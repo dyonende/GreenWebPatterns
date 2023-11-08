@@ -1,0 +1,705 @@
+kubernetes/website,395644603,12055,"{'number': 12055.0, 'repo': 'website', 'user_login': 'kubernetes'}","[{'action': 'opened', 'author': 'seh', 'comment_id': None, 'datetime': '2019-01-03T16:44:11Z', 'masked_author': 'username_0', 'text': '[The `LimitedResource` type](https://sourcegraph.com/github.com/kubernetes/kubernetes@d4d02762340bfb6ac93afd10884a3d9941b7322f/-/blob/plugin/pkg/admission/resourcequota/apis/resourcequota/v1alpha1/types.go#L35-69) has the field ""MatchScopes"" as a sibling to the field ""Resource,"" but the YAML document in the example showed the ""MatchScopes"" field as a child of the top-level `Configuration` type. Correct the example to match the actual schema.\r\n\r\nWhile we\'re here, swap the order of the ""scopeName"" and ""operator"" fields used in the YAML, to make it clearer in infix style that the operator binds the scope name to a (possibly empty) set of values.\r\n\r\n(Per [preceding discussion in the ""sig-scheduling"" channel](https://kubernetes.slack.com/archives/C09TP78DV/p1546532348038000) of the ""Kubernetes"" Slack team)', 'title': 'Correct ResourceQuota PriorityClass-related admission control configuration example', 'type': 'issue'}
+ {'action': 'created', 'author': 'seh', 'comment_id': 451275360.0, 'datetime': '2019-01-03 20:59:40+00:00', 'masked_author': 'username_0', 'text': ""Oh, I hadn't considered that the fields were sorted alphabetically! If you'd like to me flip those back into alphabetical order, please let me know and I'll comply."", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'misterikkit', 'comment_id': 451275743.0, 'datetime': '2019-01-03 21:01:06+00:00', 'masked_author': 'username_1', 'text': ""I don't think I have approval power on this repo, anyway, so I'll let an approver comment on the field sorting issue.\r\n\r\n/lgtm"", 'title': None, 'type': 'comment'}]","<issue_start><issue_comment>Title: Correct ResourceQuota PriorityClass-related admission control configuration example
+username_0: [The `LimitedResource` type](https://sourcegraph.com/github.com/kubernetes/kubernetes@d4d02762340bfb6ac93afd10884a3d9941b7322f/-/blob/plugin/pkg/admission/resourcequota/apis/resourcequota/v1alpha1/types.go#L35-69) has the field ""MatchScopes"" as a sibling to the field ""Resource,"" but the YAML document in the example showed the ""MatchScopes"" field as a child of the top-level `Configuration` type. Correct the example to match the actual schema.
+
+While we're here, swap the order of the ""scopeName"" and ""operator"" fields used in the YAML, to make it clearer in infix style that the operator binds the scope name to a (possibly empty) set of values.
+
+(Per [preceding discussion in the ""sig-scheduling"" channel](https://kubernetes.slack.com/archives/C09TP78DV/p1546532348038000) of the ""Kubernetes"" Slack team)
+<issue_comment>username_0: Oh, I hadn't considered that the fields were sorted alphabetically! If you'd like to me flip those back into alphabetical order, please let me know and I'll comply.
+<issue_comment>username_1: I don't think I have approval power on this repo, anyway, so I'll let an approver comment on the field sorting issue.
+
+/lgtm"
+exercism/website-copy,530611143,1395,,"[{'action': 'opened', 'author': 'bergjohan', 'comment_id': None, 'datetime': '2019-11-30 17:56:57+00:00', 'masked_author': 'username_0', 'text': ""Years that are multiples of 4, 100, and 400 are e.g., 1600, 2000, 2400. Using the list above this would occur 1/100 = 0.01 = 1%, and not 1.03% stated above. I'm not sure where the extra 0.03% comes from."", 'title': 'Mentoring notes for leap', 'type': 'issue'}
+ {'action': 'created', 'author': 'bergjohan', 'comment_id': 560009346.0, 'datetime': '2019-11-30 18:31:43+00:00', 'masked_author': 'username_0', 'text': ""I guess the third item wouldn't really make sense anymore, and should probably just state that we should test for divisibility by 400 last."", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'yawpitch', 'comment_id': 560181792.0, 'datetime': '2019-12-02 00:36:04+00:00', 'masked_author': 'username_1', 'text': 'I’m the original source of those numbers, but I’ll admit they’re definitely not worded well.\r\n\r\nIt should read “98.97% of all leap years are multiples of 4 that are not multiples of 100” and “1.03% of all leap years are multiples of 4, 100, and 400”.\r\n\r\nThe point is to convey the fairly drastic diagnostic gradient... in 75% of cases you know the correct answer immediately by only testing division by 4, and in ~99% of all remaining cases you know the correct answer by further testing division by 100 ... testing for division by 400 virtually never needs to occur.', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'bergjohan', 'comment_id': 560543946.0, 'datetime': '2019-12-02 19:26:54+00:00', 'masked_author': 'username_0', 'text': ""@username_1 Thank you for explaining, now I understand :)\r\n\r\nIf I make a list with all the leap years, 1/97 will be multiples of 100. That would make 96/97 = 98.97% non multiples by 100.\r\n\r\nI thought about this differently, which is why I didn't understand where the 98.97% came from:\r\n\r\n- Test divisibility by 4 first. This will eliminate 75% of the years with only one test.\r\n- Test divisibility by 100 second. This will eliminate 96% of the remaining years with only one more test.\r\n- Test for divisibility by 400 last.\r\n\r\nWhat do you think, should I make a pull request using your new wording, or just leave it as it is?"", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'yawpitch', 'comment_id': 561170877.0, 'datetime': '2019-12-03 13:37:23+00:00', 'masked_author': 'username_1', 'text': 'I\'m not tied to any particular wording, but because it\'s been replicated in a fair number of places it\'s probably best to come up with a clear phrasing and then replace them all in one go.\r\n\r\nThe key thing is to convey the obvious ""power-to-weight"" value gradient of the tests and their diagnostic value when applied in the proper order:\r\n\r\n```\r\nStepping through 4 -> 100 -> 400\r\n1. 300:400 answered, 100:400 ambiguous\r\n2. 396:400 answered,     4:400 ambiguous\r\n3. 400:400 answered\r\n```\r\nVs. \r\n\r\n```\r\nStepping through 400 -> 100 -> 4\r\n1.     1:400 answered, 399:400 ambiguous\r\n2.     4:400 answered, 396:400 ambiguous\r\n3. 400:400 answered\r\n```\r\n\r\nWhich at least makes more sense than:\r\n\r\n```\r\nStepping through 100 -> 400 -> 4\r\n1.     0:400 answered, 400:400 ambiguous\r\n2.     4:400 answered, 396:400 ambiguous\r\n3. 400:400 answered\r\n```\r\n\r\nOnce you recognize that then it doesn\'t really matter the way in which it\'s conveyed, the order is obvious and any other ordering is simply wasteful, like assembling a sieve the wrong way round. \r\n\r\nFor me it\'s made sense to explain that in terms of the percentage of leap years that each of the two refining tests will unambigously answer, but since it\'s caused you confusion I can see that your explanation above may be less ambiguous to others. Maybe have a bit of a think about how to word your approach as clearly and concisely as possible? For instance are round percentages easier or harder for the brain to process than ratios? I\'m not sure myself.', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'bergjohan', 'comment_id': 561906317.0, 'datetime': '2019-12-05 00:16:53+00:00', 'masked_author': 'username_0', 'text': ""I agree!\r\n\r\nNow that you've explained it, your approach makes sense to me as well.\r\n\r\nThe mentoring notes for python/leap was commited over a year ago. Since we haven't heard of any issues before (?), I wouldn't think this causes confusion for a lot of people. Finding out would probably require some sort of survey.\r\n\r\nI think we should stick with your approach, but maybe update the text to make it more clear."", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'yawpitch', 'comment_id': 562093609.0, 'datetime': '2019-12-05 11:40:13+00:00', 'masked_author': 'username_1', 'text': ""Right ... I'll try and take a look at finding all the instances ASAP."", 'title': None, 'type': 'comment'}
+ {'action': 'closed', 'author': 'SleeplessByte', 'comment_id': None, 'datetime': '2019-12-13 03:01:26+00:00', 'masked_author': 'username_2', 'text': '', 'title': None, 'type': 'issue'}]","<issue_start><issue_comment>Title: Mentoring notes for leap
+username_0: Years that are multiples of 4, 100, and 400 are e.g., 1600, 2000, 2400. Using the list above this would occur 1/100 = 0.01 = 1%, and not 1.03% stated above. I'm not sure where the extra 0.03% comes from.
+<issue_comment>username_0: I guess the third item wouldn't really make sense anymore, and should probably just state that we should test for divisibility by 400 last.
+<issue_comment>username_1: I’m the original source of those numbers, but I’ll admit they’re definitely not worded well.
+
+It should read “98.97% of all leap years are multiples of 4 that are not multiples of 100” and “1.03% of all leap years are multiples of 4, 100, and 400”.
+
+The point is to convey the fairly drastic diagnostic gradient... in 75% of cases you know the correct answer immediately by only testing division by 4, and in ~99% of all remaining cases you know the correct answer by further testing division by 100 ... testing for division by 400 virtually never needs to occur.
+<issue_comment>username_0: @username_1 Thank you for explaining, now I understand :)
+
+If I make a list with all the leap years, 1/97 will be multiples of 100. That would make 96/97 = 98.97% non multiples by 100.
+
+I thought about this differently, which is why I didn't understand where the 98.97% came from:
+
+- Test divisibility by 4 first. This will eliminate 75% of the years with only one test.
+- Test divisibility by 100 second. This will eliminate 96% of the remaining years with only one more test.
+- Test for divisibility by 400 last.
+
+What do you think, should I make a pull request using your new wording, or just leave it as it is?
+<issue_comment>username_1: I'm not tied to any particular wording, but because it's been replicated in a fair number of places it's probably best to come up with a clear phrasing and then replace them all in one go.
+
+The key thing is to convey the obvious ""power-to-weight"" value gradient of the tests and their diagnostic value when applied in the proper order:
+
+```
+Stepping through 4 -> 100 -> 400
+1. 300:400 answered, 100:400 ambiguous
+2. 396:400 answered,     4:400 ambiguous
+3. 400:400 answered
+```
+Vs. 
+
+```
+Stepping through 400 -> 100 -> 4
+1.     1:400 answered, 399:400 ambiguous
+2.     4:400 answered, 396:400 ambiguous
+3. 400:400 answered
+```
+
+Which at least makes more sense than:
+
+```
+Stepping through 100 -> 400 -> 4
+1.     0:400 answered, 400:400 ambiguous
+2.     4:400 answered, 396:400 ambiguous
+3. 400:400 answered
+```
+
+Once you recognize that then it doesn't really matter the way in which it's conveyed, the order is obvious and any other ordering is simply wasteful, like assembling a sieve the wrong way round. 
+
+For me it's made sense to explain that in terms of the percentage of leap years that each of the two refining tests will unambigously answer, but since it's caused you confusion I can see that your explanation above may be less ambiguous to others. Maybe have a bit of a think about how to word your approach as clearly and concisely as possible? For instance are round percentages easier or harder for the brain to process than ratios? I'm not sure myself.
+<issue_comment>username_0: I agree!
+
+Now that you've explained it, your approach makes sense to me as well.
+
+The mentoring notes for python/leap was commited over a year ago. Since we haven't heard of any issues before (?), I wouldn't think this causes confusion for a lot of people. Finding out would probably require some sort of survey.
+
+I think we should stick with your approach, but maybe update the text to make it more clear.
+<issue_comment>username_1: Right ... I'll try and take a look at finding all the instances ASAP.<issue_closed>"
+KiCad/kicad-website,460311477,418,,"[{'action': 'opened', 'author': 'antoniovazquezblanco', 'comment_id': None, 'datetime': '2019-06-25 09:26:24+00:00', 'masked_author': 'username_0', 'text': 'I am also thinking about the `1P1T` vs `1FormC` notations. I personally prefer to see the number of poles an throws but relay notation includes more information (normally open/closed) so maybe we should drop the usage of both notations in favour of the form notation?\r\n\r\nCurrent proposal based on that input:\r\n```Relay_[Manufacturer]_[Model]_[poles]Form[A|B|C]_[Options]```\r\n```RelaySocket_[Manufacturer]_[Model]_[poles]Form[A|B|C]_[Options]```', 'title': 'KLC: Relay naming convention', 'type': 'issue'}
+ {'action': 'created', 'author': 'poeschlr', 'comment_id': 505409291.0, 'datetime': '2019-06-25 11:47:45+00:00', 'masked_author': 'username_1', 'text': 'I would follow the switch naming convention as close as feasible.\r\n\r\nWe might also think about a standardized naming for pins (contacts and coils) to allow for the use of generic symbols. (similar to what we did with audio connectors)\r\n\r\nMy suggestion would be to follow EN 5000 (overview found in https://www.finder-relais.net/en/Finder-general-technical-information-en.pdf#page=2)', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'antoniovazquezblanco', 'comment_id': 505489702.0, 'datetime': '2019-06-25 15:12:42+00:00', 'masked_author': 'username_0', 'text': 'Current switch convention:\r\n`SW_[type]_[poles]P[throws]Tx[quantity]_[NO/NC]_[Latching/Toggle]_[control]_[light]_[options]_[Horizontal/Vertical]_[man]_[mpn]`\r\n\r\nNew relay proposal:\r\n`Relay_[Socket]_[poles]P[throws]Tx[quantity]_[NO/NC]_[Latching]_[options]_[man]_[mpn]`', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'evanshultz', 'comment_id': 506079812.0, 'datetime': '2019-06-26 23:22:40+00:00', 'masked_author': 'username_2', 'text': ""Thanks for starting this, @username_0 !\r\n\r\nI believe the root question was regarding footprints, so I'll add in my thoughts just for footprints below.\r\n\r\n---\r\n\r\nIn my experience the `XFormY` is common in relays and helpful. I like that over the `xPyT` format.\r\n\r\n---\r\n\r\nThe switch footprint naming from https://github.com/KiCad/kicad-symbols/issues/580#issuecomment-450632899 is `SW_[type]_[poles]P[throws]Tx[quantity]_[NO/NC]_[Latching/Toggle]_[control]_[light]_[options]_[Horizontal/Vertical]_[man]_[mpn]`.\r\n\r\nThat means the type and `xPyT` are grouped first. And the placement for manufacturer name and PN are at the very end. I didn't notice this before during the relay discussion, so sorry for that, but this is opposite everywhere else I've seen where the manufacturer stuff is at the beginning. Why would we not do that for all footprints instead of all footprints except for switches? Are switches so generic that this is a better scheme?\r\n\r\nLet's take the [Panasonic JW](https://www.jameco.com/Jameco/Products/ProdDS/843235.pdf) series as an example. `Relay*Panasonic*JW1*` works well as an FP filter and clearly reveals the manufacturer of the relay. Actually, it works either way because of the wildcarding. `JW1` includes the contact being 1FormC, assuming CvPcb is also filtering by pin quantity. And `Relay*Panasonic*JW1a*` catches the `FormA version.\r\n\r\nManufacturer at the end means that the Panasonic JW footprints are split all over the place, grouped by the contact configuration. To me, grouping by series is more important than the contact configuration.\r\n\r\nWhile switches are perhaps more compatible than relays, relays often have rather unique characteristics. Contact construction can vary greatly between relays which have the same body size and ratings on paper. I've been bitten by this before and so to me, knowing the vendor of the relay is important. I can't accept supply chain folks adding on other sources because there's too many criteria to evaluate just from a datasheet. Contact configuration and current certainly don't tell the whole story. My experience is with some small signal relays and many power relays. And I also think body size is an important piece of info when selecting a relay, and that's not in the switch footprint name at all. If the relay footprint name is based off the switch one, where is body size? Or am I unusual and body size isn't so important?\r\n\r\nSo from what I see the discussion is about the placement of the manufacturer info. Which is best to have at the front of the footprint name?\r\n1. Manufacturer info, which carries the manufacturer name (of course) and body size due to the family.\r\n2. Contact configuration, which would relate to the usage of the relay.\r\n\r\nI described my thoughts about why I prefer the manufacturer at the front. To summarize:\r\n1. In general, manufacturer-specific footprints put the manufacturer at the front already.\r\n1. We seem to prioritize manufacturer since footprints are broken up this way for big folders.\r\n1. For relays, grouping by family means that I know right where to look if I want to check for a specific vendor's part. I just go that vendor's name and then to the family name. Maybe I'm weird or use the tool awkwardly, but I tend to do that often. So for me this feels natural.\r\n1. While some relay requirements have lots of potential alternate parts, I usually pick them from the vendors I know and so that means the manufacturer is important to me. I don't view relays as common parts with just a few important criteria, so selecting by manufacturer is the best way I know of to find the correct relay for the application.\r\n1. To me, relays aren't all that generic even if the basic specs are the same because the internal construction can vary. So making relay footprints more specific than the switch footprint naming indicates seems prudent.\r\n1. If body size isn't part of the standard footprint name for a relay, then the manufacturer and series is the way to know how big things are (it may not have a particular ordering, but one gets to know the sizes as they become familiar).\r\n\r\nNaturally, there are downsides as well. Nothing is perfect. That's just my feeling. And if the FP filters are clever then CvPcb probably only shows matching footprints anyway so to KiCad users it may not matter.\r\n\r\nWow. That was a lot. Sorry if I went overboard. I was just typing what came to mind.\r\n\r\n---\r\n\r\nI'm on board with those relay pin names and used on generic and specific symbols. Good reference link."", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'poeschlr', 'comment_id': 506204237.0, 'datetime': '2019-06-27 06:03:51+00:00', 'masked_author': 'username_1', 'text': 'I do not know why we have manufacturers at the start for other libs. In IC package libs it can make sense as it then clearly differentiates generic from manufacturer specific footprints. For switches (and relays) all footprints are manufacturer specific.\r\n\r\n---\r\n\r\nMeaning i strongly vote for having at least the contact configuration and coil type at the start as it will allow us to be more flexible in the future (It allows having generic symbols in some future. Possibly with aliases for specific parts assuming the v6 format allows for having aliases with different footprints.)', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'antoniovazquezblanco', 'comment_id': 508716313.0, 'datetime': '2019-07-05 10:38:59+00:00', 'masked_author': 'username_0', 'text': 'From the last comments I get that the manufacturer should be kept at the end for the moment. Have we reached an agreement about naming or is there anything else that should be discussed?\r\n\r\nThank you guys!', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'evanshultz', 'comment_id': 508765432.0, 'datetime': '2019-07-05 13:51:04+00:00', 'masked_author': 'username_2', 'text': ""It is not true that relays are all manufacturer-specific. At least not for power relays I'm familiar with.\r\n\r\nAs I showed above, because the FP filter wildcards catch the manufacturer and series name in any position it does not matter where in the footprint name they are located. If if making this easy is the most important option (and also assuming your first point about all relays being manufacturer-specific), why not just use the manufacturer and series and dispense with any other fields?\r\n\r\nNo matter what footprint name format is selected, there will be lots of non-adhering footprints. Possibly all of them. So if matching the format is desired for v6, many libraries will need a massive renaming to adhere.\r\n\r\n@username_0 \r\nI defer to Rene on the general topic.\r\n\r\nBut I still have a couple of questions, taking the format you proposed at https://github.com/KiCad/kicad-website/issues/418#issuecomment-505489702:\r\n1. What about XFormY vs XPYT? I don't see Rene's response to that so the contents of this field can be settled.\r\n1. What does the `Socket` field capture for a relay?\r\n1. Does coil latching matter? Isn't that more of a symbol thing than a footprint one? I don't think that affects the footprint, unless there's a coil graphic on the footprint to show this. It would seem latching and non-latching can share a footprint easily IMO.\r\n1. Same with NO vs NC. Why unique footprints? Can't the footprint be in common? Or did you intend to have (and standardize on) a graphic on the footprint to show this?\r\n1. Would body size be a helpful thing to include? Switches vary wildly, but relays are often rectangular. If the user sees the body size in the footprint in CvPcb or another tool (like KiCost?), would that help them select a relay?\r\n1. Some relays have the choice of THT or SMD pins. Should that be captured in the footprint? We do that with other footprints, and if one footprint covers a wide range of series names then it would help to cut down on the number of footprints or make footprint naming less awkward."", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'antoniovazquezblanco', 'comment_id': 509152505.0, 'datetime': '2019-07-08 09:31:15+00:00', 'masked_author': 'username_0', 'text': 'Some manufacturers provide sockets for relays so they can be replaced easely.\r\nhttps://gfinder.findernet.com/public/attachments/56/DE/S56DE.pdf#page=12', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'antoniovazquezblanco', 'comment_id': 512830104.0, 'datetime': '2019-07-18 14:05:02+00:00', 'masked_author': 'username_0', 'text': 'Maybe do the same as in the converters and add that info at the end.\r\n\r\nCurrent standard summary:\r\n`Relay_[Socket]_([poles]P[throws]Tx[quantity]|XFormY )_[options]_[man]_[mpn]_[THT|SMD]`', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'evanshultz', 'comment_id': 512937755.0, 'datetime': '2019-07-18 18:40:36+00:00', 'masked_author': 'username_2', 'text': ""Thanks for starting and continuing this discussion!\r\n\r\n2 Got it. Thank you. I would suggest this goes into the `options` field since I guess it's far less common that not using a socket?\r\n\r\n5 Yes, I would say an overall bounding box for odd-shaped relays. And that's only if size is accepted."", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'antoniovazquezblanco', 'comment_id': 513168779.0, 'datetime': '2019-07-19 09:50:21+00:00', 'masked_author': 'username_0', 'text': 'Current standard options:\r\n1. `Relay_[poles]P[throws]Tx[quantity]_[width]x[length]mm_[options]_[man]_[mpn]_[THT|SMD]`\r\n2. `Relay_XFormY_[width]x[length]mm_[options]_[man]_[mpn]_[THT|SMD]`\r\n\r\n* Options: Socket, etc.\r\n\r\nDo you agree with size positioning in the name?\r\n\r\nI think that the rest mainly depends on what Rene considers more adecuate. I personally am more familiar withe the xPyT notation but XFormY is more common around the relay world.\r\n\r\nThanks!', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'poeschlr', 'comment_id': 515671159.0, 'datetime': '2019-07-27 09:43:53+00:00', 'masked_author': 'username_1', 'text': 'For connecting the correct generic symbol to the correct footprints. How else would you filter it? (Same as with the switches) Unless kicad adds additional things we can filter for such things need to be encoded in the footprint name. (Or do you really want to keep the lib fully atomic? Fine by me but i still feel we paint us into a corner that way.)', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'poeschlr', 'comment_id': 515671253.0, 'datetime': '2019-07-27 09:45:31+00:00', 'masked_author': 'username_1', 'text': 'Additionally: Why is there both FormX and the pole/throw nomenclature in there. This seems silly. Lets keep it as pole/throw only as it is intuitively understandable (FormX means one needs to learn what the letters stand for. Poly/Throw tells you on the tin what to expect.)', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'evanshultz', 'comment_id': 516141955.0, 'datetime': '2019-07-29 20:05:51+00:00', 'masked_author': 'username_2', 'text': ""I mentioned above that relays seem generally manufacturer-specific. So I understand your point about latching vs non-latching and NO vs NC in the footprint name would apply when generic symbols were used with a specific footprint. Right? Is there another case to consider?\r\n\r\nIntuitiveness depends on if one is familiar with the XFormY nomenclature or the pole/throw nomenclature. Intuitive to one person doesn't mean intuitive to everyone, especially when there are regional differences around the world."", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'poeschlr', 'comment_id': 516309007.0, 'datetime': '2019-07-30 07:56:44+00:00', 'masked_author': 'username_1', 'text': 'The nomenclature would be quite clear if we write out the words throw and pole instead of shortening them to a single letter. Maybe this would be the way to go? (pole and throw should be understandable by every electrical engineer with at least a bit of understanding of the english language. And we kind of assume the later to be true as we do not provide translated libraries anyways.)', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'antoniovazquezblanco', 'comment_id': 550972373.0, 'datetime': '2019-11-07 08:17:41+00:00', 'masked_author': 'username_0', 'text': 'I would vote to keep the P and T nomeclature as it is very well known and writing down the full word would make FP names much longer...\r\n\r\n`Relay_[poles]P[throws]Tx[quantity]_[width]x[length]mm_[options]_[man]_[mpn]_[THT|SMD]`', 'title': None, 'type': 'comment'}]","<issue_start><issue_comment>Title: KLC: Relay naming convention
+username_0: I am also thinking about the `1P1T` vs `1FormC` notations. I personally prefer to see the number of poles an throws but relay notation includes more information (normally open/closed) so maybe we should drop the usage of both notations in favour of the form notation?
+
+Current proposal based on that input:
+```Relay_[Manufacturer]_[Model]_[poles]Form[A|B|C]_[Options]```
+```RelaySocket_[Manufacturer]_[Model]_[poles]Form[A|B|C]_[Options]```
+<issue_comment>username_1: I would follow the switch naming convention as close as feasible.
+
+We might also think about a standardized naming for pins (contacts and coils) to allow for the use of generic symbols. (similar to what we did with audio connectors)
+
+My suggestion would be to follow EN 5000 (overview found in https://www.finder-relais.net/en/Finder-general-technical-information-en.pdf#page=2)
+<issue_comment>username_0: Current switch convention:
+`SW_[type]_[poles]P[throws]Tx[quantity]_[NO/NC]_[Latching/Toggle]_[control]_[light]_[options]_[Horizontal/Vertical]_[man]_[mpn]`
+
+New relay proposal:
+`Relay_[Socket]_[poles]P[throws]Tx[quantity]_[NO/NC]_[Latching]_[options]_[man]_[mpn]`
+<issue_comment>username_2: Thanks for starting this, @username_0 !
+
+I believe the root question was regarding footprints, so I'll add in my thoughts just for footprints below.
+
+---
+
+In my experience the `XFormY` is common in relays and helpful. I like that over the `xPyT` format.
+
+---
+
+The switch footprint naming from https://github.com/KiCad/kicad-symbols/issues/580#issuecomment-450632899 is `SW_[type]_[poles]P[throws]Tx[quantity]_[NO/NC]_[Latching/Toggle]_[control]_[light]_[options]_[Horizontal/Vertical]_[man]_[mpn]`.
+
+That means the type and `xPyT` are grouped first. And the placement for manufacturer name and PN are at the very end. I didn't notice this before during the relay discussion, so sorry for that, but this is opposite everywhere else I've seen where the manufacturer stuff is at the beginning. Why would we not do that for all footprints instead of all footprints except for switches? Are switches so generic that this is a better scheme?
+
+Let's take the [Panasonic JW](https://www.jameco.com/Jameco/Products/ProdDS/843235.pdf) series as an example. `Relay*Panasonic*JW1*` works well as an FP filter and clearly reveals the manufacturer of the relay. Actually, it works either way because of the wildcarding. `JW1` includes the contact being 1FormC, assuming CvPcb is also filtering by pin quantity. And `Relay*Panasonic*JW1a*` catches the `FormA version.
+
+Manufacturer at the end means that the Panasonic JW footprints are split all over the place, grouped by the contact configuration. To me, grouping by series is more important than the contact configuration.
+
+While switches are perhaps more compatible than relays, relays often have rather unique characteristics. Contact construction can vary greatly between relays which have the same body size and ratings on paper. I've been bitten by this before and so to me, knowing the vendor of the relay is important. I can't accept supply chain folks adding on other sources because there's too many criteria to evaluate just from a datasheet. Contact configuration and current certainly don't tell the whole story. My experience is with some small signal relays and many power relays. And I also think body size is an important piece of info when selecting a relay, and that's not in the switch footprint name at all. If the relay footprint name is based off the switch one, where is body size? Or am I unusual and body size isn't so important?
+
+So from what I see the discussion is about the placement of the manufacturer info. Which is best to have at the front of the footprint name?
+1. Manufacturer info, which carries the manufacturer name (of course) and body size due to the family.
+2. Contact configuration, which would relate to the usage of the relay.
+
+I described my thoughts about why I prefer the manufacturer at the front. To summarize:
+1. In general, manufacturer-specific footprints put the manufacturer at the front already.
+1. We seem to prioritize manufacturer since footprints are broken up this way for big folders.
+1. For relays, grouping by family means that I know right where to look if I want to check for a specific vendor's part. I just go that vendor's name and then to the family name. Maybe I'm weird or use the tool awkwardly, but I tend to do that often. So for me this feels natural.
+1. While some relay requirements have lots of potential alternate parts, I usually pick them from the vendors I know and so that means the manufacturer is important to me. I don't view relays as common parts with just a few important criteria, so selecting by manufacturer is the best way I know of to find the correct relay for the application.
+1. To me, relays aren't all that generic even if the basic specs are the same because the internal construction can vary. So making relay footprints more specific than the switch footprint naming indicates seems prudent.
+1. If body size isn't part of the standard footprint name for a relay, then the manufacturer and series is the way to know how big things are (it may not have a particular ordering, but one gets to know the sizes as they become familiar).
+
+Naturally, there are downsides as well. Nothing is perfect. That's just my feeling. And if the FP filters are clever then CvPcb probably only shows matching footprints anyway so to KiCad users it may not matter.
+
+Wow. That was a lot. Sorry if I went overboard. I was just typing what came to mind.
+
+---
+
+I'm on board with those relay pin names and used on generic and specific symbols. Good reference link.
+<issue_comment>username_1: I do not know why we have manufacturers at the start for other libs. In IC package libs it can make sense as it then clearly differentiates generic from manufacturer specific footprints. For switches (and relays) all footprints are manufacturer specific.
+
+---
+
+Meaning i strongly vote for having at least the contact configuration and coil type at the start as it will allow us to be more flexible in the future (It allows having generic symbols in some future. Possibly with aliases for specific parts assuming the v6 format allows for having aliases with different footprints.)
+<issue_comment>username_0: From the last comments I get that the manufacturer should be kept at the end for the moment. Have we reached an agreement about naming or is there anything else that should be discussed?
+
+Thank you guys!
+<issue_comment>username_2: It is not true that relays are all manufacturer-specific. At least not for power relays I'm familiar with.
+
+As I showed above, because the FP filter wildcards catch the manufacturer and series name in any position it does not matter where in the footprint name they are located. If if making this easy is the most important option (and also assuming your first point about all relays being manufacturer-specific), why not just use the manufacturer and series and dispense with any other fields?
+
+No matter what footprint name format is selected, there will be lots of non-adhering footprints. Possibly all of them. So if matching the format is desired for v6, many libraries will need a massive renaming to adhere.
+
+@username_0 
+I defer to Rene on the general topic.
+
+But I still have a couple of questions, taking the format you proposed at https://github.com/KiCad/kicad-website/issues/418#issuecomment-505489702:
+1. What about XFormY vs XPYT? I don't see Rene's response to that so the contents of this field can be settled.
+1. What does the `Socket` field capture for a relay?
+1. Does coil latching matter? Isn't that more of a symbol thing than a footprint one? I don't think that affects the footprint, unless there's a coil graphic on the footprint to show this. It would seem latching and non-latching can share a footprint easily IMO.
+1. Same with NO vs NC. Why unique footprints? Can't the footprint be in common? Or did you intend to have (and standardize on) a graphic on the footprint to show this?
+1. Would body size be a helpful thing to include? Switches vary wildly, but relays are often rectangular. If the user sees the body size in the footprint in CvPcb or another tool (like KiCost?), would that help them select a relay?
+1. Some relays have the choice of THT or SMD pins. Should that be captured in the footprint? We do that with other footprints, and if one footprint covers a wide range of series names then it would help to cut down on the number of footprints or make footprint naming less awkward.
+<issue_comment>username_0: Some manufacturers provide sockets for relays so they can be replaced easely.
+https://gfinder.findernet.com/public/attachments/56/DE/S56DE.pdf#page=12
+<issue_comment>username_0: Maybe do the same as in the converters and add that info at the end.
+
+Current standard summary:
+`Relay_[Socket]_([poles]P[throws]Tx[quantity]|XFormY )_[options]_[man]_[mpn]_[THT|SMD]`
+<issue_comment>username_2: Thanks for starting and continuing this discussion!
+
+2 Got it. Thank you. I would suggest this goes into the `options` field since I guess it's far less common that not using a socket?
+
+5 Yes, I would say an overall bounding box for odd-shaped relays. And that's only if size is accepted.
+<issue_comment>username_0: Current standard options:
+1. `Relay_[poles]P[throws]Tx[quantity]_[width]x[length]mm_[options]_[man]_[mpn]_[THT|SMD]`
+2. `Relay_XFormY_[width]x[length]mm_[options]_[man]_[mpn]_[THT|SMD]`
+
+* Options: Socket, etc.
+
+Do you agree with size positioning in the name?
+
+I think that the rest mainly depends on what Rene considers more adecuate. I personally am more familiar withe the xPyT notation but XFormY is more common around the relay world.
+
+Thanks!
+<issue_comment>username_1: For connecting the correct generic symbol to the correct footprints. How else would you filter it? (Same as with the switches) Unless kicad adds additional things we can filter for such things need to be encoded in the footprint name. (Or do you really want to keep the lib fully atomic? Fine by me but i still feel we paint us into a corner that way.)
+<issue_comment>username_1: Additionally: Why is there both FormX and the pole/throw nomenclature in there. This seems silly. Lets keep it as pole/throw only as it is intuitively understandable (FormX means one needs to learn what the letters stand for. Poly/Throw tells you on the tin what to expect.)
+<issue_comment>username_2: I mentioned above that relays seem generally manufacturer-specific. So I understand your point about latching vs non-latching and NO vs NC in the footprint name would apply when generic symbols were used with a specific footprint. Right? Is there another case to consider?
+
+Intuitiveness depends on if one is familiar with the XFormY nomenclature or the pole/throw nomenclature. Intuitive to one person doesn't mean intuitive to everyone, especially when there are regional differences around the world.
+<issue_comment>username_1: The nomenclature would be quite clear if we write out the words throw and pole instead of shortening them to a single letter. Maybe this would be the way to go? (pole and throw should be understandable by every electrical engineer with at least a bit of understanding of the english language. And we kind of assume the later to be true as we do not provide translated libraries anyways.)
+<issue_comment>username_0: I would vote to keep the P and T nomeclature as it is very well known and writing down the full word would make FP names much longer...
+
+`Relay_[poles]P[throws]Tx[quantity]_[width]x[length]mm_[options]_[man]_[mpn]_[THT|SMD]`"
+kubernetes/website,426433394,13501,,"[{'action': 'opened', 'author': 'x8091', 'comment_id': None, 'datetime': '2019-03-28 11:10:46+00:00', 'masked_author': 'username_0', 'text': 'While the Kubernetes control plane runs on your Linux node(s), the following components are configured and run on your Windows node(s).\r\nkubelet\r\n**kube-proxy**\r\nkubectl (optional)\r\nContainer runtime\r\n\r\nIn later section (apply node-selector patch), I found that **os=linux** also applied for kube-proxy.\r\n![Screen Shot 2019-03-28 at 6 02 36 PM](https://user-images.githubusercontent.com/38066297/55152887-d8b7ca80-5183-11e9-9de1-78f5abbc891b.png)\r\n\r\nThis causes a lot of confusions.\r\nTherefore, I try both cases:\r\n+ If I let kube-proxy run on Windows node, if failed to create (attached)\r\n![Screen Shot 2019-03-28 at 12 58 55 PM](https://user-images.githubusercontent.com/38066297/55153199-71e6e100-5184-11e9-8ec2-5c2bf754bc93.png)\r\n\r\n+ If I prevent kube-proxy to run on Windows node, I cannot schedule pods/containers on Windows node, it hanging in **ContainerCreating** status.\r\n\r\n**Proposed Solution:**\r\nPlease help to clarify whether kube-proxy is needed or not\r\n\r\n**Page to Update:**\r\nhttps://kubernetes.io/...\r\n\r\n<!--Optional Information (remove the comment tags around information you would like to include)-->\r\n<!--Kubernetes Version:-->\r\n\r\n<!--Additional Information:-->', 'title': 'Issue with k8s.io/docs/setup/windows/user-guide-windows-nodes/', 'type': 'issue'}
+ {'action': 'created', 'author': 'PatrickLang', 'comment_id': 477704306.0, 'datetime': '2019-03-28 17:51:23+00:00', 'masked_author': 'username_1', 'text': ""kube-proxy is needed, but it should be launched directly on the Windows node by the start.ps1 script https://github.com/Microsoft/SDN/blob/ce70380ccb6b71b69efdb313c2192b786cde14cc/Kubernetes/flannel/start.ps1#L67 \r\n\r\nCan you check the following to help narrow it down?\r\n\r\n1. After you run that script, can you run `get-process kube-proxy` and confirm it's running?\r\n2. Log into the Windows node and make sure `docker run kubeletwin/pause` works\r\n3. If the pod still won't start, can you check the logs and include the output from `kubectl describe pod …` so we can see the events?\r\n\r\nThe kube-proxy daemonset won't work on Windows because we don't have privileged container support.\r\n\r\ncc @daschott"", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'x8091', 'comment_id': 477853894.0, 'datetime': '2019-03-29 03:32:37+00:00', 'masked_author': 'username_0', 'text': 'Here is the log:\r\n```javascript\r\nName:               kube-proxy-87mdh\r\nNamespace:          kube-system\r\nPriority:           2000001000\r\nPriorityClassName:  system-node-critical\r\nNode:               win-bu3nulfkq1v/10.10.1.242\r\nStart Time:         Thu, 28 Mar 2019 06:18:02 -0400\r\nLabels:             controller-revision-hash=b7775b676\r\n                    k8s-app=kube-proxy\r\n                    pod-template-generation=5\r\nAnnotations:        <none>\r\nStatus:             Pending\r\nIP:                 10.10.1.242\r\nControlled By:      DaemonSet/kube-proxy\r\nContainers:\r\n  kube-proxy:\r\n    Container ID:  \r\n    Image:         k8s.gcr.io/kube-proxy:v1.14.0\r\n    Image ID:      \r\n    Port:          <none>\r\n    Host Port:     <none>\r\n    Command:\r\n      /usr/local/bin/kube-proxy\r\n      --config=/var/lib/kube-proxy/config.conf\r\n      --hostname-override=$(NODE_NAME)\r\n    State:          Waiting\r\n      Reason:       ContainerCreating\r\n    Ready:          False\r\n    Restart Count:  0\r\n    Environment:\r\n      NODE_NAME:   (v1:spec.nodeName)\r\n    Mounts:\r\n      /lib/modules from lib-modules (ro)\r\n      /run/xtables.lock from xtables-lock (rw)\r\n      /var/lib/kube-proxy from kube-proxy (rw)\r\n      /var/run/secrets/kubernetes.io/serviceaccount from kube-proxy-token-qdtph (ro)\r\nConditions:\r\n  Type              Status\r\n  Initialized       True \r\n  Ready             False \r\n  ContainersReady   False \r\n  PodScheduled      True \r\nVolumes:\r\n  kube-proxy:\r\n    Type:      ConfigMap (a volume populated by a ConfigMap)\r\n    Name:      kube-proxy\r\n    Optional:  false\r\n  xtables-lock:\r\n    Type:          HostPath (bare host directory volume)\r\n    Path:          /run/xtables.lock\r\n    HostPathType:  FileOrCreate\r\n  lib-modules:\r\n    Type:          HostPath (bare host directory volume)\r\n    Path:          /lib/modules\r\n    HostPathType:  \r\n  kube-proxy-token-qdtph:\r\n    Type:        Secret (a volume populated by a Secret)\r\n    SecretName:  kube-proxy-token-qdtph\r\n    Optional:    false\r\nQoS Class:       BestEffort\r\nNode-Selectors:  <none>\r\nTolerations:     \r\n                 CriticalAddonsOnly\r\n                 node.kubernetes.io/disk-pressure:NoSchedule\r\n                 node.kubernetes.io/memory-pressure:NoSchedule\r\n                 node.kubernetes.io/network-unavailable:NoSchedule\r\n                 node.kubernetes.io/not-ready:NoExecute\r\n                 node.kubernetes.io/pid-pressure:NoSchedule\r\n                 node.kubernetes.io/unreachable:NoExecute\r\n                 node.kubernetes.io/unschedulable:NoSchedule\r\nEvents:\r\n  Type     Reason                  Age                     From                      Message\r\n  ----     ------                  ----                    ----                      -------\r\n  Warning  FailedCreatePodSandBox  9m2s (x50668 over 17h)  kubelet, win-bu3nulfkq1v  Failed create pod sandbox: rpc error: code = Unknown desc = failed to start sandbox container for pod ""kube-proxy-87mdh"": Error response from daemon: network host not found\r\n  Normal   SandboxChanged          4m2s (x50935 over 17h)  kubelet, win-bu3nulfkq1v  Pod sandbox changed, it will be killed and re-created.\r\n```\r\n\r\n**There are few things to note:**\r\n1. 3 nodes are running on different subnets, but they have L3 connectivity.\r\n2. I created the cluster by using kubeadm.\r\n\r\nThanks.', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'neolit123', 'comment_id': 477949605.0, 'datetime': '2019-03-29 10:32:26+00:00', 'masked_author': 'username_2', 'text': ""kubeadm is not supported yet officially with the Windows GA containers release, but let me know if you find any problems related to the tool: https://github.com/kubernetes/kubeadm/issues/1393\r\n\r\nhaving a quick look at the issue, i'm not even sure how `kubeadm join` passes on the Windows worker node.\r\n\r\ncan you show the output of the `kubeadm join -v=4 ....` command?\r\nare you even using `kubeadm join` to join this worker?"", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'x8091', 'comment_id': 477959027.0, 'datetime': '2019-03-29 11:05:51+00:00', 'masked_author': 'username_0', 'text': '@username_2 : I didn\'t use `kubeadm join` command. As you can see in the document, to join Windows node we use a PowerShell script, here is the detail:\r\n`.\\start.ps1 -ManagementIP 10.10.1.242 -NetworkMode overlay  -ClusterCIDR 10.244.0.0/16 -ServiceCIDR 10.96.0.0/12 -KubeDnsServiceIP 10.96.0.10 -LogDir C:\\k -KubeletFeatureGates ""WinOverlay=true""`\r\n\r\nNote that on master node, it already see Windows node as worker role with status **Ready**.\r\n\r\nSecondly, if FeatureGate WinOverlay is not provided, the script keep saying ""_Waiting for the network to be created_"".', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'neolit123', 'comment_id': 477968036.0, 'datetime': '2019-03-29 11:41:25+00:00', 'masked_author': 'username_2', 'text': 'if you are creating the control plane node with kubeadm, but then you want to join a worker node to the same cluster without `kubeadm join` it will probably fail boostrapping the worker properly.\r\n\r\nhttps://kubernetes.io/docs/reference/setup-tools/kubeadm/implementation-details/#configure-tls-bootstrapping-for-node-joining\r\n\r\nkubeadm uses BoostrapTokens:\r\nhttps://kubernetes.io/docs/reference/access-authn-authz/bootstrap-tokens/', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'x8091', 'comment_id': 478076508.0, 'datetime': '2019-03-29 17:07:49+00:00', 'masked_author': 'username_0', 'text': 'Your explanation makes sense to me. Seems like to join Windows node we have to use either AKS or GCE right?', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'neolit123', 'comment_id': 478077764.0, 'datetime': '2019-03-29 17:11:26+00:00', 'masked_author': 'username_2', 'text': 'or any ""bootrapper"" that currently works with Windows nodes.\r\n\r\nas far as i know kube-up also supports that, but the tool is deprecated:\r\nhttps://github.com/kubernetes/kubernetes/blob/8dd09e0b36d510ddbedb6da446a47e2ffa86c4a4/cluster/gce/windows/README-GCE-Windows-kube-up.md', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'x8091', 'comment_id': 478078575.0, 'datetime': '2019-03-29 17:13:53+00:00', 'masked_author': 'username_0', 'text': 'Thank you very much for the information.\r\nI will try and update here if anything come up.\r\nRegards', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'sftim', 'comment_id': 498758539.0, 'datetime': '2019-06-04 17:03:59+00:00', 'masked_author': 'username_3', 'text': '/language en', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'sftim', 'comment_id': 530147048.0, 'datetime': '2019-09-10 22:36:22+00:00', 'masked_author': 'username_3', 'text': 'This was mostly handled like a support request\r\n/triage support\r\n/close', 'title': None, 'type': 'comment'}]","<issue_start><issue_comment>Title: Issue with k8s.io/docs/setup/windows/user-guide-windows-nodes/
+username_0: While the Kubernetes control plane runs on your Linux node(s), the following components are configured and run on your Windows node(s).
+kubelet
+**kube-proxy**
+kubectl (optional)
+Container runtime
+
+In later section (apply node-selector patch), I found that **os=linux** also applied for kube-proxy.
+![Screen Shot 2019-03-28 at 6 02 36 PM](https://user-images.githubusercontent.com/38066297/55152887-d8b7ca80-5183-11e9-9de1-78f5abbc891b.png)
+
+This causes a lot of confusions.
+Therefore, I try both cases:
++ If I let kube-proxy run on Windows node, if failed to create (attached)
+![Screen Shot 2019-03-28 at 12 58 55 PM](https://user-images.githubusercontent.com/38066297/55153199-71e6e100-5184-11e9-8ec2-5c2bf754bc93.png)
+
++ If I prevent kube-proxy to run on Windows node, I cannot schedule pods/containers on Windows node, it hanging in **ContainerCreating** status.
+
+**Proposed Solution:**
+Please help to clarify whether kube-proxy is needed or not
+
+**Page to Update:**
+https://kubernetes.io/...
+
+<!--Optional Information (remove the comment tags around information you would like to include)-->
+<!--Kubernetes Version:-->
+
+<!--Additional Information:-->
+<issue_comment>username_1: kube-proxy is needed, but it should be launched directly on the Windows node by the start.ps1 script https://github.com/Microsoft/SDN/blob/ce70380ccb6b71b69efdb313c2192b786cde14cc/Kubernetes/flannel/start.ps1#L67 
+
+Can you check the following to help narrow it down?
+
+1. After you run that script, can you run `get-process kube-proxy` and confirm it's running?
+2. Log into the Windows node and make sure `docker run kubeletwin/pause` works
+3. If the pod still won't start, can you check the logs and include the output from `kubectl describe pod …` so we can see the events?
+
+The kube-proxy daemonset won't work on Windows because we don't have privileged container support.
+
+cc @daschott
+<issue_comment>username_0: Here is the log:
+```javascript
+Name:               kube-proxy-87mdh
+Namespace:          kube-system
+Priority:           2000001000
+PriorityClassName:  system-node-critical
+Node:               win-bu3nulfkq1v/10.10.1.242
+Start Time:         Thu, 28 Mar 2019 06:18:02 -0400
+Labels:             controller-revision-hash=b7775b676
+                    k8s-app=kube-proxy
+                    pod-template-generation=5
+Annotations:        <none>
+Status:             Pending
+IP:                 10.10.1.242
+Controlled By:      DaemonSet/kube-proxy
+Containers:
+  kube-proxy:
+    Container ID:  
+    Image:         k8s.gcr.io/kube-proxy:v1.14.0
+    Image ID:      
+    Port:          <none>
+    Host Port:     <none>
+    Command:
+      /usr/local/bin/kube-proxy
+      --config=/var/lib/kube-proxy/config.conf
+      --hostname-override=$(NODE_NAME)
+    State:          Waiting
+      Reason:       ContainerCreating
+    Ready:          False
+    Restart Count:  0
+    Environment:
+      NODE_NAME:   (v1:spec.nodeName)
+    Mounts:
+      /lib/modules from lib-modules (ro)
+      /run/xtables.lock from xtables-lock (rw)
+      /var/lib/kube-proxy from kube-proxy (rw)
+      /var/run/secrets/kubernetes.io/serviceaccount from kube-proxy-token-qdtph (ro)
+Conditions:
+  Type              Status
+  Initialized       True 
+  Ready             False 
+  ContainersReady   False 
+  PodScheduled      True 
+Volumes:
+  kube-proxy:
+    Type:      ConfigMap (a volume populated by a ConfigMap)
+    Name:      kube-proxy
+    Optional:  false
+  xtables-lock:
+    Type:          HostPath (bare host directory volume)
+    Path:          /run/xtables.lock
+    HostPathType:  FileOrCreate
+  lib-modules:
+    Type:          HostPath (bare host directory volume)
+    Path:          /lib/modules
+    HostPathType:  
+  kube-proxy-token-qdtph:
+    Type:        Secret (a volume populated by a Secret)
+    SecretName:  kube-proxy-token-qdtph
+    Optional:    false
+QoS Class:       BestEffort
+Node-Selectors:  <none>
+Tolerations:     
+                 CriticalAddonsOnly
+                 node.kubernetes.io/disk-pressure:NoSchedule
+                 node.kubernetes.io/memory-pressure:NoSchedule
+                 node.kubernetes.io/network-unavailable:NoSchedule
+                 node.kubernetes.io/not-ready:NoExecute
+                 node.kubernetes.io/pid-pressure:NoSchedule
+                 node.kubernetes.io/unreachable:NoExecute
+                 node.kubernetes.io/unschedulable:NoSchedule
+Events:
+  Type     Reason                  Age                     From                      Message
+  ----     ------                  ----                    ----                      -------
+  Warning  FailedCreatePodSandBox  9m2s (x50668 over 17h)  kubelet, win-bu3nulfkq1v  Failed create pod sandbox: rpc error: code = Unknown desc = failed to start sandbox container for pod ""kube-proxy-87mdh"": Error response from daemon: network host not found
+  Normal   SandboxChanged          4m2s (x50935 over 17h)  kubelet, win-bu3nulfkq1v  Pod sandbox changed, it will be killed and re-created.
+```
+
+**There are few things to note:**
+1. 3 nodes are running on different subnets, but they have L3 connectivity.
+2. I created the cluster by using kubeadm.
+
+Thanks.
+<issue_comment>username_2: kubeadm is not supported yet officially with the Windows GA containers release, but let me know if you find any problems related to the tool: https://github.com/kubernetes/kubeadm/issues/1393
+
+having a quick look at the issue, i'm not even sure how `kubeadm join` passes on the Windows worker node.
+
+can you show the output of the `kubeadm join -v=4 ....` command?
+are you even using `kubeadm join` to join this worker?
+<issue_comment>username_0: @username_2 : I didn't use `kubeadm join` command. As you can see in the document, to join Windows node we use a PowerShell script, here is the detail:
+`.\start.ps1 -ManagementIP 10.10.1.242 -NetworkMode overlay  -ClusterCIDR 10.244.0.0/16 -ServiceCIDR 10.96.0.0/12 -KubeDnsServiceIP 10.96.0.10 -LogDir C:\k -KubeletFeatureGates ""WinOverlay=true""`
+
+Note that on master node, it already see Windows node as worker role with status **Ready**.
+
+Secondly, if FeatureGate WinOverlay is not provided, the script keep saying ""_Waiting for the network to be created_"".
+<issue_comment>username_2: if you are creating the control plane node with kubeadm, but then you want to join a worker node to the same cluster without `kubeadm join` it will probably fail boostrapping the worker properly.
+
+https://kubernetes.io/docs/reference/setup-tools/kubeadm/implementation-details/#configure-tls-bootstrapping-for-node-joining
+
+kubeadm uses BoostrapTokens:
+https://kubernetes.io/docs/reference/access-authn-authz/bootstrap-tokens/
+<issue_comment>username_0: Your explanation makes sense to me. Seems like to join Windows node we have to use either AKS or GCE right?
+<issue_comment>username_2: or any ""bootrapper"" that currently works with Windows nodes.
+
+as far as i know kube-up also supports that, but the tool is deprecated:
+https://github.com/kubernetes/kubernetes/blob/8dd09e0b36d510ddbedb6da446a47e2ffa86c4a4/cluster/gce/windows/README-GCE-Windows-kube-up.md
+<issue_comment>username_0: Thank you very much for the information.
+I will try and update here if anything come up.
+Regards
+<issue_comment>username_3: /language en
+<issue_comment>username_3: This was mostly handled like a support request
+/triage support
+/close"
+kyma-project/website,843043958,692,,"[{'action': 'opened', 'author': 'kwiatekus', 'comment_id': None, 'datetime': '2021-03-29 07:02:05+00:00', 'masked_author': 'username_0', 'text': '**Description**\r\n\r\nAdd feedback widget ( powered by qualtrics) \r\n\r\n**AC**\r\n\r\n- ability to rate overall experience (1-5)\r\n- ability to leave free text feedback\r\n- Ability to gather current page  \r\n- survey should be anonymous, but if somebody want he could leave contact (optional email field)\r\n- feedback widget should contain links to kyma slack channel and github project\r\n\r\n**Reasons**\r\n\r\nTo gather ( analyse and act upon )  feedback from the open source community on the kyma project.\r\n\r\n**Attachments**\r\n\r\n<!-- Attach any files, links, code samples, or screenshots that will convince us to your idea. -->', 'title': 'Feedback widget', 'type': 'issue'}
+ {'action': 'created', 'author': 'kwiatekus', 'comment_id': 809125773.0, 'datetime': '2021-03-29 07:03:09+00:00', 'masked_author': 'username_0', 'text': '(TWs’ wish list):\r\n- Mark somehow the exact text/image you are leaving feedback for\r\n- Have one central point for feedback when you can:\r\n    - Leave basic feedback: Yes/No or some emojis/thumbs up or down, like here: https://istio.io/latest/docs/concepts/what-is-istio/\r\n    - Leave more advanced feedback by choosing one of these 3 options: leave a comment, contribute directly to the doc (PR), or create an issue (see [Docker docs](https://docs.docker.com/get-started/overview/), [BTP cockpit](https://account.int.sap.eu2.hana.ondemand.com/cockpit#/home/allaccounts) for reference)\r\n- (or) Have the “Leave Feedback” option at the bottom of each MD doc.', 'title': None, 'type': 'comment'}]","<issue_start><issue_comment>Title: Feedback widget
+username_0: **Description**
+
+Add feedback widget ( powered by qualtrics) 
+
+**AC**
+
+- ability to rate overall experience (1-5)
+- ability to leave free text feedback
+- Ability to gather current page  
+- survey should be anonymous, but if somebody want he could leave contact (optional email field)
+- feedback widget should contain links to kyma slack channel and github project
+
+**Reasons**
+
+To gather ( analyse and act upon )  feedback from the open source community on the kyma project.
+
+**Attachments**
+
+<!-- Attach any files, links, code samples, or screenshots that will convince us to your idea. -->
+<issue_comment>username_0: (TWs’ wish list):
+- Mark somehow the exact text/image you are leaving feedback for
+- Have one central point for feedback when you can:
+    - Leave basic feedback: Yes/No or some emojis/thumbs up or down, like here: https://istio.io/latest/docs/concepts/what-is-istio/
+    - Leave more advanced feedback by choosing one of these 3 options: leave a comment, contribute directly to the doc (PR), or create an issue (see [Docker docs](https://docs.docker.com/get-started/overview/), [BTP cockpit](https://account.int.sap.eu2.hana.ondemand.com/cockpit#/home/allaccounts) for reference)
+- (or) Have the “Leave Feedback” option at the bottom of each MD doc."
+devopsdays/devopsdays-web,119328388,61,"{'number': 61.0, 'repo': 'devopsdays-web', 'user_login': 'devopsdays'}","[{'action': 'opened', 'author': 'm1keil', 'comment_id': None, 'datetime': '2015-11-29T01:19:49Z', 'masked_author': 'username_0', 'text': 'This needs to be more pretty (a lot of duplication is going on)\r\nport all of the blogs. blogs needs to be checked that the links are the same. Also fix broken images in blog posts.\r\n\r\ncss/js/images needs to be cleaned up.\r\n\r\nevents still missing.', 'title': 'Add legacy template and port stuff', 'type': 'issue'}
+ {'action': 'created', 'author': 'mattstratton', 'comment_id': 160353727.0, 'datetime': '2015-11-29 01:23:23+00:00', 'masked_author': 'username_1', 'text': ""I don't quite understand what this is for. We cannot run more than one theme in Hugo at a time. Can you describe a bit more of what the approach is for this?"", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'm1keil', 'comment_id': 160354388.0, 'datetime': '2015-11-29 01:36:36+00:00', 'masked_author': 'username_0', 'text': 'I\'ve created extra theme in order to avoid any merge conflicts, or any current work we have on the ""devopsdays"" site.\r\n\r\nAs we discussed previously, it would be much easier for us to merge the old site to use Hugo, and only then start making edits to the layout.\r\n\r\nThe devops-legacy theme does most of it (not including /events, since we want to use data files there).\r\nIf you run hugo and instruct it to use this theme, you should get the exact replica of today\'s site, only instead of webby, it\'s powered by hugo.\r\nI\'ve ported the blog posts and did some minimal pagination stuff under the /blog section. \r\n\r\nTell me what you think.', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'mattstratton', 'comment_id': 160371839.0, 'datetime': '2015-11-29 05:03:03+00:00', 'masked_author': 'username_1', 'text': ""Where does all the event data come from? I don't see any of the old events?"", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'm1keil', 'comment_id': 160392862.0, 'datetime': '2015-11-29 09:08:57+00:00', 'masked_author': 'username_0', 'text': ""yep, I didn't ported any events yet.\r\nAlso the future and past events in the footer are still not auto generated but static. Work in progress."", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'm1keil', 'comment_id': 160423107.0, 'datetime': '2015-11-29 15:41:23+00:00', 'masked_author': 'username_0', 'text': 'Just let me know if I should invest time in this', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'mattstratton', 'comment_id': 160722895.0, 'datetime': '2015-11-30 18:51:48+00:00', 'masked_author': 'username_1', 'text': 'My only concern with this is that we will import all the pages over, and then have to touch them all with the new layout. I think the layout is actually almost done; the thing that is the holdup right now is there is no point in importing the events until that is done since the data file format is not finalized right now.\r\n\r\nI would suggest we do the following:\r\n\r\n1. Finalize the event data file format\r\n2. Finalize the event detail page template (this is actually pretty much done I think)\r\n3. Finalize the sponsor data file format and integration (I think this is done, just need to validate it)\r\n4. Import all the events to the new structure\r\n5. Import all the existing pages\r\n6. THEN work on making any changes to the theme. I think that the existing theme should work for importing stuff now?\r\n\r\nIn this approach, we should make NO more stylistic changes to layout, etc...just get the data over so it all displays. Then we can make changes to the templates which will be much more of a DRY approach.', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'm1keil', 'comment_id': 160724811.0, 'datetime': '2015-11-30 18:57:59+00:00', 'masked_author': 'username_0', 'text': ""But the current layout is entirely different from the site we have at devopsdays.org so I guess I'm not really understanding what is the goal."", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'mattstratton', 'comment_id': 160725367.0, 'datetime': '2015-11-30 19:00:13+00:00', 'masked_author': 'username_1', 'text': ""Which parts are completely different? The menu nav? I pretty much replicated how it looked when I built this theme. The only real difference is in the menu bar/social links. The page layouts can/should be the same, and those are just templates anyway...my concern is building a structure with partials that doesn't reflect the overall?\r\n\r\nI might be missing something so if you can be specific about what is fundamentally different in the new theme it will help me a lot :)"", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'm1keil', 'comment_id': 160734726.0, 'datetime': '2015-11-30 19:33:28+00:00', 'masked_author': 'username_0', 'text': 'Well, not only. Right now the front page is different in many things (alignment, sizes, missing elements). I thought it would be easier just to take what we currently have and convert it to use Hugo, instead of building everything from scratch and trying to make it look identical.\r\n\r\nDid you run the legacy theme?', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'mattstratton', 'comment_id': 160737478.0, 'datetime': '2015-11-30 19:43:42+00:00', 'masked_author': 'username_1', 'text': 'I did. I pulled it down and ran it. I guess as long as we feel like any content imported using the ""legacy"" theme wouldn\'t require touching later, then it makes sense. What I don\'t want to do is important dozens of events, and then have to touch their files again to make them work with the final theme. The layout stuff you\'ve mentioned seems to be more chrome than functional, and I don\'t think it affects the import of data one way or another. \r\n\r\nI see the point of having two themes so you can switch between them as we go. The biggest thing is to make sure they are both compatible with the data/content and the content files don\'t need to be changed for the new setup. \r\n\r\nThe only thing I would suggest is to not over-write the content/page/organizing.md file...I put a ton of content in it which will get blown away by this merge (see #52 for reference)\r\n\r\nOtherwise I think it is good :)', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'm1keil', 'comment_id': 160738201.0, 'datetime': '2015-11-30 19:46:18+00:00', 'masked_author': 'username_0', 'text': 'From my checks the `organizing.md` is still there, and working.', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'mattstratton', 'comment_id': 160738489.0, 'datetime': '2015-11-30 19:47:22+00:00', 'masked_author': 'username_1', 'text': ""I probably just panicked from the github diff. Then I say plus one on the merge. I'll fire it up. It won't hurt anything :)"", 'title': None, 'type': 'comment'}]","<issue_start><issue_comment>Title: Add legacy template and port stuff
+username_0: This needs to be more pretty (a lot of duplication is going on)
+port all of the blogs. blogs needs to be checked that the links are the same. Also fix broken images in blog posts.
+
+css/js/images needs to be cleaned up.
+
+events still missing.
+<issue_comment>username_1: I don't quite understand what this is for. We cannot run more than one theme in Hugo at a time. Can you describe a bit more of what the approach is for this?
+<issue_comment>username_0: I've created extra theme in order to avoid any merge conflicts, or any current work we have on the ""devopsdays"" site.
+
+As we discussed previously, it would be much easier for us to merge the old site to use Hugo, and only then start making edits to the layout.
+
+The devops-legacy theme does most of it (not including /events, since we want to use data files there).
+If you run hugo and instruct it to use this theme, you should get the exact replica of today's site, only instead of webby, it's powered by hugo.
+I've ported the blog posts and did some minimal pagination stuff under the /blog section. 
+
+Tell me what you think.
+<issue_comment>username_1: Where does all the event data come from? I don't see any of the old events?
+<issue_comment>username_0: yep, I didn't ported any events yet.
+Also the future and past events in the footer are still not auto generated but static. Work in progress.
+<issue_comment>username_0: Just let me know if I should invest time in this
+<issue_comment>username_1: My only concern with this is that we will import all the pages over, and then have to touch them all with the new layout. I think the layout is actually almost done; the thing that is the holdup right now is there is no point in importing the events until that is done since the data file format is not finalized right now.
+
+I would suggest we do the following:
+
+1. Finalize the event data file format
+2. Finalize the event detail page template (this is actually pretty much done I think)
+3. Finalize the sponsor data file format and integration (I think this is done, just need to validate it)
+4. Import all the events to the new structure
+5. Import all the existing pages
+6. THEN work on making any changes to the theme. I think that the existing theme should work for importing stuff now?
+
+In this approach, we should make NO more stylistic changes to layout, etc...just get the data over so it all displays. Then we can make changes to the templates which will be much more of a DRY approach.
+<issue_comment>username_0: But the current layout is entirely different from the site we have at devopsdays.org so I guess I'm not really understanding what is the goal.
+<issue_comment>username_1: Which parts are completely different? The menu nav? I pretty much replicated how it looked when I built this theme. The only real difference is in the menu bar/social links. The page layouts can/should be the same, and those are just templates anyway...my concern is building a structure with partials that doesn't reflect the overall?
+
+I might be missing something so if you can be specific about what is fundamentally different in the new theme it will help me a lot :)
+<issue_comment>username_0: Well, not only. Right now the front page is different in many things (alignment, sizes, missing elements). I thought it would be easier just to take what we currently have and convert it to use Hugo, instead of building everything from scratch and trying to make it look identical.
+
+Did you run the legacy theme?
+<issue_comment>username_1: I did. I pulled it down and ran it. I guess as long as we feel like any content imported using the ""legacy"" theme wouldn't require touching later, then it makes sense. What I don't want to do is important dozens of events, and then have to touch their files again to make them work with the final theme. The layout stuff you've mentioned seems to be more chrome than functional, and I don't think it affects the import of data one way or another. 
+
+I see the point of having two themes so you can switch between them as we go. The biggest thing is to make sure they are both compatible with the data/content and the content files don't need to be changed for the new setup. 
+
+The only thing I would suggest is to not over-write the content/page/organizing.md file...I put a ton of content in it which will get blown away by this merge (see #52 for reference)
+
+Otherwise I think it is good :)
+<issue_comment>username_0: From my checks the `organizing.md` is still there, and working.
+<issue_comment>username_1: I probably just panicked from the github diff. Then I say plus one on the merge. I'll fire it up. It won't hurt anything :)"
+appveyor/website,327831917,474,,"[{'action': 'opened', 'author': 'Wasapl', 'comment_id': None, 'datetime': '2018-05-30T17:40:58Z', 'masked_author': 'username_0', 'text': 'Recently we introduced Ubuntu images. Therefore we need to update docs to show users how to work with Linux images.\r\n\r\nDocs to review:\r\n\r\n* [ ] [Stacks/Node.js](https://www.appveyor.com/docs/lang/nodejs-iojs/)', 'title': 'Update Appveyor Docs with Linux examples and how-tos', 'type': 'issue'}
+ {'action': 'created', 'author': 'tomap', 'comment_id': 439793241.0, 'datetime': '2018-11-19 07:14:27+00:00', 'masked_author': 'username_1', 'text': ""Hi, what I'm especially interested is how to make a matrix of stack, to support multiple versions of node on Windows and linux"", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'James-Jackson-South', 'comment_id': 525625046.0, 'datetime': '2019-08-28 17:44:51+00:00', 'masked_author': 'username_2', 'text': ""Any movement here? There's still no documentation on how to install node on Linux side-by-side with Windows. \r\n\r\nThe following answer from the forums:\r\n\r\nhttps://help.appveyor.com/discussions/questions/22219-installing-a-specifc-node-version-on-both-windows-and-linux-builds\r\n\r\nFails on Windows with the following message\r\n\r\n``` bash\r\npowershell Install-Product node\r\nInstall-Product : The term 'Install-Product' is not recognized as the name of a cmdlet, function, script file, or \r\noperable program. Check the spelling of the name, or if a path was included, verify that the path is correct and try \r\nagain.\r\nAt line:1 char:1\r\n+ Install-Product node\r\n+ ~~~~~~~~~~~~~~~\r\n    + CategoryInfo          : ObjectNotFound: (Install-Product:String) [], CommandNotFoundException\r\n    + FullyQualifiedErrorId : CommandNotFoundException\r\n \r\nCommand exited with code 1\r\n```"", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'IlyaFinkelshteyn', 'comment_id': 525942579.0, 'datetime': '2019-08-28 22:11:59+00:00', 'masked_author': 'username_3', 'text': '@username_2 please share a link to the build and your build configuration in YAML format (use `Export YAML` menu is you use UI).', 'title': None, 'type': 'comment'}]","<issue_start><issue_comment>Title: Update Appveyor Docs with Linux examples and how-tos
+username_0: Recently we introduced Ubuntu images. Therefore we need to update docs to show users how to work with Linux images.
+
+Docs to review:
+
+* [ ] [Stacks/Node.js](https://www.appveyor.com/docs/lang/nodejs-iojs/)
+<issue_comment>username_1: Hi, what I'm especially interested is how to make a matrix of stack, to support multiple versions of node on Windows and linux
+<issue_comment>username_2: Any movement here? There's still no documentation on how to install node on Linux side-by-side with Windows. 
+
+The following answer from the forums:
+
+https://help.appveyor.com/discussions/questions/22219-installing-a-specifc-node-version-on-both-windows-and-linux-builds
+
+Fails on Windows with the following message
+
+``` bash
+powershell Install-Product node
+Install-Product : The term 'Install-Product' is not recognized as the name of a cmdlet, function, script file, or 
+operable program. Check the spelling of the name, or if a path was included, verify that the path is correct and try 
+again.
+At line:1 char:1
++ Install-Product node
++ ~~~~~~~~~~~~~~~
+    + CategoryInfo          : ObjectNotFound: (Install-Product:String) [], CommandNotFoundException
+    + FullyQualifiedErrorId : CommandNotFoundException
+ 
+Command exited with code 1
+```
+<issue_comment>username_3: @username_2 please share a link to the build and your build configuration in YAML format (use `Export YAML` menu is you use UI)."
+ethereum/ethereum-org-website,869442290,2947,,"[{'action': 'opened', 'author': 'awg0013-PR', 'comment_id': None, 'datetime': '2021-04-28 02:58:19+00:00', 'masked_author': 'username_0', 'text': '**Is your feature request related to a problem? Please describe.**\r\n\r\nNo, my feature request is not related to a problem. I would like to submit an article to be included on the _[Community guides and resources page](https://ethereum.org/en/learn/)_ within the ""Learn"" section of the ethereum.org website.\r\n\r\n**Describe the solution you\'d like**\r\n\r\nI would like for my article to be included on the ethereum.org website under the ""Community guides and resources"" page. The article, titled [""_Understanding Ethereum_""](https://allan-gulley.medium.com/understanding-ethereum-819c2096b613), was written for non-technical audiences and its objective is to provide a simple explanation of Ethereum and its native token.\r\n\r\n**Describe alternatives you\'ve considered**\r\n\r\nI have shared this article within a variety of crypto communities across discord, telegram, and other social channels and I have encouraged people to share it with any ""crypto newbies"" they know. For those that are well-versed in all things Ethereum, the content may seem elementary, but for newcomers, the content can be constructive for their knowledge base.\r\n\r\nI\'ve watched the quality and quantity of educational content on ethereum.org grow over the years and I now point people directly to the Learn tab if they are starting out on their crypto journey. Although the most obvious alternative is for my article to not be included on the website, I do believe that it would be helpful to provide another supplementary source of information to bridge the gap between the uninitiated and the power users!\r\n\r\n**Additional context**\r\n\r\nThe article meets the criteria listed on the _[Adding Articles](https://ethereum.org/en/contributing/adding-articles/)_ page of the ethereum.org website.\r\n- the article is up to date\r\n- the information in the article is accurate and factual\r\n- the author is credible and all sources are referenced\r\n- this content adds distinct value because it is written specifically for non-technical audiences, it provides context for the web2-web3 paradigm shift, and it illustrates the symbiosis between Ethereum and DeFi\r\n- this content serves two of the three personas: Individuals and Enterprise\r\n\r\n**Want to contribute?**\r\n\r\nI am eager to contribute this piece to the community because I truly believe in the principles and potential of Ethereum! I have spent years explaining many of the concepts in the article to friends, family, co-workers, and clients and I truly believe that this article can be a great starting point for anyone that wants to understand and explore the Ethereum ecosystem.', 'title': 'Add an Article - ""Understanding Ethereum""', 'type': 'issue'}
+ {'action': 'created', 'author': 'wackerow', 'comment_id': 837565097.0, 'datetime': '2021-05-11 00:45:15+00:00', 'masked_author': 'username_1', 'text': ""@username_0 Hey, thanks for posting this article. I'm down to post this on the page you suggested, but noticing this medium link has a paywall. If we can get a link without any paywall I can help get this posted =) Let me know"", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'awg0013-PR', 'comment_id': 837568955.0, 'datetime': '2021-05-11 00:49:32+00:00', 'masked_author': 'username_0', 'text': 'Great news! Sorry to hear you hit a paywall - I\'m newer to Medium and I\'m still figuring things out.\r\n\r\nHere\'s a ""friend link"" that should allow anyone to read the article free of charge (and free of pay walls): https://allan-gulley.medium.com/understanding-ethereum-819c2096b613?sk=c89f3aa5a4fd8b5fa0dae3042a3fa011\r\n\r\nPlease let me know if you have any trouble! Cheers.', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'wackerow', 'comment_id': 839439816.0, 'datetime': '2021-05-12 05:07:19+00:00', 'masked_author': 'username_1', 'text': '@all-contributors please add @username_0 for content', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'wackerow', 'comment_id': 839440832.0, 'datetime': '2021-05-12 05:08:38+00:00', 'masked_author': 'username_1', 'text': '@username_0 Thanks for providing the link. Nice article, thanks for posting this =)', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'awg0013-PR', 'comment_id': 839762375.0, 'datetime': '2021-05-12 13:13:34+00:00', 'masked_author': 'username_0', 'text': '', 'title': None, 'type': 'comment'}]","<issue_start><issue_comment>Title: Add an Article - ""Understanding Ethereum""
+username_0: **Is your feature request related to a problem? Please describe.**
+
+No, my feature request is not related to a problem. I would like to submit an article to be included on the _[Community guides and resources page](https://ethereum.org/en/learn/)_ within the ""Learn"" section of the ethereum.org website.
+
+**Describe the solution you'd like**
+
+I would like for my article to be included on the ethereum.org website under the ""Community guides and resources"" page. The article, titled [""_Understanding Ethereum_""](https://allan-gulley.medium.com/understanding-ethereum-819c2096b613), was written for non-technical audiences and its objective is to provide a simple explanation of Ethereum and its native token.
+
+**Describe alternatives you've considered**
+
+I have shared this article within a variety of crypto communities across discord, telegram, and other social channels and I have encouraged people to share it with any ""crypto newbies"" they know. For those that are well-versed in all things Ethereum, the content may seem elementary, but for newcomers, the content can be constructive for their knowledge base.
+
+I've watched the quality and quantity of educational content on ethereum.org grow over the years and I now point people directly to the Learn tab if they are starting out on their crypto journey. Although the most obvious alternative is for my article to not be included on the website, I do believe that it would be helpful to provide another supplementary source of information to bridge the gap between the uninitiated and the power users!
+
+**Additional context**
+
+The article meets the criteria listed on the _[Adding Articles](https://ethereum.org/en/contributing/adding-articles/)_ page of the ethereum.org website.
+- the article is up to date
+- the information in the article is accurate and factual
+- the author is credible and all sources are referenced
+- this content adds distinct value because it is written specifically for non-technical audiences, it provides context for the web2-web3 paradigm shift, and it illustrates the symbiosis between Ethereum and DeFi
+- this content serves two of the three personas: Individuals and Enterprise
+
+**Want to contribute?**
+
+I am eager to contribute this piece to the community because I truly believe in the principles and potential of Ethereum! I have spent years explaining many of the concepts in the article to friends, family, co-workers, and clients and I truly believe that this article can be a great starting point for anyone that wants to understand and explore the Ethereum ecosystem.
+<issue_comment>username_1: @username_0 Hey, thanks for posting this article. I'm down to post this on the page you suggested, but noticing this medium link has a paywall. If we can get a link without any paywall I can help get this posted =) Let me know
+<issue_comment>username_0: Great news! Sorry to hear you hit a paywall - I'm newer to Medium and I'm still figuring things out.
+
+Here's a ""friend link"" that should allow anyone to read the article free of charge (and free of pay walls): https://allan-gulley.medium.com/understanding-ethereum-819c2096b613?sk=c89f3aa5a4fd8b5fa0dae3042a3fa011
+
+Please let me know if you have any trouble! Cheers.
+<issue_comment>username_1: @all-contributors please add @username_0 for content
+<issue_comment>username_1: @username_0 Thanks for providing the link. Nice article, thanks for posting this =)"
+gohugoio/hugo,164499040,2263,"{'number': 2263.0, 'repo': 'hugo', 'user_login': 'gohugoio'}","[{'action': 'opened', 'author': 'sasivarnan', 'comment_id': None, 'datetime': '2016-07-08T10:05:09Z', 'masked_author': 'username_0', 'text': 'The `universal code` for disqus is as follows. The existing script template doesn\'t seems to be working proper.\n\n```\n<div id=""disqus_thread""></div>\n<script>\n    /**\n     *  RECOMMENDED CONFIGURATION VARIABLES: EDIT AND UNCOMMENT THE SECTION BELOW TO INSERT DYNAMIC VALUES FROM YOUR PLATFORM OR CMS.\n     *  LEARN WHY DEFINING THESE VARIABLES IS IMPORTANT: https://disqus.com/admin/universalcode/#configuration-variables\n     */\n    /*\n    var disqus_config = function () {\n        this.page.url = PAGE_URL;  // Replace PAGE_URL with your page\'s canonical URL variable\n        this.page.identifier = PAGE_IDENTIFIER; // Replace PAGE_IDENTIFIER with your page\'s unique identifier variable\n    };\n    */\n    (function() {  // DON\'T EDIT BELOW THIS LINE\n        var d = document, s = d.createElement(\'script\');\n\n        s.src = \'//\' + disqus_shortname + \'.disqus.com/embed.js\';\n\n        s.setAttribute(\'data-timestamp\', +new Date());\n        (d.head || d.body).appendChild(s);\n    })();\n</script>\n<noscript>Please enable JavaScript to view the <a href=""https://disqus.com/?ref_noscript"" rel=""nofollow"">comments powered by Disqus.</a></noscript>\n```\n\nI have updated the script template matching with the `universal code`.\n\nhttps://help.disqus.com/customer/en/portal/articles/2158629', 'title': 'Updated disqus template with configuration-variables', 'type': 'issue'}
+ {'action': 'created', 'author': 'bep', 'comment_id': 311760363.0, 'datetime': '2017-06-28 19:18:20+00:00', 'masked_author': 'username_1', 'text': '@username_2 is this still relevant?', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'anthonyfok', 'comment_id': 311812020.0, 'datetime': '2017-06-28 22:39:30+00:00', 'masked_author': 'username_2', 'text': ""Thanks for the heads up @ username_1!\r\n\r\n@username_0, thank you so much for your contribution!\r\nI am sorry that I had missed your Pull Request, and had instead saw @username_3's Pull Requests #3639 and #3655 from this past week, and had merged his PRs.  The fixes are very, very similar, so you have the credit of being here first!  :-)\r\n\r\nI apologize for my oversight, and thank you again @username_0!"", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'yihui', 'comment_id': 311843156.0, 'datetime': '2017-06-29 02:15:32+00:00', 'masked_author': 'username_3', 'text': ""Oops. I didn't notice there was an existing PR. Yeah, this one is very similar to the one I sent."", 'title': None, 'type': 'comment'}]","<issue_start><issue_comment>Title: Updated disqus template with configuration-variables
+username_0: The `universal code` for disqus is as follows. The existing script template doesn't seems to be working proper.
+
+```
+<div id=""disqus_thread""></div>
+<script>
+    /**
+     *  RECOMMENDED CONFIGURATION VARIABLES: EDIT AND UNCOMMENT THE SECTION BELOW TO INSERT DYNAMIC VALUES FROM YOUR PLATFORM OR CMS.
+     *  LEARN WHY DEFINING THESE VARIABLES IS IMPORTANT: https://disqus.com/admin/universalcode/#configuration-variables
+     */
+    /*
+    var disqus_config = function () {
+        this.page.url = PAGE_URL;  // Replace PAGE_URL with your page's canonical URL variable
+        this.page.identifier = PAGE_IDENTIFIER; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
+    };
+    */
+    (function() {  // DON'T EDIT BELOW THIS LINE
+        var d = document, s = d.createElement('script');
+
+        s.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href=""https://disqus.com/?ref_noscript"" rel=""nofollow"">comments powered by Disqus.</a></noscript>
+```
+
+I have updated the script template matching with the `universal code`.
+
+https://help.disqus.com/customer/en/portal/articles/2158629
+<issue_comment>username_1: @username_2 is this still relevant?
+<issue_comment>username_2: Thanks for the heads up @ username_1!
+
+@username_0, thank you so much for your contribution!
+I am sorry that I had missed your Pull Request, and had instead saw @username_3's Pull Requests #3639 and #3655 from this past week, and had merged his PRs.  The fixes are very, very similar, so you have the credit of being here first!  :-)
+
+I apologize for my oversight, and thank you again @username_0!
+<issue_comment>username_3: Oops. I didn't notice there was an existing PR. Yeah, this one is very similar to the one I sent."
+facebook/docusaurus,562849609,2280,,"[{'action': 'opened', 'author': 'binarylogic', 'comment_id': None, 'datetime': '2020-02-10 21:50:06+00:00', 'masked_author': 'username_0', 'text': ""## 🐛 Bug Report\r\n\r\nHi, we're attempting to add additional sections to our Docusaurus site powered by the `@docusaurus/plugin-content-blog` plugin. For example:\r\n\r\n```\r\n// ...\r\n plugins: [\r\n    '@docusaurus/plugin-content-blog',\r\n    {\r\n      path: 'components',\r\n      routeBasePath: 'components'\r\n    },\r\n  ],\r\n// ...\r\n```\r\n\r\nHowever, when we start the site we're presented with a bunch of syntax errors:\r\n\r\n```\r\nSyntaxError: /path/to/website/blog/2020-01-07-blog-post.md: Identifier 'React' has already been declared (36:122)\r\n```\r\n\r\nIt appears that this markdown file is being double processed, even though the above plugin definition targets the `componens` folder (not the `blogs` folder).\r\n\r\nI'm wondering how we can successfully reuse components like this to power other sections with markdown?\r\n\r\n### Have you read the [Contributing Guidelines on issues](https://github.com/facebook/docusaurus/blob/master/CONTRIBUTING.md#reporting-new-issues)?\r\n\r\nYes\r\n\r\n## To Reproduce\r\n\r\n(Write your steps here:)\r\n\r\n1. Add the above `plugins` definition.\r\n1. Start docusaurus.\r\n1. :( errors.\r\n\r\n## Expected behavior\r\n\r\nFor a new `/components` section to become available, powered by `.md` files in the `components` folder.\r\n\r\n## Actual Behavior\r\n\r\nI received the above error."", 'title': '[v2] Unable to reuse content plugins', 'type': 'issue'}
+ {'action': 'created', 'author': 'lex111', 'comment_id': 584430642.0, 'datetime': '2020-02-11 00:51:03+00:00', 'masked_author': 'username_1', 'text': ""```\r\n      path: 'components',\r\n      routeBasePath: 'components'\r\n```\r\n\r\nThis will not create a new section, but will modify the existing one (blog). That is, `routeBasePath` indicates which root path the blog posts are available for (defaults to `blog`) and `path` is the place in the file system where the blog posts themselves are located (in MD).\r\n\r\nIn the current implementation, you are limited to docs and a blog, you can change the base URL paths, but you won’t be able to create something new."", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'binarylogic', 'comment_id': 585341852.0, 'datetime': '2020-02-12 18:13:38+00:00', 'masked_author': 'username_0', 'text': ""Got it. That would be a really great feature though. It seems odd that a plugin can't be reused with different parameters. I don't fully understand how it all works, but I'm curious if it's possible with a small amount of work?"", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'lex111', 'comment_id': 585347967.0, 'datetime': '2020-02-12 18:22:15+00:00', 'masked_author': 'username_1', 'text': ""I realized that you want to define your own sections, roughly speaking, a page with a list of elements and a page with a specific element (similar to a blog), right? Currently this is not possible, plugins implement specific goals. But here's the question: how will you define your own template for new sections? I can’t even think of how it should be implemented conveniently and expandable for the user. If you have thoughts on this, write how you see it."", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'binarylogic', 'comment_id': 585352133.0, 'datetime': '2020-02-12 18:31:45+00:00', 'masked_author': 'username_0', 'text': ""I was hoping that I could customize [these options](https://github.com/facebook/docusaurus/blob/master/packages/docusaurus-plugin-content-blog/src/index.ts#L33-L45) and pass my own custom components.\r\n\r\nI'm happy to simply copy this plugin and rename it, but that seems like a lot of duplication."", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'lex111', 'comment_id': 585357239.0, 'datetime': '2020-02-12 18:43:40+00:00', 'masked_author': 'username_1', 'text': 'The fact of the matter is that in this way you will override the options of the current  plugin. We need to think about how to do this most simply and conveniently for the user.', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'binarylogic', 'comment_id': 586412271.0, 'datetime': '2020-02-14 18:28:18+00:00', 'masked_author': 'username_0', 'text': ""Got it. I'll close then."", 'title': None, 'type': 'comment'}
+ {'action': 'closed', 'author': 'binarylogic', 'comment_id': None, 'datetime': '2020-02-14 18:28:18+00:00', 'masked_author': 'username_0', 'text': '', 'title': None, 'type': 'issue'}]","<issue_start><issue_comment>Title: [v2] Unable to reuse content plugins
+username_0: ## 🐛 Bug Report
+
+Hi, we're attempting to add additional sections to our Docusaurus site powered by the `@docusaurus/plugin-content-blog` plugin. For example:
+
+```
+// ...
+ plugins: [
+    '@docusaurus/plugin-content-blog',
+    {
+      path: 'components',
+      routeBasePath: 'components'
+    },
+  ],
+// ...
+```
+
+However, when we start the site we're presented with a bunch of syntax errors:
+
+```
+SyntaxError: /path/to/website/blog/2020-01-07-blog-post.md: Identifier 'React' has already been declared (36:122)
+```
+
+It appears that this markdown file is being double processed, even though the above plugin definition targets the `componens` folder (not the `blogs` folder).
+
+I'm wondering how we can successfully reuse components like this to power other sections with markdown?
+
+### Have you read the [Contributing Guidelines on issues](https://github.com/facebook/docusaurus/blob/master/CONTRIBUTING.md#reporting-new-issues)?
+
+Yes
+
+## To Reproduce
+
+(Write your steps here:)
+
+1. Add the above `plugins` definition.
+1. Start docusaurus.
+1. :( errors.
+
+## Expected behavior
+
+For a new `/components` section to become available, powered by `.md` files in the `components` folder.
+
+## Actual Behavior
+
+I received the above error.
+<issue_comment>username_1: ```
+      path: 'components',
+      routeBasePath: 'components'
+```
+
+This will not create a new section, but will modify the existing one (blog). That is, `routeBasePath` indicates which root path the blog posts are available for (defaults to `blog`) and `path` is the place in the file system where the blog posts themselves are located (in MD).
+
+In the current implementation, you are limited to docs and a blog, you can change the base URL paths, but you won’t be able to create something new.
+<issue_comment>username_0: Got it. That would be a really great feature though. It seems odd that a plugin can't be reused with different parameters. I don't fully understand how it all works, but I'm curious if it's possible with a small amount of work?
+<issue_comment>username_1: I realized that you want to define your own sections, roughly speaking, a page with a list of elements and a page with a specific element (similar to a blog), right? Currently this is not possible, plugins implement specific goals. But here's the question: how will you define your own template for new sections? I can’t even think of how it should be implemented conveniently and expandable for the user. If you have thoughts on this, write how you see it.
+<issue_comment>username_0: I was hoping that I could customize [these options](https://github.com/facebook/docusaurus/blob/master/packages/docusaurus-plugin-content-blog/src/index.ts#L33-L45) and pass my own custom components.
+
+I'm happy to simply copy this plugin and rename it, but that seems like a lot of duplication.
+<issue_comment>username_1: The fact of the matter is that in this way you will override the options of the current  plugin. We need to think about how to do this most simply and conveniently for the user.
+<issue_comment>username_0: Got it. I'll close then.<issue_closed>"
+nodejs/nodejs.org,178605649,908,,"[{'action': 'opened', 'author': 'hackygolucky', 'comment_id': None, 'datetime': '2016-09-22 13:10:13+00:00', 'masked_author': 'username_0', 'text': ""* **URL**: https://nodejs.org/en/foundation/\r\n\r\n<!-- Enter your issue details below this comment. -->\r\nAs the education initiatives move forward(such as Certification development or Outreachy participation), it would be helpful to have these efforts surfaced on nodejs.org. \r\n\r\nIn the short term, as part of the Node.js community's participation in the [Outreachy effort](), I will need to have a page or subsection to share the information about the Node.js project's specific information for applicants up. I was thinking this could go under the [Foundation](https://nodejs.org/en/foundation/) section of the site and create a new tab which would be either 'Outreachy' or 'Education'(I think 'Education' makes more sense and 'Outreachy' would simply be a section on that page since it is a time-boxed effort).\r\n\r\nIn the long term, I'd love to see 'Learn' as a top-level navigation where we have Getting Started resources among whatever else we can dream up and see fit to put there(or link to). I think that it might also make sense to keep what I've mentioned above(the Education initiatives tab under Foundation) because I really, really want to find as many ways as possible to communicate/be transparent about what is happening here.\r\n\r\nWould love thoughts on this!"", 'title': 'Learn/Education initiatives subsection on nodejs.org', 'type': 'issue'}
+ {'action': 'created', 'author': 'Fishrock123', 'comment_id': 248951638.0, 'datetime': '2016-09-22 16:15:56+00:00', 'masked_author': 'username_1', 'text': 'Maybe it would be better under ""get involved""\r\n\r\nor maybe we should switch ""get involved"" to ""learn""?', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'hackygolucky', 'comment_id': 249233896.0, 'datetime': '2016-09-23 16:07:20+00:00', 'masked_author': 'username_0', 'text': ""Ah! This *is* a tough one. There are a number of ways to learn under Get Involved, but when I think of that naming, it ultimately implies you're considering participating or giving back, not necessarily learning as a top-level. I'd say ultimately that getting involved and learning are two separate, important activities that absolutely can converge. Is it that you think we should take an opinion that eventually as people become more comfortable with the platform that they -should- contribute?(no judgement there honest question and an interesting one at that). \r\n\r\nI LOVE the call to action that is 'Get Involved'. I don't think I want that to go away. It's a better label than just 'Community' to me. It empowers folks. I think I'd like a separate 'Learn' that contains a Getting Started section, but that ensures we're able to cover multiple users because not everyone is getting started.\r\n\r\nI've turned this into a weird bikeshedding. I tried to look at what other communities that I respect have set precedence with in regards to this, but I'm not very satisfied with what I saw :)"", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'Fishrock123', 'comment_id': 249312721.0, 'datetime': '2016-09-23 22:00:22+00:00', 'masked_author': 'username_1', 'text': 'In that case, could we roll ""Foundation"" into ""About""? I suspect the main objection to this would be that the top nav is getting to crowded... which I think is partially true.\r\n\r\ncc @nodejs/website thoughts appreciated, but I\'d really like to have a ""Lear"" sort of section way more front and center.', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'evanlucas', 'comment_id': 249313392.0, 'datetime': '2016-09-23 22:04:21+00:00', 'masked_author': 'username_2', 'text': '+1 to having Learn top level item and rolling Foundation into About from me.', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'williamkapke', 'comment_id': 249349553.0, 'datetime': '2016-09-24 06:57:52+00:00', 'masked_author': 'username_3', 'text': ""Yup- I've always felt a bit off about the fact that Working Groups are under About and Board/TSC stuff was under foundation. Plus, Announcements & In The News seem out-of-place under Foundation.\r\n\r\n+1 to combining them somehow."", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'hackygolucky', 'comment_id': 249624653.0, 'datetime': '2016-09-26 16:38:44+00:00', 'masked_author': 'username_0', 'text': 'Sounds good to me!', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'hackygolucky', 'comment_id': 249633943.0, 'datetime': '2016-09-26 17:12:34+00:00', 'masked_author': 'username_0', 'text': ""I'll PR the nav changes suggested here and add a separate PR for the Outreachy page."", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'Fishrock123', 'comment_id': 249892118.0, 'datetime': '2016-09-27 15:03:58+00:00', 'masked_author': 'username_1', 'text': ""@username_0 sounds good! You'll probably need to modify `site.json` quite a bit as a start: https://github.com/nodejs/nodejs.org/blob/master/locale/en/site.json#L105-L132"", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'fhemberger', 'comment_id': 277423418.0, 'datetime': '2017-02-04 06:36:15+00:00', 'masked_author': 'username_4', 'text': 'Closing this as #929 was merged …', 'title': None, 'type': 'comment'}
+ {'action': 'closed', 'author': 'fhemberger', 'comment_id': None, 'datetime': '2017-02-04 06:36:15+00:00', 'masked_author': 'username_4', 'text': '', 'title': None, 'type': 'issue'}]","<issue_start><issue_comment>Title: Learn/Education initiatives subsection on nodejs.org
+username_0: * **URL**: https://nodejs.org/en/foundation/
+
+<!-- Enter your issue details below this comment. -->
+As the education initiatives move forward(such as Certification development or Outreachy participation), it would be helpful to have these efforts surfaced on nodejs.org. 
+
+In the short term, as part of the Node.js community's participation in the [Outreachy effort](), I will need to have a page or subsection to share the information about the Node.js project's specific information for applicants up. I was thinking this could go under the [Foundation](https://nodejs.org/en/foundation/) section of the site and create a new tab which would be either 'Outreachy' or 'Education'(I think 'Education' makes more sense and 'Outreachy' would simply be a section on that page since it is a time-boxed effort).
+
+In the long term, I'd love to see 'Learn' as a top-level navigation where we have Getting Started resources among whatever else we can dream up and see fit to put there(or link to). I think that it might also make sense to keep what I've mentioned above(the Education initiatives tab under Foundation) because I really, really want to find as many ways as possible to communicate/be transparent about what is happening here.
+
+Would love thoughts on this!
+<issue_comment>username_1: Maybe it would be better under ""get involved""
+
+or maybe we should switch ""get involved"" to ""learn""?
+<issue_comment>username_0: Ah! This *is* a tough one. There are a number of ways to learn under Get Involved, but when I think of that naming, it ultimately implies you're considering participating or giving back, not necessarily learning as a top-level. I'd say ultimately that getting involved and learning are two separate, important activities that absolutely can converge. Is it that you think we should take an opinion that eventually as people become more comfortable with the platform that they -should- contribute?(no judgement there honest question and an interesting one at that). 
+
+I LOVE the call to action that is 'Get Involved'. I don't think I want that to go away. It's a better label than just 'Community' to me. It empowers folks. I think I'd like a separate 'Learn' that contains a Getting Started section, but that ensures we're able to cover multiple users because not everyone is getting started.
+
+I've turned this into a weird bikeshedding. I tried to look at what other communities that I respect have set precedence with in regards to this, but I'm not very satisfied with what I saw :)
+<issue_comment>username_1: In that case, could we roll ""Foundation"" into ""About""? I suspect the main objection to this would be that the top nav is getting to crowded... which I think is partially true.
+
+cc @nodejs/website thoughts appreciated, but I'd really like to have a ""Lear"" sort of section way more front and center.
+<issue_comment>username_2: +1 to having Learn top level item and rolling Foundation into About from me.
+<issue_comment>username_3: Yup- I've always felt a bit off about the fact that Working Groups are under About and Board/TSC stuff was under foundation. Plus, Announcements & In The News seem out-of-place under Foundation.
+
++1 to combining them somehow.
+<issue_comment>username_0: Sounds good to me!
+<issue_comment>username_0: I'll PR the nav changes suggested here and add a separate PR for the Outreachy page.
+<issue_comment>username_1: @username_0 sounds good! You'll probably need to modify `site.json` quite a bit as a start: https://github.com/nodejs/nodejs.org/blob/master/locale/en/site.json#L105-L132
+<issue_comment>username_4: Closing this as #929 was merged …<issue_closed>"
+go-gitea/website,195539050,17,"{'number': 17.0, 'repo': 'website', 'user_login': 'go-gitea'}","[{'action': 'opened', 'author': 'strk', 'comment_id': None, 'datetime': '2016-12-14T14:05:12Z', 'masked_author': 'username_0', 'text': '.. also mention planned self-hosting and add link to download area', 'title': 'Add link to try.gitea.io', 'type': 'issue'}
+ {'action': 'created', 'author': 'lunny', 'comment_id': 267060160.0, 'datetime': '2016-12-14 15:16:27+00:00', 'masked_author': 'username_1', 'text': 'LGTM', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'tboerger', 'comment_id': 267062273.0, 'datetime': '2016-12-14 15:24:21+00:00', 'masked_author': 'username_2', 'text': 'Generally I prefer lesser new lines as all the single sentences will be transferred to separate paragraphs.', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'strk', 'comment_id': 267062869.0, 'datetime': '2016-12-14 15:26:41+00:00', 'masked_author': 'username_0', 'text': ""Given the amount of current content, it isn't bad to have more paragraphs.."", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'tboerger', 'comment_id': 267077295.0, 'datetime': '2016-12-14 16:15:45+00:00', 'masked_author': 'username_2', 'text': 'Instead of stretching simple phrases we want things like screenshots.', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'strk', 'comment_id': 267085791.0, 'datetime': '2016-12-14 16:44:44+00:00', 'masked_author': 'username_0', 'text': 'I think we can do better incrementally, how about merging this and\nsending a new PR for next iteration ?', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'bkcsoft', 'comment_id': 268029560.0, 'datetime': '2016-12-19 17:46:20+00:00', 'masked_author': 'username_3', 'text': 'I would flip the 2 lower around and then put them in the same paragraph.', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'tboerger', 'comment_id': 268043774.0, 'datetime': '2016-12-19 18:43:49+00:00', 'masked_author': 'username_2', 'text': ':-1: stop the line wrapping.', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'strk', 'comment_id': 268045266.0, 'datetime': '2016-12-19 18:49:42+00:00', 'masked_author': 'username_0', 'text': ""How do line wrapping hurt ?\nWhat does your -1 mean in terms of acceptability of this PR ?\nThe CONTRIBUTING.md file doesn't mention veto powers nor does\ngo into details of acceptance/rejection (it probably should)"", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'lunny', 'comment_id': 268125514.0, 'datetime': '2016-12-20 01:12:51+00:00', 'masked_author': 'username_1', 'text': 'All are right except line wrapping. It will break the UI on mobile or other small screen devices.', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'strk', 'comment_id': 268199707.0, 'datetime': '2016-12-20 09:46:39+00:00', 'masked_author': 'username_0', 'text': 'Single linebreaks in markdown have no structural meaning and should\nthus not change the rendered output in any way. Do you have proof of\nyour statement about breaking on mobile UI and small screen devices ?', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'tboerger', 'comment_id': 268304116.0, 'datetime': '2016-12-20 17:26:24+00:00', 'masked_author': 'username_2', 'text': ""Just revert the line breaks to match the style of ALL other markdown documents. Without this revert I'm against this pr."", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'strk', 'comment_id': 269086084.0, 'datetime': '2016-12-24 14:18:26+00:00', 'masked_author': 'username_0', 'text': ""Not needed anymore now, there's a big green TRY button now.."", 'title': None, 'type': 'comment'}]","<issue_start><issue_comment>Title: Add link to try.gitea.io
+username_0: .. also mention planned self-hosting and add link to download area
+<issue_comment>username_1: LGTM
+<issue_comment>username_2: Generally I prefer lesser new lines as all the single sentences will be transferred to separate paragraphs.
+<issue_comment>username_0: Given the amount of current content, it isn't bad to have more paragraphs..
+<issue_comment>username_2: Instead of stretching simple phrases we want things like screenshots.
+<issue_comment>username_0: I think we can do better incrementally, how about merging this and
+sending a new PR for next iteration ?
+<issue_comment>username_3: I would flip the 2 lower around and then put them in the same paragraph.
+<issue_comment>username_2: :-1: stop the line wrapping.
+<issue_comment>username_0: How do line wrapping hurt ?
+What does your -1 mean in terms of acceptability of this PR ?
+The CONTRIBUTING.md file doesn't mention veto powers nor does
+go into details of acceptance/rejection (it probably should)
+<issue_comment>username_1: All are right except line wrapping. It will break the UI on mobile or other small screen devices.
+<issue_comment>username_0: Single linebreaks in markdown have no structural meaning and should
+thus not change the rendered output in any way. Do you have proof of
+your statement about breaking on mobile UI and small screen devices ?
+<issue_comment>username_2: Just revert the line breaks to match the style of ALL other markdown documents. Without this revert I'm against this pr.
+<issue_comment>username_0: Not needed anymore now, there's a big green TRY button now.."

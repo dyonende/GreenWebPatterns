@@ -1,0 +1,617 @@
+getnikola/nikola,285339935,2941,,"[{'action': 'opened', 'author': 'assarbad', 'comment_id': None, 'datetime': '2018-01-02 00:41:19+00:00', 'masked_author': 'username_0', 'text': ""I was using a `pyenv` to install Python 3.6.4 and in order to install Nikola in it, using the `pip` method I needed to install the following packages: `build-essential libbz2-dev libsqlite3-dev libreadline-dev libxml2-dev libjpeg-dev libxslt-dev`.\r\n\r\nThat was on Ubuntu 14.04.5 (ARM).\r\n\r\nSince the `pip` output was somewhat misleading and it took me a considerable time to figure it out, I thought I'd open a ticket here so others can find the info."", 'title': 'Just something that took me a while to figure out', 'type': 'issue'}
+ {'action': 'created', 'author': 'tritium21', 'comment_id': 354716822.0, 'datetime': '2018-01-02 08:01:01+00:00', 'masked_author': 'username_1', 'text': 'What do you intend to accomplish here?\r\n\r\nIf you are using pyenv, you are in python power user territory.  I think building python and pillow, and lxml is out of scope for nikola documentation, since most users wont be on arm, build python, or have to build lxml or pillow (they have manylinux - x86-64 generic - wheels)', 'title': None, 'type': 'comment'}
+ {'action': 'closed', 'author': 'Kwpolska', 'comment_id': None, 'datetime': '2018-01-02 11:30:13+00:00', 'masked_author': 'username_2', 'text': '', 'title': None, 'type': 'issue'}
+ {'action': 'created', 'author': 'Kwpolska', 'comment_id': 354748219.0, 'datetime': '2018-01-02 11:30:13+00:00', 'masked_author': 'username_2', 'text': 'And as @username_1 said, `pyenv` is an advanced technique, Nikola is compatible with Python 3.4 which is in 14.04 repositories.', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'assarbad', 'comment_id': 354850503.0, 'datetime': '2018-01-02 19:12:16+00:00', 'masked_author': 'username_0', 'text': ""Yeah folks, I was just trying to help future internauts who may have come across the same issue. I didn't really expect _any_ action other than that this ticket would be closed, since the purpose was just sharing what I had found out."", 'title': None, 'type': 'comment'}]","<issue_start><issue_comment>Title: Just something that took me a while to figure out
+username_0: I was using a `pyenv` to install Python 3.6.4 and in order to install Nikola in it, using the `pip` method I needed to install the following packages: `build-essential libbz2-dev libsqlite3-dev libreadline-dev libxml2-dev libjpeg-dev libxslt-dev`.
+
+That was on Ubuntu 14.04.5 (ARM).
+
+Since the `pip` output was somewhat misleading and it took me a considerable time to figure it out, I thought I'd open a ticket here so others can find the info.
+<issue_comment>username_1: What do you intend to accomplish here?
+
+If you are using pyenv, you are in python power user territory.  I think building python and pillow, and lxml is out of scope for nikola documentation, since most users wont be on arm, build python, or have to build lxml or pillow (they have manylinux - x86-64 generic - wheels)<issue_closed>
+<issue_comment>username_2: And as @username_1 said, `pyenv` is an advanced technique, Nikola is compatible with Python 3.4 which is in 14.04 repositories.
+<issue_comment>username_0: Yeah folks, I was just trying to help future internauts who may have come across the same issue. I didn't really expect _any_ action other than that this ticket would be closed, since the purpose was just sharing what I had found out."
+gohugoio/hugo,339123112,4910,,"[{'action': 'opened', 'author': 'zoosky', 'comment_id': None, 'datetime': '2018-07-07 06:53:00+00:00', 'masked_author': 'username_0', 'text': 'This would Hugo enable to adapt to an API based Headless CMS.\r\n\r\nContext: \r\n\r\n""Pages from “other data sources”\r\nCurrently, in addition to Hugo’s list pages, every URL must be backed by a content file (Markdown, HTML etc.). This covers most use cases, but we need a flexible way to generate pages from other data sources. Think product catalogues and similar.""\r\n\r\nSee http://gohugo.io/news/lets-celebrate-hugos-5th-birthday/', 'title': 'Create Pages from GraphQL queries', 'type': 'issue'}
+ {'action': 'created', 'author': 'lucperkins', 'comment_id': 404588852.0, 'datetime': '2018-07-12 17:29:16+00:00', 'masked_author': 'username_1', 'text': 'I\'m not necessarily opposed to a feature like this, but to me it seems like it would be very difficult to manage the trade-off between power and simplicity. Allowing users to specify a GraphQL query via configuration might be simple enough, but then where do the fetched pages end up in the directory structure? How often does the fetching happen? How would authentication for GraphCMS/Contentful/whatever be handled?\r\n\r\nRight now the ""Hugo Way"" is to make gathering inputs a process that happens outside of Hugo, with the exception of things like `readFile` and `readJSON`, both of which are much more specific and limited in scope than what you\'re calling for.\r\n\r\nI\'m not saying that a GraphQL implementation is impossible *per se*. I\'m just skeptical that there\'s enough similarity across GraphQL content backends to make a feature like this generally useful.', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'lucperkins', 'comment_id': 404590258.0, 'datetime': '2018-07-12 17:33:57+00:00', 'masked_author': 'username_1', 'text': 'In a different mood, what would be super cool would be some kind of API standard for GraphQL content gathering, a standard to which existing GraphQL content providers could be pressured to conform. This would provide a solid ""contractual"" basis for tools like Hugo, Gatsby, Jekyll, Middleman, and the like to provide their own GraphQL implementations. The standard could cover auth*, directory organization, file metadata, etc.', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'zoosky', 'comment_id': 412894271.0, 'datetime': '2018-08-14 14:36:08+00:00', 'masked_author': 'username_0', 'text': 'Gatsby has Source Plugins https://www.gatsbyjs.org/docs/create-source-plugin/ that help integrate with a Headless CMS. See https://hackernoon.com/building-a-static-blog-using-gatsby-and-strapi-8b5acfc82ad8', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'regisphilibert', 'comment_id': 435032473.0, 'datetime': '2018-11-01 12:56:45+00:00', 'masked_author': 'username_2', 'text': 'Hopefully this would fall under https://github.com/gohugoio/hugo/issues/5074', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'bep', 'comment_id': 435284996.0, 'datetime': '2018-11-02 06:33:49+00:00', 'masked_author': 'username_3', 'text': 'Duplicates #5074 (kind of)', 'title': None, 'type': 'comment'}
+ {'action': 'closed', 'author': 'bep', 'comment_id': None, 'datetime': '2018-11-02 06:34:07+00:00', 'masked_author': 'username_3', 'text': '', 'title': None, 'type': 'issue'}]","<issue_start><issue_comment>Title: Create Pages from GraphQL queries
+username_0: This would Hugo enable to adapt to an API based Headless CMS.
+
+Context: 
+
+""Pages from “other data sources”
+Currently, in addition to Hugo’s list pages, every URL must be backed by a content file (Markdown, HTML etc.). This covers most use cases, but we need a flexible way to generate pages from other data sources. Think product catalogues and similar.""
+
+See http://gohugo.io/news/lets-celebrate-hugos-5th-birthday/
+<issue_comment>username_1: I'm not necessarily opposed to a feature like this, but to me it seems like it would be very difficult to manage the trade-off between power and simplicity. Allowing users to specify a GraphQL query via configuration might be simple enough, but then where do the fetched pages end up in the directory structure? How often does the fetching happen? How would authentication for GraphCMS/Contentful/whatever be handled?
+
+Right now the ""Hugo Way"" is to make gathering inputs a process that happens outside of Hugo, with the exception of things like `readFile` and `readJSON`, both of which are much more specific and limited in scope than what you're calling for.
+
+I'm not saying that a GraphQL implementation is impossible *per se*. I'm just skeptical that there's enough similarity across GraphQL content backends to make a feature like this generally useful.
+<issue_comment>username_1: In a different mood, what would be super cool would be some kind of API standard for GraphQL content gathering, a standard to which existing GraphQL content providers could be pressured to conform. This would provide a solid ""contractual"" basis for tools like Hugo, Gatsby, Jekyll, Middleman, and the like to provide their own GraphQL implementations. The standard could cover auth*, directory organization, file metadata, etc.
+<issue_comment>username_0: Gatsby has Source Plugins https://www.gatsbyjs.org/docs/create-source-plugin/ that help integrate with a Headless CMS. See https://hackernoon.com/building-a-static-blog-using-gatsby-and-strapi-8b5acfc82ad8
+<issue_comment>username_2: Hopefully this would fall under https://github.com/gohugoio/hugo/issues/5074
+<issue_comment>username_3: Duplicates #5074 (kind of)<issue_closed>"
+getnikola/nikola,474838789,3277,,"[{'action': 'opened', 'author': 'Xeverous', 'comment_id': None, 'datetime': '2019-07-30 21:51:51+00:00', 'masked_author': 'username_0', 'text': ""First, before everything I would like to thank Nikola, because among [tons of other static site generators](https://www.staticgen.com/), **it's the only one** that has all of the following features which I need (maybe Hugo also has all of these but I prefer Python to Go):\r\n\r\n- not limited to a blog\r\n- custom subparsers (here named *shortcodes*) through plugins\r\n- the possibilty for a custom data model (not as built-in as in [Statik](https://getstatik.com/) but I can do I though plugins)\r\n- advanced build step customization\r\n\r\n___\r\n\r\nI have a plan for a relatively complex website and this raised few questions for me\r\n\r\n1. If a page depends on some data (eg image), how should it be expressed in the page source? Just call a shortcode with that file and let it report the dependency to the generator?\r\n1. Is there any convention for storing globally-accessible data? I might have a lot of binary (eg images) and non-binary data (eg some fixed text) that need to be accessed from multiple pages.\r\n1. How should I handle nested shortcodes? AFAIK neither Markdown or reST parsers support them. I have a need for nested `div`s in final HTML, at worst instead of `{{% foo }} {{% bar %}} ... {{% /bar %}} {{% /foo %}}` I can write `{{% foo %}} {{% bar %}} ... {{% end_foo %}} {{% end_bar %}}` and implement all these `foo`, `bar`, `end_foo` and `end_bar` as plugins but is this possible at all? I would need for my plugin to be able to store some state and a guuarantee that it will be called exactly in the order of shortcodes appearance (and not interleaved while doing other article or having some way to detect this - eg on file path)\r\n1. How are the source files of non-blog pages mapped to the resulting output directory? Simply 1:1 (representing the same directory tree)? Can I use `PAGES` config value to implement 1:1 directory tree mapping?\r\n1. This is a bit silly approach, but I have seen few frameworks/highlighters/generators which did not implement proper parsers (Chomsky Type-2 or Type-1) and instead based the entire Markdown/reST/other compiler on regular expressions (regular grammar == Type-3) which are incapable of parsing more complex grammars than Type-3. Asking this to prevent the issue that if I host some very complex and symbol-intensive code on my site (like regexes, C++ or Haskell), everything would break in syntax errors.\r\n1. If I want to genete something like a sitemap or a hierarchical menu, which build step would be good to plug into? (I would need to run it either on source structure or almost-done output directory.)"", 'title': 'Multiple questions regarding customizing the build system (nested shortcodes, directory tree mapping, assets)', 'type': 'issue'}
+ {'action': 'created', 'author': 'Kwpolska', 'comment_id': 516615038.0, 'datetime': '2019-07-30 22:09:20+00:00', 'masked_author': 'username_1', 'text': '1\\. and 2\\.\r\nFor binary data, you would generally store it in `files/` or `images/` and just refer to it with an `<img>` or `<a>` or other tag in the output HTML. For that, you don’t need dependencies, the file will just independently copy itself when it changes. For text/JSON-ish data, you could use the *data files* system: https://getnikola.com/handbook.html#the-global-context-and-data-files\r\n\r\n3\\.\r\nThis is not supported. The shortcode system is generally meant for non-complex use-cases.\r\n\r\n4\\.\r\nThe directory trees are generally reproduced on output, adding the PAGES directory in front (it can be blank), and `PRETTY_URLS` can also change stuff.\r\n\r\n5\\.\r\nThe shortcode parser is unaware of the surrounding context.  If you had `{{%` in your actual blog post content, that would need to be escaped.\r\n\r\n6\\.\r\nWe generate a `sitemap.xml` file for search engines. If you want a user-readable sitemap, you might need to write a custom plugin to generate that file, based on data in the site object — it has a representation of all posts/pages there are on your site.\r\n\r\n---\r\n\r\nCould you describe the use-case for shortcodes you have in more detail? Maybe we could propose something different that would solve it in a better way.', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'Xeverous', 'comment_id': 516623624.0, 'datetime': '2019-07-30 22:44:06+00:00', 'masked_author': 'username_0', 'text': 'I want to be able to implement multiple dynamic elements that may host child elements in the final HTML. For example:\r\n\r\n- spoilers\r\n- text block with different backgrounds\r\n- highlighted code block\r\n\r\nIf I understand correctly, It would not be possible to have any nested structure without the support for nested shortcodes:\r\n\r\n- a code block inside a spoiler block\r\n- a different-background-color-text block-within another such block\r\n- image inside a different-background-color-text block-within\r\n\r\nMy idea for a workaround was to just implement them separately (as 2 different shortcodes, without `data` parameter):\r\n\r\n- `{{% spoiler %}}` that would emit `<div class=""spoiler"">` HTML\r\n- `{{% end_spoiler %}}` that would emit `</div>` HTML\r\n\r\nThe only problem would be verifying that all shortcodes are closed and closed in proper order.\r\n___\r\n\r\nAlso, thanks for the fast response.', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'Kwpolska', 'comment_id': 517025650.0, 'datetime': '2019-07-31 21:20:37+00:00', 'masked_author': 'username_1', 'text': '1\\. and 2\\.\r\nWith the default config, files in `files/` are copied to the main output directory (eg. `files/foo/bar.png` becomes `output/foo/bar.png`). Use `/foo/bar.png` to refer to it from HTML.\r\n\r\n6\\.\r\nFull metadata is available in Post objects.\r\n\r\n---\r\n7\\.\r\nConsider writing reST or Markdown extensions instead of manually-paired shortcodes. Those will be a lot more flexible than shortcodes are, and allow for more markup possibilities than shortcodes. In fact, your `spoiler` example can be just done with a `.. class:: spoiler` in reST.', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'Xeverous', 'comment_id': 517040650.0, 'datetime': '2019-07-31 22:08:01+00:00', 'masked_author': 'username_0', 'text': 'Ok, so I have all figured out except 7.\r\n\r\nI get that markdown/reST extensions can be more powerful than custom shortcodes, but can they be nested?', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'Kwpolska', 'comment_id': 517047770.0, 'datetime': '2019-07-31 22:35:04+00:00', 'masked_author': 'username_1', 'text': 'That depends on the specific implementation, check the docs for the\nrespective markup compilers (docutils, python-markdown)\n\n-- \nChris Warrick <https://chriswarrick.com/>', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'Xeverous', 'comment_id': 517050178.0, 'datetime': '2019-07-31 22:45:34+00:00', 'masked_author': 'username_0', 'text': 'Ok, I will check and see what can be done. At worst, I will implement 2 custom shortcodes and another build blugin which will verify that all nested custom shortcodes are properly closed.', 'title': None, 'type': 'comment'}
+ {'action': 'closed', 'author': 'Xeverous', 'comment_id': None, 'datetime': '2019-07-31 22:45:34+00:00', 'masked_author': 'username_0', 'text': '', 'title': None, 'type': 'issue'}]","<issue_start><issue_comment>Title: Multiple questions regarding customizing the build system (nested shortcodes, directory tree mapping, assets)
+username_0: First, before everything I would like to thank Nikola, because among [tons of other static site generators](https://www.staticgen.com/), **it's the only one** that has all of the following features which I need (maybe Hugo also has all of these but I prefer Python to Go):
+
+- not limited to a blog
+- custom subparsers (here named *shortcodes*) through plugins
+- the possibilty for a custom data model (not as built-in as in [Statik](https://getstatik.com/) but I can do I though plugins)
+- advanced build step customization
+
+___
+
+I have a plan for a relatively complex website and this raised few questions for me
+
+1. If a page depends on some data (eg image), how should it be expressed in the page source? Just call a shortcode with that file and let it report the dependency to the generator?
+1. Is there any convention for storing globally-accessible data? I might have a lot of binary (eg images) and non-binary data (eg some fixed text) that need to be accessed from multiple pages.
+1. How should I handle nested shortcodes? AFAIK neither Markdown or reST parsers support them. I have a need for nested `div`s in final HTML, at worst instead of `{{% foo }} {{% bar %}} ... {{% /bar %}} {{% /foo %}}` I can write `{{% foo %}} {{% bar %}} ... {{% end_foo %}} {{% end_bar %}}` and implement all these `foo`, `bar`, `end_foo` and `end_bar` as plugins but is this possible at all? I would need for my plugin to be able to store some state and a guuarantee that it will be called exactly in the order of shortcodes appearance (and not interleaved while doing other article or having some way to detect this - eg on file path)
+1. How are the source files of non-blog pages mapped to the resulting output directory? Simply 1:1 (representing the same directory tree)? Can I use `PAGES` config value to implement 1:1 directory tree mapping?
+1. This is a bit silly approach, but I have seen few frameworks/highlighters/generators which did not implement proper parsers (Chomsky Type-2 or Type-1) and instead based the entire Markdown/reST/other compiler on regular expressions (regular grammar == Type-3) which are incapable of parsing more complex grammars than Type-3. Asking this to prevent the issue that if I host some very complex and symbol-intensive code on my site (like regexes, C++ or Haskell), everything would break in syntax errors.
+1. If I want to genete something like a sitemap or a hierarchical menu, which build step would be good to plug into? (I would need to run it either on source structure or almost-done output directory.)
+<issue_comment>username_1: 1\. and 2\.
+For binary data, you would generally store it in `files/` or `images/` and just refer to it with an `<img>` or `<a>` or other tag in the output HTML. For that, you don’t need dependencies, the file will just independently copy itself when it changes. For text/JSON-ish data, you could use the *data files* system: https://getnikola.com/handbook.html#the-global-context-and-data-files
+
+3\.
+This is not supported. The shortcode system is generally meant for non-complex use-cases.
+
+4\.
+The directory trees are generally reproduced on output, adding the PAGES directory in front (it can be blank), and `PRETTY_URLS` can also change stuff.
+
+5\.
+The shortcode parser is unaware of the surrounding context.  If you had `{{%` in your actual blog post content, that would need to be escaped.
+
+6\.
+We generate a `sitemap.xml` file for search engines. If you want a user-readable sitemap, you might need to write a custom plugin to generate that file, based on data in the site object — it has a representation of all posts/pages there are on your site.
+
+---
+
+Could you describe the use-case for shortcodes you have in more detail? Maybe we could propose something different that would solve it in a better way.
+<issue_comment>username_0: I want to be able to implement multiple dynamic elements that may host child elements in the final HTML. For example:
+
+- spoilers
+- text block with different backgrounds
+- highlighted code block
+
+If I understand correctly, It would not be possible to have any nested structure without the support for nested shortcodes:
+
+- a code block inside a spoiler block
+- a different-background-color-text block-within another such block
+- image inside a different-background-color-text block-within
+
+My idea for a workaround was to just implement them separately (as 2 different shortcodes, without `data` parameter):
+
+- `{{% spoiler %}}` that would emit `<div class=""spoiler"">` HTML
+- `{{% end_spoiler %}}` that would emit `</div>` HTML
+
+The only problem would be verifying that all shortcodes are closed and closed in proper order.
+___
+
+Also, thanks for the fast response.
+<issue_comment>username_1: 1\. and 2\.
+With the default config, files in `files/` are copied to the main output directory (eg. `files/foo/bar.png` becomes `output/foo/bar.png`). Use `/foo/bar.png` to refer to it from HTML.
+
+6\.
+Full metadata is available in Post objects.
+
+---
+7\.
+Consider writing reST or Markdown extensions instead of manually-paired shortcodes. Those will be a lot more flexible than shortcodes are, and allow for more markup possibilities than shortcodes. In fact, your `spoiler` example can be just done with a `.. class:: spoiler` in reST.
+<issue_comment>username_0: Ok, so I have all figured out except 7.
+
+I get that markdown/reST extensions can be more powerful than custom shortcodes, but can they be nested?
+<issue_comment>username_1: That depends on the specific implementation, check the docs for the
+respective markup compilers (docutils, python-markdown)
+
+-- 
+Chris Warrick <https://chriswarrick.com/>
+<issue_comment>username_0: Ok, I will check and see what can be done. At worst, I will implement 2 custom shortcodes and another build blugin which will verify that all nested custom shortcodes are properly closed.<issue_closed>"
+gohugoio/hugo,222002706,3354,,"[{'action': 'opened', 'author': 'LeeU1911', 'comment_id': None, 'datetime': '2017-04-16T10:23:39Z', 'masked_author': 'username_0', 'text': ""Hi all,\r\n\r\nI'm building a multilingual site and would like to have 2 different urls for my section list page.\r\n\r\nThe content is as follows:\r\n```\r\ncontent\r\n|___product\r\n|___ _index.md\r\n|___ product-1.md\r\n|___ product-1.fr.md\r\n```\r\nCurrently, by default, hugo generates /product and /product/product-1 which is expected.\r\n\r\nFor multilingual purpose, I want to achieve:\r\nEnglish:\r\n```\r\n/product\r\n/product/product-1\r\n```\r\nFrench:\r\n```\r\n/produit\r\n/produit/produit-1\r\n```\r\nI can achieve `/produit/produit-1` by permalinks configuration in `config.toml` but I don't know how to generate `/produit` one which will still use my section template page under `theme/layouts/section/product.html` (same for both language).\r\n\r\nAny idea would be very appreciated.\r\n\r\nThanks a lot.\r\n\r\nP/S: I tried with putting url and slug in `_index.md` and that seems not working although the content of the file is picked up correctly in the template.\r\n\r\nThis is issue is referenced by this [discussion](https://discuss.gohugo.io/t/override-section-url/6197)."", 'title': 'Override section url', 'type': 'issue'}
+ {'action': 'created', 'author': 'ngsctt', 'comment_id': 353562669.0, 'datetime': '2017-12-22 09:49:18+00:00', 'masked_author': 'username_1', 'text': 'Just thought I\'d chime in and say that this is my single biggest issue using Hugo at the moment, and I think probably the only major roadblock to really powerful multilingual sites.\r\n\r\nIn my case, I have for example a `notes` section. In English, I want that section to have the title ""Notes"", the list page to appear at `http://example.com/notes/`, and the pages to be at eg. `http://example.com/notes/on-making-a-website.html`.\r\n\r\nBut, in Japanese, I need that section to have the title 意見 (iken), the list page to appear at `http://example.com/ja/iken/` and the pages to be at eg. `http://example.com/ja/iken/saito-wo-tukuru.html`.\r\n\r\nAt the moment, I can get the subpages to have the correct output path (`http://example.com/ja/iken/saito-wo-tukuru.html`), by using\r\n``` yaml\r\nLanguages:\r\n  ja:\r\n      permalinks:\r\n        notes: /iken/:slug\r\n```\r\nin my `config.yaml`, but the list page permalink will still come out at `http://example.com/ja/notes/`.\r\n\r\nEven using rewrite rules on Netlify, and throwing some hack-y code into templates and shortlinks using a Param listing these problem sections (ie. `index .Site.Params.slugPatches (.Get 0)`), I *still* can\'t get the permalinks in `.Translations` to match up.\r\n\r\nIt means I can\'t have a URL that makes sense in the target language, and there\'s no possible workaround that I can find.\r\n\r\nOn the other hand, if the section\'s output folder was named after the `slug` value in the section\'s frontmatter, just like for single pages, the system would work perfectly (and make a lot of immediate sense). Sections could be correctly translated, and the pages in the sections would have a correctly translated path.\r\n\r\nThen, in `/content/notes/_index.ja.md` I could just put\r\n``` yaml\r\n---\r\ntitle: 意見\r\nslug: iken\r\n---\r\n```\r\ninstead of all those workarounds/.Site.Params/redirect rules.', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'biodranik', 'comment_id': 353793804.0, 'datetime': '2017-12-24 16:47:24+00:00', 'masked_author': 'username_2', 'text': ""I have the same issue now, trying to switch to hugo for an existing site. The concept of _index.[lang].md files for sections is great, and it's one of the biggest issues."", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'lucendio', 'comment_id': 359935177.0, 'datetime': '2018-01-23 21:23:18+00:00', 'masked_author': 'username_3', 'text': ""Hi, \r\n\r\nI would like to outline the need of this functionality a bit more. Starting with the following three threads in the forum, which are all (more or less) related to this matter. Some of them even explain how to work around this, which, in some case, might actually be applicable.\r\n\r\n- https://discourse.gohugo.io/t/override-section-url/6197\r\n- https://discourse.gohugo.io/t/how-to-translate-sections/9060\r\n- https://discourse.gohugo.io/t/content-organization-not-working-in-multilingual-site/4967\r\n\r\nMulti language support and the need for translating parts of an url is, IMHO, one of the most reasonable use cases for overwriting section names with it's language-specific counterpart. \r\nYes, it is possible to accomplish that with the permalink configurations in hugo's `config.` file - as described in the forums. Though, it only works for the first level in the folder structure. Deeper sub-sections can't be overwritten with this approach.\r\n\r\nIdeally, the `slug` parameter in the front matter for `/content/section-name/subsectionA/_index.en.md` would overwrite `subsectionA` in the output. I could also think of some build step, where section names get checked with the `i18n` function against existing translations (e.g. in `hugolib/permalinks.go`). An existing translation would then replace the original section name.\r\nIf anybody has other ideas, feel free to share them.\r\n\r\nHopefully, with this I was able to emphasize a bit more on the realness of this feature request.\r\n@bep, I would love to see you starting to take this issue a bit more serious, even though the feature might not be important for *you* personally."", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'regisphilibert', 'comment_id': 359936838.0, 'datetime': '2018-01-23 21:29:25+00:00', 'masked_author': 'username_4', 'text': ""The guy is releasing patches twice a week give him a break. I'm just reacting to this last paragraph.\r\n\r\nNow .34 resolves the section slug issue. You can now add one to your section _index.md. \r\n\r\nYet it still doesn't solve your problem ?"", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'lucendio', 'comment_id': 359943297.0, 'datetime': '2018-01-23 21:52:08+00:00', 'masked_author': 'username_3', 'text': ""Without a doubt, all contributors do an amazing work and I am very thankful for all their effort. I was just [citing his own words](https://discourse.gohugo.io/t/how-to-translate-sections/9060/11), which, at least to me, seems to show a bit of an inappropriate attitude in that context.\r\n\r\nRegarding .34, I couldn't find any hint of this issue being solved in the release. I already installed the latest release and noticed no difference in the behaviour already described."", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'jonjbar', 'comment_id': 374532081.0, 'datetime': '2018-03-20 09:35:27+00:00', 'masked_author': 'username_5', 'text': ""Hi,\r\nThis is currently the only issue we've identified preventing us from moving from Drupal to Hugo. Hopefully, there will be a way to achieve that in a future update."", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'budparr', 'comment_id': 374580706.0, 'datetime': '2018-03-20 12:31:59+00:00', 'masked_author': 'username_6', 'text': '@username_5 Does the solution @username_4 posted here solve your issue? https://github.com/gohugoio/hugo/issues/3354#issuecomment-359936838', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'lucendio', 'comment_id': 374587523.0, 'datetime': '2018-03-20 12:57:10+00:00', 'masked_author': 'username_3', 'text': '@username_6 I already mentioned above, and happily confirm again that https://github.com/gohugoio/hugo/issues/3354#issuecomment-359936838 does *not* work for me (v0.36.1). Maybe @username_4 has some permalinks applied in the global config file, but again, that approach wont work for nested sections and is merly a workaround.', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'regisphilibert', 'comment_id': 374600396.0, 'datetime': '2018-03-20 13:38:28+00:00', 'masked_author': 'username_4', 'text': ""@username_3 I understand your problem and yes my comment can help you. I was able to achieve multilingual subsection url overriding using 0.37.\r\nYou do have to mention the parent section new url in the subsection `url` parameter.\r\n\r\nIf you point me to a repo of some sort I'd try and take a look.\r\n\r\nCheers."", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'lucendio', 'comment_id': 374603242.0, 'datetime': '2018-03-20 13:46:52+00:00', 'masked_author': 'username_3', 'text': '@username_4 Interesting. Would you mind posting a simple example or point me to the section in the docs showing how to achieve this? \r\nAny hint or enlightenment is much apprechiated. (the repo of concern can be found [here](https://github.com/chichi-berlin/website))\r\n\r\nthx, L', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'regisphilibert', 'comment_id': 374613274.0, 'datetime': '2018-03-20 14:15:41+00:00', 'masked_author': 'username_4', 'text': ""Ok give it a look here: https://github.com/username_4/rp_hugo/tree/greeting-test/\r\n\r\nYou're not going to be able to fork it as it because the theme is a private submodule but you can still download it and use any theme of your chosing.\r\n\r\nThen, look at config.toml where permalinks are set.\r\nAnd then inside content/post, you'll find the __greeting__ sub section. Give it a look.\r\n\r\nI didn't have time to check templates for it, but if you compile Hugo, you'll see the directory are generated the way you want."", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'jonjbar', 'comment_id': 374619502.0, 'datetime': '2018-03-20 14:32:57+00:00', 'masked_author': 'username_5', 'text': '@username_4 Thank you for the sample. Still learning Hugo here but I believe that this is working due to the fact that you have only one section with the following in your config.toml file:\r\n\r\n`[languages.fr.permalinks]\r\npost = ""blogue/:year/:month/:slug/""`\r\n\r\nWithout that, and if you have multiple sections (e.g. have ""blog"" section and ""products"" section...) you can\'t use the _index.md trick to override the URL of sub-pages.\r\nIn other words, you can\'t have multiple translatable sections:\r\n\r\n/blog/ -> /blogue\r\n/product -> /produit\r\n...\r\n\r\nOr perhaps I am missing something ?', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'regisphilibert', 'comment_id': 374621746.0, 'datetime': '2018-03-20 14:39:07+00:00', 'masked_author': 'username_4', 'text': 'Are you saying that (from config.toml)\r\n\r\n```\r\n[languages.fr.permalinks]\r\n  post = ""blogue/:year/:month/:title/""\r\n  product = ""produit/:title""\r\n```\r\n\r\nis not working ?', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'lucendio', 'comment_id': 374627365.0, 'datetime': '2018-03-20 14:53:48+00:00', 'masked_author': 'username_3', 'text': ""@username_4 thank you for the example. But sadly this still does not work for sub-sections or scales for multiple sections (as @username_5 pointed out). The user experience I'd like to see, or I think this thread here is looking for, is described [here](https://github.com/gohugoio/hugo/issues/3354#issuecomment-359935177). In short, it's something around the lines of, the ability to overwrite slug (meaning the part of the url for its specific path level) in its corresponding `_index.[$Lang].md` front matter."", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'InsOpDe', 'comment_id': 453743980.0, 'datetime': '2019-01-12 12:34:00+00:00', 'masked_author': 'username_7', 'text': 'any news on this?', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'igr', 'comment_id': 457232330.0, 'datetime': '2019-01-24 15:13:22+00:00', 'masked_author': 'username_8', 'text': 'This. Feature. Would. Be. Really. Awesome.', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'marcanuy', 'comment_id': 475975122.0, 'datetime': '2019-03-24 16:30:05+00:00', 'masked_author': 'username_9', 'text': 'I came up with a solution supporting nested sections assigning custom slugs\r\nfor each language, no matter their depth in dir structure. It requires:\r\n\r\n- ""Translation by content directory""\r\n- ""Frontmatter\'s translationKey""\r\n\r\n1. Set languages in config and define a directory for each one of them:\r\n\r\n~~~\r\n[languages]\r\n  [languages.en]\r\n    contentDir = ""content/en""\r\n    languageName = ""English""\r\n    weight = 10\r\n  [languages.es]\r\n    title = ""Sitio ...""\r\n    contentDir = ""content/es""\r\n    languageName = ""Español""\r\n    weight = 20\r\n~~~\r\n\r\n2. Set **translationKey** for `_index.md` and *pages* and their slug as\r\n   directory name or filename; I use the slug of the\r\n   section/page being translated as the translation key, for example for\r\n   `/content/en/foo/_index.md`:\r\n   \r\n   - EN: `/content/en/foo/`\r\n   \r\n         ----\r\n\t\t translationKey = ""foo""\r\n\t\t ----\r\n   \r\n   - ES: `/content/es/foo-slug-in-spanish/`\r\n\r\n         ----\r\n\t\t translationKey = ""foo""\r\n\t\t ----\r\n\r\n  Same process for pages.\r\n  \r\nThen each level of the hierarchy will have its corresponding page in\r\nthe other language, and *subdirectories* will also be translated.\r\n\r\nApplied this approach in this [theme](https://github.com/username_9/simpleit-hugo-theme), for example for:\r\n\r\n- EN\r\n  - `content/en/foo-first-level-section/foo-second-level/_index.md `\r\n  - https://username_9.github.io/simpleit-hugo-theme/foo-first-level-section/foo-second-level/ \r\n    - `<link rel=""alternate"" hreflang=""es"" href=""https://username_9.github.io/simpleit-hugo-theme/es/foo-seccion-primer-nivel/foo-segundo-nivel/"" />`\r\n\r\n- ES\r\n  - `content/es/foo-seccion-primer-nivel/foo-segundo-nivel/_index.md`\r\n  - https://username_9.github.io/simpleit-hugo-theme/es/foo-seccion-primer-nivel/foo-segundo-nivel/\r\n    - `<link rel=""alternate"" hreflang=""en"" href=""https://username_9.github.io/simpleit-hugo-theme/foo-first-level-section/foo-second-level/"" />`', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'biodranik', 'comment_id': 475979380.0, 'datetime': '2019-03-24 17:12:59+00:00', 'masked_author': 'username_2', 'text': '@bep Are there plans about an easier solution than just published workaround by @username_9 ? This feature is really important for many multilingual sites.', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'biodranik', 'comment_id': 518014769.0, 'datetime': '2019-08-04 15:54:29+00:00', 'masked_author': 'username_2', 'text': ""@bep it was closed from another issue, but I don't see any reference to it from #5681\r\nWas it fixed?"", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'andekande', 'comment_id': 590319714.0, 'datetime': '2020-02-24 13:28:45+00:00', 'masked_author': 'username_10', 'text': ""It's not been implemented. The PR enables to localize Pages via FrontMatter property 'url'.\r\nWhat's asked for here is to enable that for sections the same way.\r\nAnd have it picked up when accessing permalinks as well."", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'fthorns', 'comment_id': 960302921.0, 'datetime': '2021-11-03 23:55:08+00:00', 'masked_author': 'username_11', 'text': ""Sad to see this issue is closed, this feature would awesome to have! I hope I haven't missed anything, if I did, please let me know :)"", 'title': None, 'type': 'comment'}]","<issue_start><issue_comment>Title: Override section url
+username_0: Hi all,
+
+I'm building a multilingual site and would like to have 2 different urls for my section list page.
+
+The content is as follows:
+```
+content
+|___product
+|___ _index.md
+|___ product-1.md
+|___ product-1.fr.md
+```
+Currently, by default, hugo generates /product and /product/product-1 which is expected.
+
+For multilingual purpose, I want to achieve:
+English:
+```
+/product
+/product/product-1
+```
+French:
+```
+/produit
+/produit/produit-1
+```
+I can achieve `/produit/produit-1` by permalinks configuration in `config.toml` but I don't know how to generate `/produit` one which will still use my section template page under `theme/layouts/section/product.html` (same for both language).
+
+Any idea would be very appreciated.
+
+Thanks a lot.
+
+P/S: I tried with putting url and slug in `_index.md` and that seems not working although the content of the file is picked up correctly in the template.
+
+This is issue is referenced by this [discussion](https://discuss.gohugo.io/t/override-section-url/6197).
+<issue_comment>username_1: Just thought I'd chime in and say that this is my single biggest issue using Hugo at the moment, and I think probably the only major roadblock to really powerful multilingual sites.
+
+In my case, I have for example a `notes` section. In English, I want that section to have the title ""Notes"", the list page to appear at `http://example.com/notes/`, and the pages to be at eg. `http://example.com/notes/on-making-a-website.html`.
+
+But, in Japanese, I need that section to have the title 意見 (iken), the list page to appear at `http://example.com/ja/iken/` and the pages to be at eg. `http://example.com/ja/iken/saito-wo-tukuru.html`.
+
+At the moment, I can get the subpages to have the correct output path (`http://example.com/ja/iken/saito-wo-tukuru.html`), by using
+``` yaml
+Languages:
+  ja:
+      permalinks:
+        notes: /iken/:slug
+```
+in my `config.yaml`, but the list page permalink will still come out at `http://example.com/ja/notes/`.
+
+Even using rewrite rules on Netlify, and throwing some hack-y code into templates and shortlinks using a Param listing these problem sections (ie. `index .Site.Params.slugPatches (.Get 0)`), I *still* can't get the permalinks in `.Translations` to match up.
+
+It means I can't have a URL that makes sense in the target language, and there's no possible workaround that I can find.
+
+On the other hand, if the section's output folder was named after the `slug` value in the section's frontmatter, just like for single pages, the system would work perfectly (and make a lot of immediate sense). Sections could be correctly translated, and the pages in the sections would have a correctly translated path.
+
+Then, in `/content/notes/_index.ja.md` I could just put
+``` yaml
+---
+title: 意見
+slug: iken
+---
+```
+instead of all those workarounds/.Site.Params/redirect rules.
+<issue_comment>username_2: I have the same issue now, trying to switch to hugo for an existing site. The concept of _index.[lang].md files for sections is great, and it's one of the biggest issues.
+<issue_comment>username_3: Hi, 
+
+I would like to outline the need of this functionality a bit more. Starting with the following three threads in the forum, which are all (more or less) related to this matter. Some of them even explain how to work around this, which, in some case, might actually be applicable.
+
+- https://discourse.gohugo.io/t/override-section-url/6197
+- https://discourse.gohugo.io/t/how-to-translate-sections/9060
+- https://discourse.gohugo.io/t/content-organization-not-working-in-multilingual-site/4967
+
+Multi language support and the need for translating parts of an url is, IMHO, one of the most reasonable use cases for overwriting section names with it's language-specific counterpart. 
+Yes, it is possible to accomplish that with the permalink configurations in hugo's `config.` file - as described in the forums. Though, it only works for the first level in the folder structure. Deeper sub-sections can't be overwritten with this approach.
+
+Ideally, the `slug` parameter in the front matter for `/content/section-name/subsectionA/_index.en.md` would overwrite `subsectionA` in the output. I could also think of some build step, where section names get checked with the `i18n` function against existing translations (e.g. in `hugolib/permalinks.go`). An existing translation would then replace the original section name.
+If anybody has other ideas, feel free to share them.
+
+Hopefully, with this I was able to emphasize a bit more on the realness of this feature request.
+@bep, I would love to see you starting to take this issue a bit more serious, even though the feature might not be important for *you* personally.
+<issue_comment>username_4: The guy is releasing patches twice a week give him a break. I'm just reacting to this last paragraph.
+
+Now .34 resolves the section slug issue. You can now add one to your section _index.md. 
+
+Yet it still doesn't solve your problem ?
+<issue_comment>username_3: Without a doubt, all contributors do an amazing work and I am very thankful for all their effort. I was just [citing his own words](https://discourse.gohugo.io/t/how-to-translate-sections/9060/11), which, at least to me, seems to show a bit of an inappropriate attitude in that context.
+
+Regarding .34, I couldn't find any hint of this issue being solved in the release. I already installed the latest release and noticed no difference in the behaviour already described.
+<issue_comment>username_5: Hi,
+This is currently the only issue we've identified preventing us from moving from Drupal to Hugo. Hopefully, there will be a way to achieve that in a future update.
+<issue_comment>username_6: @username_5 Does the solution @username_4 posted here solve your issue? https://github.com/gohugoio/hugo/issues/3354#issuecomment-359936838
+<issue_comment>username_3: @username_6 I already mentioned above, and happily confirm again that https://github.com/gohugoio/hugo/issues/3354#issuecomment-359936838 does *not* work for me (v0.36.1). Maybe @username_4 has some permalinks applied in the global config file, but again, that approach wont work for nested sections and is merly a workaround.
+<issue_comment>username_4: @username_3 I understand your problem and yes my comment can help you. I was able to achieve multilingual subsection url overriding using 0.37.
+You do have to mention the parent section new url in the subsection `url` parameter.
+
+If you point me to a repo of some sort I'd try and take a look.
+
+Cheers.
+<issue_comment>username_3: @username_4 Interesting. Would you mind posting a simple example or point me to the section in the docs showing how to achieve this? 
+Any hint or enlightenment is much apprechiated. (the repo of concern can be found [here](https://github.com/chichi-berlin/website))
+
+thx, L
+<issue_comment>username_4: Ok give it a look here: https://github.com/username_4/rp_hugo/tree/greeting-test/
+
+You're not going to be able to fork it as it because the theme is a private submodule but you can still download it and use any theme of your chosing.
+
+Then, look at config.toml where permalinks are set.
+And then inside content/post, you'll find the __greeting__ sub section. Give it a look.
+
+I didn't have time to check templates for it, but if you compile Hugo, you'll see the directory are generated the way you want.
+<issue_comment>username_5: @username_4 Thank you for the sample. Still learning Hugo here but I believe that this is working due to the fact that you have only one section with the following in your config.toml file:
+
+`[languages.fr.permalinks]
+post = ""blogue/:year/:month/:slug/""`
+
+Without that, and if you have multiple sections (e.g. have ""blog"" section and ""products"" section...) you can't use the _index.md trick to override the URL of sub-pages.
+In other words, you can't have multiple translatable sections:
+
+/blog/ -> /blogue
+/product -> /produit
+...
+
+Or perhaps I am missing something ?
+<issue_comment>username_4: Are you saying that (from config.toml)
+
+```
+[languages.fr.permalinks]
+  post = ""blogue/:year/:month/:title/""
+  product = ""produit/:title""
+```
+
+is not working ?
+<issue_comment>username_3: @username_4 thank you for the example. But sadly this still does not work for sub-sections or scales for multiple sections (as @username_5 pointed out). The user experience I'd like to see, or I think this thread here is looking for, is described [here](https://github.com/gohugoio/hugo/issues/3354#issuecomment-359935177). In short, it's something around the lines of, the ability to overwrite slug (meaning the part of the url for its specific path level) in its corresponding `_index.[$Lang].md` front matter.
+<issue_comment>username_7: any news on this?
+<issue_comment>username_8: This. Feature. Would. Be. Really. Awesome.
+<issue_comment>username_9: I came up with a solution supporting nested sections assigning custom slugs
+for each language, no matter their depth in dir structure. It requires:
+
+- ""Translation by content directory""
+- ""Frontmatter's translationKey""
+
+1. Set languages in config and define a directory for each one of them:
+
+~~~
+[languages]
+  [languages.en]
+    contentDir = ""content/en""
+    languageName = ""English""
+    weight = 10
+  [languages.es]
+    title = ""Sitio ...""
+    contentDir = ""content/es""
+    languageName = ""Español""
+    weight = 20
+~~~
+
+2. Set **translationKey** for `_index.md` and *pages* and their slug as
+   directory name or filename; I use the slug of the
+   section/page being translated as the translation key, for example for
+   `/content/en/foo/_index.md`:
+   
+   - EN: `/content/en/foo/`
+   
+         ----
+		 translationKey = ""foo""
+		 ----
+   
+   - ES: `/content/es/foo-slug-in-spanish/`
+
+         ----
+		 translationKey = ""foo""
+		 ----
+
+  Same process for pages.
+  
+Then each level of the hierarchy will have its corresponding page in
+the other language, and *subdirectories* will also be translated.
+
+Applied this approach in this [theme](https://github.com/username_9/simpleit-hugo-theme), for example for:
+
+- EN
+  - `content/en/foo-first-level-section/foo-second-level/_index.md `
+  - https://username_9.github.io/simpleit-hugo-theme/foo-first-level-section/foo-second-level/ 
+    - `<link rel=""alternate"" hreflang=""es"" href=""https://username_9.github.io/simpleit-hugo-theme/es/foo-seccion-primer-nivel/foo-segundo-nivel/"" />`
+
+- ES
+  - `content/es/foo-seccion-primer-nivel/foo-segundo-nivel/_index.md`
+  - https://username_9.github.io/simpleit-hugo-theme/es/foo-seccion-primer-nivel/foo-segundo-nivel/
+    - `<link rel=""alternate"" hreflang=""en"" href=""https://username_9.github.io/simpleit-hugo-theme/foo-first-level-section/foo-second-level/"" />`
+<issue_comment>username_2: @bep Are there plans about an easier solution than just published workaround by @username_9 ? This feature is really important for many multilingual sites.
+<issue_comment>username_2: @bep it was closed from another issue, but I don't see any reference to it from #5681
+Was it fixed?
+<issue_comment>username_10: It's not been implemented. The PR enables to localize Pages via FrontMatter property 'url'.
+What's asked for here is to enable that for sections the same way.
+And have it picked up when accessing permalinks as well.
+<issue_comment>username_11: Sad to see this issue is closed, this feature would awesome to have! I hope I haven't missed anything, if I did, please let me know :)"
+gohugoio/hugo,962700137,8862,,"[{'action': 'opened', 'author': 'marckhouzam', 'comment_id': None, 'datetime': '2021-08-06 12:38:53+00:00', 'masked_author': 'username_0', 'text': 'This may not be considered a bug, but I wanted to make the maintainers aware of the situation.\r\n\r\n```\r\n$ hugo gen autocomplete -h |head -1\r\nGenerates a shell autocompletion script for Hugo.\r\n\r\n$ hugo completion -h | head -2\r\nGenerate the autocompletion script for hugo for the specified shell.\r\n```\r\n\r\nTo facilitate the use of shell completion, Cobra 1.2 automatically provides a ""completion"" command (https://github.com/spf13/cobra/releases/tag/v1.2.0).  This command needs to be explicitly disabled for programs that don\'t want to use it (https://github.com/spf13/cobra/blob/master/shell_completions.md#adapting-the-default-completion-command).\r\n\r\nHugo 0.87.0 moved to Cobra 1.2.1 and has inherited this new ""completion"" command.\r\n\r\nNote that the ""completion"" command provided by Cobra is more complete that the one defined in Hugo:\r\n- it provides completion descriptions for Powershell and Bash\r\n- it allows individual users to disable completion descriptions for all shells with the `--no-descriptions` flag\r\n- it uses bash completion V2 which has a 250-line script instead of the 3200-line one generated by Hugo\r\n\r\nIt is in part to avoid projects missing some of these subtle tweaks that Cobra provides the completion command itself.\r\n\r\n### What version of Hugo are you using (`hugo version`)?\r\n0.87.0\r\n\r\n### Does this issue reproduce with the latest release?\r\nYes', 'title': 'Duplicate methods of generating shell completion scripts', 'type': 'issue'}
+ {'action': 'closed', 'author': 'bep', 'comment_id': None, 'datetime': '2022-02-01 22:23:32+00:00', 'masked_author': 'username_1', 'text': '', 'title': None, 'type': 'issue'}
+ {'action': 'created', 'author': 'austintraver', 'comment_id': 1027469257.0, 'datetime': '2022-02-02 00:55:31+00:00', 'masked_author': 'username_2', 'text': ""Thank you for catching this @username_0 , I was using the other one by mistake prior to seeing this issue. \r\n\r\nThe `zsh` completions I'm getting now (generated via `hugo completion`) are *incredibly* comprehensive. For those reading this looking to do the same, redirect the output of `hugo completion zsh` to a file named `_hugo`, and locate it within one of the subdirectories set in the `${fpath}` array. Your shell will load the completions the next time you start up a new session.\r\n\r\n[Supporting `zsh` documentation](https://zsh.fyi/completion-system#initialization)"", 'title': None, 'type': 'comment'}]","<issue_start><issue_comment>Title: Duplicate methods of generating shell completion scripts
+username_0: This may not be considered a bug, but I wanted to make the maintainers aware of the situation.
+
+```
+$ hugo gen autocomplete -h |head -1
+Generates a shell autocompletion script for Hugo.
+
+$ hugo completion -h | head -2
+Generate the autocompletion script for hugo for the specified shell.
+```
+
+To facilitate the use of shell completion, Cobra 1.2 automatically provides a ""completion"" command (https://github.com/spf13/cobra/releases/tag/v1.2.0).  This command needs to be explicitly disabled for programs that don't want to use it (https://github.com/spf13/cobra/blob/master/shell_completions.md#adapting-the-default-completion-command).
+
+Hugo 0.87.0 moved to Cobra 1.2.1 and has inherited this new ""completion"" command.
+
+Note that the ""completion"" command provided by Cobra is more complete that the one defined in Hugo:
+- it provides completion descriptions for Powershell and Bash
+- it allows individual users to disable completion descriptions for all shells with the `--no-descriptions` flag
+- it uses bash completion V2 which has a 250-line script instead of the 3200-line one generated by Hugo
+
+It is in part to avoid projects missing some of these subtle tweaks that Cobra provides the completion command itself.
+
+### What version of Hugo are you using (`hugo version`)?
+0.87.0
+
+### Does this issue reproduce with the latest release?
+Yes<issue_closed>
+<issue_comment>username_2: Thank you for catching this @username_0 , I was using the other one by mistake prior to seeing this issue. 
+
+The `zsh` completions I'm getting now (generated via `hugo completion`) are *incredibly* comprehensive. For those reading this looking to do the same, redirect the output of `hugo completion zsh` to a file named `_hugo`, and locate it within one of the subdirectories set in the `${fpath}` array. Your shell will load the completions the next time you start up a new session.
+
+[Supporting `zsh` documentation](https://zsh.fyi/completion-system#initialization)"
+kubernetes/website,266373817,5950,,"[{'action': 'opened', 'author': 'kumarganesh2814', 'comment_id': None, 'datetime': '2017-10-18T06:32:55Z', 'masked_author': 'username_0', 'text': '<!-- Thanks for filing an issue! Before submitting, please fill in the following information. -->\r\n\r\n<!--Required Information-->\r\n\r\n**This is a...** \r\n<!-- choose one by changing [ ] to [x] -->\r\n- [ x] Feature Request\r\n- [ ] Bug Report\r\n\r\n**Problem:**\r\n minikube start\r\nStarting local Kubernetes v1.7.5 cluster...\r\nStarting VM...\r\nE1018 01:54:38.808925   26207 start.go:146] Error starting host: Error creating host: Error executing step: Running precreate checks.\r\n: We support Virtualbox starting with version 5. Your VirtualBox install is ""WARNING: The vboxdrv kernel module is not loaded. Either there is no module\\n         available for the current kernel (4.1.12-61.1.33.el7uek.x86_64) or it failed to\\n         load. Please recompile the kernel module and install it by\\n\\n           sudo /sbin/vboxconfig\\n\\n         You will not be able to start VMs until this problem is fixed.\\n5.1.28r117968"". Please upgrade at https://www.virtualbox.org.\r\n\r\n\r\n\r\n**Proposed Solution:**\r\n\r\n\r\n**Page to Update:**\r\nhttp://kubernetes.io/...\r\n\r\n<!--Optional Information (remove the comment tags around information you would like to include)-->\r\n<!--Kubernetes Version:-->\r\n\r\n<!--Additional Information:-->', 'title': 'Issue while starting minikube ', 'type': 'issue'}
+ {'action': 'created', 'author': 'tengqm', 'comment_id': 337779880.0, 'datetime': '2017-10-19 02:15:48+00:00', 'masked_author': 'username_1', 'text': 'Alright, the error message is pretty clear: ""`Running VirtualBox in a Xen environment is not supported.`"".\r\nYou may want to give `kubeadm` a try: https://kubernetes.io/docs/setup/independent/create-cluster-kubeadm/', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'kumarganesh2814', 'comment_id': 337787189.0, 'datetime': '2017-10-19 03:09:37+00:00', 'masked_author': 'username_0', 'text': ""Hi Qiming,\r\n\r\nTrying with kubeadm also gives an error :(\r\n\r\nAfter firing command kubeadm init\r\n\r\n[kubelet-check] It seems like the kubelet isn't running or healthy.\r\n[kubelet-check] The HTTP call equal to 'curl -sSL http://localhost:10255/healthz' failed with error: Get http://localhost:10255/healthz: dial tcp [::1]:10255: getsockopt: connection refused.\r\n\r\n[kubelet-check] The HTTP call equal to 'curl -sSL http://localhost:10255/healthz' failed with error: Get http://localhost:10255/healthz: dial tcp [::1]:10255: getsockopt: connection refused.\r\n\r\nUnfortunately, an error has occurred:\r\n        timed out waiting for the condition\r\n\r\nThis error is likely caused by that:\r\n        - The kubelet is not running\r\n        - The kubelet is unhealthy due to a misconfiguration of the node in some way (required cgroups disabled)\r\n        - There is no internet connection; so the kubelet can't pull the following control plane images:\r\n                - gcr.io/google_containers/kube-apiserver-amd64:v1.8.1\r\n                - gcr.io/google_containers/kube-controller-manager-amd64:v1.8.1\r\n                - gcr.io/google_containers/kube-scheduler-amd64:v1.8.1\r\n\r\nYou can troubleshoot this for example with the following commands if you're on a systemd-powered system:\r\n        - 'systemctl status kubelet'\r\n        - 'journalctl -xeu kubelet'\r\ncouldn't initialize a Kubernetes cluster\r\n[root@ec2bcf ~]# systemctl status kubelet\r\n● kubelet.service - kubelet: The Kubernetes Node Agent\r\n   Loaded: loaded (/etc/systemd/system/kubelet.service; enabled; vendor preset: disabled)\r\n  Drop-In: /etc/systemd/system/kubelet.service.d\r\n           └─10-kubeadm.conf\r\n   Active: activating (auto-restart) (Result: exit-code) since Wed 2017-10-18 22:53:35 EDT; 7s ago\r\n     Docs: http://kubernetes.io/docs/\r\n  Process: 15268 ExecStart=/usr/bin/kubelet $KUBELET_KUBECONFIG_ARGS $KUBELET_SYSTEM_PODS_ARGS $KUBELET_NETWORK_ARGS $KUBELET_DNS_ARGS $KUBELET_AUTHZ_ARGS $KUBELET_CADVISOR_ARGS $KUBELET_CGROUP_ARGS $KUBELET_CERTIFICATE_ARGS $KUBELET_EXTRA_ARGS (code=exited, status=1/FAILURE)\r\n Main PID: 15268 (code=exited, status=1/FAILURE)\r\n\r\nOct 18 22:53:35 ec2bcf systemd[1]: Unit kubelet.service entered failed state.\r\nOct 18 22:53:35 ec2bcf systemd[1]: kubelet.service failed.\r\n[root@ec2bcf ~]# systemctl start kubelet\r\n[root@ec2bcf ~]# systemctl status kubelet\r\n● kubelet.service - kubelet: The Kubernetes Node Agent\r\n   Loaded: loaded (/etc/systemd/system/kubelet.service; enabled; vendor preset: disabled)\r\n  Drop-In: /etc/systemd/system/kubelet.service.d\r\n           └─10-kubeadm.conf\r\n   Active: activating (auto-restart) (Result: exit-code) since Wed 2017-10-18 22:54:06 EDT; 5s ago\r\n     Docs: http://kubernetes.io/docs/\r\n  Process: 15389 ExecStart=/usr/bin/kubelet $KUBELET_KUBECONFIG_ARGS $KUBELET_SYSTEM_PODS_ARGS $KUBELET_NETWORK_ARGS $KUBELET_DNS_ARGS $KUBELET_AUTHZ_ARGS $KUBELET_CADVISOR_ARGS $KUBELET_CGROUP_ARGS $KUBELET_CERTIFICATE_ARGS $KUBELET_EXTRA_ARGS (code=exited, status=1/FAILURE)\r\n Main PID: 15389 (code=exited, status=1/FAILURE)\r\n\r\nOct 18 22:54:06 ec2bcf systemd[1]: Unit kubelet.service entered failed state.\r\nOct 18 22:54:06 ec2bcf systemd[1]: kubelet.service failed.\r\n\r\n\r\nAny advice for this\r\n\r\nRegards\r\nGanesh"", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'tengqm', 'comment_id': 337800099.0, 'datetime': '2017-10-19 05:02:26+00:00', 'masked_author': 'username_1', 'text': 'It looks like `kubelet` cannot be started. You may want to check `systemctl -u kubelet` and `journalctl -xe` to find out if kubelet has any meaningful error messages in the log.', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'kumarganesh2814', 'comment_id': 337834080.0, 'datetime': '2017-10-19 08:17:15+00:00', 'masked_author': 'username_0', 'text': '0\r\nOct 19 04:16:05 ec2bcf.compute-gse00003472.oraclecloud.internal kubelet[29913]: W1019 04:16:05.112000   29913 kubelet_network\r\nOct 19 04:16:05 ec2bcf.compute-gse00003472.oraclecloud.internal kubelet[29913]: I1019 04:16:05.112028   29913 kubelet.go:517]\r\nOct 19 04:16:05 ec2bcf.compute-gse00003472.oraclecloud.internal kubelet[29913]: W1019 04:16:05.112093   29913 cni.go:196] Una\r\nOct 19 04:16:05 ec2bcf.compute-gse00003472.oraclecloud.internal kubelet[29913]: W1019 04:16:05.112865   29913 cni.go:196] Una\r\nOct 19 04:16:05 ec2bcf.compute-gse00003472.oraclecloud.internal kubelet[29913]: W1019 04:16:05.126862   29913 cni.go:196] Una\r\nOct 19 04:16:05 ec2bcf.compute-gse00003472.oraclecloud.internal kubelet[29913]: I1019 04:16:05.126896   29913 docker_service.\r\nOct 19 04:16:05 ec2bcf.compute-gse00003472.oraclecloud.internal kubelet[29913]: error: failed to run Kubelet: failed to creat\r\nOct 19 04:16:05 ec2bcf.compute-gse00003472.oraclecloud.internal systemd[1]: kubelet.service: main process exited, code=exited\r\nOct 19 04:16:05 ec2bcf.compute-gse00003472.oraclecloud.internal systemd[1]: Unit kubelet.service entered failed state.\r\nOct 19 04:16:05 ec2bcf.compute-gse00003472.oraclecloud.internal systemd[1]: kubelet.service failed.\r\n\r\n\r\nI see above using journalctl -xe\r\n\r\nNot Sure what is wrong here\r\n\r\nBest Regards\r\nGanesh', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'tengqm', 'comment_id': 337854441.0, 'datetime': '2017-10-19 09:36:22+00:00', 'masked_author': 'username_1', 'text': 'I believe you managed to paste some not so useful information and succeeded in cropping out exactly the interesting text ...\r\n\r\n`Oct 19 04:16:05 ec2bcf.compute-gse00003472.oraclecloud.internal kubelet[29913]: W1019 04:16:05.126862 29913 cni.go:196] Una ..... <check the whole output here, you will get some hints>`\r\n\r\nIt looks like a network problem this time.', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'kumarganesh2814', 'comment_id': 337857354.0, 'datetime': '2017-10-19 09:47:50+00:00', 'masked_author': 'username_0', 'text': 'Oct 19 05:42:56 localhost kubelet: I1019 05:42:56.356192   16763 container_manager_linux.go:288] Creating device plugin handler: false\r\nOct 19 05:42:56 localhost kubelet: I1019 05:42:56.356267   16763 kubelet.go:273] Adding manifest file: /etc/kubernetes/manifests\r\nOct 19 05:42:56 localhost kubelet: I1019 05:42:56.356287   16763 kubelet.go:283] Watching apiserver\r\nOct 19 05:42:56 localhost kubelet: E1019 05:42:56.357658   16763 reflector.go:205] k8s.io/kubernetes/pkg/kubelet/config/apiserver.go:47: Failed to list *v1.Pod: Get https://10.196.199.46:6443/api/v1/pods?fieldSelector=spec.nodeName%3Dec2bcf.compute-gse00003472.oraclecloud.internal&resourceVersion=0: dial tcp 10.196.199.46:6443: getsockopt: connection refused\r\nOct 19 05:42:56 localhost kubelet: E1019 05:42:56.357706   16763 reflector.go:205] k8s.io/kubernetes/pkg/kubelet/kubelet.go:413: Failed to list *v1.Service: Get https://10.196.199.46:6443/api/v1/services?resourceVersion=0: dial tcp 10.196.199.46:6443: getsockopt: connection refused\r\nOct 19 05:42:56 localhost kubelet: E1019 05:42:56.357744   16763 reflector.go:205] k8s.io/kubernetes/pkg/kubelet/kubelet.go:422: Failed to list *v1.Node: Get https://10.196.199.46:6443/api/v1/nodes?fieldSelector=metadata.name%3Dec2bcf.compute-gse00003472.oraclecloud.internal&resourceVersion=0: dial tcp 10.196.199.46:6443: getsockopt: connection refused\r\nOct 19 05:42:56 localhost kubelet: W1019 05:42:56.363382   16763 kubelet_network.go:69] Hairpin mode set to ""promiscuous-bridge"" but kubenet is not enabled, falling back to ""hairpin-veth""\r\nOct 19 05:42:56 localhost kubelet: I1019 05:42:56.363416   16763 kubelet.go:517] Hairpin mode set to ""hairpin-veth""\r\nOct 19 05:42:56 localhost kubelet: W1019 05:42:56.363486   16763 cni.go:196] Unable to update cni config: No networks found in /etc/cni/net.d\r\nOct 19 05:42:56 localhost kubelet: W1019 05:42:56.364298   16763 cni.go:196] Unable to update cni config: No networks found in /etc/cni/net.d\r\nOct 19 05:42:56 localhost kubelet: W1019 05:42:56.372273   16763 cni.go:196] Unable to update cni config: No networks found in /etc/cni/net.d\r\nOct 19 05:42:56 localhost kubelet: I1019 05:42:56.372305   16763 docker_service.go:207] Docker cri networking managed by cni\r\nOct 19 05:42:56 localhost kubelet: error: failed to run Kubelet: failed to create kubelet: misconfiguration: kubelet cgroup driver: ""systemd"" is different from docker cgroup driver: ""cgroupfs""\r\nOct 19 05:42:56 localhost systemd: kubelet.service: main process exited, code=exited, status=1/FAILURE\r\nOct 19 05:42:56 localhost systemd: Unit kubelet.service entered failed state.\r\nOct 19 05:42:56 localhost systemd: kubelet.service failed.\r\n\r\n\r\n\r\nAbove is what found form /var/log/messages\r\n\r\nSeems to be many issue for running kubelet in my VM\r\n\r\nPlease advise', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'tengqm', 'comment_id': 337932610.0, 'datetime': '2017-10-19 14:50:36+00:00', 'masked_author': 'username_1', 'text': 'If I\'m understanding this correctly, problems related to apiserver connection or CRI should be fine at this stage. The critical issue is the following one:\r\n\r\n```\r\nOct 19 05:42:56 localhost kubelet: error: failed to run Kubelet: failed to create kubelet: misconfiguration: kubelet cgroup driver: ""systemd"" is different from docker cgroup driver: ""cgroupfs""\r\n```\r\nWhen using kubeadm, you have to have kubelet up before apiserver deployment is created or network related configurations are set up. Since docker is using ""cgroupfs"", you may want to tell kubelet to use ""cgroupfs"" as its cgroup driver as well. You may try something shown below (I myself haven\'t tried it though):\r\n\r\n```\r\n$ sudo cat > /etc/systemd/system/kubelet.service.d/20-cri.conf <<EOF\r\nEnvironment=""KUBELET_EXTRA_ARGS=--cgroup-driver=cgroupfs""\r\nEOF\r\n$ sudo systemctl daemon-reload\r\n$ sudo systemctl restart kubelet\r\n```\r\n\r\nThen you can try `kubeadm init` again.', 'title': None, 'type': 'comment'}
+ {'action': 'closed', 'author': 'zacharysarah', 'comment_id': None, 'datetime': '2017-10-19 18:41:27+00:00', 'masked_author': 'username_2', 'text': '', 'title': None, 'type': 'issue'}
+ {'action': 'created', 'author': 'zacharysarah', 'comment_id': 337999828.0, 'datetime': '2017-10-19 18:41:27+00:00', 'masked_author': 'username_2', 'text': ""@username_0 👋 This issue sounds more like a request for support and less like an issue specifically for docs. I'm going to close this issue, but please feel free to continue to discuss it here as @username_1's ability permits. (Thanks, @username_1! 💛 )"", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'kumarganesh2814', 'comment_id': 338108724.0, 'datetime': '2017-10-20 05:20:49+00:00', 'masked_author': 'username_0', 'text': 'Oct 20 01:18:46 localhost kubelet: I1020 01:18:46.320014   13395 container_manager_linux.go:288] Creating device plugin handler: false\r\nOct 20 01:18:46 localhost kubelet: I1020 01:18:46.320160   13395 kubelet.go:273] Adding manifest file: /etc/kubernetes/manifests\r\nOct 20 01:18:46 localhost kubelet: I1020 01:18:46.320183   13395 kubelet.go:283] Watching apiserver\r\nOct 20 01:18:46 localhost kubelet: E1020 01:18:46.322195   13395 reflector.go:205] k8s.io/kubernetes/pkg/kubelet/kubelet.go:422: Failed to list *v1.Node: Get https://10.196.199.46:6443/api/v1/nodes?fieldSelector=metadata.name%3Dec2bcf.compute-gse00003472.oraclecloud.internal&resourceVersion=0: dial tcp 10.196.199.46:6443: getsockopt: connection refused\r\nOct 20 01:18:46 localhost kubelet: E1020 01:18:46.322255   13395 reflector.go:205] k8s.io/kubernetes/pkg/kubelet/config/apiserver.go:47: Failed to list *v1.Pod: Get https://10.196.199.46:6443/api/v1/pods?fieldSelector=spec.nodeName%3Dec2bcf.compute-gse00003472.oraclecloud.internal&resourceVersion=0: dial tcp 10.196.199.46:6443: getsockopt: connection refused\r\nOct 20 01:18:46 localhost kubelet: E1020 01:18:46.322301   13395 reflector.go:205] k8s.io/kubernetes/pkg/kubelet/kubelet.go:413: Failed to list *v1.Service: Get https://10.196.199.46:6443/api/v1/services?resourceVersion=0: dial tcp 10.196.199.46:6443: getsockopt: connection refused\r\nOct 20 01:18:46 localhost kubelet: W1020 01:18:46.325423   13395 kubelet_network.go:69] Hairpin mode set to ""promiscuous-bridge"" but kubenet is not enabled, falling back to ""hairpin-veth""\r\nOct 20 01:18:46 localhost kubelet: I1020 01:18:46.325446   13395 kubelet.go:517] Hairpin mode set to ""hairpin-veth""\r\nOct 20 01:18:46 localhost kubelet: W1020 01:18:46.325516   13395 cni.go:196] Unable to update cni config: No networks found in /etc/cni/net.d\r\nOct 20 01:18:46 localhost kubelet: W1020 01:18:46.326305   13395 cni.go:196] Unable to update cni config: No networks found in /etc/cni/net.d\r\nOct 20 01:18:46 localhost kubelet: W1020 01:18:46.336290   13395 cni.go:196] Unable to update cni config: No networks found in /etc/cni/net.d\r\nOct 20 01:18:46 localhost kubelet: I1020 01:18:46.336330   13395 docker_service.go:207] Docker cri networking managed by cni\r\nOct 20 01:18:46 localhost kubelet: error: failed to run Kubelet: failed to create kubelet: misconfiguration: kubelet cgroup driver: ""systemd"" is different from docker cgroup driver: ""cgroupfs""\r\nOct 20 01:18:46 localhost systemd: kubelet.service: main process exited, code=exited, status=1/FAILURE\r\nOct 20 01:18:46 localhost systemd: Unit kubelet.service entered failed state.\r\nOct 20 01:18:46 localhost systemd: kubelet.service failed.\r\n\r\nBest Regards\r\nGanesh', 'title': None, 'type': 'comment'}]","<issue_start><issue_comment>Title: Issue while starting minikube 
+username_0: <!-- Thanks for filing an issue! Before submitting, please fill in the following information. -->
+
+<!--Required Information-->
+
+**This is a...** 
+<!-- choose one by changing [ ] to [x] -->
+- [ x] Feature Request
+- [ ] Bug Report
+
+**Problem:**
+ minikube start
+Starting local Kubernetes v1.7.5 cluster...
+Starting VM...
+E1018 01:54:38.808925   26207 start.go:146] Error starting host: Error creating host: Error executing step: Running precreate checks.
+: We support Virtualbox starting with version 5. Your VirtualBox install is ""WARNING: The vboxdrv kernel module is not loaded. Either there is no module\n         available for the current kernel (4.1.12-61.1.33.el7uek.x86_64) or it failed to\n         load. Please recompile the kernel module and install it by\n\n           sudo /sbin/vboxconfig\n\n         You will not be able to start VMs until this problem is fixed.\n5.1.28r117968"". Please upgrade at https://www.virtualbox.org.
+
+
+
+**Proposed Solution:**
+
+
+**Page to Update:**
+http://kubernetes.io/...
+
+<!--Optional Information (remove the comment tags around information you would like to include)-->
+<!--Kubernetes Version:-->
+
+<!--Additional Information:-->
+<issue_comment>username_1: Alright, the error message is pretty clear: ""`Running VirtualBox in a Xen environment is not supported.`"".
+You may want to give `kubeadm` a try: https://kubernetes.io/docs/setup/independent/create-cluster-kubeadm/
+<issue_comment>username_0: Hi Qiming,
+
+Trying with kubeadm also gives an error :(
+
+After firing command kubeadm init
+
+[kubelet-check] It seems like the kubelet isn't running or healthy.
+[kubelet-check] The HTTP call equal to 'curl -sSL http://localhost:10255/healthz' failed with error: Get http://localhost:10255/healthz: dial tcp [::1]:10255: getsockopt: connection refused.
+
+[kubelet-check] The HTTP call equal to 'curl -sSL http://localhost:10255/healthz' failed with error: Get http://localhost:10255/healthz: dial tcp [::1]:10255: getsockopt: connection refused.
+
+Unfortunately, an error has occurred:
+        timed out waiting for the condition
+
+This error is likely caused by that:
+        - The kubelet is not running
+        - The kubelet is unhealthy due to a misconfiguration of the node in some way (required cgroups disabled)
+        - There is no internet connection; so the kubelet can't pull the following control plane images:
+                - gcr.io/google_containers/kube-apiserver-amd64:v1.8.1
+                - gcr.io/google_containers/kube-controller-manager-amd64:v1.8.1
+                - gcr.io/google_containers/kube-scheduler-amd64:v1.8.1
+
+You can troubleshoot this for example with the following commands if you're on a systemd-powered system:
+        - 'systemctl status kubelet'
+        - 'journalctl -xeu kubelet'
+couldn't initialize a Kubernetes cluster
+[root@ec2bcf ~]# systemctl status kubelet
+● kubelet.service - kubelet: The Kubernetes Node Agent
+   Loaded: loaded (/etc/systemd/system/kubelet.service; enabled; vendor preset: disabled)
+  Drop-In: /etc/systemd/system/kubelet.service.d
+           └─10-kubeadm.conf
+   Active: activating (auto-restart) (Result: exit-code) since Wed 2017-10-18 22:53:35 EDT; 7s ago
+     Docs: http://kubernetes.io/docs/
+  Process: 15268 ExecStart=/usr/bin/kubelet $KUBELET_KUBECONFIG_ARGS $KUBELET_SYSTEM_PODS_ARGS $KUBELET_NETWORK_ARGS $KUBELET_DNS_ARGS $KUBELET_AUTHZ_ARGS $KUBELET_CADVISOR_ARGS $KUBELET_CGROUP_ARGS $KUBELET_CERTIFICATE_ARGS $KUBELET_EXTRA_ARGS (code=exited, status=1/FAILURE)
+ Main PID: 15268 (code=exited, status=1/FAILURE)
+
+Oct 18 22:53:35 ec2bcf systemd[1]: Unit kubelet.service entered failed state.
+Oct 18 22:53:35 ec2bcf systemd[1]: kubelet.service failed.
+[root@ec2bcf ~]# systemctl start kubelet
+[root@ec2bcf ~]# systemctl status kubelet
+● kubelet.service - kubelet: The Kubernetes Node Agent
+   Loaded: loaded (/etc/systemd/system/kubelet.service; enabled; vendor preset: disabled)
+  Drop-In: /etc/systemd/system/kubelet.service.d
+           └─10-kubeadm.conf
+   Active: activating (auto-restart) (Result: exit-code) since Wed 2017-10-18 22:54:06 EDT; 5s ago
+     Docs: http://kubernetes.io/docs/
+  Process: 15389 ExecStart=/usr/bin/kubelet $KUBELET_KUBECONFIG_ARGS $KUBELET_SYSTEM_PODS_ARGS $KUBELET_NETWORK_ARGS $KUBELET_DNS_ARGS $KUBELET_AUTHZ_ARGS $KUBELET_CADVISOR_ARGS $KUBELET_CGROUP_ARGS $KUBELET_CERTIFICATE_ARGS $KUBELET_EXTRA_ARGS (code=exited, status=1/FAILURE)
+ Main PID: 15389 (code=exited, status=1/FAILURE)
+
+Oct 18 22:54:06 ec2bcf systemd[1]: Unit kubelet.service entered failed state.
+Oct 18 22:54:06 ec2bcf systemd[1]: kubelet.service failed.
+
+
+Any advice for this
+
+Regards
+Ganesh
+<issue_comment>username_1: It looks like `kubelet` cannot be started. You may want to check `systemctl -u kubelet` and `journalctl -xe` to find out if kubelet has any meaningful error messages in the log.
+<issue_comment>username_0: 0
+Oct 19 04:16:05 ec2bcf.compute-gse00003472.oraclecloud.internal kubelet[29913]: W1019 04:16:05.112000   29913 kubelet_network
+Oct 19 04:16:05 ec2bcf.compute-gse00003472.oraclecloud.internal kubelet[29913]: I1019 04:16:05.112028   29913 kubelet.go:517]
+Oct 19 04:16:05 ec2bcf.compute-gse00003472.oraclecloud.internal kubelet[29913]: W1019 04:16:05.112093   29913 cni.go:196] Una
+Oct 19 04:16:05 ec2bcf.compute-gse00003472.oraclecloud.internal kubelet[29913]: W1019 04:16:05.112865   29913 cni.go:196] Una
+Oct 19 04:16:05 ec2bcf.compute-gse00003472.oraclecloud.internal kubelet[29913]: W1019 04:16:05.126862   29913 cni.go:196] Una
+Oct 19 04:16:05 ec2bcf.compute-gse00003472.oraclecloud.internal kubelet[29913]: I1019 04:16:05.126896   29913 docker_service.
+Oct 19 04:16:05 ec2bcf.compute-gse00003472.oraclecloud.internal kubelet[29913]: error: failed to run Kubelet: failed to creat
+Oct 19 04:16:05 ec2bcf.compute-gse00003472.oraclecloud.internal systemd[1]: kubelet.service: main process exited, code=exited
+Oct 19 04:16:05 ec2bcf.compute-gse00003472.oraclecloud.internal systemd[1]: Unit kubelet.service entered failed state.
+Oct 19 04:16:05 ec2bcf.compute-gse00003472.oraclecloud.internal systemd[1]: kubelet.service failed.
+
+
+I see above using journalctl -xe
+
+Not Sure what is wrong here
+
+Best Regards
+Ganesh
+<issue_comment>username_1: I believe you managed to paste some not so useful information and succeeded in cropping out exactly the interesting text ...
+
+`Oct 19 04:16:05 ec2bcf.compute-gse00003472.oraclecloud.internal kubelet[29913]: W1019 04:16:05.126862 29913 cni.go:196] Una ..... <check the whole output here, you will get some hints>`
+
+It looks like a network problem this time.
+<issue_comment>username_0: Oct 19 05:42:56 localhost kubelet: I1019 05:42:56.356192   16763 container_manager_linux.go:288] Creating device plugin handler: false
+Oct 19 05:42:56 localhost kubelet: I1019 05:42:56.356267   16763 kubelet.go:273] Adding manifest file: /etc/kubernetes/manifests
+Oct 19 05:42:56 localhost kubelet: I1019 05:42:56.356287   16763 kubelet.go:283] Watching apiserver
+Oct 19 05:42:56 localhost kubelet: E1019 05:42:56.357658   16763 reflector.go:205] k8s.io/kubernetes/pkg/kubelet/config/apiserver.go:47: Failed to list *v1.Pod: Get https://10.196.199.46:6443/api/v1/pods?fieldSelector=spec.nodeName%3Dec2bcf.compute-gse00003472.oraclecloud.internal&resourceVersion=0: dial tcp 10.196.199.46:6443: getsockopt: connection refused
+Oct 19 05:42:56 localhost kubelet: E1019 05:42:56.357706   16763 reflector.go:205] k8s.io/kubernetes/pkg/kubelet/kubelet.go:413: Failed to list *v1.Service: Get https://10.196.199.46:6443/api/v1/services?resourceVersion=0: dial tcp 10.196.199.46:6443: getsockopt: connection refused
+Oct 19 05:42:56 localhost kubelet: E1019 05:42:56.357744   16763 reflector.go:205] k8s.io/kubernetes/pkg/kubelet/kubelet.go:422: Failed to list *v1.Node: Get https://10.196.199.46:6443/api/v1/nodes?fieldSelector=metadata.name%3Dec2bcf.compute-gse00003472.oraclecloud.internal&resourceVersion=0: dial tcp 10.196.199.46:6443: getsockopt: connection refused
+Oct 19 05:42:56 localhost kubelet: W1019 05:42:56.363382   16763 kubelet_network.go:69] Hairpin mode set to ""promiscuous-bridge"" but kubenet is not enabled, falling back to ""hairpin-veth""
+Oct 19 05:42:56 localhost kubelet: I1019 05:42:56.363416   16763 kubelet.go:517] Hairpin mode set to ""hairpin-veth""
+Oct 19 05:42:56 localhost kubelet: W1019 05:42:56.363486   16763 cni.go:196] Unable to update cni config: No networks found in /etc/cni/net.d
+Oct 19 05:42:56 localhost kubelet: W1019 05:42:56.364298   16763 cni.go:196] Unable to update cni config: No networks found in /etc/cni/net.d
+Oct 19 05:42:56 localhost kubelet: W1019 05:42:56.372273   16763 cni.go:196] Unable to update cni config: No networks found in /etc/cni/net.d
+Oct 19 05:42:56 localhost kubelet: I1019 05:42:56.372305   16763 docker_service.go:207] Docker cri networking managed by cni
+Oct 19 05:42:56 localhost kubelet: error: failed to run Kubelet: failed to create kubelet: misconfiguration: kubelet cgroup driver: ""systemd"" is different from docker cgroup driver: ""cgroupfs""
+Oct 19 05:42:56 localhost systemd: kubelet.service: main process exited, code=exited, status=1/FAILURE
+Oct 19 05:42:56 localhost systemd: Unit kubelet.service entered failed state.
+Oct 19 05:42:56 localhost systemd: kubelet.service failed.
+
+
+
+Above is what found form /var/log/messages
+
+Seems to be many issue for running kubelet in my VM
+
+Please advise
+<issue_comment>username_1: If I'm understanding this correctly, problems related to apiserver connection or CRI should be fine at this stage. The critical issue is the following one:
+
+```
+Oct 19 05:42:56 localhost kubelet: error: failed to run Kubelet: failed to create kubelet: misconfiguration: kubelet cgroup driver: ""systemd"" is different from docker cgroup driver: ""cgroupfs""
+```
+When using kubeadm, you have to have kubelet up before apiserver deployment is created or network related configurations are set up. Since docker is using ""cgroupfs"", you may want to tell kubelet to use ""cgroupfs"" as its cgroup driver as well. You may try something shown below (I myself haven't tried it though):
+
+```
+$ sudo cat > /etc/systemd/system/kubelet.service.d/20-cri.conf <<EOF
+Environment=""KUBELET_EXTRA_ARGS=--cgroup-driver=cgroupfs""
+EOF
+$ sudo systemctl daemon-reload
+$ sudo systemctl restart kubelet
+```
+
+Then you can try `kubeadm init` again.<issue_closed>
+<issue_comment>username_2: @username_0 👋 This issue sounds more like a request for support and less like an issue specifically for docs. I'm going to close this issue, but please feel free to continue to discuss it here as @username_1's ability permits. (Thanks, @username_1! 💛 )
+<issue_comment>username_0: Oct 20 01:18:46 localhost kubelet: I1020 01:18:46.320014   13395 container_manager_linux.go:288] Creating device plugin handler: false
+Oct 20 01:18:46 localhost kubelet: I1020 01:18:46.320160   13395 kubelet.go:273] Adding manifest file: /etc/kubernetes/manifests
+Oct 20 01:18:46 localhost kubelet: I1020 01:18:46.320183   13395 kubelet.go:283] Watching apiserver
+Oct 20 01:18:46 localhost kubelet: E1020 01:18:46.322195   13395 reflector.go:205] k8s.io/kubernetes/pkg/kubelet/kubelet.go:422: Failed to list *v1.Node: Get https://10.196.199.46:6443/api/v1/nodes?fieldSelector=metadata.name%3Dec2bcf.compute-gse00003472.oraclecloud.internal&resourceVersion=0: dial tcp 10.196.199.46:6443: getsockopt: connection refused
+Oct 20 01:18:46 localhost kubelet: E1020 01:18:46.322255   13395 reflector.go:205] k8s.io/kubernetes/pkg/kubelet/config/apiserver.go:47: Failed to list *v1.Pod: Get https://10.196.199.46:6443/api/v1/pods?fieldSelector=spec.nodeName%3Dec2bcf.compute-gse00003472.oraclecloud.internal&resourceVersion=0: dial tcp 10.196.199.46:6443: getsockopt: connection refused
+Oct 20 01:18:46 localhost kubelet: E1020 01:18:46.322301   13395 reflector.go:205] k8s.io/kubernetes/pkg/kubelet/kubelet.go:413: Failed to list *v1.Service: Get https://10.196.199.46:6443/api/v1/services?resourceVersion=0: dial tcp 10.196.199.46:6443: getsockopt: connection refused
+Oct 20 01:18:46 localhost kubelet: W1020 01:18:46.325423   13395 kubelet_network.go:69] Hairpin mode set to ""promiscuous-bridge"" but kubenet is not enabled, falling back to ""hairpin-veth""
+Oct 20 01:18:46 localhost kubelet: I1020 01:18:46.325446   13395 kubelet.go:517] Hairpin mode set to ""hairpin-veth""
+Oct 20 01:18:46 localhost kubelet: W1020 01:18:46.325516   13395 cni.go:196] Unable to update cni config: No networks found in /etc/cni/net.d
+Oct 20 01:18:46 localhost kubelet: W1020 01:18:46.326305   13395 cni.go:196] Unable to update cni config: No networks found in /etc/cni/net.d
+Oct 20 01:18:46 localhost kubelet: W1020 01:18:46.336290   13395 cni.go:196] Unable to update cni config: No networks found in /etc/cni/net.d
+Oct 20 01:18:46 localhost kubelet: I1020 01:18:46.336330   13395 docker_service.go:207] Docker cri networking managed by cni
+Oct 20 01:18:46 localhost kubelet: error: failed to run Kubelet: failed to create kubelet: misconfiguration: kubelet cgroup driver: ""systemd"" is different from docker cgroup driver: ""cgroupfs""
+Oct 20 01:18:46 localhost systemd: kubelet.service: main process exited, code=exited, status=1/FAILURE
+Oct 20 01:18:46 localhost systemd: Unit kubelet.service entered failed state.
+Oct 20 01:18:46 localhost systemd: kubelet.service failed.
+
+Best Regards
+Ganesh"
+gohugoio/hugo,969858769,8885,,"[{'action': 'opened', 'author': 'brendan-mccoy', 'comment_id': None, 'datetime': '2021-08-13T01:03:04Z', 'masked_author': 'username_0', 'text': '<!-- Please answer these questions before submitting your issue. Thanks! -->\r\n\r\n### What version of Hugo are you using (`hugo version`)?\r\n\r\n<pre>\r\n$ hugo version\r\nhugo v0.87.0-B0C541E4+extended windows/amd64 BuildDate=2021-08-03T10:57:28Z VendorInfo=gohugoio\r\n</pre>\r\n\r\n### Does this issue reproduce with the latest release?\r\nYes\r\n\r\n\r\nThe issue I\'m seeing in windows is that, when using `.File.Path` like so: `<a href=""{{ $geekdocRepo }}/{{ $geekdocEditPath }}/{{ .File.Path }}"">` or rather, in the theme I\'m using, `<a href=""{{ $geekdocRepo }}/{{ $geekdocEditPath }}/{{ $.Scratch.Get ""geekdocFilePath"" }}"">`, the backslashes that would be returned in .File.Path used elsewhere will be replaced with %5c, which will cause broken hyperlinks that were built using .File.Path.\r\n\r\nI reckon this stems from Windows using backslashes in paths unlike mostly everything else that uses forward slashes (though Windows will accept forward slashes in powershell and explorer). I\'m not familiar enough with how URLs to say whether or not the making the HTML parser just not escape backslashes into $5c on URLs, though there\'s probably plenty of HTML reasons why this gets done.\r\n\r\nWithout having reviewed the underlying code, I suppose these are possible fixes for this particular breakage (whether they are suitable for other uses, I don\'t know).\r\n\r\n1. Convert the Windows path backslashes to forward slashes on any dot properties, like .File.Path\r\n2. Don\'t escape backslashes when parsing, or don\'t escape them when they are in hyperlinks\r\n\r\nProbably 1 is a better idea, I can kinda noodle some reasons 2 would break things in my head, but I\'m not certain.\r\n\r\nIn the meantime, I can use `<a href=""{{ $geekdocRepo }}/{{ $geekdocEditPath }}/{{ replace ($.Scratch.Get ""geekdocFilePath"") ""\\\\"" ""/"" }}"">` in my partial instead, but it seems to me hugo should internally use the same style of slash independent of OS.\r\n\r\nAs an aside, if you don\'t want people who use the search for existing issues or coming from Google to contribute to those extant issues, lock them when they pass your arbitrary age limit that isn\'t documented, re:https://github.com/gohugoio/hugo/issues/5515#issuecomment-897995182. Perhaps this could be updated alternatively: https://github.com/gohugoio/hugo/blob/master/CONTRIBUTING.md#reporting-issues.', 'title': 'Hugo on Windows File Paths: Backslashes get unexpectedly escaped in HTML/Hyperlinks', 'type': 'issue'}
+ {'action': 'created', 'author': 'pamubay', 'comment_id': 898087529.0, 'datetime': '2021-08-13 01:19:15+00:00', 'masked_author': 'username_1', 'text': 'e.g.:\r\n```\r\n<a href=""{{ path.Join $geekdocRepo  $geekdocEditPath  .File.Path }}"">\r\n```\r\n\r\nRead More: [path.Join](https://gohugo.io/functions/path.join/)', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'bep', 'comment_id': 898273748.0, 'datetime': '2021-08-13 08:12:52+00:00', 'masked_author': 'username_2', 'text': ""There is a longer story here, but the `.File` object is more or less what Go gives us, and they decided some moons ago to keep the slashes as, so I don't think we want to do anything with that. Also, it's very rarely needed.\r\n\r\nYou can work around this today by `path.Join .File.Dir`.\r\n\r\nBut I do suggest that we add a `path.Clean` function that does a \r\n\r\n```\r\nfilepath.ToSlash \r\npath.Clean\r\n```"", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'bradcypert', 'comment_id': 932438452.0, 'datetime': '2021-10-01 17:54:54+00:00', 'masked_author': 'username_3', 'text': '@username_2 Mind if I take a crack at this?', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'bep', 'comment_id': 932719939.0, 'datetime': '2021-10-02 09:12:31+00:00', 'masked_author': 'username_2', 'text': '@username_3 go ahead.\r\n\r\nI would expect it to be the output of doing `path.Clean(filepath.ToSlash(""foo\\bar\\biz.txt""))`. And I\'m pretty sure none of those do any suffix-removal.', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'bradcypert', 'comment_id': 932740669.0, 'datetime': '2021-10-02 12:03:33+00:00', 'masked_author': 'username_3', 'text': ""Sounds good! Here's a PR: https://github.com/gohugoio/hugo/pull/9005"", 'title': None, 'type': 'comment'}
+ {'action': 'closed', 'author': 'bep', 'comment_id': None, 'datetime': '2021-10-05 14:15:19+00:00', 'masked_author': 'username_2', 'text': '', 'title': None, 'type': 'issue'}]","<issue_start><issue_comment>Title: Hugo on Windows File Paths: Backslashes get unexpectedly escaped in HTML/Hyperlinks
+username_0: <!-- Please answer these questions before submitting your issue. Thanks! -->
+
+### What version of Hugo are you using (`hugo version`)?
+
+<pre>
+$ hugo version
+hugo v0.87.0-B0C541E4+extended windows/amd64 BuildDate=2021-08-03T10:57:28Z VendorInfo=gohugoio
+</pre>
+
+### Does this issue reproduce with the latest release?
+Yes
+
+
+The issue I'm seeing in windows is that, when using `.File.Path` like so: `<a href=""{{ $geekdocRepo }}/{{ $geekdocEditPath }}/{{ .File.Path }}"">` or rather, in the theme I'm using, `<a href=""{{ $geekdocRepo }}/{{ $geekdocEditPath }}/{{ $.Scratch.Get ""geekdocFilePath"" }}"">`, the backslashes that would be returned in .File.Path used elsewhere will be replaced with %5c, which will cause broken hyperlinks that were built using .File.Path.
+
+I reckon this stems from Windows using backslashes in paths unlike mostly everything else that uses forward slashes (though Windows will accept forward slashes in powershell and explorer). I'm not familiar enough with how URLs to say whether or not the making the HTML parser just not escape backslashes into $5c on URLs, though there's probably plenty of HTML reasons why this gets done.
+
+Without having reviewed the underlying code, I suppose these are possible fixes for this particular breakage (whether they are suitable for other uses, I don't know).
+
+1. Convert the Windows path backslashes to forward slashes on any dot properties, like .File.Path
+2. Don't escape backslashes when parsing, or don't escape them when they are in hyperlinks
+
+Probably 1 is a better idea, I can kinda noodle some reasons 2 would break things in my head, but I'm not certain.
+
+In the meantime, I can use `<a href=""{{ $geekdocRepo }}/{{ $geekdocEditPath }}/{{ replace ($.Scratch.Get ""geekdocFilePath"") ""\\"" ""/"" }}"">` in my partial instead, but it seems to me hugo should internally use the same style of slash independent of OS.
+
+As an aside, if you don't want people who use the search for existing issues or coming from Google to contribute to those extant issues, lock them when they pass your arbitrary age limit that isn't documented, re:https://github.com/gohugoio/hugo/issues/5515#issuecomment-897995182. Perhaps this could be updated alternatively: https://github.com/gohugoio/hugo/blob/master/CONTRIBUTING.md#reporting-issues.
+<issue_comment>username_1: e.g.:
+```
+<a href=""{{ path.Join $geekdocRepo  $geekdocEditPath  .File.Path }}"">
+```
+
+Read More: [path.Join](https://gohugo.io/functions/path.join/)
+<issue_comment>username_2: There is a longer story here, but the `.File` object is more or less what Go gives us, and they decided some moons ago to keep the slashes as, so I don't think we want to do anything with that. Also, it's very rarely needed.
+
+You can work around this today by `path.Join .File.Dir`.
+
+But I do suggest that we add a `path.Clean` function that does a 
+
+```
+filepath.ToSlash 
+path.Clean
+```
+<issue_comment>username_3: @username_2 Mind if I take a crack at this?
+<issue_comment>username_2: @username_3 go ahead.
+
+I would expect it to be the output of doing `path.Clean(filepath.ToSlash(""foo\bar\biz.txt""))`. And I'm pretty sure none of those do any suffix-removal.
+<issue_comment>username_3: Sounds good! Here's a PR: https://github.com/gohugoio/hugo/pull/9005<issue_closed>"
+appveyor/website,350829353,512,,"[{'action': 'opened', 'author': 'astrofrog', 'comment_id': None, 'datetime': '2018-08-15 14:25:06+00:00', 'masked_author': 'username_0', 'text': 'Is the https://ci.appveyor.com/tools/validate-yaml tool available as a command-line tool? If not, could it be?', 'title': 'Command-line tool to validate AppVeyor YAML file', 'type': 'issue'}
+ {'action': 'created', 'author': 'OwenMcDonnell', 'comment_id': 413291061.0, 'datetime': '2018-08-15 18:28:43+00:00', 'masked_author': 'username_1', 'text': 'It’s not available as a command line tool, but [here](https://gist.github.com/username_1/01e215d1615e75e871ecf2418224ca96) is a powershell script we created into which you can pass a *.yml* file for validation.', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'astrofrog', 'comment_id': 413292013.0, 'datetime': '2018-08-15 18:31:47+00:00', 'masked_author': 'username_0', 'text': '@username_1 - thanks!', 'title': None, 'type': 'comment'}]","<issue_start><issue_comment>Title: Command-line tool to validate AppVeyor YAML file
+username_0: Is the https://ci.appveyor.com/tools/validate-yaml tool available as a command-line tool? If not, could it be?
+<issue_comment>username_1: It’s not available as a command line tool, but [here](https://gist.github.com/username_1/01e215d1615e75e871ecf2418224ca96) is a powershell script we created into which you can pass a *.yml* file for validation.
+<issue_comment>username_0: @username_1 - thanks!"

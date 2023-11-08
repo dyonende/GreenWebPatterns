@@ -1,0 +1,642 @@
+OneSignal/OneSignal-Website-SDK,362947354,412,,"[{'action': 'opened', 'author': 'jviral', 'comment_id': None, 'datetime': '2018-09-23 14:34:04+00:00', 'masked_author': 'username_0', 'text': '**Description:**\r\nSometimes notifications show ""This site has been updated in the background."" instead of their content. Also, some times notifications are not clickable when multiple notifications are shown.\r\n\r\n![](https://i.imgur.com/a4zHRfh.png)\r\n\r\n\r\n**Steps to Reproduce Issue:**\r\n\r\n1. Subscribe to a website that frequently sends notifications on Windows 10 Chrome (I used producthunt)\r\n2. Power off the machine a few days (I used Virtual Box)\r\n3. When you turn on the machine again, sometimes the error occurs\r\n\r\n\r\n**Anything else:**\r\n\r\nAlmost all of the time most notifications on Windows 10 are not clickable, it appears only the last notification is clickable.', 'title': '""This site has been updated in the background"" - Windows 10 Chrome', 'type': 'issue'}
+ {'action': 'created', 'author': 'jkasten2', 'comment_id': 424567518.0, 'datetime': '2018-09-26 02:54:06+00:00', 'masked_author': 'username_1', 'text': '@username_0 Thanks for reporting, the ""This site has been updated in the background"" is a default notification that Chrome shows if the servicer work does not generate a notification of it\'s own. However for OneSignal there isn\'t any know cases where a notification would never show.\r\n\r\nThe only case I could see if there was some javascript error preventing the notification. If you open a new tab to chrome://serviceworker-internals/ you can precess the Inspect button to get a javascript console in this context.\r\n![image](https://user-images.githubusercontent.com/645861/46054360-dbb1ff80-c0fb-11e8-8fc5-83080cedf064.png)\r\nCan you try to reproduce the issue again with this javascript console open and report back any errors? Also please run `OneSignal.VERSION` from the console so we can confirm the version you are running of the SDK.\r\n\r\nLastly this notification shouldn\'t just be a Windows 10 issue. Chrome Windows, macOS, Android, and Linux should all show this message if in the case I noted above.\r\n\r\nFor the 2nd issue of only the last notification clickable, it is expected for only the most recent notification to show per site with OneSignal. Is this display issue what you are referring to by ""...it appears only the last notification is clickable.""? If not what behavior do you get when you click on the notification? Does it stay around or just go away without a page showing?', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'Ndekere', 'comment_id': 440908499.0, 'datetime': '2018-11-22 04:20:37+00:00', 'masked_author': 'username_2', 'text': 'Wow!! Thanks for the info... Av learnt a lot.', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'FlavorPantry', 'comment_id': 461908607.0, 'datetime': '2019-02-08 18:58:17+00:00', 'masked_author': 'username_3', 'text': '![screenshot 14171](https://user-images.githubusercontent.com/20829617/52499454-52720580-2b90-11e9-9998-eb320537c308.jpg)\r\n\r\nI see this message frequently... just happened again this morning..', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'rgomezp', 'comment_id': 462592906.0, 'datetime': '2019-02-12 02:49:33+00:00', 'masked_author': 'username_4', 'text': 'Closing due to no response from OP', 'title': None, 'type': 'comment'}
+ {'action': 'closed', 'author': 'rgomezp', 'comment_id': None, 'datetime': '2019-02-12 02:49:33+00:00', 'masked_author': 'username_4', 'text': '', 'title': None, 'type': 'issue'}]","<issue_start><issue_comment>Title: ""This site has been updated in the background"" - Windows 10 Chrome
+username_0: **Description:**
+Sometimes notifications show ""This site has been updated in the background."" instead of their content. Also, some times notifications are not clickable when multiple notifications are shown.
+
+![](https://i.imgur.com/a4zHRfh.png)
+
+
+**Steps to Reproduce Issue:**
+
+1. Subscribe to a website that frequently sends notifications on Windows 10 Chrome (I used producthunt)
+2. Power off the machine a few days (I used Virtual Box)
+3. When you turn on the machine again, sometimes the error occurs
+
+
+**Anything else:**
+
+Almost all of the time most notifications on Windows 10 are not clickable, it appears only the last notification is clickable.
+<issue_comment>username_1: @username_0 Thanks for reporting, the ""This site has been updated in the background"" is a default notification that Chrome shows if the servicer work does not generate a notification of it's own. However for OneSignal there isn't any know cases where a notification would never show.
+
+The only case I could see if there was some javascript error preventing the notification. If you open a new tab to chrome://serviceworker-internals/ you can precess the Inspect button to get a javascript console in this context.
+![image](https://user-images.githubusercontent.com/645861/46054360-dbb1ff80-c0fb-11e8-8fc5-83080cedf064.png)
+Can you try to reproduce the issue again with this javascript console open and report back any errors? Also please run `OneSignal.VERSION` from the console so we can confirm the version you are running of the SDK.
+
+Lastly this notification shouldn't just be a Windows 10 issue. Chrome Windows, macOS, Android, and Linux should all show this message if in the case I noted above.
+
+For the 2nd issue of only the last notification clickable, it is expected for only the most recent notification to show per site with OneSignal. Is this display issue what you are referring to by ""...it appears only the last notification is clickable.""? If not what behavior do you get when you click on the notification? Does it stay around or just go away without a page showing?
+<issue_comment>username_2: Wow!! Thanks for the info... Av learnt a lot.
+<issue_comment>username_3: ![screenshot 14171](https://user-images.githubusercontent.com/20829617/52499454-52720580-2b90-11e9-9998-eb320537c308.jpg)
+
+I see this message frequently... just happened again this morning..
+<issue_comment>username_4: Closing due to no response from OP<issue_closed>"
+department-of-veterans-affairs/vets-website,959353498,18111,"{'number': 18111.0, 'repo': 'vets-website', 'user_login': 'department-of-veterans-affairs'}","[{'action': 'opened', 'author': 'holdenhinkle', 'comment_id': None, 'datetime': '2021-08-03T17:53:03Z', 'masked_author': 'username_0', 'text': ""## Description\r\nResolves ticket [Implement Test Selection for E2E Test Specs#28218](https://app.zenhub.com/workspaces/vsp-5cedc9cce6e3335dc5a49fc4/issues/department-of-veterans-affairs/va.gov-team/28218)\r\n\r\nCypress test selection is implemented via the following logic:\r\n- If all files pushed to a branch are `.md` files, skip all tests -- changed files cannot affect any application\r\n- Else, if all files pushed to a branch are in `src/applications` or they are `.md` files, only run the tests for the application(s) in the `src/applications` file path -- changed files can only affect those applications\r\n- Else, run all tests -- change is 'global' and can affect all applications\r\n\r\nIf only the tests in an application file path beginning with `src/applications` are selected, all tests in `src/platform` are also included in the selected tests; these tests are run by default.\r\n\r\nThe number of containers required to run the tests in the `cypress-tests` job matrix is set dynamically based on the number of tests selected. This solution basically reduces the number of containers needed to run the tests, depending on the number of tests selected. If only a few tests are selected, text execution time is reduced significantly. Otherwise, if there are > 20 tests to run for example, the only benefit will be using fewer containers to run the tests. I'm hoping that will reduce costs and free up the runners to pop other jobs off the queue. Here's what this part of the code looks like:\r\n\r\n```JavaScript\r\nconst numTests = tests.length;\r\n\r\n// core.exportVariable() exports variable to GitHub Actions workflow\r\nif (numTests === 0) {\r\n  core.exportVariable('NUM_CONTAINERS', 0);\r\n} else if (numTests < 20) {\r\n  core.exportVariable('NUM_CONTAINERS', 1);\r\n  core.exportVariable('CI_NODE_INDEX', [0]);\r\n} else if (numTests < 40) {\r\n  core.exportVariable('NUM_CONTAINERS', 2);\r\n  core.exportVariable('CI_NODE_INDEX', [0, 1]);\r\n} else if (numTests < 60) {\r\n  core.exportVariable('NUM_CONTAINERS', 3);\r\n  core.exportVariable('CI_NODE_INDEX', [0, 1, 2]);\r\n} else if (numTests < 80) {\r\n  core.exportVariable('NUM_CONTAINERS', 4);\r\n  core.exportVariable('CI_NODE_INDEX', [0, 1, 2, 3]);\r\n} else if (numTests < 100) {\r\n  core.exportVariable('NUM_CONTAINERS', 5);\r\n  core.exportVariable('CI_NODE_INDEX', [0, 1, 2, 3, 4]);\r\n} else if (numTests < 120) {\r\n  core.exportVariable('NUM_CONTAINERS', 6);\r\n  core.exportVariable('CI_NODE_INDEX', [0, 1, 2, 3, 4, 5]);\r\n} else if (numTests < 140) {\r\n  core.exportVariable('NUM_CONTAINERS', 7);\r\n  core.exportVariable('CI_NODE_INDEX', [0, 1, 2, 3, 4, 5, 6]);\r\n} else {\r\n  core.exportVariable('NUM_CONTAINERS', 8);\r\n  core.exportVariable('CI_NODE_INDEX', [0, 1, 2, 3, 4, 5, 6, 7]);\r\n}\r\n\r\nif (numTests > 0) core.exportVariable('TESTS', tests);\r\n```\r\n\r\nThis can be optimized in different ways, which we plan to explore later.\r\n\r\n## Testing done\r\nIf you would like to checkout this PR and test it yourself, change line 6 in `script/github-actions/select-cypress-tests.js` to the following to ignore the files in this PR, then update a file(s) and push it to see what tests are selected:\r\n\r\n```JavaScript\r\nconst filepaths = process.env.CHANGED_FILE_PATHS.split(' ');\r\nconst pathsOfChangedFiles = filepaths.filter(filepath => {\r\n  return (\r\n    filepath !== 'package.json' &&\r\n    filepath !== 'yarn.lock' &&\r\n    filepath !== 'script/github-actions/run-cypress-tests.js' &&\r\n    filepath !== 'script/github-actions/select-cypress-tests.js' &&\r\n    filepath !== '.github/workflows/continuous-integration.yml'\r\n  );\r\n});\r\n```\r\n### TestRail\r\nManual testing was done using TestRail. Here's a link to the [Test Runs & Results](https://dsvavsp.testrail.io/index.php?/runs/view/2090&group_by=cases:section_id&group_id=1472&group_order=asc).\r\n![image](https://user-images.githubusercontent.com/9326247/128770145-e5e15a83-9798-4af9-ad7a-786c74275df1.png)\r\n\r\nThe following tests were completed and the results are included here in case the reviewers of this PR don't have access to TestRail:\r\n### Change to One MD File\r\nI changed the README.md file.\r\n\r\nNo tests were selected to run, which was the expected result.\r\n\r\nThe 'Cypress E2E Tests' job(s) and the 'Testing Results' were skipped as expected.\r\n\r\nLink to checks for push - https://github.com/department-of-veterans-affairs/vets-website/actions/runs/1113155376\r\n\r\n### Changes to Multiple MD Files\r\nI changed the following .md files:\r\n[Truncated]\nsrc/applications/gi/components/content/AboutThisTool.jsx\r\nsrc/applications/gi/components/profile/AdditionalInformation.jsx \r\nsrc/applications/gi/components/profile/ContactInformation.jsx \r\n\r\nCoronavirus vaccination app - multiple files\r\nsrc/applications/coronavirus-vaccination/components/Confirmation.jsx\r\nsrc/applications/coronavirus-vaccination/components/Form.jsx\r\n\r\nFacility locator app - multiple files\r\nsrc/applications/facility-locator/components/AccessToCare.jsx  src/applications/facility-locator/components/ResultsList.jsx\r\n\r\nThe full suite of Cypress tests ran, as expected:\r\n\r\nLink to checks - https://github.com/department-of-veterans-affairs/vets-website/actions/runs/1113861975\r\n\r\n## Definition of done\r\n- [x] Events are logged appropriately\r\n- [x] Documentation has been updated, if applicable\r\n- [x] A link has been provided to the originating GitHub issue (or connected to it via ZenHub)\r\n- [x] No sensitive information (i.e. PII/credentials/internal URLs/etc.) is captured in logging, hardcoded, or specs"", 'title': '28218 implement cypress test selection', 'type': 'issue'}
+ {'action': 'created', 'author': 'holdenhinkle', 'comment_id': 895612263.0, 'datetime': '2021-08-09 23:13:46+00:00', 'masked_author': 'username_0', 'text': ""Hey @oseasmoran73 Just as I was driving to the beach tonight after work I remembered that I forgot to uncomment the concurrency block :-) It's done."", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'ddzz', 'comment_id': 896233430.0, 'datetime': '2021-08-10 18:52:47+00:00', 'masked_author': 'username_1', 'text': 'Will any E2E tests run on merge to master?', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'holdenhinkle', 'comment_id': 896305212.0, 'datetime': '2021-08-10 20:46:13+00:00', 'masked_author': 'username_0', 'text': ""I'm currently updating this PR so selected tests run on each push, and all tests run on merge to master.\r\n\r\nBy 'selected tests' I mean any tests that should run, depending on the changed files in the branch, which means all tests would run if a 'global' file has been changed. The logic powering test selection hasn't changed."", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'holdenhinkle', 'comment_id': 896976355.0, 'datetime': '2021-08-11 16:35:12+00:00', 'masked_author': 'username_0', 'text': 'I did some additional manual testing against my most recent changes and all seems to be good:\r\n\r\n- https://github.com/department-of-veterans-affairs/vets-website/actions/runs/1120808811\r\n- https://github.com/department-of-veterans-affairs/vets-website/actions/runs/1120814122\r\n- https://github.com/department-of-veterans-affairs/vets-website/actions/runs/1120816949', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'holdenhinkle', 'comment_id': 897085025.0, 'datetime': '2021-08-11 19:16:41+00:00', 'masked_author': 'username_0', 'text': ""I talked to Joe about implementing test selection for unit tests. FE Tools owns unit tests so we'd have to talk with them about that. That aside, it might be better to do that in a separate PR anyway."", 'title': None, 'type': 'comment'}]","<issue_start><issue_comment>Title: 28218 implement cypress test selection
+username_0: ## Description
+Resolves ticket [Implement Test Selection for E2E Test Specs#28218](https://app.zenhub.com/workspaces/vsp-5cedc9cce6e3335dc5a49fc4/issues/department-of-veterans-affairs/va.gov-team/28218)
+
+Cypress test selection is implemented via the following logic:
+- If all files pushed to a branch are `.md` files, skip all tests -- changed files cannot affect any application
+- Else, if all files pushed to a branch are in `src/applications` or they are `.md` files, only run the tests for the application(s) in the `src/applications` file path -- changed files can only affect those applications
+- Else, run all tests -- change is 'global' and can affect all applications
+
+If only the tests in an application file path beginning with `src/applications` are selected, all tests in `src/platform` are also included in the selected tests; these tests are run by default.
+
+The number of containers required to run the tests in the `cypress-tests` job matrix is set dynamically based on the number of tests selected. This solution basically reduces the number of containers needed to run the tests, depending on the number of tests selected. If only a few tests are selected, text execution time is reduced significantly. Otherwise, if there are > 20 tests to run for example, the only benefit will be using fewer containers to run the tests. I'm hoping that will reduce costs and free up the runners to pop other jobs off the queue. Here's what this part of the code looks like:
+
+```JavaScript
+const numTests = tests.length;
+
+// core.exportVariable() exports variable to GitHub Actions workflow
+if (numTests === 0) {
+  core.exportVariable('NUM_CONTAINERS', 0);
+} else if (numTests < 20) {
+  core.exportVariable('NUM_CONTAINERS', 1);
+  core.exportVariable('CI_NODE_INDEX', [0]);
+} else if (numTests < 40) {
+  core.exportVariable('NUM_CONTAINERS', 2);
+  core.exportVariable('CI_NODE_INDEX', [0, 1]);
+} else if (numTests < 60) {
+  core.exportVariable('NUM_CONTAINERS', 3);
+  core.exportVariable('CI_NODE_INDEX', [0, 1, 2]);
+} else if (numTests < 80) {
+  core.exportVariable('NUM_CONTAINERS', 4);
+  core.exportVariable('CI_NODE_INDEX', [0, 1, 2, 3]);
+} else if (numTests < 100) {
+  core.exportVariable('NUM_CONTAINERS', 5);
+  core.exportVariable('CI_NODE_INDEX', [0, 1, 2, 3, 4]);
+} else if (numTests < 120) {
+  core.exportVariable('NUM_CONTAINERS', 6);
+  core.exportVariable('CI_NODE_INDEX', [0, 1, 2, 3, 4, 5]);
+} else if (numTests < 140) {
+  core.exportVariable('NUM_CONTAINERS', 7);
+  core.exportVariable('CI_NODE_INDEX', [0, 1, 2, 3, 4, 5, 6]);
+} else {
+  core.exportVariable('NUM_CONTAINERS', 8);
+  core.exportVariable('CI_NODE_INDEX', [0, 1, 2, 3, 4, 5, 6, 7]);
+}
+
+if (numTests > 0) core.exportVariable('TESTS', tests);
+```
+
+This can be optimized in different ways, which we plan to explore later.
+
+## Testing done
+If you would like to checkout this PR and test it yourself, change line 6 in `script/github-actions/select-cypress-tests.js` to the following to ignore the files in this PR, then update a file(s) and push it to see what tests are selected:
+
+```JavaScript
+const filepaths = process.env.CHANGED_FILE_PATHS.split(' ');
+const pathsOfChangedFiles = filepaths.filter(filepath => {
+  return (
+    filepath !== 'package.json' &&
+    filepath !== 'yarn.lock' &&
+    filepath !== 'script/github-actions/run-cypress-tests.js' &&
+    filepath !== 'script/github-actions/select-cypress-tests.js' &&
+    filepath !== '.github/workflows/continuous-integration.yml'
+  );
+});
+```
+### TestRail
+Manual testing was done using TestRail. Here's a link to the [Test Runs & Results](https://dsvavsp.testrail.io/index.php?/runs/view/2090&group_by=cases:section_id&group_id=1472&group_order=asc).
+![image](https://user-images.githubusercontent.com/9326247/128770145-e5e15a83-9798-4af9-ad7a-786c74275df1.png)
+
+The following tests were completed and the results are included here in case the reviewers of this PR don't have access to TestRail:
+### Change to One MD File
+I changed the README.md file.
+
+No tests were selected to run, which was the expected result.
+
+The 'Cypress E2E Tests' job(s) and the 'Testing Results' were skipped as expected.
+
+Link to checks for push - https://github.com/department-of-veterans-affairs/vets-website/actions/runs/1113155376
+
+### Changes to Multiple MD Files
+I changed the following .md files:
+[Truncated]
+src/applications/gi/components/content/AboutThisTool.jsx
+src/applications/gi/components/profile/AdditionalInformation.jsx 
+src/applications/gi/components/profile/ContactInformation.jsx 
+
+Coronavirus vaccination app - multiple files
+src/applications/coronavirus-vaccination/components/Confirmation.jsx
+src/applications/coronavirus-vaccination/components/Form.jsx
+
+Facility locator app - multiple files
+src/applications/facility-locator/components/AccessToCare.jsx  src/applications/facility-locator/components/ResultsList.jsx
+
+The full suite of Cypress tests ran, as expected:
+
+Link to checks - https://github.com/department-of-veterans-affairs/vets-website/actions/runs/1113861975
+
+## Definition of done
+- [x] Events are logged appropriately
+- [x] Documentation has been updated, if applicable
+- [x] A link has been provided to the originating GitHub issue (or connected to it via ZenHub)
+- [x] No sensitive information (i.e. PII/credentials/internal URLs/etc.) is captured in logging, hardcoded, or specs
+<issue_comment>username_0: Hey @oseasmoran73 Just as I was driving to the beach tonight after work I remembered that I forgot to uncomment the concurrency block :-) It's done.
+<issue_comment>username_1: Will any E2E tests run on merge to master?
+<issue_comment>username_0: I'm currently updating this PR so selected tests run on each push, and all tests run on merge to master.
+
+By 'selected tests' I mean any tests that should run, depending on the changed files in the branch, which means all tests would run if a 'global' file has been changed. The logic powering test selection hasn't changed.
+<issue_comment>username_0: I did some additional manual testing against my most recent changes and all seems to be good:
+
+- https://github.com/department-of-veterans-affairs/vets-website/actions/runs/1120808811
+- https://github.com/department-of-veterans-affairs/vets-website/actions/runs/1120814122
+- https://github.com/department-of-veterans-affairs/vets-website/actions/runs/1120816949
+<issue_comment>username_0: I talked to Joe about implementing test selection for unit tests. FE Tools owns unit tests so we'd have to talk with them about that. That aside, it might be better to do that in a separate PR anyway."
+ethereum/ethereum-org-website,443168928,70,"{'number': 70.0, 'repo': 'ethereum-org-website', 'user_login': 'ethereum'}","[{'action': 'opened', 'author': 'virgil', 'comment_id': None, 'datetime': '2019-05-13T01:09:50Z', 'masked_author': 'username_0', 'text': 'Title says it all.', 'title': 'Added Visual Studio Code', 'type': 'issue'}
+ {'action': 'created', 'author': 'jjmstark', 'comment_id': 492269995.0, 'datetime': '2019-05-14 14:48:08+00:00', 'masked_author': 'username_1', 'text': '@username_2 I think we\'ve been doing ""first in first out"" for ordering of tools on this page - should it be at the top, or should it be below EthFiddle? The fact that it\'s a notable professional tool might suggest it should be higher on the list.', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'virgil', 'comment_id': 492273267.0, 'datetime': '2019-05-14 14:55:19+00:00', 'masked_author': 'username_0', 'text': 'I personally suggest putting it at the top.  I think Some level of expert judgement in the ordering is fine.  And bluntly, visual studio is already the most powerful IDE, and Microsoft has agreed to continue developing it.', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'maurelian', 'comment_id': 492287414.0, 'datetime': '2019-05-14 15:28:35+00:00', 'masked_author': 'username_2', 'text': 'At the top seems reasonable to me. ""Add to the bottom"" is just a decent tie-breaker in the absence of other strong ordering indicators.', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'virgil', 'comment_id': 492357903.0, 'datetime': '2019-05-14 18:36:39+00:00', 'masked_author': 'username_0', 'text': 'Sure add the bullet point.', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'virgil', 'comment_id': 496319147.0, 'datetime': '2019-05-27 23:16:09+00:00', 'masked_author': 'username_0', 'text': ""What's needed to get this accepted?  I want to see a happy Microsoft so they'll keep making baller dev tools for us."", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'jjmstark', 'comment_id': 496321400.0, 'datetime': '2019-05-27 23:41:52+00:00', 'masked_author': 'username_1', 'text': '@username_2 anything additional needed to merge this?', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'maurelian', 'comment_id': 496334120.0, 'datetime': '2019-05-28 01:37:17+00:00', 'masked_author': 'username_2', 'text': ""No objection to merging. \r\n\r\nHowever there's a merge conflict in a build file, which I had to fix locally, so we should merge this instead: https://github.com/ethereum/ethereum-org-website/pull/96\r\n\r\nAlso, are we merging to staging or master now?"", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'maurelian', 'comment_id': 496576773.0, 'datetime': '2019-05-28 15:52:50+00:00', 'masked_author': 'username_2', 'text': 'Replaced by #96.', 'title': None, 'type': 'comment'}]","<issue_start><issue_comment>Title: Added Visual Studio Code
+username_0: Title says it all.
+<issue_comment>username_1: @username_2 I think we've been doing ""first in first out"" for ordering of tools on this page - should it be at the top, or should it be below EthFiddle? The fact that it's a notable professional tool might suggest it should be higher on the list.
+<issue_comment>username_0: I personally suggest putting it at the top.  I think Some level of expert judgement in the ordering is fine.  And bluntly, visual studio is already the most powerful IDE, and Microsoft has agreed to continue developing it.
+<issue_comment>username_2: At the top seems reasonable to me. ""Add to the bottom"" is just a decent tie-breaker in the absence of other strong ordering indicators.
+<issue_comment>username_0: Sure add the bullet point.
+<issue_comment>username_0: What's needed to get this accepted?  I want to see a happy Microsoft so they'll keep making baller dev tools for us.
+<issue_comment>username_1: @username_2 anything additional needed to merge this?
+<issue_comment>username_2: No objection to merging. 
+
+However there's a merge conflict in a build file, which I had to fix locally, so we should merge this instead: https://github.com/ethereum/ethereum-org-website/pull/96
+
+Also, are we merging to staging or master now?
+<issue_comment>username_2: Replaced by #96."
+cake-build/website,152815251,78,"{'number': 78.0, 'repo': 'website', 'user_login': 'cake-build'}","[{'action': 'opened', 'author': 'RLittlesII', 'comment_id': None, 'datetime': '2016-05-03T16:18:36Z', 'masked_author': 'username_0', 'text': ""This doesn't include the bash.  I just wanted to be sure this was useful before I went any further. I'll rebase before any merge."", 'title': 'Extending Bootstrapper Documentation', 'type': 'issue'}
+ {'action': 'created', 'author': 'gep13', 'comment_id': 216630864.0, 'datetime': '2016-05-03 18:58:44+00:00', 'masked_author': 'username_1', 'text': ""@username_0 I think that this makes sense to me, yes.  In the heading section, would it be possible to call out what you are doing?  i.e. give it a scenario.\r\n\r\n`The Cake Bootstrapper that you can get directly from cakebuild.net is intended as a sample on what can be done.  It is entirely possible that you can extend the bootstrapper to include your own requirements.  For example, let's say you want to add you own input parameter to the bootstrapper called buildConfiguration.  These are the changes that you would need to make in order to achieve this...`\r\n\r\nWhat do you think?"", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'RLittlesII', 'comment_id': 216633252.0, 'datetime': '2016-05-03 19:07:17+00:00', 'masked_author': 'username_0', 'text': ""I like it.  I have another scenario to add, so that definitely makes sense.  I'll update with the rest of the documentation and scenarios. Is it necessary to add a bash example?"", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'gep13', 'comment_id': 216633501.0, 'datetime': '2016-05-03 19:08:09+00:00', 'masked_author': 'username_1', 'text': '@username_0 for the sake of completeness, I would say that yes, we should have the same examples in bash, as well as PowerShell.', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'RLittlesII', 'comment_id': 216635846.0, 'datetime': '2016-05-03 19:16:39+00:00', 'masked_author': 'username_0', 'text': ""@username_1 I'll make sure to prefix it to show PowerShell vs Bash."", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'RLittlesII', 'comment_id': 217063202.0, 'datetime': '2016-05-05 02:45:24+00:00', 'masked_author': 'username_0', 'text': ""@username_1 I still have to test that the documentation works on bash.  Comments on making sure the look and feel of the document vibe with the rest of the cake site is appreciated.  I don't want this to read like it came from me.  :smile:"", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'gep13', 'comment_id': 217102665.0, 'datetime': '2016-05-05 08:29:40+00:00', 'masked_author': 'username_1', 'text': '@username_0 this looks really good to me so far!  The only comment would be to perhaps make the changes that you have made in the code snippets bold, so that they can stand out.  What do you think?', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'RLittlesII', 'comment_id': 217125327.0, 'datetime': '2016-05-05 11:00:49+00:00', 'masked_author': 'username_0', 'text': '@username_1 I think calling out the specific change would ultimately make it more useful.  I am not aware of how to bold something inside of a code block in mark down.  Maybe I add a comment on the end of the line that says `// This line was added` or something to that affect?  If you know how, let me know.', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'gep13', 'comment_id': 217137750.0, 'datetime': '2016-05-05 12:10:44+00:00', 'masked_author': 'username_1', 'text': '```\r\n**bold**\r\nnot bold\r\n```', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'gep13', 'comment_id': 217138033.0, 'datetime': '2016-05-05 12:12:51+00:00', 'masked_author': 'username_1', 'text': ""@username_0 hmm, I thought there was a direct way, but looks like there isn't :-(\r\n\r\nIn the above, I did what was suggested here:\r\n\r\nhttp://meta.stackexchange.com/questions/183610/how-to-combine-bold-and-code-sample-in-markdown"", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'gep13', 'comment_id': 217138103.0, 'datetime': '2016-05-05 12:13:22+00:00', 'masked_author': 'username_1', 'text': 'But anyway, I agree, calling out the specific thing that has changed, would ultimately make the most sense.', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'RLittlesII', 'comment_id': 217144331.0, 'datetime': '2016-05-05 12:51:06+00:00', 'masked_author': 'username_0', 'text': '@username_1 I found the same post and was equally disappointed that it did not work.  I will add comments to the code sample.', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'RLittlesII', 'comment_id': 219557055.0, 'datetime': '2016-05-16 21:41:39+00:00', 'masked_author': 'username_0', 'text': ""@username_1 Are the changes sufficient?  I have tried to bold the line, but it doesn't seem to work correctly."", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'gep13', 'comment_id': 219638054.0, 'datetime': '2016-05-17 07:16:49+00:00', 'masked_author': 'username_1', 'text': '@username_0 this all looks good to me, with only one suggestion...\r\n\r\nCan you add an example of the command that you would use to run the bootstrapper in each case?  This would be especially helpful in the second example, to show passing in two build configurations.\r\n\r\nThanks!', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'RLittlesII', 'comment_id': 219787882.0, 'datetime': '2016-05-17 17:14:20+00:00', 'masked_author': 'username_0', 'text': ""@username_1 I just realized that passing array's at the bash shell is clunky.  I need to prove it works before I add it."", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'gep13', 'comment_id': 219822216.0, 'datetime': '2016-05-17 19:10:09+00:00', 'masked_author': 'username_1', 'text': '@username_0 not a problem at all.  Let me know when you are ready for me to take a look again.', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'RLittlesII', 'comment_id': 225621429.0, 'datetime': '2016-06-13 15:44:59+00:00', 'masked_author': 'username_0', 'text': ""@username_1 I am inclined to remove the part about array's that way we can close this out and I can add it once I've done the research."", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'gep13', 'comment_id': 225635631.0, 'datetime': '2016-06-13 16:32:56+00:00', 'masked_author': 'username_1', 'text': '@username_0 that sounds fine with me.  You want to fix it up and I can get it merged in?', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'RLittlesII', 'comment_id': 225760662.0, 'datetime': '2016-06-14 02:04:42+00:00', 'masked_author': 'username_0', 'text': 'Fixed up and rebased.', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'gep13', 'comment_id': 227251576.0, 'datetime': '2016-06-20 19:57:52+00:00', 'masked_author': 'username_1', 'text': '@username_0 perfect, thank you!', 'title': None, 'type': 'comment'}]","<issue_start><issue_comment>Title: Extending Bootstrapper Documentation
+username_0: This doesn't include the bash.  I just wanted to be sure this was useful before I went any further. I'll rebase before any merge.
+<issue_comment>username_1: @username_0 I think that this makes sense to me, yes.  In the heading section, would it be possible to call out what you are doing?  i.e. give it a scenario.
+
+`The Cake Bootstrapper that you can get directly from cakebuild.net is intended as a sample on what can be done.  It is entirely possible that you can extend the bootstrapper to include your own requirements.  For example, let's say you want to add you own input parameter to the bootstrapper called buildConfiguration.  These are the changes that you would need to make in order to achieve this...`
+
+What do you think?
+<issue_comment>username_0: I like it.  I have another scenario to add, so that definitely makes sense.  I'll update with the rest of the documentation and scenarios. Is it necessary to add a bash example?
+<issue_comment>username_1: @username_0 for the sake of completeness, I would say that yes, we should have the same examples in bash, as well as PowerShell.
+<issue_comment>username_0: @username_1 I'll make sure to prefix it to show PowerShell vs Bash.
+<issue_comment>username_0: @username_1 I still have to test that the documentation works on bash.  Comments on making sure the look and feel of the document vibe with the rest of the cake site is appreciated.  I don't want this to read like it came from me.  :smile:
+<issue_comment>username_1: @username_0 this looks really good to me so far!  The only comment would be to perhaps make the changes that you have made in the code snippets bold, so that they can stand out.  What do you think?
+<issue_comment>username_0: @username_1 I think calling out the specific change would ultimately make it more useful.  I am not aware of how to bold something inside of a code block in mark down.  Maybe I add a comment on the end of the line that says `// This line was added` or something to that affect?  If you know how, let me know.
+<issue_comment>username_1: ```
+**bold**
+not bold
+```
+<issue_comment>username_1: @username_0 hmm, I thought there was a direct way, but looks like there isn't :-(
+
+In the above, I did what was suggested here:
+
+http://meta.stackexchange.com/questions/183610/how-to-combine-bold-and-code-sample-in-markdown
+<issue_comment>username_1: But anyway, I agree, calling out the specific thing that has changed, would ultimately make the most sense.
+<issue_comment>username_0: @username_1 I found the same post and was equally disappointed that it did not work.  I will add comments to the code sample.
+<issue_comment>username_0: @username_1 Are the changes sufficient?  I have tried to bold the line, but it doesn't seem to work correctly.
+<issue_comment>username_1: @username_0 this all looks good to me, with only one suggestion...
+
+Can you add an example of the command that you would use to run the bootstrapper in each case?  This would be especially helpful in the second example, to show passing in two build configurations.
+
+Thanks!
+<issue_comment>username_0: @username_1 I just realized that passing array's at the bash shell is clunky.  I need to prove it works before I add it.
+<issue_comment>username_1: @username_0 not a problem at all.  Let me know when you are ready for me to take a look again.
+<issue_comment>username_0: @username_1 I am inclined to remove the part about array's that way we can close this out and I can add it once I've done the research.
+<issue_comment>username_1: @username_0 that sounds fine with me.  You want to fix it up and I can get it merged in?
+<issue_comment>username_0: Fixed up and rebased.
+<issue_comment>username_1: @username_0 perfect, thank you!"
+GDQuest/website,531869881,106,,"[{'action': 'opened', 'author': 'NathanLovato', 'comment_id': None, 'datetime': '2019-12-03T10:10:21Z', 'masked_author': 'username_0', 'text': ""The website's [homepage](https://gdquest.com/) hasn't been updated in a long time and it doesn't provide a great layout and information for people visiting the website.\r\n\r\nI'd like some complete review of the homepage's layout and content, and help to design a good one, with the key info that we should put forward.\r\n\r\nWe're a free software project, we promote programs like Krita, Blender, or Godot, and we teach game creation with free and open-source tools.\r\n\r\n## What we do ##\r\n\r\n- We code small [game demos](https://youtu.be/77CiZ-5JKfc) to help people learn to create games with Godot.\r\n- We make [video tutorials](https://youtube.com/c/gdquest) and [guides](https://www.gdquest.com/docs/guides/learn-godot/beginner/) for game developers.\r\n- We code tools to help people create games or content more easily, like the [Open 3D Mannequin](https://github.com/GDQuest/godot-3d-mannequin), the [Godot Steering Toolkit](https://github.com/GDQuest/godot-steering-toolkit/) or the Blender video editing add-on [Power Sequencer](https://github.com/GDQuest/blender-power-sequencer).\r\n\r\n## The people who come to our website ##\r\n\r\nOur visitors come for what we do so:\r\n\r\n- Learning\r\n- Getting tools and their documentation\r\n- News about our work and projects\r\n\r\n## What we need ##\r\n\r\nTo start with, I'd like detailed feedback and a proposal to improve or redesign the homepage's layout. I'd like somebody who's experienced with that to help us design a page that's relevant to what we do. We have a limited budget so when it comes to the website's CSS (built from scss), the proposal shouldn't require a complete rewrite of the website's styles, but rather improve, extend, or reuse the existing stylesheets. That's our main constraint.\r\n\r\nThe website is built with [hugo](https://gohugo.io/) so code-wise it's mostly HTML with a few go templates. Here's the current homepage's code: https://github.com/GDQuest/website/blob/master/layouts/index.html"", 'title': ""Redesign the website's homepage"", 'type': 'issue'}
+ {'action': 'created', 'author': 'gdomaradzki', 'comment_id': 585171437.0, 'datetime': '2020-02-12 11:55:56+00:00', 'masked_author': 'username_1', 'text': 'If someone provides a design, I can implement it free of charge.', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'NathanLovato', 'comment_id': 585217556.0, 'datetime': '2020-02-12 13:59:10+00:00', 'masked_author': 'username_0', 'text': ""That's very kind of you! I couldn't find a designer who could do that just yet."", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'NathanLovato', 'comment_id': 648848314.0, 'datetime': '2020-06-24 14:16:15+00:00', 'masked_author': 'username_0', 'text': 'In progress with  15965cf', 'title': None, 'type': 'comment'}
+ {'action': 'closed', 'author': 'NathanLovato', 'comment_id': None, 'datetime': '2020-06-24 14:16:16+00:00', 'masked_author': 'username_0', 'text': '', 'title': None, 'type': 'issue'}
+ {'action': 'reopened', 'author': 'NathanLovato', 'comment_id': None, 'datetime': '2020-06-24 14:16:19+00:00', 'masked_author': 'username_0', 'text': ""The website's [homepage](https://gdquest.com/) hasn't been updated in a long time and it doesn't provide a great layout and information for people visiting the website.\r\n\r\nI'd like some complete review of the homepage's layout and content, and help to design a good one, with the key info that we should put forward.\r\n\r\nWe're a free software project, we promote programs like Krita, Blender, or Godot, and we teach game creation with free and open-source tools.\r\n\r\n## What we do ##\r\n\r\n- We code small [game demos](https://youtu.be/77CiZ-5JKfc) to help people learn to create games with Godot.\r\n- We make [video tutorials](https://youtube.com/c/gdquest) and [guides](https://www.gdquest.com/docs/guides/learn-godot/beginner/) for game developers.\r\n- We code tools to help people create games or content more easily, like the [Open 3D Mannequin](https://github.com/GDQuest/godot-3d-mannequin), the [Godot Steering Toolkit](https://github.com/GDQuest/godot-steering-toolkit/) or the Blender video editing add-on [Power Sequencer](https://github.com/GDQuest/blender-power-sequencer).\r\n\r\n## The people who come to our website ##\r\n\r\nOur visitors come for what we do so:\r\n\r\n- Learning\r\n- Getting tools and their documentation\r\n- News about our work and projects\r\n\r\n## What we need ##\r\n\r\nTo start with, I'd like detailed feedback and a proposal to improve or redesign the homepage's layout. I'd like somebody who's experienced with that to help us design a page that's relevant to what we do. We have a limited budget so when it comes to the website's CSS (built from scss), the proposal shouldn't require a complete rewrite of the website's styles, but rather improve, extend, or reuse the existing stylesheets. That's our main constraint.\r\n\r\nThe website is built with [hugo](https://gohugo.io/) so code-wise it's mostly HTML with a few go templates. Here's the current homepage's code: https://github.com/GDQuest/website/blob/master/layouts/index.html\r\n\r\n## Possible redesign\r\n\r\nContent-driven page. After the intro header that introduces the website, have two grids:\r\n\r\n- Our latest courses\r\n- Our latest tools/Free Software projects\r\n\r\nAnd then the updates/announcements."", 'title': ""Redesign the website's homepage"", 'type': 'issue'}
+ {'action': 'closed', 'author': 'NathanLovato', 'comment_id': None, 'datetime': '2020-06-28 20:27:43+00:00', 'masked_author': 'username_0', 'text': '', 'title': None, 'type': 'issue'}]","<issue_start><issue_comment>Title: Redesign the website's homepage
+username_0: The website's [homepage](https://gdquest.com/) hasn't been updated in a long time and it doesn't provide a great layout and information for people visiting the website.
+
+I'd like some complete review of the homepage's layout and content, and help to design a good one, with the key info that we should put forward.
+
+We're a free software project, we promote programs like Krita, Blender, or Godot, and we teach game creation with free and open-source tools.
+
+## What we do ##
+
+- We code small [game demos](https://youtu.be/77CiZ-5JKfc) to help people learn to create games with Godot.
+- We make [video tutorials](https://youtube.com/c/gdquest) and [guides](https://www.gdquest.com/docs/guides/learn-godot/beginner/) for game developers.
+- We code tools to help people create games or content more easily, like the [Open 3D Mannequin](https://github.com/GDQuest/godot-3d-mannequin), the [Godot Steering Toolkit](https://github.com/GDQuest/godot-steering-toolkit/) or the Blender video editing add-on [Power Sequencer](https://github.com/GDQuest/blender-power-sequencer).
+
+## The people who come to our website ##
+
+Our visitors come for what we do so:
+
+- Learning
+- Getting tools and their documentation
+- News about our work and projects
+
+## What we need ##
+
+To start with, I'd like detailed feedback and a proposal to improve or redesign the homepage's layout. I'd like somebody who's experienced with that to help us design a page that's relevant to what we do. We have a limited budget so when it comes to the website's CSS (built from scss), the proposal shouldn't require a complete rewrite of the website's styles, but rather improve, extend, or reuse the existing stylesheets. That's our main constraint.
+
+The website is built with [hugo](https://gohugo.io/) so code-wise it's mostly HTML with a few go templates. Here's the current homepage's code: https://github.com/GDQuest/website/blob/master/layouts/index.html
+<issue_comment>username_1: If someone provides a design, I can implement it free of charge.
+<issue_comment>username_0: That's very kind of you! I couldn't find a designer who could do that just yet.
+<issue_comment>username_0: In progress with  15965cf<issue_closed>
+<issue_comment>username_0: The website's [homepage](https://gdquest.com/) hasn't been updated in a long time and it doesn't provide a great layout and information for people visiting the website.
+
+I'd like some complete review of the homepage's layout and content, and help to design a good one, with the key info that we should put forward.
+
+We're a free software project, we promote programs like Krita, Blender, or Godot, and we teach game creation with free and open-source tools.
+
+## What we do ##
+
+- We code small [game demos](https://youtu.be/77CiZ-5JKfc) to help people learn to create games with Godot.
+- We make [video tutorials](https://youtube.com/c/gdquest) and [guides](https://www.gdquest.com/docs/guides/learn-godot/beginner/) for game developers.
+- We code tools to help people create games or content more easily, like the [Open 3D Mannequin](https://github.com/GDQuest/godot-3d-mannequin), the [Godot Steering Toolkit](https://github.com/GDQuest/godot-steering-toolkit/) or the Blender video editing add-on [Power Sequencer](https://github.com/GDQuest/blender-power-sequencer).
+
+## The people who come to our website ##
+
+Our visitors come for what we do so:
+
+- Learning
+- Getting tools and their documentation
+- News about our work and projects
+
+## What we need ##
+
+To start with, I'd like detailed feedback and a proposal to improve or redesign the homepage's layout. I'd like somebody who's experienced with that to help us design a page that's relevant to what we do. We have a limited budget so when it comes to the website's CSS (built from scss), the proposal shouldn't require a complete rewrite of the website's styles, but rather improve, extend, or reuse the existing stylesheets. That's our main constraint.
+
+The website is built with [hugo](https://gohugo.io/) so code-wise it's mostly HTML with a few go templates. Here's the current homepage's code: https://github.com/GDQuest/website/blob/master/layouts/index.html
+
+## Possible redesign
+
+Content-driven page. After the intro header that introduces the website, have two grids:
+
+- Our latest courses
+- Our latest tools/Free Software projects
+
+And then the updates/announcements.<issue_closed>"
+facebook/docusaurus,533544359,2090,,"[{'action': 'opened', 'author': 'davidhagg', 'comment_id': None, 'datetime': '2019-12-05 19:20:24+00:00', 'masked_author': 'username_0', 'text': '## 🐛 Bug Report\r\n\r\nI cannot get a clean fresh scaffolding to work on Windows 10.\r\nTried using both cmder and powershell\r\n\r\n### Have you read the [Contributing Guidelines on issues](https://github.com/facebook/docusaurus/blob/master/CONTRIBUTING.md#reporting-new-issues)?\r\n\r\nYes\r\n\r\n## To Reproduce\r\n\r\n1.Run\r\n`npx @docusaurus/init@next init payments classic`\r\n\r\n2.Then run\r\n`yarn start`\r\n\r\n## Expected behavior\r\n\r\nThe website to start with a predefined template. No errors.\r\n\r\n## Actual Behavior\r\n\r\nAn error occurs stating:\r\n""Octal literal in strict mode""\r\n\r\n## Reproducible Demo\r\n\r\n![image](https://user-images.githubusercontent.com/1506085/70266315-8449fd80-179c-11ea-84aa-1a3452525437.png)\r\n\r\n<!--\r\n  What happens if you skip this step?\r\n\r\n  Someone will read your bug report, and maybe will be able to help you,\r\n  but it’s unlikely that it will get much attention from the team. Eventually,\r\n  the issue will likely get closed in favor of issues that have reproducible demos.\r\n\r\n  Please remember that:\r\n\r\n    * Issues without reproducible demos have a very low priority.\r\n    * The person fixing the bug would have to do that anyway. Please be respectful of their time.\r\n    * You might figure out the issues yourself as you work on extracting it.\r\n\r\n  Thanks for helping us help you!\r\n-->', 'title': ""Scaffolding a fresh v2 won't compile on windows"", 'type': 'issue'}
+ {'action': 'created', 'author': 'yangshun', 'comment_id': 562278541.0, 'datetime': '2019-12-05 19:29:05+00:00', 'masked_author': 'username_1', 'text': 'Will be fixed in https://github.com/facebook/docusaurus/pull/2086', 'title': None, 'type': 'comment'}
+ {'action': 'closed', 'author': 'endiliey', 'comment_id': None, 'datetime': '2019-12-06 05:49:10+00:00', 'masked_author': 'username_2', 'text': '', 'title': None, 'type': 'issue'}
+ {'action': 'created', 'author': 'endiliey', 'comment_id': 562442096.0, 'datetime': '2019-12-06 05:49:34+00:00', 'masked_author': 'username_2', 'text': ""We'll send a release soon. Sorry"", 'title': None, 'type': 'comment'}]","<issue_start><issue_comment>Title: Scaffolding a fresh v2 won't compile on windows
+username_0: ## 🐛 Bug Report
+
+I cannot get a clean fresh scaffolding to work on Windows 10.
+Tried using both cmder and powershell
+
+### Have you read the [Contributing Guidelines on issues](https://github.com/facebook/docusaurus/blob/master/CONTRIBUTING.md#reporting-new-issues)?
+
+Yes
+
+## To Reproduce
+
+1.Run
+`npx @docusaurus/init@next init payments classic`
+
+2.Then run
+`yarn start`
+
+## Expected behavior
+
+The website to start with a predefined template. No errors.
+
+## Actual Behavior
+
+An error occurs stating:
+""Octal literal in strict mode""
+
+## Reproducible Demo
+
+![image](https://user-images.githubusercontent.com/1506085/70266315-8449fd80-179c-11ea-84aa-1a3452525437.png)
+
+<!--
+  What happens if you skip this step?
+
+  Someone will read your bug report, and maybe will be able to help you,
+  but it’s unlikely that it will get much attention from the team. Eventually,
+  the issue will likely get closed in favor of issues that have reproducible demos.
+
+  Please remember that:
+
+    * Issues without reproducible demos have a very low priority.
+    * The person fixing the bug would have to do that anyway. Please be respectful of their time.
+    * You might figure out the issues yourself as you work on extracting it.
+
+  Thanks for helping us help you!
+-->
+<issue_comment>username_1: Will be fixed in https://github.com/facebook/docusaurus/pull/2086<issue_closed>
+<issue_comment>username_2: We'll send a release soon. Sorry"
+gohugoio/hugo,261509688,3923,"{'number': 3923.0, 'repo': 'hugo', 'user_login': 'gohugoio'}","[{'action': 'opened', 'author': 'moorereason', 'comment_id': None, 'datetime': '2017-09-29T01:51:50Z', 'masked_author': 'username_0', 'text': 'When template metrics are enabled, calculate a checksum for the output\r\nof every partial and identify partials that always generate the same\r\noutput.', 'title': 'metrics: Detect partialCached candidates', 'type': 'issue'}
+ {'action': 'created', 'author': 'moorereason', 'comment_id': 333009880.0, 'datetime': '2017-09-29 01:53:19+00:00', 'masked_author': 'username_0', 'text': 'Sample output:\r\n\r\n```text\r\nTemplate Metrics:\r\n\r\n     cumulative       average       maximum         \r\n       duration      duration      duration  count  template\r\n     ----------      --------      --------  -----  --------\r\n   4.016195381s      2.1149ms   40.464406ms   1899  post/single.html\r\n   1.501761942s     6.82619ms  158.542712ms    220  taxonomy/tag.html\r\n   1.287319185s      88.481µs   50.391187ms  14549  theme/_default/li.html\r\n   1.146139245s     535.328µs   21.760069ms   2141  partials/default_head.html\r\n   543.050767ms     253.643µs   20.579276ms   2141  partials/head.html\r\n   497.718056ms    2.117949ms   34.459169ms    235  theme/rss.xml\r\n   363.451719ms     169.757µs   21.300448ms   2141  partials/sidebar.html\r\n   311.709801ms   22.264985ms   95.811685ms     14  taxonomy/category.html\r\n   303.597405ms  303.597405ms  303.597405ms      1  indexes/post.html\r\n   268.807471ms    2.337456ms   57.851899ms    115  _internal/shortcodes/highlight.html\r\n   263.727971ms  263.727971ms  263.727971ms      1  fixed/archives.html\r\n*  116.935001ms      54.617µs   38.906473ms   2141  theme/partials/default_foot.html\r\n   103.365146ms  103.365146ms  103.365146ms      1  _internal/_default/sitemap.xml\r\n    52.778722ms      36.199µs    3.732557ms   1458  _internal/shortcodes/relref.html\r\n    35.470809ms   35.470809ms   35.470809ms      1  index.html\r\n     5.334418ms    5.334418ms    5.334418ms      1  taxonomy/tag.terms.html\r\n     2.265137ms      75.504µs     262.042µs     30  _default/li2.html\r\n     2.236642ms    1.118321ms    1.801326ms      2  theme/fixed/single.html\r\n      930.834µs     930.834µs     930.834µs      1  taxonomy/category.terms.html\r\n      787.871µs     787.871µs     787.871µs      1  404.html\r\n\r\n* = this partial always generates the same output; consider using partialCached\r\n```', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'bep', 'comment_id': 333046291.0, 'datetime': '2017-09-29 06:54:47+00:00', 'masked_author': 'username_1', 'text': 'This is fantastic. I would never (or it would have taken me long time) have thought of it. Simple and powerful.', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'bep', 'comment_id': 333079367.0, 'datetime': '2017-09-29 09:31:42+00:00', 'masked_author': 'username_1', 'text': 'Thinking a little about it, I think this can be made even more powerful.\r\n\r\nI suspect there are many partial use cases that is ""almost cacheable"", i.e. it can be cached with a small partial refactoring.\r\n\r\nSay this pseudo partial that produces this:\r\n\r\n```\r\n# My Single Page\r\n\r\nAnd then some very static and long text ...\r\n```\r\n\r\nThe above could be refactored by pulling the `{{ .Title }}` out.\r\n\r\nSo:\r\n\r\nInstead of storing the hashes, I suggest:\r\n\r\n1. Save the content of the first rendering of a given partial.\r\n2. For the subsequent partial rendering of the same partial: Diff it with the first and keep a ""diff counter"". If it is ""totally different"" you could maybe mark it to avoid having to diff all of them.\r\n3. Then create a ""cache score"" in percentage at the end, i.e. 100% would represent what is currently in this PR.', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'moorereason', 'comment_id': 333110638.0, 'datetime': '2017-09-29 12:16:05+00:00', 'masked_author': 'username_0', 'text': '@username_1,\r\nThanks for the feedback.  I intentionally kept this first round simple to make sure others like the general idea.\r\n\r\nYou mention detecting slight differences in the output.  I hadn\'t considered that approach.  I\'ll have to think about how to use that and convey results to the user.\r\n\r\nMy next idea was to give clues about potential uses of cached variants.  For instance, with the following change, you\'ll get a view of the checksum distributions:\r\n\r\n```diff\r\ndiff --git a/metrics/metrics.go b/metrics/metrics.go\r\nindex d97b7c0..9a8c28f 100644\r\n--- a/metrics/metrics.go\r\n+++ b/metrics/metrics.go\r\n@@ -89,11 +89,10 @@ func (s *Store) WriteMetrics(w io.Writer) {\r\n        // Find partialCached candidates\r\n        candidates := make(map[string]bool)\r\n        for name, sumMap := range s.partialChecksums {\r\n-               if len(sumMap) == 1 {\r\n-                       for _, v := range sumMap {\r\n-                               if v > 1 {\r\n-                                       candidates[name] = true\r\n-                               }\r\n+               for _, v := range sumMap {\r\n+                       if v > 1 {\r\n+                               candidates[name] = true\r\n+                               fmt.Fprintf(w, ""~ %5d  %s\\n"", v, name)\r\n                        }\r\n                }\r\n        }\r\n```\r\n\r\nRunning this against the Hugo docs, you\'ll see things like this:\r\n\r\n```text\r\n~   554  theme/partials/svg/link-ext.svg\r\n~     7  theme/partials/svg/link-ext.svg\r\n\r\n~     4  theme/partials/svg/twitter.svg\r\n~   277  theme/partials/svg/twitter.svg\r\n```\r\n\r\nI\'d like to come up with a simple math formula to highlight instances like these and recommend using partialCached variants.', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'moorereason', 'comment_id': 334937729.0, 'datetime': '2017-10-07 14:11:02+00:00', 'masked_author': 'username_0', 'text': 'Replaced by #3938.', 'title': None, 'type': 'comment'}]","<issue_start><issue_comment>Title: metrics: Detect partialCached candidates
+username_0: When template metrics are enabled, calculate a checksum for the output
+of every partial and identify partials that always generate the same
+output.
+<issue_comment>username_0: Sample output:
+
+```text
+Template Metrics:
+
+     cumulative       average       maximum         
+       duration      duration      duration  count  template
+     ----------      --------      --------  -----  --------
+   4.016195381s      2.1149ms   40.464406ms   1899  post/single.html
+   1.501761942s     6.82619ms  158.542712ms    220  taxonomy/tag.html
+   1.287319185s      88.481µs   50.391187ms  14549  theme/_default/li.html
+   1.146139245s     535.328µs   21.760069ms   2141  partials/default_head.html
+   543.050767ms     253.643µs   20.579276ms   2141  partials/head.html
+   497.718056ms    2.117949ms   34.459169ms    235  theme/rss.xml
+   363.451719ms     169.757µs   21.300448ms   2141  partials/sidebar.html
+   311.709801ms   22.264985ms   95.811685ms     14  taxonomy/category.html
+   303.597405ms  303.597405ms  303.597405ms      1  indexes/post.html
+   268.807471ms    2.337456ms   57.851899ms    115  _internal/shortcodes/highlight.html
+   263.727971ms  263.727971ms  263.727971ms      1  fixed/archives.html
+*  116.935001ms      54.617µs   38.906473ms   2141  theme/partials/default_foot.html
+   103.365146ms  103.365146ms  103.365146ms      1  _internal/_default/sitemap.xml
+    52.778722ms      36.199µs    3.732557ms   1458  _internal/shortcodes/relref.html
+    35.470809ms   35.470809ms   35.470809ms      1  index.html
+     5.334418ms    5.334418ms    5.334418ms      1  taxonomy/tag.terms.html
+     2.265137ms      75.504µs     262.042µs     30  _default/li2.html
+     2.236642ms    1.118321ms    1.801326ms      2  theme/fixed/single.html
+      930.834µs     930.834µs     930.834µs      1  taxonomy/category.terms.html
+      787.871µs     787.871µs     787.871µs      1  404.html
+
+* = this partial always generates the same output; consider using partialCached
+```
+<issue_comment>username_1: This is fantastic. I would never (or it would have taken me long time) have thought of it. Simple and powerful.
+<issue_comment>username_1: Thinking a little about it, I think this can be made even more powerful.
+
+I suspect there are many partial use cases that is ""almost cacheable"", i.e. it can be cached with a small partial refactoring.
+
+Say this pseudo partial that produces this:
+
+```
+# My Single Page
+
+And then some very static and long text ...
+```
+
+The above could be refactored by pulling the `{{ .Title }}` out.
+
+So:
+
+Instead of storing the hashes, I suggest:
+
+1. Save the content of the first rendering of a given partial.
+2. For the subsequent partial rendering of the same partial: Diff it with the first and keep a ""diff counter"". If it is ""totally different"" you could maybe mark it to avoid having to diff all of them.
+3. Then create a ""cache score"" in percentage at the end, i.e. 100% would represent what is currently in this PR.
+<issue_comment>username_0: @username_1,
+Thanks for the feedback.  I intentionally kept this first round simple to make sure others like the general idea.
+
+You mention detecting slight differences in the output.  I hadn't considered that approach.  I'll have to think about how to use that and convey results to the user.
+
+My next idea was to give clues about potential uses of cached variants.  For instance, with the following change, you'll get a view of the checksum distributions:
+
+```diff
+diff --git a/metrics/metrics.go b/metrics/metrics.go
+index d97b7c0..9a8c28f 100644
+--- a/metrics/metrics.go
++++ b/metrics/metrics.go
+@@ -89,11 +89,10 @@ func (s *Store) WriteMetrics(w io.Writer) {
+        // Find partialCached candidates
+        candidates := make(map[string]bool)
+        for name, sumMap := range s.partialChecksums {
+-               if len(sumMap) == 1 {
+-                       for _, v := range sumMap {
+-                               if v > 1 {
+-                                       candidates[name] = true
+-                               }
++               for _, v := range sumMap {
++                       if v > 1 {
++                               candidates[name] = true
++                               fmt.Fprintf(w, ""~ %5d  %s\n"", v, name)
+                        }
+                }
+        }
+```
+
+Running this against the Hugo docs, you'll see things like this:
+
+```text
+~   554  theme/partials/svg/link-ext.svg
+~     7  theme/partials/svg/link-ext.svg
+
+~     4  theme/partials/svg/twitter.svg
+~   277  theme/partials/svg/twitter.svg
+```
+
+I'd like to come up with a simple math formula to highlight instances like these and recommend using partialCached variants.
+<issue_comment>username_0: Replaced by #3938."
+microsoft/TypeScript-Handbook,596450637,1312,,"[{'action': 'opened', 'author': 'dotnetCarpenter', 'comment_id': None, 'datetime': '2020-04-08 09:49:00+00:00', 'masked_author': 'username_0', 'text': 'The current section, https://www.typescriptlang.org/docs/handbook/type-checking-javascript-files.html, is huge but at the same time lacking a lot of information.\r\n\r\nQuestions like https://stackoverflow.com/questions/61097030/how-to-import-custom-typings-into-a-vscode-js-project, https://stackoverflow.com/questions/51982814/reference-definition-from-ts-check-js-file etc... are not answered. Rather, one has to search github issues and trial and error, to get a solution.\r\n\r\n`//@ts-check` is powerful but difficult to actually use, once you use it on anything apart from extremely simple code.', 'title': 'Please expand Type Checking JavaScript Files into mutiple sections', 'type': 'issue'}
+ {'action': 'created', 'author': 'dotnetCarpenter', 'comment_id': 610979371.0, 'datetime': '2020-04-08 14:04:05+00:00', 'masked_author': 'username_0', 'text': 'Actually I found the the answer to https://stackoverflow.com/questions/61097030/how-to-import-custom-typings-into-a-vscode-js-project here, https://www.typescriptlang.org/docs/handbook/type-checking-javascript-files.html#import-types.\r\n\r\n[Checking JavaScript Files.md](../blob/master/pages/Type%20Checking%20JavaScript%20Files.md) should have a table of content or get split up into several files.', 'title': None, 'type': 'comment'}]","<issue_start><issue_comment>Title: Please expand Type Checking JavaScript Files into mutiple sections
+username_0: The current section, https://www.typescriptlang.org/docs/handbook/type-checking-javascript-files.html, is huge but at the same time lacking a lot of information.
+
+Questions like https://stackoverflow.com/questions/61097030/how-to-import-custom-typings-into-a-vscode-js-project, https://stackoverflow.com/questions/51982814/reference-definition-from-ts-check-js-file etc... are not answered. Rather, one has to search github issues and trial and error, to get a solution.
+
+`//@ts-check` is powerful but difficult to actually use, once you use it on anything apart from extremely simple code.
+<issue_comment>username_0: Actually I found the the answer to https://stackoverflow.com/questions/61097030/how-to-import-custom-typings-into-a-vscode-js-project here, https://www.typescriptlang.org/docs/handbook/type-checking-javascript-files.html#import-types.
+
+[Checking JavaScript Files.md](../blob/master/pages/Type%20Checking%20JavaScript%20Files.md) should have a table of content or get split up into several files."
+github/personal-website,510054595,185,,"[{'action': 'opened', 'author': 'dj-louw', 'comment_id': None, 'datetime': '2019-10-21 15:33:00+00:00', 'masked_author': 'username_0', 'text': ""Hello\r\n\r\nI am trying to get a personal site up and running by powering it with GitHub pages, and using this as my starting template.\r\n\r\nI have run into a problem that I'm not sure is related to this template or something else, but it seems like markdown rendering for pages is broken. When I create a post (inside the `_posts` directory), markdown renders fine, but when I create a page as explained in the README then it appears as if only the page title is rendered properly, and after that the md file's contents is dumped raw.\r\n\r\nHave a look at https://dlouw.com/cv/ and https://dlouw.com/README/ for examples, the site repo can be found here: https://github.com/username_0/username_0.github.io"", 'title': 'Markdown rendering breaks on Pages', 'type': 'issue'}]","<issue_start><issue_comment>Title: Markdown rendering breaks on Pages
+username_0: Hello
+
+I am trying to get a personal site up and running by powering it with GitHub pages, and using this as my starting template.
+
+I have run into a problem that I'm not sure is related to this template or something else, but it seems like markdown rendering for pages is broken. When I create a post (inside the `_posts` directory), markdown renders fine, but when I create a page as explained in the README then it appears as if only the page title is rendered properly, and after that the md file's contents is dumped raw.
+
+Have a look at https://dlouw.com/cv/ and https://dlouw.com/README/ for examples, the site repo can be found here: https://github.com/username_0/username_0.github.io"
+RSS-Bridge/rss-bridge,329143629,708,,"[{'action': 'opened', 'author': 'mitsukarenai', 'comment_id': None, 'datetime': '2018-06-04 17:13:17+00:00', 'masked_author': 'username_0', 'text': ""I've just identified a potential issue for the good development of the project and the general privacy/safety of it's contributors:\r\n\r\n![issue](https://framapic.org/ubN1kD8Um4hq/wdbW19KdA00r.png)\r\n\r\nWhile it seems outside our power to block events from unfolding, it is not too late to exchange on the subject and determine _if_ action is required, or _if_ the project is not in jeopardy / would profit from this event.\r\n\r\nThank you for non-trolly inputs :wink:"", 'title': 'Potential problem with repository hosting', 'type': 'issue'}
+ {'action': 'created', 'author': 'LogMANOriginal', 'comment_id': 394468204.0, 'datetime': '2018-06-04 19:20:41+00:00', 'masked_author': 'username_1', 'text': ""Having a big company running GitHub has a few advantages which could prove useful in the future, especially when connecting to other services of the same origin. However, in exchange for these features we have to accept the fact that MS will collect (personal) information to utilize to their benefit.\r\n\r\nFor those crying about MS in particular: The same has been true for GitHub all along, just on a smaller scale. If we don't want our information being used by third parties we either pay for the service or host our own (basically the same but more expensive).\r\n\r\nThe MS company is not stupid and they can do things that the GitHub company couldn't: For example they can provide the name of one of the biggest SW company there is on this planet to advertise one of the biggest hosting services on the planet.\r\n\r\nHaving a project hosted on the largest platform surely is something to strive for. That being said, I really don't care where RSS-Bridge is hosted. It is a side-project which all of us can decide to drop at any time.\r\n\r\nTo summarize: I wouldn't worry too much about who the owner of GitHub is right now, but rather focus on how we can make sure that RSS-Bridge can stay active without breaking any laws and continuously improving the experience. With the user base growing it is important to also grow trust from all parties to prevent a one-sided battle against bigger opponents who'll crush you in a blink of an eye.\r\n\r\nSorry for such a long message 😊"", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'mitsukarenai', 'comment_id': 396595757.0, 'datetime': '2018-06-12 13:49:22+00:00', 'masked_author': 'username_0', 'text': 'Agreed, we have yet to see for what reasons Microsoft was willing to lay 7.5 G$ in stocks to get Github, seems involved parties bet on a hefty return-on-investment. I think it\'s related to their educational stuff. Getting people in schools and universities on board of computer programming by ""recommending"" Github ? They know once people step into a tool, they are unwilling to learn to use another one.\r\n\r\nAnyway. I\'ve made a GitLab account at [Framagit](https://framagit.org/username_0), which is handled by a French NGO and hosted at Hetzner in Germany 😉\r\n\r\nAnd GitLab includes a function to push commits to an external repository, in case we\'d need to migrate the project but still wanted to keep a Github up for legacy updates.', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'mro', 'comment_id': 396736351.0, 'datetime': '2018-06-12 21:14:59+00:00', 'masked_author': 'username_2', 'text': 'I encourage all contributors to https://indieweb.org/POSSE and let know. (I do at https://gogs.username_2.name/username_2/rss-bridge) Self-host your contributions and use github as an meeting/integration point – but not as your personal main repo location.', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'captn3m0', 'comment_id': 409698501.0, 'datetime': '2018-08-01 19:46:25+00:00', 'masked_author': 'username_3', 'text': ""I don't see a reason why we should jump ship _now_. GitLab makes it easy enough to syndicate, and in the case we do need to migrate - that shouldn't be hard either.\r\n\r\nIn the month since the announcement, I've seen no warning signs so far. The only advantage I see (as of now) with GitHub is the lower barrier to entry, because of network effects (more people on GH, easier for others to fork and file PR) which is why I'd suggest sticking to GitHub _for now_\r\n\r\nMaybe some day https://github.com/git-federation/gitpub becomes a reality and will let us contribute to rss-bridge from any git hosting service.\r\n\r\n@username_2 Thanks for the POSSE link :100:"", 'title': None, 'type': 'comment'}
+ {'action': 'closed', 'author': 'dvikan', 'comment_id': None, 'datetime': '2022-03-25 23:18:23+00:00', 'masked_author': 'username_4', 'text': '', 'title': None, 'type': 'issue'}
+ {'action': 'created', 'author': 'dvikan', 'comment_id': 1079509764.0, 'datetime': '2022-03-25 23:18:23+00:00', 'masked_author': 'username_4', 'text': 'https://sourcehut.org/', 'title': None, 'type': 'comment'}]","<issue_start><issue_comment>Title: Potential problem with repository hosting
+username_0: I've just identified a potential issue for the good development of the project and the general privacy/safety of it's contributors:
+
+![issue](https://framapic.org/ubN1kD8Um4hq/wdbW19KdA00r.png)
+
+While it seems outside our power to block events from unfolding, it is not too late to exchange on the subject and determine _if_ action is required, or _if_ the project is not in jeopardy / would profit from this event.
+
+Thank you for non-trolly inputs :wink:
+<issue_comment>username_1: Having a big company running GitHub has a few advantages which could prove useful in the future, especially when connecting to other services of the same origin. However, in exchange for these features we have to accept the fact that MS will collect (personal) information to utilize to their benefit.
+
+For those crying about MS in particular: The same has been true for GitHub all along, just on a smaller scale. If we don't want our information being used by third parties we either pay for the service or host our own (basically the same but more expensive).
+
+The MS company is not stupid and they can do things that the GitHub company couldn't: For example they can provide the name of one of the biggest SW company there is on this planet to advertise one of the biggest hosting services on the planet.
+
+Having a project hosted on the largest platform surely is something to strive for. That being said, I really don't care where RSS-Bridge is hosted. It is a side-project which all of us can decide to drop at any time.
+
+To summarize: I wouldn't worry too much about who the owner of GitHub is right now, but rather focus on how we can make sure that RSS-Bridge can stay active without breaking any laws and continuously improving the experience. With the user base growing it is important to also grow trust from all parties to prevent a one-sided battle against bigger opponents who'll crush you in a blink of an eye.
+
+Sorry for such a long message 😊
+<issue_comment>username_0: Agreed, we have yet to see for what reasons Microsoft was willing to lay 7.5 G$ in stocks to get Github, seems involved parties bet on a hefty return-on-investment. I think it's related to their educational stuff. Getting people in schools and universities on board of computer programming by ""recommending"" Github ? They know once people step into a tool, they are unwilling to learn to use another one.
+
+Anyway. I've made a GitLab account at [Framagit](https://framagit.org/username_0), which is handled by a French NGO and hosted at Hetzner in Germany 😉
+
+And GitLab includes a function to push commits to an external repository, in case we'd need to migrate the project but still wanted to keep a Github up for legacy updates.
+<issue_comment>username_2: I encourage all contributors to https://indieweb.org/POSSE and let know. (I do at https://gogs.username_2.name/username_2/rss-bridge) Self-host your contributions and use github as an meeting/integration point – but not as your personal main repo location.
+<issue_comment>username_3: I don't see a reason why we should jump ship _now_. GitLab makes it easy enough to syndicate, and in the case we do need to migrate - that shouldn't be hard either.
+
+In the month since the announcement, I've seen no warning signs so far. The only advantage I see (as of now) with GitHub is the lower barrier to entry, because of network effects (more people on GH, easier for others to fork and file PR) which is why I'd suggest sticking to GitHub _for now_
+
+Maybe some day https://github.com/git-federation/gitpub becomes a reality and will let us contribute to rss-bridge from any git hosting service.
+
+@username_2 Thanks for the POSSE link :100:<issue_closed>
+<issue_comment>username_4: https://sourcehut.org/"
+facebook/docusaurus,969296892,5351,"{'number': 5351.0, 'repo': 'docusaurus', 'user_login': 'facebook'}","[{'action': 'opened', 'author': 'slorber', 'comment_id': None, 'datetime': '2021-08-12T18:02:21Z', 'masked_author': 'username_0', 'text': '## Motivation\r\n\r\nAdd a link to Twitter account in the announcement bar.\r\n\r\nI guess it can make sense to bump the version from time to time too to ensure that people subscribe for updates and ""thank"" Docusaurus.', 'title': 'docs(website): bump announcement bar + include Twitter link', 'type': 'issue'}
+ {'action': 'created', 'author': 'lex111', 'comment_id': 897925621.0, 'datetime': '2021-08-12 19:55:16+00:00', 'masked_author': 'username_1', 'text': 'Maybe set some fancy background to draw more attention to the announcement bar? Something like that below?\r\n\r\n![image](https://user-images.githubusercontent.com/4408379/129260753-875db5c5-ef3d-402d-a54f-51ed296fc59a.png)', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'slorber', 'comment_id': 898428615.0, 'datetime': '2021-08-13 12:36:37+00:00', 'masked_author': 'username_0', 'text': ""Thanks @username_1 , applied your suggestion but lighter for accessibility/contrast\r\n\r\nThis was also a good pretext to apply some css var + hsl technique that I think we should use more for color palettes.\r\n\r\nThe site colors remain exactly the same as before, it's just the way to create those colors that are now based on a lightnesss/darkness %, without requiring any preprocessor.\r\n\r\nThis also helps highlight that we have colors with 2 different saturations. Didn't want to change that in that PR but maybe we should migrate to only one and just modify the lightness.\r\n\r\nI'd like to explore this a bit more but I think we could apply that in Infima so that users would only have to provide one base hue/saturation instead of a set of css variables.\r\n\r\nSee https://blog.maximeheckel.com/posts/the-power-of-composition-with-css-variables/\r\n\r\n![image](https://user-images.githubusercontent.com/749374/129357978-04589a15-0ad5-44fa-9c09-a2948ee66f34.png)"", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'lex111', 'comment_id': 898437529.0, 'datetime': '2021-08-13 12:53:53+00:00', 'masked_author': 'username_1', 'text': ""Good idea, it's definitely worth to dig deeper."", 'title': None, 'type': 'comment'}]","<issue_start><issue_comment>Title: docs(website): bump announcement bar + include Twitter link
+username_0: ## Motivation
+
+Add a link to Twitter account in the announcement bar.
+
+I guess it can make sense to bump the version from time to time too to ensure that people subscribe for updates and ""thank"" Docusaurus.
+<issue_comment>username_1: Maybe set some fancy background to draw more attention to the announcement bar? Something like that below?
+
+![image](https://user-images.githubusercontent.com/4408379/129260753-875db5c5-ef3d-402d-a54f-51ed296fc59a.png)
+<issue_comment>username_0: Thanks @username_1 , applied your suggestion but lighter for accessibility/contrast
+
+This was also a good pretext to apply some css var + hsl technique that I think we should use more for color palettes.
+
+The site colors remain exactly the same as before, it's just the way to create those colors that are now based on a lightnesss/darkness %, without requiring any preprocessor.
+
+This also helps highlight that we have colors with 2 different saturations. Didn't want to change that in that PR but maybe we should migrate to only one and just modify the lightness.
+
+I'd like to explore this a bit more but I think we could apply that in Infima so that users would only have to provide one base hue/saturation instead of a set of css variables.
+
+See https://blog.maximeheckel.com/posts/the-power-of-composition-with-css-variables/
+
+![image](https://user-images.githubusercontent.com/749374/129357978-04589a15-0ad5-44fa-9c09-a2948ee66f34.png)
+<issue_comment>username_1: Good idea, it's definitely worth to dig deeper."
+facebook/docusaurus,674528500,3230,,"[{'action': 'opened', 'author': 'jagracey', 'comment_id': None, 'datetime': '2020-08-06 18:49:33+00:00', 'masked_author': 'username_0', 'text': '## 🚀 Feature\r\n\r\nFor blog mode in Docusaurus V2, there should be a clean way to turn off the calendar date section within the URL path for each blog post, enabling more creative documentation use cases. In our own case we\'ve built a ""help center"" (knowledge base) that would benefit from disabling the path prefix.\r\n\r\n`example.com/blog/2020/08/18/title-slug`    ==>    `example.com/blog/title-slug`\r\n\r\n### Have you read the [Contributing Guidelines on issues]\r\nYes\r\n\r\n## Motivation\r\nSee [help.getwisdom.io](https://help.getwisdom.io) for a live example.\r\n`example.com/2020/08/18/title-slug`    ==>    `example.com/title-slug`\r\n\r\n## Pitch\r\n\r\nDocusaurus has a great blog framework with a tagging system and related tag list pages (/tags/) that in some ways make it a more powerful documentation approach to using docs with a sidebar. We are using the ""blog mode"" for Help Center like documentation, however each blog entry has a calendar entry time that doesn\'t provide benefit:\r\n1. Aesthetics are poor in this case\r\n2. Semantics are not relevant, given that for us, these posts should be frequently updated (evergreen).\r\n\r\nCurrently, saving a markdown file without the filename date prefix appears to just default to UTC date instead of no date within the URL path.\r\n\r\n### Candidate Interfaces:\r\n\r\nPossible Interfaces:\r\n1. string `path_prefix`: string prefix.\r\n   - `null` defaulting to current date `/blog/2020/08/01/title-slug`\r\n   - `\'\'` empty string produces no prefix (special case to *not produce* `/blog//title-slug`)\r\n    - `string1/string2` produces `/blog/string1/string2/title-slug`\r\n2. boolean `path_prefix`: Config to disable URL path prefix (currently calendar date)\r\n3. function in `docusaurus.config.js` that sets the string prefix for each blog article `(blog) => \'level1/level2\';`.\r\n4. Stop defaulting to UTC time if the file name is not prefixed with date.', 'title': 'Blog Mode: Disable or modify the date prefixes `/blog/2020/08/01/title-slug`.', 'type': 'issue'}
+ {'action': 'created', 'author': 'slorber', 'comment_id': 671969845.0, 'datetime': '2020-08-11 14:09:23+00:00', 'masked_author': 'username_1', 'text': ""Yes you are right we need a way to have better control of blog slugs.\r\n\r\nI tried this:\r\n\r\n![image](https://user-images.githubusercontent.com/749374/89906708-0328ed00-dbec-11ea-9ad0-8183491b1994.png)\r\n\r\nAnd the URL was this: `http://localhost:3000/blog/2020/08/11/heyyy`. In such case we'd rather simply not adding the date to the URL at all. \r\n\r\nUsing markdown files without dates in filenames should be supported and not produce weird issues likes this.\r\n\r\nWe need a retrocompatible solution, and I'd be fine with 2 options:\r\n- frontmatter slug\r\n- boolean option to remove the date from the URL, and opt-out of this legacy behavior (not useful to provide custom path prefix, because there's already a routeBasePath option anyway...)\r\n\r\nNote: when using slugs, we should not prefix the slug of the user with a date. If they wants a date, they'll add it to the slug.\r\n\r\nIn the long term we should encourage users to only use slugs and move out of this legacy url scheme\r\n\r\nSomeone wants to work on this?"", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'JeanMarcSaad', 'comment_id': 672269360.0, 'datetime': '2020-08-11 20:44:03+00:00', 'masked_author': 'username_2', 'text': ""I'll be working on this 🙂"", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'JeanMarcSaad', 'comment_id': 672693836.0, 'datetime': '2020-08-12 07:38:43+00:00', 'masked_author': 'username_2', 'text': 'Hello @username_1 \r\n\r\nSo after delving into the code, turns out this is already supported.\r\n\r\n<img width=""403"" alt=""Screen Shot 2020-08-12 at 10 27 18 AM"" src=""https://user-images.githubusercontent.com/25410209/89987619-07eeaf00-dc87-11ea-98ad-065d2c6e08d5.png"">\r\n\r\nIn this block of code in `docusaurus-plugin-content-blog/blogUtils.ts`,\r\nif frontmatter.id is defined, it will use it as the only slug and not append the date to the url path.\r\n\r\nI tried:\r\nThis blog structure\r\n\r\n<img width=""278"" alt=""Screen Shot 2020-08-12 at 10 29 03 AM"" src=""https://user-images.githubusercontent.com/25410209/89987847-5c922a00-dc87-11ea-9159-8b1f35ab94ea.png"">\r\n\r\nand this test.md\r\n\r\n<img width=""182"" alt=""Screen Shot 2020-08-12 at 10 29 33 AM"" src=""https://user-images.githubusercontent.com/25410209/89987874-687dec00-dc87-11ea-8377-2f280e24b050.png"">\r\n\r\nAnd the url was available at `http://localhost:3000/blog/test`\r\n\r\n<img width=""695"" alt=""Screen Shot 2020-08-12 at 10 29 52 AM"" src=""https://user-images.githubusercontent.com/25410209/89987886-6caa0980-dc87-11ea-8fb6-dd8737c5a2b3.png"">\r\n\r\nThis feature in not documented though, and no mention of *id* frontmatter is present in the blog docs.\r\n\r\nDo you think I should go forward with:\r\n- Renaming id to slug\r\n- Updating the documentation to include this new frontmatter key', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'slorber', 'comment_id': 672757772.0, 'datetime': '2020-08-12 09:16:43+00:00', 'masked_author': 'username_1', 'text': 'Yes we should:\r\n- rename id to slug (add a warning for users using frontmatter.id)\r\n- document slug frontmatter\r\n- fix the date parsing logic that use current date as a default pathname prefix when filename is `test.mdx`: it should just lead to `/blog/test` unless user is using slug frontmatter\r\n\r\nThanks', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'slorber', 'comment_id': 702162579.0, 'datetime': '2020-10-01 14:10:02+00:00', 'masked_author': 'username_1', 'text': 'Fixed by #3284', 'title': None, 'type': 'comment'}
+ {'action': 'closed', 'author': 'slorber', 'comment_id': None, 'datetime': '2020-10-01 14:10:03+00:00', 'masked_author': 'username_1', 'text': '', 'title': None, 'type': 'issue'}]","<issue_start><issue_comment>Title: Blog Mode: Disable or modify the date prefixes `/blog/2020/08/01/title-slug`.
+username_0: ## 🚀 Feature
+
+For blog mode in Docusaurus V2, there should be a clean way to turn off the calendar date section within the URL path for each blog post, enabling more creative documentation use cases. In our own case we've built a ""help center"" (knowledge base) that would benefit from disabling the path prefix.
+
+`example.com/blog/2020/08/18/title-slug`    ==>    `example.com/blog/title-slug`
+
+### Have you read the [Contributing Guidelines on issues]
+Yes
+
+## Motivation
+See [help.getwisdom.io](https://help.getwisdom.io) for a live example.
+`example.com/2020/08/18/title-slug`    ==>    `example.com/title-slug`
+
+## Pitch
+
+Docusaurus has a great blog framework with a tagging system and related tag list pages (/tags/) that in some ways make it a more powerful documentation approach to using docs with a sidebar. We are using the ""blog mode"" for Help Center like documentation, however each blog entry has a calendar entry time that doesn't provide benefit:
+1. Aesthetics are poor in this case
+2. Semantics are not relevant, given that for us, these posts should be frequently updated (evergreen).
+
+Currently, saving a markdown file without the filename date prefix appears to just default to UTC date instead of no date within the URL path.
+
+### Candidate Interfaces:
+
+Possible Interfaces:
+1. string `path_prefix`: string prefix.
+   - `null` defaulting to current date `/blog/2020/08/01/title-slug`
+   - `''` empty string produces no prefix (special case to *not produce* `/blog//title-slug`)
+    - `string1/string2` produces `/blog/string1/string2/title-slug`
+2. boolean `path_prefix`: Config to disable URL path prefix (currently calendar date)
+3. function in `docusaurus.config.js` that sets the string prefix for each blog article `(blog) => 'level1/level2';`.
+4. Stop defaulting to UTC time if the file name is not prefixed with date.
+<issue_comment>username_1: Yes you are right we need a way to have better control of blog slugs.
+
+I tried this:
+
+![image](https://user-images.githubusercontent.com/749374/89906708-0328ed00-dbec-11ea-9ad0-8183491b1994.png)
+
+And the URL was this: `http://localhost:3000/blog/2020/08/11/heyyy`. In such case we'd rather simply not adding the date to the URL at all. 
+
+Using markdown files without dates in filenames should be supported and not produce weird issues likes this.
+
+We need a retrocompatible solution, and I'd be fine with 2 options:
+- frontmatter slug
+- boolean option to remove the date from the URL, and opt-out of this legacy behavior (not useful to provide custom path prefix, because there's already a routeBasePath option anyway...)
+
+Note: when using slugs, we should not prefix the slug of the user with a date. If they wants a date, they'll add it to the slug.
+
+In the long term we should encourage users to only use slugs and move out of this legacy url scheme
+
+Someone wants to work on this?
+<issue_comment>username_2: I'll be working on this 🙂
+<issue_comment>username_2: Hello @username_1 
+
+So after delving into the code, turns out this is already supported.
+
+<img width=""403"" alt=""Screen Shot 2020-08-12 at 10 27 18 AM"" src=""https://user-images.githubusercontent.com/25410209/89987619-07eeaf00-dc87-11ea-98ad-065d2c6e08d5.png"">
+
+In this block of code in `docusaurus-plugin-content-blog/blogUtils.ts`,
+if frontmatter.id is defined, it will use it as the only slug and not append the date to the url path.
+
+I tried:
+This blog structure
+
+<img width=""278"" alt=""Screen Shot 2020-08-12 at 10 29 03 AM"" src=""https://user-images.githubusercontent.com/25410209/89987847-5c922a00-dc87-11ea-9159-8b1f35ab94ea.png"">
+
+and this test.md
+
+<img width=""182"" alt=""Screen Shot 2020-08-12 at 10 29 33 AM"" src=""https://user-images.githubusercontent.com/25410209/89987874-687dec00-dc87-11ea-8377-2f280e24b050.png"">
+
+And the url was available at `http://localhost:3000/blog/test`
+
+<img width=""695"" alt=""Screen Shot 2020-08-12 at 10 29 52 AM"" src=""https://user-images.githubusercontent.com/25410209/89987886-6caa0980-dc87-11ea-8fb6-dd8737c5a2b3.png"">
+
+This feature in not documented though, and no mention of *id* frontmatter is present in the blog docs.
+
+Do you think I should go forward with:
+- Renaming id to slug
+- Updating the documentation to include this new frontmatter key
+<issue_comment>username_1: Yes we should:
+- rename id to slug (add a warning for users using frontmatter.id)
+- document slug frontmatter
+- fix the date parsing logic that use current date as a default pathname prefix when filename is `test.mdx`: it should just lead to `/blog/test` unless user is using slug frontmatter
+
+Thanks
+<issue_comment>username_1: Fixed by #3284<issue_closed>"
+pidcodes/pidcodes.github.com,93162102,95,"{'number': 95.0, 'repo': 'pidcodes.github.com', 'user_login': 'pidcodes'}","[{'action': 'opened', 'author': 'kwagyeman', 'comment_id': None, 'datetime': '2015-07-06T00:41:11Z', 'masked_author': 'username_0', 'text': ""Hi,\r\n\r\nWe're requesting the pid abd1 for our OpenMV Cam project. OpenMV Cam is a python powered open-source machine vision camera module.\r\n\r\nThanks,"", 'title': 'OpenMV PID', 'type': 'issue'}
+ {'action': 'created', 'author': 'Arachnid', 'comment_id': 118737511.0, 'datetime': '2015-07-06 06:17:22+00:00', 'masked_author': 'username_1', 'text': 'Hi,\r\n\r\nYour pull request looks good! However, can you please squash your PR down into a single commit?\r\n\r\nAlso, note that as written your entry will show up as ""OpenMV OpenMV Cam""; to remove the duplication, remove ""OpenMV"" from the PID entry title.', 'title': None, 'type': 'comment'}]","<issue_start><issue_comment>Title: OpenMV PID
+username_0: Hi,
+
+We're requesting the pid abd1 for our OpenMV Cam project. OpenMV Cam is a python powered open-source machine vision camera module.
+
+Thanks,
+<issue_comment>username_1: Hi,
+
+Your pull request looks good! However, can you please squash your PR down into a single commit?
+
+Also, note that as written your entry will show up as ""OpenMV OpenMV Cam""; to remove the duplication, remove ""OpenMV"" from the PID entry title."

@@ -1,0 +1,283 @@
+jaspervdj/hakyll,906852682,850,,"[{'action': 'opened', 'author': 'Minoru', 'comment_id': None, 'datetime': '2021-05-30 19:08:54+00:00', 'masked_author': 'username_0', 'text': ""https://github.com/jaspervdj/hakyll/pull/844 added a new async runtime, but on SMT machines (eg. Intel's HyperThreading), it doesn't scale too well past the number of cores. Details are in https://github.com/jaspervdj/hakyll/pull/844#issuecomment-825779039, and there are some ideas further down the thread.\r\n\r\nFor now, the workaround is to use `+RTS -Nx` to limit the number of threads to the number of cores."", 'title': 'Make async runtime scale better on SMT machines', 'type': 'issue'}
+ {'action': 'created', 'author': 'fishtreesugar', 'comment_id': 851481005.0, 'datetime': '2021-05-31 13:09:21+00:00', 'masked_author': 'username_1', 'text': ""According to the benchmark from [scheduler](https://github.com/lehins/haskell-scheduler#benchmarks), `unliftio`'s [pooledMapConcurrently](https://hackage.haskell.org/package/unliftio-0.2.17/docs/UnliftIO-Async.html#v:pooledForConcurrently_)'s quite better than `async`'s  `mapConcurrently`, maybe we could give it a try"", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'Minoru', 'comment_id': 851677774.0, 'datetime': '2021-05-31 20:49:54+00:00', 'masked_author': 'username_0', 'text': ""Thanks for the pointer! That benchmark focuses on speed, not scalability, so I'm sceptical that it'll make any different. I don't have energy to invest into this right now, but if you do, please try and report back the results!"", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'vaibhavsagar', 'comment_id': 882029756.0, 'datetime': '2021-07-18 09:41:35+00:00', 'masked_author': 'username_2', 'text': ""I investigated using `pooledMapConcurrently` with [this patch](https://github.com/jaspervdj/hakyll/files/6835962/pooledMapConcurrently.patch.txt) on top of https://github.com/jaspervdj/hakyll/pull/863 and it didn't seem to improve the SMT scaling (my laptop uses an Intel i7-8550U with 4 cores and 8 threads):\r\n\r\n```\r\n[nix-shell:~/code/website]$ hyperfine --parameter-scan threads 1 10 --prepare './result/bin/site clean' './result/bin/site build +RTS -N{threads}' \r\nBenchmark #1: ./result/bin/site build +RTS -N1\r\n  Time (mean ± σ):      3.409 s ±  0.074 s    [User: 3.279 s, System: 0.138 s]\r\n  Range (min … max):    3.295 s …  3.525 s    10 runs\r\n \r\nBenchmark #2: ./result/bin/site build +RTS -N2\r\n  Time (mean ± σ):      2.196 s ±  0.053 s    [User: 3.799 s, System: 0.362 s]\r\n  Range (min … max):    2.113 s …  2.265 s    10 runs\r\n \r\nBenchmark #3: ./result/bin/site build +RTS -N3\r\n  Time (mean ± σ):      1.886 s ±  0.060 s    [User: 4.571 s, System: 0.583 s]\r\n  Range (min … max):    1.790 s …  1.963 s    10 runs\r\n \r\nBenchmark #4: ./result/bin/site build +RTS -N4\r\n  Time (mean ± σ):      1.885 s ±  0.049 s    [User: 5.487 s, System: 0.897 s]\r\n  Range (min … max):    1.833 s …  1.976 s    10 runs\r\n \r\nBenchmark #5: ./result/bin/site build +RTS -N5\r\n  Time (mean ± σ):      2.164 s ±  0.098 s    [User: 7.585 s, System: 1.639 s]\r\n  Range (min … max):    2.014 s …  2.294 s    10 runs\r\n \r\nBenchmark #6: ./result/bin/site build +RTS -N6\r\n  Time (mean ± σ):      2.348 s ±  0.096 s    [User: 9.346 s, System: 2.417 s]\r\n  Range (min … max):    2.174 s …  2.506 s    10 runs\r\n \r\nBenchmark #7: ./result/bin/site build +RTS -N7\r\n  Time (mean ± σ):      2.487 s ±  0.047 s    [User: 11.058 s, System: 3.255 s]\r\n  Range (min … max):    2.414 s …  2.536 s    10 runs\r\n \r\nBenchmark #8: ./result/bin/site build +RTS -N8\r\n  Time (mean ± σ):      2.746 s ±  0.132 s    [User: 13.610 s, System: 4.138 s]\r\n  Range (min … max):    2.565 s …  3.064 s    10 runs\r\n \r\nBenchmark #9: ./result/bin/site build +RTS -N9\r\n  Time (mean ± σ):      3.251 s ±  0.138 s    [User: 16.528 s, System: 4.896 s]\r\n  Range (min … max):    3.097 s …  3.506 s    10 runs\r\n \r\nBenchmark #10: ./result/bin/site build +RTS -N10\r\n  Time (mean ± σ):      3.668 s ±  0.240 s    [User: 19.285 s, System: 5.075 s]\r\n  Range (min … max):    3.385 s …  4.166 s    10 runs\r\n \r\nSummary\r\n  './result/bin/site build +RTS -N4' ran\r\n    1.00 ± 0.04 times faster than './result/bin/site build +RTS -N3'\r\n    1.15 ± 0.06 times faster than './result/bin/site build +RTS -N5'\r\n    1.17 ± 0.04 times faster than './result/bin/site build +RTS -N2'\r\n    1.25 ± 0.06 times faster than './result/bin/site build +RTS -N6'\r\n    1.32 ± 0.04 times faster than './result/bin/site build +RTS -N7'\r\n    1.46 ± 0.08 times faster than './result/bin/site build +RTS -N8'\r\n    1.73 ± 0.09 times faster than './result/bin/site build +RTS -N9'\r\n    1.81 ± 0.06 times faster than './result/bin/site build +RTS -N1'\r\n    1.95 ± 0.14 times faster than './result/bin/site build +RTS -N10'\r\n\r\n```"", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'frasertweedale', 'comment_id': 913935147.0, 'datetime': '2021-09-07 01:59:34+00:00', 'masked_author': 'username_3', 'text': ""I am also experiencing this scaling issue.  The increased userland CPU time when using more\r\ncapabilities is strange.  I would expect to see small (certainly sublinear) increases in CPU time\r\nfor additional capabilities.  Instead, per @username_2's benchmark above, the CPU time\r\nappears to have superlinear growth and quickly overwhelms the advantage gained by parallel\r\nexecution.\r\n\r\nProfiling didn't reveal anything interesting, the profiles looking overwhelmingly similar for\r\ndifferent numbers of capabilities, apart from total time.\r\n\r\nI'm beginning to wonder if this issue might be in the GHC RTS, rather than Hakyll..."", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'vaibhavsagar', 'comment_id': 914006200.0, 'datetime': '2021-09-07 05:42:12+00:00', 'masked_author': 'username_2', 'text': ""@username_3 I did some investigation with ThreadScope afterwards that wasn't especially insightful, which is why I didn't mention it here, but it did show that some of the overhead was GC-related. When I minimised garbage collection using some of the suggestions [here](https://stackoverflow.com/questions/29542977/how-to-disable-garbage-collection-in-ghc-haskell) the observed performance did seem to scale better. I'm a relative novice when it comes to parallel Haskell so it's entirely possible that there's something simple that I'm missing."", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'frasertweedale', 'comment_id': 914018339.0, 'datetime': '2021-09-07 06:07:29+00:00', 'masked_author': 'username_3', 'text': ""@username_2 thanks for the additional info.  It is always helpful to mention the dead ends in the investigation.  That way, people will know it has been done, and won't waste their time doing the same thing :)"", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'frasertweedale', 'comment_id': 917352219.0, 'datetime': '2021-09-11 06:33:11+00:00', 'masked_author': 'username_3', 'text': ""When using multiple capabilities, on GHC 8.8 I get the best results with `+RTS -N -qg1`, which disables parallel GC for the first generation.  On my site this achieves ~70% productivity compared to using compared to ~40% for the default (parallel GC for all generations).\r\n\r\nThere must be something about Hakyll's design that makes parallel GC particularly inefficient.  When actually using multiple capabilities there was an improvement in wall time GCing the second generation, although productivity still decreases considerably.  For the first generation, the parallel GC performance is quite terrible.\r\n\r\nI'd be interested to see how GHC 8.10+'s `--nonmoving-gc` RTS option performs, but it cannot be used for the first generation.\r\n\r\nI'm suspending my investigation at this point.  Single-threaded performance is good enough for me and even with `-qg1` I gain little advantage from using multiple capabilities.  I've only done these measurements on my Hakyll blog site.  YMMV."", 'title': None, 'type': 'comment'}]","<issue_start><issue_comment>Title: Make async runtime scale better on SMT machines
+username_0: https://github.com/jaspervdj/hakyll/pull/844 added a new async runtime, but on SMT machines (eg. Intel's HyperThreading), it doesn't scale too well past the number of cores. Details are in https://github.com/jaspervdj/hakyll/pull/844#issuecomment-825779039, and there are some ideas further down the thread.
+
+For now, the workaround is to use `+RTS -Nx` to limit the number of threads to the number of cores.
+<issue_comment>username_1: According to the benchmark from [scheduler](https://github.com/lehins/haskell-scheduler#benchmarks), `unliftio`'s [pooledMapConcurrently](https://hackage.haskell.org/package/unliftio-0.2.17/docs/UnliftIO-Async.html#v:pooledForConcurrently_)'s quite better than `async`'s  `mapConcurrently`, maybe we could give it a try
+<issue_comment>username_0: Thanks for the pointer! That benchmark focuses on speed, not scalability, so I'm sceptical that it'll make any different. I don't have energy to invest into this right now, but if you do, please try and report back the results!
+<issue_comment>username_2: I investigated using `pooledMapConcurrently` with [this patch](https://github.com/jaspervdj/hakyll/files/6835962/pooledMapConcurrently.patch.txt) on top of https://github.com/jaspervdj/hakyll/pull/863 and it didn't seem to improve the SMT scaling (my laptop uses an Intel i7-8550U with 4 cores and 8 threads):
+
+```
+[nix-shell:~/code/website]$ hyperfine --parameter-scan threads 1 10 --prepare './result/bin/site clean' './result/bin/site build +RTS -N{threads}' 
+Benchmark #1: ./result/bin/site build +RTS -N1
+  Time (mean ± σ):      3.409 s ±  0.074 s    [User: 3.279 s, System: 0.138 s]
+  Range (min … max):    3.295 s …  3.525 s    10 runs
+ 
+Benchmark #2: ./result/bin/site build +RTS -N2
+  Time (mean ± σ):      2.196 s ±  0.053 s    [User: 3.799 s, System: 0.362 s]
+  Range (min … max):    2.113 s …  2.265 s    10 runs
+ 
+Benchmark #3: ./result/bin/site build +RTS -N3
+  Time (mean ± σ):      1.886 s ±  0.060 s    [User: 4.571 s, System: 0.583 s]
+  Range (min … max):    1.790 s …  1.963 s    10 runs
+ 
+Benchmark #4: ./result/bin/site build +RTS -N4
+  Time (mean ± σ):      1.885 s ±  0.049 s    [User: 5.487 s, System: 0.897 s]
+  Range (min … max):    1.833 s …  1.976 s    10 runs
+ 
+Benchmark #5: ./result/bin/site build +RTS -N5
+  Time (mean ± σ):      2.164 s ±  0.098 s    [User: 7.585 s, System: 1.639 s]
+  Range (min … max):    2.014 s …  2.294 s    10 runs
+ 
+Benchmark #6: ./result/bin/site build +RTS -N6
+  Time (mean ± σ):      2.348 s ±  0.096 s    [User: 9.346 s, System: 2.417 s]
+  Range (min … max):    2.174 s …  2.506 s    10 runs
+ 
+Benchmark #7: ./result/bin/site build +RTS -N7
+  Time (mean ± σ):      2.487 s ±  0.047 s    [User: 11.058 s, System: 3.255 s]
+  Range (min … max):    2.414 s …  2.536 s    10 runs
+ 
+Benchmark #8: ./result/bin/site build +RTS -N8
+  Time (mean ± σ):      2.746 s ±  0.132 s    [User: 13.610 s, System: 4.138 s]
+  Range (min … max):    2.565 s …  3.064 s    10 runs
+ 
+Benchmark #9: ./result/bin/site build +RTS -N9
+  Time (mean ± σ):      3.251 s ±  0.138 s    [User: 16.528 s, System: 4.896 s]
+  Range (min … max):    3.097 s …  3.506 s    10 runs
+ 
+Benchmark #10: ./result/bin/site build +RTS -N10
+  Time (mean ± σ):      3.668 s ±  0.240 s    [User: 19.285 s, System: 5.075 s]
+  Range (min … max):    3.385 s …  4.166 s    10 runs
+ 
+Summary
+  './result/bin/site build +RTS -N4' ran
+    1.00 ± 0.04 times faster than './result/bin/site build +RTS -N3'
+    1.15 ± 0.06 times faster than './result/bin/site build +RTS -N5'
+    1.17 ± 0.04 times faster than './result/bin/site build +RTS -N2'
+    1.25 ± 0.06 times faster than './result/bin/site build +RTS -N6'
+    1.32 ± 0.04 times faster than './result/bin/site build +RTS -N7'
+    1.46 ± 0.08 times faster than './result/bin/site build +RTS -N8'
+    1.73 ± 0.09 times faster than './result/bin/site build +RTS -N9'
+    1.81 ± 0.06 times faster than './result/bin/site build +RTS -N1'
+    1.95 ± 0.14 times faster than './result/bin/site build +RTS -N10'
+
+```
+<issue_comment>username_3: I am also experiencing this scaling issue.  The increased userland CPU time when using more
+capabilities is strange.  I would expect to see small (certainly sublinear) increases in CPU time
+for additional capabilities.  Instead, per @username_2's benchmark above, the CPU time
+appears to have superlinear growth and quickly overwhelms the advantage gained by parallel
+execution.
+
+Profiling didn't reveal anything interesting, the profiles looking overwhelmingly similar for
+different numbers of capabilities, apart from total time.
+
+I'm beginning to wonder if this issue might be in the GHC RTS, rather than Hakyll...
+<issue_comment>username_2: @username_3 I did some investigation with ThreadScope afterwards that wasn't especially insightful, which is why I didn't mention it here, but it did show that some of the overhead was GC-related. When I minimised garbage collection using some of the suggestions [here](https://stackoverflow.com/questions/29542977/how-to-disable-garbage-collection-in-ghc-haskell) the observed performance did seem to scale better. I'm a relative novice when it comes to parallel Haskell so it's entirely possible that there's something simple that I'm missing.
+<issue_comment>username_3: @username_2 thanks for the additional info.  It is always helpful to mention the dead ends in the investigation.  That way, people will know it has been done, and won't waste their time doing the same thing :)
+<issue_comment>username_3: When using multiple capabilities, on GHC 8.8 I get the best results with `+RTS -N -qg1`, which disables parallel GC for the first generation.  On my site this achieves ~70% productivity compared to using compared to ~40% for the default (parallel GC for all generations).
+
+There must be something about Hakyll's design that makes parallel GC particularly inefficient.  When actually using multiple capabilities there was an improvement in wall time GCing the second generation, although productivity still decreases considerably.  For the first generation, the parallel GC performance is quite terrible.
+
+I'd be interested to see how GHC 8.10+'s `--nonmoving-gc` RTS option performs, but it cannot be used for the first generation.
+
+I'm suspending my investigation at this point.  Single-threaded performance is good enough for me and even with `-qg1` I gain little advantage from using multiple capabilities.  I've only done these measurements on my Hakyll blog site.  YMMV."
+apache/apisix-website,824143188,250,,"[{'action': 'opened', 'author': 'juzhiyuan', 'comment_id': None, 'datetime': '2021-03-08 04:05:58+00:00', 'masked_author': 'username_0', 'text': 'Hi, would you mind fixing this link in this PR?\r\n\r\nThe correct one is `https://github.com/apache/apisix/blob/master/powered-by.md`\r\n\r\n_Originally posted by @username_0 in https://github.com/apache/apisix-website/pull/239#discussion_r589125799_', 'title': 'incorrect powered-by.md link', 'type': 'issue'}
+ {'action': 'created', 'author': 'stu01509', 'comment_id': 792470227.0, 'datetime': '2021-03-08 05:18:27+00:00', 'masked_author': 'username_1', 'text': 'Anyone is working on this issue?', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'juzhiyuan', 'comment_id': 792504015.0, 'datetime': '2021-03-08 06:27:51+00:00', 'masked_author': 'username_0', 'text': 'it sees that @username_3 is working on this 😂', 'title': None, 'type': 'comment'}
+ {'action': 'closed', 'author': 'liuxiran', 'comment_id': None, 'datetime': '2021-03-08 07:32:43+00:00', 'masked_author': 'username_2', 'text': '', 'title': None, 'type': 'issue'}
+ {'action': 'created', 'author': 'KishaniKandasamy', 'comment_id': 792548740.0, 'datetime': '2021-03-08 07:48:30+00:00', 'masked_author': 'username_3', 'text': '😐😐', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'juzhiyuan', 'comment_id': 792577040.0, 'datetime': '2021-03-08 08:34:03+00:00', 'masked_author': 'username_0', 'text': '@username_3 aoh!! I made a wrong cc 😂', 'title': None, 'type': 'comment'}]","<issue_start><issue_comment>Title: incorrect powered-by.md link
+username_0: Hi, would you mind fixing this link in this PR?
+
+The correct one is `https://github.com/apache/apisix/blob/master/powered-by.md`
+
+_Originally posted by @username_0 in https://github.com/apache/apisix-website/pull/239#discussion_r589125799_
+<issue_comment>username_1: Anyone is working on this issue?
+<issue_comment>username_0: it sees that @username_3 is working on this 😂<issue_closed>
+<issue_comment>username_3: 😐😐
+<issue_comment>username_0: @username_3 aoh!! I made a wrong cc 😂"
+gohugoio/hugo,360935337,5222,,"[{'action': 'opened', 'author': 'bep', 'comment_id': None, 'datetime': '2018-09-17 15:57:00+00:00', 'masked_author': 'username_0', 'text': 'I suggest we add a partial that works like a function. \r\n\r\n```\r\n{{ $calculation := .Arg | strings.Repeat 20 }}\r\n{{ .SetResult  $calculation }}\r\n{{/* or .Fail, .Failf to mark error situations  /*}}\r\n```\r\n\r\nAnd in a template:\r\n\r\n```\r\n{{ $result := partial ""myfuncs/repeat20""  ""a"" }}\r\n{{ with $result.Error }}\r\n{{ else }}\r\nLetters: {{ $result.Result }}\r\n{{ end }}\r\n```\r\n\r\nWe could possibly make this into its own **thing** (but I fear that we have enough **things** as it is. We could possibly also support a syntax like this:\r\n\r\n```\r\n{{ $result := customfuncs.Repeat20 ""a"" }}\r\n```\r\n\r\nThe hard part with the above is **naming** -- and to figure a way to identify these ""special partials"".\r\n\r\nThoughts?', 'title': 'Add support for ""custom template funcs""', 'type': 'issue'}
+ {'action': 'created', 'author': 'regisphilibert', 'comment_id': 431697803.0, 'datetime': '2018-10-21 19:42:10+00:00', 'masked_author': 'username_1', 'text': 'Discovering this, pretty excited.\r\n\r\nIt is true, a lot of people, me included, are already using `partial` to compute numbers or concatenate/generate complex strings rather than simply include or reuse bits of template. But this only means that a need is not being filled. Answering this need by empowering the current `partial` workaround may, while presently looking consistent, over-complicate the future.\r\n\r\nFor exemple, in order not to break any existing code, allowing `partial` to take an argument which is not a map and retrieve it with `.Arg` should not altere the current behaviour of a context (`dict` or otherwise) and its keys. Thus on top of making the ""Arg"" keys reserved would complexity the documentation and the overall usage, especially for people not familiar with the history of `partial`.\r\n\r\nI personally think `partial` should be left as an ""include"" solution and a new function should be added.\r\n\r\nI also think Hugo\'s shortcode ""API"" and its very complete attribute solution (`.Get` for either named or ordered attrs.) should be the inspiration for this future `function` function. \r\nNew function should only need the `.Get` method from shortcode plus the `.Return` method @username_0 suggested for `partial`.\r\n\r\nAlso, and I\'m very cautions about this but, I\'m not entirely sure an `Error` handling method is badly needed here for a simple template function. Maybe user could just make its function return `nil` in case of error?', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'bep', 'comment_id': 431706647.0, 'datetime': '2018-10-21 21:41:51+00:00', 'masked_author': 'username_0', 'text': 'Just a quick note. We\'re building this on top of Go\'s template ""engine"". There is no return values from a template. So, to return something to the caller, you need to set a value in a object received, e.g. `{{ .SetErr ""failed""{ }}`, or whatever.', 'title': None, 'type': 'comment'}
+ {'action': 'closed', 'author': 'bep', 'comment_id': None, 'datetime': '2019-03-24 13:03:58+00:00', 'masked_author': 'username_0', 'text': '', 'title': None, 'type': 'issue'}
+ {'action': 'created', 'author': 'bep', 'comment_id': 475956973.0, 'datetime': '2019-03-24 13:03:58+00:00', 'masked_author': 'username_0', 'text': ""I'm closing this. I now know how to do this and will start fresh in a new issue."", 'title': None, 'type': 'comment'}]","<issue_start><issue_comment>Title: Add support for ""custom template funcs""
+username_0: I suggest we add a partial that works like a function. 
+
+```
+{{ $calculation := .Arg | strings.Repeat 20 }}
+{{ .SetResult  $calculation }}
+{{/* or .Fail, .Failf to mark error situations  /*}}
+```
+
+And in a template:
+
+```
+{{ $result := partial ""myfuncs/repeat20""  ""a"" }}
+{{ with $result.Error }}
+{{ else }}
+Letters: {{ $result.Result }}
+{{ end }}
+```
+
+We could possibly make this into its own **thing** (but I fear that we have enough **things** as it is. We could possibly also support a syntax like this:
+
+```
+{{ $result := customfuncs.Repeat20 ""a"" }}
+```
+
+The hard part with the above is **naming** -- and to figure a way to identify these ""special partials"".
+
+Thoughts?
+<issue_comment>username_1: Discovering this, pretty excited.
+
+It is true, a lot of people, me included, are already using `partial` to compute numbers or concatenate/generate complex strings rather than simply include or reuse bits of template. But this only means that a need is not being filled. Answering this need by empowering the current `partial` workaround may, while presently looking consistent, over-complicate the future.
+
+For exemple, in order not to break any existing code, allowing `partial` to take an argument which is not a map and retrieve it with `.Arg` should not altere the current behaviour of a context (`dict` or otherwise) and its keys. Thus on top of making the ""Arg"" keys reserved would complexity the documentation and the overall usage, especially for people not familiar with the history of `partial`.
+
+I personally think `partial` should be left as an ""include"" solution and a new function should be added.
+
+I also think Hugo's shortcode ""API"" and its very complete attribute solution (`.Get` for either named or ordered attrs.) should be the inspiration for this future `function` function. 
+New function should only need the `.Get` method from shortcode plus the `.Return` method @username_0 suggested for `partial`.
+
+Also, and I'm very cautions about this but, I'm not entirely sure an `Error` handling method is badly needed here for a simple template function. Maybe user could just make its function return `nil` in case of error?
+<issue_comment>username_0: Just a quick note. We're building this on top of Go's template ""engine"". There is no return values from a template. So, to return something to the caller, you need to set a value in a object received, e.g. `{{ .SetErr ""failed""{ }}`, or whatever.<issue_closed>
+<issue_comment>username_0: I'm closing this. I now know how to do this and will start fresh in a new issue."
+conda-forge/conda-forge.github.io,526450717,928,,"[{'action': 'opened', 'author': 'xhochy', 'comment_id': None, 'datetime': '2019-11-21 08:55:40+00:00', 'masked_author': 'username_0', 'text': 'I have some Windows systems (also includes throwaway VMs using cloud providers) that I use to develop and debug conda-forge recipe failures on Windows. Sadly I have never had a Windows system that was working with all conda-forge packages. Most often I have to resort to developing against the CI. The documentation we have is okish, improving it would help but having a Windows docker image that replicates our CI setup would greatly help me to enable packages for Windows.\r\n\r\nWould it be possible to create such an image or Dockerfile? (we might have to use the latter as we may not be able to redistribute some SDKs?)', 'title': 'Windows Docker image for conda-forge development', 'type': 'issue'}
+ {'action': 'created', 'author': 'mariusvniekerk', 'comment_id': 557078880.0, 'datetime': '2019-11-21 13:13:32+00:00', 'masked_author': 'username_1', 'text': 'I think a viable solution is to have an ansible playbook somewhere that can provision a windows machine.', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'xhochy', 'comment_id': 611394297.0, 'datetime': '2020-04-09 08:10:48+00:00', 'masked_author': 'username_0', 'text': 'Meanwhile I have a basic `Dockerfile` that works for building packages with native code on Windows:\r\n\r\n```\r\nFROM mcr.microsoft.com/windows/servercore:ltsc2019\r\n\r\nWORKDIR C:/Users/Administrator\r\n\r\n# Be patient, this takes quite a while and you see no action.\r\nRUN powershell -Command "" \\\r\n    $url = \\""http://go.microsoft.com/fwlink/?LinkId=691126\\""; \\\r\n    $client = new-object System.Net.WebClient; \\\r\n    $client.DownloadFile( $url, \\""msvc_build_tools.exe\\""); \\\r\n    ./msvc_build_tools.exe /full /q | Write-Output; \\\r\n    Start-Sleep -s 20; \\\r\n    del msvc_build_tools.exe; \\\r\n    ""\r\n\r\nRUN powershell -NoProfile -ExecutionPolicy Bypass -Command ""iex ((new-object net.webclient).DownloadString(\'https://chocolatey.org/install.ps1\'))""\r\nRUN chocolatey feature enable -n allowGlobalConfirmation\r\nRUN choco install neovim\r\n\r\nRUN powershell -Command "" \\\r\n    $url = \\""https://repo.continuum.io/miniconda/Miniconda3-latest-Windows-x86_64.exe\\""; \\\r\n    $client = new-object System.Net.WebClient; \\\r\n    $client.DownloadFile( $url, \\""miniconda3.exe\\""); \\\r\n    ./miniconda3.exe /S /D=C:\\Users\\Administrator\\miniconda3 | Write-Output; \\\r\n    del miniconda3.exe; \\\r\n    ./miniconda3/Scripts/conda clean --all -y; \\\r\n    ""\r\n\r\nRUN miniconda3\\Scripts\\activate.bat && \\\r\n    conda config --add channels conda-forge && \\\r\n    conda install -y conda-build git && \\\r\n    conda config --set always_yes true && \\\r\n    conda config --set anaconda_upload false\r\n```\r\n\r\nOnly works reliably if you disable any Virus scanner.', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'jjhelmus', 'comment_id': 611529103.0, 'datetime': '2020-04-09 13:30:40+00:00', 'masked_author': 'username_2', 'text': '@username_0 This is really neat.  Do you know what version of Visual Studio/Visual C++ is installed by the first RUN step?', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'jakirkham', 'comment_id': 611928540.0, 'datetime': '2020-04-10 08:06:29+00:00', 'masked_author': 'username_3', 'text': 'Do you know why virus scanners need to be disabled?', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'xhochy', 'comment_id': 612571162.0, 'datetime': '2020-04-12 06:30:07+00:00', 'masked_author': 'username_0', 'text': 'I have often had the problem that conda was unable to delete files due to permission problems. Normally this is an indicator that another process also has an open handle to that file. These problems vanished completely after disabling Windows Defender.', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'xhochy', 'comment_id': 612571614.0, 'datetime': '2020-04-12 06:36:13+00:00', 'masked_author': 'username_0', 'text': 'VS Build Tools 2015, with the latest changes on conda-forge, I need to find the 2017 ones. Currently I only see links for 2015 and 2019.\r\n\r\nMeanwhile I found that on chochlatey also the tools are packages and I will try to use them instead of the direct download link as that should make the version more obvious and hopefully the installation less mysterious.', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'jakirkham', 'comment_id': 612689353.0, 'datetime': '2020-04-12 23:03:41+00:00', 'masked_author': 'username_3', 'text': 'I wonder if Conda is not closing files properly then.', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'mingwandroid', 'comment_id': 682061872.0, 'datetime': '2020-08-27 16:40:19+00:00', 'masked_author': 'username_4', 'text': 'No @username_3, Windows File IO does not do file locking well. That is the problem here.', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'jakirkham', 'comment_id': 983873303.0, 'datetime': '2021-12-01 17:37:27+00:00', 'masked_author': 'username_3', 'text': 'cc @jaimergp (for reference)', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'carterbox', 'comment_id': 1034149724.0, 'datetime': '2022-02-09 20:10:02+00:00', 'masked_author': 'username_5', 'text': 'I updated @username_0\'s recipe to use the VS build tools installer. This installer allows you to provide a config file, so you know exactly what tools are being installed.\r\n\r\n```docker\r\nFROM mcr.microsoft.com/windows/servercore:ltsc2019\r\n\r\nSHELL [""cmd"", ""/S"", ""/C""]\r\n\r\nWORKDIR C:/Users/Administrator\r\n\r\n# Exported from Visual Studio Installer GUI, this config file is used to\r\n# explicitly list out which MSVC components are installed. Component names are\r\n# also documented here:\r\n# https://docs.microsoft.com/en-us/visualstudio/install/workload-component-id-vs-build-tools\r\nADD .vsconfig-2017 ""C:\\\\TEMP\\\\.vsconfig""\r\n\r\n# Be patient, this takes quite a while and you see no action.\r\nRUN powershell -Command "" \\\r\n    $url = \\""https://aka.ms/vs/17/release/vs_buildtools.exe\\""; \\\r\n    $client = new-object System.Net.WebClient; \\\r\n    $client.DownloadFile( $url, \\""msvc_build_tools.exe\\""); \\\r\n    ./msvc_build_tools.exe --quiet --wait --norestart --nocache --config C:\\TEMP\\.vsconfig | Write-Output; \\\r\n    Start-Sleep -s 20; \\\r\n    del msvc_build_tools.exe; \\\r\n    ""\r\n\r\nRUN powershell -Command "" \\\r\n    $url = \\""https://repo.continuum.io/miniconda/Miniconda3-latest-Windows-x86_64.exe\\""; \\\r\n    $client = new-object System.Net.WebClient; \\\r\n    $client.DownloadFile( $url, \\""miniconda3.exe\\""); \\\r\n    ./miniconda3.exe /S /D=C:\\Users\\Administrator\\miniconda3 | Write-Output; \\\r\n    del miniconda3.exe; \\\r\n    ./miniconda3/Scripts/conda clean --all -y; \\\r\n    ""\r\n\r\nRUN miniconda3\\Scripts\\activate.bat && \\\r\n    conda config --add channels conda-forge && \\\r\n    conda install -y conda-build git && \\\r\n    conda config --set always_yes true && \\\r\n    conda config --set anaconda_upload false\r\n\r\nCMD cmd.exe /k miniconda3\\Scripts\\activate.bat\r\n\r\n```\r\n\r\n.vsconfig-2017\r\n```\r\n{\r\n  ""version"": ""1.0"",\r\n  ""components"": [\r\n    ""Microsoft.VisualStudio.Component.Roslyn.Compiler"",\r\n    ""Microsoft.Component.MSBuild"",\r\n    ""Microsoft.VisualStudio.Component.CoreBuildTools"",\r\n    ""Microsoft.VisualStudio.Workload.MSBuildTools"",\r\n    ""Microsoft.VisualStudio.Component.Windows10SDK"",\r\n    ""Microsoft.VisualStudio.Component.VC.CoreBuildTools"",\r\n    ""Microsoft.VisualStudio.Component.VC.Tools.x86.x64"",\r\n    ""Microsoft.VisualStudio.Component.VC.Redist.14.Latest"",\r\n    ""Microsoft.VisualStudio.Component.Windows10SDK.19041"",\r\n    ""Microsoft.VisualStudio.Component.VC.CMake.Project"",\r\n    ""Microsoft.VisualStudio.Component.TestTools.BuildTools"",\r\n    ""Microsoft.VisualStudio.Component.VC.ASAN"",\r\n    ""Microsoft.VisualStudio.Component.TextTemplating"",\r\n    ""Microsoft.VisualStudio.Component.VC.CoreIde"",\r\n    ""Microsoft.VisualStudio.ComponentGroup.NativeDesktop.Core"",\r\n    ""Microsoft.VisualStudio.Component.VC.v141.x86.x64"",\r\n    ""Microsoft.VisualStudio.Workload.VCTools""\r\n  ]\r\n}\r\n```\r\n\r\nThis one is 7GB larger for a total of 15GB! It includes additional things such as Windows CMake tools and the Windows 10 SDK, but I believe these things are necessary for CMake to function correctly.', 'title': None, 'type': 'comment'}]","<issue_start><issue_comment>Title: Windows Docker image for conda-forge development
+username_0: I have some Windows systems (also includes throwaway VMs using cloud providers) that I use to develop and debug conda-forge recipe failures on Windows. Sadly I have never had a Windows system that was working with all conda-forge packages. Most often I have to resort to developing against the CI. The documentation we have is okish, improving it would help but having a Windows docker image that replicates our CI setup would greatly help me to enable packages for Windows.
+
+Would it be possible to create such an image or Dockerfile? (we might have to use the latter as we may not be able to redistribute some SDKs?)
+<issue_comment>username_1: I think a viable solution is to have an ansible playbook somewhere that can provision a windows machine.
+<issue_comment>username_0: Meanwhile I have a basic `Dockerfile` that works for building packages with native code on Windows:
+
+```
+FROM mcr.microsoft.com/windows/servercore:ltsc2019
+
+WORKDIR C:/Users/Administrator
+
+# Be patient, this takes quite a while and you see no action.
+RUN powershell -Command "" \
+    $url = \""http://go.microsoft.com/fwlink/?LinkId=691126\""; \
+    $client = new-object System.Net.WebClient; \
+    $client.DownloadFile( $url, \""msvc_build_tools.exe\""); \
+    ./msvc_build_tools.exe /full /q | Write-Output; \
+    Start-Sleep -s 20; \
+    del msvc_build_tools.exe; \
+    ""
+
+RUN powershell -NoProfile -ExecutionPolicy Bypass -Command ""iex ((new-object net.webclient).DownloadString('https://chocolatey.org/install.ps1'))""
+RUN chocolatey feature enable -n allowGlobalConfirmation
+RUN choco install neovim
+
+RUN powershell -Command "" \
+    $url = \""https://repo.continuum.io/miniconda/Miniconda3-latest-Windows-x86_64.exe\""; \
+    $client = new-object System.Net.WebClient; \
+    $client.DownloadFile( $url, \""miniconda3.exe\""); \
+    ./miniconda3.exe /S /D=C:\Users\Administrator\miniconda3 | Write-Output; \
+    del miniconda3.exe; \
+    ./miniconda3/Scripts/conda clean --all -y; \
+    ""
+
+RUN miniconda3\Scripts\activate.bat && \
+    conda config --add channels conda-forge && \
+    conda install -y conda-build git && \
+    conda config --set always_yes true && \
+    conda config --set anaconda_upload false
+```
+
+Only works reliably if you disable any Virus scanner.
+<issue_comment>username_2: @username_0 This is really neat.  Do you know what version of Visual Studio/Visual C++ is installed by the first RUN step?
+<issue_comment>username_3: Do you know why virus scanners need to be disabled?
+<issue_comment>username_0: I have often had the problem that conda was unable to delete files due to permission problems. Normally this is an indicator that another process also has an open handle to that file. These problems vanished completely after disabling Windows Defender.
+<issue_comment>username_0: VS Build Tools 2015, with the latest changes on conda-forge, I need to find the 2017 ones. Currently I only see links for 2015 and 2019.
+
+Meanwhile I found that on chochlatey also the tools are packages and I will try to use them instead of the direct download link as that should make the version more obvious and hopefully the installation less mysterious.
+<issue_comment>username_3: I wonder if Conda is not closing files properly then.
+<issue_comment>username_4: No @username_3, Windows File IO does not do file locking well. That is the problem here.
+<issue_comment>username_3: cc @jaimergp (for reference)
+<issue_comment>username_5: I updated @username_0's recipe to use the VS build tools installer. This installer allows you to provide a config file, so you know exactly what tools are being installed.
+
+```docker
+FROM mcr.microsoft.com/windows/servercore:ltsc2019
+
+SHELL [""cmd"", ""/S"", ""/C""]
+
+WORKDIR C:/Users/Administrator
+
+# Exported from Visual Studio Installer GUI, this config file is used to
+# explicitly list out which MSVC components are installed. Component names are
+# also documented here:
+# https://docs.microsoft.com/en-us/visualstudio/install/workload-component-id-vs-build-tools
+ADD .vsconfig-2017 ""C:\\TEMP\\.vsconfig""
+
+# Be patient, this takes quite a while and you see no action.
+RUN powershell -Command "" \
+    $url = \""https://aka.ms/vs/17/release/vs_buildtools.exe\""; \
+    $client = new-object System.Net.WebClient; \
+    $client.DownloadFile( $url, \""msvc_build_tools.exe\""); \
+    ./msvc_build_tools.exe --quiet --wait --norestart --nocache --config C:\TEMP\.vsconfig | Write-Output; \
+    Start-Sleep -s 20; \
+    del msvc_build_tools.exe; \
+    ""
+
+RUN powershell -Command "" \
+    $url = \""https://repo.continuum.io/miniconda/Miniconda3-latest-Windows-x86_64.exe\""; \
+    $client = new-object System.Net.WebClient; \
+    $client.DownloadFile( $url, \""miniconda3.exe\""); \
+    ./miniconda3.exe /S /D=C:\Users\Administrator\miniconda3 | Write-Output; \
+    del miniconda3.exe; \
+    ./miniconda3/Scripts/conda clean --all -y; \
+    ""
+
+RUN miniconda3\Scripts\activate.bat && \
+    conda config --add channels conda-forge && \
+    conda install -y conda-build git && \
+    conda config --set always_yes true && \
+    conda config --set anaconda_upload false
+
+CMD cmd.exe /k miniconda3\Scripts\activate.bat
+
+```
+
+.vsconfig-2017
+```
+{
+  ""version"": ""1.0"",
+  ""components"": [
+    ""Microsoft.VisualStudio.Component.Roslyn.Compiler"",
+    ""Microsoft.Component.MSBuild"",
+    ""Microsoft.VisualStudio.Component.CoreBuildTools"",
+    ""Microsoft.VisualStudio.Workload.MSBuildTools"",
+    ""Microsoft.VisualStudio.Component.Windows10SDK"",
+    ""Microsoft.VisualStudio.Component.VC.CoreBuildTools"",
+    ""Microsoft.VisualStudio.Component.VC.Tools.x86.x64"",
+    ""Microsoft.VisualStudio.Component.VC.Redist.14.Latest"",
+    ""Microsoft.VisualStudio.Component.Windows10SDK.19041"",
+    ""Microsoft.VisualStudio.Component.VC.CMake.Project"",
+    ""Microsoft.VisualStudio.Component.TestTools.BuildTools"",
+    ""Microsoft.VisualStudio.Component.VC.ASAN"",
+    ""Microsoft.VisualStudio.Component.TextTemplating"",
+    ""Microsoft.VisualStudio.Component.VC.CoreIde"",
+    ""Microsoft.VisualStudio.ComponentGroup.NativeDesktop.Core"",
+    ""Microsoft.VisualStudio.Component.VC.v141.x86.x64"",
+    ""Microsoft.VisualStudio.Workload.VCTools""
+  ]
+}
+```
+
+This one is 7GB larger for a total of 15GB! It includes additional things such as Windows CMake tools and the Windows 10 SDK, but I believe these things are necessary for CMake to function correctly."

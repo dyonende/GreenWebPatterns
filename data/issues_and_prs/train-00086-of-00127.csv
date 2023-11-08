@@ -1,0 +1,333 @@
+kubernetes/website,1167356727,32229,,"[{'action': 'opened', 'author': 'Ricky816845', 'comment_id': None, 'datetime': '2022-03-12 18:08:21+00:00', 'masked_author': 'username_0', 'text': '![image](https://user-images.githubusercontent.com/20158450/158029501-f415640c-4500-49cf-9139-c0c11d954062.png)', 'title': 'Issue with k8s.io/docs/tasks/tools/included/optional-kubectl-configs-pwsh/ not sopport powershell', 'type': 'issue'}
+ {'action': 'created', 'author': 'mk46', 'comment_id': 1066411485.0, 'datetime': '2022-03-14 06:03:25+00:00', 'masked_author': 'username_1', 'text': '@username_0 Thanks for reporting, \r\nPowershell support was added in v1.23 by https://github.com/kubernetes/kubernetes/pull/103758.\r\nKindly check your kubectl version.\r\n@username_2 Could we mention something like `supported in kubectl v1.23 or later` ?', 'title': None, 'type': 'comment'}
+ {'action': 'closed', 'author': 'Ricky816845', 'comment_id': None, 'datetime': '2022-03-14 12:36:36+00:00', 'masked_author': 'username_0', 'text': '', 'title': None, 'type': 'issue'}
+ {'action': 'created', 'author': 'Ricky816845', 'comment_id': 1066735083.0, 'datetime': '2022-03-14 12:36:36+00:00', 'masked_author': 'username_0', 'text': ""The version is 1.22, which is installed from Docker Desktop.\r\nAfter installing kubernetes-cli via chocolatey doesn't seem to point to the correct version\r\nFound the problem, thanks."", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'sftim', 'comment_id': 1066762755.0, 'datetime': '2022-03-14 13:07:12+00:00', 'masked_author': 'username_2', 'text': '/kind support', 'title': None, 'type': 'comment'}]","<issue_start><issue_comment>Title: Issue with k8s.io/docs/tasks/tools/included/optional-kubectl-configs-pwsh/ not sopport powershell
+username_0: ![image](https://user-images.githubusercontent.com/20158450/158029501-f415640c-4500-49cf-9139-c0c11d954062.png)
+<issue_comment>username_1: @username_0 Thanks for reporting, 
+Powershell support was added in v1.23 by https://github.com/kubernetes/kubernetes/pull/103758.
+Kindly check your kubectl version.
+@username_2 Could we mention something like `supported in kubectl v1.23 or later` ?<issue_closed>
+<issue_comment>username_0: The version is 1.22, which is installed from Docker Desktop.
+After installing kubernetes-cli via chocolatey doesn't seem to point to the correct version
+Found the problem, thanks.
+<issue_comment>username_2: /kind support"
+newrelic/docs-website,898805787,2412,,"[{'action': 'opened', 'author': 'antoniodesenvolvedor', 'comment_id': None, 'datetime': '2021-05-22 13:41:18+00:00', 'masked_author': 'username_0', 'text': 'While installing the new relic to monitor my sql server instance I got the following error.\r\n\r\n\'\'\'\r\n$output = sqlcmd -S ""127.0.0.1,1433"" -U my_user -P ""my_pass"" -Q ""SELECT GETDATE()""; if ( -not ($output -like ""*rows\r\naffected*"") ) { Write-Error ""Cannot connect to the SQL Server instance 127.0.0.1 with the provided username sa and\r\npassword.""; Exit 2; } : Cannot connect to the SQL Server instance 127.0.0.1 with the provided username sa and password.\r\n    + CategoryInfo          : NotSpecified: (:) [Write-Error], WriteErrorException\r\n    + FullyQualifiedErrorId : Microsoft.PowerShell.Commands.WriteErrorException\r\n\r\n==> Installing mssql-server-integration-installer...failed.\r\n\r\n\'\'\'\r\n\r\nI figured out that the problem is the  connectivity check logic in  \r\n""not ($output -like ""*rows affected*"")""\r\n\r\nMy SqlServer Instance does not output the message in english ""rows affected"", so this test always fails for me,\r\n\r\nExample of the message in portuguese\r\n""(1 linha afetada)""\r\n\r\nYou could change the logic to check for the number ""1"", this way the installation process of the mssql-server-integration-installer\r\nwould be more portable across languages.\r\n\r\nThank you.', 'title': ""Can't install mssql-server-integration-installer because of language problems"", 'type': 'issue'}
+ {'action': 'created', 'author': 'rhetoric101', 'comment_id': 847230123.0, 'datetime': '2021-05-24 18:02:07+00:00', 'masked_author': 'username_1', 'text': '@username_0, thanks for your suggestion. I mentioned this to our engineering team and will see what they say.', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'rhetoric101', 'comment_id': 847395411.0, 'datetime': '2021-05-24 22:36:33+00:00', 'masked_author': 'username_1', 'text': '@username_0, our engineering team considered this a bug, and created an internal issue to track the work (VIRTUOSO-951).', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'Julien4218', 'comment_id': 847428530.0, 'datetime': '2021-05-24 23:55:55+00:00', 'masked_author': 'username_2', 'text': 'A fix is now deployed', 'title': None, 'type': 'comment'}
+ {'action': 'closed', 'author': 'rhetoric101', 'comment_id': None, 'datetime': '2021-05-26 01:59:33+00:00', 'masked_author': 'username_1', 'text': '', 'title': None, 'type': 'issue'}]","<issue_start><issue_comment>Title: Can't install mssql-server-integration-installer because of language problems
+username_0: While installing the new relic to monitor my sql server instance I got the following error.
+
+'''
+$output = sqlcmd -S ""127.0.0.1,1433"" -U my_user -P ""my_pass"" -Q ""SELECT GETDATE()""; if ( -not ($output -like ""*rows
+affected*"") ) { Write-Error ""Cannot connect to the SQL Server instance 127.0.0.1 with the provided username sa and
+password.""; Exit 2; } : Cannot connect to the SQL Server instance 127.0.0.1 with the provided username sa and password.
+    + CategoryInfo          : NotSpecified: (:) [Write-Error], WriteErrorException
+    + FullyQualifiedErrorId : Microsoft.PowerShell.Commands.WriteErrorException
+
+==> Installing mssql-server-integration-installer...failed.
+
+'''
+
+I figured out that the problem is the  connectivity check logic in  
+""not ($output -like ""*rows affected*"")""
+
+My SqlServer Instance does not output the message in english ""rows affected"", so this test always fails for me,
+
+Example of the message in portuguese
+""(1 linha afetada)""
+
+You could change the logic to check for the number ""1"", this way the installation process of the mssql-server-integration-installer
+would be more portable across languages.
+
+Thank you.
+<issue_comment>username_1: @username_0, thanks for your suggestion. I mentioned this to our engineering team and will see what they say.
+<issue_comment>username_1: @username_0, our engineering team considered this a bug, and created an internal issue to track the work (VIRTUOSO-951).
+<issue_comment>username_2: A fix is now deployed<issue_closed>"
+kubernetes/website,792113146,26199,,"[{'action': 'opened', 'author': 'ymartineau', 'comment_id': None, 'datetime': '2021-01-22 15:52:35+00:00', 'masked_author': 'username_0', 'text': 'Module 3 - Step 2\r\n\r\ncurl http://localhost:8001/api/v1/namespaces/default/pods/$POD_NAME/proxy/\r\n\r\nThis doesn\'t work when executed on a local minikube installation on windows (it works as expected on katacoda but the difference between those two environments is not obvious for this specific issue).\r\n\r\nI\'m using a virtualbox driver (I don\'t know if it matters).\r\nShould this kind of bug be open against minikube or here?\r\n\r\ncurl http://localhost:8001/api/v1/namespaces/default/pods/kubernetes-bootcamp-57978f5f5d-pjl9r/proxy/\r\n{\r\n  ""kind"": ""Status"",\r\n  ""apiVersion"": ""v1"",\r\n  ""metadata"": {\r\n\r\n  },\r\n  ""status"": ""Failure"",\r\n  ""message"": ""error trying to reach service: dial tcp 172.17.0.3:80: connect: connection refused"",\r\n  ""code"": 500\r\n}\r\n\r\nHere the connection attempt is made on port 80 while NodeJs is running on port 8080.', 'title': 'Interactive Tutorial - Exploring Your App', 'type': 'issue'}
+ {'action': 'created', 'author': 'sftim', 'comment_id': 768489103.0, 'datetime': '2021-01-27 18:37:22+00:00', 'masked_author': 'username_1', 'text': ""This looks like a report for https://kubernetes.io/docs/tutorials/kubernetes-basics/explore/explore-interactive/\r\n\r\nMake sure that when you run `kubectl proxy` it stays running (you don't quit the proxy and then try to use it to access pods). The advice is to open a second window (PowerShell, etc) to run the remaining commands.\r\n\r\nIf you see an error from `kubectl proxy` then please describe it.\r\n\r\nCan you confirm the details of the system that someone could replicate this on @username_0 ?\r\n- Windows version\r\n- minikube version\r\n- Kubernetes version\r\n- VirtualBox version\r\n- Processor architecture, I'm assuming AMD64\r\n\r\nplus anything else that seems relevant."", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'ymartineau', 'comment_id': 768578819.0, 'datetime': '2021-01-27 21:09:16+00:00', 'masked_author': 'username_0', 'text': 'Thank you for your response.\r\n\r\nYes, this is the right url.\r\n\r\nYes I kept `kubectl proxy` running in one window (cmd prompt, not powershell, but I\'m not sure it matters) (there was no output message) and ran curl in another window (cmd prompt).\r\n\r\nwindows version: windows 10 x64 patch 1809\r\nminikube version: v1.16.0\r\n\r\nKubernetes:\r\nkubectl version\r\nClient Version: version.Info{Major:""1"", Minor:""20"", GitVersion:""v1.20.2"", GitCommit:""faecb196815e248d3ecfb03c680a4507229c2a56"", GitTreeState:""clean"", BuildDate:""2021-01-13T13:28:09Z"", GoVersion:""go1.15.5"", Compiler:""gc"", Platform:""windows/amd64""}\r\nServer Version: version.Info{Major:""1"", Minor:""20"", GitVersion:""v1.20.0"", GitCommit:""af46c47ce925f4c4ad5cc8d1fca46c7b77d13b38"", GitTreeState:""clean"", BuildDate:""2020-12-08T17:51:19Z"", GoVersion:""go1.15.5"", Compiler:""gc"", Platform:""linux/amd64""}\r\n\r\nVirtualbox Version 6.1.16 r140961\r\n\r\nProcessor architecture: x64\r\n\r\nthank you', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'ch4mpy', 'comment_id': 777166167.0, 'datetime': '2021-02-11 02:22:56+00:00', 'masked_author': 'username_2', 'text': 'Same `kubectl proxy` issue here with with Minikube 1.17.1 and VirtualBox 6.1.18 r142142 running on Windows 10.\r\n\r\nRunning `kubectl exec -ti [my-running-pod] bash` and then `curl http://localhost:8080/api/v1/namespaces/default/pods/kubernetes-bootcamp-57978f5f5d-nddqv/proxy/` works.\r\n\r\nRunning `kubectl proxy` gives `Starting to serve on 127.0.0.1:8001` but then accessing http://localhost:8001/api/v1/namespaces/default/pods/kubernetes-bootcamp-57978f5f5d-nddqv/proxy/ returns:\r\n```\r\n{\r\n  ""kind"": ""Status"",\r\n  ""apiVersion"": ""v1"",\r\n  ""metadata"": {\r\n    \r\n  },\r\n  ""status"": ""Failure"",\r\n  ""message"": ""error trying to reach service: dial tcp 172.17.0.3:80: connect: connection refused"",\r\n  ""code"": 500\r\n}\r\n```', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'Karmavil', 'comment_id': 780376516.0, 'datetime': '2021-02-17 07:58:16+00:00', 'masked_author': 'username_3', 'text': ""@username_0 You're right. \r\n\r\nThe exercise doesn't assign a port in the deployment. \r\nTry:\r\n`kubectl create deployment kubernetes-bootcamp --image=gcr.io/google-samples/kubernetes-bootcamp:v1 --port=8080`\r\nUsing a new tab or terminal run `kubectl proxy --port=8080`\r\nDefine your $POD_NAME or just copy the name from the `kubectl get pods` output and run the curl command. It will work"", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'simonc6372', 'comment_id': 787444558.0, 'datetime': '2021-02-28 12:28:01+00:00', 'masked_author': 'username_4', 'text': 'I ran into this too, and was about to create an issue, but found this one. \r\n\r\nThe deployment created in the preceding lesson (https://kubernetes.io/docs/tutorials/kubernetes-basics/deploy-app/deploy-interactive/) does not have a port assigned. \r\nThis tutorial assumes the deployment *does* have a port assigned, but if you are following the lessons against your own cluster, this is not the case. \r\nThis makes it hard to follow along against your own cluster. \r\nI think you either need to tweak the image, or the tutorial command to assign the port.', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'sftim', 'comment_id': 787470408.0, 'datetime': '2021-02-28 15:31:15+00:00', 'masked_author': 'username_1', 'text': ""@username_0 would you be willing to summarize https://github.com/kubernetes/website/issues/26199#issuecomment-787444558 into the description of this issue? I think that'd help."", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'sftim', 'comment_id': 787470424.0, 'datetime': '2021-02-28 15:31:24+00:00', 'masked_author': 'username_1', 'text': '/language en', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'ymartineau', 'comment_id': 794147457.0, 'datetime': '2021-03-09 16:47:15+00:00', 'masked_author': 'username_0', 'text': 'hi, FYI I tried the instructions provided by @username_3, the curl command to get the api version (curl http://localhost:8001/version) had to be updated to use the 8080 port (curl http://localhost:8080/version) and it worked. Thank you\r\n\r\nI was intrigued by the 8080 port so I tried the following:\r\n\r\nkubectl create deployment kubernetes-bootcamp --image=gcr.io/google-samples/kubernetes-bootcamp:v1 --port=8001\r\nkubectl proxy\r\n\r\nand it didn\'t work with same error message as original attempt.\r\nSo I ""guess"" there is something special with 8001 port. This is not necessarily the point here, so as mentioned I guess something could be updated in the tutorial or the image to be consistent.\r\n\r\nThank you', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'Karmavil', 'comment_id': 797103151.0, 'datetime': '2021-03-11 22:52:35+00:00', 'masked_author': 'username_3', 'text': '/team/katacoda', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'Karmavil', 'comment_id': 799923119.0, 'datetime': '2021-03-16 03:48:12+00:00', 'masked_author': 'username_3', 'text': 'But something is happening in the process that I still cannot yet understand, sorry I thought it was related with an outdated version of minikube but apparently it is not. I cannot give better assistance on this issue.\r\n\r\nMaybe the problem has something to do with this :\r\n```bash\r\n# outputs from interactive tutorial\r\n$ minikube version\r\nminikube version: v1.8.1\r\n\r\n$ kubectl get nodes\r\nNAME       STATUS   ROLES    AGE   VERSION\r\nminikube   Ready    master   17m   v1.17.3\r\n```', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'ymartineau', 'comment_id': 801716134.0, 'datetime': '2021-03-18 08:02:24+00:00', 'masked_author': 'username_0', 'text': '', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'Karmavil', 'comment_id': 802162021.0, 'datetime': '2021-03-18 17:51:52+00:00', 'masked_author': 'username_3', 'text': ""Thanks for the feedback @username_0 I will try it (soon). \r\nI'm not sure if the exercise is embedded so I can't confirm if that's something easy to do. Also there is a release incoming so people is busy and I don't want to brake thing right now. \r\nI will take a look"", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'Karmavil', 'comment_id': 804316852.0, 'datetime': '2021-03-22 19:02:20+00:00', 'masked_author': 'username_3', 'text': '', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'sftim', 'comment_id': 814434835.0, 'datetime': '2021-04-06 20:55:55+00:00', 'masked_author': 'username_1', 'text': 'https://github.com/kubernetes/website/issues/26199#issuecomment-801716134 seems like a reasonable fix to me!', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'AdamHollow49', 'comment_id': 883304101.0, 'datetime': '2021-07-20 11:05:26+00:00', 'masked_author': 'username_5', 'text': 'Ran into this today - comments here saved it! No note added to tutorial yet?', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'sftim', 'comment_id': 883315732.0, 'datetime': '2021-07-20 11:24:49+00:00', 'masked_author': 'username_1', 'text': ""@username_5 if you'd like to [propose](https://kubernetes.io/docs/contribute/) a fix, the Kubernetes special interest group for documentation can help you do that.\r\n\r\nLike Kubernetes itself, the documentation is open source. Most improvements are done by volunteers.\r\n/remove-lifecycle stale"", 'title': None, 'type': 'comment'}]","<issue_start><issue_comment>Title: Interactive Tutorial - Exploring Your App
+username_0: Module 3 - Step 2
+
+curl http://localhost:8001/api/v1/namespaces/default/pods/$POD_NAME/proxy/
+
+This doesn't work when executed on a local minikube installation on windows (it works as expected on katacoda but the difference between those two environments is not obvious for this specific issue).
+
+I'm using a virtualbox driver (I don't know if it matters).
+Should this kind of bug be open against minikube or here?
+
+curl http://localhost:8001/api/v1/namespaces/default/pods/kubernetes-bootcamp-57978f5f5d-pjl9r/proxy/
+{
+  ""kind"": ""Status"",
+  ""apiVersion"": ""v1"",
+  ""metadata"": {
+
+  },
+  ""status"": ""Failure"",
+  ""message"": ""error trying to reach service: dial tcp 172.17.0.3:80: connect: connection refused"",
+  ""code"": 500
+}
+
+Here the connection attempt is made on port 80 while NodeJs is running on port 8080.
+<issue_comment>username_1: This looks like a report for https://kubernetes.io/docs/tutorials/kubernetes-basics/explore/explore-interactive/
+
+Make sure that when you run `kubectl proxy` it stays running (you don't quit the proxy and then try to use it to access pods). The advice is to open a second window (PowerShell, etc) to run the remaining commands.
+
+If you see an error from `kubectl proxy` then please describe it.
+
+Can you confirm the details of the system that someone could replicate this on @username_0 ?
+- Windows version
+- minikube version
+- Kubernetes version
+- VirtualBox version
+- Processor architecture, I'm assuming AMD64
+
+plus anything else that seems relevant.
+<issue_comment>username_0: Thank you for your response.
+
+Yes, this is the right url.
+
+Yes I kept `kubectl proxy` running in one window (cmd prompt, not powershell, but I'm not sure it matters) (there was no output message) and ran curl in another window (cmd prompt).
+
+windows version: windows 10 x64 patch 1809
+minikube version: v1.16.0
+
+Kubernetes:
+kubectl version
+Client Version: version.Info{Major:""1"", Minor:""20"", GitVersion:""v1.20.2"", GitCommit:""faecb196815e248d3ecfb03c680a4507229c2a56"", GitTreeState:""clean"", BuildDate:""2021-01-13T13:28:09Z"", GoVersion:""go1.15.5"", Compiler:""gc"", Platform:""windows/amd64""}
+Server Version: version.Info{Major:""1"", Minor:""20"", GitVersion:""v1.20.0"", GitCommit:""af46c47ce925f4c4ad5cc8d1fca46c7b77d13b38"", GitTreeState:""clean"", BuildDate:""2020-12-08T17:51:19Z"", GoVersion:""go1.15.5"", Compiler:""gc"", Platform:""linux/amd64""}
+
+Virtualbox Version 6.1.16 r140961
+
+Processor architecture: x64
+
+thank you
+<issue_comment>username_2: Same `kubectl proxy` issue here with with Minikube 1.17.1 and VirtualBox 6.1.18 r142142 running on Windows 10.
+
+Running `kubectl exec -ti [my-running-pod] bash` and then `curl http://localhost:8080/api/v1/namespaces/default/pods/kubernetes-bootcamp-57978f5f5d-nddqv/proxy/` works.
+
+Running `kubectl proxy` gives `Starting to serve on 127.0.0.1:8001` but then accessing http://localhost:8001/api/v1/namespaces/default/pods/kubernetes-bootcamp-57978f5f5d-nddqv/proxy/ returns:
+```
+{
+  ""kind"": ""Status"",
+  ""apiVersion"": ""v1"",
+  ""metadata"": {
+    
+  },
+  ""status"": ""Failure"",
+  ""message"": ""error trying to reach service: dial tcp 172.17.0.3:80: connect: connection refused"",
+  ""code"": 500
+}
+```
+<issue_comment>username_3: @username_0 You're right. 
+
+The exercise doesn't assign a port in the deployment. 
+Try:
+`kubectl create deployment kubernetes-bootcamp --image=gcr.io/google-samples/kubernetes-bootcamp:v1 --port=8080`
+Using a new tab or terminal run `kubectl proxy --port=8080`
+Define your $POD_NAME or just copy the name from the `kubectl get pods` output and run the curl command. It will work
+<issue_comment>username_4: I ran into this too, and was about to create an issue, but found this one. 
+
+The deployment created in the preceding lesson (https://kubernetes.io/docs/tutorials/kubernetes-basics/deploy-app/deploy-interactive/) does not have a port assigned. 
+This tutorial assumes the deployment *does* have a port assigned, but if you are following the lessons against your own cluster, this is not the case. 
+This makes it hard to follow along against your own cluster. 
+I think you either need to tweak the image, or the tutorial command to assign the port.
+<issue_comment>username_1: @username_0 would you be willing to summarize https://github.com/kubernetes/website/issues/26199#issuecomment-787444558 into the description of this issue? I think that'd help.
+<issue_comment>username_1: /language en
+<issue_comment>username_0: hi, FYI I tried the instructions provided by @username_3, the curl command to get the api version (curl http://localhost:8001/version) had to be updated to use the 8080 port (curl http://localhost:8080/version) and it worked. Thank you
+
+I was intrigued by the 8080 port so I tried the following:
+
+kubectl create deployment kubernetes-bootcamp --image=gcr.io/google-samples/kubernetes-bootcamp:v1 --port=8001
+kubectl proxy
+
+and it didn't work with same error message as original attempt.
+So I ""guess"" there is something special with 8001 port. This is not necessarily the point here, so as mentioned I guess something could be updated in the tutorial or the image to be consistent.
+
+Thank you
+<issue_comment>username_3: /team/katacoda
+<issue_comment>username_3: But something is happening in the process that I still cannot yet understand, sorry I thought it was related with an outdated version of minikube but apparently it is not. I cannot give better assistance on this issue.
+
+Maybe the problem has something to do with this :
+```bash
+# outputs from interactive tutorial
+$ minikube version
+minikube version: v1.8.1
+
+$ kubectl get nodes
+NAME       STATUS   ROLES    AGE   VERSION
+minikube   Ready    master   17m   v1.17.3
+```
+<issue_comment>username_3: Thanks for the feedback @username_0 I will try it (soon). 
+I'm not sure if the exercise is embedded so I can't confirm if that's something easy to do. Also there is a release incoming so people is busy and I don't want to brake thing right now. 
+I will take a look
+<issue_comment>username_1: https://github.com/kubernetes/website/issues/26199#issuecomment-801716134 seems like a reasonable fix to me!
+<issue_comment>username_5: Ran into this today - comments here saved it! No note added to tutorial yet?
+<issue_comment>username_1: @username_5 if you'd like to [propose](https://kubernetes.io/docs/contribute/) a fix, the Kubernetes special interest group for documentation can help you do that.
+
+Like Kubernetes itself, the documentation is open source. Most improvements are done by volunteers.
+/remove-lifecycle stale"
+eduardoboucas/staticman,453341833,296,,"[{'action': 'opened', 'author': 'nverinaud', 'comment_id': None, 'datetime': '2019-06-07 05:16:50+00:00', 'masked_author': 'username_0', 'text': 'I try to connect Staticman to my repository (Step 1 of ""Getting Started"") but it fails with an error from Heroku.\r\n\r\nHere is the URL I call : `https://api.staticman.net/v2/connect/Ryfacto/academie.ryfacto.fr`.\r\n\r\nAnd the response :\r\n\r\n```html\r\n<!DOCTYPE html>\r\n<html>\r\n    <head>\r\n        <meta name=""viewport"" content=""width=device-width, initial-scale=1"">\r\n        <meta charset=""utf-8"">\r\n        <title>Application Error</title>\r\n        <style media=""screen"">\r\n\t\t  html,body,iframe {\r\n\t\t\tmargin: 0;\r\n\t\t\tpadding: 0;\r\n\t\t  }\r\n\t\t  html,body {\r\n\t\t\theight: 100%;\r\n\t\t\toverflow: hidden;\r\n\t\t  }\r\n\t\t  iframe {\r\n\t\t\twidth: 100%;\r\n\t\t\theight: 100%;\r\n\t\t\tborder: 0;\r\n\t\t  }\r\n\t\t</style>\r\n    </head>\r\n    <body>\r\n        <iframe src=""//www.herokucdn.com/error-pages/application-error.html""></iframe>\r\n    </body>\r\n</html>\r\n```\r\n\r\nThanks a lot for your help !', 'title': '""Application error"" when trying to connect a new repository', 'type': 'issue'}
+ {'action': 'created', 'author': 'deadlydog', 'comment_id': 501979277.0, 'datetime': '2019-06-14 05:59:03+00:00', 'masked_author': 'username_1', 'text': ""I'm also having this same issue.\r\n\r\n![image](https://user-images.githubusercontent.com/1187140/59486534-cd954200-8e36-11e9-9a74-9e98ac46515d.png)\r\n\r\n![image](https://user-images.githubusercontent.com/1187140/59486569-eaca1080-8e36-11e9-8b12-ef6bdbcf7133.png)\r\n\r\nI'm not sure if it's related, but I noticed that the build is also failing. Perhaps a bad version got pushed out?"", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'deadlydog', 'comment_id': 501987544.0, 'datetime': '2019-06-14 06:35:52+00:00', 'masked_author': 'username_1', 'text': 'I found issue #243 and installed the app instead of going the contributor route. I think this is the new recommended practice, but the docs have not been updated yet.', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'huobi-registraciya', 'comment_id': 502155814.0, 'datetime': '2019-06-14 15:33:56+00:00', 'masked_author': 'username_2', 'text': ""I'm also having this same issue!"", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'antohabio', 'comment_id': 504694759.0, 'datetime': '2019-06-22 20:08:36+00:00', 'masked_author': 'username_3', 'text': ""I'm too."", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'ayaxxchanz', 'comment_id': 507046705.0, 'datetime': '2019-06-30 15:48:37+00:00', 'masked_author': 'username_4', 'text': 'Hi. Any fix to this problem? I try to install Staticman with my Hugo site but always got this same error. The documentation is outdated. I also came across with several websites to ask questions about this but every time I want to post a comment, I receive this application error too (including the demo site https://hugo.staticman.net/ )', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'tomasparks', 'comment_id': 508715428.0, 'datetime': '2019-07-05 10:36:00+00:00', 'masked_author': 'username_5', 'text': 'me too', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'VincentTam', 'comment_id': 508732658.0, 'datetime': '2019-07-05 11:46:23+00:00', 'masked_author': 'username_6', 'text': ""@username_1 That's against what the project owner's idea in https://github.com/eduardoboucas/staticman/issues/243#issuecomment-453876235."", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'zxdawn2', 'comment_id': 509571795.0, 'datetime': '2019-07-09 09:41:45+00:00', 'masked_author': 'username_7', 'text': ""@username_6 I can't find `staticmanapp` on GitHub:\r\n![image](https://user-images.githubusercontent.com/50947063/60877607-bea48280-a270-11e9-8d95-52c0e5be2a54.png)"", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'VincentTam', 'comment_id': 509674348.0, 'datetime': '2019-07-09 14:49:37+00:00', 'masked_author': 'username_6', 'text': ""@username_7 I don't own the official instance, so nobody can fix this except the author.  You may try using an alternative instance (i.e. anything that's NOT official), like @staticmanlab, @staticmanaima, @BloggerBust-bot, etc.\r\n\r\nP.S. I maintain the first one, and I helped the setup of the 2nd one through GitHub issues.  I've only tested mine.  If you want to use mine, please refer to the later half of https://github.com/einsteinpy/blog.einsteinpy.org/issues/12#issue-449871630 and adapt it to your repo.  I'm too lazy to retype everything again.  Please don't hesitate to ping me in case of questions."", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'zxdawn2', 'comment_id': 510276267.0, 'datetime': '2019-07-11 00:12:14+00:00', 'masked_author': 'username_7', 'text': '@username_6 I tried to visit `https://staticman3.herokuapp.com/v3/connect/github/username_7/username_7.github.io/master/comments`, but I get this error:\r\n```\r\nCannot GET /v3/connect/github/username_7/username_7.github.io/master/comments\r\n```\r\n\r\nBTW,  I use this method to add comments:\r\n```\r\n<form method=""POST"" action=""https://staticman3.herokuapp.com/v3/connect/github/{{ .Site.Params.staticman.username }}/{{ .Site.Params.staticman.repository }}/{{ .Site.Params.staticman.branch }}/comments"">\r\n```\r\n\r\nAs a result, when I try to post, I got this error:\r\n```\r\nCannot POST /v3/connect/github/username_7/username_7.github.io/master/comments\r\n```', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'VincentTam', 'comment_id': 510478125.0, 'datetime': '2019-07-11 13:08:50+00:00', 'masked_author': 'username_6', 'text': '@username_7 Thanks for your invitation to @staticmanlab.\r\n\r\n1. The link for accepting the invitation is  \r\nhttps://staticman3.herokuapp.com/v3/connect/github/username_7/username_7.github.io/  \r\nExplanation: You invite a GitHub/GitLab user to the *whole* repo, not just to a particular branch.\r\n2. To hook up your HTML form with Staticman API. you need `/entry` instead of `/connect`.\r\n\r\n       <form method=""POST"" action=""https://staticman3.herokuapp.com/v3/entry/github/{{ .Site.Params.staticman.username }}/{{ .Site.Params.staticman.repository }}/{{ .Site.Params.staticman.branch }}/comments"">\r\n\r\n    Note that `comments` is just a property name in `staticman.yml`.  You may change it to any name you like.  For example, https://github.com/okfde/offenerhaushalt.de/blob/gh-pages/staticman.yml.', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'zxdawn2', 'comment_id': 517895169.0, 'datetime': '2019-08-03 05:09:02+00:00', 'masked_author': 'username_7', 'text': ""@username_6 thanks!\r\nAlthough comment works, subscribe button doesn't work:\r\nhttps://github.com/username_7/username_7.github.io/blob/3a9b470ddd13ac1c8bb2831d1e15d30d55505ef2/themes/AllinOne/layouts/partials/staticman/form-comments.html#L30-L37\r\nIs that caused by @staticmanlab?"", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'VincentTam', 'comment_id': 517897763.0, 'datetime': '2019-08-03 06:00:25+00:00', 'masked_author': 'username_6', 'text': ""@staticmanlab _doesn't_ touch Akismet and Mailgun because his main goal is to show that Staticman's GitLab integration works, so that a truly open-source staticman commenting system is, in principle, feasible, for static sites hosted on Framagit, which is open-source.\r\n\r\nBefore the appearance of a free (as in both free beer and in freedom) alternative of Akismet and/or Mailgun, @staticmanlab won't try them."", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'zxdawn2', 'comment_id': 517933796.0, 'datetime': '2019-08-03 15:40:21+00:00', 'masked_author': 'username_7', 'text': 'Thanks! However, mailgun has free account option. Why not support it?', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'VincentTam', 'comment_id': 517934771.0, 'datetime': '2019-08-03 15:55:11+00:00', 'masked_author': 'username_6', 'text': '1. In this case, ""free"" as in ""free beer"" is offered, but not ""free"" as in ""freedom"" in GNU\'s norms.\r\n2. @staticmanlab\'s main goal is to test and demonstrate Staticman\'s native GitLab support, which had not yet been merged against the `master` branch, so I tried my best to minimise the [setup](https://vincenttam.gitlab.io/post/2018-09-16-staticman-powered-gitlab-pages/2/) and the corresponding [git diff between the `dev` branch at `55d14306` and my `deploy` branch](https://github.com/eduardoboucas/staticman/compare/55d14306d851059a2a27d24b5eb4cb17c5009477..username_6:deploy).', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'zxdawn2', 'comment_id': 522232156.0, 'datetime': '2019-08-17 12:21:18+00:00', 'masked_author': 'username_7', 'text': '@username_6 Thank you for your help! I rebuilded the [repository](https://github.com/username_7/username_7.github.io) and got another problem:\r\nThe Comment content at the end of this [page](https://username_7.github.io/2019/08/17/hugo-staticman-travis/#/reference) looks different from local (hugo server).\r\n\r\nLocal: \r\n![image](https://user-images.githubusercontent.com/50947063/63211626-63499800-c12c-11e9-9e0c-a4c8d620fdca.png)\r\n\r\nWEB:\r\n![image](https://user-images.githubusercontent.com/50947063/63211629-70ff1d80-c12c-11e9-8c30-9716c7af9fbd.png)', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'VincentTam', 'comment_id': 522233308.0, 'datetime': '2019-08-17 12:40:24+00:00', 'masked_author': 'username_6', 'text': '1. The project is about the Node.JS app that converts HTML form data into GitHub/GitLab pull/merge requests.  It *shouldn\'t* care whether you use GitHub/GitLab pages or not, as @<span></span>eduardoboucas commented in https://github.com/eduardoboucas/staticman/issues/278#issuecomment-475170669.  Your project is about the display of a HTML form, which has *nothing* to do with the structure of the form data, so perhaps you have to find a better place to ask, like [Hugo Discourse](https://discourse.gohugo.io/).\r\n2. To ensure that your Staticman config is correct, a quick way to test is to use API clients like [Postman](https://www.getpostman.com/), as @<span></span>ntsim suggested in #219.\r\n3. Please be aware of the ""503 Service Unavailable"" error of the official production instance ""api.staticman.net"".', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'ajbozdar', 'comment_id': 536014670.0, 'datetime': '2019-09-27 16:45:01+00:00', 'masked_author': 'username_8', 'text': 'Is staticman dead? When I try to add it as a collaborator, it says no such user exists.', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'VincentTam', 'comment_id': 536329653.0, 'datetime': '2019-09-29 18:44:52+00:00', 'masked_author': 'username_6', 'text': '@username_8 Your question has already been asked in #306.', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'alexwaibel', 'comment_id': 551362910.0, 'datetime': '2019-11-08 02:57:04+00:00', 'masked_author': 'username_9', 'text': 'Duplicate of #317', 'title': None, 'type': 'comment'}
+ {'action': 'closed', 'author': 'alexwaibel', 'comment_id': None, 'datetime': '2019-11-08 02:57:05+00:00', 'masked_author': 'username_9', 'text': '', 'title': None, 'type': 'issue'}]","<issue_start><issue_comment>Title: ""Application error"" when trying to connect a new repository
+username_0: I try to connect Staticman to my repository (Step 1 of ""Getting Started"") but it fails with an error from Heroku.
+
+Here is the URL I call : `https://api.staticman.net/v2/connect/Ryfacto/academie.ryfacto.fr`.
+
+And the response :
+
+```html
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta name=""viewport"" content=""width=device-width, initial-scale=1"">
+        <meta charset=""utf-8"">
+        <title>Application Error</title>
+        <style media=""screen"">
+		  html,body,iframe {
+			margin: 0;
+			padding: 0;
+		  }
+		  html,body {
+			height: 100%;
+			overflow: hidden;
+		  }
+		  iframe {
+			width: 100%;
+			height: 100%;
+			border: 0;
+		  }
+		</style>
+    </head>
+    <body>
+        <iframe src=""//www.herokucdn.com/error-pages/application-error.html""></iframe>
+    </body>
+</html>
+```
+
+Thanks a lot for your help !
+<issue_comment>username_1: I'm also having this same issue.
+
+![image](https://user-images.githubusercontent.com/1187140/59486534-cd954200-8e36-11e9-9a74-9e98ac46515d.png)
+
+![image](https://user-images.githubusercontent.com/1187140/59486569-eaca1080-8e36-11e9-8b12-ef6bdbcf7133.png)
+
+I'm not sure if it's related, but I noticed that the build is also failing. Perhaps a bad version got pushed out?
+<issue_comment>username_1: I found issue #243 and installed the app instead of going the contributor route. I think this is the new recommended practice, but the docs have not been updated yet.
+<issue_comment>username_2: I'm also having this same issue!
+<issue_comment>username_3: I'm too.
+<issue_comment>username_4: Hi. Any fix to this problem? I try to install Staticman with my Hugo site but always got this same error. The documentation is outdated. I also came across with several websites to ask questions about this but every time I want to post a comment, I receive this application error too (including the demo site https://hugo.staticman.net/ )
+<issue_comment>username_5: me too
+<issue_comment>username_6: @username_1 That's against what the project owner's idea in https://github.com/eduardoboucas/staticman/issues/243#issuecomment-453876235.
+<issue_comment>username_7: @username_6 I can't find `staticmanapp` on GitHub:
+![image](https://user-images.githubusercontent.com/50947063/60877607-bea48280-a270-11e9-8d95-52c0e5be2a54.png)
+<issue_comment>username_6: @username_7 I don't own the official instance, so nobody can fix this except the author.  You may try using an alternative instance (i.e. anything that's NOT official), like @staticmanlab, @staticmanaima, @BloggerBust-bot, etc.
+
+P.S. I maintain the first one, and I helped the setup of the 2nd one through GitHub issues.  I've only tested mine.  If you want to use mine, please refer to the later half of https://github.com/einsteinpy/blog.einsteinpy.org/issues/12#issue-449871630 and adapt it to your repo.  I'm too lazy to retype everything again.  Please don't hesitate to ping me in case of questions.
+<issue_comment>username_7: @username_6 I tried to visit `https://staticman3.herokuapp.com/v3/connect/github/username_7/username_7.github.io/master/comments`, but I get this error:
+```
+Cannot GET /v3/connect/github/username_7/username_7.github.io/master/comments
+```
+
+BTW,  I use this method to add comments:
+```
+<form method=""POST"" action=""https://staticman3.herokuapp.com/v3/connect/github/{{ .Site.Params.staticman.username }}/{{ .Site.Params.staticman.repository }}/{{ .Site.Params.staticman.branch }}/comments"">
+```
+
+As a result, when I try to post, I got this error:
+```
+Cannot POST /v3/connect/github/username_7/username_7.github.io/master/comments
+```
+<issue_comment>username_6: @username_7 Thanks for your invitation to @staticmanlab.
+
+1. The link for accepting the invitation is  
+https://staticman3.herokuapp.com/v3/connect/github/username_7/username_7.github.io/  
+Explanation: You invite a GitHub/GitLab user to the *whole* repo, not just to a particular branch.
+2. To hook up your HTML form with Staticman API. you need `/entry` instead of `/connect`.
+
+       <form method=""POST"" action=""https://staticman3.herokuapp.com/v3/entry/github/{{ .Site.Params.staticman.username }}/{{ .Site.Params.staticman.repository }}/{{ .Site.Params.staticman.branch }}/comments"">
+
+    Note that `comments` is just a property name in `staticman.yml`.  You may change it to any name you like.  For example, https://github.com/okfde/offenerhaushalt.de/blob/gh-pages/staticman.yml.
+<issue_comment>username_7: @username_6 thanks!
+Although comment works, subscribe button doesn't work:
+https://github.com/username_7/username_7.github.io/blob/3a9b470ddd13ac1c8bb2831d1e15d30d55505ef2/themes/AllinOne/layouts/partials/staticman/form-comments.html#L30-L37
+Is that caused by @staticmanlab?
+<issue_comment>username_6: @staticmanlab _doesn't_ touch Akismet and Mailgun because his main goal is to show that Staticman's GitLab integration works, so that a truly open-source staticman commenting system is, in principle, feasible, for static sites hosted on Framagit, which is open-source.
+
+Before the appearance of a free (as in both free beer and in freedom) alternative of Akismet and/or Mailgun, @staticmanlab won't try them.
+<issue_comment>username_7: Thanks! However, mailgun has free account option. Why not support it?
+<issue_comment>username_6: 1. In this case, ""free"" as in ""free beer"" is offered, but not ""free"" as in ""freedom"" in GNU's norms.
+2. @staticmanlab's main goal is to test and demonstrate Staticman's native GitLab support, which had not yet been merged against the `master` branch, so I tried my best to minimise the [setup](https://vincenttam.gitlab.io/post/2018-09-16-staticman-powered-gitlab-pages/2/) and the corresponding [git diff between the `dev` branch at `55d14306` and my `deploy` branch](https://github.com/eduardoboucas/staticman/compare/55d14306d851059a2a27d24b5eb4cb17c5009477..username_6:deploy).
+<issue_comment>username_7: @username_6 Thank you for your help! I rebuilded the [repository](https://github.com/username_7/username_7.github.io) and got another problem:
+The Comment content at the end of this [page](https://username_7.github.io/2019/08/17/hugo-staticman-travis/#/reference) looks different from local (hugo server).
+
+Local: 
+![image](https://user-images.githubusercontent.com/50947063/63211626-63499800-c12c-11e9-9e0c-a4c8d620fdca.png)
+
+WEB:
+![image](https://user-images.githubusercontent.com/50947063/63211629-70ff1d80-c12c-11e9-8c30-9716c7af9fbd.png)
+<issue_comment>username_6: 1. The project is about the Node.JS app that converts HTML form data into GitHub/GitLab pull/merge requests.  It *shouldn't* care whether you use GitHub/GitLab pages or not, as @<span></span>eduardoboucas commented in https://github.com/eduardoboucas/staticman/issues/278#issuecomment-475170669.  Your project is about the display of a HTML form, which has *nothing* to do with the structure of the form data, so perhaps you have to find a better place to ask, like [Hugo Discourse](https://discourse.gohugo.io/).
+2. To ensure that your Staticman config is correct, a quick way to test is to use API clients like [Postman](https://www.getpostman.com/), as @<span></span>ntsim suggested in #219.
+3. Please be aware of the ""503 Service Unavailable"" error of the official production instance ""api.staticman.net"".
+<issue_comment>username_8: Is staticman dead? When I try to add it as a collaborator, it says no such user exists.
+<issue_comment>username_6: @username_8 Your question has already been asked in #306.
+<issue_comment>username_9: Duplicate of #317<issue_closed>"
+kubernetes/website,464656069,15308,"{'number': 15308.0, 'repo': 'website', 'user_login': 'kubernetes'}","[{'action': 'opened', 'author': 'manishbansal8843', 'comment_id': None, 'datetime': '2019-07-05T14:03:51Z', 'masked_author': 'username_0', 'text': 'This command does not work in Powershell. A specific note would help the developers to take care of the same.', 'title': 'Improvement for kubectl patch command', 'type': 'issue'}
+ {'action': 'created', 'author': 'manishbansal8843', 'comment_id': 508905465.0, 'datetime': '2019-07-06 07:48:06+00:00', 'masked_author': 'username_0', 'text': '/check-cla', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'manishbansal8843', 'comment_id': 509082138.0, 'datetime': '2019-07-08 05:18:35+00:00', 'masked_author': 'username_0', 'text': '/check-cla', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'manishbansal8843', 'comment_id': 509169262.0, 'datetime': '2019-07-08 10:21:34+00:00', 'masked_author': 'username_0', 'text': 'I have signed the corporate cla. I have tried forcing the bot to re-check the CLA but still its not working. Can anyone please help on this?\r\n/check-cla', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'manishbansal8843', 'comment_id': 509221051.0, 'datetime': '2019-07-08 13:17:22+00:00', 'masked_author': 'username_0', 'text': '/check-cla\r\nForcing cla check', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'manishbansal8843', 'comment_id': 509221333.0, 'datetime': '2019-07-08 13:18:06+00:00', 'masked_author': 'username_0', 'text': '/assign @jimangel', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'zacharysarah', 'comment_id': 518441029.0, 'datetime': '2019-08-05 23:44:25+00:00', 'masked_author': 'username_1', 'text': ""@username_0 👋 Thanks for your patience. This is a useful clarification! \r\n\r\nInstead of a note, I'd prefer to see it formatted with a [shortcode for multiple tabs](https://kubernetes.io/docs/contribute/style/hugo-shortcodes/#tabs). Please feel free to ask in [#sig-docs](https://app.slack.com/client/T09NY5SBT/C1J0BPD2M) if you have any questions about formatting."", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'manishbansal8843', 'comment_id': 518517066.0, 'datetime': '2019-08-06 06:04:11+00:00', 'masked_author': 'username_0', 'text': '@username_1 I have made the changes. However, i am not able to add a note in `PowerShell` tab to explain the reason for removing quotes around command substitution. If this is acceptable, then kindly approve it. Anyway, i have posted a query on slack. Will update the PR if there is any way to do that.', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'zacharysarah', 'comment_id': 518881798.0, 'datetime': '2019-08-06 23:35:02+00:00', 'masked_author': 'username_1', 'text': 'The idea of multiple tabs is hopefully to make the necessary difference self-explanatory. In this case, I think it works great.\r\n\r\n/lgtm\r\n/approve', 'title': None, 'type': 'comment'}]","<issue_start><issue_comment>Title: Improvement for kubectl patch command
+username_0: This command does not work in Powershell. A specific note would help the developers to take care of the same.
+<issue_comment>username_0: /check-cla
+<issue_comment>username_0: /check-cla
+<issue_comment>username_0: I have signed the corporate cla. I have tried forcing the bot to re-check the CLA but still its not working. Can anyone please help on this?
+/check-cla
+<issue_comment>username_0: /check-cla
+Forcing cla check
+<issue_comment>username_0: /assign @jimangel
+<issue_comment>username_1: @username_0 👋 Thanks for your patience. This is a useful clarification! 
+
+Instead of a note, I'd prefer to see it formatted with a [shortcode for multiple tabs](https://kubernetes.io/docs/contribute/style/hugo-shortcodes/#tabs). Please feel free to ask in [#sig-docs](https://app.slack.com/client/T09NY5SBT/C1J0BPD2M) if you have any questions about formatting.
+<issue_comment>username_0: @username_1 I have made the changes. However, i am not able to add a note in `PowerShell` tab to explain the reason for removing quotes around command substitution. If this is acceptable, then kindly approve it. Anyway, i have posted a query on slack. Will update the PR if there is any way to do that.
+<issue_comment>username_1: The idea of multiple tabs is hopefully to make the necessary difference self-explanatory. In this case, I think it works great.
+
+/lgtm
+/approve"

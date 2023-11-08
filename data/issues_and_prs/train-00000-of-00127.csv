@@ -1,0 +1,475 @@
+flutter/website,318393443,981,"{'number': 981.0, 'repo': 'website', 'user_login': 'flutter'}","[{'action': 'opened', 'author': 'rock3r', 'comment_id': None, 'datetime': '2018-04-27T12:36:22Z', 'masked_author': 'username_0', 'text': ""This PR is for the sixth section of the work to create the `flutter-for-ios.md` document. Writing by @niamh-power on Novoda's behalf, I am just a proxy.\r\n\r\nFollowing the same rough format as the `flutter-for-android.md` document, with iOS details instead.\r\n\r\nThe following sections have been created:\r\n\r\n* What is the equivalent of a UITableView or UICollectionView in Flutter?\r\n* How do I know which list item is clicked?\r\n* How do I update ListViews dynamically?\r\n* What is the equivalent of a ScrollView in Flutter?\r\n\r\n⚠️ **This requires #980 to be merged first!** ⚠️"", 'title': 'Flutter for iOS — Layouts section', 'type': 'issue'}
+ {'action': 'created', 'author': 'rock3r', 'comment_id': 385896321.0, 'datetime': '2018-05-02 08:02:13+00:00', 'masked_author': 'username_0', 'text': 'Contents covered in #993, closing this. Will address comments on that one.', 'title': None, 'type': 'comment'}]","<issue_start><issue_comment>Title: Flutter for iOS — Layouts section
+username_0: This PR is for the sixth section of the work to create the `flutter-for-ios.md` document. Writing by @niamh-power on Novoda's behalf, I am just a proxy.
+
+Following the same rough format as the `flutter-for-android.md` document, with iOS details instead.
+
+The following sections have been created:
+
+* What is the equivalent of a UITableView or UICollectionView in Flutter?
+* How do I know which list item is clicked?
+* How do I update ListViews dynamically?
+* What is the equivalent of a ScrollView in Flutter?
+
+⚠️ **This requires #980 to be merged first!** ⚠️
+<issue_comment>username_0: Contents covered in #993, closing this. Will address comments on that one."
+facebook/docusaurus,757474481,3886,,"[{'action': 'opened', 'author': 'saydo17', 'comment_id': None, 'datetime': '2020-12-04 23:35:55+00:00', 'masked_author': 'username_0', 'text': '## 🐛 Bug Report\r\n\r\nWhen building on Windows, the Client Redirect plugin creates an invalid url for the redirect. `/` becomes `%5C`\r\n\r\n### Have you read the [Contributing Guidelines on issues](https://github.com/facebook/docusaurus/blob/master/CONTRIBUTING.md#reporting-new-issues)?\r\n\r\nYes\r\n\r\n## To Reproduce\r\n\r\n1. configure redirect from /doc/old to /docs/something/else\r\n1. `yarn build` on windows from powershell\r\n1. Navigate to the `from` route\r\n\r\n## Expected behavior\r\n\r\nShould redirect to /docs/something/else\r\n\r\n\r\n## Actual Behavior\r\n \r\nRedirects to /docs%5Csomething%5Celse/ which does not exist.\r\n\r\n## Your Environment\r\n\r\n- Docusaurus version used: 2.0.0-alpha.69\r\n- plugin-client-redirect version: 2.0.0-alpha.69\r\n- Environment name and version (e.g. Chrome 78.0.3904.108, Node.js 10.17.0): Node v12.18.0\r\n- Operating system and version (desktop or mobile): Windows 10 Pro 2004, Powershell 5.1.19041.610\r\n\r\n## Reproducible Demo\r\n\r\n[example repo](https://github.com/username_0/redirectBug)', 'title': 'plugin-client-redirects fails on Windows', 'type': 'issue'}
+ {'action': 'created', 'author': 'saydo17', 'comment_id': 739078978.0, 'datetime': '2020-12-04 23:41:42+00:00', 'masked_author': 'username_0', 'text': 'Issue seems to be at this call [here ](https://github.com/facebook/docusaurus/blob/08f6734bff3878a0b1e8424c814c1c8a02185f71/packages/docusaurus-plugin-client-redirects/src/writeRedirectFiles.ts#L41)', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'slorber', 'comment_id': 740061219.0, 'datetime': '2020-12-07 17:23:30+00:00', 'masked_author': 'username_1', 'text': ""Thanks for reporting\r\n\r\nI don't have windows so any help to fix this is welcome 😅"", 'title': None, 'type': 'comment'}
+ {'action': 'closed', 'author': 'slorber', 'comment_id': None, 'datetime': '2020-12-28 10:55:17+00:00', 'masked_author': 'username_1', 'text': '', 'title': None, 'type': 'issue'}]","<issue_start><issue_comment>Title: plugin-client-redirects fails on Windows
+username_0: ## 🐛 Bug Report
+
+When building on Windows, the Client Redirect plugin creates an invalid url for the redirect. `/` becomes `%5C`
+
+### Have you read the [Contributing Guidelines on issues](https://github.com/facebook/docusaurus/blob/master/CONTRIBUTING.md#reporting-new-issues)?
+
+Yes
+
+## To Reproduce
+
+1. configure redirect from /doc/old to /docs/something/else
+1. `yarn build` on windows from powershell
+1. Navigate to the `from` route
+
+## Expected behavior
+
+Should redirect to /docs/something/else
+
+
+## Actual Behavior
+ 
+Redirects to /docs%5Csomething%5Celse/ which does not exist.
+
+## Your Environment
+
+- Docusaurus version used: 2.0.0-alpha.69
+- plugin-client-redirect version: 2.0.0-alpha.69
+- Environment name and version (e.g. Chrome 78.0.3904.108, Node.js 10.17.0): Node v12.18.0
+- Operating system and version (desktop or mobile): Windows 10 Pro 2004, Powershell 5.1.19041.610
+
+## Reproducible Demo
+
+[example repo](https://github.com/username_0/redirectBug)
+<issue_comment>username_0: Issue seems to be at this call [here ](https://github.com/facebook/docusaurus/blob/08f6734bff3878a0b1e8424c814c1c8a02185f71/packages/docusaurus-plugin-client-redirects/src/writeRedirectFiles.ts#L41)
+<issue_comment>username_1: Thanks for reporting
+
+I don't have windows so any help to fix this is welcome 😅<issue_closed>"
+gohugoio/hugo,241468205,3687,,"[{'action': 'opened', 'author': 'thewebmastercom', 'comment_id': None, 'datetime': '2017-07-08 17:35:06+00:00', 'masked_author': 'username_0', 'text': 'As the title says, I cannot get the navigate to changed feature working with Webstorm (jetbrains). Essentially, nothing happens (no change of URL in browser). It just updates the content automatically for URLs already open (i.e. previous functionality works fine).\r\n\r\nI have confirmed that it solely relates to webstorm by opening a file in notepad and making a change and everything works as expected (i.e. new webpage loads with the changes).\r\n\r\nI am using Windows 10 Pro, Powershell, and Webstorm, and of course Hugo 0.25.\r\n\r\nI am not sure what information (if any) might help you, or if it is something that is better directed at Jetbrains. Please let me know if you need anything else from me.', 'title': '--navigateToChanged Not working with Webstorm', 'type': 'issue'}
+ {'action': 'closed', 'author': 'bep', 'comment_id': None, 'datetime': '2017-07-08 17:39:01+00:00', 'masked_author': 'username_1', 'text': '', 'title': None, 'type': 'issue'}
+ {'action': 'created', 'author': 'bep', 'comment_id': 313870224.0, 'datetime': '2017-07-08 17:39:01+00:00', 'masked_author': 'username_1', 'text': 'This is fixed by https://github.com/gohugoio/hugo/commit/7bcc1ce659710f2220b400ce3b76e50d2e48b241\r\n\r\nWebStorm behaves strangely, but the above should get it right.', 'title': None, 'type': 'comment'}]","<issue_start><issue_comment>Title: --navigateToChanged Not working with Webstorm
+username_0: As the title says, I cannot get the navigate to changed feature working with Webstorm (jetbrains). Essentially, nothing happens (no change of URL in browser). It just updates the content automatically for URLs already open (i.e. previous functionality works fine).
+
+I have confirmed that it solely relates to webstorm by opening a file in notepad and making a change and everything works as expected (i.e. new webpage loads with the changes).
+
+I am using Windows 10 Pro, Powershell, and Webstorm, and of course Hugo 0.25.
+
+I am not sure what information (if any) might help you, or if it is something that is better directed at Jetbrains. Please let me know if you need anything else from me.<issue_closed>
+<issue_comment>username_1: This is fixed by https://github.com/gohugoio/hugo/commit/7bcc1ce659710f2220b400ce3b76e50d2e48b241
+
+WebStorm behaves strangely, but the above should get it right."
+gohugoio/hugo,489717088,6310,,"[{'action': 'opened', 'author': 'bep', 'comment_id': None, 'datetime': '2019-09-05 12:22:31+00:00', 'masked_author': 'username_0', 'text': 'There are existing issues about this, but I prefer to start fresh when I have new ideas on a subject. I thought about this again when having my hair washed at the hairdresser today. Maybe the hair massage helped.\r\n\r\nI think I have been too hung up in the technical challenges of this (remote adapters, how to effectively do partial updates etc.), making the whole issue too big to start with. What we have talked about earler have also been ""something different on the side"" of what we already have.\r\n\r\nBut what we have is a\r\n\r\n* A virtually `/content` directory that can be composed via Hugo Modules (with overrides on file level)\r\n* Virtual mounts support (you can mount any directory, even remote GitHub repos into `/content`)\r\n* A front matter based metadata model with cascade keyword etc.\r\n* Partial server updates based on filesystem events.\r\n* ...\r\n\r\nWith that I mind, I thought about adding a new reserved filename in `/content` starting with `_content`.\r\n\r\nGiven the example below:\r\n\r\n* `_content.json`, _content.toml` (and Yaml) would be fairly straight forward, i.e. metadata + content. We should probably support a tree structure somehow, so you can build a complete content structure from one root `_content`file.\r\n* `_content.go` would represent the dynamic content, some kind of content adapter, possibly remote. This is obviously the are with most open questions (`_content.js` would be a thought), but having the naming in place is a start. \r\n\r\n```bash\r\ncontent\r\n├── _content.json\r\n├── _index.md\r\n├── blog\r\n│\xa0\xa0 ├── _content.toml\r\n│\xa0\xa0 ├── _index.md\r\n│\xa0\xa0 ├── image.png\r\n│\xa0\xa0 └── post1.md\r\n└── docs\r\n    ├── _content.go\r\n    └── _index.md\r\n```\r\n\r\n/cc @username_1 @onedrawingperday @digitalcraftsman @budparr @moorereason @username_2 and gang.', 'title': 'Pages from data, take 5', 'type': 'issue'}
+ {'action': 'created', 'author': 'regisphilibert', 'comment_id': 528350118.0, 'datetime': '2019-09-05 12:56:10+00:00', 'masked_author': 'username_1', 'text': 'If we need to create another file, might as well create the directory: `/products/_content.json`', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'bep', 'comment_id': 528482225.0, 'datetime': '2019-09-05 17:15:30+00:00', 'masked_author': 'username_0', 'text': ""Yes, probably.\r\n\r\nAlso thinking, I think I'm going to restrict this to `JSON` in its first iteration, as that is the only format supporting stream decoding."", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'bep', 'comment_id': 528486138.0, 'datetime': '2019-09-05 17:25:24+00:00', 'masked_author': 'username_0', 'text': 'And possibly YAML:\r\n\r\nhttps://github.com/go-yaml/yaml/issues/4', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'regisphilibert', 'comment_id': 529036397.0, 'datetime': '2019-09-06 22:36:39+00:00', 'masked_author': 'username_1', 'text': 'That\'s great. Now I\'m seeing those `_content.yaml` file with lots of information about the meta data. Which key goes where in a ""page"" object.\r\n\r\nBut I was also under the impression that Hugo would fetch the data based on some parameters (endpoints, pagination, etc...) which might have been a bit optimistic.\r\n\r\nWith `_content.go`? Does this mean, we\'ll be able to write our own data fetcher/parser in Go or Javascript and if so, can\'t the metadata/front_matter be addressed from there?', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'bep', 'comment_id': 529038636.0, 'datetime': '2019-09-06 22:48:08+00:00', 'masked_author': 'username_0', 'text': 'So, there is 2 stories to this issue. \r\n\r\nThe main story being that we ned to break this down into smaller pieces to be able to grasp it and possibly also implement it in iterations.\r\n\r\nSo:\r\n\r\n* `_content.yaml` is raw page data just wrapped in a more ""data like"" format than a markdown file with frontmatter. The big benefit being that you can create thousands of pages in one file.\r\n* `_content.go` would be the ""create those thousands of articles by some kind custom scripting towards and Hugo API"" (which would handle all the caching/partial update logic etc).\r\n* `_content.wordpress`(and now I\'m just making stuff up) would use a built-in Hugo adapter to pull in those thousand articles.', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'regisphilibert', 'comment_id': 529039076.0, 'datetime': '2019-09-06 22:50:45+00:00', 'masked_author': 'username_1', 'text': 'Got it! Thanks for clarifying.', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'regisphilibert', 'comment_id': 529041080.0, 'datetime': '2019-09-06 23:02:26+00:00', 'masked_author': 'username_1', 'text': 'Oh and, if all Hugo need from a `_content.go` is to produce an array of item, we could use Go Template and `return`.\r\n\r\nThat would allows us to use some partials and other familiar Hugo stuff to parse de data grabbed from `GetJSON` or else...', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'bep', 'comment_id': 529042842.0, 'datetime': '2019-09-06 23:13:06+00:00', 'masked_author': 'username_0', 'text': 'Sure, but what I had in mind, which I admit needs some more thoughs, was something more powerful. Something in the line of what @natefinch suggested here some time ago, a more or less ""full Go"" plugin type of thing.', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'bep', 'comment_id': 529127744.0, 'datetime': '2019-09-07 17:22:00+00:00', 'masked_author': 'username_0', 'text': 'I have done some experiments with @natefinch \'s https://github.com/starlight-go/starlight today (his library wraps https://github.com/google/starlark-go/ by Google), and I\'m very impressed and think it would be a good fit for the above (and also other uses). \r\n\r\nIt will be yet another thing to learn for Hugo users (it\'s a Python dialect), but I think well worth it.\r\n\r\nIt integrates very well with the Go side of the fence. It returns all the variable definitions when evaluating a script, even functions, so it should be possible to define ""plugin interfaces"" with default implementations, and implement whatever needed in the `_content.py` file, e.g:\r\n\r\n```go\r\ntype interface DataGetter {\r\n   GetDataStream() io.ReadCloser\r\n}\r\n```\r\n\r\nWould be implemented in `_content.py` as:\r\n\r\n```py\r\ndef GetDataStream():\r\n\treturn http.Get(site.Param(""wordPressAPI""))\r\n\r\n```', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'bep', 'comment_id': 529133907.0, 'datetime': '2019-09-07 18:24:43+00:00', 'masked_author': 'username_0', 'text': 'See my previous comments, and push the appropriate button below whether you think adding Starlark (a Python dialect) as a scripting language in Go. First as a way for users to write custom ""source adapters"" for content, but we will most llkely find other use cases, eventually (@natefinch did a PR some time ago with custom template functions in Python).\r\n\r\n[![](https://m131jyck4m.execute-api.us-west-2.amazonaws.com/prod/poll/01DM6FCCJ5EAKDFEJJSRWN196G/Yes%2C%20using%20Python%20in%20Hugo%20sounds%20good.)](https://m131jyck4m.execute-api.us-west-2.amazonaws.com/prod/poll/01DM6FCCJ5EAKDFEJJSRWN196G/Yes%2C%20using%20Python%20in%20Hugo%20sounds%20good./vote)\r\n[![](https://m131jyck4m.execute-api.us-west-2.amazonaws.com/prod/poll/01DM6FCCJ5EAKDFEJJSRWN196G/No%2C%20that%20is%20a%20bad%20idea.)](https://m131jyck4m.execute-api.us-west-2.amazonaws.com/prod/poll/01DM6FCCJ5EAKDFEJJSRWN196G/No%2C%20that%20is%20a%20bad%20idea./vote)', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'regisphilibert', 'comment_id': 529134943.0, 'datetime': '2019-09-07 18:35:52+00:00', 'masked_author': 'username_1', 'text': ""I think the learning curve of Go Template is hard enough for many new users, letting them know that learning Python is a requisite for Data source sounds a bit harsh. \r\n\r\nI'd be willing to invest time into learning some Go, but Python, not so excited. Did you drop JS because of speed?"", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'bep', 'comment_id': 529136253.0, 'datetime': '2019-09-07 18:48:54+00:00', 'masked_author': 'username_0', 'text': 'The options that I have evaluated are Python and Lua. To my knowledge there are no solid solid and embedded JS implementation in Go. But I assume some day it will happen.', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'regisphilibert', 'comment_id': 529136465.0, 'datetime': '2019-09-07 18:51:12+00:00', 'masked_author': 'username_1', 'text': 'And for my own curiosity, why not Go?', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'bep', 'comment_id': 529136754.0, 'datetime': '2019-09-07 18:54:28+00:00', 'masked_author': 'username_0', 'text': 'Mostly security related.', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'kaushalmodi', 'comment_id': 529137568.0, 'datetime': '2019-09-07 19:03:17+00:00', 'masked_author': 'username_2', 'text': '+1', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'bep', 'comment_id': 529138461.0, 'datetime': '2019-09-07 19:13:24+00:00', 'masked_author': 'username_0', 'text': 'Note that that remark was about ""compiled Go"" (not Go templates).', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'regisphilibert', 'comment_id': 529152149.0, 'datetime': '2019-09-07 22:33:16+00:00', 'masked_author': 'username_1', 'text': ""I trust you in choosing the fastest most reliable way of letting coders build their own data parsers.\r\n\r\nSo I'll mention Go Template one last time.\r\nWith returning partials, `merge`, `transform.Unmarshal`, Hugo's got really better at handling data.\r\nWith getJSON (might need improvements and complementing methods) and the new features mentioned above, I know I can build that parser with Go Template. Is it a bad idea?"", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'bep', 'comment_id': 529186779.0, 'datetime': '2019-09-08 09:43:02+00:00', 'masked_author': 'username_0', 'text': 'For me, my Python skills are just about on par with my JavaScript skills, but I still think I would prefer Python for the use cases above if I were a Python newbie. I only think JS would make sense if you also bring in all the (in)sanity of NPM.\r\n\r\nAlso, being able to define these plugin interfaces (as proper interfaces), we can also provide a set of implementations in Go which you then can configure from your plugin, e.g. (and again, I\'m just quickly making this stuff up):\r\n\r\n\r\n```py\r\ndef SourcePlugin():\r\n  # One of ""many"" supported adapters with implementation in Go.\r\n  return ""wordpress""\r\n\r\ndef PluginConfig():\r\n  return site.Param(""myWordPressConfig"")\r\n\r\n```\r\n\r\nThe above is, I think, valid Python. Most editors will provide syntax highlighting for it (if you suffix the file ""*.py"") and is, in my head, much easier to explain to people than some Go template conditional spaghetti.\r\n\r\nI will also add that, if you think the above is hard and you still want/need to use it (people have happily lived without the above for a long time), Hugo Modules allows people to borrow from other people\'s work. This will be even more true if we extend this to writing plugins that gets exposed as template functions (see @natefinch \'s PR).', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'bep', 'comment_id': 529188538.0, 'datetime': '2019-09-08 10:10:08+00:00', 'masked_author': 'username_0', 'text': 'This may also be an interesting option that I will have a look at:\r\n\r\nhttps://github.com/d5/tengo', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'HenrySkup', 'comment_id': 529190048.0, 'datetime': '2019-09-08 10:33:44+00:00', 'masked_author': 'username_3', 'text': 'yes, yes! Let Go Templates do the templating ... and other interfaces for the more ambiguous and likely-to-branch-and-to-error data generation.  Since Go is 1) a security risk and 2) rather esoteric then Python and JS seem like robust and highly used options (with Python being particularly well crafted and good for beginners).  That being said, there would be some aesthetic nicety of having an ""all-GO-based"" solution .', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'regisphilibert', 'comment_id': 529197559.0, 'datetime': '2019-09-08 12:21:33+00:00', 'masked_author': 'username_1', 'text': 'I’m convinced and cast my vote. :). Can’t wait to see some parser example. I guess I wanted an excuse to learn Go.', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'regisphilibert', 'comment_id': 529198139.0, 'datetime': '2019-09-08 12:29:40+00:00', 'masked_author': 'username_1', 'text': 'This might be a an example that Hugo users can more easily rely to: \r\n\r\nhttps://github.com/bazelbuild/starlark/blob/master/README.md#tour\r\n\r\nThis is pretty exciting actually. Give so much control on a directory’s data, remote or otherwise', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'bep', 'comment_id': 529199392.0, 'datetime': '2019-09-08 12:46:58+00:00', 'masked_author': 'username_0', 'text': 'Still plenty of reasons to learn Go ...\r\n\r\nFor completeness, my previous answer about ""Go as plugin"" assumed some kind of ""compile on the fly"" and communication via ""os/exec"". Go has a ""plugin package"" built-in that could have worked for us, but it\'s Linux and macOS only and considered very experimental and buggy (and no-one have worked on it for years).', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'gour', 'comment_id': 529348292.0, 'datetime': '2019-09-09 08:07:57+00:00', 'masked_author': 'username_4', 'text': ""I won't cry because of that. :-)"", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'marceloverdijk', 'comment_id': 644690471.0, 'datetime': '2020-06-16 10:54:49+00:00', 'masked_author': 'username_5', 'text': 'Is this issue regarding pages from data still relevant? The discussion seems to have stalled.\r\n\r\nAnyway, I used https://github.com/avillafiorita/jekyll-datapage_gen for Jekyll site in the past and maybe it could be used for inspiration for a Hugo equivalent?', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'chris-79', 'comment_id': 644717105.0, 'datetime': '2020-06-16 11:57:02+00:00', 'masked_author': 'username_6', 'text': ""I definitely think it's still relevant.\r\n\r\nI wrote a couple of small scripts in golang that are doing the job for me, currently, but I would love to have this feature baked-in."", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'sg-modlab', 'comment_id': 679099741.0, 'datetime': '2020-08-24 12:35:01+00:00', 'masked_author': 'username_7', 'text': 'Just chiming in to say I have a number of cases where having a way for Hugo to consume data via json from an external provider or a collection of json files stored as data would be hugely beneficial. Currently having to write solutions that create and commit md to a repo or script the creation of hundreds of markdown files that reference a json data file are cumbersome and undesirable complexity. If I am following this thread (if) seems like having a way to define external or data driven content sources within the current content tree and if needed have a scripting language to define your transform sounds excellent. So would like to see something like this happen.', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'frontaid', 'comment_id': 683899488.0, 'datetime': '2020-08-31 16:50:11+00:00', 'masked_author': 'username_8', 'text': ""100% agreed. We are developing a [CMS for JSON files](https://username_8.io/) and as a consequence have done lots of research in that area. Most static page generators are severly lacking in that aspect. While some (including Hugo) can load data files into certain predefined pages, creating dynamic pages and/or dynamic navigations is mostly somewhere between cumbersome to impossible. So I think that having good support for arbitrary structured data sources could be beneficial for Hugo.\r\n\r\nOne other project that was introduced recently is [Nuxt Content](https://content.nuxtjs.org/) which is a plugin for Nuxt.js (a framework for server-side rendered or statically generated applications). It allows loading different types of files and create content dynamically based on them. For example, you can create dynamic pages/routes and/or create a dynamic navigation. We've done a simple test project with it and it seems to be well thought out and very flexible. Maybe there is some inspiration in that project for Hugo."", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'carlmjohnson', 'comment_id': 717571290.0, 'datetime': '2020-10-27 22:13:04+00:00', 'masked_author': 'username_9', 'text': 'https://github.com/gohugoio/hugo/issues/5074#issuecomment-717564911', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'c-nv-s', 'comment_id': 955114292.0, 'datetime': '2021-10-30 00:36:48+00:00', 'masked_author': 'username_10', 'text': 'is it not possible to use a scripting language that is at least very similar, syntactically, to Go?\r\nI am not a security expert by any means but can the security concern/s not be mitigated somehow?\r\nif a project like https://github.com/goplus/gossa  exists, what are they doing security-wise which is different?\r\n...just for the record, I am in no way trying to discredit the starlight project, which is obviously great work!', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'brunoamaral', 'comment_id': 957006102.0, 'datetime': '2021-11-02 00:53:13+00:00', 'masked_author': 'username_11', 'text': 'I have a build script  in python that converts json entries to files. You can find it here: https://github.com/username_11/gregory/blob/main/build.py#L136-L189\r\n\r\nHope it helps.', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'regisphilibert', 'comment_id': 989029423.0, 'datetime': '2021-12-08 17:39:59+00:00', 'masked_author': 'username_1', 'text': 'As the end of year comes near, I\'d like to reflect a bit on this popular ticket.\r\n\r\nHaving dealt this year with a lot of pre-build (write your own files) workarounds, I feel like this could go into an early stage using Go Template and returning partials to feed Hugo a simple list of stings or maps. \r\n\r\nWe know Hugo is already building pages without content files for taxonomy terms. And all it can work with is a `string` (_Museum_, _Food And Entertainment_ etc...) and it\'s pretty good at building a URL from that and publishing the page. [I personally have be using this](https://www.thenewdynamic.com/article/toward-using-a-headless-cms-with-hugo-part-1/) to build page from data with Hugo (or remote, it eases up the pre-build work: only two files to write instead hundreds of md). \r\n\r\nWhat would already be a big leap to achieve the goals this ticket is aiming for is to give Hugo a simple list of entries to build pages for a given section. (akin to a simple list of taxonomy terms)\r\n\r\nThis can be as simple as a returning partial whose returned value could be fed to Hugo. It could come from a data file or a `getJSON` call. \r\n\r\n## A simple slice of strings (no data structuring)\r\nIt could even be a simple lists of strings (exactly like taxonomy terms). \r\n\r\n```\r\n{{/* content/products/_content.html */}}\r\n{{ $products := slice }}\r\n{{ with site.Data.products }}\r\n  {{ range . }}\r\n    {{ $products = append .Name }}\r\n  {{ end }}\r\n{{ end }}\r\n{{ return $products }}\r\n```\r\nAnd, users could build up their own logic to fetch the data for each page using a data file or else. (Like when using the taxonomy hack)\r\n\r\n```\r\n{{/* layouts/products/single */}}}\r\n{{ with index site.Data.products .Title }}\r\n  <h1>{{ .Name }}</h1>\r\n  price: {{ .TaxPrice }}\r\n{{ end }}\r\n```\r\n\r\n## As a slice of maps (data structuring is supported)\r\nWe could envision a slice of maps. This would potentially take care of the data structuring. It seems the only required key would be `title` (to generate the URL). All the rest could be parsed as is (reserved keys preserved, unreserved keys under would be held in the `.Params` object in templates).\r\n\r\nThat\'s how this returning partials could look like:\r\n```\r\n{{/* content/products/_content.html */}}\r\n{{ $products := slice\r\n{{ $remote_entries := site.Data.products }} \r\n{{/* or $remote_entries := getJSON ""https://myapi.com/products""  */}}\r\n\r\n{{ with $remote_entries }}\r\n  {{ range . }}\r\n    {{ $products = $products | append (dict\r\n      ""title"" .Name\r\n      ""price"" .TaxPrice\r\n    ) }}\r\n  {{ end }}\r\n{{ end }}\r\n{{ return $products }}\r\n```\r\n\r\n\r\nIf I\'m not wrong and this is not such a big leap from the code base, this would make this early stage ""building pages from data"" easy enough that any body could jump in and test it. The more feedback the more robust the next stages will be.\r\n\r\nI understand plugins could be used, and yeah maybe it would be great in the long term to support  heavy old dated structure like WordPress or Drupal. But do we need this from the get-go? I\'m very excited about this prospect and I, personally, would love to jump into a world where Hugo can build pages from data, even if it is as limited as my suggestion can be.', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'c-nv-s', 'comment_id': 1014767268.0, 'datetime': '2022-01-17 17:34:07+00:00', 'masked_author': 'username_10', 'text': '@corinnefreer  https://www.thenewdynamic.com/article/toward-using-a-headless-cms-with-hugo-part-2-building-from-remote-api/', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'petervukovic', 'comment_id': 1024024644.0, 'datetime': '2022-01-28 09:13:53+00:00', 'masked_author': 'username_12', 'text': 'I\'ve stumbled upon this problem yesterday and found this thread.  I\'d like to propose an extension of the initial solution proposed by @username_0 that uses the content directory structure as a routing mechanism and a JSON query library file to filter the source data for each route.\r\n\r\nFor example, let\'s imagine we\'re building a movie database website and we want automatically generated pages for movies by title, by year, by genre, and by actor, all generated from a single JSON file (or external source) [like this one](https://gist.github.com/saniyusuf/406b843afdfb9c6a86e25753fe2761f4).\r\n\r\nThe directory structure would appear as follows:\r\n\r\n```\r\ncontent\r\n├── _index.md\r\n├── movies\r\n│   ├── query.toml\r\n│   ├── _index.md\r\n│      ├──year\r\n│            ├── _index.md\r\n│            ├── :id\r\n│               ├── query.toml\r\n│               ├── _index.md\r\n│      ├──actor\r\n│            ├── _index.md\r\n│            ├── :id\r\n│               ├── query.toml\r\n│               ├── _index.md\r\n...etc\r\n```\r\n\r\nThe `query.toml` would include the data source and the JSON query to filter the data.  JSON queries could be executed using a Go library like [jsonql](https://github.com/elgs/jsonql), so a sample query file for the `movies` folder (which, for example, is there to lists all published movies) could look like this:\r\n\r\n```\r\nsource = ""movies.json""  \r\nquery =  ""published is true""\r\n```\r\n\r\nThis setup would look at movies.json, find all entries where published is true, and then make that data available via `.Page.Data` variable in the template for looping purposes.\r\n\r\nA special `:id` directory tells Hugo to build one page for each query result.  The query file in that directory must include the `:id` variable that denotes the key which will be used to build pages.  Looking at the `year` folder example, our intention here is to create one page for each year found in the JSON file, i.e:\r\n\r\n```\r\n/movies/year/1986\r\n/movies/year/1999\r\n/movies/year/2004\r\n...etc.\r\n```\r\n\r\nThis is why we would create an `:id` directory under the `year` folder, with following `query.toml`\r\n\r\n```\r\nsource = ""movies.json""  \r\nquery =  ""year = :id""\r\n```\r\n\r\nHugo would recognize that year is the key we want to build pages around and execute accordingly.\r\n\r\nThis proposal is still rough around the edges but there are a few clear benefits:\r\n\r\n- Definining routes is typical for most frameworks and this would ease the adoption of this feature for newcomers\r\n- The data is separate from content and still gets to sit in the data directory, which allows for reusability via .Site.Data\r\n- We could support external queries via config files in the data directory\r\n- Using JSON query to filter the source data is extremely flexible and supports a variety of scenarios and use cases\r\n\r\nHope this helps.', 'title': None, 'type': 'comment'}]","<issue_start><issue_comment>Title: Pages from data, take 5
+username_0: There are existing issues about this, but I prefer to start fresh when I have new ideas on a subject. I thought about this again when having my hair washed at the hairdresser today. Maybe the hair massage helped.
+
+I think I have been too hung up in the technical challenges of this (remote adapters, how to effectively do partial updates etc.), making the whole issue too big to start with. What we have talked about earler have also been ""something different on the side"" of what we already have.
+
+But what we have is a
+
+* A virtually `/content` directory that can be composed via Hugo Modules (with overrides on file level)
+* Virtual mounts support (you can mount any directory, even remote GitHub repos into `/content`)
+* A front matter based metadata model with cascade keyword etc.
+* Partial server updates based on filesystem events.
+* ...
+
+With that I mind, I thought about adding a new reserved filename in `/content` starting with `_content`.
+
+Given the example below:
+
+* `_content.json`, _content.toml` (and Yaml) would be fairly straight forward, i.e. metadata + content. We should probably support a tree structure somehow, so you can build a complete content structure from one root `_content`file.
+* `_content.go` would represent the dynamic content, some kind of content adapter, possibly remote. This is obviously the are with most open questions (`_content.js` would be a thought), but having the naming in place is a start. 
+
+```bash
+content
+├── _content.json
+├── _index.md
+├── blog
+│   ├── _content.toml
+│   ├── _index.md
+│   ├── image.png
+│   └── post1.md
+└── docs
+    ├── _content.go
+    └── _index.md
+```
+
+/cc @username_1 @onedrawingperday @digitalcraftsman @budparr @moorereason @username_2 and gang.
+<issue_comment>username_1: If we need to create another file, might as well create the directory: `/products/_content.json`
+<issue_comment>username_0: Yes, probably.
+
+Also thinking, I think I'm going to restrict this to `JSON` in its first iteration, as that is the only format supporting stream decoding.
+<issue_comment>username_0: And possibly YAML:
+
+https://github.com/go-yaml/yaml/issues/4
+<issue_comment>username_1: That's great. Now I'm seeing those `_content.yaml` file with lots of information about the meta data. Which key goes where in a ""page"" object.
+
+But I was also under the impression that Hugo would fetch the data based on some parameters (endpoints, pagination, etc...) which might have been a bit optimistic.
+
+With `_content.go`? Does this mean, we'll be able to write our own data fetcher/parser in Go or Javascript and if so, can't the metadata/front_matter be addressed from there?
+<issue_comment>username_0: So, there is 2 stories to this issue. 
+
+The main story being that we ned to break this down into smaller pieces to be able to grasp it and possibly also implement it in iterations.
+
+So:
+
+* `_content.yaml` is raw page data just wrapped in a more ""data like"" format than a markdown file with frontmatter. The big benefit being that you can create thousands of pages in one file.
+* `_content.go` would be the ""create those thousands of articles by some kind custom scripting towards and Hugo API"" (which would handle all the caching/partial update logic etc).
+* `_content.wordpress`(and now I'm just making stuff up) would use a built-in Hugo adapter to pull in those thousand articles.
+<issue_comment>username_1: Got it! Thanks for clarifying.
+<issue_comment>username_1: Oh and, if all Hugo need from a `_content.go` is to produce an array of item, we could use Go Template and `return`.
+
+That would allows us to use some partials and other familiar Hugo stuff to parse de data grabbed from `GetJSON` or else...
+<issue_comment>username_0: Sure, but what I had in mind, which I admit needs some more thoughs, was something more powerful. Something in the line of what @natefinch suggested here some time ago, a more or less ""full Go"" plugin type of thing.
+<issue_comment>username_0: I have done some experiments with @natefinch 's https://github.com/starlight-go/starlight today (his library wraps https://github.com/google/starlark-go/ by Google), and I'm very impressed and think it would be a good fit for the above (and also other uses). 
+
+It will be yet another thing to learn for Hugo users (it's a Python dialect), but I think well worth it.
+
+It integrates very well with the Go side of the fence. It returns all the variable definitions when evaluating a script, even functions, so it should be possible to define ""plugin interfaces"" with default implementations, and implement whatever needed in the `_content.py` file, e.g:
+
+```go
+type interface DataGetter {
+   GetDataStream() io.ReadCloser
+}
+```
+
+Would be implemented in `_content.py` as:
+
+```py
+def GetDataStream():
+	return http.Get(site.Param(""wordPressAPI""))
+
+```
+<issue_comment>username_0: See my previous comments, and push the appropriate button below whether you think adding Starlark (a Python dialect) as a scripting language in Go. First as a way for users to write custom ""source adapters"" for content, but we will most llkely find other use cases, eventually (@natefinch did a PR some time ago with custom template functions in Python).
+
+[![](https://m131jyck4m.execute-api.us-west-2.amazonaws.com/prod/poll/01DM6FCCJ5EAKDFEJJSRWN196G/Yes%2C%20using%20Python%20in%20Hugo%20sounds%20good.)](https://m131jyck4m.execute-api.us-west-2.amazonaws.com/prod/poll/01DM6FCCJ5EAKDFEJJSRWN196G/Yes%2C%20using%20Python%20in%20Hugo%20sounds%20good./vote)
+[![](https://m131jyck4m.execute-api.us-west-2.amazonaws.com/prod/poll/01DM6FCCJ5EAKDFEJJSRWN196G/No%2C%20that%20is%20a%20bad%20idea.)](https://m131jyck4m.execute-api.us-west-2.amazonaws.com/prod/poll/01DM6FCCJ5EAKDFEJJSRWN196G/No%2C%20that%20is%20a%20bad%20idea./vote)
+<issue_comment>username_1: I think the learning curve of Go Template is hard enough for many new users, letting them know that learning Python is a requisite for Data source sounds a bit harsh. 
+
+I'd be willing to invest time into learning some Go, but Python, not so excited. Did you drop JS because of speed?
+<issue_comment>username_0: The options that I have evaluated are Python and Lua. To my knowledge there are no solid solid and embedded JS implementation in Go. But I assume some day it will happen.
+<issue_comment>username_1: And for my own curiosity, why not Go?
+<issue_comment>username_0: Mostly security related.
+<issue_comment>username_2: +1
+<issue_comment>username_0: Note that that remark was about ""compiled Go"" (not Go templates).
+<issue_comment>username_1: I trust you in choosing the fastest most reliable way of letting coders build their own data parsers.
+
+So I'll mention Go Template one last time.
+With returning partials, `merge`, `transform.Unmarshal`, Hugo's got really better at handling data.
+With getJSON (might need improvements and complementing methods) and the new features mentioned above, I know I can build that parser with Go Template. Is it a bad idea?
+<issue_comment>username_0: For me, my Python skills are just about on par with my JavaScript skills, but I still think I would prefer Python for the use cases above if I were a Python newbie. I only think JS would make sense if you also bring in all the (in)sanity of NPM.
+
+Also, being able to define these plugin interfaces (as proper interfaces), we can also provide a set of implementations in Go which you then can configure from your plugin, e.g. (and again, I'm just quickly making this stuff up):
+
+
+```py
+def SourcePlugin():
+  # One of ""many"" supported adapters with implementation in Go.
+  return ""wordpress""
+
+def PluginConfig():
+  return site.Param(""myWordPressConfig"")
+
+```
+
+The above is, I think, valid Python. Most editors will provide syntax highlighting for it (if you suffix the file ""*.py"") and is, in my head, much easier to explain to people than some Go template conditional spaghetti.
+
+I will also add that, if you think the above is hard and you still want/need to use it (people have happily lived without the above for a long time), Hugo Modules allows people to borrow from other people's work. This will be even more true if we extend this to writing plugins that gets exposed as template functions (see @natefinch 's PR).
+<issue_comment>username_0: This may also be an interesting option that I will have a look at:
+
+https://github.com/d5/tengo
+<issue_comment>username_3: yes, yes! Let Go Templates do the templating ... and other interfaces for the more ambiguous and likely-to-branch-and-to-error data generation.  Since Go is 1) a security risk and 2) rather esoteric then Python and JS seem like robust and highly used options (with Python being particularly well crafted and good for beginners).  That being said, there would be some aesthetic nicety of having an ""all-GO-based"" solution .
+<issue_comment>username_1: I’m convinced and cast my vote. :). Can’t wait to see some parser example. I guess I wanted an excuse to learn Go.
+<issue_comment>username_1: This might be a an example that Hugo users can more easily rely to: 
+
+https://github.com/bazelbuild/starlark/blob/master/README.md#tour
+
+This is pretty exciting actually. Give so much control on a directory’s data, remote or otherwise
+<issue_comment>username_0: Still plenty of reasons to learn Go ...
+
+For completeness, my previous answer about ""Go as plugin"" assumed some kind of ""compile on the fly"" and communication via ""os/exec"". Go has a ""plugin package"" built-in that could have worked for us, but it's Linux and macOS only and considered very experimental and buggy (and no-one have worked on it for years).
+<issue_comment>username_4: I won't cry because of that. :-)
+<issue_comment>username_5: Is this issue regarding pages from data still relevant? The discussion seems to have stalled.
+
+Anyway, I used https://github.com/avillafiorita/jekyll-datapage_gen for Jekyll site in the past and maybe it could be used for inspiration for a Hugo equivalent?
+<issue_comment>username_6: I definitely think it's still relevant.
+
+I wrote a couple of small scripts in golang that are doing the job for me, currently, but I would love to have this feature baked-in.
+<issue_comment>username_7: Just chiming in to say I have a number of cases where having a way for Hugo to consume data via json from an external provider or a collection of json files stored as data would be hugely beneficial. Currently having to write solutions that create and commit md to a repo or script the creation of hundreds of markdown files that reference a json data file are cumbersome and undesirable complexity. If I am following this thread (if) seems like having a way to define external or data driven content sources within the current content tree and if needed have a scripting language to define your transform sounds excellent. So would like to see something like this happen.
+<issue_comment>username_8: 100% agreed. We are developing a [CMS for JSON files](https://username_8.io/) and as a consequence have done lots of research in that area. Most static page generators are severly lacking in that aspect. While some (including Hugo) can load data files into certain predefined pages, creating dynamic pages and/or dynamic navigations is mostly somewhere between cumbersome to impossible. So I think that having good support for arbitrary structured data sources could be beneficial for Hugo.
+
+One other project that was introduced recently is [Nuxt Content](https://content.nuxtjs.org/) which is a plugin for Nuxt.js (a framework for server-side rendered or statically generated applications). It allows loading different types of files and create content dynamically based on them. For example, you can create dynamic pages/routes and/or create a dynamic navigation. We've done a simple test project with it and it seems to be well thought out and very flexible. Maybe there is some inspiration in that project for Hugo.
+<issue_comment>username_9: https://github.com/gohugoio/hugo/issues/5074#issuecomment-717564911
+<issue_comment>username_10: is it not possible to use a scripting language that is at least very similar, syntactically, to Go?
+I am not a security expert by any means but can the security concern/s not be mitigated somehow?
+if a project like https://github.com/goplus/gossa  exists, what are they doing security-wise which is different?
+...just for the record, I am in no way trying to discredit the starlight project, which is obviously great work!
+<issue_comment>username_11: I have a build script  in python that converts json entries to files. You can find it here: https://github.com/username_11/gregory/blob/main/build.py#L136-L189
+
+Hope it helps.
+<issue_comment>username_1: As the end of year comes near, I'd like to reflect a bit on this popular ticket.
+
+Having dealt this year with a lot of pre-build (write your own files) workarounds, I feel like this could go into an early stage using Go Template and returning partials to feed Hugo a simple list of stings or maps. 
+
+We know Hugo is already building pages without content files for taxonomy terms. And all it can work with is a `string` (_Museum_, _Food And Entertainment_ etc...) and it's pretty good at building a URL from that and publishing the page. [I personally have be using this](https://www.thenewdynamic.com/article/toward-using-a-headless-cms-with-hugo-part-1/) to build page from data with Hugo (or remote, it eases up the pre-build work: only two files to write instead hundreds of md). 
+
+What would already be a big leap to achieve the goals this ticket is aiming for is to give Hugo a simple list of entries to build pages for a given section. (akin to a simple list of taxonomy terms)
+
+This can be as simple as a returning partial whose returned value could be fed to Hugo. It could come from a data file or a `getJSON` call. 
+
+## A simple slice of strings (no data structuring)
+It could even be a simple lists of strings (exactly like taxonomy terms). 
+
+```
+{{/* content/products/_content.html */}}
+{{ $products := slice }}
+{{ with site.Data.products }}
+  {{ range . }}
+    {{ $products = append .Name }}
+  {{ end }}
+{{ end }}
+{{ return $products }}
+```
+And, users could build up their own logic to fetch the data for each page using a data file or else. (Like when using the taxonomy hack)
+
+```
+{{/* layouts/products/single */}}}
+{{ with index site.Data.products .Title }}
+  <h1>{{ .Name }}</h1>
+  price: {{ .TaxPrice }}
+{{ end }}
+```
+
+## As a slice of maps (data structuring is supported)
+We could envision a slice of maps. This would potentially take care of the data structuring. It seems the only required key would be `title` (to generate the URL). All the rest could be parsed as is (reserved keys preserved, unreserved keys under would be held in the `.Params` object in templates).
+
+That's how this returning partials could look like:
+```
+{{/* content/products/_content.html */}}
+{{ $products := slice
+{{ $remote_entries := site.Data.products }} 
+{{/* or $remote_entries := getJSON ""https://myapi.com/products""  */}}
+
+{{ with $remote_entries }}
+  {{ range . }}
+    {{ $products = $products | append (dict
+      ""title"" .Name
+      ""price"" .TaxPrice
+    ) }}
+  {{ end }}
+{{ end }}
+{{ return $products }}
+```
+
+
+If I'm not wrong and this is not such a big leap from the code base, this would make this early stage ""building pages from data"" easy enough that any body could jump in and test it. The more feedback the more robust the next stages will be.
+
+I understand plugins could be used, and yeah maybe it would be great in the long term to support  heavy old dated structure like WordPress or Drupal. But do we need this from the get-go? I'm very excited about this prospect and I, personally, would love to jump into a world where Hugo can build pages from data, even if it is as limited as my suggestion can be.
+<issue_comment>username_10: @corinnefreer  https://www.thenewdynamic.com/article/toward-using-a-headless-cms-with-hugo-part-2-building-from-remote-api/
+<issue_comment>username_12: I've stumbled upon this problem yesterday and found this thread.  I'd like to propose an extension of the initial solution proposed by @username_0 that uses the content directory structure as a routing mechanism and a JSON query library file to filter the source data for each route.
+
+For example, let's imagine we're building a movie database website and we want automatically generated pages for movies by title, by year, by genre, and by actor, all generated from a single JSON file (or external source) [like this one](https://gist.github.com/saniyusuf/406b843afdfb9c6a86e25753fe2761f4).
+
+The directory structure would appear as follows:
+
+```
+content
+├── _index.md
+├── movies
+│   ├── query.toml
+│   ├── _index.md
+│      ├──year
+│            ├── _index.md
+│            ├── :id
+│               ├── query.toml
+│               ├── _index.md
+│      ├──actor
+│            ├── _index.md
+│            ├── :id
+│               ├── query.toml
+│               ├── _index.md
+...etc
+```
+
+The `query.toml` would include the data source and the JSON query to filter the data.  JSON queries could be executed using a Go library like [jsonql](https://github.com/elgs/jsonql), so a sample query file for the `movies` folder (which, for example, is there to lists all published movies) could look like this:
+
+```
+source = ""movies.json""  
+query =  ""published is true""
+```
+
+This setup would look at movies.json, find all entries where published is true, and then make that data available via `.Page.Data` variable in the template for looping purposes.
+
+A special `:id` directory tells Hugo to build one page for each query result.  The query file in that directory must include the `:id` variable that denotes the key which will be used to build pages.  Looking at the `year` folder example, our intention here is to create one page for each year found in the JSON file, i.e:
+
+```
+/movies/year/1986
+/movies/year/1999
+/movies/year/2004
+...etc.
+```
+
+This is why we would create an `:id` directory under the `year` folder, with following `query.toml`
+
+```
+source = ""movies.json""  
+query =  ""year = :id""
+```
+
+Hugo would recognize that year is the key we want to build pages around and execute accordingly.
+
+This proposal is still rough around the edges but there are a few clear benefits:
+
+- Definining routes is typical for most frameworks and this would ease the adoption of this feature for newcomers
+- The data is separate from content and still gets to sit in the data directory, which allows for reusability via .Site.Data
+- We could support external queries via config files in the data directory
+- Using JSON query to filter the source data is extremely flexible and supports a variety of scenarios and use cases
+
+Hope this helps."
+emberjs/website,59164248,2036,,"[{'action': 'opened', 'author': 'finnigantime', 'comment_id': None, 'datetime': '2015-02-26 23:43:13+00:00', 'masked_author': 'username_0', 'text': 'I created a repository to show the repro for this issue. I worked through each step of the ""Getting Started"" guide and hit this issue on the final step (adding the LocalStorage adapter).\r\n\r\n## Repro:\r\n1. Pull this repository: https://github.com/username_0/emberjs-gettingStarted\r\n2. Refresh index.html in browser.\r\n3. Type some text in the ""What needs to be done?"" placeholder and hit enter.\r\n\r\n## Manual Repro (working through the getting started guide yourself):\r\n1. Work through the EmberJS ""Getting Started"" guide all the way until you get to the last step ""Using other adapters"": http://emberjs.com/guides/getting-started/using-other-adapters/\r\n2. Hook up the LSAdapter in application.js and include a script reference in index.html.\r\n3. Download the LSAdapter source from the link given in the guide (https://raw.github.com/rpflorence/ember-localstorage-adapter/master/localstorage_adapter.js).\r\n4. Refresh index.html in browser.\r\n5. Type some text in the ""What needs to be done?"" placeholder and hit enter.\r\n\r\n*Expected*: Task is created.\r\n*Actual*: Error encountered. Chrome console shows the error ""Uncaught TypeError: undefined is not a function"" on line 229 of localstorage_adapter.js. The problem is ```record._createSnapshot``` is undefined.\r\n\r\nThis is on Windows 8.1 in Chrome.', 'title': ""Guide - Getting Started: LocalStorage adapter fails with 'undefined is not a function'"", 'type': 'issue'}
+ {'action': 'created', 'author': 'trek', 'comment_id': 76388481.0, 'datetime': '2015-02-27 12:39:06+00:00', 'masked_author': 'username_1', 'text': 'Which version of Ember and ember-data are you using? ember-data is still in beta and its API changes.', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'finnigantime', 'comment_id': 76444011.0, 'datetime': '2015-02-27 18:17:33+00:00', 'masked_author': 'username_0', 'text': 'I\'m using the files linked from the ""Getting Started"" guide here:\r\nhttp://emberjs.com/guides/getting-started/obtaining-emberjs-and-dependencies/\r\n\r\nhttp://builds.emberjs.com/tags/v1.8.1/ember.js\r\nhttp://builds.emberjs.com/tags/v1.0.0-beta.11/ember-data.js', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'trek', 'comment_id': 76467732.0, 'datetime': '2015-02-27 20:40:21+00:00', 'masked_author': 'username_1', 'text': ""An over-eager commit PRed bumped ember-data to latest (at the time) without checking if they it still with the other dependencies (https://github.com/emberjs/website/commit/13a1eb173be3f8fcd6919edba32c2bcc6380bbb3). The TodoMVC guide aren't long for this world but if you want to find the latest ember-data that works with the suggested ember-localstorage-adapter or (see if latest https://github.com/kurko/ember-localstorage-adapter works with latest ember-data?) we'd accept that PR."", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'finnigantime', 'comment_id': 76471168.0, 'datetime': '2015-02-27 21:02:48+00:00', 'masked_author': 'username_0', 'text': 'Looks like this PR bumped localStorage-adapter from Ember Data 1.0.beta.14.1 to 1.0.beta.15:\r\nhttps://github.com/kurko/ember-localstorage-adapter/commit/728b4d062b48f41baf838d11c15aef0a5fc9a94c#diff-639624853778297e9e33bf4519ca8898\r\n\r\nUsing the previous version of localStorage-adapter works:\r\nhttps://raw.githubusercontent.com/kurko/ember-localstorage-adapter/c32477626ce0e7c8447e1ee79eb78e64a8357d70/localstorage_adapter.js\r\n\r\nI am happy to submit a PR that links this version of localStorage-adapter in the TodoMVC guide. Why is it going away though - is it being superseded? I found it to be a nice intro tutorial.', 'title': None, 'type': 'comment'}
+ {'action': 'closed', 'author': 'stefanpenner', 'comment_id': None, 'datetime': '2015-02-27 21:12:17+00:00', 'masked_author': 'username_2', 'text': '', 'title': None, 'type': 'issue'}
+ {'action': 'created', 'author': 'trek', 'comment_id': 76632050.0, 'datetime': '2015-03-01 21:31:07+00:00', 'masked_author': 'username_1', 'text': ""It doesn't really do a good job showing off the power of the framework sadly."", 'title': None, 'type': 'comment'}]","<issue_start><issue_comment>Title: Guide - Getting Started: LocalStorage adapter fails with 'undefined is not a function'
+username_0: I created a repository to show the repro for this issue. I worked through each step of the ""Getting Started"" guide and hit this issue on the final step (adding the LocalStorage adapter).
+
+## Repro:
+1. Pull this repository: https://github.com/username_0/emberjs-gettingStarted
+2. Refresh index.html in browser.
+3. Type some text in the ""What needs to be done?"" placeholder and hit enter.
+
+## Manual Repro (working through the getting started guide yourself):
+1. Work through the EmberJS ""Getting Started"" guide all the way until you get to the last step ""Using other adapters"": http://emberjs.com/guides/getting-started/using-other-adapters/
+2. Hook up the LSAdapter in application.js and include a script reference in index.html.
+3. Download the LSAdapter source from the link given in the guide (https://raw.github.com/rpflorence/ember-localstorage-adapter/master/localstorage_adapter.js).
+4. Refresh index.html in browser.
+5. Type some text in the ""What needs to be done?"" placeholder and hit enter.
+
+*Expected*: Task is created.
+*Actual*: Error encountered. Chrome console shows the error ""Uncaught TypeError: undefined is not a function"" on line 229 of localstorage_adapter.js. The problem is ```record._createSnapshot``` is undefined.
+
+This is on Windows 8.1 in Chrome.
+<issue_comment>username_1: Which version of Ember and ember-data are you using? ember-data is still in beta and its API changes.
+<issue_comment>username_0: I'm using the files linked from the ""Getting Started"" guide here:
+http://emberjs.com/guides/getting-started/obtaining-emberjs-and-dependencies/
+
+http://builds.emberjs.com/tags/v1.8.1/ember.js
+http://builds.emberjs.com/tags/v1.0.0-beta.11/ember-data.js
+<issue_comment>username_1: An over-eager commit PRed bumped ember-data to latest (at the time) without checking if they it still with the other dependencies (https://github.com/emberjs/website/commit/13a1eb173be3f8fcd6919edba32c2bcc6380bbb3). The TodoMVC guide aren't long for this world but if you want to find the latest ember-data that works with the suggested ember-localstorage-adapter or (see if latest https://github.com/kurko/ember-localstorage-adapter works with latest ember-data?) we'd accept that PR.
+<issue_comment>username_0: Looks like this PR bumped localStorage-adapter from Ember Data 1.0.beta.14.1 to 1.0.beta.15:
+https://github.com/kurko/ember-localstorage-adapter/commit/728b4d062b48f41baf838d11c15aef0a5fc9a94c#diff-639624853778297e9e33bf4519ca8898
+
+Using the previous version of localStorage-adapter works:
+https://raw.githubusercontent.com/kurko/ember-localstorage-adapter/c32477626ce0e7c8447e1ee79eb78e64a8357d70/localstorage_adapter.js
+
+I am happy to submit a PR that links this version of localStorage-adapter in the TodoMVC guide. Why is it going away though - is it being superseded? I found it to be a nice intro tutorial.<issue_closed>
+<issue_comment>username_1: It doesn't really do a good job showing off the power of the framework sadly."
+kubernetes/website,1097852692,31270,"{'number': 31270.0, 'repo': 'website', 'user_login': 'kubernetes'}","[{'action': 'opened', 'author': 'jeremy-morren', 'comment_id': None, 'datetime': '2022-01-10T12:39:00Z', 'masked_author': 'username_0', 'text': ""Setting powershell variables container only numbers does not work with multiple periods (at least on Powershell 5.1). Using quotes is necessary.\r\n\r\nThe proposed update changes the 'set $version variable' instruction to use double quotes for the version.  Without this, the variable is not set due to multiple periods in the value."", 'title': 'Update powershell script', 'type': 'issue'}
+ {'action': 'created', 'author': 'jihoon-seo', 'comment_id': 1009532049.0, 'datetime': '2022-01-11 02:03:25+00:00', 'masked_author': 'username_1', 'text': '- Please [sign the CLA](https://github.com/kubernetes/website/pull/31270#issuecomment-1008836224).\r\n- Maybe changing the base branch from `dev-1.24` to `main` back might help. 😊', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'bradtopol', 'comment_id': 1010127921.0, 'datetime': '2022-01-11 16:20:08+00:00', 'masked_author': 'username_2', 'text': 'Thank you @username_0 for your contribution. Please sign the CLA so we can accept your PR for review.', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'bradtopol', 'comment_id': 1010129722.0, 'datetime': '2022-01-11 16:22:04+00:00', 'masked_author': 'username_2', 'text': 'I think this PR is touching too many files.  I think there maybe an error in how the commit was created.\r\n/assign @username_3', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'jimangel', 'comment_id': 1026356820.0, 'datetime': '2022-02-01 00:43:20+00:00', 'masked_author': 'username_3', 'text': ""Hey there! @username_0, looks like you haven't signed the CLA yet. Could I please have you do that? https://github.com/kubernetes/community/blob/master/CLA.md"", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'jimangel', 'comment_id': 1026400495.0, 'datetime': '2022-02-01 01:49:04+00:00', 'masked_author': 'username_3', 'text': '/milestone 1.24', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'Babapool', 'comment_id': 1026401382.0, 'datetime': '2022-02-01 01:50:42+00:00', 'masked_author': 'username_4', 'text': 'Hi @username_0 a friendly ping, are you still working on this PR? Thanks.', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'jeremy-morren', 'comment_id': 1026409612.0, 'datetime': '2022-02-01 02:06:13+00:00', 'masked_author': 'username_0', 'text': ""I have signed the CLA. I'm going to close this pull request and create a new one, to retrigger the checks."", 'title': None, 'type': 'comment'}]","<issue_start><issue_comment>Title: Update powershell script
+username_0: Setting powershell variables container only numbers does not work with multiple periods (at least on Powershell 5.1). Using quotes is necessary.
+
+The proposed update changes the 'set $version variable' instruction to use double quotes for the version.  Without this, the variable is not set due to multiple periods in the value.
+<issue_comment>username_1: - Please [sign the CLA](https://github.com/kubernetes/website/pull/31270#issuecomment-1008836224).
+- Maybe changing the base branch from `dev-1.24` to `main` back might help. 😊
+<issue_comment>username_2: Thank you @username_0 for your contribution. Please sign the CLA so we can accept your PR for review.
+<issue_comment>username_2: I think this PR is touching too many files.  I think there maybe an error in how the commit was created.
+/assign @username_3
+<issue_comment>username_3: Hey there! @username_0, looks like you haven't signed the CLA yet. Could I please have you do that? https://github.com/kubernetes/community/blob/master/CLA.md
+<issue_comment>username_3: /milestone 1.24
+<issue_comment>username_4: Hi @username_0 a friendly ping, are you still working on this PR? Thanks.
+<issue_comment>username_0: I have signed the CLA. I'm going to close this pull request and create a new one, to retrigger the checks."
+AdoptOpenJDK/openjdk-website,454117036,506,"{'number': 506.0, 'repo': 'openjdk-website', 'user_login': 'AdoptOpenJDK'}","[{'action': 'opened', 'author': 'gdams', 'comment_id': None, 'datetime': '2019-06-10T11:06:44Z', 'masked_author': 'username_0', 'text': '<!--\r\nThank you for your pull request. Please provide a description above and review\r\nthe requirements below.\r\n-->\r\n\r\n##### Checklist\r\n<!-- Remove items that do not apply. For completed items, change [ ] to [x]. -->\r\n\r\n- [x] `npm test` passes\r\n- [ ] documentation is changed or added (if applicable)\r\n- [x] permission has been obtained to add new logo (if applicable)\r\n- [x] contribution guidelines followed [here](https://github.com/AdoptOpenJDK/openjdk-website/blob/master/CONTRIBUTING.md)', 'title': 'WIP: switch paddypower to be flutter group', 'type': 'issue'}
+ {'action': 'created', 'author': 'gdams', 'comment_id': 500800309.0, 'datetime': '2019-06-11 11:27:03+00:00', 'masked_author': 'username_0', 'text': ""hmm that logo isn't rendering on staging."", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'karianna', 'comment_id': 500800913.0, 'datetime': '2019-06-11 11:29:06+00:00', 'masked_author': 'username_1', 'text': 'Needs to be ./dist', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'karianna', 'comment_id': 500800972.0, 'datetime': '2019-06-11 11:29:19+00:00', 'masked_author': 'username_1', 'text': 'https://staging.adoptopenjdk.net/506/dist/assets/flutter.svg is there', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'gdams', 'comment_id': 500801212.0, 'datetime': '2019-06-11 11:30:15+00:00', 'masked_author': 'username_0', 'text': ""yeah weirdly the other logos don't have that."", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'karianna', 'comment_id': 500802594.0, 'datetime': '2019-06-11 11:35:14+00:00', 'masked_author': 'username_1', 'text': ""They're mostly external refs\nCheers,\nMartijn"", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'gdams', 'comment_id': 500807286.0, 'datetime': '2019-06-11 11:51:07+00:00', 'masked_author': 'username_0', 'text': ""It's working fine on production so I'm not too worried aha"", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'ParkerM', 'comment_id': 500956404.0, 'datetime': '2019-06-11 18:00:55+00:00', 'masked_author': 'username_2', 'text': 'Note the leading slash and URI base path 😉 \r\n\r\n![image](https://user-images.githubusercontent.com/5124113/59295207-b8f35700-8c48-11e9-921c-6abe86f70d7c.png)\r\n![image](https://user-images.githubusercontent.com/5124113/59295261-d9231600-8c48-11e9-805e-4efb13e3acd6.png)', 'title': None, 'type': 'comment'}]","<issue_start><issue_comment>Title: WIP: switch paddypower to be flutter group
+username_0: <!--
+Thank you for your pull request. Please provide a description above and review
+the requirements below.
+-->
+
+##### Checklist
+<!-- Remove items that do not apply. For completed items, change [ ] to [x]. -->
+
+- [x] `npm test` passes
+- [ ] documentation is changed or added (if applicable)
+- [x] permission has been obtained to add new logo (if applicable)
+- [x] contribution guidelines followed [here](https://github.com/AdoptOpenJDK/openjdk-website/blob/master/CONTRIBUTING.md)
+<issue_comment>username_0: hmm that logo isn't rendering on staging.
+<issue_comment>username_1: Needs to be ./dist
+<issue_comment>username_1: https://staging.adoptopenjdk.net/506/dist/assets/flutter.svg is there
+<issue_comment>username_0: yeah weirdly the other logos don't have that.
+<issue_comment>username_1: They're mostly external refs
+Cheers,
+Martijn
+<issue_comment>username_0: It's working fine on production so I'm not too worried aha
+<issue_comment>username_2: Note the leading slash and URI base path 😉 
+
+![image](https://user-images.githubusercontent.com/5124113/59295207-b8f35700-8c48-11e9-921c-6abe86f70d7c.png)
+![image](https://user-images.githubusercontent.com/5124113/59295261-d9231600-8c48-11e9-805e-4efb13e3acd6.png)"
+11ty/11ty-website,759519309,870,"{'number': 870.0, 'repo': '11ty-website', 'user_login': '11ty'}","[{'action': 'opened', 'author': 'BenjaminWalsh', 'comment_id': None, 'datetime': '2020-12-08T15:02:31Z', 'masked_author': 'username_0', 'text': ""I struggled for a while to get debugging running on windows. \r\n\r\nThe formatting of the command to set the debug value didn't work for me, but using the formatting from this issue [https://github.com/getgauge/taiko/issues/1065](https://github.com/getgauge/taiko/issues/1065) solved my problem. \r\n\r\nSo I've added adding this to the document for both local and global installations. It should save anyone else from having to dig around for the same information to get it working.\r\n\r\nFor the record I'm not 100% happy with the way I've named these additions or how I've organised them. But the information itself was valuable."", 'title': 'Add alternative Windows debug commands to debugging.md', 'type': 'issue'}
+ {'action': 'created', 'author': 'zachleat', 'comment_id': 808945105.0, 'datetime': '2021-03-28 19:17:03+00:00', 'masked_author': 'username_1', 'text': 'Just so I’m aware, this is powershell specific?', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'zachleat', 'comment_id': 894847314.0, 'datetime': '2021-08-08 19:58:49+00:00', 'masked_author': 'username_1', 'text': 'Ah sorry somehow this got lost, but I do want to check in here and say we do have Powershell examples on the docs now via https://github.com/11ty/11ty-website/pull/1119 https://www.11ty.dev/docs/debugging/\r\n\r\nThank you!', 'title': None, 'type': 'comment'}]","<issue_start><issue_comment>Title: Add alternative Windows debug commands to debugging.md
+username_0: I struggled for a while to get debugging running on windows. 
+
+The formatting of the command to set the debug value didn't work for me, but using the formatting from this issue [https://github.com/getgauge/taiko/issues/1065](https://github.com/getgauge/taiko/issues/1065) solved my problem. 
+
+So I've added adding this to the document for both local and global installations. It should save anyone else from having to dig around for the same information to get it working.
+
+For the record I'm not 100% happy with the way I've named these additions or how I've organised them. But the information itself was valuable.
+<issue_comment>username_1: Just so I’m aware, this is powershell specific?
+<issue_comment>username_1: Ah sorry somehow this got lost, but I do want to check in here and say we do have Powershell examples on the docs now via https://github.com/11ty/11ty-website/pull/1119 https://www.11ty.dev/docs/debugging/
+
+Thank you!"

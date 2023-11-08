@@ -1,0 +1,459 @@
+yanzhenjie/AndServer,792456668,357,,"[{'action': 'opened', 'author': 'lancewoo', 'comment_id': None, 'datetime': '2021-01-23 06:47:41+00:00', 'masked_author': 'username_0', 'text': 'My server api:\r\n\r\n`\r\n    /**\r\n     * 接收上传文件并转移到服务器根目录下。\r\n     *\r\n     * @param file 客户端上传的文件\r\n     * @throws IOException\r\n     */\r\n    @PostMapping(path = ""/uploadWithInfo"")\r\n    UserInfo uploadWithInfo(@FormPart(name = ""user"") UserInfo userInfo,\r\n                            @FormPart(name = ""file"") MultipartFile file,\r\n                            @FormPart(name = ""fileList"", required = false) List<MultipartFile> fileList\r\n    ) throws IOException {\r\n        File localFile = FileUtils.createFile(file);\r\n        file.transferTo(localFile);\r\n        if (fileList != null) {\r\n            userInfo.setUserName(userInfo.getUserId() + "" | fileList: "" + fileList.size());\r\n        }\r\n        return userInfo;\r\n    }\r\n\r\n`\r\n\r\nMy client calls:\r\n`\r\n        UserInfo userInfo = new UserInfo();\r\n        userInfo.setUserId(""username_1"");\r\n        userInfo.setUserName(""YAN Zhenjie"");\r\n\r\n        FormBody formBody = FormBody.newBuilder()\r\n                .param(""user"", JSON.toJSONString(userInfo))\r\n                .build();\r\n\r\n        // 传object和文件及多文件\r\n        List<File> files = new ArrayList<>();\r\n        files.add(new File(""/sdcard/batteryInfo.json""));\r\n        files.add(new File(""/sdcard/userinfo.json""));\r\n        // 第一次上传不带可选参数多个文件\r\n        formBody = FormBody.newBuilder()\r\n                .param(""user"", JSON.toJSONString(userInfo))\r\n                .file(""file"", new File(""/sdcard/Debug_Log_ST2303/loglist.txt""))\r\n                .build();\r\n        Kalle.post(UrlConfig.UPLOAD_WITH_INFO)\r\n                .body(formBody)\r\n                .perform(new SimpleCallback<UserInfo>(this) {\r\n                    @Override\r\n                    public void onResponse(SimpleResponse<UserInfo, String> response) {\r\n                        Logger.i(UrlConfig.UPLOAD_WITH_INFO + "" 第一次上传不带可选参数多个文件 responded form:"" + response.succeed());\r\n                    }\r\n                });\r\n        // 第二次上传带可选参数多个文件\r\n        formBody = FormBody.newBuilder()\r\n                .param(""user"", JSON.toJSONString(userInfo))\r\n                .file(""file"", new File(""/sdcard/Debug_Log_ST2303/loglist.txt""))\r\n                .files(""fileList"", files)\r\n                .build();\r\n        Kalle.post(UrlConfig.UPLOAD_WITH_INFO)\r\n                .body(formBody)\r\n                .perform(new SimpleCallback<UserInfo>(this) {\r\n                    @Override\r\n                    public void onResponse(SimpleResponse<UserInfo, String> response) {\r\n                        Logger.i(UrlConfig.UPLOAD_WITH_INFO + "" 第二次上传带可选参数多个文件 responded form:"" + response.succeed());\r\n                    }\r\n                });\r\n`\r\n\r\nThe output from the server:\r\n`\r\n2021-01-23 14:40:04.173 24806-25118/com.username_1.andserver.sample I/AndServerSample: Path: /uploadWithInfo\r\n2021-01-23 14:40:04.173 24806-25118/com.username_1.andserver.sample I/AndServerSample: Method: POST\r\n2021-01-23 14:40:04.174 24806-25118/com.username_1.andserver.sample I/AndServerSample: Param: {""user"":[""{\\""userId\\"":\\""username_1\\"",\\""userName\\"":\\""YAN Zhenjie\\""}""]}\r\n2021-01-23 14:40:04.178 24806-25118/com.username_1.andserver.sample W/System.err: com.alibaba.fastjson.JSONException: exepct \'[\', but {, pos 1, json : {""capacityVoltage"":0.471,""floatingCharging"":false,""lineGatherCharging"":0,""mcuAlarmType"":0,""powerSourceVoltage"":0,""sampleSecondsSinceEpoch"":1611384001,""voltage"":6.728,""workTemperature"":20.0,""name"":""BatteryInfo""}\r\n2021-01-23 14:40:04.179 24806-25118/com.username_1.andserver.sample W/System.err:     at com.alibaba.fastjson.parser.DefaultJSONParser.parseArray(DefaultJSONParser.java:734)\r\n2021-01-23 14:40:04.179 24806-25118/com.username_1.andserver.sample W/System.err:     at com.alibaba.fastjson.serializer.CollectionCodec.deserialze(CollectionCodec.java:171)\r\n2021-01-23 14:40:04.179 24806-25118/com.username_1.andserver.sample W/System.err:     at com.alibaba.fastjson.parser.DefaultJSONParser.parseObject(DefaultJSONParser.java:704)\r\n2021-01-23 14:40:04.179 24806-25118/com.username_1.andserver.sample W/System.err:     at com.alibaba.fastjson.parser.DefaultJSONParser.parseObject(DefaultJSONParser.java:677)\r\n2021-01-23 14:40:04.190 24806-25118/com.username_1.andserver.sample W/System.err:     at com.alibaba.fastjson.JSON.parseObject(JSON.java:245)\r\n2021-01-23 14:40:04.191 24806-25118/com.username_1.andserver.sample W/System.err:     at com.alibaba.fastjson.JSON.parseObject(JSON.java:217)\r\n2021-01-23 14:40:04.191 24806-25118/com.username_1.andserver.sample W/System.err:     at com.alibaba.fastjson.JSON.parseObject(JSON.java:187)\r\n[Truncated]\n      if (param2File != null) {\r\n        InputStream stream = param2File.getStream();\r\n        MediaType mimeType = param2File.getContentType();\r\n        param2 = converter.convert(stream, mimeType, param2Type);\r\n      }\r\n      if (param2 == null) {\r\n        String param2Str = multiRequest.getParameter(""fileList"");\r\n        if (!TextUtils.isEmpty(param2Str)) {\r\n          InputStream stream = new ByteArrayInputStream(param2Str.getBytes());\r\n          MediaType mimeType = MediaType.TEXT_PLAIN;\r\n          param2 = converter.convert(stream, mimeType, param2Type);\r\n        }\r\n      }\r\n    }\r\n    Object o = ((CentralController)mHost).uploadWithInfo(param0, param1, param2);\r\n    return new ObjectView(true, o);\r\n  }\r\n}\r\n\r\n`', 'title': 'List<MultipartFile> not supported, while MultipartFile[] works on v2.1.6', 'type': 'issue'}
+ {'action': 'created', 'author': 'yanzhenjie', 'comment_id': 782566450.0, 'datetime': '2021-02-20 05:50:46+00:00', 'masked_author': 'username_1', 'text': 'Yes, List is not supported, it will follow the logic of `converter`, and array should be used.\r\n```java\r\n    @PostMapping(path = ""/uploadWithInfo"")\r\n    UserInfo uploadWithInfo(@FormPart(name = ""user"") UserInfo userInfo,\r\n                            @FormPart(name = ""file"") MultipartFile file,\r\n                            @FormPart(name = ""fileList"", required = false) MultipartFile[] fileList\r\n    ) throws IOException {\r\n        ...\r\n        return userInfo;\r\n    }\r\n```\r\n\r\nchange\r\n```java\r\n@FormPart(name = ""fileList"", required = false)List<MultipartFile> fileList\r\n```\r\nto\r\n```java\r\n@FormPart(name = ""fileList"", required = false) MultipartFile[] fileList\r\n```', 'title': None, 'type': 'comment'}]","<issue_start><issue_comment>Title: List<MultipartFile> not supported, while MultipartFile[] works on v2.1.6
+username_0: My server api:
+
+`
+    /**
+     * 接收上传文件并转移到服务器根目录下。
+     *
+     * @param file 客户端上传的文件
+     * @throws IOException
+     */
+    @PostMapping(path = ""/uploadWithInfo"")
+    UserInfo uploadWithInfo(@FormPart(name = ""user"") UserInfo userInfo,
+                            @FormPart(name = ""file"") MultipartFile file,
+                            @FormPart(name = ""fileList"", required = false) List<MultipartFile> fileList
+    ) throws IOException {
+        File localFile = FileUtils.createFile(file);
+        file.transferTo(localFile);
+        if (fileList != null) {
+            userInfo.setUserName(userInfo.getUserId() + "" | fileList: "" + fileList.size());
+        }
+        return userInfo;
+    }
+
+`
+
+My client calls:
+`
+        UserInfo userInfo = new UserInfo();
+        userInfo.setUserId(""username_1"");
+        userInfo.setUserName(""YAN Zhenjie"");
+
+        FormBody formBody = FormBody.newBuilder()
+                .param(""user"", JSON.toJSONString(userInfo))
+                .build();
+
+        // 传object和文件及多文件
+        List<File> files = new ArrayList<>();
+        files.add(new File(""/sdcard/batteryInfo.json""));
+        files.add(new File(""/sdcard/userinfo.json""));
+        // 第一次上传不带可选参数多个文件
+        formBody = FormBody.newBuilder()
+                .param(""user"", JSON.toJSONString(userInfo))
+                .file(""file"", new File(""/sdcard/Debug_Log_ST2303/loglist.txt""))
+                .build();
+        Kalle.post(UrlConfig.UPLOAD_WITH_INFO)
+                .body(formBody)
+                .perform(new SimpleCallback<UserInfo>(this) {
+                    @Override
+                    public void onResponse(SimpleResponse<UserInfo, String> response) {
+                        Logger.i(UrlConfig.UPLOAD_WITH_INFO + "" 第一次上传不带可选参数多个文件 responded form:"" + response.succeed());
+                    }
+                });
+        // 第二次上传带可选参数多个文件
+        formBody = FormBody.newBuilder()
+                .param(""user"", JSON.toJSONString(userInfo))
+                .file(""file"", new File(""/sdcard/Debug_Log_ST2303/loglist.txt""))
+                .files(""fileList"", files)
+                .build();
+        Kalle.post(UrlConfig.UPLOAD_WITH_INFO)
+                .body(formBody)
+                .perform(new SimpleCallback<UserInfo>(this) {
+                    @Override
+                    public void onResponse(SimpleResponse<UserInfo, String> response) {
+                        Logger.i(UrlConfig.UPLOAD_WITH_INFO + "" 第二次上传带可选参数多个文件 responded form:"" + response.succeed());
+                    }
+                });
+`
+
+The output from the server:
+`
+2021-01-23 14:40:04.173 24806-25118/com.username_1.andserver.sample I/AndServerSample: Path: /uploadWithInfo
+2021-01-23 14:40:04.173 24806-25118/com.username_1.andserver.sample I/AndServerSample: Method: POST
+2021-01-23 14:40:04.174 24806-25118/com.username_1.andserver.sample I/AndServerSample: Param: {""user"":[""{\""userId\"":\""username_1\"",\""userName\"":\""YAN Zhenjie\""}""]}
+2021-01-23 14:40:04.178 24806-25118/com.username_1.andserver.sample W/System.err: com.alibaba.fastjson.JSONException: exepct '[', but {, pos 1, json : {""capacityVoltage"":0.471,""floatingCharging"":false,""lineGatherCharging"":0,""mcuAlarmType"":0,""powerSourceVoltage"":0,""sampleSecondsSinceEpoch"":1611384001,""voltage"":6.728,""workTemperature"":20.0,""name"":""BatteryInfo""}
+2021-01-23 14:40:04.179 24806-25118/com.username_1.andserver.sample W/System.err:     at com.alibaba.fastjson.parser.DefaultJSONParser.parseArray(DefaultJSONParser.java:734)
+2021-01-23 14:40:04.179 24806-25118/com.username_1.andserver.sample W/System.err:     at com.alibaba.fastjson.serializer.CollectionCodec.deserialze(CollectionCodec.java:171)
+2021-01-23 14:40:04.179 24806-25118/com.username_1.andserver.sample W/System.err:     at com.alibaba.fastjson.parser.DefaultJSONParser.parseObject(DefaultJSONParser.java:704)
+2021-01-23 14:40:04.179 24806-25118/com.username_1.andserver.sample W/System.err:     at com.alibaba.fastjson.parser.DefaultJSONParser.parseObject(DefaultJSONParser.java:677)
+2021-01-23 14:40:04.190 24806-25118/com.username_1.andserver.sample W/System.err:     at com.alibaba.fastjson.JSON.parseObject(JSON.java:245)
+2021-01-23 14:40:04.191 24806-25118/com.username_1.andserver.sample W/System.err:     at com.alibaba.fastjson.JSON.parseObject(JSON.java:217)
+2021-01-23 14:40:04.191 24806-25118/com.username_1.andserver.sample W/System.err:     at com.alibaba.fastjson.JSON.parseObject(JSON.java:187)
+[Truncated]
+      if (param2File != null) {
+        InputStream stream = param2File.getStream();
+        MediaType mimeType = param2File.getContentType();
+        param2 = converter.convert(stream, mimeType, param2Type);
+      }
+      if (param2 == null) {
+        String param2Str = multiRequest.getParameter(""fileList"");
+        if (!TextUtils.isEmpty(param2Str)) {
+          InputStream stream = new ByteArrayInputStream(param2Str.getBytes());
+          MediaType mimeType = MediaType.TEXT_PLAIN;
+          param2 = converter.convert(stream, mimeType, param2Type);
+        }
+      }
+    }
+    Object o = ((CentralController)mHost).uploadWithInfo(param0, param1, param2);
+    return new ObjectView(true, o);
+  }
+}
+
+`
+<issue_comment>username_1: Yes, List is not supported, it will follow the logic of `converter`, and array should be used.
+```java
+    @PostMapping(path = ""/uploadWithInfo"")
+    UserInfo uploadWithInfo(@FormPart(name = ""user"") UserInfo userInfo,
+                            @FormPart(name = ""file"") MultipartFile file,
+                            @FormPart(name = ""fileList"", required = false) MultipartFile[] fileList
+    ) throws IOException {
+        ...
+        return userInfo;
+    }
+```
+
+change
+```java
+@FormPart(name = ""fileList"", required = false)List<MultipartFile> fileList
+```
+to
+```java
+@FormPart(name = ""fileList"", required = false) MultipartFile[] fileList
+```"
+kubeflow/website,1010768145,2981,"{'number': 2981.0, 'repo': 'website', 'user_login': 'kubeflow'}","[{'action': 'opened', 'author': 'RFMVasconcelos', 'comment_id': None, 'datetime': '2021-09-29T10:15:21Z', 'masked_author': 'username_0', 'text': ""Dear community,\r\n\r\nIn the last 2 years, I have had the great pleasure to be part of the community building this amazing open-source tool. I am quite satisfied in feeling that I left a small dent in the overall experience for new users.\r\n\r\nToday I see my path take a different course, which I am excited to invest my full energy into. 🚀\r\n\r\nI was also very lucky to work on Canonical's distribution - which I leave in the great hands of @knkski  @DomFleischmann and more. \r\n\r\nIf you want to stay in touch, please connect via [LinkedIn](https://www.linkedin.com/in/rui-vasconcelos/).\r\n\r\nI nominate @knkski to take on some of the responsibilities I held, in his own capacity, given his 3 years of dedication to Kubeflow.\r\n\r\nWith Gratitude,\r\nRui"", 'title': 'rm RFMVasconcelos', 'type': 'issue'}
+ {'action': 'created', 'author': 'Jeffwan', 'comment_id': 930365132.0, 'datetime': '2021-09-29 17:05:25+00:00', 'masked_author': 'username_1', 'text': 'Thanks a lot for the contribution in past two years! @username_0', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'RFMVasconcelos', 'comment_id': 930384327.0, 'datetime': '2021-09-29 17:27:57+00:00', 'masked_author': 'username_0', 'text': 'Thank you @username_1 ! Wish you all the best :)', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'andreyvelich', 'comment_id': 930384497.0, 'datetime': '2021-09-29 17:28:10+00:00', 'masked_author': 'username_2', 'text': 'Thank you for your help to Kubeflow community @username_0!', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'Bobgy', 'comment_id': 939208783.0, 'datetime': '2021-10-09 02:32:13+00:00', 'masked_author': 'username_3', 'text': 'Thank you @username_0 for the great contributions to documentation!\r\nGood luck!', 'title': None, 'type': 'comment'}]","<issue_start><issue_comment>Title: rm RFMVasconcelos
+username_0: Dear community,
+
+In the last 2 years, I have had the great pleasure to be part of the community building this amazing open-source tool. I am quite satisfied in feeling that I left a small dent in the overall experience for new users.
+
+Today I see my path take a different course, which I am excited to invest my full energy into. 🚀
+
+I was also very lucky to work on Canonical's distribution - which I leave in the great hands of @knkski  @DomFleischmann and more. 
+
+If you want to stay in touch, please connect via [LinkedIn](https://www.linkedin.com/in/rui-vasconcelos/).
+
+I nominate @knkski to take on some of the responsibilities I held, in his own capacity, given his 3 years of dedication to Kubeflow.
+
+With Gratitude,
+Rui
+<issue_comment>username_1: Thanks a lot for the contribution in past two years! @username_0
+<issue_comment>username_0: Thank you @username_1 ! Wish you all the best :)
+<issue_comment>username_2: Thank you for your help to Kubeflow community @username_0!
+<issue_comment>username_3: Thank you @username_0 for the great contributions to documentation!
+Good luck!"
+facebook/docusaurus,1028117616,5724,,"[{'action': 'opened', 'author': 'sohamsshah', 'comment_id': None, 'datetime': '2021-10-16T18:31:12Z', 'masked_author': 'username_0', 'text': ""## 🐛 Bug Report\r\n\r\n### Prerequisites\r\n\r\n- [X] I'm using the latest version of Docusaurus.\r\n- [X] I have tried the `npm run clear` or `yarn clear` command.\r\n- [X] I have tried `rm -rf node_modules yarn.lock package-lock.json` and re-installing packages.\r\n- [X] I have tried creating a repro with https://new.docusaurus.io\r\n- [X] I have read the console error message carefully (if applicable)\r\n\r\n### Description\r\n\r\nThe `img` tag in the NavbarLogo attribute in docusaurus.config.js file to add Logo to Navbar doesn't have any option/prop to set the `height` and `width` of the logo. Because of this, the Lighthouse Report fails and suggests to add `width` and `height` to the logo image.\r\n\r\n### Have you read the [Contributing Guidelines on issues](https://github.com/facebook/docusaurus/blob/main/CONTRIBUTING.md#reporting-new-issues)?\r\n\r\nYes, I have Read it.\r\n\r\n## Steps to reproduce\r\n\r\n1. Run Lighthouse test on any docusaurus powered website\r\n1. See the diagnostics message that suggests to add `width` and `height` attribute\r\n1. Also in `inspect` element, width and height attributes are missing.\r\n\r\n## Expected behavior\r\n\r\nThere should be props for this in order to add height and width to image along with defaults.\r\n\r\n## Screen Shot\r\n![image](https://user-images.githubusercontent.com/47717492/137598357-fc8cae8e-fe25-459f-9d41-f90225181ba2.png)\r\n\r\n## Your environment\r\n- Docusaurus version used: latest\r\n- Environment name and version (e.g. Chrome 78.0.3904.108, Node.js 10.17.0): Chrome 87\r\n- Operating system and version (e.g. Ubuntu 20.04.2 LTS): Windows 10\r\n\r\nI am new to the community and willing to contribute towards this issue. Please let me know more insights upon this. Would like to take this up!"", 'title': ""NavbarLogo doesn't have width and height attribute "", 'type': 'issue'}
+ {'action': 'created', 'author': 'Josh-Cena', 'comment_id': 945051281.0, 'datetime': '2021-10-17 05:12:55+00:00', 'masked_author': 'username_1', 'text': ""As a further request: can we make all images within a Markdown file have the `height` (and `width`, maybe) attribute as well? Is it possible to fetch this data when we convert them to `require` calls?\n\nThis ensures that there's no layout shift as the images load."", 'title': None, 'type': 'comment'}
+ {'action': 'closed', 'author': 'Josh-Cena', 'comment_id': None, 'datetime': '2021-11-01 10:09:31+00:00', 'masked_author': 'username_1', 'text': '', 'title': None, 'type': 'issue'}]","<issue_start><issue_comment>Title: NavbarLogo doesn't have width and height attribute 
+username_0: ## 🐛 Bug Report
+
+### Prerequisites
+
+- [X] I'm using the latest version of Docusaurus.
+- [X] I have tried the `npm run clear` or `yarn clear` command.
+- [X] I have tried `rm -rf node_modules yarn.lock package-lock.json` and re-installing packages.
+- [X] I have tried creating a repro with https://new.docusaurus.io
+- [X] I have read the console error message carefully (if applicable)
+
+### Description
+
+The `img` tag in the NavbarLogo attribute in docusaurus.config.js file to add Logo to Navbar doesn't have any option/prop to set the `height` and `width` of the logo. Because of this, the Lighthouse Report fails and suggests to add `width` and `height` to the logo image.
+
+### Have you read the [Contributing Guidelines on issues](https://github.com/facebook/docusaurus/blob/main/CONTRIBUTING.md#reporting-new-issues)?
+
+Yes, I have Read it.
+
+## Steps to reproduce
+
+1. Run Lighthouse test on any docusaurus powered website
+1. See the diagnostics message that suggests to add `width` and `height` attribute
+1. Also in `inspect` element, width and height attributes are missing.
+
+## Expected behavior
+
+There should be props for this in order to add height and width to image along with defaults.
+
+## Screen Shot
+![image](https://user-images.githubusercontent.com/47717492/137598357-fc8cae8e-fe25-459f-9d41-f90225181ba2.png)
+
+## Your environment
+- Docusaurus version used: latest
+- Environment name and version (e.g. Chrome 78.0.3904.108, Node.js 10.17.0): Chrome 87
+- Operating system and version (e.g. Ubuntu 20.04.2 LTS): Windows 10
+
+I am new to the community and willing to contribute towards this issue. Please let me know more insights upon this. Would like to take this up!
+<issue_comment>username_1: As a further request: can we make all images within a Markdown file have the `height` (and `width`, maybe) attribute as well? Is it possible to fetch this data when we convert them to `require` calls?
+
+This ensures that there's no layout shift as the images load.<issue_closed>"
+devopsdays/devopsdays-web,158536660,527,"{'number': 527.0, 'repo': 'devopsdays-web', 'user_login': 'devopsdays'}","[{'action': 'opened', 'author': 'barkerd427', 'comment_id': None, 'datetime': '2016-06-05T04:18:21Z', 'masked_author': 'username_0', 'text': 'This closes #82 by adding support for localizing the map. I have currently set the zoom at 6, but we can play with that if it isn\'t optimal. If location information isn\'t available, then the default zoom is applied.\r\n\r\nI also removed the labels and added info windows instead. They\'re still slightly buggy in that the ""disappear on drag"" functionality only works on the last window to appear. I\'ve done this in the past, but it may require additional restructuring. I\'ll log an issue if this PR is merged.', 'title': 'Updated map zoom and labels', 'type': 'issue'}
+ {'action': 'created', 'author': 'bridgetkromhout', 'comment_id': 223793828.0, 'datetime': '2016-06-05 05:19:01+00:00', 'masked_author': 'username_1', 'text': 'Thanks. I\'ll check it over more carefully tomorrow. Meanwhile, please put the Kansas-City-specific stuff into a different PR (per the request in the README - we don\'t want to mix ""stuff for a specific city"" with ""stuff that affects the whole site"" in the same PRs). Thanks!', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'barkerd427', 'comment_id': 223811081.0, 'datetime': '2016-06-05 12:43:40+00:00', 'masked_author': 'username_0', 'text': 'Updated.', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'bridgetkromhout', 'comment_id': 223818214.0, 'datetime': '2016-06-05 15:07:05+00:00', 'masked_author': 'username_1', 'text': 'Commented in #82 where we can discuss the design. Thanks!', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'mattstratton', 'comment_id': 223874495.0, 'datetime': '2016-06-06 05:57:28+00:00', 'masked_author': 'username_2', 'text': 'I have built this branch to http://workstation.username_2.com if anyone wants to see what it looks like.', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'mattstratton', 'comment_id': 223901556.0, 'datetime': '2016-06-06 08:48:04+00:00', 'masked_author': 'username_2', 'text': 'just a note for those of you with merge powers - this PR requires a thumbs up from both @username_1 and @username_2 before merging.', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'yvovandoorn', 'comment_id': 223968064.0, 'datetime': '2016-06-06 14:02:34+00:00', 'masked_author': 'username_3', 'text': ""In general I like it. It looks less messy with the city names not shown. \r\n\r\nWhat would make it even better though if the city names it now exposes are clickable links to the actual event (that wasn't working for me on Chrome 52). \r\n\r\nMy 2 cents."", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'jyee', 'comment_id': 224022857.0, 'datetime': '2016-06-06 17:08:50+00:00', 'masked_author': 'username_4', 'text': 'I like it, but similar to Bridget\'s comments on #82, I have a tendency to click ""No"" when sites ask for my location and it\'s unclear what providing that info will do (also for some reason, Chrome is not asking and simply showing the global, zoomed-out map).\r\n\r\nI wonder if some sort of ""See events near you"" button that would trigger the location request and then zoom to an appropriate level (either a preset zoom number or encompassing the nearest X number of events near the geolocation).', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'mattstratton', 'comment_id': 224028971.0, 'datetime': '2016-06-06 17:30:28+00:00', 'masked_author': 'username_2', 'text': 'FYI, ""do not merge"" does not mean rejected, it\'s just a signal to other maintainers :)', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'barkerd427', 'comment_id': 224641657.0, 'datetime': '2016-06-08 16:10:33+00:00', 'masked_author': 'username_0', 'text': ""@username_3, that may be easy, but it's largely dependent on what information is available for that marker. Swapping in a link is easy if there's one available."", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'barkerd427', 'comment_id': 224642428.0, 'datetime': '2016-06-08 16:12:35+00:00', 'masked_author': 'username_0', 'text': ""@username_4, not sure why it isn't asking, but the default is that it zooms to fit all markers. It only changes if you select yes. You may have a global config switched that has turned off the location prompt. We can certainly add a separate button, but it would still prompt for access to the location information."", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'bridgetkromhout', 'comment_id': 230587561.0, 'datetime': '2016-07-05 20:06:48+00:00', 'masked_author': 'username_1', 'text': 'Per the discussion in #82, closing this without merging. Thanks for helping us work through this, @username_0!', 'title': None, 'type': 'comment'}]","<issue_start><issue_comment>Title: Updated map zoom and labels
+username_0: This closes #82 by adding support for localizing the map. I have currently set the zoom at 6, but we can play with that if it isn't optimal. If location information isn't available, then the default zoom is applied.
+
+I also removed the labels and added info windows instead. They're still slightly buggy in that the ""disappear on drag"" functionality only works on the last window to appear. I've done this in the past, but it may require additional restructuring. I'll log an issue if this PR is merged.
+<issue_comment>username_1: Thanks. I'll check it over more carefully tomorrow. Meanwhile, please put the Kansas-City-specific stuff into a different PR (per the request in the README - we don't want to mix ""stuff for a specific city"" with ""stuff that affects the whole site"" in the same PRs). Thanks!
+<issue_comment>username_0: Updated.
+<issue_comment>username_1: Commented in #82 where we can discuss the design. Thanks!
+<issue_comment>username_2: I have built this branch to http://workstation.username_2.com if anyone wants to see what it looks like.
+<issue_comment>username_2: just a note for those of you with merge powers - this PR requires a thumbs up from both @username_1 and @username_2 before merging.
+<issue_comment>username_3: In general I like it. It looks less messy with the city names not shown. 
+
+What would make it even better though if the city names it now exposes are clickable links to the actual event (that wasn't working for me on Chrome 52). 
+
+My 2 cents.
+<issue_comment>username_4: I like it, but similar to Bridget's comments on #82, I have a tendency to click ""No"" when sites ask for my location and it's unclear what providing that info will do (also for some reason, Chrome is not asking and simply showing the global, zoomed-out map).
+
+I wonder if some sort of ""See events near you"" button that would trigger the location request and then zoom to an appropriate level (either a preset zoom number or encompassing the nearest X number of events near the geolocation).
+<issue_comment>username_2: FYI, ""do not merge"" does not mean rejected, it's just a signal to other maintainers :)
+<issue_comment>username_0: @username_3, that may be easy, but it's largely dependent on what information is available for that marker. Swapping in a link is easy if there's one available.
+<issue_comment>username_0: @username_4, not sure why it isn't asking, but the default is that it zooms to fit all markers. It only changes if you select yes. You may have a global config switched that has turned off the location prompt. We can certainly add a separate button, but it would still prompt for access to the location information.
+<issue_comment>username_1: Per the discussion in #82, closing this without merging. Thanks for helping us work through this, @username_0!"
+ethereum/ethereum-org-website,1083881195,4823,"{'number': 4823.0, 'repo': 'ethereum-org-website', 'user_login': 'ethereum'}","[{'action': 'opened', 'author': 'bskrksyp9', 'comment_id': None, 'datetime': '2021-12-18T17:51:01Z', 'masked_author': 'username_0', 'text': '<!--- Provide a general summary of your changes in the Title above -->\r\n\r\n## Description\r\nCorrections for typo, re-word and redundant words.\r\n<!--- Describe your changes in detail -->', 'title': 'Grammatical corrections in energy-consumption doc', 'type': 'issue'}
+ {'action': 'created', 'author': 'minimalsm', 'comment_id': 997862350.0, 'datetime': '2021-12-20 12:03:04+00:00', 'masked_author': 'username_1', 'text': 'Awesome, thanks @username_0', 'title': None, 'type': 'comment'}]","<issue_start><issue_comment>Title: Grammatical corrections in energy-consumption doc
+username_0: <!--- Provide a general summary of your changes in the Title above -->
+
+## Description
+Corrections for typo, re-word and redundant words.
+<!--- Describe your changes in detail -->
+<issue_comment>username_1: Awesome, thanks @username_0"
+JedWatson/sydjs-site,61202206,52,,"[{'action': 'opened', 'author': 'cantuket', 'comment_id': None, 'datetime': '2015-03-13 19:40:06+00:00', 'masked_author': 'username_0', 'text': ""Hi guys,\r\n\r\nI'm new to jade and was wondering if you had any advice for rendering jade templates on the fly with a simple ajax call. \r\n\r\nI've been looking around and see that you can do it both server-side or client-side and am wondering if you've already included these capabilities somewhere that I'm not seeing. Right now I've included all my partials/includes in my public folder in HTML, but i would like to move everything to jade and am having some difficulties.\r\n\r\nThanks for any help in advance!\r\n~ Kyle"", 'title': 'Compile Jade templates for AJAX requests - Client vs Server-Side', 'type': 'issue'}
+ {'action': 'created', 'author': 'cantuket', 'comment_id': 80813147.0, 'datetime': '2015-03-15 02:42:59+00:00', 'masked_author': 'username_0', 'text': ""It took a little bit of research and trial & error, but I came up with a system that I am truly ecstatic with. \r\n\r\n1) Im doing the Jade compiling client-side during development with [Grunt Jade](https://github.com/gruntjs/grunt-contrib-jade) compiler, which compiles all of my Jade partials from 'templates > views > partials' to 'public > partials_compiled'. This may seem excessive, but the site I'm building currently has about 40 partials and will likely get up to +100 by the end of it. This allows me to access the pages as static HTML with AJAX right now, but if I want to create custom routes and manipulate data client side, while maintaining the asynchronous behavior of the HTML, then its extremely easy to do so because the file structure is identical in each 'partials directory'. I think this solution is also likely as good as a I can do performance wise, because the other options are...\r\n\r\na) client-side compiling, per AJAX transaction\r\nb) server-side compiling, per AJAX transaction\r\nc) mass server-side compiling to JSON objects at initial load, in some monstrous file\r\n\r\nNone of these options seemed very efficient, manageable or scalable in the long-term. this solution also allows my to minify all my HTML in production getting even more speed and easily move the code to other platforms in HTML for different non-Jade/Node projects. I'd still like to hear how other peoples opinions on the matter though.\r\n\r\n2) To move all my previous HTML into Jade I used [html2jade] (https://github.com/donpark/html2jade), which I also run with grunt. I takes a little bit of clean-up after compiling to Jade, but is by far the best tool I found. Its also the only tool I found that allows you to designate nesting with 'Tabs' vs 'Spaces', which I think is a million times easier to read and maintain; as well as other options like eliminating commas between attributes.\r\n\r\nI'm coming from building in Laravel with Blade, which is just as verbose as PHP, and the horrors of Wordpress for CMSs (I was moving to OctoberCMS before I left, but still doesn't even compare to the power and flexibility of Keystone). Even though the transition has taken some work and there's still a much smaller community/resources with Keystone & Node, I'm completely thrilled with everything about the transition. The entire development process is unbelievably smooth, no more VMs, dependency issues and massive DB migrations. Best of all my HTML has never been more beautiful and maintainable with Jade; I literally stared at it for an hour last night.\r\n\r\nSo thats my St. Pattys day induced rant. Thanks for the the great theme you guys have put together and to everyone supporting the Node community! \r\n\r\n~ Kyle"", 'title': None, 'type': 'comment'}
+ {'action': 'closed', 'author': 'cantuket', 'comment_id': None, 'datetime': '2015-03-15 02:42:59+00:00', 'masked_author': 'username_0', 'text': '', 'title': None, 'type': 'issue'}]","<issue_start><issue_comment>Title: Compile Jade templates for AJAX requests - Client vs Server-Side
+username_0: Hi guys,
+
+I'm new to jade and was wondering if you had any advice for rendering jade templates on the fly with a simple ajax call. 
+
+I've been looking around and see that you can do it both server-side or client-side and am wondering if you've already included these capabilities somewhere that I'm not seeing. Right now I've included all my partials/includes in my public folder in HTML, but i would like to move everything to jade and am having some difficulties.
+
+Thanks for any help in advance!
+~ Kyle
+<issue_comment>username_0: It took a little bit of research and trial & error, but I came up with a system that I am truly ecstatic with. 
+
+1) Im doing the Jade compiling client-side during development with [Grunt Jade](https://github.com/gruntjs/grunt-contrib-jade) compiler, which compiles all of my Jade partials from 'templates > views > partials' to 'public > partials_compiled'. This may seem excessive, but the site I'm building currently has about 40 partials and will likely get up to +100 by the end of it. This allows me to access the pages as static HTML with AJAX right now, but if I want to create custom routes and manipulate data client side, while maintaining the asynchronous behavior of the HTML, then its extremely easy to do so because the file structure is identical in each 'partials directory'. I think this solution is also likely as good as a I can do performance wise, because the other options are...
+
+a) client-side compiling, per AJAX transaction
+b) server-side compiling, per AJAX transaction
+c) mass server-side compiling to JSON objects at initial load, in some monstrous file
+
+None of these options seemed very efficient, manageable or scalable in the long-term. this solution also allows my to minify all my HTML in production getting even more speed and easily move the code to other platforms in HTML for different non-Jade/Node projects. I'd still like to hear how other peoples opinions on the matter though.
+
+2) To move all my previous HTML into Jade I used [html2jade] (https://github.com/donpark/html2jade), which I also run with grunt. I takes a little bit of clean-up after compiling to Jade, but is by far the best tool I found. Its also the only tool I found that allows you to designate nesting with 'Tabs' vs 'Spaces', which I think is a million times easier to read and maintain; as well as other options like eliminating commas between attributes.
+
+I'm coming from building in Laravel with Blade, which is just as verbose as PHP, and the horrors of Wordpress for CMSs (I was moving to OctoberCMS before I left, but still doesn't even compare to the power and flexibility of Keystone). Even though the transition has taken some work and there's still a much smaller community/resources with Keystone & Node, I'm completely thrilled with everything about the transition. The entire development process is unbelievably smooth, no more VMs, dependency issues and massive DB migrations. Best of all my HTML has never been more beautiful and maintainable with Jade; I literally stared at it for an hour last night.
+
+So thats my St. Pattys day induced rant. Thanks for the the great theme you guys have put together and to everyone supporting the Node community! 
+
+~ Kyle<issue_closed>"
+sindresorhus/pageres,259856651,317,,"[{'action': 'opened', 'author': 'b4dnewz', 'comment_id': None, 'datetime': '2017-09-22 15:43:04+00:00', 'masked_author': 'username_0', 'text': ""I would like to know if is possible to skip the requests that doesn't return a 200 status code and eventually count them (both success and non success).\r\n\r\nI've seen in the documentation but seems not possible.\r\n\r\nI see there is a 'warning' emit but no other events for when an snapshot is done correctly or not.\r\n\r\nMany thanks in advance, I'm integrating this tool in a cli tool and is super powerful compared to otherones I've tried."", 'title': ""Don't capture non 200 status code responses"", 'type': 'issue'}
+ {'action': 'closed', 'author': 'b4dnewz', 'comment_id': None, 'datetime': '2018-06-08 11:29:38+00:00', 'masked_author': 'username_0', 'text': '', 'title': None, 'type': 'issue'}]","<issue_start><issue_comment>Title: Don't capture non 200 status code responses
+username_0: I would like to know if is possible to skip the requests that doesn't return a 200 status code and eventually count them (both success and non success).
+
+I've seen in the documentation but seems not possible.
+
+I see there is a 'warning' emit but no other events for when an snapshot is done correctly or not.
+
+Many thanks in advance, I'm integrating this tool in a cli tool and is super powerful compared to otherones I've tried.<issue_closed>"
+asyncapi/website,819137446,189,"{'number': 189.0, 'repo': 'website', 'user_login': 'asyncapi'}","[{'action': 'opened', 'author': 'fmvilas', 'comment_id': None, 'datetime': '2021-03-01T18:32:10Z', 'masked_author': 'username_0', 'text': '### Description\r\n\r\nThis adds a new page containing the description of the 5-year vision, goals, and roadmap.\r\n\r\n- [ ] Add paragraphs explaining that goals are there to serve the vision.\r\n- [ ] Add the roadmap.', 'title': 'Add vision, goals, and roadmap', 'type': 'issue'}
+ {'action': 'created', 'author': 'fmvilas', 'comment_id': 788174130.0, 'datetime': '2021-03-01 18:34:40+00:00', 'masked_author': 'username_0', 'text': 'Preview here: https://deploy-preview-189--asyncapi-website.netlify.app/roadmap', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'magicmatatjahu', 'comment_id': 788728954.0, 'datetime': '2021-03-02 08:37:20+00:00', 'masked_author': 'username_1', 'text': ""@username_0 Looking great, but I don't see any link from navigation to go to roadmap. Is it intentional?"", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'fmvilas', 'comment_id': 788744341.0, 'datetime': '2021-03-02 09:01:46+00:00', 'masked_author': 'username_0', 'text': ""@username_1 yes, it's an early version. I'll add it to the navigation later."", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'fmvilas', 'comment_id': 791336182.0, 'datetime': '2021-03-05 10:40:35+00:00', 'masked_author': 'username_0', 'text': 'Good point. I will!', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'fmvilas', 'comment_id': 791350443.0, 'datetime': '2021-03-05 11:07:42+00:00', 'masked_author': 'username_0', 'text': 'I have to admit this is probably not the kind of road map some people are looking for. Let me try to go a bit deeper in terms of ideas we want to explore.', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'derberg', 'comment_id': 791387049.0, 'datetime': '2021-03-05 12:23:44+00:00', 'masked_author': 'username_2', 'text': '@username_0 I think it all depends on the audience, like who is that for. Is it for the community? because the community asks specific questions, ""when we will have this or that"", ""when we plan to work on this issue"", ""when we will enable this"". For me roadmap is ""you know where you go, and these are the steps"". From vision, we clearly know where we are going and I love it. Just for me step = action, you take this step and then another, `User is able to focus only on business logic` is definitely not a step, especially after you explained it, you see that even I didn\'t get it and immediately thought it is just about model generation and that this one soon will be solved. For me, this is like an item on a more granular vision.\r\n\r\nI hope you know what I mean, I\'m basically doing a community guardian job here. ""Product"" must have vision and roadmap, but users need a list of action points, a pipeline of stuff, ordered, like ""this is for 2020"" (just few items) and ""this is for later"" (with clear annotation saying ""this is super dynamic, you want to push something faster, join us""). \r\n\r\nI just think that most people, when they ask for the roadmap, they ask for a list of things they want to do or can be affected by. \r\n\r\nTake for example HTML template and react component. If I would be outside the core team, I would be super interested to know in advance on what we plan to do there and when, so I can plan my stuff. `Deprecate html-template and improve asyncapi-react` is an item I would expect, one line that can clearly tell me if this is important for me or not.\r\n\r\nYes, I know roadmap != backlog, but they should be aligned (and best if combined in one view.\r\n\r\nNow, when I look at 👇🏼 \r\n\r\n![Screenshot 2021-03-05 at 13 18 08](https://user-images.githubusercontent.com/6995927/110114627-4085df80-7db5-11eb-8b1d-a64628c951d1.png)\r\n\r\nThe black ones are the details people expect, backlog items that will be handled. And it is linked to the roadmap item, which is perfect. Just that this roadmap item is very generic, and something that can never be finished if it is not scoped.\r\n\r\nAm I getting somewhere here? do you know what I mean?\r\n\r\n\r\n\r\nbtw, I forgot to mention that at the end it is as you planned, based on GitHub issues, so always, in the end, if something is not clear, a not shy community member can always click and comment on the issue ❤️', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'derberg', 'comment_id': 791389514.0, 'datetime': '2021-03-05 12:29:04+00:00', 'masked_author': 'username_2', 'text': 'My above comment in short:\r\n\r\n- vision 💪🏼 \r\n- design of the `roadmap` view ❤️ \r\n- way you map roadmap items to actions 😗 \r\n- powered by GitHub issues, roadmap auto-updates  🚀 \r\n\r\njust in my opinion, some items are missing and some are too generic.', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'fmvilas', 'comment_id': 791418849.0, 'datetime': '2021-03-05 13:27:34+00:00', 'masked_author': 'username_0', 'text': 'I think we\'re aligned. Let me just add one more step. I think it\'s important to keep these ""generic"" outcomes. They\'re not generic, they\'re concrete. But not concrete things anyone can jump and do but instead concrete problems we want to solve.\r\n\r\nThe reason you\'re seeing it generic now is that:\r\n\r\n1. You\'re looking at it from a task description point of view. And like you, many people will look at it like this.\r\n2. It\'s missing one step in the middle. Usually called ""Solution"" or ""Idea"". So, for instance, `User is able to focus only on business logic` will get 3 actionable items: a. CLI to create AsyncAPI files interactively; b. Improve Generator so people don\'t have to worry about models; c. Create a framework that uses an AsyncAPI file as a config file and automatically does everything for you.\r\n\r\nIn this case, 2.b. will then be mapped to the features that are now there in black. I hope I\'m making myself understandable here 😄 It should be easy to understand once you see it and still will be Github issues.', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'derberg', 'comment_id': 791434260.0, 'datetime': '2021-03-05 13:55:55+00:00', 'masked_author': 'username_2', 'text': ""@username_0 should we then be in rush to merge? wouldn't it be better if you just work on those descriptions and then we merge?"", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'fmvilas', 'comment_id': 791453181.0, 'datetime': '2021-03-05 14:28:22+00:00', 'masked_author': 'username_0', 'text': ""Yeah, let's hold it for now."", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'fmvilas', 'comment_id': 791627558.0, 'datetime': '2021-03-05 19:19:34+00:00', 'masked_author': 'username_0', 'text': ""@jonaslagoni I'd prefer to have the research there as well, to show the full story. It's part of the task in the end."", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'fmvilas', 'comment_id': 792688407.0, 'datetime': '2021-03-08 11:22:12+00:00', 'masked_author': 'username_0', 'text': ""@username_2 how about this way of visualizing the relationship now? https://deploy-preview-189--asyncapi-website.netlify.app/roadmap.\r\n\r\nI'm thinking now:\r\n\r\n* Add a box explaining this is our road map but anyone can contribute and solve something any time.\r\n* Adding an icon with a question mark next to Solution and Feature tags to clarify their meaning.\r\n* Completing issues descriptions.\r\n* Record a video explaining the roadmap for those who don't like to read. (this may be another PR so it's not blocking)"", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'derberg', 'comment_id': 792731997.0, 'datetime': '2021-03-08 12:45:46+00:00', 'masked_author': 'username_2', 'text': 'that would be amazing and yes, can be added later and embedded from youtube. Totally another PR', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'fmvilas', 'comment_id': 792796038.0, 'datetime': '2021-03-08 14:34:47+00:00', 'masked_author': 'username_0', 'text': 'No, we don\'t but it improves readability. Try it yourself, remove the colors. It becomes very ""schematic"".', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'derberg', 'comment_id': 792877421.0, 'datetime': '2021-03-08 16:27:50+00:00', 'masked_author': 'username_2', 'text': '<img width=""1282"" alt=""Screenshot 2021-03-08 at 17 25 19"" src=""https://user-images.githubusercontent.com/6995927/110349748-4ab51180-8033-11eb-8b1f-46496f29af45.png"">\r\n\r\nyeap, hard to distinguish, but maybe just entire columns could be framed, have border color like green, etc? \r\n\r\nnevertheless to many colors is too much, requires additional legend for colors. So even if you leave colors for now, later, future, then at least remove legend as it is not needed', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'fmvilas', 'comment_id': 792956296.0, 'datetime': '2021-03-08 18:03:26+00:00', 'masked_author': 'username_0', 'text': ""I'd not remove the legend, it's especially useful in mobile where there are no columns. May be obvious for some but prefer to make it clearer."", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'derberg', 'comment_id': 792957643.0, 'datetime': '2021-03-08 18:05:11+00:00', 'masked_author': 'username_2', 'text': 'will you at least resign from the Feature/Solution? 😄', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'fmvilas', 'comment_id': 792995370.0, 'datetime': '2021-03-08 19:01:36+00:00', 'masked_author': 'username_0', 'text': 'What do you mean? I thought this was bringing more clarity to the road map. Or do you mean the colors?', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'fmvilas', 'comment_id': 793573286.0, 'datetime': '2021-03-09 08:54:51+00:00', 'masked_author': 'username_0', 'text': 'But they\'re not the same. For instance, a solution is ""Create an event gateway"". Features are what will make the creation of the gateway possible. If I put them on the same level, I\'ll be giving the wrong information.', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'derberg', 'comment_id': 793583652.0, 'datetime': '2021-03-09 09:03:27+00:00', 'masked_author': 'username_2', 'text': 'oh wait, was it expandable yesterday? the solution? I don\'t think, so. Now when I see that feature is under solution, it is super clear. Sorry for the confusion and pointless discussion from my side.....I could wait to see it first\r\n\r\n<img width=""377"" alt=""Screenshot 2021-03-09 at 10 02 11"" src=""https://user-images.githubusercontent.com/6995927/110445592-92cd4600-80be-11eb-93bd-c50cd664cf22.png"">', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'fmvilas', 'comment_id': 795953582.0, 'datetime': '2021-03-10 19:26:11+00:00', 'masked_author': 'username_0', 'text': ""@username_2 I'm happy with the result now. I've finished adding descriptions to all the Outcomes and Solutions, except the ones below, that I want to check with you first:\r\n\r\n![Captura de pantalla 2021-03-10 a las 20 25 01](https://user-images.githubusercontent.com/242119/110685554-b2f42680-81de-11eb-8911-63e3284637f4.png)\r\n\r\nIn any case, this is a living road map and it's never going to be done so I'd suggest we merge already."", 'title': None, 'type': 'comment'}]","<issue_start><issue_comment>Title: Add vision, goals, and roadmap
+username_0: ### Description
+
+This adds a new page containing the description of the 5-year vision, goals, and roadmap.
+
+- [ ] Add paragraphs explaining that goals are there to serve the vision.
+- [ ] Add the roadmap.
+<issue_comment>username_0: Preview here: https://deploy-preview-189--asyncapi-website.netlify.app/roadmap
+<issue_comment>username_1: @username_0 Looking great, but I don't see any link from navigation to go to roadmap. Is it intentional?
+<issue_comment>username_0: @username_1 yes, it's an early version. I'll add it to the navigation later.
+<issue_comment>username_0: Good point. I will!
+<issue_comment>username_0: I have to admit this is probably not the kind of road map some people are looking for. Let me try to go a bit deeper in terms of ideas we want to explore.
+<issue_comment>username_2: @username_0 I think it all depends on the audience, like who is that for. Is it for the community? because the community asks specific questions, ""when we will have this or that"", ""when we plan to work on this issue"", ""when we will enable this"". For me roadmap is ""you know where you go, and these are the steps"". From vision, we clearly know where we are going and I love it. Just for me step = action, you take this step and then another, `User is able to focus only on business logic` is definitely not a step, especially after you explained it, you see that even I didn't get it and immediately thought it is just about model generation and that this one soon will be solved. For me, this is like an item on a more granular vision.
+
+I hope you know what I mean, I'm basically doing a community guardian job here. ""Product"" must have vision and roadmap, but users need a list of action points, a pipeline of stuff, ordered, like ""this is for 2020"" (just few items) and ""this is for later"" (with clear annotation saying ""this is super dynamic, you want to push something faster, join us""). 
+
+I just think that most people, when they ask for the roadmap, they ask for a list of things they want to do or can be affected by. 
+
+Take for example HTML template and react component. If I would be outside the core team, I would be super interested to know in advance on what we plan to do there and when, so I can plan my stuff. `Deprecate html-template and improve asyncapi-react` is an item I would expect, one line that can clearly tell me if this is important for me or not.
+
+Yes, I know roadmap != backlog, but they should be aligned (and best if combined in one view.
+
+Now, when I look at 👇🏼 
+
+![Screenshot 2021-03-05 at 13 18 08](https://user-images.githubusercontent.com/6995927/110114627-4085df80-7db5-11eb-8b1d-a64628c951d1.png)
+
+The black ones are the details people expect, backlog items that will be handled. And it is linked to the roadmap item, which is perfect. Just that this roadmap item is very generic, and something that can never be finished if it is not scoped.
+
+Am I getting somewhere here? do you know what I mean?
+
+
+
+btw, I forgot to mention that at the end it is as you planned, based on GitHub issues, so always, in the end, if something is not clear, a not shy community member can always click and comment on the issue ❤️
+<issue_comment>username_2: My above comment in short:
+
+- vision 💪🏼 
+- design of the `roadmap` view ❤️ 
+- way you map roadmap items to actions 😗 
+- powered by GitHub issues, roadmap auto-updates  🚀 
+
+just in my opinion, some items are missing and some are too generic.
+<issue_comment>username_0: I think we're aligned. Let me just add one more step. I think it's important to keep these ""generic"" outcomes. They're not generic, they're concrete. But not concrete things anyone can jump and do but instead concrete problems we want to solve.
+
+The reason you're seeing it generic now is that:
+
+1. You're looking at it from a task description point of view. And like you, many people will look at it like this.
+2. It's missing one step in the middle. Usually called ""Solution"" or ""Idea"". So, for instance, `User is able to focus only on business logic` will get 3 actionable items: a. CLI to create AsyncAPI files interactively; b. Improve Generator so people don't have to worry about models; c. Create a framework that uses an AsyncAPI file as a config file and automatically does everything for you.
+
+In this case, 2.b. will then be mapped to the features that are now there in black. I hope I'm making myself understandable here 😄 It should be easy to understand once you see it and still will be Github issues.
+<issue_comment>username_2: @username_0 should we then be in rush to merge? wouldn't it be better if you just work on those descriptions and then we merge?
+<issue_comment>username_0: Yeah, let's hold it for now.
+<issue_comment>username_0: @jonaslagoni I'd prefer to have the research there as well, to show the full story. It's part of the task in the end.
+<issue_comment>username_0: @username_2 how about this way of visualizing the relationship now? https://deploy-preview-189--asyncapi-website.netlify.app/roadmap.
+
+I'm thinking now:
+
+* Add a box explaining this is our road map but anyone can contribute and solve something any time.
+* Adding an icon with a question mark next to Solution and Feature tags to clarify their meaning.
+* Completing issues descriptions.
+* Record a video explaining the roadmap for those who don't like to read. (this may be another PR so it's not blocking)
+<issue_comment>username_2: that would be amazing and yes, can be added later and embedded from youtube. Totally another PR
+<issue_comment>username_0: No, we don't but it improves readability. Try it yourself, remove the colors. It becomes very ""schematic"".
+<issue_comment>username_2: <img width=""1282"" alt=""Screenshot 2021-03-08 at 17 25 19"" src=""https://user-images.githubusercontent.com/6995927/110349748-4ab51180-8033-11eb-8b1f-46496f29af45.png"">
+
+yeap, hard to distinguish, but maybe just entire columns could be framed, have border color like green, etc? 
+
+nevertheless to many colors is too much, requires additional legend for colors. So even if you leave colors for now, later, future, then at least remove legend as it is not needed
+<issue_comment>username_0: I'd not remove the legend, it's especially useful in mobile where there are no columns. May be obvious for some but prefer to make it clearer.
+<issue_comment>username_2: will you at least resign from the Feature/Solution? 😄
+<issue_comment>username_0: What do you mean? I thought this was bringing more clarity to the road map. Or do you mean the colors?
+<issue_comment>username_0: But they're not the same. For instance, a solution is ""Create an event gateway"". Features are what will make the creation of the gateway possible. If I put them on the same level, I'll be giving the wrong information.
+<issue_comment>username_2: oh wait, was it expandable yesterday? the solution? I don't think, so. Now when I see that feature is under solution, it is super clear. Sorry for the confusion and pointless discussion from my side.....I could wait to see it first
+
+<img width=""377"" alt=""Screenshot 2021-03-09 at 10 02 11"" src=""https://user-images.githubusercontent.com/6995927/110445592-92cd4600-80be-11eb-93bd-c50cd664cf22.png"">
+<issue_comment>username_0: @username_2 I'm happy with the result now. I've finished adding descriptions to all the Outcomes and Solutions, except the ones below, that I want to check with you first:
+
+![Captura de pantalla 2021-03-10 a las 20 25 01](https://user-images.githubusercontent.com/242119/110685554-b2f42680-81de-11eb-8911-63e3284637f4.png)
+
+In any case, this is a living road map and it's never going to be done so I'd suggest we merge already."
+files-community/Website,1105454770,112,,"[{'action': 'opened', 'author': 'WhiteBrownie', 'comment_id': None, 'datetime': '2022-01-17 07:05:06+00:00', 'masked_author': 'username_0', 'text': ""### Description\n\nAs stated [here](https://github.com/files-community/Files/issues/7250#issuecomment-989881696_), a custom winget version isn't maintained any more. The website however still shows `winget install -e Files-Community.Files ` as a way to install Files. It should probably be changed to `winget install -e 9NGHP3DX8HDX`  (for the MS Store version) or be removed outright. \n\n### Steps To Reproduce\n\n1. go on https://files.community/\r\n2. click on the download dropdown\r\n3. select  Winget (CLI)\n\n### Expected behavior\n\nThe winget install command on the website should install Files\n\n### Files Version\n\nn/a\n\n### Windows Version\n\nn/a\n\n### Relevant Assets/Logs\n\n`winget install -e Files-Community.Files`\r\nNo package found matching input criteria.\r\n\r\n`winget install 9NGHP3DX8HDX`\r\nFound Files - File Manager for Windows [9NGHP3DX8HDX] Version Unknown\r\nThis package is provided through Microsoft Store. winget may need to acquire the package from Microsoft Store on behalf of the current user.\r\nVersion: Unknown\r\nPublisher: Yair A\r\nPublisher Url: https://files.community\r\nDescription: Files is a file manager with a powerful yet intuitive design. It has features like multiple tabs, panes, columns, shell extensions in the context menu and tags.\r\n\r\nThis is an open source project and community participation is welcome. To participate please visit https://github.com/files-community/Files\r\nLicense: ms-windows-store://pdp/?ProductId=9NGHP3DX8HDX\r\nPrivacy Url: https://github.com/files-community/Files/blob/master/Privacy.md\r\nAgreements:\r\nCategory: Productivity\r\nPricing: Free\r\nFree Trial: No\r\nTerms of Transaction: https://aka.ms/microsoft-store-terms-of-transaction\r\nSeizure Warning: https://aka.ms/microsoft-store-seizure-warning\r\nStore License Terms: https://aka.ms/microsoft-store-license"", 'title': 'winget command on website', 'type': 'issue'}
+ {'action': 'closed', 'author': 'yaichenbaum', 'comment_id': None, 'datetime': '2022-01-23 22:16:45+00:00', 'masked_author': 'username_1', 'text': '', 'title': None, 'type': 'issue'}]","<issue_start><issue_comment>Title: winget command on website
+username_0: ### Description
+
+As stated [here](https://github.com/files-community/Files/issues/7250#issuecomment-989881696_), a custom winget version isn't maintained any more. The website however still shows `winget install -e Files-Community.Files ` as a way to install Files. It should probably be changed to `winget install -e 9NGHP3DX8HDX`  (for the MS Store version) or be removed outright. 
+
+### Steps To Reproduce
+
+1. go on https://files.community/
+2. click on the download dropdown
+3. select  Winget (CLI)
+
+### Expected behavior
+
+The winget install command on the website should install Files
+
+### Files Version
+
+n/a
+
+### Windows Version
+
+n/a
+
+### Relevant Assets/Logs
+
+`winget install -e Files-Community.Files`
+No package found matching input criteria.
+
+`winget install 9NGHP3DX8HDX`
+Found Files - File Manager for Windows [9NGHP3DX8HDX] Version Unknown
+This package is provided through Microsoft Store. winget may need to acquire the package from Microsoft Store on behalf of the current user.
+Version: Unknown
+Publisher: Yair A
+Publisher Url: https://files.community
+Description: Files is a file manager with a powerful yet intuitive design. It has features like multiple tabs, panes, columns, shell extensions in the context menu and tags.
+
+This is an open source project and community participation is welcome. To participate please visit https://github.com/files-community/Files
+License: ms-windows-store://pdp/?ProductId=9NGHP3DX8HDX
+Privacy Url: https://github.com/files-community/Files/blob/master/Privacy.md
+Agreements:
+Category: Productivity
+Pricing: Free
+Free Trial: No
+Terms of Transaction: https://aka.ms/microsoft-store-terms-of-transaction
+Seizure Warning: https://aka.ms/microsoft-store-seizure-warning
+Store License Terms: https://aka.ms/microsoft-store-license<issue_closed>"
+techqueria/website,680610152,714,,"[{'action': 'opened', 'author': 'fvcproductions', 'comment_id': None, 'datetime': '2020-08-18 00:49:55+00:00', 'masked_author': 'username_0', 'text': '## Request\r\n\r\nWe need a CSS file for our new Help Center powered by Help Scout\r\n\r\n## URL(s)\r\n\r\nhttps://help.techqueria.org\r\n\r\n## Why did you make this request?\r\n\r\nThe default theme is pretty ugly, we need to use our branding\r\n\r\n## Any additional context?\r\n\r\nThis needs to be...\r\n\r\nhttps://techqueria.org/brand\r\n\r\nhttps://docs.helpscout.com/ is good example\r\n\r\nhttps://docs.helpscout.com/article/562-docs-branding-examples\r\n\r\n![screencapture-help-techqueria-org-2020-08-17-20_49_44](https://user-images.githubusercontent.com/4284691/90458021-32979800-e0cb-11ea-9da6-3ac5d059ff12.png)\r\n![screencapture-secure-helpscout-net-settings-docs-site-5ebac665042863474d1a91ba-2020-08-17-20_49_28](https://user-images.githubusercontent.com/4284691/90458022-33302e80-e0cb-11ea-8095-3efd9ab07de1.png)', 'title': 'New Feature Request: CSS For Help Center', 'type': 'issue'}
+ {'action': 'created', 'author': 'PeppermintNDaisies', 'comment_id': 701779430.0, 'datetime': '2020-10-01 02:42:39+00:00', 'masked_author': 'username_1', 'text': 'Hello! I would love to work on this issue!', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'fvcproductions', 'comment_id': 702822991.0, 'datetime': '2020-10-02 16:12:03+00:00', 'masked_author': 'username_0', 'text': '@username_1 Just assigned you!', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'PeppermintNDaisies', 'comment_id': 702954281.0, 'datetime': '2020-10-02 20:57:29+00:00', 'masked_author': 'username_1', 'text': 'How exciting, thanks!', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'PeppermintNDaisies', 'comment_id': 703039600.0, 'datetime': '2020-10-03 03:32:40+00:00', 'masked_author': 'username_1', 'text': ""Hello @username_0 ! I forked the repository and didn't find the help center page there, I later came back here and found the page is hosted in Help Scout. I went there for some guidance and found [this](https://docs.helpscout.com/article/835-css-styles-to-snag), but I'm not sure how to proceed, is the code somewhere I can see it or use it to test the CSS?"", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'FrancesCoronel', 'comment_id': 705850603.0, 'datetime': '2020-10-08 22:12:15+00:00', 'masked_author': 'username_2', 'text': 'Heyo, so the help center code is hosted on Help Scout but what you can do is grab the HTML and apply the CSS locally using the guide.', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'PeppermintNDaisies', 'comment_id': 705854722.0, 'datetime': '2020-10-08 22:23:41+00:00', 'masked_author': 'username_1', 'text': 'Perfect! That sounds good, where can I get that HTML from? Where is that code located?', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'FrancesCoronel', 'comment_id': 708573222.0, 'datetime': '2020-10-14 18:11:55+00:00', 'masked_author': 'username_2', 'text': 'https://help.techqueria.org/ has the current HTML', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'FrancesCoronel', 'comment_id': 708573750.0, 'datetime': '2020-10-14 18:12:53+00:00', 'masked_author': 'username_2', 'text': '[help-site.zip](https://github.com/techqueria/website/files/5380069/help-site.zip)\r\n\r\nThis is what I was working on', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'PeppermintNDaisies', 'comment_id': 711106448.0, 'datetime': '2020-10-18 02:14:17+00:00', 'masked_author': 'username_1', 'text': 'Perfect, thanks!!', 'title': None, 'type': 'comment'}]","<issue_start><issue_comment>Title: New Feature Request: CSS For Help Center
+username_0: ## Request
+
+We need a CSS file for our new Help Center powered by Help Scout
+
+## URL(s)
+
+https://help.techqueria.org
+
+## Why did you make this request?
+
+The default theme is pretty ugly, we need to use our branding
+
+## Any additional context?
+
+This needs to be...
+
+https://techqueria.org/brand
+
+https://docs.helpscout.com/ is good example
+
+https://docs.helpscout.com/article/562-docs-branding-examples
+
+![screencapture-help-techqueria-org-2020-08-17-20_49_44](https://user-images.githubusercontent.com/4284691/90458021-32979800-e0cb-11ea-9da6-3ac5d059ff12.png)
+![screencapture-secure-helpscout-net-settings-docs-site-5ebac665042863474d1a91ba-2020-08-17-20_49_28](https://user-images.githubusercontent.com/4284691/90458022-33302e80-e0cb-11ea-8095-3efd9ab07de1.png)
+<issue_comment>username_1: Hello! I would love to work on this issue!
+<issue_comment>username_0: @username_1 Just assigned you!
+<issue_comment>username_1: How exciting, thanks!
+<issue_comment>username_1: Hello @username_0 ! I forked the repository and didn't find the help center page there, I later came back here and found the page is hosted in Help Scout. I went there for some guidance and found [this](https://docs.helpscout.com/article/835-css-styles-to-snag), but I'm not sure how to proceed, is the code somewhere I can see it or use it to test the CSS?
+<issue_comment>username_2: Heyo, so the help center code is hosted on Help Scout but what you can do is grab the HTML and apply the CSS locally using the guide.
+<issue_comment>username_1: Perfect! That sounds good, where can I get that HTML from? Where is that code located?
+<issue_comment>username_2: https://help.techqueria.org/ has the current HTML
+<issue_comment>username_2: [help-site.zip](https://github.com/techqueria/website/files/5380069/help-site.zip)
+
+This is what I was working on
+<issue_comment>username_1: Perfect, thanks!!"

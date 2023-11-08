@@ -1,0 +1,2 @@
+from huggingface_hub import snapshot_download
+snapshot_download(repo_id="bigcode/the-stack-github-issues", repo_type='dataset', local_dir='../the-stack/', local_dir_use_symlinks=False, resume_download=True, max_workers=1)

@@ -1,0 +1,872 @@
+flutter/website,420802359,2515,,"[{'action': 'opened', 'author': 'carlyonj', 'comment_id': None, 'datetime': '2019-03-14 02:25:31+00:00', 'masked_author': 'username_0', 'text': 'Page URL: https://flutter.dev/docs/get-started/install/windows.html\r\nPage source: https://github.com/flutter/website/tree/master/src/docs/get-started/install/windows.md\r\n\r\nFound a typo? You can fix it yourself by going to the page source and clicking the pencil icon. Or finish creating this issue.\r\n\r\nDescription of issue:\r\n\r\nUnable to install on windows. Followed directions and verified many times that everything is correct. I get the below error any time I try and use the flutter command in command prompt, power shell and with various admin rights on all of them.\r\n\r\n```\r\nflutter\r\n\\Flutter\\flutter\\bin\\cache was unexpected at this time.\r\n```', 'title': ""'Windows install' page issue"", 'type': 'issue'}
+ {'action': 'created', 'author': 'sfshaza2', 'comment_id': 500535768.0, 'datetime': '2019-06-10 18:26:35+00:00', 'masked_author': 'username_1', 'text': 'Have not received other reports about this. If anyone has seen it or knows the cause, please weigh in.', 'title': None, 'type': 'comment'}]","<issue_start><issue_comment>Title: 'Windows install' page issue
+username_0: Page URL: https://flutter.dev/docs/get-started/install/windows.html
+Page source: https://github.com/flutter/website/tree/master/src/docs/get-started/install/windows.md
+
+Found a typo? You can fix it yourself by going to the page source and clicking the pencil icon. Or finish creating this issue.
+
+Description of issue:
+
+Unable to install on windows. Followed directions and verified many times that everything is correct. I get the below error any time I try and use the flutter command in command prompt, power shell and with various admin rights on all of them.
+
+```
+flutter
+\Flutter\flutter\bin\cache was unexpected at this time.
+```
+<issue_comment>username_1: Have not received other reports about this. If anyone has seen it or knows the cause, please weigh in."
+pidcodes/pidcodes.github.com,66388162,45,"{'number': 45.0, 'repo': 'pidcodes.github.com', 'user_login': 'pidcodes'}","[{'action': 'opened', 'author': 'anthonyjchriste', 'comment_id': None, 'datetime': '2015-04-05T01:33:51Z', 'masked_author': 'username_0', 'text': 'Requesting 1209/0987', 'title': 'Applied for pid for OPQBox under openpowerquality', 'type': 'issue'}
+ {'action': 'created', 'author': 'Arachnid', 'comment_id': 89732452.0, 'datetime': '2015-04-05 07:59:34+00:00', 'masked_author': 'username_1', 'text': ""Thanks for your pull request! However, there are a couple of issues that need resolving before we can issue you a PID:\r\n - PIDs in the range 0x0000-0x0FFF are reserved for special uses, as described in http://pid.codes/1209/. Please choose a pid over 0x2000.\r\n - Your device doesn't appear to have a USB interface. Can you clarify what you need the PID for?"", 'title': None, 'type': 'comment'}]","<issue_start><issue_comment>Title: Applied for pid for OPQBox under openpowerquality
+username_0: Requesting 1209/0987
+<issue_comment>username_1: Thanks for your pull request! However, there are a couple of issues that need resolving before we can issue you a PID:
+ - PIDs in the range 0x0000-0x0FFF are reserved for special uses, as described in http://pid.codes/1209/. Please choose a pid over 0x2000.
+ - Your device doesn't appear to have a USB interface. Can you clarify what you need the PID for?"
+sindresorhus/pageres,993755586,419,,"[{'action': 'opened', 'author': 'venustulips', 'comment_id': None, 'datetime': '2021-09-11 05:36:53+00:00', 'masked_author': 'username_0', 'text': ""I am using `pageres-cli` and I found that the default timeout of 60 seconds as described in readme is not working if the command is run from PowerShell (default with new Windows Terminal). However with `cmd.exe` command completed within a few seconds with error as expected.\r\n\r\nFor eg,. run following command in PowerShell and the command will never complete, at least in my machine.\r\n\r\n`pageres https://www.google.com --overwrite --filename='google' --verbose --selector='.any-class'`\r\n\r\npageres-cli 0.6.0\r\nWindows 10"", 'title': 'Default timeout is not working with pageres-cli when run with PowerShell', 'type': 'issue'}]","<issue_start><issue_comment>Title: Default timeout is not working with pageres-cli when run with PowerShell
+username_0: I am using `pageres-cli` and I found that the default timeout of 60 seconds as described in readme is not working if the command is run from PowerShell (default with new Windows Terminal). However with `cmd.exe` command completed within a few seconds with error as expected.
+
+For eg,. run following command in PowerShell and the command will never complete, at least in my machine.
+
+`pageres https://www.google.com --overwrite --filename='google' --verbose --selector='.any-class'`
+
+pageres-cli 0.6.0
+Windows 10"
+kubernetes/website,514109303,17289,,"[{'action': 'opened', 'author': 'NylaWorker', 'comment_id': None, 'datetime': '2019-10-29 17:52:07+00:00', 'masked_author': 'username_0', 'text': '**This is a Bug Report**\r\n\r\n<!-- Thanks for filing an issue! Before submitting, please fill in the following information. -->\r\n<!-- See https://kubernetes.io/docs/contribute/start/ for guidance on writing an actionable issue description. -->\r\nFix tutorial, it crashes after step one. \r\n\r\nminikube start cause the following error:\r\n\r\n`\r\nX Error starting cluster: cmd failed: sudo /usr/bin/kubeadm init --config /var/lib/kubeadm.yaml  --ignore-preflight-errors=DirAvailable--etc-kubernetes-manifests,DirAvailable--data-minikube,FileAvailable--etc-kubernetes-manifests-kube-scheduler.yaml,FileAvailable--etc-kubernetes-manifests-kube-apiserver.yaml,FileAvailable--etc-kubernetes-manifests-kube-controller-manager.yaml,FileAvailable--etc-kubernetes-manifests-etcd.yaml,Port-10250,Swap\r\n\r\n: running command: sudo /usr/bin/kubeadm init --config /var/lib/kubeadm.yaml  --ignore-preflight-errors=DirAvailable--etc-kubernetes-manifests,DirAvailable--data-minikube,FileAvailable--etc-kubernetes-manifests-kube-scheduler.yaml,FileAvailable--etc-kubernetes-manifests-kube-apiserver.yaml,FileAvailable--etc-kubernetes-manifests-kube-controller-manager.yaml,FileAvailable--etc-kubernetes-manifests-etcd.yaml,Port-10250,Swap\r\n output: [init] Using Kubernetes version: v1.15.0\r\n[preflight] Running pre-flight checks\r\n        [WARNING Service-Docker]: docker service is not enabled, please run \'systemctl enable docker.service\'\r\n        [WARNING IsDockerSystemdCheck]: detected ""cgroupfs"" as the Docker cgroup driver. The recommended driver is ""systemd"". Please follow the guide at https://kubernetes.io/docs/setup/cri/\r\n[preflight] Pulling images required for setting up a Kubernetes cluster\r\n[preflight] This might take a minute or two, depending on the speed of your internet connection\r\n[preflight] You can also perform this action in beforehand using \'kubeadm config images pull\'\r\n[kubelet-start] Writing kubelet environment file with flags to file ""/var/lib/kubelet/kubeadm-flags.env""\r\n[kubelet-start] Writing kubelet configuration to file ""/var/lib/kubelet/config.yaml""\r\n[kubelet-start] Activating the kubelet service\r\n[certs] Using certificateDir folder ""/var/lib/minikube/certs/""\r\n[certs] Generating ""front-proxy-ca"" certificate and key\r\n[certs] Generating ""front-proxy-client"" certificate and key\r\n[certs] Using existing ca certificate authority\r\n[certs] Generating ""apiserver-kubelet-client"" certificate and key\r\n[certs] Using existing apiserver certificate and key on disk\r\n[certs] Generating ""etcd/ca"" certificate and key\r\n[certs] Generating ""etcd/peer"" certificate and key\r\n[certs] etcd/peer serving cert is signed for DNS names [minikube localhost] and IPs [172.17.0.40 127.0.0.1 ::1]\r\n[certs] Generating ""apiserver-etcd-client"" certificate and key\r\n[certs] Generating ""etcd/server"" certificate and key\r\n[certs] etcd/server serving cert is signed for DNS names [minikube localhost] and IPs [172.17.0.40 127.0.0.1 ::1]\r\n[certs] Generating ""etcd/healthcheck-client"" certificate and key\r\n[certs] Generating ""sa"" key and public key\r\n[kubeconfig] Using kubeconfig folder ""/etc/kubernetes""\r\n[kubeconfig] Writing ""admin.conf"" kubeconfig file\r\n[kubeconfig] Writing ""kubelet.conf"" kubeconfig file\r\n[kubeconfig] Writing ""controller-manager.conf"" kubeconfig file\r\n[kubeconfig] Writing ""scheduler.conf"" kubeconfig file\r\n[control-plane] Using manifest folder ""/etc/kubernetes/manifests""\r\n[control-plane] Creating static Pod manifest for ""kube-apiserver""\r\n[control-plane] Creating static Pod manifest for ""kube-controller-manager""\r\n[control-plane] Creating static Pod manifest for ""kube-scheduler""\r\n[etcd] Creating static Pod manifest for local etcd in ""/etc/kubernetes/manifests""\r\n[wait-control-plane] Waiting for the kubelet to boot up the control plane as static Pods from directory ""/etc/kubernetes/manifests"". This can take up to 4m0s\r\n[kubelet-check] Initial timeout of 40s passed.\r\n\r\nUnfortunately, an error has occurred:\r\n        timed out waiting for the condition\r\n\r\nThis error is likely caused by:\r\n        - The kubelet is not running\r\n        - The kubelet is unhealthy due to a misconfiguration of the node in some way (required cgroupsdisabled)\r\n\r\nIf you are on a systemd-powered system, you can try to troubleshoot the error with the following commands:\r\n        - \'systemctl status kubelet\'\r\n        - \'journalctl -xeu kubelet\'\r\n\r\nAdditionally, a control plane component may have crashed or exited when started by the container runtime.\r\nTo troubleshoot, list all containers using your preferred container runtimes CLI, e.g. docker.\r\nHere is one example how you may list all Kubernetes containers running in docker:\r\n        - \'docker ps -a | grep kube | grep -v pause\'\r\n        Once you have found the failing container, you can inspect its logs with:\r\n        - \'docker logs CONTAINERID\'\r\nerror execution phase wait-control-plane: couldn\'t initialize a Kubernetes cluster\r\n: running command: sudo /usr/bin/kubeadm init --config /var/lib/kubeadm.yaml  --ignore-preflight-errors=DirAvailable--etc-kubernetes-manifests,DirAvailable--data-minikube,FileAvailable--etc-kubernetes-manifests-kube-scheduler.yaml,FileAvailable--etc-kubernetes-manifests-kube-apiserver.yaml,FileAvailable--etc-kubernetes-manifests-kube-controller-manager.yaml,FileAvailable--etc-kubernetes-manifests-etcd.yaml,Port-10250,Swap\r\n.: exit status 1\r\n*\r\n* Sorry that minikube crashed. If this was unexpected, we would love to hear from you:\r\n  - https://github.com/kubernetes/minikube/issues/new/choose\r\n* Problems detected in kube-addon-manager:\r\n  - error: unable to recognize ""STDIN"": Get https://localhost:8443/api?timeout=32s: dial tcp [::1]:8443: connect: connection refused\r\n  - error: unable to recognize ""STDIN"": Get https://localhost:8443/api?timeout=32s: net/http: TLS handshake timeout\r\n  - error: unable to recognize ""STDIN"": Get https://localhost:8443/api?timeout=32s: dial tcp [::1]:8443: connect: connection refused`', 'title': 'Issue with k8s.io/docs/tutorials/kubernetes-basics/create-cluster/cluster-interactive/', 'type': 'issue'}
+ {'action': 'created', 'author': 'BenHall', 'comment_id': 547786798.0, 'datetime': '2019-10-30 08:21:14+00:00', 'masked_author': 'username_1', 'text': 'Thank you for the report. This looks like a duplicate of \r\nHttps://github.com/kubernetes/website/issues/17279', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'RA489', 'comment_id': 558585608.0, 'datetime': '2019-11-26 11:22:24+00:00', 'masked_author': 'username_2', 'text': '@username_0 can you please try restarting kubelet `systemctl restart kubelet`', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'sftim', 'comment_id': 596087302.0, 'datetime': '2020-03-07 13:15:28+00:00', 'masked_author': 'username_3', 'text': 'I think this is fixed.\r\n/close', 'title': None, 'type': 'comment'}]","<issue_start><issue_comment>Title: Issue with k8s.io/docs/tutorials/kubernetes-basics/create-cluster/cluster-interactive/
+username_0: **This is a Bug Report**
+
+<!-- Thanks for filing an issue! Before submitting, please fill in the following information. -->
+<!-- See https://kubernetes.io/docs/contribute/start/ for guidance on writing an actionable issue description. -->
+Fix tutorial, it crashes after step one. 
+
+minikube start cause the following error:
+
+`
+X Error starting cluster: cmd failed: sudo /usr/bin/kubeadm init --config /var/lib/kubeadm.yaml  --ignore-preflight-errors=DirAvailable--etc-kubernetes-manifests,DirAvailable--data-minikube,FileAvailable--etc-kubernetes-manifests-kube-scheduler.yaml,FileAvailable--etc-kubernetes-manifests-kube-apiserver.yaml,FileAvailable--etc-kubernetes-manifests-kube-controller-manager.yaml,FileAvailable--etc-kubernetes-manifests-etcd.yaml,Port-10250,Swap
+
+: running command: sudo /usr/bin/kubeadm init --config /var/lib/kubeadm.yaml  --ignore-preflight-errors=DirAvailable--etc-kubernetes-manifests,DirAvailable--data-minikube,FileAvailable--etc-kubernetes-manifests-kube-scheduler.yaml,FileAvailable--etc-kubernetes-manifests-kube-apiserver.yaml,FileAvailable--etc-kubernetes-manifests-kube-controller-manager.yaml,FileAvailable--etc-kubernetes-manifests-etcd.yaml,Port-10250,Swap
+ output: [init] Using Kubernetes version: v1.15.0
+[preflight] Running pre-flight checks
+        [WARNING Service-Docker]: docker service is not enabled, please run 'systemctl enable docker.service'
+        [WARNING IsDockerSystemdCheck]: detected ""cgroupfs"" as the Docker cgroup driver. The recommended driver is ""systemd"". Please follow the guide at https://kubernetes.io/docs/setup/cri/
+[preflight] Pulling images required for setting up a Kubernetes cluster
+[preflight] This might take a minute or two, depending on the speed of your internet connection
+[preflight] You can also perform this action in beforehand using 'kubeadm config images pull'
+[kubelet-start] Writing kubelet environment file with flags to file ""/var/lib/kubelet/kubeadm-flags.env""
+[kubelet-start] Writing kubelet configuration to file ""/var/lib/kubelet/config.yaml""
+[kubelet-start] Activating the kubelet service
+[certs] Using certificateDir folder ""/var/lib/minikube/certs/""
+[certs] Generating ""front-proxy-ca"" certificate and key
+[certs] Generating ""front-proxy-client"" certificate and key
+[certs] Using existing ca certificate authority
+[certs] Generating ""apiserver-kubelet-client"" certificate and key
+[certs] Using existing apiserver certificate and key on disk
+[certs] Generating ""etcd/ca"" certificate and key
+[certs] Generating ""etcd/peer"" certificate and key
+[certs] etcd/peer serving cert is signed for DNS names [minikube localhost] and IPs [172.17.0.40 127.0.0.1 ::1]
+[certs] Generating ""apiserver-etcd-client"" certificate and key
+[certs] Generating ""etcd/server"" certificate and key
+[certs] etcd/server serving cert is signed for DNS names [minikube localhost] and IPs [172.17.0.40 127.0.0.1 ::1]
+[certs] Generating ""etcd/healthcheck-client"" certificate and key
+[certs] Generating ""sa"" key and public key
+[kubeconfig] Using kubeconfig folder ""/etc/kubernetes""
+[kubeconfig] Writing ""admin.conf"" kubeconfig file
+[kubeconfig] Writing ""kubelet.conf"" kubeconfig file
+[kubeconfig] Writing ""controller-manager.conf"" kubeconfig file
+[kubeconfig] Writing ""scheduler.conf"" kubeconfig file
+[control-plane] Using manifest folder ""/etc/kubernetes/manifests""
+[control-plane] Creating static Pod manifest for ""kube-apiserver""
+[control-plane] Creating static Pod manifest for ""kube-controller-manager""
+[control-plane] Creating static Pod manifest for ""kube-scheduler""
+[etcd] Creating static Pod manifest for local etcd in ""/etc/kubernetes/manifests""
+[wait-control-plane] Waiting for the kubelet to boot up the control plane as static Pods from directory ""/etc/kubernetes/manifests"". This can take up to 4m0s
+[kubelet-check] Initial timeout of 40s passed.
+
+Unfortunately, an error has occurred:
+        timed out waiting for the condition
+
+This error is likely caused by:
+        - The kubelet is not running
+        - The kubelet is unhealthy due to a misconfiguration of the node in some way (required cgroupsdisabled)
+
+If you are on a systemd-powered system, you can try to troubleshoot the error with the following commands:
+        - 'systemctl status kubelet'
+        - 'journalctl -xeu kubelet'
+
+Additionally, a control plane component may have crashed or exited when started by the container runtime.
+To troubleshoot, list all containers using your preferred container runtimes CLI, e.g. docker.
+Here is one example how you may list all Kubernetes containers running in docker:
+        - 'docker ps -a | grep kube | grep -v pause'
+        Once you have found the failing container, you can inspect its logs with:
+        - 'docker logs CONTAINERID'
+error execution phase wait-control-plane: couldn't initialize a Kubernetes cluster
+: running command: sudo /usr/bin/kubeadm init --config /var/lib/kubeadm.yaml  --ignore-preflight-errors=DirAvailable--etc-kubernetes-manifests,DirAvailable--data-minikube,FileAvailable--etc-kubernetes-manifests-kube-scheduler.yaml,FileAvailable--etc-kubernetes-manifests-kube-apiserver.yaml,FileAvailable--etc-kubernetes-manifests-kube-controller-manager.yaml,FileAvailable--etc-kubernetes-manifests-etcd.yaml,Port-10250,Swap
+.: exit status 1
+*
+* Sorry that minikube crashed. If this was unexpected, we would love to hear from you:
+  - https://github.com/kubernetes/minikube/issues/new/choose
+* Problems detected in kube-addon-manager:
+  - error: unable to recognize ""STDIN"": Get https://localhost:8443/api?timeout=32s: dial tcp [::1]:8443: connect: connection refused
+  - error: unable to recognize ""STDIN"": Get https://localhost:8443/api?timeout=32s: net/http: TLS handshake timeout
+  - error: unable to recognize ""STDIN"": Get https://localhost:8443/api?timeout=32s: dial tcp [::1]:8443: connect: connection refused`
+<issue_comment>username_1: Thank you for the report. This looks like a duplicate of 
+Https://github.com/kubernetes/website/issues/17279
+<issue_comment>username_2: @username_0 can you please try restarting kubelet `systemctl restart kubelet`
+<issue_comment>username_3: I think this is fixed.
+/close"
+opensearch-project/documentation-website,1145911295,419,,"[{'action': 'opened', 'author': 'ahopp', 'comment_id': None, 'datetime': '2022-02-21 15:02:15+00:00', 'masked_author': 'username_0', 'text': '### Background\r\nSince the launch of OpenSearch, there has been some great progress in documenting the project. So far, the Open Distro documentation has been updated and moved to OpenSearch, and there have been continued additions to content coverage on OpenSearch plugin features, OpenSearch search, fundamental OpenSearch language clients content, OpenSearch APIs (e.g., CAT, bulk, DSL), and other ad hoc content based on basis address community requests (e.g., updating security content, updating docker configs, and more). \r\n\r\nDespite the significant progress, we haven’t established a plan we can work backwards from specific set of needs. Additionally, the current documentation is still structured in a manner better suited for a peripheral product (e.g. Open Distro). \r\n\r\n### Proposal\r\nTo resolve this, I am recommending an update to the basic hierarchy of content as well as the overall content subjects I think should be covered by the documentation site. In this proposal I tried to consider the following:\r\n\r\n* The structure should be flexible enough to allow the OpenSearch project documentation to change as the overall project changes. It will also need to be able to be reviewed and refreshed periodically. \r\n* The structure should be suitable for all readers. While we can’t optimize for every type of user, we should endeavor to support all. \r\n* Not all content will be reviewed in the same context so the structure scheme should allow for some repetition. \r\n* We should structure the documents to support both information-oriented reference material and goal-oriented how-to material. \r\n* The goal should be to reduce as much cognitive load in looking for content as possible\r\n\r\nWhile I framed this as a table of contents and described what sections I think we should have in our documentation, I also want to acknowledge that there are many more decisions to be made (e.g. how we title the content, what interlinks we have, what navigation looks like throughout, etc.). Those topics are important and need to be discussed. However, the structure and documentation content seemed to be the most composable, logical place to start. Once we feel good about the initial organization schemes and structures, we should review proposals for labeling, navigation, search, etc.\r\n\r\nFinally, while there is some importance in ordering (e.g. overview should probably be high on the list), I’ve focused on coverage for this proposal. I think we can make efforts optimizing the ordering once we have aligned on the content. \r\n\r\n#### Recommended Structure\r\nBelow is the general proposal for the section and structure of the content needed for the OpenSearch project. \r\n\r\n* *Overview*: As the name implies, this section provides an overview of OpenSearch and OpenSearch Dashboards including concepts, paths to community content (ex. roadmaps, current design docs, etc.), and release/end-of-life information. Topics in this section include;\r\n    * Project Overview and Concepts\r\n    * First steps and Learning Progressions\r\n    * Roadmap\r\n    * Design documents/RFCs\r\n    * Releases\r\n    * End of Life\r\n    * FAQ\r\n* *Installation and Configuration*: This section will demonstrate how to install and configure OpenSearch and OpenSearch Dashboards including install requirements and examples for common configurations. It will also include content specific to upgrading from common systems or versions. Topics in this section include;\r\n    * Installation Overview and Concepts\r\n    * Planning\r\n    * Installing on <Platform>\r\n    * Upgrading\r\n    * Configuration\r\n    * Configuring multiple node types\r\n* *Manage, Monitor, and Tune*: This section will focus on methods, instructions, and guidelines to run OpenSearch and OpenSearch Dashboards including Performance Analyzer. Topics in this section include;\r\n    * Performance Analyzer\r\n* *Migration*: This section will provide content on migrating to OpenSearch and OpenSearch Dashboards from various common sources (ex. Open Distro, older version of OpenSearch, Elasticsearch, etc.).Topics in this section include;\r\n    * Overview and concepts\r\n    * From Open Distro\r\n    * From OSS Elasticsearch\r\n    * From Elasticsearch\r\n    * From Other Databases\r\n* *Security*: This section will provide both an overviews of security (include key concepts) and configuration options/guidance including authorization, authentication, and auditing. Topics in this section include;\r\n    * Overview and concepts\r\n    * How-to/tutorials\r\n    * Configuration\r\n    * Authentication\r\n    * Access control\r\n    * Auditing\r\n* *Indexes and ingestion*: This section will be all about the ins and outs of the OpenSearch index including reindexing, aliases, and overall index management. Topics in this section include;\r\n    * Overview and concepts\r\n    * Index templates\r\n    * Units and data types\r\n    * Indexing APIs\r\n    * Indexing back pressure\r\n    * Reindexing\r\n    * Index aliases\r\n    * Data Streams\r\n    * Index Management\r\n    * Ingestion Nodes\r\n* *Search and Query:* This section will provide an overview of search and query concepts as well as provide information on query options across OpenSearch and OpenSearch Dashboards. Topics in this section include;\r\n    * Overview and concepts\r\n    * Search (e.g. Query DSL, Search Templates, Autocomplete, etc.)\r\n    * Query languages (e.g. DSL, SSL, SQL, etc.)\r\n    * Cross Cluster Search\r\n    * Machine Learning (e.g. KNN)\r\n    * Aggregations\r\n    * SQL\r\n* *Availability and Recovery*: This section will cover all the guidance needed for snapshots, cluster replication (and cross cluster replication), and recovery methods. It will also include information to optimize for availability. Topics in this section include;\r\n    * Overview\r\n    * Snapshots\r\n    * Cluster Replication\r\n    * Cross Cluster Replication\r\n* *Analytics, Dashboards, and Machine Learning*: This section will catch the information needed to use OpenSearch and OpenSearch Dashboards for analytics, visualization, and dashboarding including alerting, reporting, and OpenSearch Dashboard specific “how-tos”. This section will also cover using tools in OpenSearch Dashboards such as Dev Tools and Stack Management. Topics in this section include;\r\n    * Overview and concepts\r\n    * OpenSearch Dashboards\r\n    * Alerting\r\n    * Anomaly Detection\r\n[Truncated]\n    * Ingestion tools (e.g. Data Prepper, Logstash, Fluentd, Tika, etc.)\r\n    * Data collection agents (e.g. Beats, Fluent Bit, etc.)\r\n    * Language Clients (e.g. Python, JavaScript, Java, etc.)\r\n    * Analytics tools (e.g. Grafana, Power BI, Tableau, etc.)\r\n    * OpenTelemetry\r\n    * OpenSearch Benchmark\r\n* *Troubleshooting*: This section will focus on resolving common challenges such as troubleshooting configuration issues and fixing security issues. Topics in this section include;\r\n    * Common issues\r\n    * securityadmin.sh\r\n    * TLS\r\n    * SAML\r\n    * OpenID\r\n* *REST API Reference*: This section will provide a breakdown of the REST API and demonstrate what can be called to  configure or access OpenSearch functions. \r\n* *External links*: This section will provide a path to external links and associated documents not part of the core reference documentation. Topics in this section include;\r\n    * Javadoc \r\n    * OpenSearch developer guide\r\n    * Dashboards developer guide\r\n\r\n**What are remaining open questions?**\r\nWhile I tried to focus on what documentation users would be looking for based on feedback on the forums, GitHub, and looking at examples of other OSS projects, I know there is still a big opportunity for optimization. ***Please poke holes, provide feedback, identify gaps, and make proposals***! From there we can use this issue as a living roadmap we all can add to and plan our documentation efforts.', 'title': '[PROPOSAL] Overall Documentation Structure/Restructure', 'type': 'issue'}
+ {'action': 'created', 'author': 'ashwin-pc', 'comment_id': 1047269010.0, 'datetime': '2022-02-21 22:25:53+00:00', 'masked_author': 'username_1', 'text': ""Amazing breakdown! I don't see much here about development docs. Will that be covered separately in the OpenSeach and OpenSeach dashboards developer guides?"", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'ahopp', 'comment_id': 1048064277.0, 'datetime': '2022-02-22 17:58:17+00:00', 'masked_author': 'username_0', 'text': 'Great callout! I think it would make sense to add them in the developer guides but we can also link them in the main overview. What do you think?', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'Naarcha-AWS', 'comment_id': 1048070728.0, 'datetime': '2022-02-22 18:06:01+00:00', 'masked_author': 'username_2', 'text': '@username_1: Still learning everything of course. Could you describe the distinction between the overall OpenSearch documentation and the ""development docs"". I assume the development docs you are referring to are these: https://github.com/opensearch-project/OpenSearch/blob/main/DEVELOPER_GUIDE.md#developer-guide.\r\n\r\nIf so, should we make a distinction between ""Development"" and ""Contribution""? Either way, adding the links to the various guides in the main overview make sense to me.', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'Naarcha-AWS', 'comment_id': 1048074724.0, 'datetime': '2022-02-22 18:10:55+00:00', 'masked_author': 'username_2', 'text': 'On the troubleshooting section: \r\n\r\n```\r\nTroubleshooting: This section will focus on resolving common challenges such as troubleshooting configuration issues and fixing security issues. Topics in this section include;\r\n\r\n    Common issues\r\n    securityadmin.sh\r\n    TLS\r\n    SAML\r\n    OpenID\r\n```\r\nI\'m conflicted about making that section it\'s own. Would it be better to have individual ""Troubleshooting"" subsections within each section. For example, the security plugin docs could include a page for troubleshooting TLS, SAML, and security admin.\r\n\r\nFurthermore, we could make ""Common Issues"" it\'s own top-level page, to account for issues that might not fit into the Use Case sections.\r\n\r\nAny thoughts?', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'ashwin-pc', 'comment_id': 1048102288.0, 'datetime': '2022-02-22 18:43:47+00:00', 'masked_author': 'username_1', 'text': ""By dev docs I meant documentation that new contributors can use to familiarize themselves with the internals of our systems. Looking at Andrews list, I see a lot that helps new users understand OpenSeach but for new contributors, there are still a lot of gaps. \r\n\r\nFor example, for OpenSeach Dashboards the only section I see is a link to the dev guide. Which makes sense for an OpenSeach user. But if someone wishes to contribute to Dashboards, the existing documentation is quite sparse. And the developer guide doesn't do much more than give us setup instructions and the style guide to follow."", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'ashwin-pc', 'comment_id': 1048104116.0, 'datetime': '2022-02-22 18:46:10+00:00', 'masked_author': 'username_1', 'text': ""I might be wrong, but I don't think we have  a good developer guide. In dashboards we have a single developer doc and that doesn't say much. It's just installation instructions and a style guide. We need a whole new set of docs for that. Ideally generated directly from the code."", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'mattweber', 'comment_id': 1048185177.0, 'datetime': '2022-02-22 20:29:17+00:00', 'masked_author': 'username_3', 'text': 'IMO, it would be great if docs could be moved into main repo like Elastic does it.  It is very useful to have docs live with the code so that contributors can add/update/remove the relevant docs in the same pull request.  It can be a requirement that changes are documented before a pull request is merged.', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'ahopp', 'comment_id': 1048208852.0, 'datetime': '2022-02-22 21:02:48+00:00', 'masked_author': 'username_0', 'text': 'This is interesting. I feel like making /doc (or /docs) a top-level directory in the ""main"" repository a good mechanism to signal the importance of documentation but I\'m not sure how it would work given the distributed nature of the repos in the OpenSearch project specifically. \r\n\r\n@CEHENKLE @dblock what are your thoughts?', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'ahopp', 'comment_id': 1048211383.0, 'datetime': '2022-02-22 21:06:00+00:00', 'masked_author': 'username_0', 'text': 'My first instinct is why not both? We can have a general troubleshooting section where people can go to in addition to individual ""Troubleshooting"" subsections within each section. The content only needs to be written once and can them be discovered in either use flow (e.g. problem -> troubleshooting -> specific topic OR problem -> specific topic -> troubleshooting).', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'ahopp', 'comment_id': 1048213562.0, 'datetime': '2022-02-22 21:08:57+00:00', 'masked_author': 'username_0', 'text': 'This makes sense to me. The question then becomes: Where should they live in the above structure?', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'keithhc2', 'comment_id': 1048218666.0, 'datetime': '2022-02-22 21:15:40+00:00', 'masked_author': 'username_4', 'text': 'So the general troubleshooting section would just link off to the individual troubleshooting sections, where people can find the actual content?', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'Naarcha-AWS', 'comment_id': 1048224684.0, 'datetime': '2022-02-22 21:23:12+00:00', 'masked_author': 'username_2', 'text': 'Maybe a top-level section labeled ""Contribution"". \r\n\r\n---\r\n\r\n_Contribution_: This section provides instructions and best practices for developing the OpenSearch project.\r\n- Contribution pipeline and review overview\r\n- OpenSearch development guide\r\n- Dashboard\'s development guide\r\n- Security Plugin development guide', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'keithhc2', 'comment_id': 1048225116.0, 'datetime': '2022-02-22 21:23:46+00:00', 'masked_author': 'username_4', 'text': ""Ultimately, this is going to depend on how we define what the docs site's purpose is. This is how we're currently organizing the information:\r\n\r\nRepos:\r\n\r\nWhat is this thing?\r\nHow do get started with development and build it from source?\r\nHow do I contribute changes or bug fixes?\r\nDocumentation:\r\n\r\nWhat is this thing?\r\nHow do I install it?\r\nHow do I get started with it?\r\nReference stuff: supported operations, configuration, tuning, best practices, REST API, etc.\r\n\r\nSo if we want to include developer guide content in OpenSearch documentation, then I'm not sure what information we'd put in the repos themselves, and we don't want duplicated information anywhere. My thinking is if first-time contributors are looking to contribute to the projects, then they're on the repos already, so why not stick the developer guide information like how to contribute and more in-depth explanations of systems in the repo's README? If the docs site's purpose is to document how to _use_ OpenSearch, then it doesn't make much sense to document how to _contribute_ to OpenSearch on the docs site."", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'Naarcha-AWS', 'comment_id': 1048230170.0, 'datetime': '2022-02-22 21:30:07+00:00', 'masked_author': 'username_2', 'text': ""That is in line with how other Open Source tools operate, keep contribution instructions in the code base where contribution occurs. I do think there is value in having a hub in which we route users towards our repos though. For example, Elastic has a [Community Contribution Program](https://www.elastic.co/community/contributor), a hub for users which to contribute to Elastic. They gate their instructions behind a web app that requires you to sign-up, which I don't love. However, the page and app does encourage contributors by promising recognition for those that make significant contributions."", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'ashwin-pc', 'comment_id': 1048259957.0, 'datetime': '2022-02-22 22:10:18+00:00', 'masked_author': 'username_1', 'text': ""So where would the details for building say a plugin go? To build a plugin today all we have is a blog post. But it does not for example contains the details of how to generate one, what are the different functional libraries available to a plugin developer, different key concepts that one should know before building one etc. \r\n\r\nI guess what i am looking for in the documentation is something like this:\r\nhttps://developer.android.com/docs\r\n\r\nIts not really a guide on how contribute to Android for example but how to build on top of it. And most of the contents are also very relevant to someone who's contributing.\r\n\r\nThe actual style guide and contribution specific details can and should remain in the repo, but guides, api, and other core concepts make more sense here"", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'keithhc2', 'comment_id': 1048274095.0, 'datetime': '2022-02-22 22:30:10+00:00', 'masked_author': 'username_4', 'text': ""Right, and that's why I'm saying we should decide what the purpose of the OpenSearch docs site is, and whether that should just be how to use OpenSearch VS everything OpenSearch-related. I would say that if users are looking at the plugin's repo to download, clone, do whatever with a plugin, they should be able to look at that repo's README to get the information they need, rather than jump through another hoop to the docs site.\r\n\r\nI agree that guides and APIs should be in the OpenSearch documentation, but I think it makes more sense to have breakdowns on what libraries are available in a plugin/what to know when thinking about contributing to a plugin within the repo, where they would actually make contributions and where the code actually lives.\r\n\r\nI like that Android development link because it educates people on how to _use_ Android to build custom apps. But they don't mention anything about contributing to Android, which is at an entirely different link: https://source.android.com/setup/contribute"", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'nateynateynate', 'comment_id': 1049289937.0, 'datetime': '2022-02-23 22:47:44+00:00', 'masked_author': 'username_5', 'text': ""I'd like to call out what I feel is a gap in our existing docs - In the situation where someone might be learning **Docker and OpenSearch at the same time**, I found the amount of guidance just a bit short. We should probably provide a generous dose of help for some basic docker familiarity.  Some examples: \r\n\r\nInstallation and Configuration - \r\n\r\n- Using `docker cp` to pull out yml files, make changes, and then `docker cp` them back in.  A corollary - it was also not quite clear where exactly the config file lives inside of the docker container, which I had to execute an interactive shell to figure out.  I realize the difficulty is low for that, but we should at least have it properly documented. \r\n\r\n- Attaching new volumes to containers to prepare them as a snapshot repository  through edits to `docker-compose.yml` prior to bringing up containers. New volumes cannot be attached to containers that have already been started."", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'asafm', 'comment_id': 1055173432.0, 'datetime': '2022-03-01 08:54:49+00:00', 'masked_author': 'username_6', 'text': 'Regarding contribution - from someone who just enters OpenSearch as a developer (not a user), there is a huge gap of How OpenSearch Works: Internal Architecture / Design\r\n* How does replication works?\r\n* How does the Shard Allocator (Balancer) works?\r\n* How do plugins work?\r\n\r\nA lot of excellent content in that area has been contributed as blog posts. \r\nToday to learn those fields, I have to google, find all sorts of blogs posts, and piece it together. \r\n\r\nI think it makes sense to have a section in the docs about the architecture and design of OpenSearch. \r\n\r\nHere is an example of an issue I opened which has been closed since there is not such place to add that content to: https://github.com/opensearch-project/documentation-website/issues/426', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'ahopp', 'comment_id': 1055651461.0, 'datetime': '2022-03-01 16:58:05+00:00', 'masked_author': 'username_0', 'text': 'I think we could include some of this in the install guides for OpenSearch via Docker (under ""Installation and Configuration"" section) and link out to Docker content for any command deep dives. What do you think?', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'ahopp', 'comment_id': 1055653764.0, 'datetime': '2022-03-01 17:00:45+00:00', 'masked_author': 'username_0', 'text': ""@username_4 So, where are we landing on the structure? I can make an update if we feel we're aligned."", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'asafm', 'comment_id': 1055697581.0, 'datetime': '2022-03-01 17:47:40+00:00', 'masked_author': 'username_6', 'text': '@username_0 Looks good 👍', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'stockholmux', 'comment_id': 1055703018.0, 'datetime': '2022-03-01 17:54:24+00:00', 'masked_author': 'username_7', 'text': 'I really like this. It\'s long over due and it\'s solving some long-standing concerns I\'ve had. \r\n\r\n**Overall feedback**: There are a lot of sections. I think, as a user, I might get overwhelmed by this list. Laterally, I also don\'t like how several dissimilar things are is bundled together (""Analytics, Dashboards, and Machine Learning"" seems especially potpourri). I would suggest an additional layer of organization. Maybe three big areas - ""Setting up & running OpenSearch,"" ""Using OpenSearch for your data"" and ""OpenSearch internals & contribution"" and then a few other general ones (maybe Overview, external links, API reference).\r\n\r\n**Other nits and picks**: \r\n\r\n""Security"" section: I would definitely break this up. This seems to cover the footprint of the security plugin which bundles a lot dissimilar functionality. I would say that access control needs its own category. Encryption might also be a good area to cover. (SSL is listed as a query language which is amusingly incorrect).\r\n\r\n""Search and Query"" section: needs work. SSL is encryption - should it be PPL? No mention of DQL. SQL is listed twice.\r\n\r\n""Clients and tools"" section: break this up. Languages and clients are apples and oranges. I think this historical more than anything.', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'nateynateynate', 'comment_id': 1055760951.0, 'datetime': '2022-03-01 19:03:05+00:00', 'masked_author': 'username_5', 'text': ""Perfect. I sure would like to not have any reason to have to visit a different website to get the practical information needed. I'll take it."", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'ashwin-pc', 'comment_id': 1055892309.0, 'datetime': '2022-03-01 21:47:07+00:00', 'masked_author': 'username_1', 'text': ""Shouldn't we have a similar section for dashboards? \r\n\r\nBtw this is what I was referring to when I mentioned developer docs being different from the developer guide on the repository"", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'brijos', 'comment_id': 1055971184.0, 'datetime': '2022-03-01 23:35:10+00:00', 'masked_author': 'username_8', 'text': 'I agree.  Below is how I see it.\r\n\r\nClients:  This section will provide light documentation and links to download clients.\r\nClients include:  Python, JavaScript, Java, etc.\r\n\r\n\r\nTools:  This section will provide documentation for tools that are part of the OpenSearch project. Topics in this section include:\r\n\r\nOpenSearch CLI\r\nIngestion tools (e.g. Data Prepper, Logstash, Fluentd, Tika, etc.)\r\nData collection agents (e.g. Beats, Fluent Bit, etc.)\r\nAnalytics tools (e.g. Grafana, Power BI, Tableau, etc.)\r\nOpenTelemetry\r\nOpenSearch Benchmark', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'dlvenable', 'comment_id': 1057451910.0, 'datetime': '2022-03-02 22:18:59+00:00', 'masked_author': 'username_9', 'text': 'This is a big change and there are lots of `https://opensearch.org/docs` links out on the internet. I think it would be valuable to support redirecting old links to new links. Perhaps not every link could get a redirect, but a lot of the major pages should. As a user of documentation, I find it highly frustrating to follow an old link and then have to rework my way into the correct page.', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'ahopp', 'comment_id': 1058192897.0, 'datetime': '2022-03-03 15:58:03+00:00', 'masked_author': 'username_0', 'text': ""I've updated to reflect your input - let me know if that works!"", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'ahopp', 'comment_id': 1058225040.0, 'datetime': '2022-03-03 16:21:09+00:00', 'masked_author': 'username_0', 'text': ""Thanks @passbt I've added it explicit under query languages as well as the Dashboards section!"", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'ahopp', 'comment_id': 1058541808.0, 'datetime': '2022-03-03 22:06:54+00:00', 'masked_author': 'username_0', 'text': '@macrakis I\'ve moved k-NN and search plugins under ""Optimization"" (which itself is under ""Search and Query""). What\'s your thought here - is this the right taxonomy?', 'title': None, 'type': 'comment'}]","<issue_start><issue_comment>Title: [PROPOSAL] Overall Documentation Structure/Restructure
+username_0: ### Background
+Since the launch of OpenSearch, there has been some great progress in documenting the project. So far, the Open Distro documentation has been updated and moved to OpenSearch, and there have been continued additions to content coverage on OpenSearch plugin features, OpenSearch search, fundamental OpenSearch language clients content, OpenSearch APIs (e.g., CAT, bulk, DSL), and other ad hoc content based on basis address community requests (e.g., updating security content, updating docker configs, and more). 
+
+Despite the significant progress, we haven’t established a plan we can work backwards from specific set of needs. Additionally, the current documentation is still structured in a manner better suited for a peripheral product (e.g. Open Distro). 
+
+### Proposal
+To resolve this, I am recommending an update to the basic hierarchy of content as well as the overall content subjects I think should be covered by the documentation site. In this proposal I tried to consider the following:
+
+* The structure should be flexible enough to allow the OpenSearch project documentation to change as the overall project changes. It will also need to be able to be reviewed and refreshed periodically. 
+* The structure should be suitable for all readers. While we can’t optimize for every type of user, we should endeavor to support all. 
+* Not all content will be reviewed in the same context so the structure scheme should allow for some repetition. 
+* We should structure the documents to support both information-oriented reference material and goal-oriented how-to material. 
+* The goal should be to reduce as much cognitive load in looking for content as possible
+
+While I framed this as a table of contents and described what sections I think we should have in our documentation, I also want to acknowledge that there are many more decisions to be made (e.g. how we title the content, what interlinks we have, what navigation looks like throughout, etc.). Those topics are important and need to be discussed. However, the structure and documentation content seemed to be the most composable, logical place to start. Once we feel good about the initial organization schemes and structures, we should review proposals for labeling, navigation, search, etc.
+
+Finally, while there is some importance in ordering (e.g. overview should probably be high on the list), I’ve focused on coverage for this proposal. I think we can make efforts optimizing the ordering once we have aligned on the content. 
+
+#### Recommended Structure
+Below is the general proposal for the section and structure of the content needed for the OpenSearch project. 
+
+* *Overview*: As the name implies, this section provides an overview of OpenSearch and OpenSearch Dashboards including concepts, paths to community content (ex. roadmaps, current design docs, etc.), and release/end-of-life information. Topics in this section include;
+    * Project Overview and Concepts
+    * First steps and Learning Progressions
+    * Roadmap
+    * Design documents/RFCs
+    * Releases
+    * End of Life
+    * FAQ
+* *Installation and Configuration*: This section will demonstrate how to install and configure OpenSearch and OpenSearch Dashboards including install requirements and examples for common configurations. It will also include content specific to upgrading from common systems or versions. Topics in this section include;
+    * Installation Overview and Concepts
+    * Planning
+    * Installing on <Platform>
+    * Upgrading
+    * Configuration
+    * Configuring multiple node types
+* *Manage, Monitor, and Tune*: This section will focus on methods, instructions, and guidelines to run OpenSearch and OpenSearch Dashboards including Performance Analyzer. Topics in this section include;
+    * Performance Analyzer
+* *Migration*: This section will provide content on migrating to OpenSearch and OpenSearch Dashboards from various common sources (ex. Open Distro, older version of OpenSearch, Elasticsearch, etc.).Topics in this section include;
+    * Overview and concepts
+    * From Open Distro
+    * From OSS Elasticsearch
+    * From Elasticsearch
+    * From Other Databases
+* *Security*: This section will provide both an overviews of security (include key concepts) and configuration options/guidance including authorization, authentication, and auditing. Topics in this section include;
+    * Overview and concepts
+    * How-to/tutorials
+    * Configuration
+    * Authentication
+    * Access control
+    * Auditing
+* *Indexes and ingestion*: This section will be all about the ins and outs of the OpenSearch index including reindexing, aliases, and overall index management. Topics in this section include;
+    * Overview and concepts
+    * Index templates
+    * Units and data types
+    * Indexing APIs
+    * Indexing back pressure
+    * Reindexing
+    * Index aliases
+    * Data Streams
+    * Index Management
+    * Ingestion Nodes
+* *Search and Query:* This section will provide an overview of search and query concepts as well as provide information on query options across OpenSearch and OpenSearch Dashboards. Topics in this section include;
+    * Overview and concepts
+    * Search (e.g. Query DSL, Search Templates, Autocomplete, etc.)
+    * Query languages (e.g. DSL, SSL, SQL, etc.)
+    * Cross Cluster Search
+    * Machine Learning (e.g. KNN)
+    * Aggregations
+    * SQL
+* *Availability and Recovery*: This section will cover all the guidance needed for snapshots, cluster replication (and cross cluster replication), and recovery methods. It will also include information to optimize for availability. Topics in this section include;
+    * Overview
+    * Snapshots
+    * Cluster Replication
+    * Cross Cluster Replication
+* *Analytics, Dashboards, and Machine Learning*: This section will catch the information needed to use OpenSearch and OpenSearch Dashboards for analytics, visualization, and dashboarding including alerting, reporting, and OpenSearch Dashboard specific “how-tos”. This section will also cover using tools in OpenSearch Dashboards such as Dev Tools and Stack Management. Topics in this section include;
+    * Overview and concepts
+    * OpenSearch Dashboards
+    * Alerting
+    * Anomaly Detection
+[Truncated]
+    * Ingestion tools (e.g. Data Prepper, Logstash, Fluentd, Tika, etc.)
+    * Data collection agents (e.g. Beats, Fluent Bit, etc.)
+    * Language Clients (e.g. Python, JavaScript, Java, etc.)
+    * Analytics tools (e.g. Grafana, Power BI, Tableau, etc.)
+    * OpenTelemetry
+    * OpenSearch Benchmark
+* *Troubleshooting*: This section will focus on resolving common challenges such as troubleshooting configuration issues and fixing security issues. Topics in this section include;
+    * Common issues
+    * securityadmin.sh
+    * TLS
+    * SAML
+    * OpenID
+* *REST API Reference*: This section will provide a breakdown of the REST API and demonstrate what can be called to  configure or access OpenSearch functions. 
+* *External links*: This section will provide a path to external links and associated documents not part of the core reference documentation. Topics in this section include;
+    * Javadoc 
+    * OpenSearch developer guide
+    * Dashboards developer guide
+
+**What are remaining open questions?**
+While I tried to focus on what documentation users would be looking for based on feedback on the forums, GitHub, and looking at examples of other OSS projects, I know there is still a big opportunity for optimization. ***Please poke holes, provide feedback, identify gaps, and make proposals***! From there we can use this issue as a living roadmap we all can add to and plan our documentation efforts.
+<issue_comment>username_1: Amazing breakdown! I don't see much here about development docs. Will that be covered separately in the OpenSeach and OpenSeach dashboards developer guides?
+<issue_comment>username_0: Great callout! I think it would make sense to add them in the developer guides but we can also link them in the main overview. What do you think?
+<issue_comment>username_2: @username_1: Still learning everything of course. Could you describe the distinction between the overall OpenSearch documentation and the ""development docs"". I assume the development docs you are referring to are these: https://github.com/opensearch-project/OpenSearch/blob/main/DEVELOPER_GUIDE.md#developer-guide.
+
+If so, should we make a distinction between ""Development"" and ""Contribution""? Either way, adding the links to the various guides in the main overview make sense to me.
+<issue_comment>username_2: On the troubleshooting section: 
+
+```
+Troubleshooting: This section will focus on resolving common challenges such as troubleshooting configuration issues and fixing security issues. Topics in this section include;
+
+    Common issues
+    securityadmin.sh
+    TLS
+    SAML
+    OpenID
+```
+I'm conflicted about making that section it's own. Would it be better to have individual ""Troubleshooting"" subsections within each section. For example, the security plugin docs could include a page for troubleshooting TLS, SAML, and security admin.
+
+Furthermore, we could make ""Common Issues"" it's own top-level page, to account for issues that might not fit into the Use Case sections.
+
+Any thoughts?
+<issue_comment>username_1: By dev docs I meant documentation that new contributors can use to familiarize themselves with the internals of our systems. Looking at Andrews list, I see a lot that helps new users understand OpenSeach but for new contributors, there are still a lot of gaps. 
+
+For example, for OpenSeach Dashboards the only section I see is a link to the dev guide. Which makes sense for an OpenSeach user. But if someone wishes to contribute to Dashboards, the existing documentation is quite sparse. And the developer guide doesn't do much more than give us setup instructions and the style guide to follow.
+<issue_comment>username_1: I might be wrong, but I don't think we have  a good developer guide. In dashboards we have a single developer doc and that doesn't say much. It's just installation instructions and a style guide. We need a whole new set of docs for that. Ideally generated directly from the code.
+<issue_comment>username_3: IMO, it would be great if docs could be moved into main repo like Elastic does it.  It is very useful to have docs live with the code so that contributors can add/update/remove the relevant docs in the same pull request.  It can be a requirement that changes are documented before a pull request is merged.
+<issue_comment>username_0: This is interesting. I feel like making /doc (or /docs) a top-level directory in the ""main"" repository a good mechanism to signal the importance of documentation but I'm not sure how it would work given the distributed nature of the repos in the OpenSearch project specifically. 
+
+@CEHENKLE @dblock what are your thoughts?
+<issue_comment>username_0: My first instinct is why not both? We can have a general troubleshooting section where people can go to in addition to individual ""Troubleshooting"" subsections within each section. The content only needs to be written once and can them be discovered in either use flow (e.g. problem -> troubleshooting -> specific topic OR problem -> specific topic -> troubleshooting).
+<issue_comment>username_0: This makes sense to me. The question then becomes: Where should they live in the above structure?
+<issue_comment>username_4: So the general troubleshooting section would just link off to the individual troubleshooting sections, where people can find the actual content?
+<issue_comment>username_2: Maybe a top-level section labeled ""Contribution"". 
+
+---
+
+_Contribution_: This section provides instructions and best practices for developing the OpenSearch project.
+- Contribution pipeline and review overview
+- OpenSearch development guide
+- Dashboard's development guide
+- Security Plugin development guide
+<issue_comment>username_4: Ultimately, this is going to depend on how we define what the docs site's purpose is. This is how we're currently organizing the information:
+
+Repos:
+
+What is this thing?
+How do get started with development and build it from source?
+How do I contribute changes or bug fixes?
+Documentation:
+
+What is this thing?
+How do I install it?
+How do I get started with it?
+Reference stuff: supported operations, configuration, tuning, best practices, REST API, etc.
+
+So if we want to include developer guide content in OpenSearch documentation, then I'm not sure what information we'd put in the repos themselves, and we don't want duplicated information anywhere. My thinking is if first-time contributors are looking to contribute to the projects, then they're on the repos already, so why not stick the developer guide information like how to contribute and more in-depth explanations of systems in the repo's README? If the docs site's purpose is to document how to _use_ OpenSearch, then it doesn't make much sense to document how to _contribute_ to OpenSearch on the docs site.
+<issue_comment>username_2: That is in line with how other Open Source tools operate, keep contribution instructions in the code base where contribution occurs. I do think there is value in having a hub in which we route users towards our repos though. For example, Elastic has a [Community Contribution Program](https://www.elastic.co/community/contributor), a hub for users which to contribute to Elastic. They gate their instructions behind a web app that requires you to sign-up, which I don't love. However, the page and app does encourage contributors by promising recognition for those that make significant contributions.
+<issue_comment>username_1: So where would the details for building say a plugin go? To build a plugin today all we have is a blog post. But it does not for example contains the details of how to generate one, what are the different functional libraries available to a plugin developer, different key concepts that one should know before building one etc. 
+
+I guess what i am looking for in the documentation is something like this:
+https://developer.android.com/docs
+
+Its not really a guide on how contribute to Android for example but how to build on top of it. And most of the contents are also very relevant to someone who's contributing.
+
+The actual style guide and contribution specific details can and should remain in the repo, but guides, api, and other core concepts make more sense here
+<issue_comment>username_4: Right, and that's why I'm saying we should decide what the purpose of the OpenSearch docs site is, and whether that should just be how to use OpenSearch VS everything OpenSearch-related. I would say that if users are looking at the plugin's repo to download, clone, do whatever with a plugin, they should be able to look at that repo's README to get the information they need, rather than jump through another hoop to the docs site.
+
+I agree that guides and APIs should be in the OpenSearch documentation, but I think it makes more sense to have breakdowns on what libraries are available in a plugin/what to know when thinking about contributing to a plugin within the repo, where they would actually make contributions and where the code actually lives.
+
+I like that Android development link because it educates people on how to _use_ Android to build custom apps. But they don't mention anything about contributing to Android, which is at an entirely different link: https://source.android.com/setup/contribute
+<issue_comment>username_5: I'd like to call out what I feel is a gap in our existing docs - In the situation where someone might be learning **Docker and OpenSearch at the same time**, I found the amount of guidance just a bit short. We should probably provide a generous dose of help for some basic docker familiarity.  Some examples: 
+
+Installation and Configuration - 
+
+- Using `docker cp` to pull out yml files, make changes, and then `docker cp` them back in.  A corollary - it was also not quite clear where exactly the config file lives inside of the docker container, which I had to execute an interactive shell to figure out.  I realize the difficulty is low for that, but we should at least have it properly documented. 
+
+- Attaching new volumes to containers to prepare them as a snapshot repository  through edits to `docker-compose.yml` prior to bringing up containers. New volumes cannot be attached to containers that have already been started.
+<issue_comment>username_6: Regarding contribution - from someone who just enters OpenSearch as a developer (not a user), there is a huge gap of How OpenSearch Works: Internal Architecture / Design
+* How does replication works?
+* How does the Shard Allocator (Balancer) works?
+* How do plugins work?
+
+A lot of excellent content in that area has been contributed as blog posts. 
+Today to learn those fields, I have to google, find all sorts of blogs posts, and piece it together. 
+
+I think it makes sense to have a section in the docs about the architecture and design of OpenSearch. 
+
+Here is an example of an issue I opened which has been closed since there is not such place to add that content to: https://github.com/opensearch-project/documentation-website/issues/426
+<issue_comment>username_0: I think we could include some of this in the install guides for OpenSearch via Docker (under ""Installation and Configuration"" section) and link out to Docker content for any command deep dives. What do you think?
+<issue_comment>username_0: @username_4 So, where are we landing on the structure? I can make an update if we feel we're aligned.
+<issue_comment>username_6: @username_0 Looks good 👍
+<issue_comment>username_7: I really like this. It's long over due and it's solving some long-standing concerns I've had. 
+
+**Overall feedback**: There are a lot of sections. I think, as a user, I might get overwhelmed by this list. Laterally, I also don't like how several dissimilar things are is bundled together (""Analytics, Dashboards, and Machine Learning"" seems especially potpourri). I would suggest an additional layer of organization. Maybe three big areas - ""Setting up & running OpenSearch,"" ""Using OpenSearch for your data"" and ""OpenSearch internals & contribution"" and then a few other general ones (maybe Overview, external links, API reference).
+
+**Other nits and picks**: 
+
+""Security"" section: I would definitely break this up. This seems to cover the footprint of the security plugin which bundles a lot dissimilar functionality. I would say that access control needs its own category. Encryption might also be a good area to cover. (SSL is listed as a query language which is amusingly incorrect).
+
+""Search and Query"" section: needs work. SSL is encryption - should it be PPL? No mention of DQL. SQL is listed twice.
+
+""Clients and tools"" section: break this up. Languages and clients are apples and oranges. I think this historical more than anything.
+<issue_comment>username_5: Perfect. I sure would like to not have any reason to have to visit a different website to get the practical information needed. I'll take it.
+<issue_comment>username_1: Shouldn't we have a similar section for dashboards? 
+
+Btw this is what I was referring to when I mentioned developer docs being different from the developer guide on the repository
+<issue_comment>username_8: I agree.  Below is how I see it.
+
+Clients:  This section will provide light documentation and links to download clients.
+Clients include:  Python, JavaScript, Java, etc.
+
+
+Tools:  This section will provide documentation for tools that are part of the OpenSearch project. Topics in this section include:
+
+OpenSearch CLI
+Ingestion tools (e.g. Data Prepper, Logstash, Fluentd, Tika, etc.)
+Data collection agents (e.g. Beats, Fluent Bit, etc.)
+Analytics tools (e.g. Grafana, Power BI, Tableau, etc.)
+OpenTelemetry
+OpenSearch Benchmark
+<issue_comment>username_9: This is a big change and there are lots of `https://opensearch.org/docs` links out on the internet. I think it would be valuable to support redirecting old links to new links. Perhaps not every link could get a redirect, but a lot of the major pages should. As a user of documentation, I find it highly frustrating to follow an old link and then have to rework my way into the correct page.
+<issue_comment>username_0: I've updated to reflect your input - let me know if that works!
+<issue_comment>username_0: Thanks @passbt I've added it explicit under query languages as well as the Dashboards section!
+<issue_comment>username_0: @macrakis I've moved k-NN and search plugins under ""Optimization"" (which itself is under ""Search and Query""). What's your thought here - is this the right taxonomy?"
+elixir-lang/elixir-lang.github.com,106638194,599,,"[{'action': 'opened', 'author': 'BruceEckel', 'comment_id': None, 'datetime': '2015-09-15 20:23:10+00:00', 'masked_author': 'username_0', 'text': 'On the page http://elixir-lang.org/getting-started/introduction.html (and I assume other pages) it refers to iex. When I installed elixir using chocolatey, iex was not on my path, but ielixir was.', 'title': 'iex should apparently be called ielixir in the docs', 'type': 'issue'}
+ {'action': 'created', 'author': 'josevalim', 'comment_id': 140541780.0, 'datetime': '2015-09-15 21:07:53+00:00', 'masked_author': 'username_1', 'text': 'Thank you @username_0!\r\n\r\n@onoriocatenacci can you please confirm this is indeed the way to go?', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'OnorioCatenacci', 'comment_id': 140567431.0, 'datetime': '2015-09-15 22:36:29+00:00', 'masked_author': 'username_2', 'text': 'Hi Jose and Bruce,\r\n\r\nActually it\'s up to you Jose.  I didn\'t get rid of iex on Windows; I simply added ielixir as a shortcut for the iex.bat file.  That is the only file that I aliased because it\'s the only one that presents a problem with Powershell.  I mean to say that a person can use the ielixir shortcut from either a powershell terminal window or the old windows cmd terminal window but you can\'t type ""iex"" in the Powershell window--you need to type iex.bat.  So I added ielixir as an alternative for that case. \r\n\r\nIt only applies when someone downloads the ChocolateyNuGet package and it is just a secondary shortcut; iex.bat and the rest all still work.  I think I can add iex.bat to the path as well--I say ""I think"" because of the Windows shimming technology I\'m using to add the shortcut to ielixir.  I can double check this.\r\n\r\nI could swear that I had sent something to the Elixir-Lang-Talk mailing list mentioning this additional shortcut but I can\'t seem to find it now.\r\n\r\nAt any rate, this is just a secondary shortcut that I added to the ChocolateyNuGet package--it only applies on Windows and it only applies when someone has run the CNG installer.  And, as I say, I\'m not forcing anyone to use ielixir; it\'s there solely as a convenience for those who want to run Powershell as their terminal console.\r\n\r\nWhat do you think Jose?  I can remove it (as I say I added it because Windows users should be using Powershell for a terminal and when you use Powershell for a terminal iex has a different meaning) or I can see if I can add iex to the path as well.  I could also document it if you want.  \r\n\r\nJust let me know how you want to proceed.  Sorry if this caused you any inconvenience Bruce!\r\n\r\n--\r\nOnorio', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'OnorioCatenacci', 'comment_id': 140574216.0, 'datetime': '2015-09-15 22:54:08+00:00', 'masked_author': 'username_2', 'text': 'By the way Jose if you want me to add iex.bat (and the rest) to the path, I should be able to make that change when I upload the 1.1.0-rc0 CNG package which I should have within the next day or two.', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'BruceEckel', 'comment_id': 140581788.0, 'datetime': '2015-09-15 23:43:23+00:00', 'masked_author': 'username_0', 'text': 'Either way, but if the docs say ""iex"" and it doesn\'t work for the\nchocolatey people (who, I suspect, are expecting a simple install), then it\ncan potentially turn some people away. I use the out-of-the-box experience\nas part of a litmus test, so I think it\'s important.\n\n\n-- Bruce Eckel\nwww.MindviewInc.com <http://www.mindviewinc.com/>\nBlog: username_0.github.io\nwww.WinterTechForum.com\nwww.AtomicScala.com\nwww.Reinventing-Business.com\nhttp://www.TrustOrganizations.com <http://www.ScalaSummit.com>\n\n\nOn Tue, Sep 15, 2015 at 4:36 PM,', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'josevalim', 'comment_id': 140665551.0, 'datetime': '2015-09-16 08:15:13+00:00', 'masked_author': 'username_1', 'text': ""Thank you @username_2! Don't worry, you did everything perfect.\r\n\r\n@username_0 we say `iex.bat` the first time we run iex: http://elixir-lang.org/getting-started/introduction.html\r\n\r\nWhich part was confusing or unclear? Should we have a large disclaimer?"", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'OnorioCatenacci', 'comment_id': 140721844.0, 'datetime': '2015-09-16 12:08:31+00:00', 'masked_author': 'username_2', 'text': 'I\'ll write this up partially to explain my thinking and partially so it\'s\ndocumented.\n\n1.) Totally agree that out of the box experience is very important.  But\nwhat I\'ve struggled with is what constitutes ""out of the box"" when someone\nis installing from Chocolatey NuGet (CNG).  You can run CNG from either the\nterminal window that comes up when you run cmd (cmd_shell) or the terminal\nwindow that comes up when you run powershell (ps_shell).  At the cmd_shell\ntyping _iex_ if iex.bat is in the path and the erlang runtime is in the\npath will work exactly as expected.  But in the ps_shell (and CNG is a\nbunch of powershell scripts) typing _iex_ will not start iex.bat but\ninstead will run the ""Invoke-Expression"" cmdlet.\n\nNow for most windows apps, you wouldn\'t even have to start a terminal\nwindow--you\'d have a shortcut on the desktop or something on the start menu\nor something like that.  But elixir is something that developers (as\nopposed to general end-users) use so starting a command line isn\'t so much\nof an issue.  But, as I say, which command line?  cmd_shell or\nps_shell--especially as I say, given that CNG is a bunch of PS scripts and\ngiven that the most likely person to install the Elixir CNG package is a\ndeveloper who might prefer ps_shell over cmd_shell.\n\n2.) I don\'t know about other Windows users but for me, I don\'t want\napplications automatically adding themselves to my path.  This is for two\nreasons:\n\na.) This is my development machine; I don\'t want the environment changed\nunless I change it myself.  Could cause me problems with my development\nwork.\n\nb.) The path can only be 256 characters long and every app that adds itself\nto the path is taking up space in that 256 characters.\n\nHence I felt that even though the out of the box experience would suffer, I\nwould avoid automatically appending either Erlang or Elixir\'s binary\ndirectories to the path.  As I say, again, I\'m inclined to believe that\nmost of the folks looking at Elixir via CNG are developers and while it\'s a\nbit annoying not to have ""iex"" work out of the box, since they are\ndevelopers I would hope they can understand the reasoning. I guess I have\nbeen a bit lax about documenting the reasoning for the choice and\nexplaining what someone needs to do in order to get it so that ""iex"" works\nas expected at a cmd_shell prompt.\n\n3.) As I say since I primarily use the ps_shell, I got tired of forgetting\nto type ""iex.bat"" as opposed to ""iex"" so I created the ""ielixir"" shortcut\nso I wouldn\'t keep forgetting.  I added it to the CNG package as a\nconvenience for others. But it was an addition; the behavior of iex in\nrelation to Windows is exactly the same as it was before.  That is someone\nstill needs to add the Erlang and Elixir binary directories to their path\nthemselves if they want to run ""iex.bat"" in the ps_shell.  As I say this is\nbecause I\'m guessing that most people looking at this are developers.\n\n4.) I think I should probably make a PR to supplement the docs to explain\nexactly what I explained above since this question seems to come up all the\ntime for those who install the CNG version to play with Elixir.\n\nSo having said all that, if you want Jose, I can modify the 1.1.0-rc0 CNG\npackage to add a shimmed shortcut to iex.bat to the path.  But the problem\nwith ps_shell will still remain.  And it has been my impression that there\nare a lot of sysadmins who are converting to using ps_shell (as opposed to\ncmd_shell) on a more regular basis because the scripting language in\nps_shell is a lot more powerful than the old Windows batch files.\n\nIf you want me to do a PR for the docs to document my choices for the CNG\npackage, just let me know.  I\'m happy to write this up.  Or maybe a FAQ on\nthe install packages or something of that sort.  This question about ""iex""\nnot working seems to come up almost as often as why strings are displayed\nfor lists of chars and why values can be _seemingly_ rebound.', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'josevalim', 'comment_id': 140724439.0, 'datetime': '2015-09-16 12:16:19+00:00', 'masked_author': 'username_1', 'text': 'For Windows, we will always tell users to use `iex.bat`. I believe this is orthogonal to the Chocolatey discussion because that\'s the only way afaik to run Elixir across all windows shells and installers. That\'s problem 1: make it clear that Windows users need to run `iex.bat`.\r\n\r\nProblem 2: should Chocolatey add things to my PATH, regardless if `iex.bat` or `ielixir`? That\'s not up to me to answer. I think you should just follow Chocolatey best practices here and Chocolatey users will be aware of what should be done. If we want to keep it as is, without copying, then may be should add a tiny note to the install page under the Chocolatey instructions that says: ""Elixir executables are not added to your PATH automatically. Do x, y, z to add them"".', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'OnorioCatenacci', 'comment_id': 140728760.0, 'datetime': '2015-09-16 12:35:01+00:00', 'masked_author': 'username_2', 'text': 'Ok Jose that makes good sense to me. I can modify the CNG installer, as I\nsay, when I create the package for 1.1.0-rc0--which should be today around\nmy lunchtime. :)', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'OnorioCatenacci', 'comment_id': 140738825.0, 'datetime': '2015-09-16 13:15:28+00:00', 'masked_author': 'username_2', 'text': 'Ok, just to put a final conclusion on this discussion:\n\n1.) I\'ve modified the Elixir 1.1.0-rc0 installer to create a shortcut to\n""iex.bat"" and I\'ve modified the installer to insure that people are told\nthey need to type ""iex.bat"" at the command prompt.\n\n2.) Since ""iex.bat"" works for both the cmd shell and the powershell shell\nthere\'s no need for ielixir and I\'ve removed it.\n\n3.) If you want me to modify the docs to specify ""iex.bat"" for Windows,\njust let me know.  I can do a PR when I get a chance.\n\n4.) I\'ve uploaded the 1.1.0-rc0 CNG package to CNG.  I may make an\nannouncement later but I sometimes think people get tired of hearing me\nannounce things :)\n\n--\nOnorio', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'josevalim', 'comment_id': 140744832.0, 'datetime': '2015-09-16 13:37:49+00:00', 'masked_author': 'username_1', 'text': '3.) If you want me to modify the docs to specify ""iex.bat"" for Windows,\njust let me know. I can do a PR when I get a chance.\n\nWe already do this but maybe we should be clearer.\nI don\'t know what to change though.\n\nThanks for all the changes and improvements Onorio!', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'OnorioCatenacci', 'comment_id': 140747172.0, 'datetime': '2015-09-16 13:47:36+00:00', 'masked_author': 'username_2', 'text': 'I\'m always glad to do what I can to help Jose.\n\nTake a look at my announcement of the CNG package on Elixir Lang Talk.  We\nneed to explicitly document that someone needs to type the string ""iex.bat""\nat a command prompt because on Windows normally you can run a batch file\nwithout having to type the extension.  That is a Windows user would expect\nto type ""iex"" (no extension) and have it run iex.bat.  We\'ve just changed\nit such that someone will need to type ""iex.bat"" (with the extension).\nIt\'s down to making it clear that they will need to type the extension\nwhich they normally wouldn\'t.\n\n--\nOnorio', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'BruceEckel', 'comment_id': 140802499.0, 'datetime': '2015-09-16 16:55:05+00:00', 'masked_author': 'username_0', 'text': 'The path length appears to be 2047, with 4095 for Windows 7 and later:\nhttps://software.intel.com/en-us/articles/limitation-to-the-length-of-the-system-path-variable\n\nI\'m not suggesting whether it be iex or ielixir; just that, once the user\ndoes an installation, whatever the documentation says should work without\nadditional adjustments to the path.\n\n\n-- Bruce Eckel\nwww.MindviewInc.com <http://www.mindviewinc.com/>\nBlog: username_0.github.io\nwww.WinterTechForum.com\nwww.AtomicScala.com\nwww.Reinventing-Business.com\nhttp://www.TrustOrganizations.com <http://www.ScalaSummit.com>\n\n\nOn Wed, Sep 16, 2015 at 7:47 AM, Onorio Catenacci <hzdkv@example.com>\nwrote:\n\n> I\'m always glad to do what I can to help Jose.\n>\n> Take a look at my announcement of the CNG package on Elixir Lang Talk. We\n> need to explicitly document that someone needs to type the string ""iex.bat""\n> at a command prompt because on Windows normally you can run a batch file\n> without having to type the extension. That is a Windows user would expect\n> to type ""iex"" (no extension) and have it run iex.bat. We\'ve just changed\n> it such that someone will need to type ""iex.bat"" (with the extension).\n> It\'s down to making it clear that they will need to type the extension\n> which they normally wouldn\'t.\n>\n> --\n> Onorio\n>\n>\n>', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'OnorioCatenacci', 'comment_id': 140866043.0, 'datetime': '2015-09-16 19:43:22+00:00', 'masked_author': 'username_2', 'text': 'Wow--I guess that shows how long I\'ve been working on Windows.  That about\nonly 256 chars may even go back to the days of DOS. Good to know that about\nthe path.\n\nRegardless the CNG package for Elixir 1.1.0-rc.0 now contains a shortcut to\niex.bat.  But you will need to type ""iex.bat"" (with the file extension) to\nstart it.  But it\'s not finished just yet (there are some problems that I\nknow about) and I hope to have it all fixed up for the Elixir 1.1.0 final\nCNG package.\n\n\nOn Wed, Sep 16, 2015 at 12:55 PM, Bruce Eckel <efpyi@example.com>\nwrote:\n\n> The path length appears to be 2047, with 4095 for Windows 7 and later:\n>\n> https://software.intel.com/en-us/articles/limitation-to-the-length-of-the-system-path-variable\n>\n> I\'m not suggesting whether it be iex or ielixir; just that, once the user\n> does an installation, whatever the documentation says should work without\n> additional adjustments to the path.\n>\n>\n> -- Bruce Eckel\n> www.MindviewInc.com <http://www.mindviewinc.com/>\n> Blog: username_0.github.io\n> www.WinterTechForum.com\n> www.AtomicScala.com\n> www.Reinventing-Business.com\n> http://www.TrustOrganizations.com <http://www.ScalaSummit.com>\n>\n>\n> On Wed, Sep 16, 2015 at 7:47 AM, Onorio Catenacci <\n> efpyi@example.com>\n> wrote:\n>\n> > I\'m always glad to do what I can to help Jose.\n> >\n> > Take a look at my announcement of the CNG package on Elixir Lang Talk. We\n> > need to explicitly document that someone needs to type the string\n> ""iex.bat""\n> > at a command prompt because on Windows normally you can run a batch file\n> > without having to type the extension. That is a Windows user would expect\n> > to type ""iex"" (no extension) and have it run iex.bat. We\'ve just changed\n> > it such that someone will need to type ""iex.bat"" (with the extension).\n> > It\'s down to making it clear that they will need to type the extension\n> > which they normally wouldn\'t.\n> >\n> > --\n> > Onorio\n> >\n> >\n> >', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'OnorioCatenacci', 'comment_id': 150308630.0, 'datetime': '2015-10-22 18:07:40+00:00', 'masked_author': 'username_2', 'text': 'For whatever it\'s worth, I just discovered why Bruce and I found such\ndifferent numbers.  The absolute path to a specific file in Windows can\nnever be more than 260 characters.\nhttps://msdn.microsoft.com/en-us/library/aa365247(VS.85).aspx#maxpath  (The\nMAX_PATH constant in the Windows API) This is what I was thinking of when I\nmentioned the limit on path length.  As far as I can tell this still holds\nwith Windows 10 for whatever it\'s worth.\n\nBruce is right in that the length limit of the PATH environment variable is\nmuch more than 260 characters and, of course, it\'s referring to something\ntotally different. It was my misremembering of the Windows API that led me\nto mistakenly believe that the same limitation would apply on the\nenvironment variable.\n\nIt\'s really sort of beside the point in this discussion anyway but I add\nthis note here for future reference.  It seems that we were both sort of\nright but Bruce was more right than I in this context. It\'s a moot question\nanyway since I\'ve modified the CNG installer to put Elixir in the path\nanyway.\n\n\n\nOn Wed, Sep 16, 2015 at 12:55 PM, Bruce Eckel <dycjh@example.com>\nwrote:\n\n> The path length appears to be 2047, with 4095 for Windows 7 and later:\n>\n> https://software.intel.com/en-us/articles/limitation-to-the-length-of-the-system-path-variable\n>\n> I\'m not suggesting whether it be iex or ielixir; just that, once the user\n> does an installation, whatever the documentation says should work without\n> additional adjustments to the path.\n>\n>\n> -- Bruce Eckel\n> www.MindviewInc.com <http://www.mindviewinc.com/>\n> Blog: username_0.github.io\n> www.WinterTechForum.com\n> www.AtomicScala.com\n> www.Reinventing-Business.com\n> http://www.TrustOrganizations.com <http://www.ScalaSummit.com>\n>\n>\n> On Wed, Sep 16, 2015 at 7:47 AM, Onorio Catenacci <\n> dycjh@example.com>\n> wrote:\n>\n> > I\'m always glad to do what I can to help Jose.\n> >\n> > Take a look at my announcement of the CNG package on Elixir Lang Talk. We\n> > need to explicitly document that someone needs to type the string\n> ""iex.bat""\n> > at a command prompt because on Windows normally you can run a batch file\n> > without having to type the extension. That is a Windows user would expect\n> > to type ""iex"" (no extension) and have it run iex.bat. We\'ve just changed\n> > it such that someone will need to type ""iex.bat"" (with the extension).\n> > It\'s down to making it clear that they will need to type the extension\n> > which they normally wouldn\'t.\n> >\n> > --\n> > Onorio\n> >\n> >\n> >', 'title': None, 'type': 'comment'}
+ {'action': 'closed', 'author': 'josevalim', 'comment_id': None, 'datetime': '2015-11-28 19:22:33+00:00', 'masked_author': 'username_1', 'text': '', 'title': None, 'type': 'issue'}]","<issue_start><issue_comment>Title: iex should apparently be called ielixir in the docs
+username_0: On the page http://elixir-lang.org/getting-started/introduction.html (and I assume other pages) it refers to iex. When I installed elixir using chocolatey, iex was not on my path, but ielixir was.
+<issue_comment>username_1: Thank you @username_0!
+
+@onoriocatenacci can you please confirm this is indeed the way to go?
+<issue_comment>username_2: Hi Jose and Bruce,
+
+Actually it's up to you Jose.  I didn't get rid of iex on Windows; I simply added ielixir as a shortcut for the iex.bat file.  That is the only file that I aliased because it's the only one that presents a problem with Powershell.  I mean to say that a person can use the ielixir shortcut from either a powershell terminal window or the old windows cmd terminal window but you can't type ""iex"" in the Powershell window--you need to type iex.bat.  So I added ielixir as an alternative for that case. 
+
+It only applies when someone downloads the ChocolateyNuGet package and it is just a secondary shortcut; iex.bat and the rest all still work.  I think I can add iex.bat to the path as well--I say ""I think"" because of the Windows shimming technology I'm using to add the shortcut to ielixir.  I can double check this.
+
+I could swear that I had sent something to the Elixir-Lang-Talk mailing list mentioning this additional shortcut but I can't seem to find it now.
+
+At any rate, this is just a secondary shortcut that I added to the ChocolateyNuGet package--it only applies on Windows and it only applies when someone has run the CNG installer.  And, as I say, I'm not forcing anyone to use ielixir; it's there solely as a convenience for those who want to run Powershell as their terminal console.
+
+What do you think Jose?  I can remove it (as I say I added it because Windows users should be using Powershell for a terminal and when you use Powershell for a terminal iex has a different meaning) or I can see if I can add iex to the path as well.  I could also document it if you want.  
+
+Just let me know how you want to proceed.  Sorry if this caused you any inconvenience Bruce!
+
+--
+Onorio
+<issue_comment>username_2: By the way Jose if you want me to add iex.bat (and the rest) to the path, I should be able to make that change when I upload the 1.1.0-rc0 CNG package which I should have within the next day or two.
+<issue_comment>username_0: Either way, but if the docs say ""iex"" and it doesn't work for the
+chocolatey people (who, I suspect, are expecting a simple install), then it
+can potentially turn some people away. I use the out-of-the-box experience
+as part of a litmus test, so I think it's important.
+
+
+-- Bruce Eckel
+www.MindviewInc.com <http://www.mindviewinc.com/>
+Blog: username_0.github.io
+www.WinterTechForum.com
+www.AtomicScala.com
+www.Reinventing-Business.com
+http://www.TrustOrganizations.com <http://www.ScalaSummit.com>
+
+
+On Tue, Sep 15, 2015 at 4:36 PM,
+<issue_comment>username_1: Thank you @username_2! Don't worry, you did everything perfect.
+
+@username_0 we say `iex.bat` the first time we run iex: http://elixir-lang.org/getting-started/introduction.html
+
+Which part was confusing or unclear? Should we have a large disclaimer?
+<issue_comment>username_2: I'll write this up partially to explain my thinking and partially so it's
+documented.
+
+1.) Totally agree that out of the box experience is very important.  But
+what I've struggled with is what constitutes ""out of the box"" when someone
+is installing from Chocolatey NuGet (CNG).  You can run CNG from either the
+terminal window that comes up when you run cmd (cmd_shell) or the terminal
+window that comes up when you run powershell (ps_shell).  At the cmd_shell
+typing _iex_ if iex.bat is in the path and the erlang runtime is in the
+path will work exactly as expected.  But in the ps_shell (and CNG is a
+bunch of powershell scripts) typing _iex_ will not start iex.bat but
+instead will run the ""Invoke-Expression"" cmdlet.
+
+Now for most windows apps, you wouldn't even have to start a terminal
+window--you'd have a shortcut on the desktop or something on the start menu
+or something like that.  But elixir is something that developers (as
+opposed to general end-users) use so starting a command line isn't so much
+of an issue.  But, as I say, which command line?  cmd_shell or
+ps_shell--especially as I say, given that CNG is a bunch of PS scripts and
+given that the most likely person to install the Elixir CNG package is a
+developer who might prefer ps_shell over cmd_shell.
+
+2.) I don't know about other Windows users but for me, I don't want
+applications automatically adding themselves to my path.  This is for two
+reasons:
+
+a.) This is my development machine; I don't want the environment changed
+unless I change it myself.  Could cause me problems with my development
+work.
+
+b.) The path can only be 256 characters long and every app that adds itself
+to the path is taking up space in that 256 characters.
+
+Hence I felt that even though the out of the box experience would suffer, I
+would avoid automatically appending either Erlang or Elixir's binary
+directories to the path.  As I say, again, I'm inclined to believe that
+most of the folks looking at Elixir via CNG are developers and while it's a
+bit annoying not to have ""iex"" work out of the box, since they are
+developers I would hope they can understand the reasoning. I guess I have
+been a bit lax about documenting the reasoning for the choice and
+explaining what someone needs to do in order to get it so that ""iex"" works
+as expected at a cmd_shell prompt.
+
+3.) As I say since I primarily use the ps_shell, I got tired of forgetting
+to type ""iex.bat"" as opposed to ""iex"" so I created the ""ielixir"" shortcut
+so I wouldn't keep forgetting.  I added it to the CNG package as a
+convenience for others. But it was an addition; the behavior of iex in
+relation to Windows is exactly the same as it was before.  That is someone
+still needs to add the Erlang and Elixir binary directories to their path
+themselves if they want to run ""iex.bat"" in the ps_shell.  As I say this is
+because I'm guessing that most people looking at this are developers.
+
+4.) I think I should probably make a PR to supplement the docs to explain
+exactly what I explained above since this question seems to come up all the
+time for those who install the CNG version to play with Elixir.
+
+So having said all that, if you want Jose, I can modify the 1.1.0-rc0 CNG
+package to add a shimmed shortcut to iex.bat to the path.  But the problem
+with ps_shell will still remain.  And it has been my impression that there
+are a lot of sysadmins who are converting to using ps_shell (as opposed to
+cmd_shell) on a more regular basis because the scripting language in
+ps_shell is a lot more powerful than the old Windows batch files.
+
+If you want me to do a PR for the docs to document my choices for the CNG
+package, just let me know.  I'm happy to write this up.  Or maybe a FAQ on
+the install packages or something of that sort.  This question about ""iex""
+not working seems to come up almost as often as why strings are displayed
+for lists of chars and why values can be _seemingly_ rebound.
+<issue_comment>username_1: For Windows, we will always tell users to use `iex.bat`. I believe this is orthogonal to the Chocolatey discussion because that's the only way afaik to run Elixir across all windows shells and installers. That's problem 1: make it clear that Windows users need to run `iex.bat`.
+
+Problem 2: should Chocolatey add things to my PATH, regardless if `iex.bat` or `ielixir`? That's not up to me to answer. I think you should just follow Chocolatey best practices here and Chocolatey users will be aware of what should be done. If we want to keep it as is, without copying, then may be should add a tiny note to the install page under the Chocolatey instructions that says: ""Elixir executables are not added to your PATH automatically. Do x, y, z to add them"".
+<issue_comment>username_2: Ok Jose that makes good sense to me. I can modify the CNG installer, as I
+say, when I create the package for 1.1.0-rc0--which should be today around
+my lunchtime. :)
+<issue_comment>username_2: Ok, just to put a final conclusion on this discussion:
+
+1.) I've modified the Elixir 1.1.0-rc0 installer to create a shortcut to
+""iex.bat"" and I've modified the installer to insure that people are told
+they need to type ""iex.bat"" at the command prompt.
+
+2.) Since ""iex.bat"" works for both the cmd shell and the powershell shell
+there's no need for ielixir and I've removed it.
+
+3.) If you want me to modify the docs to specify ""iex.bat"" for Windows,
+just let me know.  I can do a PR when I get a chance.
+
+4.) I've uploaded the 1.1.0-rc0 CNG package to CNG.  I may make an
+announcement later but I sometimes think people get tired of hearing me
+announce things :)
+
+--
+Onorio
+<issue_comment>username_1: 3.) If you want me to modify the docs to specify ""iex.bat"" for Windows,
+just let me know. I can do a PR when I get a chance.
+
+We already do this but maybe we should be clearer.
+I don't know what to change though.
+
+Thanks for all the changes and improvements Onorio!
+<issue_comment>username_2: I'm always glad to do what I can to help Jose.
+
+Take a look at my announcement of the CNG package on Elixir Lang Talk.  We
+need to explicitly document that someone needs to type the string ""iex.bat""
+at a command prompt because on Windows normally you can run a batch file
+without having to type the extension.  That is a Windows user would expect
+to type ""iex"" (no extension) and have it run iex.bat.  We've just changed
+it such that someone will need to type ""iex.bat"" (with the extension).
+It's down to making it clear that they will need to type the extension
+which they normally wouldn't.
+
+--
+Onorio
+<issue_comment>username_0: The path length appears to be 2047, with 4095 for Windows 7 and later:
+https://software.intel.com/en-us/articles/limitation-to-the-length-of-the-system-path-variable
+
+I'm not suggesting whether it be iex or ielixir; just that, once the user
+does an installation, whatever the documentation says should work without
+additional adjustments to the path.
+
+
+-- Bruce Eckel
+www.MindviewInc.com <http://www.mindviewinc.com/>
+Blog: username_0.github.io
+www.WinterTechForum.com
+www.AtomicScala.com
+www.Reinventing-Business.com
+http://www.TrustOrganizations.com <http://www.ScalaSummit.com>
+
+
+On Wed, Sep 16, 2015 at 7:47 AM, Onorio Catenacci <notifications@github.com>
+wrote:
+
+> I'm always glad to do what I can to help Jose.
+>
+> Take a look at my announcement of the CNG package on Elixir Lang Talk. We
+> need to explicitly document that someone needs to type the string ""iex.bat""
+> at a command prompt because on Windows normally you can run a batch file
+> without having to type the extension. That is a Windows user would expect
+> to type ""iex"" (no extension) and have it run iex.bat. We've just changed
+> it such that someone will need to type ""iex.bat"" (with the extension).
+> It's down to making it clear that they will need to type the extension
+> which they normally wouldn't.
+>
+> --
+> Onorio
+>
+>
+>
+<issue_comment>username_2: Wow--I guess that shows how long I've been working on Windows.  That about
+only 256 chars may even go back to the days of DOS. Good to know that about
+the path.
+
+Regardless the CNG package for Elixir 1.1.0-rc.0 now contains a shortcut to
+iex.bat.  But you will need to type ""iex.bat"" (with the file extension) to
+start it.  But it's not finished just yet (there are some problems that I
+know about) and I hope to have it all fixed up for the Elixir 1.1.0 final
+CNG package.
+
+
+On Wed, Sep 16, 2015 at 12:55 PM, Bruce Eckel <notifications@github.com>
+wrote:
+
+> The path length appears to be 2047, with 4095 for Windows 7 and later:
+>
+> https://software.intel.com/en-us/articles/limitation-to-the-length-of-the-system-path-variable
+>
+> I'm not suggesting whether it be iex or ielixir; just that, once the user
+> does an installation, whatever the documentation says should work without
+> additional adjustments to the path.
+>
+>
+> -- Bruce Eckel
+> www.MindviewInc.com <http://www.mindviewinc.com/>
+> Blog: username_0.github.io
+> www.WinterTechForum.com
+> www.AtomicScala.com
+> www.Reinventing-Business.com
+> http://www.TrustOrganizations.com <http://www.ScalaSummit.com>
+>
+>
+> On Wed, Sep 16, 2015 at 7:47 AM, Onorio Catenacci <
+> notifications@github.com>
+> wrote:
+>
+> > I'm always glad to do what I can to help Jose.
+> >
+> > Take a look at my announcement of the CNG package on Elixir Lang Talk. We
+> > need to explicitly document that someone needs to type the string
+> ""iex.bat""
+> > at a command prompt because on Windows normally you can run a batch file
+> > without having to type the extension. That is a Windows user would expect
+> > to type ""iex"" (no extension) and have it run iex.bat. We've just changed
+> > it such that someone will need to type ""iex.bat"" (with the extension).
+> > It's down to making it clear that they will need to type the extension
+> > which they normally wouldn't.
+> >
+> > --
+> > Onorio
+> >
+> >
+> >
+<issue_comment>username_2: For whatever it's worth, I just discovered why Bruce and I found such
+different numbers.  The absolute path to a specific file in Windows can
+never be more than 260 characters.
+https://msdn.microsoft.com/en-us/library/aa365247(VS.85).aspx#maxpath  (The
+MAX_PATH constant in the Windows API) This is what I was thinking of when I
+mentioned the limit on path length.  As far as I can tell this still holds
+with Windows 10 for whatever it's worth.
+
+Bruce is right in that the length limit of the PATH environment variable is
+much more than 260 characters and, of course, it's referring to something
+totally different. It was my misremembering of the Windows API that led me
+to mistakenly believe that the same limitation would apply on the
+environment variable.
+
+It's really sort of beside the point in this discussion anyway but I add
+this note here for future reference.  It seems that we were both sort of
+right but Bruce was more right than I in this context. It's a moot question
+anyway since I've modified the CNG installer to put Elixir in the path
+anyway.
+
+
+
+On Wed, Sep 16, 2015 at 12:55 PM, Bruce Eckel <notifications@github.com>
+wrote:
+
+> The path length appears to be 2047, with 4095 for Windows 7 and later:
+>
+> https://software.intel.com/en-us/articles/limitation-to-the-length-of-the-system-path-variable
+>
+> I'm not suggesting whether it be iex or ielixir; just that, once the user
+> does an installation, whatever the documentation says should work without
+> additional adjustments to the path.
+>
+>
+> -- Bruce Eckel
+> www.MindviewInc.com <http://www.mindviewinc.com/>
+> Blog: username_0.github.io
+> www.WinterTechForum.com
+> www.AtomicScala.com
+> www.Reinventing-Business.com
+> http://www.TrustOrganizations.com <http://www.ScalaSummit.com>
+>
+>
+> On Wed, Sep 16, 2015 at 7:47 AM, Onorio Catenacci <
+> notifications@github.com>
+> wrote:
+>
+> > I'm always glad to do what I can to help Jose.
+> >
+> > Take a look at my announcement of the CNG package on Elixir Lang Talk. We
+> > need to explicitly document that someone needs to type the string
+> ""iex.bat""
+> > at a command prompt because on Windows normally you can run a batch file
+> > without having to type the extension. That is a Windows user would expect
+> > to type ""iex"" (no extension) and have it run iex.bat. We've just changed
+> > it such that someone will need to type ""iex.bat"" (with the extension).
+> > It's down to making it clear that they will need to type the extension
+> > which they normally wouldn't.
+> >
+> > --
+> > Onorio
+> >
+> >
+> ><issue_closed>"
+jscraftcamp/website,349728490,538,,"[{'action': 'opened', 'author': 'wolframkriesing', 'comment_id': None, 'datetime': '2018-08-11 11:45:38+00:00', 'masked_author': 'username_0', 'text': ""## Why food?\r\n\r\nNo Food, no craftsmanship! Even the best people/coder need a full stomach - help us get some delicious energy-restorings for our guests. Of course as a sponsor you can either have a say in what to serve or you can leave it completely up to us to choose the right developers nutriment. And last year we got them all fed, so it's not as hard as it sounds :).\r\n\r\n## How does it work?\r\n\r\nLast year we asked some food companies for offers and had the sponsor confirm that amount up front. Once the food was delivered on the day the sponsor pulled out the credit card and made all attendees happy by enabling them to fill up their stomaches. And boy, they had been happier and their energy levels had been restored and they went for another half a day ... [until the party][party].\r\n\r\n[party]: https://github.com/jscraftcamp/website/issues/201"", 'title': 'Sponsor needed for lunch on Friday 🍱 🍔 🍕 🌮 🍇', 'type': 'issue'}
+ {'action': 'created', 'author': 'martinlechner1', 'comment_id': 477586789.0, 'datetime': '2019-03-28 13:07:12+00:00', 'masked_author': 'username_1', 'text': 'Hi,\r\nScout24 can most likely take care about lunch sponsorship. Could you contact me via mail: ychag@example.com\r\nBest,\r\nMartin', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'c-stoeckl', 'comment_id': 490972755.0, 'datetime': '2019-05-09 16:23:46+00:00', 'masked_author': 'username_2', 'text': 'Hi! :)\r\nSince you moved this to in discussion again:\r\nIf you are still looking for a food sponsor we (Hetzner Cloud) would also be happy to take care of this.', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'wolframkriesing', 'comment_id': 492352972.0, 'datetime': '2019-05-14 18:23:42+00:00', 'masked_author': 'username_0', 'text': '@username_2 awesome that you ping us, thanks a lot. Oh yes, we are looking for a sponsor for this again. We would love to have Hetzner Cloud take this.', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'wolframkriesing', 'comment_id': 492365944.0, 'datetime': '2019-05-14 18:58:28+00:00', 'masked_author': 'username_0', 'text': '@username_2 can you please provide the logo we can use on the website, ideally it should have a transparent background', 'title': None, 'type': 'comment'}
+ {'action': 'closed', 'author': 'wolframkriesing', 'comment_id': None, 'datetime': '2019-05-14 20:05:06+00:00', 'masked_author': 'username_0', 'text': '', 'title': None, 'type': 'issue'}]","<issue_start><issue_comment>Title: Sponsor needed for lunch on Friday 🍱 🍔 🍕 🌮 🍇
+username_0: ## Why food?
+
+No Food, no craftsmanship! Even the best people/coder need a full stomach - help us get some delicious energy-restorings for our guests. Of course as a sponsor you can either have a say in what to serve or you can leave it completely up to us to choose the right developers nutriment. And last year we got them all fed, so it's not as hard as it sounds :).
+
+## How does it work?
+
+Last year we asked some food companies for offers and had the sponsor confirm that amount up front. Once the food was delivered on the day the sponsor pulled out the credit card and made all attendees happy by enabling them to fill up their stomaches. And boy, they had been happier and their energy levels had been restored and they went for another half a day ... [until the party][party].
+
+[party]: https://github.com/jscraftcamp/website/issues/201
+<issue_comment>username_1: Hi,
+Scout24 can most likely take care about lunch sponsorship. Could you contact me via mail: martin.lechner@scout24.com
+Best,
+Martin
+<issue_comment>username_2: Hi! :)
+Since you moved this to in discussion again:
+If you are still looking for a food sponsor we (Hetzner Cloud) would also be happy to take care of this.
+<issue_comment>username_0: @username_2 awesome that you ping us, thanks a lot. Oh yes, we are looking for a sponsor for this again. We would love to have Hetzner Cloud take this.
+<issue_comment>username_0: @username_2 can you please provide the logo we can use on the website, ideally it should have a transparent background<issue_closed>"
+ethereum/ethereum-org-website,1081734251,4792,"{'number': 4792.0, 'repo': 'ethereum-org-website', 'user_login': 'ethereum'}","[{'action': 'opened', 'author': 'wackerow', 'comment_id': None, 'datetime': '2021-12-16T03:35:53Z', 'masked_author': 'username_0', 'text': '***\r\n### :zap: Changes\r\n- Re-add StatsBoxGrid component (#4789) @username_0\r\n- Support new report type from Crowdin for TranslationLeaderboard (#4758) @corwintines\r\n- Remove StatsBoxGrid (#4787) @username_0\r\n- Updating Ethereum-on-ARM Repo URL (#4709) @0xOsprey\r\n- Fix stacking button elements in container [Fixes #4598] (#4696) @vluna\r\n- fix grammar in logging-events-smart-contracts doc (#4717) @bskrksyp9\r\n- Fix grammar in calling-a-smart-contract-from-javascript tutorial (#4718) @bskrksyp9\r\n- Update translation guide (#4775) @lukassim\r\n- Enforce sentence case on nav items (#4777) @minimalsm\r\n- Render StatsBoxGrid as a span [Fixes #4757] (#4779) @joneskj55\r\n- Add Calgary meetup to meetups list (#4782) @corwintines\r\n- Add citing article authors guidance to style-guide (#4773) @minimalsm\r\n- Fix client images to use `gatsby-plugin-image` format (#4764) @username_0\r\n- Update energy consumption page (#4776) @minimalsm\r\n- Refactor isMobile implementation in Tooltip component (#4771) @minimalsm\r\n- update further reading to include A rollup-centric ethereum roadmap (#4754) @MiConnell\r\n- Add Figment to the list of Ethereum APIs (#4769) @neewy\r\n- Refactor isMobile to separate function (#4604) @ShubhankarKG\r\n- Add translation support to MeetupList and UpcomingEventsList (#4728) @corwintines\r\n- Add Ethereum energy consumption page (#3650) @jmcook1186\r\n- Add Web3.Career job board to get-involved page (#4734) @AndreyAzimov\r\n- Fix typos in EVM developer docs (#4692) @jhonnyvianello\r\n- Add crypto mining pool scam section to /security [Fixes #4655] (#4681) @joneskj55\r\n- Sort meetup list (#4662) @amm98d\r\n- Adjust codeHash explanation (#4599) @mariahpickett\r\n- Add EF job listings (#4761) @samajammin\r\n- Add keys to list renders (#4751) @samajammin\r\n- Add DAO card information in community/online.md  (#4729) @corwintines\r\n- Add Architecture of a Web 3.0 application article (#4750) @samajammin\r\n- update withdraws -> withdrawals (#4735) @MiConnell\r\n\r\n## :globe_with_meridians: Translations\r\n\r\n- Update Ethereumonarm URL (#4785) @minimalsm\r\n- German: Homepage and Use Ethereum updated (#4748) @username_0\r\n- docs: update Simplified Chinese for intro-to-ethereum[skip ci] (#4689) @Adam23\r\n- Remove outdated learn pages (#4770) @minimalsm\r\n- Farsi: Homepage updated (#4749) @username_0\r\n- Dutch: Homepage updated (#4730) @username_0\r\n- Bulgarian: Homepage updated (#4736) @username_0\r\n- Ukrainian: Homepage updated (#4746) @username_0\r\n- Russian: Homepage updated (#4743) @username_0\r\n- Hungarian: Homepage updated (#4740) @username_0\r\n- Arabic: Homepage updated (#4723) @username_0\r\n- Indonesian: Homepage updated (#4731) @username_0\r\n- Portuguese: Homepage updated (#4732) @username_0\r\n- Slovak: Homepage updated (#4733) @username_0\r\n- Catalan: Homepage updated (#4737) @username_0\r\n- Croatian: Homepage updated (#4738) @username_0\r\n- Greek: Homepage updated (#4739) @username_0\r\n- Romanian: Homepage updated (#4741) @username_0\r\n- Japanese: Homepage updated (#4742) @username_0\r\n- Slovenian: Homepage updated (#4744) @username_0\r\n- Spanish: Homepage updated (#4745) @username_0\r\n\r\n## :house: Internal\r\n\r\n- Remove `gatsby-plugin-lodash` (#4788) @username_0\r\n- Adjust `relativePathStart` logic [Fixes #4710] (#4763) @username_0\r\n\r\n## :wrench: Tooling\r\n\r\n- Update suggest_wallet.md (#4719) @taxmeifyoucan\r\n\r\n## :package: Dependencies\r\n\r\n- Regenerate `yarn.lock` (#4790) @username_0\r\n- Remove `gatsby-plugin-lodash` (#4788) @username_0\r\n***\r\n### :unicorn: Contributors\r\nThank you @0xOsprey, @Adam23, @AndreyAzimov, @MiConnell, @ShubhankarKG, @amm98d, @bskrksyp9, @corwintines, @jhonnyvianello, @jmcook1186, @joneskj55, @lukassim, @mariahpickett, @minimalsm, @neewy, @samajammin, @taxmeifyoucan, @vluna and @username_0 for the contributions! :trophy:\r\n***', 'title': 'Deploy v3.2.0', 'type': 'issue'}]","<issue_start><issue_comment>Title: Deploy v3.2.0
+username_0: ***
+### :zap: Changes
+- Re-add StatsBoxGrid component (#4789) @username_0
+- Support new report type from Crowdin for TranslationLeaderboard (#4758) @corwintines
+- Remove StatsBoxGrid (#4787) @username_0
+- Updating Ethereum-on-ARM Repo URL (#4709) @0xOsprey
+- Fix stacking button elements in container [Fixes #4598] (#4696) @vluna
+- fix grammar in logging-events-smart-contracts doc (#4717) @bskrksyp9
+- Fix grammar in calling-a-smart-contract-from-javascript tutorial (#4718) @bskrksyp9
+- Update translation guide (#4775) @lukassim
+- Enforce sentence case on nav items (#4777) @minimalsm
+- Render StatsBoxGrid as a span [Fixes #4757] (#4779) @joneskj55
+- Add Calgary meetup to meetups list (#4782) @corwintines
+- Add citing article authors guidance to style-guide (#4773) @minimalsm
+- Fix client images to use `gatsby-plugin-image` format (#4764) @username_0
+- Update energy consumption page (#4776) @minimalsm
+- Refactor isMobile implementation in Tooltip component (#4771) @minimalsm
+- update further reading to include A rollup-centric ethereum roadmap (#4754) @MiConnell
+- Add Figment to the list of Ethereum APIs (#4769) @neewy
+- Refactor isMobile to separate function (#4604) @ShubhankarKG
+- Add translation support to MeetupList and UpcomingEventsList (#4728) @corwintines
+- Add Ethereum energy consumption page (#3650) @jmcook1186
+- Add Web3.Career job board to get-involved page (#4734) @AndreyAzimov
+- Fix typos in EVM developer docs (#4692) @jhonnyvianello
+- Add crypto mining pool scam section to /security [Fixes #4655] (#4681) @joneskj55
+- Sort meetup list (#4662) @amm98d
+- Adjust codeHash explanation (#4599) @mariahpickett
+- Add EF job listings (#4761) @samajammin
+- Add keys to list renders (#4751) @samajammin
+- Add DAO card information in community/online.md  (#4729) @corwintines
+- Add Architecture of a Web 3.0 application article (#4750) @samajammin
+- update withdraws -> withdrawals (#4735) @MiConnell
+
+## :globe_with_meridians: Translations
+
+- Update Ethereumonarm URL (#4785) @minimalsm
+- German: Homepage and Use Ethereum updated (#4748) @username_0
+- docs: update Simplified Chinese for intro-to-ethereum[skip ci] (#4689) @Adam23
+- Remove outdated learn pages (#4770) @minimalsm
+- Farsi: Homepage updated (#4749) @username_0
+- Dutch: Homepage updated (#4730) @username_0
+- Bulgarian: Homepage updated (#4736) @username_0
+- Ukrainian: Homepage updated (#4746) @username_0
+- Russian: Homepage updated (#4743) @username_0
+- Hungarian: Homepage updated (#4740) @username_0
+- Arabic: Homepage updated (#4723) @username_0
+- Indonesian: Homepage updated (#4731) @username_0
+- Portuguese: Homepage updated (#4732) @username_0
+- Slovak: Homepage updated (#4733) @username_0
+- Catalan: Homepage updated (#4737) @username_0
+- Croatian: Homepage updated (#4738) @username_0
+- Greek: Homepage updated (#4739) @username_0
+- Romanian: Homepage updated (#4741) @username_0
+- Japanese: Homepage updated (#4742) @username_0
+- Slovenian: Homepage updated (#4744) @username_0
+- Spanish: Homepage updated (#4745) @username_0
+
+## :house: Internal
+
+- Remove `gatsby-plugin-lodash` (#4788) @username_0
+- Adjust `relativePathStart` logic [Fixes #4710] (#4763) @username_0
+
+## :wrench: Tooling
+
+- Update suggest_wallet.md (#4719) @taxmeifyoucan
+
+## :package: Dependencies
+
+- Regenerate `yarn.lock` (#4790) @username_0
+- Remove `gatsby-plugin-lodash` (#4788) @username_0
+***
+### :unicorn: Contributors
+Thank you @0xOsprey, @Adam23, @AndreyAzimov, @MiConnell, @ShubhankarKG, @amm98d, @bskrksyp9, @corwintines, @jhonnyvianello, @jmcook1186, @joneskj55, @lukassim, @mariahpickett, @minimalsm, @neewy, @samajammin, @taxmeifyoucan, @vluna and @username_0 for the contributions! :trophy:
+***"
+grammyjs/website,1057305435,104,"{'number': 104.0, 'repo': 'website', 'user_login': 'grammyjs'}","[{'action': 'opened', 'author': 'rojserbest', 'comment_id': None, 'datetime': '2021-11-18T12:33:31Z', 'masked_author': 'username_0', 'text': '', 'title': 'Improvements', 'type': 'issue'}
+ {'action': 'created', 'author': 'rojserbest', 'comment_id': 973180464.0, 'datetime': '2021-11-18 19:19:20+00:00', 'masked_author': 'username_0', 'text': 'Some nice clicks made', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'rojserbest', 'comment_id': 973190631.0, 'datetime': '2021-11-18 19:32:51+00:00', 'masked_author': 'username_0', 'text': ""So here's our comment style, if I'm not wrong:\r\n - Starts with uppercase letter if the comment is a sentence.\r\n - Ends with a period if the comment is the sentence.\r\n - The above 2 styles aren't applied to inline comments.\r\n - Won't start with an uppercase letter or end with a period if the comment is not a sentence.\r\n \r\nWhen a comment is a sentence in this case? When it includes a verb."", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'KnorpelSenf', 'comment_id': 973283977.0, 'datetime': '2021-11-18 21:25:14+00:00', 'masked_author': 'username_1', 'text': 'Good job, you two!\r\n\r\n@username_0 please consider adding suggestions to a batch and then committing once. This will save us from having a bunch of similar commits, which makes it easier to review.\r\n\r\nWill review more thoroughly when out of draft state.', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'rojserbest', 'comment_id': 973766421.0, 'datetime': '2021-11-19 05:28:02+00:00', 'masked_author': 'username_0', 'text': 'Adding suggestions to my own changes?', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'KnorpelSenf', 'comment_id': 974004318.0, 'datetime': '2021-11-19 11:49:27+00:00', 'masked_author': 'username_1', 'text': 'When going through another person\'s review, instead of clicking ""commit suggestion"" 22 times, go to the files tab, then click ""add suggestion to batch"" 22 times, and perform a single commit that collects all changes.', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'rojserbest', 'comment_id': 974051237.0, 'datetime': '2021-11-19 13:00:48+00:00', 'masked_author': 'username_0', 'text': 'Thanks, got you!', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'KnorpelSenf', 'comment_id': 974812013.0, 'datetime': '2021-11-21 12:51:03+00:00', 'masked_author': 'username_1', 'text': ""@linbuxiao @username_2 it's sufficient if you review the few changes to the Chinese translations."", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'WingLim', 'comment_id': 974812671.0, 'datetime': '2021-11-21 12:55:39+00:00', 'masked_author': 'username_2', 'text': 'LGTM, but do I need to change the corresponding translation in this PR, or I can do it in #98 which I still working on.', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'KnorpelSenf', 'comment_id': 974813309.0, 'datetime': '2021-11-21 12:59:54+00:00', 'masked_author': 'username_1', 'text': ""Either way is fine. It's important that the translations are in sync _eventually_ (once all PRs are merged so to say), but other than that you can do it however it works best for you."", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'WingLim', 'comment_id': 974814012.0, 'datetime': '2021-11-21 13:04:14+00:00', 'masked_author': 'username_2', 'text': 'Great, I will sync the document in #98 , you can merge this PR first if it is done, this will not take too much time.', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'KnorpelSenf', 'comment_id': 974833987.0, 'datetime': '2021-11-21 15:09:20+00:00', 'masked_author': 'username_1', 'text': ""I'd still like to wait for @CalsiBotDev to review the changes before merging them."", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'rojserbest', 'comment_id': 974834432.0, 'datetime': '2021-11-21 15:11:23+00:00', 'masked_author': 'username_0', 'text': 'Same.', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'KnorpelSenf', 'comment_id': 975967905.0, 'datetime': '2021-11-22 22:19:28+00:00', 'masked_author': 'username_1', 'text': ""Thanks for another thorough review! @username_0 I'd apply every suggestion I didn't comment on, unless you have objections. They make sense to me."", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'KnorpelSenf', 'comment_id': 976423587.0, 'datetime': '2021-11-23 11:29:01+00:00', 'masked_author': 'username_1', 'text': ""There are a lot of nit-picks in here, so just be sure that you're enjoying micro-optimising language as much as I do. It should not feel like a waste of time to anyone :)\r\n\r\nI'll let you two decide on the exact conventions we use, and where to apply them. Just be sure to ping me once you agreed on stuff, so that I can\r\n- adapt to the new rules when writing future articles, and\r\n- make sure that both languages have the same code examples."", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'rojserbest', 'comment_id': 976549612.0, 'datetime': '2021-11-23 13:40:16+00:00', 'masked_author': 'username_0', 'text': 'Comment rules:\r\n - Start with an uppercase letter and include a period at the end if the comment included a sentence, this doesn\'t apply for inline comments.\r\n - Inline comments start with a lowercase and won\'t have periods in their end in any way.\r\n\r\nList rules:\r\n - List items have nothing in common between them, No need for "","".', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'rojserbest', 'comment_id': 976551113.0, 'datetime': '2021-11-23 13:41:21+00:00', 'masked_author': 'username_0', 'text': '@username_1, the above is everything so far.', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'rojserbest', 'comment_id': 976569313.0, 'datetime': '2021-11-23 13:54:16+00:00', 'masked_author': 'username_0', 'text': ""And we're not forced to follow those instructions everytime, we should follow them in regular times only. For example, if we needed to have more clarity somewhere, we can break them,"", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'KnorpelSenf', 'comment_id': 976606617.0, 'datetime': '2021-11-23 14:22:21+00:00', 'masked_author': 'username_1', 'text': 'Understood. Regarding lists, I tend to write sentences with an enumeration that is simply formatted as a list. Example:\r\n\r\ngrammY is\r\n- simple,\r\n- fast, and\r\n- powerful\r\n\r\nand therefore a good choice for your bot.\r\n\r\nWould you advise to rather break the rule, or to avoid such sentences?', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'rojserbest', 'comment_id': 976646608.0, 'datetime': '2021-11-23 14:42:11+00:00', 'masked_author': 'username_0', 'text': ""I don't know where you took that style from, but I haven't seen splitting a sentence with a list like you do throughout my life.\r\n\r\nI'd just write:\r\n\r\ngrammY is:\r\n - grammY\r\n - Simple\r\n - Fast\r\n - Powerful\r\n - Stunning"", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'rojserbest', 'comment_id': 980633999.0, 'datetime': '2021-11-27 14:09:04+00:00', 'masked_author': 'username_0', 'text': 'Thanks!', 'title': None, 'type': 'comment'}]","<issue_start><issue_comment>Title: Improvements
+username_0: 
+<issue_comment>username_0: Some nice clicks made
+<issue_comment>username_0: So here's our comment style, if I'm not wrong:
+ - Starts with uppercase letter if the comment is a sentence.
+ - Ends with a period if the comment is the sentence.
+ - The above 2 styles aren't applied to inline comments.
+ - Won't start with an uppercase letter or end with a period if the comment is not a sentence.
+ 
+When a comment is a sentence in this case? When it includes a verb.
+<issue_comment>username_1: Good job, you two!
+
+@username_0 please consider adding suggestions to a batch and then committing once. This will save us from having a bunch of similar commits, which makes it easier to review.
+
+Will review more thoroughly when out of draft state.
+<issue_comment>username_0: Adding suggestions to my own changes?
+<issue_comment>username_1: When going through another person's review, instead of clicking ""commit suggestion"" 22 times, go to the files tab, then click ""add suggestion to batch"" 22 times, and perform a single commit that collects all changes.
+<issue_comment>username_0: Thanks, got you!
+<issue_comment>username_1: @linbuxiao @username_2 it's sufficient if you review the few changes to the Chinese translations.
+<issue_comment>username_2: LGTM, but do I need to change the corresponding translation in this PR, or I can do it in #98 which I still working on.
+<issue_comment>username_1: Either way is fine. It's important that the translations are in sync _eventually_ (once all PRs are merged so to say), but other than that you can do it however it works best for you.
+<issue_comment>username_2: Great, I will sync the document in #98 , you can merge this PR first if it is done, this will not take too much time.
+<issue_comment>username_1: I'd still like to wait for @CalsiBotDev to review the changes before merging them.
+<issue_comment>username_0: Same.
+<issue_comment>username_1: Thanks for another thorough review! @username_0 I'd apply every suggestion I didn't comment on, unless you have objections. They make sense to me.
+<issue_comment>username_1: There are a lot of nit-picks in here, so just be sure that you're enjoying micro-optimising language as much as I do. It should not feel like a waste of time to anyone :)
+
+I'll let you two decide on the exact conventions we use, and where to apply them. Just be sure to ping me once you agreed on stuff, so that I can
+- adapt to the new rules when writing future articles, and
+- make sure that both languages have the same code examples.
+<issue_comment>username_0: Comment rules:
+ - Start with an uppercase letter and include a period at the end if the comment included a sentence, this doesn't apply for inline comments.
+ - Inline comments start with a lowercase and won't have periods in their end in any way.
+
+List rules:
+ - List items have nothing in common between them, No need for "","".
+<issue_comment>username_0: @username_1, the above is everything so far.
+<issue_comment>username_0: And we're not forced to follow those instructions everytime, we should follow them in regular times only. For example, if we needed to have more clarity somewhere, we can break them,
+<issue_comment>username_1: Understood. Regarding lists, I tend to write sentences with an enumeration that is simply formatted as a list. Example:
+
+grammY is
+- simple,
+- fast, and
+- powerful
+
+and therefore a good choice for your bot.
+
+Would you advise to rather break the rule, or to avoid such sentences?
+<issue_comment>username_0: I don't know where you took that style from, but I haven't seen splitting a sentence with a list like you do throughout my life.
+
+I'd just write:
+
+grammY is:
+ - grammY
+ - Simple
+ - Fast
+ - Powerful
+ - Stunning
+<issue_comment>username_0: Thanks!"

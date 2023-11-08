@@ -1,0 +1,414 @@
+kubernetes/website,464839266,15319,,"[{'action': 'opened', 'author': 'OJFord', 'comment_id': None, 'datetime': '2019-07-06 10:06:19+00:00', 'masked_author': 'username_0', 'text': ""**This is a Bug Report**\r\n\r\n<!--Required Information-->\r\n**Problem:**\r\n`local` is not given as a type of Persistent Volume:\r\nhttps://kubernetes.io/docs/concepts/storage/persistent-volumes/#types-of-persistent-volumes\r\n\r\nbut the example for `local` Volume is a PV:\r\nhttps://kubernetes.io/docs/concepts/storage/volumes/#local\r\n\r\n**Proposed Solution:**\r\n- Add `local` to types of PV\r\n- Modify Volume example to not be a PV: PV page suggests 'familiarity with volumes', but one of the simplest volume types to understand has a PV example\r\n\r\n**Page to Update:**\r\nhttps://kubernetes.io/docs/concepts/storage/persistent-volumes\r\nhttps://kubernetes.io/docs/concepts/storage/volumes\r\n\r\n<!--Optional Information (remove the comment tags around information you would like to include)-->\r\n<!--Kubernetes Version:-->\r\n\r\n<!--Additional Information:-->"", 'title': 'Confusing `local` docs: not given as PV type, but volume example is a PV', 'type': 'issue'}
+ {'action': 'created', 'author': 'sftim', 'comment_id': 511562632.0, 'datetime': '2019-07-15 20:44:27+00:00', 'masked_author': 'username_1', 'text': 'Thanks for the report\r\n/language en', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'OJFord', 'comment_id': 731425592.0, 'datetime': '2020-11-20 21:50:55+00:00', 'masked_author': 'username_0', 'text': ""@username_1 I'm not sure this bot is helpful here? What activity would there be? I reported it to try to be helpful, but I don't really 'care' about it in the sense that I have much motivation to keep removing these markers, but I assume it's still an issue, just not one that generates any discussion.\r\n\r\nJust commenting in case you have the power to add some magic `no-go-stale` label or something, I'll probably mute notifications now since they're just noise from my perspective (and I'm _trying_ to keep a better grip on notifications :slightly_smiling_face:).\r\n\r\nCheers.\r\n\r\n/remove-lifecycle stale"", 'title': None, 'type': 'comment'}]","<issue_start><issue_comment>Title: Confusing `local` docs: not given as PV type, but volume example is a PV
+username_0: **This is a Bug Report**
+
+<!--Required Information-->
+**Problem:**
+`local` is not given as a type of Persistent Volume:
+https://kubernetes.io/docs/concepts/storage/persistent-volumes/#types-of-persistent-volumes
+
+but the example for `local` Volume is a PV:
+https://kubernetes.io/docs/concepts/storage/volumes/#local
+
+**Proposed Solution:**
+- Add `local` to types of PV
+- Modify Volume example to not be a PV: PV page suggests 'familiarity with volumes', but one of the simplest volume types to understand has a PV example
+
+**Page to Update:**
+https://kubernetes.io/docs/concepts/storage/persistent-volumes
+https://kubernetes.io/docs/concepts/storage/volumes
+
+<!--Optional Information (remove the comment tags around information you would like to include)-->
+<!--Kubernetes Version:-->
+
+<!--Additional Information:-->
+<issue_comment>username_1: Thanks for the report
+/language en
+<issue_comment>username_0: @username_1 I'm not sure this bot is helpful here? What activity would there be? I reported it to try to be helpful, but I don't really 'care' about it in the sense that I have much motivation to keep removing these markers, but I assume it's still an issue, just not one that generates any discussion.
+
+Just commenting in case you have the power to add some magic `no-go-stale` label or something, I'll probably mute notifications now since they're just noise from my perspective (and I'm _trying_ to keep a better grip on notifications :slightly_smiling_face:).
+
+Cheers.
+
+/remove-lifecycle stale"
+pidcodes/pidcodes.github.com,941265372,659,"{'number': 659.0, 'repo': 'pidcodes.github.com', 'user_login': 'pidcodes'}","[{'action': 'opened', 'author': 'michaesc', 'comment_id': None, 'datetime': '2021-07-10T14:52:00Z', 'masked_author': 'username_0', 'text': 'We recently designed (not yet in production) a simpler version of a Monero hardware device, to be used by educators when teaching classes to those interested in getting started with cryptosecure electronics. To help define such devices (for example when connecting on a computer already connected to other devices) we request the new PID EDCA. Thank you!', 'title': 'Added 1209/EDCA for the educator version of a Monero hardware device', 'type': 'issue'}
+ {'action': 'created', 'author': 'michaesc', 'comment_id': 879740925.0, 'datetime': '2021-07-14 09:26:36+00:00', 'masked_author': 'username_0', 'text': 'The CERN OHL hardware source is in the **hardware** subdirectory of the following link:\r\n\r\nhttps://github.com/monero-project/kastelo/\r\n\r\nThis hardware is embedded and powered by a microcontroller, so there is no host software. The USB logic is implemented in firmware and is in an early state of development. The firmware source belongs in the **firmware** subdirectory of the same link.\r\n\r\nWe have a different firmware project (BSD licensed) that runs on the device as well, and it is here:\r\n\r\nhttps://github.com/m2049r/monerujo-hw/\r\n\r\nDoes that answer your question?', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'michaesc', 'comment_id': 889005055.0, 'datetime': '2021-07-29 10:34:47+00:00', 'masked_author': 'username_0', 'text': ""I hope my answer to 'where is the hardware source' was sufficient, and that we're able to use the PID soon. Thanks!"", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'tannewt', 'comment_id': 890418114.0, 'datetime': '2021-07-31 23:55:18+00:00', 'masked_author': 'username_1', 'text': 'I assume this PID is for the newer device. Until it is released, then please use a test PID.', 'title': None, 'type': 'comment'}]","<issue_start><issue_comment>Title: Added 1209/EDCA for the educator version of a Monero hardware device
+username_0: We recently designed (not yet in production) a simpler version of a Monero hardware device, to be used by educators when teaching classes to those interested in getting started with cryptosecure electronics. To help define such devices (for example when connecting on a computer already connected to other devices) we request the new PID EDCA. Thank you!
+<issue_comment>username_0: The CERN OHL hardware source is in the **hardware** subdirectory of the following link:
+
+https://github.com/monero-project/kastelo/
+
+This hardware is embedded and powered by a microcontroller, so there is no host software. The USB logic is implemented in firmware and is in an early state of development. The firmware source belongs in the **firmware** subdirectory of the same link.
+
+We have a different firmware project (BSD licensed) that runs on the device as well, and it is here:
+
+https://github.com/m2049r/monerujo-hw/
+
+Does that answer your question?
+<issue_comment>username_0: I hope my answer to 'where is the hardware source' was sufficient, and that we're able to use the PID soon. Thanks!
+<issue_comment>username_1: I assume this PID is for the newer device. Until it is released, then please use a test PID."
+flutter/website,335867691,1080,"{'number': 1080.0, 'repo': 'website', 'user_login': 'flutter'}","[{'action': 'opened', 'author': 'mrickard', 'comment_id': None, 'datetime': '2018-06-26T15:12:41Z', 'masked_author': 'username_0', 'text': 'Update to receiveBatteryLevel in Swift example to prevent this error on build: ""error: call to method \'receiveBatteryLevel\' in closure requires explicit \'self.\' to make capture semantics explicit.""  This affects both simulated and physical iOS devices in Swift-based apps.', 'title': 'Correcting Swift error in platform-channels.md', 'type': 'issue'}
+ {'action': 'created', 'author': 'mrickard', 'comment_id': 400348141.0, 'datetime': '2018-06-26 15:17:46+00:00', 'masked_author': 'username_0', 'text': ""I've signed the CLA."", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'Sfshaza', 'comment_id': 400379645.0, 'datetime': '2018-06-26 16:33:30+00:00', 'masked_author': 'username_1', 'text': 'Thanks for catching that, @username_0!', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'mrickard', 'comment_id': 400382569.0, 'datetime': '2018-06-26 16:40:19+00:00', 'masked_author': 'username_0', 'text': ""You're welcome, @username_1 !"", 'title': None, 'type': 'comment'}]","<issue_start><issue_comment>Title: Correcting Swift error in platform-channels.md
+username_0: Update to receiveBatteryLevel in Swift example to prevent this error on build: ""error: call to method 'receiveBatteryLevel' in closure requires explicit 'self.' to make capture semantics explicit.""  This affects both simulated and physical iOS devices in Swift-based apps.
+<issue_comment>username_0: I've signed the CLA.
+<issue_comment>username_1: Thanks for catching that, @username_0!
+<issue_comment>username_0: You're welcome, @username_1 !"
+blitz-js/blitzjs.com,835799953,416,"{'number': 416.0, 'repo': 'blitzjs.com', 'user_login': 'blitz-js'}","[{'action': 'opened', 'author': 'abuuzayr', 'comment_id': None, 'datetime': '2021-03-19T10:19:07Z', 'masked_author': 'username_0', 'text': ""Tailwind just released a spanking new experimental library for just-in-time compilations a few days ago: https://blog.tailwindcss.com/just-in-time-the-next-generation-of-tailwind-css\r\n\r\nFor me who's using an underpowered laptop, developing on blitzjs.com was quite a pain as any change I made would trigger a CSS recompilation and my browser would struggle to apply the large css bundle as we enabled quite a few variants (perhaps we don't even use all the enabled variants, but since V2 was a fork off the tailwind website.. we didn't look into removing the unused variants)\r\n\r\nWhile the library is experimental, I think it is sufficiently ready and will bring a lot of benefits by this simple small change. But of course, this is optional and we don't have to apply it if we don't want to :)"", 'title': 'Optional chore: Add and use @tailwindcss/jit', 'type': 'issue'}
+ {'action': 'created', 'author': 'JuanM04', 'comment_id': 802808703.0, 'datetime': '2021-03-19 12:46:24+00:00', 'masked_author': 'username_1', 'text': 'I did a quick benchmark and the results were amazing!\r\nWhen building the whole site, before it took 1m15s and now it takes 55s (-25%).\r\nBut, when running `yarn dev`, the time it takes to the first render went from 26s to 7s (-75%!!!!!!)', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'abuuzayr', 'comment_id': 802810103.0, 'datetime': '2021-03-19 12:49:10+00:00', 'masked_author': 'username_0', 'text': 'hahah thanks for the benchmark results @username_1 ! i wanted to do it too but i had no idea how.. now thats quantifiable', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'JuanM04', 'comment_id': 802811185.0, 'datetime': '2021-03-19 12:51:18+00:00', 'masked_author': 'username_1', 'text': 'It\'s not the best method, but when you run `yarn build` it says ""Done in XX at the end"", and to test the time to first render I just used a stopwatch :rofl:', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'abuuzayr', 'comment_id': 802815956.0, 'datetime': '2021-03-19 13:00:03+00:00', 'masked_author': 'username_0', 'text': 'if it works, it works! and i should stop overthinking about “the best way” 😝', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'flybayer', 'comment_id': 802885827.0, 'datetime': '2021-03-19 14:45:29+00:00', 'masked_author': 'username_2', 'text': 'woohoo!!', 'title': None, 'type': 'comment'}]","<issue_start><issue_comment>Title: Optional chore: Add and use @tailwindcss/jit
+username_0: Tailwind just released a spanking new experimental library for just-in-time compilations a few days ago: https://blog.tailwindcss.com/just-in-time-the-next-generation-of-tailwind-css
+
+For me who's using an underpowered laptop, developing on blitzjs.com was quite a pain as any change I made would trigger a CSS recompilation and my browser would struggle to apply the large css bundle as we enabled quite a few variants (perhaps we don't even use all the enabled variants, but since V2 was a fork off the tailwind website.. we didn't look into removing the unused variants)
+
+While the library is experimental, I think it is sufficiently ready and will bring a lot of benefits by this simple small change. But of course, this is optional and we don't have to apply it if we don't want to :)
+<issue_comment>username_1: I did a quick benchmark and the results were amazing!
+When building the whole site, before it took 1m15s and now it takes 55s (-25%).
+But, when running `yarn dev`, the time it takes to the first render went from 26s to 7s (-75%!!!!!!)
+<issue_comment>username_0: hahah thanks for the benchmark results @username_1 ! i wanted to do it too but i had no idea how.. now thats quantifiable
+<issue_comment>username_1: It's not the best method, but when you run `yarn build` it says ""Done in XX at the end"", and to test the time to first render I just used a stopwatch :rofl:
+<issue_comment>username_0: if it works, it works! and i should stop overthinking about “the best way” 😝
+<issue_comment>username_2: woohoo!!"
+TheOdinProject/theodinproject,231514187,560,"{'number': 560.0, 'repo': 'theodinproject', 'user_login': 'TheOdinProject'}","[{'action': 'opened', 'author': 'Demo318', 'comment_id': None, 'datetime': '2017-05-26T03:06:52Z', 'masked_author': 'username_0', 'text': 'Consolidate course descriptions from paragraphs into just a few lines.', 'title': 'Update course descriptions and short descriptions.', 'type': 'issue'}
+ {'action': 'created', 'author': 'KevinMulhern', 'comment_id': 304314085.0, 'datetime': '2017-05-26 15:33:53+00:00', 'masked_author': 'username_1', 'text': 'Hey @username_0, thanks for putting this together 😄 \r\n\r\nI\'ve read through the updated descriptions and think they are really good 👍 \r\n\r\nAfter reading through these while trying to put my self in the shoes of someone knew to development and Odin. I think we should take a slightly different approach to this though. I think theres 2 things we want to communicate with the descriptions.\r\n\r\n1. The courses at the moment are designed to be taken in order, if we could communicate how each course fits in to the overall picture that would be awesome.\r\n\r\n2. I think we should emphasise what the user will be able to do by the time they complete each course.\r\n\r\nSo with these in mind what about descriptions like these?\r\n\r\nWeb Development 101\r\n""To start things off, in this course you will get a quick hands-on overview for all the different parts of full stack development you\'ll use to build fully functioning web apps.""\r\n\r\nRuby Programming\r\n""Now that you\'ve got a got overview of how all the different pieces of web development fit together. Its time to deep dive into learning programming using Ruby, a versitile, powerful and beginner friendly language designed for programmer happiness.""\r\n\r\n...\r\n\r\nThis is definitely up for discussion though, what do you think?', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'Demo318', 'comment_id': 304322300.0, 'datetime': '2017-05-26 16:06:33+00:00', 'masked_author': 'username_0', 'text': '@username_1 Thanks for the feedback!\r\n\r\nI noticed elsewhere on the redesigned site that there\'s a ""choose your path"" emphasis. For this reason, I made descriptions as stand-alone as possible instead of one linking to the next. If we do want to emphasize the flow, we might want to also update the other mention so users are on the same page. Would you want this theme worked into both the short & long descriptions?\r\n\r\nAlso, I noticed in each \'new course\' section of seeds.rb there\'s a ""what you\'ll learn"" and ""what you\'ll build."" I thought it best not to double-up with listing those items in the description as well as wherever that other info will end up (keeping it DRY).\r\n\r\nIf the ""what you\'ll learn"" and ""what you\'ll build"" info won\'t be visible alongside the description, I can certainly add it in.', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'KevinMulhern', 'comment_id': 304328734.0, 'datetime': '2017-05-26 16:34:26+00:00', 'masked_author': 'username_1', 'text': 'Hey @username_0, ah of course I see 😄 \r\n\r\nWe plan on offering different paths in the future, we were very optimistic about how soon we could get that done though. So Ada designed that paths text on the homepage. We\'ve recently removed that text from the homepage https://github.com/TheOdinProject/theodinproject/issues/553 it hasn\'t been deployed to the staging server yet though.\r\n\r\nThe  ""what you\'ll learn"" and ""what you\'ll build."" stuff in the seeds file was used in the old design. We won\'t be using them at all in the new design. I forgot about those, I must create a new issue to remove them from the courses model. Thanks for bringing it to our attention 😄', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'Demo318', 'comment_id': 304330247.0, 'datetime': '2017-05-26 16:40:16+00:00', 'masked_author': 'username_0', 'text': ""@username_1 I appreciate the context. Super helpful!\r\n\r\nI'll refactor this over the weekend.\r\n\r\nShort Descriptions: I'll work in the logical flow, to emphasize moving from one subject to the next.\r\n\r\nLong Descriptions: I'll add in the what you'll learn and what you'll build.\r\n\r\nThanks!"", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'KevinMulhern', 'comment_id': 304333194.0, 'datetime': '2017-05-26 16:52:33+00:00', 'masked_author': 'username_1', 'text': ""Hey @username_0 I'm not sure if its worth spending time on the long descriptions, those are only used on individual [course pages](http://localhost:3000/courses/web-development-101) we might be getting rid of them soon. We need to discuss that in the next design review though.\r\n\r\nI think focusing on the brief descriptions is best for this ticket. \r\n\r\nSome sort of combination of the flow and what the student will be capable of when they complete each course is how I envisioned these descriptions.\r\n\r\nThis is the way I approached it\r\nImagining you're a new user to the site, as a new user you'll probably be exploring to see if the curriculum is for you are not. From that point of view you'll want to know how each part of the curriculum fits together and even more importantly what you will expect to be able to do by the end of the curriculum.\r\n\r\nMaybe this is the wrong way to think about it, I personally think the descriptions have more benefit to new users than existing users. As existing users will already have a good idea of whats in the curriculum."", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'Demo318', 'comment_id': 304333972.0, 'datetime': '2017-05-26 16:55:50+00:00', 'masked_author': 'username_0', 'text': '@username_1 Got it.\r\n\r\nWith focusing on just the brief descriptions, can you give me a ballpark character count? How short is too short? How long is too long? This will help me make a block of text that fits well with the rest of the layout.', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'KevinMulhern', 'comment_id': 304335157.0, 'datetime': '2017-05-26 17:00:39+00:00', 'masked_author': 'username_1', 'text': 'I think limiting it to about 3 lines would be ideal 😄 that will lower the resistance of users to read them and look better on mobile.', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'Demo318', 'comment_id': 304336087.0, 'datetime': '2017-05-26 17:04:22+00:00', 'masked_author': 'username_0', 'text': '@username_1 Cool. ~225 characters looks like this. \r\n\r\n![capture](https://cloud.githubusercontent.com/assets/18633311/26504751/725e7308-420b-11e7-95a4-1cc6a4e81c2f.PNG)\r\n\r\n\r\nIs that what you envision?', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'Demo318', 'comment_id': 304459169.0, 'datetime': '2017-05-27 15:32:50+00:00', 'masked_author': 'username_0', 'text': ""Thanks all for the feedback. Updated descriptions based on feedback from @username_1. I think JavaScript is still not exactly where it needs to be, but I hope we're close. Here are what they look like in the current design:\r\n\r\n![image](https://cloud.githubusercontent.com/assets/18633311/26522486/c183af54-42c7-11e7-82f2-41d7c110dbb1.png)\r\n![image](https://cloud.githubusercontent.com/assets/18633311/26522487/c52e1dba-42c7-11e7-9ce3-ee5a64dedcf2.png)\r\n![image](https://cloud.githubusercontent.com/assets/18633311/26522488/ca84ca98-42c7-11e7-8123-02de991da057.png)\r\n![image](https://cloud.githubusercontent.com/assets/18633311/26522490/cdd125ac-42c7-11e7-95b1-b306466c0aff.png)\r\n![image](https://cloud.githubusercontent.com/assets/18633311/26522491/d01ea302-42c7-11e7-84c6-c2c8e27f6c55.png)\r\n![image](https://cloud.githubusercontent.com/assets/18633311/26522492/d27696be-42c7-11e7-8f89-f7a5bc902837.png)"", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'KevinMulhern', 'comment_id': 304468033.0, 'datetime': '2017-05-27 18:14:00+00:00', 'masked_author': 'username_1', 'text': 'These are absolutely perfect @username_0 😍 \r\n\r\nThank you for doing this and all your patience with me 😄 \r\n\r\nLGTM 👍 👍 👍 👍', 'title': None, 'type': 'comment'}]","<issue_start><issue_comment>Title: Update course descriptions and short descriptions.
+username_0: Consolidate course descriptions from paragraphs into just a few lines.
+<issue_comment>username_1: Hey @username_0, thanks for putting this together 😄 
+
+I've read through the updated descriptions and think they are really good 👍 
+
+After reading through these while trying to put my self in the shoes of someone knew to development and Odin. I think we should take a slightly different approach to this though. I think theres 2 things we want to communicate with the descriptions.
+
+1. The courses at the moment are designed to be taken in order, if we could communicate how each course fits in to the overall picture that would be awesome.
+
+2. I think we should emphasise what the user will be able to do by the time they complete each course.
+
+So with these in mind what about descriptions like these?
+
+Web Development 101
+""To start things off, in this course you will get a quick hands-on overview for all the different parts of full stack development you'll use to build fully functioning web apps.""
+
+Ruby Programming
+""Now that you've got a got overview of how all the different pieces of web development fit together. Its time to deep dive into learning programming using Ruby, a versitile, powerful and beginner friendly language designed for programmer happiness.""
+
+...
+
+This is definitely up for discussion though, what do you think?
+<issue_comment>username_0: @username_1 Thanks for the feedback!
+
+I noticed elsewhere on the redesigned site that there's a ""choose your path"" emphasis. For this reason, I made descriptions as stand-alone as possible instead of one linking to the next. If we do want to emphasize the flow, we might want to also update the other mention so users are on the same page. Would you want this theme worked into both the short & long descriptions?
+
+Also, I noticed in each 'new course' section of seeds.rb there's a ""what you'll learn"" and ""what you'll build."" I thought it best not to double-up with listing those items in the description as well as wherever that other info will end up (keeping it DRY).
+
+If the ""what you'll learn"" and ""what you'll build"" info won't be visible alongside the description, I can certainly add it in.
+<issue_comment>username_1: Hey @username_0, ah of course I see 😄 
+
+We plan on offering different paths in the future, we were very optimistic about how soon we could get that done though. So Ada designed that paths text on the homepage. We've recently removed that text from the homepage https://github.com/TheOdinProject/theodinproject/issues/553 it hasn't been deployed to the staging server yet though.
+
+The  ""what you'll learn"" and ""what you'll build."" stuff in the seeds file was used in the old design. We won't be using them at all in the new design. I forgot about those, I must create a new issue to remove them from the courses model. Thanks for bringing it to our attention 😄
+<issue_comment>username_0: @username_1 I appreciate the context. Super helpful!
+
+I'll refactor this over the weekend.
+
+Short Descriptions: I'll work in the logical flow, to emphasize moving from one subject to the next.
+
+Long Descriptions: I'll add in the what you'll learn and what you'll build.
+
+Thanks!
+<issue_comment>username_1: Hey @username_0 I'm not sure if its worth spending time on the long descriptions, those are only used on individual [course pages](http://localhost:3000/courses/web-development-101) we might be getting rid of them soon. We need to discuss that in the next design review though.
+
+I think focusing on the brief descriptions is best for this ticket. 
+
+Some sort of combination of the flow and what the student will be capable of when they complete each course is how I envisioned these descriptions.
+
+This is the way I approached it
+Imagining you're a new user to the site, as a new user you'll probably be exploring to see if the curriculum is for you are not. From that point of view you'll want to know how each part of the curriculum fits together and even more importantly what you will expect to be able to do by the end of the curriculum.
+
+Maybe this is the wrong way to think about it, I personally think the descriptions have more benefit to new users than existing users. As existing users will already have a good idea of whats in the curriculum.
+<issue_comment>username_0: @username_1 Got it.
+
+With focusing on just the brief descriptions, can you give me a ballpark character count? How short is too short? How long is too long? This will help me make a block of text that fits well with the rest of the layout.
+<issue_comment>username_1: I think limiting it to about 3 lines would be ideal 😄 that will lower the resistance of users to read them and look better on mobile.
+<issue_comment>username_0: @username_1 Cool. ~225 characters looks like this. 
+
+![capture](https://cloud.githubusercontent.com/assets/18633311/26504751/725e7308-420b-11e7-95a4-1cc6a4e81c2f.PNG)
+
+
+Is that what you envision?
+<issue_comment>username_0: Thanks all for the feedback. Updated descriptions based on feedback from @username_1. I think JavaScript is still not exactly where it needs to be, but I hope we're close. Here are what they look like in the current design:
+
+![image](https://cloud.githubusercontent.com/assets/18633311/26522486/c183af54-42c7-11e7-82f2-41d7c110dbb1.png)
+![image](https://cloud.githubusercontent.com/assets/18633311/26522487/c52e1dba-42c7-11e7-9ce3-ee5a64dedcf2.png)
+![image](https://cloud.githubusercontent.com/assets/18633311/26522488/ca84ca98-42c7-11e7-8123-02de991da057.png)
+![image](https://cloud.githubusercontent.com/assets/18633311/26522490/cdd125ac-42c7-11e7-95b1-b306466c0aff.png)
+![image](https://cloud.githubusercontent.com/assets/18633311/26522491/d01ea302-42c7-11e7-84c6-c2c8e27f6c55.png)
+![image](https://cloud.githubusercontent.com/assets/18633311/26522492/d27696be-42c7-11e7-8f89-f7a5bc902837.png)
+<issue_comment>username_1: These are absolutely perfect @username_0 😍 
+
+Thank you for doing this and all your patience with me 😄 
+
+LGTM 👍 👍 👍 👍"
+kubernetes/website,162746735,747,,"[{'action': 'opened', 'author': 'danielromlein', 'comment_id': None, 'datetime': '2016-06-28T17:54:23Z', 'masked_author': 'username_0', 'text': '## About\n\nKubernetes is a complex product and we would like to be able to better explain its core concepts through use of visuals. A visual language composed of symbols and icons will enable the creation of illustrative diagrams.\n## Current State\n\nOnly symbols we have today are in the first five slides of this [Google Cloud Platform slide deck](https://docs.google.com/presentation/d/13klSkUQI9yPxKckP8UFLpzzKzxYwv1lit9ELWOnXJFM/edit#slide=id.p15) (if anyone has any others please share). \n## Proposal\n1. **Prioritize concepts** we want to have visualizations for. \n2. **Discuss possible representations for concepts & post sketches**. Loop in Google UX researchers for feedback.\n3. **Establish basic visual guidelines** for designs of different icons to adhere to as we expand the library. Symbols should be grounded in [Material Design System Icons](https://material.google.com/style/icons.html#icons-system-icons) principles (e.g. ""Bold, geometric, simple, intuitive, actionable, consistent""). The Slides of the [Google Cloud Platform visual language](https://docs.google.com/presentation/d/13klSkUQI9yPxKckP8UFLpzzKzxYwv1lit9ELWOnXJFM/edit#slide=id.p15) should be referenced as inspiration, but we\'re also not going out of our way to align with this style.\n4. **Design visually consistent vector (i.e. SVG) symbols**.\n\nBased on @bgrant0607\'s [proposed concepts](https://github.com/kubernetes/kubernetes.github.io/issues/84#issuecomment-226300701), I\'ve put together the following list of concepts to consider for visualization:\n- Pod\n- All types of services:\n  - Cluster\n  - Nodeport\n  - Loadbalancer\n  - Headless\n  - Imported\n- Ingress\n- EndPoint\n- Every controller:\n  - Replication Controller\n  - Replica Set\n  - Deployment\n  - DaemonSet\n  - PetSet\n  - Job\n  - ScheduledJob\n- Rolling update\n- Canary deployment pattern\n  - with ConfigMap\n- Horizontal Pod Autoscaling\n- ServiceAccount\n- Secret\n- Persistent Volumes and Persistent Volume Claims\n- System Architecture\n- Things we will need to diagram concepts and processes\n  - Virtual IP\n  - IP address\n  - Running Container\n  - Request / Response\n\nAs @pwittrock [pointed out](https://github.com/kubernetes/kubernetes.github.io/issues/84#issuecomment-228387857), we should focus first on designing visualizations for concepts, while keeping in mind how those visualizations will come together in more complex diagrams (e.g. _deployment_)\n## Reference\n- [Issue #84 – ""We need more diagrams!""](https://github.com/kubernetes/kubernetes.github.io/issues/84)\n- [Brian Grant _WSO2Con US 2015 Kubernetes_ Slides](http://www.slideshare.net/BrianGrant11/wso2con-us-2015-kubernetes-a-platform-for-automating-deployment-scaling-and-operations)\n- [Microsoft\'s Azure, Cloud and Enterprise Symbol / Icon Set](https://www.microsoft.com/en-us/download/details.aspx?id=41937)', 'title': 'Symbols for Diagrams', 'type': 'issue'}
+ {'action': 'created', 'author': 'Roderick-Jonsson', 'comment_id': 370798470.0, 'datetime': '2018-03-06 14:28:32+00:00', 'masked_author': 'username_1', 'text': '@username_0 I have done some diagrams which cover some concepts you mentioned. Here you have an example [PowerodIT - Blog - Kubernetes Patterns: Stateless Applications](https://powerodit.ch/2017/11/06/kubernetes-patterns-stateless-applications/). Is there still interest in pursuing this project from your side. Would be interested to have short chat with you about the project.', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'collinmangum', 'comment_id': 380245146.0, 'datetime': '2018-04-10 21:01:00+00:00', 'masked_author': 'username_2', 'text': '@username_0 @username_1 @username_3 I work at Lucidchart and since there are no official Kubernetes icons we are seriously looking to create an Icon pack. If there is anyone that would be interested in chatting with us about that let me know, we would love input from the community.', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'Roderick-Jonsson', 'comment_id': 380328815.0, 'datetime': '2018-04-11 05:08:44+00:00', 'masked_author': 'username_1', 'text': '@username_2 You guys where actually on my mind, great to hear from you. We are at the moment reviving the project. @username_0 has his meetings on [Thursdays](https://github.com/kubernetes/community/tree/master/sig-ui), how about we meet then to further discuss this opportunity?', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'Vlaaaaaaad', 'comment_id': 380348397.0, 'datetime': '2018-04-11 07:01:17+00:00', 'masked_author': 'username_3', 'text': ""@username_2: great initiative from Lucidchart! Not sure how much I can help, but I'm open for a chat.\r\n\r\nI'd prefer a more... minimalistic approach with simple lines, but that's me.\r\n\r\nI can say I really enjoyed the icons used in [this blog post](https://container-solutions.com/deployment-strategies/) by @username_4. A big hexagon for a pod and smaller ones for containers seem great. The hexagon motif is used in the _Kublr Control Plane_ section on [kublr](https://kublr.com/) too where an example of a detailed container/pod view can be seen."", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'etiennetremel', 'comment_id': 380377802.0, 'datetime': '2018-04-11 08:52:22+00:00', 'masked_author': 'username_4', 'text': 'Thanks @username_3, Container Solutions also helped with the diagrams used in the [Kubernetes basics tutorials](https://kubernetes.io/docs/tutorials/kubernetes-basics/)', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'Vlaaaaaaad', 'comment_id': 380379871.0, 'datetime': '2018-04-11 08:59:14+00:00', 'masked_author': 'username_3', 'text': ""@username_4 wow, those are great. Extending on them seems perfect.\r\n\r\nBTW, are the resources available anywhere? I'd love to use them."", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'etiennetremel', 'comment_id': 380444095.0, 'datetime': '2018-04-11 13:04:11+00:00', 'masked_author': 'username_4', 'text': 'There some of these resources available here: https://github.com/kubernetes/website/tree/master/docs/tutorials/kubernetes-basics/public/images', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'collinmangum', 'comment_id': 380495740.0, 'datetime': '2018-04-11 15:32:31+00:00', 'masked_author': 'username_2', 'text': ""Glad to hear of some excitement behind this project! @username_1 can you invite me to the Thursday meeting referenced and I'll get a few members of the Lucidchart team on the line with me so we can have some initial discussions?"", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'Roderick-Jonsson', 'comment_id': 380499170.0, 'datetime': '2018-04-11 15:42:06+00:00', 'masked_author': 'username_1', 'text': '@username_2 Great! I just took a look at the [SIG meeting calendar](https://kubernetes.io/community/) @username_0 will there be a meeting tomorrow?', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'Roderick-Jonsson', 'comment_id': 380766727.0, 'datetime': '2018-04-12 11:05:45+00:00', 'masked_author': 'username_1', 'text': ""@username_2 @username_0  Seems that there is no meeting slot for today.\r\nLet's make an open meeting next Thursday where everybody interested in getting this project of the ground is encouraged to join in :)"", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'collinmangum', 'comment_id': 380831578.0, 'datetime': '2018-04-12 14:46:20+00:00', 'masked_author': 'username_2', 'text': 'Sounds great, @username_1. I will watch for the meeting info and have some Lucidchart representation.', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'collinmangum', 'comment_id': 382144609.0, 'datetime': '2018-04-17 21:01:33+00:00', 'masked_author': 'username_2', 'text': ""@username_1 I'm not seeing a meeting slot on the calendar for Thursday. Is there one scheduled? Trying to ensure I can have some Lucidchart members join."", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'Roderick-Jonsson', 'comment_id': 382146996.0, 'datetime': '2018-04-17 21:08:56+00:00', 'masked_author': 'username_1', 'text': '@username_2 Sorry for the delay there seem to be changes going on. I am waiting for someone from the team opening the calendar entry. @username_0 @maciaszczykm @floreks', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'danielromlein', 'comment_id': 382162012.0, 'datetime': '2018-04-17 21:55:31+00:00', 'masked_author': 'username_0', 'text': ""@username_2 not sure where the calendar event went for SIG UI's weekly. For now, I've created a one-off meeting this [Thursday](https://calendar.google.com/event?action=TEMPLATE&tmeid=MHRuNTV1aXFxanY5bjU3c2I4OHU0YjVzZW1fMjAxODA0MTlUMTYwMDAwWiBkcm9tbGVpbkBnb29nbGUuY29t&tmsrc=dromlein%40google.com&scp=ALL) at the typical time so we can chat then. Thanks for your interest!"", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'collinmangum', 'comment_id': 382169254.0, 'datetime': '2018-04-17 22:03:08+00:00', 'masked_author': 'username_2', 'text': 'Great, thanks @username_0! Chat with you Thursday at 9am PT.', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'etiennecoutaud', 'comment_id': 390983920.0, 'datetime': '2018-05-22 13:10:22+00:00', 'masked_author': 'username_5', 'text': ""I'm not sure if it's the right place, but we worked on kubernetes symbols for diagrams.\r\n\r\nFeel free to use: [https://github.com/octo-technology/kubernetes-icons](https://github.com/octo-technology/kubernetes-icons)\r\n\r\nDo not hesitate to ask for help if needed."", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'dankohn', 'comment_id': 390994397.0, 'datetime': '2018-05-22 13:41:47+00:00', 'masked_author': 'username_6', 'text': 'I think these are great. If you wanted to contribute them to CNCF, we would be happy to host them, which may get them additional attention. Unless, perhaps, ContribEx wanted to host them in the Kubernetes project directly.\r\n\r\nCc @parispittman @username_7 @Phillels @thockin', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'etiennecoutaud', 'comment_id': 391006160.0, 'datetime': '2018-05-22 14:14:21+00:00', 'masked_author': 'username_5', 'text': ""It would be a pleasure to contribute them to CNCF.\r\n\r\nI'm waiting for ContribEx feedbacks"", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'castrojo', 'comment_id': 391081197.0, 'datetime': '2018-05-22 17:49:13+00:00', 'masked_author': 'username_7', 'text': 'cc @kubernetes/sig-architecture-feature-requests as I know their charter mentions documenting the k8s architecture and they might have an opinion on this. We could either create a new directory for it or put it under the sig-arch/ directory.', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'lucidanthony', 'comment_id': 391138695.0, 'datetime': '2018-05-22 20:59:07+00:00', 'masked_author': 'username_8', 'text': ""@username_5 these are excellent! @username_2 and I work for a diagramming company, [Lucidchart](https://www.lucidchart.com) (see mention earlier in this thread), and we've been looking for a canonical source of Kubernetes icons. Our goal is to turn them into a shape library so that people can use them to create Kubernetes architecture diagrams. We have similar shape libraries for AWS, GCP, and Azure today. \r\n\r\nWould you be open to our using these icons in a Kubernetes shape library?"", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'etiennecoutaud', 'comment_id': 391141549.0, 'datetime': '2018-05-22 21:09:19+00:00', 'masked_author': 'username_5', 'text': '@username_8 sure !', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'jdumars', 'comment_id': 391800251.0, 'datetime': '2018-05-24 17:41:54+00:00', 'masked_author': 'username_9', 'text': '+100 for a Lucidchart Kubernetes icon set.', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'idvoretskyi', 'comment_id': 391801114.0, 'datetime': '2018-05-24 17:44:58+00:00', 'masked_author': 'username_10', 'text': '+100 as well!\r\n\r\nGreat job!', 'title': None, 'type': 'comment'}]","<issue_start><issue_comment>Title: Symbols for Diagrams
+username_0: ## About
+
+Kubernetes is a complex product and we would like to be able to better explain its core concepts through use of visuals. A visual language composed of symbols and icons will enable the creation of illustrative diagrams.
+## Current State
+
+Only symbols we have today are in the first five slides of this [Google Cloud Platform slide deck](https://docs.google.com/presentation/d/13klSkUQI9yPxKckP8UFLpzzKzxYwv1lit9ELWOnXJFM/edit#slide=id.p15) (if anyone has any others please share). 
+## Proposal
+1. **Prioritize concepts** we want to have visualizations for. 
+2. **Discuss possible representations for concepts & post sketches**. Loop in Google UX researchers for feedback.
+3. **Establish basic visual guidelines** for designs of different icons to adhere to as we expand the library. Symbols should be grounded in [Material Design System Icons](https://material.google.com/style/icons.html#icons-system-icons) principles (e.g. ""Bold, geometric, simple, intuitive, actionable, consistent""). The Slides of the [Google Cloud Platform visual language](https://docs.google.com/presentation/d/13klSkUQI9yPxKckP8UFLpzzKzxYwv1lit9ELWOnXJFM/edit#slide=id.p15) should be referenced as inspiration, but we're also not going out of our way to align with this style.
+4. **Design visually consistent vector (i.e. SVG) symbols**.
+
+Based on @bgrant0607's [proposed concepts](https://github.com/kubernetes/kubernetes.github.io/issues/84#issuecomment-226300701), I've put together the following list of concepts to consider for visualization:
+- Pod
+- All types of services:
+  - Cluster
+  - Nodeport
+  - Loadbalancer
+  - Headless
+  - Imported
+- Ingress
+- EndPoint
+- Every controller:
+  - Replication Controller
+  - Replica Set
+  - Deployment
+  - DaemonSet
+  - PetSet
+  - Job
+  - ScheduledJob
+- Rolling update
+- Canary deployment pattern
+  - with ConfigMap
+- Horizontal Pod Autoscaling
+- ServiceAccount
+- Secret
+- Persistent Volumes and Persistent Volume Claims
+- System Architecture
+- Things we will need to diagram concepts and processes
+  - Virtual IP
+  - IP address
+  - Running Container
+  - Request / Response
+
+As @pwittrock [pointed out](https://github.com/kubernetes/kubernetes.github.io/issues/84#issuecomment-228387857), we should focus first on designing visualizations for concepts, while keeping in mind how those visualizations will come together in more complex diagrams (e.g. _deployment_)
+## Reference
+- [Issue #84 – ""We need more diagrams!""](https://github.com/kubernetes/kubernetes.github.io/issues/84)
+- [Brian Grant _WSO2Con US 2015 Kubernetes_ Slides](http://www.slideshare.net/BrianGrant11/wso2con-us-2015-kubernetes-a-platform-for-automating-deployment-scaling-and-operations)
+- [Microsoft's Azure, Cloud and Enterprise Symbol / Icon Set](https://www.microsoft.com/en-us/download/details.aspx?id=41937)
+<issue_comment>username_1: @username_0 I have done some diagrams which cover some concepts you mentioned. Here you have an example [PowerodIT - Blog - Kubernetes Patterns: Stateless Applications](https://powerodit.ch/2017/11/06/kubernetes-patterns-stateless-applications/). Is there still interest in pursuing this project from your side. Would be interested to have short chat with you about the project.
+<issue_comment>username_2: @username_0 @username_1 @username_3 I work at Lucidchart and since there are no official Kubernetes icons we are seriously looking to create an Icon pack. If there is anyone that would be interested in chatting with us about that let me know, we would love input from the community.
+<issue_comment>username_1: @username_2 You guys where actually on my mind, great to hear from you. We are at the moment reviving the project. @username_0 has his meetings on [Thursdays](https://github.com/kubernetes/community/tree/master/sig-ui), how about we meet then to further discuss this opportunity?
+<issue_comment>username_3: @username_2: great initiative from Lucidchart! Not sure how much I can help, but I'm open for a chat.
+
+I'd prefer a more... minimalistic approach with simple lines, but that's me.
+
+I can say I really enjoyed the icons used in [this blog post](https://container-solutions.com/deployment-strategies/) by @username_4. A big hexagon for a pod and smaller ones for containers seem great. The hexagon motif is used in the _Kublr Control Plane_ section on [kublr](https://kublr.com/) too where an example of a detailed container/pod view can be seen.
+<issue_comment>username_4: Thanks @username_3, Container Solutions also helped with the diagrams used in the [Kubernetes basics tutorials](https://kubernetes.io/docs/tutorials/kubernetes-basics/)
+<issue_comment>username_3: @username_4 wow, those are great. Extending on them seems perfect.
+
+BTW, are the resources available anywhere? I'd love to use them.
+<issue_comment>username_4: There some of these resources available here: https://github.com/kubernetes/website/tree/master/docs/tutorials/kubernetes-basics/public/images
+<issue_comment>username_2: Glad to hear of some excitement behind this project! @username_1 can you invite me to the Thursday meeting referenced and I'll get a few members of the Lucidchart team on the line with me so we can have some initial discussions?
+<issue_comment>username_1: @username_2 Great! I just took a look at the [SIG meeting calendar](https://kubernetes.io/community/) @username_0 will there be a meeting tomorrow?
+<issue_comment>username_1: @username_2 @username_0  Seems that there is no meeting slot for today.
+Let's make an open meeting next Thursday where everybody interested in getting this project of the ground is encouraged to join in :)
+<issue_comment>username_2: Sounds great, @username_1. I will watch for the meeting info and have some Lucidchart representation.
+<issue_comment>username_2: @username_1 I'm not seeing a meeting slot on the calendar for Thursday. Is there one scheduled? Trying to ensure I can have some Lucidchart members join.
+<issue_comment>username_1: @username_2 Sorry for the delay there seem to be changes going on. I am waiting for someone from the team opening the calendar entry. @username_0 @maciaszczykm @floreks
+<issue_comment>username_0: @username_2 not sure where the calendar event went for SIG UI's weekly. For now, I've created a one-off meeting this [Thursday](https://calendar.google.com/event?action=TEMPLATE&tmeid=MHRuNTV1aXFxanY5bjU3c2I4OHU0YjVzZW1fMjAxODA0MTlUMTYwMDAwWiBkcm9tbGVpbkBnb29nbGUuY29t&tmsrc=dromlein%40google.com&scp=ALL) at the typical time so we can chat then. Thanks for your interest!
+<issue_comment>username_2: Great, thanks @username_0! Chat with you Thursday at 9am PT.
+<issue_comment>username_5: I'm not sure if it's the right place, but we worked on kubernetes symbols for diagrams.
+
+Feel free to use: [https://github.com/octo-technology/kubernetes-icons](https://github.com/octo-technology/kubernetes-icons)
+
+Do not hesitate to ask for help if needed.
+<issue_comment>username_6: I think these are great. If you wanted to contribute them to CNCF, we would be happy to host them, which may get them additional attention. Unless, perhaps, ContribEx wanted to host them in the Kubernetes project directly.
+
+Cc @parispittman @username_7 @Phillels @thockin
+<issue_comment>username_5: It would be a pleasure to contribute them to CNCF.
+
+I'm waiting for ContribEx feedbacks
+<issue_comment>username_7: cc @kubernetes/sig-architecture-feature-requests as I know their charter mentions documenting the k8s architecture and they might have an opinion on this. We could either create a new directory for it or put it under the sig-arch/ directory.
+<issue_comment>username_8: @username_5 these are excellent! @username_2 and I work for a diagramming company, [Lucidchart](https://www.lucidchart.com) (see mention earlier in this thread), and we've been looking for a canonical source of Kubernetes icons. Our goal is to turn them into a shape library so that people can use them to create Kubernetes architecture diagrams. We have similar shape libraries for AWS, GCP, and Azure today. 
+
+Would you be open to our using these icons in a Kubernetes shape library?
+<issue_comment>username_5: @username_8 sure !
+<issue_comment>username_9: +100 for a Lucidchart Kubernetes icon set.
+<issue_comment>username_10: +100 as well!
+
+Great job!"
+kubernetes/website,512177917,17176,"{'number': 17176.0, 'repo': 'website', 'user_login': 'kubernetes'}","[{'action': 'opened', 'author': 'christophercarney', 'comment_id': None, 'datetime': '2019-10-24T20:58:22Z', 'masked_author': 'username_0', 'text': 'Fixes #17174 \r\n\r\n""compute"" is a verb, the most likely typo here is the author meant to write ""computers"".', 'title': 'Fix typo in persistent volume introduction', 'type': 'issue'}
+ {'action': 'created', 'author': 'sftim', 'comment_id': 546431441.0, 'datetime': '2019-10-25 16:57:42+00:00', 'masked_author': 'username_1', 'text': ""“compute” is jargon, meaning “the abstract concept of performing computation”. That's analogous to how the existing text has “storage” rather than “storage devices”.\r\n\r\nAlthough “compute” is jargon, replacing it with “computers” doesn't feel right either: it changes the meaning. For examples of the jargon in common use, see https://aws.amazon.com/lambda/ and [https://www.fastly.com/products/edge-compute](https://www.fastly.com/products/edge-compute).\r\n\r\n@username_0 can you suggest an alternative rewording that leaves the meaning and nuance intact?"", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'christophercarney', 'comment_id': 546442336.0, 'datetime': '2019-10-25 17:30:52+00:00', 'masked_author': 'username_0', 'text': '@username_1 I see your point, but I believe that probably stems that ""storage"" is much more colloquial in technical jargon than ""compute"". Compute here reads awkwardly because used without some kind of qualifier it reads foremost as a verb. In your examples, the real jargon phrase would probably be ""edge compute"" and ""compute time"" rather than just ""compute"" alone. The qualifiers of time and edge add context to the word compute, giving it meaning. \r\n\r\nIn light of that, I\'d then suggest adding some kind of qualifier to compute to make it clear that it is jargon rather than the verb. Brainstorming a couple of possibilities below:\r\n```\r\ncompute resources\r\ncompute power (computing?)\r\ncompute problems\r\ncompute concepts\r\ncompute issues\r\n```', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'bradtopol', 'comment_id': 546613143.0, 'datetime': '2019-10-26 15:35:16+00:00', 'masked_author': 'username_2', 'text': 'So it is very common in cloud computing for compute to be used as a noun.  See\r\nhttps://www.techopedia.com/definition/6580/compute\r\n\r\nThat being said, if you prefer changing compute to either ""compute nodes""  or ""compute instances"" \r\nI would find both of those options as acceptable changes that improve readability.  Computers is definitely not the proper change here.  \r\n \r\n/cc @zacharysarah @username_1 \r\n/assign', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'christophercarney', 'comment_id': 546615903.0, 'datetime': '2019-10-26 16:06:57+00:00', 'masked_author': 'username_0', 'text': 'I agree computer is wrong. I also agree compute is common as a noun in cloud computing but in this context the sentence reads a little strangely, especially to people who may be unfamiliar with cloud computing concepts. So I think adding the modifier to compute makes it increases overall readability.', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'christophercarney', 'comment_id': 548395504.0, 'datetime': '2019-10-31 14:14:31+00:00', 'masked_author': 'username_0', 'text': '/assign @username_2', 'title': None, 'type': 'comment'}]","<issue_start><issue_comment>Title: Fix typo in persistent volume introduction
+username_0: Fixes #17174 
+
+""compute"" is a verb, the most likely typo here is the author meant to write ""computers"".
+<issue_comment>username_1: “compute” is jargon, meaning “the abstract concept of performing computation”. That's analogous to how the existing text has “storage” rather than “storage devices”.
+
+Although “compute” is jargon, replacing it with “computers” doesn't feel right either: it changes the meaning. For examples of the jargon in common use, see https://aws.amazon.com/lambda/ and [https://www.fastly.com/products/edge-compute](https://www.fastly.com/products/edge-compute).
+
+@username_0 can you suggest an alternative rewording that leaves the meaning and nuance intact?
+<issue_comment>username_0: @username_1 I see your point, but I believe that probably stems that ""storage"" is much more colloquial in technical jargon than ""compute"". Compute here reads awkwardly because used without some kind of qualifier it reads foremost as a verb. In your examples, the real jargon phrase would probably be ""edge compute"" and ""compute time"" rather than just ""compute"" alone. The qualifiers of time and edge add context to the word compute, giving it meaning. 
+
+In light of that, I'd then suggest adding some kind of qualifier to compute to make it clear that it is jargon rather than the verb. Brainstorming a couple of possibilities below:
+```
+compute resources
+compute power (computing?)
+compute problems
+compute concepts
+compute issues
+```
+<issue_comment>username_2: So it is very common in cloud computing for compute to be used as a noun.  See
+https://www.techopedia.com/definition/6580/compute
+
+That being said, if you prefer changing compute to either ""compute nodes""  or ""compute instances"" 
+I would find both of those options as acceptable changes that improve readability.  Computers is definitely not the proper change here.  
+ 
+/cc @zacharysarah @username_1 
+/assign
+<issue_comment>username_0: I agree computer is wrong. I also agree compute is common as a noun in cloud computing but in this context the sentence reads a little strangely, especially to people who may be unfamiliar with cloud computing concepts. So I think adding the modifier to compute makes it increases overall readability.
+<issue_comment>username_0: /assign @username_2"
+grpc/grpc.io,907594847,792,,"[{'action': 'opened', 'author': 'Gabreilriley', 'comment_id': None, 'datetime': '2021-05-31 16:20:13+00:00', 'masked_author': 'username_0', 'text': ""Hey some colleagues from Paris were trying to register on eBMS through the app and it doesn't work well. Specifically, French people try to register and the app gives the message that the account was already registered when it was not the case. Now the users are blocked.\r\n\r\nI tried to register another email account from my phone and the website on [ryobi universal router table](https://www.tabletypes.com/best-powered-ryobi-router-table-plans-in-australia/) allows me to do it but I didn't receive the confirmation email so the account is block now and I cannot log in on the app then. Could you check what is happening? Thanks"", 'title': 'Website issue', 'type': 'issue'}
+ {'action': 'created', 'author': 'nicolasnoble', 'comment_id': 851648995.0, 'datetime': '2021-05-31 19:36:30+00:00', 'masked_author': 'username_1', 'text': 'Totally wrong github repository.', 'title': None, 'type': 'comment'}
+ {'action': 'closed', 'author': 'nicolasnoble', 'comment_id': None, 'datetime': '2021-05-31 19:36:30+00:00', 'masked_author': 'username_1', 'text': '', 'title': None, 'type': 'issue'}
+ {'action': 'created', 'author': 'nicolasnoble', 'comment_id': 851649185.0, 'datetime': '2021-05-31 19:37:15+00:00', 'masked_author': 'username_1', 'text': 'Also, spam, actually. Reporting.', 'title': None, 'type': 'comment'}]","<issue_start><issue_comment>Title: Website issue
+username_0: Hey some colleagues from Paris were trying to register on eBMS through the app and it doesn't work well. Specifically, French people try to register and the app gives the message that the account was already registered when it was not the case. Now the users are blocked.
+
+I tried to register another email account from my phone and the website on [ryobi universal router table](https://www.tabletypes.com/best-powered-ryobi-router-table-plans-in-australia/) allows me to do it but I didn't receive the confirmation email so the account is block now and I cannot log in on the app then. Could you check what is happening? Thanks
+<issue_comment>username_1: Totally wrong github repository.<issue_closed>
+<issue_comment>username_1: Also, spam, actually. Reporting."
+nodejs/nodejs.org,1154404292,4446,"{'number': 4446.0, 'repo': 'nodejs.org', 'user_login': 'nodejs'}","[{'action': 'opened', 'author': 'alexandrtovmach', 'comment_id': None, 'datetime': '2022-02-28T18:16:45Z', 'masked_author': 'username_0', 'text': 'сc: @zeke @username_4 @obensource @MaledongGit @joesepi \r\n\r\nAdded banner to support Ukraine!\r\n\r\n<img width=""1439"" alt=""image"" src=""https://user-images.githubusercontent.com/28801003/156035863-d998e939-ad42-4a41-90f4-88d58029f2d7.png"">\r\n\r\nI\'m Alex, and I\'m software engineer from Ukraine. Right now, my peaceful country attacked by neighborhood, without reason. It\'s really hard to understand from news, what\'s actually happening here\r\n\r\nhttps://twitter.com/ua_parliament/status/1498266783173824517?t=XgTAeDu5-VH60dYs46m9fg&s=19\r\n\r\nOur brave Ukrainian army show their strength, and fighting with one of the biggest army in the world on the same level and better. But Putin side is attacking civilians from the sky. It\'s violence that not acceptable by any war conflict, and we should stop it.\r\n\r\nI\'ve never asked for help, but I should do it now. I don\'t like to mix political things with job, but right now, my family should cover in a shelter 3 times a day, because of bombing. We are community, we can do many things. Help with paying attention to closing the sky over Ukraine by NATO, the rest, we can do ourselves.\r\n\r\nWe did support for BLM, and won, right now Ukraine need your help.', 'title': 'Support Ukraine', 'type': 'issue'}
+ {'action': 'created', 'author': 'alexandrtovmach', 'comment_id': 1054542215.0, 'datetime': '2022-02-28 18:28:06+00:00', 'masked_author': 'username_0', 'text': ""haven't enought time to do CSS updates, but yeah we can do that"", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'ronag', 'comment_id': 1054580905.0, 'datetime': '2022-02-28 19:17:23+00:00', 'masked_author': 'username_1', 'text': '#CloseTheSky is controversial IMO. Can we use a different message? #SupportUkraine or something?', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'benjamingr', 'comment_id': 1054596689.0, 'datetime': '2022-02-28 19:38:52+00:00', 'masked_author': 'username_2', 'text': 'Hey is there anything more concrete Node.js can do to help? This sort of initiative can end up being performative.\r\n\r\nIf there are any areas where project members can contribute I would much rather we do that as a project instead of put another banner up. I\'m personally disappointed with the commitments the project made with the BlackLivesMatter banner and then failed to meet. I think that initiative was full of good intent but I don\'t think we delivered on those commitments.\r\n\r\nWhat about any of the following instead to show support:\r\n - Doing virtual code+learn events for Ukranians\r\n - Doing ""ask a developer"" sessions for local communities or panels\r\n - Helping local nonprofits with technical issues during the crisis\r\n - Helping people stuck in war zones with logistical issues (writing to consulates of your nationality asking for help etc)\r\n - Doing a fundraiser workshop (where proceeds go to a relief organization like the Ukranian red cross)\r\n\r\nIf any of those make sense to you I think it would be good for the TSC to discuss this and send out a ""call for volunteers"" to all Node.js org members. I think this can also go alongside a blog-post explaining what Node.js is doing.\r\n\r\nI would also strongly prefer the focus here on helping Ukranians stuck in this situation and _not_ the war itself. Node.js has a diverse and multinational contributor base and I would not want to alienate members based on picking a side in a conflict most of us are pretty ignorant of.', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'jasnell', 'comment_id': 1054597034.0, 'datetime': '2022-02-28 19:39:19+00:00', 'masked_author': 'username_3', 'text': ""Overall, I'm definitely +1 on this. Like @username_1, I'd prefer something like `#SupportUkraine`."", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'benjamingr', 'comment_id': 1054598769.0, 'datetime': '2022-02-28 19:41:49+00:00', 'masked_author': 'username_2', 'text': ""Also @username_0 stay strong and stay safe. I'm really sorry you have to go through this. I've spent time in bomb shelters before and it really sucks. I hope the conflict ends soon and your life goes back to normalcy. If there is any logistics I can help you with or you just wanna talk please reach out (ychag@example.com)."", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'alexandrtovmach', 'comment_id': 1054598851.0, 'datetime': '2022-02-28 19:41:56+00:00', 'masked_author': 'username_0', 'text': '@username_1 @username_3 Changed message to `#SupportUkraine`', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'alexandrtovmach', 'comment_id': 1054602348.0, 'datetime': '2022-02-28 19:46:36+00:00', 'masked_author': 'username_0', 'text': ""But I'm not sure how open source community can help with that.\r\nI'm also not asking to do anything with war, and only want to pay attention to the problem over the world, and push politics to resolve it."", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'benjamingr', 'comment_id': 1054604513.0, 'datetime': '2022-02-28 19:49:34+00:00', 'masked_author': 'username_2', 'text': 'I think a good next step to make that happen is to tag that issue with tsc-agenda and ask them to send a call for volunteers. If you know any local tech communities in your area you can contact them and see if you can reach non-profits working on relief.\r\n\r\nAs for a fundraiser workshop that\'s something the TSC would have to organize. I think ""Node.js commits NNNNN$ to support Ukraine war relief"" is a __much__ more powerful message than just a hashtag on the homepage.', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'alexandrtovmach', 'comment_id': 1054609199.0, 'datetime': '2022-02-28 19:56:20+00:00', 'masked_author': 'username_0', 'text': ""I've added tag, but I can't guarantee that I'll join the call with TSC, because of unstable situation."", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'alexandrtovmach', 'comment_id': 1054614054.0, 'datetime': '2022-02-28 20:02:58+00:00', 'masked_author': 'username_0', 'text': '@username_2 @username_1 @username_3 would you approve?', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'alexandrtovmach', 'comment_id': 1054618029.0, 'datetime': '2022-02-28 20:07:30+00:00', 'masked_author': 'username_0', 'text': ""I'd like to have at least 2 approves from TSC members before merge it. Thanks everyone"", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'alexandrtovmach', 'comment_id': 1054626127.0, 'datetime': '2022-02-28 20:17:13+00:00', 'masked_author': 'username_0', 'text': 'Thanks for approve\r\nMerging', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'alexandrtovmach', 'comment_id': 1054626454.0, 'datetime': '2022-02-28 20:17:38+00:00', 'masked_author': 'username_0', 'text': ""If we'll think that link is not works, we can fix it easily"", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'Trott', 'comment_id': 1054627236.0, 'datetime': '2022-02-28 20:18:35+00:00', 'masked_author': 'username_4', 'text': ""No need to block on this comment, but it might be good to link (instead of to a Twitter account) to a relief organization that people can donate to in order to help Ukrainian refugees fleeing to neighboring countries. Then at least we're reminding/encouraging people to spend a little money to help out with the humanitarian issues. Perhaps https://donate.unhcr.org/int/en/ukraine-emergency?"", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'ronag', 'comment_id': 1054627263.0, 'datetime': '2022-02-28 20:18:38+00:00', 'masked_author': 'username_1', 'text': ""I'm not sure what the rules are on this repo but wouldn't it be appropriate to wait at least 24 hours before we go live with this so that people have a chance to object?"", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'benjamingr', 'comment_id': 1054628119.0, 'datetime': '2022-02-28 20:19:39+00:00', 'masked_author': 'username_2', 'text': 'I strongly agree with @username_1 that there should be more eyes on this before this goes live so people have a chance to object.\r\n\r\nMore over I strongly prefer any of those options https://github.com/nodejs/nodejs.org/pull/4446#issuecomment-1054602348 to the banner after last time.', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'alexandrtovmach', 'comment_id': 1054628651.0, 'datetime': '2022-02-28 20:20:21+00:00', 'masked_author': 'username_0', 'text': 'ohh, sorry, reverting now for 24 hours', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'alexandrtovmach', 'comment_id': 1054629417.0, 'datetime': '2022-02-28 20:21:23+00:00', 'masked_author': 'username_0', 'text': 'is there a way to do revert with Github UI?', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'Trott', 'comment_id': 1054723817.0, 'datetime': '2022-02-28 22:27:54+00:00', 'masked_author': 'username_4', 'text': 'I guess we need to re-open this PR somehow or else open a new one?', 'title': None, 'type': 'comment'}]","<issue_start><issue_comment>Title: Support Ukraine
+username_0: сc: @zeke @username_4 @obensource @MaledongGit @joesepi 
+
+Added banner to support Ukraine!
+
+<img width=""1439"" alt=""image"" src=""https://user-images.githubusercontent.com/28801003/156035863-d998e939-ad42-4a41-90f4-88d58029f2d7.png"">
+
+I'm Alex, and I'm software engineer from Ukraine. Right now, my peaceful country attacked by neighborhood, without reason. It's really hard to understand from news, what's actually happening here
+
+https://twitter.com/ua_parliament/status/1498266783173824517?t=XgTAeDu5-VH60dYs46m9fg&s=19
+
+Our brave Ukrainian army show their strength, and fighting with one of the biggest army in the world on the same level and better. But Putin side is attacking civilians from the sky. It's violence that not acceptable by any war conflict, and we should stop it.
+
+I've never asked for help, but I should do it now. I don't like to mix political things with job, but right now, my family should cover in a shelter 3 times a day, because of bombing. We are community, we can do many things. Help with paying attention to closing the sky over Ukraine by NATO, the rest, we can do ourselves.
+
+We did support for BLM, and won, right now Ukraine need your help.
+<issue_comment>username_0: haven't enought time to do CSS updates, but yeah we can do that
+<issue_comment>username_1: #CloseTheSky is controversial IMO. Can we use a different message? #SupportUkraine or something?
+<issue_comment>username_2: Hey is there anything more concrete Node.js can do to help? This sort of initiative can end up being performative.
+
+If there are any areas where project members can contribute I would much rather we do that as a project instead of put another banner up. I'm personally disappointed with the commitments the project made with the BlackLivesMatter banner and then failed to meet. I think that initiative was full of good intent but I don't think we delivered on those commitments.
+
+What about any of the following instead to show support:
+ - Doing virtual code+learn events for Ukranians
+ - Doing ""ask a developer"" sessions for local communities or panels
+ - Helping local nonprofits with technical issues during the crisis
+ - Helping people stuck in war zones with logistical issues (writing to consulates of your nationality asking for help etc)
+ - Doing a fundraiser workshop (where proceeds go to a relief organization like the Ukranian red cross)
+
+If any of those make sense to you I think it would be good for the TSC to discuss this and send out a ""call for volunteers"" to all Node.js org members. I think this can also go alongside a blog-post explaining what Node.js is doing.
+
+I would also strongly prefer the focus here on helping Ukranians stuck in this situation and _not_ the war itself. Node.js has a diverse and multinational contributor base and I would not want to alienate members based on picking a side in a conflict most of us are pretty ignorant of.
+<issue_comment>username_3: Overall, I'm definitely +1 on this. Like @username_1, I'd prefer something like `#SupportUkraine`.
+<issue_comment>username_2: Also @username_0 stay strong and stay safe. I'm really sorry you have to go through this. I've spent time in bomb shelters before and it really sucks. I hope the conflict ends soon and your life goes back to normalcy. If there is any logistics I can help you with or you just wanna talk please reach out (username_2@gmail.com).
+<issue_comment>username_0: @username_1 @username_3 Changed message to `#SupportUkraine`
+<issue_comment>username_0: But I'm not sure how open source community can help with that.
+I'm also not asking to do anything with war, and only want to pay attention to the problem over the world, and push politics to resolve it.
+<issue_comment>username_2: I think a good next step to make that happen is to tag that issue with tsc-agenda and ask them to send a call for volunteers. If you know any local tech communities in your area you can contact them and see if you can reach non-profits working on relief.
+
+As for a fundraiser workshop that's something the TSC would have to organize. I think ""Node.js commits NNNNN$ to support Ukraine war relief"" is a __much__ more powerful message than just a hashtag on the homepage.
+<issue_comment>username_0: I've added tag, but I can't guarantee that I'll join the call with TSC, because of unstable situation.
+<issue_comment>username_0: @username_2 @username_1 @username_3 would you approve?
+<issue_comment>username_0: I'd like to have at least 2 approves from TSC members before merge it. Thanks everyone
+<issue_comment>username_0: Thanks for approve
+Merging
+<issue_comment>username_0: If we'll think that link is not works, we can fix it easily
+<issue_comment>username_4: No need to block on this comment, but it might be good to link (instead of to a Twitter account) to a relief organization that people can donate to in order to help Ukrainian refugees fleeing to neighboring countries. Then at least we're reminding/encouraging people to spend a little money to help out with the humanitarian issues. Perhaps https://donate.unhcr.org/int/en/ukraine-emergency?
+<issue_comment>username_1: I'm not sure what the rules are on this repo but wouldn't it be appropriate to wait at least 24 hours before we go live with this so that people have a chance to object?
+<issue_comment>username_2: I strongly agree with @username_1 that there should be more eyes on this before this goes live so people have a chance to object.
+
+More over I strongly prefer any of those options https://github.com/nodejs/nodejs.org/pull/4446#issuecomment-1054602348 to the banner after last time.
+<issue_comment>username_0: ohh, sorry, reverting now for 24 hours
+<issue_comment>username_0: is there a way to do revert with Github UI?
+<issue_comment>username_4: I guess we need to re-open this PR somehow or else open a new one?"
+ethereum/ethereum-org-website,1068121980,4600,"{'number': 4600.0, 'repo': 'ethereum-org-website', 'user_login': 'ethereum'}","[{'action': 'opened', 'author': 'Xia-Sam', 'comment_id': None, 'datetime': '2021-12-01T08:43:56Z', 'masked_author': 'username_0', 'text': '<!--- Provide a general summary of your changes in the Title above -->\r\n\r\n## Description\r\nNew portion added to pos content: How POS addressses mining power\r\n\r\n<!--- Describe your changes in detail -->\r\n\r\n## Related Issue\r\n\r\n<!--- This project accepts pull requests related to open issues -->\r\n<!--- If suggesting a new feature or change, please discuss it in an issue first -->\r\n<!--- If fixing a bug, there should be an issue describing it with steps to reproduce -->\r\n<!--- Please link to the issue here: -->', 'title': 'Update POS content', 'type': 'issue'}
+ {'action': 'created', 'author': 'minimalsm', 'comment_id': 984787330.0, 'datetime': '2021-12-02 16:26:29+00:00', 'masked_author': 'username_1', 'text': ""Hey @username_0 thanks for the PR on this. The points being made in this new paragraph are already made elsewhere in the doc. I'm not certain we need to add a whole new section on this.\r\n\r\nEspecially as this doc is focused on what proof-of-stake is, and not what proof-of-stake is in comparison to proof-of-work."", 'title': None, 'type': 'comment'}]","<issue_start><issue_comment>Title: Update POS content
+username_0: <!--- Provide a general summary of your changes in the Title above -->
+
+## Description
+New portion added to pos content: How POS addressses mining power
+
+<!--- Describe your changes in detail -->
+
+## Related Issue
+
+<!--- This project accepts pull requests related to open issues -->
+<!--- If suggesting a new feature or change, please discuss it in an issue first -->
+<!--- If fixing a bug, there should be an issue describing it with steps to reproduce -->
+<!--- Please link to the issue here: -->
+<issue_comment>username_1: Hey @username_0 thanks for the PR on this. The points being made in this new paragraph are already made elsewhere in the doc. I'm not certain we need to add a whole new section on this.
+
+Especially as this doc is focused on what proof-of-stake is, and not what proof-of-stake is in comparison to proof-of-work."

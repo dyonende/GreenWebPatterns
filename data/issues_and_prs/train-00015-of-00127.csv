@@ -1,0 +1,869 @@
+corona-warn-app/cwa-website,981145747,1674,,"[{'action': 'opened', 'author': 'dsarkar', 'comment_id': None, 'datetime': '2021-08-27T11:17:14Z', 'masked_author': 'username_0', 'text': '- [ ] Gulpfile: Only update shortly before release roll out, in order to avoid merge conflicts\r\n- [ ] Update Privacy Notice Files \r\n- [ ] FAQs Internal Tracking ID: [EXPOSUREAPP-9107](https://jira-ibs.wbs.net.sap/browse/EXPOSUREAPP-9107) \r\n  - [ ] ""In Vertretung warnen"" \r\n  Internal Tracking ID: [EXPOSUREAPP-9181](https://jira-ibs.wbs.net.sap/browse/EXPOSUREAPP-9181) \r\n  - [ ] update FAQ regarding recovered persons. \r\n  Internal Tracking ID: [EXPOSUREAPP-9182](https://jira-ibs.wbs.net.sap/browse/EXPOSUREAPP-9182)\r\n- [ ] Screenshots \r\nInternal Tracking ID: [EXPOSUREAPP-8856](https://jira-ibs.wbs.net.sap/browse/EXPOSUREAPP-8856)\r\n \r\n\r\nScreenshots in the assets:\r\n- https://github.com/corona-warn-app/cwa-app-ios/releases\r\n- https://github.com/corona-warn-app/cwa-app-android/releases\r\n\r\nContent to include:\r\n- In Vertretung warnen: Als Organisator eines Events können Sie nun nach Aufforderung durch das Gesundheitsamt Ihre Gäste in Vertretung für eine positiv getestete Person warnen, die am Event teilgenommen hat, aber nicht über die Corona-Warn-App eingecheckt war.\r\n- Sofortige Impfstatusanzeige für Genesene: Für Genesene wird ab jetzt direkt nach der ersten Impfung der vollständige Impfschutz in der Corona-Warn-App angezeigt. Die zweiwöchige Wartezeit entfällt bei allen Impfstoffen außer bei Johnson & Johnson.\r\n- new section: ""In Vertretung warnen""\r\n  - anchor suggestions (and ios_xzy): \r\n    - android_event_organizer_warning\r\n    - android_representative_warning\r\n    - android_warn_on_behalf_of\r\n- Files - ""In Vertretung warnen""\r\n  - TraceLocationWarnInfoFragment.png - wrong file name: Internal Tracking ID: [EXPOSUREAPP-9209](https://jira-ibs.wbs.net.sap/browse/EXPOSUREAPP-9209)\r\n  - TestCertificateDetailsFragment.png\r\n  - TraceLocationSelectionFragment.png\r\n  - TraceLocationWarnDurationFragment.png\r\n  - TraceLocationWarnTanFragment.png\r\n  - TraceLocationOrganizerThanksFragment.png\r\n\r\n<img width=""940"" alt=""image"" src=""https://user-images.githubusercontent.com/1409741/131128071-08a4d8ef-16bd-4051-98ec-34e3df6e6808.png"">', 'title': 'Release 2.9: Screenshots, FAQ, Privacy documents, update gulpfile', 'type': 'issue'}
+ {'action': 'created', 'author': 'dsarkar', 'comment_id': 907660525.0, 'datetime': '2021-08-28 17:37:24+00:00', 'masked_author': 'username_0', 'text': '@username_1 Yes indeed, thanks.', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'Ein-Tim', 'comment_id': 907793827.0, 'datetime': '2021-08-29 13:42:35+00:00', 'masked_author': 'username_1', 'text': ""One more question:\nWhy do Johnson & Johnson vaccinated people who recovered from COVID still have to wait 14 days? What's the legal basis for this?"", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'MikeMcC399', 'comment_id': 907808724.0, 'datetime': '2021-08-29 15:11:46+00:00', 'masked_author': 'username_2', 'text': 'It may be just a practical problem. Johnson & Johnson is a 1/1 vaccination, so anybody who received that without previously being recovered will have to wait 14 days. But how do you distinguish a Johnson & Johnson 1/1 vaccination certificate issued for a person who was **not** previously infected compared to a certificate issued for a person who **was** infected?\r\n\r\nIn the case of vaccinations which are normally only complete with 2/2, the inference of a 1/1 for instance with AstraZeneca is that it must be for a recovered person.\r\n\r\nMaybe  @username_3 could cross-check that since he is much more familiar with the status and developments of the DCC schema on https://github.com/ehn-dcc-development/ehn-dcc-schema?', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'Ein-Tim', 'comment_id': 907809450.0, 'datetime': '2021-08-29 15:16:15+00:00', 'masked_author': 'username_1', 'text': 'Yes, this must be the answer to my question. There is no way to differentiate between normally vaccinated people with 1/1 or recovered people with 1/1. Thanks Mike!', 'title': None, 'type': 'comment'}
+ {'action': 'closed', 'author': 'dsarkar', 'comment_id': None, 'datetime': '2021-09-08 13:06:48+00:00', 'masked_author': 'username_0', 'text': '', 'title': None, 'type': 'issue'}
+ {'action': 'created', 'author': 'vaubaehn', 'comment_id': 915308055.0, 'datetime': '2021-09-08 14:50:41+00:00', 'masked_author': 'username_3', 'text': 'Actually, the idea to solve the technical problem to distinguish vaccinations from non-infected persons and recovered persons by just looking to/reading out the vaccination certificate and to rely on the total series of doses, is great imho. But I think, we would run into a legal problem then: it would be discrimination of people who received Johnson&Johnson after recovery just for technical means.\r\nIndeed, it\'s not possible to conclude about the recovery status, when solely looking to the vaccination certificate due to restrictions in the current eHN DCC schema (""only one event allowed"" per DCC). You would need the combination of both certificates, vaccination and recovery, to evaluate the effective validity of immunization status.\r\nHowever, CWA will check the booster validity also for recovered persons from v2.10 on (see https://github.com/corona-warn-app/cwa-app-android/pull/4001): CWA will assemble a kind of artificial DCC and submit it to the CertLogic engine, and the engine will be fed with special crafted ""booster rules"", that will only be available in/for Germany for now. By this, the separation of certificates can be circumvented. Unfortunately, the design of the eHN DCC will not support business rules validation in a similar way currently. To make it possible, _all_ wallet apps in EU and elsewhere would need to be adapted to use a similar approach like CWA will do. For verifier apps it would even get more complicated, as they would need to scan 2 QR codes serially, but _just in some cases_, which would mean more effort for gate keeper and user during the control.\r\n\r\nThis is why I think, that the exception for Johnson&Johnson has other reasons. Probably there is not enough scientific evidence yet (finished studies) that Johnson&Johnson is able to protect recovered persons after one single shot in a similar degree (immediately) like the other vaccines. I made a fast search on secondary sources, but couldn\'t find anything useful in this subject. I didn\'t look into primary sources so far.\r\n\r\nBy the way, EU countries handle Johnson and Johnson differently, too, when validating business rules:\r\n\r\n<details><summary>Netherlands wants 28 days until vaccination is valid</summary>\r\n\r\n```json\r\n[\r\n   {\r\n      ""Type"":""Acceptance"",\r\n      ""SchemaVersion"":""1.0.0"",\r\n      ""Engine"":""CERTLOGIC"",\r\n      ""EngineVersion"":""0.7.5"",\r\n      ""CertificateType"":""Vaccination"",\r\n      ""Description"":[\r\n         {\r\n            ""lang"":""en"",\r\n            ""desc"":""A vaccination with the Janssen vaccine has to be administered at least 28 days ago.""\r\n         },\r\n         {\r\n            ""lang"":""nl"",\r\n            ""desc"":""Een vaccinatie met het Janssen-vaccin moet ten minste 28 dagen geleden uitgevoerd zijn.""\r\n         }\r\n      ],\r\n      ""ValidFrom"":""2021-08-14T00:00:00+02:00"",\r\n      ""ValidTo"":""2030-06-01T00:00:00Z"",\r\n      ""AffectedFields"":[\r\n         ""v.0.dt"",\r\n         ""v.0.mp""\r\n      ],\r\n      ""Logic"":{\r\n         ""if"":[\r\n            {\r\n               ""==="":[\r\n                  {\r\n                     ""var"":""payload.v.0.mp""\r\n                  },\r\n                  ""EU/1/20/1525""\r\n               ]\r\n            },\r\n            {\r\n               ""if"":[\r\n                  {\r\n                     ""before"":[\r\n                        {\r\n                           ""plusTime"":[\r\n                              {\r\n                                 ""var"":""payload.v.0.dt""\r\n                              },\r\n                              -1,\r\n                              ""day""\r\n                           ]\r\n                        },\r\n                        {\r\n                           ""plusTime"":[\r\n                              ""2021-08-14"",\r\n                              -1,\r\n                              ""day""\r\n                           ]\r\n                        }\r\n                     ]\r\n                  },\r\n                  {\r\n                     ""not-before"":[\r\n                        {\r\n                           ""plusTime"":[\r\n                              {\r\n                                 ""var"":""external.validationClock""\r\n                              },\r\n                              -1,\r\n                              ""day""\r\n                           ]\r\n                        },\r\n                        {\r\n                           ""plusTime"":[\r\n                              {\r\n[Truncated]\n                              ""day""\r\n                           ]\r\n                        }\r\n                     ]\r\n                  },\r\n                  true\r\n               ]\r\n            },\r\n            true\r\n         ]\r\n      },\r\n      ""Identifier"":""VR-UA-0006"",\r\n      ""Version"":""1.0.0"",\r\n      ""Country"":""UA""\r\n   }\r\n]\r\n\r\n```\r\n\r\n</details>', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'MikeMcC399', 'comment_id': 915319453.0, 'datetime': '2021-09-08 15:03:41+00:00', 'masked_author': 'username_2', 'text': '@username_3 \r\nMy guess about the reason is confirmed in the blog https://www.coronawarn.app/en/blog/2021-09-08-cwa-version-2-9/\r\n\r\n""Users who get vaccinated with Johnson & Johnson’s vaccine after recovery are an exception. Since only one shot is required for this vaccine, the Corona-Warn-App cannot distinguish between those who have recovered and got vaccinated and those who have been vaccinated normally. In these cases, it always displays full vaccination status after 14 days.""\r\n\r\nI\'m afraid that your other points will be lost here. You would need to post elsewhere if you are requesting any change.', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'dsarkar', 'comment_id': 915334299.0, 'datetime': '2021-09-08 15:20:33+00:00', 'masked_author': 'username_0', 'text': '@username_2 @username_3 @username_1 \r\n\r\nIt is a technical problem: The actual JSON scheme makes it impossible to differentiate the case ""Recovered and 1/1 &J vaccinated"" not only for a the CWA but also for the verifier apps. Scanning both certificates would not help in the current implementation, since the vaccination certificate will be shown as invalid in the first 14 days due to the business rules. The current scheme simply cannot map the case properly.', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'vaubaehn', 'comment_id': 915343024.0, 'datetime': '2021-09-08 15:31:02+00:00', 'masked_author': 'username_3', 'text': '@username_0 @username_2 @username_1 \r\nThanks for your replies, and confirming the technical issue. But from all I understood, the problem will/could be circumvented with CWA 2.10 with rather much effort: https://github.com/corona-warn-app/cwa-app-android/pull/4001\r\nI hope this 2-step approach (2.9: vaccination for recovered except Johnson&Johnson; 2.10: Johnson&Johnson after recovery could be detected) won\'t get a nightmare for support teams, due to users complaining about that ""discrimination""...\r\n\r\nAll the best!\r\n\r\n(@username_2 I won\'t invest any more energy into the subject for now, so I won\'t request any changes 😉 )', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'dsarkar', 'comment_id': 915952270.0, 'datetime': '2021-09-09 10:13:26+00:00', 'masked_author': 'username_0', 'text': 'I think that is crucial point: Only one certificate is verified.', 'title': None, 'type': 'comment'}]","<issue_start><issue_comment>Title: Release 2.9: Screenshots, FAQ, Privacy documents, update gulpfile
+username_0: - [ ] Gulpfile: Only update shortly before release roll out, in order to avoid merge conflicts
+- [ ] Update Privacy Notice Files 
+- [ ] FAQs Internal Tracking ID: [EXPOSUREAPP-9107](https://jira-ibs.wbs.net.sap/browse/EXPOSUREAPP-9107) 
+  - [ ] ""In Vertretung warnen"" 
+  Internal Tracking ID: [EXPOSUREAPP-9181](https://jira-ibs.wbs.net.sap/browse/EXPOSUREAPP-9181) 
+  - [ ] update FAQ regarding recovered persons. 
+  Internal Tracking ID: [EXPOSUREAPP-9182](https://jira-ibs.wbs.net.sap/browse/EXPOSUREAPP-9182)
+- [ ] Screenshots 
+Internal Tracking ID: [EXPOSUREAPP-8856](https://jira-ibs.wbs.net.sap/browse/EXPOSUREAPP-8856)
+ 
+
+Screenshots in the assets:
+- https://github.com/corona-warn-app/cwa-app-ios/releases
+- https://github.com/corona-warn-app/cwa-app-android/releases
+
+Content to include:
+- In Vertretung warnen: Als Organisator eines Events können Sie nun nach Aufforderung durch das Gesundheitsamt Ihre Gäste in Vertretung für eine positiv getestete Person warnen, die am Event teilgenommen hat, aber nicht über die Corona-Warn-App eingecheckt war.
+- Sofortige Impfstatusanzeige für Genesene: Für Genesene wird ab jetzt direkt nach der ersten Impfung der vollständige Impfschutz in der Corona-Warn-App angezeigt. Die zweiwöchige Wartezeit entfällt bei allen Impfstoffen außer bei Johnson & Johnson.
+- new section: ""In Vertretung warnen""
+  - anchor suggestions (and ios_xzy): 
+    - android_event_organizer_warning
+    - android_representative_warning
+    - android_warn_on_behalf_of
+- Files - ""In Vertretung warnen""
+  - TraceLocationWarnInfoFragment.png - wrong file name: Internal Tracking ID: [EXPOSUREAPP-9209](https://jira-ibs.wbs.net.sap/browse/EXPOSUREAPP-9209)
+  - TestCertificateDetailsFragment.png
+  - TraceLocationSelectionFragment.png
+  - TraceLocationWarnDurationFragment.png
+  - TraceLocationWarnTanFragment.png
+  - TraceLocationOrganizerThanksFragment.png
+
+<img width=""940"" alt=""image"" src=""https://user-images.githubusercontent.com/1409741/131128071-08a4d8ef-16bd-4051-98ec-34e3df6e6808.png"">
+<issue_comment>username_0: @username_1 Yes indeed, thanks.
+<issue_comment>username_1: One more question:
+Why do Johnson & Johnson vaccinated people who recovered from COVID still have to wait 14 days? What's the legal basis for this?
+<issue_comment>username_2: It may be just a practical problem. Johnson & Johnson is a 1/1 vaccination, so anybody who received that without previously being recovered will have to wait 14 days. But how do you distinguish a Johnson & Johnson 1/1 vaccination certificate issued for a person who was **not** previously infected compared to a certificate issued for a person who **was** infected?
+
+In the case of vaccinations which are normally only complete with 2/2, the inference of a 1/1 for instance with AstraZeneca is that it must be for a recovered person.
+
+Maybe  @username_3 could cross-check that since he is much more familiar with the status and developments of the DCC schema on https://github.com/ehn-dcc-development/ehn-dcc-schema?
+<issue_comment>username_1: Yes, this must be the answer to my question. There is no way to differentiate between normally vaccinated people with 1/1 or recovered people with 1/1. Thanks Mike!<issue_closed>
+<issue_comment>username_3: Actually, the idea to solve the technical problem to distinguish vaccinations from non-infected persons and recovered persons by just looking to/reading out the vaccination certificate and to rely on the total series of doses, is great imho. But I think, we would run into a legal problem then: it would be discrimination of people who received Johnson&Johnson after recovery just for technical means.
+Indeed, it's not possible to conclude about the recovery status, when solely looking to the vaccination certificate due to restrictions in the current eHN DCC schema (""only one event allowed"" per DCC). You would need the combination of both certificates, vaccination and recovery, to evaluate the effective validity of immunization status.
+However, CWA will check the booster validity also for recovered persons from v2.10 on (see https://github.com/corona-warn-app/cwa-app-android/pull/4001): CWA will assemble a kind of artificial DCC and submit it to the CertLogic engine, and the engine will be fed with special crafted ""booster rules"", that will only be available in/for Germany for now. By this, the separation of certificates can be circumvented. Unfortunately, the design of the eHN DCC will not support business rules validation in a similar way currently. To make it possible, _all_ wallet apps in EU and elsewhere would need to be adapted to use a similar approach like CWA will do. For verifier apps it would even get more complicated, as they would need to scan 2 QR codes serially, but _just in some cases_, which would mean more effort for gate keeper and user during the control.
+
+This is why I think, that the exception for Johnson&Johnson has other reasons. Probably there is not enough scientific evidence yet (finished studies) that Johnson&Johnson is able to protect recovered persons after one single shot in a similar degree (immediately) like the other vaccines. I made a fast search on secondary sources, but couldn't find anything useful in this subject. I didn't look into primary sources so far.
+
+By the way, EU countries handle Johnson and Johnson differently, too, when validating business rules:
+
+<details><summary>Netherlands wants 28 days until vaccination is valid</summary>
+
+```json
+[
+   {
+      ""Type"":""Acceptance"",
+      ""SchemaVersion"":""1.0.0"",
+      ""Engine"":""CERTLOGIC"",
+      ""EngineVersion"":""0.7.5"",
+      ""CertificateType"":""Vaccination"",
+      ""Description"":[
+         {
+            ""lang"":""en"",
+            ""desc"":""A vaccination with the Janssen vaccine has to be administered at least 28 days ago.""
+         },
+         {
+            ""lang"":""nl"",
+            ""desc"":""Een vaccinatie met het Janssen-vaccin moet ten minste 28 dagen geleden uitgevoerd zijn.""
+         }
+      ],
+      ""ValidFrom"":""2021-08-14T00:00:00+02:00"",
+      ""ValidTo"":""2030-06-01T00:00:00Z"",
+      ""AffectedFields"":[
+         ""v.0.dt"",
+         ""v.0.mp""
+      ],
+      ""Logic"":{
+         ""if"":[
+            {
+               ""==="":[
+                  {
+                     ""var"":""payload.v.0.mp""
+                  },
+                  ""EU/1/20/1525""
+               ]
+            },
+            {
+               ""if"":[
+                  {
+                     ""before"":[
+                        {
+                           ""plusTime"":[
+                              {
+                                 ""var"":""payload.v.0.dt""
+                              },
+                              -1,
+                              ""day""
+                           ]
+                        },
+                        {
+                           ""plusTime"":[
+                              ""2021-08-14"",
+                              -1,
+                              ""day""
+                           ]
+                        }
+                     ]
+                  },
+                  {
+                     ""not-before"":[
+                        {
+                           ""plusTime"":[
+                              {
+                                 ""var"":""external.validationClock""
+                              },
+                              -1,
+                              ""day""
+                           ]
+                        },
+                        {
+                           ""plusTime"":[
+                              {
+[Truncated]
+                              ""day""
+                           ]
+                        }
+                     ]
+                  },
+                  true
+               ]
+            },
+            true
+         ]
+      },
+      ""Identifier"":""VR-UA-0006"",
+      ""Version"":""1.0.0"",
+      ""Country"":""UA""
+   }
+]
+
+```
+
+</details>
+<issue_comment>username_2: @username_3 
+My guess about the reason is confirmed in the blog https://www.coronawarn.app/en/blog/2021-09-08-cwa-version-2-9/
+
+""Users who get vaccinated with Johnson & Johnson’s vaccine after recovery are an exception. Since only one shot is required for this vaccine, the Corona-Warn-App cannot distinguish between those who have recovered and got vaccinated and those who have been vaccinated normally. In these cases, it always displays full vaccination status after 14 days.""
+
+I'm afraid that your other points will be lost here. You would need to post elsewhere if you are requesting any change.
+<issue_comment>username_0: @username_2 @username_3 @username_1 
+
+It is a technical problem: The actual JSON scheme makes it impossible to differentiate the case ""Recovered and 1/1 &J vaccinated"" not only for a the CWA but also for the verifier apps. Scanning both certificates would not help in the current implementation, since the vaccination certificate will be shown as invalid in the first 14 days due to the business rules. The current scheme simply cannot map the case properly.
+<issue_comment>username_3: @username_0 @username_2 @username_1 
+Thanks for your replies, and confirming the technical issue. But from all I understood, the problem will/could be circumvented with CWA 2.10 with rather much effort: https://github.com/corona-warn-app/cwa-app-android/pull/4001
+I hope this 2-step approach (2.9: vaccination for recovered except Johnson&Johnson; 2.10: Johnson&Johnson after recovery could be detected) won't get a nightmare for support teams, due to users complaining about that ""discrimination""...
+
+All the best!
+
+(@username_2 I won't invest any more energy into the subject for now, so I won't request any changes 😉 )
+<issue_comment>username_0: I think that is crucial point: Only one certificate is verified."
+RSS-Bridge/rss-bridge,1079507654,2372,,"[{'action': 'opened', 'author': 'Boldairdev', 'comment_id': None, 'datetime': '2021-12-14 09:21:47+00:00', 'masked_author': 'username_0', 'text': 'Error message: `Call to a member function find() on bool`\r\nQuery string: `action=display&bridge=AutoJM&context=Afficher+les+offres+de+v%C3%A9hicules+disponible+en+fonction+des+crit%C3%A8res+du+site+AutoJM&url=mandataire-carrosserie-citadine&energy=5&transmission=1&priceMin=0&priceMax=150000&format=Atom`\r\nVersion: `dev.2021-04-25\r\n\r\n**PHP 8**`', 'title': '                         Citadine neuve pas chère à prix mandataire | AutoJM                    failed with error 0', 'type': 'issue'}
+ {'action': 'created', 'author': 'em92', 'comment_id': 997181280.0, 'datetime': '2021-12-18 10:18:28+00:00', 'masked_author': 'username_1', 'text': 'Ping @username_2 as maintainer of this bridge', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'sysadminstory', 'comment_id': 1001087811.0, 'datetime': '2021-12-26 00:31:31+00:00', 'masked_author': 'username_2', 'text': 'The website was reworked. I rewrote the bridge using the new website. See the PR #2390\r\nExisting bridge will be broken : nothing could be done to keep the old feed running.', 'title': None, 'type': 'comment'}
+ {'action': 'closed', 'author': 'em92', 'comment_id': None, 'datetime': '2022-01-01 21:15:14+00:00', 'masked_author': 'username_1', 'text': '', 'title': None, 'type': 'issue'}]","<issue_start><issue_comment>Title:                          Citadine neuve pas chère à prix mandataire | AutoJM                    failed with error 0
+username_0: Error message: `Call to a member function find() on bool`
+Query string: `action=display&bridge=AutoJM&context=Afficher+les+offres+de+v%C3%A9hicules+disponible+en+fonction+des+crit%C3%A8res+du+site+AutoJM&url=mandataire-carrosserie-citadine&energy=5&transmission=1&priceMin=0&priceMax=150000&format=Atom`
+Version: `dev.2021-04-25
+
+**PHP 8**`
+<issue_comment>username_1: Ping @username_2 as maintainer of this bridge
+<issue_comment>username_2: The website was reworked. I rewrote the bridge using the new website. See the PR #2390
+Existing bridge will be broken : nothing could be done to keep the old feed running.<issue_closed>"
+gohugoio/hugo,1079093358,9285,,"[{'action': 'opened', 'author': 'regisphilibert', 'comment_id': None, 'datetime': '2021-12-13 22:25:38+00:00', 'masked_author': 'username_0', 'text': 'I\'m sorry to bring this up so late, it did not occur to me before upgrading but I\'m having second thought about this functionnality sharing its name with a very commonly used method.\r\n\r\nMany people are using CMS, with markdown images added to the body content. We then try and improve generated images with render hooks.\r\n\r\nThis meant a simple `with resources.Get `.Destination` to find the local image, and if not found use the existing `.Destination`. But with `resources.Get` going ""remote capable"", now any URL passed through `resource.Get` is a resource created and potentially processed by Hugo.\r\n\r\nI envision several problems. A website publishing its image on imgix, and relying on the imgix server to transform image like `https://xxxx.imgix.net/home_slide_kayak.jpg?auto=format&ch=Width,DPR&q=95&w=2000`. The latter being accidentally passed through `resource.Get` would trigger an uneccessary fetch and transformation.\r\n\r\nNot that many use case comes to mind beside `render-hooks`, and it\'s of course something we can ""guard"" by looking at the passed string and making sure it\'s relative.\r\n\r\nBut I\'m opening a discussion here, in case other use cases could fall into the same problem. I do think, a bit late sorry again, that something as powerfull, could have its own name/method and its own entry in the documentation site, rather than share it with another commonly used one. It would also ensure that we have 100% control on what is locally ""got"" and/or ""remotely"" fetch.\r\n\r\nWe have\r\n- resources.Get\r\n- resources.GetMatch\r\n- resources.Match\r\n\r\nAdding a foth one, resources.Fetch or other wouldn\'t hurt.', 'title': 'Add `resources.Fetch` for remote resources and limit `resources.Get` to local assets', 'type': 'issue'}
+ {'action': 'created', 'author': 'bep', 'comment_id': 993408348.0, 'datetime': '2021-12-14 10:40:04+00:00', 'masked_author': 'username_1', 'text': ""Hmmm... `resources.Fetch` is not ... great, but I can live with `resources.GetRemote` (which was my second choice when I thought hard about this).\r\n\r\nI'm doing another release later this week. I will let the Hugo community decide:\r\n\r\n[![](https://api.gh-polls.com/poll/01FPW8BZFN8NY1ADWJD3W9YRKK/Use%20resources.GetRemote%20for%20remote%20get)](https://api.gh-polls.com/poll/01FPW8BZFN8NY1ADWJD3W9YRKK/Use%20resources.GetRemote%20for%20remote%20get/vote)\r\n[![](https://api.gh-polls.com/poll/01FPW8BZFN8NY1ADWJD3W9YRKK/Keep%20using%20resources.Get%20for%20both)](https://api.gh-polls.com/poll/01FPW8BZFN8NY1ADWJD3W9YRKK/Keep%20using%20resources.Get%20for%20both/vote)"", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'davidsneighbour', 'comment_id': 993413487.0, 'datetime': '2021-12-14 10:46:49+00:00', 'masked_author': 'username_2', 'text': 'Voting for `.GetRemote` but dark-mode in Github breaks the voting images. Transparent is bad these days. \r\n\r\n![Selection_177](https://user-images.githubusercontent.com/83281/145983750-423dd1d5-7747-4419-85aa-01be7c19133d.png)', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'bep', 'comment_id': 993415650.0, 'datetime': '2021-12-14 10:49:44+00:00', 'masked_author': 'username_1', 'text': '@username_2 then turn off dark-mode,  not sure what you want me to do about it.', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'bep', 'comment_id': 994066318.0, 'datetime': '2021-12-14 21:49:49+00:00', 'masked_author': 'username_1', 'text': '@username_0 assuming you control the code, you can do \r\n\r\n```\r\n{{ if not (urls.Parse $url).IsRemote }}\r\n{{ end }}\r\n```\r\n\r\nThere are no accidents in the above?', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'regisphilibert', 'comment_id': 994084189.0, 'datetime': '2021-12-14 22:02:05+00:00', 'masked_author': 'username_0', 'text': ""Yes I would if the method was not renamed, but if it is renamed, then I'll stick with the original test (is there a local resource at the passed location?). \r\nAnd yes, if I don't control the value passed to a `.GetRemote`, I'd safeguard it with your suggestion. That's helpful thanks!"", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'bep', 'comment_id': 994508560.0, 'datetime': '2021-12-15 08:48:48+00:00', 'masked_author': 'username_1', 'text': 'Hmm ... The vote is clear.', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'jmooring', 'comment_id': 994795377.0, 'datetime': '2021-12-15 13:32:53+00:00', 'masked_author': 'username_3', 'text': ""This was bit like a trial, with the prosecution presenting evidence, and the jury voting to convict. I'm not sure the defense attorney was able to present their case."", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'bep', 'comment_id': 994797359.0, 'datetime': '2021-12-15 13:35:15+00:00', 'masked_author': 'username_1', 'text': '@username_3 what did you vote?', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'jmooring', 'comment_id': 994798657.0, 'datetime': '2021-12-15 13:36:45+00:00', 'masked_author': 'username_3', 'text': ""`.GetRemote` and now I'm having second thoughts."", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'bep', 'comment_id': 994801029.0, 'datetime': '2021-12-15 13:39:45+00:00', 'masked_author': 'username_1', 'text': 'Yea, I\'m still not sure ... One of Hugo\'s ""problems"" is a little too many moving parts. What I like about the `Resource` (which is a rather vague term in itself) _thing_ is that is this rather simple interface that can be used for _everything_. And there is a a rather nice thing to also have only one way of _getting_ these resources (there are more this this story, I know), especially when explaining it to the user (via documentation etc.).', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'bep', 'comment_id': 994802441.0, 'datetime': '2021-12-15 13:41:28+00:00', 'masked_author': 'username_1', 'text': '... what about adding a `resources.GetLocal` function?', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'regisphilibert', 'comment_id': 994806297.0, 'datetime': '2021-12-15 13:45:56+00:00', 'masked_author': 'username_0', 'text': ""I'm focusing on the second part of that sentence. This functionality is extremely important as it makes Hugo capable of grabbing anything remote, (And yes API is what I'm mostly concerned about, and what I predict will make 80% of that feature's uses case), so let's make it stand out.\r\n\r\nBut also I think a function which grab a local file from the dedicated asset directory should not be the same as the one which give you access to the unlimited internet."", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'regisphilibert', 'comment_id': 994807555.0, 'datetime': '2021-12-15 13:47:27+00:00', 'masked_author': 'username_0', 'text': '... what about adding a resources.GetLocal function?\r\n\r\nThat sounds like a big breaking change.', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'jmooring', 'comment_id': 994808005.0, 'datetime': '2021-12-15 13:47:59+00:00', 'masked_author': 'username_3', 'text': 'I\'ve a big fan of readme-driven development, because it forces you to explain it to someone before you do it. \r\n\r\nI have a docs PR in progress for content-management/image-processing/index.md...\r\n\r\n----\r\n\r\n## Image Resource\r\n\r\nTo process an image, you must access the image as either a page resource or a global resource.\r\n\r\n### Image as Page Resource\r\n\r\nA page resource is a file within a [page bundle]. A page bundle is a directory with an `index.md` or `_index.md` file at its root.\r\n\r\n```text\r\ncontent/\r\n└── posts/\r\n    └── post-1/           <-- page bundle\r\n        ├── index.md\r\n        └── sunset.jpg    <-- page resource\r\n```\r\n\r\nTo access an image as a page resource:\r\n\r\n```go-html-template\r\n{{ $image := .Resources.GetMatch ""sunset.jpg"" }}\r\n```\r\n\r\n### Image as Global Resource\r\n\r\nA global resource is a file:\r\n\r\n- Within the `assets` directory, or\r\n- Within any directory [mounted] to the `assets` directory, or\r\n- Located on a remote server accessible via `http` or `https`\r\n\r\n```text\r\nassets/\r\n└── images/\r\n    └── sunset.jpg    <-- global resource\r\n```\r\n\r\nTo access a _local_ image as a global resource:\r\n\r\n```go-html-template\r\n{{ $image := resources.Get ""images/sunset.jpg"" }}\r\n```\r\n\r\nTo access a _remote_ image as a global resource:\r\n\r\n```go-html-template\r\n{{ $image := resources.Get ""https://gohugo.io/img/hugo-logo.png"" }}\r\n```\r\n\r\n----', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'bep', 'comment_id': 994808021.0, 'datetime': '2021-12-15 13:48:01+00:00', 'masked_author': 'username_1', 'text': 'Not from Hugo 0.90.', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'regisphilibert', 'comment_id': 994808967.0, 'datetime': '2021-12-15 13:49:15+00:00', 'masked_author': 'username_0', 'text': 'Why not?', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'bep', 'comment_id': 994817297.0, 'datetime': '2021-12-15 13:59:18+00:00', 'masked_author': 'username_1', 'text': 'How would adding a new function be a breaking change?', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'bep', 'comment_id': 994868191.0, 'datetime': '2021-12-15 14:53:58+00:00', 'masked_author': 'username_1', 'text': '@username_0 never mind, I was just blabbering; this _was_ a rather breaking change when adding resources.Get -- I will add a GetRemote and get that out some time this weak. \r\n\r\n@username_3 I can also add the adjustment we discussed re this, if you have not already implemented it...', 'title': None, 'type': 'comment'}
+ {'action': 'closed', 'author': 'bep', 'comment_id': None, 'datetime': '2021-12-17 09:25:01+00:00', 'masked_author': 'username_1', 'text': '', 'title': None, 'type': 'issue'}]","<issue_start><issue_comment>Title: Add `resources.Fetch` for remote resources and limit `resources.Get` to local assets
+username_0: I'm sorry to bring this up so late, it did not occur to me before upgrading but I'm having second thought about this functionnality sharing its name with a very commonly used method.
+
+Many people are using CMS, with markdown images added to the body content. We then try and improve generated images with render hooks.
+
+This meant a simple `with resources.Get `.Destination` to find the local image, and if not found use the existing `.Destination`. But with `resources.Get` going ""remote capable"", now any URL passed through `resource.Get` is a resource created and potentially processed by Hugo.
+
+I envision several problems. A website publishing its image on imgix, and relying on the imgix server to transform image like `https://xxxx.imgix.net/home_slide_kayak.jpg?auto=format&ch=Width,DPR&q=95&w=2000`. The latter being accidentally passed through `resource.Get` would trigger an uneccessary fetch and transformation.
+
+Not that many use case comes to mind beside `render-hooks`, and it's of course something we can ""guard"" by looking at the passed string and making sure it's relative.
+
+But I'm opening a discussion here, in case other use cases could fall into the same problem. I do think, a bit late sorry again, that something as powerfull, could have its own name/method and its own entry in the documentation site, rather than share it with another commonly used one. It would also ensure that we have 100% control on what is locally ""got"" and/or ""remotely"" fetch.
+
+We have
+- resources.Get
+- resources.GetMatch
+- resources.Match
+
+Adding a foth one, resources.Fetch or other wouldn't hurt.
+<issue_comment>username_1: Hmmm... `resources.Fetch` is not ... great, but I can live with `resources.GetRemote` (which was my second choice when I thought hard about this).
+
+I'm doing another release later this week. I will let the Hugo community decide:
+
+[![](https://api.gh-polls.com/poll/01FPW8BZFN8NY1ADWJD3W9YRKK/Use%20resources.GetRemote%20for%20remote%20get)](https://api.gh-polls.com/poll/01FPW8BZFN8NY1ADWJD3W9YRKK/Use%20resources.GetRemote%20for%20remote%20get/vote)
+[![](https://api.gh-polls.com/poll/01FPW8BZFN8NY1ADWJD3W9YRKK/Keep%20using%20resources.Get%20for%20both)](https://api.gh-polls.com/poll/01FPW8BZFN8NY1ADWJD3W9YRKK/Keep%20using%20resources.Get%20for%20both/vote)
+<issue_comment>username_2: Voting for `.GetRemote` but dark-mode in Github breaks the voting images. Transparent is bad these days. 
+
+![Selection_177](https://user-images.githubusercontent.com/83281/145983750-423dd1d5-7747-4419-85aa-01be7c19133d.png)
+<issue_comment>username_1: @username_2 then turn off dark-mode,  not sure what you want me to do about it.
+<issue_comment>username_1: @username_0 assuming you control the code, you can do 
+
+```
+{{ if not (urls.Parse $url).IsRemote }}
+{{ end }}
+```
+
+There are no accidents in the above?
+<issue_comment>username_0: Yes I would if the method was not renamed, but if it is renamed, then I'll stick with the original test (is there a local resource at the passed location?). 
+And yes, if I don't control the value passed to a `.GetRemote`, I'd safeguard it with your suggestion. That's helpful thanks!
+<issue_comment>username_1: Hmm ... The vote is clear.
+<issue_comment>username_3: This was bit like a trial, with the prosecution presenting evidence, and the jury voting to convict. I'm not sure the defense attorney was able to present their case.
+<issue_comment>username_1: @username_3 what did you vote?
+<issue_comment>username_3: `.GetRemote` and now I'm having second thoughts.
+<issue_comment>username_1: Yea, I'm still not sure ... One of Hugo's ""problems"" is a little too many moving parts. What I like about the `Resource` (which is a rather vague term in itself) _thing_ is that is this rather simple interface that can be used for _everything_. And there is a a rather nice thing to also have only one way of _getting_ these resources (there are more this this story, I know), especially when explaining it to the user (via documentation etc.).
+<issue_comment>username_1: ... what about adding a `resources.GetLocal` function?
+<issue_comment>username_0: I'm focusing on the second part of that sentence. This functionality is extremely important as it makes Hugo capable of grabbing anything remote, (And yes API is what I'm mostly concerned about, and what I predict will make 80% of that feature's uses case), so let's make it stand out.
+
+But also I think a function which grab a local file from the dedicated asset directory should not be the same as the one which give you access to the unlimited internet.
+<issue_comment>username_0: ... what about adding a resources.GetLocal function?
+
+That sounds like a big breaking change.
+<issue_comment>username_3: I've a big fan of readme-driven development, because it forces you to explain it to someone before you do it. 
+
+I have a docs PR in progress for content-management/image-processing/index.md...
+
+----
+
+## Image Resource
+
+To process an image, you must access the image as either a page resource or a global resource.
+
+### Image as Page Resource
+
+A page resource is a file within a [page bundle]. A page bundle is a directory with an `index.md` or `_index.md` file at its root.
+
+```text
+content/
+└── posts/
+    └── post-1/           <-- page bundle
+        ├── index.md
+        └── sunset.jpg    <-- page resource
+```
+
+To access an image as a page resource:
+
+```go-html-template
+{{ $image := .Resources.GetMatch ""sunset.jpg"" }}
+```
+
+### Image as Global Resource
+
+A global resource is a file:
+
+- Within the `assets` directory, or
+- Within any directory [mounted] to the `assets` directory, or
+- Located on a remote server accessible via `http` or `https`
+
+```text
+assets/
+└── images/
+    └── sunset.jpg    <-- global resource
+```
+
+To access a _local_ image as a global resource:
+
+```go-html-template
+{{ $image := resources.Get ""images/sunset.jpg"" }}
+```
+
+To access a _remote_ image as a global resource:
+
+```go-html-template
+{{ $image := resources.Get ""https://gohugo.io/img/hugo-logo.png"" }}
+```
+
+----
+<issue_comment>username_1: Not from Hugo 0.90.
+<issue_comment>username_0: Why not?
+<issue_comment>username_1: How would adding a new function be a breaking change?
+<issue_comment>username_1: @username_0 never mind, I was just blabbering; this _was_ a rather breaking change when adding resources.Get -- I will add a GetRemote and get that out some time this weak. 
+
+@username_3 I can also add the adjustment we discussed re this, if you have not already implemented it...<issue_closed>"
+facebook/docusaurus,606023132,2651,,"[{'action': 'opened', 'author': 'yangshun', 'comment_id': None, 'datetime': '2020-04-24 04:04:17+00:00', 'masked_author': 'username_0', 'text': ""<!--\r\n  Consider requesting the feature on https://docusaurus-2.netlify.com/feedback/ instead.\r\n  Feature requests on v1 are more likely to be missed as we're focusing on building v2.\r\n-->\r\n\r\n## 💥 Proposal\r\n\r\nAn umbrella issue to track the translations work for v2 and guide the design and implementation on the feature in v2. Give suggestions and feedback on this issue.\r\n\r\n## v1 Issues\r\n\r\n- Build times are slow\r\n- https://stackoverflow.com/questions/59125516/versioned-docusaurus-site-returns-404-for-the-other-languages\r\n\r\n### Have you read the [Contributing Guidelines on issues](https://github.com/facebook/docusaurus/blob/master/CONTRIBUTING.md#reporting-new-issues)?\r\n\r\nYes"", 'title': '[v2] Translations approach', 'type': 'issue'}
+ {'action': 'created', 'author': 'fanny', 'comment_id': 621149471.0, 'datetime': '2020-04-29 11:44:40+00:00', 'masked_author': 'username_1', 'text': 'Do you plan use an approach like the [`react-i18n-intl`](https://github.com/i18next/react-i18next/)? In the v1, we have the `crowdin` to make the translations, but this put the limitation to assume that the default language is english. Is a plan to v2 change this architecture, to make possible the developer submit your own translations and we use a framwork to read them?', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'yangshun', 'comment_id': 621161088.0, 'datetime': '2020-04-29 12:08:15+00:00', 'masked_author': 'username_0', 'text': 'There are two things we need to translate here:\r\n\r\n- UI and React components - Those can be powered by i18n libraries such as [FBT](https://facebook.github.io/fbt/) and [`react-i18n-intl`](https://fburl.com/deltoid3/sprmvo2j)\r\n- Documentation - I presume the docs for another language would be side-by-side with the original docs:\r\n\r\n```\r\ndocs\r\n├── introduction.md\r\n├── introduction.jp.md\r\n├── introduction.es.md\r\n...\r\n```', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'nebrelbug', 'comment_id': 621561438.0, 'datetime': '2020-04-30 01:40:14+00:00', 'masked_author': 'username_2', 'text': '@username_0 would #2302 need to be completed first, or will versioning stay similar enough as presented to the user?', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'yangshun', 'comment_id': 636284083.0, 'datetime': '2020-05-30 06:14:22+00:00', 'masked_author': 'username_0', 'text': '@username_2 Versioning might change a bit. We might end up doing /<baseUrl>/<locale>/<docs>/<version>. IMO locale should be a first class feature in Docusaurus.', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'nebrelbug', 'comment_id': 636357280.0, 'datetime': '2020-05-30 16:57:10+00:00', 'masked_author': 'username_2', 'text': '`////` meaning something like `/en/docs/v2/somedoc-name`?', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'yangshun', 'comment_id': 639446947.0, 'datetime': '2020-06-05 12:19:09+00:00', 'masked_author': 'username_0', 'text': '@username_2 Sorry I had to wrap the text in a code tags for it to show. But you got it!', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'nothingismagick', 'comment_id': 646983557.0, 'datetime': '2020-06-20 11:35:37+00:00', 'masked_author': 'username_3', 'text': 'We would still love to be able to use `crowdin` if that is possible.', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'slorber', 'comment_id': 647447332.0, 'datetime': '2020-06-22 11:05:32+00:00', 'masked_author': 'username_4', 'text': ""There are many potential solutions for i18n in v2 that we are thinking about.\r\n\r\nI think for regular MD docs, we should stick to integrating with a SaaS that allows uploading MD files directly, so that translators can work in full doc context, instead of translating key/value pairs.\r\n\r\nKeeping compability with Crowdin is probably important to v1 users.\r\n\r\nWe also need to validate that Crowdin and other i18n SaaS providers works great with MDX (ie docs pages embedding React components for interactive demos). If you have feedback on that I'm interested."", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'iafan', 'comment_id': 660792635.0, 'datetime': '2020-07-20 04:20:20+00:00', 'masked_author': 'username_5', 'text': 'I\'ve been exploring using Docusaurus for a multilingual site, only to realize v2 doesn\'t have any i18n layer. I have some experience with localizing products/documentation in various forms, including some automated localization pipelines, so here are my thoughts on how I would expect i18n to be handled:\r\n\r\n1. I\'d prefer i18n of an open-source project to be SaaS platform agnostic, so that Docusaurus users could pick the SaaS of their choice, or stick with an open-source localization solution.\r\n2. MD/MDX, while not being the easiest format for localization purposes, is something Docusaurus has committed to use, so an external localization solution or process needs be able to work with MDX as a source and produce MDX as a target.\r\n3. Scalability of building/deploying a multilingual site is a concern. Adding a number of languages on top of a multi-versioned site adds even more complexity. However, it\'s unlikely that older versions of the documentation will need to continue to be translated or regularly rebuilt. Ideally, making a versioned snapshot would mean that the current state of the site and all its current translations is frozen, built, and not being rebuilt unless explicitly asked. This would potentially allow to have many versions that would not slow down the builds. Only the latest version of the site would be actively translated and built.\r\n4. For the speed of development, it is best for the developers or content creators to focus on the source language only, and build/preview only that language. This means that until explicitly asked, it should be fine to compile only the source language, and have the site functional. Ideally, docusaurus could be told to build a specific language (including live-reload scenarios), or to build all languages at once. With this, translations that are being automatically committed to the site repo (in continuous localization scenarios) would not slow down the development.\r\n5. For SEO, bookmarking and link sharing, a cleanest way is to have each language exposed explicitly in the URL, with the language negotiation being performed at each page level. For example:\r\n    - Visiting `/` URL on a multi-lingual site would redirect to a language-specific URL (e.g. `/en/`, `/de/`, `/fr/`) based on available languages for that URL, and user\'s browser language preferences.\r\n    - Visiting `/some-folder/some-page/` would redirect the user to e.g. `/en/some-folder/some-page/`, `/de/some-folder/some-page/` or `/fr/some-folder/some-page/`. An ability to provide deep links that auto-resolve to the target user\'s language is a must when using them in the product UI, marketing emails, and so on.\r\n6. Translating content takes some time, so if a page is missing in a specific language, it shouldn\'t break the build; If one goes to a language-specific URL, and the page doesn\'t exist [yet], the site could show a 404 page that says ""this page is not available in your language yet, but you can switch to another language it is available in: xx, yy, zz.""\r\n7. It should be possible to allow for a partial translation of websites. In other words, a situation where a particular page doesn\'t exist in a particular language, is valid and should not be considered temporary. Unresolved document IDs referenced from `sidebars.js` must not break the build, but hide that link from the document tree, and give a warning in the console log.\r\n\r\n## Proposal\r\n\r\nA set of localizable files include `docusaurus.config.js`, `sidebars.js` and content folders (`blog/`, `docs/`). Imagine that you can have them sitting together in some common subfolder, e.g. `content/`. So the structure becomes:\r\n```\r\ncontent/\r\n      blog/\r\n      docs/\r\n      docusaurus.config.js\r\n      sidebars.js\r\nnode_modules/\r\nsrc/\r\nstatic/\r\npackage.json\r\n...\r\n```\r\n\r\nAll localizable content needed by plugins needs to be externalized into JavaScript/TypeScript/JSON files and reside in the `content/` folder as well. Ideally there would be some common format and file naming convention that all plugins are expected to use.\r\n\r\nRunning `docusaurus build` without parameters would compile only the site inside the default (`content/`) subfolder, with its local config, sidebars and content.\r\n\r\nAn external localization process would need to take the source `content/` folder and create localized variants of this folder, for example, `content-de/`, `content-fr/`, etc. Running Docusaurus against a specific content folder would render that portion of the site. For example, `docusaurus build content-fr` would try to load `content-fr/docusaurus.config.js` relative to the current working directory, and resolve all the documents relative to that file.\r\n\r\nEach content variant needs to have its unique root URL (mount point) so that the variants can be deployed to the target site independently. This could be done directly in each version of `docusaurus.config.js`, but it might be cleaner to have them listed in some global config. `content-de/` would get a `/de/` root URL, `content-fr/` would map to `/fr/`, and so on. The default `content/` folder, depending on the source language, would also get a specific root URL, e.g. `/en/`. Having a root URL other than `/` is necessary for per-URL language redirects.\r\n\r\nMaking a version of a site means that the current state of these content folders needs to be duplicated. For example, when one decides to cut a version `1.x`, what would be done is:\r\n- `content` folder is copied to `content-1.x` folder, and the root URL of the versioned copy changes from its current one, e.g. `/en/`, to `/en/1.x/`  \r\n- `content-de` folder is copied to `content-de-1.x` with `/de/1.x/` root URL\r\n- `content-fr` folder is copied to `content-fr-1.x` with `/fr/1.x/` root URL\r\n- ...and so on.\r\n\r\nSimilarly, running `docusaurus deploy <content-directory>` would deploy this specific directory. It would be handy to have globs supported, so that one could say `docusaurus deploy *` to deploy all content directories, or `docusaurus deploy *-1.x` to redeploy all the content directories that end with `-1.x`.\r\n\r\nDocusaurus would likely need to have static pre-rendered maps of all files for each of the content directories so that it can do quick lookups and per-URL language-based redirects, and that language negotiation/redirect portion will be shared across all content variants. Redeploying a particular language or a particular version would update these static maps, allowing to dynamically render the language switcher on all the pages.\r\n\r\n## Current workaround\r\n\r\nRight now it should be possible to mimic the behavior I described above to some extent by creating a side project for each language variant and deploying each sub-site independently to a subdirectory of a global site. Symlinking directories like `node_modules`, `src` and some common files might help in keeping all these versions in sync. A global 404 handler might be used to dynamically switch to an available language-specific variant of the page if a generic URL is provided.\r\n\r\nSorry if that\'s a lot of text to process. :) Would love to hear your thoughts.', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'slorber', 'comment_id': 661091266.0, 'datetime': '2020-07-20 14:55:52+00:00', 'masked_author': 'username_4', 'text': 'Thanks for your feedback @username_5 . I agree with you on most parts. If you are on discord, that could be useful that we chat before I start working on this feature', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'iafan', 'comment_id': 661271810.0, 'datetime': '2020-07-20 18:54:29+00:00', 'masked_author': 'username_5', 'text': ""@username_4 Of course. I DM'ed you on Discord."", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'slorber', 'comment_id': 677825144.0, 'datetime': '2020-08-20 18:24:37+00:00', 'masked_author': 'username_4', 'text': ""Hey there. I'm closing this issue in favor of a new one: https://github.com/facebook/docusaurus/issues/3317\r\n\r\nI'm working on i18n, and have already integrated a few feedbacks from this issue already."", 'title': None, 'type': 'comment'}
+ {'action': 'closed', 'author': 'slorber', 'comment_id': None, 'datetime': '2020-08-20 18:24:46+00:00', 'masked_author': 'username_4', 'text': '', 'title': None, 'type': 'issue'}]","<issue_start><issue_comment>Title: [v2] Translations approach
+username_0: <!--
+  Consider requesting the feature on https://docusaurus-2.netlify.com/feedback/ instead.
+  Feature requests on v1 are more likely to be missed as we're focusing on building v2.
+-->
+
+## 💥 Proposal
+
+An umbrella issue to track the translations work for v2 and guide the design and implementation on the feature in v2. Give suggestions and feedback on this issue.
+
+## v1 Issues
+
+- Build times are slow
+- https://stackoverflow.com/questions/59125516/versioned-docusaurus-site-returns-404-for-the-other-languages
+
+### Have you read the [Contributing Guidelines on issues](https://github.com/facebook/docusaurus/blob/master/CONTRIBUTING.md#reporting-new-issues)?
+
+Yes
+<issue_comment>username_1: Do you plan use an approach like the [`react-i18n-intl`](https://github.com/i18next/react-i18next/)? In the v1, we have the `crowdin` to make the translations, but this put the limitation to assume that the default language is english. Is a plan to v2 change this architecture, to make possible the developer submit your own translations and we use a framwork to read them?
+<issue_comment>username_0: There are two things we need to translate here:
+
+- UI and React components - Those can be powered by i18n libraries such as [FBT](https://facebook.github.io/fbt/) and [`react-i18n-intl`](https://fburl.com/deltoid3/sprmvo2j)
+- Documentation - I presume the docs for another language would be side-by-side with the original docs:
+
+```
+docs
+├── introduction.md
+├── introduction.jp.md
+├── introduction.es.md
+...
+```
+<issue_comment>username_2: @username_0 would #2302 need to be completed first, or will versioning stay similar enough as presented to the user?
+<issue_comment>username_0: @username_2 Versioning might change a bit. We might end up doing /<baseUrl>/<locale>/<docs>/<version>. IMO locale should be a first class feature in Docusaurus.
+<issue_comment>username_2: `////` meaning something like `/en/docs/v2/somedoc-name`?
+<issue_comment>username_0: @username_2 Sorry I had to wrap the text in a code tags for it to show. But you got it!
+<issue_comment>username_3: We would still love to be able to use `crowdin` if that is possible.
+<issue_comment>username_4: There are many potential solutions for i18n in v2 that we are thinking about.
+
+I think for regular MD docs, we should stick to integrating with a SaaS that allows uploading MD files directly, so that translators can work in full doc context, instead of translating key/value pairs.
+
+Keeping compability with Crowdin is probably important to v1 users.
+
+We also need to validate that Crowdin and other i18n SaaS providers works great with MDX (ie docs pages embedding React components for interactive demos). If you have feedback on that I'm interested.
+<issue_comment>username_5: I've been exploring using Docusaurus for a multilingual site, only to realize v2 doesn't have any i18n layer. I have some experience with localizing products/documentation in various forms, including some automated localization pipelines, so here are my thoughts on how I would expect i18n to be handled:
+
+1. I'd prefer i18n of an open-source project to be SaaS platform agnostic, so that Docusaurus users could pick the SaaS of their choice, or stick with an open-source localization solution.
+2. MD/MDX, while not being the easiest format for localization purposes, is something Docusaurus has committed to use, so an external localization solution or process needs be able to work with MDX as a source and produce MDX as a target.
+3. Scalability of building/deploying a multilingual site is a concern. Adding a number of languages on top of a multi-versioned site adds even more complexity. However, it's unlikely that older versions of the documentation will need to continue to be translated or regularly rebuilt. Ideally, making a versioned snapshot would mean that the current state of the site and all its current translations is frozen, built, and not being rebuilt unless explicitly asked. This would potentially allow to have many versions that would not slow down the builds. Only the latest version of the site would be actively translated and built.
+4. For the speed of development, it is best for the developers or content creators to focus on the source language only, and build/preview only that language. This means that until explicitly asked, it should be fine to compile only the source language, and have the site functional. Ideally, docusaurus could be told to build a specific language (including live-reload scenarios), or to build all languages at once. With this, translations that are being automatically committed to the site repo (in continuous localization scenarios) would not slow down the development.
+5. For SEO, bookmarking and link sharing, a cleanest way is to have each language exposed explicitly in the URL, with the language negotiation being performed at each page level. For example:
+    - Visiting `/` URL on a multi-lingual site would redirect to a language-specific URL (e.g. `/en/`, `/de/`, `/fr/`) based on available languages for that URL, and user's browser language preferences.
+    - Visiting `/some-folder/some-page/` would redirect the user to e.g. `/en/some-folder/some-page/`, `/de/some-folder/some-page/` or `/fr/some-folder/some-page/`. An ability to provide deep links that auto-resolve to the target user's language is a must when using them in the product UI, marketing emails, and so on.
+6. Translating content takes some time, so if a page is missing in a specific language, it shouldn't break the build; If one goes to a language-specific URL, and the page doesn't exist [yet], the site could show a 404 page that says ""this page is not available in your language yet, but you can switch to another language it is available in: xx, yy, zz.""
+7. It should be possible to allow for a partial translation of websites. In other words, a situation where a particular page doesn't exist in a particular language, is valid and should not be considered temporary. Unresolved document IDs referenced from `sidebars.js` must not break the build, but hide that link from the document tree, and give a warning in the console log.
+
+## Proposal
+
+A set of localizable files include `docusaurus.config.js`, `sidebars.js` and content folders (`blog/`, `docs/`). Imagine that you can have them sitting together in some common subfolder, e.g. `content/`. So the structure becomes:
+```
+content/
+      blog/
+      docs/
+      docusaurus.config.js
+      sidebars.js
+node_modules/
+src/
+static/
+package.json
+...
+```
+
+All localizable content needed by plugins needs to be externalized into JavaScript/TypeScript/JSON files and reside in the `content/` folder as well. Ideally there would be some common format and file naming convention that all plugins are expected to use.
+
+Running `docusaurus build` without parameters would compile only the site inside the default (`content/`) subfolder, with its local config, sidebars and content.
+
+An external localization process would need to take the source `content/` folder and create localized variants of this folder, for example, `content-de/`, `content-fr/`, etc. Running Docusaurus against a specific content folder would render that portion of the site. For example, `docusaurus build content-fr` would try to load `content-fr/docusaurus.config.js` relative to the current working directory, and resolve all the documents relative to that file.
+
+Each content variant needs to have its unique root URL (mount point) so that the variants can be deployed to the target site independently. This could be done directly in each version of `docusaurus.config.js`, but it might be cleaner to have them listed in some global config. `content-de/` would get a `/de/` root URL, `content-fr/` would map to `/fr/`, and so on. The default `content/` folder, depending on the source language, would also get a specific root URL, e.g. `/en/`. Having a root URL other than `/` is necessary for per-URL language redirects.
+
+Making a version of a site means that the current state of these content folders needs to be duplicated. For example, when one decides to cut a version `1.x`, what would be done is:
+- `content` folder is copied to `content-1.x` folder, and the root URL of the versioned copy changes from its current one, e.g. `/en/`, to `/en/1.x/`  
+- `content-de` folder is copied to `content-de-1.x` with `/de/1.x/` root URL
+- `content-fr` folder is copied to `content-fr-1.x` with `/fr/1.x/` root URL
+- ...and so on.
+
+Similarly, running `docusaurus deploy <content-directory>` would deploy this specific directory. It would be handy to have globs supported, so that one could say `docusaurus deploy *` to deploy all content directories, or `docusaurus deploy *-1.x` to redeploy all the content directories that end with `-1.x`.
+
+Docusaurus would likely need to have static pre-rendered maps of all files for each of the content directories so that it can do quick lookups and per-URL language-based redirects, and that language negotiation/redirect portion will be shared across all content variants. Redeploying a particular language or a particular version would update these static maps, allowing to dynamically render the language switcher on all the pages.
+
+## Current workaround
+
+Right now it should be possible to mimic the behavior I described above to some extent by creating a side project for each language variant and deploying each sub-site independently to a subdirectory of a global site. Symlinking directories like `node_modules`, `src` and some common files might help in keeping all these versions in sync. A global 404 handler might be used to dynamically switch to an available language-specific variant of the page if a generic URL is provided.
+
+Sorry if that's a lot of text to process. :) Would love to hear your thoughts.
+<issue_comment>username_4: Thanks for your feedback @username_5 . I agree with you on most parts. If you are on discord, that could be useful that we chat before I start working on this feature
+<issue_comment>username_5: @username_4 Of course. I DM'ed you on Discord.
+<issue_comment>username_4: Hey there. I'm closing this issue in favor of a new one: https://github.com/facebook/docusaurus/issues/3317
+
+I'm working on i18n, and have already integrated a few feedbacks from this issue already.<issue_closed>"
+eduardoboucas/staticman,225926778,102,,"[{'action': 'opened', 'author': 'schickimiki', 'comment_id': None, 'datetime': '2017-05-03T09:22:19Z', 'masked_author': 'username_0', 'text': 'First of all thank for this very useful application with superpowers!\r\n\r\nWhy I think an option of storing comments as issues on Github would also be useful:\r\n- Ability to handle a comment as an actual issue by reacting with a feature update or bug fix and closing the issue.\r\n- Viewing single comments on github when they are stored as content in files pushed to a branch is not very user friendly. If the comments would be stored as issues then they can be viewed directly on the github issues page.', 'title': 'Submit comments as issues in github repo rather than as a seperate files in branch?', 'type': 'issue'}
+ {'action': 'closed', 'author': 'eduardoboucas', 'comment_id': None, 'datetime': '2017-07-04 00:13:15+00:00', 'masked_author': 'username_1', 'text': '', 'title': None, 'type': 'issue'}
+ {'action': 'created', 'author': 'eduardoboucas', 'comment_id': 312752739.0, 'datetime': '2017-07-04 00:13:15+00:00', 'masked_author': 'username_1', 'text': ""Thanks for submitting this, but I don't want to broaden the scope and complexity of the platform by introducing this feature."", 'title': None, 'type': 'comment'}]","<issue_start><issue_comment>Title: Submit comments as issues in github repo rather than as a seperate files in branch?
+username_0: First of all thank for this very useful application with superpowers!
+
+Why I think an option of storing comments as issues on Github would also be useful:
+- Ability to handle a comment as an actual issue by reacting with a feature update or bug fix and closing the issue.
+- Viewing single comments on github when they are stored as content in files pushed to a branch is not very user friendly. If the comments would be stored as issues then they can be viewed directly on the github issues page.<issue_closed>
+<issue_comment>username_1: Thanks for submitting this, but I don't want to broaden the scope and complexity of the platform by introducing this feature."
+website-scraper/website-scraper-puppeteer,609388999,16,,"[{'action': 'opened', 'author': 'BenPortner', 'comment_id': None, 'datetime': '2020-04-29 22:01:35+00:00', 'masked_author': 'username_0', 'text': ""Dear wsp developers,\r\n\r\nfirst of all, thank you for this wonderful plugin! I really like how you can write powerful scrapers with just a few lines of code using website-scraper + puppeteer!\r\n\r\nNow to my question / problem:\r\nI'm trying to scrape a website (http://bennyp.homestead.com/) hosted on homestead. Unfortunately, I cannot get wsp to download the content correctly. Homestead has some mechanisms to protect its content. In this case, a javascript embedded in the index.html injects the actual content as a frameset. This frameset links to another site called index~ns4.html. I see puppeteer opening both html files but it seems that the index~ns4.html is not downloaded at all and the index.html is downloaded before the content has been injected. Is there a way to get this to work, e.g. by making pupeteer wait longer before downloading the files?\r\n\r\nCheers and keep up the good work!\r\nBen"", 'title': 'JS-injected content not scraped correctly', 'type': 'issue'}
+ {'action': 'created', 'author': 's0ph1e', 'comment_id': 622528470.0, 'datetime': '2020-05-01 19:27:10+00:00', 'masked_author': 'username_1', 'text': ""Hi @username_0 👋 \r\n\r\nThank you for your feedback!\r\n\r\nI've checked issue with mentioned website and found that it is caused by redirect done by javascript with `location.replace`. \r\n\r\nTo fix similar issues in future I've added `blockNavigation` options which blocks such navigations. It was released in version [0.1.5](https://github.com/website-scraper/website-scraper-puppeteer/releases/tag/v0.1.5)\r\n\r\n```javascript\r\n// usage example\r\nscrape({\r\n\turls: ['http://bennyp.homestead.com'],\r\n\tdirectory: 'tmpDir/' + new Date().getTime(),\r\n\tplugins: [\r\n\t\tnew PuppeteerPlugin({ blockNavigation: true }),\r\n\t]\r\n});\r\n```\r\n\r\n\r\nHope it helps"", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'BenPortner', 'comment_id': 625453251.0, 'datetime': '2020-05-07 19:31:54+00:00', 'masked_author': 'username_0', 'text': ""Thank you so much for your fix @username_1! Now I can finally download and open the html file. Only one minor problem persists: For some reason, the background image at http://bennyp.homestead.com/defaultUser/images/backgrounds/extreme.gif is not being downloaded. In the readme of website-scraper I found that `maxDepth` controls the recursion depth for downloads. However, I have not set it so it should default to infinite depth?\r\n\r\nHere is my code:\r\n```js\r\nconst scrape = require('website-scraper');\r\nconst PuppeteerPlugin = require('website-scraper-puppeteer');\r\n\r\nscrape({\r\n    urls: ['http://bennyp.homestead.com'],\r\n    directory: 'bennyp',\r\n    plugins: [ \r\n      new PuppeteerPlugin({\r\n        launchOptions: { headless: false },\r\n        scrollToBottom: { timeout: 10000, viewportN: 10 },\r\n        blockNavigation: true,\r\n      })\r\n    ]\r\n});\r\n```\r\nAny ideas? Thanks again for your help. It is much appreciated!\r\n\r\nCheers.\r\nBen"", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 's0ph1e', 'comment_id': 629648328.0, 'datetime': '2020-05-16 13:46:30+00:00', 'masked_author': 'username_1', 'text': 'Hi @username_0 \r\n\r\nAs I can see it is not downloaded because it is defined in \'background\' attribute of body tag, like `<body background=""url"">`. The background attribute deprecated in HTML5, it\'s not usual now so was not handled by default. You can add `sources` to your options:\r\n\r\n```\r\nsources: [...scrape.defaults.sources,\r\n\t{ selector: \'[background]\', attr: \'background\' }\r\n],\r\n```\r\nit will download all default sources + all sources from `background` attribute of tags that contain background attribute.\r\n\r\nI\'ll consider adding this rule to default config of sources to download.', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'BenPortner', 'comment_id': 636496936.0, 'datetime': '2020-05-31 16:49:56+00:00', 'masked_author': 'username_0', 'text': 'Hi @username_1,\r\n\r\nthat did the trick 😉 Thank you very much for your help! Now everything is working perfectly! \r\n\r\nI love how website-scraper + puppeteer is powerful yet easy to use! Keep up the excellent work!\r\n\r\nBen', 'title': None, 'type': 'comment'}
+ {'action': 'closed', 'author': 'BenPortner', 'comment_id': None, 'datetime': '2020-05-31 16:50:06+00:00', 'masked_author': 'username_0', 'text': '', 'title': None, 'type': 'issue'}]","<issue_start><issue_comment>Title: JS-injected content not scraped correctly
+username_0: Dear wsp developers,
+
+first of all, thank you for this wonderful plugin! I really like how you can write powerful scrapers with just a few lines of code using website-scraper + puppeteer!
+
+Now to my question / problem:
+I'm trying to scrape a website (http://bennyp.homestead.com/) hosted on homestead. Unfortunately, I cannot get wsp to download the content correctly. Homestead has some mechanisms to protect its content. In this case, a javascript embedded in the index.html injects the actual content as a frameset. This frameset links to another site called index~ns4.html. I see puppeteer opening both html files but it seems that the index~ns4.html is not downloaded at all and the index.html is downloaded before the content has been injected. Is there a way to get this to work, e.g. by making pupeteer wait longer before downloading the files?
+
+Cheers and keep up the good work!
+Ben
+<issue_comment>username_1: Hi @username_0 👋 
+
+Thank you for your feedback!
+
+I've checked issue with mentioned website and found that it is caused by redirect done by javascript with `location.replace`. 
+
+To fix similar issues in future I've added `blockNavigation` options which blocks such navigations. It was released in version [0.1.5](https://github.com/website-scraper/website-scraper-puppeteer/releases/tag/v0.1.5)
+
+```javascript
+// usage example
+scrape({
+	urls: ['http://bennyp.homestead.com'],
+	directory: 'tmpDir/' + new Date().getTime(),
+	plugins: [
+		new PuppeteerPlugin({ blockNavigation: true }),
+	]
+});
+```
+
+
+Hope it helps
+<issue_comment>username_0: Thank you so much for your fix @username_1! Now I can finally download and open the html file. Only one minor problem persists: For some reason, the background image at http://bennyp.homestead.com/defaultUser/images/backgrounds/extreme.gif is not being downloaded. In the readme of website-scraper I found that `maxDepth` controls the recursion depth for downloads. However, I have not set it so it should default to infinite depth?
+
+Here is my code:
+```js
+const scrape = require('website-scraper');
+const PuppeteerPlugin = require('website-scraper-puppeteer');
+
+scrape({
+    urls: ['http://bennyp.homestead.com'],
+    directory: 'bennyp',
+    plugins: [ 
+      new PuppeteerPlugin({
+        launchOptions: { headless: false },
+        scrollToBottom: { timeout: 10000, viewportN: 10 },
+        blockNavigation: true,
+      })
+    ]
+});
+```
+Any ideas? Thanks again for your help. It is much appreciated!
+
+Cheers.
+Ben
+<issue_comment>username_1: Hi @username_0 
+
+As I can see it is not downloaded because it is defined in 'background' attribute of body tag, like `<body background=""url"">`. The background attribute deprecated in HTML5, it's not usual now so was not handled by default. You can add `sources` to your options:
+
+```
+sources: [...scrape.defaults.sources,
+	{ selector: '[background]', attr: 'background' }
+],
+```
+it will download all default sources + all sources from `background` attribute of tags that contain background attribute.
+
+I'll consider adding this rule to default config of sources to download.
+<issue_comment>username_0: Hi @username_1,
+
+that did the trick 😉 Thank you very much for your help! Now everything is working perfectly! 
+
+I love how website-scraper + puppeteer is powerful yet easy to use! Keep up the excellent work!
+
+Ben<issue_closed>"
+ember-learn/ember-website,569982234,606,"{'number': 606.0, 'repo': 'ember-website', 'user_login': 'ember-learn'}","[{'action': 'opened', 'author': 'jamesdixon', 'comment_id': None, 'datetime': '2020-02-24T16:46:43Z', 'masked_author': 'username_0', 'text': 'First, the website looks amazing! Cheers.\r\n\r\nSecond, this PR adds Scout to the ""Who Uses Ember"" page. We use Ember to power our main web application located at https://app.scoutforpets.com.\r\n\r\nThanks!', 'title': 'adds Scout to users page', 'type': 'issue'}
+ {'action': 'created', 'author': 'MelSumner', 'comment_id': 592040594.0, 'datetime': '2020-02-27 16:09:15+00:00', 'masked_author': 'username_1', 'text': '@username_0 thanks for the PR! Please also share the annual [Ember Community Survey](https://emberjs.com/ember-community-survey-2020) internally. Thank you!', 'title': None, 'type': 'comment'}]","<issue_start><issue_comment>Title: adds Scout to users page
+username_0: First, the website looks amazing! Cheers.
+
+Second, this PR adds Scout to the ""Who Uses Ember"" page. We use Ember to power our main web application located at https://app.scoutforpets.com.
+
+Thanks!
+<issue_comment>username_1: @username_0 thanks for the PR! Please also share the annual [Ember Community Survey](https://emberjs.com/ember-community-survey-2020) internally. Thank you!"
+gohugoio/hugo,226207386,3433,,"[{'action': 'opened', 'author': 'lebarde', 'comment_id': None, 'datetime': '2017-05-04T08:19:11Z', 'masked_author': 'username_0', 'text': ""Hello,\r\n\r\n@bep spoke of [standardizing themes](https://github.com/spf13/hugo/issues/2639#issuecomment-273824050). I think this is a great idea and a must-have, but I have not seen a general discussion over that.\r\n\r\nSo what is to do?\r\n\r\n- Build a `hugo get` command to get a theme?\r\n- Wouldn't it be nice to have a general `hugo get` command with the following sub-commands:\r\n```\r\nhugo get theme github.com/the-theme-url\r\nhugo get widget github.com/the-widget-url\r\nhugo get what else?\r\n```\r\nor even better:\r\n```\r\nhugo get theme the-theme's-unique-identifyier # (e.g. material-docs)\r\nhugo get widget the-widget's-unique-identifyier\r\nhugo get what else?\r\n```\r\nwhich would be so nice. We also would need `hugo update` to update themes and widgets in this case.\r\n\r\n- Would we need to centralize themes and widgets? How to do it? Looking at the [hugoThemes](https://github.com/spf13/hugoThemes) repository, I think themes are already centralized and that it is ready to use with a `hugo get theme` command, which needs to be written.\r\n- Now, what would be the standards for a theme? I assume we don't need more than the following files:\r\n```\r\nthemes/\r\n└── mytheme\r\n    ├── config.toml\r\n    └── index.html\r\n```\r\nAnd inside the `config.toml` (or `config.yaml`), the assertion to extend a theme would be:\r\n```\r\nextends: someother-theme\r\n```\r\n- I often saw that I could not switch a theme without heavily modifying the main site's config file. So, should we specify and recommend standard config vars (especially, `params`) to ensure that a same site would work with all themes that follow those guidelines (to draw the parallel, I would like to recommend some specific widget area names for the same reasons)?\r\n\r\n### Sum up\r\n\r\nIn my opinion, the general goal we have to aim is to enable non-developers (or not-so power users) to use Hugo and get personnalized, pretty websites. This goes by:\r\n\r\n1) Switching themes should not be painful (user has to experiment several themes if he/she cannot develop his/her own). This would be enabled by standard config recommendations for theme developers.\r\n2) Modifying a theme should be easy. One modification, in the case of theme inheritance, would need only to create one directory, one config file with one line (`extends: …`), and one file that replaces that of the parent theme (He/she copies the original file in the child theme and modifies it). This is easy enough for not-so power users (but not true beginners, but diving into themes cannot be *that* accessible in my opinion).\r\n3) Adding information aside of the main content should be easy. This is where widgets come into play. Widget area names should be normalized, such as that another theme would probably use that same name for the same position (e.g. sidebars, headers, footers).\r\n\r\nAnd you? What do you think we need to help make the Hugo experience even happier?"", 'title': 'Theme standards and general user experience', 'type': 'issue'}]","<issue_start><issue_comment>Title: Theme standards and general user experience
+username_0: Hello,
+
+@bep spoke of [standardizing themes](https://github.com/spf13/hugo/issues/2639#issuecomment-273824050). I think this is a great idea and a must-have, but I have not seen a general discussion over that.
+
+So what is to do?
+
+- Build a `hugo get` command to get a theme?
+- Wouldn't it be nice to have a general `hugo get` command with the following sub-commands:
+```
+hugo get theme github.com/the-theme-url
+hugo get widget github.com/the-widget-url
+hugo get what else?
+```
+or even better:
+```
+hugo get theme the-theme's-unique-identifyier # (e.g. material-docs)
+hugo get widget the-widget's-unique-identifyier
+hugo get what else?
+```
+which would be so nice. We also would need `hugo update` to update themes and widgets in this case.
+
+- Would we need to centralize themes and widgets? How to do it? Looking at the [hugoThemes](https://github.com/spf13/hugoThemes) repository, I think themes are already centralized and that it is ready to use with a `hugo get theme` command, which needs to be written.
+- Now, what would be the standards for a theme? I assume we don't need more than the following files:
+```
+themes/
+└── mytheme
+    ├── config.toml
+    └── index.html
+```
+And inside the `config.toml` (or `config.yaml`), the assertion to extend a theme would be:
+```
+extends: someother-theme
+```
+- I often saw that I could not switch a theme without heavily modifying the main site's config file. So, should we specify and recommend standard config vars (especially, `params`) to ensure that a same site would work with all themes that follow those guidelines (to draw the parallel, I would like to recommend some specific widget area names for the same reasons)?
+
+### Sum up
+
+In my opinion, the general goal we have to aim is to enable non-developers (or not-so power users) to use Hugo and get personnalized, pretty websites. This goes by:
+
+1) Switching themes should not be painful (user has to experiment several themes if he/she cannot develop his/her own). This would be enabled by standard config recommendations for theme developers.
+2) Modifying a theme should be easy. One modification, in the case of theme inheritance, would need only to create one directory, one config file with one line (`extends: …`), and one file that replaces that of the parent theme (He/she copies the original file in the child theme and modifies it). This is easy enough for not-so power users (but not true beginners, but diving into themes cannot be *that* accessible in my opinion).
+3) Adding information aside of the main content should be easy. This is where widgets come into play. Widget area names should be normalized, such as that another theme would probably use that same name for the same position (e.g. sidebars, headers, footers).
+
+And you? What do you think we need to help make the Hugo experience even happier?"
+WebAssembly/website,650562077,179,"{'number': 179.0, 'repo': 'website', 'user_login': 'WebAssembly'}","[{'action': 'opened', 'author': 'RReverser', 'comment_id': None, 'datetime': '2020-07-03T12:20:40Z', 'masked_author': 'username_0', 'text': 'I\'ve added [COOP+COEP](https://web.dev/coop-coep/) headers to the feature test page, which unlocks powerful APIs like shared memory. In particular, This flips ""threads"" on Firefox stable to true!\r\n\r\ncc @chicoxyzzy just to double-check on someone else\'s Firefox :)', 'title': 'Enable COOP+COEP on the feature test page', 'type': 'issue'}
+ {'action': 'created', 'author': 'RReverser', 'comment_id': 653523840.0, 'datetime': '2020-07-03 12:25:51+00:00', 'masked_author': 'username_0', 'text': ""Er, I've actually tested on Beta, didn't realise it overwrote my stable installation..."", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'RReverser', 'comment_id': 653528157.0, 'datetime': '2020-07-03 12:37:35+00:00', 'masked_author': 'username_0', 'text': 'Fixed to ""Beta 79"".', 'title': None, 'type': 'comment'}]","<issue_start><issue_comment>Title: Enable COOP+COEP on the feature test page
+username_0: I've added [COOP+COEP](https://web.dev/coop-coep/) headers to the feature test page, which unlocks powerful APIs like shared memory. In particular, This flips ""threads"" on Firefox stable to true!
+
+cc @chicoxyzzy just to double-check on someone else's Firefox :)
+<issue_comment>username_0: Er, I've actually tested on Beta, didn't realise it overwrote my stable installation...
+<issue_comment>username_0: Fixed to ""Beta 79""."
+flutter/website,875934555,5733,"{'number': 5733.0, 'repo': 'website', 'user_login': 'flutter'}","[{'action': 'opened', 'author': 'kevmoo', 'comment_id': None, 'datetime': '2021-05-05T00:02:19Z', 'masked_author': 'username_0', 'text': '', 'title': 'Use code_excerpt[er|_updater] from site-shared', 'type': 'issue'}
+ {'action': 'created', 'author': 'kevmoo', 'comment_id': 832331629.0, 'datetime': '2021-05-05 00:03:23+00:00', 'masked_author': 'username_0', 'text': '@username_1 –\xa0this seems...much better, right?\r\n\r\nStop depending on your fork of these?', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'kevmoo', 'comment_id': 832427708.0, 'datetime': '2021-05-05 05:46:04+00:00', 'masked_author': 'username_0', 'text': '@username_1 –\xa0I lack the power to squash. Please do the honors', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'RedBrogdon', 'comment_id': 832431617.0, 'datetime': '2021-05-05 05:55:45+00:00', 'masked_author': 'username_1', 'text': 'I, too, lack the power. @kwalrath, what dark wizardry is this? 😄', 'title': None, 'type': 'comment'}]","<issue_start><issue_comment>Title: Use code_excerpt[er|_updater] from site-shared
+username_0: 
+<issue_comment>username_0: @username_1 – this seems...much better, right?
+
+Stop depending on your fork of these?
+<issue_comment>username_0: @username_1 – I lack the power to squash. Please do the honors
+<issue_comment>username_1: I, too, lack the power. @kwalrath, what dark wizardry is this? 😄"
+kubernetes/website,1049263878,30426,"{'number': 30426.0, 'repo': 'website', 'user_login': 'kubernetes'}","[{'action': 'opened', 'author': 'luizgribeiro', 'comment_id': None, 'datetime': '2021-11-10T00:27:07Z', 'masked_author': 'username_0', 'text': 'The doc version for brazilian portuguese scale-intro page seems to be generated by an AI powered engine, which is not quite right and/or specific as the original one.\r\n\r\nThis PR changes a few words and a bit of the structure of the phrase in the pt-br doc, using de original (en) version as source of information.', 'title': 'docs: update scale-intro.html (pt-br)', 'type': 'issue'}
+ {'action': 'created', 'author': 'edsoncelio', 'comment_id': 964721950.0, 'datetime': '2021-11-10 02:22:31+00:00', 'masked_author': 'username_1', 'text': 'Hey @username_0 thanks for your PR! could you sign the CLA (as said [here](https://github.com/kubernetes/website/pull/30426#issuecomment-964666524))? after that i can review and then approve :)', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'luizgribeiro', 'comment_id': 965088341.0, 'datetime': '2021-11-10 12:33:08+00:00', 'masked_author': 'username_0', 'text': ""Hey @username_1! I've just done that. I hope it works now :crossed_fingers: :crossed_fingers:"", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'edsoncelio', 'comment_id': 965091994.0, 'datetime': '2021-11-10 12:37:08+00:00', 'masked_author': 'username_1', 'text': 'Thanks! /lgtm', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'edsoncelio', 'comment_id': 965096617.0, 'datetime': '2021-11-10 12:43:10+00:00', 'masked_author': 'username_1', 'text': '@jhonmike could you take a look on that? i already added my lgtm, thanks!  :D', 'title': None, 'type': 'comment'}]","<issue_start><issue_comment>Title: docs: update scale-intro.html (pt-br)
+username_0: The doc version for brazilian portuguese scale-intro page seems to be generated by an AI powered engine, which is not quite right and/or specific as the original one.
+
+This PR changes a few words and a bit of the structure of the phrase in the pt-br doc, using de original (en) version as source of information.
+<issue_comment>username_1: Hey @username_0 thanks for your PR! could you sign the CLA (as said [here](https://github.com/kubernetes/website/pull/30426#issuecomment-964666524))? after that i can review and then approve :)
+<issue_comment>username_0: Hey @username_1! I've just done that. I hope it works now :crossed_fingers: :crossed_fingers:
+<issue_comment>username_1: Thanks! /lgtm
+<issue_comment>username_1: @jhonmike could you take a look on that? i already added my lgtm, thanks!  :D"
+flutter/website,352099989,1169,"{'number': 1169.0, 'repo': 'website', 'user_login': 'flutter'}","[{'action': 'opened', 'author': 'chalin', 'comment_id': None, 'datetime': '2018-08-20T11:45:04Z', 'masked_author': 'username_0', 'text': 'delete mode 100644 _site/AUTHORS\r\n delete mode 100644 _site/README.md\r\n delete mode 100644 _site/Rakefile\r\n delete mode 100644 _site/analysis_options.yaml\r\n delete mode 100644 _site/firebase.json\r\n delete mode 100644 _site/firebase_config/firebase_rules.json\r\n delete mode 100644 _site/pubspec.lock\r\n delete mode 100644 _site/pubspec.yaml\r\n```\r\n\r\ncc @username_3', 'title': 'Site file reorg: move site sources to src folder', 'type': 'issue'}
+ {'action': 'created', 'author': 'miksen', 'comment_id': 414683869.0, 'datetime': '2018-08-21 13:59:20+00:00', 'masked_author': 'username_1', 'text': '@username_0 we seem to have lost all history to the content after this change !? E.g.:\r\n\r\nhttps://github.com/flutter/website/commits/master/src/fastlane.md\r\nhttps://github.com/flutter/website/commits/master/src/accessiblity.md', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'mit-mit', 'comment_id': 414684182.0, 'datetime': '2018-08-21 14:00:11+00:00', 'masked_author': 'username_2', 'text': '@username_0 we seem to have lost all history to the content after this change !? E.g.:\r\n\r\nhttps://github.com/flutter/website/commits/master/src/fastlane.md\r\nhttps://github.com/flutter/website/commits/master/src/accessiblity.md', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'chalin', 'comment_id': 414695472.0, 'datetime': '2018-08-21 14:32:25+00:00', 'masked_author': 'username_0', 'text': '7449 (1):\r\n      fix flutter-for-react-native CheatSheet link (#964)\r\n\r\nAdam (1):\r\n      Flutter for Xamarin.Forms (#1087)\r\n\r\nAdam Barth (110):\r\n      Initial commit\r\n     ...snip...\r\n      Update FractionalOffset references to Alignment (#691)\r\n\r\nAdam Williams (1):\r\n      start => starts typo fix (#613)\r\n\r\nAditya Arora (1):\r\n      get-sdk.md: Update installation docs (#774)\r\n\r\nAkshay Chordiya (1):\r\n      Fixed image url not working (#854)\r\n\r\nAlexandre Ardhuin (11):\r\n      Update getting-started.md\r\n      ...snip...\r\n      output expected formatting on travis (#268)\r\n\r\nAlter Ego (1):\r\n      fixed typo (#957)\r\n\r\nAlvin Konda (1):\r\n      update (#892)\r\n\r\nAndrew Brogdon (1):\r\n      Updating FAQ with APK/ipa details. (#1084)\r\n\r\nArthur Thompson (1):\r\n      Update upgrading.md (#642)\r\n\r\nBema (1):\r\n      Add missing parameter to itemBuilder callback\r\n\r\nBenjamin Misell (1):\r\n      Update iOS setup (#918)\r\n\r\nBrandon Donnelson (3):\r\n...\r\n```', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'mit-mit', 'comment_id': 414698019.0, 'datetime': '2018-08-21 14:39:33+00:00', 'masked_author': 'username_2', 'text': 'Ugh, is there anything we can do to make the GitHub UI work again? If not, I think we should revert this PR (having the GitHub UI work is more valuable than having a few less files in the root).', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'chalin', 'comment_id': 414701516.0, 'datetime': '2018-08-21 14:49:22+00:00', 'masked_author': 'username_0', 'text': 'This is just the beginning of structural changes to that repo. As you know a new version of the site is in the works. This is a first step along that path. (Btw, all of our other sites are organized in this way. This new organization helps separate concerns: localizing Jekyll source files to `/src`, while separating them from other resources like code, tooling, etc.)\r\n\r\nI believe that the root of the problem is that source code was embedded ""deep"" inside the Jekyll website source structure. It is usually best to keep sources at the root below, say, `examples`.\r\n\r\nThat being said, I\'ll let @username_3 and @username_4 weigh in.', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'Sfshaza', 'comment_id': 414722669.0, 'datetime': '2018-08-21 15:46:53+00:00', 'masked_author': 'username_3', 'text': ""I know that @mitmit is concerned that we preserve the history of the repo,\nbut when we reworked www.dartlang, for example, we started a brand new\nrepo. We preferred not to drag all the old history around, which had\ngreatly bloated the repo.\n\nSo, it's not my decision, but I'm OK with it. In the case of www.dartlang,\nwe saved the old repo for reference.\n\nFilip?"", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'filiph', 'comment_id': 414913751.0, 'datetime': '2018-08-22 05:11:57+00:00', 'masked_author': 'username_4', 'text': ""I'm strongly in favor of moving the files. As Patrice says, this is just a beginning of a larger refactor — it's not just a one-time cosmetic change. It unlocks the ability to grow the site, and bring in valuable tools and shared content from dartlang and webdev.\r\n\r\nWhile I understand the need to check history/blame for a piece of documentation, I think that regular users don't do it that often, if ever. Power users can use `--follow` from the command line."", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'mit-mit', 'comment_id': 414988197.0, 'datetime': '2018-08-22 10:33:46+00:00', 'masked_author': 'username_2', 'text': 'If you all think the move has value, and is aligned with future changes, then just go ahead. I was just reacting to a PR that was listed as having ""no side effects"" that did have an affect on something that I care about.\r\n\r\nI would also add that -- as shown by the contribution history of this repo -- a lot of this repo was created by non-""power users"", so it\'s important to consider our work flows as-well.', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'chalin', 'comment_id': 415101445.0, 'datetime': '2018-08-22 16:52:09+00:00', 'masked_author': 'username_0', 'text': 'Sorry about that. The ""no side effects"" was meant to imply that the site would look the same.\r\n\r\nSince the git history isn\'t lost, it\'s just not currently accessible from GH, making noise on https://github.com/isaacs/github/issues/900 might be a good thing to do.\r\n\r\nAs you probably know, while you can\'t view the _complete_ history of the relocated files all in one go, you can use GH view the history of files before they were relocated. For example, here is the history for `fastlane.md` (as viewed from the last commit before the file reorg): https://github.com/flutter/website/commits/7871e94d289189f860fbe069dd8729770cc73667/fastlane.md\r\n\r\nIf this is something that you\'d like to do often enough, I can create a branch referring to the last commit before the file reorg. It will make viewing history easier. Let me know if that might be helpful.', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'mit-mit', 'comment_id': 415102097.0, 'datetime': '2018-08-22 16:54:25+00:00', 'masked_author': 'username_2', 'text': ""It's OK really, let's just focus on getting all those awesome future changes done!"", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'chalin', 'comment_id': 415106760.0, 'datetime': '2018-08-22 17:09:22+00:00', 'masked_author': 'username_0', 'text': 'SG!', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'xster', 'comment_id': 415220826.0, 'datetime': '2018-08-22 23:30:32+00:00', 'masked_author': 'username_5', 'text': 'Can you update the asset references from the main repo like https://github.com/flutter/flutter/blob/master/README.md too? :)', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'chalin', 'comment_id': 415236625.0, 'datetime': '2018-08-23 00:57:29+00:00', 'masked_author': 'username_0', 'text': 'Yes, thanks for pointing that out! Done: https://github.com/flutter/flutter/pull/20935.', 'title': None, 'type': 'comment'}]","<issue_start><issue_comment>Title: Site file reorg: move site sources to src folder
+username_0: delete mode 100644 _site/AUTHORS
+ delete mode 100644 _site/README.md
+ delete mode 100644 _site/Rakefile
+ delete mode 100644 _site/analysis_options.yaml
+ delete mode 100644 _site/firebase.json
+ delete mode 100644 _site/firebase_config/firebase_rules.json
+ delete mode 100644 _site/pubspec.lock
+ delete mode 100644 _site/pubspec.yaml
+```
+
+cc @username_3
+<issue_comment>username_1: @username_0 we seem to have lost all history to the content after this change !? E.g.:
+
+https://github.com/flutter/website/commits/master/src/fastlane.md
+https://github.com/flutter/website/commits/master/src/accessiblity.md
+<issue_comment>username_2: @username_0 we seem to have lost all history to the content after this change !? E.g.:
+
+https://github.com/flutter/website/commits/master/src/fastlane.md
+https://github.com/flutter/website/commits/master/src/accessiblity.md
+<issue_comment>username_0: 7449 (1):
+      fix flutter-for-react-native CheatSheet link (#964)
+
+Adam (1):
+      Flutter for Xamarin.Forms (#1087)
+
+Adam Barth (110):
+      Initial commit
+     ...snip...
+      Update FractionalOffset references to Alignment (#691)
+
+Adam Williams (1):
+      start => starts typo fix (#613)
+
+Aditya Arora (1):
+      get-sdk.md: Update installation docs (#774)
+
+Akshay Chordiya (1):
+      Fixed image url not working (#854)
+
+Alexandre Ardhuin (11):
+      Update getting-started.md
+      ...snip...
+      output expected formatting on travis (#268)
+
+Alter Ego (1):
+      fixed typo (#957)
+
+Alvin Konda (1):
+      update (#892)
+
+Andrew Brogdon (1):
+      Updating FAQ with APK/ipa details. (#1084)
+
+Arthur Thompson (1):
+      Update upgrading.md (#642)
+
+Bema (1):
+      Add missing parameter to itemBuilder callback
+
+Benjamin Misell (1):
+      Update iOS setup (#918)
+
+Brandon Donnelson (3):
+...
+```
+<issue_comment>username_2: Ugh, is there anything we can do to make the GitHub UI work again? If not, I think we should revert this PR (having the GitHub UI work is more valuable than having a few less files in the root).
+<issue_comment>username_0: This is just the beginning of structural changes to that repo. As you know a new version of the site is in the works. This is a first step along that path. (Btw, all of our other sites are organized in this way. This new organization helps separate concerns: localizing Jekyll source files to `/src`, while separating them from other resources like code, tooling, etc.)
+
+I believe that the root of the problem is that source code was embedded ""deep"" inside the Jekyll website source structure. It is usually best to keep sources at the root below, say, `examples`.
+
+That being said, I'll let @username_3 and @username_4 weigh in.
+<issue_comment>username_3: I know that @mitmit is concerned that we preserve the history of the repo,
+but when we reworked www.dartlang, for example, we started a brand new
+repo. We preferred not to drag all the old history around, which had
+greatly bloated the repo.
+
+So, it's not my decision, but I'm OK with it. In the case of www.dartlang,
+we saved the old repo for reference.
+
+Filip?
+<issue_comment>username_4: I'm strongly in favor of moving the files. As Patrice says, this is just a beginning of a larger refactor — it's not just a one-time cosmetic change. It unlocks the ability to grow the site, and bring in valuable tools and shared content from dartlang and webdev.
+
+While I understand the need to check history/blame for a piece of documentation, I think that regular users don't do it that often, if ever. Power users can use `--follow` from the command line.
+<issue_comment>username_2: If you all think the move has value, and is aligned with future changes, then just go ahead. I was just reacting to a PR that was listed as having ""no side effects"" that did have an affect on something that I care about.
+
+I would also add that -- as shown by the contribution history of this repo -- a lot of this repo was created by non-""power users"", so it's important to consider our work flows as-well.
+<issue_comment>username_0: Sorry about that. The ""no side effects"" was meant to imply that the site would look the same.
+
+Since the git history isn't lost, it's just not currently accessible from GH, making noise on https://github.com/isaacs/github/issues/900 might be a good thing to do.
+
+As you probably know, while you can't view the _complete_ history of the relocated files all in one go, you can use GH view the history of files before they were relocated. For example, here is the history for `fastlane.md` (as viewed from the last commit before the file reorg): https://github.com/flutter/website/commits/7871e94d289189f860fbe069dd8729770cc73667/fastlane.md
+
+If this is something that you'd like to do often enough, I can create a branch referring to the last commit before the file reorg. It will make viewing history easier. Let me know if that might be helpful.
+<issue_comment>username_2: It's OK really, let's just focus on getting all those awesome future changes done!
+<issue_comment>username_0: SG!
+<issue_comment>username_5: Can you update the asset references from the main repo like https://github.com/flutter/flutter/blob/master/README.md too? :)
+<issue_comment>username_0: Yes, thanks for pointing that out! Done: https://github.com/flutter/flutter/pull/20935."
+facebook/react-native-website,310773853,281,,"[{'action': 'opened', 'author': 'heisty', 'comment_id': None, 'datetime': '2018-04-03 10:09:18+00:00', 'masked_author': 'username_0', 'text': 'D:\\Official Project Files\\react-native-website\\website>yarn start\r\nyarn run v1.5.1\r\n$ docusaurus-start\r\nStarting Docusaurus server on port 3000...\r\nNo \'original_id\' field found in D:/Official Project Files/react-native-website/website/versioned_docs/version-0.10/modal.md. Perhaps you forgot to add it when importing prior versions of your docs?\r\nD:\\Official Project Files\\react-native-website\\website\\node_modules\\docusaurus\\lib\\start-server.js:57\r\n      throw ex;\r\n      ^\r\n\r\nError: No \'original_id\' field found in D:/Official Project Files/react-native-website/website/versioned_docs/version-0.10/modal.md. Perhaps you forgot to add it when importing prior versions of your docs?\r\n    at D:/Official Project Files/react-native-website/website/node_modules/docusaurus/lib/server/versionFallback.js:104:11\r\n    at Array.forEach (<anonymous>)\r\n    at Object.<anonymous> (D:/Official Project Files/react-native-website/website/node_modules/docusaurus/lib/server/versionFallback.js:92:7)\r\n    at Module._compile (module.js:649:30)\r\n    at loader (D:\\Official Project Files\\react-native-website\\website\\node_modules\\babel-register\\lib\\node.js:144:5)\r\n    at Object.require.extensions.(anonymous function) [as .js] (D:\\Official Project Files\\react-native-website\\website\\node_modules\\babel-register\\lib\\node.js:154:7)\r\n    at Module.load (module.js:561:32)\r\n    at tryModuleLoad (module.js:501:12)\r\n    at Function.Module._load (module.js:493:3)\r\n    at Module.require (module.js:593:17)\r\nerror An unexpected error occurred: ""Command failed.\r\nExit code: 1\r\nCommand: C:\\\\Windows\\\\system32\\\\cmd.exe\r\nArguments: /d /s /c docusaurus-start\r\nDirectory: D:\\\\Official Project Files\\\\react-native-website\\\\website', 'title': ""Error: No 'original_id' field found in D:/Official Project Files/react-native-website/website/versioned_docs/version-0.10/modal.md."", 'type': 'issue'}
+ {'action': 'created', 'author': 'ronaldroe', 'comment_id': 379154914.0, 'datetime': '2018-04-06 05:48:01+00:00', 'masked_author': 'username_1', 'text': 'Having the same issue. Please help.', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'ronaldroe', 'comment_id': 380511429.0, 'datetime': '2018-04-11 16:19:30+00:00', 'masked_author': 'username_1', 'text': 'Tried updating Docusaurus to `@latest`. No joy.', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'jpujol880807', 'comment_id': 381629923.0, 'datetime': '2018-04-16 14:59:59+00:00', 'masked_author': 'username_2', 'text': 'Same issue here\r\nArguments: \r\n  C:\\Program Files\\nodejs\\node.exe C:\\Program Files (x86)\\Yarn\\bin\\yarn.js start\r\n\r\nPATH: \r\n  C:\\Users\\julio\\bin;C:\\Program Files\\Git\\mingw64\\bin;C:\\Program Files\\Git\\usr\\local\\bin;C:\\Program Files\\Git\\usr\\bin;C:\\Program Files\\Git\\usr\\bin;C:\\Program Files\\Git\\mingw64\\bin;C:\\Program Files\\Git\\usr\\bin;C:\\Users\\julio\\bin;C:\\Python34;C:\\Python34\\Scripts;C:\\ProgramData\\Oracle\\Java\\javapath;C:\\Windows\\system32;C:\\Windows;C:\\Windows\\System32\\Wbem;C:\\Windows\\System32\\WindowsPowerShell\\v1.0;C:\\Program Files\\Git\\cmd;C:\\Program Files\\TortoiseGit\\bin;C:\\Program Files\\dotnet;C:\\Program Files\\Microsoft SQL Server\\130\\Tools\\Binn;C:\\Program Files\\nodejs;C:\\Program Files (x86)\\Yarn\\bin;C:\\Users\\julio\\AppData\\Local\\Microsoft\\WindowsApps;C:\\xampp\\php;C:\\Users\\julio\\AppData\\Roaming\\npm;C:\\Users\\julio\\AppData\\Roaming\\npm\\node_modules@angular\\cli\\bi;.;C:\\Users\\julio\\AppData\\Local\\Yarn\\bin;C:\\Program Files\\Git\\usr\\bin\\vendor_perl;C:\\Program Files\\Git\\usr\\bin\\core_perl\r\n\r\nYarn version: \r\n  1.5.1\r\n\r\nNode version: \r\n  8.11.1\r\n\r\nPlatform: \r\n  win32 x64\r\n\r\nnpm manifest: \r\n  {\r\n    ""name"": ""react-native-website"",\r\n    ""description"": ""React Native website"",\r\n    ""version"": ""0.0.1"",\r\n    ""private"": true,\r\n    ""bugs"": {\r\n      ""url"": ""https://github.com/facebook/react-native-website""\r\n    },\r\n    ""license"": ""CC"",\r\n    ""main"": ""n/a"",\r\n    ""repository"": {\r\n      ""type"": ""git"",\r\n      ""url"": ""git+https://github.com/facebook/react-native-website.git""\r\n    },\r\n    ""scripts"": {\r\n      ""start"": ""docusaurus-start"",\r\n      ""build"": ""docusaurus-build"",\r\n      ""publish-gh-pages"": ""docusaurus-publish"",\r\n      ""version"": ""docusaurus-version"",\r\n      ""rename-version"": ""docusaurus-rename-version"",\r\n      ""ci-check"": ""yarn prettier:diff && node image-check.js"",\r\n      ""format:source"":\r\n        ""prettier --config ../.prettierrc --write \\""{core/**/*.js,static/js/**/*.js}\\"""",\r\n      ""format:markdown"":\r\n        ""prettier --config ../.prettierrc  --write \\""{../docs/**/*.md,versioned_docs/**/*.md,blog/**/*.md}\\"""",\r\n      ""nit:source"":\r\n        ""prettier --config ../.prettierrc  --list-different \\""{core/**/*.js,static/js/**/*.js}\\"""",\r\n      ""nit:markdown"":\r\n        ""prettier --config ../.prettierrc  --list-different \\""{../docs/**/*.md,versioned_docs/**/*.md,blog/**/*.md}\\"""",\r\n      ""prettier"": ""yarn format:source && yarn format:markdown"",\r\n      ""prettier:diff"": ""yarn nit:source"",\r\n      ""precommit"": ""lint-staged"",\r\n      ""test"": ""yarn build""\r\n    },\r\n    ""lint-staged"": {\r\n      ""*.{js,json,css,md}"": [""prettier --write"", ""git add""]\r\n    },\r\n    ""dependencies"": {\r\n      ""docusaurus"": ""^1.0.9"",\r\n      ""highlight.js"": ""^9.12.0"",\r\n      ""remarkable"": ""^1.7.1""\r\n    },\r\n    ""devDependencies"": {\r\n      ""bluebird"": ""^3.5.1"",\r\n      ""fs-extra"": ""^5.0.0"",\r\n      ""glob"": ""^7.1.2"",\r\n      ""glob-promise"": ""^3.3.0"",\r\n      ""husky"": ""^0.14.3"",\r\n      ""lint-staged"": ""^6.0.0"",\r\n      ""path"": ""^0.12.7"",\r\n      ""prettier"": ""1.9.1""\r\n    }\r\n  }\r\n\r\nyarn manifest: \r\n  No manifest\r\n\r\nLockfile: \r\n  # THIS IS AN AUTOGENERATED FILE. DO NOT EDIT THIS FILE DIRECTLY.\r\n  # yarn lockfile v1\r\n  \r\n  \r\n  accepts@~1.3.5:\r\n[Truncated]\n    version ""2.3.0""\r\n    resolved ""https://registry.yarnpkg.com/yargs/-/yargs-2.3.0.tgz#e900c87250ec5cd080db6009fe3dd63156f1d7fb""\r\n    dependencies:\r\n      wordwrap ""0.0.2""\r\n\r\nTrace: \r\n  Error: Command failed.\r\n  Exit code: 1\r\n  Command: C:\\Windows\\system32\\cmd.exe\r\n  Arguments: /d /s /c docusaurus-start\r\n  Directory: E:\\DOCUMENTACION\\Desarrollo Web\\REACT NATIVE\\react-native-website\\website\r\n  Output:\r\n  \r\n      at ProcessTermError.MessageError (C:\\Program Files (x86)\\Yarn\\lib\\cli.js:186:110)\r\n      at new ProcessTermError (C:\\Program Files (x86)\\Yarn\\lib\\cli.js:226:113)\r\n      at ChildProcess.<anonymous> (C:\\Program Files (x86)\\Yarn\\lib\\cli.js:30281:17)\r\n      at emitTwo (events.js:126:13)\r\n      at ChildProcess.emit (events.js:214:7)\r\n      at maybeClose (internal/child_process.js:925:16)\r\n      at Process.ChildProcess._handle.onexit (internal/child_process.js:209:5)', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'ronaldroe', 'comment_id': 384710385.0, 'datetime': '2018-04-26 16:45:33+00:00', 'masked_author': 'username_1', 'text': 'This issue is also a duplicate of:\r\n#278', 'title': None, 'type': 'comment'}
+ {'action': 'closed', 'author': 'charpeni', 'comment_id': None, 'datetime': '2018-05-16 19:54:06+00:00', 'masked_author': 'username_3', 'text': '', 'title': None, 'type': 'issue'}
+ {'action': 'created', 'author': 'charpeni', 'comment_id': 389645000.0, 'datetime': '2018-05-16 19:54:06+00:00', 'masked_author': 'username_3', 'text': 'Duplicate of #278.', 'title': None, 'type': 'comment'}]","<issue_start><issue_comment>Title: Error: No 'original_id' field found in D:/Official Project Files/react-native-website/website/versioned_docs/version-0.10/modal.md.
+username_0: D:\Official Project Files\react-native-website\website>yarn start
+yarn run v1.5.1
+$ docusaurus-start
+Starting Docusaurus server on port 3000...
+No 'original_id' field found in D:/Official Project Files/react-native-website/website/versioned_docs/version-0.10/modal.md. Perhaps you forgot to add it when importing prior versions of your docs?
+D:\Official Project Files\react-native-website\website\node_modules\docusaurus\lib\start-server.js:57
+      throw ex;
+      ^
+
+Error: No 'original_id' field found in D:/Official Project Files/react-native-website/website/versioned_docs/version-0.10/modal.md. Perhaps you forgot to add it when importing prior versions of your docs?
+    at D:/Official Project Files/react-native-website/website/node_modules/docusaurus/lib/server/versionFallback.js:104:11
+    at Array.forEach (<anonymous>)
+    at Object.<anonymous> (D:/Official Project Files/react-native-website/website/node_modules/docusaurus/lib/server/versionFallback.js:92:7)
+    at Module._compile (module.js:649:30)
+    at loader (D:\Official Project Files\react-native-website\website\node_modules\babel-register\lib\node.js:144:5)
+    at Object.require.extensions.(anonymous function) [as .js] (D:\Official Project Files\react-native-website\website\node_modules\babel-register\lib\node.js:154:7)
+    at Module.load (module.js:561:32)
+    at tryModuleLoad (module.js:501:12)
+    at Function.Module._load (module.js:493:3)
+    at Module.require (module.js:593:17)
+error An unexpected error occurred: ""Command failed.
+Exit code: 1
+Command: C:\\Windows\\system32\\cmd.exe
+Arguments: /d /s /c docusaurus-start
+Directory: D:\\Official Project Files\\react-native-website\\website
+<issue_comment>username_1: Having the same issue. Please help.
+<issue_comment>username_1: Tried updating Docusaurus to `@latest`. No joy.
+<issue_comment>username_2: Same issue here
+Arguments: 
+  C:\Program Files\nodejs\node.exe C:\Program Files (x86)\Yarn\bin\yarn.js start
+
+PATH: 
+  C:\Users\julio\bin;C:\Program Files\Git\mingw64\bin;C:\Program Files\Git\usr\local\bin;C:\Program Files\Git\usr\bin;C:\Program Files\Git\usr\bin;C:\Program Files\Git\mingw64\bin;C:\Program Files\Git\usr\bin;C:\Users\julio\bin;C:\Python34;C:\Python34\Scripts;C:\ProgramData\Oracle\Java\javapath;C:\Windows\system32;C:\Windows;C:\Windows\System32\Wbem;C:\Windows\System32\WindowsPowerShell\v1.0;C:\Program Files\Git\cmd;C:\Program Files\TortoiseGit\bin;C:\Program Files\dotnet;C:\Program Files\Microsoft SQL Server\130\Tools\Binn;C:\Program Files\nodejs;C:\Program Files (x86)\Yarn\bin;C:\Users\julio\AppData\Local\Microsoft\WindowsApps;C:\xampp\php;C:\Users\julio\AppData\Roaming\npm;C:\Users\julio\AppData\Roaming\npm\node_modules@angular\cli\bi;.;C:\Users\julio\AppData\Local\Yarn\bin;C:\Program Files\Git\usr\bin\vendor_perl;C:\Program Files\Git\usr\bin\core_perl
+
+Yarn version: 
+  1.5.1
+
+Node version: 
+  8.11.1
+
+Platform: 
+  win32 x64
+
+npm manifest: 
+  {
+    ""name"": ""react-native-website"",
+    ""description"": ""React Native website"",
+    ""version"": ""0.0.1"",
+    ""private"": true,
+    ""bugs"": {
+      ""url"": ""https://github.com/facebook/react-native-website""
+    },
+    ""license"": ""CC"",
+    ""main"": ""n/a"",
+    ""repository"": {
+      ""type"": ""git"",
+      ""url"": ""git+https://github.com/facebook/react-native-website.git""
+    },
+    ""scripts"": {
+      ""start"": ""docusaurus-start"",
+      ""build"": ""docusaurus-build"",
+      ""publish-gh-pages"": ""docusaurus-publish"",
+      ""version"": ""docusaurus-version"",
+      ""rename-version"": ""docusaurus-rename-version"",
+      ""ci-check"": ""yarn prettier:diff && node image-check.js"",
+      ""format:source"":
+        ""prettier --config ../.prettierrc --write \""{core/**/*.js,static/js/**/*.js}\"""",
+      ""format:markdown"":
+        ""prettier --config ../.prettierrc  --write \""{../docs/**/*.md,versioned_docs/**/*.md,blog/**/*.md}\"""",
+      ""nit:source"":
+        ""prettier --config ../.prettierrc  --list-different \""{core/**/*.js,static/js/**/*.js}\"""",
+      ""nit:markdown"":
+        ""prettier --config ../.prettierrc  --list-different \""{../docs/**/*.md,versioned_docs/**/*.md,blog/**/*.md}\"""",
+      ""prettier"": ""yarn format:source && yarn format:markdown"",
+      ""prettier:diff"": ""yarn nit:source"",
+      ""precommit"": ""lint-staged"",
+      ""test"": ""yarn build""
+    },
+    ""lint-staged"": {
+      ""*.{js,json,css,md}"": [""prettier --write"", ""git add""]
+    },
+    ""dependencies"": {
+      ""docusaurus"": ""^1.0.9"",
+      ""highlight.js"": ""^9.12.0"",
+      ""remarkable"": ""^1.7.1""
+    },
+    ""devDependencies"": {
+      ""bluebird"": ""^3.5.1"",
+      ""fs-extra"": ""^5.0.0"",
+      ""glob"": ""^7.1.2"",
+      ""glob-promise"": ""^3.3.0"",
+      ""husky"": ""^0.14.3"",
+      ""lint-staged"": ""^6.0.0"",
+      ""path"": ""^0.12.7"",
+      ""prettier"": ""1.9.1""
+    }
+  }
+
+yarn manifest: 
+  No manifest
+
+Lockfile: 
+  # THIS IS AN AUTOGENERATED FILE. DO NOT EDIT THIS FILE DIRECTLY.
+  # yarn lockfile v1
+  
+  
+  accepts@~1.3.5:
+[Truncated]
+    version ""2.3.0""
+    resolved ""https://registry.yarnpkg.com/yargs/-/yargs-2.3.0.tgz#e900c87250ec5cd080db6009fe3dd63156f1d7fb""
+    dependencies:
+      wordwrap ""0.0.2""
+
+Trace: 
+  Error: Command failed.
+  Exit code: 1
+  Command: C:\Windows\system32\cmd.exe
+  Arguments: /d /s /c docusaurus-start
+  Directory: E:\DOCUMENTACION\Desarrollo Web\REACT NATIVE\react-native-website\website
+  Output:
+  
+      at ProcessTermError.MessageError (C:\Program Files (x86)\Yarn\lib\cli.js:186:110)
+      at new ProcessTermError (C:\Program Files (x86)\Yarn\lib\cli.js:226:113)
+      at ChildProcess.<anonymous> (C:\Program Files (x86)\Yarn\lib\cli.js:30281:17)
+      at emitTwo (events.js:126:13)
+      at ChildProcess.emit (events.js:214:7)
+      at maybeClose (internal/child_process.js:925:16)
+      at Process.ChildProcess._handle.onexit (internal/child_process.js:209:5)
+<issue_comment>username_1: This issue is also a duplicate of:
+#278<issue_closed>
+<issue_comment>username_3: Duplicate of #278."
+OperationCode/front-end,719667602,1297,,"[{'action': 'opened', 'author': 'datphotogurl', 'comment_id': None, 'datetime': '2020-10-12 21:03:52+00:00', 'masked_author': 'username_0', 'text': 'URL: https://operationcode.org/get_involved\r\n\r\n**Related Issues**\r\n#1296 \r\n\r\n**Requested Change**\r\nUnder the Empower Our Community section: change Subtitle to ""Empower Our Community and Support Our Mission"". Change paragraph wording to - Make a difference in the lives of our military community and help them reach their pursuits of a tech career.', 'title': 'Web Content Change: Get Involved Page [Change 2]', 'type': 'issue'}
+ {'action': 'closed', 'author': 'kylemh', 'comment_id': None, 'datetime': '2020-10-13 15:04:24+00:00', 'masked_author': 'username_1', 'text': '', 'title': None, 'type': 'issue'}]","<issue_start><issue_comment>Title: Web Content Change: Get Involved Page [Change 2]
+username_0: URL: https://operationcode.org/get_involved
+
+**Related Issues**
+#1296 
+
+**Requested Change**
+Under the Empower Our Community section: change Subtitle to ""Empower Our Community and Support Our Mission"". Change paragraph wording to - Make a difference in the lives of our military community and help them reach their pursuits of a tech career.<issue_closed>"
+appveyor/website,206940327,255,"{'number': 255.0, 'repo': 'website', 'user_login': 'appveyor'}","[{'action': 'opened', 'author': 'SteveL-MSFT', 'comment_id': None, 'datetime': '2017-02-11T00:29:02Z', 'masked_author': 'username_0', 'text': 'The addition of the Authorization header makes this fail.  I tried the same thing with curl:\r\n\r\ncurl -L -H ""Authorization: Bearer <token>"" -o outfile https://ci.appveyor.com/api/...\r\n\r\nWith the Authorization header, it fails.  Once removed, it succeeds.', 'title': 'Update download-artifacts-ps.md', 'type': 'issue'}
+ {'action': 'created', 'author': 'IlyaFinkelshteyn', 'comment_id': 279107971.0, 'datetime': '2017-02-11 01:11:25+00:00', 'masked_author': 'username_1', 'text': 'Hi Steve,\r\n\r\nThis is issue related to curl (and wget). Problem is that AppVeyor returns 302 redirect to Azure blob storage temporary URL.  Curl (and wget) sends authorization header (which is needed only for AppVeyor) to Azure blob storage URL too, which results in failure. PowerShell works just fine.\r\n\r\nIt worked with curl this way, because it was I believe public project. With private one it will not work without authorization.\r\n\r\nIlya.', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'SteveL-MSFT', 'comment_id': 279122218.0, 'datetime': '2017-02-11 05:12:38+00:00', 'masked_author': 'username_0', 'text': ""@username_1 thanks for the explanation, sounds like I'll need to open an issue against libcurl"", 'title': None, 'type': 'comment'}]","<issue_start><issue_comment>Title: Update download-artifacts-ps.md
+username_0: The addition of the Authorization header makes this fail.  I tried the same thing with curl:
+
+curl -L -H ""Authorization: Bearer <token>"" -o outfile https://ci.appveyor.com/api/...
+
+With the Authorization header, it fails.  Once removed, it succeeds.
+<issue_comment>username_1: Hi Steve,
+
+This is issue related to curl (and wget). Problem is that AppVeyor returns 302 redirect to Azure blob storage temporary URL.  Curl (and wget) sends authorization header (which is needed only for AppVeyor) to Azure blob storage URL too, which results in failure. PowerShell works just fine.
+
+It worked with curl this way, because it was I believe public project. With private one it will not work without authorization.
+
+Ilya.
+<issue_comment>username_0: @username_1 thanks for the explanation, sounds like I'll need to open an issue against libcurl"

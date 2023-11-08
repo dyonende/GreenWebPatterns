@@ -1,0 +1,551 @@
+corona-warn-app/cwa-website,748291470,612,,"[{'action': 'opened', 'author': 'corneliusroemer', 'comment_id': None, 'datetime': '2020-11-22 17:28:26+00:00', 'masked_author': 'username_0', 'text': ""Unfortunately, there seem to be exceptions to this rule, not mentioned in the FAQ - the FAQs read as if any phone with Android 6+ and Play services up to date works. \r\nE.g. Xiaomi, Redmi, Huawei, see issues corona-warn-app/cwa-app-android#495 corona-warn-app/cwa-app-android#490 corona-warn-app/cwa-app-android#487 \r\n\r\nThe fact that these devices won't work isn't clear from your documentation, so it's a bug. Please add it to the FAQs and the Play Store App Compatibility List as excluded devices: https://support.google.com/googleplay/android-developer/answer/7353455?hl=en\r\n\r\nIf Google has a list of devices that are compatible/incompatible, it would be worth linking to. Rather than just saying contact Google/Apple. You know they won't be of any help.\r\n\r\nI remember that a week ago someone asked you for a Green List of devices. You said you didn't want to make one. I asked for a public beta test to figure these issues out before release and be prepared with messaging. You didn't want to beta test. Well, now we have the salad.\r\n\r\n---\r\nInternal Tracking ID: EXPOSUREAPP-2957"", 'title': 'List devices on which the app does not work (e.g. Xiaomi, Huawei)', 'type': 'issue'}
+ {'action': 'created', 'author': 'dsarkar', 'comment_id': 732139167.0, 'datetime': '2020-11-23 12:43:37+00:00', 'masked_author': 'username_1', 'text': '@gizmo21, regarding BLE peripheral mode, see this comment: https://github.com/corona-warn-app/cwa-app-android/issues/688#issuecomment-732054785 \r\n\r\nBest wishes,\r\nDS\r\n\r\n---\r\nCorona-Warn-App Open Source Team', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'MikeMcC399', 'comment_id': 842414775.0, 'datetime': '2021-05-17 15:23:34+00:00', 'masked_author': 'username_2', 'text': 'Since CWA Android 2.2.1 the app checks for Bluetooth Low Energy (BLE) compatibility. See https://www.coronawarn.app/en/faq/#incompatibility_warning and https://github.com/corona-warn-app/cwa-app-android/issues/688 (as mentioned already by @username_1).', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'GisoSchroederSAP', 'comment_id': 873211265.0, 'datetime': '2021-07-02 19:17:52+00:00', 'masked_author': 'username_3', 'text': 'Whoever ist interested to follow up on this topic, may have a quick view to the [list provided here.](https://altbeacon.github.io/android-beacon-library/beacon-transmitter-devices.html)\r\nMaybe, it is helpful to understand, that the CWA now just detects the limited capabilities (as described above) but cannot change the behavior of the device', 'title': None, 'type': 'comment'}]","<issue_start><issue_comment>Title: List devices on which the app does not work (e.g. Xiaomi, Huawei)
+username_0: Unfortunately, there seem to be exceptions to this rule, not mentioned in the FAQ - the FAQs read as if any phone with Android 6+ and Play services up to date works. 
+E.g. Xiaomi, Redmi, Huawei, see issues corona-warn-app/cwa-app-android#495 corona-warn-app/cwa-app-android#490 corona-warn-app/cwa-app-android#487 
+
+The fact that these devices won't work isn't clear from your documentation, so it's a bug. Please add it to the FAQs and the Play Store App Compatibility List as excluded devices: https://support.google.com/googleplay/android-developer/answer/7353455?hl=en
+
+If Google has a list of devices that are compatible/incompatible, it would be worth linking to. Rather than just saying contact Google/Apple. You know they won't be of any help.
+
+I remember that a week ago someone asked you for a Green List of devices. You said you didn't want to make one. I asked for a public beta test to figure these issues out before release and be prepared with messaging. You didn't want to beta test. Well, now we have the salad.
+
+---
+Internal Tracking ID: EXPOSUREAPP-2957
+<issue_comment>username_1: @gizmo21, regarding BLE peripheral mode, see this comment: https://github.com/corona-warn-app/cwa-app-android/issues/688#issuecomment-732054785 
+
+Best wishes,
+DS
+
+---
+Corona-Warn-App Open Source Team
+<issue_comment>username_2: Since CWA Android 2.2.1 the app checks for Bluetooth Low Energy (BLE) compatibility. See https://www.coronawarn.app/en/faq/#incompatibility_warning and https://github.com/corona-warn-app/cwa-app-android/issues/688 (as mentioned already by @username_1).
+<issue_comment>username_3: Whoever ist interested to follow up on this topic, may have a quick view to the [list provided here.](https://altbeacon.github.io/android-beacon-library/beacon-transmitter-devices.html)
+Maybe, it is helpful to understand, that the CWA now just detects the limited capabilities (as described above) but cannot change the behavior of the device"
+flutter/website,715289811,4827,,"[{'action': 'opened', 'author': 'mitchross', 'comment_id': None, 'datetime': '2020-10-06 02:31:08+00:00', 'masked_author': 'username_0', 'text': 'There doesn\'t seem to be a lot of documentation around ""platform interface package"". The documentation jumps around and never completes a full picture. I am looking at plugins + platform interface package. There\'s good info on plugins for ios/android but it falls short.\r\n\r\nIt appears the new documentation for plugins recommends https://pub.dev/packages/pigeon for type safety. Id like to see a full start to finish v2 federated plugin for flutter that includes ios/android, platform interface packages, and plugins.\r\n\r\nThe only place that has it is here https://github.com/flutter/plugins/tree/master/packages/video_player which looks like the future of plugins, yet there doesnt seem to be much documentation around how to set all this up.', 'title': 'Add Documentation for platform interface packages for federated plugins', 'type': 'issue'}
+ {'action': 'created', 'author': 'sfshaza2', 'comment_id': 708029891.0, 'datetime': '2020-10-13 21:53:18+00:00', 'masked_author': 'username_1', 'text': ""@amirh, let's talk about this issue. I only recently learned about endorsed federated plugins and am not sure what else we might be missing.."", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'mitchross', 'comment_id': 708099921.0, 'datetime': '2020-10-14 01:33:47+00:00', 'masked_author': 'username_0', 'text': 'Hi @username_1 @amin3mej \r\n\r\nImagine you are new to Flutter and you want to make a plugin, you naturally will check out https://flutter.dev/docs/development/packages-and-plugins/developing-packages.\r\n\r\nYou will go about your tutorial and practice code with the classic ""flutter create --template=package hello""\r\n\r\nAlong the way you will discover platform specific tutorials which will lead you here https://flutter.dev/docs/development/platform-integration/platform-channels?tab=android-channel-java-tab.\r\n\r\nYou follow this tutorial, which now disconnects you from the first link of developing packages. As a new to flutter developer, you\'ve just been distracted by this new link, which in no way connects back to the first article in any friendly fashion. The first article mentions nothing about battery plugins, but thats ok, you start think how the first link relates to the second link and after hours you might make a connection. \r\n\r\nNow you are getting into Android/iOS specific platform code. You start going through the ""platform-integration"" tutorial and you find your self, thinking wow, I have to pass literal strings to invoke methods? aka invokeMethod(\'getBatteryLevel\'); That doesnt seem very _type safe_ , but thats ok, its a new platform, you gotta give what you gotta give.\r\n\r\nSo you start reading further and _huzzah!_ ""Typesafe platform channels via Pigeon"". As a developer who enjoys type safety you realize, wow this is quite amazing! You want to use this magical _Pigeon_ utility ! You find your self at odds with the 1049 characters, 165 words minimalist description of how to use it. \r\n\r\nSo in order to actually understand anything about _Pigeon_ you must now goto a _pubdev_ page and read though yet another documentation piece that yet again does not connect back to ""developing-packages"" or  ""platform-integration"".\r\n\r\nBeing the experience dev that you are, you look at the example code and realize there is no example app! There is a loosely defined terminal command you can run and this command magically generates a Messages.dart class that auto generates code. None of this is documented anywhere or gives anyone a idea how to use it.\r\n\r\nNo fear! Being the experience dev that you are you turn to none other the master of source its self, the official flutter repo! https://github.com/flutter/plugins/tree/master/packages\r\n\r\nGreat! we have _real_ code examples! But wait, only a few packages use this pattern!\r\n\r\nYou find this -> https://github.com/flutter/plugins/tree/master/packages/video_player and you spend countless nights and weekends reverse engineering the code to learn about how to combine all three links into one _personal_ tutorial.\r\n\r\nBut wait there\'s more! You want to use _Swift_ because that\'s the official language of Apple, but you have to use twitter to figure out how to actually use the Pigeon library with Swift. So you find this Tweet. https://twitter.com/couttsdev/status/1291883361879957504\r\n\r\nNow after wasting countless hours, you can develop a type safe federated plugin! Flutter rocks!', 'title': None, 'type': 'comment'}]","<issue_start><issue_comment>Title: Add Documentation for platform interface packages for federated plugins
+username_0: There doesn't seem to be a lot of documentation around ""platform interface package"". The documentation jumps around and never completes a full picture. I am looking at plugins + platform interface package. There's good info on plugins for ios/android but it falls short.
+
+It appears the new documentation for plugins recommends https://pub.dev/packages/pigeon for type safety. Id like to see a full start to finish v2 federated plugin for flutter that includes ios/android, platform interface packages, and plugins.
+
+The only place that has it is here https://github.com/flutter/plugins/tree/master/packages/video_player which looks like the future of plugins, yet there doesnt seem to be much documentation around how to set all this up.
+<issue_comment>username_1: @amirh, let's talk about this issue. I only recently learned about endorsed federated plugins and am not sure what else we might be missing..
+<issue_comment>username_0: Hi @username_1 @amin3mej 
+
+Imagine you are new to Flutter and you want to make a plugin, you naturally will check out https://flutter.dev/docs/development/packages-and-plugins/developing-packages.
+
+You will go about your tutorial and practice code with the classic ""flutter create --template=package hello""
+
+Along the way you will discover platform specific tutorials which will lead you here https://flutter.dev/docs/development/platform-integration/platform-channels?tab=android-channel-java-tab.
+
+You follow this tutorial, which now disconnects you from the first link of developing packages. As a new to flutter developer, you've just been distracted by this new link, which in no way connects back to the first article in any friendly fashion. The first article mentions nothing about battery plugins, but thats ok, you start think how the first link relates to the second link and after hours you might make a connection. 
+
+Now you are getting into Android/iOS specific platform code. You start going through the ""platform-integration"" tutorial and you find your self, thinking wow, I have to pass literal strings to invoke methods? aka invokeMethod('getBatteryLevel'); That doesnt seem very _type safe_ , but thats ok, its a new platform, you gotta give what you gotta give.
+
+So you start reading further and _huzzah!_ ""Typesafe platform channels via Pigeon"". As a developer who enjoys type safety you realize, wow this is quite amazing! You want to use this magical _Pigeon_ utility ! You find your self at odds with the 1049 characters, 165 words minimalist description of how to use it. 
+
+So in order to actually understand anything about _Pigeon_ you must now goto a _pubdev_ page and read though yet another documentation piece that yet again does not connect back to ""developing-packages"" or  ""platform-integration"".
+
+Being the experience dev that you are, you look at the example code and realize there is no example app! There is a loosely defined terminal command you can run and this command magically generates a Messages.dart class that auto generates code. None of this is documented anywhere or gives anyone a idea how to use it.
+
+No fear! Being the experience dev that you are you turn to none other the master of source its self, the official flutter repo! https://github.com/flutter/plugins/tree/master/packages
+
+Great! we have _real_ code examples! But wait, only a few packages use this pattern!
+
+You find this -> https://github.com/flutter/plugins/tree/master/packages/video_player and you spend countless nights and weekends reverse engineering the code to learn about how to combine all three links into one _personal_ tutorial.
+
+But wait there's more! You want to use _Swift_ because that's the official language of Apple, but you have to use twitter to figure out how to actually use the Pigeon library with Swift. So you find this Tweet. https://twitter.com/couttsdev/status/1291883361879957504
+
+Now after wasting countless hours, you can develop a type safe federated plugin! Flutter rocks!"
+OperationCode/front-end,503038338,844,"{'number': 844.0, 'repo': 'front-end', 'user_login': 'OperationCode'}","[{'action': 'opened', 'author': 'hydrosquall', 'comment_id': None, 'datetime': '2019-10-06T01:28:37Z', 'masked_author': 'username_0', 'text': ""# Description of changes\r\n\r\n- Fulfills a feature request to help with identifying repeat users without storing any PII or using server-side data, using the javascript library powering the EFF browser fingerprinting test.\r\n- The hashed identifier is not human interpretable, but should still work for repeat visitor ID'ing purposes.\r\n\r\n# Issue Resolved\r\n\r\nFixes #582 \r\n\r\n## Screenshots/GIFs\r\n\r\n- N/A\r\n\r\n## Other Notes\r\n\r\n- I referred to the SO answer that unblocked the backend request: https://stackoverflow.com/questions/4445404/how-to-anonymously-identify-a-user-and-store-that-information/4445584#4445584\r\n- Reference library for Fingerprinting (returns 29 identifying components): https://github.com/Valve/fingerprintjs2\r\n- Reference library for hashing the components: https://www.npmjs.com/package/object-hash"", 'title': '[feature] Add client-side fingerprint for LogRocket Identify #582', 'type': 'issue'}
+ {'action': 'created', 'author': 'kylemh', 'comment_id': 538703490.0, 'datetime': '2019-10-06 01:31:03+00:00', 'masked_author': 'username_1', 'text': '🤖 **This is a bot** 🤖<br /><br />🎉 Deployed Storybook preview! 🎉<br /><br />Click the link at the bottom of this comment to see it live.\n\nBuilt with commit 7cd40180a3d0728f19d4c675a1c5bd6b83bec893\n\nhttps://deploy-preview-844--operation-code-storybook.netlify.com', 'title': None, 'type': 'comment'}]","<issue_start><issue_comment>Title: [feature] Add client-side fingerprint for LogRocket Identify #582
+username_0: # Description of changes
+
+- Fulfills a feature request to help with identifying repeat users without storing any PII or using server-side data, using the javascript library powering the EFF browser fingerprinting test.
+- The hashed identifier is not human interpretable, but should still work for repeat visitor ID'ing purposes.
+
+# Issue Resolved
+
+Fixes #582 
+
+## Screenshots/GIFs
+
+- N/A
+
+## Other Notes
+
+- I referred to the SO answer that unblocked the backend request: https://stackoverflow.com/questions/4445404/how-to-anonymously-identify-a-user-and-store-that-information/4445584#4445584
+- Reference library for Fingerprinting (returns 29 identifying components): https://github.com/Valve/fingerprintjs2
+- Reference library for hashing the components: https://www.npmjs.com/package/object-hash
+<issue_comment>username_1: 🤖 **This is a bot** 🤖<br /><br />🎉 Deployed Storybook preview! 🎉<br /><br />Click the link at the bottom of this comment to see it live.
+
+Built with commit 7cd40180a3d0728f19d4c675a1c5bd6b83bec893
+
+https://deploy-preview-844--operation-code-storybook.netlify.com"
+getnikola/nikola,352162376,3144,,"[{'action': 'opened', 'author': 'muellert', 'comment_id': None, 'datetime': '2018-08-20 14:32:20+00:00', 'masked_author': 'username_0', 'text': ""<!--\r\nBefore creating an issue:\r\n* make sure you are using an up-to-date version of Nikola\r\n* search for existing issues that might be related\r\n\r\nIf you are reporting a bug:\r\n* provide information about your environment (below)\r\n* include all the output you get, and any other information related to your problem\r\n\r\nNikola v7.6.4, as provided by Ubuntu, is NOT SUPPORTED.\r\nIf you are using this version, you should upgrade: https://getnikola.com/getting-started.html\r\n-->\r\n\r\n### Environment (if reporting a bug)\r\n\r\n**Python Version:**\r\n3.5.3\r\n**Nikola Version:**\r\n8.0.0b3 (but the problem also occurs with 7.8.15)\r\n**Operating System:**\r\n\r\nDebian/Stretch amd64\r\n\r\n### Description:\r\n\r\nI am trying to develop a new theme for my site. Inside the theme folder, I have an assets folder with stuff in it. Contrary to the documentation, only some parts of this folder are being copied to the output/assets folder, and especially, my images folder, which has the site logo, amongst other pieces, is _not_ being copied. As a result, all the images are missing.\r\n\r\nTo repeat, just do the following:\r\n\r\n1. Create a site and then a new theme.\r\n2. Inside the theme, have a folder 'assets' and place some images in it.\r\n3. rm -fr output\r\n4. nikola build\r\n5. ls output/assets"", 'title': 'assets not properly copied', 'type': 'issue'}
+ {'action': 'created', 'author': 'Kwpolska', 'comment_id': 414371751.0, 'datetime': '2018-08-20 16:06:21+00:00', 'masked_author': 'username_1', 'text': 'Did you remember to change `THEME` in `conf.py`? I can’t reproduce with this structure:\r\n\r\n```\r\n$ tree themes\r\nthemes\r\n└── foobar\r\n    ├── assets\r\n    │\xa0\xa0 └── img\r\n    │\xa0\xa0     └── bkg.png\r\n    └── foobar.theme\r\n```', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'muellert', 'comment_id': 414423666.0, 'datetime': '2018-08-20 18:51:57+00:00', 'masked_author': 'username_0', 'text': 'While I had indeed forgotten to change the theme setting, I now did that and still got the same result:\r\n$ grep THEME conf.py\r\nTHEME = ""ontheme-bs3-grad-jinjia""\r\nTHEME_COLOR = \'#5670d4\'\r\n$ rm -fr output && nikola build && tree themes/ontheme-bs3-grad-jinjia output/assets\r\n...\r\nthemes/ontheme-bs3-grad-jinjia\r\n├── assets\r\n│\xa0\xa0 ├── css\r\n│\xa0\xa0 │\xa0\xa0 ├── ontheme.css\r\n│\xa0\xa0 │\xa0\xa0 ├── ontheme.css.map\r\n│\xa0\xa0 │\xa0\xa0 └── ontheme.scss\r\n│\xa0\xa0 ├── images\r\n│\xa0\xa0 │\xa0\xa0 ├── debian-swirl-100.png\r\n│\xa0\xa0 │\xa0\xa0 ├── django-logo-positive-small.png\r\n│\xa0\xa0 │\xa0\xa0 ├── logo.png\r\n│\xa0\xa0 │\xa0\xa0 ├── mbfish.gif\r\n│\xa0\xa0 │\xa0\xa0 ├── ncc-member-logo.png\r\n│\xa0\xa0 │\xa0\xa0 ├── plone-logo-256.png\r\n│\xa0\xa0 │\xa0\xa0 ├── pyramid-positive-small.png\r\n│\xa0\xa0 │\xa0\xa0 └── python.png\r\n│\xa0\xa0 └── js\r\n├── AUTHORS.txt\r\n├── bundles\r\n├── engine\r\n├── ontheme-bs3-grad-jinjia.theme\r\n├── parent\r\n├── README.md\r\n└── templates\r\n    ├── base_helper.tmpl\r\n    └── feeds_translations_helper.tmpl\r\noutput/assets\r\n├── css\r\n│\xa0\xa0 ├── baguetteBox.min.css\r\n│\xa0\xa0 ├── bootblog.css\r\n│\xa0\xa0 ├── bootstrap.min.css\r\n│\xa0\xa0 ├── code.css\r\n│\xa0\xa0 ├── html4css1.css\r\n│\xa0\xa0 ├── ipython.min.css\r\n│\xa0\xa0 ├── nikola_ipython.css\r\n│\xa0\xa0 ├── nikola_rst.css\r\n│\xa0\xa0 ├── rst_base.css\r\n│\xa0\xa0 ├── rst.css\r\n│\xa0\xa0 └── theme.css\r\n├── js\r\n│\xa0\xa0 ├── baguetteBox.min.js\r\n│\xa0\xa0 ├── bootstrap.min.js\r\n│\xa0\xa0 ├── fancydates.js\r\n│\xa0\xa0 ├── fancydates.min.js\r\n│\xa0\xa0 ├── gallery.js\r\n│\xa0\xa0 ├── gallery.min.js\r\n│\xa0\xa0 ├── html5.js\r\n│\xa0\xa0 ├── html5shiv-printshiv.min.js\r\n│\xa0\xa0 ├── jquery.min.js\r\n│\xa0\xa0 ├── justified-layout.min.js\r\n│\xa0\xa0 ├── moment-with-locales.min.js\r\n│\xa0\xa0 ├── popper.min.js\r\n│\xa0\xa0 └── tag_cloud_data.json\r\n└── xml\r\n    ├── atom.xsl\r\n    └── rss.xsl', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'Kwpolska', 'comment_id': 414427257.0, 'datetime': '2018-08-20 19:03:43+00:00', 'masked_author': 'username_1', 'text': 'It still looks as if your theme were not active. Could you paste your conf.py file?', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'muellert', 'comment_id': 414443786.0, 'datetime': '2018-08-20 20:00:24+00:00', 'masked_author': 'username_0', 'text': 'With name of company removed...\r\n$ grep -v \'^#\' conf.py|sed -e \'/^ *$/d\'\r\nfrom __future__ import unicode_literals\r\nimport time\r\nBLOG_AUTHOR = ""XXXXXX""  # (translatable)\r\nBLOG_TITLE = ""IT Consulting & Services""  # (translatable)\r\nSITE_URL = ""http://localhost:8000/""\r\nBLOG_EMAIL = ""efpyi@example.com""\r\nBLOG_DESCRIPTION = ""Powered by Nikola.""  # (translatable)\r\nDEFAULT_LANG = ""en""\r\nTRANSLATIONS = {\r\n    DEFAULT_LANG: ""en"",\r\n    ""de"": ""./de"",\r\n    ""zh_cn"": ""./zh_cn"",\r\n}\r\nTRANSLATIONS_PATTERN = ""{path}.{lang}.{ext}""\r\nNAVIGATION_LINKS = {\r\n    DEFAULT_LANG: (\r\n        (""/en/archive/index.html"", ""Archive""),\r\n        (""/en/categories/"", ""Tags""),\r\n        (""/en/rss.xml"", ""RSS feed""),\r\n    ),\r\n    ""de"": (\r\n        (""/de/archive/index.html"", ""Archiv""),\r\n        (""/de/categories/"", ""Tags""),\r\n        (""/de/rss.xml"", ""RSS-Feed""),\r\n    ),\r\n    ""zh_cn"": (\r\n        (""/zh_cn/archive/index.html"", ""文章存档""),\r\n        (""/zh_cn/categories/"", ""标签""),\r\n        (""/zh_cn/rss.xml"", ""RSS 源""),\r\n    ),\r\n}\r\nTHEME = ""ontheme-bs3-grad-jinjia""\r\nTHEME_COLOR = \'#5670d4\'\r\nPOSTS = (\r\n    (""posts/*.rst"", ""posts"", ""post.tmpl""),\r\n    (""posts/*.md"", ""posts"", ""post.tmpl""),\r\n    (""posts/*.txt"", ""posts"", ""post.tmpl""),\r\n    (""posts/*.html"", ""posts"", ""post.tmpl""),\r\n)\r\nPAGES = (\r\n    (""pages/*.rst"", """", ""page.tmpl""),\r\n    (""pages/*.md"", """", ""page.tmpl""),\r\n    (""pages/*.txt"", """", ""page.tmpl""),\r\n    (""pages/*.html"", """", ""page.tmpl""),\r\n)\r\nTIMEZONE = ""Europe/Berlin""\r\nFORCE_ISO8601 = True\r\nCOMPILERS = {\r\n    ""rest"": (\'.rst\', \'.txt\'),\r\n    ""markdown"": (\'.md\', \'.mdown\', \'.markdown\'),\r\n    ""textile"": (\'.textile\',),\r\n    ""txt2tags"": (\'.t2t\',),\r\n    ""bbcode"": (\'.bb\',),\r\n    ""wiki"": (\'.wiki\',),\r\n    ""ipynb"": (\'.ipynb\',),\r\n    ""html"": (\'.html\', \'.htm\'),\r\n    # PHP files are rendered the usual way (i.e. with the full templates).\r\n    # The resulting files have .php extensions, making it possible to run\r\n    # them without reconfiguring your server to recognize them.\r\n    ""php"": (\'.php\',),\r\n    # Pandoc detects the input from the source filename\r\n    # but is disabled by default as it would conflict\r\n    # with many of the others.\r\n    # ""pandoc"": (\'.rst\', \'.md\', \'.txt\'),\r\n}\r\nLOGO_URL = \'/assets/images/logo.png\'\r\nWRITE_TAG_CLOUD = True\r\nPOSTS_SECTIONS = True\r\nHIDDEN_TAGS = [\'mathjax\']\r\nCATEGORY_ALLOW_HIERARCHIES = True\r\nCATEGORY_OUTPUT_FLAT_HIERARCHY = False\r\nCATEGORY_PAGES_ARE_INDEXES = False\r\nHIDDEN_CATEGORIES = []\r\nHIDDEN_AUTHORS = [\'Guest\']\r\nFRONT_INDEX_HEADER = {\r\n    DEFAULT_LANG: \'\'\r\n}\r\nARCHIVE_PATH = ""archive""\r\n[Truncated]\n        }\r\n    )\r\n}\r\nRSS_COPYRIGHT = \'Contents © {date} <a href=""mailto:{email}"">{author}</a> {license}\'\r\nRSS_COPYRIGHT_PLAIN = \'Contents © {date} {author} {license}\'\r\nRSS_COPYRIGHT_FORMATS = CONTENT_FOOTER_FORMATS\r\nCOMMENT_SYSTEM = """"\r\nCOMMENT_SYSTEM_ID = """"\r\nPAGE_INDEX = True\r\nINDEX_FILE = ""index.html""\r\nSTRIP_INDEXES = True\r\nPRETTY_URLS = True\r\nMARKDOWN_EXTENSIONS = [\'markdown.extensions.fenced_code\', \'markdown.extensions.codehilite\', \'markdown.extensions.extra\']\r\nSHOW_SOURCELINK = False\r\nCOPY_SOURCES = False\r\nGENERATE_ATOM = True\r\nUNSLUGIFY_TITLES = True\r\nUSE_BUNDLES = False\r\nGLOBAL_CONTEXT = {}\r\nGLOBAL_CONTEXT_FILLER = []', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'ralsina', 'comment_id': 414623888.0, 'datetime': '2018-08-21 10:11:42+00:00', 'masked_author': 'username_2', 'text': 'Just a wild guess but the config says ""jinjia"" and maybe the theme is\ncalled ""jinja""?', 'title': None, 'type': 'comment'}
+ {'action': 'closed', 'author': 'Kwpolska', 'comment_id': None, 'datetime': '2018-09-03 16:02:40+00:00', 'masked_author': 'username_1', 'text': '', 'title': None, 'type': 'issue'}
+ {'action': 'created', 'author': 'Kwpolska', 'comment_id': 418152423.0, 'datetime': '2018-09-03 16:02:40+00:00', 'masked_author': 'username_1', 'text': 'Closing due to no response and no reproduction in 14 days.', 'title': None, 'type': 'comment'}]","<issue_start><issue_comment>Title: assets not properly copied
+username_0: <!--
+Before creating an issue:
+* make sure you are using an up-to-date version of Nikola
+* search for existing issues that might be related
+
+If you are reporting a bug:
+* provide information about your environment (below)
+* include all the output you get, and any other information related to your problem
+
+Nikola v7.6.4, as provided by Ubuntu, is NOT SUPPORTED.
+If you are using this version, you should upgrade: https://getnikola.com/getting-started.html
+-->
+
+### Environment (if reporting a bug)
+
+**Python Version:**
+3.5.3
+**Nikola Version:**
+8.0.0b3 (but the problem also occurs with 7.8.15)
+**Operating System:**
+
+Debian/Stretch amd64
+
+### Description:
+
+I am trying to develop a new theme for my site. Inside the theme folder, I have an assets folder with stuff in it. Contrary to the documentation, only some parts of this folder are being copied to the output/assets folder, and especially, my images folder, which has the site logo, amongst other pieces, is _not_ being copied. As a result, all the images are missing.
+
+To repeat, just do the following:
+
+1. Create a site and then a new theme.
+2. Inside the theme, have a folder 'assets' and place some images in it.
+3. rm -fr output
+4. nikola build
+5. ls output/assets
+<issue_comment>username_1: Did you remember to change `THEME` in `conf.py`? I can’t reproduce with this structure:
+
+```
+$ tree themes
+themes
+└── foobar
+    ├── assets
+    │   └── img
+    │       └── bkg.png
+    └── foobar.theme
+```
+<issue_comment>username_0: While I had indeed forgotten to change the theme setting, I now did that and still got the same result:
+$ grep THEME conf.py
+THEME = ""ontheme-bs3-grad-jinjia""
+THEME_COLOR = '#5670d4'
+$ rm -fr output && nikola build && tree themes/ontheme-bs3-grad-jinjia output/assets
+...
+themes/ontheme-bs3-grad-jinjia
+├── assets
+│   ├── css
+│   │   ├── ontheme.css
+│   │   ├── ontheme.css.map
+│   │   └── ontheme.scss
+│   ├── images
+│   │   ├── debian-swirl-100.png
+│   │   ├── django-logo-positive-small.png
+│   │   ├── logo.png
+│   │   ├── mbfish.gif
+│   │   ├── ncc-member-logo.png
+│   │   ├── plone-logo-256.png
+│   │   ├── pyramid-positive-small.png
+│   │   └── python.png
+│   └── js
+├── AUTHORS.txt
+├── bundles
+├── engine
+├── ontheme-bs3-grad-jinjia.theme
+├── parent
+├── README.md
+└── templates
+    ├── base_helper.tmpl
+    └── feeds_translations_helper.tmpl
+output/assets
+├── css
+│   ├── baguetteBox.min.css
+│   ├── bootblog.css
+│   ├── bootstrap.min.css
+│   ├── code.css
+│   ├── html4css1.css
+│   ├── ipython.min.css
+│   ├── nikola_ipython.css
+│   ├── nikola_rst.css
+│   ├── rst_base.css
+│   ├── rst.css
+│   └── theme.css
+├── js
+│   ├── baguetteBox.min.js
+│   ├── bootstrap.min.js
+│   ├── fancydates.js
+│   ├── fancydates.min.js
+│   ├── gallery.js
+│   ├── gallery.min.js
+│   ├── html5.js
+│   ├── html5shiv-printshiv.min.js
+│   ├── jquery.min.js
+│   ├── justified-layout.min.js
+│   ├── moment-with-locales.min.js
+│   ├── popper.min.js
+│   └── tag_cloud_data.json
+└── xml
+    ├── atom.xsl
+    └── rss.xsl
+<issue_comment>username_1: It still looks as if your theme were not active. Could you paste your conf.py file?
+<issue_comment>username_0: With name of company removed...
+$ grep -v '^#' conf.py|sed -e '/^ *$/d'
+from __future__ import unicode_literals
+import time
+BLOG_AUTHOR = ""XXXXXX""  # (translatable)
+BLOG_TITLE = ""IT Consulting & Services""  # (translatable)
+SITE_URL = ""http://localhost:8000/""
+BLOG_EMAIL = ""n.tesla@example.com""
+BLOG_DESCRIPTION = ""Powered by Nikola.""  # (translatable)
+DEFAULT_LANG = ""en""
+TRANSLATIONS = {
+    DEFAULT_LANG: ""en"",
+    ""de"": ""./de"",
+    ""zh_cn"": ""./zh_cn"",
+}
+TRANSLATIONS_PATTERN = ""{path}.{lang}.{ext}""
+NAVIGATION_LINKS = {
+    DEFAULT_LANG: (
+        (""/en/archive/index.html"", ""Archive""),
+        (""/en/categories/"", ""Tags""),
+        (""/en/rss.xml"", ""RSS feed""),
+    ),
+    ""de"": (
+        (""/de/archive/index.html"", ""Archiv""),
+        (""/de/categories/"", ""Tags""),
+        (""/de/rss.xml"", ""RSS-Feed""),
+    ),
+    ""zh_cn"": (
+        (""/zh_cn/archive/index.html"", ""文章存档""),
+        (""/zh_cn/categories/"", ""标签""),
+        (""/zh_cn/rss.xml"", ""RSS 源""),
+    ),
+}
+THEME = ""ontheme-bs3-grad-jinjia""
+THEME_COLOR = '#5670d4'
+POSTS = (
+    (""posts/*.rst"", ""posts"", ""post.tmpl""),
+    (""posts/*.md"", ""posts"", ""post.tmpl""),
+    (""posts/*.txt"", ""posts"", ""post.tmpl""),
+    (""posts/*.html"", ""posts"", ""post.tmpl""),
+)
+PAGES = (
+    (""pages/*.rst"", """", ""page.tmpl""),
+    (""pages/*.md"", """", ""page.tmpl""),
+    (""pages/*.txt"", """", ""page.tmpl""),
+    (""pages/*.html"", """", ""page.tmpl""),
+)
+TIMEZONE = ""Europe/Berlin""
+FORCE_ISO8601 = True
+COMPILERS = {
+    ""rest"": ('.rst', '.txt'),
+    ""markdown"": ('.md', '.mdown', '.markdown'),
+    ""textile"": ('.textile',),
+    ""txt2tags"": ('.t2t',),
+    ""bbcode"": ('.bb',),
+    ""wiki"": ('.wiki',),
+    ""ipynb"": ('.ipynb',),
+    ""html"": ('.html', '.htm'),
+    # PHP files are rendered the usual way (i.e. with the full templates).
+    # The resulting files have .php extensions, making it possible to run
+    # them without reconfiguring your server to recognize them.
+    ""php"": ('.php',),
+    # Pandoc detects the input from the source filename
+    # but is disabled by default as it would conflict
+    # with many of the others.
+    # ""pandoc"": ('.rst', '.md', '.txt'),
+}
+LOGO_URL = '/assets/images/logo.png'
+WRITE_TAG_CLOUD = True
+POSTS_SECTIONS = True
+HIDDEN_TAGS = ['mathjax']
+CATEGORY_ALLOW_HIERARCHIES = True
+CATEGORY_OUTPUT_FLAT_HIERARCHY = False
+CATEGORY_PAGES_ARE_INDEXES = False
+HIDDEN_CATEGORIES = []
+HIDDEN_AUTHORS = ['Guest']
+FRONT_INDEX_HEADER = {
+    DEFAULT_LANG: ''
+}
+ARCHIVE_PATH = ""archive""
+[Truncated]
+        }
+    )
+}
+RSS_COPYRIGHT = 'Contents © {date} <a href=""mailto:{email}"">{author}</a> {license}'
+RSS_COPYRIGHT_PLAIN = 'Contents © {date} {author} {license}'
+RSS_COPYRIGHT_FORMATS = CONTENT_FOOTER_FORMATS
+COMMENT_SYSTEM = """"
+COMMENT_SYSTEM_ID = """"
+PAGE_INDEX = True
+INDEX_FILE = ""index.html""
+STRIP_INDEXES = True
+PRETTY_URLS = True
+MARKDOWN_EXTENSIONS = ['markdown.extensions.fenced_code', 'markdown.extensions.codehilite', 'markdown.extensions.extra']
+SHOW_SOURCELINK = False
+COPY_SOURCES = False
+GENERATE_ATOM = True
+UNSLUGIFY_TITLES = True
+USE_BUNDLES = False
+GLOBAL_CONTEXT = {}
+GLOBAL_CONTEXT_FILLER = []
+<issue_comment>username_2: Just a wild guess but the config says ""jinjia"" and maybe the theme is
+called ""jinja""?<issue_closed>
+<issue_comment>username_1: Closing due to no response and no reproduction in 14 days."
+dlang/dlang.org,237715880,1762,"{'number': 1762.0, 'repo': 'dlang.org', 'user_login': 'dlang'}","[{'action': 'opened', 'author': 'wilzbach', 'comment_id': None, 'datetime': '2017-06-22T02:33:39Z', 'masked_author': 'username_0', 'text': 'With Allman brace style this one got quite long, any ideas on trimming it down?', 'title': 'Add example about code generation', 'type': 'issue'}
+ {'action': 'created', 'author': 'ZombineDev', 'comment_id': 310377649.0, 'datetime': '2017-06-22 13:19:37+00:00', 'masked_author': 'username_1', 'text': 'There\'s not need for mixins here. I think the following looks better:\r\n```D\r\n// Use compile-time introspection to generate\r\n// a configuration parser.\r\nimport std.algorithm, std.conv, std.range, std.stdio,\r\n       std.typecons : staticIota; // XXX: staticIota is undocumented and should be in std.meta\r\n\r\nvoid main()\r\n{\r\n    Config conf;\r\n\r\n    ""b=1,a=2,c=hello"".splitter("","").each!(e => conf.read(e));\r\n    \r\n    conf.writeln;\r\n}\r\n\r\nstruct Config\r\n{\r\n    int a, b;\r\n    string c;\r\n}\r\n\r\nvoid read(Conf)(ref Conf c, string entry)\r\n{\r\n    auto r = entry.splitter(""="");\r\n    \r\n    switch (r.front)\r\n    {\r\n        default:\r\n            assert (0, ""Unknown member name."");\r\n        foreach (idx; staticIota!(0, Conf.tupleof.length))\r\n        {\r\n            case Conf.tupleof[idx].stringof:\r\n                c.tupleof[idx] = r.dropOne.front.to!(typeof(Conf.tupleof[idx]));\r\n                break;\r\n        }\r\n    }   \r\n}\r\n\r\n```', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'CyberShadow', 'comment_id': 310569378.0, 'datetime': '2017-06-23 04:39:25+00:00', 'masked_author': 'username_2', 'text': ""You need to break with a label there :) Otherwise it'll break the `foreach`, not `switch`. Common gotcha."", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'ZombineDev', 'comment_id': 310638571.0, 'datetime': '2017-06-23 11:08:48+00:00', 'masked_author': 'username_1', 'text': 'TBH, I wasn\'t sure, so I first wrote it with `break LSwitch`, but then I tested it without a didn\'t find a difference and used a plain `break;`. Still I\'m not sure about the sematics of breaking out of unrolled loop - what if the break was guarded by a runtime check (that always passes) then it won\'t be possible to stop the loop unrolling and I would expect the runtime check + the `break;` to be present in all switch cases.\r\nSimilarly, I think you can\'t do an early return inside an unrolled loop, because you would get ""statement unreachable"" warnings.', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'aG0aep6G', 'comment_id': 310686507.0, 'datetime': '2017-06-23 14:51:24+00:00', 'masked_author': 'username_3', 'text': 'Would make sense to me, but dmd accepts this without warning:\r\n\r\n```d\r\nint main()\r\n{\r\n    import std.meta: AliasSeq;\r\n    foreach (x; AliasSeq!(1, 2, 3)) return x;\r\n}\r\n```', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'wilzbach', 'comment_id': 316496055.0, 'datetime': '2017-07-19 19:46:26+00:00', 'masked_author': 'username_0', 'text': 'Okay I finally got around rebasing this PR.\r\nThanks @username_1 for the excellent suggestion!\r\nI modified it a bit to save space, but the example still uses up a lot:\r\n\r\n![image](https://user-images.githubusercontent.com/4370550/28386324-8b975304-6ccb-11e7-9e82-dc2992d863e4.png)\r\n\r\nDoes anyone have a good idea to save space? I feel like this example has three lines too many.', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'wilzbach', 'comment_id': 349898124.0, 'datetime': '2017-12-07 08:32:20+00:00', 'masked_author': 'username_0', 'text': 'I tried switching from Allman brace style to K&R.', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'wilzbach', 'comment_id': 349921102.0, 'datetime': '2017-12-07 10:05:30+00:00', 'masked_author': 'username_0', 'text': ""@username_4 thanks a lot for your ideas! It's still a bit. Maybe one or two lines less and we it's good?\r\n\r\n![image](https://user-images.githubusercontent.com/4370550/33709680-662d1950-db3e-11e7-8bd0-54f7c6b9003c.png)"", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'JinShil', 'comment_id': 349922253.0, 'datetime': '2017-12-07 10:10:02+00:00', 'masked_author': 'username_4', 'text': 'That newline really stinks.  What about?\r\n\r\n```D\r\nc.tupleof[idx] = r.dropOne.front\r\n    .to!(typeof(Conf.tupleof[idx]));\r\n```', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'JinShil', 'comment_id': 349922588.0, 'datetime': '2017-12-07 10:11:29+00:00', 'masked_author': 'username_4', 'text': 'Is it still too tall?  If you really need to shrink it down you might try...\r\n\r\n```D\r\nstruct Config { int a, b; string c; }\r\n```', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'wilzbach', 'comment_id': 350231218.0, 'datetime': '2017-12-08 10:37:18+00:00', 'masked_author': 'username_0', 'text': 'Yeah gave it a try. I could try to remove the comment too?\r\n\r\n![image](https://user-images.githubusercontent.com/4370550/33762250-1b819ab0-dc0c-11e7-9b62-866aa676f50a.png)', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'JinShil', 'comment_id': 350256041.0, 'datetime': '2017-12-08 12:51:52+00:00', 'masked_author': 'username_4', 'text': 'Look OK to me.  How many lines are you aiming for?', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'wilzbach', 'comment_id': 350943357.0, 'datetime': '2017-12-12 04:39:47+00:00', 'masked_author': 'username_0', 'text': 'So that people don\'t shout. WTF? What monster is this?\r\nPeople already complained that the [example at the Dlang-Tour](https://tour.dlang.org/) is too complex, so I\'m not so sure whether we should move forward with this. Maybe it\'s better to add a ""D by example"" section to tour.dlang.org? This would also allow more room for comments and explanations.', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'JinShil', 'comment_id': 350945092.0, 'datetime': '2017-12-12 04:54:00+00:00', 'masked_author': 'username_4', 'text': ""I don't see this getting any simpler.  I thought this was for the front-page example, not the D tour.  The D tour's examples should be just enough complexity to illustrate the concept under discussion and nothing more, but the front-page examples are intended to showcase D's capabilities, are they not?\r\n\r\nI wouldn't recommend this being in the D tour, but as a front-page example showcase, I think it's OK."", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'wilzbach', 'comment_id': 350949338.0, 'datetime': '2017-12-12 05:28:07+00:00', 'masked_author': 'username_0', 'text': ""Oh I think you misunderstood me. I was talking about adding it at the end of the tour as an addendum for people interesting in powerful, one-page examples.\r\n\r\nHave a look at: https://github.com/dlang-tour/english/pull/217\r\n\r\nI believe that's the better way to go than shocking users on the main page.\r\nCC @andralex @username_2 @username_1 @MetaLang @JackStouffer for opinions."", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'CyberShadow', 'comment_id': 351531140.0, 'datetime': '2017-12-13 21:30:40+00:00', 'masked_author': 'username_2', 'text': 'Oof ouch owie my inbox.\r\n\r\nPerhaps we can exclude some examples from the ""random roulette"", so that the page doesn\'t appear too broken by default, but allow adding larger examples that the user could still select manually from the dropdown?', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'wilzbach', 'comment_id': 352101450.0, 'datetime': '2017-12-15 20:16:49+00:00', 'masked_author': 'username_0', 'text': ""I like the idea, but won't the list then get too big? IIRC was the magic number eight."", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'wilzbach', 'comment_id': 353790876.0, 'datetime': '2017-12-24 15:43:10+00:00', 'masked_author': 'username_0', 'text': 'I will close this now as I feel that the example has found a good place at the end of the DTour. If someone wants to include it on dlang.org, it will be easy to find.', 'title': None, 'type': 'comment'}]","<issue_start><issue_comment>Title: Add example about code generation
+username_0: With Allman brace style this one got quite long, any ideas on trimming it down?
+<issue_comment>username_1: There's not need for mixins here. I think the following looks better:
+```D
+// Use compile-time introspection to generate
+// a configuration parser.
+import std.algorithm, std.conv, std.range, std.stdio,
+       std.typecons : staticIota; // XXX: staticIota is undocumented and should be in std.meta
+
+void main()
+{
+    Config conf;
+
+    ""b=1,a=2,c=hello"".splitter("","").each!(e => conf.read(e));
+    
+    conf.writeln;
+}
+
+struct Config
+{
+    int a, b;
+    string c;
+}
+
+void read(Conf)(ref Conf c, string entry)
+{
+    auto r = entry.splitter(""="");
+    
+    switch (r.front)
+    {
+        default:
+            assert (0, ""Unknown member name."");
+        foreach (idx; staticIota!(0, Conf.tupleof.length))
+        {
+            case Conf.tupleof[idx].stringof:
+                c.tupleof[idx] = r.dropOne.front.to!(typeof(Conf.tupleof[idx]));
+                break;
+        }
+    }   
+}
+
+```
+<issue_comment>username_2: You need to break with a label there :) Otherwise it'll break the `foreach`, not `switch`. Common gotcha.
+<issue_comment>username_1: TBH, I wasn't sure, so I first wrote it with `break LSwitch`, but then I tested it without a didn't find a difference and used a plain `break;`. Still I'm not sure about the sematics of breaking out of unrolled loop - what if the break was guarded by a runtime check (that always passes) then it won't be possible to stop the loop unrolling and I would expect the runtime check + the `break;` to be present in all switch cases.
+Similarly, I think you can't do an early return inside an unrolled loop, because you would get ""statement unreachable"" warnings.
+<issue_comment>username_3: Would make sense to me, but dmd accepts this without warning:
+
+```d
+int main()
+{
+    import std.meta: AliasSeq;
+    foreach (x; AliasSeq!(1, 2, 3)) return x;
+}
+```
+<issue_comment>username_0: Okay I finally got around rebasing this PR.
+Thanks @username_1 for the excellent suggestion!
+I modified it a bit to save space, but the example still uses up a lot:
+
+![image](https://user-images.githubusercontent.com/4370550/28386324-8b975304-6ccb-11e7-9e82-dc2992d863e4.png)
+
+Does anyone have a good idea to save space? I feel like this example has three lines too many.
+<issue_comment>username_0: I tried switching from Allman brace style to K&R.
+<issue_comment>username_0: @username_4 thanks a lot for your ideas! It's still a bit. Maybe one or two lines less and we it's good?
+
+![image](https://user-images.githubusercontent.com/4370550/33709680-662d1950-db3e-11e7-8bd0-54f7c6b9003c.png)
+<issue_comment>username_4: That newline really stinks.  What about?
+
+```D
+c.tupleof[idx] = r.dropOne.front
+    .to!(typeof(Conf.tupleof[idx]));
+```
+<issue_comment>username_4: Is it still too tall?  If you really need to shrink it down you might try...
+
+```D
+struct Config { int a, b; string c; }
+```
+<issue_comment>username_0: Yeah gave it a try. I could try to remove the comment too?
+
+![image](https://user-images.githubusercontent.com/4370550/33762250-1b819ab0-dc0c-11e7-9b62-866aa676f50a.png)
+<issue_comment>username_4: Look OK to me.  How many lines are you aiming for?
+<issue_comment>username_0: So that people don't shout. WTF? What monster is this?
+People already complained that the [example at the Dlang-Tour](https://tour.dlang.org/) is too complex, so I'm not so sure whether we should move forward with this. Maybe it's better to add a ""D by example"" section to tour.dlang.org? This would also allow more room for comments and explanations.
+<issue_comment>username_4: I don't see this getting any simpler.  I thought this was for the front-page example, not the D tour.  The D tour's examples should be just enough complexity to illustrate the concept under discussion and nothing more, but the front-page examples are intended to showcase D's capabilities, are they not?
+
+I wouldn't recommend this being in the D tour, but as a front-page example showcase, I think it's OK.
+<issue_comment>username_0: Oh I think you misunderstood me. I was talking about adding it at the end of the tour as an addendum for people interesting in powerful, one-page examples.
+
+Have a look at: https://github.com/dlang-tour/english/pull/217
+
+I believe that's the better way to go than shocking users on the main page.
+CC @andralex @username_2 @username_1 @MetaLang @JackStouffer for opinions.
+<issue_comment>username_2: Oof ouch owie my inbox.
+
+Perhaps we can exclude some examples from the ""random roulette"", so that the page doesn't appear too broken by default, but allow adding larger examples that the user could still select manually from the dropdown?
+<issue_comment>username_0: I like the idea, but won't the list then get too big? IIRC was the magic number eight.
+<issue_comment>username_0: I will close this now as I feel that the example has found a good place at the end of the DTour. If someone wants to include it on dlang.org, it will be easy to find."
+emberjs/website,135303800,2469,"{'number': 2469.0, 'repo': 'website', 'user_login': 'emberjs'}","[{'action': 'opened', 'author': 'acorncom', 'comment_id': None, 'datetime': '2016-02-22T03:29:20Z', 'masked_author': 'username_0', 'text': ""This file is going to be referenced from the Ember-CLI `application.hbs` file.  We're trying to achieve a few things here:\r\n\r\n- provide a nice 'getting started' experience for folks new to the Ember ecosystem\r\n- keep from unnecessarily cluttering the Ember default template in any way that would make upgrades more painful for folks already using Ember\r\n\r\nWe ( @username_4 and I ) are hoping that referencing this script from the Ember-CLI `application.hbs` will be a reasonable compromise.\r\n\r\nBefore:\r\n![before](https://cloud.githubusercontent.com/assets/802505/13208749/2aee2776-d8d9-11e5-90d5-b9720bcefebc.png)\r\n\r\nAfter:\r\n![screen shot 2016-02-21 at 8 40 30 pm](https://cloud.githubusercontent.com/assets/802505/13208945/6a383e06-d8db-11e5-9fd7-417768cf7ec1.png)\r\n\r\nQuestions:\r\n- Is this the text that we want to put in? Is it warm and friendly enough?  Representative of the Tomster way of saying things? :smile:  Anything we are leaving out?  \r\n- Do we want to link to anything else?  I've heard recommendations to link to the Ember Inspector, but was trying to avoid linking to anything specifically called out in the Guides and also avoid linking to Slack so we don't run into size problems there ...  Plus, linking to specific sub-sections of the guides requires additional 'version' info as we don't currently have a `/current/` url yet ;-)\r\n- I'm assuming we'd want to localize this for different languages.  That seems like a v2 of this, but any thoughts on how to handle that?\r\n\r\nAdditional thoughts:\r\n- we decided to skip worrying about the 'offline experience' of this as the only time folks would see this page would be immediately after an `npm install` (unless this is shown while at a conference without Internet access, in which case the page should load as normal but throw a 404 behind the scenes due to the inability to load the external script)\r\n\r\n/cc @username_3 @wifelette @username_4 @username_1"", 'title': 'Add Ember-CLI welcome script', 'type': 'issue'}
+ {'action': 'created', 'author': 'tomdale', 'comment_id': 187243942.0, 'datetime': '2016-02-22 15:59:43+00:00', 'masked_author': 'username_1', 'text': 'This is awesome! I\'ve always wanted to have a nice experience for the default app when running, so I\'m glad you all are tackling this.\r\n\r\nOne thing that might be nice is to strike a more congratulatory tone. Your first Ember app is an auspicious moment—we should make sure users feel like we\'re acknowledging how exciting it is.\r\n\r\nThe links to reference material is great, but we may also want to consider linking back to the GSG. Something like ""Is this your first Ember app? We have a tutorial that walks you through everything you need to know.""\r\n\r\nI\'m fine with punting on the offline experience for now. One way of dealing with it would be to write it to localStorage and prefer that if available—but it\'s definitely an edge case.', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'Turbo87', 'comment_id': 187622266.0, 'datetime': '2016-02-23 09:33:50+00:00', 'masked_author': 'username_2', 'text': ""as mentioned in https://github.com/ember-cli/ember-cli/pull/5501 it would be better to extract this page into an `ember-getting-started` addon. unless I'm missing something this would require five steps:\r\n\r\n- [ ] create `ember-getting-started` addon\r\n- [ ] add `app/templates/application.hbs` with the proposed contents\r\n- [ ] add necessary CSS to the addon\r\n- [ ] add `ember-getting-started` to the default `app` blueprint in `ember-cli`\r\n- [ ] remove `application.hbs` from the default `app` blueprint in `ember-cli`"", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'locks', 'comment_id': 188004584.0, 'datetime': '2016-02-24 01:47:23+00:00', 'masked_author': 'username_3', 'text': '@username_2 https://github.com/username_3/ember-welcome-page\r\n\r\nShould I publish it under my own name?', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'acorncom', 'comment_id': 188081939.0, 'datetime': '2016-02-24 05:32:56+00:00', 'masked_author': 'username_0', 'text': ""Regarding congratulatory tone, I've posted a few other text options on UseCanvas.  @username_1 any feedback on these? https://usecanvas.com/ember-docs/welcome-drafts/33KmyOjhfBdrTmJeIx1dn4  We can mix and match between the options or iterate on one of them if it's in the right ballpark but still not coming across the way you intend ..."", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'mixonic', 'comment_id': 188083702.0, 'datetime': '2016-02-24 05:38:23+00:00', 'masked_author': 'username_4', 'text': '@rwjblue and I have discussed this in person. He feels confident we can spike an addon that would detect if an app exists, and if it does not, then display this prompt.\r\n\r\n""detect if an app exists"" consists of a set of checks:\r\n\r\n* Has an `application.hbs` been created?\r\n* Has an `index.hbs` been created?\r\n* Have any routes been created?\r\n\r\nThese are all things not too hard to check for. Then we would not even need to pull in a script.', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'locks', 'comment_id': 188161437.0, 'datetime': '2016-02-24 09:32:39+00:00', 'masked_author': 'username_3', 'text': ""@username_4 you mean instead of what I'm doing in the repo linked above? send over a PR, please :)"", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'Turbo87', 'comment_id': 188178215.0, 'datetime': '2016-02-24 10:18:02+00:00', 'masked_author': 'username_2', 'text': ""I just tested @username_3 `ember-welcome-page` addon and it works quite well.\r\n\r\nThere is one minor issue if you try to overwrite the `application.hbs` without removing the addon first it will complain that the `application.js` file already exists. I'm not sure if that is actually a problem though because the welcome page should explain how to remove the welcome page addon.\r\n\r\nAnother thing that might be problematic for power users is that they now have to manually remove the addon each time they create a new app, while previously they just had to overwrite or delete the existing `application.hbs` or just start working and adjust the file later. This could possibly be solved by something like a `--no-welcome-page` flag on the `ember new` command though."", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'acorncom', 'comment_id': 188256343.0, 'datetime': '2016-02-24 13:31:30+00:00', 'masked_author': 'username_0', 'text': '@username_3 re having this repo under your name, I think it makes more sense for it to be an Ember repo so that others can be assigned write access via groups in the future ...', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'locks', 'comment_id': 188266676.0, 'datetime': '2016-02-24 14:00:20+00:00', 'masked_author': 'username_3', 'text': ""@username_0 I meant if I should publish temporarily under my account to get it moving on the CLI side. I agree and I'll transfer the repo as soon as approved :)"", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'acorncom', 'comment_id': 188270368.0, 'datetime': '2016-02-24 14:08:36+00:00', 'masked_author': 'username_0', 'text': ':+1:', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'Turbo87', 'comment_id': 188270941.0, 'datetime': '2016-02-24 14:10:19+00:00', 'masked_author': 'username_2', 'text': '@username_3 are we talking NPM publish or GitHub publish?', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'locks', 'comment_id': 188271288.0, 'datetime': '2016-02-24 14:11:32+00:00', 'masked_author': 'username_3', 'text': ""npm. I guess it's not necessary, we can use github dep, right?"", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'Turbo87', 'comment_id': 188271620.0, 'datetime': '2016-02-24 14:12:45+00:00', 'masked_author': 'username_2', 'text': '@username_3 yes, as long as we\'re still experimenting with it a github dep should be sufficient. once the addon is somewhat ""finished"" the PR to `ember-cli` should use a NPM dep though.', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'acorncom', 'comment_id': 189118368.0, 'datetime': '2016-02-26 05:21:37+00:00', 'masked_author': 'username_0', 'text': ""I'm closing this PR as we've moved development to the `ember-welcome-page` repo.  Feedback or comments on our v1 issue (https://github.com/username_3/ember-welcome-page/issues/4) are more than welcome!"", 'title': None, 'type': 'comment'}]","<issue_start><issue_comment>Title: Add Ember-CLI welcome script
+username_0: This file is going to be referenced from the Ember-CLI `application.hbs` file.  We're trying to achieve a few things here:
+
+- provide a nice 'getting started' experience for folks new to the Ember ecosystem
+- keep from unnecessarily cluttering the Ember default template in any way that would make upgrades more painful for folks already using Ember
+
+We ( @username_4 and I ) are hoping that referencing this script from the Ember-CLI `application.hbs` will be a reasonable compromise.
+
+Before:
+![before](https://cloud.githubusercontent.com/assets/802505/13208749/2aee2776-d8d9-11e5-90d5-b9720bcefebc.png)
+
+After:
+![screen shot 2016-02-21 at 8 40 30 pm](https://cloud.githubusercontent.com/assets/802505/13208945/6a383e06-d8db-11e5-9fd7-417768cf7ec1.png)
+
+Questions:
+- Is this the text that we want to put in? Is it warm and friendly enough?  Representative of the Tomster way of saying things? :smile:  Anything we are leaving out?  
+- Do we want to link to anything else?  I've heard recommendations to link to the Ember Inspector, but was trying to avoid linking to anything specifically called out in the Guides and also avoid linking to Slack so we don't run into size problems there ...  Plus, linking to specific sub-sections of the guides requires additional 'version' info as we don't currently have a `/current/` url yet ;-)
+- I'm assuming we'd want to localize this for different languages.  That seems like a v2 of this, but any thoughts on how to handle that?
+
+Additional thoughts:
+- we decided to skip worrying about the 'offline experience' of this as the only time folks would see this page would be immediately after an `npm install` (unless this is shown while at a conference without Internet access, in which case the page should load as normal but throw a 404 behind the scenes due to the inability to load the external script)
+
+/cc @username_3 @wifelette @username_4 @username_1
+<issue_comment>username_1: This is awesome! I've always wanted to have a nice experience for the default app when running, so I'm glad you all are tackling this.
+
+One thing that might be nice is to strike a more congratulatory tone. Your first Ember app is an auspicious moment—we should make sure users feel like we're acknowledging how exciting it is.
+
+The links to reference material is great, but we may also want to consider linking back to the GSG. Something like ""Is this your first Ember app? We have a tutorial that walks you through everything you need to know.""
+
+I'm fine with punting on the offline experience for now. One way of dealing with it would be to write it to localStorage and prefer that if available—but it's definitely an edge case.
+<issue_comment>username_2: as mentioned in https://github.com/ember-cli/ember-cli/pull/5501 it would be better to extract this page into an `ember-getting-started` addon. unless I'm missing something this would require five steps:
+
+- [ ] create `ember-getting-started` addon
+- [ ] add `app/templates/application.hbs` with the proposed contents
+- [ ] add necessary CSS to the addon
+- [ ] add `ember-getting-started` to the default `app` blueprint in `ember-cli`
+- [ ] remove `application.hbs` from the default `app` blueprint in `ember-cli`
+<issue_comment>username_3: @username_2 https://github.com/username_3/ember-welcome-page
+
+Should I publish it under my own name?
+<issue_comment>username_0: Regarding congratulatory tone, I've posted a few other text options on UseCanvas.  @username_1 any feedback on these? https://usecanvas.com/ember-docs/welcome-drafts/33KmyOjhfBdrTmJeIx1dn4  We can mix and match between the options or iterate on one of them if it's in the right ballpark but still not coming across the way you intend ...
+<issue_comment>username_4: @rwjblue and I have discussed this in person. He feels confident we can spike an addon that would detect if an app exists, and if it does not, then display this prompt.
+
+""detect if an app exists"" consists of a set of checks:
+
+* Has an `application.hbs` been created?
+* Has an `index.hbs` been created?
+* Have any routes been created?
+
+These are all things not too hard to check for. Then we would not even need to pull in a script.
+<issue_comment>username_3: @username_4 you mean instead of what I'm doing in the repo linked above? send over a PR, please :)
+<issue_comment>username_2: I just tested @username_3 `ember-welcome-page` addon and it works quite well.
+
+There is one minor issue if you try to overwrite the `application.hbs` without removing the addon first it will complain that the `application.js` file already exists. I'm not sure if that is actually a problem though because the welcome page should explain how to remove the welcome page addon.
+
+Another thing that might be problematic for power users is that they now have to manually remove the addon each time they create a new app, while previously they just had to overwrite or delete the existing `application.hbs` or just start working and adjust the file later. This could possibly be solved by something like a `--no-welcome-page` flag on the `ember new` command though.
+<issue_comment>username_0: @username_3 re having this repo under your name, I think it makes more sense for it to be an Ember repo so that others can be assigned write access via groups in the future ...
+<issue_comment>username_3: @username_0 I meant if I should publish temporarily under my account to get it moving on the CLI side. I agree and I'll transfer the repo as soon as approved :)
+<issue_comment>username_0: :+1:
+<issue_comment>username_2: @username_3 are we talking NPM publish or GitHub publish?
+<issue_comment>username_3: npm. I guess it's not necessary, we can use github dep, right?
+<issue_comment>username_2: @username_3 yes, as long as we're still experimenting with it a github dep should be sufficient. once the addon is somewhat ""finished"" the PR to `ember-cli` should use a NPM dep though.
+<issue_comment>username_0: I'm closing this PR as we've moved development to the `ember-welcome-page` repo.  Feedback or comments on our v1 issue (https://github.com/username_3/ember-welcome-page/issues/4) are more than welcome!"
+techqueria/website,471489354,429,,"[{'action': 'opened', 'author': 'fvcproductions', 'comment_id': None, 'datetime': '2019-07-23 05:08:51+00:00', 'masked_author': 'username_0', 'text': '## Member Directory\r\n\r\nhttps://techqueria.org/members\r\n\r\n- look up members through dedicated directory\r\n- would be like LinkedIn\r\n- powered by Algolia\r\n- users can choose to make their profiles indexed and public; private by default', 'title': 'New Feature Request: Member Directory', 'type': 'issue'}]","<issue_start><issue_comment>Title: New Feature Request: Member Directory
+username_0: ## Member Directory
+
+https://techqueria.org/members
+
+- look up members through dedicated directory
+- would be like LinkedIn
+- powered by Algolia
+- users can choose to make their profiles indexed and public; private by default"
+girldevelopit/gdi-website,167963776,483,,"[{'action': 'opened', 'author': 'corinnepw', 'comment_id': None, 'datetime': '2016-07-27 21:42:33+00:00', 'masked_author': 'username_0', 'text': '**Create Summit Leadership Landing page**\r\n*The annual Girl Develop It Leadership Summit is coming up! We want to create a static page that includes info on the summit and how sponsors can support*\r\n\r\n**To Do**\r\n- [ ] Review summit page mock-up (attached) \r\n- [ ] Review Summit Sponsorship deck pdf (attached)\r\n- [ ] Add page Title: Girl Develop It 2016 Leadership Summit\r\n- [ ] Add 2015 Group Photo (attached)\r\n- [ ] Add About GDI info: _Girl Develop It is a 501(c)3 nonprofit that provides affordable and accessible opportunities to women who want to learn web and software development through hands-on instruction. Since our founding in 2010, Girl Develop It has led the nationwide movement to provide women with avenues to participate in the technology industry today._\r\n- [ ] Add Summit graf # 1: _On October 6th - 9th in Austin, TX, the annual Girl Develop It Leadership Summit will bring together 85 industry-leading technical women from our 50+ chapters across the country, representing more than 68,000 Girl Develop It members nationwide._ \r\n- [ ] Add icons from infographic directly below GDI and summit info graf 1 (attached) & add numbers for each - 201 leaders;; 54 chapters; 68,437 members\r\n- [ ] Add Summit graf # 2: _The goal of the Summit is to provide our leaders with invaluable opportunities to connect, and to receive training and support in order to empower them to continue as ambassadors of GDI\'s mission in their respective cities. The Summit will feature industry experts presenting best practices, including workshops on marketing and inclusion outreach, how to build a leadership team, and effective storytelling._\r\n- [ ] Embed 2015 Recap video: https://vimeo.com/149221166\r\n- [ ] Add Section header ""Get Involved"" and add info from Sponsorship Deck pdf Get Involved section\r\n- [ ] Add Section header ""Support Levels & Perks"" and add info from Sponsorship Deck pdf Levels & Perks section\r\n- [ ] Add Section header ""Sponsors"" & add sponsor logos: IBM and Indeed (attached)\r\n- [ ] Add ""Contact Us"" note from bottom of Sponsorship deck pdf.\r\n\r\n![summit landing page mock-up](https://cloud.githubusercontent.com/assets/4427638/17192357/0f5b7e78-541c-11e6-8a88-55618bac7c74.JPG)\r\n\r\n[GDI Leadership Summit 2016 Sponsorship Deck.pdf](https://github.com/girldevelopit/gdi-website/files/387243/GDI.Leadership.Summit.2016.Sponsorship.Deck.pdf)\r\n\r\n![img_1813](https://cloud.githubusercontent.com/assets/4427638/17193210/09dd17c8-5420-11e6-96ed-408d9345e02d.JPG)\r\n\r\n![54 chapters](https://cloud.githubusercontent.com/assets/4427638/17193148/ab516e52-541f-11e6-8261-f34965111eb8.png)\r\n![68 437 members](https://cloud.githubusercontent.com/assets/4427638/17193146/ab4fcafc-541f-11e6-80cd-4741d4d6c525.png)\r\n![201 leaders](https://cloud.githubusercontent.com/assets/4427638/17193147/ab508208-541f-11e6-845f-cb7e48a2184b.png)\r\n\r\n![ibm logo](https://cloud.githubusercontent.com/assets/4427638/17193494/563996b8-5421-11e6-9423-0ae5f05c55c4.png)\r\n![indeed logo](https://cloud.githubusercontent.com/assets/4427638/17193498/59b598d2-5421-11e6-9926-438ed40ed4f5.png)', 'title': 'Create 2016 Leadership Summit static landing page', 'type': 'issue'}
+ {'action': 'closed', 'author': 'Roenok', 'comment_id': None, 'datetime': '2016-07-31 13:52:12+00:00', 'masked_author': 'username_1', 'text': '', 'title': None, 'type': 'issue'}]","<issue_start><issue_comment>Title: Create 2016 Leadership Summit static landing page
+username_0: **Create Summit Leadership Landing page**
+*The annual Girl Develop It Leadership Summit is coming up! We want to create a static page that includes info on the summit and how sponsors can support*
+
+**To Do**
+- [ ] Review summit page mock-up (attached) 
+- [ ] Review Summit Sponsorship deck pdf (attached)
+- [ ] Add page Title: Girl Develop It 2016 Leadership Summit
+- [ ] Add 2015 Group Photo (attached)
+- [ ] Add About GDI info: _Girl Develop It is a 501(c)3 nonprofit that provides affordable and accessible opportunities to women who want to learn web and software development through hands-on instruction. Since our founding in 2010, Girl Develop It has led the nationwide movement to provide women with avenues to participate in the technology industry today._
+- [ ] Add Summit graf # 1: _On October 6th - 9th in Austin, TX, the annual Girl Develop It Leadership Summit will bring together 85 industry-leading technical women from our 50+ chapters across the country, representing more than 68,000 Girl Develop It members nationwide._ 
+- [ ] Add icons from infographic directly below GDI and summit info graf 1 (attached) & add numbers for each - 201 leaders;; 54 chapters; 68,437 members
+- [ ] Add Summit graf # 2: _The goal of the Summit is to provide our leaders with invaluable opportunities to connect, and to receive training and support in order to empower them to continue as ambassadors of GDI's mission in their respective cities. The Summit will feature industry experts presenting best practices, including workshops on marketing and inclusion outreach, how to build a leadership team, and effective storytelling._
+- [ ] Embed 2015 Recap video: https://vimeo.com/149221166
+- [ ] Add Section header ""Get Involved"" and add info from Sponsorship Deck pdf Get Involved section
+- [ ] Add Section header ""Support Levels & Perks"" and add info from Sponsorship Deck pdf Levels & Perks section
+- [ ] Add Section header ""Sponsors"" & add sponsor logos: IBM and Indeed (attached)
+- [ ] Add ""Contact Us"" note from bottom of Sponsorship deck pdf.
+
+![summit landing page mock-up](https://cloud.githubusercontent.com/assets/4427638/17192357/0f5b7e78-541c-11e6-8a88-55618bac7c74.JPG)
+
+[GDI Leadership Summit 2016 Sponsorship Deck.pdf](https://github.com/girldevelopit/gdi-website/files/387243/GDI.Leadership.Summit.2016.Sponsorship.Deck.pdf)
+
+![img_1813](https://cloud.githubusercontent.com/assets/4427638/17193210/09dd17c8-5420-11e6-96ed-408d9345e02d.JPG)
+
+![54 chapters](https://cloud.githubusercontent.com/assets/4427638/17193148/ab516e52-541f-11e6-8261-f34965111eb8.png)
+![68 437 members](https://cloud.githubusercontent.com/assets/4427638/17193146/ab4fcafc-541f-11e6-80cd-4741d4d6c525.png)
+![201 leaders](https://cloud.githubusercontent.com/assets/4427638/17193147/ab508208-541f-11e6-845f-cb7e48a2184b.png)
+
+![ibm logo](https://cloud.githubusercontent.com/assets/4427638/17193494/563996b8-5421-11e6-9423-0ae5f05c55c4.png)
+![indeed logo](https://cloud.githubusercontent.com/assets/4427638/17193498/59b598d2-5421-11e6-9926-438ed40ed4f5.png)<issue_closed>"
+JetBrains/kotlin-web-site,1055205324,2660,"{'number': 2660.0, 'repo': 'kotlin-web-site', 'user_login': 'JetBrains'}","[{'action': 'opened', 'author': 'Lokik-5', 'comment_id': None, 'datetime': '2021-11-16T18:42:24Z', 'masked_author': 'username_0', 'text': 'I think making property private for data class and allowing then access by public property using backing fields will print wrong output for componentN(), toString(), etc.\r\n\r\ndata class BatteryDemo(\r\n    private val _level: Int,\r\n    private val _temperature: Int,\r\n    private val _voltage: Int,\r\n) {\r\n    val level get() = _level.toString()\r\n    val temperature get() = _temperature.toString()\r\n    val voltage get() = _voltage.toString()\r\n}', 'title': 'Documentation updated', 'type': 'issue'}
+ {'action': 'created', 'author': 'udalov', 'comment_id': 976495181.0, 'datetime': '2021-11-23 12:59:16+00:00', 'masked_author': 'username_1', 'text': ""You can still write the code that way if it's needed for some reason though. This section is talking about the constraints that the language puts on the data classes. The compiler will report an error if one of these constraints is not satisfied, which is not true for the statement you propose to add."", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'Lokik-5', 'comment_id': 976732530.0, 'datetime': '2021-11-23 15:36:43+00:00', 'masked_author': 'username_0', 'text': '', 'title': None, 'type': 'comment'}]","<issue_start><issue_comment>Title: Documentation updated
+username_0: I think making property private for data class and allowing then access by public property using backing fields will print wrong output for componentN(), toString(), etc.
+
+data class BatteryDemo(
+    private val _level: Int,
+    private val _temperature: Int,
+    private val _voltage: Int,
+) {
+    val level get() = _level.toString()
+    val temperature get() = _temperature.toString()
+    val voltage get() = _voltage.toString()
+}
+<issue_comment>username_1: You can still write the code that way if it's needed for some reason though. This section is talking about the constraints that the language puts on the data classes. The compiler will report an error if one of these constraints is not satisfied, which is not true for the statement you propose to add."

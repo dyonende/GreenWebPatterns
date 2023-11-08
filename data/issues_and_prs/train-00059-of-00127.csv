@@ -1,0 +1,874 @@
+DjangoGirls/djangogirls,962784501,610,"{'number': 610.0, 'repo': 'djangogirls', 'user_login': 'DjangoGirls'}","[{'action': 'opened', 'author': 'carltongibson', 'comment_id': None, 'datetime': '2021-08-06T14:22:47Z', 'masked_author': 'username_0', 'text': ""WIP to fix #608 — gulp is still supported and active, so we should be able to fix the tasks. \r\nThey're not doing very much: copying some files, running a preprocessor, ... —\xa0it's got to be easier to fix gulp that swap to webpack or ... (that we're no more experts in there than we are here.) \r\n\r\nUpdate node and gulp, since it breaks on latest node. (I can't see a way to work\r\nout which stable versions worked before.)\r\n\r\nBegin updating gulp tasks to use gulp.series()\r\n\r\nRun into `Task never defined: set-production` — but that seems to be present in\r\nenvironment.js so I'm a bit 🤔\r\n\r\nPausing here, for the moment."", 'title': 'WIP on fixing gulp.', 'type': 'issue'}
+ {'action': 'created', 'author': 'carltongibson', 'comment_id': 894300587.0, 'datetime': '2021-08-06 14:28:52+00:00', 'masked_author': 'username_0', 'text': ""Some log extracts: \r\n\r\nAfter messing around updating for ages, clean install: \r\n\r\n```\r\n$ npm install\r\nnpm WARN deprecated urix@0.1.0: Please see https://github.com/lydell/urix#deprecated\r\nnpm WARN deprecated resolve-url@0.2.1: https://github.com/lydell/resolve-url#deprecated\r\nnpm WARN deprecated crypto@0.0.3: This package is no longer supported. It's now a built-in Node module. If you've depended on crypto, you should switch to the one that's built-in.\r\nnpm WARN deprecated gulp-util@3.0.8: gulp-util is deprecated - replace it, following the guidelines at https://medium.com/gulpjs/gulp-util-ca3b1f9f9ac5\r\nnpm WARN deprecated fsevents@1.2.13: fsevents 1 will break on node v14+ and could be using insecure binaries. Upgrade to fsevents 2.\r\nnpm WARN deprecated chokidar@2.1.8: Chokidar 2 will break on node v14+. Upgrade to chokidar 3 with 15x less dependencies.\r\nnpm WARN deprecated gulp-util@2.2.20: gulp-util is deprecated - replace it, following the guidelines at https://medium.com/gulpjs/gulp-util-ca3b1f9f9ac5\r\n\r\n...\r\n```\r\n\r\nHmmm. Do we need to address all those? 🤔\r\n\r\n```\r\n$ gulp --version\r\nCLI version: 2.3.0\r\nLocal version: 4.0.2\r\n$ gulp\r\nAssertionError [ERR_ASSERTION]: Task function must be specified\r\n    at Gulp.set [as _setTask] (/Users/carlton/Documents/DjangoGirls/djangogirls/node_modules/undertaker/lib/set-task.js:10:3)\r\n    at Gulp.task (/Users/carlton/Documents/DjangoGirls/djangogirls/node_modules/undertaker/lib/task.js:13:8)\r\n    at Object.<anonymous> (/Users/carlton/Documents/DjangoGirls/djangogirls/gulp/tasks/build.js:4:6)\r\n\r\n... \r\n \r\n}\r\n```\r\n\r\nOK, so add some `gulp.series()` declarations: \r\n\r\n```\r\n(djangogirls) ~/Documents/DjangoGirls/djangogirls (fix-workflow-file)$ gulp\r\nAssertionError [ERR_ASSERTION]: Task never defined: set-production\r\n    at getFunction (/Users/carlton/Documents/DjangoGirls/djangogirls/node_modules/undertaker/lib/helpers/normalizeArgs.js:21:9)\r\n    at map (/Users/carlton/Documents/DjangoGirls/djangogirls/node_modules/arr-map/index.js:20:14)\r\n    at normalizeArgs (/Users/carlton/Documents/DjangoGirls/djangogirls/node_modules/undertaker/lib/helpers/normalizeArgs.js:30:10)\r\n    at Gulp.series (/Users/carlton/Documents/DjangoGirls/djangogirls/node_modules/undertaker/lib/series.js:13:14)\r\n    at Object.<anonymous> (/Users/carlton/Documents/DjangoGirls/djangogirls/gulp/tasks/build.js:4:25)\r\n...\r\n}\r\n```\r\n\r\nGrrr. OK. Let's stop."", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'xavdid', 'comment_id': 894612059.0, 'datetime': '2021-08-07 06:13:54+00:00', 'masked_author': 'username_1', 'text': ""@username_0 I spent some time on this today - looks like the `gulp@4` change was a little more of an upgrade than it lead on. The biggest change is how tasks are declared:\r\n\r\n```js\r\n// declaring tasks is discouraged, use exports instead:\r\n\r\ngulp.task('sometask', ['a', 'b', 'c'], function() { ... })\r\n\r\n// becomes\r\n\r\n// in build.js\r\nmodule.exports = gulp.series('a', 'b', 'c', async () => { ... })\r\n\r\n// in gulpfile.js\r\nmodule.exports = { sometask: require('./tasks/build') }\r\n```\r\n\r\nHaving tasks be individual functions changes how these files are structured and the tasks are declared, but is straightforward enough. It will take more time than I expected though, so you'll have to bear with me (if you'd still like me to handle it) 😅"", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'carltongibson', 'comment_id': 894613043.0, 'datetime': '2021-08-07 06:26:18+00:00', 'masked_author': 'username_0', 'text': 'Hey @username_1 Thanks for the input! \r\n\r\nYes I think what you say agrees with my findings thus far. I got to the point of the last error and ran out of time energy. As you see I’ve only updated a couple of the definitions so far, trying to feel my way (without finding a good How to Migrate Guide yet…)\r\n\r\nI’d be super grateful if you do have a bit of capacity to help on this. I don’t know gulp at all so … 😬\r\n(If you were to make a PR in this branch so we can collaborate that would be great.)', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'carltongibson', 'comment_id': 895230178.0, 'datetime': '2021-08-09 13:38:04+00:00', 'masked_author': 'username_0', 'text': 'Closing in favour of #611 .', 'title': None, 'type': 'comment'}]","<issue_start><issue_comment>Title: WIP on fixing gulp.
+username_0: WIP to fix #608 — gulp is still supported and active, so we should be able to fix the tasks. 
+They're not doing very much: copying some files, running a preprocessor, ... — it's got to be easier to fix gulp that swap to webpack or ... (that we're no more experts in there than we are here.) 
+
+Update node and gulp, since it breaks on latest node. (I can't see a way to work
+out which stable versions worked before.)
+
+Begin updating gulp tasks to use gulp.series()
+
+Run into `Task never defined: set-production` — but that seems to be present in
+environment.js so I'm a bit 🤔
+
+Pausing here, for the moment.
+<issue_comment>username_0: Some log extracts: 
+
+After messing around updating for ages, clean install: 
+
+```
+$ npm install
+npm WARN deprecated urix@0.1.0: Please see https://github.com/lydell/urix#deprecated
+npm WARN deprecated resolve-url@0.2.1: https://github.com/lydell/resolve-url#deprecated
+npm WARN deprecated crypto@0.0.3: This package is no longer supported. It's now a built-in Node module. If you've depended on crypto, you should switch to the one that's built-in.
+npm WARN deprecated gulp-util@3.0.8: gulp-util is deprecated - replace it, following the guidelines at https://medium.com/gulpjs/gulp-util-ca3b1f9f9ac5
+npm WARN deprecated fsevents@1.2.13: fsevents 1 will break on node v14+ and could be using insecure binaries. Upgrade to fsevents 2.
+npm WARN deprecated chokidar@2.1.8: Chokidar 2 will break on node v14+. Upgrade to chokidar 3 with 15x less dependencies.
+npm WARN deprecated gulp-util@2.2.20: gulp-util is deprecated - replace it, following the guidelines at https://medium.com/gulpjs/gulp-util-ca3b1f9f9ac5
+
+...
+```
+
+Hmmm. Do we need to address all those? 🤔
+
+```
+$ gulp --version
+CLI version: 2.3.0
+Local version: 4.0.2
+$ gulp
+AssertionError [ERR_ASSERTION]: Task function must be specified
+    at Gulp.set [as _setTask] (/Users/carlton/Documents/DjangoGirls/djangogirls/node_modules/undertaker/lib/set-task.js:10:3)
+    at Gulp.task (/Users/carlton/Documents/DjangoGirls/djangogirls/node_modules/undertaker/lib/task.js:13:8)
+    at Object.<anonymous> (/Users/carlton/Documents/DjangoGirls/djangogirls/gulp/tasks/build.js:4:6)
+
+... 
+ 
+}
+```
+
+OK, so add some `gulp.series()` declarations: 
+
+```
+(djangogirls) ~/Documents/DjangoGirls/djangogirls (fix-workflow-file)$ gulp
+AssertionError [ERR_ASSERTION]: Task never defined: set-production
+    at getFunction (/Users/carlton/Documents/DjangoGirls/djangogirls/node_modules/undertaker/lib/helpers/normalizeArgs.js:21:9)
+    at map (/Users/carlton/Documents/DjangoGirls/djangogirls/node_modules/arr-map/index.js:20:14)
+    at normalizeArgs (/Users/carlton/Documents/DjangoGirls/djangogirls/node_modules/undertaker/lib/helpers/normalizeArgs.js:30:10)
+    at Gulp.series (/Users/carlton/Documents/DjangoGirls/djangogirls/node_modules/undertaker/lib/series.js:13:14)
+    at Object.<anonymous> (/Users/carlton/Documents/DjangoGirls/djangogirls/gulp/tasks/build.js:4:25)
+...
+}
+```
+
+Grrr. OK. Let's stop.
+<issue_comment>username_1: @username_0 I spent some time on this today - looks like the `gulp@4` change was a little more of an upgrade than it lead on. The biggest change is how tasks are declared:
+
+```js
+// declaring tasks is discouraged, use exports instead:
+
+gulp.task('sometask', ['a', 'b', 'c'], function() { ... })
+
+// becomes
+
+// in build.js
+module.exports = gulp.series('a', 'b', 'c', async () => { ... })
+
+// in gulpfile.js
+module.exports = { sometask: require('./tasks/build') }
+```
+
+Having tasks be individual functions changes how these files are structured and the tasks are declared, but is straightforward enough. It will take more time than I expected though, so you'll have to bear with me (if you'd still like me to handle it) 😅
+<issue_comment>username_0: Hey @username_1 Thanks for the input! 
+
+Yes I think what you say agrees with my findings thus far. I got to the point of the last error and ran out of time energy. As you see I’ve only updated a couple of the definitions so far, trying to feel my way (without finding a good How to Migrate Guide yet…)
+
+I’d be super grateful if you do have a bit of capacity to help on this. I don’t know gulp at all so … 😬
+(If you were to make a PR in this branch so we can collaborate that would be great.)
+<issue_comment>username_0: Closing in favour of #611 ."
+asyncapi/website,833656587,204,,"[{'action': 'opened', 'author': 'MikeRalphson', 'comment_id': None, 'datetime': '2021-03-17 11:07:25+00:00', 'masked_author': 'username_0', 'text': '#### Reason/Context\r\n\r\n* To demonstrate adoption of the specification\r\n* To give users examples to work with\r\n* To showcase use of the specification by member orgs etc\r\n* In future, links to online code-generator, playground etc\r\n* Current site location does not have eyeballs or traction\r\n\r\n#### Description\r\n\r\n* APIs.guru [asyncapi-directory](https://apis.guru/asyncapi-directory/) is currently a data-driven static site built with Eleventy, using around 4 template pages and the old static html generator\r\n* Port or re-implement in next.js using scheduled GitHub actions to update the definitions from source\r\n* Ignore streamdata stubs, as not maintained', 'title': 'Integrate or re-implement APIs.guru asyncapi-directory', 'type': 'issue'}
+ {'action': 'created', 'author': 'Gdewilde', 'comment_id': 803453048.0, 'datetime': '2021-03-20 19:41:22+00:00', 'masked_author': 'username_1', 'text': 'As mentioned on Slack: https://asyncapi.slack.com/archives/C34F2JV0U/p1615954697001600\r\n\r\nApideck will fast-track the apitracker.io overview, so it’s easier to compare. We can also make an effort to integrate the data into the asyncapi.io website as soon as it’s done https://apitracker.io/specifications.', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'Gdewilde', 'comment_id': 803498829.0, 'datetime': '2021-03-21 01:57:11+00:00', 'masked_author': 'username_1', 'text': 'Quick prototype: https://apitracker.io/specifications/asyncapi\r\n\r\nWhat other data would be relevant to the list?\r\n\r\n<img width=""1790"" alt=""Screenshot 2021-03-21 at 02 56 10"" src=""https://user-images.githubusercontent.com/1112129/111891175-1f4a0380-89f1-11eb-9f9a-8487e84886de.png"">', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'derberg', 'comment_id': 803889629.0, 'datetime': '2021-03-22 09:01:38+00:00', 'masked_author': 'username_2', 'text': 'I think it would be great to also have a link to portal with documentation to see how companies render docs for users', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'Gdewilde', 'comment_id': 803893555.0, 'datetime': '2021-03-22 09:06:04+00:00', 'masked_author': 'username_1', 'text': 'Like https://docs.zoracloud.com/dev-mqtt-docs/latest/ or more what @username_0 did with https:dycjh@example.com', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'derberg', 'comment_id': 803916918.0, 'datetime': '2021-03-22 09:38:44+00:00', 'masked_author': 'username_2', 'text': 'I think best is to link to the official ones, then people can see different use cases on how EDA docs are presented to users\r\n\r\nthe playground is already rendering docs using the official latest HTML template, so no need to add something separate I think', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'derberg', 'comment_id': 804685279.0, 'datetime': '2021-03-23 07:33:57+00:00', 'masked_author': 'username_2', 'text': 'a dedicated view where we could have a list of specs pulled from apitracker is under Community navigation item, a new view like `In Production` or something like this?\r\n\r\n![Screenshot 2021-03-23 at 08 33 35](https://user-images.githubusercontent.com/6995927/112109934-7b0fba80-8bb2-11eb-9cba-8af513d989f5.png)', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'Gdewilde', 'comment_id': 804687911.0, 'datetime': '2021-03-23 07:39:09+00:00', 'masked_author': 'username_1', 'text': 'Sounds good!', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'AceTheCreator', 'comment_id': 806073153.0, 'datetime': '2021-03-24 18:51:45+00:00', 'masked_author': 'username_3', 'text': ""@username_2 @username_1 I'd really love to work on this if granted the opportunity to do so"", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'derberg', 'comment_id': 806128294.0, 'datetime': '2021-03-24 19:48:49+00:00', 'masked_author': 'username_2', 'text': '@username_1 what do you think? would you need some help with integration?\r\n\r\nbtw I guess we still need to figure out how people can report manually their documents to get them pulled on the list', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'Gdewilde', 'comment_id': 806282985.0, 'datetime': '2021-03-25 01:05:03+00:00', 'masked_author': 'username_1', 'text': ""Sure, we first need to get the API in place at the API Tracker. \r\n\r\n**btw I guess we still need to figure out how people can report manually their documents to get them pulled on the list**\r\n\r\n--> Indeed, I was thinking along the lines of http://apisjson.org/ that they put at the root of their website/dev docs or in a GitHub repo they manage. We don't want to make this an opaque process. @username_0, what's your experience from running the OpenAPI directory?\r\n\r\nDo you have any ideas?"", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'derberg', 'comment_id': 806433784.0, 'datetime': '2021-03-25 07:36:07+00:00', 'masked_author': 'username_2', 'text': '@username_3 it can take some time until you could actually start working on this one. I suggest finding some other issue. If you want to do some frontend then from this repo I recommend https://github.com/asyncapi/website/issues/212 + we also have a react component for the spec where some help would be highly appreciated as more and more users use the component https://github.com/asyncapi/asyncapi-react/', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'AceTheCreator', 'comment_id': 808291183.0, 'datetime': '2021-03-26 15:06:06+00:00', 'masked_author': 'username_3', 'text': ""@username_2 That's fine and I'll definitely check out other issues from the link mentioned above. I'll also try to keep in touch with this issue just in case if I could be of help."", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'MikeRalphson', 'comment_id': 808296664.0, 'datetime': '2021-03-26 15:13:34+00:00', 'masked_author': 'username_0', 'text': 'We use a mix of research, spidering, scraping and user-submissions via a form which creates GitHub issues. The schema.org [WebAPI](https://schema.org/WebAPI) type can be used to declare that a web-page describes a Web API (of any type) using JSON-LD or RDF.', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'derberg', 'comment_id': 839575086.0, 'datetime': '2021-05-12 08:25:42+00:00', 'masked_author': 'username_2', 'text': '@username_1 hey, how is it going? any progress on the API side?', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'Gdewilde', 'comment_id': 841196827.0, 'datetime': '2021-05-14 11:54:19+00:00', 'masked_author': 'username_1', 'text': 'Hi @username_2! I hope to get to it this weekend.', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'AceTheCreator', 'comment_id': 841331325.0, 'datetime': '2021-05-14 15:52:50+00:00', 'masked_author': 'username_3', 'text': '@username_1 How can I be of help?', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'Gdewilde', 'comment_id': 841358688.0, 'datetime': '2021-05-14 16:36:54+00:00', 'masked_author': 'username_1', 'text': '@username_3 thanks for offering. Something that needs to be implemented by our company (Apideck). Will keep you posted!', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'Gdewilde', 'comment_id': 841877662.0, 'datetime': '2021-05-16 21:06:29+00:00', 'masked_author': 'username_1', 'text': '@username_3 @username_2 the API powering https://www.apitracker.io/specifications/asyncapi is now available at https://www.apitracker.io/api/specifications/asyncapi Still need to write a spec for it tho 😅 Are you able to get started?', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'Gdewilde', 'comment_id': 841877797.0, 'datetime': '2021-05-16 21:07:27+00:00', 'masked_author': 'username_1', 'text': '@username_2 can you verify if we labeled the protocols correctly?', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'AceTheCreator', 'comment_id': 841913877.0, 'datetime': '2021-05-17 01:10:47+00:00', 'masked_author': 'username_3', 'text': 'Looks good and great job @username_1. @username_2 what do you think?', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'derberg', 'comment_id': 842087684.0, 'datetime': '2021-05-17 07:36:39+00:00', 'masked_author': 'username_2', 'text': '@username_1 looks awesome 🎉 My only concern is if Gitter and Slack should be there as they are 1.2 and not 2.0 AsyncAPI and I\'m afraid that would promote old versions this way 🤔 but it is nice to see Slack on the list on the other hands 😕 \r\n\r\nthe other one we can add is eBay https://developer.ebay.com/marketplace-account-deletion as they wrote about AsyncAPI adoption recently https://tech.ebayinc.com/engineering/asyncapi-2-0-enabling-the-event-driven-world/\r\n\r\nAlso we could add this https://github.com/asyncapi/spec/blob/master/examples/2.0.0/websocket-gemini.yml and mark AsyncAPI as author. It is a spec file I created for Gemini\'s official API https://docs.sandbox.gemini.com/websocket-api/#market-data\r\n\r\nSo we would take 2 off the list that are for old spec, and add 2 new from cool projects. Bilans = 0 😄 \r\n\r\n@username_3 yup, now we need to think how to present it in the UI. If we need a separate view, or rather have it on the landing page. @username_4 as you are so far our official website designer, we need your input\r\n\r\n@username_1 please share us the API Tracker logo that we could put in our website, under the list of API, as a ""thank you"" reference that the list is powered by API Tracker. This is how we can give back for the effords', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'AceTheCreator', 'comment_id': 842233913.0, 'datetime': '2021-05-17 11:07:09+00:00', 'masked_author': 'username_3', 'text': '@username_2 I think it will be cool to have it on a separate view and maybe have something that references it on the landing page. Well, let see what approach @username_4 thinks.', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'fmvilas', 'comment_id': 842262561.0, 'datetime': '2021-05-17 11:53:15+00:00', 'masked_author': 'username_4', 'text': ""Let's work on this together."", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'Gdewilde', 'comment_id': 844584903.0, 'datetime': '2021-05-20 00:19:05+00:00', 'masked_author': 'username_1', 'text': 'Ok, we will index the eBay and Gemini specs shortly!', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'Gdewilde', 'comment_id': 845592164.0, 'datetime': '2021-05-21 01:43:58+00:00', 'masked_author': 'username_1', 'text': 'Added! Link to the API Tracker logo https://res.cloudinary.com/apideck/image/upload/v1621561371/apitracker/apitracker..svg', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'derberg', 'comment_id': 846912428.0, 'datetime': '2021-05-24 09:26:59+00:00', 'masked_author': 'username_2', 'text': '@username_4 @username_3 I think it would be good to have a short, max 3-5 elements list displayed on the landing page under some new section like `AsyncAPI in the wild` and a link to click for more that would take you to separate view of all specs. Also there would be a new element in the navigation, under **Learning** called something like `Real life examples`\r\n\r\nThe view with all the specs would be super similar to what is currently on API Tracker, and below or above the list we could have a ""thank you reference"" to API Tracker + clear information how easily you can add your APIs to the list.', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'AceTheCreator', 'comment_id': 913466481.0, 'datetime': '2021-09-06 08:48:06+00:00', 'masked_author': 'username_3', 'text': '@username_2 @username_4 can we start implementing this?', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'derberg', 'comment_id': 913468081.0, 'datetime': '2021-09-06 08:50:23+00:00', 'masked_author': 'username_2', 'text': 'I think so, @username_1 the API is ready right?', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'Gdewilde', 'comment_id': 913642020.0, 'datetime': '2021-09-06 13:14:23+00:00', 'masked_author': 'username_1', 'text': 'Yes, apitracker.io/api/specifications/asyncapi', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'AceTheCreator', 'comment_id': 926048236.0, 'datetime': '2021-09-23 18:19:21+00:00', 'masked_author': 'username_3', 'text': '@username_2 @username_4 Should I come up with some design implementation?', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'derberg', 'comment_id': 926404470.0, 'datetime': '2021-09-24 07:20:26+00:00', 'masked_author': 'username_2', 'text': '@username_3 would be awesome. I cannot help much here, but API Tracker set a good direction [here](https://apitracker.io/specifications/asyncapi)\r\n\r\nmost important is where, where we will render it, as I initially thought about main landing page, but am not so sure about it any more. Maybe that should be Use Cases view that we did not implement yet and still waiting for first use case', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'AceTheCreator', 'comment_id': 927011106.0, 'datetime': '2021-09-25 04:58:04+00:00', 'masked_author': 'username_3', 'text': '@username_2 what do you mean by first use case?', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'derberg', 'comment_id': 927798731.0, 'datetime': '2021-09-27 11:53:13+00:00', 'masked_author': 'username_2', 'text': 'oh yeah, sorry, so we have this on the website\r\n\r\n<img width=""939"" alt=""Screenshot 2021-09-27 at 13 51 13"" src=""https://user-images.githubusercontent.com/6995927/134902631-1b9754a6-60b5-47fc-9d56-fed39e2629e8.png"">\r\n\r\nUse cases are not ready, but we could already have a landing page there, once you click `Use cases`. And landing page would say, `no detailed use cases available yet, contact us to give yours` and another explanation that `you can see below a list of real world usage of AsyncAPI files` and a list of data provided by API Tracker.\r\n\r\nMakes sense?', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'AceTheCreator', 'comment_id': 961642819.0, 'datetime': '2021-11-05 05:46:29+00:00', 'masked_author': 'username_3', 'text': ""@username_5 I would really love and appreciate it if you could help develop some design for this issue. and probably use https://www.apitracker.io/specifications as a reference to what we're trying to achieve. Or @username_2 what do you think? Don't blame me for being suck at design 🙂"", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'mcturco', 'comment_id': 963362251.0, 'datetime': '2021-11-08 16:55:54+00:00', 'masked_author': 'username_5', 'text': 'Hi @username_3! Saw your comment last week but just now finished reading through the history of this issue. I would love to help out with this! Just to confirm that I understand the goals: \r\n\r\n- We basically want to render this chart: https://www.apitracker.io/specifications/asyncapi on a new page on the website matching the AsyncAPI style & have `powered by [apitracker logo]` near it\r\n- Then, we want to add a call to action on the home page to view the chart of specs on the above new landing page\r\n\r\nLet me know if that is accurate and I can get started on a design mock up!', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'AceTheCreator', 'comment_id': 964877958.0, 'datetime': '2021-11-10 08:09:46+00:00', 'masked_author': 'username_3', 'text': ""@username_5 you're absolutely correct!"", 'title': None, 'type': 'comment'}]","<issue_start><issue_comment>Title: Integrate or re-implement APIs.guru asyncapi-directory
+username_0: #### Reason/Context
+
+* To demonstrate adoption of the specification
+* To give users examples to work with
+* To showcase use of the specification by member orgs etc
+* In future, links to online code-generator, playground etc
+* Current site location does not have eyeballs or traction
+
+#### Description
+
+* APIs.guru [asyncapi-directory](https://apis.guru/asyncapi-directory/) is currently a data-driven static site built with Eleventy, using around 4 template pages and the old static html generator
+* Port or re-implement in next.js using scheduled GitHub actions to update the definitions from source
+* Ignore streamdata stubs, as not maintained
+<issue_comment>username_1: As mentioned on Slack: https://asyncapi.slack.com/archives/C34F2JV0U/p1615954697001600
+
+Apideck will fast-track the apitracker.io overview, so it’s easier to compare. We can also make an effort to integrate the data into the asyncapi.io website as soon as it’s done https://apitracker.io/specifications.
+<issue_comment>username_1: Quick prototype: https://apitracker.io/specifications/asyncapi
+
+What other data would be relevant to the list?
+
+<img width=""1790"" alt=""Screenshot 2021-03-21 at 02 56 10"" src=""https://user-images.githubusercontent.com/1112129/111891175-1f4a0380-89f1-11eb-9f9a-8487e84886de.png"">
+<issue_comment>username_2: I think it would be great to also have a link to portal with documentation to see how companies render docs for users
+<issue_comment>username_1: Like https://docs.zoracloud.com/dev-mqtt-docs/latest/ or more what @username_0 did with https://apis.guru/asyncapi-directory//html/gitter.com+streaming@v1.0.0.html
+<issue_comment>username_2: I think best is to link to the official ones, then people can see different use cases on how EDA docs are presented to users
+
+the playground is already rendering docs using the official latest HTML template, so no need to add something separate I think
+<issue_comment>username_2: a dedicated view where we could have a list of specs pulled from apitracker is under Community navigation item, a new view like `In Production` or something like this?
+
+![Screenshot 2021-03-23 at 08 33 35](https://user-images.githubusercontent.com/6995927/112109934-7b0fba80-8bb2-11eb-9cba-8af513d989f5.png)
+<issue_comment>username_1: Sounds good!
+<issue_comment>username_3: @username_2 @username_1 I'd really love to work on this if granted the opportunity to do so
+<issue_comment>username_2: @username_1 what do you think? would you need some help with integration?
+
+btw I guess we still need to figure out how people can report manually their documents to get them pulled on the list
+<issue_comment>username_1: Sure, we first need to get the API in place at the API Tracker. 
+
+**btw I guess we still need to figure out how people can report manually their documents to get them pulled on the list**
+
+--> Indeed, I was thinking along the lines of http://apisjson.org/ that they put at the root of their website/dev docs or in a GitHub repo they manage. We don't want to make this an opaque process. @username_0, what's your experience from running the OpenAPI directory?
+
+Do you have any ideas?
+<issue_comment>username_2: @username_3 it can take some time until you could actually start working on this one. I suggest finding some other issue. If you want to do some frontend then from this repo I recommend https://github.com/asyncapi/website/issues/212 + we also have a react component for the spec where some help would be highly appreciated as more and more users use the component https://github.com/asyncapi/asyncapi-react/
+<issue_comment>username_3: @username_2 That's fine and I'll definitely check out other issues from the link mentioned above. I'll also try to keep in touch with this issue just in case if I could be of help.
+<issue_comment>username_0: We use a mix of research, spidering, scraping and user-submissions via a form which creates GitHub issues. The schema.org [WebAPI](https://schema.org/WebAPI) type can be used to declare that a web-page describes a Web API (of any type) using JSON-LD or RDF.
+<issue_comment>username_2: @username_1 hey, how is it going? any progress on the API side?
+<issue_comment>username_1: Hi @username_2! I hope to get to it this weekend.
+<issue_comment>username_3: @username_1 How can I be of help?
+<issue_comment>username_1: @username_3 thanks for offering. Something that needs to be implemented by our company (Apideck). Will keep you posted!
+<issue_comment>username_1: @username_3 @username_2 the API powering https://www.apitracker.io/specifications/asyncapi is now available at https://www.apitracker.io/api/specifications/asyncapi Still need to write a spec for it tho 😅 Are you able to get started?
+<issue_comment>username_1: @username_2 can you verify if we labeled the protocols correctly?
+<issue_comment>username_3: Looks good and great job @username_1. @username_2 what do you think?
+<issue_comment>username_2: @username_1 looks awesome 🎉 My only concern is if Gitter and Slack should be there as they are 1.2 and not 2.0 AsyncAPI and I'm afraid that would promote old versions this way 🤔 but it is nice to see Slack on the list on the other hands 😕 
+
+the other one we can add is eBay https://developer.ebay.com/marketplace-account-deletion as they wrote about AsyncAPI adoption recently https://tech.ebayinc.com/engineering/asyncapi-2-0-enabling-the-event-driven-world/
+
+Also we could add this https://github.com/asyncapi/spec/blob/master/examples/2.0.0/websocket-gemini.yml and mark AsyncAPI as author. It is a spec file I created for Gemini's official API https://docs.sandbox.gemini.com/websocket-api/#market-data
+
+So we would take 2 off the list that are for old spec, and add 2 new from cool projects. Bilans = 0 😄 
+
+@username_3 yup, now we need to think how to present it in the UI. If we need a separate view, or rather have it on the landing page. @username_4 as you are so far our official website designer, we need your input
+
+@username_1 please share us the API Tracker logo that we could put in our website, under the list of API, as a ""thank you"" reference that the list is powered by API Tracker. This is how we can give back for the effords
+<issue_comment>username_3: @username_2 I think it will be cool to have it on a separate view and maybe have something that references it on the landing page. Well, let see what approach @username_4 thinks.
+<issue_comment>username_4: Let's work on this together.
+<issue_comment>username_1: Ok, we will index the eBay and Gemini specs shortly!
+<issue_comment>username_1: Added! Link to the API Tracker logo https://res.cloudinary.com/apideck/image/upload/v1621561371/apitracker/apitracker..svg
+<issue_comment>username_2: @username_4 @username_3 I think it would be good to have a short, max 3-5 elements list displayed on the landing page under some new section like `AsyncAPI in the wild` and a link to click for more that would take you to separate view of all specs. Also there would be a new element in the navigation, under **Learning** called something like `Real life examples`
+
+The view with all the specs would be super similar to what is currently on API Tracker, and below or above the list we could have a ""thank you reference"" to API Tracker + clear information how easily you can add your APIs to the list.
+<issue_comment>username_3: @username_2 @username_4 can we start implementing this?
+<issue_comment>username_2: I think so, @username_1 the API is ready right?
+<issue_comment>username_1: Yes, apitracker.io/api/specifications/asyncapi
+<issue_comment>username_3: @username_2 @username_4 Should I come up with some design implementation?
+<issue_comment>username_2: @username_3 would be awesome. I cannot help much here, but API Tracker set a good direction [here](https://apitracker.io/specifications/asyncapi)
+
+most important is where, where we will render it, as I initially thought about main landing page, but am not so sure about it any more. Maybe that should be Use Cases view that we did not implement yet and still waiting for first use case
+<issue_comment>username_3: @username_2 what do you mean by first use case?
+<issue_comment>username_2: oh yeah, sorry, so we have this on the website
+
+<img width=""939"" alt=""Screenshot 2021-09-27 at 13 51 13"" src=""https://user-images.githubusercontent.com/6995927/134902631-1b9754a6-60b5-47fc-9d56-fed39e2629e8.png"">
+
+Use cases are not ready, but we could already have a landing page there, once you click `Use cases`. And landing page would say, `no detailed use cases available yet, contact us to give yours` and another explanation that `you can see below a list of real world usage of AsyncAPI files` and a list of data provided by API Tracker.
+
+Makes sense?
+<issue_comment>username_3: @username_5 I would really love and appreciate it if you could help develop some design for this issue. and probably use https://www.apitracker.io/specifications as a reference to what we're trying to achieve. Or @username_2 what do you think? Don't blame me for being suck at design 🙂
+<issue_comment>username_5: Hi @username_3! Saw your comment last week but just now finished reading through the history of this issue. I would love to help out with this! Just to confirm that I understand the goals: 
+
+- We basically want to render this chart: https://www.apitracker.io/specifications/asyncapi on a new page on the website matching the AsyncAPI style & have `powered by [apitracker logo]` near it
+- Then, we want to add a call to action on the home page to view the chart of specs on the above new landing page
+
+Let me know if that is accurate and I can get started on a design mock up!
+<issue_comment>username_3: @username_5 you're absolutely correct!"
+dlang/dlang.org,160873341,1378,"{'number': 1378.0, 'repo': 'dlang.org', 'user_login': 'dlang'}","[{'action': 'opened', 'author': 'CyberShadow', 'comment_id': None, 'datetime': '2016-06-17T12:03:22Z', 'masked_author': 'username_0', 'text': 'CC @username_2', 'title': 'A few tweaks to the recent changes', 'type': 'issue'}
+ {'action': 'created', 'author': 'CyberShadow', 'comment_id': 226772259.0, 'datetime': '2016-06-17 13:44:32+00:00', 'masked_author': 'username_0', 'text': 'Did a pass over the text. @username_2 You should probably get your editor to highlight repeated words (e.g. ""of of"", ""to to"", ""is is"", ""the power the power"").', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'JackStouffer', 'comment_id': 226791507.0, 'datetime': '2016-06-17 14:55:13+00:00', 'masked_author': 'username_1', 'text': 'LGTM', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'wilzbach', 'comment_id': 226793197.0, 'datetime': '2016-06-17 15:01:03+00:00', 'masked_author': 'username_2', 'text': 'Wow thanks a lot @username_0 for taking the time to improve this document!!\r\n(I am quite sad you found so many dissonances)', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'CyberShadow', 'comment_id': 226794951.0, 'datetime': '2016-06-17 15:07:28+00:00', 'masked_author': 'username_0', 'text': ""np, thanks for taking the initiative and creating this page. Let's leave the other nits for another day.\r\n\r\nPerhaps someone more experienced in English writing could make another full pass over the text, as my edits are mostly tweaks and fixes. There's still a bunch of run-on sentences and room for improvement. I know Andrei could certainly tear this in half with his gigantic thesaurus :)"", 'title': None, 'type': 'comment'}]","<issue_start><issue_comment>Title: A few tweaks to the recent changes
+username_0: CC @username_2
+<issue_comment>username_0: Did a pass over the text. @username_2 You should probably get your editor to highlight repeated words (e.g. ""of of"", ""to to"", ""is is"", ""the power the power"").
+<issue_comment>username_1: LGTM
+<issue_comment>username_2: Wow thanks a lot @username_0 for taking the time to improve this document!!
+(I am quite sad you found so many dissonances)
+<issue_comment>username_0: np, thanks for taking the initiative and creating this page. Let's leave the other nits for another day.
+
+Perhaps someone more experienced in English writing could make another full pass over the text, as my edits are mostly tweaks and fixes. There's still a bunch of run-on sentences and room for improvement. I know Andrei could certainly tear this in half with his gigantic thesaurus :)"
+facebook/docusaurus,746012205,3780,,"[{'action': 'opened', 'author': 'TomPeirs', 'comment_id': None, 'datetime': '2020-11-18 21:18:05+00:00', 'masked_author': 'username_0', 'text': '## 🐛 Bug Report\r\n\r\nTonight I tried to create a docusaurus instance on my windows machine.\r\n\r\n### Have you read the [Contributing Guidelines on issues](https://github.com/facebook/docusaurus/blob/master/CONTRIBUTING.md#reporting-new-issues)?\r\n\r\nYes\r\n\r\n## To Reproduce\r\n\r\n(Write your steps here:)\r\n\r\n1. Have node installed Node.js version >= 10.15.1\r\n --> I currently run node v14.15.0\r\n2. Install Yarn Yarn version >= 1.5\r\n--> I run yarn version 1.22.5\r\n3. Scaffold your website: npx @docusaurus/init@next init my-website classic\r\n\r\n## Expected behavior\r\n\r\nA folder structure is scaffolded.\r\n\r\n## Actual Behavior\r\n\r\nnpm ERR! notarget No matching version found for @docusaurus/init@next\r\n\r\nWindows Powerrshell logs\r\n`PS C:\\dev> npx @docusaurus/init@next init my-website classic\r\nnpm ERR! code ETARGET\r\nnpm ERR! notarget No matching version found for @docusaurus/init@next.\r\nnpm ERR! notarget In most cases you or one of your dependencies are requesting\r\nnpm ERR! notarget a package version that doesn\'t exist.\r\n\r\nnpm ERR! A complete log of this run can be found in:\r\nnpm ERR!     C:\\Users\\Harry\\AppData\\Roaming\\npm-cache\\_logs\\2020-11-18T21_15_38_608Z-debug.log\r\nInstall for [ \'@docusaurus/init@next\' ] failed with code 1`\r\n\r\nLogs\r\n`0 info it worked if it ends with ok\r\n1 verbose cli [\r\n1 verbose cli   \'C:\\\\Program Files\\\\nodejs\\\\node.exe\',\r\n1 verbose cli   \'C:\\\\Program Files\\\\nodejs\\\\node_modules\\\\npm\\\\bin\\\\npm-cli.js\',\r\n1 verbose cli   \'install\',\r\n1 verbose cli   \'@docusaurus/init@next\',\r\n1 verbose cli   \'--global\',\r\n1 verbose cli   \'--prefix\',\r\n1 verbose cli   \'C:\\\\Users\\\\Harry\\\\AppData\\\\Roaming\\\\npm-cache\\\\_npx\\\\25584\',\r\n1 verbose cli   \'--loglevel\',\r\n1 verbose cli   \'error\',\r\n1 verbose cli   \'--json\'\r\n1 verbose cli ]\r\n2 info using npm@6.14.8\r\n3 info using node@v14.15.0\r\n4 verbose npm-session a310fba5fd179568\r\n5 silly install loadCurrentTree\r\n6 silly install readGlobalPackageData\r\n7 http fetch GET 304 https://registry.npmjs.org/@docusaurus%2finit 271ms (from cache)\r\n8 silly registry:manifest no matching version for @docusaurus/init@next in the cache. Forcing revalidation.\r\n9 http fetch GET 200 https://registry.npmjs.org/@docusaurus%2finit 1488ms\r\n10 silly fetchPackageMetaData error for @docusaurus/init@next No matching version found for @docusaurus/init@next.\r\n11 timing stage:rollbackFailedOptional Completed in 1ms\r\n12 timing stage:runTopLevelLifecycles Completed in 1793ms\r\n13 verbose type tag\r\n14 verbose stack @docusaurus/init: No matching version found for @docusaurus/init@next.\r\n14 verbose stack     at pickManifest (C:\\Program Files\\nodejs\\node_modules\\npm\\node_modules\\npm-pick-manifest\\index.js:122:13)\r\n14 verbose stack     at C:\\Program Files\\nodejs\\node_modules\\npm\\node_modules\\pacote\\lib\\fetchers\\registry\\manifest.js:43:18\r\n14 verbose stack     at tryCatcher (C:\\Program Files\\nodejs\\node_modules\\npm\\node_modules\\bluebird\\js\\release\\util.js:16:23)\r\n14 verbose stack     at Promise._settlePromiseFromHandler (C:\\Program Files\\nodejs\\node_modules\\npm\\node_modules\\bluebird\\js\\release\\promise.js:517:31)\r\n14 verbose stack     at Promise._settlePromise (C:\\Program Files\\nodejs\\node_modules\\npm\\node_modules\\bluebird\\js\\release\\promise.js:574:18)\r\n14 verbose stack     at Promise._settlePromise0 (C:\\Program Files\\nodejs\\node_modules\\npm\\node_modules\\bluebird\\js\\release\\promise.js:619:10)\r\n14 verbose stack     at Promise._settlePromises (C:\\Program Files\\nodejs\\node_modules\\npm\\node_modules\\bluebird\\js\\release\\promise.js:699:18)\r\n14 verbose stack     at _drainQueueStep (C:\\Program Files\\nodejs\\node_modules\\npm\\node_modules\\bluebird\\js\\release\\async.js:138:12)\r\n14 verbose stack     at _drainQueue (C:\\Program Files\\nodejs\\node_modules\\npm\\node_modules\\bluebird\\js\\release\\async.js:131:9)\r\n14 verbose stack     at Async._drainQueues (C:\\Program Files\\nodejs\\node_modules\\npm\\node_modules\\bluebird\\js\\release\\async.js:147:5)\r\n14 verbose stack     at Immediate.Async.drainQueues [as _onImmediate] (C:\\Program Files\\nodejs\\node_modules\\npm\\node_modules\\bluebird\\js\\release\\async.js:17:14)\r\n14 verbose stack     at processImmediate (internal/timers.js:461:21)\r\n15 verbose cwd C:\\dev\r\n16 verbose Windows_NT 10.0.19041\r\n17 verbose argv ""C:\\\\Program Files\\\\nodejs\\\\node.exe"" ""C:\\\\Program Files\\\\nodejs\\\\node_modules\\\\npm\\\\bin\\\\npm-cli.js"" ""install"" ""@docusaurus/init@next"" ""--global"" ""--prefix"" ""C:\\\\Users\\\\Harry\\\\AppData\\\\Roaming\\\\npm-cache\\\\_npx\\\\25584"" ""--loglevel"" ""error"" ""--json""\r\n18 verbose node v14.15.0\r\n19 verbose npm  v6.14.8\r\n20 error code ETARGET\r\n21 error notarget No matching version found for @docusaurus/init@next.\r\n22 error notarget In most cases you or one of your dependencies are requesting\r\n22 error notarget a package version that doesn\'t exist.\r\n23 verbose exit [ 1, true ]\r\n`\r\n\r\n## Your Environment\r\n\r\n\r\n- Docusaurus version used:\r\n- Environment name and version (e.g. Chrome 78.0.3904.108, Node.js 10.17.0):\r\n- Operating system and version (desktop or mobile):\r\n\r\n## Reproducible Demo\r\n\r\nNo demo sorry ;-)', 'title': 'npm ERR! notarget No matching version found for @docusaurus/init@next', 'type': 'issue'}
+ {'action': 'created', 'author': 'camiluc', 'comment_id': 730045739.0, 'datetime': '2020-11-19 00:34:39+00:00', 'masked_author': 'username_1', 'text': ""same issue using npm@7.0.12 and node@15.2.1 on windows 10 home 2004\r\ntom's workaround works fine ❤"", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'slorber', 'comment_id': 730305103.0, 'datetime': '2020-11-19 11:18:37+00:00', 'masked_author': 'username_2', 'text': 'Hi,\r\n\r\nYesterday\'s release changed a bit the way we use npm dist tags: we don\'t use @next anymore now, and all v2 packages are published with ""latest"" tag.\r\n\r\nI\'m in the process to remove all `@next` refs from the doc, it\'s only a temporary doc  issue ;)', 'title': None, 'type': 'comment'}
+ {'action': 'closed', 'author': 'slorber', 'comment_id': None, 'datetime': '2020-11-19 11:48:20+00:00', 'masked_author': 'username_2', 'text': '', 'title': None, 'type': 'issue'}
+ {'action': 'created', 'author': 'ledtest', 'comment_id': 734655502.0, 'datetime': '2020-11-27 05:43:40+00:00', 'masked_author': 'username_3', 'text': 'Hello everyone，I met this issue too.And I use this command `sudo npx @docusaurus/init@2.0.0-alpha.68 init my-website classic` solved my problem.', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'slorber', 'comment_id': 734713723.0, 'datetime': '2020-11-27 08:35:26+00:00', 'masked_author': 'username_2', 'text': ""@username_3 we don't document anymore to use `@next`. If you follow the updated doc it should work."", 'title': None, 'type': 'comment'}]","<issue_start><issue_comment>Title: npm ERR! notarget No matching version found for @docusaurus/init@next
+username_0: ## 🐛 Bug Report
+
+Tonight I tried to create a docusaurus instance on my windows machine.
+
+### Have you read the [Contributing Guidelines on issues](https://github.com/facebook/docusaurus/blob/master/CONTRIBUTING.md#reporting-new-issues)?
+
+Yes
+
+## To Reproduce
+
+(Write your steps here:)
+
+1. Have node installed Node.js version >= 10.15.1
+ --> I currently run node v14.15.0
+2. Install Yarn Yarn version >= 1.5
+--> I run yarn version 1.22.5
+3. Scaffold your website: npx @docusaurus/init@next init my-website classic
+
+## Expected behavior
+
+A folder structure is scaffolded.
+
+## Actual Behavior
+
+npm ERR! notarget No matching version found for @docusaurus/init@next
+
+Windows Powerrshell logs
+`PS C:\dev> npx @docusaurus/init@next init my-website classic
+npm ERR! code ETARGET
+npm ERR! notarget No matching version found for @docusaurus/init@next.
+npm ERR! notarget In most cases you or one of your dependencies are requesting
+npm ERR! notarget a package version that doesn't exist.
+
+npm ERR! A complete log of this run can be found in:
+npm ERR!     C:\Users\Harry\AppData\Roaming\npm-cache\_logs\2020-11-18T21_15_38_608Z-debug.log
+Install for [ '@docusaurus/init@next' ] failed with code 1`
+
+Logs
+`0 info it worked if it ends with ok
+1 verbose cli [
+1 verbose cli   'C:\\Program Files\\nodejs\\node.exe',
+1 verbose cli   'C:\\Program Files\\nodejs\\node_modules\\npm\\bin\\npm-cli.js',
+1 verbose cli   'install',
+1 verbose cli   '@docusaurus/init@next',
+1 verbose cli   '--global',
+1 verbose cli   '--prefix',
+1 verbose cli   'C:\\Users\\Harry\\AppData\\Roaming\\npm-cache\\_npx\\25584',
+1 verbose cli   '--loglevel',
+1 verbose cli   'error',
+1 verbose cli   '--json'
+1 verbose cli ]
+2 info using npm@6.14.8
+3 info using node@v14.15.0
+4 verbose npm-session a310fba5fd179568
+5 silly install loadCurrentTree
+6 silly install readGlobalPackageData
+7 http fetch GET 304 https://registry.npmjs.org/@docusaurus%2finit 271ms (from cache)
+8 silly registry:manifest no matching version for @docusaurus/init@next in the cache. Forcing revalidation.
+9 http fetch GET 200 https://registry.npmjs.org/@docusaurus%2finit 1488ms
+10 silly fetchPackageMetaData error for @docusaurus/init@next No matching version found for @docusaurus/init@next.
+11 timing stage:rollbackFailedOptional Completed in 1ms
+12 timing stage:runTopLevelLifecycles Completed in 1793ms
+13 verbose type tag
+14 verbose stack @docusaurus/init: No matching version found for @docusaurus/init@next.
+14 verbose stack     at pickManifest (C:\Program Files\nodejs\node_modules\npm\node_modules\npm-pick-manifest\index.js:122:13)
+14 verbose stack     at C:\Program Files\nodejs\node_modules\npm\node_modules\pacote\lib\fetchers\registry\manifest.js:43:18
+14 verbose stack     at tryCatcher (C:\Program Files\nodejs\node_modules\npm\node_modules\bluebird\js\release\util.js:16:23)
+14 verbose stack     at Promise._settlePromiseFromHandler (C:\Program Files\nodejs\node_modules\npm\node_modules\bluebird\js\release\promise.js:517:31)
+14 verbose stack     at Promise._settlePromise (C:\Program Files\nodejs\node_modules\npm\node_modules\bluebird\js\release\promise.js:574:18)
+14 verbose stack     at Promise._settlePromise0 (C:\Program Files\nodejs\node_modules\npm\node_modules\bluebird\js\release\promise.js:619:10)
+14 verbose stack     at Promise._settlePromises (C:\Program Files\nodejs\node_modules\npm\node_modules\bluebird\js\release\promise.js:699:18)
+14 verbose stack     at _drainQueueStep (C:\Program Files\nodejs\node_modules\npm\node_modules\bluebird\js\release\async.js:138:12)
+14 verbose stack     at _drainQueue (C:\Program Files\nodejs\node_modules\npm\node_modules\bluebird\js\release\async.js:131:9)
+14 verbose stack     at Async._drainQueues (C:\Program Files\nodejs\node_modules\npm\node_modules\bluebird\js\release\async.js:147:5)
+14 verbose stack     at Immediate.Async.drainQueues [as _onImmediate] (C:\Program Files\nodejs\node_modules\npm\node_modules\bluebird\js\release\async.js:17:14)
+14 verbose stack     at processImmediate (internal/timers.js:461:21)
+15 verbose cwd C:\dev
+16 verbose Windows_NT 10.0.19041
+17 verbose argv ""C:\\Program Files\\nodejs\\node.exe"" ""C:\\Program Files\\nodejs\\node_modules\\npm\\bin\\npm-cli.js"" ""install"" ""@docusaurus/init@next"" ""--global"" ""--prefix"" ""C:\\Users\\Harry\\AppData\\Roaming\\npm-cache\\_npx\\25584"" ""--loglevel"" ""error"" ""--json""
+18 verbose node v14.15.0
+19 verbose npm  v6.14.8
+20 error code ETARGET
+21 error notarget No matching version found for @docusaurus/init@next.
+22 error notarget In most cases you or one of your dependencies are requesting
+22 error notarget a package version that doesn't exist.
+23 verbose exit [ 1, true ]
+`
+
+## Your Environment
+
+
+- Docusaurus version used:
+- Environment name and version (e.g. Chrome 78.0.3904.108, Node.js 10.17.0):
+- Operating system and version (desktop or mobile):
+
+## Reproducible Demo
+
+No demo sorry ;-)
+<issue_comment>username_1: same issue using npm@7.0.12 and node@15.2.1 on windows 10 home 2004
+tom's workaround works fine ❤
+<issue_comment>username_2: Hi,
+
+Yesterday's release changed a bit the way we use npm dist tags: we don't use @next anymore now, and all v2 packages are published with ""latest"" tag.
+
+I'm in the process to remove all `@next` refs from the doc, it's only a temporary doc  issue ;)<issue_closed>
+<issue_comment>username_3: Hello everyone，I met this issue too.And I use this command `sudo npx @docusaurus/init@2.0.0-alpha.68 init my-website classic` solved my problem.
+<issue_comment>username_2: @username_3 we don't document anymore to use `@next`. If you follow the updated doc it should work."
+corona-warn-app/cwa-website,892696217,1274,,"[{'action': 'opened', 'author': 'MikeMcC399', 'comment_id': None, 'datetime': '2021-05-16 15:35:47+00:00', 'masked_author': 'username_0', 'text': '## Where to find the issue\r\n\r\n**[Google/Android] A card on my Start Screen is notifying me that my device is not or only partially compatible. What does this mean?**\r\nhttps://www.coronawarn.app/en/faq/#incompatibility_warning\r\n\r\n**[Google/Android] Auf meinem Hauptbildschirm werde ich gewarnt, dass mein Gerät nicht oder nicht vollständig kompatibel ist. Was bedeutet das?**\r\nhttps://www.coronawarn.app/de/faq/#incompatibility_warning\r\n\r\n## Describe the issue\r\n\r\nThe introduction of the functionality to check Bluetooth Low Energy compatibility has not been announced as tied to a particular release anywhere. This leaves users updating to CWA Android 2.2.x (the version where it was introduced) who are seeing an incompatibility message for the first time wondering if there is a bug in the app.\r\n\r\n- The blog announcement https://www.coronawarn.app/en/blog/2021-05-12-corona-warn-app-version-2-2/ has no mention of the BLE compatibility check.\r\n- The Android [release_info_strings.xml](https://github.com/corona-warn-app/cwa-app-android/blob/release/2.2.x/Corona-Warn-App/src/main/res/values/release_info_strings.xml) mentions only:\r\no ""Record Troubleshooting Logs""\r\no ""Create Rapid Test Profiles""\r\nSo also here in the App Information > New Features section of the app there is no mention of the new checks.\r\n\r\n## Suggested change\r\n\r\nExplain in the FAQ that this is a new check introduced with version 2.2 of the Android app. You could say that the Google Play Store checked previously for the presence of Bluetooth before allowing for installation, however the new check does a more detailed compatibility check compared to previous versions.\r\n\r\nThe suggestion was already made in https://github.com/corona-warn-app/cwa-website/pull/1211#pullrequestreview-652528871 by @username_1 and the subject was raised again in https://github.com/corona-warn-app/cwa-app-android/issues/3170#issuecomment-841830041.\r\n\r\nMaybe @username_3 as the original author would like to pick this up as a PR? Or perhaps @username_1, who raised the flag previously? Please let me know if you need assistance.', 'title': 'FAQ: Bluetooth incompatibility does not mention introduction version', 'type': 'issue'}
+ {'action': 'created', 'author': 'Ein-Tim', 'comment_id': 841839815.0, 'datetime': '2021-05-16 16:22:15+00:00', 'masked_author': 'username_1', 'text': ""I'm quite busy at the moment, so happy to leave this to @username_3 if he has time. 🙂"", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'MikeMcC399', 'comment_id': 842021401.0, 'datetime': '2021-05-17 06:07:38+00:00', 'masked_author': 'username_0', 'text': ""I'd suggest the following simple addition, so I'll open a PR with this:\r\n\r\n---\r\nEN\r\nBluetooth compatibility checking and warnings were introduced with Android Corona-Warn-App version 2.2. \r\n\r\n---\r\nDE\r\nBluetooth-Kompatibilitätsüberprüfungen und -Warnmeldungen wurden mit der Android Corona-Warn-App Version 2.2 eingeführt."", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'MikeMcC399', 'comment_id': 842042234.0, 'datetime': '2021-05-17 06:36:04+00:00', 'masked_author': 'username_0', 'text': 'PR https://github.com/corona-warn-app/cwa-website/pull/1275 opened.', 'title': None, 'type': 'comment'}
+ {'action': 'closed', 'author': 'thomasaugsten', 'comment_id': None, 'datetime': '2021-05-17 06:51:20+00:00', 'masked_author': 'username_2', 'text': '', 'title': None, 'type': 'issue'}
+ {'action': 'created', 'author': 'fynngodau', 'comment_id': 842062384.0, 'datetime': '2021-05-17 07:02:05+00:00', 'masked_author': 'username_3', 'text': 'Thanks @username_0', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'MikeMcC399', 'comment_id': 842116182.0, 'datetime': '2021-05-17 08:12:23+00:00', 'masked_author': 'username_0', 'text': ""@username_3 \r\nYou raised the valid point that Bluetooth checks were done before V2.2.\r\n\r\nI simplified the text in the FAQ to not mention those details, as the main point was to avoid users thinking there was a bug in the app. These would probably be users with older hardware which did not meet the BLE requirement, especially BLE peripheral mode.\r\n\r\nI checked on a Pixel 3a emulator running API 29 (Android 10), which doesn't have Bluetooth.\r\n\r\nCWA Android is only supported for distribution through the Google Play Store and if a user goes directly to https://play.google.com/store/apps/details?id=de.rki.coronawarnapp from a device with no Bluetooth, they will see the following:\r\n\r\n![image](https://user-images.githubusercontent.com/66998419/118452609-9e5c6f00-b6f6-11eb-8f0b-bf2b545092a0.png)\r\n\r\nBypassing the Google Play Store, sideloading a version earlier than 2.2.1, such as 2.1.2 through an apk, then starting and attempting to activate exposure logging will bring up \r\n\r\n![image](https://user-images.githubusercontent.com/66998419/118453501-9650ff00-b6f7-11eb-896a-924fdf2c1dc6.png)\r\n\r\nI think what is new for the user in 2.2.1 is that the app now catches and flags missing BLE peripheral mode.\r\n\r\nI don't have any physical device without Bluetooth or a physical device without BLE peripheral mode, so I can't check that.\r\n\r\nAnyway, as I responded in the PR, I think we can leave the updated FAQ as it is, unless you think that users will be confused."", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'fynngodau', 'comment_id': 842129489.0, 'datetime': '2021-05-17 08:28:16+00:00', 'masked_author': 'username_3', 'text': '@username_0 I meant something different: you could read that version 2.2 introduced ""bluetooth warnings"", as in ""Bluetooth-based exposure notifications"". So the phrasing could be improved a bit but it is also okay as is.\n\nWe will need to rework this for 2.3 to split it up into warnig for no advertising and no scanning (though I don\'t know or own any device where the latter is the case either, and you are right to mention that those devices should not be able to install the app at all – though OTAH, this could be changed to allow those devices, whichever they are, to at least use the other features)', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'MikeMcC399', 'comment_id': 842160442.0, 'datetime': '2021-05-17 09:11:42+00:00', 'masked_author': 'username_0', 'text': ""I hadn't thought about allowing installation without Bluetooth. I'd like to check the wishlist and add an entry there if it is not already covered."", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'MikeMcC399', 'comment_id': 842186467.0, 'datetime': '2021-05-17 09:50:27+00:00', 'masked_author': 'username_0', 'text': ""I've opened https://github.com/corona-warn-app/cwa-app-android/issues/3186 to remove the Google Play Store restriction on requiring BLE."", 'title': None, 'type': 'comment'}]","<issue_start><issue_comment>Title: FAQ: Bluetooth incompatibility does not mention introduction version
+username_0: ## Where to find the issue
+
+**[Google/Android] A card on my Start Screen is notifying me that my device is not or only partially compatible. What does this mean?**
+https://www.coronawarn.app/en/faq/#incompatibility_warning
+
+**[Google/Android] Auf meinem Hauptbildschirm werde ich gewarnt, dass mein Gerät nicht oder nicht vollständig kompatibel ist. Was bedeutet das?**
+https://www.coronawarn.app/de/faq/#incompatibility_warning
+
+## Describe the issue
+
+The introduction of the functionality to check Bluetooth Low Energy compatibility has not been announced as tied to a particular release anywhere. This leaves users updating to CWA Android 2.2.x (the version where it was introduced) who are seeing an incompatibility message for the first time wondering if there is a bug in the app.
+
+- The blog announcement https://www.coronawarn.app/en/blog/2021-05-12-corona-warn-app-version-2-2/ has no mention of the BLE compatibility check.
+- The Android [release_info_strings.xml](https://github.com/corona-warn-app/cwa-app-android/blob/release/2.2.x/Corona-Warn-App/src/main/res/values/release_info_strings.xml) mentions only:
+o ""Record Troubleshooting Logs""
+o ""Create Rapid Test Profiles""
+So also here in the App Information > New Features section of the app there is no mention of the new checks.
+
+## Suggested change
+
+Explain in the FAQ that this is a new check introduced with version 2.2 of the Android app. You could say that the Google Play Store checked previously for the presence of Bluetooth before allowing for installation, however the new check does a more detailed compatibility check compared to previous versions.
+
+The suggestion was already made in https://github.com/corona-warn-app/cwa-website/pull/1211#pullrequestreview-652528871 by @username_1 and the subject was raised again in https://github.com/corona-warn-app/cwa-app-android/issues/3170#issuecomment-841830041.
+
+Maybe @username_3 as the original author would like to pick this up as a PR? Or perhaps @username_1, who raised the flag previously? Please let me know if you need assistance.
+<issue_comment>username_1: I'm quite busy at the moment, so happy to leave this to @username_3 if he has time. 🙂
+<issue_comment>username_0: I'd suggest the following simple addition, so I'll open a PR with this:
+
+---
+EN
+Bluetooth compatibility checking and warnings were introduced with Android Corona-Warn-App version 2.2. 
+
+---
+DE
+Bluetooth-Kompatibilitätsüberprüfungen und -Warnmeldungen wurden mit der Android Corona-Warn-App Version 2.2 eingeführt.
+<issue_comment>username_0: PR https://github.com/corona-warn-app/cwa-website/pull/1275 opened.<issue_closed>
+<issue_comment>username_3: Thanks @username_0
+<issue_comment>username_0: @username_3 
+You raised the valid point that Bluetooth checks were done before V2.2.
+
+I simplified the text in the FAQ to not mention those details, as the main point was to avoid users thinking there was a bug in the app. These would probably be users with older hardware which did not meet the BLE requirement, especially BLE peripheral mode.
+
+I checked on a Pixel 3a emulator running API 29 (Android 10), which doesn't have Bluetooth.
+
+CWA Android is only supported for distribution through the Google Play Store and if a user goes directly to https://play.google.com/store/apps/details?id=de.rki.coronawarnapp from a device with no Bluetooth, they will see the following:
+
+![image](https://user-images.githubusercontent.com/66998419/118452609-9e5c6f00-b6f6-11eb-8f0b-bf2b545092a0.png)
+
+Bypassing the Google Play Store, sideloading a version earlier than 2.2.1, such as 2.1.2 through an apk, then starting and attempting to activate exposure logging will bring up 
+
+![image](https://user-images.githubusercontent.com/66998419/118453501-9650ff00-b6f7-11eb-896a-924fdf2c1dc6.png)
+
+I think what is new for the user in 2.2.1 is that the app now catches and flags missing BLE peripheral mode.
+
+I don't have any physical device without Bluetooth or a physical device without BLE peripheral mode, so I can't check that.
+
+Anyway, as I responded in the PR, I think we can leave the updated FAQ as it is, unless you think that users will be confused.
+<issue_comment>username_3: @username_0 I meant something different: you could read that version 2.2 introduced ""bluetooth warnings"", as in ""Bluetooth-based exposure notifications"". So the phrasing could be improved a bit but it is also okay as is.
+
+We will need to rework this for 2.3 to split it up into warnig for no advertising and no scanning (though I don't know or own any device where the latter is the case either, and you are right to mention that those devices should not be able to install the app at all – though OTAH, this could be changed to allow those devices, whichever they are, to at least use the other features)
+<issue_comment>username_0: I hadn't thought about allowing installation without Bluetooth. I'd like to check the wishlist and add an entry there if it is not already covered.
+<issue_comment>username_0: I've opened https://github.com/corona-warn-app/cwa-app-android/issues/3186 to remove the Google Play Store restriction on requiring BLE."
+kubernetes/website,1095098389,31221,"{'number': 31221.0, 'repo': 'website', 'user_login': 'kubernetes'}","[{'action': 'opened', 'author': 'raesene', 'comment_id': None, 'datetime': '2022-01-06T08:49:36Z', 'masked_author': 'username_0', 'text': ""This is a draft blog post based on some work that's been done by SIG-Security docs. It talks about a threat modelling exercise that we did for admission controllers.\r\n\r\nThere's one thing to be added which is a link to the threat model itself which will be housed in the SIG-Security repo. that PR is open so we can add the link once it's merged."", 'title': 'Draft Blog post from SIG-Security docs', 'type': 'issue'}
+ {'action': 'created', 'author': 'sftim', 'comment_id': 1006437357.0, 'datetime': '2022-01-06 10:08:19+00:00', 'masked_author': 'username_1', 'text': '/retitle [WIP] Blog post from SIG-Security docs', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'sftim', 'comment_id': 1006818291.0, 'datetime': '2022-01-06 18:29:06+00:00', 'masked_author': 'username_1', 'text': 'If this is ready for review, please squash commits @username_0 and retitle to remove the [WIP].', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'sftim', 'comment_id': 1006818411.0, 'datetime': '2022-01-06 18:29:20+00:00', 'masked_author': 'username_1', 'text': 'Ooops!\r\n/reopen', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'sftim', 'comment_id': 1006818603.0, 'datetime': '2022-01-06 18:29:40+00:00', 'masked_author': 'username_1', 'text': ""GitHub admin powers are too easily wielded. That's my excuse and I'm sticking to it."", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'raesene', 'comment_id': 1007325997.0, 'datetime': '2022-01-07 11:10:31+00:00', 'masked_author': 'username_0', 'text': ""hopefully that's done ok :) I'm a squashing newbie."", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'sftim', 'comment_id': 1007334893.0, 'datetime': '2022-01-07 11:26:07+00:00', 'masked_author': 'username_1', 'text': 'Squash looks fine', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'PushkarJ', 'comment_id': 1009208221.0, 'datetime': '2022-01-10 18:25:23+00:00', 'masked_author': 'username_2', 'text': 'Related https://github.com/kubernetes/sig-security/pull/27', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'sftim', 'comment_id': 1009219085.0, 'datetime': '2022-01-10 18:32:32+00:00', 'masked_author': 'username_1', 'text': '/retitle Add blog article “Securing Admission Controllers”', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'sftim', 'comment_id': 1009221586.0, 'datetime': '2022-01-10 18:33:38+00:00', 'masked_author': 'username_1', 'text': 'Should we /hold this for that link to be added?', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'raesene', 'comment_id': 1009237346.0, 'datetime': '2022-01-10 18:45:37+00:00', 'masked_author': 'username_0', 'text': ""@username_1 yeah that's a good idea, should get that one sorted really soon, so we can get it added here."", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'raesene', 'comment_id': 1009332863.0, 'datetime': '2022-01-10 20:53:25+00:00', 'masked_author': 'username_0', 'text': ""@username_1 that's the link added now :) (and I re-squashed)"", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'reylejano', 'comment_id': 1009392865.0, 'datetime': '2022-01-10 22:11:36+00:00', 'masked_author': 'username_3', 'text': 'Thank you for this PR, great content.\r\nI made a few non-blocking suggestions but overall LGTM\r\n/lgtm', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'raesene', 'comment_id': 1009837819.0, 'datetime': '2022-01-11 10:45:51+00:00', 'masked_author': 'username_0', 'text': ""Thanks all for the reviews :) \r\n\r\nThink I've got all the feedback and re-squashed"", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'raesene', 'comment_id': 1012351008.0, 'datetime': '2022-01-13 17:27:46+00:00', 'masked_author': 'username_0', 'text': ""hey all, think I've got all the bits and pieces so hopefully it should be good to go for the 19th? (cc @username_1 )"", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'sftim', 'comment_id': 1012353422.0, 'datetime': '2022-01-13 17:30:42+00:00', 'masked_author': 'username_1', 'text': ""@username_0 has this been checked off by SIG Auth? It's not essential but I do recommend it.\r\n\r\nI think that's the last piece of the puzzle (and it may actually be in place!)"", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'sftim', 'comment_id': 1012353621.0, 'datetime': '2022-01-13 17:30:56+00:00', 'masked_author': 'username_1', 'text': 'LGTM for SIG Docs blog subproject', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'raesene', 'comment_id': 1012418416.0, 'datetime': '2022-01-13 18:56:27+00:00', 'masked_author': 'username_0', 'text': '@nate-double-u Thanks :) I was about to ask how to trigger that!', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'sftim', 'comment_id': 1013066680.0, 'datetime': '2022-01-14 12:12:03+00:00', 'masked_author': 'username_1', 'text': 'BTW @username_0 you might want to edit the description to remove the word “draft”', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'raesene', 'comment_id': 1013389067.0, 'datetime': '2022-01-14 19:15:54+00:00', 'masked_author': 'username_0', 'text': '@username_1 done ta :)', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'sftim', 'comment_id': 1014296920.0, 'datetime': '2022-01-17 09:14:01+00:00', 'masked_author': 'username_1', 'text': 'Changes since https://github.com/kubernetes/website/pull/31221#issuecomment-1009392865 are trivial.\r\n\r\n/lgtm\r\n/approve', 'title': None, 'type': 'comment'}]","<issue_start><issue_comment>Title: Draft Blog post from SIG-Security docs
+username_0: This is a draft blog post based on some work that's been done by SIG-Security docs. It talks about a threat modelling exercise that we did for admission controllers.
+
+There's one thing to be added which is a link to the threat model itself which will be housed in the SIG-Security repo. that PR is open so we can add the link once it's merged.
+<issue_comment>username_1: /retitle [WIP] Blog post from SIG-Security docs
+<issue_comment>username_1: If this is ready for review, please squash commits @username_0 and retitle to remove the [WIP].
+<issue_comment>username_1: Ooops!
+/reopen
+<issue_comment>username_1: GitHub admin powers are too easily wielded. That's my excuse and I'm sticking to it.
+<issue_comment>username_0: hopefully that's done ok :) I'm a squashing newbie.
+<issue_comment>username_1: Squash looks fine
+<issue_comment>username_2: Related https://github.com/kubernetes/sig-security/pull/27
+<issue_comment>username_1: /retitle Add blog article “Securing Admission Controllers”
+<issue_comment>username_1: Should we /hold this for that link to be added?
+<issue_comment>username_0: @username_1 yeah that's a good idea, should get that one sorted really soon, so we can get it added here.
+<issue_comment>username_0: @username_1 that's the link added now :) (and I re-squashed)
+<issue_comment>username_3: Thank you for this PR, great content.
+I made a few non-blocking suggestions but overall LGTM
+/lgtm
+<issue_comment>username_0: Thanks all for the reviews :) 
+
+Think I've got all the feedback and re-squashed
+<issue_comment>username_0: hey all, think I've got all the bits and pieces so hopefully it should be good to go for the 19th? (cc @username_1 )
+<issue_comment>username_1: @username_0 has this been checked off by SIG Auth? It's not essential but I do recommend it.
+
+I think that's the last piece of the puzzle (and it may actually be in place!)
+<issue_comment>username_1: LGTM for SIG Docs blog subproject
+<issue_comment>username_0: @nate-double-u Thanks :) I was about to ask how to trigger that!
+<issue_comment>username_1: BTW @username_0 you might want to edit the description to remove the word “draft”
+<issue_comment>username_0: @username_1 done ta :)
+<issue_comment>username_1: Changes since https://github.com/kubernetes/website/pull/31221#issuecomment-1009392865 are trivial.
+
+/lgtm
+/approve"
+conda-forge/conda-forge.github.io,199955537,306,,"[{'action': 'opened', 'author': 'wesm', 'comment_id': None, 'datetime': '2017-01-10 22:47:17+00:00', 'masked_author': 'username_0', 'text': ""Hello -- what is the current status vis-a-vis OS X build capacity for CF? I opened a build a little over 4 hours ago and it still hasn't processed: https://github.com/conda-forge/parquet-cpp-feedstock/pull/10\r\n\r\nBy the time that's merged, then master builds, we could be talking 12-24 hour turnaround time to update a package only requiring a change in build and version number. \r\n\r\nWhat's the status of fiscal sponsorship for CF and Travis CI in particular? Can I help with procuring funds to obtain more workers? Have you considered joining NumFOCUS to provide another conduit of tax-deductible donations? We should also put a big blue DONATE button on the conda-forge homepage (but we would need a legal entity set up to collect the donations).\r\n\r\nI'm willing to invest a bunch of my energy in helping fund raise because of the amount of time this has been costing me, so let me know how I can help."", 'title': 'Procuring more Travis CI capacity', 'type': 'issue'}
+ {'action': 'created', 'author': 'ocefpaf', 'comment_id': 271737089.0, 'datetime': '2017-01-11 00:00:40+00:00', 'masked_author': 'username_1', 'text': '@username_0 I contact Travis-CI some time ago and surprisingly paying for it would not improve our situation that much. With that said, all of @conda-forge/core agrees with what you said. However, we lack manpower to take action on those points you raised.\r\n\r\nPS: Would you be willing to participate in one of our meetings? We did not not schedule the next one yet but when we do so it will be announced in https://conda-forge.hackpad.com/conda-forge-meetings-2YkV96cvxPG', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'ChrisBarker-NOAA', 'comment_id': 271740957.0, 'datetime': '2017-01-11 00:24:06+00:00', 'masked_author': 'username_2', 'text': ""And yes, we have talked about NumFocus as a conduit for donations. I think we all agree that it's a good idea, but as @username_1 said, someone needs to be willing to take the lead and get the hasseling done.\r\n\r\nAlso, it still isn't clear if $$ will solve the problems anyway.\r\n\r\nIn short, great ideas, and we welcome any input and assistance with the effort.\r\n\r\n-CHB"", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'jakirkham', 'comment_id': 271742956.0, 'datetime': '2017-01-11 00:36:42+00:00', 'masked_author': 'username_3', 'text': 'Should add that one of the things that we have discussed over the past few months is having some sort of BYOC (bring your own compute) type build system where people could contribute computers they have for building. Some sort of VM would be installed on them where the builds run. These would be leveraged by some sort of CI system to farm out the builds to different workers. It could also be used for things requiring longer build times. IIUC this [repo]( https://github.com/conda/conda-concourse-ci ) houses the current work towards this goal. @msarahan shared his work on this during one of our meetings near the end of last year.', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'jakirkham', 'comment_id': 273924419.0, 'datetime': '2017-01-19 22:52:28+00:00', 'masked_author': 'username_3', 'text': ""Also, as another thing to consider, we could look to Travis CI's supplier of OS X infrastructure. Their supplier is [MacStadium]( https://www.macstadium.com/ ). Though there may still be more work to be done. Travis CI provides us a nice interface that would take time to recreate and maintain."", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'SylvainCorlay', 'comment_id': 273930086.0, 'datetime': '2017-01-19 23:20:42+00:00', 'masked_author': 'username_4', 'text': ""A volunteer computing CI service (a build@home similar to Folding@home or SETI@home) would be awesome! Donating compute for CI of a whitelist of GitHub organizations would give me the impression of having more direct impact than the equivalent amount of computing donated to SETI@Home :)\r\n\r\nWith 4 pending build (xsimd, cryptopp, ipympl and and update to zeromq) I find this already quite frustrating. I can't imagine how core conda-forge devs must feel!"", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'jakirkham', 'comment_id': 273986757.0, 'datetime': '2017-01-20 06:17:50+00:00', 'masked_author': 'username_3', 'text': 'In an attempt to try and improve the situation with Travis CI, have written up PR ( https://github.com/conda-forge/staged-recipes/pull/2257 ). This includes a similar strategy as is used on AppVeyor to fast finish old PR builds. Also tries to cache some things like conda packages and the Miniconda installer to speed things up. There are some other changes of lesser note. Would appreciate if people interested in this issue gave that PR a look over.', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'SylvainCorlay', 'comment_id': 274057301.0, 'datetime': '2017-01-20 12:05:54+00:00', 'masked_author': 'username_4', 'text': 'I have the impression that travis is not building anything on conda forge at some points in time, even when global backlog is empty.', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'jakirkham', 'comment_id': 274096813.0, 'datetime': '2017-01-20 15:18:26+00:00', 'masked_author': 'username_3', 'text': ""The backlog was low last night and it seemed to be building things then. Though admittedly with a sizeable delay. Certainly when the backlog is large, they can no longer guarantee their 5 workers per user/org, which is where I think things go off the rails. It is possible their is additional throttling in the equation that we don't know of.\r\n\r\nStill I think if we can use some of the time we are give to help cutdown the queue size, that should improve the situation. It is not as great as say avoiding unneeded builds being queued at all and/or canceling them without using CIs. ( https://github.com/conda-forge/conda-forge-webservices/issues/79 ) Though this has fewer limitations and is something we are able to do immediately without waiting for changes from Travis CI."", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'SylvainCorlay', 'comment_id': 274104619.0, 'datetime': '2017-01-20 15:47:47+00:00', 'masked_author': 'username_4', 'text': 'I have been canceling a few builds that were in the queue but not valid anymore (rebased PRs etc).\r\n\r\nRight now, the conda-forge queue is about 22 hours long...', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'SylvainCorlay', 'comment_id': 274106243.0, 'datetime': '2017-01-20 15:54:01+00:00', 'masked_author': 'username_4', 'text': 'By the way, just like @username_0, if there is anything I can do to help fund more os x compute, I would love to know!', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'SylvainCorlay', 'comment_id': 274215522.0, 'datetime': '2017-01-21 00:30:49+00:00', 'masked_author': 'username_4', 'text': ""I don't think that any build was done by travisci for conda-forge over the past couple of hours. :unamused:"", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'jakirkham', 'comment_id': 274222501.0, 'datetime': '2017-01-21 01:34:55+00:00', 'masked_author': 'username_3', 'text': ""This [build]( https://travis-ci.org/conda-forge/zeromq-feedstock/builds/193442654 ) ran ~20 mins ago and this [one]( https://travis-ci.org/conda-forge/xorg-xcb-proto-feedstock/builds/193432142 ) an hour ago. Things are running albeit slowly. However Travis' GUI unlike AppVeyor's is not great at displaying this information and people have asked them to fix it in various issues."", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'jakirkham', 'comment_id': 274222654.0, 'datetime': '2017-01-21 01:36:39+00:00', 'masked_author': 'username_3', 'text': ""If anyone would like to help, I'd appreciate more feedback on PR ( https://github.com/conda-forge/staged-recipes/pull/2257 ) to help cull the queue on Travis."", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'SylvainCorlay', 'comment_id': 274226160.0, 'datetime': '2017-01-21 02:22:12+00:00', 'masked_author': 'username_4', 'text': 'That was after my commet :)', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'jakirkham', 'comment_id': 274228377.0, 'datetime': '2017-01-21 02:52:35+00:00', 'masked_author': 'username_3', 'text': 'Only trying to point out the situation is not totally hopeless. 😄\r\n\r\nIn any event, the long term fix is our own build infrastructure.\r\n\r\nThe short term fix will probably be plugging the holes in the dam. That said, I think I found a pretty serious problem with Travis (running outdated builds). Fixing that problem with AppVeyor has been crucial for getting to where we are today. While this may seem like extra or wasted work, it is not really as we will still require similar solutions for our own build infrastructure too. So we can likely reuse lessons learned when we migrate.', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'jakirkham', 'comment_id': 274355293.0, 'datetime': '2017-01-22 20:07:12+00:00', 'masked_author': 'username_3', 'text': 'Have written up a CI fast finish script in PR ( https://github.com/conda-forge/conda-forge-build-setup-feedstock/pull/52 ). It checks if a build is out of date for the given PR and fails it immediately if it is. Tested it on CircleCI, Travis CI, and AppVeyor. The script has no dependencies outside of a Python interpreter and works on 2 or 3. As such, it can safely be downloaded on all CIs and just run as all of them have some Python interpreter available (either 2 or 3). Since it is written in Python, it is much cleaner that it would be in shell and is a bit more web friendly. Please take a look.', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'patricksnape', 'comment_id': 275743683.0, 'datetime': '2017-01-27 18:53:18+00:00', 'masked_author': 'username_5', 'text': 'I would also be interested in any solutions we might have for improving our Travis builds - I would also be willing to donate if we felt like some agreement (including payments) might be possible with Travis themselves.', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'wesm', 'comment_id': 276099612.0, 'datetime': '2017-01-30 15:52:41+00:00', 'masked_author': 'username_0', 'text': 'I can help with soliciting corporate donations to pay for additional Travis CI build capacity. Please contact me offline if this is possible', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'SylvainCorlay', 'comment_id': 276302688.0, 'datetime': '2017-01-31 08:24:42+00:00', 'masked_author': 'username_4', 'text': 'Same here. I would love to help with funding if this is something you are pursuing.', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'jakirkham', 'comment_id': 283054043.0, 'datetime': '2017-02-28 14:31:37+00:00', 'masked_author': 'username_3', 'text': ""The only way ATM that I can see paying for Travis CI helping is if we can get our own dedicated queue with a few workers. FWICT it doesn't seem like this is something they currently offer. However, we can always ask. Would someone be willing to take this on?"", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'scopatz', 'comment_id': 283225166.0, 'datetime': '2017-03-01 02:21:53+00:00', 'masked_author': 'username_6', 'text': '@username_3 do you know who to talk to?', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'scopatz', 'comment_id': 283225212.0, 'datetime': '2017-03-01 02:22:08+00:00', 'masked_author': 'username_6', 'text': 'That is, do we have a contact?', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'jakirkham', 'comment_id': 283234331.0, 'datetime': '2017-03-01 03:26:03+00:00', 'masked_author': 'username_3', 'text': ""We don't have a contact currently, no. Though I have emailed them at their support email ( support <at> travis-ci <dot> com ) before and have gotten pretty good response. Would recommend the same here unless there are other suggestions."", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'scopatz', 'comment_id': 283735728.0, 'datetime': '2017-03-02 18:22:07+00:00', 'masked_author': 'username_6', 'text': 'Ok I will email them now.', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'scopatz', 'comment_id': 283740889.0, 'datetime': '2017-03-02 18:41:27+00:00', 'masked_author': 'username_6', 'text': ""Email sent, I'll let you know what I hear back"", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'jakirkham', 'comment_id': 283773892.0, 'datetime': '2017-03-02 20:42:23+00:00', 'masked_author': 'username_3', 'text': 'Awesome! Thanks so much @username_6. 😄', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'scopatz', 'comment_id': 284097577.0, 'datetime': '2017-03-03 23:17:59+00:00', 'masked_author': 'username_6', 'text': ""Hello All, I just received a reply from Travis. \r\n\r\nSo the good news is that they do supply dedicated hardware and queues for mac infrastructure. The technical specifications are:\r\n\r\n* Mac Pros\r\n* 12 core\r\n* 32 GB RAM\r\n* 5 concurrent jobs per machine\r\n\r\nThey only offer groups of two machines. Each machine is $1500 / month, so the minimum cost is $3000 / month. \r\n\r\nI am planning on having a call to c=touch base with them sometime during the week of March 12th. If you have specific questions you'd like me to ask please let me know.  Or maybe we should have a document to list some of the issues to bring up. I know I have a couple of my own."", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'ChrisBarker-NOAA', 'comment_id': 284099804.0, 'datetime': '2017-03-03 23:31:42+00:00', 'masked_author': 'username_2', 'text': 'Christopher Barker, Ph.D.\nOceanographer\n\nEmergency Response Division\nNOAA/NOS/OR&R            (206) 526-6959   voice\n7600 Sand Point Way NE   (206) 526-6329   fax\nSeattle, WA  98115       (206) 526-6317   main reception\n\ndycjh@example.com', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'scopatz', 'comment_id': 284101097.0, 'datetime': '2017-03-03 23:40:22+00:00', 'masked_author': 'username_6', 'text': ""@username_2, yeah one of my questions is about how many orgs you can share this across, how long you have to buy in for, etc. \r\n\r\nI probably missed something, but what is vonda-forge?\r\n\r\nAnd I actually do think that we want a dedicate resource. Higher queue priority still wouldn't allow us to extend the max job time, which is something that we'll need if we want to build gcc, clang, etc."", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'ocefpaf', 'comment_id': 284101818.0, 'datetime': '2017-03-03 23:45:11+00:00', 'masked_author': 'username_1', 'text': 'A typo. (`c` is way to close to `v` :wink:)\r\n\r\nI agree that ~3000.00 is pricey :confused: In 2-3 years that would be equal to buy our own hardware and hire someone to do it...', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'jakirkham', 'comment_id': 284102078.0, 'datetime': '2017-03-03 23:46:53+00:00', 'masked_author': 'username_3', 'text': 'Thanks @username_6. That\'s very useful information. Would be interested in hearing what comes out of the call. Will try to come up with some questions to send to you in the interim.\r\n\r\nI [mentioned]( https://github.com/conda-forge/conda-forge.github.io/issues/306#issuecomment-273924419 ) MacStadium is [Travis CI\'s provider]( https://www.macstadium.com/blog/how-travis-ci-halved-boot-times-for-os-x-and-ios-testing-at-macstadium/ ) for Mac machines (unless that has changed). It is probably worth comparing their [offerings]( https://www.macstadium.com/cloud/ ).\r\n\r\nFor MacStadium\'s high end cloud offering (they have lower end ones too), it runs $2799/mo provides 36 cores and 192GB RAM. They advertise having 1 VM per core (or better). The ""better"" part sounds fishy to me, but 1 VM per core sounds potentially reasonable especially given that there would be a little over 5GBs of RAM per instance (unclear on what overhead the infrastructure has).\r\n\r\nThe challenge is I have no idea what sort of software MacStadium provides to manage this. Travis CI is a known quantity that we can use and plugin to our existing infrastructure. Will MacStadium fit this bill or will we need to put some software of our own on the system? In particular, think about provisioning, sharing log files, possibly caching, queuing builds, notifying of build completion. If the latter, who has time to help maintain this? Perhaps this is the cost differential in the end is having a product ready to go vs. taking on some of the work on our own. We certainly could schedule a call with them too.\r\n\r\nIt might be helpful as we start to explore pay for this service to field some other suggestions about infrastructure providers for Mac. Either Googling options or reaching out to friends in tech generally (probably DevOps specifically) for suggestions/recommendations. Once we get a better idea of what is out there, we can assess what is feasible for us to use from both financial and maintenance perspectives.', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'scopatz', 'comment_id': 284104034.0, 'datetime': '2017-03-03 23:59:58+00:00', 'masked_author': 'username_6', 'text': 'My personal opinion is that if we are going to fund raise and shell out that kind of money, we\'d be better off going with the full stack solution, like travis or circle. If we are only going to pay for infrastructure, we\'d still be setting up something special to manage it. In this case it would be better to do that as an ""@home"" solution. I think it would allow better scaling of infrastructure over our diverse group.\r\n\r\nI know that HT Condor does run on mac and would provide a mechanism for mac hosts.', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'ocefpaf', 'comment_id': 284104233.0, 'datetime': '2017-03-04 00:01:17+00:00', 'masked_author': 'username_1', 'text': 'I agree. (Even though the price scares me.)', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'tkelman', 'comment_id': 287551175.0, 'datetime': '2017-03-18 14:53:20+00:00', 'masked_author': 'username_7', 'text': ""How much of the queue comes from the staged-recipes repo vs everything else? Has the option been considered of moving feedstocks and as many other repos as possible (aside from staged-recipes, assuming that's the busiest?) to different github organizations? It may complicate some code and permissions handling, but would multiply the effective travis concurrency if the load is distributed across many repos."", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'jakirkham', 'comment_id': 287561540.0, 'datetime': '2017-03-18 17:34:17+00:00', 'masked_author': 'username_3', 'text': ""I don't think Travis gives us the stats to figure that out. Though TBH since they added more workers to the pool and fixed up some other issues, it seems the queue has been doing much better."", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'tkelman', 'comment_id': 287577130.0, 'datetime': '2017-03-18 21:45:31+00:00', 'masked_author': 'username_7', 'text': ""It's possible to ask. They have a slack channel where other projects have asked about that kind of data, though I think it's invite only (mostly community language maintainers there). Might be able to ask for someone affiliated with conda-forge to be invited there."", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'scopatz', 'comment_id': 289811233.0, 'datetime': '2017-03-28 15:39:18+00:00', 'masked_author': 'username_6', 'text': ""Hey All, I just got off the phone with Travis and I think there are some better options available that the dedicated infrastructure proposed before. \r\n\r\nBasically, for $250 per month we can purchase 5 more concurrent jobs on the travis.org infrastructure. This can be purchased as many times as we want. That is, for $1000 per month we could get 20 more concurrent jobs.  \r\n\r\nAdditionally, Travis offers a 30% discount to non-profits. So, for instrance, if Travis was able to bill Numfocus, then we could knock the $250 down to $175. \r\n\r\nThis seems much more reasonable overall and could eliminate many of our potential queue issues. I am not sure how many concurrent jobs we'd really need, but this framework would allow us to scale up or down depending on our needs and funding.\r\n\r\nAre we talking with Numfocus already about support / fiscal sponsorship? Sorry if I have been out of it for the past month or so. I am happy to bring this Mac issue up with them if no one else has."", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'ocefpaf', 'comment_id': 289813110.0, 'datetime': '2017-03-28 15:45:18+00:00', 'masked_author': 'username_1', 'text': 'Yes please :grimacing:\r\n\r\n(Thanks for looking into this!)', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'scopatz', 'comment_id': 289814717.0, 'datetime': '2017-03-28 15:50:04+00:00', 'masked_author': 'username_6', 'text': 'Who was chatting to them before?', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'ocefpaf', 'comment_id': 289815123.0, 'datetime': '2017-03-28 15:51:21+00:00', 'masked_author': 'username_1', 'text': '@jjhelmus', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'jakirkham', 'comment_id': 289819021.0, 'datetime': '2017-03-28 16:03:37+00:00', 'masked_author': 'username_3', 'text': ""FWIW I think Travis CI has largely fixed the massive queues as noted in this [comment]( https://github.com/conda-forge/staged-recipes/pull/2657#issuecomment-288895561 ). Though looking at their status page for the past couple weeks is also informative. That doesn't mean we wouldn't want to increase our concurrency, but it is just something to factor in before making a financial decision."", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'patricksnape', 'comment_id': 289867993.0, 'datetime': '2017-03-28 18:50:07+00:00', 'masked_author': 'username_5', 'text': ""Well that's interesting thanks @username_6! Would be good to have a centralized place for payments if we go that route (such as numfocus or something) so that we delegate that responsibility."", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'wesm', 'comment_id': 289879186.0, 'datetime': '2017-03-28 19:30:43+00:00', 'masked_author': 'username_0', 'text': 'Would you accept an implicit donation of funds from other NumFOCUS sponsored projects (i.e. we would pay the invoice)? pandas and other projects derive enough value from conda-forge, that a number of us together could foot the bill (assuming there is suitable consensus) for the extra Travis CI capacity.', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'scopatz', 'comment_id': 289885418.0, 'datetime': '2017-03-28 19:55:32+00:00', 'masked_author': 'username_6', 'text': '@username_0 - a discussion of NF supporting all orgs did come up. It appears that for every 2 github orgs under the same bill, they will throw in an extra 5 concurrent jobs. I think this would be a great thing to bring up so that all NF projects could get a tangible benefit from being in NF. \r\n\r\nFor purposes here, NF would still have to be happy with allowing conda-forge to be part of that.', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'tkelman', 'comment_id': 289888821.0, 'datetime': '2017-03-28 20:08:27+00:00', 'masked_author': 'username_7', 'text': ""JuliaLang has been paying for extra Travis capacity (with funding routed through NumFocus) for a while, same basic plan described above - though I don't think we've been getting a nonprofit discount. If it meant more workers for someone and otherwise didn't hurt anything, we could look into combining somehow."", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'patricksnape', 'comment_id': 289997665.0, 'datetime': '2017-03-29 06:40:20+00:00', 'masked_author': 'username_5', 'text': '@username_6 that would be awesome, seems like grouping resources would be most cost effective. @username_0 that would be very generous and it sounds like some support from numfocus would be very valuable for conda forge', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'jakirkham', 'comment_id': 331579912.0, 'datetime': '2017-09-22 23:05:28+00:00', 'masked_author': 'username_3', 'text': ""Probably time to revisit some options on this front in light of Travis CI's [proposed changes]( https://blog.travis-ci.com/2017-09-22-macos-update )."", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'wesm', 'comment_id': 331582772.0, 'datetime': '2017-09-22 23:30:42+00:00', 'masked_author': 'username_0', 'text': ""I would be surprised if we couldn't put together at least $50K or $100K annually in support of CI capacity for Travis CI. I can help with the fundraising, but we need a fiscal conduit (e.g. NumFOCUS)"", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'ocefpaf', 'comment_id': 331583723.0, 'datetime': '2017-09-22 23:40:03+00:00', 'masked_author': 'username_1', 'text': ""@username_0 I am in touch with NumFOCUS and hopefully soon we'll be a fiscally sponsored project.\r\nI'll keep you informed on how this goes."", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'ChrisBarker-NOAA', 'comment_id': 331589635.0, 'datetime': '2017-09-23 00:32:33+00:00', 'masked_author': 'username_2', 'text': ""@username_0 <https://github.com/username_0> I am in touch with NumFOCUS and hopefully\nsoon we'll be a fiscally sponsored project.\n\nThanks!\n\nAnything the rest of us can to help?\n\n-CHB"", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'ocefpaf', 'comment_id': 331593217.0, 'datetime': '2017-09-23 00:55:38+00:00', 'masked_author': 'username_1', 'text': ""At the moment there is not much we can do.\r\nI'm trying to go to PyData NY in November to see if I can talk with NumFOCUS people in person and move this faster."", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'mwcraig', 'comment_id': 360825993.0, 'datetime': '2018-01-26 16:04:11+00:00', 'masked_author': 'username_8', 'text': 'GIving this issue a bump now that conda-forge is a NumFocus affiliated package: https://www.numfocus.org/sponsored-projects/affiliated-projects/\r\n\r\nIn addition to the travis plan above, circle-ci also offers mac options: http://circleci.com/pricing/#build-os-x', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'jakirkham', 'comment_id': 360829861.0, 'datetime': '2018-01-26 16:17:31+00:00', 'masked_author': 'username_3', 'text': 'Thanks @username_8. Have updated the title to reflect the new scope.', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'johanneskoester', 'comment_id': 360839166.0, 'datetime': '2018-01-26 16:49:14+00:00', 'masked_author': 'username_9', 'text': 'Dear all, I would like to inform you that we had the same issues in bioconda, and we now have switched to CircleCI for both Linux and MacOS. We simply asked them and they gave us free builds on both. Maybe that is an option for you as well?', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'mwcraig', 'comment_id': 360942539.0, 'datetime': '2018-01-27 00:32:09+00:00', 'masked_author': 'username_8', 'text': '@username_9 -- thanks for the additional information. Do you have a cap on your mac build minutes per month?', 'title': None, 'type': 'comment'}
+ {'action': 'closed', 'author': 'jakirkham', 'comment_id': None, 'datetime': '2018-10-19 20:08:43+00:00', 'masked_author': 'username_3', 'text': '', 'title': None, 'type': 'issue'}
+ {'action': 'created', 'author': 'jakirkham', 'comment_id': 431484304.0, 'datetime': '2018-10-19 20:08:43+00:00', 'masked_author': 'username_3', 'text': ""Going to close this out for a few reasons.\r\n\r\nFirst, today Travis CI's macOS builds are run faster than any other CI (including our Dockerized Linux builds on CircleCI surprisingly) even while we are under the strain of a nearly total stack rebuild while continuing to maintain a stable copy of packages alongside it (basically doubling our job queue). IOW if any CI is struggling it is definitely not Travis CI. This is a pretty big improvement and a lot of this thanks to how [Travis CI redesigned their macOS offering earlier this year]( https://blog.travis-ci.com/2018-01-30-macos-update ), for which we are very thankful.\r\n\r\nSecond, as many of you know, [conda-forge recently became a NumFOCUS sponsored project]( https://numfocus.org/blog/conda-forge-joins-numfocus-sponsored-projects ). As such NumFOCUS is able to receive donations on our behalf (amongst many other great things NumFOCUS does). So it is actually possible to [donate to conda-forge]( https://www.flipcause.com/secure/cause_pdetails/NDA0OTk= ), which was not previously possible. Hence we have a way of getting funds that can be spent on CI.\r\n\r\nThird we received our first donation, which core has decide will be [spent on more AppVeyor jobs]( https://github.com/conda-forge/conda-forge.github.io/issues/657 ) (the currently hampered build queue). So what was once a nearly insurmountable obstacle is much more easily resolvable today (as long as we have the funds of course).\r\n\r\nWe have come a long way and we are very thankful for everyone that helped make this possible. 😄"", 'title': None, 'type': 'comment'}]","<issue_start><issue_comment>Title: Procuring more Travis CI capacity
+username_0: Hello -- what is the current status vis-a-vis OS X build capacity for CF? I opened a build a little over 4 hours ago and it still hasn't processed: https://github.com/conda-forge/parquet-cpp-feedstock/pull/10
+
+By the time that's merged, then master builds, we could be talking 12-24 hour turnaround time to update a package only requiring a change in build and version number. 
+
+What's the status of fiscal sponsorship for CF and Travis CI in particular? Can I help with procuring funds to obtain more workers? Have you considered joining NumFOCUS to provide another conduit of tax-deductible donations? We should also put a big blue DONATE button on the conda-forge homepage (but we would need a legal entity set up to collect the donations).
+
+I'm willing to invest a bunch of my energy in helping fund raise because of the amount of time this has been costing me, so let me know how I can help.
+<issue_comment>username_1: @username_0 I contact Travis-CI some time ago and surprisingly paying for it would not improve our situation that much. With that said, all of @conda-forge/core agrees with what you said. However, we lack manpower to take action on those points you raised.
+
+PS: Would you be willing to participate in one of our meetings? We did not not schedule the next one yet but when we do so it will be announced in https://conda-forge.hackpad.com/conda-forge-meetings-2YkV96cvxPG
+<issue_comment>username_2: And yes, we have talked about NumFocus as a conduit for donations. I think we all agree that it's a good idea, but as @username_1 said, someone needs to be willing to take the lead and get the hasseling done.
+
+Also, it still isn't clear if $$ will solve the problems anyway.
+
+In short, great ideas, and we welcome any input and assistance with the effort.
+
+-CHB
+<issue_comment>username_3: Should add that one of the things that we have discussed over the past few months is having some sort of BYOC (bring your own compute) type build system where people could contribute computers they have for building. Some sort of VM would be installed on them where the builds run. These would be leveraged by some sort of CI system to farm out the builds to different workers. It could also be used for things requiring longer build times. IIUC this [repo]( https://github.com/conda/conda-concourse-ci ) houses the current work towards this goal. @msarahan shared his work on this during one of our meetings near the end of last year.
+<issue_comment>username_3: Also, as another thing to consider, we could look to Travis CI's supplier of OS X infrastructure. Their supplier is [MacStadium]( https://www.macstadium.com/ ). Though there may still be more work to be done. Travis CI provides us a nice interface that would take time to recreate and maintain.
+<issue_comment>username_4: A volunteer computing CI service (a build@home similar to Folding@home or SETI@home) would be awesome! Donating compute for CI of a whitelist of GitHub organizations would give me the impression of having more direct impact than the equivalent amount of computing donated to SETI@Home :)
+
+With 4 pending build (xsimd, cryptopp, ipympl and and update to zeromq) I find this already quite frustrating. I can't imagine how core conda-forge devs must feel!
+<issue_comment>username_3: In an attempt to try and improve the situation with Travis CI, have written up PR ( https://github.com/conda-forge/staged-recipes/pull/2257 ). This includes a similar strategy as is used on AppVeyor to fast finish old PR builds. Also tries to cache some things like conda packages and the Miniconda installer to speed things up. There are some other changes of lesser note. Would appreciate if people interested in this issue gave that PR a look over.
+<issue_comment>username_4: I have the impression that travis is not building anything on conda forge at some points in time, even when global backlog is empty.
+<issue_comment>username_3: The backlog was low last night and it seemed to be building things then. Though admittedly with a sizeable delay. Certainly when the backlog is large, they can no longer guarantee their 5 workers per user/org, which is where I think things go off the rails. It is possible their is additional throttling in the equation that we don't know of.
+
+Still I think if we can use some of the time we are give to help cutdown the queue size, that should improve the situation. It is not as great as say avoiding unneeded builds being queued at all and/or canceling them without using CIs. ( https://github.com/conda-forge/conda-forge-webservices/issues/79 ) Though this has fewer limitations and is something we are able to do immediately without waiting for changes from Travis CI.
+<issue_comment>username_4: I have been canceling a few builds that were in the queue but not valid anymore (rebased PRs etc).
+
+Right now, the conda-forge queue is about 22 hours long...
+<issue_comment>username_4: By the way, just like @username_0, if there is anything I can do to help fund more os x compute, I would love to know!
+<issue_comment>username_4: I don't think that any build was done by travisci for conda-forge over the past couple of hours. :unamused:
+<issue_comment>username_3: This [build]( https://travis-ci.org/conda-forge/zeromq-feedstock/builds/193442654 ) ran ~20 mins ago and this [one]( https://travis-ci.org/conda-forge/xorg-xcb-proto-feedstock/builds/193432142 ) an hour ago. Things are running albeit slowly. However Travis' GUI unlike AppVeyor's is not great at displaying this information and people have asked them to fix it in various issues.
+<issue_comment>username_3: If anyone would like to help, I'd appreciate more feedback on PR ( https://github.com/conda-forge/staged-recipes/pull/2257 ) to help cull the queue on Travis.
+<issue_comment>username_4: That was after my commet :)
+<issue_comment>username_3: Only trying to point out the situation is not totally hopeless. 😄
+
+In any event, the long term fix is our own build infrastructure.
+
+The short term fix will probably be plugging the holes in the dam. That said, I think I found a pretty serious problem with Travis (running outdated builds). Fixing that problem with AppVeyor has been crucial for getting to where we are today. While this may seem like extra or wasted work, it is not really as we will still require similar solutions for our own build infrastructure too. So we can likely reuse lessons learned when we migrate.
+<issue_comment>username_3: Have written up a CI fast finish script in PR ( https://github.com/conda-forge/conda-forge-build-setup-feedstock/pull/52 ). It checks if a build is out of date for the given PR and fails it immediately if it is. Tested it on CircleCI, Travis CI, and AppVeyor. The script has no dependencies outside of a Python interpreter and works on 2 or 3. As such, it can safely be downloaded on all CIs and just run as all of them have some Python interpreter available (either 2 or 3). Since it is written in Python, it is much cleaner that it would be in shell and is a bit more web friendly. Please take a look.
+<issue_comment>username_5: I would also be interested in any solutions we might have for improving our Travis builds - I would also be willing to donate if we felt like some agreement (including payments) might be possible with Travis themselves.
+<issue_comment>username_0: I can help with soliciting corporate donations to pay for additional Travis CI build capacity. Please contact me offline if this is possible
+<issue_comment>username_4: Same here. I would love to help with funding if this is something you are pursuing.
+<issue_comment>username_3: The only way ATM that I can see paying for Travis CI helping is if we can get our own dedicated queue with a few workers. FWICT it doesn't seem like this is something they currently offer. However, we can always ask. Would someone be willing to take this on?
+<issue_comment>username_6: @username_3 do you know who to talk to?
+<issue_comment>username_6: That is, do we have a contact?
+<issue_comment>username_3: We don't have a contact currently, no. Though I have emailed them at their support email ( support <at> travis-ci <dot> com ) before and have gotten pretty good response. Would recommend the same here unless there are other suggestions.
+<issue_comment>username_6: Ok I will email them now.
+<issue_comment>username_6: Email sent, I'll let you know what I hear back
+<issue_comment>username_3: Awesome! Thanks so much @username_6. 😄
+<issue_comment>username_6: Hello All, I just received a reply from Travis. 
+
+So the good news is that they do supply dedicated hardware and queues for mac infrastructure. The technical specifications are:
+
+* Mac Pros
+* 12 core
+* 32 GB RAM
+* 5 concurrent jobs per machine
+
+They only offer groups of two machines. Each machine is $1500 / month, so the minimum cost is $3000 / month. 
+
+I am planning on having a call to c=touch base with them sometime during the week of March 12th. If you have specific questions you'd like me to ask please let me know.  Or maybe we should have a document to list some of the issues to bring up. I know I have a couple of my own.
+<issue_comment>username_2: Christopher Barker, Ph.D.
+Oceanographer
+
+Emergency Response Division
+NOAA/NOS/OR&R            (206) 526-6959   voice
+7600 Sand Point Way NE   (206) 526-6329   fax
+Seattle, WA  98115       (206) 526-6317   main reception
+
+Chris.Barker@noaa.gov
+<issue_comment>username_6: @username_2, yeah one of my questions is about how many orgs you can share this across, how long you have to buy in for, etc. 
+
+I probably missed something, but what is vonda-forge?
+
+And I actually do think that we want a dedicate resource. Higher queue priority still wouldn't allow us to extend the max job time, which is something that we'll need if we want to build gcc, clang, etc.
+<issue_comment>username_1: A typo. (`c` is way to close to `v` :wink:)
+
+I agree that ~3000.00 is pricey :confused: In 2-3 years that would be equal to buy our own hardware and hire someone to do it...
+<issue_comment>username_3: Thanks @username_6. That's very useful information. Would be interested in hearing what comes out of the call. Will try to come up with some questions to send to you in the interim.
+
+I [mentioned]( https://github.com/conda-forge/conda-forge.github.io/issues/306#issuecomment-273924419 ) MacStadium is [Travis CI's provider]( https://www.macstadium.com/blog/how-travis-ci-halved-boot-times-for-os-x-and-ios-testing-at-macstadium/ ) for Mac machines (unless that has changed). It is probably worth comparing their [offerings]( https://www.macstadium.com/cloud/ ).
+
+For MacStadium's high end cloud offering (they have lower end ones too), it runs $2799/mo provides 36 cores and 192GB RAM. They advertise having 1 VM per core (or better). The ""better"" part sounds fishy to me, but 1 VM per core sounds potentially reasonable especially given that there would be a little over 5GBs of RAM per instance (unclear on what overhead the infrastructure has).
+
+The challenge is I have no idea what sort of software MacStadium provides to manage this. Travis CI is a known quantity that we can use and plugin to our existing infrastructure. Will MacStadium fit this bill or will we need to put some software of our own on the system? In particular, think about provisioning, sharing log files, possibly caching, queuing builds, notifying of build completion. If the latter, who has time to help maintain this? Perhaps this is the cost differential in the end is having a product ready to go vs. taking on some of the work on our own. We certainly could schedule a call with them too.
+
+It might be helpful as we start to explore pay for this service to field some other suggestions about infrastructure providers for Mac. Either Googling options or reaching out to friends in tech generally (probably DevOps specifically) for suggestions/recommendations. Once we get a better idea of what is out there, we can assess what is feasible for us to use from both financial and maintenance perspectives.
+<issue_comment>username_6: My personal opinion is that if we are going to fund raise and shell out that kind of money, we'd be better off going with the full stack solution, like travis or circle. If we are only going to pay for infrastructure, we'd still be setting up something special to manage it. In this case it would be better to do that as an ""@home"" solution. I think it would allow better scaling of infrastructure over our diverse group.
+
+I know that HT Condor does run on mac and would provide a mechanism for mac hosts.
+<issue_comment>username_1: I agree. (Even though the price scares me.)
+<issue_comment>username_7: How much of the queue comes from the staged-recipes repo vs everything else? Has the option been considered of moving feedstocks and as many other repos as possible (aside from staged-recipes, assuming that's the busiest?) to different github organizations? It may complicate some code and permissions handling, but would multiply the effective travis concurrency if the load is distributed across many repos.
+<issue_comment>username_3: I don't think Travis gives us the stats to figure that out. Though TBH since they added more workers to the pool and fixed up some other issues, it seems the queue has been doing much better.
+<issue_comment>username_7: It's possible to ask. They have a slack channel where other projects have asked about that kind of data, though I think it's invite only (mostly community language maintainers there). Might be able to ask for someone affiliated with conda-forge to be invited there.
+<issue_comment>username_6: Hey All, I just got off the phone with Travis and I think there are some better options available that the dedicated infrastructure proposed before. 
+
+Basically, for $250 per month we can purchase 5 more concurrent jobs on the travis.org infrastructure. This can be purchased as many times as we want. That is, for $1000 per month we could get 20 more concurrent jobs.  
+
+Additionally, Travis offers a 30% discount to non-profits. So, for instrance, if Travis was able to bill Numfocus, then we could knock the $250 down to $175. 
+
+This seems much more reasonable overall and could eliminate many of our potential queue issues. I am not sure how many concurrent jobs we'd really need, but this framework would allow us to scale up or down depending on our needs and funding.
+
+Are we talking with Numfocus already about support / fiscal sponsorship? Sorry if I have been out of it for the past month or so. I am happy to bring this Mac issue up with them if no one else has.
+<issue_comment>username_1: Yes please :grimacing:
+
+(Thanks for looking into this!)
+<issue_comment>username_6: Who was chatting to them before?
+<issue_comment>username_1: @jjhelmus
+<issue_comment>username_3: FWIW I think Travis CI has largely fixed the massive queues as noted in this [comment]( https://github.com/conda-forge/staged-recipes/pull/2657#issuecomment-288895561 ). Though looking at their status page for the past couple weeks is also informative. That doesn't mean we wouldn't want to increase our concurrency, but it is just something to factor in before making a financial decision.
+<issue_comment>username_5: Well that's interesting thanks @username_6! Would be good to have a centralized place for payments if we go that route (such as numfocus or something) so that we delegate that responsibility.
+<issue_comment>username_0: Would you accept an implicit donation of funds from other NumFOCUS sponsored projects (i.e. we would pay the invoice)? pandas and other projects derive enough value from conda-forge, that a number of us together could foot the bill (assuming there is suitable consensus) for the extra Travis CI capacity.
+<issue_comment>username_6: @username_0 - a discussion of NF supporting all orgs did come up. It appears that for every 2 github orgs under the same bill, they will throw in an extra 5 concurrent jobs. I think this would be a great thing to bring up so that all NF projects could get a tangible benefit from being in NF. 
+
+For purposes here, NF would still have to be happy with allowing conda-forge to be part of that.
+<issue_comment>username_7: JuliaLang has been paying for extra Travis capacity (with funding routed through NumFocus) for a while, same basic plan described above - though I don't think we've been getting a nonprofit discount. If it meant more workers for someone and otherwise didn't hurt anything, we could look into combining somehow.
+<issue_comment>username_5: @username_6 that would be awesome, seems like grouping resources would be most cost effective. @username_0 that would be very generous and it sounds like some support from numfocus would be very valuable for conda forge
+<issue_comment>username_3: Probably time to revisit some options on this front in light of Travis CI's [proposed changes]( https://blog.travis-ci.com/2017-09-22-macos-update ).
+<issue_comment>username_0: I would be surprised if we couldn't put together at least $50K or $100K annually in support of CI capacity for Travis CI. I can help with the fundraising, but we need a fiscal conduit (e.g. NumFOCUS)
+<issue_comment>username_1: @username_0 I am in touch with NumFOCUS and hopefully soon we'll be a fiscally sponsored project.
+I'll keep you informed on how this goes.
+<issue_comment>username_2: @username_0 <https://github.com/username_0> I am in touch with NumFOCUS and hopefully
+soon we'll be a fiscally sponsored project.
+
+Thanks!
+
+Anything the rest of us can to help?
+
+-CHB
+<issue_comment>username_1: At the moment there is not much we can do.
+I'm trying to go to PyData NY in November to see if I can talk with NumFOCUS people in person and move this faster.
+<issue_comment>username_8: GIving this issue a bump now that conda-forge is a NumFocus affiliated package: https://www.numfocus.org/sponsored-projects/affiliated-projects/
+
+In addition to the travis plan above, circle-ci also offers mac options: http://circleci.com/pricing/#build-os-x
+<issue_comment>username_3: Thanks @username_8. Have updated the title to reflect the new scope.
+<issue_comment>username_9: Dear all, I would like to inform you that we had the same issues in bioconda, and we now have switched to CircleCI for both Linux and MacOS. We simply asked them and they gave us free builds on both. Maybe that is an option for you as well?
+<issue_comment>username_8: @username_9 -- thanks for the additional information. Do you have a cap on your mac build minutes per month?<issue_closed>
+<issue_comment>username_3: Going to close this out for a few reasons.
+
+First, today Travis CI's macOS builds are run faster than any other CI (including our Dockerized Linux builds on CircleCI surprisingly) even while we are under the strain of a nearly total stack rebuild while continuing to maintain a stable copy of packages alongside it (basically doubling our job queue). IOW if any CI is struggling it is definitely not Travis CI. This is a pretty big improvement and a lot of this thanks to how [Travis CI redesigned their macOS offering earlier this year]( https://blog.travis-ci.com/2018-01-30-macos-update ), for which we are very thankful.
+
+Second, as many of you know, [conda-forge recently became a NumFOCUS sponsored project]( https://numfocus.org/blog/conda-forge-joins-numfocus-sponsored-projects ). As such NumFOCUS is able to receive donations on our behalf (amongst many other great things NumFOCUS does). So it is actually possible to [donate to conda-forge]( https://www.flipcause.com/secure/cause_pdetails/NDA0OTk= ), which was not previously possible. Hence we have a way of getting funds that can be spent on CI.
+
+Third we received our first donation, which core has decide will be [spent on more AppVeyor jobs]( https://github.com/conda-forge/conda-forge.github.io/issues/657 ) (the currently hampered build queue). So what was once a nearly insurmountable obstacle is much more easily resolvable today (as long as we have the funds of course).
+
+We have come a long way and we are very thankful for everyone that helped make this possible. 😄"
+fastify/website,775675984,220,"{'number': 220.0, 'repo': 'website', 'user_login': 'fastify'}","[{'action': 'opened', 'author': 'apexconsultant', 'comment_id': None, 'datetime': '2020-12-29T03:20:59Z', 'masked_author': 'username_0', 'text': ""<!--\r\nPlease add OracleAPEXConsultant to organisations.\r\n\r\nThank you for your pull request. Please provide a description above and review\r\nthe requirements below.\r\n\r\nBug fixes and new features should include tests and possibly benchmarks.\r\n\r\nContributors guide: https://github.com/fastify/fastify/blob/master/CONTRIBUTING.md\r\n\r\nBy making a contribution to this project, I certify that:\r\n\r\n* (a) The contribution was created in whole or in part by me and I\r\n  have the right to submit it under the open source license\r\n  indicated in the file; or\r\n\r\n* (b) The contribution is based upon previous work that, to the best\r\n  of my knowledge, is covered under an appropriate open source\r\n  license and I have the right under that license to submit that\r\n  work with modifications, whether created in whole or in part\r\n  by me, under the same open source license (unless I am\r\n  permitted to submit under a different license), as indicated\r\n  in the file; or\r\n\r\n* (c) The contribution was provided directly to me by some other\r\n  person who certified (a), (b) or (c) and I have not modified\r\n  it.\r\n\r\n* (d) I understand and agree that this project and the contribution\r\n  are public and that a record of the contribution (including all\r\n  personal information I submit with it, including my sign-off) is\r\n  maintained indefinitely and may be redistributed consistent with\r\n  this project or the open source license(s) involved.\r\n-->\r\n\r\n#### Checklist\r\n\r\n- [x] run `npm run test` and `npm run benchmark`\r\n- [x] tests and/or benchmarks are included\r\n- [x] documentation is changed or added\r\n- [x] commit message and code follows the [Developer's Certification of Origin](https://github.com/fastify/.github/blob/master/CONTRIBUTING.md#developers-certificate-of-origin-11)\r\n      and the [Code of conduct](https://github.com/fastify/.github/blob/master/CODE_OF_CONDUCT.md)"", 'title': 'Please add OracleAPEXConsultant to organisations.', 'type': 'issue'}
+ {'action': 'created', 'author': 'lmammino', 'comment_id': 752049504.0, 'datetime': '2020-12-29 11:53:53+00:00', 'masked_author': 'username_1', 'text': 'Hello @username_0 and thanks for submitting this PR.\r\n\r\nI second what @jsumners already mention. Please make sure the logo contains actual vector shapes and not raw pixels. This allows us to keep the logo consistent and well visible across multiple resolutions / devices.\r\n\r\nOther than that, I am quite curious to understand more how do you use Fastify. From the outside, it seems that the company is purely focused on ""Oracle APEX"".\r\n\r\nWould you be able to share with us a case state where you used Fastify for one of your projects and why you didn\'t go with Apex?', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'mcollina', 'comment_id': 752051350.0, 'datetime': '2020-12-29 12:01:11+00:00', 'masked_author': 'username_2', 'text': 'I\'m not sure we can list the term ""Oracle Apex"" as it is a registered trademark.', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'apexconsultant', 'comment_id': 752154278.0, 'datetime': '2020-12-29 16:46:52+00:00', 'masked_author': 'username_0', 'text': ""Hello All,\r\n\r\nWe will add a pure SVG logo, apologize for the wrong format generated/converted by the software.\r\n\r\n@username_1, we are promoting apex for the development of the data-centric web solutions, but along with that also dealing/utilizing other development platforms [ open source, Javascript, Java, PHP, .Net, NodeJs, React, Mobile development, etc.] also for meeting customers needs. You can check on https://www.oracleusername_0.com/services/development, here as we mentioned for the micro-services & web services development we are using the Fastify framework. To mention a very recent use case for one of the projects, we used MySQL as a database and on top of that leverages the power of NodeJs + Fastify for developing REST web-services which can be consumed by any end client - mobile apps & web apps. There are certain projects where we have to use a database other than oracle and the need for NodeJs for developing microservices. \r\n\r\n@username_2, I would like to mention Oracle is the trademark, not Oracle APEX, and our company name is the OracleAPEXConsultant - single word. We are not using the same color, shape, or fonts as per the trademark guidelines. We have been listed on the oracle official community section as a consulting company, since 2011. \xa0Please check it out - https://apex.oracle.com/pls/apex/apex_pm/r/apex-community/consulting-companies. We've initiated a request for the updating logo, and that will be addressed soon, after the company new year holiday. \r\n\r\nPlease let us know in case of any questions.\r\n\r\n**Thanks & Regards,**\r\nTeam OAC"", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'lmammino', 'comment_id': 752189419.0, 'datetime': '2020-12-29 18:12:15+00:00', 'masked_author': 'username_1', 'text': 'Thank you @username_0 for taking the time to answer our queries. I think at this point the only blocker is to get the updated SVG and then we could probably get this shipped :)', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'mcollina', 'comment_id': 767710539.0, 'datetime': '2021-01-26 17:42:38+00:00', 'masked_author': 'username_2', 'text': 'Please send a fresh PR with updated logo', 'title': None, 'type': 'comment'}]","<issue_start><issue_comment>Title: Please add OracleAPEXConsultant to organisations.
+username_0: <!--
+Please add OracleAPEXConsultant to organisations.
+
+Thank you for your pull request. Please provide a description above and review
+the requirements below.
+
+Bug fixes and new features should include tests and possibly benchmarks.
+
+Contributors guide: https://github.com/fastify/fastify/blob/master/CONTRIBUTING.md
+
+By making a contribution to this project, I certify that:
+
+* (a) The contribution was created in whole or in part by me and I
+  have the right to submit it under the open source license
+  indicated in the file; or
+
+* (b) The contribution is based upon previous work that, to the best
+  of my knowledge, is covered under an appropriate open source
+  license and I have the right under that license to submit that
+  work with modifications, whether created in whole or in part
+  by me, under the same open source license (unless I am
+  permitted to submit under a different license), as indicated
+  in the file; or
+
+* (c) The contribution was provided directly to me by some other
+  person who certified (a), (b) or (c) and I have not modified
+  it.
+
+* (d) I understand and agree that this project and the contribution
+  are public and that a record of the contribution (including all
+  personal information I submit with it, including my sign-off) is
+  maintained indefinitely and may be redistributed consistent with
+  this project or the open source license(s) involved.
+-->
+
+#### Checklist
+
+- [x] run `npm run test` and `npm run benchmark`
+- [x] tests and/or benchmarks are included
+- [x] documentation is changed or added
+- [x] commit message and code follows the [Developer's Certification of Origin](https://github.com/fastify/.github/blob/master/CONTRIBUTING.md#developers-certificate-of-origin-11)
+      and the [Code of conduct](https://github.com/fastify/.github/blob/master/CODE_OF_CONDUCT.md)
+<issue_comment>username_1: Hello @username_0 and thanks for submitting this PR.
+
+I second what @jsumners already mention. Please make sure the logo contains actual vector shapes and not raw pixels. This allows us to keep the logo consistent and well visible across multiple resolutions / devices.
+
+Other than that, I am quite curious to understand more how do you use Fastify. From the outside, it seems that the company is purely focused on ""Oracle APEX"".
+
+Would you be able to share with us a case state where you used Fastify for one of your projects and why you didn't go with Apex?
+<issue_comment>username_2: I'm not sure we can list the term ""Oracle Apex"" as it is a registered trademark.
+<issue_comment>username_0: Hello All,
+
+We will add a pure SVG logo, apologize for the wrong format generated/converted by the software.
+
+@username_1, we are promoting apex for the development of the data-centric web solutions, but along with that also dealing/utilizing other development platforms [ open source, Javascript, Java, PHP, .Net, NodeJs, React, Mobile development, etc.] also for meeting customers needs. You can check on https://www.oracleusername_0.com/services/development, here as we mentioned for the micro-services & web services development we are using the Fastify framework. To mention a very recent use case for one of the projects, we used MySQL as a database and on top of that leverages the power of NodeJs + Fastify for developing REST web-services which can be consumed by any end client - mobile apps & web apps. There are certain projects where we have to use a database other than oracle and the need for NodeJs for developing microservices. 
+
+@username_2, I would like to mention Oracle is the trademark, not Oracle APEX, and our company name is the OracleAPEXConsultant - single word. We are not using the same color, shape, or fonts as per the trademark guidelines. We have been listed on the oracle official community section as a consulting company, since 2011.  Please check it out - https://apex.oracle.com/pls/apex/apex_pm/r/apex-community/consulting-companies. We've initiated a request for the updating logo, and that will be addressed soon, after the company new year holiday. 
+
+Please let us know in case of any questions.
+
+**Thanks & Regards,**
+Team OAC
+<issue_comment>username_1: Thank you @username_0 for taking the time to answer our queries. I think at this point the only blocker is to get the updated SVG and then we could probably get this shipped :)
+<issue_comment>username_2: Please send a fresh PR with updated logo"
+conda-forge/conda-forge.github.io,147151050,81,,"[{'action': 'opened', 'author': 'jakirkham', 'comment_id': None, 'datetime': '2016-04-09 18:34:52+00:00', 'masked_author': 'username_0', 'text': ""I have opted to break this out as an issue as this is a real world problem that deserves careful consideration before proceeding. This was inspired by this issue ( https://github.com/conda-forge/staged-recipes/pull/300 ).\r\n\r\nOne point is do we package assemblers. This is interesting as we currently do package `yasm` We need `yasm` to build other dependencies (`x264`, `ffmpeg`, possibly other things in the future). Also, in the case of `yasm, it is packaged as cross platform (all platforms, even Windows) so I don't know that there is a way around it. We may need to add `nasm` in the future too.\r\n\r\nThere are also some cases we have found it better to package our own build tools like `m4`, `bison`, `flex`, `libtool`, `automake`, `autoconf`, `pkg-config`, etc. There are many reasons for this that range from the system versions being too old (often the case with Mac, sometimes Linux too), having more consistency across platforms, having more control of the build process, etc. The line between too low and acceptable to package is still pretty fuzzy in this case. For example, should `ar` be packaged? It isn't that complicated and it could be useful to have a newer version in some cases. Similar arguments could be added for other binutils too.\r\n\r\nOne thought might be we don't package tools that are OS specific. However, I don't expect that to hold as I think we definitely need to package `patchelf` and we will want that in conda-forge so that we can ensure we have the latest version (as it still hasn't hit 1.0, but it is getting close). There also has been discussion of having a newer version of `clang` for Mac, which would presumably require packaging. Though that point is far from settled.\r\n\r\nAnother thought might be we don't want to package standard system development tools. However, this point could be sort of contentious as we use `gcc` from a package at present. I expect this will be a topic of a fair amount of debate especially as we engage other conda-recipe communities that have opted for different build strategies.\r\n\r\nPlease feel free to share your thoughts on this point."", 'title': 'What is our limit in terms of low level packaging', 'type': 'issue'}
+ {'action': 'created', 'author': 'jakirkham', 'comment_id': 207828075.0, 'datetime': '2016-04-09 18:37:34+00:00', 'masked_author': 'username_0', 'text': 'cc @username_3 @msarahan @username_2', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'PythonCHB', 'comment_id': 207843887.0, 'datetime': '2016-04-09 19:57:57+00:00', 'masked_author': 'username_1', 'text': ""Let's not forget that a pretty large class of users want pre-built packages, but *also* need to build their own code.\r\n\r\nAnd it'd be really nice if conda supplied the complete build environment, at least when it's the standard one they are likely to have in their machines.\r\n\r\nSo it would be nice to have all this packaged up."", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'ocefpaf', 'comment_id': 207848206.0, 'datetime': '2016-04-09 20:20:47+00:00', 'masked_author': 'username_2', 'text': '@username_0 thanks for organizing this issue. I will re-state my opinion from the original issue here.\r\n\r\nI agree with @msarahan that we should avoid using low level build tools when packaging, but I am not against letting contributors packaging them. However, as you pointed out in many examples above, we might even break that rule and end up using them in case of necessity.\r\n\r\nBasically I am OK merging #300. I am clueless to when, or even if, we (`conda-forge`) will use the packages from #300 in here.', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'frol', 'comment_id': 207893269.0, 'datetime': '2016-04-10 01:20:16+00:00', 'masked_author': 'username_3', 'text': ""I haven't suggested using my Binutils package as build/run dependencies; in fact, I, personally, pre-install the package into root environment in our company's Docker build image and expose the binaries to the system level (symlink to `/usr/local/bin/`), so I don't put it as a build dependency anyway (the same story with GCC 5.x)."", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'ocefpaf', 'comment_id': 207967357.0, 'datetime': '2016-04-10 11:40:17+00:00', 'masked_author': 'username_2', 'text': ""To be honest I am not concerned about your use of those packages. As a power user I am sure you know what you are doing. I am concerned about people, like me, that might see this package available and then submit a recipe that uses them. Or other type of people, like me :stuck_out_tongue_winking_eye:, that will miss those packages in the dependency list when review a PR and merge it without noticing them.\r\n\r\nWe need some sort of rule to ensure they will be used by power users and/or for local experiments only. We could split this into another channel, but I don't really like that idea... I'd prefer if we could strengthen our review process to avoid the cases I mention above."", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'frol', 'comment_id': 207970428.0, 'datetime': '2016-04-10 11:49:39+00:00', 'masked_author': 'username_3', 'text': ""@username_2 I can't agree more! I love Conda-Forge exactly because of the quality and automation it provides! Please, take your time to find the best solution."", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'jakirkham', 'comment_id': 208056929.0, 'datetime': '2016-04-10 20:06:05+00:00', 'masked_author': 'username_0', 'text': 'Thanks @username_3 for being so patient and understanding. I know it is not fun to have things held up in the queue.\r\n\r\nWe certainly appreciate that having old binutils and compilers are a pain and we also want to workaround this, as well. There is some good discussion happening in this issue ( https://github.com/conda-forge/conda-forge.github.io/issues/29 ) where we hope to come to some workable resolution for all parties. We currently are leaning towards having new versions in a Docker container. At this point, it is more a question of how we do this.', 'title': None, 'type': 'comment'}]","<issue_start><issue_comment>Title: What is our limit in terms of low level packaging
+username_0: I have opted to break this out as an issue as this is a real world problem that deserves careful consideration before proceeding. This was inspired by this issue ( https://github.com/conda-forge/staged-recipes/pull/300 ).
+
+One point is do we package assemblers. This is interesting as we currently do package `yasm` We need `yasm` to build other dependencies (`x264`, `ffmpeg`, possibly other things in the future). Also, in the case of `yasm, it is packaged as cross platform (all platforms, even Windows) so I don't know that there is a way around it. We may need to add `nasm` in the future too.
+
+There are also some cases we have found it better to package our own build tools like `m4`, `bison`, `flex`, `libtool`, `automake`, `autoconf`, `pkg-config`, etc. There are many reasons for this that range from the system versions being too old (often the case with Mac, sometimes Linux too), having more consistency across platforms, having more control of the build process, etc. The line between too low and acceptable to package is still pretty fuzzy in this case. For example, should `ar` be packaged? It isn't that complicated and it could be useful to have a newer version in some cases. Similar arguments could be added for other binutils too.
+
+One thought might be we don't package tools that are OS specific. However, I don't expect that to hold as I think we definitely need to package `patchelf` and we will want that in conda-forge so that we can ensure we have the latest version (as it still hasn't hit 1.0, but it is getting close). There also has been discussion of having a newer version of `clang` for Mac, which would presumably require packaging. Though that point is far from settled.
+
+Another thought might be we don't want to package standard system development tools. However, this point could be sort of contentious as we use `gcc` from a package at present. I expect this will be a topic of a fair amount of debate especially as we engage other conda-recipe communities that have opted for different build strategies.
+
+Please feel free to share your thoughts on this point.
+<issue_comment>username_0: cc @username_3 @msarahan @username_2
+<issue_comment>username_1: Let's not forget that a pretty large class of users want pre-built packages, but *also* need to build their own code.
+
+And it'd be really nice if conda supplied the complete build environment, at least when it's the standard one they are likely to have in their machines.
+
+So it would be nice to have all this packaged up.
+<issue_comment>username_2: @username_0 thanks for organizing this issue. I will re-state my opinion from the original issue here.
+
+I agree with @msarahan that we should avoid using low level build tools when packaging, but I am not against letting contributors packaging them. However, as you pointed out in many examples above, we might even break that rule and end up using them in case of necessity.
+
+Basically I am OK merging #300. I am clueless to when, or even if, we (`conda-forge`) will use the packages from #300 in here.
+<issue_comment>username_3: I haven't suggested using my Binutils package as build/run dependencies; in fact, I, personally, pre-install the package into root environment in our company's Docker build image and expose the binaries to the system level (symlink to `/usr/local/bin/`), so I don't put it as a build dependency anyway (the same story with GCC 5.x).
+<issue_comment>username_2: To be honest I am not concerned about your use of those packages. As a power user I am sure you know what you are doing. I am concerned about people, like me, that might see this package available and then submit a recipe that uses them. Or other type of people, like me :stuck_out_tongue_winking_eye:, that will miss those packages in the dependency list when review a PR and merge it without noticing them.
+
+We need some sort of rule to ensure they will be used by power users and/or for local experiments only. We could split this into another channel, but I don't really like that idea... I'd prefer if we could strengthen our review process to avoid the cases I mention above.
+<issue_comment>username_3: @username_2 I can't agree more! I love Conda-Forge exactly because of the quality and automation it provides! Please, take your time to find the best solution.
+<issue_comment>username_0: Thanks @username_3 for being so patient and understanding. I know it is not fun to have things held up in the queue.
+
+We certainly appreciate that having old binutils and compilers are a pain and we also want to workaround this, as well. There is some good discussion happening in this issue ( https://github.com/conda-forge/conda-forge.github.io/issues/29 ) where we hope to come to some workable resolution for all parties. We currently are leaning towards having new versions in a Docker container. At this point, it is more a question of how we do this."
+gitpod-io/website,591704635,567,"{'number': 567.0, 'repo': 'website', 'user_login': 'gitpod-io'}","[{'action': 'opened', 'author': 'jankeromnes', 'comment_id': None, 'datetime': '2020-04-01T07:55:27Z', 'masked_author': 'username_0', 'text': '', 'title': '[WIP][docs] Add LaTeX in Gitpod tutorial based on https://github.com/ptrottier/latex', 'type': 'issue'}
+ {'action': 'created', 'author': 'PTrottier', 'comment_id': 607258816.0, 'datetime': '2020-04-01 13:45:31+00:00', 'masked_author': 'username_1', 'text': 'I love it, thanks @username_0!', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'PTrottier', 'comment_id': 607273803.0, 'datetime': '2020-04-01 14:12:11+00:00', 'masked_author': 'username_1', 'text': 'Wow, thanks for sharing, those looks really powerful!', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'JesterOrNot', 'comment_id': 620255207.0, 'datetime': '2020-04-27 21:52:15+00:00', 'masked_author': 'username_2', 'text': '@username_0 are you still working on this?', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'jankeromnes', 'comment_id': 630088930.0, 'datetime': '2020-05-18 10:18:54+00:00', 'masked_author': 'username_0', 'text': ""Many thanks for the reviews! I've added the recommended extensions, and the guide looks good to me now.\r\n\r\nMerging as is, but please feel free to suggest any changes to it in follow-up Pull Requests. 🙂\r\n\r\nThanks again @username_1 for prompting this super cool addition to our docs!"", 'title': None, 'type': 'comment'}]","<issue_start><issue_comment>Title: [WIP][docs] Add LaTeX in Gitpod tutorial based on https://github.com/ptrottier/latex
+username_0: 
+<issue_comment>username_1: I love it, thanks @username_0!
+<issue_comment>username_1: Wow, thanks for sharing, those looks really powerful!
+<issue_comment>username_2: @username_0 are you still working on this?
+<issue_comment>username_0: Many thanks for the reviews! I've added the recommended extensions, and the guide looks good to me now.
+
+Merging as is, but please feel free to suggest any changes to it in follow-up Pull Requests. 🙂
+
+Thanks again @username_1 for prompting this super cool addition to our docs!"
+hyde/hyde,137146546,314,"{'number': 314.0, 'repo': 'hyde', 'user_login': 'hyde'}","[{'action': 'opened', 'author': 'jonafato', 'comment_id': None, 'datetime': '2016-02-29T04:22:39Z', 'masked_author': 'username_0', 'text': 'This is the starting point of documenting Hyde using Sphinx. This\r\nprovides several benefits:\r\n\r\n1. Code and documentation live together, so it\'s easier to track and\r\nenforce that there exists documentation for new or changing code.\r\n\r\n2. This lets us get Hyde on Read The Docs.\r\n\r\n3. We can use things like `autoclass` where appropriate to pull\r\ndocumentation directly from source code without reinventing the wheel.\r\n\r\nI\'ve tried to replicate what currently exists on hyde.github.io. The\r\nfirst pass of this effort is concerned with parity, and we can continue\r\nto improve from there on. Steps:\r\n\r\n1. Convert all existing documentation on hyde.github.io to Sphinx. This\r\nis covered by this commit and should be considered ""in review"".\r\n\r\n2. Open issues for core parts of Hyde that are missing documentation.\r\n\r\n3. Close these issues individually. This is a great opportunity for\r\ncommunity members wishing to get involved to contribute.\r\n\r\n4. Require significant changes in code to be accompanied by updated /\r\nnew documentation the same way we would require tests.\r\n\r\nWhile these steps are in progress, the following should also be done:\r\n\r\n1. Deprecate the docs at hyde.github.io, linking users to Read The Docs.\r\n\r\n2. Replace the content currently hosted at hyde.github.io with a new\r\nbrochure site showing off some of Hyde\'s uses and linking to other\r\ninteresting content (e.g. a list of themes, links to sites powered by\r\nHyde, etc.).\r\n\r\nReferences #188, #209, and quite a few other issues.\r\n\r\n@username_1, @llonchj: please review. This is a starting point for\r\nSphinx docs, and the PR is labelled as a work in progress, but I have no\r\nspecific threshold for it being ""done"". Once we\'re all satisfied with\r\nthe first pass, I\'ll set up RTD, and we can start filing issues for\r\nspecific areas lacking docs.', 'title': '[WIP] Add Sphinx docs', 'type': 'issue'}
+ {'action': 'created', 'author': 'jonafato', 'comment_id': 190066179.0, 'datetime': '2016-02-29 06:43:58+00:00', 'masked_author': 'username_0', 'text': 'Something seems to have changed between ``pygments==2.1.0`` and\r\n``pygments==2.1.1`` causing an extra ``<span></span>`` to be generated\r\nby the Jinja2 and Markdown code block tests. This PR updates the\r\ntests to reflect that change, but a more permanent solution should be\r\ndeveloped if possible.', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'lakshmivyas', 'comment_id': 190507386.0, 'datetime': '2016-03-01 02:45:35+00:00', 'masked_author': 'username_1', 'text': 'This is looking great @username_0.  :100: \r\n\r\nMinor changes in markdown and other libraries breaking hyde tests have been a recurring issue.  On the one hand these tests make sure that our rendering works non-intrusively on the other hand we are essentially testing other libraries.    If we could wrap our tests so that we compare hyde generated output with output generated by the libraries instead of hardcoding the output, we may get rid of some of the pain.', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'lakshmivyas', 'comment_id': 190507707.0, 'datetime': '2016-03-01 02:47:23+00:00', 'masked_author': 'username_1', 'text': 'I think we can make a release once we have RTD setup (even with sparse content) and make an announcement about the docs and opportunities for contribution.', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'jonafato', 'comment_id': 190519114.0, 'datetime': '2016-03-01 03:25:08+00:00', 'masked_author': 'username_0', 'text': ""@username_1 Agreed on wrapping our test data to make the output testing more robust against minor library changes. I'll open a separate issue for that.\r\n\r\nI think doing a release (or at the very least, a pre-release) is a great idea (especially to get the Python 3 support out there). If you think this is sufficient for a starting point of documentation, I think it's ready to merge. Once it's merged and the docs are up, I'll work on some issue gardening and try to identify good candidates for contributor documentation."", 'title': None, 'type': 'comment'}]","<issue_start><issue_comment>Title: [WIP] Add Sphinx docs
+username_0: This is the starting point of documenting Hyde using Sphinx. This
+provides several benefits:
+
+1. Code and documentation live together, so it's easier to track and
+enforce that there exists documentation for new or changing code.
+
+2. This lets us get Hyde on Read The Docs.
+
+3. We can use things like `autoclass` where appropriate to pull
+documentation directly from source code without reinventing the wheel.
+
+I've tried to replicate what currently exists on hyde.github.io. The
+first pass of this effort is concerned with parity, and we can continue
+to improve from there on. Steps:
+
+1. Convert all existing documentation on hyde.github.io to Sphinx. This
+is covered by this commit and should be considered ""in review"".
+
+2. Open issues for core parts of Hyde that are missing documentation.
+
+3. Close these issues individually. This is a great opportunity for
+community members wishing to get involved to contribute.
+
+4. Require significant changes in code to be accompanied by updated /
+new documentation the same way we would require tests.
+
+While these steps are in progress, the following should also be done:
+
+1. Deprecate the docs at hyde.github.io, linking users to Read The Docs.
+
+2. Replace the content currently hosted at hyde.github.io with a new
+brochure site showing off some of Hyde's uses and linking to other
+interesting content (e.g. a list of themes, links to sites powered by
+Hyde, etc.).
+
+References #188, #209, and quite a few other issues.
+
+@username_1, @llonchj: please review. This is a starting point for
+Sphinx docs, and the PR is labelled as a work in progress, but I have no
+specific threshold for it being ""done"". Once we're all satisfied with
+the first pass, I'll set up RTD, and we can start filing issues for
+specific areas lacking docs.
+<issue_comment>username_0: Something seems to have changed between ``pygments==2.1.0`` and
+``pygments==2.1.1`` causing an extra ``<span></span>`` to be generated
+by the Jinja2 and Markdown code block tests. This PR updates the
+tests to reflect that change, but a more permanent solution should be
+developed if possible.
+<issue_comment>username_1: This is looking great @username_0.  :100: 
+
+Minor changes in markdown and other libraries breaking hyde tests have been a recurring issue.  On the one hand these tests make sure that our rendering works non-intrusively on the other hand we are essentially testing other libraries.    If we could wrap our tests so that we compare hyde generated output with output generated by the libraries instead of hardcoding the output, we may get rid of some of the pain.
+<issue_comment>username_1: I think we can make a release once we have RTD setup (even with sparse content) and make an announcement about the docs and opportunities for contribution.
+<issue_comment>username_0: @username_1 Agreed on wrapping our test data to make the output testing more robust against minor library changes. I'll open a separate issue for that.
+
+I think doing a release (or at the very least, a pre-release) is a great idea (especially to get the Python 3 support out there). If you think this is sufficient for a starting point of documentation, I think it's ready to merge. Once it's merged and the docs are up, I'll work on some issue gardening and try to identify good candidates for contributor documentation."
+elixir-lang/elixir-lang.github.com,951424328,1544,,"[{'action': 'opened', 'author': 'DaniruKun', 'comment_id': None, 'datetime': '2021-07-23 09:49:03+00:00', 'masked_author': 'username_0', 'text': 'It would be amazing if the official language guide on the website was also interactive, for example in the form of a Livebook with individual sessions for each visitor.\r\n\r\nI already created a ported version of all the guides to the `.livemd` format with the right fixes here:\r\n\r\nhttps://github.com/username_0/ex-guide-livebook\r\n\r\nIt is actually very trivial to convert the `.markdown` pages to `.livemd`, as you can see from the script supplied. The question is - where should this Livebook be hosted, and is it possible to somehow integrate Elixir code evaluation nicely into the website?', 'title': 'Interactive language guide powered by Livebook', 'type': 'issue'}
+ {'action': 'created', 'author': 'josevalim', 'comment_id': 885559806.0, 'datetime': '2021-07-23 10:56:21+00:00', 'masked_author': 'username_1', 'text': 'The issue with Livebook is that everyone gets access to execute whatever they want in the machine, which opens up the door for all kinds of explotation.\r\n\r\nSo we need to tell users to boot up and run their own Livebook instead. Given how early Livebook is in its life, it is too early to push into this direction in the official guides (and not all official guides can run in Livebook, such as the Mix one). In the future, maybe we will convert some of the guides and provide an option to run them in Livebook, but not by default.', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'DaniruKun', 'comment_id': 885575763.0, 'datetime': '2021-07-23 11:29:20+00:00', 'masked_author': 'username_0', 'text': ""That's fair, I was thinking maybe in the future, there could be some kind of small pool of VPCs / containers running Livebook nodes, and a visitor could be allocated to one, provided they authenticate themselves in some way (something as simple as Oauth + Github profile for example). So there might be some kind of use-case for a simple Livebook as a Service."", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'josevalim', 'comment_id': 885588383.0, 'datetime': '2021-07-23 11:58:53+00:00', 'masked_author': 'username_1', 'text': ""Exactly, but that's a much bigger effort and we don't have plans for those at moment. Because of that, I will go ahead and close this :) Thanks!"", 'title': None, 'type': 'comment'}
+ {'action': 'closed', 'author': 'josevalim', 'comment_id': None, 'datetime': '2021-07-23 11:58:53+00:00', 'masked_author': 'username_1', 'text': '', 'title': None, 'type': 'issue'}]","<issue_start><issue_comment>Title: Interactive language guide powered by Livebook
+username_0: It would be amazing if the official language guide on the website was also interactive, for example in the form of a Livebook with individual sessions for each visitor.
+
+I already created a ported version of all the guides to the `.livemd` format with the right fixes here:
+
+https://github.com/username_0/ex-guide-livebook
+
+It is actually very trivial to convert the `.markdown` pages to `.livemd`, as you can see from the script supplied. The question is - where should this Livebook be hosted, and is it possible to somehow integrate Elixir code evaluation nicely into the website?
+<issue_comment>username_1: The issue with Livebook is that everyone gets access to execute whatever they want in the machine, which opens up the door for all kinds of explotation.
+
+So we need to tell users to boot up and run their own Livebook instead. Given how early Livebook is in its life, it is too early to push into this direction in the official guides (and not all official guides can run in Livebook, such as the Mix one). In the future, maybe we will convert some of the guides and provide an option to run them in Livebook, but not by default.
+<issue_comment>username_0: That's fair, I was thinking maybe in the future, there could be some kind of small pool of VPCs / containers running Livebook nodes, and a visitor could be allocated to one, provided they authenticate themselves in some way (something as simple as Oauth + Github profile for example). So there might be some kind of use-case for a simple Livebook as a Service.
+<issue_comment>username_1: Exactly, but that's a much bigger effort and we don't have plans for those at moment. Because of that, I will go ahead and close this :) Thanks!<issue_closed>"

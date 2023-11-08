@@ -1,0 +1,368 @@
+gohugoio/hugo,337201374,4891,,"[{'action': 'opened', 'author': 'bep', 'comment_id': None, 'datetime': '2018-06-30 09:28:54+00:00', 'masked_author': 'username_0', 'text': 'You can currently set\r\n\r\n```bash\r\ntype: pretty\r\nlayout: two-colums\r\n```\r\n\r\nIn every content page, list and single pages. Which makes it flexible. But if you take the base layouts into account, it is hard to create a couple of reusable templates that can be applied to new sections on demand (without creating duplicates):\r\n\r\nIf I set this in `news/_index.md`:\r\n\r\n```bash\r\ntype: ""3-column""\r\n```\r\n\r\nThen I want that type to be in the template lookup order (before the most general ones) for both that section and other pages in that section.\r\n\r\nThis means that if I create `news/article.md` I don\'t have to do something extra to get that ""3-column"" layout.\r\n\r\nThis behaviour matches what we do with the `section` today, but this will make it more flexible.\r\n\r\nSo we add\r\n\r\n* The current section\'s type if set\r\n* The root section\'s type if set\r\n\r\nIn that order.', 'title': ""Layout lookup should consider root and current section's type if set"", 'type': 'issue'}
+ {'action': 'closed', 'author': 'bep', 'comment_id': None, 'datetime': '2018-06-30 11:11:37+00:00', 'masked_author': 'username_0', 'text': '', 'title': None, 'type': 'issue'}
+ {'action': 'created', 'author': 'bep', 'comment_id': 401545050.0, 'datetime': '2018-06-30 14:36:24+00:00', 'masked_author': 'username_0', 'text': ""I need to reconsider/refine this one, so I'll reopen to remind me."", 'title': None, 'type': 'comment'}
+ {'action': 'reopened', 'author': 'bep', 'comment_id': None, 'datetime': '2018-06-30 14:36:24+00:00', 'masked_author': 'username_0', 'text': 'You can currently set\r\n\r\n```bash\r\ntype: pretty\r\nlayout: two-colums\r\n```\r\n\r\nIn every content page, list and single pages. Which makes it flexible. But if you take the base layouts into account, it is hard to create a couple of reusable templates that can be applied to new sections on demand (without creating duplicates):\r\n\r\nIf I set this in `news/_index.md`:\r\n\r\n```bash\r\ntype: ""3-column""\r\n```\r\n\r\nThen I want that type to be in the template lookup order (before the most general ones) for both that section and other pages in that section.\r\n\r\nThis means that if I create `news/article.md` I don\'t have to do something extra to get that ""3-column"" layout.\r\n\r\nThis behaviour matches what we do with the `section` today, but this will make it more flexible.\r\n\r\nSo we add\r\n\r\n* The current section\'s type if set\r\n* The root section\'s type if set\r\n\r\nIn that order.', 'title': ""Layout lookup should consider root and current section's type if set"", 'type': 'issue'}
+ {'action': 'created', 'author': 'bep', 'comment_id': 401556664.0, 'datetime': '2018-06-30 17:57:48+00:00', 'masked_author': 'username_0', 'text': ""I have enabled this for page + section right now. Will have to think about this a little bit. Testing it and it wasn't that powerful as I hoped -- but that is because of the baseof resolution. I will create another issue for that. \r\n\r\nNote to self: For taxonomies, make sure this does not resolve to list.html in the type override folder."", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'onedrawingperday', 'comment_id': 407124604.0, 'datetime': '2018-07-23 16:47:38+00:00', 'masked_author': 'username_1', 'text': ""There is one related commit to this issue that doesn't show up here.\r\n\r\nThis is the one about `.FirstSection`: https://github.com/gohugoio/hugo/commit/c790029e1dbb0b66af18d05764bd6045deb2e180\r\n\r\nCross posting this from the forum, because this link needs to be here also."", 'title': None, 'type': 'comment'}]","<issue_start><issue_comment>Title: Layout lookup should consider root and current section's type if set
+username_0: You can currently set
+
+```bash
+type: pretty
+layout: two-colums
+```
+
+In every content page, list and single pages. Which makes it flexible. But if you take the base layouts into account, it is hard to create a couple of reusable templates that can be applied to new sections on demand (without creating duplicates):
+
+If I set this in `news/_index.md`:
+
+```bash
+type: ""3-column""
+```
+
+Then I want that type to be in the template lookup order (before the most general ones) for both that section and other pages in that section.
+
+This means that if I create `news/article.md` I don't have to do something extra to get that ""3-column"" layout.
+
+This behaviour matches what we do with the `section` today, but this will make it more flexible.
+
+So we add
+
+* The current section's type if set
+* The root section's type if set
+
+In that order.<issue_closed>
+<issue_comment>username_0: I need to reconsider/refine this one, so I'll reopen to remind me.
+<issue_comment>username_0: You can currently set
+
+```bash
+type: pretty
+layout: two-colums
+```
+
+In every content page, list and single pages. Which makes it flexible. But if you take the base layouts into account, it is hard to create a couple of reusable templates that can be applied to new sections on demand (without creating duplicates):
+
+If I set this in `news/_index.md`:
+
+```bash
+type: ""3-column""
+```
+
+Then I want that type to be in the template lookup order (before the most general ones) for both that section and other pages in that section.
+
+This means that if I create `news/article.md` I don't have to do something extra to get that ""3-column"" layout.
+
+This behaviour matches what we do with the `section` today, but this will make it more flexible.
+
+So we add
+
+* The current section's type if set
+* The root section's type if set
+
+In that order.
+<issue_comment>username_0: I have enabled this for page + section right now. Will have to think about this a little bit. Testing it and it wasn't that powerful as I hoped -- but that is because of the baseof resolution. I will create another issue for that. 
+
+Note to self: For taxonomies, make sure this does not resolve to list.html in the type override folder.
+<issue_comment>username_1: There is one related commit to this issue that doesn't show up here.
+
+This is the one about `.FirstSection`: https://github.com/gohugoio/hugo/commit/c790029e1dbb0b66af18d05764bd6045deb2e180
+
+Cross posting this from the forum, because this link needs to be here also."
+ember-learn/ember-website,628602630,646,"{'number': 646.0, 'repo': 'ember-website', 'user_login': 'ember-learn'}","[{'action': 'opened', 'author': 'MelSumner', 'comment_id': None, 'datetime': '2020-06-01T17:23:07Z', 'masked_author': 'username_0', 'text': 'Requesting merge (to revert when appropriate) or temporary branch deployment. \r\n\r\nCopied/Adapted from https://www.django-rest-framework.org/ \r\n\r\nAs requested by https://twitter.com/kwuchu/status/1267438396340932610', 'title': 'statement to express community solidarity', 'type': 'issue'}
+ {'action': 'created', 'author': 'kategengler', 'comment_id': 637041058.0, 'datetime': '2020-06-01 18:51:31+00:00', 'masked_author': 'username_1', 'text': 'My only concern is that (from reviewing Percy) this also takes down the Community Guidelines that is linked to from many places and feels important to be available for review.', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'kategengler', 'comment_id': 637045497.0, 'datetime': '2020-06-01 19:01:47+00:00', 'masked_author': 'username_1', 'text': 'To clarify, my concern is not linking to the guidelines from the message, but ensuring the URL for the guidelines http://emberjs.com/guidelines still has them available to peruse.', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'tomdale', 'comment_id': 637081573.0, 'datetime': '2020-06-01 20:21:26+00:00', 'masked_author': 'username_2', 'text': 'I am in favor of this change.\r\n\r\nI was happy to see Ember used at the beginning of the COVID-19 pandemic to quickly roll out a global tracking dashboard, and I hope Ember will similarly be used now in the pursuit of justice.  I believe this PR strikes the right balance of making a bold statement while keeping learning content available for people building applications to hold the powerful accountable.\r\n\r\nSecond, we serve an international audience and the U.S. does not have a monopoly on injustice. We should use this opportunity to start defining a set of rules for when and how we make these kinds of statements, to avoid sending the signal that only American pain matters.\r\n\r\nBut that discussion feels too academic to have right at this moment, when my Black brothers and sisters are being murdered by militarized police who are never held accountable for their actions. As small of a gesture this is, I want them to know that we are united in their struggle and that Black Lives Matter.', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'wycats', 'comment_id': 637082761.0, 'datetime': '2020-06-01 20:23:52+00:00', 'masked_author': 'username_3', 'text': 'This looks good to me.', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'sandstrom', 'comment_id': 641772017.0, 'datetime': '2020-06-10 06:57:52+00:00', 'masked_author': 'username_4', 'text': ""Not against the message, but I'm curious why this issue is singled out. I think you (the US) has a pretty flawed justice system[1][2][3][4] and these flaws has been known for a long time. But it's not just you. \r\n\r\nFor example, the Philippine police has been on a fairly well-documented killing spree[5][6][7] during the past few years, in a country where police is killing about ~10x as many per year compared to the US.\r\n\r\nAgain, I'm not against open-source projects taking a stance. Though personally, I think it would be better to focus on issues closer to the software field, e.g. software patents and government efforts to weaken encryption.\r\n\r\nObviously there is a ton of social and economical injustices that one could get involved in. However, your flawed justice system is actually pretty functional compared to some other places. So if you want to be non-discriminatory in what causes you support, up next should be a 10x longer blackout to support everyone killed by police in the Philippines, and then on to the next[8] one[9].\r\n\r\n[1] https://en.wikipedia.org/wiki/Plea_bargain\r\n[2] https://en.wikipedia.org/wiki/Civil_forfeiture_in_the_United_States\r\n[3] https://en.wikipedia.org/wiki/United_States_incarceration_rate\r\n[4] https://en.wikipedia.org/wiki/American_rule_(attorney%27s_fees)\r\n[5] https://www.economist.com/briefing/2020/02/20/rodrigo-dutertes-lawless-war-on-drugs-is-wildly-popular\r\n[6] https://www.theguardian.com/world/2019/jul/05/philippines-senator-dela-rosa-defends-police-over-toddlers-death-in-drugs-raid\r\n[7] https://www.bbc.com/news/world-asia-50236481\r\n[8] https://en.wikipedia.org/wiki/List_of_killings_by_law_enforcement_officers_by_country\r\n[9] https://worldjusticeproject.org/rule-of-law-index/"", 'title': None, 'type': 'comment'}]","<issue_start><issue_comment>Title: statement to express community solidarity
+username_0: Requesting merge (to revert when appropriate) or temporary branch deployment. 
+
+Copied/Adapted from https://www.django-rest-framework.org/ 
+
+As requested by https://twitter.com/kwuchu/status/1267438396340932610
+<issue_comment>username_1: My only concern is that (from reviewing Percy) this also takes down the Community Guidelines that is linked to from many places and feels important to be available for review.
+<issue_comment>username_1: To clarify, my concern is not linking to the guidelines from the message, but ensuring the URL for the guidelines http://emberjs.com/guidelines still has them available to peruse.
+<issue_comment>username_2: I am in favor of this change.
+
+I was happy to see Ember used at the beginning of the COVID-19 pandemic to quickly roll out a global tracking dashboard, and I hope Ember will similarly be used now in the pursuit of justice.  I believe this PR strikes the right balance of making a bold statement while keeping learning content available for people building applications to hold the powerful accountable.
+
+Second, we serve an international audience and the U.S. does not have a monopoly on injustice. We should use this opportunity to start defining a set of rules for when and how we make these kinds of statements, to avoid sending the signal that only American pain matters.
+
+But that discussion feels too academic to have right at this moment, when my Black brothers and sisters are being murdered by militarized police who are never held accountable for their actions. As small of a gesture this is, I want them to know that we are united in their struggle and that Black Lives Matter.
+<issue_comment>username_3: This looks good to me.
+<issue_comment>username_4: Not against the message, but I'm curious why this issue is singled out. I think you (the US) has a pretty flawed justice system[1][2][3][4] and these flaws has been known for a long time. But it's not just you. 
+
+For example, the Philippine police has been on a fairly well-documented killing spree[5][6][7] during the past few years, in a country where police is killing about ~10x as many per year compared to the US.
+
+Again, I'm not against open-source projects taking a stance. Though personally, I think it would be better to focus on issues closer to the software field, e.g. software patents and government efforts to weaken encryption.
+
+Obviously there is a ton of social and economical injustices that one could get involved in. However, your flawed justice system is actually pretty functional compared to some other places. So if you want to be non-discriminatory in what causes you support, up next should be a 10x longer blackout to support everyone killed by police in the Philippines, and then on to the next[8] one[9].
+
+[1] https://en.wikipedia.org/wiki/Plea_bargain
+[2] https://en.wikipedia.org/wiki/Civil_forfeiture_in_the_United_States
+[3] https://en.wikipedia.org/wiki/United_States_incarceration_rate
+[4] https://en.wikipedia.org/wiki/American_rule_(attorney%27s_fees)
+[5] https://www.economist.com/briefing/2020/02/20/rodrigo-dutertes-lawless-war-on-drugs-is-wildly-popular
+[6] https://www.theguardian.com/world/2019/jul/05/philippines-senator-dela-rosa-defends-police-over-toddlers-death-in-drugs-raid
+[7] https://www.bbc.com/news/world-asia-50236481
+[8] https://en.wikipedia.org/wiki/List_of_killings_by_law_enforcement_officers_by_country
+[9] https://worldjusticeproject.org/rule-of-law-index/"
+techqueria/website,456602820,400,,"[{'action': 'opened', 'author': 'fvcproductions', 'comment_id': None, 'datetime': '2019-06-16 05:08:21+00:00', 'masked_author': 'username_0', 'text': 'through user profiles, job boards, and event calendars\r\n\r\n2019-03-22 Sentry Open Source Grant: Brainstorming\r\nGoal\r\nCreate a member portal that provides an enriched experience for our exponentially growing Latinx in Tech community.\r\nThis member portal should be entirely integrated and authenticated through our Slack community.\r\nSimilar Products\r\nhttps://landit.com/playbook\r\nhttps://www.devcolor.org/\r\nhttps://majorkey.devcolor.org/\r\nhttps://www.womenwhocode.com\r\nhttps://new.hiretechladies.com/\r\nhttps://www.pocitjobs.com/\r\nhttps://include.io/\r\nCore Features to Add/Create\r\nMain Hub\r\nhttps://techqueria.org/hub \r\nhttps://casa.techqueria.org\r\nhttps://techqueria.org/hogar\r\nhttps://hogar.techqueria.org\r\ntacqueria —> potential name\r\nMember Portal\r\nURL: https://techqueria.org/hub/members \r\nsign in through website using Slack (free)\r\nhttps://api.slack.com/docs/sign-in-with-slack\r\nautomatically integrates with Slack and Mailchimp\r\nevery new registration gets added to MailChimp email list\r\nlook up members through dedicated directory\r\nwould be like LinkedIn\r\npowered by Algolia\r\nleaderboard from HeyTaco: https://www.heytaco.chat/api\r\nhttps://www.heytaco.chat/api/v1/json/leaderboard/T0KQTUZ2B?days=365\r\nevents based on location\r\ngoals/milestones/career advice/path\r\nJob Postings (should include speaking opportunities/conference discounts)\r\nPostings to jobs channel —> Slack specifically to posts\r\nPeople cannot post to jobs automatically; they have to register through website & pay to post jobs there\r\nURL: /jobs \r\nLocation\r\nSan Francisco\r\nAustin\r\nChicago\r\nNYC\r\nLos Angeles\r\nAdd chapters in as they get formed\r\nJob Type\r\nFull-Time\r\nContract\r\nInternship\r\nApprenticeship\r\nJob Role\r\nEngineering\r\nMarketing\r\netc.\r\nTracking\r\nMixPanel/Google Analytics\r\nCompanies want diverse candidates applying to their roles\r\nPricing\r\nUse Memberful to put pricing for certain job posts\r\nhttps://memberful.com/pricing/\r\nAggregator\r\nFYI: Alejandro Rincon is currently working on a web app that aggregates all the job postings for easier consumption. We would want Slack auth here.\r\nInternal Documentation (Slab)\r\nURL: https://techqueria.slab.com\r\nFor folks to easily contribute internal long-form documentation\r\nCareer Path\r\nURL: https://techqueria.com/hub/career-goals \r\nGamified\r\nthis gamification could be enhanced by highlight/giving props (HeyTaco) to folks that have helped you complete career milestones\r\nRefer a friend\r\nURL: https://techqueria.com/referrals or https://techqueria.org/refer-a-friend \r\nShould be public facing in case allies want to let their Latinx friends know about it\r\nv1 Sends email to friend inviting them to sign up\r\nOR https://communitybot.co/?ref=producthunt\r\nBlog\r\nURL: https://techqueria.com/blog \r\nBig announcements should all go on our blog and then be linked on social media, Slack, email, etc.\r\nEmail Newsletter\r\nURL: https://techqueria.com/subscribe \r\nWe should have link to email archive for easy reference\r\n[Truncated]\nSponsors\r\nShop\r\nJobs (only shown when logged in)\r\nJoin or Login\r\nLook Into\r\nhttps://www.discourse.org/\r\nhttps://splashthat.com/\r\nhttps://www.salesforce.org/nonprofit/get-started/ \r\nhttps://www.algolia.com/for-open-source/\r\nhttps://launchpass.com\r\nhttps://en.gravatar.com/site/implement/\r\nhttps://memberful.com/pricing/\r\nhttps://buffer.com/pricing\r\nhttps://slab.com/features/\r\nhttps://spreadshirt.com\r\nTo Set Up ASAP\r\nDisqus Comments on Website for Blog Posts\r\nShared Email Inbox (MailClark)\r\nCollaborative Team Documentation (Slab)\r\nSocial Media Automation for sharing posts across all social media platforms (Buffer)', 'title': 'Ideation: Feature List for Member Portal (WIP)', 'type': 'issue'}
+ {'action': 'created', 'author': 'fvcproductions', 'comment_id': 502425759.0, 'datetime': '2019-06-16 06:41:21+00:00', 'masked_author': 'username_0', 'text': '## POC in Tech\r\n\r\n![Screen Shot 2019-06-15 at 10 57 43 PM](https://user-images.githubusercontent.com/4284691/59560450-02d09a00-8fc7-11e9-8039-741722dc1594.jpg)\r\n\r\n## Tech Ladies\r\n\r\n![Screen Shot 2019-06-15 at 10 55 27 PM](https://user-images.githubusercontent.com/4284691/59560452-049a5d80-8fc7-11e9-9e56-38e418e474e0.jpg)\r\n\r\n## Women Who Code\r\n\r\n![Screen Shot 2019-06-15 at 10 52 31 PM](https://user-images.githubusercontent.com/4284691/59560453-05cb8a80-8fc7-11e9-93b5-df18004866d1.jpg)', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'fvntr', 'comment_id': 507137779.0, 'datetime': '2019-07-01 06:47:25+00:00', 'masked_author': 'username_1', 'text': 'Great examples', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'fvcproductions', 'comment_id': 512599003.0, 'datetime': '2019-07-17 22:58:55+00:00', 'masked_author': 'username_0', 'text': 'This is not finalized - waiting for design thinking session', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'fvcproductions', 'comment_id': 514052367.0, 'datetime': '2019-07-23 04:47:35+00:00', 'masked_author': 'username_0', 'text': 'Related issues\r\n\r\n#424 #423', 'title': None, 'type': 'comment'}
+ {'action': 'closed', 'author': 'fvcproductions', 'comment_id': None, 'datetime': '2019-07-27 04:37:37+00:00', 'masked_author': 'username_0', 'text': '', 'title': None, 'type': 'issue'}
+ {'action': 'created', 'author': 'fvcproductions', 'comment_id': 515651293.0, 'datetime': '2019-07-27 04:37:37+00:00', 'masked_author': 'username_0', 'text': 'All these were created to issues! Will be adding in more feature requests from design thinking session.', 'title': None, 'type': 'comment'}]","<issue_start><issue_comment>Title: Ideation: Feature List for Member Portal (WIP)
+username_0: through user profiles, job boards, and event calendars
+
+2019-03-22 Sentry Open Source Grant: Brainstorming
+Goal
+Create a member portal that provides an enriched experience for our exponentially growing Latinx in Tech community.
+This member portal should be entirely integrated and authenticated through our Slack community.
+Similar Products
+https://landit.com/playbook
+https://www.devcolor.org/
+https://majorkey.devcolor.org/
+https://www.womenwhocode.com
+https://new.hiretechladies.com/
+https://www.pocitjobs.com/
+https://include.io/
+Core Features to Add/Create
+Main Hub
+https://techqueria.org/hub 
+https://casa.techqueria.org
+https://techqueria.org/hogar
+https://hogar.techqueria.org
+tacqueria —> potential name
+Member Portal
+URL: https://techqueria.org/hub/members 
+sign in through website using Slack (free)
+https://api.slack.com/docs/sign-in-with-slack
+automatically integrates with Slack and Mailchimp
+every new registration gets added to MailChimp email list
+look up members through dedicated directory
+would be like LinkedIn
+powered by Algolia
+leaderboard from HeyTaco: https://www.heytaco.chat/api
+https://www.heytaco.chat/api/v1/json/leaderboard/T0KQTUZ2B?days=365
+events based on location
+goals/milestones/career advice/path
+Job Postings (should include speaking opportunities/conference discounts)
+Postings to jobs channel —> Slack specifically to posts
+People cannot post to jobs automatically; they have to register through website & pay to post jobs there
+URL: /jobs 
+Location
+San Francisco
+Austin
+Chicago
+NYC
+Los Angeles
+Add chapters in as they get formed
+Job Type
+Full-Time
+Contract
+Internship
+Apprenticeship
+Job Role
+Engineering
+Marketing
+etc.
+Tracking
+MixPanel/Google Analytics
+Companies want diverse candidates applying to their roles
+Pricing
+Use Memberful to put pricing for certain job posts
+https://memberful.com/pricing/
+Aggregator
+FYI: Alejandro Rincon is currently working on a web app that aggregates all the job postings for easier consumption. We would want Slack auth here.
+Internal Documentation (Slab)
+URL: https://techqueria.slab.com
+For folks to easily contribute internal long-form documentation
+Career Path
+URL: https://techqueria.com/hub/career-goals 
+Gamified
+this gamification could be enhanced by highlight/giving props (HeyTaco) to folks that have helped you complete career milestones
+Refer a friend
+URL: https://techqueria.com/referrals or https://techqueria.org/refer-a-friend 
+Should be public facing in case allies want to let their Latinx friends know about it
+v1 Sends email to friend inviting them to sign up
+OR https://communitybot.co/?ref=producthunt
+Blog
+URL: https://techqueria.com/blog 
+Big announcements should all go on our blog and then be linked on social media, Slack, email, etc.
+Email Newsletter
+URL: https://techqueria.com/subscribe 
+We should have link to email archive for easy reference
+[Truncated]
+Sponsors
+Shop
+Jobs (only shown when logged in)
+Join or Login
+Look Into
+https://www.discourse.org/
+https://splashthat.com/
+https://www.salesforce.org/nonprofit/get-started/ 
+https://www.algolia.com/for-open-source/
+https://launchpass.com
+https://en.gravatar.com/site/implement/
+https://memberful.com/pricing/
+https://buffer.com/pricing
+https://slab.com/features/
+https://spreadshirt.com
+To Set Up ASAP
+Disqus Comments on Website for Blog Posts
+Shared Email Inbox (MailClark)
+Collaborative Team Documentation (Slab)
+Social Media Automation for sharing posts across all social media platforms (Buffer)
+<issue_comment>username_0: ## POC in Tech
+
+![Screen Shot 2019-06-15 at 10 57 43 PM](https://user-images.githubusercontent.com/4284691/59560450-02d09a00-8fc7-11e9-8039-741722dc1594.jpg)
+
+## Tech Ladies
+
+![Screen Shot 2019-06-15 at 10 55 27 PM](https://user-images.githubusercontent.com/4284691/59560452-049a5d80-8fc7-11e9-9e56-38e418e474e0.jpg)
+
+## Women Who Code
+
+![Screen Shot 2019-06-15 at 10 52 31 PM](https://user-images.githubusercontent.com/4284691/59560453-05cb8a80-8fc7-11e9-93b5-df18004866d1.jpg)
+<issue_comment>username_1: Great examples
+<issue_comment>username_0: This is not finalized - waiting for design thinking session
+<issue_comment>username_0: Related issues
+
+#424 #423<issue_closed>
+<issue_comment>username_0: All these were created to issues! Will be adding in more feature requests from design thinking session."
+opentracing/opentracing.io,187545853,153,"{'number': 153.0, 'repo': 'opentracing.io', 'user_login': 'opentracing'}","[{'action': 'opened', 'author': 'wu-sheng', 'comment_id': None, 'datetime': '2016-11-06T06:51:49Z', 'masked_author': 'username_0', 'text': '- As I mentioned before in #149, I am translating OpenTracing Documents to Simplified Chinese version . \r\n\r\n- I add a menu, `Other Language Documents`, to choose other languages, if there are other users to contribute translations. As default, I add a link to Simplified Chinese version document.', 'title': 'add a menu and a link to Simplified Chinese version document', 'type': 'issue'}
+ {'action': 'created', 'author': 'bensigelman', 'comment_id': 260150298.0, 'datetime': '2016-11-12 21:43:01+00:00', 'masked_author': 'username_1', 'text': ""@username_0 sorry for the delay here, I had a crazy week.\r\n\r\nI was looking at what other projects have done with this sort of thing and I couldn't find any examples.\r\n\r\nMy concern is only that the Simplified Chinese version of the docs will fall out of date. Maybe you could add something to the header of the translated version that specifies the most recent update?\r\n\r\nThanks."", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'wu-sheng', 'comment_id': 260164707.0, 'datetime': '2016-11-13 03:30:50+00:00', 'masked_author': 'username_0', 'text': ""@username_1 , I changed the to `Translations`, and only add `Flag of China`. Because Enlish is the original version, only Chinese version is translations. \r\n\r\nAt the same time, I can't find any release version of opentracing.io repository ( maybe consider to add later? ), and I have to choose to add a timestamp at the end of line.\r\n\r\nFurther, in order to keep translators like me, or any interested people, I commend to add release version, and release note."", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'wu-sheng', 'comment_id': 260175571.0, 'datetime': '2016-11-13 09:35:02+00:00', 'masked_author': 'username_0', 'text': '@username_1 , are you all in KubeCon?', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'wu-sheng', 'comment_id': 260255308.0, 'datetime': '2016-11-14 06:04:36+00:00', 'masked_author': 'username_0', 'text': '@username_1, @yurishkuro  \r\nIs the `translation` link page good enough? or any other opinions?', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'wu-sheng', 'comment_id': 261473120.0, 'datetime': '2016-11-18 08:13:30+00:00', 'masked_author': 'username_0', 'text': '@username_1 ,  Simplified Chinese version of OT spec released. I am ready to merge to official online doc.', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'bensigelman', 'comment_id': 261602241.0, 'datetime': '2016-11-18 18:17:39+00:00', 'masked_author': 'username_1', 'text': '@username_0 sorry for the delay -- can you post a screenshot of how the new link looks in a browser? Thanks.', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'bensigelman', 'comment_id': 261602371.0, 'datetime': '2016-11-18 18:18:13+00:00', 'masked_author': 'username_1', 'text': 'Actually, forget it -- just checked it out locally. LGTM, thanks!', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'wu-sheng', 'comment_id': 262142118.0, 'datetime': '2016-11-22 04:04:18+00:00', 'masked_author': 'username_0', 'text': '@username_1 , I will have a speak in my company, to introduce OT. And I have PowerPoint Document in English, can you give me a e-mail, and help me review it?', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'pritianka', 'comment_id': 262151054.0, 'datetime': '2016-11-22 05:26:46+00:00', 'masked_author': 'username_2', 'text': ""I can help you with that if you like! I'm at nnheo@example.com.\n\nBest,\nPriyanka \n\nSent from my iPhone\n\n>"", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'wu-sheng', 'comment_id': 262151414.0, 'datetime': '2016-11-22 05:29:39+00:00', 'masked_author': 'username_0', 'text': ""@username_2, Thanks a lot. I will send to you as soon as possible. I am writing it, it will cost more time.\r\n\r\nBackground, it's the first class of OT spec, and i am in one of top level APM company in China."", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'wu-sheng', 'comment_id': 262168213.0, 'datetime': '2016-11-22 07:35:00+00:00', 'masked_author': 'username_0', 'text': '@username_2 , I have send you a mail from envkt@example.com and kenaa@example.com, including a powerpoint doc in attachment.\r\n\r\nAfter your review, please let me know on github. Thank you.', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'pritianka', 'comment_id': 262299189.0, 'datetime': '2016-11-22 17:00:42+00:00', 'masked_author': 'username_2', 'text': ""Hi! I got your email. I'll send you a response by tomorrow morning if that's cool (it's Tuesday morning in SF right now :-)). \n\nSent from my iPhone\n\n>"", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'wu-sheng', 'comment_id': 262415884.0, 'datetime': '2016-11-23 01:34:35+00:00', 'masked_author': 'username_0', 'text': '@username_2 thank you.', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'pritianka', 'comment_id': 262416591.0, 'datetime': '2016-11-23 01:40:28+00:00', 'masked_author': 'username_2', 'text': 'Sent you a note with suggestions!\nᐧ\n\nPriyanka Sharma\nAdvisor, HeavyBit <http://heavybit.com/>\nHead of Marketing & Partnerships, LightStep <http://lightstep.com/>\nCo-founder, WakaTime <http://www.wakatime.com/> - Quantify your coding\nwww.twitter.com/username_2\n650-796-7125', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'bensigelman', 'comment_id': 263138408.0, 'datetime': '2016-11-27 18:33:06+00:00', 'masked_author': 'username_1', 'text': '@username_0 is this ready to be merged yet? (i.e., is the destination URL in acceptable condition?)', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'wu-sheng', 'comment_id': 263165290.0, 'datetime': '2016-11-28 01:43:07+00:00', 'masked_author': 'username_0', 'text': '@username_1 , I got confused about **GitBook** published page. Can you help me, to confirm for me?\r\n\r\nMy gitbook homepage https://www.gitbook.com/book/username_0/opentracing-io/details is always working. But my published page is often fail down in China: https://username_0.gitbooks.io/opentracing-io/content/\r\n\r\nCan you confirm?', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'bensigelman', 'comment_id': 263165391.0, 'datetime': '2016-11-28 01:44:12+00:00', 'masked_author': 'username_1', 'text': '@username_0 sure :)\r\n\r\n![image](https://cloud.githubusercontent.com/assets/2251553/20653912/38f246f0-b4e2-11e6-9e90-3cc7702db51b.png)\r\n\r\n![image](https://cloud.githubusercontent.com/assets/2251553/20653916/3e69815c-b4e2-11e6-951a-251b1ff90bc5.png)\r\n\r\n\r\nDoes that help?', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'wu-sheng', 'comment_id': 263166394.0, 'datetime': '2016-11-28 01:54:49+00:00', 'masked_author': 'username_0', 'text': ""@username_1, Ohno....,  it's confirmed the url is right of this rp, disgusting China gov firewall.... \r\n\r\nMaybe, should I add a download link to the translation page? It's always working in China."", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'bensigelman', 'comment_id': 263168101.0, 'datetime': '2016-11-28 02:12:51+00:00', 'masked_author': 'username_1', 'text': ""@username_0 you would have a better sense of what works for developers in China... I really don't feel qualified to have an opinion.\r\n\r\nPS: How disappointing that the government's firewall is so poorly implemented. :)  A translated OpenTracing specification has no bearing on 🇨🇳 politics!! Then again, maybe Trump will be censoring the internet in the 🇺🇸 soon, too :-/"", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'wu-sheng', 'comment_id': 263168710.0, 'datetime': '2016-11-28 02:19:07+00:00', 'masked_author': 'username_0', 'text': ""@username_1 , It's a disaster for so many China developers. I will send a rp to add a link to download."", 'title': None, 'type': 'comment'}]","<issue_start><issue_comment>Title: add a menu and a link to Simplified Chinese version document
+username_0: - As I mentioned before in #149, I am translating OpenTracing Documents to Simplified Chinese version . 
+
+- I add a menu, `Other Language Documents`, to choose other languages, if there are other users to contribute translations. As default, I add a link to Simplified Chinese version document.
+<issue_comment>username_1: @username_0 sorry for the delay here, I had a crazy week.
+
+I was looking at what other projects have done with this sort of thing and I couldn't find any examples.
+
+My concern is only that the Simplified Chinese version of the docs will fall out of date. Maybe you could add something to the header of the translated version that specifies the most recent update?
+
+Thanks.
+<issue_comment>username_0: @username_1 , I changed the to `Translations`, and only add `Flag of China`. Because Enlish is the original version, only Chinese version is translations. 
+
+At the same time, I can't find any release version of opentracing.io repository ( maybe consider to add later? ), and I have to choose to add a timestamp at the end of line.
+
+Further, in order to keep translators like me, or any interested people, I commend to add release version, and release note.
+<issue_comment>username_0: @username_1 , are you all in KubeCon?
+<issue_comment>username_0: @username_1, @yurishkuro  
+Is the `translation` link page good enough? or any other opinions?
+<issue_comment>username_0: @username_1 ,  Simplified Chinese version of OT spec released. I am ready to merge to official online doc.
+<issue_comment>username_1: @username_0 sorry for the delay -- can you post a screenshot of how the new link looks in a browser? Thanks.
+<issue_comment>username_1: Actually, forget it -- just checked it out locally. LGTM, thanks!
+<issue_comment>username_0: @username_1 , I will have a speak in my company, to introduce OT. And I have PowerPoint Document in English, can you give me a e-mail, and help me review it?
+<issue_comment>username_2: I can help you with that if you like! I'm at priyanka@lightstep.com.
+
+Best,
+Priyanka 
+
+Sent from my iPhone
+
+>
+<issue_comment>username_0: @username_2, Thanks a lot. I will send to you as soon as possible. I am writing it, it will cost more time.
+
+Background, it's the first class of OT spec, and i am in one of top level APM company in China.
+<issue_comment>username_0: @username_2 , I have send you a mail from wu.sheng.841108@gmail.com and wu.sheng@foxmail.com, including a powerpoint doc in attachment.
+
+After your review, please let me know on github. Thank you.
+<issue_comment>username_2: Hi! I got your email. I'll send you a response by tomorrow morning if that's cool (it's Tuesday morning in SF right now :-)). 
+
+Sent from my iPhone
+
+>
+<issue_comment>username_0: @username_2 thank you.
+<issue_comment>username_2: Sent you a note with suggestions!
+ᐧ
+
+Priyanka Sharma
+Advisor, HeavyBit <http://heavybit.com/>
+Head of Marketing & Partnerships, LightStep <http://lightstep.com/>
+Co-founder, WakaTime <http://www.wakatime.com/> - Quantify your coding
+www.twitter.com/username_2
+650-796-7125
+<issue_comment>username_1: @username_0 is this ready to be merged yet? (i.e., is the destination URL in acceptable condition?)
+<issue_comment>username_0: @username_1 , I got confused about **GitBook** published page. Can you help me, to confirm for me?
+
+My gitbook homepage https://www.gitbook.com/book/username_0/opentracing-io/details is always working. But my published page is often fail down in China: https://username_0.gitbooks.io/opentracing-io/content/
+
+Can you confirm?
+<issue_comment>username_1: @username_0 sure :)
+
+![image](https://cloud.githubusercontent.com/assets/2251553/20653912/38f246f0-b4e2-11e6-9e90-3cc7702db51b.png)
+
+![image](https://cloud.githubusercontent.com/assets/2251553/20653916/3e69815c-b4e2-11e6-951a-251b1ff90bc5.png)
+
+
+Does that help?
+<issue_comment>username_0: @username_1, Ohno....,  it's confirmed the url is right of this rp, disgusting China gov firewall.... 
+
+Maybe, should I add a download link to the translation page? It's always working in China.
+<issue_comment>username_1: @username_0 you would have a better sense of what works for developers in China... I really don't feel qualified to have an opinion.
+
+PS: How disappointing that the government's firewall is so poorly implemented. :)  A translated OpenTracing specification has no bearing on 🇨🇳 politics!! Then again, maybe Trump will be censoring the internet in the 🇺🇸 soon, too :-/
+<issue_comment>username_0: @username_1 , It's a disaster for so many China developers. I will send a rp to add a link to download."
+kubernetes/website,472772212,15530,"{'number': 15530.0, 'repo': 'website', 'user_login': 'kubernetes'}","[{'action': 'opened', 'author': 'wojtek-t', 'comment_id': None, 'datetime': '2019-07-25T09:53:13Z', 'masked_author': 'username_0', 'text': '/assign @lavalamp @deads2k', 'title': 'Watch bookmarks to beta ', 'type': 'issue'}
+ {'action': 'created', 'author': 'tengqm', 'comment_id': 515291073.0, 'datetime': '2019-07-26 03:06:52+00:00', 'masked_author': 'username_1', 'text': '/lgtm', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'wojtek-t', 'comment_id': 515869770.0, 'datetime': '2019-07-29 06:58:03+00:00', 'masked_author': 'username_0', 'text': '@kbhawkey @username_2 - PTAL', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'liggitt', 'comment_id': 515989154.0, 'datetime': '2019-07-29 13:22:57+00:00', 'masked_author': 'username_2', 'text': '/lgtm', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'zacharysarah', 'comment_id': 518882890.0, 'datetime': '2019-08-06 23:40:33+00:00', 'masked_author': 'username_3', 'text': ""@username_0 👋 Please rebase this PR in order to continue. Looks like it's headed in the right direction, so anyone can `/lgtm` after rebase.\r\n\r\n/approve"", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'wojtek-t', 'comment_id': 519049496.0, 'datetime': '2019-08-07 11:03:26+00:00', 'masked_author': 'username_0', 'text': 'Rebased.\r\n\r\n/hold cancel\r\n\r\nPTAL', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'zacharysarah', 'comment_id': 519240327.0, 'datetime': '2019-08-07 19:38:14+00:00', 'masked_author': 'username_3', 'text': '/milestone 1.16', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'zacharysarah', 'comment_id': 519241121.0, 'datetime': '2019-08-07 19:40:43+00:00', 'masked_author': 'username_3', 'text': ""@username_0 Thanks for rebasing. Sorry, I missed that this is for 1.16; I'll leave approval for @simplytunde. \r\n\r\n/approve cancel\r\n/lgtm"", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'zacharysarah', 'comment_id': 519243150.0, 'datetime': '2019-08-07 19:46:59+00:00', 'masked_author': 'username_3', 'text': '/shrug', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'zacharysarah', 'comment_id': 519243494.0, 'datetime': '2019-08-07 19:48:05+00:00', 'masked_author': 'username_3', 'text': '/shrug\r\n\r\n@kubernetes/sig-testing-pr-reviews 👋 Did I miss something with removing `/approve`?', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'zacharysarah', 'comment_id': 519246907.0, 'datetime': '2019-08-07 19:59:04+00:00', 'masked_author': 'username_3', 'text': ""It looks like a force push caught a bunch of commits that triggered non-applicable labels. I'm removing them with magic admin powers."", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'zacharysarah', 'comment_id': 519666409.0, 'datetime': '2019-08-08 20:01:04+00:00', 'masked_author': 'username_3', 'text': '/hold', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'wojtek-t', 'comment_id': 520130998.0, 'datetime': '2019-08-10 08:39:29+00:00', 'masked_author': 'username_0', 'text': '@username_3 - can we hold cancel now?', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'zacharysarah', 'comment_id': 520138994.0, 'datetime': '2019-08-10 10:46:14+00:00', 'masked_author': 'username_3', 'text': ""@username_0 Because this PR is part of the 1.16 release cycle, it's up to the docs release lead (@simplytunde) as to when it merges.\r\n\r\nThat said, it LGTM."", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'zacharysarah', 'comment_id': 523197259.0, 'datetime': '2019-08-20 21:13:49+00:00', 'masked_author': 'username_3', 'text': '/hold cancel', 'title': None, 'type': 'comment'}]","<issue_start><issue_comment>Title: Watch bookmarks to beta 
+username_0: /assign @lavalamp @deads2k
+<issue_comment>username_1: /lgtm
+<issue_comment>username_0: @kbhawkey @username_2 - PTAL
+<issue_comment>username_2: /lgtm
+<issue_comment>username_3: @username_0 👋 Please rebase this PR in order to continue. Looks like it's headed in the right direction, so anyone can `/lgtm` after rebase.
+
+/approve
+<issue_comment>username_0: Rebased.
+
+/hold cancel
+
+PTAL
+<issue_comment>username_3: /milestone 1.16
+<issue_comment>username_3: @username_0 Thanks for rebasing. Sorry, I missed that this is for 1.16; I'll leave approval for @simplytunde. 
+
+/approve cancel
+/lgtm
+<issue_comment>username_3: /shrug
+<issue_comment>username_3: /shrug
+
+@kubernetes/sig-testing-pr-reviews 👋 Did I miss something with removing `/approve`?
+<issue_comment>username_3: It looks like a force push caught a bunch of commits that triggered non-applicable labels. I'm removing them with magic admin powers.
+<issue_comment>username_3: /hold
+<issue_comment>username_0: @username_3 - can we hold cancel now?
+<issue_comment>username_3: @username_0 Because this PR is part of the 1.16 release cycle, it's up to the docs release lead (@simplytunde) as to when it merges.
+
+That said, it LGTM.
+<issue_comment>username_3: /hold cancel"

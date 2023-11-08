@@ -1,0 +1,929 @@
+lektor/lektor-website,310662530,181,"{'number': 181.0, 'repo': 'lektor-website', 'user_login': 'lektor'}","[{'action': 'opened', 'author': 'Andrew-Shay', 'comment_id': None, 'datetime': '2018-04-03T01:28:52Z', 'masked_author': 'username_0', 'text': ""This is my first plugin. `read-full-post`  \r\nIt allows the blog listing page to show a shorter version of the blog post.  \r\n\r\n**However, I need some help.**  \r\nThe plugin worked in a sample lektor site when installed manually, however when installed via lektor, it doesn't appear to work.  \r\nI used the lektor command to install it.  \r\nI see \r\n```\r\nInstalling collected packages: lektor-read-full-post\r\nSuccessfully installed lektor-read-full-post-0.1\r\n```\r\nI also see `lektor-read-full-post = 0.1` (added automatically) in my project config.  \r\nI made the changes to the templates but I don't see the plugin's changes.  \r\nCan someone help me debug?\r\nMy develop branch contains the readme and code https://github.com/username_0/lektor-read-full-post/tree/develop  \r\nIt is on pypi https://pypi.python.org/pypi?name=lektor-read-full-post&version=0.1&:action=display"", 'title': 'New Plugin: read-full-post', 'type': 'issue'}
+ {'action': 'created', 'author': 'nixjdm', 'comment_id': 378276261.0, 'datetime': '2018-04-03 14:46:41+00:00', 'masked_author': 'username_1', 'text': ""I just tried this plugin with `lektor plugins add lektor-read-full-post`, and it works for me. Good plugin!\r\n\r\nHave you tried either `lektor clean` or `lektor plugins flush-cache`? It sounds like you have something hanging around  when it shouldn't. If those commands don't clear things out sufficiently, you can see where your build and packages caches are with `lektor project-info` and `lektor plugins list` respectively."", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'nixjdm', 'comment_id': 378278146.0, 'datetime': '2018-04-03 14:51:58+00:00', 'masked_author': 'username_1', 'text': 'A suggestion about the plugin though: You chose a good default string as a string to split on, but not everyone uses Markdown for their content fields. They might be using html straight, or rst with another plugin for instance (and others potentially). Your plugin would be more flexible if you could set the split text string (or list of strings to check for / split on) in the config, so people could supply their own. You just need to instruct people that they should be comments in their content type of choice so that they remain invisible on the fully rendered page.', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'Andrew-Shay', 'comment_id': 378412865.0, 'datetime': '2018-04-03 21:58:26+00:00', 'masked_author': 'username_0', 'text': 'Thanks for your feedback. It was a bug in my own plugin not reading the config the way I expected haha\r\n\r\nI like both your suggestions! I will implement them :100:', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'Andrew-Shay', 'comment_id': 378796320.0, 'datetime': '2018-04-05 01:43:00+00:00', 'masked_author': 'username_0', 'text': '@username_1 You mentioned people may not use Markdown. Do you know if it\'s possible to have posts with multiple formats on the same site?  \r\nI ask because I\'ve been playing with different options to maximize support.  \r\nI was thinking about the following. This allows the user to create the code for the link and the split text. They are both csvs to allow multiple options. The split text detected would then pull the corresponding link-text at the same index.\r\n```\r\nlink-text = <br><br>[Read Full Post]({URL_PATH}),<br><br><a href=""{URL_PATH}"">Continue Reading</a>\r\nalways-display = true\r\nsplit-text = [//]: # (PLUGIN-READ-FULL-POST),<!-- PLUGIN-READ-FULL-POST -->\r\n```\r\nThe only issue is if `always-display` is True, and there is no split text, which do I pick? Maybe the values at index 0? Maybe users should use HTML as the default? Would that provide max support?', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'nixjdm', 'comment_id': 378816736.0, 'datetime': '2018-04-05 04:25:23+00:00', 'masked_author': 'username_1', 'text': ""Yes, this is field-specific, specified by the [content type](https://www.getlektor.com/docs/api/db/types/), so a site / post could have multiple fields of different content types. Though I don't imagine that's very common to have back-to-back Markdown and pure HTML, but it'll happen on occasion.\r\n\r\nIf users know the first value of the link-text is default, I'd imagine that's usable enough for most people. \r\n\r\nYou *could* get fancier, if you wanted. For instance, you can check the `type(post._data['body'])` directly, and let users assign link-text to a dict instead of a list, so you can make the determination on the fly. That way you don't have *one* default, but have a mapping to each content type. They'll be able to explicitly say 'this is the markdown link', and 'this is the restructuredtext link'. That's more powerful. Whether it's easier to use is arguable. It's also more work :) It's up to you, but those are my thoughts."", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'nixjdm', 'comment_id': 378818958.0, 'datetime': '2018-04-05 04:46:02+00:00', 'masked_author': 'username_1', 'text': 'This definitely falls under ""premature generalization,"" but I noticed something else. You\'re assuming the user has named their field `body` and wants to operate on that, which might not be the case. Maybe they named it `blogpost` or anything else. If the user supplied `blogpost` and got back `body_short`, that\'d be inconsistent too.\r\n\r\n`body_short` might also conflict with an existing `body_short` the user may have made, too, which is a potential edge case where things would go awry.\r\n\r\nI don\'t think you need to worry about either of these soon, if ever, but you got my noddle cooking, so I thought I\'d write these down while I\'m thinking about it all.', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'Andrew-Shay', 'comment_id': 379112925.0, 'datetime': '2018-04-06 00:12:26+00:00', 'masked_author': 'username_0', 'text': ""I like your new advice again!\r\nFor `type(post._data['body'])` I get `<class 'lektor.types.formats.MarkdownDescriptor'>`\r\nI could use `type(post._data['body']).__name__` to detect what it is.  However this isn't listed on the Builtin Field Types page"", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'Andrew-Shay', 'comment_id': 379113718.0, 'datetime': '2018-04-06 00:17:59+00:00', 'masked_author': 'username_0', 'text': ""I did find `post.datamodel.field_map['body'].type.name` which returns `markdown`"", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'Andrew-Shay', 'comment_id': 380279651.0, 'datetime': '2018-04-10 23:31:56+00:00', 'masked_author': 'username_0', 'text': '@username_1', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'nixjdm', 'comment_id': 380309521.0, 'datetime': '2018-04-11 02:48:44+00:00', 'masked_author': 'username_1', 'text': ""Hi @username_0, I like the last way you found better `post.datamodel.field_map['body'].type.name` since that gives the name in the exact same way the user would have to list the type of the body field in the ini model file. That seems easiest for the user. Plus, it doesn't access any private methods which looks better code-wise. :)\r\n\r\nNote, this should work even for types other plugins add, such as asciidoc or rst."", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'Andrew-Shay', 'comment_id': 382190607.0, 'datetime': '2018-04-17 23:31:05+00:00', 'masked_author': 'username_0', 'text': ""@username_1 Will you test my plugin again? :smile:   \r\nI'm hoping it's finished"", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'nixjdm', 'comment_id': 382191161.0, 'datetime': '2018-04-17 23:33:41+00:00', 'masked_author': 'username_1', 'text': ""@username_0 Sure, I can get check it out tomorrow. I was wondering how it's been coming along. Also, can you rebase this PR? There's a conflict now, for some reason. *cough* I have no idea why. *cough*"", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'Andrew-Shay', 'comment_id': 382193242.0, 'datetime': '2018-04-17 23:43:23+00:00', 'masked_author': 'username_0', 'text': 'Ill be sure to fix the conflict before requesting the merge! :)', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'nixjdm', 'comment_id': 382495287.0, 'datetime': '2018-04-18 19:04:10+00:00', 'masked_author': 'username_1', 'text': ""@username_0 It doesn't look like you've pushed any commits since we've discussed all those options / changes https://github.com/username_0/lektor-read-full-post/tree/develop\r\n\r\nDo you just need to push?"", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'Andrew-Shay', 'comment_id': 382562688.0, 'datetime': '2018-04-18 23:39:46+00:00', 'masked_author': 'username_0', 'text': '@username_1  Derp. Pushed.', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'nixjdm', 'comment_id': 384457655.0, 'datetime': '2018-04-25 22:47:20+00:00', 'masked_author': 'username_1', 'text': 'Hey @username_0,\r\n\r\nYou should note the default for `always-display` option in the README. When it\'s not included it has the same effect of `false`, which I like.\r\n\r\nOnly markdown is really handled, basically, because most Lektor content types that are string-like don\'t have a `.source` where their contents are stored internally. \r\n\r\n```python\r\nFile ""/home/joe/wrkspc/lktr-prjcts/lektor/example/packages/lektor-read-full-post/lektor_read_full_post.py"", line 36, in rfp_process_post\r\n    text_full = post._data[\'body\'].source\r\nAttributeError: \'Markup\' object has no attribute \'source\'\r\n```\r\n\r\nTo handle html as well, and most everything else, you\'ll need to do something [similar to what I did for the jinja-content plugin](https://github.com/terminal-labs/lektor-jinja-content/blob/master/lektor_jinja_content.py#L32-L35).\r\n\r\nThat\'s all I\'ve caught so far!\r\n\r\nOnce conflicts are resolved, I can pull this whenever you\'re satisfied, by the way. Just let me know. I\'m happy to keep doing code review if you like, but you may end up waiting on me some :)', 'title': None, 'type': 'comment'}]","<issue_start><issue_comment>Title: New Plugin: read-full-post
+username_0: This is my first plugin. `read-full-post`  
+It allows the blog listing page to show a shorter version of the blog post.  
+
+**However, I need some help.**  
+The plugin worked in a sample lektor site when installed manually, however when installed via lektor, it doesn't appear to work.  
+I used the lektor command to install it.  
+I see 
+```
+Installing collected packages: lektor-read-full-post
+Successfully installed lektor-read-full-post-0.1
+```
+I also see `lektor-read-full-post = 0.1` (added automatically) in my project config.  
+I made the changes to the templates but I don't see the plugin's changes.  
+Can someone help me debug?
+My develop branch contains the readme and code https://github.com/username_0/lektor-read-full-post/tree/develop  
+It is on pypi https://pypi.python.org/pypi?name=lektor-read-full-post&version=0.1&:action=display
+<issue_comment>username_1: I just tried this plugin with `lektor plugins add lektor-read-full-post`, and it works for me. Good plugin!
+
+Have you tried either `lektor clean` or `lektor plugins flush-cache`? It sounds like you have something hanging around  when it shouldn't. If those commands don't clear things out sufficiently, you can see where your build and packages caches are with `lektor project-info` and `lektor plugins list` respectively.
+<issue_comment>username_1: A suggestion about the plugin though: You chose a good default string as a string to split on, but not everyone uses Markdown for their content fields. They might be using html straight, or rst with another plugin for instance (and others potentially). Your plugin would be more flexible if you could set the split text string (or list of strings to check for / split on) in the config, so people could supply their own. You just need to instruct people that they should be comments in their content type of choice so that they remain invisible on the fully rendered page.
+<issue_comment>username_0: Thanks for your feedback. It was a bug in my own plugin not reading the config the way I expected haha
+
+I like both your suggestions! I will implement them :100:
+<issue_comment>username_0: @username_1 You mentioned people may not use Markdown. Do you know if it's possible to have posts with multiple formats on the same site?  
+I ask because I've been playing with different options to maximize support.  
+I was thinking about the following. This allows the user to create the code for the link and the split text. They are both csvs to allow multiple options. The split text detected would then pull the corresponding link-text at the same index.
+```
+link-text = <br><br>[Read Full Post]({URL_PATH}),<br><br><a href=""{URL_PATH}"">Continue Reading</a>
+always-display = true
+split-text = [//]: # (PLUGIN-READ-FULL-POST),<!-- PLUGIN-READ-FULL-POST -->
+```
+The only issue is if `always-display` is True, and there is no split text, which do I pick? Maybe the values at index 0? Maybe users should use HTML as the default? Would that provide max support?
+<issue_comment>username_1: Yes, this is field-specific, specified by the [content type](https://www.getlektor.com/docs/api/db/types/), so a site / post could have multiple fields of different content types. Though I don't imagine that's very common to have back-to-back Markdown and pure HTML, but it'll happen on occasion.
+
+If users know the first value of the link-text is default, I'd imagine that's usable enough for most people. 
+
+You *could* get fancier, if you wanted. For instance, you can check the `type(post._data['body'])` directly, and let users assign link-text to a dict instead of a list, so you can make the determination on the fly. That way you don't have *one* default, but have a mapping to each content type. They'll be able to explicitly say 'this is the markdown link', and 'this is the restructuredtext link'. That's more powerful. Whether it's easier to use is arguable. It's also more work :) It's up to you, but those are my thoughts.
+<issue_comment>username_1: This definitely falls under ""premature generalization,"" but I noticed something else. You're assuming the user has named their field `body` and wants to operate on that, which might not be the case. Maybe they named it `blogpost` or anything else. If the user supplied `blogpost` and got back `body_short`, that'd be inconsistent too.
+
+`body_short` might also conflict with an existing `body_short` the user may have made, too, which is a potential edge case where things would go awry.
+
+I don't think you need to worry about either of these soon, if ever, but you got my noddle cooking, so I thought I'd write these down while I'm thinking about it all.
+<issue_comment>username_0: I like your new advice again!
+For `type(post._data['body'])` I get `<class 'lektor.types.formats.MarkdownDescriptor'>`
+I could use `type(post._data['body']).__name__` to detect what it is.  However this isn't listed on the Builtin Field Types page
+<issue_comment>username_0: I did find `post.datamodel.field_map['body'].type.name` which returns `markdown`
+<issue_comment>username_0: @username_1
+<issue_comment>username_1: Hi @username_0, I like the last way you found better `post.datamodel.field_map['body'].type.name` since that gives the name in the exact same way the user would have to list the type of the body field in the ini model file. That seems easiest for the user. Plus, it doesn't access any private methods which looks better code-wise. :)
+
+Note, this should work even for types other plugins add, such as asciidoc or rst.
+<issue_comment>username_0: @username_1 Will you test my plugin again? :smile:   
+I'm hoping it's finished
+<issue_comment>username_1: @username_0 Sure, I can get check it out tomorrow. I was wondering how it's been coming along. Also, can you rebase this PR? There's a conflict now, for some reason. *cough* I have no idea why. *cough*
+<issue_comment>username_0: Ill be sure to fix the conflict before requesting the merge! :)
+<issue_comment>username_1: @username_0 It doesn't look like you've pushed any commits since we've discussed all those options / changes https://github.com/username_0/lektor-read-full-post/tree/develop
+
+Do you just need to push?
+<issue_comment>username_0: @username_1  Derp. Pushed.
+<issue_comment>username_1: Hey @username_0,
+
+You should note the default for `always-display` option in the README. When it's not included it has the same effect of `false`, which I like.
+
+Only markdown is really handled, basically, because most Lektor content types that are string-like don't have a `.source` where their contents are stored internally. 
+
+```python
+File ""/home/joe/wrkspc/lktr-prjcts/lektor/example/packages/lektor-read-full-post/lektor_read_full_post.py"", line 36, in rfp_process_post
+    text_full = post._data['body'].source
+AttributeError: 'Markup' object has no attribute 'source'
+```
+
+To handle html as well, and most everything else, you'll need to do something [similar to what I did for the jinja-content plugin](https://github.com/terminal-labs/lektor-jinja-content/blob/master/lektor_jinja_content.py#L32-L35).
+
+That's all I've caught so far!
+
+Once conflicts are resolved, I can pull this whenever you're satisfied, by the way. Just let me know. I'm happy to keep doing code review if you like, but you may end up waiting on me some :)"
+kubernetes/website,531841228,17924,,"[{'action': 'opened', 'author': 'biello', 'comment_id': None, 'datetime': '2019-12-03 09:24:06+00:00', 'masked_author': 'username_0', 'text': '**This is a Bug Report**\r\nfollowing the guide [Configure cgroup driver used by kubelet on control-plane node](https://kubernetes.io/docs/setup/production-environment/tools/kubeadm/install-kubeadm/#configure-cgroup-driver-used-by-kubelet-on-control-plane-node), \r\nuse systemd as docker cgroup driver, write KUBELET_EXTRA_ARGS=--cgroup-driver=systemd to /etc/sysconfig/kubelet but doesn\'t work.\r\n\r\n\r\n<!--Required Information-->\r\n**Problem:**\r\nkubelet cannot start\r\n**Proposed Solution:**\r\n\r\n**Page to Update:**\r\nhttps://kubernetes.io/docs/setup/production-environment/tools/kubeadm/install-kubeadm/#configure-cgroup-driver-used-by-kubelet-on-control-plane-node\r\n\r\n<!--Optional Information (remove the comment tags around information you would like to include)-->\r\n<!--Kubernetes Version:-->\r\n\r\n<!--Additional Information:-->\r\nOS: CentOS7.2\r\nKenel: Linux 3.10.0-514.26.2.el7.x86_64\r\n\r\n# docker info -f {{.CgroupDriver}}\r\nsystemd\r\n\r\n# cat /etc/sysconfig/kubelet\r\nKUBELET_EXTRA_ARGS=--cgroup-driver=systemd\r\n\r\n# journalctl -xeu kubelet\r\n-- Unit kubelet.service has begun starting up.\r\n12月 03 11:07:34 k8s-master-01 kubelet[4811]: I1203 11:07:34.991782    4811 server.go:410] Version: v1.16.3\r\n12月 03 11:07:34 k8s-master-01 kubelet[4811]: I1203 11:07:34.992033    4811 plugins.go:100] No cloud provider specified.\r\n12月 03 11:07:34 k8s-master-01 kubelet[4811]: W1203 11:07:34.992048    4811 server.go:549] standalone mode, no API client\r\n12月 03 11:07:35 k8s-master-01 kubelet[4811]: W1203 11:07:35.016308    4811 server.go:467] No api server defined - no events will be sent to API server.\r\n12月 03 11:07:35 k8s-master-01 kubelet[4811]: I1203 11:07:35.016327    4811 server.go:636] --cgroups-per-qos enabled, but --cgroup-root was not specified.  defaulting to /\r\n12月 03 11:07:35 k8s-master-01 kubelet[4811]: I1203 11:07:35.016614    4811 container_manager_linux.go:265] container manager verified user specified cgroup-root exists: []\r\n12月 03 11:07:35 k8s-master-01 kubelet[4811]: I1203 11:07:35.016627    4811 container_manager_linux.go:270] Creating Container Manager object based on Node Config: {RuntimeCgroupsName: SystemCgroup\r\n12月 03 11:07:35 k8s-master-01 kubelet[4811]: I1203 11:07:35.016722    4811 fake_topology_manager.go:29] [fake topologymanager] NewFakeManager\r\n12月 03 11:07:35 k8s-master-01 kubelet[4811]: I1203 11:07:35.016728    4811 container_manager_linux.go:305] Creating device plugin manager: true\r\n12月 03 11:07:35 k8s-master-01 kubelet[4811]: I1203 11:07:35.016749    4811 fake_topology_manager.go:39] [fake topologymanager] AddHintProvider HintProvider:  &{kubelet.sock /var/lib/kubelet/device\r\n12月 03 11:07:35 k8s-master-01 kubelet[4811]: I1203 11:07:35.016789    4811 state_mem.go:36] [cpumanager] initializing new in-memory state store\r\n12月 03 11:07:35 k8s-master-01 kubelet[4811]: I1203 11:07:35.016878    4811 state_mem.go:84] [cpumanager] updated default cpuset: """"\r\n12月 03 11:07:35 k8s-master-01 kubelet[4811]: I1203 11:07:35.016888    4811 state_mem.go:92] [cpumanager] updated cpuset assignments: ""map[]""\r\n12月 03 11:07:35 k8s-master-01 kubelet[4811]: I1203 11:07:35.016898    4811 fake_topology_manager.go:39] [fake topologymanager] AddHintProvider HintProvider:  &{{0 0} 0x79a0338 10000000000 0xc00086\r\n12月 03 11:07:35 k8s-master-01 kubelet[4811]: I1203 11:07:35.019422    4811 client.go:75] Connecting to docker on unix:///var/run/docker.sock\r\n12月 03 11:07:35 k8s-master-01 kubelet[4811]: I1203 11:07:35.019448    4811 client.go:104] Start docker client with request timeout=2m0s\r\n12月 03 11:07:35 k8s-master-01 kubelet[4811]: W1203 11:07:35.024960    4811 docker_service.go:563] Hairpin mode set to ""promiscuous-bridge"" but kubenet is not enabled, falling back to ""hairpin-veth\r\n12月 03 11:07:35 k8s-master-01 kubelet[4811]: I1203 11:07:35.024987    4811 docker_service.go:240] Hairpin mode set to ""hairpin-veth""\r\n12月 03 11:07:35 k8s-master-01 kubelet[4811]: W1203 11:07:35.025085    4811 cni.go:237] Unable to update cni config: no networks found in /etc/cni/net.d\r\n12月 03 11:07:35 k8s-master-01 kubelet[4811]: I1203 11:07:35.029419    4811 docker_service.go:255] Docker cri networking managed by kubernetes.io/no-op\r\n12月 03 11:07:35 k8s-master-01 kubelet[4811]: I1203 11:07:35.037545    4811 docker_service.go:260] Docker Info: &{ID:4PTN:INQG:E7GI:RHP6:2Y4D:MUR4:ZGFP:UEOF:LNNW:GDOM:WCIR:LTT5 Containers:0 Contain\r\n12月 03 11:07:35 k8s-master-01 kubelet[4811]: F1203 11:07:35.037650    4811 server.go:271] failed to run Kubelet: failed to create kubelet: misconfiguration: kubelet cgroup driver: ""cgroupfs"" is di\r\n12月 03 11:07:35 k8s-master-01 systemd[1]: kubelet.service: main process exited, code=exited, status=255/n/a\r\n12月 03 11:07:35 k8s-master-01 systemd[1]: Unit kubelet.service entered failed state.\r\n12月 03 11:07:35 k8s-master-01 systemd[1]: kubelet.service failed.', 'title': 'Issue with k8s.io/docs/setup/production-environment/tools/kubeadm/install-kubeadm/', 'type': 'issue'}
+ {'action': 'created', 'author': 'sftim', 'comment_id': 561168582.0, 'datetime': '2019-12-03 13:31:11+00:00', 'masked_author': 'username_1', 'text': '/sig cluster-lifecycle', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'neolit123', 'comment_id': 561360098.0, 'datetime': '2019-12-03 21:15:10+00:00', 'masked_author': 'username_2', 'text': '/triage support', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'biello', 'comment_id': 561451860.0, 'datetime': '2019-12-04 02:49:48+00:00', 'masked_author': 'username_0', 'text': ""thanks, it seems kubelet failed to autodetect the cgroup driver of docker.\r\nI tried to remove /etc/sysconfig/kubelet, /etc/systemd/system/kubelet.service.d/10-kubeadm.conf，\r\nbut doesn't work, journalctl -xeu kubelet output all the same."", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'biello', 'comment_id': 561453665.0, 'datetime': '2019-12-04 02:58:27+00:00', 'masked_author': 'username_0', 'text': 'is my docker version 18.06.2-ce too old for autodetection?', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'neolit123', 'comment_id': 561459234.0, 'datetime': '2019-12-04 03:23:24+00:00', 'masked_author': 'username_2', 'text': 'this version is supported.', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'biello', 'comment_id': 561465288.0, 'datetime': '2019-12-04 03:54:02+00:00', 'masked_author': 'username_0', 'text': 'I reinstalled kubelet and checked this file `/etc/systemd/system/kubelet.service.d/10-kubeadm.conf` is empty, and run  `kubeadm init --pod-network-cidr=10.244.0.0/16 --apiserver-advertise-address=myip`, it says \r\n`The HTTP call equal to \'curl -sSL http://localhost:10248/healthz\' failed with error: Get http://localhost:10248/healthz: dial tcp 127.0.0.1:10248: connect: connection refused.\r\n[kubelet-check] It seems like the kubelet isn\'t running or healthy.\r\nUnfortunately, an error has occurred:\r\n\ttimed out waiting for the condition\r\n\r\nThis error is likely caused by:\r\n\t- The kubelet is not running\r\n\t- The kubelet is unhealthy due to a misconfiguration of the node in some way (required cgroups disabled)\r\n\r\nIf you are on a systemd-powered system, you can try to troubleshoot the error with the following commands:\r\n\t- \'systemctl status kubelet\'\r\n\t- \'journalctl -xeu kubelet\'`\r\n\r\nso i turn to check `journalctl -xeu kubelet`, and it says\r\n`failed to create kubelet: misconfiguration: kubelet cgroup driver: ""cgroupfs"" is different from docker cgroup driver: ""systemd""`\r\n\r\napparently it\'s the cgroup driver problem, the problem is how can i set kubelet cgroup driver to  ""systemd"" as k8s recommanded? Or how can i let kubeadm know that my docker cgroup driver is ""systemd""?', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'biello', 'comment_id': 561466977.0, 'datetime': '2019-12-04 04:03:46+00:00', 'masked_author': 'username_0', 'text': 'is there any problem with my OS, docker or something else? Or is it a bug of kubeadm or kubelet?', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'neolit123', 'comment_id': 561680172.0, 'datetime': '2019-12-04 14:52:30+00:00', 'masked_author': 'username_2', 'text': 'this file should not be empty for the kubelet to work.\r\ntry uninstalling kubeadm and kubelet and installing them again.', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'biello', 'comment_id': 561943038.0, 'datetime': '2019-12-05 02:50:20+00:00', 'masked_author': 'username_0', 'text': 'thx, I uninstalled kubeadm and kubelet with `yum remove`, and then installed them with `yum install`, but this file `/etc/systemd/system/kubelet.service.d/10-kubeadm.conf` is still empty, any idea?', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'neolit123', 'comment_id': 561955748.0, 'datetime': '2019-12-05 03:48:37+00:00', 'masked_author': 'username_2', 'text': ""did you try removing the file first, before installing the packages?\r\ni don't see how after package installation the file will be empty.\r\n\r\nclosing as not a bug or documentation change request.\r\n\r\n/close"", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'sftim', 'comment_id': 562049563.0, 'datetime': '2019-12-05 09:38:56+00:00', 'masked_author': 'username_1', 'text': '/triage support', 'title': None, 'type': 'comment'}]","<issue_start><issue_comment>Title: Issue with k8s.io/docs/setup/production-environment/tools/kubeadm/install-kubeadm/
+username_0: **This is a Bug Report**
+following the guide [Configure cgroup driver used by kubelet on control-plane node](https://kubernetes.io/docs/setup/production-environment/tools/kubeadm/install-kubeadm/#configure-cgroup-driver-used-by-kubelet-on-control-plane-node), 
+use systemd as docker cgroup driver, write KUBELET_EXTRA_ARGS=--cgroup-driver=systemd to /etc/sysconfig/kubelet but doesn't work.
+
+
+<!--Required Information-->
+**Problem:**
+kubelet cannot start
+**Proposed Solution:**
+
+**Page to Update:**
+https://kubernetes.io/docs/setup/production-environment/tools/kubeadm/install-kubeadm/#configure-cgroup-driver-used-by-kubelet-on-control-plane-node
+
+<!--Optional Information (remove the comment tags around information you would like to include)-->
+<!--Kubernetes Version:-->
+
+<!--Additional Information:-->
+OS: CentOS7.2
+Kenel: Linux 3.10.0-514.26.2.el7.x86_64
+
+# docker info -f {{.CgroupDriver}}
+systemd
+
+# cat /etc/sysconfig/kubelet
+KUBELET_EXTRA_ARGS=--cgroup-driver=systemd
+
+# journalctl -xeu kubelet
+-- Unit kubelet.service has begun starting up.
+12月 03 11:07:34 k8s-master-01 kubelet[4811]: I1203 11:07:34.991782    4811 server.go:410] Version: v1.16.3
+12月 03 11:07:34 k8s-master-01 kubelet[4811]: I1203 11:07:34.992033    4811 plugins.go:100] No cloud provider specified.
+12月 03 11:07:34 k8s-master-01 kubelet[4811]: W1203 11:07:34.992048    4811 server.go:549] standalone mode, no API client
+12月 03 11:07:35 k8s-master-01 kubelet[4811]: W1203 11:07:35.016308    4811 server.go:467] No api server defined - no events will be sent to API server.
+12月 03 11:07:35 k8s-master-01 kubelet[4811]: I1203 11:07:35.016327    4811 server.go:636] --cgroups-per-qos enabled, but --cgroup-root was not specified.  defaulting to /
+12月 03 11:07:35 k8s-master-01 kubelet[4811]: I1203 11:07:35.016614    4811 container_manager_linux.go:265] container manager verified user specified cgroup-root exists: []
+12月 03 11:07:35 k8s-master-01 kubelet[4811]: I1203 11:07:35.016627    4811 container_manager_linux.go:270] Creating Container Manager object based on Node Config: {RuntimeCgroupsName: SystemCgroup
+12月 03 11:07:35 k8s-master-01 kubelet[4811]: I1203 11:07:35.016722    4811 fake_topology_manager.go:29] [fake topologymanager] NewFakeManager
+12月 03 11:07:35 k8s-master-01 kubelet[4811]: I1203 11:07:35.016728    4811 container_manager_linux.go:305] Creating device plugin manager: true
+12月 03 11:07:35 k8s-master-01 kubelet[4811]: I1203 11:07:35.016749    4811 fake_topology_manager.go:39] [fake topologymanager] AddHintProvider HintProvider:  &{kubelet.sock /var/lib/kubelet/device
+12月 03 11:07:35 k8s-master-01 kubelet[4811]: I1203 11:07:35.016789    4811 state_mem.go:36] [cpumanager] initializing new in-memory state store
+12月 03 11:07:35 k8s-master-01 kubelet[4811]: I1203 11:07:35.016878    4811 state_mem.go:84] [cpumanager] updated default cpuset: """"
+12月 03 11:07:35 k8s-master-01 kubelet[4811]: I1203 11:07:35.016888    4811 state_mem.go:92] [cpumanager] updated cpuset assignments: ""map[]""
+12月 03 11:07:35 k8s-master-01 kubelet[4811]: I1203 11:07:35.016898    4811 fake_topology_manager.go:39] [fake topologymanager] AddHintProvider HintProvider:  &{{0 0} 0x79a0338 10000000000 0xc00086
+12月 03 11:07:35 k8s-master-01 kubelet[4811]: I1203 11:07:35.019422    4811 client.go:75] Connecting to docker on unix:///var/run/docker.sock
+12月 03 11:07:35 k8s-master-01 kubelet[4811]: I1203 11:07:35.019448    4811 client.go:104] Start docker client with request timeout=2m0s
+12月 03 11:07:35 k8s-master-01 kubelet[4811]: W1203 11:07:35.024960    4811 docker_service.go:563] Hairpin mode set to ""promiscuous-bridge"" but kubenet is not enabled, falling back to ""hairpin-veth
+12月 03 11:07:35 k8s-master-01 kubelet[4811]: I1203 11:07:35.024987    4811 docker_service.go:240] Hairpin mode set to ""hairpin-veth""
+12月 03 11:07:35 k8s-master-01 kubelet[4811]: W1203 11:07:35.025085    4811 cni.go:237] Unable to update cni config: no networks found in /etc/cni/net.d
+12月 03 11:07:35 k8s-master-01 kubelet[4811]: I1203 11:07:35.029419    4811 docker_service.go:255] Docker cri networking managed by kubernetes.io/no-op
+12月 03 11:07:35 k8s-master-01 kubelet[4811]: I1203 11:07:35.037545    4811 docker_service.go:260] Docker Info: &{ID:4PTN:INQG:E7GI:RHP6:2Y4D:MUR4:ZGFP:UEOF:LNNW:GDOM:WCIR:LTT5 Containers:0 Contain
+12月 03 11:07:35 k8s-master-01 kubelet[4811]: F1203 11:07:35.037650    4811 server.go:271] failed to run Kubelet: failed to create kubelet: misconfiguration: kubelet cgroup driver: ""cgroupfs"" is di
+12月 03 11:07:35 k8s-master-01 systemd[1]: kubelet.service: main process exited, code=exited, status=255/n/a
+12月 03 11:07:35 k8s-master-01 systemd[1]: Unit kubelet.service entered failed state.
+12月 03 11:07:35 k8s-master-01 systemd[1]: kubelet.service failed.
+<issue_comment>username_1: /sig cluster-lifecycle
+<issue_comment>username_2: /triage support
+<issue_comment>username_0: thanks, it seems kubelet failed to autodetect the cgroup driver of docker.
+I tried to remove /etc/sysconfig/kubelet, /etc/systemd/system/kubelet.service.d/10-kubeadm.conf，
+but doesn't work, journalctl -xeu kubelet output all the same.
+<issue_comment>username_0: is my docker version 18.06.2-ce too old for autodetection?
+<issue_comment>username_2: this version is supported.
+<issue_comment>username_0: I reinstalled kubelet and checked this file `/etc/systemd/system/kubelet.service.d/10-kubeadm.conf` is empty, and run  `kubeadm init --pod-network-cidr=10.244.0.0/16 --apiserver-advertise-address=myip`, it says 
+`The HTTP call equal to 'curl -sSL http://localhost:10248/healthz' failed with error: Get http://localhost:10248/healthz: dial tcp 127.0.0.1:10248: connect: connection refused.
+[kubelet-check] It seems like the kubelet isn't running or healthy.
+Unfortunately, an error has occurred:
+	timed out waiting for the condition
+
+This error is likely caused by:
+	- The kubelet is not running
+	- The kubelet is unhealthy due to a misconfiguration of the node in some way (required cgroups disabled)
+
+If you are on a systemd-powered system, you can try to troubleshoot the error with the following commands:
+	- 'systemctl status kubelet'
+	- 'journalctl -xeu kubelet'`
+
+so i turn to check `journalctl -xeu kubelet`, and it says
+`failed to create kubelet: misconfiguration: kubelet cgroup driver: ""cgroupfs"" is different from docker cgroup driver: ""systemd""`
+
+apparently it's the cgroup driver problem, the problem is how can i set kubelet cgroup driver to  ""systemd"" as k8s recommanded? Or how can i let kubeadm know that my docker cgroup driver is ""systemd""?
+<issue_comment>username_0: is there any problem with my OS, docker or something else? Or is it a bug of kubeadm or kubelet?
+<issue_comment>username_2: this file should not be empty for the kubelet to work.
+try uninstalling kubeadm and kubelet and installing them again.
+<issue_comment>username_0: thx, I uninstalled kubeadm and kubelet with `yum remove`, and then installed them with `yum install`, but this file `/etc/systemd/system/kubelet.service.d/10-kubeadm.conf` is still empty, any idea?
+<issue_comment>username_2: did you try removing the file first, before installing the packages?
+i don't see how after package installation the file will be empty.
+
+closing as not a bug or documentation change request.
+
+/close
+<issue_comment>username_1: /triage support"
+kubernetes/website,428210930,13571,,"[{'action': 'opened', 'author': 'ariamore', 'comment_id': None, 'datetime': '2019-04-02 12:55:37+00:00', 'masked_author': 'username_0', 'text': 'I\'ve a problem when I try to stop minikube. I run the command (on Powershell, using Windows 10):\r\n$ minikube stop\r\nand the machine remains in a ""pending"" state for several time, like the image below\r\n\r\n![Cattura](https://user-images.githubusercontent.com/46370083/55403793-e6d86300-5556-11e9-9e30-bb07debd519f.PNG)\r\n\r\nI\'ve got the same result if I check the status of minikube on Hyper (I\'m using this virtual-switch).\r\n\r\nSomeone has the same problem or fix it?\r\n\r\nThanks in advance!', 'title': 'Minikube stop FAILS', 'type': 'issue'}
+ {'action': 'created', 'author': 'tstromberg', 'comment_id': 479194272.0, 'datetime': '2019-04-02 20:46:46+00:00', 'masked_author': 'username_1', 'text': 'Dupe of https://github.com/kubernetes/minikube/issues/2914', 'title': None, 'type': 'comment'}
+ {'action': 'closed', 'author': 'tengqm', 'comment_id': None, 'datetime': '2019-04-05 04:38:56+00:00', 'masked_author': 'username_2', 'text': '', 'title': None, 'type': 'issue'}
+ {'action': 'created', 'author': 'tengqm', 'comment_id': 480145822.0, 'datetime': '2019-04-05 04:38:56+00:00', 'masked_author': 'username_2', 'text': '@username_1 Thanks for pointing that out. Closing this because it is not a doc issue.', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'jjfraney', 'comment_id': 480272953.0, 'datetime': '2019-04-05 13:21:31+00:00', 'masked_author': 'username_3', 'text': ""Also, same problem with **minikube 1.0.0.**  Stop hangs.\r\n\r\nHowever, the added information I offer is that docker-machine, included with Docker Desktop, can start and stop vm clients on hyperv.  I've built a three node docker swarm with docker-machine from Docker Desktop...and stopped the nodes, too.\r\n\r\nHere is version of Docker Desktop I'm running:\r\nVersion 2.0.0.3 (31259)\r\nChannel: stable\r\nBuild: 8858db3"", 'title': None, 'type': 'comment'}]","<issue_start><issue_comment>Title: Minikube stop FAILS
+username_0: I've a problem when I try to stop minikube. I run the command (on Powershell, using Windows 10):
+$ minikube stop
+and the machine remains in a ""pending"" state for several time, like the image below
+
+![Cattura](https://user-images.githubusercontent.com/46370083/55403793-e6d86300-5556-11e9-9e30-bb07debd519f.PNG)
+
+I've got the same result if I check the status of minikube on Hyper (I'm using this virtual-switch).
+
+Someone has the same problem or fix it?
+
+Thanks in advance!
+<issue_comment>username_1: Dupe of https://github.com/kubernetes/minikube/issues/2914<issue_closed>
+<issue_comment>username_2: @username_1 Thanks for pointing that out. Closing this because it is not a doc issue.
+<issue_comment>username_3: Also, same problem with **minikube 1.0.0.**  Stop hangs.
+
+However, the added information I offer is that docker-machine, included with Docker Desktop, can start and stop vm clients on hyperv.  I've built a three node docker swarm with docker-machine from Docker Desktop...and stopped the nodes, too.
+
+Here is version of Docker Desktop I'm running:
+Version 2.0.0.3 (31259)
+Channel: stable
+Build: 8858db3"
+dlang/dlang.org,159674981,1363,"{'number': 1363.0, 'repo': 'dlang.org', 'user_login': 'dlang'}","[{'action': 'opened', 'author': 'wilzbach', 'comment_id': None, 'datetime': '2016-06-10T16:38:38Z', 'masked_author': 'username_0', 'text': ""Disqus has now been tried out for more than two years, and imho didn't work well.\r\nThe only comments we got are like those that should go to the forum:\r\n\r\n![image](https://cloud.githubusercontent.com/assets/4370550/15971306/bfde3b9a-2f38-11e6-80d6-f509e7d1fd00.png)\r\n\r\nYou can see the other comments here:\r\nhttps://disqus.com/home/forum/vibe-d/\r\n\r\nThere's also a discussion two years ago I found on the forum: http:nnheo@example.com\r\n\r\nThe best idea was to integrate stack overflow into the site and imho that's a great idea and a lot more helpful than disqus comments.\r\n\r\nPing @username_1 @Dicebot @jmdavis"", 'title': 'Kill disqus', 'type': 'issue'}
+ {'action': 'created', 'author': 's-ludwig', 'comment_id': 225234275.0, 'datetime': '2016-06-10 16:44:25+00:00', 'masked_author': 'username_1', 'text': ""It should be noted that the /library/ pages were quite hidden and my gut feeling is that the vast majority only knew or used the /phobos/ ones. So I'd take the current amount of comments with a grain of salt. But one thing is clear, we need a few people who feel responsible for replying or moderating comments."", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'JackStouffer', 'comment_id': 225234744.0, 'datetime': '2016-06-10 16:46:18+00:00', 'masked_author': 'username_2', 'text': ""And I don't think that's reasonable. IMO, let's keep the technical discussion in the n.g. and on SO. The less places to moderate the better."", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'CyberShadow', 'comment_id': 225332555.0, 'datetime': '2016-06-11 02:43:21+00:00', 'masked_author': 'username_3', 'text': ""Yep, what I was thinking of is to embed a forum widget, which would present a NG thread as a comment thread. Haven't gotten around to implementing it, though."", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 's-ludwig', 'comment_id': 225390901.0, 'datetime': '2016-06-11 19:56:08+00:00', 'masked_author': 'username_1', 'text': ""Integrating this with the forum definitely has a lot of merit, but while it will in all likelihood increase participation, I don't think that it will remove the need for moderators. Listing a huge forum thread within the documentation doesn't make sense, as the comments are meant as an additional reference, but such threads will surely happen. A voting functionality also sounds like a useful feature to enable basic crowd-sourced moderation."", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'CyberShadow', 'comment_id': 225391097.0, 'datetime': '2016-06-11 19:59:44+00:00', 'masked_author': 'username_3', 'text': 'Good point. It will call for a new view mode anyway. Perhaps it should only show top-level comments and collapse replies by default. I think the highest signal/noise will be in the top-level comments, as they will addressing the documented symbol directly.', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'CyberShadow', 'comment_id': 225416073.0, 'datetime': '2016-06-12 08:06:22+00:00', 'masked_author': 'username_3', 'text': ""Could've sworn that was implemented already. \r\n\r\nWell, it is now. \r\n\r\nhttps://github.com/username_3/DFeed/commit/c3199d6a01887974345d3f0f72eee1f982419e9c\r\n\r\nhttp://forum.dlang.org/newpost/learn?subject=[std.algorithm.iteration]%20Question"", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'andralex', 'comment_id': 226486097.0, 'datetime': '2016-06-16 13:34:01+00:00', 'masked_author': 'username_4', 'text': ""FWIW I am in favor of keeping disqus. I don't think there's enough evidence to discard it. It lowers the barrier of entry to beginners and it creates the opportunity to add value to the documentation with ease.\r\n\r\nBut delegation of responsibility is what it is. Vladimir is the Web everything czar, so I am deferring to him."", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'CyberShadow', 'comment_id': 226506575.0, 'datetime': '2016-06-16 14:43:25+00:00', 'masked_author': 'username_3', 'text': ""OK, then I suggest to shelve this until we have a concrete proposal for a replacement, which is probably something I'll need to get around to doing someday."", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'MartinNowak', 'comment_id': 228888274.0, 'datetime': '2016-06-27 21:57:23+00:00', 'masked_author': 'username_5', 'text': 'At least it supports voting for comments.\r\nBut compared to using our very active forum which can be used anonymously, creating an account with disqus takes at least 2 steps and has quite some fine print attached.\r\n[Terms of Service](https://help.disqus.com/customer/portal/articles/466260-terms-of-service)\r\n[Privacy Policy](https://help.disqus.com/customer/portal/articles/466259-privacy-policy)', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'MartinNowak', 'comment_id': 241732975.0, 'datetime': '2016-08-23 13:37:33+00:00', 'masked_author': 'username_5', 'text': 'Stay or go?', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'CyberShadow', 'comment_id': 241746339.0, 'datetime': '2016-08-23 14:19:47+00:00', 'masked_author': 'username_3', 'text': ""I am mildly in favor of 'stay' until we have a replacement, mainly because it doesn't require changing anything and it's not costing/hurting us actively to keep it."", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'JackStouffer', 'comment_id': 241746395.0, 'datetime': '2016-08-23 14:19:57+00:00', 'masked_author': 'username_2', 'text': 'Go\r\n\r\n* Slows down page load times for little gain\r\n* Is not privacy focused', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'CyberShadow', 'comment_id': 241746610.0, 'datetime': '2016-08-23 14:20:36+00:00', 'masked_author': 'username_3', 'text': '@username_2 Good points. Feel free to remove it then.', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'JackStouffer', 'comment_id': 241747421.0, 'datetime': '2016-08-23 14:22:52+00:00', 'masked_author': 'username_2', 'text': ""???\r\n\r\nI don't have merge rights."", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'CyberShadow', 'comment_id': 241748095.0, 'datetime': '2016-08-23 14:24:56+00:00', 'masked_author': 'username_3', 'text': 'Ah right. Forgot I was commenting on a PR to do exactly this. Thanks Martin.', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'MartinNowak', 'comment_id': 241748702.0, 'datetime': '2016-08-23 14:26:47+00:00', 'masked_author': 'username_5', 'text': 'The idea of a small widget to post to the forum remains appealing.', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'andralex', 'comment_id': 241748789.0, 'datetime': '2016-08-23 14:27:02+00:00', 'masked_author': 'username_4', 'text': 'I just took a look at the dlang.org use statistics and it seems ddox has had very low use.\r\n\r\nIn July 2016 (most recent complete month), the most visited page containing ""/library"" has been http://www.dlang.org/library itself, totaling only 435 hits. Next down the list is http://www.dlang.org/library/std/range/ref_range.op_assign.html with 340 hits. There\'s no long tail, in fact there\'s only one more (excluding .js paraphernalia) in the top 256: http://www.dlang.org/library-prerelease/ with 231 hits. For contrast, the top page with ""/phobos"" in its name is http://www.dlang.org/phobos with 7351 hits follow by a long tail of about 80 pages among the top 256.\r\n\r\nSo one step we need to take is increase the visibility of /library before drawing any conclusion about popularity of features on it.\r\n\r\nRegarding the ideological argument, I don\'t have time and energy for yet another debate but I will say this: it\'s the internet, get used to it. Whether you search, browse, or use whatever services, the creators thereof are in it to be paid. I don\'t think disqus is any worse than anyone else, and as long as we don\'t have a replacement it\'s a good thing to have.', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'andralex', 'comment_id': 241749102.0, 'datetime': '2016-08-23 14:27:53+00:00', 'masked_author': 'username_4', 'text': ""@username_5 could you please unmerge this. Thanks. I'd appreciate it if I'd be kept in the loop in policy decisions.\r\n\r\nI'll send you and Vladimir the password for looking at the site stats."", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'adamdruppe', 'comment_id': 241750298.0, 'datetime': '2016-08-23 14:31:08+00:00', 'masked_author': 'username_6', 'text': ""At some point, you're going to have to allow yourself to delegate."", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'CyberShadow', 'comment_id': 241750347.0, 'datetime': '2016-08-23 14:31:15+00:00', 'masked_author': 'username_3', 'text': ""I don't want to waste time arguing on this either but I'll just say that I think many will disagree."", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'andralex', 'comment_id': 241752024.0, 'datetime': '2016-08-23 14:36:16+00:00', 'masked_author': 'username_4', 'text': ""@username_3: I just sent you the password, look at the data, draw your own conclusions, and post them here.\r\n\r\nSo we have two arguments:\r\n\r\n* Not enough use of disqus\r\n* Disqus is bad because privacy etc.\r\n\r\n@username_3 and @username_5 can see how the first argument holds. I think the data blows it away out of the water. The second is a topic of debate in which reasonable people may disagree. So someone must make a judgment call. I'm uncomfortable with such a judgment call being pushed on me as the only reasonable thing to do."", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'CyberShadow', 'comment_id': 241752595.0, 'datetime': '2016-08-23 14:37:57+00:00', 'masked_author': 'username_3', 'text': '', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'andralex', 'comment_id': 241753899.0, 'datetime': '2016-08-23 14:41:52+00:00', 'masked_author': 'username_4', 'text': '@username_3 I\'m already a moderator, and that\'s going to be a problem good to have. Looking forward to having a bunch of content to moderate.\r\n\r\nPosting about a library page on the forum is a completely different flow than having user-produced content on the page itself. I don\'t see how one obviates the other.\r\n\r\nI don\'t have a particular opinion about disqus (other that I see it on reputable sites) but I do like the functionality it provides. If @username_3 could provide the same for free, that would be awesome. But going around with ""Kill disqus!"" doesn\'t sound like a productive way to go about things.', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'CyberShadow', 'comment_id': 241753923.0, 'datetime': '2016-08-23 14:41:55+00:00', 'masked_author': 'username_3', 'text': '```\r\nvladimir@digitalmars:/home/vladimir % zgrep ""GET /phobos/"" /var/log/httpd/dlang.org/httpd-access.log* | wc -l\r\n   17918\r\nvladimir@digitalmars:/home/vladimir % zgrep ""GET /library/"" /var/log/httpd/dlang.org/httpd-access.log* | wc -l\r\n   33545\r\n```\r\n\r\nI\'m afraid that the real numbers look very different, due to my point above.', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'MartinNowak', 'comment_id': 241754108.0, 'datetime': '2016-08-23 14:42:31+00:00', 'masked_author': 'username_5', 'text': 'Setting up [Isso](https://posativ.org/isso/) for self-hosted comments is really trivial, i.e. `apt-get install isso`.', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'MartinNowak', 'comment_id': 241754566.0, 'datetime': '2016-08-23 14:43:43+00:00', 'masked_author': 'username_5', 'text': ""But the main question is whether we'll actually be able to maintain the comments."", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'andralex', 'comment_id': 241754888.0, 'datetime': '2016-08-23 14:44:33+00:00', 'masked_author': 'username_4', 'text': ""@username_5: again, that'll be a good problem to have. Per the Romanian joke: Romania doesn't invade China because they don't have room for all the prisoners."", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'MartinNowak', 'comment_id': 241755236.0, 'datetime': '2016-08-23 14:45:36+00:00', 'masked_author': 'username_5', 'text': 'Feel free to undo the merge, running out of battery here, close to China btw.', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'andralex', 'comment_id': 241756028.0, 'datetime': '2016-08-23 14:48:03+00:00', 'masked_author': 'username_4', 'text': '@username_3 please look closer. Most GETs fetch http://www.dlang.org/library/symbols.js.', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'andralex', 'comment_id': 241756447.0, 'datetime': '2016-08-23 14:49:12+00:00', 'masked_author': 'username_4', 'text': '@username_5 Have fun traveling. Best time to deploy major changes eh :). @username_3 agree to undo until @username_5 returns and we can have a close look at things?', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'CyberShadow', 'comment_id': 241756851.0, 'datetime': '2016-08-23 14:50:22+00:00', 'masked_author': 'username_3', 'text': '```\r\nvladimir@digitalmars:/home/vladimir % zgrep ""GET /phobos/.*html"" /var/log/httpd/dlang.org/httpd-access.log* | wc -l\r\n   16627\r\nvladimir@digitalmars:/home/vladimir % zgrep ""GET /library/.*html"" /var/log/httpd/dlang.org/httpd-access.log* | wc -l\r\n   32230\r\nvladimir@digitalmars:/home/vladimir % zgrep ""GET /library/symbols.js"" /var/log/httpd/dlang.org/httpd-access.log* | wc -l\r\n    1215\r\n```\r\n\r\nThis is not a definition of ""most"" that I am familiar with :)', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'andralex', 'comment_id': 241757794.0, 'datetime': '2016-08-23 14:53:13+00:00', 'masked_author': 'username_4', 'text': '@username_3 How do you explain the discrepancy with webalizer?', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'andralex', 'comment_id': 241758596.0, 'datetime': '2016-08-23 14:55:25+00:00', 'masked_author': 'username_4', 'text': ""@username_5 @username_3 I'll do something in premiere: will leave this entirely up to you. You know what I think and it is my personal opinion that the entire ideological argument is crap, but you decide on this. \r\n\r\nFeels terrible but as @username_6 said at some point I got to delegate stuff."", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'andralex', 'comment_id': 241758764.0, 'datetime': '2016-08-23 14:55:53+00:00', 'masked_author': 'username_4', 'text': '@username_3 still curious about the log vs webalizer thingamaboob.', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'CyberShadow', 'comment_id': 241758837.0, 'datetime': '2016-08-23 14:56:04+00:00', 'masked_author': 'username_3', 'text': 'I don\'t really have a strong opinion one way or the other but it seems to me that the arguments have been piling up in favor of ""kill"" and evaporating away from the favor of ""keep"". Feel free to undo if it means we can stop wasting time on this debate, though.', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 's-ludwig', 'comment_id': 241759135.0, 'datetime': '2016-08-23 14:56:57+00:00', 'masked_author': 'username_1', 'text': ""It's definitely necessary to filter out search engine bots from the logs. Since /library/ has a *lot* more pages than /phobos/, that makes a huge difference."", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'CyberShadow', 'comment_id': 241759654.0, 'datetime': '2016-08-23 14:58:20+00:00', 'masked_author': 'username_3', 'text': ""I thought that could be it, but the logs do not mention user agents at all... so Webalizer wouldn't be able to filter them out either."", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 's-ludwig', 'comment_id': 241760366.0, 'datetime': '2016-08-23 15:00:16+00:00', 'masked_author': 'username_1', 'text': ""BTW, I'd generally also be in favor of replacing it with something else instead of just removing it now. It's possible to post without registration, so it isn't *that* bad privacy wise. And remember that everything is public anyway, just like the forum/newsgroup."", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'CyberShadow', 'comment_id': 241760783.0, 'datetime': '2016-08-23 15:01:27+00:00', 'masked_author': 'username_3', 'text': ""I think the major privacy concern is that Disqus can track visitors along all websites that use Disqus, whether they're signed up or not, and whether they participate or not."", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'CyberShadow', 'comment_id': 241761905.0, 'datetime': '2016-08-23 15:04:47+00:00', 'masked_author': 'username_3', 'text': 'Here is a more accurate measure - counting unique IPs:\r\n\r\n```\r\nvladimir@digitalmars:/home/vladimir % zgrep ""GET /phobos/"" /var/log/httpd/dlang.org/httpd-access.log* | cut -d \' \' -f 1 | sort -u | wc -l\r\n    5649\r\nvladimir@digitalmars:/home/vladimir % zgrep ""GET /library/"" /var/log/httpd/dlang.org/httpd-access.log* | cut -d \' \' -f 1 | sort -u | wc -l\r\n    2332\r\n```\r\n\r\nThis should better represent the usage share, if we make the assumption that major search engines visited both parts of the website from their pool of IPs.', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'CyberShadow', 'comment_id': 241768255.0, 'datetime': '2016-08-23 15:23:08+00:00', 'masked_author': 'username_3', 'text': ""I think I know:\r\n\r\n1. The discrepancy with `symbols.js` is simply due to the different time frame. Webalizer shows stats one month at a time, whereas the web server's logrotate only keeps logs for the past 10 days. Indeed, 3265 (Webalizer hits for August for `symbols.js`) /23*10 =~ 1419, which is in the ballpark of my 1215.\r\n\r\n2. The discrepancy between `/phobos/` and `/library/` is due to the long tail which Webalizer doesn't show. Too bad we don't log referrers, would be interesting to know how people reach these pages (site navigation vs. search engines)... I guess it's still possible by looking at past requests from the same IP, but not trivial."", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'CyberShadow', 'comment_id': 241770552.0, 'datetime': '2016-08-23 15:28:27+00:00', 'masked_author': 'username_3', 'text': 'Wait, just saw the ""Show all URLs"" link. Well, Webalizer seems to agree, actually:\r\n\r\n```\r\nvladimir@digitalmars:/home/vladimir % cat /usr/local/www/dlang.org/data/Usage/HTTP/url_201608.html | grep \'  /phobos/\' | cut -d \' \' -f 1 | awk \'{s+=$1} END {print s}\' \r\n39599\r\nvladimir@digitalmars:/home/vladimir % cat /usr/local/www/dlang.org/data/Usage/HTTP/url_201608.html | grep \'  /library/\' | cut -d \' \' -f 1 | awk \'{s+=$1} END {print s}\'\r\n83353\r\n```\r\n\r\nOK, that\'s probably enough numbers :)', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'andralex', 'comment_id': 241780337.0, 'datetime': '2016-08-23 15:51:30+00:00', 'masked_author': 'username_4', 'text': '@username_3 thanks for the analysis!', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 's-ludwig', 'comment_id': 241975235.0, 'datetime': '2016-08-24 07:03:48+00:00', 'masked_author': 'username_1', 'text': ""Okay, fair point. Not trying to justify/excuse that, but it should be noted that the same is more or less true for the Twitter widget and the jquery and font-awesome includes. Good that the Google ad isn't there anymore."", 'title': None, 'type': 'comment'}]","<issue_start><issue_comment>Title: Kill disqus
+username_0: Disqus has now been tried out for more than two years, and imho didn't work well.
+The only comments we got are like those that should go to the forum:
+
+![image](https://cloud.githubusercontent.com/assets/4370550/15971306/bfde3b9a-2f38-11e6-80d6-f509e7d1fd00.png)
+
+You can see the other comments here:
+https://disqus.com/home/forum/vibe-d/
+
+There's also a discussion two years ago I found on the forum: http://forum.dlang.org/thread/lr94p4$spu$1@digitalmars.com
+
+The best idea was to integrate stack overflow into the site and imho that's a great idea and a lot more helpful than disqus comments.
+
+Ping @username_1 @Dicebot @jmdavis
+<issue_comment>username_1: It should be noted that the /library/ pages were quite hidden and my gut feeling is that the vast majority only knew or used the /phobos/ ones. So I'd take the current amount of comments with a grain of salt. But one thing is clear, we need a few people who feel responsible for replying or moderating comments.
+<issue_comment>username_2: And I don't think that's reasonable. IMO, let's keep the technical discussion in the n.g. and on SO. The less places to moderate the better.
+<issue_comment>username_3: Yep, what I was thinking of is to embed a forum widget, which would present a NG thread as a comment thread. Haven't gotten around to implementing it, though.
+<issue_comment>username_1: Integrating this with the forum definitely has a lot of merit, but while it will in all likelihood increase participation, I don't think that it will remove the need for moderators. Listing a huge forum thread within the documentation doesn't make sense, as the comments are meant as an additional reference, but such threads will surely happen. A voting functionality also sounds like a useful feature to enable basic crowd-sourced moderation.
+<issue_comment>username_3: Good point. It will call for a new view mode anyway. Perhaps it should only show top-level comments and collapse replies by default. I think the highest signal/noise will be in the top-level comments, as they will addressing the documented symbol directly.
+<issue_comment>username_3: Could've sworn that was implemented already. 
+
+Well, it is now. 
+
+https://github.com/username_3/DFeed/commit/c3199d6a01887974345d3f0f72eee1f982419e9c
+
+http://forum.dlang.org/newpost/learn?subject=[std.algorithm.iteration]%20Question
+<issue_comment>username_4: FWIW I am in favor of keeping disqus. I don't think there's enough evidence to discard it. It lowers the barrier of entry to beginners and it creates the opportunity to add value to the documentation with ease.
+
+But delegation of responsibility is what it is. Vladimir is the Web everything czar, so I am deferring to him.
+<issue_comment>username_3: OK, then I suggest to shelve this until we have a concrete proposal for a replacement, which is probably something I'll need to get around to doing someday.
+<issue_comment>username_5: At least it supports voting for comments.
+But compared to using our very active forum which can be used anonymously, creating an account with disqus takes at least 2 steps and has quite some fine print attached.
+[Terms of Service](https://help.disqus.com/customer/portal/articles/466260-terms-of-service)
+[Privacy Policy](https://help.disqus.com/customer/portal/articles/466259-privacy-policy)
+<issue_comment>username_5: Stay or go?
+<issue_comment>username_3: I am mildly in favor of 'stay' until we have a replacement, mainly because it doesn't require changing anything and it's not costing/hurting us actively to keep it.
+<issue_comment>username_2: Go
+
+* Slows down page load times for little gain
+* Is not privacy focused
+<issue_comment>username_3: @username_2 Good points. Feel free to remove it then.
+<issue_comment>username_2: ???
+
+I don't have merge rights.
+<issue_comment>username_3: Ah right. Forgot I was commenting on a PR to do exactly this. Thanks Martin.
+<issue_comment>username_5: The idea of a small widget to post to the forum remains appealing.
+<issue_comment>username_4: I just took a look at the dlang.org use statistics and it seems ddox has had very low use.
+
+In July 2016 (most recent complete month), the most visited page containing ""/library"" has been http://www.dlang.org/library itself, totaling only 435 hits. Next down the list is http://www.dlang.org/library/std/range/ref_range.op_assign.html with 340 hits. There's no long tail, in fact there's only one more (excluding .js paraphernalia) in the top 256: http://www.dlang.org/library-prerelease/ with 231 hits. For contrast, the top page with ""/phobos"" in its name is http://www.dlang.org/phobos with 7351 hits follow by a long tail of about 80 pages among the top 256.
+
+So one step we need to take is increase the visibility of /library before drawing any conclusion about popularity of features on it.
+
+Regarding the ideological argument, I don't have time and energy for yet another debate but I will say this: it's the internet, get used to it. Whether you search, browse, or use whatever services, the creators thereof are in it to be paid. I don't think disqus is any worse than anyone else, and as long as we don't have a replacement it's a good thing to have.
+<issue_comment>username_4: @username_5 could you please unmerge this. Thanks. I'd appreciate it if I'd be kept in the loop in policy decisions.
+
+I'll send you and Vladimir the password for looking at the site stats.
+<issue_comment>username_6: At some point, you're going to have to allow yourself to delegate.
+<issue_comment>username_3: I don't want to waste time arguing on this either but I'll just say that I think many will disagree.
+<issue_comment>username_4: @username_3: I just sent you the password, look at the data, draw your own conclusions, and post them here.
+
+So we have two arguments:
+
+* Not enough use of disqus
+* Disqus is bad because privacy etc.
+
+@username_3 and @username_5 can see how the first argument holds. I think the data blows it away out of the water. The second is a topic of debate in which reasonable people may disagree. So someone must make a judgment call. I'm uncomfortable with such a judgment call being pushed on me as the only reasonable thing to do.
+<issue_comment>username_4: @username_3 I'm already a moderator, and that's going to be a problem good to have. Looking forward to having a bunch of content to moderate.
+
+Posting about a library page on the forum is a completely different flow than having user-produced content on the page itself. I don't see how one obviates the other.
+
+I don't have a particular opinion about disqus (other that I see it on reputable sites) but I do like the functionality it provides. If @username_3 could provide the same for free, that would be awesome. But going around with ""Kill disqus!"" doesn't sound like a productive way to go about things.
+<issue_comment>username_3: ```
+vladimir@digitalmars:/home/vladimir % zgrep ""GET /phobos/"" /var/log/httpd/dlang.org/httpd-access.log* | wc -l
+   17918
+vladimir@digitalmars:/home/vladimir % zgrep ""GET /library/"" /var/log/httpd/dlang.org/httpd-access.log* | wc -l
+   33545
+```
+
+I'm afraid that the real numbers look very different, due to my point above.
+<issue_comment>username_5: Setting up [Isso](https://posativ.org/isso/) for self-hosted comments is really trivial, i.e. `apt-get install isso`.
+<issue_comment>username_5: But the main question is whether we'll actually be able to maintain the comments.
+<issue_comment>username_4: @username_5: again, that'll be a good problem to have. Per the Romanian joke: Romania doesn't invade China because they don't have room for all the prisoners.
+<issue_comment>username_5: Feel free to undo the merge, running out of battery here, close to China btw.
+<issue_comment>username_4: @username_3 please look closer. Most GETs fetch http://www.dlang.org/library/symbols.js.
+<issue_comment>username_4: @username_5 Have fun traveling. Best time to deploy major changes eh :). @username_3 agree to undo until @username_5 returns and we can have a close look at things?
+<issue_comment>username_3: ```
+vladimir@digitalmars:/home/vladimir % zgrep ""GET /phobos/.*html"" /var/log/httpd/dlang.org/httpd-access.log* | wc -l
+   16627
+vladimir@digitalmars:/home/vladimir % zgrep ""GET /library/.*html"" /var/log/httpd/dlang.org/httpd-access.log* | wc -l
+   32230
+vladimir@digitalmars:/home/vladimir % zgrep ""GET /library/symbols.js"" /var/log/httpd/dlang.org/httpd-access.log* | wc -l
+    1215
+```
+
+This is not a definition of ""most"" that I am familiar with :)
+<issue_comment>username_4: @username_3 How do you explain the discrepancy with webalizer?
+<issue_comment>username_4: @username_5 @username_3 I'll do something in premiere: will leave this entirely up to you. You know what I think and it is my personal opinion that the entire ideological argument is crap, but you decide on this. 
+
+Feels terrible but as @username_6 said at some point I got to delegate stuff.
+<issue_comment>username_4: @username_3 still curious about the log vs webalizer thingamaboob.
+<issue_comment>username_3: I don't really have a strong opinion one way or the other but it seems to me that the arguments have been piling up in favor of ""kill"" and evaporating away from the favor of ""keep"". Feel free to undo if it means we can stop wasting time on this debate, though.
+<issue_comment>username_1: It's definitely necessary to filter out search engine bots from the logs. Since /library/ has a *lot* more pages than /phobos/, that makes a huge difference.
+<issue_comment>username_3: I thought that could be it, but the logs do not mention user agents at all... so Webalizer wouldn't be able to filter them out either.
+<issue_comment>username_1: BTW, I'd generally also be in favor of replacing it with something else instead of just removing it now. It's possible to post without registration, so it isn't *that* bad privacy wise. And remember that everything is public anyway, just like the forum/newsgroup.
+<issue_comment>username_3: I think the major privacy concern is that Disqus can track visitors along all websites that use Disqus, whether they're signed up or not, and whether they participate or not.
+<issue_comment>username_3: Here is a more accurate measure - counting unique IPs:
+
+```
+vladimir@digitalmars:/home/vladimir % zgrep ""GET /phobos/"" /var/log/httpd/dlang.org/httpd-access.log* | cut -d ' ' -f 1 | sort -u | wc -l
+    5649
+vladimir@digitalmars:/home/vladimir % zgrep ""GET /library/"" /var/log/httpd/dlang.org/httpd-access.log* | cut -d ' ' -f 1 | sort -u | wc -l
+    2332
+```
+
+This should better represent the usage share, if we make the assumption that major search engines visited both parts of the website from their pool of IPs.
+<issue_comment>username_3: I think I know:
+
+1. The discrepancy with `symbols.js` is simply due to the different time frame. Webalizer shows stats one month at a time, whereas the web server's logrotate only keeps logs for the past 10 days. Indeed, 3265 (Webalizer hits for August for `symbols.js`) /23*10 =~ 1419, which is in the ballpark of my 1215.
+
+2. The discrepancy between `/phobos/` and `/library/` is due to the long tail which Webalizer doesn't show. Too bad we don't log referrers, would be interesting to know how people reach these pages (site navigation vs. search engines)... I guess it's still possible by looking at past requests from the same IP, but not trivial.
+<issue_comment>username_3: Wait, just saw the ""Show all URLs"" link. Well, Webalizer seems to agree, actually:
+
+```
+vladimir@digitalmars:/home/vladimir % cat /usr/local/www/dlang.org/data/Usage/HTTP/url_201608.html | grep '  /phobos/' | cut -d ' ' -f 1 | awk '{s+=$1} END {print s}' 
+39599
+vladimir@digitalmars:/home/vladimir % cat /usr/local/www/dlang.org/data/Usage/HTTP/url_201608.html | grep '  /library/' | cut -d ' ' -f 1 | awk '{s+=$1} END {print s}'
+83353
+```
+
+OK, that's probably enough numbers :)
+<issue_comment>username_4: @username_3 thanks for the analysis!
+<issue_comment>username_1: Okay, fair point. Not trying to justify/excuse that, but it should be noted that the same is more or less true for the Twitter widget and the jquery and font-awesome includes. Good that the Google ad isn't there anymore."
+eduardoboucas/staticman,466615784,303,,"[{'action': 'opened', 'author': 'sachin10101998', 'comment_id': None, 'datetime': '2019-07-11 01:56:53+00:00', 'masked_author': 'username_0', 'text': 'Whenever Staticman sends a pull request, it adds an `_id `parameter in it irrespective of the type of file it is creating.\r\nFor example in[ this Pull Request](https://github.com/username_0bot/aima-exercises/pull/6/files) , `_id: 54023b70-a37e-11e9-9e5a-db49bdb8d58e` parameter is created, along with Email, Name, Message and Date.\r\nIs there some way to remove it from being added in all the Staticman PRs.\r\nAny help would be highly appreciated.', 'title': 'Extra _id parameter appears in staticman Pull Requests', 'type': 'issue'}
+ {'action': 'created', 'author': 'sachin10101998', 'comment_id': 510922886.0, 'datetime': '2019-07-12 15:10:14+00:00', 'masked_author': 'username_0', 'text': '@username_1', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'VincentTam', 'comment_id': 510948080.0, 'datetime': '2019-07-12 16:23:24+00:00', 'masked_author': 'username_1', 'text': ""This field is useful in many situations, notably for Staticman integration in static blog themes.  See, for example, [Minimo's template](https://github.com/MunifTanjim/minimo/blob/4f6e0e9fe8843faa78f602b128f7c8beab2f9c94/layouts/partials/comments/staticman/comment.html#L4).  If you don't like that, you've the freedom to change the code that powers your API instance.  That's a great aspect of open-source solutions that many developers enjoy.  I'm not yet a developer though."", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'alexwaibel', 'comment_id': 551358982.0, 'datetime': '2019-11-08 02:38:57+00:00', 'masked_author': 'username_2', 'text': 'Expected', 'title': None, 'type': 'comment'}
+ {'action': 'closed', 'author': 'alexwaibel', 'comment_id': None, 'datetime': '2019-11-08 02:38:57+00:00', 'masked_author': 'username_2', 'text': '', 'title': None, 'type': 'issue'}]","<issue_start><issue_comment>Title: Extra _id parameter appears in staticman Pull Requests
+username_0: Whenever Staticman sends a pull request, it adds an `_id `parameter in it irrespective of the type of file it is creating.
+For example in[ this Pull Request](https://github.com/username_0bot/aima-exercises/pull/6/files) , `_id: 54023b70-a37e-11e9-9e5a-db49bdb8d58e` parameter is created, along with Email, Name, Message and Date.
+Is there some way to remove it from being added in all the Staticman PRs.
+Any help would be highly appreciated.
+<issue_comment>username_0: @username_1
+<issue_comment>username_1: This field is useful in many situations, notably for Staticman integration in static blog themes.  See, for example, [Minimo's template](https://github.com/MunifTanjim/minimo/blob/4f6e0e9fe8843faa78f602b128f7c8beab2f9c94/layouts/partials/comments/staticman/comment.html#L4).  If you don't like that, you've the freedom to change the code that powers your API instance.  That's a great aspect of open-source solutions that many developers enjoy.  I'm not yet a developer though.
+<issue_comment>username_2: Expected<issue_closed>"
+microsoft/TypeScript-Website,511413056,94,,"[{'action': 'opened', 'author': 'orta', 'comment_id': None, 'datetime': '2019-10-23 15:41:45+00:00', 'masked_author': 'username_0', 'text': ""[WIP build](https://github.com/microsoft/TypeScript-Website/tree/v2/packages/sandbox)\r\n\r\nThis would allow us to embed the monaco-editor with a lot of playground features into documentation pages on request, as well as allowing external parties to have their own TypeScript powered API references with DTS files trivially.\r\n\r\nRepresents the end of the [typescript-play](https://github.com/username_0/typescript-play) fork.\r\n\r\n### New Branding Page\r\n\r\n- [Similar to Discord's](https://discordapp.com/branding) in theme, provides all the logos and some light recommendations on how to use the logo.\r\n\r\n- Can provide recommendations for how folks can make and print their own stickers"", 'title': 'Website Roadmap ', 'type': 'issue'}
+ {'action': 'created', 'author': 'Draem', 'comment_id': 545558516.0, 'datetime': '2019-10-23 17:45:15+00:00', 'masked_author': 'username_1', 'text': 'Epic.', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'IgorHalfeld', 'comment_id': 545606538.0, 'datetime': '2019-10-23 19:46:38+00:00', 'masked_author': 'username_2', 'text': 'Awesome!!', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'orta', 'comment_id': 611196893.0, 'datetime': '2020-04-08 21:11:43+00:00', 'masked_author': 'username_0', 'text': 'I shipped the branding page today, which makes this 100% done on the current roadmap.', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'orta', 'comment_id': 1011159754.0, 'datetime': '2022-01-12 15:26:00+00:00', 'masked_author': 'username_0', 'text': 'Done and shipped.', 'title': None, 'type': 'comment'}
+ {'action': 'closed', 'author': 'orta', 'comment_id': None, 'datetime': '2022-01-12 15:26:01+00:00', 'masked_author': 'username_0', 'text': '', 'title': None, 'type': 'issue'}]","<issue_start><issue_comment>Title: Website Roadmap 
+username_0: [WIP build](https://github.com/microsoft/TypeScript-Website/tree/v2/packages/sandbox)
+
+This would allow us to embed the monaco-editor with a lot of playground features into documentation pages on request, as well as allowing external parties to have their own TypeScript powered API references with DTS files trivially.
+
+Represents the end of the [typescript-play](https://github.com/username_0/typescript-play) fork.
+
+### New Branding Page
+
+- [Similar to Discord's](https://discordapp.com/branding) in theme, provides all the logos and some light recommendations on how to use the logo.
+
+- Can provide recommendations for how folks can make and print their own stickers
+<issue_comment>username_1: Epic.
+<issue_comment>username_2: Awesome!!
+<issue_comment>username_0: I shipped the branding page today, which makes this 100% done on the current roadmap.
+<issue_comment>username_0: Done and shipped.<issue_closed>"
+usegalaxy-eu/website,584291101,422,"{'number': 422.0, 'repo': 'website', 'user_login': 'usegalaxy-eu'}","[{'action': 'opened', 'author': 'stephanflemming', 'comment_id': None, 'datetime': '2020-03-19T09:55:41Z', 'masked_author': 'username_0', 'text': 'add news and event', 'title': 'Wirvsvirus', 'type': 'issue'}
+ {'action': 'created', 'author': 'mtekman', 'comment_id': 601155423.0, 'datetime': '2020-03-19 12:39:32+00:00', 'masked_author': 'username_1', 'text': '```\r\n---\r\nsite: freiburg\r\ntitle: ""WirVsVirus Hackathon""\r\ntags: [hackathon]\r\n---\r\n\r\nWe want to encourage you to participate and join the fight against Covid-19.\r\n\r\nThe Federal Government of Germany is organising the [#WirVsVirus Hackathon](https://wirvsvirushackathon.org/), and we at Galaxy are here to help.\r\n\r\n![WirVsVirus](https://wirvsvirushackathon.org/wp-content/uploads/2020/03/12-scaled.jpg)\r\n\r\n\r\nThe Galaxy community freely offers [RStudio](https://galaxyproject.github.io/training-material/topics/galaxy-ui/tutorials/rstudio/tutorial.html) and [Jupyter notebook](https://galaxyproject.github.io/training-material/topics/galaxy-ui/tutorials/galaxy-intro-jupyter/tutorial.html) instances on request, hosted using our cloud infrastructure aided by more than 3000 cores and extensive memory resources.\r\n\r\nAll tools and notebook instances are backed by a foundation of scientific and computational reproducibility, using the power of [Bioconda](https://bioconda.github.io/), along with the full [Galaxy suite](https://usegalaxy.eu) of 2000 bioinformatic tools to experiment with at your disposal.\r\n\r\nTake a look at https://covid19.galaxyproject.org/ for an initial analysis of COVID-19 data using Galaxy, BioConda and public research infrastructure (XSEDE, de.NBI-cloud, ARDC cloud).\r\n\r\nFeel free to [contact us](efpyi@example.com) for further information or if we can support your research with our infrastructure.\r\n\r\nStay healthy!\r\n```\r\n\r\nI\'ve never understood how to push edits to a checked out PR from the command line.', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'stephanflemming', 'comment_id': 601158494.0, 'datetime': '2020-03-19 12:46:55+00:00', 'masked_author': 'username_0', 'text': 'I use the same text for the news and event section, or?', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'mtekman', 'comment_id': 601160039.0, 'datetime': '2020-03-19 12:50:50+00:00', 'masked_author': 'username_1', 'text': 'sounds good to me', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'bgruening', 'comment_id': 601169642.0, 'datetime': '2020-03-19 13:12:23+00:00', 'masked_author': 'username_2', 'text': 'Thanks all.', 'title': None, 'type': 'comment'}]","<issue_start><issue_comment>Title: Wirvsvirus
+username_0: add news and event
+<issue_comment>username_1: ```
+---
+site: freiburg
+title: ""WirVsVirus Hackathon""
+tags: [hackathon]
+---
+
+We want to encourage you to participate and join the fight against Covid-19.
+
+The Federal Government of Germany is organising the [#WirVsVirus Hackathon](https://wirvsvirushackathon.org/), and we at Galaxy are here to help.
+
+![WirVsVirus](https://wirvsvirushackathon.org/wp-content/uploads/2020/03/12-scaled.jpg)
+
+
+The Galaxy community freely offers [RStudio](https://galaxyproject.github.io/training-material/topics/galaxy-ui/tutorials/rstudio/tutorial.html) and [Jupyter notebook](https://galaxyproject.github.io/training-material/topics/galaxy-ui/tutorials/galaxy-intro-jupyter/tutorial.html) instances on request, hosted using our cloud infrastructure aided by more than 3000 cores and extensive memory resources.
+
+All tools and notebook instances are backed by a foundation of scientific and computational reproducibility, using the power of [Bioconda](https://bioconda.github.io/), along with the full [Galaxy suite](https://usegalaxy.eu) of 2000 bioinformatic tools to experiment with at your disposal.
+
+Take a look at https://covid19.galaxyproject.org/ for an initial analysis of COVID-19 data using Galaxy, BioConda and public research infrastructure (XSEDE, de.NBI-cloud, ARDC cloud).
+
+Feel free to [contact us](galaxy@informatik.uni-freiburg.de) for further information or if we can support your research with our infrastructure.
+
+Stay healthy!
+```
+
+I've never understood how to push edits to a checked out PR from the command line.
+<issue_comment>username_0: I use the same text for the news and event section, or?
+<issue_comment>username_1: sounds good to me
+<issue_comment>username_2: Thanks all."
+dlang/dlang.org,160307565,1371,"{'number': 1371.0, 'repo': 'dlang.org', 'user_login': 'dlang'}","[{'action': 'opened', 'author': 'wilzbach', 'comment_id': None, 'datetime': '2016-06-14T23:27:26Z', 'masked_author': 'username_0', 'text': 'FontAwesome is amazing, so how about using it at a very important part of our frontpage?\r\n\r\nbefore:\r\n\r\n![image](https://cloud.githubusercontent.com/assets/4370550/16063137/0a111720-3298-11e6-8901-d7c6ce95b816.png)\r\n\r\nafter: \r\n\r\n![image](https://cloud.githubusercontent.com/assets/4370550/16063114/f972c2a6-3297-11e6-8731-2ba8d5007ebf.png)\r\n\r\n(screenshots are taken at 50%)', 'title': ""Add icons to 'Why D'"", 'type': 'issue'}
+ {'action': 'created', 'author': 'CyberShadow', 'comment_id': 226047346.0, 'datetime': '2016-06-14 23:30:28+00:00', 'masked_author': 'username_1', 'text': '@username_3', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'wilzbach', 'comment_id': 226053675.0, 'datetime': '2016-06-15 00:11:52+00:00', 'masked_author': 'username_0', 'text': ""I still don't like the fighter icon for power, possible ideas:\r\n\r\n- http://fontawesome.io/icon/bomb/\r\n- http://fontawesome.io/icon/fire/\r\n- http://fontawesome.io/icon/flask/\r\n- http://fontawesome.io/icon/heartbeat/\r\n- http://fontawesome.io/icon/trophy/\r\n\r\n@username_1 suggested to use the new `industry` icon (since FontAwesome 4.4) and then `rocket` for power:\r\n\r\n![image](https://cloud.githubusercontent.com/assets/4370550/16064075/6d94941a-329e-11e6-9307-248733403c2a.png)"", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'adamdruppe', 'comment_id': 226083200.0, 'datetime': '2016-06-15 04:09:30+00:00', 'masked_author': 'username_2', 'text': 'FontAwesome is a piece of crap. Just make little inline SVGs of the icons you like and use them. Better in virtually every way.', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'CyberShadow', 'comment_id': 226083279.0, 'datetime': '2016-06-15 04:10:25+00:00', 'masked_author': 'username_1', 'text': 'How so Adam? Doing what you suggest will greatly increase the load time and resource usage.', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'adamdruppe', 'comment_id': 226085549.0, 'datetime': '2016-06-15 04:33:31+00:00', 'masked_author': 'username_2', 'text': 'Surely a tiny handful of inline icons is going to load faster than loading ~ 70 KB of css and font assets (that\'s after compression!). Even font awesome themselves brag that you can get a 10x faster download by just taking the icons you actually use.\n\ndlang.org uses, what, 9 of them? That\'s not a lot to just inline (and it\'d save two http requests). fontawesome comes with over 600.\n\nMoreover, even if it were all equal, svg degrades more gracefully than littering the site with private use characters. If you have webfonts disabled/blocked, they appear as those ugly boxes. svg actually renders, or can use the standard alt tag (which should prolly just ="""" for the icons since they are just decoration). Using `<i class="""">` just disgusts me too, that\'s not what the tag means! <i> has meant some variant on italic text forever (html5 calls it ""alternate voice or mood"", there\'s no standard document that calls it an icon holder.\n\nsvg also avoids strange text artifacts like antialiasing which happens with fonts.\n\nSee this list for even more: https://css-tricks.com/icon-fonts-vs-svg/\n\nLastly, every lazy website uses these same boring stock icons. I\'d prefer to do something new, though I recognize that actually is a lot of work. But even reusing their designs as images instead of hideous html is a big step up.', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'CyberShadow', 'comment_id': 226087449.0, 'datetime': '2016-06-15 04:52:12+00:00', 'masked_author': 'username_1', 'text': 'Are *you* willing to do that (and do it in such a way that makes adding/changing icons easy)? But even if so, it would be churn with a very debatable trade-off.', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'adamdruppe', 'comment_id': 226185748.0, 'datetime': '2016-06-15 13:24:44+00:00', 'masked_author': 'username_2', 'text': ""Yeah, it's trivial. svg versions of the font awesome icons are easy to get, all you do is copy/paste it in minimally. I'd ideally prefer to do it as a css background-image though, which means fixing the semantic html, but it still isn't much... I'd make the TOUR thing take a descriptive class name instead of an icon name, then move the icon definition itself to the stylesheet.\n\nTo change icons in the future, you'd just paste a new one into the stylesheet."", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'wilzbach', 'comment_id': 226300598.0, 'datetime': '2016-06-15 19:53:00+00:00', 'masked_author': 'username_0', 'text': 'Then I am waiting for your PR ;-)\r\n\r\n---------------------------------------------\r\n\r\nIn any case: do we all agree that icons look nice in general? Are the ones I picked for categories matching?', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'adamdruppe', 'comment_id': 226302984.0, 'datetime': '2016-06-15 20:01:51+00:00', 'masked_author': 'username_2', 'text': ""I'll wait until this is merged and your decisions made then do it separately, as there's existing icons on the page that can be transitioned too."", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'andralex', 'comment_id': 226327562.0, 'datetime': '2016-06-15 21:36:19+00:00', 'masked_author': 'username_3', 'text': 'If @username_1 is for it I\'m for it.  `preapproved = approvedBy(""@Cybershadow"");`', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'wilzbach', 'comment_id': 226335358.0, 'datetime': '2016-06-15 22:10:42+00:00', 'masked_author': 'username_0', 'text': 'Upgraded to FontAwesome 4.4 (needed for the `industry` icon) and also applied it to the areas page.', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'CyberShadow', 'comment_id': 226656502.0, 'datetime': '2016-06-17 01:09:07+00:00', 'masked_author': 'username_1', 'text': 'I haven\'t actually approved adding the icons to the front page... After thinking about it, well I\'m not sure.\r\n\r\nIcons + text is a nice combination that works in a lot of cases, but perhaps we\'re starting to do it too much. At a certain point it passes some threshold and instead of adding visual information it becomes clutter, and becomes the one of the central elements of the page (i.e. one of the things that jumps at you when you open the page shouldn\'t be ""Look! We\'re using Font Awesome everywhere we can!""). Some of the icon choices also seem forced (convenience/power).\r\n\r\nSo, I\'m on the fence, and could use more opinions on this.', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'ZombineDev', 'comment_id': 226694609.0, 'datetime': '2016-06-17 06:54:19+00:00', 'masked_author': 'username_4', 'text': ""FWIW, I like the front page more with icons (Power - `rocket`, Efficiency - `bolt`, Industry-proven - `industry`). Icons are definitely something that captures visitors attention and makes the wall of information a bit more interesting.\r\nThe only thing I would change is the icon for Convenience. Here are a couple of alternatives: \r\n[diamond](http://fontawesome.io/icon/diamond/), [leaf](http://fontawesome.io/icon/leaf/), [magic](http://fontawesome.io/icon/magic/) and [paper-plane-o](http://fontawesome.io/icon/paper-plane-o/).\r\n\r\nPython's [homepage](https://www.python.org) also uses icons extensively and I don't think it's too much."", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'CyberShadow', 'comment_id': 226695882.0, 'datetime': '2016-06-17 07:02:36+00:00', 'masked_author': 'username_1', 'text': '`fa-magic` for convenience looks just right!', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'wilzbach', 'comment_id': 226795715.0, 'datetime': '2016-06-17 15:10:17+00:00', 'masked_author': 'username_0', 'text': 'Agreed - rebased  with that ;-)\r\n\r\n![image](https://cloud.githubusercontent.com/assets/4370550/16155148/549ed9a4-34ae-11e6-8306-6f7123166120.png)', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'CyberShadow', 'comment_id': 226796342.0, 'datetime': '2016-06-17 15:12:25+00:00', 'masked_author': 'username_1', 'text': ""Is that a screenshot for ants? :)\r\n\r\nGitHub will automatically size images to fit into the comment's width, so there's no need to pre-resize screenshots."", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'CyberShadow', 'comment_id': 226796729.0, 'datetime': '2016-06-17 15:13:53+00:00', 'masked_author': 'username_1', 'text': 'Oops, please rebase again :)', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'wilzbach', 'comment_id': 226798022.0, 'datetime': '2016-06-17 15:18:24+00:00', 'masked_author': 'username_0', 'text': 'Should be green now.', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'CyberShadow', 'comment_id': 226798306.0, 'datetime': '2016-06-17 15:19:29+00:00', 'masked_author': 'username_1', 'text': 'IDK about Chrome but in Firefox you can take a screenshot of an arbitrary viewport by going into mobile development mode (Ctrl+Shift+M), resizing the viewport, and clicking on the camera button.', 'title': None, 'type': 'comment'}]","<issue_start><issue_comment>Title: Add icons to 'Why D'
+username_0: FontAwesome is amazing, so how about using it at a very important part of our frontpage?
+
+before:
+
+![image](https://cloud.githubusercontent.com/assets/4370550/16063137/0a111720-3298-11e6-8901-d7c6ce95b816.png)
+
+after: 
+
+![image](https://cloud.githubusercontent.com/assets/4370550/16063114/f972c2a6-3297-11e6-8731-2ba8d5007ebf.png)
+
+(screenshots are taken at 50%)
+<issue_comment>username_1: @username_3
+<issue_comment>username_0: I still don't like the fighter icon for power, possible ideas:
+
+- http://fontawesome.io/icon/bomb/
+- http://fontawesome.io/icon/fire/
+- http://fontawesome.io/icon/flask/
+- http://fontawesome.io/icon/heartbeat/
+- http://fontawesome.io/icon/trophy/
+
+@username_1 suggested to use the new `industry` icon (since FontAwesome 4.4) and then `rocket` for power:
+
+![image](https://cloud.githubusercontent.com/assets/4370550/16064075/6d94941a-329e-11e6-9307-248733403c2a.png)
+<issue_comment>username_2: FontAwesome is a piece of crap. Just make little inline SVGs of the icons you like and use them. Better in virtually every way.
+<issue_comment>username_1: How so Adam? Doing what you suggest will greatly increase the load time and resource usage.
+<issue_comment>username_2: Surely a tiny handful of inline icons is going to load faster than loading ~ 70 KB of css and font assets (that's after compression!). Even font awesome themselves brag that you can get a 10x faster download by just taking the icons you actually use.
+
+dlang.org uses, what, 9 of them? That's not a lot to just inline (and it'd save two http requests). fontawesome comes with over 600.
+
+Moreover, even if it were all equal, svg degrades more gracefully than littering the site with private use characters. If you have webfonts disabled/blocked, they appear as those ugly boxes. svg actually renders, or can use the standard alt tag (which should prolly just ="""" for the icons since they are just decoration). Using `<i class="""">` just disgusts me too, that's not what the tag means! <i> has meant some variant on italic text forever (html5 calls it ""alternate voice or mood"", there's no standard document that calls it an icon holder.
+
+svg also avoids strange text artifacts like antialiasing which happens with fonts.
+
+See this list for even more: https://css-tricks.com/icon-fonts-vs-svg/
+
+Lastly, every lazy website uses these same boring stock icons. I'd prefer to do something new, though I recognize that actually is a lot of work. But even reusing their designs as images instead of hideous html is a big step up.
+<issue_comment>username_1: Are *you* willing to do that (and do it in such a way that makes adding/changing icons easy)? But even if so, it would be churn with a very debatable trade-off.
+<issue_comment>username_2: Yeah, it's trivial. svg versions of the font awesome icons are easy to get, all you do is copy/paste it in minimally. I'd ideally prefer to do it as a css background-image though, which means fixing the semantic html, but it still isn't much... I'd make the TOUR thing take a descriptive class name instead of an icon name, then move the icon definition itself to the stylesheet.
+
+To change icons in the future, you'd just paste a new one into the stylesheet.
+<issue_comment>username_0: Then I am waiting for your PR ;-)
+
+---------------------------------------------
+
+In any case: do we all agree that icons look nice in general? Are the ones I picked for categories matching?
+<issue_comment>username_2: I'll wait until this is merged and your decisions made then do it separately, as there's existing icons on the page that can be transitioned too.
+<issue_comment>username_3: If @username_1 is for it I'm for it.  `preapproved = approvedBy(""@Cybershadow"");`
+<issue_comment>username_0: Upgraded to FontAwesome 4.4 (needed for the `industry` icon) and also applied it to the areas page.
+<issue_comment>username_1: I haven't actually approved adding the icons to the front page... After thinking about it, well I'm not sure.
+
+Icons + text is a nice combination that works in a lot of cases, but perhaps we're starting to do it too much. At a certain point it passes some threshold and instead of adding visual information it becomes clutter, and becomes the one of the central elements of the page (i.e. one of the things that jumps at you when you open the page shouldn't be ""Look! We're using Font Awesome everywhere we can!""). Some of the icon choices also seem forced (convenience/power).
+
+So, I'm on the fence, and could use more opinions on this.
+<issue_comment>username_4: FWIW, I like the front page more with icons (Power - `rocket`, Efficiency - `bolt`, Industry-proven - `industry`). Icons are definitely something that captures visitors attention and makes the wall of information a bit more interesting.
+The only thing I would change is the icon for Convenience. Here are a couple of alternatives: 
+[diamond](http://fontawesome.io/icon/diamond/), [leaf](http://fontawesome.io/icon/leaf/), [magic](http://fontawesome.io/icon/magic/) and [paper-plane-o](http://fontawesome.io/icon/paper-plane-o/).
+
+Python's [homepage](https://www.python.org) also uses icons extensively and I don't think it's too much.
+<issue_comment>username_1: `fa-magic` for convenience looks just right!
+<issue_comment>username_0: Agreed - rebased  with that ;-)
+
+![image](https://cloud.githubusercontent.com/assets/4370550/16155148/549ed9a4-34ae-11e6-8306-6f7123166120.png)
+<issue_comment>username_1: Is that a screenshot for ants? :)
+
+GitHub will automatically size images to fit into the comment's width, so there's no need to pre-resize screenshots.
+<issue_comment>username_1: Oops, please rebase again :)
+<issue_comment>username_0: Should be green now.
+<issue_comment>username_1: IDK about Chrome but in Firefox you can take a screenshot of an arbitrary viewport by going into mobile development mode (Ctrl+Shift+M), resizing the viewport, and clicking on the camera button."
+facebook/docusaurus,648839756,3018,,"[{'action': 'opened', 'author': 'slorber', 'comment_id': None, 'datetime': '2020-07-01 09:48:17+00:00', 'masked_author': 'username_0', 'text': '## 💥 Proposal\r\n\r\nPeople using Docusaurus don\'t always like the MDX parser:\r\n- If you come from an existing Markdown docs base (like v1), you need to make it compatible with MDX, despite that you actually don\'t plan to embed any JSX components in the markdown\r\n- You might want to keep compatibility to CommonMark, to stay compatible with existing ecosystem (Github md viewer, markdownlint etc...)\r\n- It creates more ""lock-in"", because to leave MDX you have to convert back to CommonMark\r\n- It can be confusing to not be able to use CommonMark (ie html tags, not jsx) in .md files, and to learn that even .md files are parsed with MDX\r\n\r\nRelated discussions:\r\n- https://github.com/facebook/docusaurus/discussions/3009\r\n- https://github.com/mdx-js/mdx/issues/1125\r\n\r\n---\r\n\r\n## Solution ?\r\n\r\nhttps://github.com/rexxars/react-markdown\r\n\r\nThis lib:\r\n- is also based on UnifiedJS ecosystem\r\n- allows to pass custom React elements to replace existing tags\r\n\r\nWe may be able to build some shared abstraction on top of react-markdown + MDX.\r\n\r\nIf this works, we could switch from one parser to another with a simple switch/setting, that could be:\r\n- .md -> react-markdown\r\n- .mdx -> MDX\r\n- global default D2 parser setting\r\n- parser frontmatter\r\n\r\n-- \r\n\r\nFeedbacks welcome', 'title': 'RFC: CommonMark compatibility', 'type': 'issue'}
+ {'action': 'created', 'author': 'slorber', 'comment_id': 652327999.0, 'datetime': '2020-07-01 10:10:54+00:00', 'masked_author': 'username_0', 'text': 'Sidenote: `<!--truncate-->` marker used for blog summaries will likely not work in MDX 2:\r\n- https://v2.docusaurus.io/docs/blog/#summary-truncation\r\n- https://github.com/mdx-js/mdx/pull/1039', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'borekb', 'comment_id': 652339192.0, 'datetime': '2020-07-01 10:35:06+00:00', 'masked_author': 'username_1', 'text': 'I think that Docusaurus could document an interface for plugins / formats / loaders (I don\'t know how to call them) that could possibly look like this:\r\n\r\n- At the base level, the format should be able to produce an **HTML output**, i.e., an HTML **string**. For example, if I have a `.txt` file, I\'d be able to write a ""format"" that produces `<pre>... contents of the txt file ...</pre>`. Since this is just a string, Docusaurus wouldn\'t operate on it in any way, just display it.\r\n\r\n- Smarter formats would return some sort of **AST** (or JSX or whatever would be suitable). For example, if I wanted to implement `.md` that turns code blocks to live playgrounds, like [React Styleguidist](https://react-styleguidist.js.org/) does, I\'d be able to do that.\r\n\r\nSome wilders use cases this would cover (I actually had them in the past):\r\n\r\n- A marketing team uses headless WordPress to maintain the contents of landing pages.\r\n- Feature comparison / grid is maintained in a Google Sheet.\r\n- `.md` files use some sort of Markdown dialect, for example, the site used to be powered by MkDocs and uses Python-Markdown plus a couple of custom extensions.\r\n\r\nFor this RFC, I think it\'s more than enough to support CommonMark but since I\'ve now spent some time thinking about how we\'d use Docusaurus and what I\'d love it to allow me to do, I thought I\'d post it here.\r\n\r\nThanks a lot for this RFC and all the work that goes into Docusaurus!', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'borekb', 'comment_id': 658601535.0, 'datetime': '2020-07-15 07:38:57+00:00', 'masked_author': 'username_1', 'text': ""@username_0 I'd like to create a prototype of CommonMark support but am unfamiliar with Docusaurus codebase so would really appreciate high-level guidelines if you will.\r\n\r\nRoughly speaking, if I wanted to parse `.md` files as CommonMark, which parts of the codebase I'd need to touch? I can overwrite the code for now in a fork, i.e., it's not my ambition yet to make this a general solution supporting both MDX and CommonMark, I just want to see what's the minimal set of changes to swap the MDX parser for something like remark.\r\n\r\nAny hints appreciated 🙏 ."", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'slorber', 'comment_id': 658611733.0, 'datetime': '2020-07-15 08:00:31+00:00', 'masked_author': 'username_0', 'text': 'Hi,\r\n\r\nMy first intuition would be to rename ""docusaurus-mdx-loader"" to ""docusaurus-md-loader"", and provide a loader option to tell it to load the files as md or mdx. In the end, we need a React component anyway, using MDX, but in md mode, we could convert the html elements to JSX elements just before feeding mdx, so that mdx is happy?\r\n\r\nNot sure, this would require some experiments.', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'borekb', 'comment_id': 658624596.0, 'datetime': '2020-07-15 08:25:53+00:00', 'masked_author': 'username_1', 'text': ""Thanks a lot, I'll give it a go later this week or the next one."", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'borekb', 'comment_id': 671093889.0, 'datetime': '2020-08-09 19:53:29+00:00', 'masked_author': 'username_1', 'text': ""return originalPluginContentDocs.validateOptions({validate, options});\r\n}\r\n```\r\n\r\nThe there's a custom loader – `plugin-content-docs-2/src/custom-md-loader/index.ts`. It looks like this in full:\r\n\r\n```ts\r\nimport {loader} from 'webpack';\r\nimport {getOptions} from 'loader-utils';\r\nimport {readFileSync} from 'fs-extra';\r\nimport matter from 'gray-matter';\r\nimport stringifyObject from 'stringify-object';\r\nimport unified from 'unified';\r\nimport parse from 'remark-parse';\r\nimport remark2rehype from 'remark-rehype';\r\nimport rehype2react from 'rehype-react';\r\nimport React from 'react';\r\nimport rightToc from '@docusaurus/mdx-loader/src/remark/rightToc';\r\nimport slug from 'remark-slug';\r\nimport raw from 'rehype-raw';\r\nimport emoji from 'remark-emoji';\r\nimport admonitions from 'remark-admonitions';\r\nimport headings from 'rehype-autolink-headings';\r\nimport highlight from '@mapbox/rehype-prism';\r\nimport reactElementToJSXString from 'react-element-to-jsx-string';\r\n\r\nconst mdLoader: loader.Loader = function (fileString) {\r\n  const callback = this.async();\r\n\r\n  const {data, content} = matter(fileString);\r\n\r\n  const options = getOptions(this) || {};\r\n\r\n  let exportStr = `export const frontMatter = ${stringifyObject(data)};`;\r\n  // Read metadata for this MDX and export it.\r\n  if (options.metadataPath && typeof options.metadataPath === 'function') {\r\n    const metadataPath = options.metadataPath(this.resourcePath);\r\n    if (metadataPath) {\r\n      // Add as dependency of this loader result so that we can\r\n      // recompile if metadata is changed.\r\n      this.addDependency(metadataPath);\r\n      const metadata = readFileSync(metadataPath, 'utf8');\r\n      exportStr += `\\nexport const metadata = ${metadata};`;\r\n    }\r\n  }\r\n\r\n  const processedMd = unified()\r\n    .use(parse, {commonmark: true})\r\n    .use(slug)\r\n    .use(emoji)\r\n    .use(admonitions)\r\n    .use(rightToc)\r\n    .use(remark2rehype, {allowDangerousHtml: true})\r\n    .use(raw)\r\n    .use(headings)\r\n    .use(highlight)\r\n    .use(rehype2react, {createElement: React.createElement, Fragment: React.Fragment})\r\n    .processSync(content);\r\n\r\n  const jsxString = reactElementToJSXString((processedMd as any).result);\r\n\r\n  // I don't like this at all, but it's a prototype...\r\n  // We need to get 'rightToc' data from the JSX string, so following lines\r\n  // are about getting the info and then replacing it, along with escaping unwanted chars.\r\n  const rightTocString = jsxString\r\n    .match(/(export const rightToc = \\[[\\s\\S.]*\\];)/)![1]\r\n    .replace(/(\\\\n)|(\\\\t)|(\\\\)/g, '');\r\n\r\n  const escapedJsxString = jsxString\r\n    .replace(/{\\`[\\S\\s.]*?export const rightToc = \\[[\\s\\S.]*\\];[\\S\\s.]*?\\`}/, '')\r\n    .replace(/{'[\\s\\S]*?'}/g, `{' '}`)\r\n    .replace(/`/g, '\\`');\r\n\r\n  const code = `\r\n  import React from 'react';\r\n\r\n  ${rightTocString}\r\n  ${exportStr}\r\n\r\n  export default function MDLoader() {\r\n    return (${escapedJsxString});\r\n  }\r\n  `;\r\n\r\n  return callback && callback(null, code);\r\n};\r\n\r\nexport default mdLoader;\r\n```\r\n\r\nIf there wasn't the ugly React to string parsing code, it would actually be quite simple.\r\n\r\nThe downside from the maintenance point of view is that the MD loader is explicit about its unified.js plugins while the MDX loader is a bit more indirect / obscure, so there would be two places to maintain this configuration. But I think this could be refactored to be more aligned, and even in the worst case, it's like 15 lines of code and the default set of plugins probably isn't changing that often.\r\n\r\nOverall, it seems feasible to me."", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'borekb', 'comment_id': 671094040.0, 'datetime': '2020-08-09 19:54:56+00:00', 'masked_author': 'username_1', 'text': ""An alternative approach would be to convert MD to MDX first and then just let the `mdx-loader` to its thing. But there probably isn't currently a convertor from MD to MDX in the unified ecosystem, though many pieces are in place: https://github.com/unifiedjs/ideas/issues/9."", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'slorber', 'comment_id': 671911407.0, 'datetime': '2020-08-11 12:18:26+00:00', 'masked_author': 'username_0', 'text': ""thanks for those details, that looks interesting. If MDX provided a converter that would be great, also would helpful for v1->v2 migrations\r\n\r\n\r\nI don't have much time to explore these ideas but we'll come back to it someday.\r\n\r\n\r\nNote, not sure it's related, but there's a large docs plugin refactor here: https://github.com/facebook/docusaurus/pull/3245"", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'nilsocket', 'comment_id': 820938287.0, 'datetime': '2021-04-16 06:18:52+00:00', 'masked_author': 'username_2', 'text': ""Is it possible to have something simple, which works out of the box.\r\n\r\nI need math blocks, I see MDX documentation, it's too messy and complicated.\r\n\r\nDocusaurus seems to work on the basic assumptions or at-least targeted\r\nto only those users who are front-end developers, know JSX, React, ...\r\n\r\nor \r\n\r\nIs there a simple way to get math blocks support.\r\n\r\nThank you."", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'slorber', 'comment_id': 820989587.0, 'datetime': '2021-04-16 07:50:13+00:00', 'masked_author': 'username_0', 'text': ""@username_2 I don't think math blocks (latex/katex?) are really related to the markdown parser. But you are right, and we should make this easy. Can you explain better your usecase on this new issue I just created? https://github.com/facebook/docusaurus/issues/4625"", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'slorber', 'comment_id': 902023906.0, 'datetime': '2021-08-19 15:45:55+00:00', 'masked_author': 'username_0', 'text': '@username_3 unfortunately no easy solution can be implemented in userland to solve this properly. \r\nThe solution proposed by @username_1 is likely the best you can do, and I understand you might be intimidating 😅 \r\n\r\nMDX is not a ""validator"" for md files, it converts those files to React components that are loaded as JS modules in the client app through webpack loaders.\r\n\r\nTo make this compatible with CommonMark, this would require the loader to not use MDX in some cases but use a different Remark parsing logic. \r\n\r\nFor `.md` files we even have 2 choices now:\r\n- convert those files to React components, but use CommonMark compatible processing (solution of @username_1 )\r\n- convert those files to some AST that a small client-side runtime could render (it may be more performant for build time, but will have to poc this).\r\n\r\nSome challenges to consider:\r\n- The goal is not only to support CommonMark, but also try to reduce build times/improve perfs for sites not needing MDX (or with limited usage)\r\n- Some non-MDX Docusaurus markdown features (admonitions, code blocks etc...) should rather keep working when switching the parser\r\n\r\nThis is something I want to work on but I don\'t have time in the short term.', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'lukejgaskell', 'comment_id': 902152762.0, 'datetime': '2021-08-19 18:43:22+00:00', 'masked_author': 'username_3', 'text': '@username_0 That makes sense, thank you for the detailed explanation. If it\'s helpful, my use case is that I\'m importing markdown from different sources to host on a single site. That markdown may or may not follow the same syntax as the current loader. \r\n\r\nFor example, some of it uses `<pre>` tags, or other HTML elements. To fix my scenario I end up doing a bunch of regex parsing to get those files to align with the loader. Maybe there are other ways to handle these scenarios, but having loader options could be helpful as different sources have different lax practices on their markdown.\r\n\r\n```js\r\nconst replaceLT = (m, group1) => (!group1 ? m : ""&lt;"");\r\nconst replaceGT = (m, group1) => (!group1 ? m : ""&gt;"");\r\nconst replaceFileLink = (m) => m.replace(""("", ""(pathname://"");\r\n\r\nasync function run() {\r\n  await replace({\r\n    files: [""docs/**/*.md""],\r\n    from: [\r\n      /<pre>/g,\r\n      /<\\/pre>/g,\r\n      /<!--.*-->/g,\r\n      /\\[.*?\\]\\(.*?\\.(json|xlsx|xls|zip|docx|ps1)\\)/g, // fix file type links to not be picked up by loader\r\n      /\\\\`|`(?:\\\\`|[^`])*`|(<)/gm, //find all less than symbols that are not between backticks\r\n      /\\\\`|`(?:\\\\`|[^`])*`|(>)/gm, //find all greater than symbols that are not between backticks\r\n    ],\r\n    to: [""```"", ""```"", """", replaceFileLink, replaceLT, replaceGT],\r\n  });\r\n}\r\n```', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'Josh-Cena', 'comment_id': 1019412608.0, 'datetime': '2022-01-23 04:38:17+00:00', 'masked_author': 'username_4', 'text': 'I\'m 👎 on the point of letting users specify another parser, since it\'s very hard to make that line up with our build pipeline (e.g. remark plugins we already have, and the Markdown lifecycles we are to have). What _could_ happen is we build a compatibility layer on top of the MDX compiler and transform incompatible syntax (`style=""""` and `class=""""` being the two most notable) to what MDX expects. Users can always extend Markdown syntax by installing/building custom remark plugins, so there\'s no need to swap out the parser. MDX (and the unified system behind it) is designed to be completely customizable. This is especially the case after we\'ve migrated to MDX v2: there are much fewer quirks when JSX and Markdown co-exist.', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'slorber', 'comment_id': 1023434211.0, 'datetime': '2022-01-27 16:52:08+00:00', 'masked_author': 'username_0', 'text': ""yes, we'll see if it's still relevant after upgrading to MDX 2.\r\n\r\nWe'll need some dataset of existing commonmark docs to see what kind of issue we notice with MDX 2"", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'slorber', 'comment_id': 1024080327.0, 'datetime': '2022-01-28 10:25:41+00:00', 'masked_author': 'username_0', 'text': ""@username_4 apart markdown, some users might find it useful to user other content formats alongside the docs plugin (json, asciidocs...)\r\n\r\n- https://docusaurus.io/feature-requests/p/asciidoc-support\r\n- https://github.com/facebook/docusaurus/pull/6477#issuecomment-1023766156\r\n\r\nI think it could make sense to allow the docs plugin to emit content in different formats than a React component (MDX), and allow users to provide their own renderer. \r\n\r\nBeing able to pass content as json makes sense for a lot of tooling, and also CMS integrations that generally output JSON. We probably don't want to create artificial intermediate mdx files in this case.\r\n\r\nNow it does not mean we'd add an alternative md parser ourselves, but having a flexible api could allow users to implement this themselves if they really need to."", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'Josh-Cena', 'comment_id': 1024084805.0, 'datetime': '2022-01-28 10:31:24+00:00', 'masked_author': 'username_4', 'text': ""Yes, but all these data formats eventually have to become some structured data that is compatible with our architecture. For example, JSON + React components work for external docs plugins. However, if we allow swapping _our_ Markdown parsers with something else, how does the data transformation work like? Currently it's MDX -> JSX; does other parsers offer compilation to JSX-compatible formats?"", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'slorber', 'comment_id': 1024094215.0, 'datetime': '2022-01-28 10:44:25+00:00', 'masked_author': 'username_0', 'text': 'They don\'t need to be converted to JSX. The node parser can create a JSON structure, and then the theme component can render that JSON structure (and the users can write this logic themselves).\r\n\r\nThe ""content"" prop could be JSON (mdast, hast, custom ast, proprietary cms json) or even just raw pre-formatted HTML strings', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'Josh-Cena', 'comment_id': 1024096709.0, 'datetime': '2022-01-28 10:48:01+00:00', 'masked_author': 'username_4', 'text': ""Okay, if the resolution is to let a custom parser return HTML string and render using dangerously set inner HTML then sure :) I'm just not sure how good it is to populate our theme component with all kinds of checks of what a Markdown import potentially returns though."", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'zepatrik', 'comment_id': 1028851970.0, 'datetime': '2022-02-03 10:41:24+00:00', 'masked_author': 'username_5', 'text': 'One major problem I am facing right now is that I auto-generate some docs pages from go code. It is theoretically possible to inject some HTML/js because of MDX. Therefore, the generated pages are HTML escaped (replacing `< > & \' ""`).\r\nBut then, such escaped characters are not rendered as expected in code samples:\r\n![Screenshot from 2022-02-03 11-31-28](https://user-images.githubusercontent.com/5354445/152326174-8ba2a7ae-51c6-4146-860b-68221e724a46.png)\r\nfrom\r\n\r\n```markdown\r\nWe have to admit, this is not easy if you don&#39;t speak jq fluently. What\r\nabout opening an issue and telling us what predefined selectors you want to\r\nhave? https://github.com/ory/kratos/issues/new/choose\r\n\r\n\u200b```\r\nkratos identities delete &lt;id-0 [id-1 ...]&gt; [flags]\r\n\u200b```\r\n```\r\nIn ""standard"" markdown there is no need to escape any non-trusted input, but in MDX there is. It would be way safer to say: ""this is standard markdown form an untrusted source, don\'t try to run it as JS"" instead of partially escaping stuff where I might miss some edge cases.', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'Josh-Cena', 'comment_id': 1028862268.0, 'datetime': '2022-02-03 10:54:17+00:00', 'masked_author': 'username_4', 'text': ""@username_5 If you want to do post-processing, don't sanitize code in code blocks. Also, you can use a remark plugin to strip imports/exports very easily. Apart from import/exports, MDX can't execute arbitrary code."", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'zepatrik', 'comment_id': 1029000299.0, 'datetime': '2022-02-03 13:38:27+00:00', 'masked_author': 'username_5', 'text': 'Can you elaborate on that? I can easily create cross-site requests on the MDX playground using e.g.\r\n```\r\n<div onClick={() => fetch(""https://google.com/"").then(console.log).catch(console.log)}>Click me!</div>\r\n```\r\n\r\nOf course with that, I could e.g. leak stuff from local storage to one of my servers or do all kinds of things.', 'title': None, 'type': 'comment'}]","<issue_start><issue_comment>Title: RFC: CommonMark compatibility
+username_0: ## 💥 Proposal
+
+People using Docusaurus don't always like the MDX parser:
+- If you come from an existing Markdown docs base (like v1), you need to make it compatible with MDX, despite that you actually don't plan to embed any JSX components in the markdown
+- You might want to keep compatibility to CommonMark, to stay compatible with existing ecosystem (Github md viewer, markdownlint etc...)
+- It creates more ""lock-in"", because to leave MDX you have to convert back to CommonMark
+- It can be confusing to not be able to use CommonMark (ie html tags, not jsx) in .md files, and to learn that even .md files are parsed with MDX
+
+Related discussions:
+- https://github.com/facebook/docusaurus/discussions/3009
+- https://github.com/mdx-js/mdx/issues/1125
+
+---
+
+## Solution ?
+
+https://github.com/rexxars/react-markdown
+
+This lib:
+- is also based on UnifiedJS ecosystem
+- allows to pass custom React elements to replace existing tags
+
+We may be able to build some shared abstraction on top of react-markdown + MDX.
+
+If this works, we could switch from one parser to another with a simple switch/setting, that could be:
+- .md -> react-markdown
+- .mdx -> MDX
+- global default D2 parser setting
+- parser frontmatter
+
+-- 
+
+Feedbacks welcome
+<issue_comment>username_0: Sidenote: `<!--truncate-->` marker used for blog summaries will likely not work in MDX 2:
+- https://v2.docusaurus.io/docs/blog/#summary-truncation
+- https://github.com/mdx-js/mdx/pull/1039
+<issue_comment>username_1: I think that Docusaurus could document an interface for plugins / formats / loaders (I don't know how to call them) that could possibly look like this:
+
+- At the base level, the format should be able to produce an **HTML output**, i.e., an HTML **string**. For example, if I have a `.txt` file, I'd be able to write a ""format"" that produces `<pre>... contents of the txt file ...</pre>`. Since this is just a string, Docusaurus wouldn't operate on it in any way, just display it.
+
+- Smarter formats would return some sort of **AST** (or JSX or whatever would be suitable). For example, if I wanted to implement `.md` that turns code blocks to live playgrounds, like [React Styleguidist](https://react-styleguidist.js.org/) does, I'd be able to do that.
+
+Some wilders use cases this would cover (I actually had them in the past):
+
+- A marketing team uses headless WordPress to maintain the contents of landing pages.
+- Feature comparison / grid is maintained in a Google Sheet.
+- `.md` files use some sort of Markdown dialect, for example, the site used to be powered by MkDocs and uses Python-Markdown plus a couple of custom extensions.
+
+For this RFC, I think it's more than enough to support CommonMark but since I've now spent some time thinking about how we'd use Docusaurus and what I'd love it to allow me to do, I thought I'd post it here.
+
+Thanks a lot for this RFC and all the work that goes into Docusaurus!
+<issue_comment>username_1: @username_0 I'd like to create a prototype of CommonMark support but am unfamiliar with Docusaurus codebase so would really appreciate high-level guidelines if you will.
+
+Roughly speaking, if I wanted to parse `.md` files as CommonMark, which parts of the codebase I'd need to touch? I can overwrite the code for now in a fork, i.e., it's not my ambition yet to make this a general solution supporting both MDX and CommonMark, I just want to see what's the minimal set of changes to swap the MDX parser for something like remark.
+
+Any hints appreciated 🙏 .
+<issue_comment>username_0: Hi,
+
+My first intuition would be to rename ""docusaurus-mdx-loader"" to ""docusaurus-md-loader"", and provide a loader option to tell it to load the files as md or mdx. In the end, we need a React component anyway, using MDX, but in md mode, we could convert the html elements to JSX elements just before feeding mdx, so that mdx is happy?
+
+Not sure, this would require some experiments.
+<issue_comment>username_1: Thanks a lot, I'll give it a go later this week or the next one.
+<issue_comment>username_1: return originalPluginContentDocs.validateOptions({validate, options});
+}
+```
+
+The there's a custom loader – `plugin-content-docs-2/src/custom-md-loader/index.ts`. It looks like this in full:
+
+```ts
+import {loader} from 'webpack';
+import {getOptions} from 'loader-utils';
+import {readFileSync} from 'fs-extra';
+import matter from 'gray-matter';
+import stringifyObject from 'stringify-object';
+import unified from 'unified';
+import parse from 'remark-parse';
+import remark2rehype from 'remark-rehype';
+import rehype2react from 'rehype-react';
+import React from 'react';
+import rightToc from '@docusaurus/mdx-loader/src/remark/rightToc';
+import slug from 'remark-slug';
+import raw from 'rehype-raw';
+import emoji from 'remark-emoji';
+import admonitions from 'remark-admonitions';
+import headings from 'rehype-autolink-headings';
+import highlight from '@mapbox/rehype-prism';
+import reactElementToJSXString from 'react-element-to-jsx-string';
+
+const mdLoader: loader.Loader = function (fileString) {
+  const callback = this.async();
+
+  const {data, content} = matter(fileString);
+
+  const options = getOptions(this) || {};
+
+  let exportStr = `export const frontMatter = ${stringifyObject(data)};`;
+  // Read metadata for this MDX and export it.
+  if (options.metadataPath && typeof options.metadataPath === 'function') {
+    const metadataPath = options.metadataPath(this.resourcePath);
+    if (metadataPath) {
+      // Add as dependency of this loader result so that we can
+      // recompile if metadata is changed.
+      this.addDependency(metadataPath);
+      const metadata = readFileSync(metadataPath, 'utf8');
+      exportStr += `\nexport const metadata = ${metadata};`;
+    }
+  }
+
+  const processedMd = unified()
+    .use(parse, {commonmark: true})
+    .use(slug)
+    .use(emoji)
+    .use(admonitions)
+    .use(rightToc)
+    .use(remark2rehype, {allowDangerousHtml: true})
+    .use(raw)
+    .use(headings)
+    .use(highlight)
+    .use(rehype2react, {createElement: React.createElement, Fragment: React.Fragment})
+    .processSync(content);
+
+  const jsxString = reactElementToJSXString((processedMd as any).result);
+
+  // I don't like this at all, but it's a prototype...
+  // We need to get 'rightToc' data from the JSX string, so following lines
+  // are about getting the info and then replacing it, along with escaping unwanted chars.
+  const rightTocString = jsxString
+    .match(/(export const rightToc = \[[\s\S.]*\];)/)![1]
+    .replace(/(\\n)|(\\t)|(\\)/g, '');
+
+  const escapedJsxString = jsxString
+    .replace(/{\`[\S\s.]*?export const rightToc = \[[\s\S.]*\];[\S\s.]*?\`}/, '')
+    .replace(/{'[\s\S]*?'}/g, `{' '}`)
+    .replace(/`/g, '\`');
+
+  const code = `
+  import React from 'react';
+
+  ${rightTocString}
+  ${exportStr}
+
+  export default function MDLoader() {
+    return (${escapedJsxString});
+  }
+  `;
+
+  return callback && callback(null, code);
+};
+
+export default mdLoader;
+```
+
+If there wasn't the ugly React to string parsing code, it would actually be quite simple.
+
+The downside from the maintenance point of view is that the MD loader is explicit about its unified.js plugins while the MDX loader is a bit more indirect / obscure, so there would be two places to maintain this configuration. But I think this could be refactored to be more aligned, and even in the worst case, it's like 15 lines of code and the default set of plugins probably isn't changing that often.
+
+Overall, it seems feasible to me.
+<issue_comment>username_1: An alternative approach would be to convert MD to MDX first and then just let the `mdx-loader` to its thing. But there probably isn't currently a convertor from MD to MDX in the unified ecosystem, though many pieces are in place: https://github.com/unifiedjs/ideas/issues/9.
+<issue_comment>username_0: thanks for those details, that looks interesting. If MDX provided a converter that would be great, also would helpful for v1->v2 migrations
+
+
+I don't have much time to explore these ideas but we'll come back to it someday.
+
+
+Note, not sure it's related, but there's a large docs plugin refactor here: https://github.com/facebook/docusaurus/pull/3245
+<issue_comment>username_2: Is it possible to have something simple, which works out of the box.
+
+I need math blocks, I see MDX documentation, it's too messy and complicated.
+
+Docusaurus seems to work on the basic assumptions or at-least targeted
+to only those users who are front-end developers, know JSX, React, ...
+
+or 
+
+Is there a simple way to get math blocks support.
+
+Thank you.
+<issue_comment>username_0: @username_2 I don't think math blocks (latex/katex?) are really related to the markdown parser. But you are right, and we should make this easy. Can you explain better your usecase on this new issue I just created? https://github.com/facebook/docusaurus/issues/4625
+<issue_comment>username_0: @username_3 unfortunately no easy solution can be implemented in userland to solve this properly. 
+The solution proposed by @username_1 is likely the best you can do, and I understand you might be intimidating 😅 
+
+MDX is not a ""validator"" for md files, it converts those files to React components that are loaded as JS modules in the client app through webpack loaders.
+
+To make this compatible with CommonMark, this would require the loader to not use MDX in some cases but use a different Remark parsing logic. 
+
+For `.md` files we even have 2 choices now:
+- convert those files to React components, but use CommonMark compatible processing (solution of @username_1 )
+- convert those files to some AST that a small client-side runtime could render (it may be more performant for build time, but will have to poc this).
+
+Some challenges to consider:
+- The goal is not only to support CommonMark, but also try to reduce build times/improve perfs for sites not needing MDX (or with limited usage)
+- Some non-MDX Docusaurus markdown features (admonitions, code blocks etc...) should rather keep working when switching the parser
+
+This is something I want to work on but I don't have time in the short term.
+<issue_comment>username_3: @username_0 That makes sense, thank you for the detailed explanation. If it's helpful, my use case is that I'm importing markdown from different sources to host on a single site. That markdown may or may not follow the same syntax as the current loader. 
+
+For example, some of it uses `<pre>` tags, or other HTML elements. To fix my scenario I end up doing a bunch of regex parsing to get those files to align with the loader. Maybe there are other ways to handle these scenarios, but having loader options could be helpful as different sources have different lax practices on their markdown.
+
+```js
+const replaceLT = (m, group1) => (!group1 ? m : ""&lt;"");
+const replaceGT = (m, group1) => (!group1 ? m : ""&gt;"");
+const replaceFileLink = (m) => m.replace(""("", ""(pathname://"");
+
+async function run() {
+  await replace({
+    files: [""docs/**/*.md""],
+    from: [
+      /<pre>/g,
+      /<\/pre>/g,
+      /<!--.*-->/g,
+      /\[.*?\]\(.*?\.(json|xlsx|xls|zip|docx|ps1)\)/g, // fix file type links to not be picked up by loader
+      /\\`|`(?:\\`|[^`])*`|(<)/gm, //find all less than symbols that are not between backticks
+      /\\`|`(?:\\`|[^`])*`|(>)/gm, //find all greater than symbols that are not between backticks
+    ],
+    to: [""```"", ""```"", """", replaceFileLink, replaceLT, replaceGT],
+  });
+}
+```
+<issue_comment>username_4: I'm 👎 on the point of letting users specify another parser, since it's very hard to make that line up with our build pipeline (e.g. remark plugins we already have, and the Markdown lifecycles we are to have). What _could_ happen is we build a compatibility layer on top of the MDX compiler and transform incompatible syntax (`style=""""` and `class=""""` being the two most notable) to what MDX expects. Users can always extend Markdown syntax by installing/building custom remark plugins, so there's no need to swap out the parser. MDX (and the unified system behind it) is designed to be completely customizable. This is especially the case after we've migrated to MDX v2: there are much fewer quirks when JSX and Markdown co-exist.
+<issue_comment>username_0: yes, we'll see if it's still relevant after upgrading to MDX 2.
+
+We'll need some dataset of existing commonmark docs to see what kind of issue we notice with MDX 2
+<issue_comment>username_0: @username_4 apart markdown, some users might find it useful to user other content formats alongside the docs plugin (json, asciidocs...)
+
+- https://docusaurus.io/feature-requests/p/asciidoc-support
+- https://github.com/facebook/docusaurus/pull/6477#issuecomment-1023766156
+
+I think it could make sense to allow the docs plugin to emit content in different formats than a React component (MDX), and allow users to provide their own renderer. 
+
+Being able to pass content as json makes sense for a lot of tooling, and also CMS integrations that generally output JSON. We probably don't want to create artificial intermediate mdx files in this case.
+
+Now it does not mean we'd add an alternative md parser ourselves, but having a flexible api could allow users to implement this themselves if they really need to.
+<issue_comment>username_4: Yes, but all these data formats eventually have to become some structured data that is compatible with our architecture. For example, JSON + React components work for external docs plugins. However, if we allow swapping _our_ Markdown parsers with something else, how does the data transformation work like? Currently it's MDX -> JSX; does other parsers offer compilation to JSX-compatible formats?
+<issue_comment>username_0: They don't need to be converted to JSX. The node parser can create a JSON structure, and then the theme component can render that JSON structure (and the users can write this logic themselves).
+
+The ""content"" prop could be JSON (mdast, hast, custom ast, proprietary cms json) or even just raw pre-formatted HTML strings
+<issue_comment>username_4: Okay, if the resolution is to let a custom parser return HTML string and render using dangerously set inner HTML then sure :) I'm just not sure how good it is to populate our theme component with all kinds of checks of what a Markdown import potentially returns though.
+<issue_comment>username_5: One major problem I am facing right now is that I auto-generate some docs pages from go code. It is theoretically possible to inject some HTML/js because of MDX. Therefore, the generated pages are HTML escaped (replacing `< > & ' ""`).
+But then, such escaped characters are not rendered as expected in code samples:
+![Screenshot from 2022-02-03 11-31-28](https://user-images.githubusercontent.com/5354445/152326174-8ba2a7ae-51c6-4146-860b-68221e724a46.png)
+from
+
+```markdown
+We have to admit, this is not easy if you don&#39;t speak jq fluently. What
+about opening an issue and telling us what predefined selectors you want to
+have? https://github.com/ory/kratos/issues/new/choose
+
+​```
+kratos identities delete &lt;id-0 [id-1 ...]&gt; [flags]
+​```
+```
+In ""standard"" markdown there is no need to escape any non-trusted input, but in MDX there is. It would be way safer to say: ""this is standard markdown form an untrusted source, don't try to run it as JS"" instead of partially escaping stuff where I might miss some edge cases.
+<issue_comment>username_4: @username_5 If you want to do post-processing, don't sanitize code in code blocks. Also, you can use a remark plugin to strip imports/exports very easily. Apart from import/exports, MDX can't execute arbitrary code.
+<issue_comment>username_5: Can you elaborate on that? I can easily create cross-site requests on the MDX playground using e.g.
+```
+<div onClick={() => fetch(""https://google.com/"").then(console.log).catch(console.log)}>Click me!</div>
+```
+
+Of course with that, I could e.g. leak stuff from local storage to one of my servers or do all kinds of things."
+RSS-Bridge/rss-bridge,387482264,954,,"[{'action': 'opened', 'author': 'triatic', 'comment_id': None, 'datetime': '2018-12-04 21:14:13+00:00', 'masked_author': 'username_0', 'text': 'Whenever I upgrade rss-bridge, Facebook and Twitter bridges return ""Bridge returned error 0!"".\r\n\r\nWhen enabling DEBUG the cause is apparent.\r\n\r\n`C:\\php\\rss-bridge\\bridges\\FacebookBridge.php:512 class <no-class>->getSimpleHTMLDOM - Cant\'t download https://www.facebook.com/ukparliament/posts?_fb_noscript=1 cUrl error: SSL certificate problem: unable to get local issuer certificate (60)`\r\n\r\nThe solution is to add this line to lib/contents.php\r\n\r\n`curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);`\r\n\r\nIs there any way of handling this issue better? I can understand not wanting to put the above line into rss-bridge since it reduces the effectiveness of SSL but maybe the issue can be better communicated to the user than the usual ""Bridge returned error 0!""?\r\n\r\nMaybe add an argument to rss-bridge to toggle SSL peer verification?', 'title': 'cUrl SSL peer verification - Bridge returned error 0!', 'type': 'issue'}
+ {'action': 'created', 'author': 'ORelio', 'comment_id': 444411732.0, 'datetime': '2018-12-05 09:07:42+00:00', 'masked_author': 'username_1', 'text': ""It would be better to update your system's certificate store instead of disabling verification:\r\nhttps://curl.haxx.se/docs/caextract.html\r\nThe location where you need to place it likely varies depending on your system."", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'triatic', 'comment_id': 444473696.0, 'datetime': '2018-12-05 12:48:57+00:00', 'masked_author': 'username_0', 'text': 'The problem with specifying a static file of root certificates is that it will inevitably become outdated unless steps are taken to manually periodically update it.', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'triatic', 'comment_id': 444475737.0, 'datetime': '2018-12-05 12:56:33+00:00', 'masked_author': 'username_0', 'text': ""Another option is to drop cUrl entirely and use file_get_contents which, on Windows at least, manages to use the system's root certificate store."", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'LogMANOriginal', 'comment_id': 444617158.0, 'datetime': '2018-12-05 19:39:40+00:00', 'masked_author': 'username_2', 'text': 'RSS-Bridge actually used `file_get_contents` before it got replaced by cURL for various reasons, like being more secure and customizable than `file_get_contents`.', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'triatic', 'comment_id': 444623099.0, 'datetime': '2018-12-05 19:55:22+00:00', 'masked_author': 'username_0', 'text': 'I understand the downsides of disabling peer verification, but in the context of rss-bridge, I don\'t consider any of the information sent or received as particularly sensitive (no usernames or passwords). There are also downsides of specifying a static root certificate file which does not automatically update.\r\n\r\nDownloading root certificates from a third party site such as ""curl.haxx.se"" does not strike me as especially secure either, should I trust them?\r\n\r\nThis issue ultimately lies with cUrl which, on Windows, seems not to use the system root certificates, unlike file_get_contents.\r\n\r\nIf the decision is to leave the code as it is, perhaps at least some check could be made for cUrl peer verification failure and give a more helpful error message to the user, explaining the issue and suggesting a solution?', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'LogMANOriginal', 'comment_id': 445303493.0, 'datetime': '2018-12-07 17:22:19+00:00', 'masked_author': 'username_2', 'text': 'Yes, this is a good idea. There should be a way to receive an error message from cURL that can be displayed for those cases.', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'triatic', 'comment_id': 445344662.0, 'datetime': '2018-12-07 19:46:13+00:00', 'masked_author': 'username_0', 'text': 'I\'m using a plain-old PHP 7.2 Windows executable, downloaded from php.net. I use it in CLI mode. When I first started using rss-bridge I ran into this exact issue, before I even knew about enabling DEBUG. Although I do code in PHP, I never use cUrl.\r\n\r\nXAMPP specifies this line in `php.ini` by default:\r\n\r\n`curl.cainfo=""C:\\xampp\\apache\\bin\\curl-ca-bundle.crt""`.\r\n\r\nPresumably XAMPP keeps this root certificate file up to date for those who download the latest versions of XAMPP. Those who don\'t bother updating will run into the same issue I did, eventually.\r\n\r\nThe PHP CLI from php.net is not bundled with any certificates, which is fine for `file_get_contents`, but not fine for cUrl.\r\n\r\nI haven\'t tested WampServer either, maybe they don\'t specify `curl.cainfo`, or it\'s an outdated version.\r\n\r\nUltimately it would seem to be an upstream issue, but if cUrl were minded to use Windows system root certificates I\'m sure it would have happened by now,\r\n\r\nI\'ve also seen that none of the guides who give the solution mention `curl.cainfo` must periodically be updated. They give the impression it\'s a one-time fix, which it isn\'t.\r\n\r\nSo we have the rare case of people like me who run the PHP executable from php.net, but also people who may use a distro with no `curl.cainfo`, or one which is outdated.\r\n\r\nIn terms of communicating to the user, the error is already supplied in DEBUG mode (which I pasted in my first post), so it would just be a case of inserting the cUrl error message into the usual RSS feed error output in non-DEBUG mode (unless it\'s worth explaining what a ""local issuer certificate"" is, but that\'s enough to start Googling with).', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'triatic', 'comment_id': 445498632.0, 'datetime': '2018-12-08 23:46:38+00:00', 'masked_author': 'username_0', 'text': ""Is #958 any use?\r\n\r\nI don't know if those variables are always valid strings during an error condition, let me know."", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'LogMANOriginal', 'comment_id': 445962034.0, 'datetime': '2018-12-10 20:32:33+00:00', 'masked_author': 'username_2', 'text': ""I see, thanks for sharing!\r\n\r\nAre there any good practices for that?\r\n\r\nWe could detect if the script is running in CLI mode (servers should have valid certificates anyway), check if a certificate store is not defined (i.e. `if(ini_get('curl.cainfo') === false) {...}`) and opt for `file_get_contents`. There is a good chance that it won't work on all bridges, but that is something we can figure out later.\r\n\r\nWould that work for you?"", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'triatic', 'comment_id': 445970037.0, 'datetime': '2018-12-10 20:57:42+00:00', 'masked_author': 'username_0', 'text': ""That would certainly fix the issue for me, yes.\r\n\r\nI've always found the HTTP wrapper for `file_get_contents` to be sufficiently powerful, there are plenty of context options which can be set: http://php.net/manual/en/context.http.php\r\n\r\nAdditionally, $http_response_header is populated with the headers after executing `file_get_contents`.\r\n\r\nIf there's something with implementing `file_get_contents` I can help with, please let me know."", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'LogMANOriginal', 'comment_id': 445972599.0, 'datetime': '2018-12-10 21:05:36+00:00', 'masked_author': 'username_2', 'text': 'Do you have a working implementation of `getContents` using `file_get_contents` by any chance?\r\n\r\nhttps://github.com/RSS-Bridge/rss-bridge/blob/5305c405f65826a0cf3bd0050cc10bdfdc4da19c/lib/contents.php#L44\r\n\r\nHere is the code before changing to cURL (this would be my reference): https://github.com/RSS-Bridge/rss-bridge/commit/ee78e7613fa6ceeb7cfebf91a2b2fe0a202ad68b\r\n\r\nMaybe it still works? (minus the parameters removed in the past)', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'triatic', 'comment_id': 445984517.0, 'datetime': '2018-12-10 21:41:19+00:00', 'masked_author': 'username_0', 'text': ""No, I haven't made a `file_get_contents` version of `getContents `.\r\n\r\nHowever, I did substitute `contents.php` with the one from a4b9611e66d3095c943a5c63306965d4e4cbf839 . Then I changed line 512 in FacebookBridge to this:\r\n\r\n`\t\t\t$html = getSimpleHTMLDOM($this->getURI())`\r\n\r\nIt was a bit slow, but it worked without any SSL errors. The speed might be improved by adding headers."", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'triatic', 'comment_id': 445991959.0, 'datetime': '2018-12-10 22:04:48+00:00', 'masked_author': 'username_0', 'text': 'TwitterBridge works too, after I added the `getMimeType()` function to the old version of `contents.php`.', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'triatic', 'comment_id': 446175352.0, 'datetime': '2018-12-11 11:49:48+00:00', 'masked_author': 'username_0', 'text': 'PR #962 created, simple change but works for me on both Facebook and Twitter.\r\n\r\nOpen to suggestions of course.', 'title': None, 'type': 'comment'}
+ {'action': 'closed', 'author': 'triatic', 'comment_id': None, 'datetime': '2018-12-28 20:01:31+00:00', 'masked_author': 'username_0', 'text': '', 'title': None, 'type': 'issue'}]","<issue_start><issue_comment>Title: cUrl SSL peer verification - Bridge returned error 0!
+username_0: Whenever I upgrade rss-bridge, Facebook and Twitter bridges return ""Bridge returned error 0!"".
+
+When enabling DEBUG the cause is apparent.
+
+`C:\php\rss-bridge\bridges\FacebookBridge.php:512 class <no-class>->getSimpleHTMLDOM - Cant't download https://www.facebook.com/ukparliament/posts?_fb_noscript=1 cUrl error: SSL certificate problem: unable to get local issuer certificate (60)`
+
+The solution is to add this line to lib/contents.php
+
+`curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);`
+
+Is there any way of handling this issue better? I can understand not wanting to put the above line into rss-bridge since it reduces the effectiveness of SSL but maybe the issue can be better communicated to the user than the usual ""Bridge returned error 0!""?
+
+Maybe add an argument to rss-bridge to toggle SSL peer verification?
+<issue_comment>username_1: It would be better to update your system's certificate store instead of disabling verification:
+https://curl.haxx.se/docs/caextract.html
+The location where you need to place it likely varies depending on your system.
+<issue_comment>username_0: The problem with specifying a static file of root certificates is that it will inevitably become outdated unless steps are taken to manually periodically update it.
+<issue_comment>username_0: Another option is to drop cUrl entirely and use file_get_contents which, on Windows at least, manages to use the system's root certificate store.
+<issue_comment>username_2: RSS-Bridge actually used `file_get_contents` before it got replaced by cURL for various reasons, like being more secure and customizable than `file_get_contents`.
+<issue_comment>username_0: I understand the downsides of disabling peer verification, but in the context of rss-bridge, I don't consider any of the information sent or received as particularly sensitive (no usernames or passwords). There are also downsides of specifying a static root certificate file which does not automatically update.
+
+Downloading root certificates from a third party site such as ""curl.haxx.se"" does not strike me as especially secure either, should I trust them?
+
+This issue ultimately lies with cUrl which, on Windows, seems not to use the system root certificates, unlike file_get_contents.
+
+If the decision is to leave the code as it is, perhaps at least some check could be made for cUrl peer verification failure and give a more helpful error message to the user, explaining the issue and suggesting a solution?
+<issue_comment>username_2: Yes, this is a good idea. There should be a way to receive an error message from cURL that can be displayed for those cases.
+<issue_comment>username_0: I'm using a plain-old PHP 7.2 Windows executable, downloaded from php.net. I use it in CLI mode. When I first started using rss-bridge I ran into this exact issue, before I even knew about enabling DEBUG. Although I do code in PHP, I never use cUrl.
+
+XAMPP specifies this line in `php.ini` by default:
+
+`curl.cainfo=""C:\xampp\apache\bin\curl-ca-bundle.crt""`.
+
+Presumably XAMPP keeps this root certificate file up to date for those who download the latest versions of XAMPP. Those who don't bother updating will run into the same issue I did, eventually.
+
+The PHP CLI from php.net is not bundled with any certificates, which is fine for `file_get_contents`, but not fine for cUrl.
+
+I haven't tested WampServer either, maybe they don't specify `curl.cainfo`, or it's an outdated version.
+
+Ultimately it would seem to be an upstream issue, but if cUrl were minded to use Windows system root certificates I'm sure it would have happened by now,
+
+I've also seen that none of the guides who give the solution mention `curl.cainfo` must periodically be updated. They give the impression it's a one-time fix, which it isn't.
+
+So we have the rare case of people like me who run the PHP executable from php.net, but also people who may use a distro with no `curl.cainfo`, or one which is outdated.
+
+In terms of communicating to the user, the error is already supplied in DEBUG mode (which I pasted in my first post), so it would just be a case of inserting the cUrl error message into the usual RSS feed error output in non-DEBUG mode (unless it's worth explaining what a ""local issuer certificate"" is, but that's enough to start Googling with).
+<issue_comment>username_0: Is #958 any use?
+
+I don't know if those variables are always valid strings during an error condition, let me know.
+<issue_comment>username_2: I see, thanks for sharing!
+
+Are there any good practices for that?
+
+We could detect if the script is running in CLI mode (servers should have valid certificates anyway), check if a certificate store is not defined (i.e. `if(ini_get('curl.cainfo') === false) {...}`) and opt for `file_get_contents`. There is a good chance that it won't work on all bridges, but that is something we can figure out later.
+
+Would that work for you?
+<issue_comment>username_0: That would certainly fix the issue for me, yes.
+
+I've always found the HTTP wrapper for `file_get_contents` to be sufficiently powerful, there are plenty of context options which can be set: http://php.net/manual/en/context.http.php
+
+Additionally, $http_response_header is populated with the headers after executing `file_get_contents`.
+
+If there's something with implementing `file_get_contents` I can help with, please let me know.
+<issue_comment>username_2: Do you have a working implementation of `getContents` using `file_get_contents` by any chance?
+
+https://github.com/RSS-Bridge/rss-bridge/blob/5305c405f65826a0cf3bd0050cc10bdfdc4da19c/lib/contents.php#L44
+
+Here is the code before changing to cURL (this would be my reference): https://github.com/RSS-Bridge/rss-bridge/commit/ee78e7613fa6ceeb7cfebf91a2b2fe0a202ad68b
+
+Maybe it still works? (minus the parameters removed in the past)
+<issue_comment>username_0: No, I haven't made a `file_get_contents` version of `getContents `.
+
+However, I did substitute `contents.php` with the one from a4b9611e66d3095c943a5c63306965d4e4cbf839 . Then I changed line 512 in FacebookBridge to this:
+
+`			$html = getSimpleHTMLDOM($this->getURI())`
+
+It was a bit slow, but it worked without any SSL errors. The speed might be improved by adding headers.
+<issue_comment>username_0: TwitterBridge works too, after I added the `getMimeType()` function to the old version of `contents.php`.
+<issue_comment>username_0: PR #962 created, simple change but works for me on both Facebook and Twitter.
+
+Open to suggestions of course.<issue_closed>"

@@ -1,0 +1,223 @@
+eduardoboucas/staticman,655493687,365,,"[{'action': 'opened', 'author': 'clairity', 'comment_id': None, 'datetime': '2020-07-12 23:04:55+00:00', 'masked_author': 'username_0', 'text': 'once i created the `staticman.yml` file on github (plus creating a `master` branch as part of that), comment posting started showing up in the repo (🎉).\r\n\r\n<a name=""f1"">[1]</a> much thanks to these resources for making setup and configuration easy!\r\n\r\n* [Performance Matters](https://travisdowns.github.io/blog/2020/02/05/now-with-comments.html) @travisdowns\r\n* [Spinning Numbers](https://spinningnumbers.org/a/staticman-heroku.html) @willymcallister \r\n* [Made Mistakes](https://mademistakes.com/articles/improving-jekyll-static-comments/) @mmistakes', 'title': 'Suggestion: add note that `staticman.yml` needs to be hosted, not just in repository root', 'type': 'issue'}
+ {'action': 'created', 'author': 'lionxlife', 'comment_id': 679088095.0, 'datetime': '2020-08-24 12:09:31+00:00', 'masked_author': 'username_1', 'text': 'omg... I\'ve been trawling the internet re gatsby and staticman because I kept getting `{""success"":false,""errorCode"":""GITHUB_READING_FILE""}` issue... was trying all kinds of shenanigans until I came across this!! Wow, thanks. After I committed my files and pushed it worked. Thanks so much!! Not sure if anyone will action this since apparently the author has gone MIA but yeh, glad it\'s here for people who have issues.', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'alexwaibel', 'comment_id': 679456755.0, 'datetime': '2020-08-25 01:58:01+00:00', 'masked_author': 'username_2', 'text': ""I agree, this is definitely something we can clarify better in the documentation. Revising documentation is one of the higher priority items on the agenda lately. @username_3 has been doing a bit of work on that front and I'm sure could incorporate something to clarify this issue."", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'shaftoe', 'comment_id': 679941185.0, 'datetime': '2020-08-25 10:25:43+00:00', 'masked_author': 'username_3', 'text': ""@username_2 I'm sorry to disappoint but I'm not planning to invest much of time in Staticman develpment at the moment, I gradually lost interest in the project and to be honest at this point I'm thinking about baking my own solution from scratch.\r\n\r\nI know it will never be as popular as Staticman but I think what I need (a replacement for Disquss for [my Hugo website](https://a.l3x.in), no more no less) is not that hard to achieve with in a serverless fashion and I think I could settle with that. \r\n\r\nIf I'll ever decide to allocate some effort to actually do that, it will be an open source project anyway so everyone welcome to use and contribute.\r\n\r\nTo elaborate more on the why, technically speaking: I believe that nowadays, for a stateless and infrequent usage pattern like the comments of small/medium traffic websites, there's no real need for keeping a server running 24/7 (even if it's a free Heroku dyno) when you get plenty of FaaS free execution time from AWS, GCP, Azure and the like. Something like a few AWS Lambda backed by an API HTTP Gateway should do the trick.\r\n\r\nI wish Staticman all the best though and I hope the project will find a way to properly get the love it deserves 😉"", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'lionxlife', 'comment_id': 680400135.0, 'datetime': '2020-08-26 01:06:01+00:00', 'masked_author': 'username_1', 'text': ""I was going to ask too if there's a newer and better way to do this having finally implemented it just now. Thanks for clarification. I use staticman with gatsby and I did notice the many seconds delay in getting a submission response, but thought I could handle that elegantly with react so no issues for me. The pros of a simple setup and full data control is still a big winner (granted you do have to hunt a little for docs and examples).\r\n\r\nThere's a bunch of unofficial, free bots that if we could list in the instructions, it would be really simple to get this running. In which case I wouldn't mind writing that instruction page, however we might run into the same problem eventually of the free bot hitting API limits."", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'shaftoe', 'comment_id': 680719877.0, 'datetime': '2020-08-26 07:50:47+00:00', 'masked_author': 'username_3', 'text': ""For the time being I'm also ok with my Staticman instance so there's no rush from my side, but it sounds like an interesting project so why not? And to be clear, I really don't want to steer people away from Staticman, I think it's a cool project, it just saddens me to see it's not that active anymore."", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'shaftoe', 'comment_id': 691480071.0, 'datetime': '2020-09-12 12:25:28+00:00', 'masked_author': 'username_3', 'text': 'For @travisdowns attention and whomever else here that might be interested in a very stripped down version of a ""staticman"" (only GitHub support, only to create a pull request, and available as a GitHub application), please have a look at this:\r\n\r\nhttps://github.com/username_3/static-comments\r\n\r\nand let me know what you think and even better contribute if you can 😉\r\n\r\nIt\'s definitely alpha but already doing the job to me, it\'s powering comments for [my blog](https://a.l3x.in/blog) (an example PR [here](https://github.com/username_3/personal-website/pull/42)).\r\n\r\nFor the records, there\'s no serverless support out of the box yet but I\'m waiting for `v11` of Probot which has announced a better support for it so for now I\'m hosting it the usual good ol\' way (on a Debian based self managed VPS).\r\n\r\nMaybe Probot can also give some inspiration on how to make Staticman a GitHub app? No idea what\'s the effort required honestly.\r\n\r\nHTH', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'lionxlife', 'comment_id': 691616692.0, 'datetime': '2020-09-13 05:23:31+00:00', 'masked_author': 'username_1', 'text': 'oh amazing. Whenever my next project comes along, will need to try this!', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'akhyarrh', 'comment_id': 739130101.0, 'datetime': '2020-12-05 05:36:55+00:00', 'masked_author': 'username_4', 'text': 'Does this issue related to my request become not found when opening `https://address/v3/entry/github/myname/repo` ?', 'title': None, 'type': 'comment'}]","<issue_start><issue_comment>Title: Suggestion: add note that `staticman.yml` needs to be hosted, not just in repository root
+username_0: once i created the `staticman.yml` file on github (plus creating a `master` branch as part of that), comment posting started showing up in the repo (🎉).
+
+<a name=""f1"">[1]</a> much thanks to these resources for making setup and configuration easy!
+
+* [Performance Matters](https://travisdowns.github.io/blog/2020/02/05/now-with-comments.html) @travisdowns
+* [Spinning Numbers](https://spinningnumbers.org/a/staticman-heroku.html) @willymcallister 
+* [Made Mistakes](https://mademistakes.com/articles/improving-jekyll-static-comments/) @mmistakes
+<issue_comment>username_1: omg... I've been trawling the internet re gatsby and staticman because I kept getting `{""success"":false,""errorCode"":""GITHUB_READING_FILE""}` issue... was trying all kinds of shenanigans until I came across this!! Wow, thanks. After I committed my files and pushed it worked. Thanks so much!! Not sure if anyone will action this since apparently the author has gone MIA but yeh, glad it's here for people who have issues.
+<issue_comment>username_2: I agree, this is definitely something we can clarify better in the documentation. Revising documentation is one of the higher priority items on the agenda lately. @username_3 has been doing a bit of work on that front and I'm sure could incorporate something to clarify this issue.
+<issue_comment>username_3: @username_2 I'm sorry to disappoint but I'm not planning to invest much of time in Staticman develpment at the moment, I gradually lost interest in the project and to be honest at this point I'm thinking about baking my own solution from scratch.
+
+I know it will never be as popular as Staticman but I think what I need (a replacement for Disquss for [my Hugo website](https://a.l3x.in), no more no less) is not that hard to achieve with in a serverless fashion and I think I could settle with that. 
+
+If I'll ever decide to allocate some effort to actually do that, it will be an open source project anyway so everyone welcome to use and contribute.
+
+To elaborate more on the why, technically speaking: I believe that nowadays, for a stateless and infrequent usage pattern like the comments of small/medium traffic websites, there's no real need for keeping a server running 24/7 (even if it's a free Heroku dyno) when you get plenty of FaaS free execution time from AWS, GCP, Azure and the like. Something like a few AWS Lambda backed by an API HTTP Gateway should do the trick.
+
+I wish Staticman all the best though and I hope the project will find a way to properly get the love it deserves 😉
+<issue_comment>username_1: I was going to ask too if there's a newer and better way to do this having finally implemented it just now. Thanks for clarification. I use staticman with gatsby and I did notice the many seconds delay in getting a submission response, but thought I could handle that elegantly with react so no issues for me. The pros of a simple setup and full data control is still a big winner (granted you do have to hunt a little for docs and examples).
+
+There's a bunch of unofficial, free bots that if we could list in the instructions, it would be really simple to get this running. In which case I wouldn't mind writing that instruction page, however we might run into the same problem eventually of the free bot hitting API limits.
+<issue_comment>username_3: For the time being I'm also ok with my Staticman instance so there's no rush from my side, but it sounds like an interesting project so why not? And to be clear, I really don't want to steer people away from Staticman, I think it's a cool project, it just saddens me to see it's not that active anymore.
+<issue_comment>username_3: For @travisdowns attention and whomever else here that might be interested in a very stripped down version of a ""staticman"" (only GitHub support, only to create a pull request, and available as a GitHub application), please have a look at this:
+
+https://github.com/username_3/static-comments
+
+and let me know what you think and even better contribute if you can 😉
+
+It's definitely alpha but already doing the job to me, it's powering comments for [my blog](https://a.l3x.in/blog) (an example PR [here](https://github.com/username_3/personal-website/pull/42)).
+
+For the records, there's no serverless support out of the box yet but I'm waiting for `v11` of Probot which has announced a better support for it so for now I'm hosting it the usual good ol' way (on a Debian based self managed VPS).
+
+Maybe Probot can also give some inspiration on how to make Staticman a GitHub app? No idea what's the effort required honestly.
+
+HTH
+<issue_comment>username_1: oh amazing. Whenever my next project comes along, will need to try this!
+<issue_comment>username_4: Does this issue related to my request become not found when opening `https://address/v3/entry/github/myname/repo` ?"
+jscraftcamp/website,421820582,559,,"[{'action': 'opened', 'author': 'wolframkriesing', 'comment_id': None, 'datetime': '2019-03-16 15:40:43+00:00', 'masked_author': 'username_0', 'text': '# Why Snacks?\r\n\r\nPrevent a low blood sugar by providing quick energy refilling snacks in the form of sweets, baked goods and candy. Keep those hard working brains happy - either by choosing yourself what to get or just leave it up to us to find the right sugar-bombs!\r\n\r\n# How does it work?\r\n\r\nLast year we asked some food companies for offers and had the sponsor confirm that amount up front. Once the food was delivered on the day the sponsor pulled out the credit card and made all attendees happy by enabling them to making the blood sugar level catch up.', 'title': 'Sponsor needed for snacks on Friday', 'type': 'issue'}
+ {'action': 'created', 'author': 'ciovost', 'comment_id': 476535885.0, 'datetime': '2019-03-26 09:11:51+00:00', 'masked_author': 'username_1', 'text': 'Hallo Wolfram, \r\n\r\ncioplenu ist dieses Jahr auch gerne wieder mit an Board und übernimmt das Sponsoring für die 🍌🍎🍪🍐🍩🍦 am Freitag. \r\n\r\nFür weitere Rückfragen kannst du dich gerne direkt an mich wenden: \r\n+ 49 151 640 355 39\r\n\r\nViele Grüße aus Augsburg\r\nValentin von cioplenu', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'wolframkriesing', 'comment_id': 476539131.0, 'datetime': '2019-03-26 09:21:15+00:00', 'masked_author': 'username_0', 'text': '@username_1 cool.\r\nCan you organize it completely, so they just magically arrive at the location on Friday? That would be awesome!', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'ciovost', 'comment_id': 476547860.0, 'datetime': '2019-03-26 09:45:30+00:00', 'masked_author': 'username_1', 'text': 'I`m sorry we have a lot of customer requests at the moment and not the capacity to organize it. \r\nBut we will sponsor the snacks with a budget up to 120 €', 'title': None, 'type': 'comment'}
+ {'action': 'closed', 'author': 'wolframkriesing', 'comment_id': None, 'datetime': '2019-05-14 20:05:33+00:00', 'masked_author': 'username_0', 'text': '', 'title': None, 'type': 'issue'}]","<issue_start><issue_comment>Title: Sponsor needed for snacks on Friday
+username_0: # Why Snacks?
+
+Prevent a low blood sugar by providing quick energy refilling snacks in the form of sweets, baked goods and candy. Keep those hard working brains happy - either by choosing yourself what to get or just leave it up to us to find the right sugar-bombs!
+
+# How does it work?
+
+Last year we asked some food companies for offers and had the sponsor confirm that amount up front. Once the food was delivered on the day the sponsor pulled out the credit card and made all attendees happy by enabling them to making the blood sugar level catch up.
+<issue_comment>username_1: Hallo Wolfram, 
+
+cioplenu ist dieses Jahr auch gerne wieder mit an Board und übernimmt das Sponsoring für die 🍌🍎🍪🍐🍩🍦 am Freitag. 
+
+Für weitere Rückfragen kannst du dich gerne direkt an mich wenden: 
++ 49 151 640 355 39
+
+Viele Grüße aus Augsburg
+Valentin von cioplenu
+<issue_comment>username_0: @username_1 cool.
+Can you organize it completely, so they just magically arrive at the location on Friday? That would be awesome!
+<issue_comment>username_1: I`m sorry we have a lot of customer requests at the moment and not the capacity to organize it. 
+But we will sponsor the snacks with a budget up to 120 €<issue_closed>"
+facebook/docusaurus,527583639,2040,"{'number': 2040.0, 'repo': 'docusaurus', 'user_login': 'facebook'}","[{'action': 'opened', 'author': 'binarylogic', 'comment_id': None, 'datetime': '2019-11-23T17:20:11Z', 'masked_author': 'username_0', 'text': 'Hi everyone, we wanted to add [vector.dev](https://vector.dev) to the showcase. We just recently transitioned our whole site from Gitbook/Hugo to Docusuarus and have been very happy with it. We took full advantage of adding custom components which is very powerful. Thanks for your work on this project!', 'title': 'chore(v2): Add vector.dev to the showcase :)', 'type': 'issue'}
+ {'action': 'created', 'author': 'endiliey', 'comment_id': 557879660.0, 'datetime': '2019-11-24 11:26:47+00:00', 'masked_author': 'username_1', 'text': 'CLA need to be signed before merge', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'binarylogic', 'comment_id': 557906579.0, 'datetime': '2019-11-24 16:51:08+00:00', 'masked_author': 'username_0', 'text': ""@yangshun thanks! I didn't realize that. I just pushed an updated preview image.\r\n\r\n@username_1 this is done.\r\n\r\nLet me know if you need anything else 😄"", 'title': None, 'type': 'comment'}]","<issue_start><issue_comment>Title: chore(v2): Add vector.dev to the showcase :)
+username_0: Hi everyone, we wanted to add [vector.dev](https://vector.dev) to the showcase. We just recently transitioned our whole site from Gitbook/Hugo to Docusuarus and have been very happy with it. We took full advantage of adding custom components which is very powerful. Thanks for your work on this project!
+<issue_comment>username_1: CLA need to be signed before merge
+<issue_comment>username_0: @yangshun thanks! I didn't realize that. I just pushed an updated preview image.
+
+@username_1 this is done.
+
+Let me know if you need anything else 😄"
+cedricpinson/osgjs,166255693,630,"{'number': 630.0, 'repo': 'osgjs', 'user_login': 'cedricpinson'}","[{'action': 'opened', 'author': 'Kuranes', 'comment_id': None, 'datetime': '2016-07-19T06:12:43Z', 'masked_author': 'username_0', 'text': '* preprocessor to make it simple\r\n* parser to allow optimisation\r\n* 2 optimisations:\r\n** removes unused variables\r\n** removes unused function', 'title': '[#9999] [] Adds glsl preprocessor & parser', 'type': 'issue'}
+ {'action': 'created', 'author': 'cedricpinson', 'comment_id': 233911267.0, 'datetime': '2016-07-20 10:23:26+00:00', 'masked_author': 'username_1', 'text': 'What is the size impact including those deps ?', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'Kuranes', 'comment_id': 234159456.0, 'datetime': '2016-07-21 05:20:45+00:00', 'masked_author': 'username_0', 'text': 'gz compressed comparison:\r\nbefore: 285kb\r\nafter: 294kb \r\n\r\nuncompressed:\r\nbefore: 1\xa0517kb\r\nafter:  1570kb', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'Kuranes', 'comment_id': 234174082.0, 'datetime': '2016-07-21 07:06:20+00:00', 'masked_author': 'username_0', 'text': 'TODO:\r\n- add url option to enable disable preprocess, optimisation pass\r\n- add url option to time compîlaton\r\n- add better compilation log with shader name, and browse/gpu compilation time.', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'cedricpinson', 'comment_id': 234818063.0, 'datetime': '2016-07-25 01:36:04+00:00', 'masked_author': 'username_1', 'text': 'Is there a way to use like optimization like glsl optimizer ?', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'Kuranes', 'comment_id': 234853048.0, 'datetime': '2016-07-25 06:44:57+00:00', 'masked_author': 'username_0', 'text': ""for now it's just tree shaking, but who knows if some bugged drivers aren't helped by shaders going from > 1000 lines to 250lines...\r\n\r\nOthers optimization needs to be coded it :)\r\n\r\nThe order of things to be done to makes each optimization useful for the next :\r\n- function inlining (using descope as a basis https://www.npmjs.com/package/glsl-token-descope)\r\n- variables reuse (https://www.npmjs.com/package/glsl-token-assignments)\r\n- texFetch dedup (exact same texFecth => reuse var)\r\n- precision (https://www.npmjs.com/package/glsl-token-assignments + finding who ends in glFragColor)\r\n- math simplifications (from simplifying constant expression https://github.com/silentmatt/js-expression-eval/tree/master to enable approximations)"", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'Kuranes', 'comment_id': 235002625.0, 'datetime': '2016-07-25 16:16:46+00:00', 'masked_author': 'username_0', 'text': 'Usage: add &enableShaderCompilationTiming=1 to url\r\n\r\nInternal refactoring to allow shader & program naming to be less of a hack and\r\nmore of a real part of osgjs.\r\n\r\nShade name allow easiear debugging, logging, timing and is used by\r\nexternal tools like chrome shader editor.\r\nIn the same spirit of easier code handling there is now a\r\nShaderProgramBuilder, for faster code/recompilation/require and single entry point\r\ninstead of code repeated everywhere.\r\n\r\n(both can be used, PR is breaking changes free)', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'Kuranes', 'comment_id': 235005507.0, 'datetime': '2016-07-25 16:26:32+00:00', 'masked_author': 'username_0', 'text': 'On second thought, probably preprocessor & optimizer should go into shaderprogrambuilder and be removed of shaderprocessor, would make much more sense:\r\n- we would have  shadername in the preprocessor&optimizer timing/logging to too \r\n- CompilationTimingOn could be a parameter option of osg.shader and osg.program ctors \r\n\r\n(currently no shadername in preprocessor and optimizer is making skfb logs a mess, cannot be sure which is for which)', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'Kuranes', 'comment_id': 235006000.0, 'datetime': '2016-07-25 16:28:05+00:00', 'masked_author': 'username_0', 'text': 'TODO:\r\n- find how to give shadername to preprocessor & optimizer\r\n- add option to prevent trimming strings for processed/optimized but still readable shader code', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'Kuranes', 'comment_id': 235327421.0, 'datetime': '2016-07-26 16:38:15+00:00', 'masked_author': 'username_0', 'text': 'Now works everywhere with logging, and clearly separated from the shaderprocessor and shadercompiler, into th shaderprogrambuilder:\r\n\r\nurloptions is:\r\n&enableShaderOptimizer=1&enableShaderCompilationTiming=1', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'Kuranes', 'comment_id': 236364417.0, 'datetime': '2016-07-30 13:09:28+00:00', 'masked_author': 'username_0', 'text': 'rebased with better expression evaluator in preprocessor.\r\nAllows for #ifdef code based on shader names\r\n```glsl\r\n\r\n\r\n\r\n\r\n#if SHADER_NAME == hereyoujustputthenameoftheshaderandHopnoemoretexture\r\n#define _TEXTURELESS\r\n#endif\r\n\r\n#ifndef _TEXTURELESS \r\n\r\n#define textureRGB( tex, uv) texture2D(tex, uv.xy ).rgb\r\n#define textureRGBA( tex,  uv) texture2D(tex, uv.xy ).rgba\r\n#define textureIntensity(tex, uv) texture2D(tex, uv).r\r\n#define textureAlpha( tex, uv) texture2D(tex, uv.xy ).a\r\n\r\n#else\r\n\r\n#define textureRGB( tex, uv) vec3(1.0*gl_FragCoord.x, 0.5, 1.0*gl_FragCoord.y)\r\n#define textureRGBA( tex,  uv) vec4(1.0*gl_FragCoord.y, 0.5, 1.0*gl_FragCoord.x, 1.0)\r\n#define textureIntensity(tex, uv) .5 + 0.1 * gl_FragCoord.x\r\n#define textureAlpha( tex, uv) 1.0 - 0.1 * gl_FragCoord.y\r\n\r\n#endif\r\n\r\n```', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'Kuranes', 'comment_id': 236821096.0, 'datetime': '2016-08-02 07:14:00+00:00', 'masked_author': 'username_0', 'text': 'Things that PR try to adress:\r\n\r\n- Adding shader names as part of the lib rather than hack on the side\r\n\r\n- Timing Shaders work process ( all substeps per shader/program, from shader node compiler to program linking)\r\n\r\n- OSGJS internal code should use a single entry point in osgShader for shaders/program \r\n\r\n- Uses that entry point for logs, timing, pruning, and linking ( later optimize, transpiling to webgl2 etc). \r\n\r\n- All that not breaking  osgjs vanilla shader + program usage.\r\n\r\nThings that could be done: all shader going through the single entry point should be going through shaderprocessor. (for now composer shader doesn\'t for instance.)\r\n\r\nThe single Entry Point is really really a big point, it adresses:\r\n- Easier code debugging and reading (single place, all goes through same place)\r\n- Easier Shader ""processing"" code evolution  (single place code change)\r\n- DRY code. (many many many place do the 2 shader + program build + instance shaderprocessor etc)\r\n- Clear sepearation  osg / osgShader usage of shader. (vanilla shader VS augmented shader)\r\n\r\n\r\nSingle entry point could be done differently, like done in Program, but would need lots of listener/callback inside that function to call all the osgShader parts (pre/post shader individual processing, pre/post shaders processing, pre/post program linking )', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'Kuranes', 'comment_id': 257098665.0, 'datetime': '2016-10-29 15:43:34+00:00', 'masked_author': 'username_0', 'text': 'not sure of ""need fix"" todoif I want to continue on the shader optimization ?\r\n\r\nIf move the shaderProgrambuilder into Program it\'s ok ?\r\n(osg ""core"" will depend on ""osgShader"" then, but not very important indeed)', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'cedricpinson', 'comment_id': 257151576.0, 'datetime': '2016-10-30 13:40:35+00:00', 'masked_author': 'username_1', 'text': ""I feel that if we dont focus on it, it will take 6 month to have something working when a big amount of discussions/comments I prefer to focus on subject already open and that needs to be finished.\r\nI am not against the idea it's just I dont have a solution to avoid this huge energy needed to converge faster. It will take too much energy to rebase / fix to follow master. So I prefer to stop thinking on this, and when we are ready we could do it and merge it in a shorter timerange.\r\nIf you have a better way to handle this, I am listening. \r\n\r\nI am still thinking it could be good especially for mobile."", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'Kuranes', 'comment_id': 257154195.0, 'datetime': '2016-10-30 14:27:19+00:00', 'masked_author': 'username_0', 'text': 'ok, I\'ll close this and save it in a separate repo then, as  ""app side"" code, and do my geeking there', 'title': None, 'type': 'comment'}]","<issue_start><issue_comment>Title: [#9999] [] Adds glsl preprocessor & parser
+username_0: * preprocessor to make it simple
+* parser to allow optimisation
+* 2 optimisations:
+** removes unused variables
+** removes unused function
+<issue_comment>username_1: What is the size impact including those deps ?
+<issue_comment>username_0: gz compressed comparison:
+before: 285kb
+after: 294kb 
+
+uncompressed:
+before: 1 517kb
+after:  1570kb
+<issue_comment>username_0: TODO:
+- add url option to enable disable preprocess, optimisation pass
+- add url option to time compîlaton
+- add better compilation log with shader name, and browse/gpu compilation time.
+<issue_comment>username_1: Is there a way to use like optimization like glsl optimizer ?
+<issue_comment>username_0: for now it's just tree shaking, but who knows if some bugged drivers aren't helped by shaders going from > 1000 lines to 250lines...
+
+Others optimization needs to be coded it :)
+
+The order of things to be done to makes each optimization useful for the next :
+- function inlining (using descope as a basis https://www.npmjs.com/package/glsl-token-descope)
+- variables reuse (https://www.npmjs.com/package/glsl-token-assignments)
+- texFetch dedup (exact same texFecth => reuse var)
+- precision (https://www.npmjs.com/package/glsl-token-assignments + finding who ends in glFragColor)
+- math simplifications (from simplifying constant expression https://github.com/silentmatt/js-expression-eval/tree/master to enable approximations)
+<issue_comment>username_0: Usage: add &enableShaderCompilationTiming=1 to url
+
+Internal refactoring to allow shader & program naming to be less of a hack and
+more of a real part of osgjs.
+
+Shade name allow easiear debugging, logging, timing and is used by
+external tools like chrome shader editor.
+In the same spirit of easier code handling there is now a
+ShaderProgramBuilder, for faster code/recompilation/require and single entry point
+instead of code repeated everywhere.
+
+(both can be used, PR is breaking changes free)
+<issue_comment>username_0: On second thought, probably preprocessor & optimizer should go into shaderprogrambuilder and be removed of shaderprocessor, would make much more sense:
+- we would have  shadername in the preprocessor&optimizer timing/logging to too 
+- CompilationTimingOn could be a parameter option of osg.shader and osg.program ctors 
+
+(currently no shadername in preprocessor and optimizer is making skfb logs a mess, cannot be sure which is for which)
+<issue_comment>username_0: TODO:
+- find how to give shadername to preprocessor & optimizer
+- add option to prevent trimming strings for processed/optimized but still readable shader code
+<issue_comment>username_0: Now works everywhere with logging, and clearly separated from the shaderprocessor and shadercompiler, into th shaderprogrambuilder:
+
+urloptions is:
+&enableShaderOptimizer=1&enableShaderCompilationTiming=1
+<issue_comment>username_0: rebased with better expression evaluator in preprocessor.
+Allows for #ifdef code based on shader names
+```glsl
+
+
+
+
+#if SHADER_NAME == hereyoujustputthenameoftheshaderandHopnoemoretexture
+#define _TEXTURELESS
+#endif
+
+#ifndef _TEXTURELESS 
+
+#define textureRGB( tex, uv) texture2D(tex, uv.xy ).rgb
+#define textureRGBA( tex,  uv) texture2D(tex, uv.xy ).rgba
+#define textureIntensity(tex, uv) texture2D(tex, uv).r
+#define textureAlpha( tex, uv) texture2D(tex, uv.xy ).a
+
+#else
+
+#define textureRGB( tex, uv) vec3(1.0*gl_FragCoord.x, 0.5, 1.0*gl_FragCoord.y)
+#define textureRGBA( tex,  uv) vec4(1.0*gl_FragCoord.y, 0.5, 1.0*gl_FragCoord.x, 1.0)
+#define textureIntensity(tex, uv) .5 + 0.1 * gl_FragCoord.x
+#define textureAlpha( tex, uv) 1.0 - 0.1 * gl_FragCoord.y
+
+#endif
+
+```
+<issue_comment>username_0: Things that PR try to adress:
+
+- Adding shader names as part of the lib rather than hack on the side
+
+- Timing Shaders work process ( all substeps per shader/program, from shader node compiler to program linking)
+
+- OSGJS internal code should use a single entry point in osgShader for shaders/program 
+
+- Uses that entry point for logs, timing, pruning, and linking ( later optimize, transpiling to webgl2 etc). 
+
+- All that not breaking  osgjs vanilla shader + program usage.
+
+Things that could be done: all shader going through the single entry point should be going through shaderprocessor. (for now composer shader doesn't for instance.)
+
+The single Entry Point is really really a big point, it adresses:
+- Easier code debugging and reading (single place, all goes through same place)
+- Easier Shader ""processing"" code evolution  (single place code change)
+- DRY code. (many many many place do the 2 shader + program build + instance shaderprocessor etc)
+- Clear sepearation  osg / osgShader usage of shader. (vanilla shader VS augmented shader)
+
+
+Single entry point could be done differently, like done in Program, but would need lots of listener/callback inside that function to call all the osgShader parts (pre/post shader individual processing, pre/post shaders processing, pre/post program linking )
+<issue_comment>username_0: not sure of ""need fix"" todoif I want to continue on the shader optimization ?
+
+If move the shaderProgrambuilder into Program it's ok ?
+(osg ""core"" will depend on ""osgShader"" then, but not very important indeed)
+<issue_comment>username_1: I feel that if we dont focus on it, it will take 6 month to have something working when a big amount of discussions/comments I prefer to focus on subject already open and that needs to be finished.
+I am not against the idea it's just I dont have a solution to avoid this huge energy needed to converge faster. It will take too much energy to rebase / fix to follow master. So I prefer to stop thinking on this, and when we are ready we could do it and merge it in a shorter timerange.
+If you have a better way to handle this, I am listening. 
+
+I am still thinking it could be good especially for mobile.
+<issue_comment>username_0: ok, I'll close this and save it in a separate repo then, as  ""app side"" code, and do my geeking there"
+reactiveui/website,264639128,50,"{'number': 50.0, 'repo': 'website', 'user_login': 'reactiveui'}","[{'action': 'opened', 'author': 'dabutvin', 'comment_id': None, 'datetime': '2017-10-11T15:46:33Z', 'masked_author': 'username_0', 'text': 'Hey there.\r\n\r\nThis PR optimizes all the images in the repo using [ImgBot ](https://github.com/apps/imgbot) powered by [ImageMagick](https://github.com/dlemstra/Magick.NET).\r\n\r\nYou can see the results of the compression file by file in the commit message body.', 'title': '[ImgBot] optimizes images', 'type': 'issue'}
+ {'action': 'created', 'author': 'ghuntley', 'comment_id': 336099317.0, 'datetime': '2017-10-12 11:25:45+00:00', 'masked_author': 'username_1', 'text': '🚢 oh hell yes. \r\n\r\n![image](https://user-images.githubusercontent.com/127353/31493758-4251dd4a-af9c-11e7-8374-9b956449aba9.png)\r\n\r\n\r\nThanks - what a fantastic idea @username_0', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'ghuntley', 'comment_id': 336125050.0, 'datetime': '2017-10-12 12:53:43+00:00', 'masked_author': 'username_1', 'text': 'See also discussion over at https://twitter.com/James_M_South/status/918439405131464704', 'title': None, 'type': 'comment'}]","<issue_start><issue_comment>Title: [ImgBot] optimizes images
+username_0: Hey there.
+
+This PR optimizes all the images in the repo using [ImgBot ](https://github.com/apps/imgbot) powered by [ImageMagick](https://github.com/dlemstra/Magick.NET).
+
+You can see the results of the compression file by file in the commit message body.
+<issue_comment>username_1: 🚢 oh hell yes. 
+
+![image](https://user-images.githubusercontent.com/127353/31493758-4251dd4a-af9c-11e7-8374-9b956449aba9.png)
+
+
+Thanks - what a fantastic idea @username_0
+<issue_comment>username_1: See also discussion over at https://twitter.com/James_M_South/status/918439405131464704"

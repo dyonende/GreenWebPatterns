@@ -1,0 +1,363 @@
+hexojs/site,389019134,836,"{'number': 836.0, 'repo': 'site', 'user_login': 'hexojs'}","[{'action': 'opened', 'author': 'dongyuanxin', 'comment_id': None, 'datetime': '2018-12-09T12:45:47Z', 'masked_author': 'username_0', 'text': '- [x] Read the [theme publishing doc](https://hexo.io/docs/themes#Publishing) or [plugin publishing doc](https://hexo.io/docs/plugins#Publishing).\r\n\r\nAdd **theme-bmw** for `hexo`.', 'title': 'Add Theme-BMW: easy, fast but powerful', 'type': 'issue'}
+ {'action': 'created', 'author': 'dongyuanxin', 'comment_id': 445535529.0, 'datetime': '2018-12-09 12:55:18+00:00', 'masked_author': 'username_0', 'text': 'The reason why I committed 2 times is: ""Vscode"" forcibly modified the contents of the `source/_data/themes.yml`.\r\nSo I have to restore unnecessary modifications at the second commit.', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'YoshinoriN', 'comment_id': 446069428.0, 'datetime': '2018-12-11 04:35:55+00:00', 'masked_author': 'username_1', 'text': 'Thank you for your contribution 😄', 'title': None, 'type': 'comment'}]","<issue_start><issue_comment>Title: Add Theme-BMW: easy, fast but powerful
+username_0: - [x] Read the [theme publishing doc](https://hexo.io/docs/themes#Publishing) or [plugin publishing doc](https://hexo.io/docs/plugins#Publishing).
+
+Add **theme-bmw** for `hexo`.
+<issue_comment>username_0: The reason why I committed 2 times is: ""Vscode"" forcibly modified the contents of the `source/_data/themes.yml`.
+So I have to restore unnecessary modifications at the second commit.
+<issue_comment>username_1: Thank you for your contribution 😄"
+kubernetes/website,344645520,9642,,"[{'action': 'opened', 'author': 'sarath7112', 'comment_id': None, 'datetime': '2018-07-25 23:47:27+00:00', 'masked_author': 'username_0', 'text': '<!-- Thanks for filing an issue! Before submitting, please fill in the following information. -->\r\n\r\n<!--Required Information-->\r\n\r\n**This is a...** \r\n<!-- choose one by changing [ ] to [x] -->\r\n- [ ] Feature Request\r\n- [x] Bug Report\r\n\r\n**Problem:**\r\nGetting in to issues while following the kubernetes HA cluster creation documentation. Creating the cluster in CentOS 7.5.1804.\r\nkube* versions. v1.11.1\r\n\r\nThe cluster initialization command is running and its giving the following error.\r\n[kubelet-check] The HTTP call equal to \'curl -sSL http://localhost:10248/healthz\' failed with error: Get http://localhost:10248/healthz: dial tcp [::1]:10248: connect: connection refused.\r\n                Unfortunately, an error has occurred:\r\n                        timed out waiting for the condition\r\n\r\n                This error is likely caused by:\r\n                        - The kubelet is not running\r\n                        - The kubelet is unhealthy due to a misconfiguration of the node in some way (required cgroups disabled)\r\n                        - No internet connection is available so the kubelet cannot pull or find the following control plane images:\r\n                                - k8s.gcr.io/kube-apiserver-amd64:v1.11.0\r\n                                - k8s.gcr.io/kube-controller-manager-amd64:v1.11.0\r\n                                - k8s.gcr.io/kube-scheduler-amd64:v1.11.0\r\n                                - k8s.gcr.io/etcd-amd64:3.2.18\r\n                                - You can check or miligate this in beforehand with ""kubeadm config images pull"" to make sure the images\r\n                                  are downloaded locally and cached.\r\n\r\n                If you are on a systemd-powered system, you can try to troubleshoot the error with the following commands:\r\n                        - \'systemctl status kubelet\'\r\n                        - \'journalctl -xeu kubelet\'\r\n\r\n                Additionally, a control plane component may have crashed or exited when started by the container runtime.\r\n                To troubleshoot, list all containers using your preferred container runtimes CLI, e.g. docker.\r\n                Here is one example how you may list all Kubernetes containers running in docker:\r\n                        - \'docker ps -a | grep kube | grep -v pause\'\r\n                        Once you have found the failing container, you can inspect its logs with:\r\n                        - \'docker logs CONTAINERID\'\r\ncouldn\'t initialize a Kubernetes cluster\r\nThe ""kube-apiserver"" container logs has the error ""F0725 23:41:25.373090       1 storage_decorator.go:57] Unable to create storage backend: config (&{ /registry [https://127.0.0.1:2379] /etc/kubernetes/pki/apiserver-etcd-client.key /etc/kubernetes/pki/apiserver-etcd-client.crt /etc/kubernetes/pki/etcd/ca.crt true false 1000 0xc420244f00 <nil> 5m0s 1m0s}), err (dial tcp 127.0.0.1:2379: connect: connection refused)""\r\nThe ""kube-controller"" container log has this information ""failed to create listener: failed to listen on 127.0.0.1:10252: listen tcp 127.0.0.1:10252: bind: address already in use""\r\n\r\n\r\n\r\n\r\n**Proposed Solution:**\r\n\r\n\r\n**Page to Update:**\r\nhttps://kubernetes.io/...\r\n\r\n<!--Optional Information (remove the comment tags around information you would like to include)-->\r\n<!--Kubernetes Version:-->\r\n\r\n<!--Additional Information:-->', 'title': 'Issue with k8s.io/docs/setup/independent/high-availability/', 'type': 'issue'}
+ {'action': 'created', 'author': 'neolit123', 'comment_id': 407934843.0, 'datetime': '2018-07-26 00:08:04+00:00', 'masked_author': 'username_1', 'text': '/priority awaiting-more-evidence\r\n\r\nis something using the 10252 port of your localhost?', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'neolit123', 'comment_id': 407934885.0, 'datetime': '2018-07-26 00:08:15+00:00', 'masked_author': 'username_1', 'text': '/sig cluster-lifecycle', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'sarath7112', 'comment_id': 407941717.0, 'datetime': '2018-07-26 00:54:57+00:00', 'masked_author': 'username_0', 'text': 'I dont think some other processes are running on pot 10252. Before starting with the cluster initialization, i had verified for any processes consuming that port, and nothing was there. \r\n\r\nPlease find the below content from kubeadm-config.yaml\r\n\r\napiVersion: kubeadm.k8s.io/v1alpha2\r\nkind: MasterConfiguration\r\nkubernetesVersion: v1.11.0\r\napiServerCertSANs:\r\n- ""ELB_URL""\r\napi:\r\n    controlPlaneEndpoint: ""ELB_URL:6443""\r\netcd:\r\n  local:\r\n    extraArgs:\r\n      listen-client-urls: ""https://PublicIP_of_EC2:2379""\r\n      advertise-client-urls: ""https://PublicIP_of_EC2:2379""\r\n      listen-peer-urls: ""https://PublicIP_of_EC2:2380""\r\n      initial-advertise-peer-urls: ""https://PublicIP_of_EC2:2380""\r\n      initial-cluster: ""k8s1.netacd.com=https://PublicIP_of_EC2:2380""\r\n    serverCertSANs:\r\n      - EC2_HOSTNAME\r\n      - PublicIP_of_EC2\r\n    peerCertSANs:\r\n      - EC2_HOSTNAME\r\n      - PublicIP_of_EC2\r\nnetworking:\r\n    # This CIDR is a Calico default. Substitute or remove for your CNI provider.\r\n    podSubnet: ""10.244.0.0/16""\r\n\r\nThe network add-on installed is calico.\r\nPlease let me know if you need any additional information needed.\r\nThanks.', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'neolit123', 'comment_id': 407947302.0, 'datetime': '2018-07-26 01:30:58+00:00', 'masked_author': 'username_1', 'text': 'can you try a different pod network plugin - e.g. weave or flannel?', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'sarath7112', 'comment_id': 407958766.0, 'datetime': '2018-07-26 02:46:28+00:00', 'masked_author': 'username_0', 'text': ""Sorry for the confusion happened, Calico is installed for an independent cluster installation, which is up and running. HA cluster configuration with the default add-ons are running in to issues. I haven't added calico explicitly."", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'prein', 'comment_id': 472383040.0, 'datetime': '2019-03-13 11:23:19+00:00', 'masked_author': 'username_2', 'text': ""Apologies for posting to closed issue. Just wanted to leave a hint for a poor soul getting here looking for solution for similar problem. For me it was weave going into some abnormal state on the node where kube-controller-manager was throwing the `127.0.0.1:10252: bind: address already in use` error. Restarting the weave-net pod made it go away. I didn't investigate any deeper."", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'neolit123', 'comment_id': 472385388.0, 'datetime': '2019-03-13 11:31:21+00:00', 'masked_author': 'username_1', 'text': ""we are testing HA setups using weave CNI on a regular basis in this project:\r\nhttps://github.com/kubernetes-sigs/kind\r\n\r\nbut i wouldn't exclude some sort of a weird state that needs a weave pod restart."", 'title': None, 'type': 'comment'}]","<issue_start><issue_comment>Title: Issue with k8s.io/docs/setup/independent/high-availability/
+username_0: <!-- Thanks for filing an issue! Before submitting, please fill in the following information. -->
+
+<!--Required Information-->
+
+**This is a...** 
+<!-- choose one by changing [ ] to [x] -->
+- [ ] Feature Request
+- [x] Bug Report
+
+**Problem:**
+Getting in to issues while following the kubernetes HA cluster creation documentation. Creating the cluster in CentOS 7.5.1804.
+kube* versions. v1.11.1
+
+The cluster initialization command is running and its giving the following error.
+[kubelet-check] The HTTP call equal to 'curl -sSL http://localhost:10248/healthz' failed with error: Get http://localhost:10248/healthz: dial tcp [::1]:10248: connect: connection refused.
+                Unfortunately, an error has occurred:
+                        timed out waiting for the condition
+
+                This error is likely caused by:
+                        - The kubelet is not running
+                        - The kubelet is unhealthy due to a misconfiguration of the node in some way (required cgroups disabled)
+                        - No internet connection is available so the kubelet cannot pull or find the following control plane images:
+                                - k8s.gcr.io/kube-apiserver-amd64:v1.11.0
+                                - k8s.gcr.io/kube-controller-manager-amd64:v1.11.0
+                                - k8s.gcr.io/kube-scheduler-amd64:v1.11.0
+                                - k8s.gcr.io/etcd-amd64:3.2.18
+                                - You can check or miligate this in beforehand with ""kubeadm config images pull"" to make sure the images
+                                  are downloaded locally and cached.
+
+                If you are on a systemd-powered system, you can try to troubleshoot the error with the following commands:
+                        - 'systemctl status kubelet'
+                        - 'journalctl -xeu kubelet'
+
+                Additionally, a control plane component may have crashed or exited when started by the container runtime.
+                To troubleshoot, list all containers using your preferred container runtimes CLI, e.g. docker.
+                Here is one example how you may list all Kubernetes containers running in docker:
+                        - 'docker ps -a | grep kube | grep -v pause'
+                        Once you have found the failing container, you can inspect its logs with:
+                        - 'docker logs CONTAINERID'
+couldn't initialize a Kubernetes cluster
+The ""kube-apiserver"" container logs has the error ""F0725 23:41:25.373090       1 storage_decorator.go:57] Unable to create storage backend: config (&{ /registry [https://127.0.0.1:2379] /etc/kubernetes/pki/apiserver-etcd-client.key /etc/kubernetes/pki/apiserver-etcd-client.crt /etc/kubernetes/pki/etcd/ca.crt true false 1000 0xc420244f00 <nil> 5m0s 1m0s}), err (dial tcp 127.0.0.1:2379: connect: connection refused)""
+The ""kube-controller"" container log has this information ""failed to create listener: failed to listen on 127.0.0.1:10252: listen tcp 127.0.0.1:10252: bind: address already in use""
+
+
+
+
+**Proposed Solution:**
+
+
+**Page to Update:**
+https://kubernetes.io/...
+
+<!--Optional Information (remove the comment tags around information you would like to include)-->
+<!--Kubernetes Version:-->
+
+<!--Additional Information:-->
+<issue_comment>username_1: /priority awaiting-more-evidence
+
+is something using the 10252 port of your localhost?
+<issue_comment>username_1: /sig cluster-lifecycle
+<issue_comment>username_0: I dont think some other processes are running on pot 10252. Before starting with the cluster initialization, i had verified for any processes consuming that port, and nothing was there. 
+
+Please find the below content from kubeadm-config.yaml
+
+apiVersion: kubeadm.k8s.io/v1alpha2
+kind: MasterConfiguration
+kubernetesVersion: v1.11.0
+apiServerCertSANs:
+- ""ELB_URL""
+api:
+    controlPlaneEndpoint: ""ELB_URL:6443""
+etcd:
+  local:
+    extraArgs:
+      listen-client-urls: ""https://PublicIP_of_EC2:2379""
+      advertise-client-urls: ""https://PublicIP_of_EC2:2379""
+      listen-peer-urls: ""https://PublicIP_of_EC2:2380""
+      initial-advertise-peer-urls: ""https://PublicIP_of_EC2:2380""
+      initial-cluster: ""k8s1.netacd.com=https://PublicIP_of_EC2:2380""
+    serverCertSANs:
+      - EC2_HOSTNAME
+      - PublicIP_of_EC2
+    peerCertSANs:
+      - EC2_HOSTNAME
+      - PublicIP_of_EC2
+networking:
+    # This CIDR is a Calico default. Substitute or remove for your CNI provider.
+    podSubnet: ""10.244.0.0/16""
+
+The network add-on installed is calico.
+Please let me know if you need any additional information needed.
+Thanks.
+<issue_comment>username_1: can you try a different pod network plugin - e.g. weave or flannel?
+<issue_comment>username_0: Sorry for the confusion happened, Calico is installed for an independent cluster installation, which is up and running. HA cluster configuration with the default add-ons are running in to issues. I haven't added calico explicitly.
+<issue_comment>username_2: Apologies for posting to closed issue. Just wanted to leave a hint for a poor soul getting here looking for solution for similar problem. For me it was weave going into some abnormal state on the node where kube-controller-manager was throwing the `127.0.0.1:10252: bind: address already in use` error. Restarting the weave-net pod made it go away. I didn't investigate any deeper.
+<issue_comment>username_1: we are testing HA setups using weave CNI on a regular basis in this project:
+https://github.com/kubernetes-sigs/kind
+
+but i wouldn't exclude some sort of a weird state that needs a weave pod restart."
+conda-forge/conda-forge.github.io,158984821,169,,"[{'action': 'opened', 'author': 'jakirkham', 'comment_id': None, 'datetime': '2016-06-07 17:53:40+00:00', 'masked_author': 'username_0', 'text': 'Having JPEG 9 has cause no end of grief lately. Would it be possible for us to downgrade to JPEG 8 so as to match `defaults`? This would allow our stuff and `qt` to live in the same environment.\r\n\r\ncc @pelson @username_1 @kmuehlbauer @username_3', 'title': 'Downgrading to JPEG 8', 'type': 'issue'}
+ {'action': 'created', 'author': 'ocefpaf', 'comment_id': 224362311.0, 'datetime': '2016-06-07 17:58:09+00:00', 'masked_author': 'username_1', 'text': 'I worked a lot on the packages I am a member of to support `jpeg` and, as far as I know, `qt` is the last missing piece. Why not put our efforts on having `qt` with jpeg 9?', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'jakirkham', 'comment_id': 224363088.0, 'datetime': '2016-06-07 18:00:47+00:00', 'masked_author': 'username_0', 'text': ""Unfortunately Qt is not going to build on the CIs. It takes way too long. Why do we need JPEG 9? I know we upgraded, but I don't think I ever understood clearly why it was necessary."", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'ocefpaf', 'comment_id': 224363587.0, 'datetime': '2016-06-07 18:02:30+00:00', 'masked_author': 'username_1', 'text': ""Let's discuss more that and settle on a solution. I see a lot of value in moving forward with the `qt` recipe even if we don't build on our CIs."", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'janschulz', 'comment_id': 224364002.0, 'datetime': '2016-06-07 18:03:59+00:00', 'masked_author': 'username_2', 'text': 'An alternative would be to add a jpeg9 package (or Dev + binary) and rebuild on that.', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': '183amir', 'comment_id': 224365015.0, 'datetime': '2016-06-07 18:07:31+00:00', 'masked_author': 'username_3', 'text': '@username_1 but why do you need `jpeg-9`?', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'jakirkham', 'comment_id': 224365994.0, 'datetime': '2016-06-07 18:10:48+00:00', 'masked_author': 'username_0', 'text': 'Honestly, I think part of the pain in doing that upgrade was it happened manually and took quite a bit of work to track down everything effected. However, we have far better tools for this problem now. I think it is totally reasonable for people to be able to install `matplotlib` with stuff from here, but right now that is simply not possible because of this discontinuity around `jpeg` versions.', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': '183amir', 'comment_id': 224366451.0, 'datetime': '2016-06-07 18:12:16+00:00', 'masked_author': 'username_3', 'text': 'I would like to mention we have the same problem with `libpng` too. Defaults comes with `1.6.17` and we build with `1.6.21` and they are incompatible.', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'jakirkham', 'comment_id': 224366718.0, 'datetime': '2016-06-07 18:13:16+00:00', 'masked_author': 'username_0', 'text': ""It's true. I can't remember if there were any other libraries like that, but I do remember `libpng` was a problem too."", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'jakirkham', 'comment_id': 224371719.0, 'datetime': '2016-06-07 18:30:03+00:00', 'masked_author': 'username_0', 'text': ""Alright, this is clearly quite controversial and not going to happen in the near term. Let's see what acceptable workarounds we can do for the near term."", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'jakirkham', 'comment_id': 224383334.0, 'datetime': '2016-06-07 19:10:01+00:00', 'masked_author': 'username_0', 'text': ""Not trying to make this any more controversial, just trying to note our decisions are affecting downstream users. In some cases, they don't know their downstream yet. For instance, see this break at docker-stacks that affects an R user. ( https://github.com/jupyter/docker-stacks/issues/210 ) Given how willing Jupyter has been to adopt conda-forge, we should keep in mind how to avoid causing breaks for them IMHO. I'm guessing we still don't have R ready here ( though I haven't looked at that recently https://github.com/conda-forge/staged-recipes/pull/586 ). When do have the full stack that `defaults` has, this will be less of a problem, but until then this is something to be aware of."", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'patricksnape', 'comment_id': 224385047.0, 'datetime': '2016-06-07 19:16:35+00:00', 'masked_author': 'username_4', 'text': '@username_0 Which CIs are taking too long for Qt? Can we request more time for those CI builds?', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'jakirkham', 'comment_id': 224385960.0, 'datetime': '2016-06-07 19:20:10+00:00', 'masked_author': 'username_0', 'text': 'Sorry, this discussion has been happening at two places, which makes it a bit hard to follow. See this PR ( https://github.com/conda-forge/jasper-feedstock/pull/9 ) for the other half. It sounds like Continuum will switch to JPEG 9, which will make this less of an issue.', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'jakirkham', 'comment_id': 224389727.0, 'datetime': '2016-06-07 19:35:07+00:00', 'masked_author': 'username_0', 'text': ""@username_4 \r\n\r\nHere's a PR ( https://github.com/conda-forge/staged-recipes/pull/706 ) for Qt4 that is just building on CircleCI. It is getting right up next to the CircleCI limit, but it fits. Definitely doesn't fit on Travis CI. I don't recall what the status was with AppVeyor.\r\n\r\nFrom what @msarahan has said Qt5 is probably not going to work on CI. I don't know how long the build takes; so, you would need to ask him. Here is a PR ( https://github.com/conda-forge/staged-recipes/pull/706 ). However, it is missing some dependencies.\r\n\r\nWe certainly can always ask for more build time. We would need a better idea of what to ask for. The long term plan is to move to our own build infrastructure. I don't know if this will need some mixture of CIs too or what at this point. This is really still in the idea phase. This would require things like joining NumFOCUS, which thus far people here seem agreeable to. Also, it seems NumFOCUS is interested in working with us. So that will certainly open a path for this transition, which we ultimately want."", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'ocefpaf', 'comment_id': 224391886.0, 'datetime': '2016-06-07 19:43:39+00:00', 'masked_author': 'username_1', 'text': '@username_4 at PyCon @jjhelmus, @scopatz, and I had a nice chat with some numfocus people and there is a path to create a conda-forge infrastructure. After PyCon that I had a nice chat with @kwilcox, who will probably attend our next meeting, and he has some very nice ideas on how to achieve that goal.\r\n\r\nHowever, asking for more CI time right now is definitely the way to go! Any other solution will take at best  1-2 months to materialize and conda-forge moves faster than that.\r\n\r\nDo you want to take charge of writing Travis-CI and ask for more CI time? (Not sure if we will get anything from AppVeyor as we are already on their best option.)', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'jakirkham', 'comment_id': 224392644.0, 'datetime': '2016-06-07 19:46:32+00:00', 'masked_author': 'username_0', 'text': 'Do we know how long it takes to build Qt5, @msarahan and @username_5? Would be nice to ask for a certain (reasonable) amount of build time. 😄', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'ccordoba12', 'comment_id': 224395089.0, 'datetime': '2016-06-07 19:55:57+00:00', 'masked_author': 'username_5', 'text': ""I can only answer for Linux and Mac: Qt5 takes between 2 to 3 hours on a old (2012) Core i5 using 4 cores.\r\n\r\nBut the problem is not only time. CircleCI imposes a 4gb limit on space, and that's way too short for Qt5 (it needs 8-10gb)."", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'jakirkham', 'comment_id': 224396923.0, 'datetime': '2016-06-07 20:02:41+00:00', 'masked_author': 'username_0', 'text': 'Travis CI also has a [memory limit]( https://docs.travis-ci.com/user/ci-environment/#Virtualization-environments ) of 3GB so that is something we need to ask about too.  Though to try to make it easier on them we can try to ask this for one or two feedstocks instead of the whole flock (pl?).', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'jakirkham', 'comment_id': 224399230.0, 'datetime': '2016-06-07 20:11:33+00:00', 'masked_author': 'username_0', 'text': 'How long/much does it need?', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': '183amir', 'comment_id': 224399248.0, 'datetime': '2016-06-07 20:11:38+00:00', 'masked_author': 'username_3', 'text': 'while we are at it, can we ask for more time in `opencv` too, please?', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'jakirkham', 'comment_id': 224399347.0, 'datetime': '2016-06-07 20:12:00+00:00', 'masked_author': 'username_0', 'text': 'Why do we need more time for OpenCV?', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'ccordoba12', 'comment_id': 224399806.0, 'datetime': '2016-06-07 20:13:44+00:00', 'masked_author': 'username_5', 'text': 'Qt4 is easier: It needs like one hour and a half, 4 or 5 gb of space and 4 gb of memory (again, using the same computer I mentioned above).', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'ccordoba12', 'comment_id': 224399968.0, 'datetime': '2016-06-07 20:14:21+00:00', 'masked_author': 'username_5', 'text': 'And the same number of cores (4).', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': '183amir', 'comment_id': 224400463.0, 'datetime': '2016-06-07 20:16:14+00:00', 'masked_author': 'username_3', 'text': 'https://github.com/conda-forge/opencv-feedstock/pull/18#issuecomment-224346671', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'janschulz', 'comment_id': 224424541.0, 'datetime': '2016-06-07 21:45:55+00:00', 'masked_author': 'username_2', 'text': 'BTW, at least on windows it looks like `jpeg 8` runtime dependencies are not needed as jpeg 8 only includes lib files (not dlls and implib), so the jpeg stuff is statically compiled into the package.\r\n\r\n```\r\nC:\\portabel\\miniconda\\pkgs\\pyqt-4.11.4-py35_5\\Lib\\site-packages\\PyQt4\r\nλ dumpbin.exe /DEPENDENTS *pyd |grep jpeg\r\n```\r\n\r\n-> It seems that the defaults packages, at least on windows, does not need to depend on jpeg!\r\n\r\n[Also posted here: https://github.com/conda-forge/libpng-feedstock/issues/7#issuecomment-224398187]', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'patricksnape', 'comment_id': 224524571.0, 'datetime': '2016-06-08 08:35:09+00:00', 'masked_author': 'username_4', 'text': 'To clarify, I am happy to write a short email to both CircleCI and Travis asking for 2 hour build timeouts and 5GB of storage. I doubt we will get more cores/RAM, however. Maybe if we tried the build and then we have an example to point to showing them what we are seeing?\r\n\r\nAs a note, on the Menpo team we ended up switching to our own Jenkins infrastructure hosted internally for both OSX and we are transitioning for Windows. So I can understand why we would want to switch. However, the biggest downside is that your forget how much compute power is behind services such as Travis and it may well end up being slower in the worst case.\r\n\r\nHowever, if we do switch to a Jenkins-like infrastructure I am happy to petition my department to add some cloud compute Linux instances to contribute as slaves.', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'ocefpaf', 'comment_id': 224568888.0, 'datetime': '2016-06-08 12:03:12+00:00', 'masked_author': 'username_1', 'text': '@username_4 what is your timezone? I would love if you could login in our next meeting and talk about that with @kwilcox who has some similar ideas.\r\n\r\nPS: still thing that a short e-mail for CircleCI and Travis-CI is worth it. Thanks for volunteering to do so.', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'patricksnape', 'comment_id': 224572177.0, 'datetime': '2016-06-08 12:20:12+00:00', 'masked_author': 'username_4', 'text': 'GMT +1 - When is the call?', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'ocefpaf', 'comment_id': 224578269.0, 'datetime': '2016-06-08 12:48:29+00:00', 'masked_author': 'username_1', 'text': 'I am having trouble connecting to the hackpad right now, but the meeting info should be here:\r\n\r\nhttps://conda-forge.hackpad.com/conda-forge-meetings-2YkV96cvxPG#:h=2016-05-13\r\n\r\nI think it is 13:00 UTC.', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'jakirkham', 'comment_id': 224580225.0, 'datetime': '2016-06-08 12:56:36+00:00', 'masked_author': 'username_0', 'text': 'You mean 1400UTC, right? :wink:', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'hadim', 'comment_id': 243524054.0, 'datetime': '2016-08-30 17:55:13+00:00', 'masked_author': 'username_6', 'text': ""Did someone send a mail to CircleCI and Travis-CI guys at then end ? If you didn't are you still looking to build your own CI infrastructure ?"", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'patricksnape', 'comment_id': 244538980.0, 'datetime': '2016-09-03 10:27:06+00:00', 'masked_author': 'username_4', 'text': ""I believe I did send one to the Travis but I can't seem to find the response anywhere - perhaps I didn't get one (or I'm misremembering). I think that building our own CI infrastructure would be pretty difficult for non-Linux builds because OSX and Windows can't be used with docker. I think the primary issue is that, with the volume of builds that we have, we need a fairly serious coordination across many institutions to enable timely builds. Either that or we need sponsorship for paid CircleCI and travis builds so that we can more easily request increased build capabilities."", 'title': None, 'type': 'comment'}
+ {'action': 'closed', 'author': 'jakirkham', 'comment_id': None, 'datetime': '2016-09-15 23:01:31+00:00', 'masked_author': 'username_0', 'text': '', 'title': None, 'type': 'issue'}
+ {'action': 'created', 'author': 'jakirkham', 'comment_id': 247478597.0, 'datetime': '2016-09-15 23:01:31+00:00', 'masked_author': 'username_0', 'text': 'This issue is clearly not getting any traction. Also as Qt is now packaged on Linux some of the problems here have been resolved due to that. Am going to close this out. If others feel strongly about this change or have other issues, please raise them separately. Thanks.', 'title': None, 'type': 'comment'}]","<issue_start><issue_comment>Title: Downgrading to JPEG 8
+username_0: Having JPEG 9 has cause no end of grief lately. Would it be possible for us to downgrade to JPEG 8 so as to match `defaults`? This would allow our stuff and `qt` to live in the same environment.
+
+cc @pelson @username_1 @kmuehlbauer @username_3
+<issue_comment>username_1: I worked a lot on the packages I am a member of to support `jpeg` and, as far as I know, `qt` is the last missing piece. Why not put our efforts on having `qt` with jpeg 9?
+<issue_comment>username_0: Unfortunately Qt is not going to build on the CIs. It takes way too long. Why do we need JPEG 9? I know we upgraded, but I don't think I ever understood clearly why it was necessary.
+<issue_comment>username_1: Let's discuss more that and settle on a solution. I see a lot of value in moving forward with the `qt` recipe even if we don't build on our CIs.
+<issue_comment>username_2: An alternative would be to add a jpeg9 package (or Dev + binary) and rebuild on that.
+<issue_comment>username_3: @username_1 but why do you need `jpeg-9`?
+<issue_comment>username_0: Honestly, I think part of the pain in doing that upgrade was it happened manually and took quite a bit of work to track down everything effected. However, we have far better tools for this problem now. I think it is totally reasonable for people to be able to install `matplotlib` with stuff from here, but right now that is simply not possible because of this discontinuity around `jpeg` versions.
+<issue_comment>username_3: I would like to mention we have the same problem with `libpng` too. Defaults comes with `1.6.17` and we build with `1.6.21` and they are incompatible.
+<issue_comment>username_0: It's true. I can't remember if there were any other libraries like that, but I do remember `libpng` was a problem too.
+<issue_comment>username_0: Alright, this is clearly quite controversial and not going to happen in the near term. Let's see what acceptable workarounds we can do for the near term.
+<issue_comment>username_0: Not trying to make this any more controversial, just trying to note our decisions are affecting downstream users. In some cases, they don't know their downstream yet. For instance, see this break at docker-stacks that affects an R user. ( https://github.com/jupyter/docker-stacks/issues/210 ) Given how willing Jupyter has been to adopt conda-forge, we should keep in mind how to avoid causing breaks for them IMHO. I'm guessing we still don't have R ready here ( though I haven't looked at that recently https://github.com/conda-forge/staged-recipes/pull/586 ). When do have the full stack that `defaults` has, this will be less of a problem, but until then this is something to be aware of.
+<issue_comment>username_4: @username_0 Which CIs are taking too long for Qt? Can we request more time for those CI builds?
+<issue_comment>username_0: Sorry, this discussion has been happening at two places, which makes it a bit hard to follow. See this PR ( https://github.com/conda-forge/jasper-feedstock/pull/9 ) for the other half. It sounds like Continuum will switch to JPEG 9, which will make this less of an issue.
+<issue_comment>username_0: @username_4 
+
+Here's a PR ( https://github.com/conda-forge/staged-recipes/pull/706 ) for Qt4 that is just building on CircleCI. It is getting right up next to the CircleCI limit, but it fits. Definitely doesn't fit on Travis CI. I don't recall what the status was with AppVeyor.
+
+From what @msarahan has said Qt5 is probably not going to work on CI. I don't know how long the build takes; so, you would need to ask him. Here is a PR ( https://github.com/conda-forge/staged-recipes/pull/706 ). However, it is missing some dependencies.
+
+We certainly can always ask for more build time. We would need a better idea of what to ask for. The long term plan is to move to our own build infrastructure. I don't know if this will need some mixture of CIs too or what at this point. This is really still in the idea phase. This would require things like joining NumFOCUS, which thus far people here seem agreeable to. Also, it seems NumFOCUS is interested in working with us. So that will certainly open a path for this transition, which we ultimately want.
+<issue_comment>username_1: @username_4 at PyCon @jjhelmus, @scopatz, and I had a nice chat with some numfocus people and there is a path to create a conda-forge infrastructure. After PyCon that I had a nice chat with @kwilcox, who will probably attend our next meeting, and he has some very nice ideas on how to achieve that goal.
+
+However, asking for more CI time right now is definitely the way to go! Any other solution will take at best  1-2 months to materialize and conda-forge moves faster than that.
+
+Do you want to take charge of writing Travis-CI and ask for more CI time? (Not sure if we will get anything from AppVeyor as we are already on their best option.)
+<issue_comment>username_0: Do we know how long it takes to build Qt5, @msarahan and @username_5? Would be nice to ask for a certain (reasonable) amount of build time. 😄
+<issue_comment>username_5: I can only answer for Linux and Mac: Qt5 takes between 2 to 3 hours on a old (2012) Core i5 using 4 cores.
+
+But the problem is not only time. CircleCI imposes a 4gb limit on space, and that's way too short for Qt5 (it needs 8-10gb).
+<issue_comment>username_0: Travis CI also has a [memory limit]( https://docs.travis-ci.com/user/ci-environment/#Virtualization-environments ) of 3GB so that is something we need to ask about too.  Though to try to make it easier on them we can try to ask this for one or two feedstocks instead of the whole flock (pl?).
+<issue_comment>username_0: How long/much does it need?
+<issue_comment>username_3: while we are at it, can we ask for more time in `opencv` too, please?
+<issue_comment>username_0: Why do we need more time for OpenCV?
+<issue_comment>username_5: Qt4 is easier: It needs like one hour and a half, 4 or 5 gb of space and 4 gb of memory (again, using the same computer I mentioned above).
+<issue_comment>username_5: And the same number of cores (4).
+<issue_comment>username_3: https://github.com/conda-forge/opencv-feedstock/pull/18#issuecomment-224346671
+<issue_comment>username_2: BTW, at least on windows it looks like `jpeg 8` runtime dependencies are not needed as jpeg 8 only includes lib files (not dlls and implib), so the jpeg stuff is statically compiled into the package.
+
+```
+C:\portabel\miniconda\pkgs\pyqt-4.11.4-py35_5\Lib\site-packages\PyQt4
+λ dumpbin.exe /DEPENDENTS *pyd |grep jpeg
+```
+
+-> It seems that the defaults packages, at least on windows, does not need to depend on jpeg!
+
+[Also posted here: https://github.com/conda-forge/libpng-feedstock/issues/7#issuecomment-224398187]
+<issue_comment>username_4: To clarify, I am happy to write a short email to both CircleCI and Travis asking for 2 hour build timeouts and 5GB of storage. I doubt we will get more cores/RAM, however. Maybe if we tried the build and then we have an example to point to showing them what we are seeing?
+
+As a note, on the Menpo team we ended up switching to our own Jenkins infrastructure hosted internally for both OSX and we are transitioning for Windows. So I can understand why we would want to switch. However, the biggest downside is that your forget how much compute power is behind services such as Travis and it may well end up being slower in the worst case.
+
+However, if we do switch to a Jenkins-like infrastructure I am happy to petition my department to add some cloud compute Linux instances to contribute as slaves.
+<issue_comment>username_1: @username_4 what is your timezone? I would love if you could login in our next meeting and talk about that with @kwilcox who has some similar ideas.
+
+PS: still thing that a short e-mail for CircleCI and Travis-CI is worth it. Thanks for volunteering to do so.
+<issue_comment>username_4: GMT +1 - When is the call?
+<issue_comment>username_1: I am having trouble connecting to the hackpad right now, but the meeting info should be here:
+
+https://conda-forge.hackpad.com/conda-forge-meetings-2YkV96cvxPG#:h=2016-05-13
+
+I think it is 13:00 UTC.
+<issue_comment>username_0: You mean 1400UTC, right? :wink:
+<issue_comment>username_6: Did someone send a mail to CircleCI and Travis-CI guys at then end ? If you didn't are you still looking to build your own CI infrastructure ?
+<issue_comment>username_4: I believe I did send one to the Travis but I can't seem to find the response anywhere - perhaps I didn't get one (or I'm misremembering). I think that building our own CI infrastructure would be pretty difficult for non-Linux builds because OSX and Windows can't be used with docker. I think the primary issue is that, with the volume of builds that we have, we need a fairly serious coordination across many institutions to enable timely builds. Either that or we need sponsorship for paid CircleCI and travis builds so that we can more easily request increased build capabilities.<issue_closed>
+<issue_comment>username_0: This issue is clearly not getting any traction. Also as Qt is now packaged on Linux some of the problems here have been resolved due to that. Am going to close this out. If others feel strongly about this change or have other issues, please raise them separately. Thanks."
+kubernetes/website,601224211,20393,"{'number': 20393.0, 'repo': 'website', 'user_login': 'kubernetes'}","[{'action': 'opened', 'author': 'mbbroberg', 'comment_id': None, 'datetime': '2020-04-16T16:23:17Z', 'masked_author': 'username_0', 'text': ""This PR submits a blog that is nearly ready to publish by @username_1. The target publish date is 4/21, so I've set it for then with the recognition that reviews are more important than that date. \r\n\r\nWhile I got it mostly ready, Paris has a few todos noted before publication: \r\n\r\n  - Tidy up the cncf bits \r\n  - Ack covid\r\n  - before we ship this we need to define k8s in the bio too so we don’t look exclusive were all contributors can assess all contributor content no matter the platform it’s being delivered\r\n\r\n\r\nAlso, this is my first PR of an article, so please guide me if you need any updates to the commit message or workflow. Thanks 😄"", 'title': ""Add Paris' post on communication"", 'type': 'issue'}
+ {'action': 'created', 'author': 'mbbroberg', 'comment_id': 614755039.0, 'datetime': '2020-04-16 16:23:37+00:00', 'masked_author': 'username_0', 'text': '/hold', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'mbbroberg', 'comment_id': 614755268.0, 'datetime': '2020-04-16 16:23:58+00:00', 'masked_author': 'username_0', 'text': '/assign @username_1 \r\n/assign @onlydole', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'parispittman', 'comment_id': 614944215.0, 'datetime': '2020-04-16 23:16:26+00:00', 'masked_author': 'username_1', 'text': '@username_0 and @onlydole side note: we need to add the area/contributor-comms label to this repo, too. will add an issue in a sec to the community repo.', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'mbbroberg', 'comment_id': 615008184.0, 'datetime': '2020-04-17 02:47:57+00:00', 'masked_author': 'username_0', 'text': ""Thanks all! I've accepted the simpler suggestions and sent a copy of the markdown over for @username_1 to edit further. I'll upload the diff when she gets back to me and we can tidy up from there 🤝"", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'parispittman', 'comment_id': 616364270.0, 'datetime': '2020-04-20 07:30:09+00:00', 'masked_author': 'username_1', 'text': 'ok - hackmd updated for @username_0 :D yay - addressed 95% i think with the exception of a few of @kbhawkey where we have open discussion.', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'mbbroberg', 'comment_id': 616895451.0, 'datetime': '2020-04-21 01:26:34+00:00', 'masked_author': 'username_0', 'text': ""I _should_ have this all set based on @username_1's edits and re-applying previous suggestions. \r\n\r\n/hold cancel"", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'parispittman', 'comment_id': 617211204.0, 'datetime': '2020-04-21 14:21:07+00:00', 'masked_author': 'username_1', 'text': '/lgtm\r\n\r\n🚀', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'mbbroberg', 'comment_id': 617217144.0, 'datetime': '2020-04-21 14:31:06+00:00', 'masked_author': 'username_0', 'text': 'Hey @onlydole @sftim or @kbhawkey, could you take a look and use your `approved` powers to get this to liftoff? 🚀', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'mbbroberg', 'comment_id': 617249693.0, 'datetime': '2020-04-21 15:24:30+00:00', 'masked_author': 'username_0', 'text': 'YAY!', 'title': None, 'type': 'comment'}]","<issue_start><issue_comment>Title: Add Paris' post on communication
+username_0: This PR submits a blog that is nearly ready to publish by @username_1. The target publish date is 4/21, so I've set it for then with the recognition that reviews are more important than that date. 
+
+While I got it mostly ready, Paris has a few todos noted before publication: 
+
+  - Tidy up the cncf bits 
+  - Ack covid
+  - before we ship this we need to define k8s in the bio too so we don’t look exclusive were all contributors can assess all contributor content no matter the platform it’s being delivered
+
+
+Also, this is my first PR of an article, so please guide me if you need any updates to the commit message or workflow. Thanks 😄
+<issue_comment>username_0: /hold
+<issue_comment>username_0: /assign @username_1 
+/assign @onlydole
+<issue_comment>username_1: @username_0 and @onlydole side note: we need to add the area/contributor-comms label to this repo, too. will add an issue in a sec to the community repo.
+<issue_comment>username_0: Thanks all! I've accepted the simpler suggestions and sent a copy of the markdown over for @username_1 to edit further. I'll upload the diff when she gets back to me and we can tidy up from there 🤝
+<issue_comment>username_1: ok - hackmd updated for @username_0 :D yay - addressed 95% i think with the exception of a few of @kbhawkey where we have open discussion.
+<issue_comment>username_0: I _should_ have this all set based on @username_1's edits and re-applying previous suggestions. 
+
+/hold cancel
+<issue_comment>username_1: /lgtm
+
+🚀
+<issue_comment>username_0: Hey @onlydole @sftim or @kbhawkey, could you take a look and use your `approved` powers to get this to liftoff? 🚀
+<issue_comment>username_0: YAY!"
+department-of-veterans-affairs/vets-website,393614502,9302,,"[{'action': 'opened', 'author': 'ncksllvn', 'comment_id': None, 'datetime': '2018-12-21 23:06:27+00:00', 'masked_author': 'username_0', 'text': 'The Drupal team has added a [Metalsmith-Drupal plugin](https://github.com/department-of-veterans-affairs/va.gov-cms/tree/develop/metalsmith_app) into the `va.gov-cms` repo. This plugin should be integrated into `vets-website` as the next step.\n\nTo do this, we should -\n\n1. Copy that plugin over into the `src/site/stages/build` directory of `vets-website`.\n2. Import that code into the `src/site/stages/preview` script\n3. Integrate that build step by consuming the [Drupal Dev API](http://dev.va.agile6.com/graphql/explorer)\n4. Do any basic Metalsmith templating that we have to do in order to make the site function\n    - I think this can be as simple as outputting some build output for Drupal-powered pages. Then, we can do some templating as we iterate.', 'title': 'Integrate the Drupal build step into the Preview server', 'type': 'issue'}
+ {'action': 'created', 'author': 'ncksllvn', 'comment_id': 449524589.0, 'datetime': '2018-12-21 23:42:13+00:00', 'masked_author': 'username_0', 'text': '@jbalboni LMK if we need to make any adjustments to this ticket!', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'ncksllvn', 'comment_id': 449526551.0, 'datetime': '2018-12-21 23:59:31+00:00', 'masked_author': 'username_0', 'text': 'Moved to https://github.com/department-of-veterans-affairs/vets.gov-team/issues/15944', 'title': None, 'type': 'comment'}
+ {'action': 'closed', 'author': 'ncksllvn', 'comment_id': None, 'datetime': '2018-12-21 23:59:32+00:00', 'masked_author': 'username_0', 'text': '', 'title': None, 'type': 'issue'}]","<issue_start><issue_comment>Title: Integrate the Drupal build step into the Preview server
+username_0: The Drupal team has added a [Metalsmith-Drupal plugin](https://github.com/department-of-veterans-affairs/va.gov-cms/tree/develop/metalsmith_app) into the `va.gov-cms` repo. This plugin should be integrated into `vets-website` as the next step.
+
+To do this, we should -
+
+1. Copy that plugin over into the `src/site/stages/build` directory of `vets-website`.
+2. Import that code into the `src/site/stages/preview` script
+3. Integrate that build step by consuming the [Drupal Dev API](http://dev.va.agile6.com/graphql/explorer)
+4. Do any basic Metalsmith templating that we have to do in order to make the site function
+    - I think this can be as simple as outputting some build output for Drupal-powered pages. Then, we can do some templating as we iterate.
+<issue_comment>username_0: @jbalboni LMK if we need to make any adjustments to this ticket!
+<issue_comment>username_0: Moved to https://github.com/department-of-veterans-affairs/vets.gov-team/issues/15944<issue_closed>"
+kubernetes/website,450488106,14644,"{'number': 14644.0, 'repo': 'website', 'user_login': 'kubernetes'}","[{'action': 'opened', 'author': 'grcusanz', 'comment_id': None, 'datetime': '2019-05-30T20:19:13Z', 'masked_author': 'username_0', 'text': '', 'title': 'Create kubeadm-windows.md', 'type': 'issue'}
+ {'action': 'created', 'author': 'neolit123', 'comment_id': 497487546.0, 'datetime': '2019-05-30 21:10:51+00:00', 'masked_author': 'username_1', 'text': '/hold\r\nhi, username_0 thanks for the PR.\r\nplease change the file location to be under:\r\nhttps://kubernetes.io/docs/setup/windows/\r\n\r\nthanks.\r\n\r\n/sig cluster-lifecycle\r\nxref https://github.com/kubernetes/kubeadm/issues/1393', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'michmike', 'comment_id': 497488199.0, 'datetime': '2019-05-30 21:12:50+00:00', 'masked_author': 'username_2', 'text': ""@username_0 thanks for starting this\r\n@username_1 , the right place for this doc is under the kubeadm section of the docs since that's where we expect users to look for it. we can link to the doc from the \\setup\\windows section, but this doc should live with kubeadm. my 2 cents"", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'neolit123', 'comment_id': 497490943.0, 'datetime': '2019-05-30 21:22:18+00:00', 'masked_author': 'username_1', 'text': ""given the new docs will include mostly Windows PowerShell instructions, i'm inclined to recommend https://kubernetes.io/docs/setup/windows/ as the location and we can possibly link from the official kubeadm pages if the feature graduates to alpha."", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'PatrickLang', 'comment_id': 497531848.0, 'datetime': '2019-05-31 00:25:26+00:00', 'masked_author': 'username_3', 'text': '@username_0 - can you also retarget this to `dev-1.15` not `master`?', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'cody-clark', 'comment_id': 498352493.0, 'datetime': '2019-06-03 17:32:27+00:00', 'masked_author': 'username_4', 'text': '', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'jimangel', 'comment_id': 498508918.0, 'datetime': '2019-06-04 03:43:25+00:00', 'masked_author': 'username_5', 'text': 'Should this be targeted for dev-1.15?\r\n/cc @username_6', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'makoscafee', 'comment_id': 500251492.0, 'datetime': '2019-06-09 22:42:57+00:00', 'masked_author': 'username_6', 'text': 'Hi, @username_0 you need help for anything to help speed up this work? We are looking to have all PR for release 1.15 merged by June 10th. Let me know if there is anything docs team can assist on this.', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'neolit123', 'comment_id': 500605526.0, 'datetime': '2019-06-10 21:39:59+00:00', 'masked_author': 'username_1', 'text': '@username_6 as per the recent discussion on slack\r\nthis PR is moved for after v1.15 so the milestone can be removed:\r\nhttps://kubernetes.slack.com/archives/C13J86Z63/p1560196459047800', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'jimangel', 'comment_id': 500654514.0, 'datetime': '2019-06-11 01:48:13+00:00', 'masked_author': 'username_5', 'text': '/close', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'makoscafee', 'comment_id': 500667531.0, 'datetime': '2019-06-11 02:54:59+00:00', 'masked_author': 'username_6', 'text': '/milestone clear', 'title': None, 'type': 'comment'}]","<issue_start><issue_comment>Title: Create kubeadm-windows.md
+username_0: 
+<issue_comment>username_1: /hold
+hi, username_0 thanks for the PR.
+please change the file location to be under:
+https://kubernetes.io/docs/setup/windows/
+
+thanks.
+
+/sig cluster-lifecycle
+xref https://github.com/kubernetes/kubeadm/issues/1393
+<issue_comment>username_2: @username_0 thanks for starting this
+@username_1 , the right place for this doc is under the kubeadm section of the docs since that's where we expect users to look for it. we can link to the doc from the \setup\windows section, but this doc should live with kubeadm. my 2 cents
+<issue_comment>username_1: given the new docs will include mostly Windows PowerShell instructions, i'm inclined to recommend https://kubernetes.io/docs/setup/windows/ as the location and we can possibly link from the official kubeadm pages if the feature graduates to alpha.
+<issue_comment>username_3: @username_0 - can you also retarget this to `dev-1.15` not `master`?
+<issue_comment>username_5: Should this be targeted for dev-1.15?
+/cc @username_6
+<issue_comment>username_6: Hi, @username_0 you need help for anything to help speed up this work? We are looking to have all PR for release 1.15 merged by June 10th. Let me know if there is anything docs team can assist on this.
+<issue_comment>username_1: @username_6 as per the recent discussion on slack
+this PR is moved for after v1.15 so the milestone can be removed:
+https://kubernetes.slack.com/archives/C13J86Z63/p1560196459047800
+<issue_comment>username_5: /close
+<issue_comment>username_6: /milestone clear"
+conda-forge/conda-forge.github.io,375427617,668,,"[{'action': 'opened', 'author': 'dbast', 'comment_id': None, 'datetime': '2018-10-30 10:53:21+00:00', 'masked_author': 'username_0', 'text': 'How to deal with R package sources other than CRAN?\r\n\r\nMost R packages are using CRAN as source, which serves as a good quality gate as CRAN does `check` the package and also does some lifecycle management if required. (Option A)\r\n\r\nThere are also some R packages which are created directly from github archives  `https://github.com/*/$pkg/{archive, releases}/*.{zip, tar.gz}`. There is no additional CRAN which does checks, it is all up to the repo contributors their CI and the conda package maintainer to bring a ""good"" version to conda-forge. (Option B)\r\n\r\nCurrently around 1200 packages are built from CRAN and around 15 are built from github:\r\n* `rg cran feedstocks -g ""**/r-*/*/meta.yaml"" --files-with-matches | wc -l`\r\n* `rg cran feedstocks -g ""**/r-*/*/meta.yaml"" --files-without-match | wc -l`\r\n\r\nThere is now a package [0] with some unique functionality following a changing API, that was packaged via CRAN but is now outdated and not working anymore. New releases are all done via a drat repo. Releasing again to CRAN seems not to happen [1] ""Option A"" and getting their releases tagged in the repo also seems not to happen [2], which would enable ""Option B"".\r\n\r\nThe drat repo is owned by the same github project as package source code repo. And it is so more or less as reliable as the source code repo itself or as to what I refer to as ""Option B"".\r\n\r\nFor more details and how a change looks like, see also https://github.com/conda-forge/r-aws.s3-feedstock/pull/3\r\n\r\nPossible options here I see here:\r\n1. Sources other than CRAN should be the exception, but are fine.\r\n2. There is no general rule for switching sources to other than CRAN, it requires negotiation with at least two recipe maintainers.\r\n3. Packages that follow a somehow fast changing API can be packaged from sources other than CRAN.\r\n4. Drat is fine for the aws.* packages, but we don\'t decide anything else now.\r\n\r\nTagging the R package maintainers to get notified: @johanneskoester, @bgruening, @daler, @username_1, @username_2\r\n\r\nWhat do you think?\r\n\r\nThanks\r\n\r\nDaniel\r\n\r\n[0] https://github.com/conda-forge/r-aws.s3-feedstock\r\n[1] https://github.com/cloudyr/aws.s3/issues/239\r\n[2] https://github.com/cloudyr/aws.s3/issues/257', 'title': 'R packages from sources other than CRAN', 'type': 'issue'}
+ {'action': 'created', 'author': 'dbast', 'comment_id': 434578580.0, 'datetime': '2018-10-31 06:42:58+00:00', 'masked_author': 'username_0', 'text': ""Thanks, for those two perspectives. I would express it a bit differently:\r\n1. From a user perspective, I expect up-to-date and as stable/working as possible packages with a reproducible version and creation process. Which not necessarily means that conda-forge is only a compiled CRAN mirror. I also enjoy the easy installation of good/unique packages which cannot be or are not available on CRAN, e.g. because of crazy compile requirements.\r\n2. From a maintainer perspective, there are in general so many mostly non-R packages (a bit over 1000) building from the release/archive mechanism of a github repo. That means ensuring quality happens by looking at the according repo, reading changelogs, issues etc. And the feedstock documents in a transparent reproducible way what is inside a package that can be downloaded and installed. The bot https://github.com/regro-cf-autotick-bot also supports the release/archive mechanism of a github repo, if a package is build from those. \r\n\r\nIsn't it the power of conda-forge to not be limited to pypi and cran? \r\n\r\nThere are currently 13.3k pkgs on CRAN and maybe all in all 16.1k R pkgs, according to https://cran.r-project.org/web/packages/ and https://www.rdocumentation.org/"", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'dbast', 'comment_id': 434609574.0, 'datetime': '2018-10-31 08:58:53+00:00', 'masked_author': 'username_0', 'text': 'By inspecting the ""dev"" branch of https://github.com/conda-forge/cairo-feedstock, I just learned that uploading the newer not-yet-cran-uploaded versions of the cloudyr aws.* packages to conda-forge/dev would be also an option. The versions are also listed here https://anaconda.org/conda-forge/cairo/files and the user can decide what version to use.\r\n\r\nThat would mean for packages on CRAN, CRAN=main-label=feedstock-master-branch, newer-than-CRAN=dev-label=feedstock-dev-branch ... newer-than-cran does not necessarily that it is a bleeding edge version, can be still a maintainer released version.\r\n\r\nThere is a expectation mismatch if the cran/main version is less stable/working than the dev version.', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'jdblischak', 'comment_id': 434676004.0, 'datetime': '2018-10-31 12:56:00+00:00', 'masked_author': 'username_1', 'text': '@username_0 I\'m open to the possibility of using non-CRAN sources for R packages. My hope was to get some consensus from multiple maintainers on guidelines for handling this situation.\r\n\r\n@bgruening @username_2 Are you ok with supporting non-CRAN versions of R packages on conda-forge? If yes, would you prefer these packages be labeled ""main"" or ""dev""? Do you have any opinions on when this should should be used (e.g. Does the CRAN version have to be broken or just outdated? How long since the last CRAN release should we consider using a non-CRAN source for the package?)', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'cbrueffer', 'comment_id': 434679369.0, 'datetime': '2018-10-31 13:07:01+00:00', 'masked_author': 'username_2', 'text': 'I think non-CRAN packages are fine, but the specifics may vary too much on a case-by-case basis to make general rules. E.g., in the `r-aws.s3` case it appears pretty clear that the non-CRAN package should be the canonical one. That requires a judgement call on a case-by-case basis though...', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'mingwandroid', 'comment_id': 434978542.0, 'datetime': '2018-11-01 09:09:11+00:00', 'masked_author': 'username_3', 'text': 'CRAN does not serve as a good quality gate as far as macOS binaries are concerned.', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'jdblischak', 'comment_id': 435433696.0, 'datetime': '2018-11-02 16:19:00+00:00', 'masked_author': 'username_1', 'text': ""@username_0 There don't seem to be any strong objections. So I'd say that if there is a good reason for not using the CRAN package, and you're willing to maintain the recipe, then go ahead."", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'dbast', 'comment_id': 435678222.0, 'datetime': '2018-11-04 15:19:48+00:00', 'masked_author': 'username_0', 'text': '@username_1 Sounds good. Thanks!', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'jdblischak', 'comment_id': 446224930.0, 'datetime': '2018-12-11 14:39:01+00:00', 'masked_author': 'username_1', 'text': ""@username_0 Could you please close this Issue now that we've reached a decision? Thanks!"", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'dbast', 'comment_id': 446504329.0, 'datetime': '2018-12-12 08:32:49+00:00', 'masked_author': 'username_0', 'text': 'Thanks for the reminder. Closing.', 'title': None, 'type': 'comment'}
+ {'action': 'closed', 'author': 'dbast', 'comment_id': None, 'datetime': '2018-12-12 08:32:50+00:00', 'masked_author': 'username_0', 'text': '', 'title': None, 'type': 'issue'}]","<issue_start><issue_comment>Title: R packages from sources other than CRAN
+username_0: How to deal with R package sources other than CRAN?
+
+Most R packages are using CRAN as source, which serves as a good quality gate as CRAN does `check` the package and also does some lifecycle management if required. (Option A)
+
+There are also some R packages which are created directly from github archives  `https://github.com/*/$pkg/{archive, releases}/*.{zip, tar.gz}`. There is no additional CRAN which does checks, it is all up to the repo contributors their CI and the conda package maintainer to bring a ""good"" version to conda-forge. (Option B)
+
+Currently around 1200 packages are built from CRAN and around 15 are built from github:
+* `rg cran feedstocks -g ""**/r-*/*/meta.yaml"" --files-with-matches | wc -l`
+* `rg cran feedstocks -g ""**/r-*/*/meta.yaml"" --files-without-match | wc -l`
+
+There is now a package [0] with some unique functionality following a changing API, that was packaged via CRAN but is now outdated and not working anymore. New releases are all done via a drat repo. Releasing again to CRAN seems not to happen [1] ""Option A"" and getting their releases tagged in the repo also seems not to happen [2], which would enable ""Option B"".
+
+The drat repo is owned by the same github project as package source code repo. And it is so more or less as reliable as the source code repo itself or as to what I refer to as ""Option B"".
+
+For more details and how a change looks like, see also https://github.com/conda-forge/r-aws.s3-feedstock/pull/3
+
+Possible options here I see here:
+1. Sources other than CRAN should be the exception, but are fine.
+2. There is no general rule for switching sources to other than CRAN, it requires negotiation with at least two recipe maintainers.
+3. Packages that follow a somehow fast changing API can be packaged from sources other than CRAN.
+4. Drat is fine for the aws.* packages, but we don't decide anything else now.
+
+Tagging the R package maintainers to get notified: @johanneskoester, @bgruening, @daler, @username_1, @username_2
+
+What do you think?
+
+Thanks
+
+Daniel
+
+[0] https://github.com/conda-forge/r-aws.s3-feedstock
+[1] https://github.com/cloudyr/aws.s3/issues/239
+[2] https://github.com/cloudyr/aws.s3/issues/257
+<issue_comment>username_0: Thanks, for those two perspectives. I would express it a bit differently:
+1. From a user perspective, I expect up-to-date and as stable/working as possible packages with a reproducible version and creation process. Which not necessarily means that conda-forge is only a compiled CRAN mirror. I also enjoy the easy installation of good/unique packages which cannot be or are not available on CRAN, e.g. because of crazy compile requirements.
+2. From a maintainer perspective, there are in general so many mostly non-R packages (a bit over 1000) building from the release/archive mechanism of a github repo. That means ensuring quality happens by looking at the according repo, reading changelogs, issues etc. And the feedstock documents in a transparent reproducible way what is inside a package that can be downloaded and installed. The bot https://github.com/regro-cf-autotick-bot also supports the release/archive mechanism of a github repo, if a package is build from those. 
+
+Isn't it the power of conda-forge to not be limited to pypi and cran? 
+
+There are currently 13.3k pkgs on CRAN and maybe all in all 16.1k R pkgs, according to https://cran.r-project.org/web/packages/ and https://www.rdocumentation.org/
+<issue_comment>username_0: By inspecting the ""dev"" branch of https://github.com/conda-forge/cairo-feedstock, I just learned that uploading the newer not-yet-cran-uploaded versions of the cloudyr aws.* packages to conda-forge/dev would be also an option. The versions are also listed here https://anaconda.org/conda-forge/cairo/files and the user can decide what version to use.
+
+That would mean for packages on CRAN, CRAN=main-label=feedstock-master-branch, newer-than-CRAN=dev-label=feedstock-dev-branch ... newer-than-cran does not necessarily that it is a bleeding edge version, can be still a maintainer released version.
+
+There is a expectation mismatch if the cran/main version is less stable/working than the dev version.
+<issue_comment>username_1: @username_0 I'm open to the possibility of using non-CRAN sources for R packages. My hope was to get some consensus from multiple maintainers on guidelines for handling this situation.
+
+@bgruening @username_2 Are you ok with supporting non-CRAN versions of R packages on conda-forge? If yes, would you prefer these packages be labeled ""main"" or ""dev""? Do you have any opinions on when this should should be used (e.g. Does the CRAN version have to be broken or just outdated? How long since the last CRAN release should we consider using a non-CRAN source for the package?)
+<issue_comment>username_2: I think non-CRAN packages are fine, but the specifics may vary too much on a case-by-case basis to make general rules. E.g., in the `r-aws.s3` case it appears pretty clear that the non-CRAN package should be the canonical one. That requires a judgement call on a case-by-case basis though...
+<issue_comment>username_3: CRAN does not serve as a good quality gate as far as macOS binaries are concerned.
+<issue_comment>username_1: @username_0 There don't seem to be any strong objections. So I'd say that if there is a good reason for not using the CRAN package, and you're willing to maintain the recipe, then go ahead.
+<issue_comment>username_0: @username_1 Sounds good. Thanks!
+<issue_comment>username_1: @username_0 Could you please close this Issue now that we've reached a decision? Thanks!
+<issue_comment>username_0: Thanks for the reminder. Closing.<issue_closed>"

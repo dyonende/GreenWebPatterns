@@ -1,0 +1,613 @@
+adobe/aem-core-wcm-components,819856876,1421,"{'number': 1421.0, 'repo': 'aem-core-wcm-components', 'user_login': 'adobe'}","[{'action': 'opened', 'author': 'friendlymahi', 'comment_id': None, 'datetime': '2021-03-02T10:04:02Z', 'masked_author': 'username_0', 'text': ""<!--\r\nBefore making a PR please make sure to read our contributing guidelines\r\nhttps://github.com/adobe/aem-core-wcm-components/blob/master/CONTRIBUTING.md\r\n\r\nIMPORTANT: Please base your pull request on the **development** branch! The maintainers will cherry-pick the change to\r\n master after it's successfully integrated and tested.\r\n\r\nFor issue references: Add a comma-separated list of a [closing word](https://help.github.com/articles/closing-issues-via-commit-messages/)\r\nfollowed by the ticket number fixed by the PR. It should be underlined in the preview if done correctly.\r\n-->\r\n\r\n| Q \xa0 \xa0 \xa0 \xa0 \xa0 \xa0 \xa0 \xa0 \xa0 \xa0 \xa0  | A <!--(Can use an emoji 👍) -->\r\n| ------------------------ | ---\r\n| Fixed Issues?            | #1374 \r\n| Patch: Bug Fix?          | No\r\n| Minor: New Feature?      | Yes\r\n| Major: Breaking Change?  | No\r\n| Tests Added + Pass?      | Yes\r\n| Documentation Provided   | Yes (code comments and or markdown)\r\n| Any Dependency Changes?  | No\r\n| License                  | Apache License, Version 2.0\r\n\r\n<!-- Describe your changes below in as much detail as possible -->\r\nRefer to issue #1374 for complete details. StyleSystem is a powerful feature that's missing for SPA Editor implementation. This shall result in creation of too many proxy components. \r\n\r\nHowever keeping the SPA Editor aside, Sling Models when exporting CSS class names as part of the Json shall enable consuming applications to associate equivalent styles in the respective apps. \r\n\r\nFix Details: As child item models don't retrieve componentContext specific to the resource for which model json is being generated, a utility method to extract the component policy and eventually determine the CSS classes for the mapped cq:StyleIds when an author selects a style on the dialog, is added and invoked from the root Component.java/AbstractComponent.java classes. Required test data and unit tests are included. Now you shall see a new json prop addlCssClassNames included in all non page items of the model.json\r\n\r\nNote that this is not a fix for SPA Editor to support Style System. However this is essential for SPA Editor or any custom implementation to leverage StyleSystem support."", 'title': 'Issue/1374', 'type': 'issue'}
+ {'action': 'created', 'author': 'friendlymahi', 'comment_id': 788793376.0, 'datetime': '2021-03-02 10:14:40+00:00', 'masked_author': 'username_0', 'text': '@username_1 - Good Morning to you !. Please review my PR and advise me for any changes. I made the code changes and tested the same against AEM v6.5.2 and AEM v6.5.6', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'friendlymahi', 'comment_id': 788821490.0, 'datetime': '2021-03-02 10:59:16+00:00', 'masked_author': 'username_0', 'text': '@username_1 - Hello sorry for any trouble. For some reason the GPG check fails. Can you advise on this? Thank you 1', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'vladbailescu', 'comment_id': 788823667.0, 'datetime': '2021-03-02 11:02:33+00:00', 'masked_author': 'username_1', 'text': '@username_0 , thank you for your contribution! Before we begin the review, could you please make sure to merge the latest changes from `development` branch, so we have a clean changeset?', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'friendlymahi', 'comment_id': 788833834.0, 'datetime': '2021-03-02 11:19:16+00:00', 'masked_author': 'username_0', 'text': '@username_1 - Completed merging Dev to my branch so the PR looks clean. Ran the unit tests and verified that the new changes I did work as expected. Thank you !', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'friendlymahi', 'comment_id': 801191879.0, 'datetime': '2021-03-17 15:47:15+00:00', 'masked_author': 'username_0', 'text': ""@ky940819 @username_1 - Pretty much all feedback is incorporated. Please take one final look and advise me for next steps. I didn't update POM version or CHANGELOG yet, awaiting for your instructions. Thank you !"", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'vladbailescu', 'comment_id': 801886078.0, 'datetime': '2021-03-18 12:28:39+00:00', 'masked_author': 'username_1', 'text': ""@username_0 , we had a feature review with our Product Manager (@gabrielwalt) and identified that, in the future, we will need to be able to categorise applied class names based on their source:\r\n* style system\r\n* responsive grid/layout\r\nWe're still discussing about how these should be structured but we know it would be nice to be able to do something like:"", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'friendlymahi', 'comment_id': 801922122.0, 'datetime': '2021-03-18 13:22:35+00:00', 'masked_author': 'username_0', 'text': ""@username_1 @gabrielwalt - Thanks for the update. Here is my understanding. As of date classes provided by responsive grid are determined or included in the sling model of layout container. Even though the column size and offset are stored on individual nodes, they are interpreted either while rendering the resource or while generating exporter for parent grid component. However with style system, policy or style ids are determined at individual component and has no dependency on parent. Similarly panel container components have panel title stored at component level but is available via exporter or while rendering only when viewed via panel container perspective, so invoking sling model for the panel item doesn't even provide the title value. So in way this makes sense to me, that containers take over control of certain props, considering the fact that they only have meaning with in that context. Please let me know your thoughts. Thanks"", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'friendlymahi', 'comment_id': 805375875.0, 'datetime': '2021-03-24 00:29:30+00:00', 'masked_author': 'username_0', 'text': '@username_1 - any updates on this? Thanks', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'vladbailescu', 'comment_id': 809143672.0, 'datetime': '2021-03-29 07:32:13+00:00', 'masked_author': 'username_1', 'text': '@username_0:', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'friendlymahi', 'comment_id': 809149765.0, 'datetime': '2021-03-29 07:41:14+00:00', 'masked_author': 'username_0', 'text': ""@username_1 - Understood. So just for clarity, does this mean we can't merge these changes and have to wait until the new design is in place? Please advise as this helps us decide whether we should upgrade to 6.5 sp8 and wait for new core components or create proxy components for the ones that needs style system and use current version of aem and core components that we already have. Appreciate your support in advance. Thanks"", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'vladbailescu', 'comment_id': 809162615.0, 'datetime': '2021-03-29 08:00:07+00:00', 'masked_author': 'username_1', 'text': 'Since we do not have a clear timeline for this, you should probably add access to styles to your own Sling Models for now. I still think it would be good if you leveraged the newly exposed `com.adobe.cq.com.adobe.cq.wcm.style` APIs.', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'friendlymahi', 'comment_id': 828159893.0, 'datetime': '2021-04-28 05:40:59+00:00', 'masked_author': 'username_0', 'text': ""@username_1 - Hope you're doing well. We just completed upgrading our AEM instances to v6.5.8 and in the process of validating the same. any update or roadmap on integrating the styles? Thank you !"", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'friendlymahi', 'comment_id': 833448385.0, 'datetime': '2021-05-06 11:26:31+00:00', 'masked_author': 'username_0', 'text': ""@username_1 - Good afternoon/evening to you ! As per your suggestion I incorporated the Style APIs provided by you via uber-6.5.8. To my suprise it worked fine when using the APIs inside Core Components. But upon using the APIs in our app code, the bundle doesn't start. It was prevented from resolving WCM Style API bundle. After some research I found that bundles other than com.adobe or com.aem are not allowed for importing/sharing. So I went ahead and updated the resolver hook configuration to let my bundle import the same. Is this the right way to do it or do you suggest a different way to adress this? Thanks in advance !"", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'vladbailescu', 'comment_id': 833462063.0, 'datetime': '2021-05-06 11:52:14+00:00', 'masked_author': 'username_1', 'text': ""@username_0 , I double-checked and I think I missed to update something in the API controller, making the package visible in uber-jar and not resolved on the instance. My apologies, it will be fixed in 172.16.17.32. Meanwhile, let's try to get this included in Core Components 3.0.0, could you please resolve the conflicts so we can review it one more time?"", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'friendlymahi', 'comment_id': 833464080.0, 'datetime': '2021-05-06 11:55:42+00:00', 'masked_author': 'username_0', 'text': ""Thanks for confirming the same @username_1. Yes I will be able to resolve the conflicts and send you a note when it's ready for review. Btw anytime line on when 3.0.0 will be out so I can hold on doing custom components for some more time."", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'friendlymahi', 'comment_id': 836698918.0, 'datetime': '2021-05-10 13:27:30+00:00', 'masked_author': 'username_0', 'text': '@username_1 Thanks for merging the PR. Just so you are aware after pulling the latest Dev changes into my branch there were some compilation errors due to some plug-ins and eventually some sonar errors for code duplication, etc, both of them are a result of code already existing on Dev branch. In the event you need me to make any code change, please do let me know.', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'vladbailescu', 'comment_id': 836750798.0, 'datetime': '2021-05-10 14:12:12+00:00', 'masked_author': 'username_1', 'text': ""@username_0 , I fixed a couple of small issues introduced by merging that PR in ab58a3a.\r\nAs for a release date, we currently target beginning of June for 3.0.0. However, since this change introduces a dependency to 6.5.8 uber-jar, we'll need a decision from our product management to see if we can drop support for 6.4 or we will need to backport the style system changes there as well."", 'title': None, 'type': 'comment'}]","<issue_start><issue_comment>Title: Issue/1374
+username_0: <!--
+Before making a PR please make sure to read our contributing guidelines
+https://github.com/adobe/aem-core-wcm-components/blob/master/CONTRIBUTING.md
+
+IMPORTANT: Please base your pull request on the **development** branch! The maintainers will cherry-pick the change to
+ master after it's successfully integrated and tested.
+
+For issue references: Add a comma-separated list of a [closing word](https://help.github.com/articles/closing-issues-via-commit-messages/)
+followed by the ticket number fixed by the PR. It should be underlined in the preview if done correctly.
+-->
+
+| Q                        | A <!--(Can use an emoji 👍) -->
+| ------------------------ | ---
+| Fixed Issues?            | #1374 
+| Patch: Bug Fix?          | No
+| Minor: New Feature?      | Yes
+| Major: Breaking Change?  | No
+| Tests Added + Pass?      | Yes
+| Documentation Provided   | Yes (code comments and or markdown)
+| Any Dependency Changes?  | No
+| License                  | Apache License, Version 2.0
+
+<!-- Describe your changes below in as much detail as possible -->
+Refer to issue #1374 for complete details. StyleSystem is a powerful feature that's missing for SPA Editor implementation. This shall result in creation of too many proxy components. 
+
+However keeping the SPA Editor aside, Sling Models when exporting CSS class names as part of the Json shall enable consuming applications to associate equivalent styles in the respective apps. 
+
+Fix Details: As child item models don't retrieve componentContext specific to the resource for which model json is being generated, a utility method to extract the component policy and eventually determine the CSS classes for the mapped cq:StyleIds when an author selects a style on the dialog, is added and invoked from the root Component.java/AbstractComponent.java classes. Required test data and unit tests are included. Now you shall see a new json prop addlCssClassNames included in all non page items of the model.json
+
+Note that this is not a fix for SPA Editor to support Style System. However this is essential for SPA Editor or any custom implementation to leverage StyleSystem support.
+<issue_comment>username_0: @username_1 - Good Morning to you !. Please review my PR and advise me for any changes. I made the code changes and tested the same against AEM v6.5.2 and AEM v6.5.6
+<issue_comment>username_0: @username_1 - Hello sorry for any trouble. For some reason the GPG check fails. Can you advise on this? Thank you 1
+<issue_comment>username_1: @username_0 , thank you for your contribution! Before we begin the review, could you please make sure to merge the latest changes from `development` branch, so we have a clean changeset?
+<issue_comment>username_0: @username_1 - Completed merging Dev to my branch so the PR looks clean. Ran the unit tests and verified that the new changes I did work as expected. Thank you !
+<issue_comment>username_0: @ky940819 @username_1 - Pretty much all feedback is incorporated. Please take one final look and advise me for next steps. I didn't update POM version or CHANGELOG yet, awaiting for your instructions. Thank you !
+<issue_comment>username_1: @username_0 , we had a feature review with our Product Manager (@gabrielwalt) and identified that, in the future, we will need to be able to categorise applied class names based on their source:
+* style system
+* responsive grid/layout
+We're still discussing about how these should be structured but we know it would be nice to be able to do something like:
+<issue_comment>username_0: @username_1 @gabrielwalt - Thanks for the update. Here is my understanding. As of date classes provided by responsive grid are determined or included in the sling model of layout container. Even though the column size and offset are stored on individual nodes, they are interpreted either while rendering the resource or while generating exporter for parent grid component. However with style system, policy or style ids are determined at individual component and has no dependency on parent. Similarly panel container components have panel title stored at component level but is available via exporter or while rendering only when viewed via panel container perspective, so invoking sling model for the panel item doesn't even provide the title value. So in way this makes sense to me, that containers take over control of certain props, considering the fact that they only have meaning with in that context. Please let me know your thoughts. Thanks
+<issue_comment>username_0: @username_1 - any updates on this? Thanks
+<issue_comment>username_1: @username_0:
+<issue_comment>username_0: @username_1 - Understood. So just for clarity, does this mean we can't merge these changes and have to wait until the new design is in place? Please advise as this helps us decide whether we should upgrade to 6.5 sp8 and wait for new core components or create proxy components for the ones that needs style system and use current version of aem and core components that we already have. Appreciate your support in advance. Thanks
+<issue_comment>username_1: Since we do not have a clear timeline for this, you should probably add access to styles to your own Sling Models for now. I still think it would be good if you leveraged the newly exposed `com.adobe.cq.com.adobe.cq.wcm.style` APIs.
+<issue_comment>username_0: @username_1 - Hope you're doing well. We just completed upgrading our AEM instances to v6.5.8 and in the process of validating the same. any update or roadmap on integrating the styles? Thank you !
+<issue_comment>username_0: @username_1 - Good afternoon/evening to you ! As per your suggestion I incorporated the Style APIs provided by you via uber-6.5.8. To my suprise it worked fine when using the APIs inside Core Components. But upon using the APIs in our app code, the bundle doesn't start. It was prevented from resolving WCM Style API bundle. After some research I found that bundles other than com.adobe or com.aem are not allowed for importing/sharing. So I went ahead and updated the resolver hook configuration to let my bundle import the same. Is this the right way to do it or do you suggest a different way to adress this? Thanks in advance !
+<issue_comment>username_1: @username_0 , I double-checked and I think I missed to update something in the API controller, making the package visible in uber-jar and not resolved on the instance. My apologies, it will be fixed in 6.5.10.0. Meanwhile, let's try to get this included in Core Components 3.0.0, could you please resolve the conflicts so we can review it one more time?
+<issue_comment>username_0: Thanks for confirming the same @username_1. Yes I will be able to resolve the conflicts and send you a note when it's ready for review. Btw anytime line on when 3.0.0 will be out so I can hold on doing custom components for some more time.
+<issue_comment>username_0: @username_1 Thanks for merging the PR. Just so you are aware after pulling the latest Dev changes into my branch there were some compilation errors due to some plug-ins and eventually some sonar errors for code duplication, etc, both of them are a result of code already existing on Dev branch. In the event you need me to make any code change, please do let me know.
+<issue_comment>username_1: @username_0 , I fixed a couple of small issues introduced by merging that PR in ab58a3a.
+As for a release date, we currently target beginning of June for 3.0.0. However, since this change introduces a dependency to 6.5.8 uber-jar, we'll need a decision from our product management to see if we can drop support for 6.4 or we will need to backport the style system changes there as well."
+conda-forge/conda-forge.github.io,869344830,1417,"{'number': 1417.0, 'repo': 'conda-forge.github.io', 'user_login': 'conda-forge'}","[{'action': 'opened', 'author': 'viniciusdc', 'comment_id': None, 'datetime': '2021-04-27T23:25:16Z', 'masked_author': 'username_0', 'text': '<!--\r\nThank you for pull request!\r\n\r\nPlease note that the `docs` subdir is generated from the sphinx sources in `src`, changes \r\nto `.html` files will only be effective if applied to the respective `.rst`.\r\n-->\r\n\r\nPR Checklist:\r\n\r\n- [x] make all edits to the docs in the `src` directory, not in `docs` or in the html files\r\n- [ ] note any issues closed by this PR with [closing keywords](https://help.github.com/articles/closing-issues-using-keywords)\r\n- [ ] put any other relevant information below', 'title': 'Update CFEP definition in the Glossary', 'type': 'issue'}
+ {'action': 'created', 'author': 'beckermr', 'comment_id': 828016709.0, 'datetime': '2021-04-27 23:28:31+00:00', 'masked_author': 'username_1', 'text': 'Thank you!', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'prachi237', 'comment_id': 828016830.0, 'datetime': '2021-04-27 23:28:51+00:00', 'masked_author': 'username_2', 'text': 'https://conda-forge.org/docs/orga/cfep-index.html#index-of-cfeps even this has to be updated', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'viniciusdc', 'comment_id': 828018412.0, 'datetime': '2021-04-27 23:30:15+00:00', 'masked_author': 'username_0', 'text': ""@username_2 you are right, that 'all' there is too powerful, could you follow Matt comment there and make a PR for it?"", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'prachi237', 'comment_id': 828019753.0, 'datetime': '2021-04-27 23:30:58+00:00', 'masked_author': 'username_2', 'text': 'yes I will do that', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'viniciusdc', 'comment_id': 828023432.0, 'datetime': '2021-04-27 23:33:51+00:00', 'masked_author': 'username_0', 'text': 'Here https://github.com/conda-forge/cfep in the second paragraph of the readme too', 'title': None, 'type': 'comment'}]","<issue_start><issue_comment>Title: Update CFEP definition in the Glossary
+username_0: <!--
+Thank you for pull request!
+
+Please note that the `docs` subdir is generated from the sphinx sources in `src`, changes 
+to `.html` files will only be effective if applied to the respective `.rst`.
+-->
+
+PR Checklist:
+
+- [x] make all edits to the docs in the `src` directory, not in `docs` or in the html files
+- [ ] note any issues closed by this PR with [closing keywords](https://help.github.com/articles/closing-issues-using-keywords)
+- [ ] put any other relevant information below
+<issue_comment>username_1: Thank you!
+<issue_comment>username_2: https://conda-forge.org/docs/orga/cfep-index.html#index-of-cfeps even this has to be updated
+<issue_comment>username_0: @username_2 you are right, that 'all' there is too powerful, could you follow Matt comment there and make a PR for it?
+<issue_comment>username_2: yes I will do that
+<issue_comment>username_0: Here https://github.com/conda-forge/cfep in the second paragraph of the readme too"
+kubernetes/website,375645713,10780,,"[{'action': 'opened', 'author': 'scals44', 'comment_id': None, 'datetime': '2018-10-30 19:00:37+00:00', 'masked_author': 'username_0', 'text': ""- [ ] Feature Request\r\n- [ X] Bug Report\r\n\r\n**Problem:**\r\nInstalling kubectl via PowerShell gallery fails TLS handshake:\r\n\r\nThe install-kubectl.ps1 doesn't declare invoke-webrequest to use TLS1.2 and https://kubernetes.io/ doesn't accept TLS1.0 so the process fails. I got around this by editing the script and forcing TLS protocol to 1.2 with the following line. \r\n\r\n[Net.ServicePointManager]::SecurityProtocol = [Net.SecurityProtocolType]::Tls12\r\n\r\n**Proposed Solution:**\r\nAdjust the script to use TLS1.2 since the endpoint doesn't accept anything lower. \r\n\r\n**Page to Update:**\r\nhttps://kubernetes.io/docs/tasks/tools/install-kubectl/#install-with-powershell-from-psgallery"", 'title': 'Issue with k8s.io/docs/tasks/tools/install-kubectl/', 'type': 'issue'}
+ {'action': 'created', 'author': 'it-praktyk', 'comment_id': 456774800.0, 'datetime': '2019-01-23 11:55:38+00:00', 'masked_author': 'username_1', 'text': ""The script install-kubectl.ps1 was updated to v. 1.7 by @bottkars yesterday. I've tested it, works correctly on W2K8 R2 and PowerShell 3.0.\r\n\r\nIMHO, the issue can be closed now."", 'title': None, 'type': 'comment'}
+ {'action': 'closed', 'author': 'tengqm', 'comment_id': None, 'datetime': '2019-05-29 05:06:44+00:00', 'masked_author': 'username_2', 'text': '', 'title': None, 'type': 'issue'}]","<issue_start><issue_comment>Title: Issue with k8s.io/docs/tasks/tools/install-kubectl/
+username_0: - [ ] Feature Request
+- [ X] Bug Report
+
+**Problem:**
+Installing kubectl via PowerShell gallery fails TLS handshake:
+
+The install-kubectl.ps1 doesn't declare invoke-webrequest to use TLS1.2 and https://kubernetes.io/ doesn't accept TLS1.0 so the process fails. I got around this by editing the script and forcing TLS protocol to 1.2 with the following line. 
+
+[Net.ServicePointManager]::SecurityProtocol = [Net.SecurityProtocolType]::Tls12
+
+**Proposed Solution:**
+Adjust the script to use TLS1.2 since the endpoint doesn't accept anything lower. 
+
+**Page to Update:**
+https://kubernetes.io/docs/tasks/tools/install-kubectl/#install-with-powershell-from-psgallery
+<issue_comment>username_1: The script install-kubectl.ps1 was updated to v. 1.7 by @bottkars yesterday. I've tested it, works correctly on W2K8 R2 and PowerShell 3.0.
+
+IMHO, the issue can be closed now.<issue_closed>"
+google/web-starter-kit,43602814,446,,"[{'action': 'opened', 'author': 'addyosmani', 'comment_id': None, 'datetime': '2014-09-23T08:33:02Z', 'masked_author': 'username_0', 'text': ""It's time to decide whether we want Google WSK to stick with a static style guide or opt for the style guide to be auto-generated. \r\n\r\nThere are an [abundance](https://github.com/davidhund/styleguide-generators) of tools for the latter, but open questions around how well they're supported, how they work with BEM/SUIT/inuit and what the current recommendations from CSS thought leaders are.\r\n\r\n### Static\r\n\r\nThe current style guide is composed of a static HTML file that pulls in styles from a Sass-based directory of components. Our Material Design version is quite similar, but uses iFrames to pull in component demos. There are pros and cons to this approach:\r\n\r\nPros:\r\n\r\n* Super simple for beginners to edit/update the file to change components, visual look and feel\r\n* Supports LiveReload, working with a preprocessor / the other nice build process bits you get with WSK\r\n\r\nCons:\r\n\r\n* As it has to be manually updated, it may either become a burden to project authors or be deprioritized as it isn't part of the main site\r\n* It's a standalone representation of style and components without a direct link to the codebase. \r\n* The current setup requires additional build step configuration in our Gulpfile, though, this would likely be similar for any alternative approach.\r\n\r\n### Auto-generation\r\n\r\nThe auto-generation route is advocated by projects like [KSS](http://warpspire.com/kss/styleguides/) - used by GitHub for their [styleguide](https://github.com/styleguide/css) [sample](http://warpspire.com/kss/syntax/), [StyleDocco](http://jacobrask.github.io/styledocco/) and [PatternLab](patternlab.io). Team Sass has previously looked at using Yeoman generators like [this one](https://github.com/north/generator-style-prototype) to aid in the automation process.\r\n\r\nPros:\r\n\r\n* Autogenerate Style Guides when changes are made to the codebase so in theory they shouldn't be able to fall behind\r\n* As the Style Guide is generated from source, beginners shouldn't need to manually update the end product - just adhere to the style of template necessary for auto-generation to work.\r\n\r\nCons:\r\n\r\n* Gets tricky when you're working with components requiring JavaScript (where does the demo information live? Assume the generated content will be correct and include a script.js in your styleguide template?).\r\n* Duplication of template information (you end up with demo templates in both your source comments and style guide for components that are non-trivial or a mix of multiple components)\r\n\r\n### Requirements\r\n\r\nHere is to the best of my understanding what we may want:\r\n\r\n* Automated style guide generation\r\n* Little overhead of learning yet another architecture methodology that will scare off beginners and intermediate devs. \r\n  * E.g if we recommend BEM, SUIT or inuit for the general CSS architecture, we want to avoid (if possible) introducing yet another methodology unless it brings value. For example, I love PatternLab, but have this concern with [Atomic Design](http://patternlab.io/about.html#atoms), but less so KSS. Is KSS as complex? Is there something better?\r\n* Something that works well with components that may optionally require JavaScript. \r\n  * e.g I have a button with a ripple effect powered by JS - the solution has a way for my auto-generated guide to demo it. Is this flawed thinking or does an existing solution support it?\r\n* A solution with up to date tooling. \r\n  * We have no problem writing new Node modules to work with a solution if needed, but ideally the solution should have existing Node tooling around it. We can write the Gulp tasks needed if they aren't done. \r\n  * Solution can't require users to use say, PHP. We're trying to minimize our dependency tree as much as possible.\r\n\r\n### Open questions\r\n\r\n* Do Team Sass have a preferred setup for style guide generation? @jina talked about this at CSSConf\r\n* Is KSS actively maintained? The commit frequently seems to have slowed down in the last 6 months https://github.com/kneath/kss/commits/master\r\n* Does SUIT or inuitcss have a preferred solution for style guide generation that works well with those architectures? (cc @necolas @csswizardry)\r\n* How do existing techniques solutions with newer CSS architectures? e.g let's say I want to use [SUIT](https://github.com/suitcss/suit) as part of my architecture. Do I have to make the decision to use the architecture outlined by PatternLab / KSS/ StyleDocco over it. Does it generally not make sense to deviate from recommended structure?"", 'title': 'Style Guide: Static vs. Generation', 'type': 'issue'}
+ {'action': 'created', 'author': 'RiZKiT', 'comment_id': 70481047.0, 'datetime': '2015-01-19 11:43:06+00:00', 'masked_author': 'username_1', 'text': ""I expect this is way over the top for wsk, but maybe someone is interested in the concept of Lonely Planet's approach.\r\nBlog article: [A Maintainable Style Guide](http://engineering.lonelyplanet.com/2014/05/18/a-maintainable-styleguide.html)\r\nLive styleguide: http://rizzo.lonelyplanet.com/styleguide"", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'operatino', 'comment_id': 72851531.0, 'datetime': '2015-02-04 13:10:51+00:00', 'masked_author': 'username_2', 'text': ""Hi,\r\n\r\nThanks to all for really interesting discussion here, and special thanks to Web Starter Kit founders, for including Style Guide template by default. I really believe this will help pushing documentation first approach to wide spectre of developers.\r\n\r\nRecently I was doing a full depth overview of current Living Style Guide tools (slides [here](https://speakerdeck.com/username_2/maintaining-own-components-library-with-living-style-guides)), and we're also developing own Living Style Guide Platform called [SourceJS](http://sourcejs.com). Knowing the differences between current tools, and understanding the role of Web Starter Kit, I would recommend some simple Style Guide generator (static site builder), focused on well structured web components.\r\n\r\nAmong all the tools, that I overviewed, I would recommend using [Fabricator](http://resource.github.io/fabricator/) by @username_3 (or similar) in Starter Kit. It's simple, and quite extendable, plus it contains Gulp build processes for build watch and etc. \r\n\r\nFabricator is parsing components folder with pre-defined structure, and generates static site in few pages. On input it collects `.html` and `.md` files, named the same as described component.\r\n\r\nYet, it will still need some improvements:\r\n\r\n* Components folder organisation, where each component need to have its own folder with all technologies (.md, .css, .html, .js) no only `.md` and `.html` file\r\n* It should be extendable in terms of choosing the templating engine. Since HTML snippets must be not copy pasted from real application sources, and must use same temples.\r\n\r\nComparing with other tools I want to emphasise that CSS parsing way is very limited, and will suit only basic components documentation. WSK also must not promote the copy/paste approach, that you eventually will have, leaving markup example in CSS comments.\r\n\r\nBut if you still want to consider choosing CSS Documentation parsers, I recommend using [DSS](https://github.com/darcyclarke/DSS) as the best, modular solution.\r\n\r\n[Pattern Lab](http://patternlab.io) is too opinionated and design focused and our [SourceJS](http://sourcejs.com) despite the fact that it's modular and easy extendible, is still to complex for most use cases.\r\n\r\nHope this will help. And btw, I'll be always happy to collaborate on Style Guide tooling projects."", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'LukeAskew', 'comment_id': 72926362.0, 'datetime': '2015-02-04 19:56:00+00:00', 'masked_author': 'username_3', 'text': ""Thanks for the shout-out @username_2. Fabricator has just been a pet project of mine so it's glad to see someone else finding it useful.\r\n\r\nI think @benschwarz's points are very valid. Those are some of the issues I tried to address with Fabricator, albeit with a slightly different approach (looking for suggestions!). \r\n\r\nI wrote Fabricator because I didn't like how the other projects approached problem at the time. Here's some of the things I was hoping to achieve:\r\n\r\n- Focused on the toolkit/pattern library/framework/ as the output; templates/pages are tangential.\r\n- Unopinionated - allow devs to define their own architecture and taxonomies.\r\n- Unobstrusive - come out of the box with very little styling.\r\n- Make documentation as frictionless as possible - derive most from the code. \r\n- Have a single source of truth for each component - don't write the same markup for a component in two or more places.\r\n- Output a static site (don't require database or back-end language)\r\n- Output back-end-agnostic code examples.\r\n\r\nFabricator certainly doesn't get a lot of these right, but I'm hoping to make improvements! :cocktail:"", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'alejandroiglesias', 'comment_id': 97555736.0, 'datetime': '2015-04-29 19:37:13+00:00', 'masked_author': 'username_4', 'text': 'Hey, this is a very interesting talk. I\'ve been considering some of these tools and doing some work with KSS. Still not 100% happy since I\'ve been putting efforts in customizing the template and still would like some customizations that are outside the short-term scope of KSS (AFAIK) as well as the project I\'m working on, namely: toggling markup example displaying, being able to use different markups for showing the example and for showing the markup itself (want to add sample text for displaying the component, but display just ""..."" inside of the example markup, like in Bootstrap styleguide), as well as defining pages in a more sane way, like having a simple config file in which you define the pages/sections structure and use that to build a custom navigation. Other solutions seem to add some of those features at some cost, being it a stronger opinion, more complex workflow for starting with it, or different mindset that differs from mine and my goals currently. I\'m sad that I don\'t have time currently to make a fork of `kss-node` and work on those features. Will see in the future.\r\n\r\n@username_0 are you still thinking about all this? Do you have stronger opinions now or are you biased towards a specific tool/workflow? Do you have thoughts on how to integrate JS components into the generated styleguide?\r\n\r\nThanks.', 'title': None, 'type': 'comment'}
+ {'action': 'closed', 'author': 'gauntface', 'comment_id': None, 'datetime': '2018-01-09 19:36:14+00:00', 'masked_author': 'username_5', 'text': '', 'title': None, 'type': 'issue'}
+ {'action': 'created', 'author': 'gauntface', 'comment_id': 356390527.0, 'datetime': '2018-01-09 19:36:15+00:00', 'masked_author': 'username_5', 'text': '🐛 **Bankruptcy**: Closing due to inactivity.', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'alejandroiglesias', 'comment_id': 356983533.0, 'datetime': '2018-01-11 16:32:55+00:00', 'masked_author': 'username_4', 'text': 'Have you considered by any chance a component explorer like [Storybook](https://storybook.js.org/)? It also supports React and Angular components. Do any folks have experience with [that approach](https://blog.hichroma.com/the-crucial-tool-for-modern-frontend-engineers-fb849b06187a)?', 'title': None, 'type': 'comment'}]","<issue_start><issue_comment>Title: Style Guide: Static vs. Generation
+username_0: It's time to decide whether we want Google WSK to stick with a static style guide or opt for the style guide to be auto-generated. 
+
+There are an [abundance](https://github.com/davidhund/styleguide-generators) of tools for the latter, but open questions around how well they're supported, how they work with BEM/SUIT/inuit and what the current recommendations from CSS thought leaders are.
+
+### Static
+
+The current style guide is composed of a static HTML file that pulls in styles from a Sass-based directory of components. Our Material Design version is quite similar, but uses iFrames to pull in component demos. There are pros and cons to this approach:
+
+Pros:
+
+* Super simple for beginners to edit/update the file to change components, visual look and feel
+* Supports LiveReload, working with a preprocessor / the other nice build process bits you get with WSK
+
+Cons:
+
+* As it has to be manually updated, it may either become a burden to project authors or be deprioritized as it isn't part of the main site
+* It's a standalone representation of style and components without a direct link to the codebase. 
+* The current setup requires additional build step configuration in our Gulpfile, though, this would likely be similar for any alternative approach.
+
+### Auto-generation
+
+The auto-generation route is advocated by projects like [KSS](http://warpspire.com/kss/styleguides/) - used by GitHub for their [styleguide](https://github.com/styleguide/css) [sample](http://warpspire.com/kss/syntax/), [StyleDocco](http://jacobrask.github.io/styledocco/) and [PatternLab](patternlab.io). Team Sass has previously looked at using Yeoman generators like [this one](https://github.com/north/generator-style-prototype) to aid in the automation process.
+
+Pros:
+
+* Autogenerate Style Guides when changes are made to the codebase so in theory they shouldn't be able to fall behind
+* As the Style Guide is generated from source, beginners shouldn't need to manually update the end product - just adhere to the style of template necessary for auto-generation to work.
+
+Cons:
+
+* Gets tricky when you're working with components requiring JavaScript (where does the demo information live? Assume the generated content will be correct and include a script.js in your styleguide template?).
+* Duplication of template information (you end up with demo templates in both your source comments and style guide for components that are non-trivial or a mix of multiple components)
+
+### Requirements
+
+Here is to the best of my understanding what we may want:
+
+* Automated style guide generation
+* Little overhead of learning yet another architecture methodology that will scare off beginners and intermediate devs. 
+  * E.g if we recommend BEM, SUIT or inuit for the general CSS architecture, we want to avoid (if possible) introducing yet another methodology unless it brings value. For example, I love PatternLab, but have this concern with [Atomic Design](http://patternlab.io/about.html#atoms), but less so KSS. Is KSS as complex? Is there something better?
+* Something that works well with components that may optionally require JavaScript. 
+  * e.g I have a button with a ripple effect powered by JS - the solution has a way for my auto-generated guide to demo it. Is this flawed thinking or does an existing solution support it?
+* A solution with up to date tooling. 
+  * We have no problem writing new Node modules to work with a solution if needed, but ideally the solution should have existing Node tooling around it. We can write the Gulp tasks needed if they aren't done. 
+  * Solution can't require users to use say, PHP. We're trying to minimize our dependency tree as much as possible.
+
+### Open questions
+
+* Do Team Sass have a preferred setup for style guide generation? @jina talked about this at CSSConf
+* Is KSS actively maintained? The commit frequently seems to have slowed down in the last 6 months https://github.com/kneath/kss/commits/master
+* Does SUIT or inuitcss have a preferred solution for style guide generation that works well with those architectures? (cc @necolas @csswizardry)
+* How do existing techniques solutions with newer CSS architectures? e.g let's say I want to use [SUIT](https://github.com/suitcss/suit) as part of my architecture. Do I have to make the decision to use the architecture outlined by PatternLab / KSS/ StyleDocco over it. Does it generally not make sense to deviate from recommended structure?
+<issue_comment>username_1: I expect this is way over the top for wsk, but maybe someone is interested in the concept of Lonely Planet's approach.
+Blog article: [A Maintainable Style Guide](http://engineering.lonelyplanet.com/2014/05/18/a-maintainable-styleguide.html)
+Live styleguide: http://rizzo.lonelyplanet.com/styleguide
+<issue_comment>username_2: Hi,
+
+Thanks to all for really interesting discussion here, and special thanks to Web Starter Kit founders, for including Style Guide template by default. I really believe this will help pushing documentation first approach to wide spectre of developers.
+
+Recently I was doing a full depth overview of current Living Style Guide tools (slides [here](https://speakerdeck.com/username_2/maintaining-own-components-library-with-living-style-guides)), and we're also developing own Living Style Guide Platform called [SourceJS](http://sourcejs.com). Knowing the differences between current tools, and understanding the role of Web Starter Kit, I would recommend some simple Style Guide generator (static site builder), focused on well structured web components.
+
+Among all the tools, that I overviewed, I would recommend using [Fabricator](http://resource.github.io/fabricator/) by @username_3 (or similar) in Starter Kit. It's simple, and quite extendable, plus it contains Gulp build processes for build watch and etc. 
+
+Fabricator is parsing components folder with pre-defined structure, and generates static site in few pages. On input it collects `.html` and `.md` files, named the same as described component.
+
+Yet, it will still need some improvements:
+
+* Components folder organisation, where each component need to have its own folder with all technologies (.md, .css, .html, .js) no only `.md` and `.html` file
+* It should be extendable in terms of choosing the templating engine. Since HTML snippets must be not copy pasted from real application sources, and must use same temples.
+
+Comparing with other tools I want to emphasise that CSS parsing way is very limited, and will suit only basic components documentation. WSK also must not promote the copy/paste approach, that you eventually will have, leaving markup example in CSS comments.
+
+But if you still want to consider choosing CSS Documentation parsers, I recommend using [DSS](https://github.com/darcyclarke/DSS) as the best, modular solution.
+
+[Pattern Lab](http://patternlab.io) is too opinionated and design focused and our [SourceJS](http://sourcejs.com) despite the fact that it's modular and easy extendible, is still to complex for most use cases.
+
+Hope this will help. And btw, I'll be always happy to collaborate on Style Guide tooling projects.
+<issue_comment>username_3: Thanks for the shout-out @username_2. Fabricator has just been a pet project of mine so it's glad to see someone else finding it useful.
+
+I think @benschwarz's points are very valid. Those are some of the issues I tried to address with Fabricator, albeit with a slightly different approach (looking for suggestions!). 
+
+I wrote Fabricator because I didn't like how the other projects approached problem at the time. Here's some of the things I was hoping to achieve:
+
+- Focused on the toolkit/pattern library/framework/ as the output; templates/pages are tangential.
+- Unopinionated - allow devs to define their own architecture and taxonomies.
+- Unobstrusive - come out of the box with very little styling.
+- Make documentation as frictionless as possible - derive most from the code. 
+- Have a single source of truth for each component - don't write the same markup for a component in two or more places.
+- Output a static site (don't require database or back-end language)
+- Output back-end-agnostic code examples.
+
+Fabricator certainly doesn't get a lot of these right, but I'm hoping to make improvements! :cocktail:
+<issue_comment>username_4: Hey, this is a very interesting talk. I've been considering some of these tools and doing some work with KSS. Still not 100% happy since I've been putting efforts in customizing the template and still would like some customizations that are outside the short-term scope of KSS (AFAIK) as well as the project I'm working on, namely: toggling markup example displaying, being able to use different markups for showing the example and for showing the markup itself (want to add sample text for displaying the component, but display just ""..."" inside of the example markup, like in Bootstrap styleguide), as well as defining pages in a more sane way, like having a simple config file in which you define the pages/sections structure and use that to build a custom navigation. Other solutions seem to add some of those features at some cost, being it a stronger opinion, more complex workflow for starting with it, or different mindset that differs from mine and my goals currently. I'm sad that I don't have time currently to make a fork of `kss-node` and work on those features. Will see in the future.
+
+@username_0 are you still thinking about all this? Do you have stronger opinions now or are you biased towards a specific tool/workflow? Do you have thoughts on how to integrate JS components into the generated styleguide?
+
+Thanks.<issue_closed>
+<issue_comment>username_5: 🐛 **Bankruptcy**: Closing due to inactivity.
+<issue_comment>username_4: Have you considered by any chance a component explorer like [Storybook](https://storybook.js.org/)? It also supports React and Angular components. Do any folks have experience with [that approach](https://blog.hichroma.com/the-crucial-tool-for-modern-frontend-engineers-fb849b06187a)?"
+davidebbo/AzureWebsitesSamples,223644245,7,,"[{'action': 'opened', 'author': 'dfinke', 'comment_id': None, 'datetime': '2017-04-23 15:42:22+00:00', 'masked_author': 'username_0', 'text': 'Do you have a function similar to the below for deploying timer triggers? I replaced the `$props` with a PS hashtable that defined the the Timer Trigger JSON. Then it failed on on the call to `New-AzureRMResource`.\r\n\r\nhttps://github.com/username_1/AzureWebsitesSamples/blob/master/PowerShell/HelperFunctions.ps1#L367', 'title': 'Deploy Timer Trigger Function?', 'type': 'issue'}
+ {'action': 'closed', 'author': 'davidebbo', 'comment_id': None, 'datetime': '2017-04-24 23:55:59+00:00', 'masked_author': 'username_1', 'text': '', 'title': None, 'type': 'issue'}
+ {'action': 'created', 'author': 'davidebbo', 'comment_id': 296853311.0, 'datetime': '2017-04-24 23:55:59+00:00', 'masked_author': 'username_1', 'text': 'Try simply changing the trigger to be a timer trigger. Exactly the same difference as what you see in functions.json in the two cases if you create functions from portal.\r\n\r\ne.g. binding.json\r\n\r\n```\r\n  ""bindings"": [\r\n    {\r\n      ""name"": ""myTimer"",\r\n      ""type"": ""timerTrigger"",\r\n      ""direction"": ""in"",\r\n      ""schedule"": ""0 0 0 */3 * *""\r\n    }\r\n  ]\r\n```\r\n\r\n(just convert to PS syntax)', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'dfinke', 'comment_id': 296861949.0, 'datetime': '2017-04-25 01:00:24+00:00', 'masked_author': 'username_0', 'text': ""Thank you. Yeah, I tried that. The `New-AzureRMResource` threw an error. I'll try again."", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'dfinke', 'comment_id': 297194236.0, 'datetime': '2017-04-25 23:28:34+00:00', 'masked_author': 'username_0', 'text': 'Here is the error I get.\r\n```\r\nNew-AzureRmResource : NotFound : System.IO.FileNotFoundException: Function (TimerTriggerPS) config does not exist or is invalid\r\n   at Kudu.Core.Functions.FunctionManager.<GetFunctionConfigAsync>d__8.MoveNext()\r\n```', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'davidebbo', 'comment_id': 297197337.0, 'datetime': '2017-04-25 23:49:20+00:00', 'masked_author': 'username_1', 'text': 'And does the exact case I have in my sample file work for you?', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'dfinke', 'comment_id': 297198581.0, 'datetime': '2017-04-25 23:56:08+00:00', 'masked_author': 'username_0', 'text': ""Yes, that works. I'll keep digging."", 'title': None, 'type': 'comment'}]","<issue_start><issue_comment>Title: Deploy Timer Trigger Function?
+username_0: Do you have a function similar to the below for deploying timer triggers? I replaced the `$props` with a PS hashtable that defined the the Timer Trigger JSON. Then it failed on on the call to `New-AzureRMResource`.
+
+https://github.com/username_1/AzureWebsitesSamples/blob/master/PowerShell/HelperFunctions.ps1#L367<issue_closed>
+<issue_comment>username_1: Try simply changing the trigger to be a timer trigger. Exactly the same difference as what you see in functions.json in the two cases if you create functions from portal.
+
+e.g. binding.json
+
+```
+  ""bindings"": [
+    {
+      ""name"": ""myTimer"",
+      ""type"": ""timerTrigger"",
+      ""direction"": ""in"",
+      ""schedule"": ""0 0 0 */3 * *""
+    }
+  ]
+```
+
+(just convert to PS syntax)
+<issue_comment>username_0: Thank you. Yeah, I tried that. The `New-AzureRMResource` threw an error. I'll try again.
+<issue_comment>username_0: Here is the error I get.
+```
+New-AzureRmResource : NotFound : System.IO.FileNotFoundException: Function (TimerTriggerPS) config does not exist or is invalid
+   at Kudu.Core.Functions.FunctionManager.<GetFunctionConfigAsync>d__8.MoveNext()
+```
+<issue_comment>username_1: And does the exact case I have in my sample file work for you?
+<issue_comment>username_0: Yes, that works. I'll keep digging."
+files-community/Website,1103835377,106,,"[{'action': 'opened', 'author': 'SasLuca', 'comment_id': None, 'datetime': '2022-01-14 16:01:27+00:00', 'masked_author': 'username_0', 'text': ""### What's the Problem?\n\nTags are a very nice feature, however without documentation on how they are stored and clarifications regarding how they work when operations are done on files outside of Files, it can be too risky for power users to get invested into the system because they could risk losing the tag data or not being able to migrate/sync it to another system in the future.\n\n### Solution/Idea\n\nA documentation page that explains how Tags are stored, their limitations, what happens if files are modified outside of Files.\r\nIdeally, a link to the documentation could be added to the UI of Files next to the settings menu for tags (maybe as an info button) in order to help with the discoverability of these details.\n\n### Alternatives\n\nNot sure what an alternative would be here\n\n### Priorities\n\n| Capability | Priority |\r\n| :---------- | :------- |\r\n| This proposal will allow developers to accomplish W | Must |\r\n| This proposal will allow end users to accomplish X | Should |\r\n| This proposal will allow developers to accomplish Y | Could |\r\n| This proposal will allow end users to accomplish Z | Won't |\r\n\n\n### Files Version\n\n_No response_\n\n### Windows Version\n\n_No response_\n\n### Comments\n\n_No response_"", 'title': 'Documentation on how Tags work', 'type': 'issue'}]","<issue_start><issue_comment>Title: Documentation on how Tags work
+username_0: ### What's the Problem?
+
+Tags are a very nice feature, however without documentation on how they are stored and clarifications regarding how they work when operations are done on files outside of Files, it can be too risky for power users to get invested into the system because they could risk losing the tag data or not being able to migrate/sync it to another system in the future.
+
+### Solution/Idea
+
+A documentation page that explains how Tags are stored, their limitations, what happens if files are modified outside of Files.
+Ideally, a link to the documentation could be added to the UI of Files next to the settings menu for tags (maybe as an info button) in order to help with the discoverability of these details.
+
+### Alternatives
+
+Not sure what an alternative would be here
+
+### Priorities
+
+| Capability | Priority |
+| :---------- | :------- |
+| This proposal will allow developers to accomplish W | Must |
+| This proposal will allow end users to accomplish X | Should |
+| This proposal will allow developers to accomplish Y | Could |
+| This proposal will allow end users to accomplish Z | Won't |
+
+
+### Files Version
+
+_No response_
+
+### Windows Version
+
+_No response_
+
+### Comments
+
+_No response_"
+godotengine/godot-website,602657185,128,,"[{'action': 'opened', 'author': 'lvlzyro', 'comment_id': None, 'datetime': '2020-04-19 08:34:10+00:00', 'masked_author': 'username_0', 'text': ""I think godotengine.org really needs a showcase section. A week ago Game Maker was the first engine my best friend tried. I tried to convince him to use Godot but he saw all that games in showcase section of Game Maker and wanted to try that one. I know that there are no that huge titles made with Godot yet but there are great game jam games to show its power. Like securas' SealedBite.\r\n\r\nI made a list of great games I found that is made with Godot because I guess you don't have time to search for them (like 54 games, I can send it if you want to see it) even if you just make a page for them I think it would be awesome. Beginners would be more interested on Godot and the community can go way bigger. Because newbie users doesn't know they can do anything they want with Godot and they want to see what they can do. They need examples.\r\n\r\nThis is just a suggestion. But I hope you will take it serious. Have a nice day Godot Devs. And congrats for becoming the most starred game engine."", 'title': 'Website Really Needs A Showcase Section', 'type': 'issue'}
+ {'action': 'created', 'author': 'Calinou', 'comment_id': 616083757.0, 'datetime': '2020-04-19 09:19:42+00:00', 'masked_author': 'username_1', 'text': ""The showcase section we previously had was [removed](https://github.com/godotengine/godot-website/pull/117) because we don't have the manpower to maintain it. I don't think readding it would be a good idea at this point."", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'lvlzyro', 'comment_id': 616089966.0, 'datetime': '2020-04-19 09:49:35+00:00', 'masked_author': 'username_0', 'text': ""But the Game Maker's showcase didn't changed for a long time too. 54 games can show what we need and if a new good game releases we can make a pull request to let you know or to add it."", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'lvlzyro', 'comment_id': 619554507.0, 'datetime': '2020-04-26 14:00:16+00:00', 'masked_author': 'username_0', 'text': ""They made a  [https://www.youtube.com/watch?v=UEDEIksGEjQ](video) like this. That's kinda enough for me but Godot really need to have a showcase section on its website. I am closing this issue but I hope you will consider this."", 'title': None, 'type': 'comment'}
+ {'action': 'closed', 'author': 'lvlzyro', 'comment_id': None, 'datetime': '2020-04-26 14:00:51+00:00', 'masked_author': 'username_0', 'text': '', 'title': None, 'type': 'issue'}
+ {'action': 'created', 'author': 'Calinou', 'comment_id': 619559844.0, 'datetime': '2020-04-26 14:25:47+00:00', 'masked_author': 'username_1', 'text': 'That was me :upside_down_face:', 'title': None, 'type': 'comment'}]","<issue_start><issue_comment>Title: Website Really Needs A Showcase Section
+username_0: I think godotengine.org really needs a showcase section. A week ago Game Maker was the first engine my best friend tried. I tried to convince him to use Godot but he saw all that games in showcase section of Game Maker and wanted to try that one. I know that there are no that huge titles made with Godot yet but there are great game jam games to show its power. Like securas' SealedBite.
+
+I made a list of great games I found that is made with Godot because I guess you don't have time to search for them (like 54 games, I can send it if you want to see it) even if you just make a page for them I think it would be awesome. Beginners would be more interested on Godot and the community can go way bigger. Because newbie users doesn't know they can do anything they want with Godot and they want to see what they can do. They need examples.
+
+This is just a suggestion. But I hope you will take it serious. Have a nice day Godot Devs. And congrats for becoming the most starred game engine.
+<issue_comment>username_1: The showcase section we previously had was [removed](https://github.com/godotengine/godot-website/pull/117) because we don't have the manpower to maintain it. I don't think readding it would be a good idea at this point.
+<issue_comment>username_0: But the Game Maker's showcase didn't changed for a long time too. 54 games can show what we need and if a new good game releases we can make a pull request to let you know or to add it.
+<issue_comment>username_0: They made a  [https://www.youtube.com/watch?v=UEDEIksGEjQ](video) like this. That's kinda enough for me but Godot really need to have a showcase section on its website. I am closing this issue but I hope you will consider this.<issue_closed>
+<issue_comment>username_1: That was me :upside_down_face:"
+getnikola/nikola,235341565,2836,,"[{'action': 'opened', 'author': 'felixfontein', 'comment_id': None, 'datetime': '2017-06-12 19:32:36+00:00', 'masked_author': 'username_0', 'text': 'I\'d like to start a discussion on two plugin-related points:\r\n\r\n1. In #2820, @username_2 wrote ""built-in stuff should not be real yapsy plugins for performance reasons (that would require reading way too many files)"".\r\n\r\n2. Some of my internal plugins have strong dependencies (one must be there for the other to make sense and actually work), and they also share code, which is pretty hard to implement if I don\'t want to fix where they are loaded from; I need to use the `inspect` module to find their location on disk and use `importlib.machinery` (Python 3) resp. `imp` (Python 2) to load the other file, and of course I have to assume that all plugin files are in the same directory.\r\n\r\nI thought a bit about how to improve on this situation; here are two ideas:\r\n\r\na) Allow to inject plugins without yapsy. This could be done by Nikola core to add a bunch of plugins without the need to put them into own files (or even to define them in different files).\r\n\r\nb) Allow bundled plugins (a new plugin type like `CombinedPlugins`), which are one yapsy plugin and which provide several Nikola plugins from one source file (or one package).\r\n\r\nBoth ideas would share some code in `nikola.py`, and only differ in how they are seen from the point of the `DISABLED_PLUGINS` config and the `plugin` command plugin. (Idea a) plugins should be treated as different ones, idea b) plugins as one big plugin.)\r\n\r\nThis would allow to keep a loose coupling of plugins, like for #2820, without the need to have too many plugin files. What do you think?', 'title': '[discussion] Plugins', 'type': 'issue'}
+ {'action': 'created', 'author': 'ralsina', 'comment_id': 307898238.0, 'datetime': '2017-06-12 19:43:20+00:00', 'masked_author': 'username_1', 'text': ""Or we could drop Yapsy, if there's another better mechanism."", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'felixfontein', 'comment_id': 307913053.0, 'datetime': '2017-06-12 20:23:01+00:00', 'masked_author': 'username_0', 'text': ""That's a possibility, too. I don't know any other and/or better system, though."", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'ralsina', 'comment_id': 308115570.0, 'datetime': '2017-06-13 13:27:58+00:00', 'masked_author': 'username_1', 'text': ""There's this:\r\n\r\nhttps://aroberge.blogspot.com.ar/2008/12/plugins-part-6-setuptools-based.html"", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'Kwpolska', 'comment_id': 308116866.0, 'datetime': '2017-06-13 13:32:16+00:00', 'masked_author': 'username_2', 'text': 'Maybe not.\r\n\r\nIf we’re to change our system, there’s [straight.plugin](https://github.com/ironfroggy/straight.plugin) and [stevedore](https://github.com/openstack/stevedore).', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'ralsina', 'comment_id': 308118018.0, 'datetime': '2017-06-13 13:36:05+00:00', 'masked_author': 'username_1', 'text': 'Well, stevedore is based on the same setuptools stuff :-)\r\n\r\nBoth are interesting!', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'jean', 'comment_id': 392255301.0, 'datetime': '2018-05-26 11:29:18+00:00', 'masked_author': 'username_3', 'text': '[ref](http://setuptools.readthedocs.io/en/latest/pkg_resources.html?#entry-points)', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'Kwpolska', 'comment_id': 392255536.0, 'datetime': '2018-05-26 11:34:07+00:00', 'masked_author': 'username_2', 'text': '`pip install` is a no-go in my mind.', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'jean', 'comment_id': 392256080.0, 'datetime': '2018-05-26 11:45:27+00:00', 'masked_author': 'username_3', 'text': 'What am I missing, why would `pip install` be a no-go?\r\nI believe entry-points enables `pip install`, by making installed plugin modules discoverable via the registered namespaces.', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'Kwpolska', 'comment_id': 392256143.0, 'datetime': '2018-05-26 11:46:35+00:00', 'masked_author': 'username_2', 'text': 'It litters the PyPI and adds all the complexity of running `pip` (virtualenvs/user installs/no sudo/distros may do weird stuff) to managing a page. There is also no way to make some plugins specific to a page.', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'jamadden', 'comment_id': 392256930.0, 'datetime': '2018-05-26 12:02:22+00:00', 'masked_author': 'username_4', 'text': ""@username_3 I have no problems with stevedore. As I understand it, it reuses entry points, so it's compatible with PyPI and all the standard setuptools-based ecosystem. (Disclaimer: I haven't written anything that uses it.)\r\n\r\nAs a plugin user, I want to be able to use my tool of choice to manage all the dependencies of my site. That could be `pip --user`, `pip` + virtualenvs, `apt-get` or my system's standard package manager, or `pipenv` or `buildout`, or whatever else --- the ecosystem is both broad and evolving here. I also want to be able to browse for plugins on PyPI just like you can with, e.g., [Pelican](https://pypi.org/search/?q=&o=&c=Framework+%3A%3A+Pelican+%3A%3A+Plugins). I *don't* want to have to check in any Python code into my site.\r\n\r\nAs a plugin developer, I don't want to have to send a PR to a centralized github repo to enable usage of my plugin, especially if there's going to be code there that will have to be updated periodically as the rest of the plugin changes (`from external.module import *` is a poor workaround, ISTM). I want to be able to use the full power of setuptools (like `requires_python`) to ensure that users get correct code versions. I also want my code and its dependencies to be on `sys.path` so that all of the usual Python tools that use `sys.path` work as expected---`zope.configuration` being one example I ran into that breaks otherwise.\r\n\r\nDon't get me wrong, I *adore* Nikola. It's working well for us, and we found a workaround to be able to manage our plugin in the way we're used to. We're a shop full of Python developers used to building and deploying production apps, though, so our usage and desires may not be typical of the whole audience. That, plus the fact that we haven't had any feedback from plugin users outside our immediate circle, is why we haven't tried to bring any of this up."", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'jamadden', 'comment_id': 392257085.0, 'datetime': '2018-05-26 12:05:33+00:00', 'masked_author': 'username_4', 'text': '', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'jean', 'comment_id': 392257490.0, 'datetime': '2018-05-26 12:13:33+00:00', 'masked_author': 'username_3', 'text': ""It doesn't _have_ to litter PyPI, you can give `pip` a filesystem path, a git repo URL, etc. \r\nEntrypoints don't have to come from separate repos either, e.g. here [avocado](https://github.com/avocado-framework/avocado/tree/master/examples/plugins) has some bundled in a subdirectory.\r\nI also _like_ being able to search PyPI plugins. The Pelican example is good."", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'jamadden', 'comment_id': 392258296.0, 'datetime': '2018-05-26 12:30:09+00:00', 'masked_author': 'username_4', 'text': 'If stevedore is based on pkg_resources and entry points, that means that it is based on `sys.path`, or, more generally, the pkg_resources working set/distribution model. So yes, that should be possible by manipulating one or the other of those things.\r\n\r\n* he says, not having tried that specifically.', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'schettino72', 'comment_id': 404252520.0, 'datetime': '2018-07-11 17:39:24+00:00', 'masked_author': 'username_5', 'text': 'Sorry for coming late to the discussion.\r\nNot sure you guys are aware doit has its own plugin system [1].\r\nFeatures:\r\n\r\n- can mix core implementations and *real* plugins\r\n- plugins are loaded (imported) only when required/used\r\n- integrate (optionally) with pkg_resources\r\n- non-core, non-pkg_resources plugins can be defined as a dict (in doit indirectly from INI ConfigParser)\r\n\r\nDocumentation about it is not great...\r\nBut it is under 100 lines of code and pretty straightforward IMO.\r\nJust let me know if you have any questions.\r\n\r\n[1] https://github.com/pydoit/doit/blob/master/doit/plugin.py', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'Xeverous', 'comment_id': 522277813.0, 'datetime': '2019-08-17 23:23:39+00:00', 'masked_author': 'username_6', 'text': ""Posting on this - I have no knowledge of Plugins in Python but I'm interested in the issue.\r\n\r\nI have same problem as @username_0 - some of my plugins need to share some code. I don't understand the mentioned import hack, currently I'm unable to make my build work where 2 plugins import the same file. I either get an error that import is not found or that relative imports do not work outside packagaes. [More details in this reddit post](https://www.reddit.com/r/learnpython/comments/crsw49/sharing_python_code_between_multiple_yapsy/) - does Nikola support such thing? How should I share some code between Yapsy plugins inside Nikola?"", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'ralsina', 'comment_id': 522278084.0, 'datetime': '2019-08-17 23:30:23+00:00', 'masked_author': 'username_1', 'text': 'Plugins are plain python code. There are a number of ways to share code\nbetween them.\n\nYou can even just put all the code in one plugin and import it from the\nother.\n\nThe thing about ""not a package"": a package in python is just a folder with\na __init__.py in it (even an empty one) so maybe you are just missing one\nof those somewhere along the way.\n\nIf you can share the code where you have the problem I can take a look into\nmaking it work.', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'Xeverous', 'comment_id': 522318457.0, 'datetime': '2019-08-18 12:36:23+00:00', 'masked_author': 'username_6', 'text': 'Clone this branch and try to build it. I can not find any way for `metadata.py` to be importable for plugins.\r\n\r\nhttps://github.com/username_6/the_website/tree/feature-metadata-plugins', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'Xeverous', 'comment_id': 522489885.0, 'datetime': '2019-08-19 09:29:23+00:00', 'masked_author': 'username_6', 'text': 'Good news: asked help from someone else and got a clean solution.\r\n\r\nin `plugins/__init__.py` this needs to be added:\r\n\r\n```python\r\nimport sys\r\nimport os\r\nsys.path.append(os.path.abspath(os.path.dirname(__file__)))\r\n```\r\n\r\nThen, each file in `plugins` directory can do `import plugins.filename`.', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'ralsina', 'comment_id': 522985491.0, 'datetime': '2019-08-20 12:11:50+00:00', 'masked_author': 'username_1', 'text': ""There is no metadata.py file in that branch.\n\nBut let's create one, and put it in plugins/metadata.py\n\nIn the plugin I tried\n\nfrom plugins.metadata import foo\n\nAnd that, surprisingly, failed! There are a number of tricks that could be\ndone to make this work, like sys.path editing but it's really not a great\nsituation.\n\nIn my (fuzzy, this project is pretty old!) memory I thought we were setting\nthe site's path as part of our import path, but I suspect we are not.\n\nI can make that happen, in the meantime, you can just set PYTHONPATH=. (or\nwhatever) before calling Nikola"", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'Xeverous', 'comment_id': 523069350.0, 'datetime': '2019-08-20 15:32:54+00:00', 'masked_author': 'username_6', 'text': ""https://github.com/username_6/the_website/blob/feature-metadata-plugins/website/plugins/metadata.py ?\r\n\r\nAnyway, I have found a workaround. See my previous comment. Note: in order for this to make an effect, I had to clean Python's caches."", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'ralsina', 'comment_id': 610648882.0, 'datetime': '2020-04-07 22:20:24+00:00', 'masked_author': 'username_1', 'text': ""I think it's extremely unlikely that we will stop using Yapsy at this point."", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'ralsina', 'comment_id': 612955481.0, 'datetime': '2020-04-13 15:45:09+00:00', 'masked_author': 'username_1', 'text': ""If someone comes up with a proper plan, that can be done without massive effort by someone else, let's reopen this."", 'title': None, 'type': 'comment'}
+ {'action': 'closed', 'author': 'ralsina', 'comment_id': None, 'datetime': '2020-04-13 15:45:10+00:00', 'masked_author': 'username_1', 'text': '', 'title': None, 'type': 'issue'}]","<issue_start><issue_comment>Title: [discussion] Plugins
+username_0: I'd like to start a discussion on two plugin-related points:
+
+1. In #2820, @username_2 wrote ""built-in stuff should not be real yapsy plugins for performance reasons (that would require reading way too many files)"".
+
+2. Some of my internal plugins have strong dependencies (one must be there for the other to make sense and actually work), and they also share code, which is pretty hard to implement if I don't want to fix where they are loaded from; I need to use the `inspect` module to find their location on disk and use `importlib.machinery` (Python 3) resp. `imp` (Python 2) to load the other file, and of course I have to assume that all plugin files are in the same directory.
+
+I thought a bit about how to improve on this situation; here are two ideas:
+
+a) Allow to inject plugins without yapsy. This could be done by Nikola core to add a bunch of plugins without the need to put them into own files (or even to define them in different files).
+
+b) Allow bundled plugins (a new plugin type like `CombinedPlugins`), which are one yapsy plugin and which provide several Nikola plugins from one source file (or one package).
+
+Both ideas would share some code in `nikola.py`, and only differ in how they are seen from the point of the `DISABLED_PLUGINS` config and the `plugin` command plugin. (Idea a) plugins should be treated as different ones, idea b) plugins as one big plugin.)
+
+This would allow to keep a loose coupling of plugins, like for #2820, without the need to have too many plugin files. What do you think?
+<issue_comment>username_1: Or we could drop Yapsy, if there's another better mechanism.
+<issue_comment>username_0: That's a possibility, too. I don't know any other and/or better system, though.
+<issue_comment>username_1: There's this:
+
+https://aroberge.blogspot.com.ar/2008/12/plugins-part-6-setuptools-based.html
+<issue_comment>username_2: Maybe not.
+
+If we’re to change our system, there’s [straight.plugin](https://github.com/ironfroggy/straight.plugin) and [stevedore](https://github.com/openstack/stevedore).
+<issue_comment>username_1: Well, stevedore is based on the same setuptools stuff :-)
+
+Both are interesting!
+<issue_comment>username_3: [ref](http://setuptools.readthedocs.io/en/latest/pkg_resources.html?#entry-points)
+<issue_comment>username_2: `pip install` is a no-go in my mind.
+<issue_comment>username_3: What am I missing, why would `pip install` be a no-go?
+I believe entry-points enables `pip install`, by making installed plugin modules discoverable via the registered namespaces.
+<issue_comment>username_2: It litters the PyPI and adds all the complexity of running `pip` (virtualenvs/user installs/no sudo/distros may do weird stuff) to managing a page. There is also no way to make some plugins specific to a page.
+<issue_comment>username_4: @username_3 I have no problems with stevedore. As I understand it, it reuses entry points, so it's compatible with PyPI and all the standard setuptools-based ecosystem. (Disclaimer: I haven't written anything that uses it.)
+
+As a plugin user, I want to be able to use my tool of choice to manage all the dependencies of my site. That could be `pip --user`, `pip` + virtualenvs, `apt-get` or my system's standard package manager, or `pipenv` or `buildout`, or whatever else --- the ecosystem is both broad and evolving here. I also want to be able to browse for plugins on PyPI just like you can with, e.g., [Pelican](https://pypi.org/search/?q=&o=&c=Framework+%3A%3A+Pelican+%3A%3A+Plugins). I *don't* want to have to check in any Python code into my site.
+
+As a plugin developer, I don't want to have to send a PR to a centralized github repo to enable usage of my plugin, especially if there's going to be code there that will have to be updated periodically as the rest of the plugin changes (`from external.module import *` is a poor workaround, ISTM). I want to be able to use the full power of setuptools (like `requires_python`) to ensure that users get correct code versions. I also want my code and its dependencies to be on `sys.path` so that all of the usual Python tools that use `sys.path` work as expected---`zope.configuration` being one example I ran into that breaks otherwise.
+
+Don't get me wrong, I *adore* Nikola. It's working well for us, and we found a workaround to be able to manage our plugin in the way we're used to. We're a shop full of Python developers used to building and deploying production apps, though, so our usage and desires may not be typical of the whole audience. That, plus the fact that we haven't had any feedback from plugin users outside our immediate circle, is why we haven't tried to bring any of this up.
+<issue_comment>username_3: It doesn't _have_ to litter PyPI, you can give `pip` a filesystem path, a git repo URL, etc. 
+Entrypoints don't have to come from separate repos either, e.g. here [avocado](https://github.com/avocado-framework/avocado/tree/master/examples/plugins) has some bundled in a subdirectory.
+I also _like_ being able to search PyPI plugins. The Pelican example is good.
+<issue_comment>username_4: If stevedore is based on pkg_resources and entry points, that means that it is based on `sys.path`, or, more generally, the pkg_resources working set/distribution model. So yes, that should be possible by manipulating one or the other of those things.
+
+* he says, not having tried that specifically.
+<issue_comment>username_5: Sorry for coming late to the discussion.
+Not sure you guys are aware doit has its own plugin system [1].
+Features:
+
+- can mix core implementations and *real* plugins
+- plugins are loaded (imported) only when required/used
+- integrate (optionally) with pkg_resources
+- non-core, non-pkg_resources plugins can be defined as a dict (in doit indirectly from INI ConfigParser)
+
+Documentation about it is not great...
+But it is under 100 lines of code and pretty straightforward IMO.
+Just let me know if you have any questions.
+
+[1] https://github.com/pydoit/doit/blob/master/doit/plugin.py
+<issue_comment>username_6: Posting on this - I have no knowledge of Plugins in Python but I'm interested in the issue.
+
+I have same problem as @username_0 - some of my plugins need to share some code. I don't understand the mentioned import hack, currently I'm unable to make my build work where 2 plugins import the same file. I either get an error that import is not found or that relative imports do not work outside packagaes. [More details in this reddit post](https://www.reddit.com/r/learnpython/comments/crsw49/sharing_python_code_between_multiple_yapsy/) - does Nikola support such thing? How should I share some code between Yapsy plugins inside Nikola?
+<issue_comment>username_1: Plugins are plain python code. There are a number of ways to share code
+between them.
+
+You can even just put all the code in one plugin and import it from the
+other.
+
+The thing about ""not a package"": a package in python is just a folder with
+a __init__.py in it (even an empty one) so maybe you are just missing one
+of those somewhere along the way.
+
+If you can share the code where you have the problem I can take a look into
+making it work.
+<issue_comment>username_6: Clone this branch and try to build it. I can not find any way for `metadata.py` to be importable for plugins.
+
+https://github.com/username_6/the_website/tree/feature-metadata-plugins
+<issue_comment>username_6: Good news: asked help from someone else and got a clean solution.
+
+in `plugins/__init__.py` this needs to be added:
+
+```python
+import sys
+import os
+sys.path.append(os.path.abspath(os.path.dirname(__file__)))
+```
+
+Then, each file in `plugins` directory can do `import plugins.filename`.
+<issue_comment>username_1: There is no metadata.py file in that branch.
+
+But let's create one, and put it in plugins/metadata.py
+
+In the plugin I tried
+
+from plugins.metadata import foo
+
+And that, surprisingly, failed! There are a number of tricks that could be
+done to make this work, like sys.path editing but it's really not a great
+situation.
+
+In my (fuzzy, this project is pretty old!) memory I thought we were setting
+the site's path as part of our import path, but I suspect we are not.
+
+I can make that happen, in the meantime, you can just set PYTHONPATH=. (or
+whatever) before calling Nikola
+<issue_comment>username_6: https://github.com/username_6/the_website/blob/feature-metadata-plugins/website/plugins/metadata.py ?
+
+Anyway, I have found a workaround. See my previous comment. Note: in order for this to make an effect, I had to clean Python's caches.
+<issue_comment>username_1: I think it's extremely unlikely that we will stop using Yapsy at this point.
+<issue_comment>username_1: If someone comes up with a proper plan, that can be done without massive effort by someone else, let's reopen this.<issue_closed>"
+kubernetes/website,304177217,7706,,"[{'action': 'opened', 'author': 'abujji', 'comment_id': None, 'datetime': '2018-03-11 17:36:02+00:00', 'masked_author': 'username_0', 'text': '<!-- Thanks for filing an issue! Before submitting, please fill in the following information. -->\r\n\r\n<!--Required Information-->\r\nI created a secret called regcred as mentioned in this document and I also created my-private-reg-pod.yaml and followed the commands. Whenever I run the command **kubectl get pod private-reg** the pod fails because of a failed pull with the error **ImagePullBackOff**. When I try to pull the image directly from powershell by logging into docker with the same credentials, it works fine.\r\n\r\n**This is a...** \r\n<!-- choose one by changing [ ] to [x] -->\r\n- [ ] Feature Request\r\n- [ ] Bug Report\r\nI dont think it is a bug but it must be something I am doing incorrectly. I am seeking help here. Thaks in advance.\r\n**Problem:**\r\n\r\n\r\n**Proposed Solution:**\r\n\r\n\r\n**Page to Update:**\r\nhttps://kubernetes.io/...\r\n\r\n<!--Optional Information (remove the comment tags around information you would like to include)-->\r\n<!--Kubernetes Version:-->\r\n\r\n<!--Additional Information:-->', 'title': 'Issue with k8s.io/docs/tasks/configure-pod-container/pull-image-private-registry/', 'type': 'issue'}
+ {'action': 'created', 'author': 'zacharysarah', 'comment_id': 375804136.0, 'datetime': '2018-03-23 21:32:27+00:00', 'masked_author': 'username_1', 'text': '@username_0 :wave: This issue sounds more like a request for support and less like an issue specifically for docs. You can bring your question to the `#kubernetes-users` channel in [Kubernetes slack](http://slack.k8s.io/). You can also search resources like [Stack Overflow](https://stackoverflow.com/) for answers to similar questions.', 'title': None, 'type': 'comment'}
+ {'action': 'closed', 'author': 'zacharysarah', 'comment_id': None, 'datetime': '2018-03-23 21:32:29+00:00', 'masked_author': 'username_1', 'text': '', 'title': None, 'type': 'issue'}]","<issue_start><issue_comment>Title: Issue with k8s.io/docs/tasks/configure-pod-container/pull-image-private-registry/
+username_0: <!-- Thanks for filing an issue! Before submitting, please fill in the following information. -->
+
+<!--Required Information-->
+I created a secret called regcred as mentioned in this document and I also created my-private-reg-pod.yaml and followed the commands. Whenever I run the command **kubectl get pod private-reg** the pod fails because of a failed pull with the error **ImagePullBackOff**. When I try to pull the image directly from powershell by logging into docker with the same credentials, it works fine.
+
+**This is a...** 
+<!-- choose one by changing [ ] to [x] -->
+- [ ] Feature Request
+- [ ] Bug Report
+I dont think it is a bug but it must be something I am doing incorrectly. I am seeking help here. Thaks in advance.
+**Problem:**
+
+
+**Proposed Solution:**
+
+
+**Page to Update:**
+https://kubernetes.io/...
+
+<!--Optional Information (remove the comment tags around information you would like to include)-->
+<!--Kubernetes Version:-->
+
+<!--Additional Information:-->
+<issue_comment>username_1: @username_0 :wave: This issue sounds more like a request for support and less like an issue specifically for docs. You can bring your question to the `#kubernetes-users` channel in [Kubernetes slack](http://slack.k8s.io/). You can also search resources like [Stack Overflow](https://stackoverflow.com/) for answers to similar questions.<issue_closed>"
+department-of-veterans-affairs/vets-website,143073946,1478,"{'number': 1478.0, 'repo': 'vets-website', 'user_login': 'department-of-veterans-affairs'}","[{'action': 'opened', 'author': 'webinista', 'comment_id': None, 'datetime': '2016-03-23T20:37:58Z', 'masked_author': 'username_0', 'text': '- Updates _education/index.html with the new pattern\r\n- Moves ""GI Bill Comparison Tool"" link to the GI Bill card\r\n- Adds _va-navigation-cards.scss partial\r\n- Adds JavaScript snippet that powers the navigation pattern\r\n- Added width, height attributes to cards-* SVG images to constrain their icon size', 'title': 'Adding redesigned card pattern. closes #1455', 'type': 'issue'}
+ {'action': 'created', 'author': 'emilyville', 'comment_id': 200607536.0, 'datetime': '2016-03-24 01:34:25+00:00', 'masked_author': 'username_1', 'text': ""it looks good, but for some reason the interaction isn't working for me locally. I will look again tomorrow!"", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'emilyville', 'comment_id': 200953500.0, 'datetime': '2016-03-24 18:08:41+00:00', 'masked_author': 'username_1', 'text': ""I'm still having issues. Maybe someone else can pull this down and then I'll know if it's just my build? Seems quite possible."", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'akainic', 'comment_id': 200981665.0, 'datetime': '2016-03-24 19:20:24+00:00', 'masked_author': 'username_2', 'text': '@username_1 I think the interaction is working for me locally!', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'emilyville', 'comment_id': 201505189.0, 'datetime': '2016-03-25 21:11:07+00:00', 'masked_author': 'username_1', 'text': ""I think this looks good. Let's use the deployment URL to share and gather feedback before rolling out. Assigning to @username_3 for this!\r\n\r\nhttps://vets-website-pr-1478.herokuapp.com/"", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'webinista', 'comment_id': 202524844.0, 'datetime': '2016-03-28 18:43:35+00:00', 'masked_author': 'username_0', 'text': ""Assigning this back to myself for a bit while I address some of Anne's comments."", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'gnakm', 'comment_id': 205513064.0, 'datetime': '2016-04-04 21:53:15+00:00', 'masked_author': 'username_3', 'text': 'Closing this because we got feedback from vets.gov team. Moving forward design team will consider when to use blue cards and solve the sublink issue.', 'title': None, 'type': 'comment'}]","<issue_start><issue_comment>Title: Adding redesigned card pattern. closes #1455
+username_0: - Updates _education/index.html with the new pattern
+- Moves ""GI Bill Comparison Tool"" link to the GI Bill card
+- Adds _va-navigation-cards.scss partial
+- Adds JavaScript snippet that powers the navigation pattern
+- Added width, height attributes to cards-* SVG images to constrain their icon size
+<issue_comment>username_1: it looks good, but for some reason the interaction isn't working for me locally. I will look again tomorrow!
+<issue_comment>username_1: I'm still having issues. Maybe someone else can pull this down and then I'll know if it's just my build? Seems quite possible.
+<issue_comment>username_2: @username_1 I think the interaction is working for me locally!
+<issue_comment>username_1: I think this looks good. Let's use the deployment URL to share and gather feedback before rolling out. Assigning to @username_3 for this!
+
+https://vets-website-pr-1478.herokuapp.com/
+<issue_comment>username_0: Assigning this back to myself for a bit while I address some of Anne's comments.
+<issue_comment>username_3: Closing this because we got feedback from vets.gov team. Moving forward design team will consider when to use blue cards and solve the sublink issue."
+kubernetes/website,737719493,24925,,"[{'action': 'opened', 'author': 'bmaganti-netizen', 'comment_id': None, 'datetime': '2020-11-06 12:24:32+00:00', 'masked_author': 'username_0', 'text': 'I am just using kubernetes at client end.\r\nI have installed ubuntu and installed kubectl. I am unable to connect to cluster/perform any kubectl operations.\r\n\r\nWell, I am able to connect to kubenetes cluster using windows powershell but not using ubuntu.\r\nI do not understand why I am getting this error. I have tried all the possible suggestions on net.\r\n\r\nAlso,  when I tried checking  /home/{username}/.kube folder in ubuntu, I am unable to find the folder. But the kubectl installation is showing as successful . When I executed \'az aks  get-credentials"" command in ubuntu, the output is merged as config file present in the windows kubeconfig file path, not the ubuntu one.\r\n\r\nI request some one to help me out. I am trying this since weeks.\r\n\r\nThanks in advance!', 'title': '""The connection to the server localhost:8080 was refused - did you specify the right host or port?"" while trying to connect to kubernetes', 'type': 'issue'}]","<issue_start><issue_comment>Title: ""The connection to the server localhost:8080 was refused - did you specify the right host or port?"" while trying to connect to kubernetes
+username_0: I am just using kubernetes at client end.
+I have installed ubuntu and installed kubectl. I am unable to connect to cluster/perform any kubectl operations.
+
+Well, I am able to connect to kubenetes cluster using windows powershell but not using ubuntu.
+I do not understand why I am getting this error. I have tried all the possible suggestions on net.
+
+Also,  when I tried checking  /home/{username}/.kube folder in ubuntu, I am unable to find the folder. But the kubectl installation is showing as successful . When I executed 'az aks  get-credentials"" command in ubuntu, the output is merged as config file present in the windows kubeconfig file path, not the ubuntu one.
+
+I request some one to help me out. I am trying this since weeks.
+
+Thanks in advance!"
+withastro/docs,1139023675,135,,"[{'action': 'opened', 'author': 'tony-sull', 'comment_id': None, 'datetime': '2022-02-15 17:51:58+00:00', 'masked_author': 'username_0', 'text': ""Add docs for building non-HTML pages [PR #2586](https://github.com/withastro/astro/pull/2586)\r\n\r\nThe feature is currently hidden behind the `--experimental-static-build` flag, but has some very powerful use cases for building generic files (ex: JSON or XML), and a couple useful caveats like the `Astro` global isn't available"", 'title': 'DOC: Add docs for building non-HTML pages', 'type': 'issue'}]","<issue_start><issue_comment>Title: DOC: Add docs for building non-HTML pages
+username_0: Add docs for building non-HTML pages [PR #2586](https://github.com/withastro/astro/pull/2586)
+
+The feature is currently hidden behind the `--experimental-static-build` flag, but has some very powerful use cases for building generic files (ex: JSON or XML), and a couple useful caveats like the `Astro` global isn't available"
+ethereum/ethereum-org-website,887491199,3023,,"[{'action': 'opened', 'author': 'ryancreatescopy', 'comment_id': None, 'datetime': '2021-05-11T14:39:39Z', 'masked_author': 'username_0', 'text': ""**Is your feature request related to a problem? Please describe.**\r\n\r\nA newbie / non-technical intro to smart contracts\r\n\r\n**Describe the solution you'd like**\r\n\r\nA page that lives in our learn section that helps explain the potential and power of smart contracts. They are a fundamental part of Ethereum's USP so we should explain them in a way for users to understand. We currently only reference them in passing on other pages or include them in developer documentation...\r\n\r\nCan discuss further when someone registers interest.\r\n\r\nWe love contributions from the Ethereum community! Please comment on an issue if you're interested in helping out with a PR."", 'title': 'Learn page: An intro to smart contracts', 'type': 'issue'}
+ {'action': 'created', 'author': 'samajammin', 'comment_id': 838919884.0, 'datetime': '2021-05-11 18:01:10+00:00', 'masked_author': 'username_1', 'text': 'Potential sources of inspiration\r\n- https://github.com/ethereumbook/ethereumbook/blob/develop/07smart-contracts-solidity.asciidoc#what-is-a-smart-contract (CC license)\r\n- https://docs.ethhub.io/ethereum-basics/what-is-ethereum/#what-are-smart-contracts-and-decentralized-applications (CC license)\r\n- https://www.oobit.com/blog/what-are-ethereum-smart-contracts/\r\n- https://www.investopedia.com/terms/s/smart-contracts.asp\r\n- https://www.coindesk.com/learn/ethereum-101/ethereum-smart-contracts-work', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'jkbishbish', 'comment_id': 841741461.0, 'datetime': '2021-05-16 00:00:56+00:00', 'masked_author': 'username_2', 'text': 'Hey, I could do a draft of this one too. Here\'s what I\'m thinking of as an outline:\r\n\r\n_General stuff_\r\n\r\n**What\'s a smart contract**\r\n- smart contracts are computer programs that run on ethereum (the network, not the coin)\r\n- step-by-step, plain-language example of how a smart contract should work (like an auction or one of the other beginner solidity examples)\r\n- defining smart contracts generally\r\n\r\n**But...why?**\r\n- allowing things other than transactions\r\n- they automate things (program acts as intermediary)\r\n- they help put things on the blockchain record\r\n\r\n_Technical stuff_\r\n\r\n**Computer science concepts**\r\n- computers are systems (users, hardware, software) with levels\r\n- programs are software (usually) written by users to tell hardware (or other software) what to do\r\n\r\n**Ethereum\'s computer system**\r\n- nodes and client software\r\n- consensus rules\r\n- transactions\r\n\r\n**Contracts behave the same for everyone**\r\n- define deterministic\r\n- why this matters in a decentralized system like ethereum\r\n- example\r\n\r\n**A contract is born**\r\n- how contracts get to the blockchain (bulleted example of a software development process)\r\n- where they live (on their own addresses)\r\n- how people can update them, make them expire, or switch them on and off\r\n- opcodes (overview)\r\n\r\n**Who owns a smart contract?**\r\n- nobody basically\r\n- adding the right to modify / send certain opcodes could give power similar to ""ownership""\r\n\r\n**Not so smart after all**\r\n- they don\'t act on their own (i.e. they do what you build them to)\r\n- transactions as triggers\r\n- sample transaction\r\n\r\n**how do you make your own smart contract?**\r\n- brief look at elements of smart contracts (variables (if applicable), functions, etc.)\r\n- data types\r\n- special functions (constructor, fallback,  ???)\r\n\r\n**What can they do?**\r\n- defi\r\n- other dapps\r\n- underline the importance of identifying on/offchain processes (centralized exchanges, ""statelessness"", etc.)\r\n\r\n**Do it now**\r\n- easiest to learn more is by doing\r\n- links to tutorials, remix, zombies, etc\r\n\r\n**Further reading**\r\n- nick szabo (nick would be getting pushed down to the footnotes, sorry nick!)\r\n- https://ethervm.io/\r\n- vyper and solidity docs\r\n- smart contract development on other chains', 'title': None, 'type': 'comment'}
+ {'action': 'reopened', 'author': 'minimalsm', 'comment_id': None, 'datetime': '2021-08-05 14:52:44+00:00', 'masked_author': 'username_3', 'text': ""**Is your feature request related to a problem? Please describe.**\r\n\r\nA newbie / non-technical intro to smart contracts\r\n\r\n**Describe the solution you'd like**\r\n\r\nA page that lives in our learn section that helps explain the potential and power of smart contracts. They are a fundamental part of Ethereum's USP so we should explain them in a way for users to understand. We currently only reference them in passing on other pages or include them in developer documentation...\r\n\r\nCan discuss further when someone registers interest.\r\n\r\nWe love contributions from the Ethereum community! Please comment on an issue if you're interested in helping out with a PR."", 'title': 'Learn page: An intro to smart contracts', 'type': 'issue'}
+ {'action': 'created', 'author': 'minimalsm', 'comment_id': 893525748.0, 'datetime': '2021-08-05 14:55:35+00:00', 'masked_author': 'username_3', 'text': ""@username_2 Hey! Are you still looking to work on this? If not I'd be happy to carry the torch on this one 🔥"", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'jkbishbish', 'comment_id': 893576112.0, 'datetime': '2021-08-05 16:02:11+00:00', 'masked_author': 'username_2', 'text': ""@username_3 Hey! My bad! This kind of got away from me. Continuing the metaphor, I'm still hot to trot 🔥 I'll get a PR up in the next few hours"", 'title': None, 'type': 'comment'}
+ {'action': 'closed', 'author': 'samajammin', 'comment_id': None, 'datetime': '2021-10-19 10:53:49+00:00', 'masked_author': 'username_1', 'text': '', 'title': None, 'type': 'issue'}]","<issue_start><issue_comment>Title: Learn page: An intro to smart contracts
+username_0: **Is your feature request related to a problem? Please describe.**
+
+A newbie / non-technical intro to smart contracts
+
+**Describe the solution you'd like**
+
+A page that lives in our learn section that helps explain the potential and power of smart contracts. They are a fundamental part of Ethereum's USP so we should explain them in a way for users to understand. We currently only reference them in passing on other pages or include them in developer documentation...
+
+Can discuss further when someone registers interest.
+
+We love contributions from the Ethereum community! Please comment on an issue if you're interested in helping out with a PR.
+<issue_comment>username_1: Potential sources of inspiration
+- https://github.com/ethereumbook/ethereumbook/blob/develop/07smart-contracts-solidity.asciidoc#what-is-a-smart-contract (CC license)
+- https://docs.ethhub.io/ethereum-basics/what-is-ethereum/#what-are-smart-contracts-and-decentralized-applications (CC license)
+- https://www.oobit.com/blog/what-are-ethereum-smart-contracts/
+- https://www.investopedia.com/terms/s/smart-contracts.asp
+- https://www.coindesk.com/learn/ethereum-101/ethereum-smart-contracts-work
+<issue_comment>username_2: Hey, I could do a draft of this one too. Here's what I'm thinking of as an outline:
+
+_General stuff_
+
+**What's a smart contract**
+- smart contracts are computer programs that run on ethereum (the network, not the coin)
+- step-by-step, plain-language example of how a smart contract should work (like an auction or one of the other beginner solidity examples)
+- defining smart contracts generally
+
+**But...why?**
+- allowing things other than transactions
+- they automate things (program acts as intermediary)
+- they help put things on the blockchain record
+
+_Technical stuff_
+
+**Computer science concepts**
+- computers are systems (users, hardware, software) with levels
+- programs are software (usually) written by users to tell hardware (or other software) what to do
+
+**Ethereum's computer system**
+- nodes and client software
+- consensus rules
+- transactions
+
+**Contracts behave the same for everyone**
+- define deterministic
+- why this matters in a decentralized system like ethereum
+- example
+
+**A contract is born**
+- how contracts get to the blockchain (bulleted example of a software development process)
+- where they live (on their own addresses)
+- how people can update them, make them expire, or switch them on and off
+- opcodes (overview)
+
+**Who owns a smart contract?**
+- nobody basically
+- adding the right to modify / send certain opcodes could give power similar to ""ownership""
+
+**Not so smart after all**
+- they don't act on their own (i.e. they do what you build them to)
+- transactions as triggers
+- sample transaction
+
+**how do you make your own smart contract?**
+- brief look at elements of smart contracts (variables (if applicable), functions, etc.)
+- data types
+- special functions (constructor, fallback,  ???)
+
+**What can they do?**
+- defi
+- other dapps
+- underline the importance of identifying on/offchain processes (centralized exchanges, ""statelessness"", etc.)
+
+**Do it now**
+- easiest to learn more is by doing
+- links to tutorials, remix, zombies, etc
+
+**Further reading**
+- nick szabo (nick would be getting pushed down to the footnotes, sorry nick!)
+- https://ethervm.io/
+- vyper and solidity docs
+- smart contract development on other chains
+<issue_comment>username_3: **Is your feature request related to a problem? Please describe.**
+
+A newbie / non-technical intro to smart contracts
+
+**Describe the solution you'd like**
+
+A page that lives in our learn section that helps explain the potential and power of smart contracts. They are a fundamental part of Ethereum's USP so we should explain them in a way for users to understand. We currently only reference them in passing on other pages or include them in developer documentation...
+
+Can discuss further when someone registers interest.
+
+We love contributions from the Ethereum community! Please comment on an issue if you're interested in helping out with a PR.
+<issue_comment>username_3: @username_2 Hey! Are you still looking to work on this? If not I'd be happy to carry the torch on this one 🔥
+<issue_comment>username_2: @username_3 Hey! My bad! This kind of got away from me. Continuing the metaphor, I'm still hot to trot 🔥 I'll get a PR up in the next few hours<issue_closed>"
+gohugoio/hugo,56152734,870,"{'number': 870.0, 'repo': 'hugo', 'user_login': 'gohugoio'}","[{'action': 'opened', 'author': 'moxiegirl', 'comment_id': None, 'datetime': '2015-02-01T05:29:30Z', 'masked_author': 'username_0', 'text': 'So, I\'m a sloppy reader and had just a short amount of time to try your contributor install. The first time I went to follow the README I got funky error message because I had not installed Mercurial --- essentially the dependencies.  Anyway, tonight I took some extra time and got everything done correctly with some careful, slow reading.\n\nSo, now I\'d like to contribute to the README for the sloppy reader --- which to me means being a bit tighter with the README language.  The README address the various install methods -- that depend on the type of interaction you want with Hugo. Basically, I tightened from the Overview down to the third install method.\n\nAfter that, the text seemed to be addressing code contributors mainly.  The README should be tightened up a bit more but I ran out of energy. This is what I did in this pass:\n- Called out the supported architecture earlier and removed redundant lines\n- Removed the link to the release which was a bit early--- don\'t link the reader out until you get to the install instructions.\n- Between this README and the Hugo documentation site, there are about three different ""installing Hugo"" sets for just a site gen install. For now, I would recommend having a single set of install for the site gen user only.  Since such a person is less likely to land to on the GitHub repo and stumble down here, I\'m pointing them off to the Hugo docs...that eliminates one redundancy (the docs has the other two). (I pulled ""Where to Install"" since the instructions on Hugo docs pretty much say /usr/local/bin )\n- The Contributor install instructions were ok for a coder but I think you might want to collect users who are tech writers or casual bloggers.  It would be nice if these folks could contribute to the docs. I\'ve rewritten these installs for that person.  Just as an aside, you might get more contributors if you had the docs dir in its own repo.  Then, a contributor could download just the docs as a website, hit it with the Hugo binary locally, and contribute back without the code overhead.  \n- I\'ve removed reference to GOROOT because of [http://dave.cheney.net/2013/06/14/you-dont-need-to-set-goroot-really]\n- Um...sorry for the hideous pun but really who can resist?', 'title': 'README Update ', 'type': 'issue'}]","<issue_start><issue_comment>Title: README Update 
+username_0: So, I'm a sloppy reader and had just a short amount of time to try your contributor install. The first time I went to follow the README I got funky error message because I had not installed Mercurial --- essentially the dependencies.  Anyway, tonight I took some extra time and got everything done correctly with some careful, slow reading.
+
+So, now I'd like to contribute to the README for the sloppy reader --- which to me means being a bit tighter with the README language.  The README address the various install methods -- that depend on the type of interaction you want with Hugo. Basically, I tightened from the Overview down to the third install method.
+
+After that, the text seemed to be addressing code contributors mainly.  The README should be tightened up a bit more but I ran out of energy. This is what I did in this pass:
+- Called out the supported architecture earlier and removed redundant lines
+- Removed the link to the release which was a bit early--- don't link the reader out until you get to the install instructions.
+- Between this README and the Hugo documentation site, there are about three different ""installing Hugo"" sets for just a site gen install. For now, I would recommend having a single set of install for the site gen user only.  Since such a person is less likely to land to on the GitHub repo and stumble down here, I'm pointing them off to the Hugo docs...that eliminates one redundancy (the docs has the other two). (I pulled ""Where to Install"" since the instructions on Hugo docs pretty much say /usr/local/bin )
+- The Contributor install instructions were ok for a coder but I think you might want to collect users who are tech writers or casual bloggers.  It would be nice if these folks could contribute to the docs. I've rewritten these installs for that person.  Just as an aside, you might get more contributors if you had the docs dir in its own repo.  Then, a contributor could download just the docs as a website, hit it with the Hugo binary locally, and contribute back without the code overhead.  
+- I've removed reference to GOROOT because of [http://dave.cheney.net/2013/06/14/you-dont-need-to-set-goroot-really]
+- Um...sorry for the hideous pun but really who can resist?"

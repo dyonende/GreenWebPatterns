@@ -1,0 +1,440 @@
+files-community/Website,1015547768,16,,"[{'action': 'opened', 'author': 'X86-7', 'comment_id': None, 'datetime': '2021-10-04 19:25:27+00:00', 'masked_author': 'username_0', 'text': '### Before you start...\n\n- [X] Have you refreshed the page? You might be using an old version of the site.\n\n### What browsers are you seeing the problem on?\n\nFirefox\n\n### Description\n\nWhen looking at the previewed images of Files V2, the front of the landing page and part in front of the Windows 11 Background is strictly 50% transparent and theres no blur, like it is on other browsers.\n\n### Steps To Reproduce\n\n1. Go to the website\r\n2. Take a look at the first part of the landing page\r\n3. Take a look under the landing page where it says **Power meets beauty.**\n\n### Expected behavior\n\nThe background should have a Gaussian blur.\n\n### Relevant Assets\n\n![Screenshot (3)](https://user-images.githubusercontent.com/84218614/135911996-232aa699-3816-4590-8152-84082d974d5b.png)', 'title': 'Background is not acrylic, its slightly transparent.', 'type': 'issue'}
+ {'action': 'created', 'author': 'TheOnlyTails', 'comment_id': 933813910.0, 'datetime': '2021-10-04 20:05:40+00:00', 'masked_author': 'username_1', 'text': ""The background blur here relies on the `backdrop-filter` CSS property, which is locked behind a flag in Firefox, meaning we can't fix this."", 'title': None, 'type': 'comment'}
+ {'action': 'closed', 'author': 'TheOnlyTails', 'comment_id': None, 'datetime': '2021-10-04 20:05:40+00:00', 'masked_author': 'username_1', 'text': '', 'title': None, 'type': 'issue'}]","<issue_start><issue_comment>Title: Background is not acrylic, its slightly transparent.
+username_0: ### Before you start...
+
+- [X] Have you refreshed the page? You might be using an old version of the site.
+
+### What browsers are you seeing the problem on?
+
+Firefox
+
+### Description
+
+When looking at the previewed images of Files V2, the front of the landing page and part in front of the Windows 11 Background is strictly 50% transparent and theres no blur, like it is on other browsers.
+
+### Steps To Reproduce
+
+1. Go to the website
+2. Take a look at the first part of the landing page
+3. Take a look under the landing page where it says **Power meets beauty.**
+
+### Expected behavior
+
+The background should have a Gaussian blur.
+
+### Relevant Assets
+
+![Screenshot (3)](https://user-images.githubusercontent.com/84218614/135911996-232aa699-3816-4590-8152-84082d974d5b.png)
+<issue_comment>username_1: The background blur here relies on the `backdrop-filter` CSS property, which is locked behind a flag in Firefox, meaning we can't fix this.<issue_closed>"
+getnikola/nikola,187525754,2553,,"[{'action': 'opened', 'author': 'pydsigner', 'comment_id': None, 'datetime': '2016-11-05 21:54:38+00:00', 'masked_author': 'username_0', 'text': '`<a href=""#"">something</a>` is mangled into `<a href=""index.html"">something</a>`, as is `<a href=""#a"">something</a>` unless there exists an element with `id=""a""`. This causes a lot of problems for JavaScript-powered links. I have a simple example patch that fixes this.', 'title': 'url_replacer() mangles bare hash links', 'type': 'issue'}
+ {'action': 'closed', 'author': 'ralsina', 'comment_id': None, 'datetime': '2016-11-06 02:09:10+00:00', 'masked_author': 'username_1', 'text': '', 'title': None, 'type': 'issue'}]","<issue_start><issue_comment>Title: url_replacer() mangles bare hash links
+username_0: `<a href=""#"">something</a>` is mangled into `<a href=""index.html"">something</a>`, as is `<a href=""#a"">something</a>` unless there exists an element with `id=""a""`. This causes a lot of problems for JavaScript-powered links. I have a simple example patch that fixes this.<issue_closed>"
+ethereum/ethereum-org-website,834980439,2676,,"[{'action': 'opened', 'author': 'tmlee', 'comment_id': None, 'datetime': '2021-03-18 15:50:08+00:00', 'masked_author': 'username_0', 'text': ""**Describe the bug**\r\nCo-founder at CoinGecko here, it is great to see Ethereum.org using the CoinGecko API to power pricing pages\r\nBut I am also noticing a bug that it is making infinite requests to the API which is in a way of waste of bandwidth on our end for the free API that we are providing. I don't supposed that is intended.\r\n\r\n**To Reproduce**\r\nSteps to reproduce the behavior:\r\n1. I dont know if any other pages are impacted, but visit https://ethereum.org/en/stablecoins/\r\n2. Open network inspector \r\n3. You will see an infinite requests is being made to the API\r\n\r\n**Expected behavior**\r\nAPI should be made once or only sufficient to display the value rather than calling it in a loop\r\n\r\n**Screenshots**\r\n\r\nhttps://user-images.githubusercontent.com/110264/111655179-63e46c00-8844-11eb-9abe-a17ba0d945da.mov\r\n\r\n\r\n\r\n**Desktop (please complete the following information):**\r\nTested on\r\n- OS: Mac\r\n- Chrome\r\n- 89.0.4389.82\r\n\r\nbut should be applicable across browsers"", 'title': 'Infinite request made to CoinGecko API endpoints', 'type': 'issue'}
+ {'action': 'created', 'author': 'wackerow', 'comment_id': 802111396.0, 'datetime': '2021-03-18 16:59:40+00:00', 'masked_author': 'username_1', 'text': '@username_0 Thank you so much for reporting this (and of course for providing this service to begin with!). Definitely not intended, and will work to address this right away.', 'title': None, 'type': 'comment'}
+ {'action': 'closed', 'author': 'samajammin', 'comment_id': None, 'datetime': '2021-03-18 21:09:42+00:00', 'masked_author': 'username_2', 'text': '', 'title': None, 'type': 'issue'}
+ {'action': 'created', 'author': 'samajammin', 'comment_id': 802302063.0, 'datetime': '2021-03-18 21:10:51+00:00', 'masked_author': 'username_2', 'text': ""Yes thanks for the report @username_0! We've fixed the issue (thanks @username_1) & added caching to help reduce the load. Will deploy the fix shortly."", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'samajammin', 'comment_id': 802303894.0, 'datetime': '2021-03-18 21:13:36+00:00', 'masked_author': 'username_2', 'text': 'BTW @username_0 - any timeline to support `stablecoins` as a market category in your API 😄 ? Would be great to have.\r\nhttps://twitter.com/samonchain/status/1335999786865070081?s=20\r\n\r\nAppreciate your free API in the meantime! Thanks for all you do for the community.', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'samajammin', 'comment_id': 802312124.0, 'datetime': '2021-03-18 21:26:01+00:00', 'masked_author': 'username_2', 'text': '@all-contributors please add @username_0 for bug reports.', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'tmlee', 'comment_id': 802468160.0, 'datetime': '2021-03-19 02:14:42+00:00', 'masked_author': 'username_0', 'text': ""That's a good feedback, I will see how we can have that supported soon. Will let you know here when it is up and running.\r\nFeel free to let me know if there is anything else that you all need."", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'tmlee', 'comment_id': 864515842.0, 'datetime': '2021-06-20 08:04:36+00:00', 'masked_author': 'username_0', 'text': 'Hi @username_2 , just a quick update that you can do this now with the following endpoint https://api.coingecko.com/api/v3/coins/markets?vs_currency=usd&category=stablecoins&order=market_cap_desc&per_page=100&page=1&sparkline=false\r\n\r\nLet me know what you think!', 'title': None, 'type': 'comment'}]","<issue_start><issue_comment>Title: Infinite request made to CoinGecko API endpoints
+username_0: **Describe the bug**
+Co-founder at CoinGecko here, it is great to see Ethereum.org using the CoinGecko API to power pricing pages
+But I am also noticing a bug that it is making infinite requests to the API which is in a way of waste of bandwidth on our end for the free API that we are providing. I don't supposed that is intended.
+
+**To Reproduce**
+Steps to reproduce the behavior:
+1. I dont know if any other pages are impacted, but visit https://ethereum.org/en/stablecoins/
+2. Open network inspector 
+3. You will see an infinite requests is being made to the API
+
+**Expected behavior**
+API should be made once or only sufficient to display the value rather than calling it in a loop
+
+**Screenshots**
+
+https://user-images.githubusercontent.com/110264/111655179-63e46c00-8844-11eb-9abe-a17ba0d945da.mov
+
+
+
+**Desktop (please complete the following information):**
+Tested on
+- OS: Mac
+- Chrome
+- 89.0.4389.82
+
+but should be applicable across browsers
+<issue_comment>username_1: @username_0 Thank you so much for reporting this (and of course for providing this service to begin with!). Definitely not intended, and will work to address this right away.<issue_closed>
+<issue_comment>username_2: Yes thanks for the report @username_0! We've fixed the issue (thanks @username_1) & added caching to help reduce the load. Will deploy the fix shortly.
+<issue_comment>username_2: BTW @username_0 - any timeline to support `stablecoins` as a market category in your API 😄 ? Would be great to have.
+https://twitter.com/samonchain/status/1335999786865070081?s=20
+
+Appreciate your free API in the meantime! Thanks for all you do for the community.
+<issue_comment>username_2: @all-contributors please add @username_0 for bug reports.
+<issue_comment>username_0: That's a good feedback, I will see how we can have that supported soon. Will let you know here when it is up and running.
+Feel free to let me know if there is anything else that you all need.
+<issue_comment>username_0: Hi @username_2 , just a quick update that you can do this now with the following endpoint https://api.coingecko.com/api/v3/coins/markets?vs_currency=usd&category=stablecoins&order=market_cap_desc&per_page=100&page=1&sparkline=false
+
+Let me know what you think!"
+newrelic/developer-website,665301812,474,,"[{'action': 'opened', 'author': 'zstix', 'comment_id': None, 'datetime': '2020-07-24 17:10:15+00:00', 'masked_author': 'username_0', 'text': '## Description\r\nWe need to add SwiftType to the developer site so that we can power related content and search. The SwiftType dashboard has a snippet we can add (if we want to go that route).\r\n\r\n_NOTE: reach out to @username_0 if you need access to SwiftType._\r\n\r\n## Helpful Links\r\n* [SwiftType documentation](https://swiftype.com/documentation)\r\n\r\n## Screenshots\r\nN/A', 'title': '[Setup] Install SwiftType on developer site', 'type': 'issue'}
+ {'action': 'closed', 'author': 'jerelmiller', 'comment_id': None, 'datetime': '2020-08-07 01:40:52+00:00', 'masked_author': 'username_1', 'text': '', 'title': None, 'type': 'issue'}]","<issue_start><issue_comment>Title: [Setup] Install SwiftType on developer site
+username_0: ## Description
+We need to add SwiftType to the developer site so that we can power related content and search. The SwiftType dashboard has a snippet we can add (if we want to go that route).
+
+_NOTE: reach out to @username_0 if you need access to SwiftType._
+
+## Helpful Links
+* [SwiftType documentation](https://swiftype.com/documentation)
+
+## Screenshots
+N/A<issue_closed>"
+gohugoio/hugo,159967889,2207,,"[{'action': 'opened', 'author': 'anthonyfok', 'comment_id': None, 'datetime': '2016-06-13T14:46:15Z', 'masked_author': 'username_0', 'text': 'The Debian build daemon fails to build hugo_0.16-1 on alpha, mips, mipsel, mips64el and powerpc architectures (using gccgo) due to the following error when compiling golang.org/x/sys/unix:\n\n```\ndh_auto_build -O--buildsystem=golang\n    go install -v github.com/spf13/hugo github.com/spf13/hugo/bufferpool github.com/spf13/hugo/commands github.com/spf13/hugo/create github.com/spf13/hugo/helpers github.com/spf13/hugo/hugofs github.com/spf13/hugo/hugolib github.com/spf13/hugo/livereload github.com/spf13/hugo/parser github.com/spf13/hugo/source github.com/spf13/hugo/target github.com/spf13/hugo/tpl github.com/spf13/hugo/transform github.com/spf13/hugo/utils github.com/spf13/hugo/watcher\ngolang.org/x/sys/unix\ngithub.com/kardianos/osext\ngithub.com/kr/fs\ngithub.com/pkg/errors\n# golang.org/x/sys/unix\nsrc/golang.org/x/sys/unix/flock.go:15:30: error: reference to undefined name \'SYS_FCNTL\'\n var fcntl64Syscall uintptr = SYS_FCNTL\n                              ^\nsrc/golang.org/x/sys/unix/sockcmsg_linux.go:15:30: error: reference to undefined name \'SizeofUcred\'\n  b := make([]byte, CmsgSpace(SizeofUcred))\n                              ^\nsrc/golang.org/x/sys/unix/sockcmsg_linux.go:16:9: error: reference to undefined name \'Cmsghdr\'\n  h := (*Cmsghdr)(unsafe.Pointer(&b[0]))\n         ^\n```\n\nand many more lines after that, see https://buildd.debian.org/status/package.php?p=hugo&suite=sid for the overall view.\n\nIndividual build logs:\n- https://buildd.debian.org/status/fetch.php?pkg=hugo&arch=alpha&ver=0.16-1&stamp=1465835430\n- https://buildd.debian.org/status/fetch.php?pkg=hugo&arch=mips&ver=0.16-1&stamp=1465794978\n- https://buildd.debian.org/status/fetch.php?pkg=hugo&arch=mipsel&ver=0.16-1&stamp=1465794863\n- https://buildd.debian.org/status/fetch.php?pkg=hugo&arch=mips64el&ver=0.16-1&stamp=1465794891\n- https://buildd.debian.org/status/fetch.php?pkg=hugo&arch=powerpc&ver=0.16-1&stamp=1465794682\n\nNote that `gccgo` are used on these platforms, though s390x and gccgo builds hugo just fine (except a failed test in #2206), I would still say the culprit is probably at golang.org/x/sys/unix.\n\nIt might also have to do with Debian still using go1.6.1 without some related backported fixes that went into go1.6.2.  (Wait, no, that is golang-go, not gccgo...)\n\nTODO: Reproduce on Debian test ""porterbox"" servers, come up with an MWE (minimal working example) if necessary, and report back upstream.', 'title': '[alpha mips{,el,64el} powerpc] Compile error at golang.org/x/sys/unix', 'type': 'issue'}
+ {'action': 'closed', 'author': 'bep', 'comment_id': None, 'datetime': '2017-09-22 22:48:48+00:00', 'masked_author': 'username_1', 'text': '', 'title': None, 'type': 'issue'}
+ {'action': 'created', 'author': 'anthonyfok', 'comment_id': 331701989.0, 'datetime': '2017-09-24 10:51:08+00:00', 'masked_author': 'username_0', 'text': 'Just a final status update at the closing of this issue (Thanks @ username_1):\r\n\r\nAccording to https://buildd.debian.org/status/package.php?p=hugo, as of Hugo 0.25.1, MIPS architecture (mips, mipsel, mips64el) now builds successfully (Hurray!), so only alpha and powerpc remains.\r\n\r\nAnd now that I understand the problem a little better: This issue has ~little~ nothing to do with Hugo itself, but rather with golang.org/x/sys adding support (e.g. Linux kernel headers, etc.) for alpha and powerpc, both which are somewhat obsolete anyway, so not a big deal.', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'anthonyfok', 'comment_id': 726736404.0, 'datetime': '2020-11-13 12:24:29+00:00', 'masked_author': 'username_0', 'text': 'Please see follow up at https://github.com/golang/go/issues/18031.\r\n\r\nPowerPC ((linux/ppc) architecture support is being reviewed at https://go-review.googlesource.com/c/sys/+/262517', 'title': None, 'type': 'comment'}]","<issue_start><issue_comment>Title: [alpha mips{,el,64el} powerpc] Compile error at golang.org/x/sys/unix
+username_0: The Debian build daemon fails to build hugo_0.16-1 on alpha, mips, mipsel, mips64el and powerpc architectures (using gccgo) due to the following error when compiling golang.org/x/sys/unix:
+
+```
+dh_auto_build -O--buildsystem=golang
+    go install -v github.com/spf13/hugo github.com/spf13/hugo/bufferpool github.com/spf13/hugo/commands github.com/spf13/hugo/create github.com/spf13/hugo/helpers github.com/spf13/hugo/hugofs github.com/spf13/hugo/hugolib github.com/spf13/hugo/livereload github.com/spf13/hugo/parser github.com/spf13/hugo/source github.com/spf13/hugo/target github.com/spf13/hugo/tpl github.com/spf13/hugo/transform github.com/spf13/hugo/utils github.com/spf13/hugo/watcher
+golang.org/x/sys/unix
+github.com/kardianos/osext
+github.com/kr/fs
+github.com/pkg/errors
+# golang.org/x/sys/unix
+src/golang.org/x/sys/unix/flock.go:15:30: error: reference to undefined name 'SYS_FCNTL'
+ var fcntl64Syscall uintptr = SYS_FCNTL
+                              ^
+src/golang.org/x/sys/unix/sockcmsg_linux.go:15:30: error: reference to undefined name 'SizeofUcred'
+  b := make([]byte, CmsgSpace(SizeofUcred))
+                              ^
+src/golang.org/x/sys/unix/sockcmsg_linux.go:16:9: error: reference to undefined name 'Cmsghdr'
+  h := (*Cmsghdr)(unsafe.Pointer(&b[0]))
+         ^
+```
+
+and many more lines after that, see https://buildd.debian.org/status/package.php?p=hugo&suite=sid for the overall view.
+
+Individual build logs:
+- https://buildd.debian.org/status/fetch.php?pkg=hugo&arch=alpha&ver=0.16-1&stamp=1465835430
+- https://buildd.debian.org/status/fetch.php?pkg=hugo&arch=mips&ver=0.16-1&stamp=1465794978
+- https://buildd.debian.org/status/fetch.php?pkg=hugo&arch=mipsel&ver=0.16-1&stamp=1465794863
+- https://buildd.debian.org/status/fetch.php?pkg=hugo&arch=mips64el&ver=0.16-1&stamp=1465794891
+- https://buildd.debian.org/status/fetch.php?pkg=hugo&arch=powerpc&ver=0.16-1&stamp=1465794682
+
+Note that `gccgo` are used on these platforms, though s390x and gccgo builds hugo just fine (except a failed test in #2206), I would still say the culprit is probably at golang.org/x/sys/unix.
+
+It might also have to do with Debian still using go1.6.1 without some related backported fixes that went into go1.6.2.  (Wait, no, that is golang-go, not gccgo...)
+
+TODO: Reproduce on Debian test ""porterbox"" servers, come up with an MWE (minimal working example) if necessary, and report back upstream.<issue_closed>
+<issue_comment>username_0: Just a final status update at the closing of this issue (Thanks @ username_1):
+
+According to https://buildd.debian.org/status/package.php?p=hugo, as of Hugo 0.25.1, MIPS architecture (mips, mipsel, mips64el) now builds successfully (Hurray!), so only alpha and powerpc remains.
+
+And now that I understand the problem a little better: This issue has ~little~ nothing to do with Hugo itself, but rather with golang.org/x/sys adding support (e.g. Linux kernel headers, etc.) for alpha and powerpc, both which are somewhat obsolete anyway, so not a big deal.
+<issue_comment>username_0: Please see follow up at https://github.com/golang/go/issues/18031.
+
+PowerPC ((linux/ppc) architecture support is being reviewed at https://go-review.googlesource.com/c/sys/+/262517"
+devopsdays/devopsdays-web,1158586941,10919,"{'number': 10919.0, 'repo': 'devopsdays-web', 'user_login': 'devopsdays'}","[{'action': 'opened', 'author': 'mattstratton', 'comment_id': None, 'datetime': '2022-03-03T15:56:36Z', 'masked_author': 'username_0', 'text': 'Made a few suggestions to improve the layout of the program (open space links)\r\n\r\nRemoved the ""propose"" link as I think the CFP is closed?\r\n\r\nAlso made some tweaks to my own formatting of my talk/bio because I HAVE THE POWER! :)', 'title': '[RDU-2022] Small program tweaks', 'type': 'issue'}
+ {'action': 'created', 'author': 'mattstratton', 'comment_id': 1058361278.0, 'datetime': '2022-03-03 18:33:51+00:00', 'masked_author': 'username_0', 'text': ""@username_1 can you comment on this if it's cool to merge? tyvm!"", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'normalfaults', 'comment_id': 1058384746.0, 'datetime': '2022-03-03 18:59:27+00:00', 'masked_author': 'username_1', 'text': 'Lgtm thanks @username_0 !', 'title': None, 'type': 'comment'}]","<issue_start><issue_comment>Title: [RDU-2022] Small program tweaks
+username_0: Made a few suggestions to improve the layout of the program (open space links)
+
+Removed the ""propose"" link as I think the CFP is closed?
+
+Also made some tweaks to my own formatting of my talk/bio because I HAVE THE POWER! :)
+<issue_comment>username_0: @username_1 can you comment on this if it's cool to merge? tyvm!
+<issue_comment>username_1: Lgtm thanks @username_0 !"
+kubernetes/website,718719303,24480,"{'number': 24480.0, 'repo': 'website', 'user_login': 'kubernetes'}","[{'action': 'opened', 'author': 'brnl', 'comment_id': None, 'datetime': '2020-10-10T23:05:50Z', 'masked_author': 'username_0', 'text': 'The script fails when started from PowerShell ISE. It took me a while to figure that out, so a warning could help others.\r\n\r\n```ps1\r\ntar : x nssm.exe\r\nAt line:1 char:1\r\n+ tar C ""$global:NssmInstallDirectory"" -xvf .\\nssm.zip --strip-componen ...\r\n+ ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\r\n    + CategoryInfo          : NotSpecified: (x nssm.exe:String) [], RemoteException\r\n    + FullyQualifiedErrorId : NativeCommandError\r\n```\r\n\r\nThis doesn\'t happen when run from a standard/stand-alone PowerShell window.\r\n\r\n```ps1\r\n$PSVersionTable\r\n\r\nName                           Value                                                                                                                                                                       \r\n----                           -----                                                                                                                                                                       \r\nPSVersion                      5.1.17763.1432                                                                                                                                                              \r\nPSEdition                      Desktop                                                                                                                                                                     \r\nPSCompatibleVersions           {1.0, 2.0, 3.0, 4.0...}                                                                                                                                                     \r\nBuildVersion                   10.0.17763.1432                                                                                                                                                             \r\nCLRVersion                     4.0.30319.42000                                                                                                                                                             \r\nWSManStackVersion              3.0                                                                                                                                                                         \r\nPSRemotingProtocolVersion      2.3                                                                                                                                                                         \r\nSerializationVersion           1.1.0.1                                                                                                                                                                     \r\n```\r\n\r\nHope this PR helps. Feel free to formulate it differently, English is not my native language, so I\'ll take no offense in that. ;-)', 'title': 'PrepareNode.ps1 fails when run from PowerShell ISE', 'type': 'issue'}
+ {'action': 'created', 'author': 'brnl', 'comment_id': 706725617.0, 'datetime': '2020-10-11 15:55:55+00:00', 'masked_author': 'username_0', 'text': 'No, thanks.', 'title': None, 'type': 'comment'}]","<issue_start><issue_comment>Title: PrepareNode.ps1 fails when run from PowerShell ISE
+username_0: The script fails when started from PowerShell ISE. It took me a while to figure that out, so a warning could help others.
+
+```ps1
+tar : x nssm.exe
+At line:1 char:1
++ tar C ""$global:NssmInstallDirectory"" -xvf .\nssm.zip --strip-componen ...
++ ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : NotSpecified: (x nssm.exe:String) [], RemoteException
+    + FullyQualifiedErrorId : NativeCommandError
+```
+
+This doesn't happen when run from a standard/stand-alone PowerShell window.
+
+```ps1
+$PSVersionTable
+
+Name                           Value                                                                                                                                                                       
+----                           -----                                                                                                                                                                       
+PSVersion                      5.1.17763.1432                                                                                                                                                              
+PSEdition                      Desktop                                                                                                                                                                     
+PSCompatibleVersions           {1.0, 2.0, 3.0, 4.0...}                                                                                                                                                     
+BuildVersion                   10.0.17763.1432                                                                                                                                                             
+CLRVersion                     4.0.30319.42000                                                                                                                                                             
+WSManStackVersion              3.0                                                                                                                                                                         
+PSRemotingProtocolVersion      2.3                                                                                                                                                                         
+SerializationVersion           1.1.0.1                                                                                                                                                                     
+```
+
+Hope this PR helps. Feel free to formulate it differently, English is not my native language, so I'll take no offense in that. ;-)
+<issue_comment>username_0: No, thanks."
+corona-warn-app/cwa-website,731259095,518,"{'number': 518.0, 'repo': 'cwa-website', 'user_login': 'corona-warn-app'}","[{'action': 'opened', 'author': 'svengabr', 'comment_id': None, 'datetime': '2020-10-28T09:18:50Z', 'masked_author': 'username_0', 'text': '', 'title': 'added new faq article battery_optimization_background', 'type': 'issue'}
+ {'action': 'created', 'author': 'marsp61', 'comment_id': 717807329.0, 'datetime': '2020-10-28 09:24:53+00:00', 'masked_author': 'username_1', 'text': 'How to get rid of the permanent emails from Github?', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'svengabr', 'comment_id': 717808450.0, 'datetime': '2020-10-28 09:27:04+00:00', 'masked_author': 'username_0', 'text': '@username_1 try this:\r\n\r\n<img width=""465"" alt=""emails"" src=""https://user-images.githubusercontent.com/4686874/97417496-105e9980-1908-11eb-80c4-dfc36e27502d.png"">\r\n\r\nMost likely you need to go through each repository you did subscribe to...', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'marsp61', 'comment_id': 717812632.0, 'datetime': '2020-10-28 09:34:48+00:00', 'masked_author': 'username_1', 'text': 'I did not subscribe any...', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'marsp61', 'comment_id': 717813462.0, 'datetime': '2020-10-28 09:36:24+00:00', 'masked_author': 'username_1', 'text': '![image](https://user-images.githubusercontent.com/73170136/97418706-697afd00-1909-11eb-88a0-147aef3db219.jpeg)', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'svengabr', 'comment_id': 718620687.0, 'datetime': '2020-10-29 10:34:55+00:00', 'masked_author': 'username_0', 'text': '@username_1 then I suggest taking a look at your account settings in the ""Mails"" section:\r\n\r\n<img width=""321"" alt=""2020-10-29 11_31_11-Email settings"" src=""https://user-images.githubusercontent.com/4686874/97557202-c09cd280-19da-11eb-82a5-d8c5bcd4b690.png"">', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'marsp61', 'comment_id': 718653972.0, 'datetime': '2020-10-29 10:58:01+00:00', 'masked_author': 'username_1', 'text': 'Thanks, I think I solved it... on the iPad I found other prefernces than on the iPhone.', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'MikeMcC399', 'comment_id': 718661827.0, 'datetime': '2020-10-29 11:02:35+00:00', 'masked_author': 'username_2', 'text': '@username_1 \r\nAlso for reference check out https://github.com/watching which gives you both Watching and Subscriptions.', 'title': None, 'type': 'comment'}]","<issue_start><issue_comment>Title: added new faq article battery_optimization_background
+username_0: 
+<issue_comment>username_1: How to get rid of the permanent emails from Github?
+<issue_comment>username_0: @username_1 try this:
+
+<img width=""465"" alt=""emails"" src=""https://user-images.githubusercontent.com/4686874/97417496-105e9980-1908-11eb-80c4-dfc36e27502d.png"">
+
+Most likely you need to go through each repository you did subscribe to...
+<issue_comment>username_1: I did not subscribe any...
+<issue_comment>username_1: ![image](https://user-images.githubusercontent.com/73170136/97418706-697afd00-1909-11eb-88a0-147aef3db219.jpeg)
+<issue_comment>username_0: @username_1 then I suggest taking a look at your account settings in the ""Mails"" section:
+
+<img width=""321"" alt=""2020-10-29 11_31_11-Email settings"" src=""https://user-images.githubusercontent.com/4686874/97557202-c09cd280-19da-11eb-82a5-d8c5bcd4b690.png"">
+<issue_comment>username_1: Thanks, I think I solved it... on the iPad I found other prefernces than on the iPhone.
+<issue_comment>username_2: @username_1 
+Also for reference check out https://github.com/watching which gives you both Watching and Subscriptions."
+istio/istio.io,431679394,3980,"{'number': 3980.0, 'repo': 'istio.io', 'user_login': 'istio'}","[{'action': 'opened', 'author': 'zparnold', 'comment_id': None, 'datetime': '2019-04-10T19:42:10Z', 'masked_author': 'username_0', 'text': ""This adds Ygrene Energy Fund to the list of companies present and also removes the CSS animation that makes logos spin. The first one I'd like to have for sure, the animation I can remove, but I feel that it detracts from the companies when the `:hover` state is fired in the DOM"", 'title': 'add ygrene and remove logo spinning', 'type': 'issue'}
+ {'action': 'created', 'author': 'zparnold', 'comment_id': 481835693.0, 'datetime': '2019-04-10 19:46:33+00:00', 'masked_author': 'username_0', 'text': 'I signed it!', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'zparnold', 'comment_id': 481868251.0, 'datetime': '2019-04-10 21:15:29+00:00', 'masked_author': 'username_0', 'text': '/assign   username_1\r\n/cc linsun rshriram smawson louiscryan', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'geeknoid', 'comment_id': 482139222.0, 'datetime': '2019-04-11 14:32:06+00:00', 'masked_author': 'username_1', 'text': ""I've received a lot of comments about folks loving the whimsy of the fidget-spinner animations we use there, so I'd like to keep that as-is. Would you just add the company logo without the animation change please?"", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'zparnold', 'comment_id': 482278576.0, 'datetime': '2019-04-11 19:45:25+00:00', 'masked_author': 'username_0', 'text': 'Yep! @username_1 will do. Thanks 😄', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'zparnold', 'comment_id': 482278967.0, 'datetime': '2019-04-11 19:46:28+00:00', 'masked_author': 'username_0', 'text': '@username_1 Just pushed', 'title': None, 'type': 'comment'}]","<issue_start><issue_comment>Title: add ygrene and remove logo spinning
+username_0: This adds Ygrene Energy Fund to the list of companies present and also removes the CSS animation that makes logos spin. The first one I'd like to have for sure, the animation I can remove, but I feel that it detracts from the companies when the `:hover` state is fired in the DOM
+<issue_comment>username_0: I signed it!
+<issue_comment>username_0: /assign   username_1
+/cc linsun rshriram smawson louiscryan
+<issue_comment>username_1: I've received a lot of comments about folks loving the whimsy of the fidget-spinner animations we use there, so I'd like to keep that as-is. Would you just add the company logo without the animation change please?
+<issue_comment>username_0: Yep! @username_1 will do. Thanks 😄
+<issue_comment>username_0: @username_1 Just pushed"
+ethereum/ethereum-org-website,984907983,3782,,"[{'action': 'opened', 'author': 'minimalsm', 'comment_id': None, 'datetime': '2021-09-01 09:12:22+00:00', 'masked_author': 'username_0', 'text': ""**Is your feature request related to a problem? Please describe.**\r\n\r\nWe recently removed a dapp tool that was no longer maintained and in doing so noticed [we are missing some useful dapp tools ](https://github.com/ethereum/ethereum-org-website/pull/3740#issuecomment-907865282)from this page.\r\n\r\n**Describe the solution you'd like**\r\n- Add [create-eth-app](https://github.com/paulrberg/create-eth-app) and [scaffold-eth](https://github.com/austintgriffith/scaffold-eth) to the dapp tools section of our [dapps developer docs page](https://ethereum.org/en/developers/docs/dapps/)\r\n- Ideally link to an official example dapp also\r\n\r\n**Describe alternatives you've considered**\r\nNone\r\n\r\n**Additional context**\r\n#3734\r\n#3740\r\n#3779\r\n\r\n**Want to contribute?**\r\n\r\nWe love contributions from the Ethereum community! Please comment on an issue if you're interested in helping out with a PR."", 'title': 'Add to create-eth-app and scaffold-eth dapp tools', 'type': 'issue'}
+ {'action': 'created', 'author': 'raj-shekhar1', 'comment_id': 910129836.0, 'datetime': '2021-09-01 10:01:18+00:00', 'masked_author': 'username_1', 'text': 'thanks @username_0, I would like to contribute in this.', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'minimalsm', 'comment_id': 910131225.0, 'datetime': '2021-09-01 10:02:41+00:00', 'masked_author': 'username_0', 'text': '@username_1 thanks! Assigned you 👍 Let me know if you need a hand in any way.', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'raj-shekhar1', 'comment_id': 911467131.0, 'datetime': '2021-09-02 09:45:52+00:00', 'masked_author': 'username_1', 'text': '@username_0 I am currently checking with teams of both the above mentioned tools for any actively hosted dapp sample apps.\r\n\r\nIn the mean time I need your suggestion on adding the same in all the translation files as it needs to be translated in the respective language, like I have added below in the English version and want to do the same in other translation files too.\r\n```\r\n**Create Eth App** **_- Create Ethereum-powered apps with one command._**\r\n\r\n- [GitHub](https://github.com/paulrberg/create-eth-app)\r\n- [Example dapp]()\r\n\r\n**Scaffold-ETH** **_- Quickly experiment with Solidity using a frontend that adapts to your smart contract._**\r\n\r\n- [GitHub](https://github.com/austintgriffith/scaffold-eth)\r\n- [Example dapp](https://punkwallet.io/)\r\n```', 'title': None, 'type': 'comment'}]","<issue_start><issue_comment>Title: Add to create-eth-app and scaffold-eth dapp tools
+username_0: **Is your feature request related to a problem? Please describe.**
+
+We recently removed a dapp tool that was no longer maintained and in doing so noticed [we are missing some useful dapp tools ](https://github.com/ethereum/ethereum-org-website/pull/3740#issuecomment-907865282)from this page.
+
+**Describe the solution you'd like**
+- Add [create-eth-app](https://github.com/paulrberg/create-eth-app) and [scaffold-eth](https://github.com/austintgriffith/scaffold-eth) to the dapp tools section of our [dapps developer docs page](https://ethereum.org/en/developers/docs/dapps/)
+- Ideally link to an official example dapp also
+
+**Describe alternatives you've considered**
+None
+
+**Additional context**
+#3734
+#3740
+#3779
+
+**Want to contribute?**
+
+We love contributions from the Ethereum community! Please comment on an issue if you're interested in helping out with a PR.
+<issue_comment>username_1: thanks @username_0, I would like to contribute in this.
+<issue_comment>username_0: @username_1 thanks! Assigned you 👍 Let me know if you need a hand in any way.
+<issue_comment>username_1: @username_0 I am currently checking with teams of both the above mentioned tools for any actively hosted dapp sample apps.
+
+In the mean time I need your suggestion on adding the same in all the translation files as it needs to be translated in the respective language, like I have added below in the English version and want to do the same in other translation files too.
+```
+**Create Eth App** **_- Create Ethereum-powered apps with one command._**
+
+- [GitHub](https://github.com/paulrberg/create-eth-app)
+- [Example dapp]()
+
+**Scaffold-ETH** **_- Quickly experiment with Solidity using a frontend that adapts to your smart contract._**
+
+- [GitHub](https://github.com/austintgriffith/scaffold-eth)
+- [Example dapp](https://punkwallet.io/)
+```"
+gohugoio/hugo,529688402,6549,,"[{'action': 'opened', 'author': 'fu-sen', 'comment_id': None, 'datetime': '2019-11-28 04:38:29+00:00', 'masked_author': 'username_0', 'text': '### What version of Hugo are you using (`hugo version`)?\r\n\r\n<pre>\r\nPS (PowerShell)> hugo version\r\nHugo Static Site Generator v0.60.0-F2DEA9B0 windows/amd64 BuildDate: 2019-11-27T10:11:05Z\r\n</pre>\r\n\r\n### Does this issue reproduce with the latest release?\r\nYes\r\n\r\n### Problem description\r\n\r\nThere is this Markdown as a test:\r\n```\r\n**test**\\\r\ntest**test**\\\r\n**test**test\\\r\ntest**test**\r\n```\r\n\r\nIn Hugo v0.60.0, the output is as follows:\r\n![スクリーンショット 2019-11-28 13 33 11](https://user-images.githubusercontent.com/5434159/69777498-e2e30a80-11e3-11ea-9b74-3a13e61f6907.jpg)\r\n\r\nSome \\ are not converted to <br>:\r\n\r\n```\r\n<p><strong>test</strong>\\\r\n test<strong>test</strong>\\\r\n <strong>test</strong>test<br>\r\n test<strong>test</strong></p>\r\n```\r\n\r\nSince v0.59.1 was handled normally, this may require some Markdown modifications.', 'title': 'border may be ignored', 'type': 'issue'}
+ {'action': 'created', 'author': 'yuin', 'comment_id': 559707431.0, 'datetime': '2019-11-29 08:40:58+00:00', 'masked_author': 'username_1', 'text': ""goldmark author here, I've fixed the issue and released the new version."", 'title': None, 'type': 'comment'}
+ {'action': 'closed', 'author': 'bep', 'comment_id': None, 'datetime': '2019-11-29 12:44:31+00:00', 'masked_author': 'username_2', 'text': '', 'title': None, 'type': 'issue'}
+ {'action': 'created', 'author': 'fu-sen', 'comment_id': 559824073.0, 'datetime': '2019-11-29 15:29:54+00:00', 'masked_author': 'username_0', 'text': 'Thank you for the quick fix!\r\nI updated to Hugo v.0.60.1 and confirmed this fix.', 'title': None, 'type': 'comment'}]","<issue_start><issue_comment>Title: border may be ignored
+username_0: ### What version of Hugo are you using (`hugo version`)?
+
+<pre>
+PS (PowerShell)> hugo version
+Hugo Static Site Generator v0.60.0-F2DEA9B0 windows/amd64 BuildDate: 2019-11-27T10:11:05Z
+</pre>
+
+### Does this issue reproduce with the latest release?
+Yes
+
+### Problem description
+
+There is this Markdown as a test:
+```
+**test**\
+test**test**\
+**test**test\
+test**test**
+```
+
+In Hugo v0.60.0, the output is as follows:
+![スクリーンショット 2019-11-28 13 33 11](https://user-images.githubusercontent.com/5434159/69777498-e2e30a80-11e3-11ea-9b74-3a13e61f6907.jpg)
+
+Some \ are not converted to <br>:
+
+```
+<p><strong>test</strong>\
+ test<strong>test</strong>\
+ <strong>test</strong>test<br>
+ test<strong>test</strong></p>
+```
+
+Since v0.59.1 was handled normally, this may require some Markdown modifications.
+<issue_comment>username_1: goldmark author here, I've fixed the issue and released the new version.<issue_closed>
+<issue_comment>username_0: Thank you for the quick fix!
+I updated to Hugo v.0.60.1 and confirmed this fix."
+mono/website,161429484,215,"{'number': 215.0, 'repo': 'website', 'user_login': 'mono'}","[{'action': 'opened', 'author': 'PeterDaveHello', 'comment_id': None, 'datetime': '2016-06-21T12:55:58Z', 'masked_author': 'username_0', 'text': ""40 jpeg images losslessly optimized by jpegoptim as below:\r\n\r\n```\r\n archived/images/0/06/Step1.jpg               | Bin 56939 -> 56918 bytes\r\n archived/images/0/0c/CSharpPlugin_img_10.jpg | Bin 49898 -> 46719 bytes\r\n archived/images/1/10/Splendidcrm.jpg         | Bin 197853 -> 197791 bytes\r\n archived/images/1/10/Uia.jpg                 | Bin 49389 -> 46630 bytes\r\n archived/images/1/11/CSharpPlugin_img_12.jpg | Bin 34835 -> 32965 bytes\r\n archived/images/1/11/CSharpPlugin_img_9.jpg  | Bin 78086 -> 72679 bytes\r\n archived/images/2/22/CSharpPlugin_img_13.jpg | Bin 35479 -> 33473 bytes\r\n archived/images/2/23/Flow2.jpg               | Bin 31709 -> 31707 bytes\r\n archived/images/3/36/CSharpPlugin_img_15.jpg | Bin 25466 -> 22142 bytes\r\n archived/images/3/3e/CSharpPlugin_img_2.jpg  | Bin 20453 -> 19044 bytes\r\n archived/images/3/3e/CSharpPlugin_img_7.jpg  | Bin 34005 -> 31288 bytes\r\n archived/images/5/52/CSharpPlugin_img_4.jpg  | Bin 32117 -> 30483 bytes\r\n archived/images/5/54/CSharpPlugin_img_5.jpg  | Bin 36528 -> 34704 bytes\r\n archived/images/5/55/Step4.jpg               | Bin 55462 -> 55450 bytes\r\n archived/images/5/56/CSharpPlugin_img_14.jpg | Bin 27370 -> 24747 bytes\r\n archived/images/5/59/Pinta1.jpg              | Bin 192850 -> 192841 bytes\r\n archived/images/5/5f/CSharpPlugin_img_0.jpg  | Bin 44812 -> 41538 bytes\r\n archived/images/6/65/Report.jpg              | Bin 54132 -> 54116 bytes\r\n archived/images/6/68/Editorshot.jpg          | Bin 576418 -> 571359 bytes\r\n archived/images/6/6a/CSharpPlugin_img_1.jpg  | Bin 29320 -> 26340 bytes\r\n archived/images/7/74/Test006.jpg             | Bin 35982 -> 33559 bytes\r\n archived/images/8/88/CSharpPlugin_img_3.jpg  | Bin 46388 -> 41542 bytes\r\n archived/images/8/8b/CSharpPlugin_img_16.jpg | Bin 21736 -> 18393 bytes\r\n archived/images/8/8c/Step3.jpg               | Bin 43684 -> 43671 bytes\r\n archived/images/8/8f/CSharpPlugin_img_6.jpg  | Bin 48100 -> 45450 bytes\r\n archived/images/9/9b/CSharpPlugin_img_8.jpg  | Bin 21820 -> 20498 bytes\r\n archived/images/b/bc/Linux1.jpg              | Bin 48630 -> 47816 bytes\r\n archived/images/b/bc/Paco.jpg                | Bin 3919 -> 3900 bytes\r\n archived/images/c/c7/Silverlight_sample.jpg  | Bin 36752 -> 32228 bytes\r\n archived/images/c/c8/CSharpPlugin_img_11.jpg | Bin 38204 -> 35673 bytes\r\n archived/images/c/c8/UIAVerify03.jpg         | Bin 94488 -> 89599 bytes\r\n archived/images/c/ca/Fyireporting.jpg        | Bin 32326 -> 29558 bytes\r\n archived/images/c/cf/Race_to_linux.jpg       | Bin 130898 -> 130883 bytes\r\n archived/images/d/d2/UIAVerify01.jpg         | Bin 82233 -> 78339 bytes\r\n archived/images/d/d4/Screenshot-monodoc.jpg  | Bin 66712 -> 59767 bytes\r\n archived/images/d/d8/CSharpPlugin_img_17.jpg | Bin 27245 -> 23875 bytes\r\n archived/images/d/d8/Pinta2.jpg              | Bin 190313 -> 190257 bytes\r\n archived/images/d/db/Linux3.jpg              | Bin 64587 -> 64557 bytes\r\n archived/images/e/e1/UIAVerify02.jpg         | Bin 100160 -> 94393 bytes\r\n archived/images/e/e2/Flow1.jpg               | Bin 32377 -> 32366 bytes\r\n\r\n```\r\n\r\n\r\n424 png images losslessly optimized by Google's zopflipng as below:\r\n\r\n```\r\n archived/images/0/02/Linux4.png                          | Bin 64763 -> 49875 bytes\r\n archived/images/0/03/Novell_Patches.png                  | Bin 648 -> 561 bytes\r\n archived/images/0/04/GtkSharpCombo.png                   | Bin 5364 -> 4523 bytes\r\n archived/images/0/04/GtkSharpNodeViewSimple.png          | Bin 7858 -> 6411 bytes\r\n archived/images/0/05/Gsoc2010.png                        | Bin 34343 -> 26504 bytes\r\n archived/images/0/05/Monocalendar2.png                   | Bin 21450 -> 11300 bytes\r\n archived/images/0/07/GtkSharpTreeViewTutorial4.png       | Bin 10343 -> 7747 bytes\r\n archived/images/0/08/Blogengine.png                      | Bin 111771 -> 85567 bytes\r\n archived/images/0/08/Mono-powered.png                    | Bin 1676 -> 1384 bytes\r\n archived/images/0/0a/I18n_en.png                         | Bin 6365 -> 5478 bytes\r\n archived/images/0/0a/Matt.png                            | Bin 29849 -> 16226 bytes\r\n archived/images/0/0b/Airlines-demo.png                   | Bin 166393 -> 133281 bytes\r\n archived/images/0/0c/Dt_7.png                            | Bin 28178 -> 11836 bytes\r\n archived/images/0/0c/Path-parsing-progression.png        | Bin 48421 -> 39163 bytes\r\n archived/images/0/0e/Mvp-start.png                       | Bin 36631 -> 30305 bytes\r\n archived/images/0/0e/Svn3.png                            | Bin 19286 -> 14242 bytes\r\n archived/images/0/0e/Tml.png                             | Bin 5026 -> 4885 bytes\r\n archived/images/0/0f/Combo400.png                        | Bin 27059 -> 17697 bytes\r\n archived/images/1/10/Md_hw_iphone13.png                  | Bin 15308 -> 11182 bytes\r\n archived/images/1/10/Nclass2.png                         | Bin 20194 -> 14812 bytes\r\n archived/images/1/12/CecilInstrCD.png                    | Bin 6212 -> 2983 bytes\r\n archived/images/1/12/GtkSharpIconView.png                | Bin 41354 -> 38116 bytes\r\n archived/images/1/12/Soc_rules48.png                     | Bin 4730 -> 3932 bytes\r\n archived/images/1/12/Viewer.png                          | Bin 15645 -> 9520 bytes\r\n archived/images/1/13/Md_hw_iphone28.png                  | Bin 42653 -> 34264 bytes\r\n archived/images/1/14/Cjac.png                            | Bin 9963 -> 9649 bytes\r\n archived/images/1/14/Gtksharp-thumb.png                  | Bin 20267 -> 14234 bytes\r\n archived/images/1/15/SGenSpaces.png                      | Bin 11775 -> 8862 bytes\r\n archived/images/1/15/Uiaclient1.png                      | Bin 97168 -> 78936 bytes\r\n archived/images/1/17/Bgmerrell0.png                      | Bin 16271 -> 15395 bytes\r\n[Truncated]\n archived/images/f/f9/Advanced.png                        | Bin 16348 -> 12459 bytes\r\n archived/images/f/f9/Cairo-example-1.png                 | Bin 2827 -> 1763 bytes\r\n archived/images/f/fa/Existing.png                        | Bin 3366 -> 1749 bytes\r\n archived/images/f/fa/Nutech-monogui2.png                 | Bin 62702 -> 49249 bytes\r\n archived/images/f/fb/Jackson.png                         | Bin 4626 -> 4523 bytes\r\n archived/images/f/fc/Beagle.png                          | Bin 49689 -> 42047 bytes\r\n archived/images/f/fc/Heapshot_reverse_references.png     | Bin 103461 -> 64671 bytes\r\n archived/images/f/fd/Drpopper2.png                       | Bin 73494 -> 56604 bytes\r\n archived/images/f/fe/Monodoc.png                         | Bin 94694 -> 57887 bytes\r\n archived/images/f/fe/SgenNurseryFull.png                 | Bin 14555 -> 10220 bytes\r\n archived/images/f/ff/Monotools1-1-c.png                  | Bin 3791 -> 3733 bytes\r\n docs/advanced/runtime/docs/coop-state-machine.png        | Bin 141715 -> 87321 bytes\r\n images/code-completion-csharp.png                        | Bin 7361 -> 2506 bytes\r\n images/igv-diff.png                                      | Bin 682265 -> 417921 bytes\r\n images/igv-screenshot.png                                | Bin 515848 -> 299232 bytes\r\n images/mono-gorilla.png                                  | Bin 859 -> 839 bytes\r\n images/mono-mac-install.png                              | Bin 90997 -> 82118 bytes\r\n images/windows-install-mono-cmd.png                      | Bin 13017 -> 8153 bytes\r\n images/windows-install-mono.png                          | Bin 7620 -> 6581 bytes\r\n```"", 'title': 'jpg and png images optimization', 'type': 'issue'}
+ {'action': 'created', 'author': 'akoeplinger', 'comment_id': 227434808.0, 'datetime': '2016-06-21 13:12:19+00:00', 'masked_author': 'username_1', 'text': 'Cool, thanks :)', 'title': None, 'type': 'comment'}]","<issue_start><issue_comment>Title: jpg and png images optimization
+username_0: 40 jpeg images losslessly optimized by jpegoptim as below:
+
+```
+ archived/images/0/06/Step1.jpg               | Bin 56939 -> 56918 bytes
+ archived/images/0/0c/CSharpPlugin_img_10.jpg | Bin 49898 -> 46719 bytes
+ archived/images/1/10/Splendidcrm.jpg         | Bin 197853 -> 197791 bytes
+ archived/images/1/10/Uia.jpg                 | Bin 49389 -> 46630 bytes
+ archived/images/1/11/CSharpPlugin_img_12.jpg | Bin 34835 -> 32965 bytes
+ archived/images/1/11/CSharpPlugin_img_9.jpg  | Bin 78086 -> 72679 bytes
+ archived/images/2/22/CSharpPlugin_img_13.jpg | Bin 35479 -> 33473 bytes
+ archived/images/2/23/Flow2.jpg               | Bin 31709 -> 31707 bytes
+ archived/images/3/36/CSharpPlugin_img_15.jpg | Bin 25466 -> 22142 bytes
+ archived/images/3/3e/CSharpPlugin_img_2.jpg  | Bin 20453 -> 19044 bytes
+ archived/images/3/3e/CSharpPlugin_img_7.jpg  | Bin 34005 -> 31288 bytes
+ archived/images/5/52/CSharpPlugin_img_4.jpg  | Bin 32117 -> 30483 bytes
+ archived/images/5/54/CSharpPlugin_img_5.jpg  | Bin 36528 -> 34704 bytes
+ archived/images/5/55/Step4.jpg               | Bin 55462 -> 55450 bytes
+ archived/images/5/56/CSharpPlugin_img_14.jpg | Bin 27370 -> 24747 bytes
+ archived/images/5/59/Pinta1.jpg              | Bin 192850 -> 192841 bytes
+ archived/images/5/5f/CSharpPlugin_img_0.jpg  | Bin 44812 -> 41538 bytes
+ archived/images/6/65/Report.jpg              | Bin 54132 -> 54116 bytes
+ archived/images/6/68/Editorshot.jpg          | Bin 576418 -> 571359 bytes
+ archived/images/6/6a/CSharpPlugin_img_1.jpg  | Bin 29320 -> 26340 bytes
+ archived/images/7/74/Test006.jpg             | Bin 35982 -> 33559 bytes
+ archived/images/8/88/CSharpPlugin_img_3.jpg  | Bin 46388 -> 41542 bytes
+ archived/images/8/8b/CSharpPlugin_img_16.jpg | Bin 21736 -> 18393 bytes
+ archived/images/8/8c/Step3.jpg               | Bin 43684 -> 43671 bytes
+ archived/images/8/8f/CSharpPlugin_img_6.jpg  | Bin 48100 -> 45450 bytes
+ archived/images/9/9b/CSharpPlugin_img_8.jpg  | Bin 21820 -> 20498 bytes
+ archived/images/b/bc/Linux1.jpg              | Bin 48630 -> 47816 bytes
+ archived/images/b/bc/Paco.jpg                | Bin 3919 -> 3900 bytes
+ archived/images/c/c7/Silverlight_sample.jpg  | Bin 36752 -> 32228 bytes
+ archived/images/c/c8/CSharpPlugin_img_11.jpg | Bin 38204 -> 35673 bytes
+ archived/images/c/c8/UIAVerify03.jpg         | Bin 94488 -> 89599 bytes
+ archived/images/c/ca/Fyireporting.jpg        | Bin 32326 -> 29558 bytes
+ archived/images/c/cf/Race_to_linux.jpg       | Bin 130898 -> 130883 bytes
+ archived/images/d/d2/UIAVerify01.jpg         | Bin 82233 -> 78339 bytes
+ archived/images/d/d4/Screenshot-monodoc.jpg  | Bin 66712 -> 59767 bytes
+ archived/images/d/d8/CSharpPlugin_img_17.jpg | Bin 27245 -> 23875 bytes
+ archived/images/d/d8/Pinta2.jpg              | Bin 190313 -> 190257 bytes
+ archived/images/d/db/Linux3.jpg              | Bin 64587 -> 64557 bytes
+ archived/images/e/e1/UIAVerify02.jpg         | Bin 100160 -> 94393 bytes
+ archived/images/e/e2/Flow1.jpg               | Bin 32377 -> 32366 bytes
+
+```
+
+
+424 png images losslessly optimized by Google's zopflipng as below:
+
+```
+ archived/images/0/02/Linux4.png                          | Bin 64763 -> 49875 bytes
+ archived/images/0/03/Novell_Patches.png                  | Bin 648 -> 561 bytes
+ archived/images/0/04/GtkSharpCombo.png                   | Bin 5364 -> 4523 bytes
+ archived/images/0/04/GtkSharpNodeViewSimple.png          | Bin 7858 -> 6411 bytes
+ archived/images/0/05/Gsoc2010.png                        | Bin 34343 -> 26504 bytes
+ archived/images/0/05/Monocalendar2.png                   | Bin 21450 -> 11300 bytes
+ archived/images/0/07/GtkSharpTreeViewTutorial4.png       | Bin 10343 -> 7747 bytes
+ archived/images/0/08/Blogengine.png                      | Bin 111771 -> 85567 bytes
+ archived/images/0/08/Mono-powered.png                    | Bin 1676 -> 1384 bytes
+ archived/images/0/0a/I18n_en.png                         | Bin 6365 -> 5478 bytes
+ archived/images/0/0a/Matt.png                            | Bin 29849 -> 16226 bytes
+ archived/images/0/0b/Airlines-demo.png                   | Bin 166393 -> 133281 bytes
+ archived/images/0/0c/Dt_7.png                            | Bin 28178 -> 11836 bytes
+ archived/images/0/0c/Path-parsing-progression.png        | Bin 48421 -> 39163 bytes
+ archived/images/0/0e/Mvp-start.png                       | Bin 36631 -> 30305 bytes
+ archived/images/0/0e/Svn3.png                            | Bin 19286 -> 14242 bytes
+ archived/images/0/0e/Tml.png                             | Bin 5026 -> 4885 bytes
+ archived/images/0/0f/Combo400.png                        | Bin 27059 -> 17697 bytes
+ archived/images/1/10/Md_hw_iphone13.png                  | Bin 15308 -> 11182 bytes
+ archived/images/1/10/Nclass2.png                         | Bin 20194 -> 14812 bytes
+ archived/images/1/12/CecilInstrCD.png                    | Bin 6212 -> 2983 bytes
+ archived/images/1/12/GtkSharpIconView.png                | Bin 41354 -> 38116 bytes
+ archived/images/1/12/Soc_rules48.png                     | Bin 4730 -> 3932 bytes
+ archived/images/1/12/Viewer.png                          | Bin 15645 -> 9520 bytes
+ archived/images/1/13/Md_hw_iphone28.png                  | Bin 42653 -> 34264 bytes
+ archived/images/1/14/Cjac.png                            | Bin 9963 -> 9649 bytes
+ archived/images/1/14/Gtksharp-thumb.png                  | Bin 20267 -> 14234 bytes
+ archived/images/1/15/SGenSpaces.png                      | Bin 11775 -> 8862 bytes
+ archived/images/1/15/Uiaclient1.png                      | Bin 97168 -> 78936 bytes
+ archived/images/1/17/Bgmerrell0.png                      | Bin 16271 -> 15395 bytes
+[Truncated]
+ archived/images/f/f9/Advanced.png                        | Bin 16348 -> 12459 bytes
+ archived/images/f/f9/Cairo-example-1.png                 | Bin 2827 -> 1763 bytes
+ archived/images/f/fa/Existing.png                        | Bin 3366 -> 1749 bytes
+ archived/images/f/fa/Nutech-monogui2.png                 | Bin 62702 -> 49249 bytes
+ archived/images/f/fb/Jackson.png                         | Bin 4626 -> 4523 bytes
+ archived/images/f/fc/Beagle.png                          | Bin 49689 -> 42047 bytes
+ archived/images/f/fc/Heapshot_reverse_references.png     | Bin 103461 -> 64671 bytes
+ archived/images/f/fd/Drpopper2.png                       | Bin 73494 -> 56604 bytes
+ archived/images/f/fe/Monodoc.png                         | Bin 94694 -> 57887 bytes
+ archived/images/f/fe/SgenNurseryFull.png                 | Bin 14555 -> 10220 bytes
+ archived/images/f/ff/Monotools1-1-c.png                  | Bin 3791 -> 3733 bytes
+ docs/advanced/runtime/docs/coop-state-machine.png        | Bin 141715 -> 87321 bytes
+ images/code-completion-csharp.png                        | Bin 7361 -> 2506 bytes
+ images/igv-diff.png                                      | Bin 682265 -> 417921 bytes
+ images/igv-screenshot.png                                | Bin 515848 -> 299232 bytes
+ images/mono-gorilla.png                                  | Bin 859 -> 839 bytes
+ images/mono-mac-install.png                              | Bin 90997 -> 82118 bytes
+ images/windows-install-mono-cmd.png                      | Bin 13017 -> 8153 bytes
+ images/windows-install-mono.png                          | Bin 7620 -> 6581 bytes
+```
+<issue_comment>username_1: Cool, thanks :)"
+gohugoio/hugo,368902972,5301,,"[{'action': 'opened', 'author': 'c-edw', 'comment_id': None, 'datetime': '2018-10-11 00:14:26+00:00', 'masked_author': 'username_0', 'text': 'Hugo is quite outdated in the [Fedora package repository](https://apps.fedoraproject.org/packages/hugo). Is there anybody who might be willing to contact the maintainer and take over responsibility?', 'title': 'Fedora package outdated.', 'type': 'issue'}
+ {'action': 'created', 'author': 'zwbetz-gh', 'comment_id': 433458494.0, 'datetime': '2018-10-26 16:03:08+00:00', 'masked_author': 'username_1', 'text': ""@username_0 While this doesn't address your original question, since you want to use a package manager to install/manage hugo, is using snap an option for you? Snap also includes latest hugo dev versions. \r\n\r\nhttps://snapcraft.io/hugo"", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'c-edw', 'comment_id': 433495812.0, 'datetime': '2018-10-26 18:07:51+00:00', 'masked_author': 'username_0', 'text': ""Personally I don't use Snaps, but thank you for making me aware that it's available. I have installed Hugo manually for now. Though, the Hugo installation is so simple that maybe it's not worth chasing after package maintainers. An autoupdate or update notice functionality in Hugo would make it acceptable to not provide distribution packages, in my opinion."", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'bep', 'comment_id': 433550159.0, 'datetime': '2018-10-26 21:36:43+00:00', 'masked_author': 'username_2', 'text': 'I think, given the manpower we got, I will close this. Opening up a thread on https://discourse.gohugo.io/ may be a better road to take.', 'title': None, 'type': 'comment'}
+ {'action': 'closed', 'author': 'bep', 'comment_id': None, 'datetime': '2018-10-26 21:36:44+00:00', 'masked_author': 'username_2', 'text': '', 'title': None, 'type': 'issue'}]","<issue_start><issue_comment>Title: Fedora package outdated.
+username_0: Hugo is quite outdated in the [Fedora package repository](https://apps.fedoraproject.org/packages/hugo). Is there anybody who might be willing to contact the maintainer and take over responsibility?
+<issue_comment>username_1: @username_0 While this doesn't address your original question, since you want to use a package manager to install/manage hugo, is using snap an option for you? Snap also includes latest hugo dev versions. 
+
+https://snapcraft.io/hugo
+<issue_comment>username_0: Personally I don't use Snaps, but thank you for making me aware that it's available. I have installed Hugo manually for now. Though, the Hugo installation is so simple that maybe it's not worth chasing after package maintainers. An autoupdate or update notice functionality in Hugo would make it acceptable to not provide distribution packages, in my opinion.
+<issue_comment>username_2: I think, given the manpower we got, I will close this. Opening up a thread on https://discourse.gohugo.io/ may be a better road to take.<issue_closed>"
+asyncapi/website,1018499156,408,,"[{'action': 'opened', 'author': 'boyney123', 'comment_id': None, 'datetime': '2021-10-06 14:53:48+00:00', 'masked_author': 'username_0', 'text': ""#### Reason/Context\r\nPlease try answering a few of those questions\r\n\r\nI'm in the process of going through and learning as much as I can about AsyncAPI, through examples, spec, etc.\r\n\r\nI just watched this video from @fmvilas https://www.youtube.com/watch?v=g2pqCIhXQ3k&t=2025s about `Zero to AsyncAPI` which was great, it has some good content in there for anyone that wants to learn.\r\n\r\nMaybe we can embed a link to the video on the website somewhere? My suggestion maybe here?\r\n\r\nhttps://www.asyncapi.com/docs/getting-started\r\n\r\nI guess long term maybe we could make a shorter (this is 1.5 hours) version of this talk, and give a 10minute walkthrough of what AsyncAPI is. (I don't mind giving this ago once I learn more and am confident enough to do it).\r\n\r\n### Why\r\n\r\nI think it will just help people that are visual/video learners vs tutorial-based learning."", 'title': 'doc: Adding video to ""Getting Started"" section', 'type': 'issue'}
+ {'action': 'created', 'author': 'alequetzalli', 'comment_id': 983183174.0, 'datetime': '2021-12-01 01:04:51+00:00', 'masked_author': 'username_1', 'text': 'Odyssey is a **React application built with Gatsby and MDX and deployed with Netlify**. These tools were an easy first choice for our team, because several other Apollo web properties (the documentation, blog, and developer hub) already use them. We know how they work, and we know they work well! .... To power our interactive coding challenges, we use\xa0Netlify Functions. The reader’s code is passed to a serverless function that executes tests against the code in a Node.js environment, then returns the results to the browser.\r\n\r\n\r\nSource:\r\nhttps://www.apollographql.com/blog/platform/how-we-built-odyssey/', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'derberg', 'comment_id': 983579623.0, 'datetime': '2021-12-01 12:09:02+00:00', 'masked_author': 'username_2', 'text': ""well, I know you talk about it at conferences, that you organize Docs work this way, but this is not part of the contribution guide, and we should not disqualify an issue just because somebody did not watch your presentation 😄 (reminding again, this is old issue). The way you organize work on docs is pretty unusual here in AsyncAPI so it should not affect contributors too much, it should rather help them contribute, and therefore I think it is your responsibility as a maintainer to triage issues from this repo and add/remove them from the board, or drive discussion.\r\n\r\nWe should be more liberal as maintainers. The current contribution guide describes `ideal` (this word is used) workflow. It is not always required to open an issue if the change is super small. It is ok to hold a discussion on the PR level too, sometimes it is even better, for example in the `spec` repo we encourage PR over the issue. We describe the `ideal` world in the Contributor guide to defend contributors, so in case they want to make a great PR with some functionality, that required lots of work but was not aligned initially - thus lots of time was wasted, and we suggest an issue first.\r\n\r\n---\r\n\r\ntl;dr we need more flexibility IMHO, especially when change is driven by feedback and can't be super picky on every single rule 😄"", 'title': None, 'type': 'comment'}]","<issue_start><issue_comment>Title: doc: Adding video to ""Getting Started"" section
+username_0: #### Reason/Context
+Please try answering a few of those questions
+
+I'm in the process of going through and learning as much as I can about AsyncAPI, through examples, spec, etc.
+
+I just watched this video from @fmvilas https://www.youtube.com/watch?v=g2pqCIhXQ3k&t=2025s about `Zero to AsyncAPI` which was great, it has some good content in there for anyone that wants to learn.
+
+Maybe we can embed a link to the video on the website somewhere? My suggestion maybe here?
+
+https://www.asyncapi.com/docs/getting-started
+
+I guess long term maybe we could make a shorter (this is 1.5 hours) version of this talk, and give a 10minute walkthrough of what AsyncAPI is. (I don't mind giving this ago once I learn more and am confident enough to do it).
+
+### Why
+
+I think it will just help people that are visual/video learners vs tutorial-based learning.
+<issue_comment>username_1: Odyssey is a **React application built with Gatsby and MDX and deployed with Netlify**. These tools were an easy first choice for our team, because several other Apollo web properties (the documentation, blog, and developer hub) already use them. We know how they work, and we know they work well! .... To power our interactive coding challenges, we use Netlify Functions. The reader’s code is passed to a serverless function that executes tests against the code in a Node.js environment, then returns the results to the browser.
+
+
+Source:
+https://www.apollographql.com/blog/platform/how-we-built-odyssey/
+<issue_comment>username_2: well, I know you talk about it at conferences, that you organize Docs work this way, but this is not part of the contribution guide, and we should not disqualify an issue just because somebody did not watch your presentation 😄 (reminding again, this is old issue). The way you organize work on docs is pretty unusual here in AsyncAPI so it should not affect contributors too much, it should rather help them contribute, and therefore I think it is your responsibility as a maintainer to triage issues from this repo and add/remove them from the board, or drive discussion.
+
+We should be more liberal as maintainers. The current contribution guide describes `ideal` (this word is used) workflow. It is not always required to open an issue if the change is super small. It is ok to hold a discussion on the PR level too, sometimes it is even better, for example in the `spec` repo we encourage PR over the issue. We describe the `ideal` world in the Contributor guide to defend contributors, so in case they want to make a great PR with some functionality, that required lots of work but was not aligned initially - thus lots of time was wasted, and we suggest an issue first.
+
+---
+
+tl;dr we need more flexibility IMHO, especially when change is driven by feedback and can't be super picky on every single rule 😄"

@@ -1,0 +1,734 @@
+apache/apisix-website,997643038,602,"{'number': 602.0, 'repo': 'apisix-website', 'user_login': 'apache'}","[{'action': 'opened', 'author': 'bzp2010', 'comment_id': None, 'datetime': '2021-09-16T00:52:59Z', 'masked_author': 'username_0', 'text': 'Changes:\r\n\r\nAdd PR preview to the repo. Powered by Vercel.\r\n\r\nScreenshots of the change:\r\n\r\n![image](https://user-images.githubusercontent.com/8078418/133531917-0f7daf30-575b-4aeb-abc2-a2315a760394.png)\r\n\r\nAt same time, you can see the GitHub Workflow running example [**link here**](https://github.com/username_0/apisix-website/tree/feat-vercel-preview)', 'title': 'feat: add vercel preview', 'type': 'issue'}
+ {'action': 'created', 'author': 'bzp2010', 'comment_id': 920495599.0, 'datetime': '2021-09-16 01:04:14+00:00', 'masked_author': 'username_0', 'text': '', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'juzhiyuan', 'comment_id': 922493030.0, 'datetime': '2021-09-19 15:36:24+00:00', 'masked_author': 'username_1', 'text': '@username_0 Hi, may I know if this gets done?', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'bzp2010', 'comment_id': 922562636.0, 'datetime': '2021-09-20 00:16:57+00:00', 'masked_author': 'username_0', 'text': '@username_1, This PR is currently waiting for infra to add secret environment variables.', 'title': None, 'type': 'comment'}]","<issue_start><issue_comment>Title: feat: add vercel preview
+username_0: Changes:
+
+Add PR preview to the repo. Powered by Vercel.
+
+Screenshots of the change:
+
+![image](https://user-images.githubusercontent.com/8078418/133531917-0f7daf30-575b-4aeb-abc2-a2315a760394.png)
+
+At same time, you can see the GitHub Workflow running example [**link here**](https://github.com/username_0/apisix-website/tree/feat-vercel-preview)
+<issue_comment>username_1: @username_0 Hi, may I know if this gets done?
+<issue_comment>username_0: @username_1, This PR is currently waiting for infra to add secret environment variables."
+newrelic/docs-website,1067573337,5084,,"[{'action': 'opened', 'author': 'dralph3344', 'comment_id': None, 'datetime': '2021-11-30 19:00:40+00:00', 'masked_author': 'username_0', 'text': '## How can we make our docs better?\r\n\r\n* can we please optimize the search so that ""attribute dictionary"" and ""data dictionary"" search strings provide this page as the top result?\r\n\r\n\r\n\r\n### Doc information (don\'t delete this section)\r\n\r\n* https://docs.newrelic.com/attribute-dictionary/\r\n* **OS**: Unknown\r\n* **Browser**: Unknown\r\n* **Device**: Unknown', 'title': 'Optimize search for the data dictionary page', 'type': 'issue'}
+ {'action': 'created', 'author': 'rhetoric101', 'comment_id': 983175867.0, 'datetime': '2021-12-01 00:53:54+00:00', 'masked_author': 'username_1', 'text': '@username_0, it turns out that we had turned off ""attribute dictionary"" and ""data dictionary"" from our search because it loads all the attributes behind the scenes. Our developer enablement team is considering other options. This might not be a quick fix after all.', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'dralph3344', 'comment_id': 983724482.0, 'datetime': '2021-12-01 14:59:30+00:00', 'masked_author': 'username_0', 'text': 'Ah, I see. Thanks for the follow up on this! \r\n\r\nI recommend it to NR power users as it\'s a great resource as one digs into data. \r\n\r\nIn that case, I\'ll start describing it as a ""hidden gem"" in the docs, and just point people to the URL directly.', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'roadlittledawn', 'comment_id': 984956669.0, 'datetime': '2021-12-02 19:59:34+00:00', 'masked_author': 'username_2', 'text': ""[note to selves] \r\nour global header search filters out the data dictionary's `document_type` (`views_page_content`) deliberately because by default that page shows all attributes in all events, which for any given search query, could match and add noise to search results.\r\n\r\nneed to noodle more on this to see how we might be able to surface this result for very specific search terms only (e.g., `attribute dictionary`, `data dictionary`, etc)"", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'roadlittledawn', 'comment_id': 989147145.0, 'datetime': '2021-12-08 19:53:59+00:00', 'masked_author': 'username_2', 'text': ""[note to selves]\r\nwhen i query swiftype with recent top search terms, data dictionary shows up in some, but didn't actually seem too too noisy. perhaps we could remove that filter for the data dictionary's `document_type` and see how it goes"", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'dralph3344', 'comment_id': 989261326.0, 'datetime': '2021-12-08 22:00:14+00:00', 'masked_author': 'username_0', 'text': ""It would be really great to get this as an easier resource for folks. \r\n\r\nInstead of loading all event types/attributes, could we define just one event type? Maybe we default to Transaction event type and just limit to that one set of attributes. May not be optimal performance, but it's better than all attributes/event types.  And would still have lots of utility for users working to understand/work with their data."", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'laurenchow', 'comment_id': 989820400.0, 'datetime': '2021-12-09 12:46:59+00:00', 'masked_author': 'username_3', 'text': ""Seconding sentiments on usefulness, any customers we've shared this with find it an extraordinary helpful quick reference for navigating NRDB and better understanding data, so would be great to surface this in search/UI to customers (vs. rely on communicating with each customer about the existence of a resource, which has some scale limitations, grin)"", 'title': None, 'type': 'comment'}]","<issue_start><issue_comment>Title: Optimize search for the data dictionary page
+username_0: ## How can we make our docs better?
+
+* can we please optimize the search so that ""attribute dictionary"" and ""data dictionary"" search strings provide this page as the top result?
+
+
+
+### Doc information (don't delete this section)
+
+* https://docs.newrelic.com/attribute-dictionary/
+* **OS**: Unknown
+* **Browser**: Unknown
+* **Device**: Unknown
+<issue_comment>username_1: @username_0, it turns out that we had turned off ""attribute dictionary"" and ""data dictionary"" from our search because it loads all the attributes behind the scenes. Our developer enablement team is considering other options. This might not be a quick fix after all.
+<issue_comment>username_0: Ah, I see. Thanks for the follow up on this! 
+
+I recommend it to NR power users as it's a great resource as one digs into data. 
+
+In that case, I'll start describing it as a ""hidden gem"" in the docs, and just point people to the URL directly.
+<issue_comment>username_2: [note to selves] 
+our global header search filters out the data dictionary's `document_type` (`views_page_content`) deliberately because by default that page shows all attributes in all events, which for any given search query, could match and add noise to search results.
+
+need to noodle more on this to see how we might be able to surface this result for very specific search terms only (e.g., `attribute dictionary`, `data dictionary`, etc)
+<issue_comment>username_2: [note to selves]
+when i query swiftype with recent top search terms, data dictionary shows up in some, but didn't actually seem too too noisy. perhaps we could remove that filter for the data dictionary's `document_type` and see how it goes
+<issue_comment>username_0: It would be really great to get this as an easier resource for folks. 
+
+Instead of loading all event types/attributes, could we define just one event type? Maybe we default to Transaction event type and just limit to that one set of attributes. May not be optimal performance, but it's better than all attributes/event types.  And would still have lots of utility for users working to understand/work with their data.
+<issue_comment>username_3: Seconding sentiments on usefulness, any customers we've shared this with find it an extraordinary helpful quick reference for navigating NRDB and better understanding data, so would be great to surface this in search/UI to customers (vs. rely on communicating with each customer about the existence of a resource, which has some scale limitations, grin)"
+conda-forge/conda-forge.github.io,141684767,47,,"[{'action': 'opened', 'author': 'jakirkham', 'comment_id': None, 'datetime': '2016-03-17 19:30:48+00:00', 'masked_author': 'username_0', 'text': 'The build queue on AppVeyor looks pretty backed up. Given this is all being run under one account, this is not too surprising. There are a number of ways to improve this. One might be to simply increase our bandwidth on AppVeyor (paid account). Though this could solve the problem temporarily, this will likely result in ratcheting into higher and higher bandwidths becoming prohibitively expensive. Another alternative would be to create a separate account for each feedstock. This allows are bandwidth to increase linearly with our feedstocks and thus should remain maintainable even with large numbers. The only question then is how best to set up this sort of behavior.', 'title': 'One AppVeyor account per feedstock', 'type': 'issue'}
+ {'action': 'created', 'author': 'pelson', 'comment_id': 199184576.0, 'datetime': '2016-03-21 09:09:31+00:00', 'masked_author': 'username_1', 'text': 'Have you noticed this getting better since we made some of the AppVeyor queue changes, or is this still a bottleneck do you think?', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'ocefpaf', 'comment_id': 199233624.0, 'datetime': '2016-03-21 11:30:22+00:00', 'masked_author': 'username_2', 'text': 'It is much better, but I guess AppVeyor will always be a bottleneck. (It will get better once we get the bulk of `conda-recipes` converted to feedstocks.)', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'jakirkham', 'comment_id': 199248174.0, 'datetime': '2016-03-21 12:19:20+00:00', 'masked_author': 'username_0', 'text': 'I think it has been getting better, but I agree with @username_2 that this will likely remain a bottleneck. We can (and IMHO should) still try to tackle this in other ways like checking for `skip: True`. Though we should keep this in mind even though it may be tricky.', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'jjhelmus', 'comment_id': 199359635.0, 'datetime': '2016-03-21 16:09:22+00:00', 'masked_author': 'username_3', 'text': 'I think it should be possible to reduce the number of AppVeyor builds from six (one per platform and Python version) to two (one per platform) which may speeds things up a bit, especially for packages where one or more of the builds is skipped.  Rather than setting the Python version specification in the build matrix these could be set sequentially with multiple calls to conda-build-all.', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'pelson', 'comment_id': 199365439.0, 'datetime': '2016-03-21 16:25:20+00:00', 'masked_author': 'username_1', 'text': ""Agreed. We'd be trading off clarity for performance. That *is* reasonable, but I want to be certain we need to do it first - essentially, I think we should keep that up our sleeves if we want to speed things up beyond our current situation."", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'janschulz', 'comment_id': 199389428.0, 'datetime': '2016-03-21 17:28:43+00:00', 'masked_author': 'username_4', 'text': 'I don\'t think the setup for a build is the problem. E.g. looking at this: https://ci.appveyor.com/project/conda-forge/xonsh-feedstock/build/1.0.4\r\n\r\n-> 2.7 wasn\'t build and took 1:15 minute\r\n-> 3.4 was build and took 4 minutes\r\n\r\nTaking the first as an indicator for the ""setup"", you only gain 1:15 per build... So for 6 -> 2 (only different python versions, no numpy versions), you gain 5 minutes... So from 20min down to 15min. Mpl is probably much worse due to much more compilation steps...\r\n\r\nOther ideas/workarounds: \r\n\r\n* register a new appveyor account for every ~20 packages and switch accounts manually while doing the setup (manual, e.g. one commit every 20 packages in the staged-recipes repo, but currently it should still scale) or add 10 accounts in the staged-recipe scripts and assign them randomly to new packages (the first will still suck when x packages are merged at the same time)\r\n* ask numfocus for a grant to pay for more appveyor power\r\n* ask the conda guys if this could use build power from their builders? -> would need a rewrite of the conda-smithy infrastructure \r\n* ask appveyor for a upgrade-grant :-)', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'janschulz', 'comment_id': 199392210.0, 'datetime': '2016-03-21 17:34:01+00:00', 'masked_author': 'username_4', 'text': 'There is also this: https://ci.appveyor.com/project/conda-forge/protobuf-feedstock\r\n\r\nTotal build time: 2 hr 10 min\r\nSum of individual build times: ~12min', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'jakirkham', 'comment_id': 199395553.0, 'datetime': '2016-03-21 17:40:17+00:00', 'masked_author': 'username_0', 'text': ""@matthew-brett, mentioned over at NumPy that some open source projects have succeeded at getting more resources from AppVeyor by simply asking nicely. I don't know if we are in a situation where that would work for us. Though they do provide miniconda as an option with builds so they may be interested in a project that is trying to increase the diversity of packages available in that ecosystem. Then again we are using a **lot** of bandwidth."", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'janschulz', 'comment_id': 199400700.0, 'datetime': '2016-03-21 17:51:08+00:00', 'masked_author': 'username_4', 'text': 'Continuum wants to use the conda-forge packages in their (paid?) offerings, which might not what appveyor wants to pay for... On the other hand: 1200$ sounds cheap for continuum to get a happier conda-forge community :-)', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'jakirkham', 'comment_id': 199414617.0, 'datetime': '2016-03-21 18:27:43+00:00', 'masked_author': 'username_0', 'text': ""Interesting point. I didn't realize that some closed source stuff might appear here too. Will there be private recipe repos for these? Do we have some logic for that?\r\n\r\nWe should certainly consider how we want to increase our bandwidth on AppVeyor. Though there still are a few opportunities to shorten the queue/wait time by skipping builds or fast finishing them. When we make some more of these optimizations, we should reassess to see how bad the queue still is."", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'janschulz', 'comment_id': 199437775.0, 'datetime': '2016-03-21 19:21:40+00:00', 'masked_author': 'username_4', 'text': ""sorry, I didn't mean closed source, but only things like contiuum copying some packages to their channel or using the conda-forge packages as selling argument."", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'msarahan', 'comment_id': 199446235.0, 'datetime': '2016-03-21 19:48:11+00:00', 'masked_author': 'username_5', 'text': ""We've been investigating package verification as a prerequisite for packages being moved/copied from conda-forge to default.  It's a lot more complicated than I anticipated.  Simple hashes don't work, because the hash of archives is sensitive to file modification times, as well as some crazy indeterminism in how files are added.\r\n\r\nWe (Continuum) probably won't immediately go down that road.  Instead, Conda-forge will be the canonical recipe source, and we will build our own package for the default channel.  Conda-forge packages will be mirrored/linked on the community channel.\r\n\r\nHopefully this helps with any time requests from Appveyor.  I will ask other people if Continuum can sponsor some time."", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'janschulz', 'comment_id': 199449950.0, 'datetime': '2016-03-21 20:00:30+00:00', 'masked_author': 'username_4', 'text': 'If you want to go down that road: debian currently does the same with their reproducible builds... https://wiki.debian.org/ReproducibleBuilds', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'msarahan', 'comment_id': 199450386.0, 'datetime': '2016-03-21 20:01:43+00:00', 'masked_author': 'username_5', 'text': ""Yeah, we found that.  We also found that similar stuff doesn't work on Windows or on Mac. =("", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'jakirkham', 'comment_id': 204220758.0, 'datetime': '2016-04-01 02:47:01+00:00', 'masked_author': 'username_0', 'text': 'At some point, would you just be able to take what we have and use it in place of your existing builds? Once we have reproduced the stack, will there be any need for this verification?', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'msarahan', 'comment_id': 204222903.0, 'datetime': '2016-04-01 02:58:01+00:00', 'masked_author': 'username_5', 'text': ""I think it will be more for indemnification guarantees for paying customers.  If we can give them peace of mind in any way, it is valuable, no matter how unnecessary it might seem.\r\n\r\nThis is less about guaranteeing functionality (which I think conda forge handles well anyway with CI) and more about guaranteeing the absence of any malicious alterations.  Not to say that people shouldn't also trust conda forge, just that they trust businesses that they can directly hold accountable more."", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'jakirkham', 'comment_id': 204227339.0, 'datetime': '2016-04-01 03:14:37+00:00', 'masked_author': 'username_0', 'text': 'Sure, that makes sense. Corporate clients are within their rights in asking for verification.', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'ocefpaf', 'comment_id': 204338021.0, 'datetime': '2016-04-01 10:10:36+00:00', 'masked_author': 'username_2', 'text': 'I am terrible with git-hooks but if someone can come up with one that checks the `meta.yaml` for `skip:  # [Win]` and automatically adds the `[skip appveyor]` then we would have a tool to to users to ""encourage"" them :wink:', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'ocefpaf', 'comment_id': 204341795.0, 'datetime': '2016-04-01 10:27:44+00:00', 'masked_author': 'username_2', 'text': 'I am following the queue very closely this week (cancelling staged-recipes builds that are skipping Windows, re-starting failing jobs, etc) I can say that 1 (staged-recipes) is the main problem.', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'pelson', 'comment_id': 208741770.0, 'datetime': '2016-04-12 07:07:05+00:00', 'masked_author': 'username_1', 'text': ""Thanks to the AppVeyor upgrade, I think we can close this for now. I'm not against revisiting if/when the need arises. 👍 \r\nhttps://github.com/conda-forge/staged-recipes/issues/244"", 'title': None, 'type': 'comment'}
+ {'action': 'closed', 'author': 'pelson', 'comment_id': None, 'datetime': '2016-04-12 07:07:06+00:00', 'masked_author': 'username_1', 'text': '', 'title': None, 'type': 'issue'}
+ {'action': 'created', 'author': 'SylvainCorlay', 'comment_id': 256479354.0, 'datetime': '2016-10-26 21:15:50+00:00', 'masked_author': 'username_6', 'text': 'The appveyor queue has been quite long lately. 8-10 hours to get a feedstock update through. Are you still considering a numfocus-supported appveyor account with more vms?', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'SylvainCorlay', 'comment_id': 256488303.0, 'datetime': '2016-10-26 21:52:20+00:00', 'masked_author': 'username_6', 'text': 'Giving the priority to `staged-recipes` over feedstocks causes feedstocks to never get built, because new PRs keeps coming on staged recipes.', 'title': None, 'type': 'comment'}]","<issue_start><issue_comment>Title: One AppVeyor account per feedstock
+username_0: The build queue on AppVeyor looks pretty backed up. Given this is all being run under one account, this is not too surprising. There are a number of ways to improve this. One might be to simply increase our bandwidth on AppVeyor (paid account). Though this could solve the problem temporarily, this will likely result in ratcheting into higher and higher bandwidths becoming prohibitively expensive. Another alternative would be to create a separate account for each feedstock. This allows are bandwidth to increase linearly with our feedstocks and thus should remain maintainable even with large numbers. The only question then is how best to set up this sort of behavior.
+<issue_comment>username_1: Have you noticed this getting better since we made some of the AppVeyor queue changes, or is this still a bottleneck do you think?
+<issue_comment>username_2: It is much better, but I guess AppVeyor will always be a bottleneck. (It will get better once we get the bulk of `conda-recipes` converted to feedstocks.)
+<issue_comment>username_0: I think it has been getting better, but I agree with @username_2 that this will likely remain a bottleneck. We can (and IMHO should) still try to tackle this in other ways like checking for `skip: True`. Though we should keep this in mind even though it may be tricky.
+<issue_comment>username_3: I think it should be possible to reduce the number of AppVeyor builds from six (one per platform and Python version) to two (one per platform) which may speeds things up a bit, especially for packages where one or more of the builds is skipped.  Rather than setting the Python version specification in the build matrix these could be set sequentially with multiple calls to conda-build-all.
+<issue_comment>username_1: Agreed. We'd be trading off clarity for performance. That *is* reasonable, but I want to be certain we need to do it first - essentially, I think we should keep that up our sleeves if we want to speed things up beyond our current situation.
+<issue_comment>username_4: I don't think the setup for a build is the problem. E.g. looking at this: https://ci.appveyor.com/project/conda-forge/xonsh-feedstock/build/1.0.4
+
+-> 2.7 wasn't build and took 1:15 minute
+-> 3.4 was build and took 4 minutes
+
+Taking the first as an indicator for the ""setup"", you only gain 1:15 per build... So for 6 -> 2 (only different python versions, no numpy versions), you gain 5 minutes... So from 20min down to 15min. Mpl is probably much worse due to much more compilation steps...
+
+Other ideas/workarounds: 
+
+* register a new appveyor account for every ~20 packages and switch accounts manually while doing the setup (manual, e.g. one commit every 20 packages in the staged-recipes repo, but currently it should still scale) or add 10 accounts in the staged-recipe scripts and assign them randomly to new packages (the first will still suck when x packages are merged at the same time)
+* ask numfocus for a grant to pay for more appveyor power
+* ask the conda guys if this could use build power from their builders? -> would need a rewrite of the conda-smithy infrastructure 
+* ask appveyor for a upgrade-grant :-)
+<issue_comment>username_4: There is also this: https://ci.appveyor.com/project/conda-forge/protobuf-feedstock
+
+Total build time: 2 hr 10 min
+Sum of individual build times: ~12min
+<issue_comment>username_0: @matthew-brett, mentioned over at NumPy that some open source projects have succeeded at getting more resources from AppVeyor by simply asking nicely. I don't know if we are in a situation where that would work for us. Though they do provide miniconda as an option with builds so they may be interested in a project that is trying to increase the diversity of packages available in that ecosystem. Then again we are using a **lot** of bandwidth.
+<issue_comment>username_4: Continuum wants to use the conda-forge packages in their (paid?) offerings, which might not what appveyor wants to pay for... On the other hand: 1200$ sounds cheap for continuum to get a happier conda-forge community :-)
+<issue_comment>username_0: Interesting point. I didn't realize that some closed source stuff might appear here too. Will there be private recipe repos for these? Do we have some logic for that?
+
+We should certainly consider how we want to increase our bandwidth on AppVeyor. Though there still are a few opportunities to shorten the queue/wait time by skipping builds or fast finishing them. When we make some more of these optimizations, we should reassess to see how bad the queue still is.
+<issue_comment>username_4: sorry, I didn't mean closed source, but only things like contiuum copying some packages to their channel or using the conda-forge packages as selling argument.
+<issue_comment>username_5: We've been investigating package verification as a prerequisite for packages being moved/copied from conda-forge to default.  It's a lot more complicated than I anticipated.  Simple hashes don't work, because the hash of archives is sensitive to file modification times, as well as some crazy indeterminism in how files are added.
+
+We (Continuum) probably won't immediately go down that road.  Instead, Conda-forge will be the canonical recipe source, and we will build our own package for the default channel.  Conda-forge packages will be mirrored/linked on the community channel.
+
+Hopefully this helps with any time requests from Appveyor.  I will ask other people if Continuum can sponsor some time.
+<issue_comment>username_4: If you want to go down that road: debian currently does the same with their reproducible builds... https://wiki.debian.org/ReproducibleBuilds
+<issue_comment>username_5: Yeah, we found that.  We also found that similar stuff doesn't work on Windows or on Mac. =(
+<issue_comment>username_0: At some point, would you just be able to take what we have and use it in place of your existing builds? Once we have reproduced the stack, will there be any need for this verification?
+<issue_comment>username_5: I think it will be more for indemnification guarantees for paying customers.  If we can give them peace of mind in any way, it is valuable, no matter how unnecessary it might seem.
+
+This is less about guaranteeing functionality (which I think conda forge handles well anyway with CI) and more about guaranteeing the absence of any malicious alterations.  Not to say that people shouldn't also trust conda forge, just that they trust businesses that they can directly hold accountable more.
+<issue_comment>username_0: Sure, that makes sense. Corporate clients are within their rights in asking for verification.
+<issue_comment>username_2: I am terrible with git-hooks but if someone can come up with one that checks the `meta.yaml` for `skip:  # [Win]` and automatically adds the `[skip appveyor]` then we would have a tool to to users to ""encourage"" them :wink:
+<issue_comment>username_2: I am following the queue very closely this week (cancelling staged-recipes builds that are skipping Windows, re-starting failing jobs, etc) I can say that 1 (staged-recipes) is the main problem.
+<issue_comment>username_1: Thanks to the AppVeyor upgrade, I think we can close this for now. I'm not against revisiting if/when the need arises. 👍 
+https://github.com/conda-forge/staged-recipes/issues/244<issue_closed>
+<issue_comment>username_6: The appveyor queue has been quite long lately. 8-10 hours to get a feedstock update through. Are you still considering a numfocus-supported appveyor account with more vms?
+<issue_comment>username_6: Giving the priority to `staged-recipes` over feedstocks causes feedstocks to never get built, because new PRs keeps coming on staged recipes."
+dart-lang/site-www,489232652,1866,"{'number': 1866.0, 'repo': 'site-www', 'user_login': 'dart-lang'}","[{'action': 'opened', 'author': 'fioan89', 'comment_id': None, 'datetime': '2019-09-04T15:26:35Z', 'masked_author': 'username_0', 'text': 'To include proxy configuration steps for\r\nWindows PowerShell.\r\n\r\nChange-Id: Ie9afbe574b54789dc18afea1a5bf110a977f4e25', 'title': 'Update pub get troubleshoot documentation', 'type': 'issue'}
+ {'action': 'created', 'author': 'kwalrath', 'comment_id': 528012117.0, 'datetime': '2019-09-04 17:52:40+00:00', 'masked_author': 'username_1', 'text': 'Thanks, @username_0!\r\n\r\n@username_2 could you please review this, since you know more about Windows than I do?', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'legalcodes', 'comment_id': 528025333.0, 'datetime': '2019-09-04 18:24:52+00:00', 'masked_author': 'username_2', 'text': ""I've created an issue for the terminal command code fencing we should be using:\r\nhttps://github.com/dart-lang/site-www/issues/1868"", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'fioan89', 'comment_id': 528032719.0, 'datetime': '2019-09-04 18:43:35+00:00', 'masked_author': 'username_0', 'text': 'Thx. Should I update all command fencing in the troubleshoot section in this PR? Or is it acceptable as is?', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'legalcodes', 'comment_id': 528034381.0, 'datetime': '2019-09-04 18:48:14+00:00', 'masked_author': 'username_2', 'text': 'We should handle command fencing across dart.dev in a separate PR. Thanks again!', 'title': None, 'type': 'comment'}]","<issue_start><issue_comment>Title: Update pub get troubleshoot documentation
+username_0: To include proxy configuration steps for
+Windows PowerShell.
+
+Change-Id: Ie9afbe574b54789dc18afea1a5bf110a977f4e25
+<issue_comment>username_1: Thanks, @username_0!
+
+@username_2 could you please review this, since you know more about Windows than I do?
+<issue_comment>username_2: I've created an issue for the terminal command code fencing we should be using:
+https://github.com/dart-lang/site-www/issues/1868
+<issue_comment>username_0: Thx. Should I update all command fencing in the troubleshoot section in this PR? Or is it acceptable as is?
+<issue_comment>username_2: We should handle command fencing across dart.dev in a separate PR. Thanks again!"
+JuliaLang/www.julialang.org,594244324,709,,"[{'action': 'opened', 'author': 'AsForMe', 'comment_id': None, 'datetime': '2020-04-05 04:13:34+00:00', 'masked_author': 'username_0', 'text': 'Operations like  (-2)^(1/3), (-1)^(-4/7) should obtain a real answer, however, in Julia even the latest version, it will say \r\n```\r\nExponentiation yielding a complex result requires a complex argument.\r\n\r\nReplace x^y with (x+0im)^y, Complex(x)^y, or similar.\r\n\r\n```\r\nIf we try Complex(-2)^(1/3) for example, it will return a imaginary number.  Yet it should recieve a real answer without using function Complex.\r\nFor example, if we calculate (-8)^(2/3), we should get 4, yet we calculate in Julia.\r\n```\r\njulia> (-8)^(2/3)\r\n\r\nERROR: DomainError with -8.0:\r\n\r\nExponentiation yielding a complex result requires a complex argument.\r\n\r\nReplace x^y with (x+0im)^y, Complex(x)^y, or similar.\r\n\r\nStacktrace:\r\n\r\n [1] throw_exp_domainerror(::Float64) at .\\math.jl:36\r\n\r\n [2] ^ at .\\math.jl:849 [inlined]\r\n\r\n [3] ^(::Int64, ::Float64) at .\\promotion.jl:343\r\n\r\n [4] top-level scope at REPL[10]:1\r\n```\r\nIf we calculate (-27)^(5/3), we should get -243, yet we calculate in Julia.\r\n\r\n```\r\njulia> (-27)^(5/3)\r\n\r\nERROR: DomainError with -27.0:\r\n\r\nExponentiation yielding a complex result requires a complex argument.\r\n\r\nReplace x^y with (x+0im)^y, Complex(x)^y, or similar.\r\n\r\nStacktrace:\r\n\r\n [1] throw_exp_domainerror(::Float64) at .\\math.jl:36\r\n\r\n [2] ^ at .\\math.jl:849 [inlined]\r\n\r\n [3] ^(::Int64, ::Float64) at .\\promotion.jl:343\r\n\r\n [4] top-level scope at REPL[30]:1\r\n\r\n```\r\n\r\nIt reports failure, I guess this issue might be easily fixed in the source code because it seems not a universal problem for other programming languages, and it should be fixed.\r\nMaybe the core to fix this problem is to try testing the power and get proper sign bit.', 'title': 'Failure of extraction of root towards negative number where power is like 1/3,5/7 without using complex numbers.', 'type': 'issue'}
+ {'action': 'created', 'author': 'tlienart', 'comment_id': 609374767.0, 'datetime': '2020-04-05 07:49:05+00:00', 'masked_author': 'username_1', 'text': 'I would suggest you redirect your questions and comments about Julia to the main forum discourse.julialang.org ; you might also want to look for similar questions that were asked in the past and answered in details.\n\nThe repo here is only about the website.', 'title': None, 'type': 'comment'}
+ {'action': 'closed', 'author': 'tlienart', 'comment_id': None, 'datetime': '2020-04-05 07:49:13+00:00', 'masked_author': 'username_1', 'text': '', 'title': None, 'type': 'issue'}
+ {'action': 'created', 'author': 'martinholters', 'comment_id': 625707317.0, 'datetime': '2020-05-08 08:35:57+00:00', 'masked_author': 'username_2', 'text': 'It might be reasonable to allow this for `Rational` exponent, e.g. `(-2)^(1//3)`. Not really thought this through, but if someone wants to explore this, a starting point could be\r\n```\r\nfunction ^(x::Real, y::Rational)\r\n    if x >= 0 || iseven(y.den)\r\n        return x^(y.num/y.den)\r\n    else\r\n        return -(-x)^(y.num/y.den)\r\n    end\r\nend\r\n```', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'tlienart', 'comment_id': 625708386.0, 'datetime': '2020-05-08 08:38:41+00:00', 'masked_author': 'username_1', 'text': ""@username_2 do you want to suggest this on Discourse? the issue is that here your suggestion may get ignored as it's the repo for the website"", 'title': None, 'type': 'comment'}]","<issue_start><issue_comment>Title: Failure of extraction of root towards negative number where power is like 1/3,5/7 without using complex numbers.
+username_0: Operations like  (-2)^(1/3), (-1)^(-4/7) should obtain a real answer, however, in Julia even the latest version, it will say 
+```
+Exponentiation yielding a complex result requires a complex argument.
+
+Replace x^y with (x+0im)^y, Complex(x)^y, or similar.
+
+```
+If we try Complex(-2)^(1/3) for example, it will return a imaginary number.  Yet it should recieve a real answer without using function Complex.
+For example, if we calculate (-8)^(2/3), we should get 4, yet we calculate in Julia.
+```
+julia> (-8)^(2/3)
+
+ERROR: DomainError with -8.0:
+
+Exponentiation yielding a complex result requires a complex argument.
+
+Replace x^y with (x+0im)^y, Complex(x)^y, or similar.
+
+Stacktrace:
+
+ [1] throw_exp_domainerror(::Float64) at .\math.jl:36
+
+ [2] ^ at .\math.jl:849 [inlined]
+
+ [3] ^(::Int64, ::Float64) at .\promotion.jl:343
+
+ [4] top-level scope at REPL[10]:1
+```
+If we calculate (-27)^(5/3), we should get -243, yet we calculate in Julia.
+
+```
+julia> (-27)^(5/3)
+
+ERROR: DomainError with -27.0:
+
+Exponentiation yielding a complex result requires a complex argument.
+
+Replace x^y with (x+0im)^y, Complex(x)^y, or similar.
+
+Stacktrace:
+
+ [1] throw_exp_domainerror(::Float64) at .\math.jl:36
+
+ [2] ^ at .\math.jl:849 [inlined]
+
+ [3] ^(::Int64, ::Float64) at .\promotion.jl:343
+
+ [4] top-level scope at REPL[30]:1
+
+```
+
+It reports failure, I guess this issue might be easily fixed in the source code because it seems not a universal problem for other programming languages, and it should be fixed.
+Maybe the core to fix this problem is to try testing the power and get proper sign bit.
+<issue_comment>username_1: I would suggest you redirect your questions and comments about Julia to the main forum discourse.julialang.org ; you might also want to look for similar questions that were asked in the past and answered in details.
+
+The repo here is only about the website.<issue_closed>
+<issue_comment>username_2: It might be reasonable to allow this for `Rational` exponent, e.g. `(-2)^(1//3)`. Not really thought this through, but if someone wants to explore this, a starting point could be
+```
+function ^(x::Real, y::Rational)
+    if x >= 0 || iseven(y.den)
+        return x^(y.num/y.den)
+    else
+        return -(-x)^(y.num/y.den)
+    end
+end
+```
+<issue_comment>username_1: @username_2 do you want to suggest this on Discourse? the issue is that here your suggestion may get ignored as it's the repo for the website"
+ethereum/ethereum-org-website,800641762,2377,"{'number': 2377.0, 'repo': 'ethereum-org-website', 'user_login': 'ethereum'}","[{'action': 'opened', 'author': 'adamdry', 'comment_id': None, 'datetime': '2021-02-03T19:39:26Z', 'masked_author': 'username_0', 'text': ""<!--- Provide a general summary of your changes in the Title above -->\r\n\r\n## Description\r\n\r\n<!--- Describe your changes in detail -->\r\nChanged:\r\n`As a dapp developer, you don't need to know much about the EVM other than it exists and that reliably powers all applications on Ethereum without downtime.`\r\n\r\nTo:\r\n`As a dapp developer, you don't need to know much about the EVM other than it exists and that it reliably powers all applications on Ethereum without downtime.`\r\n\r\n## Related Issue\r\n\r\n<!--- This project accepts pull requests related to open issues -->\r\n<!--- If suggesting a new feature or change, please discuss it in an issue first -->\r\n<!--- If fixing a bug, there should be an issue describing it with steps to reproduce -->\r\n<!--- Please link to the issue here: -->"", 'title': 'Update index.md - added the word ""it"" to fix the typo.', 'type': 'issue'}
+ {'action': 'created', 'author': 'jley81', 'comment_id': 772806702.0, 'datetime': '2021-02-03 20:38:17+00:00', 'masked_author': 'username_1', 'text': 'Awesome thank you\n--', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'samajammin', 'comment_id': 773642859.0, 'datetime': '2021-02-04 22:23:55+00:00', 'masked_author': 'username_2', 'text': '@all-contributors please add @username_0 for bug reports & content.', 'title': None, 'type': 'comment'}]","<issue_start><issue_comment>Title: Update index.md - added the word ""it"" to fix the typo.
+username_0: <!--- Provide a general summary of your changes in the Title above -->
+
+## Description
+
+<!--- Describe your changes in detail -->
+Changed:
+`As a dapp developer, you don't need to know much about the EVM other than it exists and that reliably powers all applications on Ethereum without downtime.`
+
+To:
+`As a dapp developer, you don't need to know much about the EVM other than it exists and that it reliably powers all applications on Ethereum without downtime.`
+
+## Related Issue
+
+<!--- This project accepts pull requests related to open issues -->
+<!--- If suggesting a new feature or change, please discuss it in an issue first -->
+<!--- If fixing a bug, there should be an issue describing it with steps to reproduce -->
+<!--- Please link to the issue here: -->
+<issue_comment>username_1: Awesome thank you
+--
+<issue_comment>username_2: @all-contributors please add @username_0 for bug reports & content."
+ballerina-platform/ballerina-dev-website,742312514,1504,,"[{'action': 'opened', 'author': 'RokubungiGendo', 'comment_id': None, 'datetime': '2020-11-13 09:41:21+00:00', 'masked_author': 'username_0', 'text': '**Description:**\r\nUnable to read env variables set in configuration file\r\n\r\n**Suggested Labels:**\r\n<!-- Optional comma separated list of suggested labels. Non committers can’t assign labels to issues, so this will help issue creators who are not a committer to suggest possible labels-->\r\n\r\n**Suggested Assignees:**\r\n<!--Optional comma separated list of suggested team members who should attend the issue. Non committers can’t assign issues to assignees, so this will help issue creators who are not a committer to suggest possible assignees-->\r\n\r\n**Affected Product Version:**\r\n1.2.9\r\n\r\n**OS, Browser, other environment details and versions:**    \r\nWindows 10 Pro 20H2 build 19042.630 - PowerShell 5.1.19041.610 - Ballerina 1.2.9\r\n**Steps to reproduce:**\r\n**src file**\r\nimport ballerina/io;\r\nimport ballerina/config;\r\n\r\npublic function main() {\r\n    string confenv  = config:getAsString(""testenv.envvar"");\r\n    string confval  = config:getAsString(""testenv.var"");\r\n    io:println(""Configuration variable: ""+ confval);\r\n    io:println(""Configuration variable from env: ""+ confenv);\r\n}\r\n\r\n**config file**\r\n[testenv]\r\nenvvar=""@env{TEST_ENV}""\r\nvar=""TESTVAR""\r\n\r\n**set env variable in PS**\r\n$env:TEST_ENV=""foo""\r\n\r\n**run ballerina**\r\nballerina run testenv.bal\r\n\r\n**Result**\r\nCompiling source\r\n        testenv.bal\r\nRunning executables\r\n\r\nConfiguration variable: TESTVAR\r\nConfiguration variable from env: @env{TEST_ENV}\r\n\r\n\r\n**Related Issues:**\r\n<!-- Any related issues such as sub tasks, issues reported in other repositories (e.g component repositories), similar problems, etc. -->', 'title': 'Unable to read env variables set in config file', 'type': 'issue'}
+ {'action': 'created', 'author': 'RokubungiGendo', 'comment_id': 726662237.0, 'datetime': '2020-11-13 09:44:51+00:00', 'masked_author': 'username_0', 'text': 'sorry i posted in the wrong project', 'title': None, 'type': 'comment'}
+ {'action': 'closed', 'author': 'RokubungiGendo', 'comment_id': None, 'datetime': '2020-11-13 09:45:05+00:00', 'masked_author': 'username_0', 'text': '', 'title': None, 'type': 'issue'}]","<issue_start><issue_comment>Title: Unable to read env variables set in config file
+username_0: **Description:**
+Unable to read env variables set in configuration file
+
+**Suggested Labels:**
+<!-- Optional comma separated list of suggested labels. Non committers can’t assign labels to issues, so this will help issue creators who are not a committer to suggest possible labels-->
+
+**Suggested Assignees:**
+<!--Optional comma separated list of suggested team members who should attend the issue. Non committers can’t assign issues to assignees, so this will help issue creators who are not a committer to suggest possible assignees-->
+
+**Affected Product Version:**
+1.2.9
+
+**OS, Browser, other environment details and versions:**    
+Windows 10 Pro 20H2 build 19042.630 - PowerShell 5.1.19041.610 - Ballerina 1.2.9
+**Steps to reproduce:**
+**src file**
+import ballerina/io;
+import ballerina/config;
+
+public function main() {
+    string confenv  = config:getAsString(""testenv.envvar"");
+    string confval  = config:getAsString(""testenv.var"");
+    io:println(""Configuration variable: ""+ confval);
+    io:println(""Configuration variable from env: ""+ confenv);
+}
+
+**config file**
+[testenv]
+envvar=""@env{TEST_ENV}""
+var=""TESTVAR""
+
+**set env variable in PS**
+$env:TEST_ENV=""foo""
+
+**run ballerina**
+ballerina run testenv.bal
+
+**Result**
+Compiling source
+        testenv.bal
+Running executables
+
+Configuration variable: TESTVAR
+Configuration variable from env: @env{TEST_ENV}
+
+
+**Related Issues:**
+<!-- Any related issues such as sub tasks, issues reported in other repositories (e.g component repositories), similar problems, etc. -->
+<issue_comment>username_0: sorry i posted in the wrong project<issue_closed>"
+ethereum/ethereum-org-website,1178738314,5744,"{'number': 5744.0, 'repo': 'ethereum-org-website', 'user_login': 'ethereum'}","[{'action': 'opened', 'author': 'skylarweaver', 'comment_id': None, 'datetime': '2022-03-23T22:32:20Z', 'masked_author': 'username_0', 'text': 'Have received reports of this event not being legitimate, focusing on monetizing rather than educating, and implying that the Ethereum Foundation is a sponsor when it is not. I would suggest removing until this can be proven otherwise.', 'title': 'Remove ethmiami until legitimacy can be confirmed', 'type': 'issue'}
+ {'action': 'created', 'author': 'samajammin', 'comment_id': 1079256457.0, 'datetime': '2022-03-25 17:41:03+00:00', 'masked_author': 'username_1', 'text': 'That certainly does sound a bit shady but I\'m hesitant to remove an event due to the precedent this might set. Do you have any evidence on why it\'s not ""legitimate""? I agree ""focusing on monetizing rather than educating"" is a concern but it\'s a slippery one - many Ethereum events are paid events. As far as I can tell this event appears to be free.\r\n\r\nWhat I\'d suggest is that we create a listing policy for events so that we at least have a clear rubric to point to on how we evaluate events to list. I think that would help consistency of treatment for events to ensure we\'re not subjectively censoring events or favoring some over others.\r\n\r\nLet us know if you have any interest & capacity to help create a listing policy given your expertise on events @username_0.', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'UrbanHak', 'comment_id': 1079751103.0, 'datetime': '2022-03-26 18:38:02+00:00', 'masked_author': 'username_2', 'text': 'Thank you all for reviewing this. We are the local Miami tech community building the ecosystem for about a decade and in communications with @gilbertginsberg since we had the Blockchain Center in downtown Miami. The center closed because of Covid-19 restrictions but we continued our educational efforts online and in-person with dozens of discussion panels and free events to all community new to Ethereum or EVM developers. We are also creators of the MIAMI DAO for almost two years as a public good and utility platform aligned with Vitalik\'s vision of Crypto Cities and in general we have been working on the ground for our local talent for many years. We are also producers of Miami Blockchain Week every year and more recently, we stablished conversations with @username_0 to finally launch our ETH Miami chapter within the spirt of solidity education and the proper information about Road To DevCon. \r\n\r\nI dont have much to say about that "" ethmiami.net "" website other than they are capturing sponsorship money under the power of the "" ETH Miami "" domain but no one knows about them in Miami because they dont live here and everyone being contacted by them are coming back to me to confirm legitimacy. I also happen to be part of the Miami Dade County Cryptocurrency Task Force in order to provide the best to our communities on the ground starting with values of women in technology, equity, diversity and inclusion first. \r\n\r\nThis is a very uncomfortable message for me to write but I am representing the following local organizations in Miami which were committed and dedicated to this collective effort for a long time as well as actively participating on recent events like ETH Denver. I appreciate if you review our information carefully as we are planing to submit here our first event on April 8th as a result. \r\n\r\n- Jorge Cortes - [Cofounder of Miami DAO, BitBasel and MDC Cryptocurrency Task Force member. ](https://linktr.ee/techcortes)\r\n\r\n- [ETH Miami Twitter account \r\n](https://twitter.com/ethermiami)\r\n\r\n- [Miami DAO - Interview on CoinDesk TV](https://www.coindesk.com/tv/community-crypto/community-crypto-february-17-2022/) \r\n\r\n- [Miami DAO site](https://www.miamidao.org/)\r\n\r\n- [BitBasel inc ](https://linktr.ee/Bitbasel)\r\n\r\n- [Blockchain Institute of Technology - HQ in Miami. ](https://blockchaininstituteoftechnology.com/)\r\n\r\n- [Upstream - HQ in Miami ](https://upstreamapp.com/)\r\n\r\n- [Miami Hack Week ](https://www.miamihackweek.com/) \r\n\r\n\r\nTHANK YOU ALL SO MUCH.', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'skylarweaver', 'comment_id': 1083522177.0, 'datetime': '2022-03-30 19:10:19+00:00', 'masked_author': 'username_0', 'text': 'I agree with Sam that the best next step should be to better define the listing policy for Ethereum Events (a challenging task in and of itself 😆 ). I am closing this pull request for now.', 'title': None, 'type': 'comment'}]","<issue_start><issue_comment>Title: Remove ethmiami until legitimacy can be confirmed
+username_0: Have received reports of this event not being legitimate, focusing on monetizing rather than educating, and implying that the Ethereum Foundation is a sponsor when it is not. I would suggest removing until this can be proven otherwise.
+<issue_comment>username_1: That certainly does sound a bit shady but I'm hesitant to remove an event due to the precedent this might set. Do you have any evidence on why it's not ""legitimate""? I agree ""focusing on monetizing rather than educating"" is a concern but it's a slippery one - many Ethereum events are paid events. As far as I can tell this event appears to be free.
+
+What I'd suggest is that we create a listing policy for events so that we at least have a clear rubric to point to on how we evaluate events to list. I think that would help consistency of treatment for events to ensure we're not subjectively censoring events or favoring some over others.
+
+Let us know if you have any interest & capacity to help create a listing policy given your expertise on events @username_0.
+<issue_comment>username_2: Thank you all for reviewing this. We are the local Miami tech community building the ecosystem for about a decade and in communications with @gilbertginsberg since we had the Blockchain Center in downtown Miami. The center closed because of Covid-19 restrictions but we continued our educational efforts online and in-person with dozens of discussion panels and free events to all community new to Ethereum or EVM developers. We are also creators of the MIAMI DAO for almost two years as a public good and utility platform aligned with Vitalik's vision of Crypto Cities and in general we have been working on the ground for our local talent for many years. We are also producers of Miami Blockchain Week every year and more recently, we stablished conversations with @username_0 to finally launch our ETH Miami chapter within the spirt of solidity education and the proper information about Road To DevCon. 
+
+I dont have much to say about that "" ethmiami.net "" website other than they are capturing sponsorship money under the power of the "" ETH Miami "" domain but no one knows about them in Miami because they dont live here and everyone being contacted by them are coming back to me to confirm legitimacy. I also happen to be part of the Miami Dade County Cryptocurrency Task Force in order to provide the best to our communities on the ground starting with values of women in technology, equity, diversity and inclusion first. 
+
+This is a very uncomfortable message for me to write but I am representing the following local organizations in Miami which were committed and dedicated to this collective effort for a long time as well as actively participating on recent events like ETH Denver. I appreciate if you review our information carefully as we are planing to submit here our first event on April 8th as a result. 
+
+- Jorge Cortes - [Cofounder of Miami DAO, BitBasel and MDC Cryptocurrency Task Force member. ](https://linktr.ee/techcortes)
+
+- [ETH Miami Twitter account 
+](https://twitter.com/ethermiami)
+
+- [Miami DAO - Interview on CoinDesk TV](https://www.coindesk.com/tv/community-crypto/community-crypto-february-17-2022/) 
+
+- [Miami DAO site](https://www.miamidao.org/)
+
+- [BitBasel inc ](https://linktr.ee/Bitbasel)
+
+- [Blockchain Institute of Technology - HQ in Miami. ](https://blockchaininstituteoftechnology.com/)
+
+- [Upstream - HQ in Miami ](https://upstreamapp.com/)
+
+- [Miami Hack Week ](https://www.miamihackweek.com/) 
+
+
+THANK YOU ALL SO MUCH.
+<issue_comment>username_0: I agree with Sam that the best next step should be to better define the listing policy for Ethereum Events (a challenging task in and of itself 😆 ). I am closing this pull request for now."
+facebook/docusaurus,678471680,3278,,"[{'action': 'opened', 'author': 'jknoxville', 'comment_id': None, 'datetime': '2020-08-13 14:14:17+00:00', 'masked_author': 'username_0', 'text': '## 💥 Proposal\r\n\r\n### Current state\r\n\r\nAt the moment you have two options for linking to another page on your docusaurus V2 site:\r\n* Use a relative link, e.g. `[click here](./destination)`\r\n* Write html with an absolute reference, and the useBaseUrl hook, e.g.\r\n```\r\nimport useBaseUrl from \'@docusaurus/useBaseUrl\';\r\nimport Link from \'@docusaurus/Link\';\r\n\r\n<Link to={useBaseUrl(\'/docs/destination\')}>click here</Link>\r\n```\r\n\r\nRestricting yourself to using the first method is fine if you know that you need to do this, but one advantage of markdown is that you can easily write it without having to worry much about technicalities. To someone familiar with markdown but not necessarily docusaurus, `[click here](/docs/destination)` looks like something that should work, but unfortunately it won\'t if the site uses a baseUrl, causing confusion - especially if they write the docs with a base-url-less config, and the site then gets hosted with a base-url.\r\n\r\nGiven that the power of docusaurus is in making documentation easy, and the second option requires familiarity with javascript imports and knowledge of docusaurus, I think we can rule out the second option as a first-class way to link between pages.\r\n\r\nThere are also other advantages to absolute links, such as portability - you can copy and paste the link between different pages without concerns.\r\n\r\n### Suggestion\r\n\r\nI\'m wondering if we should automatically prepend the base url to any (domain-less) markdown links, with the goal of making it ""just work"" in as many scenarios as possible.\r\n\r\nSo `[click here](/docs/destination)` would resolve to `/the/base/url/docs/destination`\r\n\r\n### Downside\r\n\r\nCurrently, you can link to pages ""outside"" of the baseUrl, but hosted on the same domain, using absolute links of the above form. They don\'t get the base url at the moment, so these use cases would break.\r\n\r\nHowever, I expect that those use cases are much more rare than linking to pages inside the base url. In addition, by including the domain name, you would still be able to get this behavior, e.g. `[click here](https://site.com/something)`.\r\n\r\nThis would mean that all link types (relative, absolute inside base, absolute outside base) are still achievable without needing to use HTML or JS (which isn\'t the case at the moment).\r\n\r\n### Images\r\n\r\nThe above is written with hyperlinks in mind, but I think the same should apply to images too.\r\n\r\n### Have you read the [Contributing Guidelines on issues](https://github.com/facebook/docusaurus/blob/master/CONTRIBUTING.md#reporting-new-issues)?\r\n\r\nYes', 'title': 'Proposal: Prepend base url to absolute markdown links', 'type': 'issue'}
+ {'action': 'created', 'author': 'anshulrgoyal', 'comment_id': 673542325.0, 'datetime': '2020-08-13 15:22:14+00:00', 'masked_author': 'username_1', 'text': 'I can update my transformAssets remark plugin to perform this operation but I have to check with @username_2 first.', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'anshulrgoyal', 'comment_id': 673545531.0, 'datetime': '2020-08-13 15:28:09+00:00', 'masked_author': 'username_1', 'text': 'For images, I would suggest using relative paths. https://deploy-preview-3274--docusaurus-2.netlify.app/build/docs/next/markdown-features#image-assets', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'slorber', 'comment_id': 674013091.0, 'datetime': '2020-08-14 10:41:08+00:00', 'masked_author': 'username_2', 'text': 'I\'ve added a ""secret"" escape hatch for that just in case: `[click here](pathname:///destination)`, this allows to link to `/destination`, while your site is at /baseUrl\r\n\r\n---\r\n\r\nI\'ve just tried the following:\r\n\r\n```\r\n[absolute link](/docs/installation)\r\n\r\n[md link](./installation.md)\r\n\r\n![img](../static/img/docusaurus.png)\r\n\r\n![img](/img/docusaurus.png)\r\n```\r\n\r\nOnly the last image does not seem to apply the baseUrl.\r\n@username_1 I think we should add this baseUrl for absolute image paths in the existing imageTransformer code.\r\n\r\nNote: relative image paths go through webpack file loaders so they apply the baseUrl automatically through webpack config. Here it\'s not a very good example because linking to ../static is likely to break if the site becomes versioned, but relative image paths are good if you want to ""colocate"" an image in the docs folder, so that this image is versioned alongside the docs.', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'slorber', 'comment_id': 674021473.0, 'datetime': '2020-08-14 11:05:58+00:00', 'masked_author': 'username_2', 'text': 'BTW, just saw that we have a broken image on the deploy previews :)\r\n\r\nhttps://deploy-preview-3274--docusaurus-2.netlify.app/build/blog/2017/12/14/introducing-docusaurus\r\n\r\nWhether we add baseUrl or use webpack file-loader, this  image should get fixed by the solution :)', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'jknoxville', 'comment_id': 674071437.0, 'datetime': '2020-08-14 13:20:40+00:00', 'masked_author': 'username_0', 'text': 'Wow, best response I could have hoped for! Thanks @username_2 !\r\n\r\nJust tried upgrading to 61 and the absolute link does indeed work as expected, brilliant!', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'anshulrgoyal', 'comment_id': 674075497.0, 'datetime': '2020-08-14 13:30:02+00:00', 'masked_author': 'username_1', 'text': 'I will add support to convert images with the absolute path to go through webpack-loader', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'slorber', 'comment_id': 674106318.0, 'datetime': '2020-08-14 14:38:18+00:00', 'masked_author': 'username_2', 'text': 'great to know it works for you :)\r\n\r\nthanks @username_1', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'anshulrgoyal', 'comment_id': 674151772.0, 'datetime': '2020-08-14 16:18:05+00:00', 'masked_author': 'username_1', 'text': '@username_2 Can u add MLH tag to this issue and I have created a PR for it.', 'title': None, 'type': 'comment'}
+ {'action': 'closed', 'author': 'slorber', 'comment_id': None, 'datetime': '2020-08-14 19:33:09+00:00', 'masked_author': 'username_2', 'text': '', 'title': None, 'type': 'issue'}]","<issue_start><issue_comment>Title: Proposal: Prepend base url to absolute markdown links
+username_0: ## 💥 Proposal
+
+### Current state
+
+At the moment you have two options for linking to another page on your docusaurus V2 site:
+* Use a relative link, e.g. `[click here](./destination)`
+* Write html with an absolute reference, and the useBaseUrl hook, e.g.
+```
+import useBaseUrl from '@docusaurus/useBaseUrl';
+import Link from '@docusaurus/Link';
+
+<Link to={useBaseUrl('/docs/destination')}>click here</Link>
+```
+
+Restricting yourself to using the first method is fine if you know that you need to do this, but one advantage of markdown is that you can easily write it without having to worry much about technicalities. To someone familiar with markdown but not necessarily docusaurus, `[click here](/docs/destination)` looks like something that should work, but unfortunately it won't if the site uses a baseUrl, causing confusion - especially if they write the docs with a base-url-less config, and the site then gets hosted with a base-url.
+
+Given that the power of docusaurus is in making documentation easy, and the second option requires familiarity with javascript imports and knowledge of docusaurus, I think we can rule out the second option as a first-class way to link between pages.
+
+There are also other advantages to absolute links, such as portability - you can copy and paste the link between different pages without concerns.
+
+### Suggestion
+
+I'm wondering if we should automatically prepend the base url to any (domain-less) markdown links, with the goal of making it ""just work"" in as many scenarios as possible.
+
+So `[click here](/docs/destination)` would resolve to `/the/base/url/docs/destination`
+
+### Downside
+
+Currently, you can link to pages ""outside"" of the baseUrl, but hosted on the same domain, using absolute links of the above form. They don't get the base url at the moment, so these use cases would break.
+
+However, I expect that those use cases are much more rare than linking to pages inside the base url. In addition, by including the domain name, you would still be able to get this behavior, e.g. `[click here](https://site.com/something)`.
+
+This would mean that all link types (relative, absolute inside base, absolute outside base) are still achievable without needing to use HTML or JS (which isn't the case at the moment).
+
+### Images
+
+The above is written with hyperlinks in mind, but I think the same should apply to images too.
+
+### Have you read the [Contributing Guidelines on issues](https://github.com/facebook/docusaurus/blob/master/CONTRIBUTING.md#reporting-new-issues)?
+
+Yes
+<issue_comment>username_1: I can update my transformAssets remark plugin to perform this operation but I have to check with @username_2 first.
+<issue_comment>username_1: For images, I would suggest using relative paths. https://deploy-preview-3274--docusaurus-2.netlify.app/build/docs/next/markdown-features#image-assets
+<issue_comment>username_2: I've added a ""secret"" escape hatch for that just in case: `[click here](pathname:///destination)`, this allows to link to `/destination`, while your site is at /baseUrl
+
+---
+
+I've just tried the following:
+
+```
+[absolute link](/docs/installation)
+
+[md link](./installation.md)
+
+![img](../static/img/docusaurus.png)
+
+![img](/img/docusaurus.png)
+```
+
+Only the last image does not seem to apply the baseUrl.
+@username_1 I think we should add this baseUrl for absolute image paths in the existing imageTransformer code.
+
+Note: relative image paths go through webpack file loaders so they apply the baseUrl automatically through webpack config. Here it's not a very good example because linking to ../static is likely to break if the site becomes versioned, but relative image paths are good if you want to ""colocate"" an image in the docs folder, so that this image is versioned alongside the docs.
+<issue_comment>username_2: BTW, just saw that we have a broken image on the deploy previews :)
+
+https://deploy-preview-3274--docusaurus-2.netlify.app/build/blog/2017/12/14/introducing-docusaurus
+
+Whether we add baseUrl or use webpack file-loader, this  image should get fixed by the solution :)
+<issue_comment>username_0: Wow, best response I could have hoped for! Thanks @username_2 !
+
+Just tried upgrading to 61 and the absolute link does indeed work as expected, brilliant!
+<issue_comment>username_1: I will add support to convert images with the absolute path to go through webpack-loader
+<issue_comment>username_2: great to know it works for you :)
+
+thanks @username_1
+<issue_comment>username_1: @username_2 Can u add MLH tag to this issue and I have created a PR for it.<issue_closed>"
+conda-forge/conda-forge.github.io,149518027,112,,"[{'action': 'opened', 'author': 'jakirkham', 'comment_id': None, 'datetime': '2016-04-19 16:52:16+00:00', 'masked_author': 'username_0', 'text': ""@username_3 has done an amazing job of packaging MSYS2 so that is works within `conda`. See his [channel]( https://anaconda.org/msys2 ) here. Also, see his [comment]( https://github.com/conda-forge/staged-recipes/pull/364#issuecomment-211830313 ) about the work he has done and what still remains for more details.\r\n\r\nGiven how this greatly reduces the gap between Windows and the *NIXes, this makes Windows packaging very accessible to *NIX devs. This should not be undervalued as it has the potential to really increase our bandwidth on Windows by basically the size of our community. Packages that couldn't be built due to CMake files missing or other problems also dissolve away. This has the potential to substantially reduce the effort required to get a package working on all platforms, which makes us more likely to do exactly that.\r\n\r\nAlso, it has the potential to free this quite painful constraint of compiler and CPython version. That has raised such issues as making custom patched versions of CPython ( https://github.com/conda-forge/conda-forge.github.io/issues/64 ) just to have C++11 features when using Python 2.7. Further this can free us from thinking about VC features entirely, which have had various issues.\r\n\r\nIt is honestly making me seriously considering switching to MSYS2 with everything.\r\n\r\nWould be very curious to hear perspectives from a wide range of people on this. Please feel free to share your thoughts and also bring other people over that I have missed. I have put this on our docket for next weeks meeting.\r\n\r\ncc @username_13 @username_10 @username_5 @username_2 @username_6 @username_9 @mcg1969 @isuruf @ngoldbaum @username_4 @jasongrout @SylvainCorlay"", 'title': 'Using the MSYS2 tools to build conda packages', 'type': 'issue'}
+ {'action': 'created', 'author': 'janschulz', 'comment_id': 212041499.0, 'datetime': '2016-04-19 17:55:31+00:00', 'masked_author': 'username_1', 'text': 'This shouldn\'t break using pip with wheels. And also not break any of the ""how to compile python with native libs on windows""-guides, which users turn to when they have to build stuff for themself (e.g. the patched CPython should still be able to build and afterwards work with a pandas version which is compile the ""normal way"").\r\n\r\nMy guess (which is based on compiling a few python native packages and fix a few errors on the way, but no deep knowledge on how compiler and ABI work) is that it will take more time to make it work (e.g. patch out WIN32 #ifdefs which then assume a certain compiler or things like mpl which when run on windows sets up the VS compilers) than what you gain by being able to use a compiler unconstrained by the python version.', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'patricksnape', 'comment_id': 212046345.0, 'datetime': '2016-04-19 18:02:56+00:00', 'masked_author': 'username_2', 'text': ""Two things, in brief as I'm just heading out:\r\n\r\n  1. @username_3 has packaged many msys packages on the msys2 channel. This is great, but it involves a load of changes to conda-build etc to natively support it. This brings in the larger question of the scope of this project. It could really start to become enormous if we have builds for perl and all perl packages and msys and all msys packages and R and Python etc... Maybe we might think about how we interact with other channels? Perhaps, since this is a build requirement, we could almost run the channels in parallel?\r\n  2. I'm not sure that moving to msys actually 'replaces' VS. This is only the case if we **don't** link to VS, which would mean we lose compatibility with wheels/the rest of the Python ecosystem. If we do link against VS then we still have to build 3 versions on Windows and sort of the features headache we currently have."", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'jakirkham', 'comment_id': 212048459.0, 'datetime': '2016-04-19 18:06:53+00:00', 'masked_author': 'username_0', 'text': 'Per point 2, @username_2, see this [comment]( https://github.com/conda-forge/staged-recipes/pull/364#issuecomment-212028074 ) from @username_3.', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'jakirkham', 'comment_id': 212050844.0, 'datetime': '2016-04-19 18:11:39+00:00', 'masked_author': 'username_0', 'text': ""Per point 1, @username_2, we could investigate using this `pacondaman` and some sort of automated maintenance strategy like ( https://github.com/conda-forge/conda-forge.github.io/issues/51 ).\r\n\r\nThough I don't know if we will want to do that or if it will be that bad. Right now we build things like `autoconf`, `libtool`, `pkg-config`, etc. It shouldn't be a big deal to add MSYS style builds to these repos. It looks like the recipes needed already exist."", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'mingwandroid', 'comment_id': 212051200.0, 'datetime': '2016-04-19 18:12:53+00:00', 'masked_author': 'username_3', 'text': 'I expect to add all of the build tools as a matter of priority. So far only those needed for `R` have been added.', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'jakirkham', 'comment_id': 212051634.0, 'datetime': '2016-04-19 18:14:37+00:00', 'masked_author': 'username_0', 'text': 'If you would like to try PRs to those feedstocks, that would be great. I think it will be me and @username_13 working with you for the most part as we are maintainers on these sorts of things. Definitely agree those are high priority. That was our mentality here too.', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'jakirkham', 'comment_id': 212057467.0, 'datetime': '2016-04-19 18:27:53+00:00', 'masked_author': 'username_0', 'text': ""Sure. I'm betting there will be a bit of patching on the first few passes, which is fine. Normally we have been pretty eager to see patches move upstream. Though given you are a core developer of MSYS2 and there may be a fair bit of patching required, we might need to be more lax just so that we can keep this effort moving at a good pace. Also we may need to come up with a better system for tracking these patches."", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'mingwandroid', 'comment_id': 212060814.0, 'datetime': '2016-04-19 18:34:45+00:00', 'masked_author': 'username_3', 'text': ""The idea was to do a solution for DLLs and Python specifically where it looks at the C-Runtime already loaded by the process and stubs through to the functions there.\r\n\r\nThe patching I refer to is specifically to patch the differences between MSYS2 upstream and Conda. You can see what I mean if you study https://github.com/username_3/conda-recipes/tree/MSYS2-pkg-conversion/msys2/m2-msys2-filesystem\r\n\r\nAfter unpacking the MSYS2 package, the patches are applied which allows us to make such modifications as we need to. It means we don't need MSYS2 upstream to put switches in for Conda (nor should they)."", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'ukoethe', 'comment_id': 212062233.0, 'datetime': '2016-04-19 18:38:26+00:00', 'masked_author': 'username_4', 'text': 'I seriously consider an MSYS-based Python ecosystem as a possible future alternative to VC-based builds. My hope (or, rather, expectation) is that recipes for MSYS will reuse much of the existing Linux scripts. In fact, there should be only one `build.sh` script that works for Linux, Mac and MSYS, with just occasional `ifs` to account for the remaining differences. For this to work, conda should treat the MSYS-based ecosystem as an entirely new platform.', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'jakirkham', 'comment_id': 212065045.0, 'datetime': '2016-04-19 18:46:52+00:00', 'masked_author': 'username_0', 'text': 'Yes, this is exactly my hope. Ideally this will lower the threshold for getting productive packagers that are comfortable on *NIX systems trying things on Windows too. It should also significantly lower the maintenance burden with Windows.', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'ChrisBarker-NOAA', 'comment_id': 212068019.0, 'datetime': '2016-04-19 18:56:27+00:00', 'masked_author': 'username_5', 'text': 'Sorry to get a bit confused here, but, IIUC:\n\nMSYS is a port of the *nix command line tools (a shell and common\nutilities) to run semi-nativly on Windows.\n\nthat gives us the regular make and all that, which is nice.\n\nBut it also essentially requires using MInGW for the compiler, yes?\nProbably not strictly, but we wouldn\'t gain much without that.\n\nSo this is really a question about using the MInGW compiler, yes? So I have\nthese questions:\n\nBack in the day, you could use MinGW to build extensions compatible with\nthe (""standard"", i.e. VS compiled) 32 bit Python (2.6 anyway) on Windows,\nit required a bit of hacking, and resulted in slower binaries than VS, but\nworked.\n\nHowever, my understanding is that MInGW never got ""properly"" ported and\nworking for 64 bit -- so not sure the status of all that for 64 bit\nWindows. I do know for sure that I dropped MinGW years ago -- using VS was\nso much easier (provided I could find the Windows builds of the libs I\nneeded)\n\nHowever, as of recently, the numpy folks have sponsored work on MinGW (or\nSOMETHING) that has gotten stable? now for 64 bit Windows, OpenBLAS,\nFortran  and all -- so _maybe_ it\'s ready to rock. Is this what you\'re\ntalking about using?\n\nAnd does this use the MS runtime that Python is already built against? --\nI\'m pretty sure you NEED that to get full compatibility.\n\n\nAs for:\n\n> Rr patched CPython:\n\n>> as making custom patched versions of CPython ( #64\n<https://github.com/conda-forge/conda-forge.github.io/issues/64> ) just to\nhave C++11 features when using Python 2.7\n\n> This shouldn\'t break using pip with wheels.\n\nnot sure what the ""this"" is -- but providing a new build of CPython with a\ndifferent runtime would break binary wheels unless it was tagged in a\ndifferent way (as a different platform) so that pip would know not to try\nto use a binary wheel built for the ""standard"" Windows Python.\n\nBut I take it that this is about using MSYS/ MingGW for extensions and libs\n-- NOT python itself, yes?\n\n-CHB', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'ChrisBarker-NOAA', 'comment_id': 212069804.0, 'datetime': '2016-04-19 19:01:02+00:00', 'masked_author': 'username_5', 'text': 'Exactly.\n\n-CHB\n\n\n\n-- \n\nChristopher Barker, Ph.D.\nOceanographer\n\nEmergency Response Division\nNOAA/NOS/OR&R            (206) 526-6959   voice\n7600 Sand Point Way NE   (206) 526-6329   fax\nSeattle, WA  98115       (206) 526-6317   main reception\n\nnnheo@example.com', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'mingwandroid', 'comment_id': 212071701.0, 'datetime': '2016-04-19 19:06:03+00:00', 'masked_author': 'username_3', 'text': ""mingw.org and mingw-w64 are two different endeavors. There was a disagreement about whether you could use MSDN for reference, roughly speaking.\r\n\r\nmingw-w64 has had 64-bit from the start. MSYS2 is a software distro for Windows that's build on mingw-w64 and a fork of Cygwin (which is built on top of mingw-w64 these days and also provides a 64-bit variant).\r\n\r\nIn Conda, our intention is to use it to provide a consistent POSIX build environment that interoperates with native tools, a native GNU toolchain and some GNU libraries without duplicating effort or further splitting the already small GNU-based Open Source on Windows developer community."", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'janschulz', 'comment_id': 212071788.0, 'datetime': '2016-04-19 19:06:22+00:00', 'masked_author': 'username_1', 'text': 'Can someone explain the gains from such a move?\r\n\r\nThis is a deviation from upstream, sot this means that conda-forge has the complete burden to maintain forks to basically all tools and libs which assume ""win = VC"" , starting with python and conda-build itself (setup.py must find the right compiler). Basically every `if sys.platform == \'win32\'` in any setup.py code or any `#if !defined(_WIN32)` is actually a `if the compiler is VC`, which would need to be patched (or at least confiremed that this is still right). IMO there is no incentive for upstreams to do such porting, because only conda-fore would have such a port. And there would still be a ""normal"" windows port, because otherwise conda-forge on windows would become irrelevant (unless this msys2 port would be compatible to the VS builds).\r\n\r\nexamples for porting work: \r\n* Matplotlib: https://github.com/matplotlib/matplotlib/blob/master/setupext.py#L201\r\n* pandas: https://github.com/pydata/pandas/blob/f71537ab2561ab5727008095e9685966619fa7b9/pandas/src/msgpack/sysdep.h#L39, https://github.com/pydata/pandas/blob/f71537ab2561ab5727008095e9685966619fa7b9/pandas/src/parser/io.h#L32\r\n\r\nSo basically you would have all the efforts to support VC windows in addition to even more effort to support a msys2 port. So what are the gains?', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'ukoethe', 'comment_id': 212081222.0, 'datetime': '2016-04-19 19:33:28+00:00', 'masked_author': 'username_4', 'text': ""I'm currently using MinGW as part of my VS builds in two situations:\r\n* for C packages that don't have a VS build system (e.g. `openblas`)\r\n* for Fortran compilation (e.g. parts of `scipy`)\r\n\r\nI consider MinGW (64-bit version) a mature compiler that doesn't cause any headaches -- it feels like its Linux counterpart. Linking of MinGW C/Fortran binaries into VS modules works mostly out of the box with two minor tweaks:\r\n* one must create link libraries from MinGW's runtime libs using `gendef` and `lib`\r\n* one must provide a few missing C99 functions (such as `asinh` or `csqrt`) in a little helper lib (note: this problem may have been solved in the meantime, I haven't checked recently)\r\n\r\nIf MinGW worked for the entire Python ecosystem, one could mostly reuse the effort that was already spent on creating Linux recipes. People who are primarily working on Linux (i.e. many in the scientific computing community) might prefer (or rather: will love) this approach to porting their work to Windows. \r\n\r\nOf course, whether this gain is worth the effort is a matter of judgement. At the very least, some experiments have to be done to determine exactly how big the effort would be. This certainly isn't something I want to pursue now -- I just wanted to point out the possibility."", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'jakirkham', 'comment_id': 212105593.0, 'datetime': '2016-04-19 20:08:52+00:00', 'masked_author': 'username_0', 'text': ""Interesting that you mention OpenBLAS and needing a Fortran compiler. That's part of what sparked this discussion ( see PR https://github.com/conda-forge/staged-recipes/pull/364 ).\r\n\r\nA bit of an aside: It is worth noting that the BLAS part of OpenBLAS can be built with CMake (started near the end of 2014/beginning of 2015). However, that doesn't necessarily help people that want the LAPACK part too, which requires a Fortran compiler. Also, it means the loss of the assembly optimizations, which really puts the value in question IMHO. Though for using something easily on Windows, I suppose it still has value."", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'ChrisBarker-NOAA', 'comment_id': 212142504.0, 'datetime': '2016-04-19 21:46:41+00:00', 'masked_author': 'username_5', 'text': ""the numpy/scipy folks have been working hard on Mingw and OpenBLAS, and\n.... I've lost track of where they are at, but we should be sure to\nleverage what they've done.\n\n -CHB"", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'ChrisBarker-NOAA', 'comment_id': 212143682.0, 'datetime': '2016-04-19 21:49:51+00:00', 'masked_author': 'username_5', 'text': ""yup -- that would be nice.\n\nIn practice, if it's easy to build stuff on Windows at the command line,\nthen it's not hard to build a recipe -- but there are all too many libs\nthat aren't in that state...\n\n-CHB\n\n\n\n\n-- \n\nChristopher Barker, Ph.D.\nOceanographer\n\nEmergency Response Division\nNOAA/NOS/OR&R            (206) 526-6959   voice\n7600 Sand Point Way NE   (206) 526-6329   fax\nSeattle, WA  98115       (206) 526-6317   main reception\n\ndycjh@example.com"", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'gillins', 'comment_id': 212148720.0, 'datetime': '2016-04-19 22:07:07+00:00', 'masked_author': 'username_6', 'text': ""Sorry I've been silent on this. +1 to investigating using MSYS2 and seeing how hard it is to build everything using it before committing to using it. I'm happy to help with this."", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'jjhelmus', 'comment_id': 212155330.0, 'datetime': '2016-04-19 22:31:13+00:00', 'masked_author': 'username_7', 'text': 'The [The Mingwpy project](http://mingwpy.github.io/index.html) page list some information on this. Still seems to be a work in progress.  Worth keeping an eye on though.', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'jakirkham', 'comment_id': 212155742.0, 'datetime': '2016-04-19 22:33:16+00:00', 'masked_author': 'username_0', 'text': 'I was about to ask where to follow this progress on OpenBLAS, @username_5, but it looks like @username_7 has the answer already. Or are there more places to look?', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'jakirkham', 'comment_id': 212183148.0, 'datetime': '2016-04-20 00:26:58+00:00', 'masked_author': 'username_0', 'text': ""As you referred to the more [general problem]( https://github.com/conda-forge/staged-recipes/pull/364#issuecomment-212170630 ) of packaging and working with MinGW-64 compilers, I am cc'ing you here @mikofski. Also, I am cc'ing the [NumFocus grant](https://mingwpy.github.io/proposal_december2015.html) authors ( @username_12 @rgommers @matthew-brett @username_8 @ogrisel ) here, as well.\r\n\r\nHere we are discussing how best to explore the interaction between conda-forge and MSYS2. We are interested in the ability of working with Windows in nearly the same way we do with any *NIX platform (many of whose builds tools are packaged already). While the idea has been floating around, our attempt of building OpenBLAS at conda-forge has raised this more general point of how we work with MinGW-64 compilers and MSYS2. As there now are [quite a few packages available]( https://anaconda.org/msys2/ ) to start exploring this problem and some tools to aid in their automated addition, we are very eager to see where and how we can put them to use. Also, related is how this system is maintained. We are planning to have a meeting where we discuss [this and other issue]( https://conda-forge.hackpad.com/conda-forge-meeting-notes-copied-2YkV96cvxPG#:h=2016-04-28 ) at conda-forge. Anyone who is interested is welcome to come."", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'patricksnape', 'comment_id': 212276450.0, 'datetime': '2016-04-20 06:12:23+00:00', 'masked_author': 'username_2', 'text': ""I think there are sort of two separate issues:\r\n\r\n  1. We need an msys2/mingw-w64 toolchain if we want to support certain builds such as OpenBLAS and ffmpeg. We almost certainly need this toolchain to correctly link to the appropriate VS versions for each Python version. This is a practical issue that I believe @username_3 is very close to having solved (if not already solved).\r\n  2. We may want to swap all builds to this toolchain as it removes the burden of writing Windows batch files or having to deal with quirks in the older VS compilers. This, IMHO, is a much larger project and perhaps out of the scope of conda-forge. Which is not to say I wouldn't be interested in helping see how far we could push it, but I feel like it would really require cooperation with the Python Core devs.\r\n\r\nThe Intel Fortran Compiler is not free or available to us, so if we want to compile Fortran we need the msys2 toolchain. I think we should focus on how we enable the use of that toolchain for projects that already require it, like ffmpeg and OpenBLAS - rather than patching all projects to build with msys2."", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'njsmith', 'comment_id': 212307631.0, 'datetime': '2016-04-20 07:49:59+00:00', 'masked_author': 'username_8', 'text': 'An intermediate step would be to use msys2 for scripting but continue to call msvc. This would at least let you get rid of the .bat files', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'patricksnape', 'comment_id': 212321198.0, 'datetime': '2016-04-20 08:22:50+00:00', 'masked_author': 'username_2', 'text': ""I thought that only issue with Python 3.5 was if we want to link in a 'clever' way to the new versionless MSVCRT? If we just want to do the old way and link directly to msvcrt14 that should be possible, no? Seems like a reasonable stop gap - since we have that issue with the other VS versions anyway, so for the time being I don't see the problem with continuing it into Python 3.5 until mingw is sorted."", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'mingwandroid', 'comment_id': 212373646.0, 'datetime': '2016-04-20 10:36:09+00:00', 'masked_author': 'username_3', 'text': ""@username_8 You are correct, I'm not actively working on it. MSYS2 is coming to Conda to address some of the other issues of building software on Windows (POSIX shell, Autotools, GNU toolchain with gfortran, git, CMake, consistency over all those things - we'll end up with more consistency here than the Unixes ironically since there's only one MSYS2).\r\n\r\n@username_2 UCRT is quite a lot different to the other CRTs and it'll require a reasonable amount of effort above what was required for e.g. to upgrade to msvc2012. @username_8 and @username_12 are far more knowledgeable about the ins and outs of it since my involvement so far has mostly been trying to figure out when I might get time to look into it properly."", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'njsmith', 'comment_id': 212439743.0, 'datetime': '2016-04-20 14:05:25+00:00', 'masked_author': 'username_8', 'text': ""Right, starting with msvc 2015 there is no msvcrt at all :-). They changed the names and semantics of a bunch of symbols, they removed a few (or rather: moved them to a private helper library, vcruntime140) that we will want to replace with our own versions, and in general all symbols got rearranged into a whole collection of new libraries. AFAIK there's nothing deeply difficult here, but it's complicated, especially since we would like to do the work upstream in mingw-w64 rather than make a fork that we will have to maintain forever. (mingwpy is effectively a fork, but that work is much less intrusive so tracking upstream is relatively easy, and for several reasons upstream is less interested in helping with mingwpy and more interested in helping with the msvc 2015 stuff, so the calculation is different.)"", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'njsmith', 'comment_id': 212440320.0, 'datetime': '2016-04-20 14:07:31+00:00', 'masked_author': 'username_8', 'text': ""OTOH if someone wanted to try just wading in and hacking mingw-w64 to work with the UCRT then we might at least learn something. Maybe it will turn out to not be that hard :-). I'm happy to share what I know and give hints (and I guess @username_3 and others are as well)."", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'njsmith', 'comment_id': 212446795.0, 'datetime': '2016-04-20 14:25:31+00:00', 'masked_author': 'username_8', 'text': 'BTW are these meeting details available anywhere? (Like, when is it?)', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'jakirkham', 'comment_id': 212455653.0, 'datetime': '2016-04-20 14:48:16+00:00', 'masked_author': 'username_0', 'text': 'Yes, those are important details. :wink:\r\n\r\nWe have been putting our agendas (with dates) on them about when we meet and what we will discuss in [hackpad]( https://conda-forge.hackpad.com/ ). Time is 1400 UTC. We have been doing them on Google Chat. Normally @username_10 sends out a link before so that we can join the same chat room.', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'jakirkham', 'comment_id': 212455986.0, 'datetime': '2016-04-20 14:48:44+00:00', 'masked_author': 'username_0', 'text': 'Also, anyone is welcome to add items to the agenda.', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'ChrisBarker-NOAA', 'comment_id': 212506954.0, 'datetime': '2016-04-20 16:40:26+00:00', 'masked_author': 'username_5', 'text': 'blocker to this is that > higher-ups at Continuum don\'t consider it a\npriority,\n\nSo how is continuum doing Fortran on Win64 for python 3.5? The intel\ncompiler? We really need SOME way to build Fortran extensions.\n\nand while I""m at it what\'s the best practice for Fortran with Python2.7 an\nAnaconda on Win64...\n\n-CHB\n\n\n\n-- \n\nChristopher Barker, Ph.D.\nOceanographer\n\nEmergency Response Division\nNOAA/NOS/OR&R            (206) 526-6959   voice\n7600 Sand Point Way NE   (206) 526-6329   fax\nSeattle, WA  98115       (206) 526-6317   main reception\n\nupchh@example.com', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'msarahan', 'comment_id': 212510369.0, 'datetime': '2016-04-20 16:49:27+00:00', 'masked_author': 'username_9', 'text': ""I'm not completely certain, but I'm pretty sure we use the Intel compiler."", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'jakirkham', 'comment_id': 212515711.0, 'datetime': '2016-04-20 17:03:11+00:00', 'masked_author': 'username_0', 'text': ""That would make sense. FWICT the Intel compiler is [pretty nicely compatible]( https://software.intel.com/en-us/articles/intel-c-compiler-compatibility-with-microsoft-visual-c ) with VC. Though I have no experience using it. Also, I don't know what would go into getting that into the VM(s)."", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'jakirkham', 'comment_id': 212918433.0, 'datetime': '2016-04-21 13:25:15+00:00', 'masked_author': 'username_0', 'text': '@username_8 @username_3 and others interested in coming to the meeting next week the date has been corrected from Thursday to Friday. The time is still the same (1400 UTC).', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'mingwandroid', 'comment_id': 212926295.0, 'datetime': '2016-04-21 13:46:14+00:00', 'masked_author': 'username_3', 'text': ""Ok thanks, I'll await the link to the Hangout then."", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'pelson', 'comment_id': 212984116.0, 'datetime': '2016-04-21 15:53:12+00:00', 'masked_author': 'username_10', 'text': 'Hangout link can be found at https://conda-forge.hackpad.com', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'jakirkham', 'comment_id': 213004677.0, 'datetime': '2016-04-21 16:38:12+00:00', 'masked_author': 'username_0', 'text': 'Thanks @username_10.', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'tkelman', 'comment_id': 215338617.0, 'datetime': '2016-04-28 07:49:16+00:00', 'masked_author': 'username_11', 'text': ""I'm a little surprised no one has mentioned this here, but it is possible to build CPython 3.5 using mingw-w64 GCC (and 2.7 as well with a somewhat different set of patches). If you install mingw-w64-python3 in MSYS2, this is what you get. However it requires 90-odd patches that upstream CPython-dev has been very resistant to even consider reviewing the first handful, much less merge and work towards getting this to work out of the box. See https://github.com/Alexpux/MINGW-packages/blob/master/mingw-w64-python3/PKGBUILD for all the gory details.\r\n\r\nThis is the extreme case of forking a whole new platform for ease of building scientific extensions that need things MSVC doesn't support like Fortran, inline assembly, building with autotools, etc. But it has the advantage that it works today, unlike getting mingw-w64 to link against the VC 2015 runtime. In Julia's case we choose to completely ignore MSVC as it's a lousy compiler that doesn't meet our needs, and it's way too foreign to expect open-source developers who mostly use Linux and Mac to work with."", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'njsmith', 'comment_id': 215368011.0, 'datetime': '2016-04-28 09:38:03+00:00', 'masked_author': 'username_8', 'text': '@username_11: unfortunately, a Python distribution for Windows that can neither build nor use pypi wheels is unlikely to see much uptake. Also, conda-forge has no control over what compiler is used to build Python itself, unless they abandon anaconda compatibility entirely.', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'tkelman', 'comment_id': 215375993.0, 'datetime': '2016-04-28 10:07:10+00:00', 'masked_author': 'username_11', 'text': ""Depends where you'd rather invest your effort. Building a custom python ecosystem of your own, or building a custom compiler toolchain of your own for compatibility with a compiler that you don't actually want to use. You're letting the way python.org chooses to build Python binaries drive the decisions here, and it's not a foregone conclusion that it has to stay that way."", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'ukoethe', 'comment_id': 215386225.0, 'datetime': '2016-04-28 10:50:41+00:00', 'masked_author': 'username_4', 'text': ""I don't think so. If you want to do serious scientific computing in Windows, pypi is just not good enough, and I'm skeptical that its design can be fixed. conda is the only package manager on Windows whose approach is sufficiently powerful to make this work (although it's still quite a way to go). If conda lives up to our expectations, I believe it will replace pypi on Windows entirely. So, let's make conda and conda-forge as good as possible and not constrain ourselves by upstream's prejudice."", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'tkelman', 'comment_id': 215389905.0, 'datetime': '2016-04-28 11:04:31+00:00', 'masked_author': 'username_11', 'text': ""Pip and the wheels situation and the pynativelib proposal are all rapidly improving and I'm sure everyone appreciates the work Nathaniel and others have done to make that possible. And mingwpy will hopefully reach its goals sooner or later w.r.t. MSVC 2015 compatibility, and once it's there the mingw-w64-using community will evaluate whether it's something that will be more broadly useful for things like MSYS2, Julia, etc where currently MSVC is just ignored.\r\n\r\nIn the meantime, it seems there are more people capable of working on rebuild-the-world packaging infrastructure than hacking on the guts of compiler runtime compatibility issues. It's at least worth experimenting with, since there are examples of other ecosystems that rebuild everything on their own and do fine without worrying about ABI compatibility with what's posted on pypi. Cygwin has peacefully been building its own set of python packages for decades and it works decently for its users."", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'mingwandroid', 'comment_id': 215462623.0, 'datetime': '2016-04-28 15:20:14+00:00', 'masked_author': 'username_3', 'text': ""I've not mentioned MSYS2's mingw-w64-python ports yet since they're not something that we plan to add to Conda as it would cause confusion for our users and also add significantly to my workload, ending up with another Conda Python ecosystem that bears no resemblance to the Linux and OS X ones. That time would be better spent on the effort to make the toolchains compatible.\r\n\r\nGuido said that if we identified mingw-w64 Python as different from MSVC Python from pip and wheels perspective) then the idea of a mingw-w64 Python wouldn't be rejected outright, but there's still the problem that CPython developers have mostly displayed reactions ranging from disinterest to contempt and fear at the notion of compiling Python on Windows using anything but MSVC.\r\n\r\nThe patches will continue to be maintained, as time allows, by the MSYS2 project and interested contributors are welcome to lend a hand there..\r\n\r\nWe should discuss this at the conda-forge meeting tomorrow I think."", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'carlkl', 'comment_id': 217216141.0, 'datetime': '2016-05-05 17:21:38+00:00', 'masked_author': 'username_12', 'text': '@username_3, can you make a summary of features/properties  you would expect from mingwpy to be included into conda?\r\n\r\n- static vs. canonical linking of gcc runtime code\r\n- posix vs. win32 threads model\r\n- exception model for 32 bit code: sjlj vs. dwarf\r\n- long double default implementation: extended precision vs. double precision like MSVC (can be changed at compile time btw.)\r\n- things I forgot to mention', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'tkelman', 'comment_id': 217245996.0, 'datetime': '2016-05-05 19:07:41+00:00', 'masked_author': 'username_11', 'text': ""My personal preferences are:\r\n- defaulting to dynamic linking (adding `-static` within any build systems that absolutely need it)\r\n- posix threads since LLVM and other libraries are making use of C++11 threads these days (and winpthreads is a small liberally licensed dll, and the performance has improved with recent mingw-w64 runtime versions though still worth benchmarking carefully to see if it's noticeably worse than win32 thread model), or maybe building both and providing a choice like Debian's recent cross compiler packages do\r\n- sjlj if you ever want to throw, unwind, or debug through closed-source binaries (also worth benchmarking the perf difference of this)\r\n- could go either way, extended precision long doubles can be useful once in a while but they're tough to make portable\r\n- I'll make a note that `-mincoming-stack-boundary=2` is needed once in a while even if you stick to the conventional msvcrt.dll used by mingw-w64. I've seen segfaults without this flag on i686, usually when threading is involved. https://github.com/Alexpux/MINGW-packages/pull/720 / https://github.com/libgit2/libgit2/issues/3342 is one concrete example though it has come and gone with different libgit2 versions"", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'mingwandroid', 'comment_id': 217252709.0, 'datetime': '2016-05-05 19:28:15+00:00', 'masked_author': 'username_3', 'text': ""I can't see much problem with changing MSYS2's i686 mingw-w64-gcc to use `-mincoming-stack-boundary=2`."", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'ocefpaf', 'comment_id': 217253817.0, 'datetime': '2016-05-05 19:32:49+00:00', 'masked_author': 'username_13', 'text': 'If fact we already do :smile: \r\n\r\nhttps://github.com/conda-forge/pyspharm-feedstock/blob/master/recipe/meta.yaml#L21\r\n\r\n`mingwpy` is my preferred option for Fortran on Windows so far.', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'carlkl', 'comment_id': 217416840.0, 'datetime': '2016-05-06 11:29:41+00:00', 'masked_author': 'username_12', 'text': 'Just 2 links for all developers expecting extra precision from long double arguments with FPU utilization:\r\n\r\n- https://randomascii.wordpress.com/2014/10/09/intel-underestimates-error-bounds-by-1-3-quintillion\r\n- http://notabs.org/fpuaccuracy/index.htm\r\n\r\nUnfortunately Intel FPU trigonometric functions offers much less precision than expected if used with specific argument domains or used with argument reduction. This affects long double precision values as well. \r\n\r\nToday you are better of using SSE2 math code libraries or use dedicated multiprecision libraries if double precision is not enough.', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'ChrisBarker-NOAA', 'comment_id': 217470933.0, 'datetime': '2016-05-06 15:16:59+00:00', 'masked_author': 'username_5', 'text': 'Sorry, being really lazy here: does this have implications for which gcc\nlibc is used? I.e is the old one in CentOS 5 still using the hardware\nfsin()?\n\nCHB', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'jakirkham', 'comment_id': 354623087.0, 'datetime': '2017-12-31 20:42:44+00:00', 'masked_author': 'username_0', 'text': 'Going to close this out. `msys2` packages exist and are in some cases used to build packages in `defaults` and `conda-forge`. Further discussions in this area would be better targeted at specific use cases for `msys2`.', 'title': None, 'type': 'comment'}
+ {'action': 'closed', 'author': 'jakirkham', 'comment_id': None, 'datetime': '2017-12-31 20:42:44+00:00', 'masked_author': 'username_0', 'text': '', 'title': None, 'type': 'issue'}]","<issue_start><issue_comment>Title: Using the MSYS2 tools to build conda packages
+username_0: @username_3 has done an amazing job of packaging MSYS2 so that is works within `conda`. See his [channel]( https://anaconda.org/msys2 ) here. Also, see his [comment]( https://github.com/conda-forge/staged-recipes/pull/364#issuecomment-211830313 ) about the work he has done and what still remains for more details.
+
+Given how this greatly reduces the gap between Windows and the *NIXes, this makes Windows packaging very accessible to *NIX devs. This should not be undervalued as it has the potential to really increase our bandwidth on Windows by basically the size of our community. Packages that couldn't be built due to CMake files missing or other problems also dissolve away. This has the potential to substantially reduce the effort required to get a package working on all platforms, which makes us more likely to do exactly that.
+
+Also, it has the potential to free this quite painful constraint of compiler and CPython version. That has raised such issues as making custom patched versions of CPython ( https://github.com/conda-forge/conda-forge.github.io/issues/64 ) just to have C++11 features when using Python 2.7. Further this can free us from thinking about VC features entirely, which have had various issues.
+
+It is honestly making me seriously considering switching to MSYS2 with everything.
+
+Would be very curious to hear perspectives from a wide range of people on this. Please feel free to share your thoughts and also bring other people over that I have missed. I have put this on our docket for next weeks meeting.
+
+cc @username_13 @username_10 @username_5 @username_2 @username_6 @username_9 @mcg1969 @isuruf @ngoldbaum @username_4 @jasongrout @SylvainCorlay
+<issue_comment>username_1: This shouldn't break using pip with wheels. And also not break any of the ""how to compile python with native libs on windows""-guides, which users turn to when they have to build stuff for themself (e.g. the patched CPython should still be able to build and afterwards work with a pandas version which is compile the ""normal way"").
+
+My guess (which is based on compiling a few python native packages and fix a few errors on the way, but no deep knowledge on how compiler and ABI work) is that it will take more time to make it work (e.g. patch out WIN32 #ifdefs which then assume a certain compiler or things like mpl which when run on windows sets up the VS compilers) than what you gain by being able to use a compiler unconstrained by the python version.
+<issue_comment>username_2: Two things, in brief as I'm just heading out:
+
+  1. @username_3 has packaged many msys packages on the msys2 channel. This is great, but it involves a load of changes to conda-build etc to natively support it. This brings in the larger question of the scope of this project. It could really start to become enormous if we have builds for perl and all perl packages and msys and all msys packages and R and Python etc... Maybe we might think about how we interact with other channels? Perhaps, since this is a build requirement, we could almost run the channels in parallel?
+  2. I'm not sure that moving to msys actually 'replaces' VS. This is only the case if we **don't** link to VS, which would mean we lose compatibility with wheels/the rest of the Python ecosystem. If we do link against VS then we still have to build 3 versions on Windows and sort of the features headache we currently have.
+<issue_comment>username_0: Per point 2, @username_2, see this [comment]( https://github.com/conda-forge/staged-recipes/pull/364#issuecomment-212028074 ) from @username_3.
+<issue_comment>username_0: Per point 1, @username_2, we could investigate using this `pacondaman` and some sort of automated maintenance strategy like ( https://github.com/conda-forge/conda-forge.github.io/issues/51 ).
+
+Though I don't know if we will want to do that or if it will be that bad. Right now we build things like `autoconf`, `libtool`, `pkg-config`, etc. It shouldn't be a big deal to add MSYS style builds to these repos. It looks like the recipes needed already exist.
+<issue_comment>username_3: I expect to add all of the build tools as a matter of priority. So far only those needed for `R` have been added.
+<issue_comment>username_0: If you would like to try PRs to those feedstocks, that would be great. I think it will be me and @username_13 working with you for the most part as we are maintainers on these sorts of things. Definitely agree those are high priority. That was our mentality here too.
+<issue_comment>username_0: Sure. I'm betting there will be a bit of patching on the first few passes, which is fine. Normally we have been pretty eager to see patches move upstream. Though given you are a core developer of MSYS2 and there may be a fair bit of patching required, we might need to be more lax just so that we can keep this effort moving at a good pace. Also we may need to come up with a better system for tracking these patches.
+<issue_comment>username_3: The idea was to do a solution for DLLs and Python specifically where it looks at the C-Runtime already loaded by the process and stubs through to the functions there.
+
+The patching I refer to is specifically to patch the differences between MSYS2 upstream and Conda. You can see what I mean if you study https://github.com/username_3/conda-recipes/tree/MSYS2-pkg-conversion/msys2/m2-msys2-filesystem
+
+After unpacking the MSYS2 package, the patches are applied which allows us to make such modifications as we need to. It means we don't need MSYS2 upstream to put switches in for Conda (nor should they).
+<issue_comment>username_4: I seriously consider an MSYS-based Python ecosystem as a possible future alternative to VC-based builds. My hope (or, rather, expectation) is that recipes for MSYS will reuse much of the existing Linux scripts. In fact, there should be only one `build.sh` script that works for Linux, Mac and MSYS, with just occasional `ifs` to account for the remaining differences. For this to work, conda should treat the MSYS-based ecosystem as an entirely new platform.
+<issue_comment>username_0: Yes, this is exactly my hope. Ideally this will lower the threshold for getting productive packagers that are comfortable on *NIX systems trying things on Windows too. It should also significantly lower the maintenance burden with Windows.
+<issue_comment>username_5: Sorry to get a bit confused here, but, IIUC:
+
+MSYS is a port of the *nix command line tools (a shell and common
+utilities) to run semi-nativly on Windows.
+
+that gives us the regular make and all that, which is nice.
+
+But it also essentially requires using MInGW for the compiler, yes?
+Probably not strictly, but we wouldn't gain much without that.
+
+So this is really a question about using the MInGW compiler, yes? So I have
+these questions:
+
+Back in the day, you could use MinGW to build extensions compatible with
+the (""standard"", i.e. VS compiled) 32 bit Python (2.6 anyway) on Windows,
+it required a bit of hacking, and resulted in slower binaries than VS, but
+worked.
+
+However, my understanding is that MInGW never got ""properly"" ported and
+working for 64 bit -- so not sure the status of all that for 64 bit
+Windows. I do know for sure that I dropped MinGW years ago -- using VS was
+so much easier (provided I could find the Windows builds of the libs I
+needed)
+
+However, as of recently, the numpy folks have sponsored work on MinGW (or
+SOMETHING) that has gotten stable? now for 64 bit Windows, OpenBLAS,
+Fortran  and all -- so _maybe_ it's ready to rock. Is this what you're
+talking about using?
+
+And does this use the MS runtime that Python is already built against? --
+I'm pretty sure you NEED that to get full compatibility.
+
+
+As for:
+
+> Rr patched CPython:
+
+>> as making custom patched versions of CPython ( #64
+<https://github.com/conda-forge/conda-forge.github.io/issues/64> ) just to
+have C++11 features when using Python 2.7
+
+> This shouldn't break using pip with wheels.
+
+not sure what the ""this"" is -- but providing a new build of CPython with a
+different runtime would break binary wheels unless it was tagged in a
+different way (as a different platform) so that pip would know not to try
+to use a binary wheel built for the ""standard"" Windows Python.
+
+But I take it that this is about using MSYS/ MingGW for extensions and libs
+-- NOT python itself, yes?
+
+-CHB
+<issue_comment>username_5: Exactly.
+
+-CHB
+
+
+
+-- 
+
+Christopher Barker, Ph.D.
+Oceanographer
+
+Emergency Response Division
+NOAA/NOS/OR&R            (206) 526-6959   voice
+7600 Sand Point Way NE   (206) 526-6329   fax
+Seattle, WA  98115       (206) 526-6317   main reception
+
+Chris.Barker@noaa.gov
+<issue_comment>username_3: mingw.org and mingw-w64 are two different endeavors. There was a disagreement about whether you could use MSDN for reference, roughly speaking.
+
+mingw-w64 has had 64-bit from the start. MSYS2 is a software distro for Windows that's build on mingw-w64 and a fork of Cygwin (which is built on top of mingw-w64 these days and also provides a 64-bit variant).
+
+In Conda, our intention is to use it to provide a consistent POSIX build environment that interoperates with native tools, a native GNU toolchain and some GNU libraries without duplicating effort or further splitting the already small GNU-based Open Source on Windows developer community.
+<issue_comment>username_1: Can someone explain the gains from such a move?
+
+This is a deviation from upstream, sot this means that conda-forge has the complete burden to maintain forks to basically all tools and libs which assume ""win = VC"" , starting with python and conda-build itself (setup.py must find the right compiler). Basically every `if sys.platform == 'win32'` in any setup.py code or any `#if !defined(_WIN32)` is actually a `if the compiler is VC`, which would need to be patched (or at least confiremed that this is still right). IMO there is no incentive for upstreams to do such porting, because only conda-fore would have such a port. And there would still be a ""normal"" windows port, because otherwise conda-forge on windows would become irrelevant (unless this msys2 port would be compatible to the VS builds).
+
+examples for porting work: 
+* Matplotlib: https://github.com/matplotlib/matplotlib/blob/master/setupext.py#L201
+* pandas: https://github.com/pydata/pandas/blob/f71537ab2561ab5727008095e9685966619fa7b9/pandas/src/msgpack/sysdep.h#L39, https://github.com/pydata/pandas/blob/f71537ab2561ab5727008095e9685966619fa7b9/pandas/src/parser/io.h#L32
+
+So basically you would have all the efforts to support VC windows in addition to even more effort to support a msys2 port. So what are the gains?
+<issue_comment>username_4: I'm currently using MinGW as part of my VS builds in two situations:
+* for C packages that don't have a VS build system (e.g. `openblas`)
+* for Fortran compilation (e.g. parts of `scipy`)
+
+I consider MinGW (64-bit version) a mature compiler that doesn't cause any headaches -- it feels like its Linux counterpart. Linking of MinGW C/Fortran binaries into VS modules works mostly out of the box with two minor tweaks:
+* one must create link libraries from MinGW's runtime libs using `gendef` and `lib`
+* one must provide a few missing C99 functions (such as `asinh` or `csqrt`) in a little helper lib (note: this problem may have been solved in the meantime, I haven't checked recently)
+
+If MinGW worked for the entire Python ecosystem, one could mostly reuse the effort that was already spent on creating Linux recipes. People who are primarily working on Linux (i.e. many in the scientific computing community) might prefer (or rather: will love) this approach to porting their work to Windows. 
+
+Of course, whether this gain is worth the effort is a matter of judgement. At the very least, some experiments have to be done to determine exactly how big the effort would be. This certainly isn't something I want to pursue now -- I just wanted to point out the possibility.
+<issue_comment>username_0: Interesting that you mention OpenBLAS and needing a Fortran compiler. That's part of what sparked this discussion ( see PR https://github.com/conda-forge/staged-recipes/pull/364 ).
+
+A bit of an aside: It is worth noting that the BLAS part of OpenBLAS can be built with CMake (started near the end of 2014/beginning of 2015). However, that doesn't necessarily help people that want the LAPACK part too, which requires a Fortran compiler. Also, it means the loss of the assembly optimizations, which really puts the value in question IMHO. Though for using something easily on Windows, I suppose it still has value.
+<issue_comment>username_5: the numpy/scipy folks have been working hard on Mingw and OpenBLAS, and
+.... I've lost track of where they are at, but we should be sure to
+leverage what they've done.
+
+ -CHB
+<issue_comment>username_5: yup -- that would be nice.
+
+In practice, if it's easy to build stuff on Windows at the command line,
+then it's not hard to build a recipe -- but there are all too many libs
+that aren't in that state...
+
+-CHB
+
+
+
+
+-- 
+
+Christopher Barker, Ph.D.
+Oceanographer
+
+Emergency Response Division
+NOAA/NOS/OR&R            (206) 526-6959   voice
+7600 Sand Point Way NE   (206) 526-6329   fax
+Seattle, WA  98115       (206) 526-6317   main reception
+
+Chris.Barker@noaa.gov
+<issue_comment>username_6: Sorry I've been silent on this. +1 to investigating using MSYS2 and seeing how hard it is to build everything using it before committing to using it. I'm happy to help with this.
+<issue_comment>username_7: The [The Mingwpy project](http://mingwpy.github.io/index.html) page list some information on this. Still seems to be a work in progress.  Worth keeping an eye on though.
+<issue_comment>username_0: I was about to ask where to follow this progress on OpenBLAS, @username_5, but it looks like @username_7 has the answer already. Or are there more places to look?
+<issue_comment>username_0: As you referred to the more [general problem]( https://github.com/conda-forge/staged-recipes/pull/364#issuecomment-212170630 ) of packaging and working with MinGW-64 compilers, I am cc'ing you here @mikofski. Also, I am cc'ing the [NumFocus grant](https://mingwpy.github.io/proposal_december2015.html) authors ( @username_12 @rgommers @matthew-brett @username_8 @ogrisel ) here, as well.
+
+Here we are discussing how best to explore the interaction between conda-forge and MSYS2. We are interested in the ability of working with Windows in nearly the same way we do with any *NIX platform (many of whose builds tools are packaged already). While the idea has been floating around, our attempt of building OpenBLAS at conda-forge has raised this more general point of how we work with MinGW-64 compilers and MSYS2. As there now are [quite a few packages available]( https://anaconda.org/msys2/ ) to start exploring this problem and some tools to aid in their automated addition, we are very eager to see where and how we can put them to use. Also, related is how this system is maintained. We are planning to have a meeting where we discuss [this and other issue]( https://conda-forge.hackpad.com/conda-forge-meeting-notes-copied-2YkV96cvxPG#:h=2016-04-28 ) at conda-forge. Anyone who is interested is welcome to come.
+<issue_comment>username_2: I think there are sort of two separate issues:
+
+  1. We need an msys2/mingw-w64 toolchain if we want to support certain builds such as OpenBLAS and ffmpeg. We almost certainly need this toolchain to correctly link to the appropriate VS versions for each Python version. This is a practical issue that I believe @username_3 is very close to having solved (if not already solved).
+  2. We may want to swap all builds to this toolchain as it removes the burden of writing Windows batch files or having to deal with quirks in the older VS compilers. This, IMHO, is a much larger project and perhaps out of the scope of conda-forge. Which is not to say I wouldn't be interested in helping see how far we could push it, but I feel like it would really require cooperation with the Python Core devs.
+
+The Intel Fortran Compiler is not free or available to us, so if we want to compile Fortran we need the msys2 toolchain. I think we should focus on how we enable the use of that toolchain for projects that already require it, like ffmpeg and OpenBLAS - rather than patching all projects to build with msys2.
+<issue_comment>username_8: An intermediate step would be to use msys2 for scripting but continue to call msvc. This would at least let you get rid of the .bat files
+<issue_comment>username_2: I thought that only issue with Python 3.5 was if we want to link in a 'clever' way to the new versionless MSVCRT? If we just want to do the old way and link directly to msvcrt14 that should be possible, no? Seems like a reasonable stop gap - since we have that issue with the other VS versions anyway, so for the time being I don't see the problem with continuing it into Python 3.5 until mingw is sorted.
+<issue_comment>username_3: @username_8 You are correct, I'm not actively working on it. MSYS2 is coming to Conda to address some of the other issues of building software on Windows (POSIX shell, Autotools, GNU toolchain with gfortran, git, CMake, consistency over all those things - we'll end up with more consistency here than the Unixes ironically since there's only one MSYS2).
+
+@username_2 UCRT is quite a lot different to the other CRTs and it'll require a reasonable amount of effort above what was required for e.g. to upgrade to msvc2012. @username_8 and @username_12 are far more knowledgeable about the ins and outs of it since my involvement so far has mostly been trying to figure out when I might get time to look into it properly.
+<issue_comment>username_8: Right, starting with msvc 2015 there is no msvcrt at all :-). They changed the names and semantics of a bunch of symbols, they removed a few (or rather: moved them to a private helper library, vcruntime140) that we will want to replace with our own versions, and in general all symbols got rearranged into a whole collection of new libraries. AFAIK there's nothing deeply difficult here, but it's complicated, especially since we would like to do the work upstream in mingw-w64 rather than make a fork that we will have to maintain forever. (mingwpy is effectively a fork, but that work is much less intrusive so tracking upstream is relatively easy, and for several reasons upstream is less interested in helping with mingwpy and more interested in helping with the msvc 2015 stuff, so the calculation is different.)
+<issue_comment>username_8: OTOH if someone wanted to try just wading in and hacking mingw-w64 to work with the UCRT then we might at least learn something. Maybe it will turn out to not be that hard :-). I'm happy to share what I know and give hints (and I guess @username_3 and others are as well).
+<issue_comment>username_8: BTW are these meeting details available anywhere? (Like, when is it?)
+<issue_comment>username_0: Yes, those are important details. :wink:
+
+We have been putting our agendas (with dates) on them about when we meet and what we will discuss in [hackpad]( https://conda-forge.hackpad.com/ ). Time is 1400 UTC. We have been doing them on Google Chat. Normally @username_10 sends out a link before so that we can join the same chat room.
+<issue_comment>username_0: Also, anyone is welcome to add items to the agenda.
+<issue_comment>username_5: blocker to this is that > higher-ups at Continuum don't consider it a
+priority,
+
+So how is continuum doing Fortran on Win64 for python 3.5? The intel
+compiler? We really need SOME way to build Fortran extensions.
+
+and while I""m at it what's the best practice for Fortran with Python2.7 an
+Anaconda on Win64...
+
+-CHB
+
+
+
+-- 
+
+Christopher Barker, Ph.D.
+Oceanographer
+
+Emergency Response Division
+NOAA/NOS/OR&R            (206) 526-6959   voice
+7600 Sand Point Way NE   (206) 526-6329   fax
+Seattle, WA  98115       (206) 526-6317   main reception
+
+Chris.Barker@noaa.gov
+<issue_comment>username_9: I'm not completely certain, but I'm pretty sure we use the Intel compiler.
+<issue_comment>username_0: That would make sense. FWICT the Intel compiler is [pretty nicely compatible]( https://software.intel.com/en-us/articles/intel-c-compiler-compatibility-with-microsoft-visual-c ) with VC. Though I have no experience using it. Also, I don't know what would go into getting that into the VM(s).
+<issue_comment>username_0: @username_8 @username_3 and others interested in coming to the meeting next week the date has been corrected from Thursday to Friday. The time is still the same (1400 UTC).
+<issue_comment>username_3: Ok thanks, I'll await the link to the Hangout then.
+<issue_comment>username_10: Hangout link can be found at https://conda-forge.hackpad.com
+<issue_comment>username_0: Thanks @username_10.
+<issue_comment>username_11: I'm a little surprised no one has mentioned this here, but it is possible to build CPython 3.5 using mingw-w64 GCC (and 2.7 as well with a somewhat different set of patches). If you install mingw-w64-python3 in MSYS2, this is what you get. However it requires 90-odd patches that upstream CPython-dev has been very resistant to even consider reviewing the first handful, much less merge and work towards getting this to work out of the box. See https://github.com/Alexpux/MINGW-packages/blob/master/mingw-w64-python3/PKGBUILD for all the gory details.
+
+This is the extreme case of forking a whole new platform for ease of building scientific extensions that need things MSVC doesn't support like Fortran, inline assembly, building with autotools, etc. But it has the advantage that it works today, unlike getting mingw-w64 to link against the VC 2015 runtime. In Julia's case we choose to completely ignore MSVC as it's a lousy compiler that doesn't meet our needs, and it's way too foreign to expect open-source developers who mostly use Linux and Mac to work with.
+<issue_comment>username_8: @username_11: unfortunately, a Python distribution for Windows that can neither build nor use pypi wheels is unlikely to see much uptake. Also, conda-forge has no control over what compiler is used to build Python itself, unless they abandon anaconda compatibility entirely.
+<issue_comment>username_11: Depends where you'd rather invest your effort. Building a custom python ecosystem of your own, or building a custom compiler toolchain of your own for compatibility with a compiler that you don't actually want to use. You're letting the way python.org chooses to build Python binaries drive the decisions here, and it's not a foregone conclusion that it has to stay that way.
+<issue_comment>username_4: I don't think so. If you want to do serious scientific computing in Windows, pypi is just not good enough, and I'm skeptical that its design can be fixed. conda is the only package manager on Windows whose approach is sufficiently powerful to make this work (although it's still quite a way to go). If conda lives up to our expectations, I believe it will replace pypi on Windows entirely. So, let's make conda and conda-forge as good as possible and not constrain ourselves by upstream's prejudice.
+<issue_comment>username_11: Pip and the wheels situation and the pynativelib proposal are all rapidly improving and I'm sure everyone appreciates the work Nathaniel and others have done to make that possible. And mingwpy will hopefully reach its goals sooner or later w.r.t. MSVC 2015 compatibility, and once it's there the mingw-w64-using community will evaluate whether it's something that will be more broadly useful for things like MSYS2, Julia, etc where currently MSVC is just ignored.
+
+In the meantime, it seems there are more people capable of working on rebuild-the-world packaging infrastructure than hacking on the guts of compiler runtime compatibility issues. It's at least worth experimenting with, since there are examples of other ecosystems that rebuild everything on their own and do fine without worrying about ABI compatibility with what's posted on pypi. Cygwin has peacefully been building its own set of python packages for decades and it works decently for its users.
+<issue_comment>username_3: I've not mentioned MSYS2's mingw-w64-python ports yet since they're not something that we plan to add to Conda as it would cause confusion for our users and also add significantly to my workload, ending up with another Conda Python ecosystem that bears no resemblance to the Linux and OS X ones. That time would be better spent on the effort to make the toolchains compatible.
+
+Guido said that if we identified mingw-w64 Python as different from MSVC Python from pip and wheels perspective) then the idea of a mingw-w64 Python wouldn't be rejected outright, but there's still the problem that CPython developers have mostly displayed reactions ranging from disinterest to contempt and fear at the notion of compiling Python on Windows using anything but MSVC.
+
+The patches will continue to be maintained, as time allows, by the MSYS2 project and interested contributors are welcome to lend a hand there..
+
+We should discuss this at the conda-forge meeting tomorrow I think.
+<issue_comment>username_12: @username_3, can you make a summary of features/properties  you would expect from mingwpy to be included into conda?
+
+- static vs. canonical linking of gcc runtime code
+- posix vs. win32 threads model
+- exception model for 32 bit code: sjlj vs. dwarf
+- long double default implementation: extended precision vs. double precision like MSVC (can be changed at compile time btw.)
+- things I forgot to mention
+<issue_comment>username_11: My personal preferences are:
+- defaulting to dynamic linking (adding `-static` within any build systems that absolutely need it)
+- posix threads since LLVM and other libraries are making use of C++11 threads these days (and winpthreads is a small liberally licensed dll, and the performance has improved with recent mingw-w64 runtime versions though still worth benchmarking carefully to see if it's noticeably worse than win32 thread model), or maybe building both and providing a choice like Debian's recent cross compiler packages do
+- sjlj if you ever want to throw, unwind, or debug through closed-source binaries (also worth benchmarking the perf difference of this)
+- could go either way, extended precision long doubles can be useful once in a while but they're tough to make portable
+- I'll make a note that `-mincoming-stack-boundary=2` is needed once in a while even if you stick to the conventional msvcrt.dll used by mingw-w64. I've seen segfaults without this flag on i686, usually when threading is involved. https://github.com/Alexpux/MINGW-packages/pull/720 / https://github.com/libgit2/libgit2/issues/3342 is one concrete example though it has come and gone with different libgit2 versions
+<issue_comment>username_3: I can't see much problem with changing MSYS2's i686 mingw-w64-gcc to use `-mincoming-stack-boundary=2`.
+<issue_comment>username_13: If fact we already do :smile: 
+
+https://github.com/conda-forge/pyspharm-feedstock/blob/master/recipe/meta.yaml#L21
+
+`mingwpy` is my preferred option for Fortran on Windows so far.
+<issue_comment>username_12: Just 2 links for all developers expecting extra precision from long double arguments with FPU utilization:
+
+- https://randomascii.wordpress.com/2014/10/09/intel-underestimates-error-bounds-by-1-3-quintillion
+- http://notabs.org/fpuaccuracy/index.htm
+
+Unfortunately Intel FPU trigonometric functions offers much less precision than expected if used with specific argument domains or used with argument reduction. This affects long double precision values as well. 
+
+Today you are better of using SSE2 math code libraries or use dedicated multiprecision libraries if double precision is not enough.
+<issue_comment>username_5: Sorry, being really lazy here: does this have implications for which gcc
+libc is used? I.e is the old one in CentOS 5 still using the hardware
+fsin()?
+
+CHB
+<issue_comment>username_0: Going to close this out. `msys2` packages exist and are in some cases used to build packages in `defaults` and `conda-forge`. Further discussions in this area would be better targeted at specific use cases for `msys2`.<issue_closed>"
+cert-manager/website,552182545,85,,"[{'action': 'opened', 'author': 'munnerz', 'comment_id': None, 'datetime': '2020-01-20 09:42:06+00:00', 'masked_author': 'username_0', 'text': 'To make it easy to discover information across the website, we should add search functionality that covers at least the documentation.\r\n\r\nHugo is a static site generator, so this normally involves utilising some additional tooling. [kubernetes.io](https://kubernetes.io/) uses ""Google Custom Search"", [Algolia](https://algolia.com) has also been recommended as a powerful alternative.\r\n\r\n/help', 'title': 'Add search functionality to the website', 'type': 'issue'}
+ {'action': 'created', 'author': 'meyskens', 'comment_id': 576194066.0, 'datetime': '2020-01-20 09:50:28+00:00', 'masked_author': 'username_1', 'text': ""I contacted Algolia to see if they can get us the open source plan (with extra queries)\r\nLooking into Hugo's docs there are several self hosted solutions but I guess that will have extra work.\r\nI would prefer Algolia over Google as we can control our indexes with Algolia and can quickly change content and links."", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'meyskens', 'comment_id': 582467891.0, 'datetime': '2020-02-05 15:39:42+00:00', 'masked_author': 'username_1', 'text': '/assign', 'title': None, 'type': 'comment'}
+ {'action': 'closed', 'author': 'meyskens', 'comment_id': None, 'datetime': '2020-02-20 12:53:00+00:00', 'masked_author': 'username_1', 'text': '', 'title': None, 'type': 'issue'}
+ {'action': 'created', 'author': 'meyskens', 'comment_id': 589006530.0, 'datetime': '2020-02-20 12:53:00+00:00', 'masked_author': 'username_1', 'text': '![Screenshot from 2020-02-20 13-52-32](https://user-images.githubusercontent.com/1625272/74935285-e56a9000-53df-11ea-94a7-d78d1d18f144.png)\r\nI think this can be closed now we have search!', 'title': None, 'type': 'comment'}]","<issue_start><issue_comment>Title: Add search functionality to the website
+username_0: To make it easy to discover information across the website, we should add search functionality that covers at least the documentation.
+
+Hugo is a static site generator, so this normally involves utilising some additional tooling. [kubernetes.io](https://kubernetes.io/) uses ""Google Custom Search"", [Algolia](https://algolia.com) has also been recommended as a powerful alternative.
+
+/help
+<issue_comment>username_1: I contacted Algolia to see if they can get us the open source plan (with extra queries)
+Looking into Hugo's docs there are several self hosted solutions but I guess that will have extra work.
+I would prefer Algolia over Google as we can control our indexes with Algolia and can quickly change content and links.
+<issue_comment>username_1: /assign<issue_closed>
+<issue_comment>username_1: ![Screenshot from 2020-02-20 13-52-32](https://user-images.githubusercontent.com/1625272/74935285-e56a9000-53df-11ea-94a7-d78d1d18f144.png)
+I think this can be closed now we have search!"

@@ -1,0 +1,902 @@
+gohugoio/hugo,300990323,4460,,"[{'action': 'opened', 'author': 'bep', 'comment_id': None, 'datetime': '2018-02-28 11:33:47+00:00', 'masked_author': 'username_0', 'text': 'I know this has been requested before, in the form of some `extends = some-other-theme`.\r\n\r\nThis isn\'t ""theme inheritance"" in its purest form (which would be ""theme1 extends theme2 extends theme3""), more like theme composition. Which is much simpler to understand/implement, but with most of the added benefits.\r\n\r\nThis relates to my work on https://github.com/username_0/html5up-to-hugo \r\n\r\nThe simple rule is that **the themes\' files will form a big overlay/union file system from left to right.**\r\n\r\nSo:\r\n\r\n```toml\r\ntheme = [""base"", ""my-theme"" ]\r\n```\r\n\r\n* All files in `base` will be used unless there is a file with the same name in `my-theme`.\r\n* This will work with layouts, data, i18n, static (and in the future: content etc.)\r\n\r\nWhat do you say?', 'title': 'Allow theme = [""base"", ""my-theme"" ] (aka theme composition)', 'type': 'issue'}
+ {'action': 'created', 'author': 'bep', 'comment_id': 369213907.0, 'datetime': '2018-02-28 11:41:33+00:00', 'masked_author': 'username_0', 'text': 'Note that this is a ""proposal"", I\'m not done with my part of the thinking here -- maybe this belongs in the theme itself etc...', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'RickCogley', 'comment_id': 369219360.0, 'datetime': '2018-02-28 12:05:10+00:00', 'masked_author': 'username_1', 'text': 'One thing I see on the forum a lot is, ""how can I make page X look _different_ from the rest of the site"". Could this facilitate styling a page like that, kind of overriding the theme applied to most of the site?', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'brunoamaral', 'comment_id': 369221829.0, 'datetime': '2018-02-28 12:16:09+00:00', 'masked_author': 'username_2', 'text': ""From @username_0's description, yes it does. You could for example have your own version of single.html or of a shortcode.\r\n\r\nI can see how this is useful. It's the same mechanic that Wordpress uses in creating 'child-themes', but I am not a fan. I remember losing track of whether I was editing the right files.\r\n\r\nIt's a personal perspective. Others will make it useful and may help produce more themes for Hugo. I don't have the knowledge to comment on the implementation. So I will abstain from voting and may even end up using it anyway."", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'kaushalmodi', 'comment_id': 369223321.0, 'datetime': '2018-02-28 12:23:18+00:00', 'masked_author': 'username_3', 'text': '+1 if I can have my personal ""theme"" of partial and shortcode collection, and can keep that theme as the secondary theme. \r\n\r\nThinking of something like:\r\n\r\n```\r\ntheme = [""actual-theme"", ""partial-shortcode-collection-theme"" ]\r\n```\r\n\r\nI\'ve wanted this feature for a while. I had tried symlinking my commonly used partials/shortcodes from a common git repo, but symlinks don\'t work.', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'Jos512', 'comment_id': 369239012.0, 'datetime': '2018-02-28 13:28:59+00:00', 'masked_author': 'username_4', 'text': 'Child themes are a great idea. They should make it easier to get started with Hugo for beginners. And they probably also make it a lot easier for people to update the original, parent theme.', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'bep', 'comment_id': 369245089.0, 'datetime': '2018-02-28 13:51:44+00:00', 'masked_author': 'username_0', 'text': '@username_1 not sure about your example, but @username_3 \'s example is a primary use case, and I think this becomes super-powerful when we get proper dependency management, i.e:\r\n\r\n```bash\r\ntheme = [""https://github.com/spf13/hyde/v2"", ""https://github.com/username_3/shortcode-pack/v1"" ]\r\n```\r\n\r\nWhen Russ Cox is done with his brilliant thinking, I\'m going to steal his thoughts: https://research.swtch.com/vgo\r\n\r\nTo me, this is mostly about DRY. On the project side, we can already today extend the theme by adding a `single.html` or overriding a partial etc. But that is not an option. So we get themes like `hydex` and `hydey` -- only slightly different ports of the same theme. If you want to create a new `hyde` theme with some blue colour, this should be possible.\r\n\r\nThinking about it, I think I will try to get this to work both on theme and in project. \r\n\r\nSo in `theme.toml` for my new Hyde theme `hyde32`:\r\n\r\n```toml\r\n# This theme is based on SPF13\'s port of Hyde, but with prettier colours.\r\ntheme = [""hyde""]\r\n```\r\n\r\nAnd then in my `config.toml`:\r\n\r\n```toml\r\ntheme = [""hyde32"", ""partial-shortcode-collection-theme""]\r\n```\r\n\r\nThe ordered set of file collections will then be:\r\n\r\n```bash\r\nhyde, hyde32, partial-shortcode-collection-theme\r\n```\r\n\r\nIn its first iteration, the end user is responsible for pulling the above 3 themes into /themes -- but the ultimate goal here is to do:\r\n\r\n```bash\r\n# Shallow clone, no themes (only referenced in config.toml)\r\ngit clone https://github.com/username_0/my-site\r\ncd my-site\r\n# hugo will download dependencies if not cached.\r\nhugo \r\n```', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'regisphilibert', 'comment_id': 369269033.0, 'datetime': '2018-02-28 15:09:34+00:00', 'masked_author': 'username_5', 'text': 'I think it will be very useful especially with output formats. If want to add an ""api"" dimension to your content, all you\'d have to do is add a special ""api"" theme and reference it. Rather than single handedly adding the json templates in your layouts/_default or other.', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'regisphilibert', 'comment_id': 369270043.0, 'datetime': '2018-02-28 15:12:40+00:00', 'masked_author': 'username_5', 'text': 'Also it will allow theme developer to release several ""extension"" for their theme which not everyone will need. Like a ""photo gallery"" extension or a ""Dentist"" extension for a theme whose base is made for broader ""health"" entities.', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'budparr', 'comment_id': 369273541.0, 'datetime': '2018-02-28 15:23:27+00:00', 'masked_author': 'username_6', 'text': 'This would be very useful. My use case is similar to @username_3  in that I keep a set of really basic files (_default layouts, etc.) to reuse on all projects and then layouts/themes for specific types of projects on top of that.', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'bep', 'comment_id': 369368646.0, 'datetime': '2018-02-28 20:16:12+00:00', 'masked_author': 'username_0', 'text': 'A development tip: Features like this are hard to get going unless you have a solid and failing test up and running:\r\n\r\n```go\r\nconst (\r\n\t\tthemeStandalone = `\r\n\t\t\tname = ""Theme Standalone""\r\n`\r\n\t\tthemeCyclic = `\r\n\t\t\tname = ""Theme Cyclic""\r\n\t\t\ttheme = ""theme3""\r\n`\r\n\t\ttheme1 = `\r\n\t\t\tname = ""Theme #1""\r\n`\r\n\r\n\t\ttheme2 = `\r\n\t\t\tname = ""Theme #2""\r\n\t\t\ttheme = ""theme1""\r\n`\r\n\r\n\t\ttheme3 = `\r\n\t\t\tname = ""Theme #3""\r\n\t\t\ttheme = [""theme2"", ""themeStandalone"", ""themeCyclic""]\r\n`\r\n\r\n\t\ttheme4 = `\r\n\t\t\tname = ""Theme #4""\r\n\t\t\ttheme = ""theme3""\r\n`\r\n\r\n\t\tsite1 = `\r\n\t\t\ttheme = ""theme4""\r\n`\r\n\t\tsite2 = `\r\n\t\t\ttheme = [""theme2"", ""themeStandalone""]\r\n`\r\n\t)\r\n```\r\n\r\nWith a test that fails to build `site1` and `site2` -- then the fun starts! It is a threshold of boring work to get there.', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'regisphilibert', 'comment_id': 373723405.0, 'datetime': '2018-03-16 14:05:46+00:00', 'masked_author': 'username_5', 'text': 'On more use case is ""shortcode"" bundles. Your theme layout files would only contains shortcode files and people could use them by just adding your theme to their ""theme set"" and easily upgrade with future updates.', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'bep', 'comment_id': 373746829.0, 'datetime': '2018-03-16 15:21:05+00:00', 'masked_author': 'username_0', 'text': 'I just figured out that this would also be really cool for bundling of shortcodes!\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n:-)', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'regisphilibert', 'comment_id': 373748150.0, 'datetime': '2018-03-16 15:25:02+00:00', 'masked_author': 'username_5', 'text': 'Or bundling of output formats templates ! 🎉  \r\nYou could even design an ""Algolia"" search theme ""addon"" along with script, css, template, output format template etc...\r\n\r\nSo much possibilities!', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'solutionroute', 'comment_id': 373871601.0, 'datetime': '2018-03-16 23:30:39+00:00', 'masked_author': 'username_7', 'text': 'Yep, all those things that we copy from theme to theme, often without changing a single line.  Shortcodes, output formats. Heck even ""base"" for many. \r\n\r\nNote if it makes dealing with static asset customization (like a site font file or landing image', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'bep', 'comment_id': 379494694.0, 'datetime': '2018-04-07 19:49:21+00:00', 'masked_author': 'username_0', 'text': 'Just a quick note that this is still pretty much priority.\r\n\r\nIn Hugo 0.38 themes got `config.toml` with namespaced `.Params` etc. and this will, of course, extend to these composites. Which will make something really powerful.', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'regisphilibert', 'comment_id': 379744206.0, 'datetime': '2018-04-09 13:03:17+00:00', 'masked_author': 'username_5', 'text': ""Can't wait for @username_3 to make a mini-theme out of his debug functionalities! (debugprint and so forth...)"", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'kaushalmodi', 'comment_id': 379747712.0, 'datetime': '2018-04-09 13:15:48+00:00', 'masked_author': 'username_3', 'text': '@username_5 Thanks! By now, I have couple of ""mini-themes"" I\'d like to roll out once this feature is out:\r\n\r\n- Debugging (`debugprint.html` partial, Kind/Type/etc. debug info, etc.)\r\n- ATOM as custom output format\r\n- Better versions of internal shortcodes and templates: `figure`, `opengraph`, `twitter_cards`, ..', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'bep', 'comment_id': 392266187.0, 'datetime': '2018-05-26 14:48:05+00:00', 'masked_author': 'username_0', 'text': '@username_3 @username_5 coming back to this issue after some months, I was a little big confused about my own writing above.\r\n\r\nGiven:\r\n\r\n\r\n```\r\ntheme = [""base"", ""my-theme"" ]\r\n```\r\n\r\nOn duplicates, what theme would you say should win? `base` or `my-theme`?', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'bmackinney', 'comment_id': 392266363.0, 'datetime': '2018-05-26 14:51:27+00:00', 'masked_author': 'username_8', 'text': '👍 `my-theme`', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'kaushalmodi', 'comment_id': 392266696.0, 'datetime': '2018-05-26 14:57:31+00:00', 'masked_author': 'username_3', 'text': '@username_0 Of course `my-theme`. \r\n\r\nI can visualize that setup as this pseudo code:\r\n\r\n```\r\ntheme my-theme extends base-theme\r\n  function single.html\r\n    """"""\r\n    Only single.html from my-theme overriding that from base-theme\r\n    """"""\r\n```', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'kaushalmodi', 'comment_id': 392266793.0, 'datetime': '2018-05-26 14:58:48+00:00', 'masked_author': 'username_3', 'text': 'If `my-theme` is overriding unwanted layouts and config params, user should trim them out.', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'bep', 'comment_id': 392267707.0, 'datetime': '2018-05-26 15:14:22+00:00', 'masked_author': 'username_0', 'text': 'I guess the theme names masked my real question, how about this:\r\n\r\n```\r\ntheme = [""theme1"", ""theme2"" ]\r\n```\r\n\r\nWho should win? Is it now obvious that ""theme1"" is the base theme? I obviously thought so back in February, just wanted to make sure ...', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'vassudanagunta', 'comment_id': 392268400.0, 'datetime': '2018-05-26 15:26:46+00:00', 'masked_author': 'username_9', 'text': 'Be consistent with #4436', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'kaushalmodi', 'comment_id': 392268968.0, 'datetime': '2018-05-26 15:36:41+00:00', 'masked_author': 'username_3', 'text': 'I think either direction (left to right, or right to left precedence) would work; just needs to be documented.\r\n\r\nBut I would suggest left to right increasing precedence order.. here\'s a reason:\r\n\r\nA user could have this initially:\r\n\r\n```toml\r\ntheme = [""some-theme""]\r\n```\r\n\r\nThen they choose to *steal* certain layouts from a different theme. So they then have:\r\n\r\n```toml\r\ntheme = [""some-theme"", ""other-theme""]\r\n```\r\n\r\ni.e. they just need to append that to the right. So the delta of change only happen towards the right of that line.\r\n\r\nLater, they tweak some portion of that ""other-theme"" and override just the RSS layout, so it will look like..\r\n\r\n```toml\r\ntheme = [""some-theme"", ""other-theme"", ""my-rss""]\r\n```\r\n\r\nWhat I am getting at is that the initial `theme = [""some-theme""` part stays constant throughout. If the precendence is reversed, the base theme position will keep moving around.', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'regisphilibert', 'comment_id': 392269061.0, 'datetime': '2018-05-26 15:38:20+00:00', 'masked_author': 'username_5', 'text': ""`theme-2` 👍 \r\n\r\nIt is my understanding that in any system, hardware of software, the layer on top will hide/override the layers below. As a left to right reader, it therefore makes sense to me that `theme-2\x1b` is the layer on top.\r\n\r\nUltimately of course and that goes without saying, project's layouts should remain the utlimate rulers of this ecosystem :)"", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'bep', 'comment_id': 392269161.0, 'datetime': '2018-05-26 15:39:44+00:00', 'masked_author': 'username_0', 'text': ""One last question. Since I wrote my test on this, a theme can now have `confit.toml` (i.e. site configuration). I also has a `theme.toml`, which is information about the theme -- we use this info to build the theme site etc.\r\n\r\nSo, \r\n\r\nWith this new feature both the project and the themes can be ... themes.\r\n\r\nThe question is:\r\n\r\nWhere to put the `themes'` `theme` configuration. `theme.toml` or `config.toml`?"", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'regisphilibert', 'comment_id': 392269318.0, 'datetime': '2018-05-26 15:42:07+00:00', 'masked_author': 'username_5', 'text': 'Wait a minute, why?', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'bep', 'comment_id': 392269531.0, 'datetime': '2018-05-26 15:45:37+00:00', 'masked_author': 'username_0', 'text': 'I added a missing ""d"" to the above, which may clear things up.\r\n\r\nThe obvious motivation behind this is to create a new `hyde` port without having to copy-and-paste everything.\r\n\r\nSo I create my hyde-z theme and configure it to be based on some other theme: `theme = hyde-x`', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'bep', 'comment_id': 392269753.0, 'datetime': '2018-05-26 15:49:20+00:00', 'masked_author': 'username_0', 'text': 'Yes, that makes sense. Another obvious use case would be shortcode collections, so:\r\n\r\n```toml\r\ntheme = [""my-theme"", ""cool-shortcodes""]\r\n```\r\n\r\nIn the above, on duplicate shortcodes, the right will win. If the shortcode exists in the project, that will of course win (as it is today).', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'regisphilibert', 'comment_id': 392269952.0, 'datetime': '2018-05-26 15:52:19+00:00', 'masked_author': 'username_5', 'text': ""I see two ways to do this.\r\n**The old way:**\r\nAdd your layouts files in `layouts` directory and set your theme as `hyde-x`:\r\n`themes = 'hyde-x'`\r\n**The new way:**\r\nCreate a `/themes/hyde-z` directory alongside `themes/hyde-x` and set theme both in your config.toml:\r\n`themes = ['hyde-x', 'hyde-z']`\r\n\r\nIn both case, your project is not a theme, so I am still confused about your previous sentence :/"", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'kaushalmodi', 'comment_id': 392270291.0, 'datetime': '2018-05-26 15:57:46+00:00', 'masked_author': 'username_3', 'text': 'I honestly think of `theme.toml` *less of a functional config* and more of a *meta-data config*.\r\n\r\nI think the `theme` should go in `config.toml`. Now.. with that, I believe that if the theme\'s config.toml has:\r\n\r\n```toml\r\n# theme-x\'s config.toml\r\ntheme = [ ""theme-x"", ""cool-shortcodes""]\r\n```\r\n\r\nand user\'s site config.toml has:\r\n\r\n```toml\r\n# user\'s site config.toml\r\ntheme = [ ""_this_"", ""my-shortcodes""]\r\n```\r\n\r\n*Looks like we will need a **special placeholder** like `""_this_""`?* Otherwise, how will ""theme-x"" refer just to its own stuff without including the extensions?\r\n\r\nDoes that effectively become:\r\n\r\n```toml\r\n# user\'s site config.toml\r\ntheme = [ ""theme-x"", ""cool-shortcodes"", ""my-shortcodes""]\r\n```', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'regisphilibert', 'comment_id': 392270736.0, 'datetime': '2018-05-26 16:04:40+00:00', 'masked_author': 'username_5', 'text': 'I understand now. I always assumed the user would add themes’ port himself in his config.toml. \r\n\r\nI don’t think a theme should be able to set itself as a layer of another theme. This is prone to inheritance being unknown to the user. \r\n\r\nThe port should let the user know he/she needs both themes in his themes directory and reference them both in his project’s config.toml this order.', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'bep', 'comment_id': 392270943.0, 'datetime': '2018-05-26 16:07:43+00:00', 'masked_author': 'username_0', 'text': '@username_5 your project is not a theme, but it can be _themed_ ... Which in my English means that you can configure it to use a theme.\r\n\r\n@username_3 \r\n\r\nIf project is:\r\n\r\n```\r\ntheme = [ ""my-theme"", ""my-shortcodes""]\r\n```\r\n\r\nAnd theme is:\r\n\r\n```\r\ntheme = [ ""theme-x"", ""even-cooler-shortcodes""]\r\n```\r\n\r\nThe final graph will be:\r\n\r\n\r\n [ ""theme-x"", ""even-cooler-shortcodes"", ""my-shortcodes""]\r\n\r\n\r\nThe above assumes that ""theme-x"" is shallow.', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'bep', 'comment_id': 392271194.0, 'datetime': '2018-05-26 16:11:25+00:00', 'masked_author': 'username_0', 'text': '@username_5 maybe ... I\'m not totally convinced either way. We have lots of very similar themes as it is today. People create a new theme just to change some minor thing. And since you currently would have to do manual clones, It would not be ""unknown to the user"".', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'kaushalmodi', 'comment_id': 392271449.0, 'datetime': '2018-05-26 16:15:23+00:00', 'masked_author': 'username_3', 'text': 'I\'m on a move, so cannot articulate properly right now.. may be do something like:\r\n\r\n```toml\r\n# theme config\r\ntheme_extensions = [""a"", ""b""]\r\n```\r\n\r\nIf user uses that theme without modifying theme-extensions, they inherit the theme\'s settings as they do now. \r\n\r\nIf user wants to add their own extensions, they need to do:\r\n\r\n```\r\n# user site config\r\ntheme_extensions = [""a"", ""b"",""c""]\r\n```', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'bep', 'comment_id': 392271682.0, 'datetime': '2018-05-26 16:19:02+00:00', 'masked_author': 'username_0', 'text': 'But it can be *themeD*?', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'bep', 'comment_id': 392272854.0, 'datetime': '2018-05-26 16:38:09+00:00', 'masked_author': 'username_0', 'text': '... that said, I see enough questions in the above conclude what we can wait with the ""inheritance"" part, and start with the simpler setup where a project only can use themes (i.e. composition).', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'kaushalmodi', 'comment_id': 392273990.0, 'datetime': '2018-05-26 16:56:13+00:00', 'masked_author': 'username_3', 'text': ""Though, don't you think that having an extra `theme_extensions` for list config param will make this easier and leave the `theme` as a single string value."", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'bep', 'comment_id': 392274321.0, 'datetime': '2018-05-26 17:01:09+00:00', 'masked_author': 'username_0', 'text': 'What is the difference between a theme and a theme_extension? Why create one more term if they are the same? ""Themes can be composed"" is simpler to explain to people than ""a project can have a theme. You can also add theme_extensions, which is the same as a theme, but just named differently.""', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'kaushalmodi', 'comment_id': 392274886.0, 'datetime': '2018-05-26 17:09:30+00:00', 'masked_author': 'username_3', 'text': ""It will blend into the theme extension inheritance that I talked about in my comment earlier. \r\n\r\nWith just one theme param, it will get difficult if users want to remove one or more of the extensions from the original theme. \r\n\r\nHaving the extensions, using the same example as earlier, user can set the extensions param as follows:\r\n\r\n- [] # empty\r\n- a\r\n- a,b,c\r\n- c\r\n- if they don't set, they get the extensions the theme defined (a,b)."", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'bep', 'comment_id': 392276161.0, 'datetime': '2018-05-26 17:31:43+00:00', 'masked_author': 'username_0', 'text': '@username_3 you have a point, but if we start with ""theme in project only"", this can wait. It is a simpler model.\r\n\r\nIf we somehow need to control order at some point, we could allow the theme as a more complex structure:\r\n\r\n```toml\r\n[themes]\r\n[themes.my-theme]\r\nweight = 1\r\n```\r\n\r\nWhich then could override the default right-to-left order you get.', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'bep', 'comment_id': 392316343.0, 'datetime': '2018-05-27 09:01:34+00:00', 'masked_author': 'username_0', 'text': 'No (or maybe, but certainly not in the first iteration).\r\n\r\nYou started the talk about extensions and extensions in the scope as something optional, not me. \r\n\r\nWe may leave the ""allow theme to set themes"" in the first round, but my general view on this is that:\r\n\r\nIf a theme `theme-a` says that it depends on `theme-b` then  `theme = theme-a ∪ theme-b`. You cannot remove `theme-b` from the theme and expect it to work. This brings in a relevant discussion about transitive dependencies in Go programs (see #4754). It becomes hard when you want to version them etc., but you cannot ignore the problem. And you cannot remove dependencies and expect the program to compile.\r\n\r\nBut we will have to start simple here. If Hugo gets really popular we can maybe adopt vgo\'s model ad get versioned imports and `hugo get` etc. \r\n\r\nThat said, I have been thinking a little about this when sleeping. And I think we\'re going to reverse the order of precedence in the `theme` slice compared to what we talked about above.\r\n\r\nIf may be slightly less intuitive, but it will be consistent with #4436 (/cc @username_9) and it will solve another problem.\r\n\r\nSo in the project\'s `config.toml`:\r\n\r\n* `theme = [""cool-shortcodes"", ""the-theme"", ""my-base-theme""]`\r\n\r\nThe precedence is from left to right.\r\n\r\n* I have put `cool-shortcodes` first, because I want my shortcodes to be used and not the collection provided by `the-theme`.\r\n* `my-base-theme` is to the far right with the lowest precedence.\r\n* This also works mentally when you think about the project as the ultimate winner.\r\n\r\nAlso note that we currently do not have a ""global identifier"" for the themes, so the theme name whatever you name it when you clone it on disk. So you can certainly exclude a theme by putting some empty theme in the named folder. This is another big question that we need to keep out of this discussion.', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'bep', 'comment_id': 392316956.0, 'datetime': '2018-05-27 09:14:38+00:00', 'masked_author': 'username_0', 'text': 'No (or maybe, but certainly not in the first iteration).\r\n\r\nYou started the talk about extensions and extensions in the scope as something optional, not me. \r\n\r\nWe may leave the ""allow theme to set themes"" out in the first round, but my general view on this is that:\r\n\r\nIf a theme `theme-a` says that it depends on `theme-b` then  `theme = theme-a ∪ theme-b`. You cannot remove `theme-b` from the theme and expect it to work. This brings in a relevant discussion about transitive dependencies in Go programs (see #4754). It becomes hard when you want to version them etc., but you cannot ignore the problem. And you cannot remove dependencies and expect the program to compile.\r\n\r\nBut we will have to start simple here. If Hugo gets really popular we can maybe adopt vgo\'s model and get versioned imports and `hugo get` etc. \r\n\r\nThat said, I have been thinking a little about this when sleeping. And I think we\'re going to reverse the order of precedence in the `theme` slice compared to what we talked about above.\r\n\r\nIt may be slightly less intuitive, but it will be consistent with #4436 (/cc @username_9) and it will make it more clear when you add ""extension type themes"" to the mix.\r\n\r\nSo in the project\'s `config.toml`:\r\n\r\n```toml\r\ntheme = [""cool-shortcodes"", ""the-theme"", ""my-base-theme""]`\r\n```\r\n\r\n\r\nThe theme\'s `config.toml`:\r\n\r\n```toml\r\ntheme = [""my-cool-shortcodes"", ""cool-shortcodes""]`\r\n```\r\n\r\nThe precedence is from left to right.\r\n\r\n* I have put `cool-shortcodes` first, because I want my shortcodes to be used and not the collection (`my-cool-shortcodes`) provided by `the-theme`.\r\n* `cool-shortcodes` is also included in the theme, but will not be included twice.\r\n* `my-base-theme` is to the far right with the lowest precedence.\r\n* This also works mentally when you think about the project as the ultimate winner (far left, before the = sign).\r\n\r\nAlso note that we currently do not have a ""global identifier"" for the themes, so the theme name whatever you name it when you clone it on disk. So you can certainly exclude a theme by putting some empty theme in the named folder. This is another big question that we need to keep out of this discussion.', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'regisphilibert', 'comment_id': 392334264.0, 'datetime': '2018-05-27 14:18:10+00:00', 'masked_author': 'username_5', 'text': 'So, I\'m confused now, as of this commit:\r\nCan `themes` declare their own ""dependencies""?', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'regisphilibert', 'comment_id': 392334921.0, 'datetime': '2018-05-27 14:27:21+00:00', 'masked_author': 'username_5', 'text': ""Here comes another question, sorry.\r\n\r\nIf I understand correctly, theme's `config.toml` will bear its own theme declaration, we'll call it theme.theme. So will, as always, the project, we'll call it project.theme.\r\n\r\nNow, If I understand the current state of inheritance/overriding of `config.toml`, the project's overrides the theme's.\r\n\r\nSo no matter what theme.theme is set to, will it not be systematically overridden by project.theme? This is undeniably what the user will expect anyway regarding any setting present in the theme's `config.toml`."", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'bep', 'comment_id': 392335648.0, 'datetime': '2018-05-27 14:37:38+00:00', 'masked_author': 'username_0', 'text': '```\r\nproject.theme = something\r\ntheme.theme = something_totally_different\r\n```\r\n\r\nThere is no systematic override in the above?', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'regisphilibert', 'comment_id': 392335849.0, 'datetime': '2018-05-27 14:40:49+00:00', 'masked_author': 'username_5', 'text': 'That is what I thought. Unless the slices will be merged somehow? Every project needing a theme will set a project.theme, thus overriding the theme.theme of its needed theme (which was used to declare some sort of theme dependencies)', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'bep', 'comment_id': 392336435.0, 'datetime': '2018-05-27 14:45:28+00:00', 'masked_author': 'username_0', 'text': 'The slices will not be merged, but there 3 rules to be aware of. If you think of the slices from left to right, and continue that thought into the theme.\r\n\r\n* If both the project and the theme defines `myshortcodes`  as a dependency, it will only be included once (the first one)\r\n* If `myshortcodes` includes `someother-myshortcodes` which then includes `myshortcodes` it is of course also only included once.\r\n* All other overrides are done on file level. So `layouts/shortcodes/myshort.html` will, on duplicates, the left-most version win.', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'bep', 'comment_id': 392336665.0, 'datetime': '2018-05-27 14:49:23+00:00', 'masked_author': 'username_0', 'text': 'And note that `myshortcodes` is supposed to refer to **the same theme**, so it should not matter where it is defined. You just need it. In practice, it may be harder, with versioning etc., but we need to solve that problem later.', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'maiki', 'comment_id': 392349832.0, 'datetime': '2018-05-27 17:36:20+00:00', 'masked_author': 'username_10', 'text': 'I don\'t know how these themes relate to each other, it seems really complicated. I like what I thought was the basic flow of left to right inheritance.\r\n\r\n```\r\ntheme = [""theme-made-for-project"", ""username_10-shortcode-collection"", ""that-one-override-for-the-gallery""]\r\n```\r\nIn a CMS like Drupal or WordPress the themes have a direct ""lineage"", meaning they refer to a single theme as a ""parent"", though they can be chained along. Anything not fitting in that chain is added as a plugin.\r\n\r\nI like that, it is easy to grok and easy to remember. And I already kinda build themes that way, except for using git to layer them on top of each other.\r\n\r\nI wanted to point this use-case, but also to comment on the ordering: it should be consistent with the logic behind template inheritance. The default archetype comes to mind, where it makes sense that it isn\'t overridden, but it appears to be inconsistent with how other templates work.\r\n\r\nI feel if the project/base theme is listed last it will be harder to remember and explain )as if it were easy to explain now! Ha!). :smile:', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'bep', 'comment_id': 392354056.0, 'datetime': '2018-05-27 18:46:34+00:00', 'masked_author': 'username_0', 'text': ""I think my last proposal is that. If we keep the archetype logic out of this (we really should), then the current order is 1. project 2. theme.\r\n\r\nAdding _plural theme_ support you get 1. project 2. themes (and also potentially themes' themes if we go down that route).\r\n\r\nA single parent theme is probably easier to understand, but it gives away a ton of flexibility. I'm currently not a big theme user. But I see big needs in re-using and compose my project from _components_ in a simple way (shortcodes etc.). This is the reason I spend time on this feature, any theme inheritance will be an added bonus.\r\n\r\nI say that even a component with 1 shortcode is a theme. We could come up with some other name for that, but I suspect that would make this even harder to grasp."", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'bep', 'comment_id': 392475698.0, 'datetime': '2018-05-28 09:37:27+00:00', 'masked_author': 'username_0', 'text': 'I cannot decide what is the best _presedence order_. \r\n\r\nGiven the theme list below:\r\n\r\n```\r\ntheme = [""theme1"", ""theme2"", ""theme3""]\r\n```\r\n\r\nI have deliberately chosen very generic theme names, but you could imagine `base-theme`, `my-shortcode-collection` or whatever.\r\n\r\nThe question is: When two themes provide the same file (e.g. `layouts/_default/single.html`, who should win? Left or right?\r\n\r\n\r\n[![](https://m131jyck4m.execute-api.us-west-2.amazonaws.com/prod/poll/01CEK1GB4BV6PXKN39W180R708/From%20right%20to%20left%20%28theme3%20wins%20on%20duplicates%29)](https://m131jyck4m.execute-api.us-west-2.amazonaws.com/prod/poll/01CEK1GB4BV6PXKN39W180R708/From%20right%20to%20left%20%28theme3%20wins%20on%20duplicates%29/vote)\r\n[![](https://m131jyck4m.execute-api.us-west-2.amazonaws.com/prod/poll/01CEK1GB4BV6PXKN39W180R708/From%20left%20to%20right%20%28theme1%20wins%20on%20duplicates%29)](https://m131jyck4m.execute-api.us-west-2.amazonaws.com/prod/poll/01CEK1GB4BV6PXKN39W180R708/From%20left%20to%20right%20%28theme1%20wins%20on%20duplicates%29/vote)', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'regisphilibert', 'comment_id': 392511671.0, 'datetime': '2018-05-28 12:16:30+00:00', 'masked_author': 'username_5', 'text': 'I did not expect that outcome :) Oh well.', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'bep', 'comment_id': 392571741.0, 'datetime': '2018-05-28 17:07:16+00:00', 'masked_author': 'username_0', 'text': 'My head was the other way around when I first thought about this, but revisiting it some months later, it just looked backwards... Reading from left makes `project extends theme1 extends theme2 extends theme3` work as a sentence.', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'regisphilibert', 'comment_id': 392576383.0, 'datetime': '2018-05-28 17:39:31+00:00', 'masked_author': 'username_5', 'text': 'Yes with the ""extends"" notion, it makes a lot of sense.\r\n\r\nHere is a thought, I don\'t think it derails the issue, but stop me if it does.\r\n\r\nCan we question the usage of the word ""theme"" for this config parameter? A theme is really something people take as a skin for their website. But now, it appears a lot of our themes will be something different. Like our already popular exemple of shortcode bundle, or output formats bundle.\r\n\r\nI feel the word theme fails to encompass what this layout inheritance will really bring along. I think we need a word used as an umbrella for themes/plugins/addons/extension as it would make more sense in the long term.', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'bep', 'comment_id': 392584277.0, 'datetime': '2018-05-28 18:36:42+00:00', 'masked_author': 'username_0', 'text': 'You may question it ...\r\n\r\nI think\r\n\r\n1) It works if you think a theme as a composite of components and other themes: \r\n\r\n```toml\r\ntheme = [""component"", ""theme2"", ""another-component""]\r\n```\r\n\r\nPut all of those together and you got your theme.\r\n\r\nAlso, I don\'t want 2 terms for this, and changing it would be a fair amount of work, and you have to be really convincing to get me down that road.', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'regisphilibert', 'comment_id': 392584740.0, 'datetime': '2018-05-28 18:40:14+00:00', 'masked_author': 'username_5', 'text': 'Again put this way it makes more sense. This should be the way to put it in the doc when the time comes. \r\n\r\nThanks.', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'maiki', 'comment_id': 392601677.0, 'datetime': '2018-05-28 20:52:11+00:00', 'masked_author': 'username_10', 'text': 'I\'ve been thinking of it as everything is a set of one or more templates that operate on your content following a ""theme"". It could be visual layout, or shortcodes, or an output format, or all of those. So if we explain how we use ""theme"", it should be fairly straightforward.\r\n\r\nI\'ve read this conversation in a lot of projects over the years (naming and ""theme""), and it is recurring issue that new users will likely know about themes solely via a PHP CMS. So they have to explain it a bit more. And we kinda have to explain everything a bit more with Hugo, it seems; a lot of folks don\'t quite grok the simplicity of a  ""template + content"" workflow. ^_^', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'bep', 'comment_id': 395206033.0, 'datetime': '2018-06-06 20:39:06+00:00', 'masked_author': 'username_0', 'text': ""Just a little heads up to people waiting for this: I'm very close to finishing this implementing this now. To get this done, I had to refactor and get real control of all the theme related to filesystem handling. With this issue closed, we will have a fully virtualized filesystem interaction without all the path logic sprinkled around.\r\n\r\nAnd it seems to make Hugo faster, at least for sites with themes. The hugo docs builds about 15% faster on my MacBook."", 'title': None, 'type': 'comment'}
+ {'action': 'closed', 'author': 'bep', 'comment_id': None, 'datetime': '2018-06-10 22:33:40+00:00', 'masked_author': 'username_0', 'text': '', 'title': None, 'type': 'issue'}
+ {'action': 'created', 'author': 'jhabdas', 'comment_id': 397883671.0, 'datetime': '2018-06-17 14:46:24+00:00', 'masked_author': 'username_11', 'text': 'https://github.com/gohugoio/hugo/issues/2639 cross-linking for reference', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'easherma', 'comment_id': 418910116.0, 'datetime': '2018-09-05 23:08:26+00:00', 'masked_author': 'username_12', 'text': ""I'd like to help with the documentation of this, mainly because I'm still having a hard time wrapping my mind around useful cases. :-D"", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'zxdawn2', 'comment_id': 495454799.0, 'datetime': '2019-05-24 02:58:34+00:00', 'masked_author': 'username_13', 'text': ""Is there any tutorial on how to use this function? I'm trying to use specific theme ([hugo-resume](https://github.com/eddiewebb/hugo-resume)) for 'about' page and common theme ([AllinOne](https://github.com/orianna-zzo/AllinOne)) for others. Will this function works for this situation?\r\n\r\nI've tried this [method](https://github.com/nurlansu/hugo-sustain/issues/7#issuecomment-303346897) to use two themes. But the structure is different and results in the wrong 'about' page."", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'regisphilibert', 'comment_id': 495922810.0, 'datetime': '2019-05-25 14:32:05+00:00', 'masked_author': 'username_5', 'text': '```\r\ntheme:\r\n  - hugo-resume\r\n  - allinone\r\n```\r\n\r\nThe first homonymous template/data/i18n match will overwrite the later.', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'zxdawn', 'comment_id': 509154169.0, 'datetime': '2019-07-08 09:36:02+00:00', 'masked_author': 'username_14', 'text': ""@username_5 \r\nThank you for your reply! I'm the beginner of hugo and focus on contents only.\r\nNot quite understand your comments above.\r\n\r\n1. Do you mean put these in the `config.toml`?\r\n```\r\ntheme:\r\n  - hugo-resume\r\n  - allinone\r\n```\r\nHowever, that's `unexpected token`.\r\n\r\n2. What's the meaning of `The first homonymous template/data/i18n match will overwrite the later.`?\r\nDo you mean that `i18n` can be used to specify different theme for different menu?\r\nIf so, how to do that?"", 'title': None, 'type': 'comment'}]","<issue_start><issue_comment>Title: Allow theme = [""base"", ""my-theme"" ] (aka theme composition)
+username_0: I know this has been requested before, in the form of some `extends = some-other-theme`.
+
+This isn't ""theme inheritance"" in its purest form (which would be ""theme1 extends theme2 extends theme3""), more like theme composition. Which is much simpler to understand/implement, but with most of the added benefits.
+
+This relates to my work on https://github.com/username_0/html5up-to-hugo 
+
+The simple rule is that **the themes' files will form a big overlay/union file system from left to right.**
+
+So:
+
+```toml
+theme = [""base"", ""my-theme"" ]
+```
+
+* All files in `base` will be used unless there is a file with the same name in `my-theme`.
+* This will work with layouts, data, i18n, static (and in the future: content etc.)
+
+What do you say?
+<issue_comment>username_0: Note that this is a ""proposal"", I'm not done with my part of the thinking here -- maybe this belongs in the theme itself etc...
+<issue_comment>username_1: One thing I see on the forum a lot is, ""how can I make page X look _different_ from the rest of the site"". Could this facilitate styling a page like that, kind of overriding the theme applied to most of the site?
+<issue_comment>username_2: From @username_0's description, yes it does. You could for example have your own version of single.html or of a shortcode.
+
+I can see how this is useful. It's the same mechanic that Wordpress uses in creating 'child-themes', but I am not a fan. I remember losing track of whether I was editing the right files.
+
+It's a personal perspective. Others will make it useful and may help produce more themes for Hugo. I don't have the knowledge to comment on the implementation. So I will abstain from voting and may even end up using it anyway.
+<issue_comment>username_3: +1 if I can have my personal ""theme"" of partial and shortcode collection, and can keep that theme as the secondary theme. 
+
+Thinking of something like:
+
+```
+theme = [""actual-theme"", ""partial-shortcode-collection-theme"" ]
+```
+
+I've wanted this feature for a while. I had tried symlinking my commonly used partials/shortcodes from a common git repo, but symlinks don't work.
+<issue_comment>username_4: Child themes are a great idea. They should make it easier to get started with Hugo for beginners. And they probably also make it a lot easier for people to update the original, parent theme.
+<issue_comment>username_0: @username_1 not sure about your example, but @username_3 's example is a primary use case, and I think this becomes super-powerful when we get proper dependency management, i.e:
+
+```bash
+theme = [""https://github.com/spf13/hyde/v2"", ""https://github.com/username_3/shortcode-pack/v1"" ]
+```
+
+When Russ Cox is done with his brilliant thinking, I'm going to steal his thoughts: https://research.swtch.com/vgo
+
+To me, this is mostly about DRY. On the project side, we can already today extend the theme by adding a `single.html` or overriding a partial etc. But that is not an option. So we get themes like `hydex` and `hydey` -- only slightly different ports of the same theme. If you want to create a new `hyde` theme with some blue colour, this should be possible.
+
+Thinking about it, I think I will try to get this to work both on theme and in project. 
+
+So in `theme.toml` for my new Hyde theme `hyde32`:
+
+```toml
+# This theme is based on SPF13's port of Hyde, but with prettier colours.
+theme = [""hyde""]
+```
+
+And then in my `config.toml`:
+
+```toml
+theme = [""hyde32"", ""partial-shortcode-collection-theme""]
+```
+
+The ordered set of file collections will then be:
+
+```bash
+hyde, hyde32, partial-shortcode-collection-theme
+```
+
+In its first iteration, the end user is responsible for pulling the above 3 themes into /themes -- but the ultimate goal here is to do:
+
+```bash
+# Shallow clone, no themes (only referenced in config.toml)
+git clone https://github.com/username_0/my-site
+cd my-site
+# hugo will download dependencies if not cached.
+hugo 
+```
+<issue_comment>username_5: I think it will be very useful especially with output formats. If want to add an ""api"" dimension to your content, all you'd have to do is add a special ""api"" theme and reference it. Rather than single handedly adding the json templates in your layouts/_default or other.
+<issue_comment>username_5: Also it will allow theme developer to release several ""extension"" for their theme which not everyone will need. Like a ""photo gallery"" extension or a ""Dentist"" extension for a theme whose base is made for broader ""health"" entities.
+<issue_comment>username_6: This would be very useful. My use case is similar to @username_3  in that I keep a set of really basic files (_default layouts, etc.) to reuse on all projects and then layouts/themes for specific types of projects on top of that.
+<issue_comment>username_0: A development tip: Features like this are hard to get going unless you have a solid and failing test up and running:
+
+```go
+const (
+		themeStandalone = `
+			name = ""Theme Standalone""
+`
+		themeCyclic = `
+			name = ""Theme Cyclic""
+			theme = ""theme3""
+`
+		theme1 = `
+			name = ""Theme #1""
+`
+
+		theme2 = `
+			name = ""Theme #2""
+			theme = ""theme1""
+`
+
+		theme3 = `
+			name = ""Theme #3""
+			theme = [""theme2"", ""themeStandalone"", ""themeCyclic""]
+`
+
+		theme4 = `
+			name = ""Theme #4""
+			theme = ""theme3""
+`
+
+		site1 = `
+			theme = ""theme4""
+`
+		site2 = `
+			theme = [""theme2"", ""themeStandalone""]
+`
+	)
+```
+
+With a test that fails to build `site1` and `site2` -- then the fun starts! It is a threshold of boring work to get there.
+<issue_comment>username_5: On more use case is ""shortcode"" bundles. Your theme layout files would only contains shortcode files and people could use them by just adding your theme to their ""theme set"" and easily upgrade with future updates.
+<issue_comment>username_0: I just figured out that this would also be really cool for bundling of shortcodes!
+
+
+
+
+
+
+
+
+
+
+
+:-)
+<issue_comment>username_5: Or bundling of output formats templates ! 🎉  
+You could even design an ""Algolia"" search theme ""addon"" along with script, css, template, output format template etc...
+
+So much possibilities!
+<issue_comment>username_7: Yep, all those things that we copy from theme to theme, often without changing a single line.  Shortcodes, output formats. Heck even ""base"" for many. 
+
+Note if it makes dealing with static asset customization (like a site font file or landing image
+<issue_comment>username_0: Just a quick note that this is still pretty much priority.
+
+In Hugo 0.38 themes got `config.toml` with namespaced `.Params` etc. and this will, of course, extend to these composites. Which will make something really powerful.
+<issue_comment>username_5: Can't wait for @username_3 to make a mini-theme out of his debug functionalities! (debugprint and so forth...)
+<issue_comment>username_3: @username_5 Thanks! By now, I have couple of ""mini-themes"" I'd like to roll out once this feature is out:
+
+- Debugging (`debugprint.html` partial, Kind/Type/etc. debug info, etc.)
+- ATOM as custom output format
+- Better versions of internal shortcodes and templates: `figure`, `opengraph`, `twitter_cards`, ..
+<issue_comment>username_0: @username_3 @username_5 coming back to this issue after some months, I was a little big confused about my own writing above.
+
+Given:
+
+
+```
+theme = [""base"", ""my-theme"" ]
+```
+
+On duplicates, what theme would you say should win? `base` or `my-theme`?
+<issue_comment>username_8: 👍 `my-theme`
+<issue_comment>username_3: @username_0 Of course `my-theme`. 
+
+I can visualize that setup as this pseudo code:
+
+```
+theme my-theme extends base-theme
+  function single.html
+    """"""
+    Only single.html from my-theme overriding that from base-theme
+    """"""
+```
+<issue_comment>username_3: If `my-theme` is overriding unwanted layouts and config params, user should trim them out.
+<issue_comment>username_0: I guess the theme names masked my real question, how about this:
+
+```
+theme = [""theme1"", ""theme2"" ]
+```
+
+Who should win? Is it now obvious that ""theme1"" is the base theme? I obviously thought so back in February, just wanted to make sure ...
+<issue_comment>username_9: Be consistent with #4436
+<issue_comment>username_3: I think either direction (left to right, or right to left precedence) would work; just needs to be documented.
+
+But I would suggest left to right increasing precedence order.. here's a reason:
+
+A user could have this initially:
+
+```toml
+theme = [""some-theme""]
+```
+
+Then they choose to *steal* certain layouts from a different theme. So they then have:
+
+```toml
+theme = [""some-theme"", ""other-theme""]
+```
+
+i.e. they just need to append that to the right. So the delta of change only happen towards the right of that line.
+
+Later, they tweak some portion of that ""other-theme"" and override just the RSS layout, so it will look like..
+
+```toml
+theme = [""some-theme"", ""other-theme"", ""my-rss""]
+```
+
+What I am getting at is that the initial `theme = [""some-theme""` part stays constant throughout. If the precendence is reversed, the base theme position will keep moving around.
+<issue_comment>username_5: `theme-2` 👍 
+
+It is my understanding that in any system, hardware of software, the layer on top will hide/override the layers below. As a left to right reader, it therefore makes sense to me that `theme-2` is the layer on top.
+
+Ultimately of course and that goes without saying, project's layouts should remain the utlimate rulers of this ecosystem :)
+<issue_comment>username_0: One last question. Since I wrote my test on this, a theme can now have `confit.toml` (i.e. site configuration). I also has a `theme.toml`, which is information about the theme -- we use this info to build the theme site etc.
+
+So, 
+
+With this new feature both the project and the themes can be ... themes.
+
+The question is:
+
+Where to put the `themes'` `theme` configuration. `theme.toml` or `config.toml`?
+<issue_comment>username_5: Wait a minute, why?
+<issue_comment>username_0: I added a missing ""d"" to the above, which may clear things up.
+
+The obvious motivation behind this is to create a new `hyde` port without having to copy-and-paste everything.
+
+So I create my hyde-z theme and configure it to be based on some other theme: `theme = hyde-x`
+<issue_comment>username_0: Yes, that makes sense. Another obvious use case would be shortcode collections, so:
+
+```toml
+theme = [""my-theme"", ""cool-shortcodes""]
+```
+
+In the above, on duplicate shortcodes, the right will win. If the shortcode exists in the project, that will of course win (as it is today).
+<issue_comment>username_5: I see two ways to do this.
+**The old way:**
+Add your layouts files in `layouts` directory and set your theme as `hyde-x`:
+`themes = 'hyde-x'`
+**The new way:**
+Create a `/themes/hyde-z` directory alongside `themes/hyde-x` and set theme both in your config.toml:
+`themes = ['hyde-x', 'hyde-z']`
+
+In both case, your project is not a theme, so I am still confused about your previous sentence :/
+<issue_comment>username_3: I honestly think of `theme.toml` *less of a functional config* and more of a *meta-data config*.
+
+I think the `theme` should go in `config.toml`. Now.. with that, I believe that if the theme's config.toml has:
+
+```toml
+# theme-x's config.toml
+theme = [ ""theme-x"", ""cool-shortcodes""]
+```
+
+and user's site config.toml has:
+
+```toml
+# user's site config.toml
+theme = [ ""_this_"", ""my-shortcodes""]
+```
+
+*Looks like we will need a **special placeholder** like `""_this_""`?* Otherwise, how will ""theme-x"" refer just to its own stuff without including the extensions?
+
+Does that effectively become:
+
+```toml
+# user's site config.toml
+theme = [ ""theme-x"", ""cool-shortcodes"", ""my-shortcodes""]
+```
+<issue_comment>username_5: I understand now. I always assumed the user would add themes’ port himself in his config.toml. 
+
+I don’t think a theme should be able to set itself as a layer of another theme. This is prone to inheritance being unknown to the user. 
+
+The port should let the user know he/she needs both themes in his themes directory and reference them both in his project’s config.toml this order.
+<issue_comment>username_0: @username_5 your project is not a theme, but it can be _themed_ ... Which in my English means that you can configure it to use a theme.
+
+@username_3 
+
+If project is:
+
+```
+theme = [ ""my-theme"", ""my-shortcodes""]
+```
+
+And theme is:
+
+```
+theme = [ ""theme-x"", ""even-cooler-shortcodes""]
+```
+
+The final graph will be:
+
+
+ [ ""theme-x"", ""even-cooler-shortcodes"", ""my-shortcodes""]
+
+
+The above assumes that ""theme-x"" is shallow.
+<issue_comment>username_0: @username_5 maybe ... I'm not totally convinced either way. We have lots of very similar themes as it is today. People create a new theme just to change some minor thing. And since you currently would have to do manual clones, It would not be ""unknown to the user"".
+<issue_comment>username_3: I'm on a move, so cannot articulate properly right now.. may be do something like:
+
+```toml
+# theme config
+theme_extensions = [""a"", ""b""]
+```
+
+If user uses that theme without modifying theme-extensions, they inherit the theme's settings as they do now. 
+
+If user wants to add their own extensions, they need to do:
+
+```
+# user site config
+theme_extensions = [""a"", ""b"",""c""]
+```
+<issue_comment>username_0: But it can be *themeD*?
+<issue_comment>username_0: ... that said, I see enough questions in the above conclude what we can wait with the ""inheritance"" part, and start with the simpler setup where a project only can use themes (i.e. composition).
+<issue_comment>username_3: Though, don't you think that having an extra `theme_extensions` for list config param will make this easier and leave the `theme` as a single string value.
+<issue_comment>username_0: What is the difference between a theme and a theme_extension? Why create one more term if they are the same? ""Themes can be composed"" is simpler to explain to people than ""a project can have a theme. You can also add theme_extensions, which is the same as a theme, but just named differently.""
+<issue_comment>username_3: It will blend into the theme extension inheritance that I talked about in my comment earlier. 
+
+With just one theme param, it will get difficult if users want to remove one or more of the extensions from the original theme. 
+
+Having the extensions, using the same example as earlier, user can set the extensions param as follows:
+
+- [] # empty
+- a
+- a,b,c
+- c
+- if they don't set, they get the extensions the theme defined (a,b).
+<issue_comment>username_0: @username_3 you have a point, but if we start with ""theme in project only"", this can wait. It is a simpler model.
+
+If we somehow need to control order at some point, we could allow the theme as a more complex structure:
+
+```toml
+[themes]
+[themes.my-theme]
+weight = 1
+```
+
+Which then could override the default right-to-left order you get.
+<issue_comment>username_0: No (or maybe, but certainly not in the first iteration).
+
+You started the talk about extensions and extensions in the scope as something optional, not me. 
+
+We may leave the ""allow theme to set themes"" in the first round, but my general view on this is that:
+
+If a theme `theme-a` says that it depends on `theme-b` then  `theme = theme-a ∪ theme-b`. You cannot remove `theme-b` from the theme and expect it to work. This brings in a relevant discussion about transitive dependencies in Go programs (see #4754). It becomes hard when you want to version them etc., but you cannot ignore the problem. And you cannot remove dependencies and expect the program to compile.
+
+But we will have to start simple here. If Hugo gets really popular we can maybe adopt vgo's model ad get versioned imports and `hugo get` etc. 
+
+That said, I have been thinking a little about this when sleeping. And I think we're going to reverse the order of precedence in the `theme` slice compared to what we talked about above.
+
+If may be slightly less intuitive, but it will be consistent with #4436 (/cc @username_9) and it will solve another problem.
+
+So in the project's `config.toml`:
+
+* `theme = [""cool-shortcodes"", ""the-theme"", ""my-base-theme""]`
+
+The precedence is from left to right.
+
+* I have put `cool-shortcodes` first, because I want my shortcodes to be used and not the collection provided by `the-theme`.
+* `my-base-theme` is to the far right with the lowest precedence.
+* This also works mentally when you think about the project as the ultimate winner.
+
+Also note that we currently do not have a ""global identifier"" for the themes, so the theme name whatever you name it when you clone it on disk. So you can certainly exclude a theme by putting some empty theme in the named folder. This is another big question that we need to keep out of this discussion.
+<issue_comment>username_0: No (or maybe, but certainly not in the first iteration).
+
+You started the talk about extensions and extensions in the scope as something optional, not me. 
+
+We may leave the ""allow theme to set themes"" out in the first round, but my general view on this is that:
+
+If a theme `theme-a` says that it depends on `theme-b` then  `theme = theme-a ∪ theme-b`. You cannot remove `theme-b` from the theme and expect it to work. This brings in a relevant discussion about transitive dependencies in Go programs (see #4754). It becomes hard when you want to version them etc., but you cannot ignore the problem. And you cannot remove dependencies and expect the program to compile.
+
+But we will have to start simple here. If Hugo gets really popular we can maybe adopt vgo's model and get versioned imports and `hugo get` etc. 
+
+That said, I have been thinking a little about this when sleeping. And I think we're going to reverse the order of precedence in the `theme` slice compared to what we talked about above.
+
+It may be slightly less intuitive, but it will be consistent with #4436 (/cc @username_9) and it will make it more clear when you add ""extension type themes"" to the mix.
+
+So in the project's `config.toml`:
+
+```toml
+theme = [""cool-shortcodes"", ""the-theme"", ""my-base-theme""]`
+```
+
+
+The theme's `config.toml`:
+
+```toml
+theme = [""my-cool-shortcodes"", ""cool-shortcodes""]`
+```
+
+The precedence is from left to right.
+
+* I have put `cool-shortcodes` first, because I want my shortcodes to be used and not the collection (`my-cool-shortcodes`) provided by `the-theme`.
+* `cool-shortcodes` is also included in the theme, but will not be included twice.
+* `my-base-theme` is to the far right with the lowest precedence.
+* This also works mentally when you think about the project as the ultimate winner (far left, before the = sign).
+
+Also note that we currently do not have a ""global identifier"" for the themes, so the theme name whatever you name it when you clone it on disk. So you can certainly exclude a theme by putting some empty theme in the named folder. This is another big question that we need to keep out of this discussion.
+<issue_comment>username_5: So, I'm confused now, as of this commit:
+Can `themes` declare their own ""dependencies""?
+<issue_comment>username_5: Here comes another question, sorry.
+
+If I understand correctly, theme's `config.toml` will bear its own theme declaration, we'll call it theme.theme. So will, as always, the project, we'll call it project.theme.
+
+Now, If I understand the current state of inheritance/overriding of `config.toml`, the project's overrides the theme's.
+
+So no matter what theme.theme is set to, will it not be systematically overridden by project.theme? This is undeniably what the user will expect anyway regarding any setting present in the theme's `config.toml`.
+<issue_comment>username_0: ```
+project.theme = something
+theme.theme = something_totally_different
+```
+
+There is no systematic override in the above?
+<issue_comment>username_5: That is what I thought. Unless the slices will be merged somehow? Every project needing a theme will set a project.theme, thus overriding the theme.theme of its needed theme (which was used to declare some sort of theme dependencies)
+<issue_comment>username_0: The slices will not be merged, but there 3 rules to be aware of. If you think of the slices from left to right, and continue that thought into the theme.
+
+* If both the project and the theme defines `myshortcodes`  as a dependency, it will only be included once (the first one)
+* If `myshortcodes` includes `someother-myshortcodes` which then includes `myshortcodes` it is of course also only included once.
+* All other overrides are done on file level. So `layouts/shortcodes/myshort.html` will, on duplicates, the left-most version win.
+<issue_comment>username_0: And note that `myshortcodes` is supposed to refer to **the same theme**, so it should not matter where it is defined. You just need it. In practice, it may be harder, with versioning etc., but we need to solve that problem later.
+<issue_comment>username_10: I don't know how these themes relate to each other, it seems really complicated. I like what I thought was the basic flow of left to right inheritance.
+
+```
+theme = [""theme-made-for-project"", ""username_10-shortcode-collection"", ""that-one-override-for-the-gallery""]
+```
+In a CMS like Drupal or WordPress the themes have a direct ""lineage"", meaning they refer to a single theme as a ""parent"", though they can be chained along. Anything not fitting in that chain is added as a plugin.
+
+I like that, it is easy to grok and easy to remember. And I already kinda build themes that way, except for using git to layer them on top of each other.
+
+I wanted to point this use-case, but also to comment on the ordering: it should be consistent with the logic behind template inheritance. The default archetype comes to mind, where it makes sense that it isn't overridden, but it appears to be inconsistent with how other templates work.
+
+I feel if the project/base theme is listed last it will be harder to remember and explain )as if it were easy to explain now! Ha!). :smile:
+<issue_comment>username_0: I think my last proposal is that. If we keep the archetype logic out of this (we really should), then the current order is 1. project 2. theme.
+
+Adding _plural theme_ support you get 1. project 2. themes (and also potentially themes' themes if we go down that route).
+
+A single parent theme is probably easier to understand, but it gives away a ton of flexibility. I'm currently not a big theme user. But I see big needs in re-using and compose my project from _components_ in a simple way (shortcodes etc.). This is the reason I spend time on this feature, any theme inheritance will be an added bonus.
+
+I say that even a component with 1 shortcode is a theme. We could come up with some other name for that, but I suspect that would make this even harder to grasp.
+<issue_comment>username_0: I cannot decide what is the best _presedence order_. 
+
+Given the theme list below:
+
+```
+theme = [""theme1"", ""theme2"", ""theme3""]
+```
+
+I have deliberately chosen very generic theme names, but you could imagine `base-theme`, `my-shortcode-collection` or whatever.
+
+The question is: When two themes provide the same file (e.g. `layouts/_default/single.html`, who should win? Left or right?
+
+
+[![](https://m131jyck4m.execute-api.us-west-2.amazonaws.com/prod/poll/01CEK1GB4BV6PXKN39W180R708/From%20right%20to%20left%20%28theme3%20wins%20on%20duplicates%29)](https://m131jyck4m.execute-api.us-west-2.amazonaws.com/prod/poll/01CEK1GB4BV6PXKN39W180R708/From%20right%20to%20left%20%28theme3%20wins%20on%20duplicates%29/vote)
+[![](https://m131jyck4m.execute-api.us-west-2.amazonaws.com/prod/poll/01CEK1GB4BV6PXKN39W180R708/From%20left%20to%20right%20%28theme1%20wins%20on%20duplicates%29)](https://m131jyck4m.execute-api.us-west-2.amazonaws.com/prod/poll/01CEK1GB4BV6PXKN39W180R708/From%20left%20to%20right%20%28theme1%20wins%20on%20duplicates%29/vote)
+<issue_comment>username_5: I did not expect that outcome :) Oh well.
+<issue_comment>username_0: My head was the other way around when I first thought about this, but revisiting it some months later, it just looked backwards... Reading from left makes `project extends theme1 extends theme2 extends theme3` work as a sentence.
+<issue_comment>username_5: Yes with the ""extends"" notion, it makes a lot of sense.
+
+Here is a thought, I don't think it derails the issue, but stop me if it does.
+
+Can we question the usage of the word ""theme"" for this config parameter? A theme is really something people take as a skin for their website. But now, it appears a lot of our themes will be something different. Like our already popular exemple of shortcode bundle, or output formats bundle.
+
+I feel the word theme fails to encompass what this layout inheritance will really bring along. I think we need a word used as an umbrella for themes/plugins/addons/extension as it would make more sense in the long term.
+<issue_comment>username_0: You may question it ...
+
+I think
+
+1) It works if you think a theme as a composite of components and other themes: 
+
+```toml
+theme = [""component"", ""theme2"", ""another-component""]
+```
+
+Put all of those together and you got your theme.
+
+Also, I don't want 2 terms for this, and changing it would be a fair amount of work, and you have to be really convincing to get me down that road.
+<issue_comment>username_5: Again put this way it makes more sense. This should be the way to put it in the doc when the time comes. 
+
+Thanks.
+<issue_comment>username_10: I've been thinking of it as everything is a set of one or more templates that operate on your content following a ""theme"". It could be visual layout, or shortcodes, or an output format, or all of those. So if we explain how we use ""theme"", it should be fairly straightforward.
+
+I've read this conversation in a lot of projects over the years (naming and ""theme""), and it is recurring issue that new users will likely know about themes solely via a PHP CMS. So they have to explain it a bit more. And we kinda have to explain everything a bit more with Hugo, it seems; a lot of folks don't quite grok the simplicity of a  ""template + content"" workflow. ^_^
+<issue_comment>username_0: Just a little heads up to people waiting for this: I'm very close to finishing this implementing this now. To get this done, I had to refactor and get real control of all the theme related to filesystem handling. With this issue closed, we will have a fully virtualized filesystem interaction without all the path logic sprinkled around.
+
+And it seems to make Hugo faster, at least for sites with themes. The hugo docs builds about 15% faster on my MacBook.<issue_closed>
+<issue_comment>username_11: https://github.com/gohugoio/hugo/issues/2639 cross-linking for reference
+<issue_comment>username_12: I'd like to help with the documentation of this, mainly because I'm still having a hard time wrapping my mind around useful cases. :-D
+<issue_comment>username_13: Is there any tutorial on how to use this function? I'm trying to use specific theme ([hugo-resume](https://github.com/eddiewebb/hugo-resume)) for 'about' page and common theme ([AllinOne](https://github.com/orianna-zzo/AllinOne)) for others. Will this function works for this situation?
+
+I've tried this [method](https://github.com/nurlansu/hugo-sustain/issues/7#issuecomment-303346897) to use two themes. But the structure is different and results in the wrong 'about' page.
+<issue_comment>username_5: ```
+theme:
+  - hugo-resume
+  - allinone
+```
+
+The first homonymous template/data/i18n match will overwrite the later.
+<issue_comment>username_14: @username_5 
+Thank you for your reply! I'm the beginner of hugo and focus on contents only.
+Not quite understand your comments above.
+
+1. Do you mean put these in the `config.toml`?
+```
+theme:
+  - hugo-resume
+  - allinone
+```
+However, that's `unexpected token`.
+
+2. What's the meaning of `The first homonymous template/data/i18n match will overwrite the later.`?
+Do you mean that `i18n` can be used to specify different theme for different menu?
+If so, how to do that?"
+RSS-Bridge/rss-bridge,528959885,1373,"{'number': 1373.0, 'repo': 'rss-bridge', 'user_login': 'RSS-Bridge'}","[{'action': 'opened', 'author': 'VerifiedJoseph', 'comment_id': None, 'datetime': '2019-11-26T20:39:09Z', 'masked_author': 'username_0', 'text': 'Adds a bridge for [Killed by Google](https://killedbygoogle.com/). Uses the JSON file that powers the website. A RSS feed has [requested](https://github.com/codyogden/killedbygoogle/issues/425) for the website, but not yet added.', 'title': '[KilledbyGoogleBridge] Add bridge', 'type': 'issue'}
+ {'action': 'created', 'author': 'em92', 'comment_id': 559051061.0, 'datetime': '2019-11-27 11:35:30+00:00', 'masked_author': 'username_1', 'text': 'How about implementing it in KilledByGoogle sources instead? Author does not seem to be against this.', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'LogMANOriginal', 'comment_id': 560099210.0, 'datetime': '2019-12-01 12:04:33+00:00', 'masked_author': 'username_2', 'text': ""As @username_1 pointed out, support for feeds is on the [roadmap](https://github.com/codyogden/killedbygoogle/projects/4) for KilledByGoogle. I also think it's best to have it generated by them. They also accept PRs, so no holding back :grin:"", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'dvikan', 'comment_id': 1075579764.0, 'datetime': '2022-03-22 19:55:30+00:00', 'masked_author': 'username_3', 'text': ""Don't think they have added a feed yet. Will probably merge this."", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'yamanq', 'comment_id': 1075667311.0, 'datetime': '2022-03-22 21:36:26+00:00', 'masked_author': 'username_4', 'text': ""Yes, they also closed the issue and removed the roadmap, so it's unlikely to be added in the near future."", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'dvikan', 'comment_id': 1077952968.0, 'datetime': '2022-03-24 19:04:26+00:00', 'masked_author': 'username_3', 'text': 'I was confused at first why rssbridge didnt show Youtube Originals which was listed on the frontpage of killedbygoogle.com\r\nBut I know understand that the rss feed item is only generated past the actual closing date.', 'title': None, 'type': 'comment'}]","<issue_start><issue_comment>Title: [KilledbyGoogleBridge] Add bridge
+username_0: Adds a bridge for [Killed by Google](https://killedbygoogle.com/). Uses the JSON file that powers the website. A RSS feed has [requested](https://github.com/codyogden/killedbygoogle/issues/425) for the website, but not yet added.
+<issue_comment>username_1: How about implementing it in KilledByGoogle sources instead? Author does not seem to be against this.
+<issue_comment>username_2: As @username_1 pointed out, support for feeds is on the [roadmap](https://github.com/codyogden/killedbygoogle/projects/4) for KilledByGoogle. I also think it's best to have it generated by them. They also accept PRs, so no holding back :grin:
+<issue_comment>username_3: Don't think they have added a feed yet. Will probably merge this.
+<issue_comment>username_4: Yes, they also closed the issue and removed the roadmap, so it's unlikely to be added in the near future.
+<issue_comment>username_3: I was confused at first why rssbridge didnt show Youtube Originals which was listed on the frontpage of killedbygoogle.com
+But I know understand that the rss feed item is only generated past the actual closing date."
+denoland/dotland,1158246192,2044,,"[{'action': 'opened', 'author': 'adamjosefus', 'comment_id': None, 'datetime': '2022-03-03 10:40:05+00:00', 'masked_author': 'username_0', 'text': 'Github add support for `mermaid` in markdown _([Github blog post](https://github.blog/2022-02-14-include-diagrams-markdown-files-mermaid/))_.\r\n\r\nDrawing charts and diagrams in readme is powerfull feature. Please add support to `https://deno.land/x` too.', 'title': 'Missing support for `mermaid` in markdown', 'type': 'issue'}
+ {'action': 'created', 'author': 'kidonng', 'comment_id': 1058829404.0, 'datetime': '2022-03-04 04:59:10+00:00', 'masked_author': 'username_1', 'text': ""GitHub's markup feature sets are way more expansive than CommonMark or GFM. It's not practical to tell every platform showing a Markdown file to become GitHub, especially given Mermaid is a relatively new supported and not so widely used format."", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'crowlKats', 'comment_id': 1058835036.0, 'datetime': '2022-03-04 05:12:36+00:00', 'masked_author': 'username_2', 'text': 'I am actually in favour of having mermaid support. @lucacasonato thoughts?', 'title': None, 'type': 'comment'}]","<issue_start><issue_comment>Title: Missing support for `mermaid` in markdown
+username_0: Github add support for `mermaid` in markdown _([Github blog post](https://github.blog/2022-02-14-include-diagrams-markdown-files-mermaid/))_.
+
+Drawing charts and diagrams in readme is powerfull feature. Please add support to `https://deno.land/x` too.
+<issue_comment>username_1: GitHub's markup feature sets are way more expansive than CommonMark or GFM. It's not practical to tell every platform showing a Markdown file to become GitHub, especially given Mermaid is a relatively new supported and not so widely used format.
+<issue_comment>username_2: I am actually in favour of having mermaid support. @lucacasonato thoughts?"
+ethereum/ethereum-org-website,439072231,33,,"[{'action': 'opened', 'author': 'alexgausman', 'comment_id': None, 'datetime': '2019-05-01 05:23:47+00:00', 'masked_author': 'username_0', 'text': ""This isn't a bug so much as a critique. The old site had a section dedicated to describing the relationship between ETH and BTC. Many users coming to the new site will likely know of Bitcoin and may hold some too. They will want to know how ETH matches up to BTC and whether they are in direct competition. Personally I am of the opinion that they can both benefit from each other. Having a link/page to a blurb about potential synergies could send a positive message and reduce anxiety of any BTC holders trying to learn more.\r\n\r\nFeel free to disagree about this being a good idea."", 'title': 'Little mention of Bitcoin', 'type': 'issue'}
+ {'action': 'created', 'author': 'alexgausman', 'comment_id': 488394035.0, 'datetime': '2019-05-01 19:48:01+00:00', 'masked_author': 'username_0', 'text': ""Here's an example of what I'm thinking... \r\n---------------------------\r\nETH and Bitcoin have a lot in common but they also have a number of differences. \r\n\r\nBitcoin has been around longer than ETH.\r\nBitcoin’s protocol is a less complex than ETH’s.\r\nThere are more options for buying/selling Bitcoins than ETH.\r\nBitcoin’s blockchain is less likely to change considerably than ETH’s.\r\nBitcoin’s price is generally less volatile than ETH.\r\n\r\nWhile it’s easy to see how Bitcoin and ETH could be viewed as competitors, there are actually many cases where they can benefit each other. \r\n\r\nWBTC is a version of Bitcoin, called “Wrapped Bitcoin”, that can be used on the Ethereum blockchain.\r\n\r\nWBTC can be traded on decentralized exchanges like Kyberswap.\r\nWBTC can earn interest on lending platforms like NuoNetwork.\r\nWBTC can be auto-balanced against other assets via TokenSets.\r\n\r\nEvery WBTC is backed 1:1 by Bitcoin, allowing Ethereum users to leverage the power of Bitcoin in a growing permisionless landscape."", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'alexgausman', 'comment_id': 488394494.0, 'datetime': '2019-05-01 19:49:28+00:00', 'masked_author': 'username_0', 'text': ""To reiterate, this is just an idea based on some criticism of the new website by BTC holders that I observed. Feel free to close this issue if you don't feel mentioning bitcoin is necessary"", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'jjmstark', 'comment_id': 488462594.0, 'datetime': '2019-05-01 22:29:19+00:00', 'masked_author': 'username_1', 'text': 'Hey @username_0 - this is a cool idea. One of the principles of the new ethereum.org is that it should have minimal ""native"" content, but be a great portal to community-created content. If you were to write a good blog post about this subject, you could submit a PR to add it as a link (maybe somewhere on /Learn?) so that users can find this information if they\'re looking for it.', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'alexgausman', 'comment_id': 488485915.0, 'datetime': '2019-05-01 23:19:03+00:00', 'masked_author': 'username_0', 'text': ""Sounds good @username_1 I'll mark this issue as closed and see about making a post and submitting it. Thanks for the response"", 'title': None, 'type': 'comment'}
+ {'action': 'closed', 'author': 'alexgausman', 'comment_id': None, 'datetime': '2019-05-01 23:19:04+00:00', 'masked_author': 'username_0', 'text': '', 'title': None, 'type': 'issue'}]","<issue_start><issue_comment>Title: Little mention of Bitcoin
+username_0: This isn't a bug so much as a critique. The old site had a section dedicated to describing the relationship between ETH and BTC. Many users coming to the new site will likely know of Bitcoin and may hold some too. They will want to know how ETH matches up to BTC and whether they are in direct competition. Personally I am of the opinion that they can both benefit from each other. Having a link/page to a blurb about potential synergies could send a positive message and reduce anxiety of any BTC holders trying to learn more.
+
+Feel free to disagree about this being a good idea.
+<issue_comment>username_0: Here's an example of what I'm thinking... 
+---------------------------
+ETH and Bitcoin have a lot in common but they also have a number of differences. 
+
+Bitcoin has been around longer than ETH.
+Bitcoin’s protocol is a less complex than ETH’s.
+There are more options for buying/selling Bitcoins than ETH.
+Bitcoin’s blockchain is less likely to change considerably than ETH’s.
+Bitcoin’s price is generally less volatile than ETH.
+
+While it’s easy to see how Bitcoin and ETH could be viewed as competitors, there are actually many cases where they can benefit each other. 
+
+WBTC is a version of Bitcoin, called “Wrapped Bitcoin”, that can be used on the Ethereum blockchain.
+
+WBTC can be traded on decentralized exchanges like Kyberswap.
+WBTC can earn interest on lending platforms like NuoNetwork.
+WBTC can be auto-balanced against other assets via TokenSets.
+
+Every WBTC is backed 1:1 by Bitcoin, allowing Ethereum users to leverage the power of Bitcoin in a growing permisionless landscape.
+<issue_comment>username_0: To reiterate, this is just an idea based on some criticism of the new website by BTC holders that I observed. Feel free to close this issue if you don't feel mentioning bitcoin is necessary
+<issue_comment>username_1: Hey @username_0 - this is a cool idea. One of the principles of the new ethereum.org is that it should have minimal ""native"" content, but be a great portal to community-created content. If you were to write a good blog post about this subject, you could submit a PR to add it as a link (maybe somewhere on /Learn?) so that users can find this information if they're looking for it.
+<issue_comment>username_0: Sounds good @username_1 I'll mark this issue as closed and see about making a post and submitting it. Thanks for the response<issue_closed>"
+bevyengine/bevy-website,948046576,189,"{'number': 189.0, 'repo': 'bevy-website', 'user_login': 'bevyengine'}","[{'action': 'opened', 'author': 'cart', 'comment_id': None, 'datetime': '2021-07-19T21:33:53Z', 'masked_author': 'username_0', 'text': ""Github Discussions is better for us basically across the board:\r\n\r\n1. Builds on top of our existing developer community. Bevy developers already have Github accounts. StackOverflow created a disconnect where you don't necessarily know who is answering or asking a question\r\n2. Easily discoverable from the bevy repo via the Discussions tab.\r\n3. Lower barrier to entry. More people have github accounts than stack overflow accounts \r\n4. We have full moderation powers over content\r\n\r\nRelevant discord discussion: https://discord.com/channels/691052431525675048/745355529777315850/863498162480349204"", 'title': 'Use Github Discussions instead of StackOverflow for QandA', 'type': 'issue'}
+ {'action': 'created', 'author': 'cart', 'comment_id': 882877626.0, 'datetime': '2021-07-19 21:35:52+00:00', 'masked_author': 'username_0', 'text': '(i also reordered our community section to prioritize our most active communities)', 'title': None, 'type': 'comment'}]","<issue_start><issue_comment>Title: Use Github Discussions instead of StackOverflow for QandA
+username_0: Github Discussions is better for us basically across the board:
+
+1. Builds on top of our existing developer community. Bevy developers already have Github accounts. StackOverflow created a disconnect where you don't necessarily know who is answering or asking a question
+2. Easily discoverable from the bevy repo via the Discussions tab.
+3. Lower barrier to entry. More people have github accounts than stack overflow accounts 
+4. We have full moderation powers over content
+
+Relevant discord discussion: https://discord.com/channels/691052431525675048/745355529777315850/863498162480349204
+<issue_comment>username_0: (i also reordered our community section to prioritize our most active communities)"
+ethereum/ethereum-org-website,1122588952,5315,,"[{'action': 'opened', 'author': 'ewerx', 'comment_id': None, 'datetime': '2022-02-03 02:31:26+00:00', 'masked_author': 'username_0', 'text': 'The entry for Coinbase Wallet includes some outdated information. Updates below. \r\n\r\n**Platforms**\r\n\r\nMobile native (iOS/Android) and **Chrome extension**\r\n\r\n**Does the wallet support layer 2 networks?**\r\n\r\nYes. Polygon, Optimism, Arbitrum.\r\n\r\n**Can the wallet be used with arbitrary Ethereum RPC endpoint?**\r\n\r\nYes\r\n\r\n**Does the wallet have fiat on-ramps?**\r\n\r\nYes, users can connect their Coinbase account for fiat purchase. Transfer fees from Coinbase app to Coinbase Wallet are discounted.\r\n\r\n**Does the wallet allow users to explore dapps?**\r\n\r\nYes, mobile dapp browser, desktop browser extension and mobile linking to desktop dapps are all supported.\r\n\r\n**Does the wallet have integrated defi/financial tools?**\r\n\r\nYes, dex and defi earn features are integrated.\r\n\r\n**Can a user withdraw to their card?**\r\n\r\nIndirectly through the Coinbase app.\r\n\r\n**Does the wallet offer limits protection?**\r\n\r\nNo.\r\n\r\n**Does the wallet allow high-volume purchases?**\r\n\r\nYes, through the Coinbase app.\r\n\r\n**Does the wallet have an integrated token swap?**\r\n\r\nYes.\r\n\r\n**Is the wallet a multi-signature wallet?**\r\n\r\nNo\r\n\r\n**Wallet description**\r\n\r\nYour key to the world of crypto and web3. Harness the power of DeFi to earn yield, grow your NFT collection, swap and store over 4,000 tokens, and much more.', 'title': 'Update Coinbase Wallet description and features', 'type': 'issue'}]","<issue_start><issue_comment>Title: Update Coinbase Wallet description and features
+username_0: The entry for Coinbase Wallet includes some outdated information. Updates below. 
+
+**Platforms**
+
+Mobile native (iOS/Android) and **Chrome extension**
+
+**Does the wallet support layer 2 networks?**
+
+Yes. Polygon, Optimism, Arbitrum.
+
+**Can the wallet be used with arbitrary Ethereum RPC endpoint?**
+
+Yes
+
+**Does the wallet have fiat on-ramps?**
+
+Yes, users can connect their Coinbase account for fiat purchase. Transfer fees from Coinbase app to Coinbase Wallet are discounted.
+
+**Does the wallet allow users to explore dapps?**
+
+Yes, mobile dapp browser, desktop browser extension and mobile linking to desktop dapps are all supported.
+
+**Does the wallet have integrated defi/financial tools?**
+
+Yes, dex and defi earn features are integrated.
+
+**Can a user withdraw to their card?**
+
+Indirectly through the Coinbase app.
+
+**Does the wallet offer limits protection?**
+
+No.
+
+**Does the wallet allow high-volume purchases?**
+
+Yes, through the Coinbase app.
+
+**Does the wallet have an integrated token swap?**
+
+Yes.
+
+**Is the wallet a multi-signature wallet?**
+
+No
+
+**Wallet description**
+
+Your key to the world of crypto and web3. Harness the power of DeFi to earn yield, grow your NFT collection, swap and store over 4,000 tokens, and much more."
+RSS-Bridge/rss-bridge,824554199,2011,,"[{'action': 'opened', 'author': 't0stiman', 'comment_id': None, 'datetime': '2021-03-08 13:24:12+00:00', 'masked_author': 'username_0', 'text': ""**Is your feature request related to a problem? Please describe.**\r\n\r\nSome users, including me, prefer dark themes over light themes, because:\r\n- easier on the eyes, especially at night\r\n- oled screens use less energy\r\n- looks cool (subjective of course)\r\n\r\n**Describe the solution you'd like**\r\n\r\nI have implemented a dark theme on my fork of rss-bridge. You can [test it here](https://rssbridge.tostiman.com/) and view the [source code here](https://github.com/username_0/rss-bridge/blob/master/static/style.css).\r\n\r\n![image](https://user-images.githubusercontent.com/18124323/110325810-17b15480-8018-11eb-93cc-3c25ba7cf4e4.png)\r\n\r\nHowever, many people prefer light themes over dark themes. A possible solution is to add a button on the page somewhere that toggles between light and dark theme."", 'title': 'optional dark theme', 'type': 'issue'}
+ {'action': 'created', 'author': 'verahawk', 'comment_id': 797422648.0, 'datetime': '2021-03-12 11:11:18+00:00', 'masked_author': 'username_1', 'text': ""You could use `@media (prefers-color-scheme: dark)` CSS query to apply dark theme based on user's system/browser settings. [https://css-tricks.com/a-complete-guide-to-dark-mode-on-the-web/](https://css-tricks.com/a-complete-guide-to-dark-mode-on-the-web/#dark-mode-at-the-operating-system-level)"", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 't0stiman', 'comment_id': 797470131.0, 'datetime': '2021-03-12 12:50:19+00:00', 'masked_author': 'username_0', 'text': '', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 't0stiman', 'comment_id': 797470965.0, 'datetime': '2021-03-12 12:51:56+00:00', 'masked_author': 'username_0', 'text': 'Oh, nice! Im gonna try that.', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'dhuschde', 'comment_id': 883340117.0, 'datetime': '2021-07-20 12:07:56+00:00', 'masked_author': 'username_2', 'text': ""As I know, OLED Screens only consume less energy if the Dark Mode is completely Black (which only looks good on OLED's, in my opinion).\r\n\r\nBut, if that's true, please remove that from the first Comment @username_0"", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'verahawk', 'comment_id': 883350903.0, 'datetime': '2021-07-20 12:25:20+00:00', 'masked_author': 'username_1', 'text': ""I don't think that's true. It also doesn't really matter in terms of this issue/PR."", 'title': None, 'type': 'comment'}
+ {'action': 'closed', 'author': 'em92', 'comment_id': None, 'datetime': '2021-08-01 11:31:59+00:00', 'masked_author': 'username_3', 'text': '', 'title': None, 'type': 'issue'}]","<issue_start><issue_comment>Title: optional dark theme
+username_0: **Is your feature request related to a problem? Please describe.**
+
+Some users, including me, prefer dark themes over light themes, because:
+- easier on the eyes, especially at night
+- oled screens use less energy
+- looks cool (subjective of course)
+
+**Describe the solution you'd like**
+
+I have implemented a dark theme on my fork of rss-bridge. You can [test it here](https://rssbridge.tostiman.com/) and view the [source code here](https://github.com/username_0/rss-bridge/blob/master/static/style.css).
+
+![image](https://user-images.githubusercontent.com/18124323/110325810-17b15480-8018-11eb-93cc-3c25ba7cf4e4.png)
+
+However, many people prefer light themes over dark themes. A possible solution is to add a button on the page somewhere that toggles between light and dark theme.
+<issue_comment>username_1: You could use `@media (prefers-color-scheme: dark)` CSS query to apply dark theme based on user's system/browser settings. [https://css-tricks.com/a-complete-guide-to-dark-mode-on-the-web/](https://css-tricks.com/a-complete-guide-to-dark-mode-on-the-web/#dark-mode-at-the-operating-system-level)
+<issue_comment>username_0: Oh, nice! Im gonna try that.
+<issue_comment>username_2: As I know, OLED Screens only consume less energy if the Dark Mode is completely Black (which only looks good on OLED's, in my opinion).
+
+But, if that's true, please remove that from the first Comment @username_0
+<issue_comment>username_1: I don't think that's true. It also doesn't really matter in terms of this issue/PR.<issue_closed>"
+elixir-lang/elixir-lang.github.com,855740064,1510,,"[{'action': 'opened', 'author': 'tomazbracic', 'comment_id': None, 'datetime': '2021-04-12 09:04:24+00:00', 'masked_author': 'username_0', 'text': 'Following the instructions at https://elixir-lang.org/install.html under ""Raspberry Pi"" on the latest Raspbian (buster) results in this output when want to install Elixir \r\n\r\nSo last command fails. I did apt update without errors.\r\n\r\n```\r\npi@raspberrypi:~ $ sudo apt install elixir\r\nReading package lists... Done\r\nBuilding dependency tree\r\nReading state information... Done\r\nSome packages could not be installed. This may mean that you have\r\nrequested an impossible situation or if you are using the unstable\r\ndistribution that some required packages have not yet been created\r\nor been moved out of Incoming.\r\nThe following information may help to resolve the situation:\r\n\r\nThe following packages have unmet dependencies:\r\n elixir : Depends: erlang-base (>= 1:23.1) but it is not going to be installed or\r\n                   erlang-base-hipe (>= 1:23.1) or\r\n                   esl-erlang (>= 1:23.1) but it is not going to be installed\r\n          Depends: erlang-crypto (>= 1:23.1) or\r\n                   esl-erlang (>= 1:23.1) but it is not going to be installed\r\n          Depends: erlang-inets (>= 1:23.1) or\r\n                   esl-erlang (>= 1:23.1) but it is not going to be installed\r\n          Depends: erlang-ssl (>= 1:23.1) or\r\n                   esl-erlang (>= 1:23.1) but it is not going to be installed\r\n          Depends: erlang-syntax-tools (>= 1:23.1) or\r\n                   esl-erlang (>= 1:23.1) but it is not going to be installed\r\nE: Unable to correct problems, you have held broken packages.\r\npi@raspberrypi:~ $\r\n```\r\n\r\nSo erlang needed is >= 1:23.1\r\n\r\nWhen I check what erlang versions are available I get only\r\n\r\n```\r\npi@raspberrypi:~ $ sudo apt-cache show erlang-base\r\nPackage: erlang-base\r\nSource: erlang\r\nVersion: 1:21.2.6+dfsg-1\r\nArchitecture: armhf\r\nMaintainer: Debian Erlang Packagers <hzdkv@example.com>\r\nInstalled-Size: 12450\r\nDepends: procps, adduser, libc6 (>= 2.28), libsystemd0, libtinfo6 (>= 6)\r\nRecommends: libsctp1 (>= 1.0.18+dfsg), erlang-crypto (= 1:21.2.6+dfsg-1), erlang-syntax-tools (= 1:21.2.6+dfsg-1)\r\nSuggests: erlang-tools (= 1:21.2.6+dfsg-1), erlang, erlang-manpages, erlang-doc\r\nConflicts: erlang (<< 1:21.2.6+dfsg-1), erlang-base-hipe, erlang-doc (>> 1:21.2.6+dfsg-999), erlang-doc (<< 1:21.2.6+dfsg), erlang-doc-html (<< 1:13.b.4), erlang-manpages (<= 1:11.b.1-2)\r\nBreaks: rabbitmq-server (<< 3.7.7)\r\nReplaces: erlang (<< 1:21.2.6+dfsg-1), erlang-base-hipe, erlang-dev (<< 1:21.2.6+dfsg-1), erlang-doc (>> 1:21.2.6+dfsg-999), erlang-doc (<< 1:21.2.6+dfsg), erlang-doc-html (<< 1:13.b.4), erlang-examples (<< 1:21.2.6+dfsg-1), erlang-manpages (<= 1:11.b.1-2), erlang-mode (<< 1:12.b.1-dfsg-2), erlang-nox (<< 1:21.2.6+dfsg-1), erlang-src (<< 1:21.2.6+dfsg-1), erlang-typer (<< 1:20.0+dfsg), erlang-x11 (<< 1:21.2.6+dfsg-1)\r\nProvides: erlang-abi-17.0\r\nHomepage: http://www.erlang.org/\r\nPriority: optional\r\nSection: interpreters\r\nFilename: pool/main/e/erlang/erlang-base_21.2.6+dfsg-1_armhf.deb\r\nSize: 7444996\r\nSHA256: db64e43de73b34ce1f0276f617edd60dc66c10d5867f4bac6822e3fada65e57f\r\nSHA1: 2d1d44b01e663e1c8987830906b9a4ac7e59ba77\r\nMD5sum: d2381a2804e6e00cfde1b2086ea36b09\r\nDescription: Erlang/OTP virtual machine and base applications\r\n This package contains the Erlang/OTP runtime implementation, which is\r\n configured and built without HiPE support (compiles to byte-code only),\r\n and minimal set of Erlang applications:\r\n  compiler - compiles Erlang code to byte-code;\r\n  erts - the Erlang runtime system application;\r\n  kernel - code necessary to run the Erlang runtime system itself;\r\n  ose - code for Enea OSE operating system;\r\n  sasl - the system architecture support libraries application;\r\n  stdlib - modules for manipulating lists, strings, files etc.\r\nDescription-md5: 34f1d00a77372c45835007b286d6b266\r\n\r\npi@raspberrypi:~ $\r\n```\r\n\r\nWhen I check if I could ""lower"" my Elixir version and with that my dependency issue I can see... that the lowest possible Elixir that I could install is 1.7.4.... \r\n\r\n```\r\n.\r\n.\r\n.\r\n.\r\n[Truncated]\n Erlang libraries transparently.\r\nDescription-md5: 572fe6b3095250d25aa22e376bc0e13e\r\nHomepage: http://elixir-lang.org/\r\nSection: interpreters\r\nPriority: optional\r\nFilename: pool/main/e/elixir-lang/elixir_1.7.4-0.1_all.deb\r\n\r\n```\r\n\r\n\r\nJust so you know... instructions don\'t really work. \r\n\r\n\r\nMy Raspbeery PI 4 version of OS:\r\n```\r\npi@raspberrypi:~ $ cat /etc/rpi-issue\r\nRaspberry Pi reference 2021-01-11\r\nGenerated using pi-gen, https://github.com/RPi-Distro/pi-gen, 21090519d85bdaa1615d5d5057d37b09368ea5d2, stage5\r\npi@raspberrypi:~ $\r\n```', 'title': 'Installation instructions for Raspberry Pi do not work on latest Raspbian', 'type': 'issue'}
+ {'action': 'created', 'author': 'josevalim', 'comment_id': 817636506.0, 'datetime': '2021-04-12 09:12:32+00:00', 'masked_author': 'username_1', 'text': 'Thanks @username_0 for the report. Those instructions are maintained by the community and they may indeed go outdated. I recommend you to ask in the ElixirForum, maybe someone can help you, and hopefully contribute back.', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'tomazbracic', 'comment_id': 817645406.0, 'datetime': '2021-04-12 09:24:12+00:00', 'masked_author': 'username_0', 'text': 'Thanks @username_1 \r\n\r\nWill do, just wanted to comment on this.. if someone needs to know.', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'hlxinfeng', 'comment_id': 830746952.0, 'datetime': '2021-05-02 05:38:09+00:00', 'masked_author': 'username_2', 'text': 'hello, am just started learn elixir and try install it in Raspi 4 model B, and get the same error/warnings\r\n\r\ni get the solutions from this:\r\n\r\n1. Install Erlang: \r\nhttps://elinux.org/Erlang\r\nsudo apt-get update\r\nsudo apt-get install wget\r\nsudo apt-get install libssl-dev\r\nsudo apt-get install ncurses-dev\r\nwget http://www.erlang.org/download/otp_src_23.2.tar.gz\r\ntar -xzvf otp_src_23.2.tar.gz\r\ncd otp_src_23.2/\r\n./configure\r\nmake\r\nsudo make install\r\ncd ..\r\nrm otp_src_23.2.tar.gz\r\nsudo rm -R otp_src_23.2/\r\n\r\n2. Install Elixir from source:\r\nwget https://github.com/elixir-lang/elixir/archive/v1.11.4.tar.gz\r\n\r\n3. And setting elixir PATH:\r\nhttps://elixir-lang.org/install.html#setting-path-environment-variable\r\nexport PATH=""$PATH:/path/to/elixir/bin""\r\n\r\n=====\r\nafter this, erlang and elixir working fine, but when trying install phoenix, mix local.hex and mix deps.get, not working. trying to make it work until morning still can not work. just shutiing down my raspi.\r\n\r\njust wake up, power up raspi, trying mix local.hex and mis deps.get,\r\nand it work. and now am working on my first hello world.\r\n\r\n:)', 'title': None, 'type': 'comment'}]","<issue_start><issue_comment>Title: Installation instructions for Raspberry Pi do not work on latest Raspbian
+username_0: Following the instructions at https://elixir-lang.org/install.html under ""Raspberry Pi"" on the latest Raspbian (buster) results in this output when want to install Elixir 
+
+So last command fails. I did apt update without errors.
+
+```
+pi@raspberrypi:~ $ sudo apt install elixir
+Reading package lists... Done
+Building dependency tree
+Reading state information... Done
+Some packages could not be installed. This may mean that you have
+requested an impossible situation or if you are using the unstable
+distribution that some required packages have not yet been created
+or been moved out of Incoming.
+The following information may help to resolve the situation:
+
+The following packages have unmet dependencies:
+ elixir : Depends: erlang-base (>= 1:23.1) but it is not going to be installed or
+                   erlang-base-hipe (>= 1:23.1) or
+                   esl-erlang (>= 1:23.1) but it is not going to be installed
+          Depends: erlang-crypto (>= 1:23.1) or
+                   esl-erlang (>= 1:23.1) but it is not going to be installed
+          Depends: erlang-inets (>= 1:23.1) or
+                   esl-erlang (>= 1:23.1) but it is not going to be installed
+          Depends: erlang-ssl (>= 1:23.1) or
+                   esl-erlang (>= 1:23.1) but it is not going to be installed
+          Depends: erlang-syntax-tools (>= 1:23.1) or
+                   esl-erlang (>= 1:23.1) but it is not going to be installed
+E: Unable to correct problems, you have held broken packages.
+pi@raspberrypi:~ $
+```
+
+So erlang needed is >= 1:23.1
+
+When I check what erlang versions are available I get only
+
+```
+pi@raspberrypi:~ $ sudo apt-cache show erlang-base
+Package: erlang-base
+Source: erlang
+Version: 1:21.2.6+dfsg-1
+Architecture: armhf
+Maintainer: Debian Erlang Packagers <pkg-erlang-devel@lists.alioth.debian.org>
+Installed-Size: 12450
+Depends: procps, adduser, libc6 (>= 2.28), libsystemd0, libtinfo6 (>= 6)
+Recommends: libsctp1 (>= 1.0.18+dfsg), erlang-crypto (= 1:21.2.6+dfsg-1), erlang-syntax-tools (= 1:21.2.6+dfsg-1)
+Suggests: erlang-tools (= 1:21.2.6+dfsg-1), erlang, erlang-manpages, erlang-doc
+Conflicts: erlang (<< 1:21.2.6+dfsg-1), erlang-base-hipe, erlang-doc (>> 1:21.2.6+dfsg-999), erlang-doc (<< 1:21.2.6+dfsg), erlang-doc-html (<< 1:13.b.4), erlang-manpages (<= 1:11.b.1-2)
+Breaks: rabbitmq-server (<< 3.7.7)
+Replaces: erlang (<< 1:21.2.6+dfsg-1), erlang-base-hipe, erlang-dev (<< 1:21.2.6+dfsg-1), erlang-doc (>> 1:21.2.6+dfsg-999), erlang-doc (<< 1:21.2.6+dfsg), erlang-doc-html (<< 1:13.b.4), erlang-examples (<< 1:21.2.6+dfsg-1), erlang-manpages (<= 1:11.b.1-2), erlang-mode (<< 1:12.b.1-dfsg-2), erlang-nox (<< 1:21.2.6+dfsg-1), erlang-src (<< 1:21.2.6+dfsg-1), erlang-typer (<< 1:20.0+dfsg), erlang-x11 (<< 1:21.2.6+dfsg-1)
+Provides: erlang-abi-17.0
+Homepage: http://www.erlang.org/
+Priority: optional
+Section: interpreters
+Filename: pool/main/e/erlang/erlang-base_21.2.6+dfsg-1_armhf.deb
+Size: 7444996
+SHA256: db64e43de73b34ce1f0276f617edd60dc66c10d5867f4bac6822e3fada65e57f
+SHA1: 2d1d44b01e663e1c8987830906b9a4ac7e59ba77
+MD5sum: d2381a2804e6e00cfde1b2086ea36b09
+Description: Erlang/OTP virtual machine and base applications
+ This package contains the Erlang/OTP runtime implementation, which is
+ configured and built without HiPE support (compiles to byte-code only),
+ and minimal set of Erlang applications:
+  compiler - compiles Erlang code to byte-code;
+  erts - the Erlang runtime system application;
+  kernel - code necessary to run the Erlang runtime system itself;
+  ose - code for Enea OSE operating system;
+  sasl - the system architecture support libraries application;
+  stdlib - modules for manipulating lists, strings, files etc.
+Description-md5: 34f1d00a77372c45835007b286d6b266
+
+pi@raspberrypi:~ $
+```
+
+When I check if I could ""lower"" my Elixir version and with that my dependency issue I can see... that the lowest possible Elixir that I could install is 1.7.4.... 
+
+```
+.
+.
+.
+.
+[Truncated]
+ Erlang libraries transparently.
+Description-md5: 572fe6b3095250d25aa22e376bc0e13e
+Homepage: http://elixir-lang.org/
+Section: interpreters
+Priority: optional
+Filename: pool/main/e/elixir-lang/elixir_1.7.4-0.1_all.deb
+
+```
+
+
+Just so you know... instructions don't really work. 
+
+
+My Raspbeery PI 4 version of OS:
+```
+pi@raspberrypi:~ $ cat /etc/rpi-issue
+Raspberry Pi reference 2021-01-11
+Generated using pi-gen, https://github.com/RPi-Distro/pi-gen, 21090519d85bdaa1615d5d5057d37b09368ea5d2, stage5
+pi@raspberrypi:~ $
+```
+<issue_comment>username_1: Thanks @username_0 for the report. Those instructions are maintained by the community and they may indeed go outdated. I recommend you to ask in the ElixirForum, maybe someone can help you, and hopefully contribute back.
+<issue_comment>username_0: Thanks @username_1 
+
+Will do, just wanted to comment on this.. if someone needs to know.
+<issue_comment>username_2: hello, am just started learn elixir and try install it in Raspi 4 model B, and get the same error/warnings
+
+i get the solutions from this:
+
+1. Install Erlang: 
+https://elinux.org/Erlang
+sudo apt-get update
+sudo apt-get install wget
+sudo apt-get install libssl-dev
+sudo apt-get install ncurses-dev
+wget http://www.erlang.org/download/otp_src_23.2.tar.gz
+tar -xzvf otp_src_23.2.tar.gz
+cd otp_src_23.2/
+./configure
+make
+sudo make install
+cd ..
+rm otp_src_23.2.tar.gz
+sudo rm -R otp_src_23.2/
+
+2. Install Elixir from source:
+wget https://github.com/elixir-lang/elixir/archive/v1.11.4.tar.gz
+
+3. And setting elixir PATH:
+https://elixir-lang.org/install.html#setting-path-environment-variable
+export PATH=""$PATH:/path/to/elixir/bin""
+
+=====
+after this, erlang and elixir working fine, but when trying install phoenix, mix local.hex and mix deps.get, not working. trying to make it work until morning still can not work. just shutiing down my raspi.
+
+just wake up, power up raspi, trying mix local.hex and mis deps.get,
+and it work. and now am working on my first hello world.
+
+:)"
+kubernetes/website,258328323,5508,,"[{'action': 'opened', 'author': 'tomgron', 'comment_id': None, 'datetime': '2017-09-17T19:43:24Z', 'masked_author': 'username_0', 'text': '<!-- Thanks for filing an issue! Before submitting, please fill in the following information. -->\r\n\r\n<!--Required Information-->\r\n\r\n**This is a...** \r\n<!-- choose one by changing [ ] to [x] -->\r\n- [ ] Feature Request\r\n- [x] Bug Report\r\n\r\n**Problem:**\r\nWhen running curl.exe -LO **https://storage.googleapis.com/kubernetes-release/release/v1.7.0/bin/windows/amd64/kubectl.exe in powershell windows 10, I get following error :\r\n\r\ncurl: (60) SSL certificate problem: unable to get local issuer certificate\r\nMore details here: https://curl.haxx.se/docs/sslcerts.html\r\n\r\ncurl performs SSL certificate verification by default, using a ""bundle""\r\n of Certificate Authority (CA) public keys (CA certs). If the default\r\n bundle file isn\'t adequate, you can specify an alternate file\r\n using the --cacert option.\r\nIf this HTTPS server uses a certificate signed by a CA represented in\r\n the bundle, the certificate verification probably failed due to a\r\n problem with the certificate (it might be expired, or the name might\r\n not match the domain name in the URL).\r\nIf you\'d like to turn off curl\'s verification of the certificate, use\r\n the -k (or --insecure) option.\r\nHTTPS-proxy has similar options --proxy-cacert and --proxy-insecure.**\r\n\r\n**Proposed Solution:**\r\nAdd ""k"" to the options (e.g. curl.exe -kLO https://storage.googleapis.com/kubernetes-release/release/v1.7.0/bin/windows/amd64/kubectl.exe)\r\n\r\n**Page to Update:**\r\nhttp://kubernetes.io/...\r\n\r\n<!--Optional Information (remove the comment tags around information you would like to include)-->\r\n<!--Kubernetes Version:-->\r\n\r\n<!--Additional Information:-->', 'title': 'Issue with k8s.io/docs/tasks/tools/install-kubectl/', 'type': 'issue'}
+ {'action': 'closed', 'author': 'tomgron', 'comment_id': None, 'datetime': '2017-11-16 21:32:55+00:00', 'masked_author': 'username_0', 'text': '', 'title': None, 'type': 'issue'}]","<issue_start><issue_comment>Title: Issue with k8s.io/docs/tasks/tools/install-kubectl/
+username_0: <!-- Thanks for filing an issue! Before submitting, please fill in the following information. -->
+
+<!--Required Information-->
+
+**This is a...** 
+<!-- choose one by changing [ ] to [x] -->
+- [ ] Feature Request
+- [x] Bug Report
+
+**Problem:**
+When running curl.exe -LO **https://storage.googleapis.com/kubernetes-release/release/v1.7.0/bin/windows/amd64/kubectl.exe in powershell windows 10, I get following error :
+
+curl: (60) SSL certificate problem: unable to get local issuer certificate
+More details here: https://curl.haxx.se/docs/sslcerts.html
+
+curl performs SSL certificate verification by default, using a ""bundle""
+ of Certificate Authority (CA) public keys (CA certs). If the default
+ bundle file isn't adequate, you can specify an alternate file
+ using the --cacert option.
+If this HTTPS server uses a certificate signed by a CA represented in
+ the bundle, the certificate verification probably failed due to a
+ problem with the certificate (it might be expired, or the name might
+ not match the domain name in the URL).
+If you'd like to turn off curl's verification of the certificate, use
+ the -k (or --insecure) option.
+HTTPS-proxy has similar options --proxy-cacert and --proxy-insecure.**
+
+**Proposed Solution:**
+Add ""k"" to the options (e.g. curl.exe -kLO https://storage.googleapis.com/kubernetes-release/release/v1.7.0/bin/windows/amd64/kubectl.exe)
+
+**Page to Update:**
+http://kubernetes.io/...
+
+<!--Optional Information (remove the comment tags around information you would like to include)-->
+<!--Kubernetes Version:-->
+
+<!--Additional Information:--><issue_closed>"
+ethereum/ethereum-org-website,1091196095,4924,"{'number': 4924.0, 'repo': 'ethereum-org-website', 'user_login': 'ethereum'}","[{'action': 'opened', 'author': 'skylarweaver', 'comment_id': None, 'datetime': '2021-12-30T16:22:38Z', 'masked_author': 'username_0', 'text': 'Minor text changes to improve readability & accuracy.', 'title': 'Improve readability & accuracy on Energy consumption page', 'type': 'issue'}
+ {'action': 'created', 'author': 'corwintines', 'comment_id': 1004358752.0, 'datetime': '2022-01-03 21:06:47+00:00', 'masked_author': 'username_1', 'text': ""Thanks @username_0, the changes look great! I merged @minimalsm suggestions to get this over the finish line. You'll have to come claim the 2022 POAP when those are ready :)"", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'samajammin', 'comment_id': 1006215318.0, 'datetime': '2022-01-06 01:39:36+00:00', 'masked_author': 'username_2', 'text': '@all-contributors please add @username_0 for content.', 'title': None, 'type': 'comment'}]","<issue_start><issue_comment>Title: Improve readability & accuracy on Energy consumption page
+username_0: Minor text changes to improve readability & accuracy.
+<issue_comment>username_1: Thanks @username_0, the changes look great! I merged @minimalsm suggestions to get this over the finish line. You'll have to come claim the 2022 POAP when those are ready :)
+<issue_comment>username_2: @all-contributors please add @username_0 for content."

@@ -1,0 +1,367 @@
+facebook/docusaurus,973476443,5375,"{'number': 5375.0, 'repo': 'docusaurus', 'user_login': 'facebook'}","[{'action': 'opened', 'author': 'johnnyreilly', 'comment_id': None, 'datetime': '2021-08-18T09:42:52Z', 'masked_author': 'username_0', 'text': '## Motivation\r\n\r\nSee https://github.com/facebook/docusaurus/issues/5373\r\n\r\nDocusaurus does not provide `og:type` at present.  It would be good if it did; perhaps with a value of `website` or `article`. eg:\r\n\r\n```html\r\n<meta property=""og:type"" content=""article"" />\r\n```\r\n\r\nThis PR provides that support through a generic meta tags mechanism which is used *only* by the blog mechanism at present.  Blogs get the `og:type` of `article` as well as some article data, powered by the metadata available:\r\n\r\n```js\r\n {\r\n        \'og:type\': \'article\',\r\n        \'article:published_time\': date,\r\n        ...(authorURL ? {\'article:author\': authorURL} : {}),\r\n        ...(frontMatter.tags\r\n          ? {\'article:tag\': frontMatter.tags.join(\',\')}\r\n          : {}),\r\n }\r\n```\r\n\r\n### Have you read the [Contributing Guidelines on pull requests](https://github.com/facebook/docusaurus/blob/main/CONTRIBUTING.md#pull-requests)?\r\n\r\nYes\r\n\r\n## Test Plan\r\n\r\nBuilding and running locally you can see the new tags being generated:\r\n\r\n![image](https://user-images.githubusercontent.com/1010525/129875514-fa7120a5-6bd8-4bd4-81ca-2d8c06c7b9bf.png)\r\n\r\n```html\r\n<meta property=""og:type"" content=""article"" data-react-helmet=""true"">\r\n<meta property=""article:published_time"" content=""2018-09-11T00:00:00.000Z"" data-react-helmet=""true"">\r\n<meta property=""article:author"" content=""https://github.com/endiliey"" data-react-helmet=""true"">\r\n<meta property=""article:tag"" content=""new,adoption"" data-react-helmet=""true"">\r\n```\r\n\r\n## Related PRs\r\n\r\nN/A', 'title': 'feat: add metatags support for seo / blogposts #5373', 'type': 'issue'}]","<issue_start><issue_comment>Title: feat: add metatags support for seo / blogposts #5373
+username_0: ## Motivation
+
+See https://github.com/facebook/docusaurus/issues/5373
+
+Docusaurus does not provide `og:type` at present.  It would be good if it did; perhaps with a value of `website` or `article`. eg:
+
+```html
+<meta property=""og:type"" content=""article"" />
+```
+
+This PR provides that support through a generic meta tags mechanism which is used *only* by the blog mechanism at present.  Blogs get the `og:type` of `article` as well as some article data, powered by the metadata available:
+
+```js
+ {
+        'og:type': 'article',
+        'article:published_time': date,
+        ...(authorURL ? {'article:author': authorURL} : {}),
+        ...(frontMatter.tags
+          ? {'article:tag': frontMatter.tags.join(',')}
+          : {}),
+ }
+```
+
+### Have you read the [Contributing Guidelines on pull requests](https://github.com/facebook/docusaurus/blob/main/CONTRIBUTING.md#pull-requests)?
+
+Yes
+
+## Test Plan
+
+Building and running locally you can see the new tags being generated:
+
+![image](https://user-images.githubusercontent.com/1010525/129875514-fa7120a5-6bd8-4bd4-81ca-2d8c06c7b9bf.png)
+
+```html
+<meta property=""og:type"" content=""article"" data-react-helmet=""true"">
+<meta property=""article:published_time"" content=""2018-09-11T00:00:00.000Z"" data-react-helmet=""true"">
+<meta property=""article:author"" content=""https://github.com/endiliey"" data-react-helmet=""true"">
+<meta property=""article:tag"" content=""new,adoption"" data-react-helmet=""true"">
+```
+
+## Related PRs
+
+N/A"
+zaproxy/zaproxy-website,610445625,113,"{'number': 113.0, 'repo': 'zaproxy-website', 'user_login': 'zaproxy'}","[{'action': 'opened', 'author': 'kingthorin', 'comment_id': None, 'datetime': '2020-04-30T23:04:27Z', 'masked_author': 'username_0', 'text': ""Per BugCrowd report & well time :+1:\r\n\r\nLeveraged https://validator.w3.org/checklink?uri=https%3A%2F%2Fwww.zaproxy.org%2Fevangelists%2F&hide_type=all&depth=&check=Check as an interim step. LinkedIn links had to be verified manually due to robots.txt, all the old numeric links now fail. There's a bunch of2013/2014 era stuff that no longer worked either. Finally a few owasp.org things now fail after the site migration.\r\n\r\nIn the majority of cases I just removed the broken reference (I don't have time of energy to go hunting for people.)"", 'title': 'Fix evangelists links', 'type': 'issue'}
+ {'action': 'created', 'author': 'kingthorin', 'comment_id': 622332627.0, 'datetime': '2020-05-01 10:22:22+00:00', 'masked_author': 'username_0', 'text': 'Thanks, will update', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'kingthorin', 'comment_id': 622374441.0, 'datetime': '2020-05-01 12:48:32+00:00', 'masked_author': 'username_0', 'text': 'All addressed.', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'thc202', 'comment_id': 622416819.0, 'datetime': '2020-05-01 14:45:11+00:00', 'masked_author': 'username_1', 'text': 'Thanks!\r\n\r\nWorth leaving a message in the evangelist list as heads up?', 'title': None, 'type': 'comment'}]","<issue_start><issue_comment>Title: Fix evangelists links
+username_0: Per BugCrowd report & well time :+1:
+
+Leveraged https://validator.w3.org/checklink?uri=https%3A%2F%2Fwww.zaproxy.org%2Fevangelists%2F&hide_type=all&depth=&check=Check as an interim step. LinkedIn links had to be verified manually due to robots.txt, all the old numeric links now fail. There's a bunch of2013/2014 era stuff that no longer worked either. Finally a few owasp.org things now fail after the site migration.
+
+In the majority of cases I just removed the broken reference (I don't have time of energy to go hunting for people.)
+<issue_comment>username_0: Thanks, will update
+<issue_comment>username_0: All addressed.
+<issue_comment>username_1: Thanks!
+
+Worth leaving a message in the evangelist list as heads up?"
+kubernetes/website,812565053,26638,,"[{'action': 'opened', 'author': 'yogyogi', 'comment_id': None, 'datetime': '2021-02-20 09:38:39+00:00', 'masked_author': 'username_0', 'text': ""As listed in the [official docs about set of ingress](https://kubernetes.io/docs/tasks/access-application-cluster/ingress-minikube/), I found out that the ingress is not reachable by the browser. \r\n\r\nI created an ingress:\r\n`kubectl apply -f https://k8s.io/examples/service/networking/example-ingress.yaml`\r\n\r\nAnd added its mapping on the `/etc/hosts` file in my windows 10 home edition.\r\n\r\n`192.168.49.2 hello-world.info`\r\n\r\nWhere 192.168.49.2 is the ip address of the ingress. \r\n\r\nFinally I tried opening the `hello-world.info` on the browser but the browser says 'This site can’t be reached'.\r\n\r\nCurl command also gave no response.\r\n`curl hello-world.info`\r\n\r\nWhat is the solution ??"", 'title': 'Ingress on Minikube with the NGINX Ingress Controller does not opens in browser', 'type': 'issue'}
+ {'action': 'created', 'author': 'sftim', 'comment_id': 782657899.0, 'datetime': '2021-02-20 13:35:13+00:00', 'masked_author': 'username_1', 'text': ""Hi @username_0 \r\n\r\nWould you be willing to describe the context for your findings? We'd want to know what kind of cluster you ran it on (eg: local minikube? minikube from Katacoda as found in that task page? something else), the version of that cluster, and whether you deviated from any of the steps.\r\n\r\n\r\nI suspect that if you are using Minikube in katacoda, there isn't any way to access the Ingress from the public internet. I haven't checked though."", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'yogyogi', 'comment_id': 782693788.0, 'datetime': '2021-02-20 14:55:08+00:00', 'masked_author': 'username_0', 'text': 'Hello @username_1,\r\n\r\nI am using **local Minikube** installed in **Windows 10 Home**. There is also docker desktop in my pc.\r\nI have also described this problem on [**stackoverflow**](https://stackoverflow.com/questions/66275458/could-not-access-kubernetes-ingress-in-browser-on-windows-home-with-minikube) with no luck till now. \r\n\r\nPlease provide me a solution. Let me know if you need any other information from me. \r\n\r\nthank you', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'sftim', 'comment_id': 782697390.0, 'datetime': '2021-02-20 15:18:49+00:00', 'masked_author': 'username_1', 'text': 'Hi @username_0\r\n\r\nThanks for asking that question on Stack Overflow - it sounds like a good place for it.\r\n\r\nI did notice that the advice about listing `hello-world.info` is POSIX-specific. Windows doesn\'t actually have `/etc/hosts` file.\r\n\r\nWhen I try this and run `curl -H ""Host: hello-world.info"" ""http://$(minikube ip)""`, it works fine. _If you\'re using PowerShell_ and have `curl` available, that should also work OK. Does that help? If so, you could suggest revising the page.', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'yogyogi', 'comment_id': 782698476.0, 'datetime': '2021-02-20 15:27:36+00:00', 'masked_author': 'username_0', 'text': 'Hello @username_1,\r\n\r\nWindows have etc/hosts file, i found it inside C:\\Windows\\System32\\drivers\\etc\\hosts. \r\nI updated it with notepad. \r\n\r\nAfter that on cmd, i did a ping to it - `ping hello-world.info`. It was pointing to the ip address `192.168.49.2` which i just set on \r\netc/hosts. So i was able to confirm this that I changed the etc/hosts file correctly. \r\n\r\nI will update the stackoverflow with the image of the ping soon. \r\n\r\nI also curl to these 2 paths which results in timeout. These 2 paths were:\r\n\r\n1. curl 192.168.49.2\r\n2. curl hello-world.info\r\n\r\nWhat can be the problem here?\r\n\r\nthank you', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'yogyogi', 'comment_id': 782731795.0, 'datetime': '2021-02-20 18:49:52+00:00', 'masked_author': 'username_0', 'text': 'I have updated [**stackoverflow**](https://stackoverflow.com/questions/66275458/could-not-access-kubernetes-ingress-in-browser-on-windows-home-with-minikube)  question with screenshots of curl command showing timeouts and also for ping command to the ip which also shows timeout.', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'RA489', 'comment_id': 1035838548.0, 'datetime': '2022-02-11 02:59:40+00:00', 'masked_author': 'username_2', 'text': '/remove-lifecycle stale', 'title': None, 'type': 'comment'}]","<issue_start><issue_comment>Title: Ingress on Minikube with the NGINX Ingress Controller does not opens in browser
+username_0: As listed in the [official docs about set of ingress](https://kubernetes.io/docs/tasks/access-application-cluster/ingress-minikube/), I found out that the ingress is not reachable by the browser. 
+
+I created an ingress:
+`kubectl apply -f https://k8s.io/examples/service/networking/example-ingress.yaml`
+
+And added its mapping on the `/etc/hosts` file in my windows 10 home edition.
+
+`192.168.49.2 hello-world.info`
+
+Where 192.168.49.2 is the ip address of the ingress. 
+
+Finally I tried opening the `hello-world.info` on the browser but the browser says 'This site can’t be reached'.
+
+Curl command also gave no response.
+`curl hello-world.info`
+
+What is the solution ??
+<issue_comment>username_1: Hi @username_0 
+
+Would you be willing to describe the context for your findings? We'd want to know what kind of cluster you ran it on (eg: local minikube? minikube from Katacoda as found in that task page? something else), the version of that cluster, and whether you deviated from any of the steps.
+
+
+I suspect that if you are using Minikube in katacoda, there isn't any way to access the Ingress from the public internet. I haven't checked though.
+<issue_comment>username_0: Hello @username_1,
+
+I am using **local Minikube** installed in **Windows 10 Home**. There is also docker desktop in my pc.
+I have also described this problem on [**stackoverflow**](https://stackoverflow.com/questions/66275458/could-not-access-kubernetes-ingress-in-browser-on-windows-home-with-minikube) with no luck till now. 
+
+Please provide me a solution. Let me know if you need any other information from me. 
+
+thank you
+<issue_comment>username_1: Hi @username_0
+
+Thanks for asking that question on Stack Overflow - it sounds like a good place for it.
+
+I did notice that the advice about listing `hello-world.info` is POSIX-specific. Windows doesn't actually have `/etc/hosts` file.
+
+When I try this and run `curl -H ""Host: hello-world.info"" ""http://$(minikube ip)""`, it works fine. _If you're using PowerShell_ and have `curl` available, that should also work OK. Does that help? If so, you could suggest revising the page.
+<issue_comment>username_0: Hello @username_1,
+
+Windows have etc/hosts file, i found it inside C:\Windows\System32\drivers\etc\hosts. 
+I updated it with notepad. 
+
+After that on cmd, i did a ping to it - `ping hello-world.info`. It was pointing to the ip address `192.168.49.2` which i just set on 
+etc/hosts. So i was able to confirm this that I changed the etc/hosts file correctly. 
+
+I will update the stackoverflow with the image of the ping soon. 
+
+I also curl to these 2 paths which results in timeout. These 2 paths were:
+
+1. curl 192.168.49.2
+2. curl hello-world.info
+
+What can be the problem here?
+
+thank you
+<issue_comment>username_0: I have updated [**stackoverflow**](https://stackoverflow.com/questions/66275458/could-not-access-kubernetes-ingress-in-browser-on-windows-home-with-minikube)  question with screenshots of curl command showing timeouts and also for ping command to the ip which also shows timeout.
+<issue_comment>username_2: /remove-lifecycle stale"
+ethereum/ethereum-org-website,989564211,3840,,"[{'action': 'opened', 'author': 'hastings8', 'comment_id': None, 'datetime': '2021-09-07 03:46:20+00:00', 'masked_author': 'username_0', 'text': 'im sick of yall bending me over , its  rape no lube nothing , ive lost 1000s  due to the gas and eth fees, its bullshit! sell bep20 coin they charge .13 cents sell some eth alt coin and your paying double the value of the cion in fees its  a gd joke! and why are yall so liked???? please explain that one to me ??? becausae yall are a  bunch of crooks if you ask me stealing honest peoples money , hell have a transaction error guess what they keep your moiney for therefuck up   fuck ETHEREUM!', 'title': 'i cant suggest one thing not one ', 'type': 'issue'}
+ {'action': 'created', 'author': 'jley81', 'comment_id': 913980209.0, 'datetime': '2021-09-07 04:24:16+00:00', 'masked_author': 'username_1', 'text': ""Hello hasting8.  I'm jerry Louis. I do apologize for the ???? And therefuck ups.  To be honest, I have no idea what I am doing. Hell no one can help me because I'm the one who created it and don't remember how or why. That fucking sucks. But I can tell you everything that is of this world.  The sooner I can find someone who can actually understand what I know, the sooner heaven will be here on earth. Want to talk but no one will listen.  Ethereum was created for endless energy. Knowledge. Free as God intended.  But all are so brained washed that it's literally me waiting."", 'title': None, 'type': 'comment'}
+ {'action': 'closed', 'author': 'minimalsm', 'comment_id': None, 'datetime': '2021-09-07 09:39:26+00:00', 'masked_author': 'username_2', 'text': '', 'title': None, 'type': 'issue'}]","<issue_start><issue_comment>Title: i cant suggest one thing not one 
+username_0: im sick of yall bending me over , its  rape no lube nothing , ive lost 1000s  due to the gas and eth fees, its bullshit! sell bep20 coin they charge .13 cents sell some eth alt coin and your paying double the value of the cion in fees its  a gd joke! and why are yall so liked???? please explain that one to me ??? becausae yall are a  bunch of crooks if you ask me stealing honest peoples money , hell have a transaction error guess what they keep your moiney for therefuck up   fuck ETHEREUM!
+<issue_comment>username_1: Hello hasting8.  I'm jerry Louis. I do apologize for the ???? And therefuck ups.  To be honest, I have no idea what I am doing. Hell no one can help me because I'm the one who created it and don't remember how or why. That fucking sucks. But I can tell you everything that is of this world.  The sooner I can find someone who can actually understand what I know, the sooner heaven will be here on earth. Want to talk but no one will listen.  Ethereum was created for endless energy. Knowledge. Free as God intended.  But all are so brained washed that it's literally me waiting.<issue_closed>"
+appveyor/website,288291044,408,,"[{'action': 'opened', 'author': 'kjin', 'comment_id': None, 'datetime': '2018-01-13 01:27:06+00:00', 'masked_author': 'username_0', 'text': ""I can't find concrete details about the PowerShell version that I should expect in my builds. I expected it to be here https://www.appveyor.com/docs/build-environment/ but didn't find what I wanted... so I eventually ended up running a dummy CI build to report the PowerShell version manually. Could this be documented in the website docs?"", 'title': 'Document PowerShell Version', 'type': 'issue'}
+ {'action': 'created', 'author': 'IlyaFinkelshteyn', 'comment_id': 357400772.0, 'datetime': '2018-01-13 01:53:24+00:00', 'masked_author': 'username_1', 'text': 'We will update it, when we have Windows PowerShell and PowerShell core side-by-side after next update.', 'title': None, 'type': 'comment'}
+ {'action': 'closed', 'author': 'IlyaFinkelshteyn', 'comment_id': None, 'datetime': '2018-01-13 01:53:24+00:00', 'masked_author': 'username_1', 'text': '', 'title': None, 'type': 'issue'}
+ {'action': 'created', 'author': 'FeodorFitsner', 'comment_id': 357402936.0, 'datetime': '2018-01-13 02:24:10+00:00', 'masked_author': 'username_2', 'text': 'Related issue: https://github.com/appveyor/ci/issues/2021', 'title': None, 'type': 'comment'}]","<issue_start><issue_comment>Title: Document PowerShell Version
+username_0: I can't find concrete details about the PowerShell version that I should expect in my builds. I expected it to be here https://www.appveyor.com/docs/build-environment/ but didn't find what I wanted... so I eventually ended up running a dummy CI build to report the PowerShell version manually. Could this be documented in the website docs?
+<issue_comment>username_1: We will update it, when we have Windows PowerShell and PowerShell core side-by-side after next update.<issue_closed>
+<issue_comment>username_2: Related issue: https://github.com/appveyor/ci/issues/2021"
+ethereum/ethereum-org-website,1167412778,5661,,"[{'action': 'opened', 'author': 'davymic1', 'comment_id': None, 'datetime': '2022-03-12 22:05:10+00:00', 'masked_author': 'username_0', 'text': ""**Describe the bug**\r\n\r\n<!-- A clear and concise description of what the bug is. -->\r\n\r\n**To Reproduce**\r\nSteps to reproduce the behavior:\r\n\r\n1. Go to '...'\r\n2. Click on '...'\r\n3. Scroll down to '...'\r\n4. See error\r\n\r\n**Expected behavior**\r\n\r\n<!-- A clear and concise description of what you expected to happen. -->\r\n\r\n**Screenshots**\r\n\r\n<!-- If applicable, add screenshots to help explain your problem. -->\r\n\r\n**Desktop (please complete the following information):**\r\n\r\n- OS: [e.g. iOS]\r\n- Browser: [e.g. chrome, safari]\r\n- Version: [e.g. 22]\r\n\r\n**Smartphone (please complete the following information):**\r\n\r\n- Device: [e.g. iPhone6]\r\n- OS: [e.g. iOS8.1]\r\n- Browser: [e.g. stock browser, safari]\r\n- Version: [e.g. 22]\r\n\r\n**Additional context**\r\n\r\n<!-- Add any other context about the problem here. -->\r\n\r\n**Want to contribute?**\r\n\r\nWe love contributions from the Ethereum community! Please comment on an issue if you're interested in helping out with a PR.\r\n@ETHorHIL #4697"", 'title': 'ETH Wallet has a powerful security updates', 'type': 'issue'}]","<issue_start><issue_comment>Title: ETH Wallet has a powerful security updates
+username_0: **Describe the bug**
+
+<!-- A clear and concise description of what the bug is. -->
+
+**To Reproduce**
+Steps to reproduce the behavior:
+
+1. Go to '...'
+2. Click on '...'
+3. Scroll down to '...'
+4. See error
+
+**Expected behavior**
+
+<!-- A clear and concise description of what you expected to happen. -->
+
+**Screenshots**
+
+<!-- If applicable, add screenshots to help explain your problem. -->
+
+**Desktop (please complete the following information):**
+
+- OS: [e.g. iOS]
+- Browser: [e.g. chrome, safari]
+- Version: [e.g. 22]
+
+**Smartphone (please complete the following information):**
+
+- Device: [e.g. iPhone6]
+- OS: [e.g. iOS8.1]
+- Browser: [e.g. stock browser, safari]
+- Version: [e.g. 22]
+
+**Additional context**
+
+<!-- Add any other context about the problem here. -->
+
+**Want to contribute?**
+
+We love contributions from the Ethereum community! Please comment on an issue if you're interested in helping out with a PR.
+@ETHorHIL #4697"
+JetBrains/kotlin-web-site,833643294,2152,"{'number': 2152.0, 'repo': 'kotlin-web-site', 'user_login': 'JetBrains'}","[{'action': 'opened', 'author': 'zayo', 'comment_id': None, 'datetime': '2021-03-17T10:51:41Z', 'masked_author': 'username_0', 'text': ""I've noticed that detekt is treating extension properties as regular properties.\r\nOpened issue on detekt: https://github.com/detekt/detekt/issues/3532\r\nLead to proposal: https://github.com/detekt/detekt/pull/3559\r\n\r\nYet that change would be unclear as this is not part of the spec at all. Thus proposing the following change."", 'title': 'Add Extension properties ordering', 'type': 'issue'}
+ {'action': 'created', 'author': 'BraisGabin', 'comment_id': 914024805.0, 'datetime': '2021-09-07 06:20:39+00:00', 'masked_author': 'username_1', 'text': 'This is not stale. I think that it should be merged or at least denied by a human telling why it should not be merged.', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'p7nov', 'comment_id': 914891345.0, 'datetime': '2021-09-08 03:56:50+00:00', 'masked_author': 'username_2', 'text': ""Hey! We're currently testing some automation to help us handle PR from contributors in time. Sorry for not responding for so long. We'll review your suggestion in a couple of days."", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'elizarov', 'comment_id': 915068795.0, 'datetime': '2021-09-08 09:22:42+00:00', 'masked_author': 'username_3', 'text': 'This addition contradicts the spirit of the Kotlin style guide which explicitly does not tries to mandate any order and says: "" ""Choose an order (either higher-level stuff first, or vice versa) and stick to it."" It is up to specific projects and tools to decide upon any specific ordering requirements if they wish to enforce them.', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'zayo', 'comment_id': 915074420.0, 'datetime': '2021-09-08 09:31:04+00:00', 'masked_author': 'username_0', 'text': ""Thats true, but guys from detekt told me, that this has unless it's in doc, they won't approve it.\r\nThe problem is, that extension properties are treated as regular properties, which I believe is wrong. Yet the doc does not states what the ext property is.\r\nAny suggestion how to rephrase it to fit both needs?"", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'elizarov', 'comment_id': 915078034.0, 'datetime': '2021-09-08 09:34:55+00:00', 'masked_author': 'username_3', 'text': ""Kotlin style guide does not enforce the ordering for a reason. We have found that it is hard to come up with rock-solid ordering rules even for our own code, so we've bailed out of trying to solve it. \r\n\r\nIt is up to detekt team to decide upon such rules if they wish to tackle this issue to have ordering enforced automatically."", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'zayo', 'comment_id': 915085291.0, 'datetime': '2021-09-08 09:44:32+00:00', 'masked_author': 'username_0', 'text': ""I got your point. I don't require the doc to contain info about order.\r\nI would like the doc to state what the extension property is. Is it property? Is it function? Is it neither one of them?"", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'elizarov', 'comment_id': 915170945.0, 'datetime': '2021-09-08 11:58:22+00:00', 'masked_author': 'username_3', 'text': ""I don't see how that kind of information is related to Kotlin's style guide."", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'zayo', 'comment_id': 915230514.0, 'datetime': '2021-09-08 13:16:59+00:00', 'masked_author': 'username_0', 'text': 'You cannot say to not force order on properties unless you start calling them ""properties"". The doc says nothing about extensions. It doesn\'t even give a hint how they should be treated. I don\'t require to tell where they should be, but current state gives everyone chnace to mix them with methods(which they effectively are), or treating them like properties(which they look like). Which gives too much power and can be even harmful and error prone from my POV.\r\nIf that ends up with mixing the extension properties into regular properties, it\'s super confusing for the reader.\r\n\r\nSo I don\'t want to state how to order them, but how not to order them in a first place. To avoid code being error prone and confusing for the reader. Hope this is clear explanation why.', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'elizarov', 'comment_id': 915313866.0, 'datetime': '2021-09-08 14:57:28+00:00', 'masked_author': 'username_3', 'text': 'This kind of decision is simply out of the scope of this particular document. It does not belong here.', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'chao2zhang', 'comment_id': 915394641.0, 'datetime': '2021-09-08 16:38:57+00:00', 'masked_author': 'username_4', 'text': 'I believe this is within the scope of this document, particularly about clarifications of the existing doc `1. Property declarations and initializer blocks`. The proposal here is to clarify the `property` as non-extension properties because extension properties do get parsed as `KtProperty`.\r\n\r\nOn the other hand, I agree with you that it makes sense to not put any restrictions on extension properties in the official documentation.', 'title': None, 'type': 'comment'}]","<issue_start><issue_comment>Title: Add Extension properties ordering
+username_0: I've noticed that detekt is treating extension properties as regular properties.
+Opened issue on detekt: https://github.com/detekt/detekt/issues/3532
+Lead to proposal: https://github.com/detekt/detekt/pull/3559
+
+Yet that change would be unclear as this is not part of the spec at all. Thus proposing the following change.
+<issue_comment>username_1: This is not stale. I think that it should be merged or at least denied by a human telling why it should not be merged.
+<issue_comment>username_2: Hey! We're currently testing some automation to help us handle PR from contributors in time. Sorry for not responding for so long. We'll review your suggestion in a couple of days.
+<issue_comment>username_3: This addition contradicts the spirit of the Kotlin style guide which explicitly does not tries to mandate any order and says: "" ""Choose an order (either higher-level stuff first, or vice versa) and stick to it."" It is up to specific projects and tools to decide upon any specific ordering requirements if they wish to enforce them.
+<issue_comment>username_0: Thats true, but guys from detekt told me, that this has unless it's in doc, they won't approve it.
+The problem is, that extension properties are treated as regular properties, which I believe is wrong. Yet the doc does not states what the ext property is.
+Any suggestion how to rephrase it to fit both needs?
+<issue_comment>username_3: Kotlin style guide does not enforce the ordering for a reason. We have found that it is hard to come up with rock-solid ordering rules even for our own code, so we've bailed out of trying to solve it. 
+
+It is up to detekt team to decide upon such rules if they wish to tackle this issue to have ordering enforced automatically.
+<issue_comment>username_0: I got your point. I don't require the doc to contain info about order.
+I would like the doc to state what the extension property is. Is it property? Is it function? Is it neither one of them?
+<issue_comment>username_3: I don't see how that kind of information is related to Kotlin's style guide.
+<issue_comment>username_0: You cannot say to not force order on properties unless you start calling them ""properties"". The doc says nothing about extensions. It doesn't even give a hint how they should be treated. I don't require to tell where they should be, but current state gives everyone chnace to mix them with methods(which they effectively are), or treating them like properties(which they look like). Which gives too much power and can be even harmful and error prone from my POV.
+If that ends up with mixing the extension properties into regular properties, it's super confusing for the reader.
+
+So I don't want to state how to order them, but how not to order them in a first place. To avoid code being error prone and confusing for the reader. Hope this is clear explanation why.
+<issue_comment>username_3: This kind of decision is simply out of the scope of this particular document. It does not belong here.
+<issue_comment>username_4: I believe this is within the scope of this document, particularly about clarifications of the existing doc `1. Property declarations and initializer blocks`. The proposal here is to clarify the `property` as non-extension properties because extension properties do get parsed as `KtProperty`.
+
+On the other hand, I agree with you that it makes sense to not put any restrictions on extension properties in the official documentation."
+ethereum/ethereum-org-website,1000517848,3950,,"[{'action': 'opened', 'author': 'colinsteidtmann', 'comment_id': None, 'datetime': '2021-09-20 02:38:36+00:00', 'masked_author': 'username_0', 'text': ""**Describe the bug**\r\n\r\n<!-- A clear and concise description of what the bug is. -->\r\n\r\n**To Reproduce**\r\nSteps to reproduce the behavior:\r\n\r\n1. Go to https://ethereum.org/en/nft/#environmental-impact-nfts\r\n2. Then go to https://ethereum.org/en/nft/#fn-1\r\n4. See different energy reduction numbers (99.95 and 99.98%)\r\n\r\n**Expected behavior**\r\n\r\nEnergy reduction numbers should be consistent\r\n\r\n**Screenshots**\r\n![99.98%](https://user-images.githubusercontent.com/34821973/133952369-aed8fd98-383b-46a8-b92e-2be91d45e2b2.png)\r\n\r\n![99.95%](https://user-images.githubusercontent.com/34821973/133952374-0b1440e0-6422-433d-bd6e-81b5c71718d0.png)\r\n\r\n**Desktop (please complete the following information):**\r\n\r\n- OS: MacOS\r\n- Browser Chrome\r\n- Version 93.0.4577.82 (Official Build) (x86_64)\r\n\r\n\r\n**Smartphone (please complete the following information):**\r\n\r\n- Device: [e.g. iPhone6]\r\n- OS: [e.g. iOS8.1]\r\n- Browser [e.g. stock browser, safari]\r\n- Version [e.g. 22]\r\n\r\n**Additional context**\r\n\r\n<!-- Add any other context about the problem here. -->\r\n\r\n**Want to contribute?**\r\nOf course. I can fix this once someone confirms which number is correct. \r\n\r\nWe love contributions from the Ethereum community! Please comment on an issue if you're interested in helping out with a PR."", 'title': 'Is it a 99.95% or 99.98% energy reduction when switich from Eth1 to Eth2?', 'type': 'issue'}
+ {'action': 'created', 'author': 'minimalsm', 'comment_id': 926583771.0, 'datetime': '2021-09-24 12:24:23+00:00', 'masked_author': 'username_1', 'text': ""Hey @username_0 nice spot.\r\n\r\nWe're going with 99.95% to bring it in line with Carl Beekhuizen's [blog on energy usage ](https://blog.ethereum.org/2021/05/18/country-power-no-more/).\r\n\r\n[This PR](https://github.com/ethereum/ethereum-org-website/pull/3777) made the change from 99.98% to 99.95% but we must have missed one instance 🤪\r\n\r\nWould love a PR on it if you're still down! Assigned you."", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'MrBrain295', 'comment_id': 927158106.0, 'datetime': '2021-09-25 17:47:04+00:00', 'masked_author': 'username_2', 'text': 'I made a pr', 'title': None, 'type': 'comment'}
+ {'action': 'closed', 'author': 'samajammin', 'comment_id': None, 'datetime': '2021-11-09 14:34:28+00:00', 'masked_author': 'username_3', 'text': '', 'title': None, 'type': 'issue'}
+ {'action': 'created', 'author': 'samajammin', 'comment_id': 964208152.0, 'datetime': '2021-11-09 14:34:28+00:00', 'masked_author': 'username_3', 'text': 'Solved in #4032 - thanks @username_0 & @username_2!', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'samajammin', 'comment_id': 964208407.0, 'datetime': '2021-11-09 14:34:42+00:00', 'masked_author': 'username_3', 'text': '@all-contributors please add @username_0 for bug reports.', 'title': None, 'type': 'comment'}]","<issue_start><issue_comment>Title: Is it a 99.95% or 99.98% energy reduction when switich from Eth1 to Eth2?
+username_0: **Describe the bug**
+
+<!-- A clear and concise description of what the bug is. -->
+
+**To Reproduce**
+Steps to reproduce the behavior:
+
+1. Go to https://ethereum.org/en/nft/#environmental-impact-nfts
+2. Then go to https://ethereum.org/en/nft/#fn-1
+4. See different energy reduction numbers (99.95 and 99.98%)
+
+**Expected behavior**
+
+Energy reduction numbers should be consistent
+
+**Screenshots**
+![99.98%](https://user-images.githubusercontent.com/34821973/133952369-aed8fd98-383b-46a8-b92e-2be91d45e2b2.png)
+
+![99.95%](https://user-images.githubusercontent.com/34821973/133952374-0b1440e0-6422-433d-bd6e-81b5c71718d0.png)
+
+**Desktop (please complete the following information):**
+
+- OS: MacOS
+- Browser Chrome
+- Version 93.0.4577.82 (Official Build) (x86_64)
+
+
+**Smartphone (please complete the following information):**
+
+- Device: [e.g. iPhone6]
+- OS: [e.g. iOS8.1]
+- Browser [e.g. stock browser, safari]
+- Version [e.g. 22]
+
+**Additional context**
+
+<!-- Add any other context about the problem here. -->
+
+**Want to contribute?**
+Of course. I can fix this once someone confirms which number is correct. 
+
+We love contributions from the Ethereum community! Please comment on an issue if you're interested in helping out with a PR.
+<issue_comment>username_1: Hey @username_0 nice spot.
+
+We're going with 99.95% to bring it in line with Carl Beekhuizen's [blog on energy usage ](https://blog.ethereum.org/2021/05/18/country-power-no-more/).
+
+[This PR](https://github.com/ethereum/ethereum-org-website/pull/3777) made the change from 99.98% to 99.95% but we must have missed one instance 🤪
+
+Would love a PR on it if you're still down! Assigned you.
+<issue_comment>username_2: I made a pr<issue_closed>
+<issue_comment>username_3: Solved in #4032 - thanks @username_0 & @username_2!
+<issue_comment>username_3: @all-contributors please add @username_0 for bug reports."
+gohugoio/hugo,308360628,4535,,"[{'action': 'opened', 'author': 'bep', 'comment_id': None, 'datetime': '2018-03-25 15:51:33+00:00', 'masked_author': 'username_0', 'text': 'Currently, if you organize your content into bundles, you would have to do something like this to create new content with the archetype system:\r\n\r\n```bash\r\nhugo new post/my-post/index.md\r\n```\r\n\r\nThis works as expected, but the added power of bundles with its resource handling (image processing etc.) is screaming for some better support in this department.\r\n\r\nThis issue suggests that we add complete directories below `/archetypes`, and it will be used as a base to create a new bundle (or whatever).\r\n\r\nCombine that with a `archetypes/post\r\n```bash\r\narchetypes\r\n├── default.md\r\n└── post-bundle\r\n    ├── bio.md\r\n    ├── images\r\n    │\xa0\xa0 └── featured.jpg\r\n    └── index.md\r\n```\r\n\r\n```bash\r\nhugo new --kinde post-bundle post/my-post\r\n```\r\n\r\nWill create a new folder in `/content/post/my-post` with the same set of files as in the `post-bundle` archetypes folder. \r\n\r\nThe handling is simple:\r\n\r\n* We do nothing with the file- or directory names. \r\n* We parse and execute the content files (md, asciidoc etc.) as Go templates (like we do today) to enable dynamic values.\r\n* All other files (images etc.) is just copied.', 'title': 'Add directory based archetypes', 'type': 'issue'}
+ {'action': 'closed', 'author': 'bep', 'comment_id': None, 'datetime': '2018-09-23 17:27:24+00:00', 'masked_author': 'username_0', 'text': '', 'title': None, 'type': 'issue'}]","<issue_start><issue_comment>Title: Add directory based archetypes
+username_0: Currently, if you organize your content into bundles, you would have to do something like this to create new content with the archetype system:
+
+```bash
+hugo new post/my-post/index.md
+```
+
+This works as expected, but the added power of bundles with its resource handling (image processing etc.) is screaming for some better support in this department.
+
+This issue suggests that we add complete directories below `/archetypes`, and it will be used as a base to create a new bundle (or whatever).
+
+Combine that with a `archetypes/post
+```bash
+archetypes
+├── default.md
+└── post-bundle
+    ├── bio.md
+    ├── images
+    │   └── featured.jpg
+    └── index.md
+```
+
+```bash
+hugo new --kinde post-bundle post/my-post
+```
+
+Will create a new folder in `/content/post/my-post` with the same set of files as in the `post-bundle` archetypes folder. 
+
+The handling is simple:
+
+* We do nothing with the file- or directory names. 
+* We parse and execute the content files (md, asciidoc etc.) as Go templates (like we do today) to enable dynamic values.
+* All other files (images etc.) is just copied.<issue_closed>"
+newrelic/docs-website,770762500,439,,"[{'action': 'opened', 'author': 'danifitz', 'comment_id': None, 'datetime': '2020-12-18 10:15:46+00:00', 'masked_author': 'username_0', 'text': ""### Is your feature request related to a problem? Please describe\r\n\r\nThere is a create integrations section at the top level nav. When I click on it, I'd expect to find information about our wonderful Telemetry SDK's and Flex which enable customers to create integrations. https://docs-preview.newrelic.com/docs/create-integrations\r\n\r\n### Describe the solution you'd like\r\n\r\nLinks to Telemetry SDK's docs and Flex docs from the Create an integration page.\r\n\r\n### Describe why this important to you\r\n\r\nAs a customer, to discover the full potential of integration options, I'd like to be able to discover the Telemetry SDK's or Flex as options for creating integrations, since they are both very powerful solutions.\r\n\r\n### Additional context\r\n\r\nNone."", 'title': ""Add Telemetry SDK's and Flex to Create Integrations section"", 'type': 'issue'}
+ {'action': 'created', 'author': 'jerelmiller', 'comment_id': 748255508.0, 'datetime': '2020-12-18 18:49:03+00:00', 'masked_author': 'username_1', 'text': ""Thanks so much for taking a look!\r\n\r\nPlease see [this comment](https://github.com/newrelic/docs-website/issues/438#issuecomment-748255111) in regards to the issue. Its likely that we haven't migrated this content over yet 😄"", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'zuluecho9', 'comment_id': 769929562.0, 'datetime': '2021-01-29 17:06:18+00:00', 'masked_author': 'username_2', 'text': ""A few notes on this: \r\n\r\n•\xa0This section was previously hidden/unindexed but don't think we can do that on github site.\r\n• The docs are currently out of order; the first doc should be the 'Intro to Integrations SDK', which does include some info about other ways to create integrations. \r\n•\xa0Maybe we just rename this category from 'Create integrations' to 'Infra integrations SDK' or something more descriptive, less general."", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'jerelmiller', 'comment_id': 769997958.0, 'datetime': '2021-01-29 19:18:10+00:00', 'masked_author': 'username_1', 'text': ""We've also noted the `Create integrations` section should not be there. We are planning to tackle that as part of #587 and move those docs to the proper location."", 'title': None, 'type': 'comment'}
+ {'action': 'closed', 'author': 'jpvajda', 'comment_id': None, 'datetime': '2021-02-20 00:26:56+00:00', 'masked_author': 'username_3', 'text': '', 'title': None, 'type': 'issue'}
+ {'action': 'created', 'author': 'jpvajda', 'comment_id': 782474980.0, 'datetime': '2021-02-20 00:26:56+00:00', 'masked_author': 'username_3', 'text': ""closing as we've accounted for all of this."", 'title': None, 'type': 'comment'}]","<issue_start><issue_comment>Title: Add Telemetry SDK's and Flex to Create Integrations section
+username_0: ### Is your feature request related to a problem? Please describe
+
+There is a create integrations section at the top level nav. When I click on it, I'd expect to find information about our wonderful Telemetry SDK's and Flex which enable customers to create integrations. https://docs-preview.newrelic.com/docs/create-integrations
+
+### Describe the solution you'd like
+
+Links to Telemetry SDK's docs and Flex docs from the Create an integration page.
+
+### Describe why this important to you
+
+As a customer, to discover the full potential of integration options, I'd like to be able to discover the Telemetry SDK's or Flex as options for creating integrations, since they are both very powerful solutions.
+
+### Additional context
+
+None.
+<issue_comment>username_1: Thanks so much for taking a look!
+
+Please see [this comment](https://github.com/newrelic/docs-website/issues/438#issuecomment-748255111) in regards to the issue. Its likely that we haven't migrated this content over yet 😄
+<issue_comment>username_2: A few notes on this: 
+
+• This section was previously hidden/unindexed but don't think we can do that on github site.
+• The docs are currently out of order; the first doc should be the 'Intro to Integrations SDK', which does include some info about other ways to create integrations. 
+• Maybe we just rename this category from 'Create integrations' to 'Infra integrations SDK' or something more descriptive, less general.
+<issue_comment>username_1: We've also noted the `Create integrations` section should not be there. We are planning to tackle that as part of #587 and move those docs to the proper location.<issue_closed>
+<issue_comment>username_3: closing as we've accounted for all of this."
+kubernetes/website,1120159697,31581,"{'number': 31581.0, 'repo': 'website', 'user_login': 'kubernetes'}","[{'action': 'opened', 'author': 'jeremy-morren', 'comment_id': None, 'datetime': '2022-02-01T02:18:22Z', 'masked_author': 'username_0', 'text': ""Setting powershell variables container only numbers does not work with multiple periods (at least on Powershell 5.1). Using quotes is necessary.\r\n\r\n<!-- 🛈\r\n\r\n Hello!\r\n\r\n Remember to ADD A DESCRIPTION and delete this note before submitting\r\n your pull request. The description should explain what will change,\r\n and why.\r\n\r\n PLEASE title the FIRST commit appropriately, so that if you squash all\r\n your commits into one, the combined commit message makes sense.\r\n For overall help on editing and submitting pull requests, visit:\r\n  https://kubernetes.io/docs/contribute/start/#improve-existing-content\r\n\r\n Use the default base branch, “main”, if you're documenting existing\r\n features in the English localization.\r\n\r\n If you're working on a different localization (not English), see\r\n https://kubernetes.io/docs/contribute/new-content/overview/#choose-which-git-branch-to-use\r\n for advice.\r\n\r\n If you're documenting a feature that will be part of a future release, see\r\n https://kubernetes.io/docs/contribute/new-content/new-features/ for advice.\r\n\r\n-->"", 'title': 'Fix powershell install script', 'type': 'issue'}
+ {'action': 'created', 'author': 'jeremy-morren', 'comment_id': 1026417394.0, 'datetime': '2022-02-01 02:21:57+00:00', 'masked_author': 'username_0', 'text': 'Signed linux founcation CLA.', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'Babapool', 'comment_id': 1026423858.0, 'datetime': '2022-02-01 02:39:49+00:00', 'masked_author': 'username_1', 'text': '@jimangel: The changes [LGTM](https://deploy-preview-31581--kubernetes-io-main-staging.netlify.app/docs/setup/production-environment/container-runtimes/#containerd) . Thanks', 'title': None, 'type': 'comment'}]","<issue_start><issue_comment>Title: Fix powershell install script
+username_0: Setting powershell variables container only numbers does not work with multiple periods (at least on Powershell 5.1). Using quotes is necessary.
+
+<!-- 🛈
+
+ Hello!
+
+ Remember to ADD A DESCRIPTION and delete this note before submitting
+ your pull request. The description should explain what will change,
+ and why.
+
+ PLEASE title the FIRST commit appropriately, so that if you squash all
+ your commits into one, the combined commit message makes sense.
+ For overall help on editing and submitting pull requests, visit:
+  https://kubernetes.io/docs/contribute/start/#improve-existing-content
+
+ Use the default base branch, “main”, if you're documenting existing
+ features in the English localization.
+
+ If you're working on a different localization (not English), see
+ https://kubernetes.io/docs/contribute/new-content/overview/#choose-which-git-branch-to-use
+ for advice.
+
+ If you're documenting a feature that will be part of a future release, see
+ https://kubernetes.io/docs/contribute/new-content/new-features/ for advice.
+
+-->
+<issue_comment>username_0: Signed linux founcation CLA.
+<issue_comment>username_1: @jimangel: The changes [LGTM](https://deploy-preview-31581--kubernetes-io-main-staging.netlify.app/docs/setup/production-environment/container-runtimes/#containerd) . Thanks"

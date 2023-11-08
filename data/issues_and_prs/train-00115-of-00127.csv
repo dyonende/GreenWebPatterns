@@ -1,0 +1,466 @@
+facebook/docusaurus,326221799,697,,"[{'action': 'opened', 'author': 'philipmjohnson', 'comment_id': None, 'datetime': '2018-05-24T17:36:50Z', 'masked_author': 'username_0', 'text': 'LiveReload server started on port 35729\r\n/Users/philipjohnson/github/openpowerquality/docusaurus/website/node_modules/docusaurus/lib/start-server.js:73\r\n        throw ex;\r\n        ^\r\n\r\nRangeError: Maximum call stack size exceeded\r\n    at Gaze._watchDir (/Users/philipjohnson/github/openpowerquality/docusaurus/website/node_modules/gaze/lib/gaze.js:331:17)\r\n    at /Users/philipjohnson/github/openpowerquality/docusaurus/website/node_modules/gaze/lib/gaze.js:387:10\r\n    at iterate (/Users/philipjohnson/github/openpowerquality/docusaurus/website/node_modules/gaze/lib/helper.js:69:5)\r\n    at /Users/philipjohnson/github/openpowerquality/docusaurus/website/node_modules/gaze/lib/helper.js:78:11\r\n    at /Users/philipjohnson/github/openpowerquality/docusaurus/website/node_modules/gaze/lib/gaze.js:452:5\r\n    at iterate (/Users/philipjohnson/github/openpowerquality/docusaurus/website/node_modules/gaze/lib/helper.js:69:5)\r\n    at /Users/philipjohnson/github/openpowerquality/docusaurus/website/node_modules/gaze/lib/helper.js:78:11\r\n    at /Users/philipjohnson/github/openpowerquality/docusaurus/website/node_modules/gaze/lib/gaze.js:452:5\r\n    at iterate (/Users/philipjohnson/github/openpowerquality/docusaurus/website/node_modules/gaze/lib/helper.js:69:5)\r\n    at /Users/philipjohnson/github/openpowerquality/docusaurus/website/node_modules/gaze/lib/helper.js:78:11\r\nnpm ERR! code ELIFECYCLE\r\nnpm ERR! errno 1\r\nnpm ERR! @ start: `docusaurus-start`\r\nnpm ERR! Exit status 1\r\nnpm ERR! \r\nnpm ERR! Failed at the @ start script.\r\nnpm ERR! This is probably not a problem with npm. There is likely additional logging output above.\r\n\r\nnpm ERR! A complete log of this run can be found in:\r\nnpm ERR!     /Users/philipjohnson/.npm/_logs/2018-05-24T17_31_59_565Z-debug.log\r\n```\r\n### Reproducible Demo\r\n\r\n1. clone https://github.com/openpowerquality/docusaurus\r\n2. cd website\r\n2. npm install\r\n3. npm update\r\n\r\n<!--\r\n  What happens if you skip this step?\r\n\r\n  Someone will read your bug report, and maybe will be able to help you,\r\n  but it’s unlikely that it will get much attention from the team. Eventually,\r\n  the issue will likely get closed in favor of issues that have reproducible demos.\r\n\r\n  Please remember that:\r\n\r\n    * Issues without reproducible demos have a very low priority.\r\n    * The person fixing the bug would have to do that anyway. Please be respectful of their time.\r\n    * You might figure out the issues yourself as you work on extracting it.\r\n\r\n  Thanks for helping us help you!\r\n-->', 'title': '[1.1.3] npm start -> RangeError: Maximum call stack size exceeded', 'type': 'issue'}
+ {'action': 'created', 'author': 'maht0rz', 'comment_id': 534715577.0, 'datetime': '2019-09-24 19:36:45+00:00', 'masked_author': 'username_1', 'text': ""@bildungsroman i'm facing the same issue, even with `v1.13.0`"", 'title': None, 'type': 'comment'}]","<issue_start><issue_comment>Title: [1.1.3] npm start -> RangeError: Maximum call stack size exceeded
+username_0: LiveReload server started on port 35729
+/Users/philipjohnson/github/openpowerquality/docusaurus/website/node_modules/docusaurus/lib/start-server.js:73
+        throw ex;
+        ^
+
+RangeError: Maximum call stack size exceeded
+    at Gaze._watchDir (/Users/philipjohnson/github/openpowerquality/docusaurus/website/node_modules/gaze/lib/gaze.js:331:17)
+    at /Users/philipjohnson/github/openpowerquality/docusaurus/website/node_modules/gaze/lib/gaze.js:387:10
+    at iterate (/Users/philipjohnson/github/openpowerquality/docusaurus/website/node_modules/gaze/lib/helper.js:69:5)
+    at /Users/philipjohnson/github/openpowerquality/docusaurus/website/node_modules/gaze/lib/helper.js:78:11
+    at /Users/philipjohnson/github/openpowerquality/docusaurus/website/node_modules/gaze/lib/gaze.js:452:5
+    at iterate (/Users/philipjohnson/github/openpowerquality/docusaurus/website/node_modules/gaze/lib/helper.js:69:5)
+    at /Users/philipjohnson/github/openpowerquality/docusaurus/website/node_modules/gaze/lib/helper.js:78:11
+    at /Users/philipjohnson/github/openpowerquality/docusaurus/website/node_modules/gaze/lib/gaze.js:452:5
+    at iterate (/Users/philipjohnson/github/openpowerquality/docusaurus/website/node_modules/gaze/lib/helper.js:69:5)
+    at /Users/philipjohnson/github/openpowerquality/docusaurus/website/node_modules/gaze/lib/helper.js:78:11
+npm ERR! code ELIFECYCLE
+npm ERR! errno 1
+npm ERR! @ start: `docusaurus-start`
+npm ERR! Exit status 1
+npm ERR! 
+npm ERR! Failed at the @ start script.
+npm ERR! This is probably not a problem with npm. There is likely additional logging output above.
+
+npm ERR! A complete log of this run can be found in:
+npm ERR!     /Users/philipjohnson/.npm/_logs/2018-05-24T17_31_59_565Z-debug.log
+```
+### Reproducible Demo
+
+1. clone https://github.com/openpowerquality/docusaurus
+2. cd website
+2. npm install
+3. npm update
+
+<!--
+  What happens if you skip this step?
+
+  Someone will read your bug report, and maybe will be able to help you,
+  but it’s unlikely that it will get much attention from the team. Eventually,
+  the issue will likely get closed in favor of issues that have reproducible demos.
+
+  Please remember that:
+
+    * Issues without reproducible demos have a very low priority.
+    * The person fixing the bug would have to do that anyway. Please be respectful of their time.
+    * You might figure out the issues yourself as you work on extracting it.
+
+  Thanks for helping us help you!
+-->
+<issue_comment>username_1: @bildungsroman i'm facing the same issue, even with `v1.13.0`"
+kubernetes/website,1096525515,31243,,"[{'action': 'opened', 'author': 'shubham-mandhare', 'comment_id': None, 'datetime': '2022-01-07 17:37:15+00:00', 'masked_author': 'username_0', 'text': 'kubectl completion powershell >> $PROFILE\r\nerror: Unsupported shell type ""powershell"".\r\nSee \'kubectl completion -h\' for help and examples\r\n```\r\n\r\nI have kubectl version 1.22.4', 'title': 'Issue with k8s.io/docs/tasks/tools/install-kubectl-windows/', 'type': 'issue'}
+ {'action': 'created', 'author': 'anubha-v-ardhan', 'comment_id': 1008010504.0, 'datetime': '2022-01-08 14:44:10+00:00', 'masked_author': 'username_1', 'text': 'Was the kubectl completion script generated successfully?', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'anubha-v-ardhan', 'comment_id': 1008011820.0, 'datetime': '2022-01-08 14:48:34+00:00', 'masked_author': 'username_1', 'text': 'Was the kubectl completion script generated successfully?', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'anubha-v-ardhan', 'comment_id': 1008012562.0, 'datetime': '2022-01-08 14:50:44+00:00', 'masked_author': 'username_1', 'text': 'Was the kubectl completion script generated successfully?\r\n\r\n/kind support', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'shubham-mandhare', 'comment_id': 1008766308.0, 'datetime': '2022-01-10 11:07:49+00:00', 'masked_author': 'username_0', 'text': 'Yes.', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'mehabhalodiya', 'comment_id': 1013810860.0, 'datetime': '2022-01-16 04:52:24+00:00', 'masked_author': 'username_2', 'text': ""@username_0 Have a look at [this](https://github.com/kubernetes/website/issues/31341).\r\nI think it's somehow related."", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'anubha-v-ardhan', 'comment_id': 1013828035.0, 'datetime': '2022-01-16 07:50:35+00:00', 'masked_author': 'username_1', 'text': ""@username_0 If I'm not wrong v1.22 doesn't have autocompletion support for Powershell (refer [v1.22 documentation for Optional kubectl configurations and plugins](https://v1-22.docs.kubernetes.io/docs/tasks/tools/install-kubectl-windows/#optional-kubectl-configurations-and-plugins)\r\n\r\nIf possible, you can update to latest version (v1.23) which has autocompletion support for  Bash, Zsh, Fish, and PowerShell ([refer v.23 docs](https://kubernetes.io/docs/tasks/tools/install-kubectl-windows/#optional-kubectl-configurations-and-plugins)"", 'title': None, 'type': 'comment'}
+ {'action': 'closed', 'author': 'shubham-mandhare', 'comment_id': None, 'datetime': '2022-01-17 14:48:09+00:00', 'masked_author': 'username_0', 'text': '', 'title': None, 'type': 'issue'}]","<issue_start><issue_comment>Title: Issue with k8s.io/docs/tasks/tools/install-kubectl-windows/
+username_0: kubectl completion powershell >> $PROFILE
+error: Unsupported shell type ""powershell"".
+See 'kubectl completion -h' for help and examples
+```
+
+I have kubectl version 1.22.4
+<issue_comment>username_1: Was the kubectl completion script generated successfully?
+<issue_comment>username_1: Was the kubectl completion script generated successfully?
+<issue_comment>username_1: Was the kubectl completion script generated successfully?
+
+/kind support
+<issue_comment>username_0: Yes.
+<issue_comment>username_2: @username_0 Have a look at [this](https://github.com/kubernetes/website/issues/31341).
+I think it's somehow related.
+<issue_comment>username_1: @username_0 If I'm not wrong v1.22 doesn't have autocompletion support for Powershell (refer [v1.22 documentation for Optional kubectl configurations and plugins](https://v1-22.docs.kubernetes.io/docs/tasks/tools/install-kubectl-windows/#optional-kubectl-configurations-and-plugins)
+
+If possible, you can update to latest version (v1.23) which has autocompletion support for  Bash, Zsh, Fish, and PowerShell ([refer v.23 docs](https://kubernetes.io/docs/tasks/tools/install-kubectl-windows/#optional-kubectl-configurations-and-plugins)<issue_closed>"
+elixir-lang/elixir-lang.github.com,57544889,463,,"[{'action': 'opened', 'author': 'oneeman', 'comment_id': None, 'datetime': '2015-02-13 01:04:52+00:00', 'masked_author': 'username_0', 'text': ""From what I've seen, the documentation just says that you can omit parentheses (at http://elixir-lang.org/crash-course.html#calling-functions).  In some cases of ambiguity a syntax error is thrown, whereas in others one of the possible interpretations is used.  For example, `func func a, b` is interpreted as `func(func(:a,:b))` as opposed to `func(func(:a), :b)`.  So it'd be nice to have some guidance on the site regarding the types of cases which (a) lead to syntax errors, (b) are valid but possibly ambiguous, or (c) are unproblematic (`func func :a`).   Needless to say, in ambiguous cases it's better to use parentheses rather than lean on the parser's rules, but it'd help to have some good exposition highlighting those cases so that developers can be more aware of them.\r\n\r\nMight perhaps also be a good place to present some of the points from https://groups.google.com/forum/#!topic/elixir-lang-talk/MvZq30BYMqs since it's roughly the same topic (ambiguity when omitting parentheses) and it'd be nice to have it on the language's site to reach a broader audience.\r\n\r\nI'd be happy to tackle this once I've got a proper grasp of the grammar rules in `elixir_parser.yrl`... which could be a while.\r\nP.S. @ericmj might remember a line he reviewed in a code snippet of mine that went `PowerSet.of Enum.into [1,2,3], HashSet.new`, his comment on which got me looking at this."", 'title': 'Clarify possible ambiguity when omitting parentheses', 'type': 'issue'}
+ {'action': 'created', 'author': 'josevalim', 'comment_id': 74217467.0, 'datetime': '2015-02-13 07:56:13+00:00', 'masked_author': 'username_1', 'text': ""The rules should be this: allowing a function call inside another function call without parenthesis is only allowed if the first call contains only on argument:\r\n\r\n    foo bar 1, 2, 3 # foo(bar(1, 2, 3))\r\n\r\nNot ok:\r\n\r\n    foo 1, bar 2, 3 # ERROR: is 3 in foo or bar?\r\n\r\nData structures are a bit more strict as they lend more to confusion:\r\n\r\n    [bar 1] # ok\r\n    [bar 1, 2, 3] # error\r\n\r\nI don't think the crash course is the place for this though. It is meant to be a crash course and not a complete reference. I wouldn't add it to the getting started guide too because I would say it would be counter productive to go into such details such early on."", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'oneeman', 'comment_id': 74251359.0, 'datetime': '2015-02-13 13:13:31+00:00', 'masked_author': 'username_0', 'text': ""For one thing, `foo :a, bar :b` is valid (and unambiguous), but wouldn't be valid according to the rule as stated.\r\n\r\nThe rule also assumes that the number of arguments to the first function can be identified unambiguously to begin with, which isn't the case.  `foo bar a, b` could (unless I'm missing something) also be intuitively interpreted as `foo(bar(a), b)`, in which case `foo` would have 2 arguments.\r\n\r\nI've tried to think of an alternative phrasing for the rule that would cover all cases, but haven't managed to.\r\n\r\nAt any rate, I do take the point that this is advanced and complex, so shouldn't be included in the beginner resources (except perhaps as a link to a page with the qualification that it's an advanced topic).  And perhaps this is material for an eventual reference guide.\r\n\r\nTangential question: is operator precedence order listed somewhere on the site?  I ask because I think maybe `,` having higher precedence than `+` makes\r\n`foo :a, 10 + bar 5, :c` valid whereas `foo :a, bar 5, :c` isn't."", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'josevalim', 'comment_id': 74254794.0, 'datetime': '2015-02-13 13:42:54+00:00', 'masked_author': 'username_1', 'text': 'Right, all those cases are ambiguous, the difference is if we decided to raise or choose one side. If they were not ambiguous, we wouldn\'t have this discussion. :)\r\n\r\nBtw, this may help:\r\n\r\n```iex\r\niex> Macro.to_string quote do: (foo :a, 10 + bar 5, :c)\r\n""foo(:a, 10 + bar(5, :c))""\r\n```\r\n\r\n:)', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'oneeman', 'comment_id': 74360037.0, 'datetime': '2015-02-14 03:46:37+00:00', 'masked_author': 'username_0', 'text': ""Absolutely.  And thanks for the quoting tip, I'd forgotten about that :-)"", 'title': None, 'type': 'comment'}
+ {'action': 'closed', 'author': 'josevalim', 'comment_id': None, 'datetime': '2015-06-06 16:59:31+00:00', 'masked_author': 'username_1', 'text': '', 'title': None, 'type': 'issue'}]","<issue_start><issue_comment>Title: Clarify possible ambiguity when omitting parentheses
+username_0: From what I've seen, the documentation just says that you can omit parentheses (at http://elixir-lang.org/crash-course.html#calling-functions).  In some cases of ambiguity a syntax error is thrown, whereas in others one of the possible interpretations is used.  For example, `func func a, b` is interpreted as `func(func(:a,:b))` as opposed to `func(func(:a), :b)`.  So it'd be nice to have some guidance on the site regarding the types of cases which (a) lead to syntax errors, (b) are valid but possibly ambiguous, or (c) are unproblematic (`func func :a`).   Needless to say, in ambiguous cases it's better to use parentheses rather than lean on the parser's rules, but it'd help to have some good exposition highlighting those cases so that developers can be more aware of them.
+
+Might perhaps also be a good place to present some of the points from https://groups.google.com/forum/#!topic/elixir-lang-talk/MvZq30BYMqs since it's roughly the same topic (ambiguity when omitting parentheses) and it'd be nice to have it on the language's site to reach a broader audience.
+
+I'd be happy to tackle this once I've got a proper grasp of the grammar rules in `elixir_parser.yrl`... which could be a while.
+P.S. @ericmj might remember a line he reviewed in a code snippet of mine that went `PowerSet.of Enum.into [1,2,3], HashSet.new`, his comment on which got me looking at this.
+<issue_comment>username_1: The rules should be this: allowing a function call inside another function call without parenthesis is only allowed if the first call contains only on argument:
+
+    foo bar 1, 2, 3 # foo(bar(1, 2, 3))
+
+Not ok:
+
+    foo 1, bar 2, 3 # ERROR: is 3 in foo or bar?
+
+Data structures are a bit more strict as they lend more to confusion:
+
+    [bar 1] # ok
+    [bar 1, 2, 3] # error
+
+I don't think the crash course is the place for this though. It is meant to be a crash course and not a complete reference. I wouldn't add it to the getting started guide too because I would say it would be counter productive to go into such details such early on.
+<issue_comment>username_0: For one thing, `foo :a, bar :b` is valid (and unambiguous), but wouldn't be valid according to the rule as stated.
+
+The rule also assumes that the number of arguments to the first function can be identified unambiguously to begin with, which isn't the case.  `foo bar a, b` could (unless I'm missing something) also be intuitively interpreted as `foo(bar(a), b)`, in which case `foo` would have 2 arguments.
+
+I've tried to think of an alternative phrasing for the rule that would cover all cases, but haven't managed to.
+
+At any rate, I do take the point that this is advanced and complex, so shouldn't be included in the beginner resources (except perhaps as a link to a page with the qualification that it's an advanced topic).  And perhaps this is material for an eventual reference guide.
+
+Tangential question: is operator precedence order listed somewhere on the site?  I ask because I think maybe `,` having higher precedence than `+` makes
+`foo :a, 10 + bar 5, :c` valid whereas `foo :a, bar 5, :c` isn't.
+<issue_comment>username_1: Right, all those cases are ambiguous, the difference is if we decided to raise or choose one side. If they were not ambiguous, we wouldn't have this discussion. :)
+
+Btw, this may help:
+
+```iex
+iex> Macro.to_string quote do: (foo :a, 10 + bar 5, :c)
+""foo(:a, 10 + bar(5, :c))""
+```
+
+:)
+<issue_comment>username_0: Absolutely.  And thanks for the quoting tip, I'd forgotten about that :-)<issue_closed>"
+facebook/react-native-website,1156344918,2986,"{'number': 2986.0, 'repo': 'react-native-website', 'user_login': 'facebook'}","[{'action': 'opened', 'author': 'dmitryvinn', 'comment_id': None, 'datetime': '2022-03-02T04:17:45Z', 'masked_author': 'username_0', 'text': '## Summary\r\nOur mission at [Meta Open Source](https://opensource.facebook.com/) is to empower communities through open source, and we believe that it means building a welcoming and safe environment for all. As a part of this work, we are adding this banner in support for Ukraine during this crisis.\r\n\r\n## Testing\r\n![image](https://user-images.githubusercontent.com/12485205/156294142-6b6386cb-6e88-44c4-abde-7b7b7a1ec7a5.png)', 'title': 'Adding Social Banner in Support of Ukraine ', 'type': 'issue'}
+ {'action': 'created', 'author': 'dmitryvinn-fb', 'comment_id': 1056179902.0, 'datetime': '2022-03-02 04:25:55+00:00', 'masked_author': 'username_1', 'text': 'Note: following this PR, we will be closing https://github.com/facebook/react-native/pull/33192', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'yungsters', 'comment_id': 1057065795.0, 'datetime': '2022-03-02 15:35:07+00:00', 'masked_author': 'username_2', 'text': ""In the spirit of getting this published as soon as possible, I'm merging this. But let's fix forward if we believe this can be done better."", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'leggomuhgreggo', 'comment_id': 1057606736.0, 'datetime': '2022-03-03 02:36:07+00:00', 'masked_author': 'username_3', 'text': ""Curious about the decision making process here. This one is -- let's just say [controversial](https://twitter.com/consent_factory/status/1498257865693405185)."", 'title': None, 'type': 'comment'}]","<issue_start><issue_comment>Title: Adding Social Banner in Support of Ukraine 
+username_0: ## Summary
+Our mission at [Meta Open Source](https://opensource.facebook.com/) is to empower communities through open source, and we believe that it means building a welcoming and safe environment for all. As a part of this work, we are adding this banner in support for Ukraine during this crisis.
+
+## Testing
+![image](https://user-images.githubusercontent.com/12485205/156294142-6b6386cb-6e88-44c4-abde-7b7b7a1ec7a5.png)
+<issue_comment>username_1: Note: following this PR, we will be closing https://github.com/facebook/react-native/pull/33192
+<issue_comment>username_2: In the spirit of getting this published as soon as possible, I'm merging this. But let's fix forward if we believe this can be done better.
+<issue_comment>username_3: Curious about the decision making process here. This one is -- let's just say [controversial](https://twitter.com/consent_factory/status/1498257865693405185)."
+corona-warn-app/cwa-website,824369675,957,"{'number': 957.0, 'repo': 'cwa-website', 'user_login': 'corona-warn-app'}","[{'action': 'opened', 'author': 'dsarkar', 'comment_id': None, 'datetime': '2021-03-08T09:28:49Z', 'masked_author': 'username_0', 'text': 'closes https://github.com/corona-warn-app/cwa-website/issues/956', 'title': 'Update faq no risk update', 'type': 'issue'}
+ {'action': 'created', 'author': 'MikeMcC399', 'comment_id': 792795179.0, 'datetime': '2021-03-08 14:33:40+00:00', 'masked_author': 'username_1', 'text': 'The sentence with link\r\nYou can find additional information in a blog post on LinkedIn (German only).\r\nhttps://www.linkedin.com/pulse/corona-warn-app-software-update-f%25C3%25BCr-ios-harald-lindlar/\r\n\r\nis quite old (July 2020) and probably would be better to remove it because the information, especially about version numbers, is out of date.', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'MikeMcC399', 'comment_id': 792798719.0, 'datetime': '2021-03-08 14:38:53+00:00', 'masked_author': 'username_1', 'text': 'The instructions\r\n\r\n1. Open the app settings.\r\n2. Choose \'Prioritized Background Activity\'.\r\n3. Activate the prioritized background activity and allow the suggested changes.\r\n\r\nare not really complete, because the Android app no longer makes the change, instead it just offers ""Open Device Settings"". This is quite confusing. See comments in https://github.com/corona-warn-app/cwa-app-android/issues/1884#issuecomment-744363225 and https://github.com/corona-warn-app/cwa-app-android/issues/1606.\r\n\r\nPerhaps this is a good opportunity to improve the instructions, at least in the FAQ, if it is not possible to improve the instructions in the app in the short term?', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'dsarkar', 'comment_id': 793797864.0, 'datetime': '2021-03-09 12:12:51+00:00', 'masked_author': 'username_0', 'text': '@username_2 OK, Danke. Ich habe es direkt hier https://github.com/corona-warn-app/cwa-website/pull/957#issuecomment-793766455 geändert. Can you have another look, please?', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'dsarkar', 'comment_id': 793843933.0, 'datetime': '2021-03-09 12:48:41+00:00', 'masked_author': 'username_0', 'text': 'EN\r\n\r\nIn the Corona-Warn-App (CWA) on the Start Screen choose the 3-dot-overflow menu (3-dot), then Settings\r\n\t•\tChoose Prioritized Backgound Activity  (If Prioritized Backgound Activity is ""On"" already, you don\'t need to take further action here.)\r\n\t•\tChoose  ""OPEN DEVICE SETTINGS""\r\n\t•\tYou are now in the menu of the operating system ""Optimise battery usage"" or similar (depends on device model). Choose in the  dropdown list ""All""\r\n\t•\tScroll down to Corona-Warn(-App)\r\n\t•\tMove the slider to the  left  (i.e. optimise battery usage off) or tap on the entry and then choose ""Do not optimise"" aus. (This procedure depends on the device model.) \r\n\t•\tCross-check the change in hte CWA:\r\n\t•\tIn the Corona-Warn-App (CWA) on the Start Screen choose the 3-dot-overflow menu (3-dot), then Settings\r\n\t•\tPrioritized Backgound Activity  should be ""On"" now.\r\n\r\n@username_2 Can you check on you phone the exact wording, please? Thanks.', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'dsarkar', 'comment_id': 793844857.0, 'datetime': '2021-03-09 12:49:23+00:00', 'masked_author': 'username_0', 'text': 'Funnily on mine UK and US English are mixed up ... what shall we use, US spelling?', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'MikeMcC399', 'comment_id': 793847119.0, 'datetime': '2021-03-09 12:50:53+00:00', 'masked_author': 'username_1', 'text': 'Maybe that should be ""Sie sehen jetzt das ..."" ?\r\n\r\nI checked on Samsung Galaxy Android 8 & 10 and on a Google Pixel 3a Android 11 emulator.\r\n\r\nOn Google Pixel 3a Android 11 the menu is labelled ""Akkuoptimierung"" (no hypen)\r\nOn Samsung Galaxy Android 8 and Pixel 3a Android 11 the dropdown list is ""Alle Apps"" \r\n\r\nThe app is always listed as Corona-Warn (not as Corona-Warn-App).\r\n\r\nYou probably need to add a general remark that the details may be different for different smartphone Android versions, models and vendors.\r\n\r\nI would suggest also adding a comment at the top of the detailed instructions to say:\r\n\r\n""Um die priorisierte Hintergrundaktivität zu **aktivieren** muss die Akkuverbrauchoptimierung **de-aktiviert** werden.""', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'MikeMcC399', 'comment_id': 793877889.0, 'datetime': '2021-03-09 13:10:17+00:00', 'masked_author': 'username_1', 'text': 'In English:\r\n\r\nMenu name\r\n- Optimise battery usage (UK) / Optimize battery usage (UK)\r\n- Battery optimisation (UK) / Battery optimization (US)\r\n\r\nDrop-down menu name\r\n- All apps\r\n- All\r\n\r\nThe Android app itself always uses US spelling, not UK spelling. The Android system menus depend on what language the user has chosen. The CWA FAQs so far are not consistent and mix US and UK spelling together.\r\n\r\nThere doesn\'t seem to be a standard name for what is technically referred to as the ""action overflow menu"" in Android \r\nhttps://developer.android.com/guide/topics/ui/menus#options-menu\r\n\r\nI quite like the ""three dot icon"", which I think that most people would understand without explanation. It is also sometimes called the ""kebab"" menu.', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'heinezen', 'comment_id': 793883995.0, 'datetime': '2021-03-09 13:15:44+00:00', 'masked_author': 'username_2', 'text': 'Kebab menu is the informal technical term and most users are probably not aware of something like this. In the official Android documents, it\'s referred to as the ""More"" option. In #955  I used ""three-dot-menu"" because that came closest to an understandable meaning.', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'dsarkar', 'comment_id': 793892656.0, 'datetime': '2021-03-09 13:23:17+00:00', 'masked_author': 'username_0', 'text': ""- Let's go for **three-dot icon**, @username_1 is the English native speaker here (I dare to assume)\r\n- OK, let's stick to US spelling."", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'dsarkar', 'comment_id': 799244620.0, 'datetime': '2021-03-15 09:02:47+00:00', 'masked_author': 'username_0', 'text': 'remove \r\n\r\n""<ol><li>Open the app settings.</li><li>Choose \'Prioritized Background Activity\'.</li><li>Activate the prioritized background activity and allow the suggested changes.</li></ol>"",\r\n                            \r\n\r\nadd\r\n\r\n""In order to activate Prioritized Background Activity you need to de-activate optimization of the battery usage:"",\r\n""<ol><li>In the Corona-Warn-App (CWA) on the Start Screen choose the three-dot icon in the top right corner, then Settings</li><li>Choose Prioritized Background Activity (If Prioritized Background Activity is \'On\' already, you don\'t need to take further action here.)</li><li>Choose \'OPEN DEVICE SETTINGS\'</li><li>You see now the operating system \'Optimize battery usage\' / \'Battery optimization\' or similar (depends on device model). Choose in the dropdown list \'All\' or \'All Apps\'</li><li>Scroll down to Corona-Warn</li><li>Move the slider to the left (i.e. optimize battery usage off) or tap on the entry and then choose \'Do not optimize\' (This procedure depends on the device model.)</li><li>Cross-check the change in the CWA:</li><li>In the Corona-Warn-App (CWA) on the Start Screen choose the three-dot icon, then Settings</li><li>Prioritized Background Activity should be \'On\' now.</li></ol>"",\r\n\r\n<li></li>\r\n<li></li>\r\n<li></li>', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'dsarkar', 'comment_id': 799257707.0, 'datetime': '2021-03-15 09:20:55+00:00', 'masked_author': 'username_0', 'text': 'remove\r\n\r\n                            ""<ol><li>Öffnen Sie die Einstellungen der App.</li><li>Wählen Sie \'Priorisierte Hintergrundaktivität\'.</li><li>Aktivieren Sie die priorisierte Hintergrundaktivität und lassen Sie die vorgeschlagene Änderung zu.</li></ol>"",\r\n\r\n\r\nadd\r\n\r\n\r\n""Um die priorisierte Hintergrundaktivität zu aktivieren muss die Akkuverbrauchoptimierung de-aktiviert werden:"",\r\n""<ol><li>Wählen Sie in der Corona-Warn-App (CWA) auf der Startseite das Dreipunktmenü oben rechts, dann Einstellungen</li><li>Wählen Sie Priorisierte Hintergrundaktivität (Sollte Priorisierte Hintergrundaktivität schon ""An"" sein, brauchen Sie hier nichts weiter tun.)</li><li>Wählen Sie Smartphone-Einstellungen öffnen</li><li>Sie sehen jetzt das Betriebssystem-Menü \'Akkuverbrauch optimieren\'/\'Akku-Optimierung\'/\'Akkuoptimierung\'. </li><li>Wählen Sie in der Dropdown-Liste \'Alle\' oder \'Alle Apps\'</li><li>Scrollen zu runter zu Corona-Warn</li><li>Ziehen Sie den Schieberegler nach links (d.h. Akkuverbrauch optimieren aus) oder tippen Sie auf den Eintrag und wählen Sie dann \'Nicht optimieren\' aus. (Dieser Vorgang ist unterschiedlich je nach Gerätemodell)</li><li>Überprüfen Sie die Änderung in der CWA:</li><li>Wählen Sie in der CWA auf der Startseite das Dreipunktmenü oben rechts, dann Einstellungen</li><li>Priorisierte Hintergrundaktivität sollte nun \'An\' sein</li></ol>"",', 'title': None, 'type': 'comment'}]","<issue_start><issue_comment>Title: Update faq no risk update
+username_0: closes https://github.com/corona-warn-app/cwa-website/issues/956
+<issue_comment>username_1: The sentence with link
+You can find additional information in a blog post on LinkedIn (German only).
+https://www.linkedin.com/pulse/corona-warn-app-software-update-f%25C3%25BCr-ios-harald-lindlar/
+
+is quite old (July 2020) and probably would be better to remove it because the information, especially about version numbers, is out of date.
+<issue_comment>username_1: The instructions
+
+1. Open the app settings.
+2. Choose 'Prioritized Background Activity'.
+3. Activate the prioritized background activity and allow the suggested changes.
+
+are not really complete, because the Android app no longer makes the change, instead it just offers ""Open Device Settings"". This is quite confusing. See comments in https://github.com/corona-warn-app/cwa-app-android/issues/1884#issuecomment-744363225 and https://github.com/corona-warn-app/cwa-app-android/issues/1606.
+
+Perhaps this is a good opportunity to improve the instructions, at least in the FAQ, if it is not possible to improve the instructions in the app in the short term?
+<issue_comment>username_0: @username_2 OK, Danke. Ich habe es direkt hier https://github.com/corona-warn-app/cwa-website/pull/957#issuecomment-793766455 geändert. Can you have another look, please?
+<issue_comment>username_0: EN
+
+In the Corona-Warn-App (CWA) on the Start Screen choose the 3-dot-overflow menu (3-dot), then Settings
+	•	Choose Prioritized Backgound Activity  (If Prioritized Backgound Activity is ""On"" already, you don't need to take further action here.)
+	•	Choose  ""OPEN DEVICE SETTINGS""
+	•	You are now in the menu of the operating system ""Optimise battery usage"" or similar (depends on device model). Choose in the  dropdown list ""All""
+	•	Scroll down to Corona-Warn(-App)
+	•	Move the slider to the  left  (i.e. optimise battery usage off) or tap on the entry and then choose ""Do not optimise"" aus. (This procedure depends on the device model.) 
+	•	Cross-check the change in hte CWA:
+	•	In the Corona-Warn-App (CWA) on the Start Screen choose the 3-dot-overflow menu (3-dot), then Settings
+	•	Prioritized Backgound Activity  should be ""On"" now.
+
+@username_2 Can you check on you phone the exact wording, please? Thanks.
+<issue_comment>username_0: Funnily on mine UK and US English are mixed up ... what shall we use, US spelling?
+<issue_comment>username_1: Maybe that should be ""Sie sehen jetzt das ..."" ?
+
+I checked on Samsung Galaxy Android 8 & 10 and on a Google Pixel 3a Android 11 emulator.
+
+On Google Pixel 3a Android 11 the menu is labelled ""Akkuoptimierung"" (no hypen)
+On Samsung Galaxy Android 8 and Pixel 3a Android 11 the dropdown list is ""Alle Apps"" 
+
+The app is always listed as Corona-Warn (not as Corona-Warn-App).
+
+You probably need to add a general remark that the details may be different for different smartphone Android versions, models and vendors.
+
+I would suggest also adding a comment at the top of the detailed instructions to say:
+
+""Um die priorisierte Hintergrundaktivität zu **aktivieren** muss die Akkuverbrauchoptimierung **de-aktiviert** werden.""
+<issue_comment>username_1: In English:
+
+Menu name
+- Optimise battery usage (UK) / Optimize battery usage (UK)
+- Battery optimisation (UK) / Battery optimization (US)
+
+Drop-down menu name
+- All apps
+- All
+
+The Android app itself always uses US spelling, not UK spelling. The Android system menus depend on what language the user has chosen. The CWA FAQs so far are not consistent and mix US and UK spelling together.
+
+There doesn't seem to be a standard name for what is technically referred to as the ""action overflow menu"" in Android 
+https://developer.android.com/guide/topics/ui/menus#options-menu
+
+I quite like the ""three dot icon"", which I think that most people would understand without explanation. It is also sometimes called the ""kebab"" menu.
+<issue_comment>username_2: Kebab menu is the informal technical term and most users are probably not aware of something like this. In the official Android documents, it's referred to as the ""More"" option. In #955  I used ""three-dot-menu"" because that came closest to an understandable meaning.
+<issue_comment>username_0: - Let's go for **three-dot icon**, @username_1 is the English native speaker here (I dare to assume)
+- OK, let's stick to US spelling.
+<issue_comment>username_0: remove 
+
+""<ol><li>Open the app settings.</li><li>Choose 'Prioritized Background Activity'.</li><li>Activate the prioritized background activity and allow the suggested changes.</li></ol>"",
+                            
+
+add
+
+""In order to activate Prioritized Background Activity you need to de-activate optimization of the battery usage:"",
+""<ol><li>In the Corona-Warn-App (CWA) on the Start Screen choose the three-dot icon in the top right corner, then Settings</li><li>Choose Prioritized Background Activity (If Prioritized Background Activity is 'On' already, you don't need to take further action here.)</li><li>Choose 'OPEN DEVICE SETTINGS'</li><li>You see now the operating system 'Optimize battery usage' / 'Battery optimization' or similar (depends on device model). Choose in the dropdown list 'All' or 'All Apps'</li><li>Scroll down to Corona-Warn</li><li>Move the slider to the left (i.e. optimize battery usage off) or tap on the entry and then choose 'Do not optimize' (This procedure depends on the device model.)</li><li>Cross-check the change in the CWA:</li><li>In the Corona-Warn-App (CWA) on the Start Screen choose the three-dot icon, then Settings</li><li>Prioritized Background Activity should be 'On' now.</li></ol>"",
+
+<li></li>
+<li></li>
+<li></li>
+<issue_comment>username_0: remove
+
+                            ""<ol><li>Öffnen Sie die Einstellungen der App.</li><li>Wählen Sie 'Priorisierte Hintergrundaktivität'.</li><li>Aktivieren Sie die priorisierte Hintergrundaktivität und lassen Sie die vorgeschlagene Änderung zu.</li></ol>"",
+
+
+add
+
+
+""Um die priorisierte Hintergrundaktivität zu aktivieren muss die Akkuverbrauchoptimierung de-aktiviert werden:"",
+""<ol><li>Wählen Sie in der Corona-Warn-App (CWA) auf der Startseite das Dreipunktmenü oben rechts, dann Einstellungen</li><li>Wählen Sie Priorisierte Hintergrundaktivität (Sollte Priorisierte Hintergrundaktivität schon ""An"" sein, brauchen Sie hier nichts weiter tun.)</li><li>Wählen Sie Smartphone-Einstellungen öffnen</li><li>Sie sehen jetzt das Betriebssystem-Menü 'Akkuverbrauch optimieren'/'Akku-Optimierung'/'Akkuoptimierung'. </li><li>Wählen Sie in der Dropdown-Liste 'Alle' oder 'Alle Apps'</li><li>Scrollen zu runter zu Corona-Warn</li><li>Ziehen Sie den Schieberegler nach links (d.h. Akkuverbrauch optimieren aus) oder tippen Sie auf den Eintrag und wählen Sie dann 'Nicht optimieren' aus. (Dieser Vorgang ist unterschiedlich je nach Gerätemodell)</li><li>Überprüfen Sie die Änderung in der CWA:</li><li>Wählen Sie in der CWA auf der Startseite das Dreipunktmenü oben rechts, dann Einstellungen</li><li>Priorisierte Hintergrundaktivität sollte nun 'An' sein</li></ol>"","
+BudgetForOpenSource/website,573083160,4,,"[{'action': 'opened', 'author': 'erikras', 'comment_id': None, 'datetime': '2020-02-29 00:39:56+00:00', 'masked_author': 'username_0', 'text': 'During discussions at the ReactConf AU afterparty, I had the idea of how powerful it would be if we could get developers to pointedly bring up these increasingly specific questions during job interviews:\r\n\r\n1. Does your organization contribute to open source?\r\n2. Does your organization contribute at least $100/yr per in-house developer to open source?\r\n3. Do you allow your developers to choose how that money is donated?\r\n\r\n## What if...\r\n\r\nWhat if there was a place where developers could promise to bring up these issues during interviews. Maybe they could be placed on a list of people who have promised to do so.\r\n\r\nThere\'s a further commitment of promising to refuse to work at an organization that does NOT give $100 to each developer to water the open source crops. This is a more aggressive step for later, maybe.\r\n\r\nSuch a website could either just be a markdown file that you can add yourself to, but it would be awesome if it could be a website with a Github OAuth login so that people\'s avatars could be displayed next to their names on the list. If it had a database backend, everyone could have a page like `100dollarpledge.org/username_0` that looked like a document by each individual making the promise.\r\n\r\n## Employer Side\r\n\r\nThere could also be an employer side of the website (not unlike BudgetForOpenSource, or maybe even connected to the same backend) where employers could promise that they are doing this. It could be a great thing to link to on first recruiter response: ""Is the company on this list?""\r\n\r\n## Conclusion\r\n\r\nThe point is that we can use devs to raise this issue with companies. We need managers and decision makers to hear these demands, and feel the pain of not making a hire due to lack of OSS funding. In the short term, got a bunch of the top talent at the afterparty to agree to, rather than ignore recruiters, turn them down by saying that not contributing to open source is a dealbreaker.\r\n\r\nI think this $100/developer is a great round, memorable number for this campaign.\r\n\r\n---\r\nJust some thoughts...', 'title': '100dollarpledge.org 💡🤔', 'type': 'issue'}
+ {'action': 'created', 'author': 'coderberry', 'comment_id': 594633872.0, 'datetime': '2020-03-04 16:10:47+00:00', 'masked_author': 'username_1', 'text': 'We are working towards this goal now with BackYourStack.com. The vision of BYS is very similar to this as well as the talk given by @JedWatson', 'title': None, 'type': 'comment'}]","<issue_start><issue_comment>Title: 100dollarpledge.org 💡🤔
+username_0: During discussions at the ReactConf AU afterparty, I had the idea of how powerful it would be if we could get developers to pointedly bring up these increasingly specific questions during job interviews:
+
+1. Does your organization contribute to open source?
+2. Does your organization contribute at least $100/yr per in-house developer to open source?
+3. Do you allow your developers to choose how that money is donated?
+
+## What if...
+
+What if there was a place where developers could promise to bring up these issues during interviews. Maybe they could be placed on a list of people who have promised to do so.
+
+There's a further commitment of promising to refuse to work at an organization that does NOT give $100 to each developer to water the open source crops. This is a more aggressive step for later, maybe.
+
+Such a website could either just be a markdown file that you can add yourself to, but it would be awesome if it could be a website with a Github OAuth login so that people's avatars could be displayed next to their names on the list. If it had a database backend, everyone could have a page like `100dollarpledge.org/username_0` that looked like a document by each individual making the promise.
+
+## Employer Side
+
+There could also be an employer side of the website (not unlike BudgetForOpenSource, or maybe even connected to the same backend) where employers could promise that they are doing this. It could be a great thing to link to on first recruiter response: ""Is the company on this list?""
+
+## Conclusion
+
+The point is that we can use devs to raise this issue with companies. We need managers and decision makers to hear these demands, and feel the pain of not making a hire due to lack of OSS funding. In the short term, got a bunch of the top talent at the afterparty to agree to, rather than ignore recruiters, turn them down by saying that not contributing to open source is a dealbreaker.
+
+I think this $100/developer is a great round, memorable number for this campaign.
+
+---
+Just some thoughts...
+<issue_comment>username_1: We are working towards this goal now with BackYourStack.com. The vision of BYS is very similar to this as well as the talk given by @JedWatson"
+KiCad/kicad-website,403363109,377,"{'number': 377.0, 'repo': 'kicad-website', 'user_login': 'KiCad'}","[{'action': 'opened', 'author': 'poeschlr', 'comment_id': None, 'datetime': '2019-01-25T22:48:18Z', 'masked_author': 'username_0', 'text': '* Clarify rules regarding NC pins\r\n   * Clarify when they may be omitted\r\n   * Clarify that they must be hidden when included.\r\n\r\nInspiration: https://github.com/KiCad/kicad-library-utils/issues/285', 'title': '[KLC] Clarify NC pin handling', 'type': 'issue'}
+ {'action': 'created', 'author': 'poeschlr', 'comment_id': 475500127.0, 'datetime': '2019-03-22 05:36:37+00:00', 'masked_author': 'username_0', 'text': 'Fixed', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'marekr', 'comment_id': 475632294.0, 'datetime': '2019-03-22 14:01:57+00:00', 'masked_author': 'username_1', 'text': '@username_0 ok to merge?', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'poeschlr', 'comment_id': 475645015.0, 'datetime': '2019-03-22 14:36:34+00:00', 'masked_author': 'username_0', 'text': 'In my opinion yes. But i might be biased here ;)', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'poeschlr', 'comment_id': 489300432.0, 'datetime': '2019-05-04 06:42:50+00:00', 'masked_author': 'username_0', 'text': '@username_1 i think this is ready to go. Nobody complained about it for a month or so and this is more an update of the KLC to document how everything is done in the library already than a new rule.', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'diegoherranz', 'comment_id': 489303435.0, 'datetime': '2019-05-04 07:32:48+00:00', 'masked_author': 'username_2', 'text': 'Maybe ""unless they are not connected **or** part of a stack or power symbols""\r\n\r\nSorry I didn\'t come back on this earlier.\r\n\r\nThanks!', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'diegoherranz', 'comment_id': 489304870.0, 'datetime': '2019-05-04 07:57:20+00:00', 'masked_author': 'username_2', 'text': ""Also, it's been so long that we may want to update the date on the revision history.\r\nThanks!"", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'poeschlr', 'comment_id': 489309471.0, 'datetime': '2019-05-04 09:12:52+00:00', 'masked_author': 'username_0', 'text': 'Since when would one use a construction like A or B or C instead of A, B or C?', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'diegoherranz', 'comment_id': 489311056.0, 'datetime': '2019-05-04 09:31:18+00:00', 'masked_author': 'username_2', 'text': 'Please ignore. In my mind I had read it as:\r\n\r\n""Symbol pins must not be hidden unless they are not connected, part of a stack **of** power symbols""\r\n\r\nAnd by stack of power symbols I understood stack of power pins in a symbol, so I misread that too.\r\nSo I was missing an ""or"" in place ofthe comma.\r\nJust ignore, sorry for the noise.\r\n\r\nAfter the date update, I think this can be merged.\r\n\r\nThanks!', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'nickoe', 'comment_id': 489368453.0, 'datetime': '2019-05-04 21:52:31+00:00', 'masked_author': 'username_3', 'text': '@username_1 it looks like the link checker keeps failing for the digikey links, but I can access those fine in my own browser. I wonder if there is anything to do about this. It is not 404, but 403.', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'poeschlr', 'comment_id': 489400266.0, 'datetime': '2019-05-05 07:44:20+00:00', 'masked_author': 'username_0', 'text': 'I did not touch these links. So i suggest to open a separate issue about it as nobody will find a discussion about them in here and the result of such an discussion should not impact this change anyways.', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'nickoe', 'comment_id': 489811782.0, 'datetime': '2019-05-06 22:33:33+00:00', 'masked_author': 'username_3', 'text': ""@username_0 yes I know. It seems like you accidently pushed 29c33d5 to your klc_nc_pins branch. I guess you don't want that merge commit here."", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'poeschlr', 'comment_id': 489928397.0, 'datetime': '2019-05-07 06:37:58+00:00', 'masked_author': 'username_0', 'text': 'I needed a merge commit as i had a conflict on the klc version page.', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'diegoherranz', 'comment_id': 490258464.0, 'datetime': '2019-05-07 21:16:21+00:00', 'masked_author': 'username_2', 'text': ""`klc.adoc` needs to be updated too. Otherwise, I think it's all ready to go.\r\nThanks!"", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'diegoherranz', 'comment_id': 490358473.0, 'datetime': '2019-05-08 05:58:40+00:00', 'masked_author': 'username_2', 'text': 'Thanks, @username_0. Looks good to go.', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'poeschlr', 'comment_id': 498005207.0, 'datetime': '2019-06-02 06:58:53+00:00', 'masked_author': 'username_0', 'text': '@username_3, @username_1 are there any open problems with this? Should the library team start to fully handle KLC parts of the website including merging?', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'evanshultz', 'comment_id': 507307821.0, 'datetime': '2019-07-01 15:16:16+00:00', 'masked_author': 'username_4', 'text': '@username_0 \r\nI have seen, and then subsequently requested, to have test pins visible. Some ICs have test pins which don\'t have value for the end user in a normal application but are be used during IC testing or programming or other validation. Sometimes these pins are marked as ""NC"" so it seems to fit here. Are these pins to be visible? If so, can it be noted with these changes?\r\n\r\nI know you\'re generally out for a couple weeks but when you have time can you please update this to 3.0.21, now the next available revision?\r\n\r\n@username_3 @username_1 \r\nAny input on Rene\'s question above?', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'evanshultz', 'comment_id': 511553031.0, 'datetime': '2019-07-15 20:16:31+00:00', 'masked_author': 'username_4', 'text': ""@username_0 \r\nSee my two comments above, fix the branch conflict, and update the KLC revision/date. Then I'd be happy to see this merged.\r\n\r\n@username_3 @username_1 \r\nPlease see Rene's question above and respond. Thank you."", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'evanshultz', 'comment_id': 511553557.0, 'datetime': '2019-07-15 20:17:55+00:00', 'masked_author': 'username_4', 'text': ""@username_0 \r\nOh, and while it's related but not required, http://kicad-pcb.org/libraries/klc/S4.6/ doesn't mention that NC pins can be inside the symbol body. Yet we do that for non-rectangular symbols (opamps and comparators) or if the symbol outline is too small to fit all NC pins.\r\n\r\nIf you wanted to include that, since it's also about NC pins, nice. If not, that's OK too."", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'poeschlr', 'comment_id': 522430453.0, 'datetime': '2019-08-19 06:25:18+00:00', 'masked_author': 'username_0', 'text': '@username_4 i think the non response to our question can be seen as the go ahead for us to be responsible for merging website content for the KLC.\r\n\r\n---\r\n\r\nRegarding test pins: Depends on how they are marked in the datasheet. If the datasheet mentions them as do not connect (without further information) then it is to be handled as a NC pin as described here.\r\nIf the datasheet calls it Test (or similar) but states ""do not connect"" then it is to be handled as a normal NC pin (we could allow the name test in this case.)\r\n\r\nOnly if the function of the test pin is described in the datasheet then we should handle it as a normal pin.\r\n\r\nProgramming pins are normally not described as ""do not connect"" in datasheets and are therefore not really handled by this ruleset. (otherwise same as with test pin: normal pin if datasheet describes it otherwise NC)', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'nickoe', 'comment_id': 522450671.0, 'datetime': '2019-08-19 07:37:35+00:00', 'masked_author': 'username_3', 'text': 'I don\'t really follow the KLC discussions so I let you handle this. I guess the same goes for @username_1. It would be nice if you just mention me in a comment on the pull request with a clear message that it should be merged. For example: ""Please merge this now.""', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'poeschlr', 'comment_id': 522452951.0, 'datetime': '2019-08-19 07:45:02+00:00', 'masked_author': 'username_0', 'text': 'In my mind the person reviewing should be the person merging. (It makes zero sense to have a ""ready please merge"" comment at the end unless the person that would respond to that also makes a review.)', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'nickoe', 'comment_id': 522454052.0, 'datetime': '2019-08-19 07:48:30+00:00', 'masked_author': 'username_3', 'text': ""I do review it, but not in detail with regard to the KLC, but only the technicalites about the website. I don't think it is a real impediment, we do merge KLC patches very fast when it is clear that it should be merged."", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'poeschlr', 'comment_id': 526894554.0, 'datetime': '2019-09-01 07:28:01+00:00', 'masked_author': 'username_0', 'text': 'I fixed all suggestions made. @username_4 have i answered your inquiry regarding test pins to your satisfaction?', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'poeschlr', 'comment_id': 529179479.0, 'datetime': '2019-09-08 07:55:25+00:00', 'masked_author': 'username_0', 'text': '@username_4 could you take a quick look? I really would like to work on other sections of the KLC but this should really be merged first.', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'evanshultz', 'comment_id': 529692231.0, 'datetime': '2019-09-09 22:30:18+00:00', 'masked_author': 'username_4', 'text': ""@username_0 \r\nSure!\r\n\r\nI made two more comments inline after re-reading the change log.\r\n\r\nRegarding test pins, see https://github.com/KiCad/kicad-symbols/pull/1719 (datasheet at http://www.ti.com/lit/ds/symlink/tusb4020bi.pdf). This is an example what I had in mind. The pins aren't named `NC`, but the datasheet says do not connect them. They clearly have some internal connection and may not be used in normal applications but are used for testing, debug, service, etc. Is this general type of pin to be shown or not?"", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'poeschlr', 'comment_id': 529695907.0, 'datetime': '2019-09-09 22:45:32+00:00', 'masked_author': 'username_0', 'text': 'And yes the manufacturer of the part will most likely use these pins for final testing. But our symbols are not meant for this usecase but for the more common usecase of the enduser who will want to follow the advice of ""do not connect"".\r\n\r\n---\r\n\r\nThe test pin however says ""it is recommended to be pulled to ground"" so it should be included like a normal pin with electrical type ""input"".', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'evanshultz', 'comment_id': 529696396.0, 'datetime': '2019-09-09 22:47:49+00:00', 'masked_author': 'username_4', 'text': ""Alright. Just the one note above using code style and then I'm good to merge this."", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'evanshultz', 'comment_id': 529697056.0, 'datetime': '2019-09-09 22:50:48+00:00', 'masked_author': 'username_4', 'text': ""And it doesn't really hurt anything, but the KLC changelog is broken down awfully fine. Just having the two major bullets would be satisfactory for me."", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'poeschlr', 'comment_id': 529697935.0, 'datetime': '2019-09-09 22:54:24+00:00', 'masked_author': 'username_0', 'text': 'history simplified', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'evanshultz', 'comment_id': 530050573.0, 'datetime': '2019-09-10 17:56:14+00:00', 'masked_author': 'username_4', 'text': 'OK. Works for me.\r\n\r\n@username_3 @username_1 \r\nThis is ready to merge!', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'evanshultz', 'comment_id': 531514432.0, 'datetime': '2019-09-14 21:11:31+00:00', 'masked_author': 'username_4', 'text': ""@username_3 @username_1 @stambaughw \r\nMerge, please.\r\n\r\nThis is a perfect example why having the head librarian with merge rights to this repo, or another solution that allows the library team to manage the KLC page, would be a good idea. 4 days isn't an eternity, and maybe this is extremely unusual, but this has been ready for merge and yet waiting in purgatory..."", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'nickoe', 'comment_id': 532877193.0, 'datetime': '2019-09-18 21:37:58+00:00', 'masked_author': 'username_3', 'text': '@username_4 @username_1 I was waiting for go on https://github.com/KiCad/kicad-website/pull/355#issuecomment-529640459', 'title': None, 'type': 'comment'}]","<issue_start><issue_comment>Title: [KLC] Clarify NC pin handling
+username_0: * Clarify rules regarding NC pins
+   * Clarify when they may be omitted
+   * Clarify that they must be hidden when included.
+
+Inspiration: https://github.com/KiCad/kicad-library-utils/issues/285
+<issue_comment>username_0: Fixed
+<issue_comment>username_1: @username_0 ok to merge?
+<issue_comment>username_0: In my opinion yes. But i might be biased here ;)
+<issue_comment>username_0: @username_1 i think this is ready to go. Nobody complained about it for a month or so and this is more an update of the KLC to document how everything is done in the library already than a new rule.
+<issue_comment>username_2: Maybe ""unless they are not connected **or** part of a stack or power symbols""
+
+Sorry I didn't come back on this earlier.
+
+Thanks!
+<issue_comment>username_2: Also, it's been so long that we may want to update the date on the revision history.
+Thanks!
+<issue_comment>username_0: Since when would one use a construction like A or B or C instead of A, B or C?
+<issue_comment>username_2: Please ignore. In my mind I had read it as:
+
+""Symbol pins must not be hidden unless they are not connected, part of a stack **of** power symbols""
+
+And by stack of power symbols I understood stack of power pins in a symbol, so I misread that too.
+So I was missing an ""or"" in place ofthe comma.
+Just ignore, sorry for the noise.
+
+After the date update, I think this can be merged.
+
+Thanks!
+<issue_comment>username_3: @username_1 it looks like the link checker keeps failing for the digikey links, but I can access those fine in my own browser. I wonder if there is anything to do about this. It is not 404, but 403.
+<issue_comment>username_0: I did not touch these links. So i suggest to open a separate issue about it as nobody will find a discussion about them in here and the result of such an discussion should not impact this change anyways.
+<issue_comment>username_3: @username_0 yes I know. It seems like you accidently pushed 29c33d5 to your klc_nc_pins branch. I guess you don't want that merge commit here.
+<issue_comment>username_0: I needed a merge commit as i had a conflict on the klc version page.
+<issue_comment>username_2: `klc.adoc` needs to be updated too. Otherwise, I think it's all ready to go.
+Thanks!
+<issue_comment>username_2: Thanks, @username_0. Looks good to go.
+<issue_comment>username_0: @username_3, @username_1 are there any open problems with this? Should the library team start to fully handle KLC parts of the website including merging?
+<issue_comment>username_4: @username_0 
+I have seen, and then subsequently requested, to have test pins visible. Some ICs have test pins which don't have value for the end user in a normal application but are be used during IC testing or programming or other validation. Sometimes these pins are marked as ""NC"" so it seems to fit here. Are these pins to be visible? If so, can it be noted with these changes?
+
+I know you're generally out for a couple weeks but when you have time can you please update this to 3.0.21, now the next available revision?
+
+@username_3 @username_1 
+Any input on Rene's question above?
+<issue_comment>username_4: @username_0 
+See my two comments above, fix the branch conflict, and update the KLC revision/date. Then I'd be happy to see this merged.
+
+@username_3 @username_1 
+Please see Rene's question above and respond. Thank you.
+<issue_comment>username_4: @username_0 
+Oh, and while it's related but not required, http://kicad-pcb.org/libraries/klc/S4.6/ doesn't mention that NC pins can be inside the symbol body. Yet we do that for non-rectangular symbols (opamps and comparators) or if the symbol outline is too small to fit all NC pins.
+
+If you wanted to include that, since it's also about NC pins, nice. If not, that's OK too.
+<issue_comment>username_0: @username_4 i think the non response to our question can be seen as the go ahead for us to be responsible for merging website content for the KLC.
+
+---
+
+Regarding test pins: Depends on how they are marked in the datasheet. If the datasheet mentions them as do not connect (without further information) then it is to be handled as a NC pin as described here.
+If the datasheet calls it Test (or similar) but states ""do not connect"" then it is to be handled as a normal NC pin (we could allow the name test in this case.)
+
+Only if the function of the test pin is described in the datasheet then we should handle it as a normal pin.
+
+Programming pins are normally not described as ""do not connect"" in datasheets and are therefore not really handled by this ruleset. (otherwise same as with test pin: normal pin if datasheet describes it otherwise NC)
+<issue_comment>username_3: I don't really follow the KLC discussions so I let you handle this. I guess the same goes for @username_1. It would be nice if you just mention me in a comment on the pull request with a clear message that it should be merged. For example: ""Please merge this now.""
+<issue_comment>username_0: In my mind the person reviewing should be the person merging. (It makes zero sense to have a ""ready please merge"" comment at the end unless the person that would respond to that also makes a review.)
+<issue_comment>username_3: I do review it, but not in detail with regard to the KLC, but only the technicalites about the website. I don't think it is a real impediment, we do merge KLC patches very fast when it is clear that it should be merged.
+<issue_comment>username_0: I fixed all suggestions made. @username_4 have i answered your inquiry regarding test pins to your satisfaction?
+<issue_comment>username_0: @username_4 could you take a quick look? I really would like to work on other sections of the KLC but this should really be merged first.
+<issue_comment>username_4: @username_0 
+Sure!
+
+I made two more comments inline after re-reading the change log.
+
+Regarding test pins, see https://github.com/KiCad/kicad-symbols/pull/1719 (datasheet at http://www.ti.com/lit/ds/symlink/tusb4020bi.pdf). This is an example what I had in mind. The pins aren't named `NC`, but the datasheet says do not connect them. They clearly have some internal connection and may not be used in normal applications but are used for testing, debug, service, etc. Is this general type of pin to be shown or not?
+<issue_comment>username_0: And yes the manufacturer of the part will most likely use these pins for final testing. But our symbols are not meant for this usecase but for the more common usecase of the enduser who will want to follow the advice of ""do not connect"".
+
+---
+
+The test pin however says ""it is recommended to be pulled to ground"" so it should be included like a normal pin with electrical type ""input"".
+<issue_comment>username_4: Alright. Just the one note above using code style and then I'm good to merge this.
+<issue_comment>username_4: And it doesn't really hurt anything, but the KLC changelog is broken down awfully fine. Just having the two major bullets would be satisfactory for me.
+<issue_comment>username_0: history simplified
+<issue_comment>username_4: OK. Works for me.
+
+@username_3 @username_1 
+This is ready to merge!
+<issue_comment>username_4: @username_3 @username_1 @stambaughw 
+Merge, please.
+
+This is a perfect example why having the head librarian with merge rights to this repo, or another solution that allows the library team to manage the KLC page, would be a good idea. 4 days isn't an eternity, and maybe this is extremely unusual, but this has been ready for merge and yet waiting in purgatory...
+<issue_comment>username_3: @username_4 @username_1 I was waiting for go on https://github.com/KiCad/kicad-website/pull/355#issuecomment-529640459"
+pidcodes/pidcodes.github.com,199544398,209,"{'number': 209.0, 'repo': 'pidcodes.github.com', 'user_login': 'pidcodes'}","[{'action': 'opened', 'author': 'xobs', 'comment_id': None, 'datetime': '2017-01-09T12:47:54Z', 'masked_author': 'username_0', 'text': ""This adds a new company -- Chibitronics -- and a new product -- Love-to-Code.  It's a sticker that's designed to be programmed via audio, to allow for everyone to learn how to code.\r\n\r\n@bunnie gave a talk on the project at 33c3: https://media.ccc.de/v/33c3-7975-making_technology_inclusive_through_papercraft_and_sound\r\n\r\nThe sticker supports uploading a USB stack via audio, and thus requires a PID."", 'title': 'Chibitronics ltc', 'type': 'issue'}
+ {'action': 'created', 'author': 'Arachnid', 'comment_id': 271342255.0, 'datetime': '2017-01-09 17:05:35+00:00', 'masked_author': 'username_1', 'text': ""Thanks for your pull request!\r\n\r\nIf you'd like a PID for your open source hardware project, you need to include source files for the PCB designs and other relevant hardware under an open-source license.\r\n\r\nAlso, it's not clear from your description - does the sticker have a USB connector? If not, what's the purpose of uploading a USB stack?"", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'xobs', 'comment_id': 271347655.0, 'datetime': '2017-01-09 17:25:39+00:00', 'masked_author': 'username_0', 'text': ""I've just had @bunnie upload the Altium source files to the same link.  It should be under the same license that's referred to in the index.md file, which is CERN OHL 1.2 (or later).\r\n\r\nThe sticker has a Micro USB connector.  Pin 5 (OTG_MODE) is repurposed as an audio pin, which is how programming is accomplished.  Power pins are the same.  The D+/D- pins are connected through to some CPU data pins, which can function as e.g. a USB HID device."", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'Arachnid', 'comment_id': 271348761.0, 'datetime': '2017-01-09 17:29:51+00:00', 'masked_author': 'username_1', 'text': 'Great, thanks!\r\n\r\nNeat project, and I love your work. I should have made sending me a device a condition of getting a PID. ;)', 'title': None, 'type': 'comment'}]","<issue_start><issue_comment>Title: Chibitronics ltc
+username_0: This adds a new company -- Chibitronics -- and a new product -- Love-to-Code.  It's a sticker that's designed to be programmed via audio, to allow for everyone to learn how to code.
+
+@bunnie gave a talk on the project at 33c3: https://media.ccc.de/v/33c3-7975-making_technology_inclusive_through_papercraft_and_sound
+
+The sticker supports uploading a USB stack via audio, and thus requires a PID.
+<issue_comment>username_1: Thanks for your pull request!
+
+If you'd like a PID for your open source hardware project, you need to include source files for the PCB designs and other relevant hardware under an open-source license.
+
+Also, it's not clear from your description - does the sticker have a USB connector? If not, what's the purpose of uploading a USB stack?
+<issue_comment>username_0: I've just had @bunnie upload the Altium source files to the same link.  It should be under the same license that's referred to in the index.md file, which is CERN OHL 1.2 (or later).
+
+The sticker has a Micro USB connector.  Pin 5 (OTG_MODE) is repurposed as an audio pin, which is how programming is accomplished.  Power pins are the same.  The D+/D- pins are connected through to some CPU data pins, which can function as e.g. a USB HID device.
+<issue_comment>username_1: Great, thanks!
+
+Neat project, and I love your work. I should have made sending me a device a condition of getting a PID. ;)"
+gohugoio/hugo,213286690,3160,,"[{'action': 'opened', 'author': 'thulka', 'comment_id': None, 'datetime': '2017-03-10T09:21:22Z', 'masked_author': 'username_0', 'text': 'Good HTML **absolutely requires** width and height of img tags to be set. This is not just ""good"" or ""nice to have"" html writing, it is absolutely essential for the browser rendering engine. Otherwise, the browser does not know what size an image will be until the image is downloaded. So the rendering engine will need to re-layout the whole page. This is often ugly to see and it costs battery on a mobile phone.\r\n\r\nFor a static site generator this is certainly a difficult thing to do, it needs to read the images, get the size and write the tag using the original size. This feature would set any site generator apart all other site generators and put it into the group of ""serious html-emitters"".\r\n\r\nThere has been a discussion about this feature at https://discuss.gohugo.io/t/can-i-find-out-the-image-size/2196 . Since I could not an issue here, I suggest it:\r\n\r\nFeature request: Automatically set **width** and **height** in *img* tags.', 'title': 'Hugo should automatically assign width and height of img tags, using original image size', 'type': 'issue'}]","<issue_start><issue_comment>Title: Hugo should automatically assign width and height of img tags, using original image size
+username_0: Good HTML **absolutely requires** width and height of img tags to be set. This is not just ""good"" or ""nice to have"" html writing, it is absolutely essential for the browser rendering engine. Otherwise, the browser does not know what size an image will be until the image is downloaded. So the rendering engine will need to re-layout the whole page. This is often ugly to see and it costs battery on a mobile phone.
+
+For a static site generator this is certainly a difficult thing to do, it needs to read the images, get the size and write the tag using the original size. This feature would set any site generator apart all other site generators and put it into the group of ""serious html-emitters"".
+
+There has been a discussion about this feature at https://discuss.gohugo.io/t/can-i-find-out-the-image-size/2196 . Since I could not an issue here, I suggest it:
+
+Feature request: Automatically set **width** and **height** in *img* tags."
+ethereum/ethereum-org-website,1094820158,4990,"{'number': 4990.0, 'repo': 'ethereum-org-website', 'user_login': 'ethereum'}","[{'action': 'opened', 'author': 'corwintines', 'comment_id': None, 'datetime': '2022-01-05T23:14:15Z', 'masked_author': 'username_0', 'text': ""***\r\n### :zap: Changes\r\n- Merkle proofs article (#4907) @qbzzt\r\n- Add in web based IDE resources (#4926) @LingTian\r\n- Remove pseudoelement from headers [Fixes #4922, Fixes #4930] (#4954) @aryankeluskar\r\n- Add certificate to acknowledgements page (#4955) @minimalsm\r\n- Clarify IDE intro (#4971) @username_1\r\n- xDai is Now Gnosis Chain.md (#4983) @yelnady\r\n- Update Translator Reports for January (#4947) @username_0\r\n- Add tutorial modal unwanted scrolling (#4980) @username_0\r\n- Update translation program stats (#4979) @lukassim\r\n- Resolve 'BugBountyCards.js' todo. Fixes #4303 (#4905) @Hakeemmidan\r\n- Add expected languages to /en/common.json (#4958) @minimalsm\r\n- Add community staking results / move community grants into community hub (#4956) @minimalsm\r\n- Add replit to IDEs (#4970) @username_1\r\n- Update consensus mechanisms developer doc intro (#4934) @elshigori\r\n- fix(typo): Norveçce (#4944) @Periyot\r\n- Improve how-to-write-and-deploy-an-nft tutorial (#4948) @neozapatista\r\n- Bengali: Homepage (#4951) @wackerow\r\n- Marathi: New language, homepage (#4952) @wackerow\r\n- docs: fix a typo in EDITING_MARKDOWN.md (#4953) @fishmandev\r\n- Add new events from ethglobal [Fixes #4859] (#4889) @vluna\r\n- Update page-developers-docs.json (#4890) @garricn\r\n- Fix warnings in dev mode (#4900) @pettinarip\r\n- Improve readability & accuracy on Energy consumption page (#4924) @skylarweaver\r\n- Remove referral links from tutorial (#4893) @juliangeissler\r\n- Fix typo in the Spanish homepage [Fixes #4877] (#4931) @vluna\r\n- Add link to PoS docs (#4925) @ethosdev\r\n- Add PoS reading links (#4920) @username_1\r\n- Fix incorrect URL in DAO Doc (#4923) @Naman-Bhalla\r\n- fix(typos): remove leading spaces (#4932) @Periyot\r\n- Add Web3 army to jobs section (#4927) @tommtt\r\n- Fix dead link in Vyper tutorial (#4908) @io12\r\n- Updating a typo from `Truffle` -> `Ganache` (#4929) @nedrocks\r\n\r\n## :globe_with_meridians: Translations\r\n\r\n- Remove xDai from non-Eng langs (#4986) @minimalsm\r\n- Refactor few components to accept intl strings for attributes (#4768) @wackerow\r\n- Indonesian: Use Ethereum (#4962) @wackerow\r\n- Update Chinese EVM developer doc (#4917) @HuangRongcun\r\n- Spanish correction on developer docs (#4911) @Factral\r\n- Add YouTube component (#4818) @wackerow\r\n- Update broken url in paragraph in blog post [Fixes #4937] (#4938) @vluna\r\n\r\n***\r\n### :unicorn: Contributors\r\nThank you @Factral, @Hakeemmidan, @HuangRongcun, @LingTian, @Naman-Bhalla, @Periyot, @aryankeluskar, @username_0, @elshigori, @ethosdev, @fishmandev, @garricn, @io12, @juliangeissler, @lukassim, @minimalsm, @nedrocks, @neozapatista, @pettinarip, @qbzzt, @username_1, @skylarweaver, @tommtt, @vluna, @wackerow and @yelnady for the contributions! :trophy:\r\n***"", 'title': 'Deploy v3.4.0', 'type': 'issue'}
+ {'action': 'created', 'author': 'samajammin', 'comment_id': 1006222877.0, 'datetime': '2022-01-06 01:58:44+00:00', 'masked_author': 'username_1', 'text': '✨ :shipit: ✨', 'title': None, 'type': 'comment'}]","<issue_start><issue_comment>Title: Deploy v3.4.0
+username_0: ***
+### :zap: Changes
+- Merkle proofs article (#4907) @qbzzt
+- Add in web based IDE resources (#4926) @LingTian
+- Remove pseudoelement from headers [Fixes #4922, Fixes #4930] (#4954) @aryankeluskar
+- Add certificate to acknowledgements page (#4955) @minimalsm
+- Clarify IDE intro (#4971) @username_1
+- xDai is Now Gnosis Chain.md (#4983) @yelnady
+- Update Translator Reports for January (#4947) @username_0
+- Add tutorial modal unwanted scrolling (#4980) @username_0
+- Update translation program stats (#4979) @lukassim
+- Resolve 'BugBountyCards.js' todo. Fixes #4303 (#4905) @Hakeemmidan
+- Add expected languages to /en/common.json (#4958) @minimalsm
+- Add community staking results / move community grants into community hub (#4956) @minimalsm
+- Add replit to IDEs (#4970) @username_1
+- Update consensus mechanisms developer doc intro (#4934) @elshigori
+- fix(typo): Norveçce (#4944) @Periyot
+- Improve how-to-write-and-deploy-an-nft tutorial (#4948) @neozapatista
+- Bengali: Homepage (#4951) @wackerow
+- Marathi: New language, homepage (#4952) @wackerow
+- docs: fix a typo in EDITING_MARKDOWN.md (#4953) @fishmandev
+- Add new events from ethglobal [Fixes #4859] (#4889) @vluna
+- Update page-developers-docs.json (#4890) @garricn
+- Fix warnings in dev mode (#4900) @pettinarip
+- Improve readability & accuracy on Energy consumption page (#4924) @skylarweaver
+- Remove referral links from tutorial (#4893) @juliangeissler
+- Fix typo in the Spanish homepage [Fixes #4877] (#4931) @vluna
+- Add link to PoS docs (#4925) @ethosdev
+- Add PoS reading links (#4920) @username_1
+- Fix incorrect URL in DAO Doc (#4923) @Naman-Bhalla
+- fix(typos): remove leading spaces (#4932) @Periyot
+- Add Web3 army to jobs section (#4927) @tommtt
+- Fix dead link in Vyper tutorial (#4908) @io12
+- Updating a typo from `Truffle` -> `Ganache` (#4929) @nedrocks
+
+## :globe_with_meridians: Translations
+
+- Remove xDai from non-Eng langs (#4986) @minimalsm
+- Refactor few components to accept intl strings for attributes (#4768) @wackerow
+- Indonesian: Use Ethereum (#4962) @wackerow
+- Update Chinese EVM developer doc (#4917) @HuangRongcun
+- Spanish correction on developer docs (#4911) @Factral
+- Add YouTube component (#4818) @wackerow
+- Update broken url in paragraph in blog post [Fixes #4937] (#4938) @vluna
+
+***
+### :unicorn: Contributors
+Thank you @Factral, @Hakeemmidan, @HuangRongcun, @LingTian, @Naman-Bhalla, @Periyot, @aryankeluskar, @username_0, @elshigori, @ethosdev, @fishmandev, @garricn, @io12, @juliangeissler, @lukassim, @minimalsm, @nedrocks, @neozapatista, @pettinarip, @qbzzt, @username_1, @skylarweaver, @tommtt, @vluna, @wackerow and @yelnady for the contributions! :trophy:
+***
+<issue_comment>username_1: ✨ :shipit: ✨"

@@ -1,0 +1,604 @@
+gohugoio/hugo,550902001,6764,,"[{'action': 'opened', 'author': 'cup', 'comment_id': None, 'datetime': '2020-01-16 16:02:16+00:00', 'masked_author': 'username_0', 'text': 'https://git-scm.com/docs/gitignore\r\n\r\nthat allows you to ignore a certain type with an exception:\r\n\r\n~~~\r\n*.txt\r\n!sunday.txt\r\n~~~\r\n\r\nor even all files with exception:\r\n\r\n~~~\r\n*\r\n!*.md\r\n~~~', 'title': 'Use GitIgnore syntax with ignoreFiles', 'type': 'issue'}
+ {'action': 'created', 'author': 'cup', 'comment_id': 575925896.0, 'datetime': '2020-01-18 18:26:58+00:00', 'masked_author': 'username_0', 'text': 'I want to add that I have tried some other things as a workaround, with no luck.\r\nFor example you could use a negative lookahead:\r\n\r\n~~~yaml\r\nignoreFiles:\r\n- \\.(?!md$)\r\n~~~\r\n\r\nbut Hugo doesnt accept it:\r\n\r\n~~~\r\nInvalid regexp ""\\\\.(?!md$)"" in ignoreFiles: error parsing regexp: invalid or\r\nunsupported Perl syntax: `(?!`\r\n~~~\r\n\r\nanother option is something like this:\r\n\r\n~~~\r\nignoreFiles:\r\n- /_\r\n~~~\r\n\r\nbut Go doesnt like it:\r\n\r\n~~~\r\n$ go run _app.go\r\npackage main: no Go files in C:\\\r\n~~~\r\n\r\nbest option I have come up with is like this:\r\n\r\n~~~\r\nignoreFiles:\r\n- _\\.\r\n~~~\r\n\r\nthen file like this:\r\n\r\n~~~\r\napp_.go\r\n~~~', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'davidsneighbour', 'comment_id': 576000786.0, 'datetime': '2020-01-19 12:41:30+00:00', 'masked_author': 'username_1', 'text': 'What happens if you ignore the gitignore syntax and use a regexp, as the error message suggests? I am not to versed in it, but `^(.?)[\\.]!(md)$` might do the trick. First brackets ""everything else greedy"", second should hit the last dot and the last one is ""not md"". $ is the end of the string. I am really not sure about this, but as I wrote: It\'s a regexp. Maybe search for a gitignore to regexp converter. Regexp is more powerful in the end than .gitignore syntax. I wouldn\'t change that :)', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'cup', 'comment_id': 576017220.0, 'datetime': '2020-01-19 15:40:19+00:00', 'masked_author': 'username_0', 'text': '@username_1 no, `!` matches the character `!` literally. It doesnt act as an operator in the example youve given.', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'cup', 'comment_id': 576020370.0, 'datetime': '2020-01-19 16:14:26+00:00', 'masked_author': 'username_0', 'text': '@username_1 no, `!` matches the character `!` literally. It doesnt act as\r\nan operator in the example youve given.\r\n\r\nBut I must thank you, as I had pretty much given up on Hugo because of this, and\r\nyou inspired me to look a little more. I found this, which doesnt use any Perl\r\nsyntax:\r\n\r\nhttps://stackoverflow.com/questions/406230/-/7286050\r\n\r\nResult:\r\n\r\n~~~yaml\r\nignoreFiles:\r\n- \\.([^m]|m[^d]|md.).*$\r\n~~~\r\n\r\nThis will ignore these:\r\n\r\n~~~\r\n.e\r\n.ee\r\n.mde\r\n.me\r\n~~~\r\n\r\nbut not this:\r\n\r\n~~~\r\n.md\r\n~~~\r\n\r\nI still think a better solution should be implemented, like GitIgnore or PCRE,\r\nbut this is a workaround for now.', 'title': None, 'type': 'comment'}]","<issue_start><issue_comment>Title: Use GitIgnore syntax with ignoreFiles
+username_0: https://git-scm.com/docs/gitignore
+
+that allows you to ignore a certain type with an exception:
+
+~~~
+*.txt
+!sunday.txt
+~~~
+
+or even all files with exception:
+
+~~~
+*
+!*.md
+~~~
+<issue_comment>username_0: I want to add that I have tried some other things as a workaround, with no luck.
+For example you could use a negative lookahead:
+
+~~~yaml
+ignoreFiles:
+- \.(?!md$)
+~~~
+
+but Hugo doesnt accept it:
+
+~~~
+Invalid regexp ""\\.(?!md$)"" in ignoreFiles: error parsing regexp: invalid or
+unsupported Perl syntax: `(?!`
+~~~
+
+another option is something like this:
+
+~~~
+ignoreFiles:
+- /_
+~~~
+
+but Go doesnt like it:
+
+~~~
+$ go run _app.go
+package main: no Go files in C:\
+~~~
+
+best option I have come up with is like this:
+
+~~~
+ignoreFiles:
+- _\.
+~~~
+
+then file like this:
+
+~~~
+app_.go
+~~~
+<issue_comment>username_1: What happens if you ignore the gitignore syntax and use a regexp, as the error message suggests? I am not to versed in it, but `^(.?)[\.]!(md)$` might do the trick. First brackets ""everything else greedy"", second should hit the last dot and the last one is ""not md"". $ is the end of the string. I am really not sure about this, but as I wrote: It's a regexp. Maybe search for a gitignore to regexp converter. Regexp is more powerful in the end than .gitignore syntax. I wouldn't change that :)
+<issue_comment>username_0: @username_1 no, `!` matches the character `!` literally. It doesnt act as an operator in the example youve given.
+<issue_comment>username_0: @username_1 no, `!` matches the character `!` literally. It doesnt act as
+an operator in the example youve given.
+
+But I must thank you, as I had pretty much given up on Hugo because of this, and
+you inspired me to look a little more. I found this, which doesnt use any Perl
+syntax:
+
+https://stackoverflow.com/questions/406230/-/7286050
+
+Result:
+
+~~~yaml
+ignoreFiles:
+- \.([^m]|m[^d]|md.).*$
+~~~
+
+This will ignore these:
+
+~~~
+.e
+.ee
+.mde
+.me
+~~~
+
+but not this:
+
+~~~
+.md
+~~~
+
+I still think a better solution should be implemented, like GitIgnore or PCRE,
+but this is a workaround for now."
+kubernetes/website,324471705,8617,"{'number': 8617.0, 'repo': 'website', 'user_login': 'kubernetes'}","[{'action': 'opened', 'author': 'neolit123', 'comment_id': None, 'datetime': '2018-05-18T16:16:30Z', 'masked_author': 'username_0', 'text': ""'kubeadm upgrade diff' is a new sub-command in 1.11:\r\n- Add a generated page for the command line arguments for 'diff'\r\n- Include the generated page in kubeadm-upgrade.md\r\n\r\nFixes kubernetes/kubeadm#832\r\n\r\n## NOTE!!!: ##\r\nthe generated page `kubeadm_upgrade_diff.md` does not have HTML formatting like the two other generated pages here - e.g.:\r\nhttps://github.com/kubernetes/website/blob/master/content/en/docs/reference/setup-tools/kubeadm/generated/kubeadm_upgrade_apply.md.\r\n\r\n**i didn't find information on how to do that, so please advise.**"", 'title': ""kubeadm-upgrade: add generated page and include about 'diff'"", 'type': 'issue'}
+ {'action': 'created', 'author': 'Bradamant3', 'comment_id': 391225503.0, 'datetime': '2018-05-23 05:32:32+00:00', 'masked_author': 'username_1', 'text': '/assign', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'Bradamant3', 'comment_id': 391340421.0, 'datetime': '2018-05-23 13:09:26+00:00', 'masked_author': 'username_1', 'text': ""Will dig into scripts for generating. @username_3 seems like I've seen related PRs? Do you have any idea what's going on here?"", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'neolit123', 'comment_id': 391342342.0, 'datetime': '2018-05-23 13:15:40+00:00', 'masked_author': 'username_0', 'text': ""@username_1 \r\nthanks a lot.\r\n\r\nthis is a bit of a blocker because me and @chuckha need to document some new `kubadm` commands and they need this missing HTML styling. we don't want to add it by hand."", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'neolit123', 'comment_id': 391723579.0, 'datetime': '2018-05-24 13:55:03+00:00', 'masked_author': 'username_0', 'text': ""yes, me too; i don't have powers in that org / repo.\r\ni see that Lucas has powers there and this does affect kubeadm, yet i think this should be addressed to others."", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'mistyhacks', 'comment_id': 391890454.0, 'datetime': '2018-05-24 22:54:18+00:00', 'masked_author': 'username_2', 'text': '/lgtm\r\n\r\n@username_1 @chenopis @username_0 PTAL again and someone approve if this still looks good to you.\r\n\r\nThis does not look like a ""new feature"" to me, but if it is, @username_0 please add it to the [1.11 feature tracking spreadsheet](https://docs.google.com/spreadsheets/d/16N9KSlxWwxUA2gV6jvuW9N8tPRHzNhu1-RYY4Y0RZLs/edit#gid=0).', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'neolit123', 'comment_id': 391898452.0, 'datetime': '2018-05-24 23:41:39+00:00', 'masked_author': 'username_0', 'text': ""i don't really know.\r\nto my understanding this is something that has a release note but it's not a new feature in the k8s sense (alpha, beta...etc stages):\r\nhttps://github.com/kubernetes/kubernetes/pull/63930\r\n\r\nLMK, if it has to be added to the sheet."", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'mistyhacks', 'comment_id': 391898949.0, 'datetime': '2018-05-24 23:44:47+00:00', 'masked_author': 'username_2', 'text': '@justaugustus @idvoretskyi PTAL', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'neolit123', 'comment_id': 392183491.0, 'datetime': '2018-05-25 20:51:07+00:00', 'masked_author': 'username_0', 'text': '@username_2 @username_1 @tengqm \r\nupdated.', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'Bradamant3', 'comment_id': 392214831.0, 'datetime': '2018-05-25 23:43:33+00:00', 'masked_author': 'username_1', 'text': ""In case it's helpful -- there is a new command for kubeadm, per the linked k/k PR. So there is a new feature, but it's not a whole Big New Feature. (From what I've seen of previous releases, features listed on the spreadsheet often stay in the same stage of things, that is alpha | beta anyway, from one release to the next, while things are polished or improved or added to.)\r\n\r\nWe need to get the generated docs issue straightened out as soon as possible. I'll comment in the PR for the tooling also. We do need the generated doc so we can check the diffs when strings for docs change in k/k code, but if the format is different then the diffs are useless. I'll think some more about what to do in the meantime. For now, I guess, don't include the generated files in the PRs. But if you could hold off on any more PRs that refer to generated files for a few days (as much as a week? Would that work?), let's see what we can work out."", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'neolit123', 'comment_id': 392216778.0, 'datetime': '2018-05-25 23:59:03+00:00', 'masked_author': 'username_0', 'text': ""yes, it's also not possible for sig-docs to review the generated files if we add the includes for them, but not the actual generated files in a PR. i will hold on sending more command PRs for now.\r\nthanks."", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'steveperry-53', 'comment_id': 393760019.0, 'datetime': '2018-06-01 05:14:11+00:00', 'masked_author': 'username_3', 'text': 'kubernetes-incubator/reference-docs#47 is merged now.', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'neolit123', 'comment_id': 393877475.0, 'datetime': '2018-06-01 13:17:47+00:00', 'masked_author': 'username_0', 'text': 'yesterday, we spoke with @username_1 and also according to what @tengqm is stating, this PR is good to be merged.\r\nthe generated / included .MD will come from the tooling.', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'neolit123', 'comment_id': 393925908.0, 'datetime': '2018-06-01 15:59:37+00:00', 'masked_author': 'username_0', 'text': 'rebased against 1.11.', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'Bradamant3', 'comment_id': 393937208.0, 'datetime': '2018-06-01 16:35:56+00:00', 'masked_author': 'username_1', 'text': '/lgtm', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'steveperry-53', 'comment_id': 394029524.0, 'datetime': '2018-06-01 22:50:40+00:00', 'masked_author': 'username_3', 'text': 'Hmm, I must be missing something. This was merged into the release-1.11 branch, correct? Then why don\'t we see the change at either of theses places?\r\n\r\nI\'m talking about this change: ""In Kubernetes v1.11.0 and later, you can use `kubeadm upgrade diff` to see ...""\r\n\r\n* http://kubernetes-io-vnext-staging.netlify.com/docs/reference/setup-tools/kubeadm/kubeadm-upgrade/\r\n* https://deploy-preview-8617--kubernetes-io-vnext-staging.netlify.com/docs/reference/setup-tools/kubeadm/kubeadm-upgrade/', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'neolit123', 'comment_id': 394030814.0, 'datetime': '2018-06-01 23:00:22+00:00', 'masked_author': 'username_0', 'text': '@username_3 \r\ni can see the include for the `diff` command in the second link, but not in the first one.\r\nboth links are missing the `In Kubernetes v1.11.0 and later...` note.\r\n\r\ncould be that the note was added later in an amended commit and the tooling did not re-generate a new preview for that.', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'steveperry-53', 'comment_id': 394031511.0, 'datetime': '2018-06-01 23:05:02+00:00', 'masked_author': 'username_3', 'text': ""Let's keep an eye on this. It's especially important that we get a good 1.11 preview here:\r\n\r\nhttp://kubernetes-io-vnext-staging.netlify.com/docs/reference/setup-tools/kubeadm/kubeadm-upgrade/"", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'neolit123', 'comment_id': 394032269.0, 'datetime': '2018-06-01 23:09:52+00:00', 'masked_author': 'username_0', 'text': 'i would ping the preview generation maintainer about this.\r\nthe problem can propagate to other RPs.', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'Bradamant3', 'comment_id': 394085731.0, 'datetime': '2018-06-02 12:57:10+00:00', 'masked_author': 'username_1', 'text': ""All Netlify deploys have been failing for a while. I've got a fix in mind, but want to take a real weekend, so I'll fiddle with it on Monday."", 'title': None, 'type': 'comment'}]","<issue_start><issue_comment>Title: kubeadm-upgrade: add generated page and include about 'diff'
+username_0: 'kubeadm upgrade diff' is a new sub-command in 1.11:
+- Add a generated page for the command line arguments for 'diff'
+- Include the generated page in kubeadm-upgrade.md
+
+Fixes kubernetes/kubeadm#832
+
+## NOTE!!!: ##
+the generated page `kubeadm_upgrade_diff.md` does not have HTML formatting like the two other generated pages here - e.g.:
+https://github.com/kubernetes/website/blob/master/content/en/docs/reference/setup-tools/kubeadm/generated/kubeadm_upgrade_apply.md.
+
+**i didn't find information on how to do that, so please advise.**
+<issue_comment>username_1: /assign
+<issue_comment>username_1: Will dig into scripts for generating. @username_3 seems like I've seen related PRs? Do you have any idea what's going on here?
+<issue_comment>username_0: @username_1 
+thanks a lot.
+
+this is a bit of a blocker because me and @chuckha need to document some new `kubadm` commands and they need this missing HTML styling. we don't want to add it by hand.
+<issue_comment>username_0: yes, me too; i don't have powers in that org / repo.
+i see that Lucas has powers there and this does affect kubeadm, yet i think this should be addressed to others.
+<issue_comment>username_2: /lgtm
+
+@username_1 @chenopis @username_0 PTAL again and someone approve if this still looks good to you.
+
+This does not look like a ""new feature"" to me, but if it is, @username_0 please add it to the [1.11 feature tracking spreadsheet](https://docs.google.com/spreadsheets/d/16N9KSlxWwxUA2gV6jvuW9N8tPRHzNhu1-RYY4Y0RZLs/edit#gid=0).
+<issue_comment>username_0: i don't really know.
+to my understanding this is something that has a release note but it's not a new feature in the k8s sense (alpha, beta...etc stages):
+https://github.com/kubernetes/kubernetes/pull/63930
+
+LMK, if it has to be added to the sheet.
+<issue_comment>username_2: @justaugustus @idvoretskyi PTAL
+<issue_comment>username_0: @username_2 @username_1 @tengqm 
+updated.
+<issue_comment>username_1: In case it's helpful -- there is a new command for kubeadm, per the linked k/k PR. So there is a new feature, but it's not a whole Big New Feature. (From what I've seen of previous releases, features listed on the spreadsheet often stay in the same stage of things, that is alpha | beta anyway, from one release to the next, while things are polished or improved or added to.)
+
+We need to get the generated docs issue straightened out as soon as possible. I'll comment in the PR for the tooling also. We do need the generated doc so we can check the diffs when strings for docs change in k/k code, but if the format is different then the diffs are useless. I'll think some more about what to do in the meantime. For now, I guess, don't include the generated files in the PRs. But if you could hold off on any more PRs that refer to generated files for a few days (as much as a week? Would that work?), let's see what we can work out.
+<issue_comment>username_0: yes, it's also not possible for sig-docs to review the generated files if we add the includes for them, but not the actual generated files in a PR. i will hold on sending more command PRs for now.
+thanks.
+<issue_comment>username_3: kubernetes-incubator/reference-docs#47 is merged now.
+<issue_comment>username_0: yesterday, we spoke with @username_1 and also according to what @tengqm is stating, this PR is good to be merged.
+the generated / included .MD will come from the tooling.
+<issue_comment>username_0: rebased against 1.11.
+<issue_comment>username_1: /lgtm
+<issue_comment>username_3: Hmm, I must be missing something. This was merged into the release-1.11 branch, correct? Then why don't we see the change at either of theses places?
+
+I'm talking about this change: ""In Kubernetes v1.11.0 and later, you can use `kubeadm upgrade diff` to see ...""
+
+* http://kubernetes-io-vnext-staging.netlify.com/docs/reference/setup-tools/kubeadm/kubeadm-upgrade/
+* https://deploy-preview-8617--kubernetes-io-vnext-staging.netlify.com/docs/reference/setup-tools/kubeadm/kubeadm-upgrade/
+<issue_comment>username_0: @username_3 
+i can see the include for the `diff` command in the second link, but not in the first one.
+both links are missing the `In Kubernetes v1.11.0 and later...` note.
+
+could be that the note was added later in an amended commit and the tooling did not re-generate a new preview for that.
+<issue_comment>username_3: Let's keep an eye on this. It's especially important that we get a good 1.11 preview here:
+
+http://kubernetes-io-vnext-staging.netlify.com/docs/reference/setup-tools/kubeadm/kubeadm-upgrade/
+<issue_comment>username_0: i would ping the preview generation maintainer about this.
+the problem can propagate to other RPs.
+<issue_comment>username_1: All Netlify deploys have been failing for a while. I've got a fix in mind, but want to take a real weekend, so I'll fiddle with it on Monday."
+conda-forge/conda-forge.github.io,344183081,612,"{'number': 612.0, 'repo': 'conda-forge.github.io', 'user_login': 'conda-forge'}","[{'action': 'opened', 'author': 'ocefpaf', 'comment_id': None, 'datetime': '2018-07-24T20:02:57Z', 'masked_author': 'username_0', 'text': ""@username_6 and @CJ-Wright this is very crude but I'm sending this to get us started.\r\n\r\nBasically my proposal is:\r\n\r\n- both kind of voting must have public discussions;\r\n- we can use the GH issues for discussing and voting, no need for secrecy on these two;\r\n- the minimum time for voting should be at least one meeting cycle.\r\n\r\nDoes that make sense to you? Is it clear on the my test below?"", 'title': 'Adding changes to the governance and general issues voting', 'type': 'issue'}
+ {'action': 'created', 'author': 'ocefpaf', 'comment_id': 408163784.0, 'datetime': '2018-07-26 16:55:39+00:00', 'masked_author': 'username_0', 'text': 'Indeed. We cannot force anyone to participate and vote. We can only give time and hope that those who are interest vote.\r\n\r\nIMO one meeting cycle is not only enough time but also allow for some live discussion before voting.\r\n\r\nLast but not least, nothing is writing in stone and any bad decision can be reverted if proven bad or harmful.', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'mwcraig', 'comment_id': 408431076.0, 'datetime': '2018-07-27 14:13:38+00:00', 'masked_author': 'username_1', 'text': '@username_0 -- were you going to add to this doc that an ""Abstain"" option will be available in voting?', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'jakirkham', 'comment_id': 408458699.0, 'datetime': '2018-07-27 15:44:44+00:00', 'masked_author': 'username_2', 'text': ""How do we decide whether a poll's text is ok? Is there a review process before sharing it?"", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'ocefpaf', 'comment_id': 408459264.0, 'datetime': '2018-07-27 15:46:39+00:00', 'masked_author': 'username_0', 'text': 'The time for the discussions exists exactly for that.', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'jakirkham', 'comment_id': 408461654.0, 'datetime': '2018-07-27 15:55:01+00:00', 'masked_author': 'username_2', 'text': 'Two points.\r\n\r\nFirst people will inevitably miss meetings due to all manner of conflicts. It would be good to provide them an option to provide input despite inability to make a meeting.\r\n\r\nSecond discussing in the meeting and reviewing the text are not the same thing. It could be done in a shared doc if that is easier.', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'isuruf', 'comment_id': 408462746.0, 'datetime': '2018-07-27 15:58:36+00:00', 'masked_author': 'username_3', 'text': ""Agree on @username_2's points. (Unrelated: there was an issue exactly like this on sagemath list. https://groups.google.com/forum/#!topic/sage-flame/JkQ0VwTUGfY)"", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'msarahan', 'comment_id': 408466035.0, 'datetime': '2018-07-27 16:10:34+00:00', 'masked_author': 'username_4', 'text': ""I agree that people not present in meetings need to have a voice, but that's hard to balance in discussions.  Meetings are where things are discussed in high-bandwidth environments, which is often essential for resolving contentious issues.  If a person makes their opinions in text and can't attend a meeting, how much weight does their opinion deserve?  Their opinion is by definition static in that meeting.  It can't block discussion in the meeting outright.  When it is strongly opposed to the general consensus reached in the meeting, how can that be reconciled?  I think that is why decisions should be made by vote, not necessarily in meetings - it allows for asynchronicity.  Still, there is a cost to not attending meetings, and I'm not sure there's any way around that.  We can't necessarily completely make up for a very high-bandwidth discussion with lots and lots of low-bandwidth discussions."", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'ChrisBarker-NOAA', 'comment_id': 408467178.0, 'datetime': '2018-07-27 16:15:01+00:00', 'masked_author': 'username_5', 'text': '+    * 50% plus one of those voting to pass\n\nCouldn’t it simply be >= X% ?\n\n-CHB', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'mwcraig', 'comment_id': 408468907.0, 'datetime': '2018-07-27 16:21:53+00:00', 'masked_author': 'username_1', 'text': 'How about circulating the text for review (with a deadline)? We could have a repo for poll questions (and results if we want) with new ones opened as PRs. \r\n\r\nI don’t think this replaces discussion at a meeting, but post-draft, pre-sending-out of polls/surveys almost always catches typos/lack of clarity even after extensive discussion. \r\n\r\nAgreed this needs to have a short turnaround, and will be best suited to small changes, not a re-discussion of the broader poll.', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'ocefpaf', 'comment_id': 410016511.0, 'datetime': '2018-08-02 18:03:39+00:00', 'masked_author': 'username_0', 'text': 'Even with a short turnaround I\'m afraid this extra step is just another hill for ideas to die at. The goal of this PR is to make conda-forge more agile and avoid the ""bureaucratic halts"" we are facing lately.', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'mwcraig', 'comment_id': 410355934.0, 'datetime': '2018-08-03 19:39:11+00:00', 'masked_author': 'username_1', 'text': 'Understood, but what about posting the text right after the meeting with a 48 hour deadline (if necessary no vote == approval), or posting for 48 hours prior to the meeting?', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'jakirkham', 'comment_id': 410479737.0, 'datetime': '2018-08-04 21:50:06+00:00', 'masked_author': 'username_2', 'text': ""This has also come up in regards to [Python's PEP process]( https://mail.python.org/pipermail/python-committers/2018-July/005713.html ). There's a bunch of other points that come up in that thread. It's worth reading if for no other reason than to understand how Python's governance model is shifting and how we might learn from it."", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'scopatz', 'comment_id': 410878984.0, 'datetime': '2018-08-06 22:59:03+00:00', 'masked_author': 'username_6', 'text': ""is something that we could have a vote to amend the governance document on if this PR were merged. Similarly, adopting ideas from the Python PEP process like Hettinger's are clear, explcit items we can vote on if this PR is merged. \r\n\r\nI actually think the concerns about leading questions are already addressed in the governance document itself.  We already have in the document, prior to this PR, the statement that `The act of calling for a vote cannot itself violate the code of conduct.`  If someone - even a member of core - is attempting to abuse these privldeges, we have several mechanisms for recourse. \r\n\r\nThat said, I don't beleive that anyone currently on core would abuse their status or bully people in order to get what they want. I don't think this is a problem we have or are likely to have. Our technical disagreements have been just that, and have not been personal or malicious.\r\n\r\nSo in summary, I believe that\r\n\r\n* These changes let us move forward with further ammendments to the document and other key decision making, and \r\n* While we need to be cognizant of potential abuses of power, we also have little reason to suspect anyone of abusing their power at this point.\r\n* These are close enough the minimal changes needed to move forward.\r\n* We should not try to stick too many changes into a single PR, especially since we don't yet have a defined process.\r\n\r\nIf there are no major show-stopper objections to the text as it stands, and with the above points in mind, I plan on merging this PR tomorrow in order to give us all a more structured way to proceed.\r\n\r\nThanks again to everyone for all of the care and attention you have given to this issue."", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'jakirkham', 'comment_id': 410888192.0, 'datetime': '2018-08-06 23:50:54+00:00', 'masked_author': 'username_2', 'text': 'Clarifying point: My understanding thus far is core is the only group that gets to vote on things as there is no specification for votes from anyone else. Is that correct?', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'dougalsutherland', 'comment_id': 411051055.0, 'datetime': '2018-08-07 13:13:21+00:00', 'masked_author': 'username_7', 'text': 'I think there\'s a difference between ""I\'m bullying people into making my decision"" and ""I put out a poll without carefully considering the wording that ended up biased towards my point of view."" The first one we have some recourse for and feels not particularly likely, but the second one is very easy to see happening, and would then call into question the whole decision / etc....', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'scopatz', 'comment_id': 411085225.0, 'datetime': '2018-08-07 14:53:31+00:00', 'masked_author': 'username_6', 'text': '@username_7 - yeah I agree that those are different cases. But it does seem to me that  the proposals that the proposals we seen come through so far have had a lot of thought put into the wording and discussion about the wording. For example, the compiler migration proposal had its own document that was a few pages long and listed all of the options. While others might not have been as verbose, they certainly had a lot of discussion before and after the vote was called for.\r\n\r\nI think if it gets to the point where we are having egregiously thoughtless proposals come in, we should vote on changes to the governance document to prevent such polls coming through in the future. But again, as things stand now, we have no mechanism for ammending the governance document. So merging this issue will allow us to move forward with these and any other concerns we may have.', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'scopatz', 'comment_id': 411145627.0, 'datetime': '2018-08-07 17:55:26+00:00', 'masked_author': 'username_6', 'text': 'Thanks again everyone!', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'embray', 'comment_id': 411780083.0, 'datetime': '2018-08-09 14:36:26+00:00', 'masked_author': 'username_8', 'text': ""I was confused as to why @username_6 was agreeing with me since I didn't recall taking part in this discussion earlier.  But I'm glad--reading the discussion on this PR, as well as the PR itself was interesting--as is conda-forge's excellent (nitpicks aside) project governance documentation.  I hope one day we can have something similar for Sage..."", 'title': None, 'type': 'comment'}]","<issue_start><issue_comment>Title: Adding changes to the governance and general issues voting
+username_0: @username_6 and @CJ-Wright this is very crude but I'm sending this to get us started.
+
+Basically my proposal is:
+
+- both kind of voting must have public discussions;
+- we can use the GH issues for discussing and voting, no need for secrecy on these two;
+- the minimum time for voting should be at least one meeting cycle.
+
+Does that make sense to you? Is it clear on the my test below?
+<issue_comment>username_0: Indeed. We cannot force anyone to participate and vote. We can only give time and hope that those who are interest vote.
+
+IMO one meeting cycle is not only enough time but also allow for some live discussion before voting.
+
+Last but not least, nothing is writing in stone and any bad decision can be reverted if proven bad or harmful.
+<issue_comment>username_1: @username_0 -- were you going to add to this doc that an ""Abstain"" option will be available in voting?
+<issue_comment>username_2: How do we decide whether a poll's text is ok? Is there a review process before sharing it?
+<issue_comment>username_0: The time for the discussions exists exactly for that.
+<issue_comment>username_2: Two points.
+
+First people will inevitably miss meetings due to all manner of conflicts. It would be good to provide them an option to provide input despite inability to make a meeting.
+
+Second discussing in the meeting and reviewing the text are not the same thing. It could be done in a shared doc if that is easier.
+<issue_comment>username_3: Agree on @username_2's points. (Unrelated: there was an issue exactly like this on sagemath list. https://groups.google.com/forum/#!topic/sage-flame/JkQ0VwTUGfY)
+<issue_comment>username_4: I agree that people not present in meetings need to have a voice, but that's hard to balance in discussions.  Meetings are where things are discussed in high-bandwidth environments, which is often essential for resolving contentious issues.  If a person makes their opinions in text and can't attend a meeting, how much weight does their opinion deserve?  Their opinion is by definition static in that meeting.  It can't block discussion in the meeting outright.  When it is strongly opposed to the general consensus reached in the meeting, how can that be reconciled?  I think that is why decisions should be made by vote, not necessarily in meetings - it allows for asynchronicity.  Still, there is a cost to not attending meetings, and I'm not sure there's any way around that.  We can't necessarily completely make up for a very high-bandwidth discussion with lots and lots of low-bandwidth discussions.
+<issue_comment>username_5: +    * 50% plus one of those voting to pass
+
+Couldn’t it simply be >= X% ?
+
+-CHB
+<issue_comment>username_1: How about circulating the text for review (with a deadline)? We could have a repo for poll questions (and results if we want) with new ones opened as PRs. 
+
+I don’t think this replaces discussion at a meeting, but post-draft, pre-sending-out of polls/surveys almost always catches typos/lack of clarity even after extensive discussion. 
+
+Agreed this needs to have a short turnaround, and will be best suited to small changes, not a re-discussion of the broader poll.
+<issue_comment>username_0: Even with a short turnaround I'm afraid this extra step is just another hill for ideas to die at. The goal of this PR is to make conda-forge more agile and avoid the ""bureaucratic halts"" we are facing lately.
+<issue_comment>username_1: Understood, but what about posting the text right after the meeting with a 48 hour deadline (if necessary no vote == approval), or posting for 48 hours prior to the meeting?
+<issue_comment>username_2: This has also come up in regards to [Python's PEP process]( https://mail.python.org/pipermail/python-committers/2018-July/005713.html ). There's a bunch of other points that come up in that thread. It's worth reading if for no other reason than to understand how Python's governance model is shifting and how we might learn from it.
+<issue_comment>username_6: is something that we could have a vote to amend the governance document on if this PR were merged. Similarly, adopting ideas from the Python PEP process like Hettinger's are clear, explcit items we can vote on if this PR is merged. 
+
+I actually think the concerns about leading questions are already addressed in the governance document itself.  We already have in the document, prior to this PR, the statement that `The act of calling for a vote cannot itself violate the code of conduct.`  If someone - even a member of core - is attempting to abuse these privldeges, we have several mechanisms for recourse. 
+
+That said, I don't beleive that anyone currently on core would abuse their status or bully people in order to get what they want. I don't think this is a problem we have or are likely to have. Our technical disagreements have been just that, and have not been personal or malicious.
+
+So in summary, I believe that
+
+* These changes let us move forward with further ammendments to the document and other key decision making, and 
+* While we need to be cognizant of potential abuses of power, we also have little reason to suspect anyone of abusing their power at this point.
+* These are close enough the minimal changes needed to move forward.
+* We should not try to stick too many changes into a single PR, especially since we don't yet have a defined process.
+
+If there are no major show-stopper objections to the text as it stands, and with the above points in mind, I plan on merging this PR tomorrow in order to give us all a more structured way to proceed.
+
+Thanks again to everyone for all of the care and attention you have given to this issue.
+<issue_comment>username_2: Clarifying point: My understanding thus far is core is the only group that gets to vote on things as there is no specification for votes from anyone else. Is that correct?
+<issue_comment>username_7: I think there's a difference between ""I'm bullying people into making my decision"" and ""I put out a poll without carefully considering the wording that ended up biased towards my point of view."" The first one we have some recourse for and feels not particularly likely, but the second one is very easy to see happening, and would then call into question the whole decision / etc....
+<issue_comment>username_6: @username_7 - yeah I agree that those are different cases. But it does seem to me that  the proposals that the proposals we seen come through so far have had a lot of thought put into the wording and discussion about the wording. For example, the compiler migration proposal had its own document that was a few pages long and listed all of the options. While others might not have been as verbose, they certainly had a lot of discussion before and after the vote was called for.
+
+I think if it gets to the point where we are having egregiously thoughtless proposals come in, we should vote on changes to the governance document to prevent such polls coming through in the future. But again, as things stand now, we have no mechanism for ammending the governance document. So merging this issue will allow us to move forward with these and any other concerns we may have.
+<issue_comment>username_6: Thanks again everyone!
+<issue_comment>username_8: I was confused as to why @username_6 was agreeing with me since I didn't recall taking part in this discussion earlier.  But I'm glad--reading the discussion on this PR, as well as the PR itself was interesting--as is conda-forge's excellent (nitpicks aside) project governance documentation.  I hope one day we can have something similar for Sage..."
+department-of-veterans-affairs/vets-website,717522759,14520,"{'number': 14520.0, 'repo': 'vets-website', 'user_login': 'department-of-veterans-affairs'}","[{'action': 'opened', 'author': 'micahchiang', 'comment_id': None, 'datetime': '2020-10-08T17:14:39Z', 'masked_author': 'username_0', 'text': '## Description\r\nThere are currently 3 forms in `vets-website` that rely on an address schema utility [here](https://github.com/department-of-veterans-affairs/vets-website/blob/master/src/applications/disability-benefits/686c-674/config/address-schema.js). \r\n\r\nThe problem with this is two of the forms, VRE 28-1900 and 28-8832, then rely on the schema used for the 686c-674 in `vets-json-schema`. The goal of this pull request is to create a new address schema utility at the root of `applications/vre` which is form agnostic. The intent is to eventually migrate the 686c-674 onto this new utility as well, so all three forms rely on an address schema independent from any one form. \r\n\r\nThis address pattern is different from another commonly used pattern in `vets-website` found [here](https://github.com/department-of-veterans-affairs/vets-website/blob/master/src/platform/forms/definitions/address.js) because it includes a checkbox to indicate whether or not a user lives on a US military base outside of the United States. \r\n\r\nThe state of this checkbox is used to manage the individual schemas for `country`, `state`, and `city`. This same pattern can be seen in a veteran\'s profile under the address block at `/profile/personal-information`, and found in vets-website [here](https://github.com/department-of-veterans-affairs/vets-website/blob/master/src/platform/user/profile/vet360/components/AddressField/address-schemas.js). \r\n\r\nIt\'s important to note that a replication of this pattern was necessary, as the version used in the profile includes a hook, `updateUiSchema`, that isn\'t [called as part of the data-update flow in a config powered application](https://github.com/department-of-veterans-affairs/vets-website/blob/master/src/platform/forms-system/src/js/state/helpers.js#L357).\r\n\r\nCorresponding schema object would look like:\r\n<details><summary>Address Schema Object</summary>\r\n\r\n```\r\nexport const addressSchema = {\r\n  type: \'object\',\r\n  properties: {\r\n    isMilitary: {\r\n      type: \'boolean\',\r\n    },\r\n    \'view:livesOnMilitaryBaseInfo\': {\r\n      type: \'object\',\r\n      properties: {},\r\n    },\r\n    country: {\r\n      type: \'string\',\r\n      enum: countries.map(country => country.value),\r\n      enumNames: countries.map(country => country.label),\r\n    },\r\n    addressLine1: {\r\n      type: \'string\',\r\n      minLength: 1,\r\n      maxLength: 100,\r\n      pattern: \'^.*\\\\S.*\',\r\n    },\r\n    addressLine2: {\r\n      type: \'string\',\r\n      minLength: 1,\r\n      maxLength: 100,\r\n      pattern: \'^.*\\\\S.*\',\r\n    },\r\n    addressLine3: {\r\n      type: \'string\',\r\n      minLength: 1,\r\n      maxLength: 100,\r\n      pattern: \'^.*\\\\S.*\',\r\n    },\r\n    city: {\r\n      type: \'string\',\r\n    },\r\n    state: {\r\n      type: \'string\',\r\n    },\r\n    postalCode: {\r\n      type: \'string\',\r\n    },\r\n  },\r\n};\r\n```\r\n\r\n</details>\r\n\r\n## Testing done\r\n- local on the address page of the non-production 28-8832 application\r\n\r\n## Screenshots\r\n<details><summary>Empty form state</summary>\r\n\r\n<img width=""590"" alt=""Screen Shot 2020-10-08 at 12 49 35 PM"" src=""https://user-images.githubusercontent.com/15097156/95491478-a33e9080-0967-11eb-89ed-2c539b9c21d3.png"">\r\n</details>\r\n\r\n<details><summary>Domestic US address</summary>\r\n\r\n<img width=""555"" alt=""Screen Shot 2020-10-08 at 12 50 28 PM"" src=""https://user-images.githubusercontent.com/15097156/95491552-bf423200-0967-11eb-9f08-c063753b83ce.png"">\r\n</details>\r\n\r\n<details><summary>US military address</summary>\r\n\r\n<img width=""563"" alt=""Screen Shot 2020-10-08 at 12 52 37 PM"" src=""https://user-images.githubusercontent.com/15097156/95491596-cff2a800-0967-11eb-8737-aa20f505e757.png"">\r\n</details>\r\n\r\n<details><summary>Foreign address</summary>\r\n\r\n<img width=""606"" alt=""Screen Shot 2020-10-08 at 12 51 03 PM"" src=""https://user-images.githubusercontent.com/15097156/95491644-e13bb480-0967-11eb-87df-89848e739800.png"">\r\n</details>\r\n\r\n\r\n## Acceptance criteria\r\n- [x] New address schema UI works as expected on an address page inside a form system application. \r\n\r\n## Definition of done\r\n- [ ] Events are logged appropriately\r\n- [ ] Documentation has been updated, if applicable\r\n- [x] A link has been provided to the originating GitHub issue (or connected to it via ZenHub)\r\n- [x] No sensitive information (i.e. PII/credentials/internal URLs/etc.) is captured in logging, hardcoded, or specs', 'title': 'Mc address schema investigation', 'type': 'issue'}
+ {'action': 'created', 'author': 'micahchiang', 'comment_id': 705713835.0, 'datetime': '2020-10-08 17:24:15+00:00', 'masked_author': 'username_0', 'text': '@Mottie @erikphansen @cvalarida @cohnjesse - Requesting code review on this as a draft because I would like any feedback or constructive criticisms on how this could be improved before merging. Thanks!', 'title': None, 'type': 'comment'}]","<issue_start><issue_comment>Title: Mc address schema investigation
+username_0: ## Description
+There are currently 3 forms in `vets-website` that rely on an address schema utility [here](https://github.com/department-of-veterans-affairs/vets-website/blob/master/src/applications/disability-benefits/686c-674/config/address-schema.js). 
+
+The problem with this is two of the forms, VRE 28-1900 and 28-8832, then rely on the schema used for the 686c-674 in `vets-json-schema`. The goal of this pull request is to create a new address schema utility at the root of `applications/vre` which is form agnostic. The intent is to eventually migrate the 686c-674 onto this new utility as well, so all three forms rely on an address schema independent from any one form. 
+
+This address pattern is different from another commonly used pattern in `vets-website` found [here](https://github.com/department-of-veterans-affairs/vets-website/blob/master/src/platform/forms/definitions/address.js) because it includes a checkbox to indicate whether or not a user lives on a US military base outside of the United States. 
+
+The state of this checkbox is used to manage the individual schemas for `country`, `state`, and `city`. This same pattern can be seen in a veteran's profile under the address block at `/profile/personal-information`, and found in vets-website [here](https://github.com/department-of-veterans-affairs/vets-website/blob/master/src/platform/user/profile/vet360/components/AddressField/address-schemas.js). 
+
+It's important to note that a replication of this pattern was necessary, as the version used in the profile includes a hook, `updateUiSchema`, that isn't [called as part of the data-update flow in a config powered application](https://github.com/department-of-veterans-affairs/vets-website/blob/master/src/platform/forms-system/src/js/state/helpers.js#L357).
+
+Corresponding schema object would look like:
+<details><summary>Address Schema Object</summary>
+
+```
+export const addressSchema = {
+  type: 'object',
+  properties: {
+    isMilitary: {
+      type: 'boolean',
+    },
+    'view:livesOnMilitaryBaseInfo': {
+      type: 'object',
+      properties: {},
+    },
+    country: {
+      type: 'string',
+      enum: countries.map(country => country.value),
+      enumNames: countries.map(country => country.label),
+    },
+    addressLine1: {
+      type: 'string',
+      minLength: 1,
+      maxLength: 100,
+      pattern: '^.*\\S.*',
+    },
+    addressLine2: {
+      type: 'string',
+      minLength: 1,
+      maxLength: 100,
+      pattern: '^.*\\S.*',
+    },
+    addressLine3: {
+      type: 'string',
+      minLength: 1,
+      maxLength: 100,
+      pattern: '^.*\\S.*',
+    },
+    city: {
+      type: 'string',
+    },
+    state: {
+      type: 'string',
+    },
+    postalCode: {
+      type: 'string',
+    },
+  },
+};
+```
+
+</details>
+
+## Testing done
+- local on the address page of the non-production 28-8832 application
+
+## Screenshots
+<details><summary>Empty form state</summary>
+
+<img width=""590"" alt=""Screen Shot 2020-10-08 at 12 49 35 PM"" src=""https://user-images.githubusercontent.com/15097156/95491478-a33e9080-0967-11eb-89ed-2c539b9c21d3.png"">
+</details>
+
+<details><summary>Domestic US address</summary>
+
+<img width=""555"" alt=""Screen Shot 2020-10-08 at 12 50 28 PM"" src=""https://user-images.githubusercontent.com/15097156/95491552-bf423200-0967-11eb-9f08-c063753b83ce.png"">
+</details>
+
+<details><summary>US military address</summary>
+
+<img width=""563"" alt=""Screen Shot 2020-10-08 at 12 52 37 PM"" src=""https://user-images.githubusercontent.com/15097156/95491596-cff2a800-0967-11eb-8737-aa20f505e757.png"">
+</details>
+
+<details><summary>Foreign address</summary>
+
+<img width=""606"" alt=""Screen Shot 2020-10-08 at 12 51 03 PM"" src=""https://user-images.githubusercontent.com/15097156/95491644-e13bb480-0967-11eb-87df-89848e739800.png"">
+</details>
+
+
+## Acceptance criteria
+- [x] New address schema UI works as expected on an address page inside a form system application. 
+
+## Definition of done
+- [ ] Events are logged appropriately
+- [ ] Documentation has been updated, if applicable
+- [x] A link has been provided to the originating GitHub issue (or connected to it via ZenHub)
+- [x] No sensitive information (i.e. PII/credentials/internal URLs/etc.) is captured in logging, hardcoded, or specs
+<issue_comment>username_0: @Mottie @erikphansen @cvalarida @cohnjesse - Requesting code review on this as a draft because I would like any feedback or constructive criticisms on how this could be improved before merging. Thanks!"
+conda-forge/conda-forge.github.io,1013939787,1514,,"[{'action': 'opened', 'author': 'jam-one', 'comment_id': None, 'datetime': '2021-10-02 06:09:58+00:00', 'masked_author': 'username_0', 'text': ""<!--\r\nThanks for reporting your issue.\r\nPlease fill out the sections below.\r\n-->\r\n\r\n- [ ] I read [the conda-forge documentation](https://conda-forge.org/docs/user/introduction.html#how-can-i-install-packages-from-conda-forge) and could not find the solution for my problem there.\r\n\r\nIssue: Cannot download the mkl package from the conda-forge channel. It randomly crashes at different percetages.\r\nDownloading and Extracting Packages\r\nmkl-2021.3.0         | 179.7 MB  | #######################6                                                                                   |  22%\r\n\r\nSSLError(SSLError(1, '[SSL: DECRYPTION_FAILED_OR_BAD_RECORD_MAC] decryption failed or bad record mac (_ssl.c:2633)'))\r\n\r\n<br/>\r\nEnvironment (<code>conda list</code>):\r\n<details>\r\n\r\n```\r\n$ conda list\r\n(base) C:\\Users\\xxxx>conda list\r\n# packages in environment at C:\\Users\\xxxx\\miniconda3:\r\n#\r\n# Name                    Version                   Build  Channel\r\nbrotlipy                  0.7.0           py39h2bbff1b_1003\r\nca-certificates           2021.7.5             haa95532_1\r\ncertifi                   2021.5.30        py39haa95532_0\r\ncffi                      1.14.6           py39h2bbff1b_0\r\nchardet                   4.0.0           py39haa95532_1003\r\nconda                     4.10.3           py39haa95532_0\r\nconda-package-handling    1.7.3            py39h8cc25b3_1\r\nconsole_shortcut          0.1.1                         4\r\ncryptography              3.4.7            py39h71e12ea_0\r\nidna                      2.10               pyhd3eb1b0_0\r\nmenuinst                  1.4.16           py39h2bbff1b_0\r\nopenssl                   1.1.1k               h2bbff1b_0\r\npip                       21.1.3           py39haa95532_0\r\npowershell_shortcut       0.0.1                         3\r\npycosat                   0.6.3            py39h2bbff1b_0\r\npycparser                 2.20                       py_2\r\npyopenssl                 20.0.1             pyhd3eb1b0_1\r\npysocks                   1.7.1            py39haa95532_0\r\npython                    3.9.5                h6244533_3\r\npywin32                   228              py39he774522_0\r\nrequests                  2.25.1             pyhd3eb1b0_0\r\nruamel_yaml               0.15.100         py39h2bbff1b_0\r\nsetuptools                52.0.0           py39haa95532_0\r\nsix                       1.16.0             pyhd3eb1b0_0\r\nsqlite                    3.36.0               h2bbff1b_0\r\ntqdm                      4.61.2             pyhd3eb1b0_1\r\ntzdata                    2021a                h52ac0ba_0\r\nurllib3                   1.26.6             pyhd3eb1b0_1\r\nvc                        14.2                 h21ff451_1\r\nvs2015_runtime            14.27.29016          h5e58377_2\r\nwheel                     0.36.2             pyhd3eb1b0_0\r\nwin_inet_pton             1.1.0            py39haa95532_0\r\nwincertstore              0.2              py39h2bbff1b_0\r\nyaml                      0.2.5                he774522_0\r\n\r\n```\r\n</details>\r\n\r\n<br/>\r\nDetails about  <code>conda</code> and system ( <code>conda info</code> ):\r\n<details>\r\n\r\n```\r\n$ conda info\r\n(base) C:\\Users\\xxxx>conda info\r\n\r\n     active environment : base\r\n    active env location : C:\\Users\\xxxx\\miniconda3\r\n            shell level : 1\r\n       user config file : C:\\Users\\xxxx\\.condarc\r\n populated config files :\r\n          conda version : 4.10.3\r\n    conda-build version : not installed\r\n         python version : 3.9.5.final.0\r\n       virtual packages : __cuda=8.0=0\r\n                          __win=0=0\r\n                          __archspec=1=x86_64\r\n[Truncated]\n           channel URLs : https://repo.anaconda.com/pkgs/main/win-64\r\n                          https://repo.anaconda.com/pkgs/main/noarch\r\n                          https://repo.anaconda.com/pkgs/r/win-64\r\n                          https://repo.anaconda.com/pkgs/r/noarch\r\n                          https://repo.anaconda.com/pkgs/msys2/win-64\r\n                          https://repo.anaconda.com/pkgs/msys2/noarch\r\n          package cache : C:\\Users\\xxxx\\miniconda3\\pkgs\r\n                          C:\\Users\\xxxx\\.conda\\pkgs\r\n                          C:\\Users\\xxxx\\AppData\\Local\\conda\\conda\\pkgs\r\n       envs directories : C:\\Users\\xxxx\\miniconda3\\envs\r\n                          C:\\Users\\xxxx\\.conda\\envs\r\n                          C:\\Users\\xxxx\\AppData\\Local\\conda\\conda\\envs\r\n               platform : win-64\r\n             user-agent : conda/4.10.3 requests/2.25.1 CPython/3.9.5 Windows/10 Windows/10.0.19043\r\n          administrator : False\r\n             netrc file : None\r\n           offline mode : False\r\n\r\n```\r\n</details>"", 'title': ""Can't download the mkl package"", 'type': 'issue'}
+ {'action': 'closed', 'author': 'isuruf', 'comment_id': None, 'datetime': '2021-10-02 16:36:18+00:00', 'masked_author': 'username_1', 'text': '', 'title': None, 'type': 'issue'}
+ {'action': 'created', 'author': 'isuruf', 'comment_id': 932780668.0, 'datetime': '2021-10-02 16:36:18+00:00', 'masked_author': 'username_1', 'text': 'Looks like you are not using conda-forge at all. Please re-open if you are.', 'title': None, 'type': 'comment'}]","<issue_start><issue_comment>Title: Can't download the mkl package
+username_0: <!--
+Thanks for reporting your issue.
+Please fill out the sections below.
+-->
+
+- [ ] I read [the conda-forge documentation](https://conda-forge.org/docs/user/introduction.html#how-can-i-install-packages-from-conda-forge) and could not find the solution for my problem there.
+
+Issue: Cannot download the mkl package from the conda-forge channel. It randomly crashes at different percetages.
+Downloading and Extracting Packages
+mkl-2021.3.0         | 179.7 MB  | #######################6                                                                                   |  22%
+
+SSLError(SSLError(1, '[SSL: DECRYPTION_FAILED_OR_BAD_RECORD_MAC] decryption failed or bad record mac (_ssl.c:2633)'))
+
+<br/>
+Environment (<code>conda list</code>):
+<details>
+
+```
+$ conda list
+(base) C:\Users\xxxx>conda list
+# packages in environment at C:\Users\xxxx\miniconda3:
+#
+# Name                    Version                   Build  Channel
+brotlipy                  0.7.0           py39h2bbff1b_1003
+ca-certificates           2021.7.5             haa95532_1
+certifi                   2021.5.30        py39haa95532_0
+cffi                      1.14.6           py39h2bbff1b_0
+chardet                   4.0.0           py39haa95532_1003
+conda                     4.10.3           py39haa95532_0
+conda-package-handling    1.7.3            py39h8cc25b3_1
+console_shortcut          0.1.1                         4
+cryptography              3.4.7            py39h71e12ea_0
+idna                      2.10               pyhd3eb1b0_0
+menuinst                  1.4.16           py39h2bbff1b_0
+openssl                   1.1.1k               h2bbff1b_0
+pip                       21.1.3           py39haa95532_0
+powershell_shortcut       0.0.1                         3
+pycosat                   0.6.3            py39h2bbff1b_0
+pycparser                 2.20                       py_2
+pyopenssl                 20.0.1             pyhd3eb1b0_1
+pysocks                   1.7.1            py39haa95532_0
+python                    3.9.5                h6244533_3
+pywin32                   228              py39he774522_0
+requests                  2.25.1             pyhd3eb1b0_0
+ruamel_yaml               0.15.100         py39h2bbff1b_0
+setuptools                52.0.0           py39haa95532_0
+six                       1.16.0             pyhd3eb1b0_0
+sqlite                    3.36.0               h2bbff1b_0
+tqdm                      4.61.2             pyhd3eb1b0_1
+tzdata                    2021a                h52ac0ba_0
+urllib3                   1.26.6             pyhd3eb1b0_1
+vc                        14.2                 h21ff451_1
+vs2015_runtime            14.27.29016          h5e58377_2
+wheel                     0.36.2             pyhd3eb1b0_0
+win_inet_pton             1.1.0            py39haa95532_0
+wincertstore              0.2              py39h2bbff1b_0
+yaml                      0.2.5                he774522_0
+
+```
+</details>
+
+<br/>
+Details about  <code>conda</code> and system ( <code>conda info</code> ):
+<details>
+
+```
+$ conda info
+(base) C:\Users\xxxx>conda info
+
+     active environment : base
+    active env location : C:\Users\xxxx\miniconda3
+            shell level : 1
+       user config file : C:\Users\xxxx\.condarc
+ populated config files :
+          conda version : 4.10.3
+    conda-build version : not installed
+         python version : 3.9.5.final.0
+       virtual packages : __cuda=8.0=0
+                          __win=0=0
+                          __archspec=1=x86_64
+[Truncated]
+           channel URLs : https://repo.anaconda.com/pkgs/main/win-64
+                          https://repo.anaconda.com/pkgs/main/noarch
+                          https://repo.anaconda.com/pkgs/r/win-64
+                          https://repo.anaconda.com/pkgs/r/noarch
+                          https://repo.anaconda.com/pkgs/msys2/win-64
+                          https://repo.anaconda.com/pkgs/msys2/noarch
+          package cache : C:\Users\xxxx\miniconda3\pkgs
+                          C:\Users\xxxx\.conda\pkgs
+                          C:\Users\xxxx\AppData\Local\conda\conda\pkgs
+       envs directories : C:\Users\xxxx\miniconda3\envs
+                          C:\Users\xxxx\.conda\envs
+                          C:\Users\xxxx\AppData\Local\conda\conda\envs
+               platform : win-64
+             user-agent : conda/4.10.3 requests/2.25.1 CPython/3.9.5 Windows/10 Windows/10.0.19043
+          administrator : False
+             netrc file : None
+           offline mode : False
+
+```
+</details><issue_closed>
+<issue_comment>username_1: Looks like you are not using conda-forge at all. Please re-open if you are."
+elixir-lang/elixir-lang.github.com,621368225,1399,"{'number': 1399.0, 'repo': 'elixir-lang.github.com', 'user_login': 'elixir-lang'}","[{'action': 'opened', 'author': 'CircuitCodes', 'comment_id': None, 'datetime': '2020-05-20T00:18:30Z', 'masked_author': 'username_0', 'text': '', 'title': 'Interactive Elixir is only aliased on PowerShell.', 'type': 'issue'}
+ {'action': 'created', 'author': 'CircuitCodes', 'comment_id': 631162385.0, 'datetime': '2020-05-20 00:27:46+00:00', 'masked_author': 'username_0', 'text': 'Both `iex` and `iex.bat` work perfectly fine in Windows, just that the `iex` command is aliased as a PowerShell command, which does _not_ carry over in Command Prompt.', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'josevalim', 'comment_id': 631294530.0, 'datetime': '2020-05-20 07:35:20+00:00', 'masked_author': 'username_1', 'text': ':green_heart: :blue_heart: :purple_heart: :yellow_heart: :heart:', 'title': None, 'type': 'comment'}]","<issue_start><issue_comment>Title: Interactive Elixir is only aliased on PowerShell.
+username_0: 
+<issue_comment>username_0: Both `iex` and `iex.bat` work perfectly fine in Windows, just that the `iex` command is aliased as a PowerShell command, which does _not_ carry over in Command Prompt.
+<issue_comment>username_1: :green_heart: :blue_heart: :purple_heart: :yellow_heart: :heart:"
+adobe/aem-core-wcm-components,417508977,500,"{'number': 500.0, 'repo': 'aem-core-wcm-components', 'user_login': 'adobe'}","[{'action': 'opened', 'author': 'bpauli', 'comment_id': None, 'datetime': '2019-03-05T21:27:17Z', 'masked_author': 'username_0', 'text': '- switch from jsr305 to org.jetbrains.annotations\r\n- add javax.annotations dependency\r\n- remove powermock\r\n- update mockito and javassist dependency; adapt test cases\r\n\r\nthis will fix #491', 'title': 'Support for JDK 11', 'type': 'issue'}
+ {'action': 'created', 'author': 'jckautzmann', 'comment_id': 471432010.0, 'datetime': '2019-03-11 07:30:02+00:00', 'masked_author': 'username_1', 'text': 'The changes in this PR are making code coverage decrease by 5%. Is it necessary? Are there plans to compensate the decrease?', 'title': None, 'type': 'comment'}]","<issue_start><issue_comment>Title: Support for JDK 11
+username_0: - switch from jsr305 to org.jetbrains.annotations
+- add javax.annotations dependency
+- remove powermock
+- update mockito and javassist dependency; adapt test cases
+
+this will fix #491
+<issue_comment>username_1: The changes in this PR are making code coverage decrease by 5%. Is it necessary? Are there plans to compensate the decrease?"
+google/web-starter-kit,101001911,740,,"[{'action': 'opened', 'author': 'stevemao', 'comment_id': None, 'datetime': '2015-08-14 12:33:06+00:00', 'masked_author': 'username_0', 'text': '<img width=""542"" alt=""screen shot 2015-08-14 at 10 28 28 pm"" src=""https://cloud.githubusercontent.com/assets/6316590/9273882/fe3eff7a-42d3-11e5-8583-b09820b7432b.png"">\r\n\r\nIn the screenshot ""Cross-device Synchronization"", ""Live Browser Reloading"" and ""Build in HTTP Server"" are all talking about browser-sync? It\'s good to merge these three sections into one and add other modules this one is using.', 'title': 'adjust to the screen shot.', 'type': 'issue'}
+ {'action': 'closed', 'author': 'gauntface', 'comment_id': None, 'datetime': '2016-02-24 10:38:13+00:00', 'masked_author': 'username_1', 'text': '', 'title': None, 'type': 'issue'}
+ {'action': 'created', 'author': 'gauntface', 'comment_id': 188186981.0, 'datetime': '2016-02-24 10:38:13+00:00', 'masked_author': 'username_1', 'text': ""We are using browsersync to power all these things but the page is largely aimed to let people know the features the kit offers and those are all features. The list isn't pointing out the modules used since I don't believe that's how view web starter kit.\r\n\r\nIf anyone else thinks we should change this please reopen."", 'title': None, 'type': 'comment'}]","<issue_start><issue_comment>Title: adjust to the screen shot.
+username_0: <img width=""542"" alt=""screen shot 2015-08-14 at 10 28 28 pm"" src=""https://cloud.githubusercontent.com/assets/6316590/9273882/fe3eff7a-42d3-11e5-8583-b09820b7432b.png"">
+
+In the screenshot ""Cross-device Synchronization"", ""Live Browser Reloading"" and ""Build in HTTP Server"" are all talking about browser-sync? It's good to merge these three sections into one and add other modules this one is using.<issue_closed>
+<issue_comment>username_1: We are using browsersync to power all these things but the page is largely aimed to let people know the features the kit offers and those are all features. The list isn't pointing out the modules used since I don't believe that's how view web starter kit.
+
+If anyone else thinks we should change this please reopen."
+flutter/website,1097638270,6652,,"[{'action': 'opened', 'author': 'nashihu', 'comment_id': None, 'datetime': '2022-01-10 09:17:52+00:00', 'masked_author': 'username_0', 'text': '### Page URL\n\nhttps://docs.flutter.dev/development/packages-and-plugins/plugin-api-migration/\n\n### Page source\n\nhttps://github.com/flutter/website/tree/main/src/development/packages-and-plugins/plugin-api-migration.md\n\n### Describe the problem\n\n404 not found at the text: \r\n&nbsp;&nbsp;&nbsp;&nbsp;see the [battery package](https://github.com/flutter/plugins/tree/master/packages/battery)\n\n### Expected fix\n\n_No response_\n\n### Additional context\n\n_No response_', 'title': ""[PAGE ISSUE]: 'Supporting the new Android plugins APIs'"", 'type': 'issue'}
+ {'action': 'created', 'author': 'danagbemava-nc', 'comment_id': 1008862159.0, 'datetime': '2022-01-10 13:13:44+00:00', 'masked_author': 'username_1', 'text': ""Hi @username_0, thanks for pointing this out. \r\n\r\nThere's a deprecation notice on the `battery` page on pub.dev, so it looks like the link should be updated to the battery_plus GitHub which can be found here https://github.com/fluttercommunity/plus_plugins/tree/main/packages/battery_plus.\r\n\r\n![Screenshot 2022-01-10 at 13 10 26](https://user-images.githubusercontent.com/88313112/148771430-97cc537d-b3bb-404e-9815-c274dc171fc1.png)"", 'title': None, 'type': 'comment'}]","<issue_start><issue_comment>Title: [PAGE ISSUE]: 'Supporting the new Android plugins APIs'
+username_0: ### Page URL
+
+https://docs.flutter.dev/development/packages-and-plugins/plugin-api-migration/
+
+### Page source
+
+https://github.com/flutter/website/tree/main/src/development/packages-and-plugins/plugin-api-migration.md
+
+### Describe the problem
+
+404 not found at the text: 
+&nbsp;&nbsp;&nbsp;&nbsp;see the [battery package](https://github.com/flutter/plugins/tree/master/packages/battery)
+
+### Expected fix
+
+_No response_
+
+### Additional context
+
+_No response_
+<issue_comment>username_1: Hi @username_0, thanks for pointing this out. 
+
+There's a deprecation notice on the `battery` page on pub.dev, so it looks like the link should be updated to the battery_plus GitHub which can be found here https://github.com/fluttercommunity/plus_plugins/tree/main/packages/battery_plus.
+
+![Screenshot 2022-01-10 at 13 10 26](https://user-images.githubusercontent.com/88313112/148771430-97cc537d-b3bb-404e-9815-c274dc171fc1.png)"
+conda-forge/conda-forge.github.io,619449495,1062,,"[{'action': 'opened', 'author': 'h-vetinari', 'comment_id': None, 'datetime': '2020-05-16 11:25:54+00:00', 'masked_author': 'username_0', 'text': 'For more details see discussion there; but maybe there are other/better ways as well?\r\n\r\nA non-exhaustive list of packages that are affected by this: [pytorch](https://github.com/conda-forge/pytorch-cpu-feedstock/issues/7), [cupy](https://github.com/conda-forge/cupy-feedstock/pull/59#issuecomment-629584090), [pyarrow](https://github.com/conda-forge/pyarrow-feedstock/pull/101/commits/7c1174e43edfb84bcad3db53aebe01bfb7c5e324), [faiss](https://github.com/conda-forge/faiss-split-feedstock/pull/1#issuecomment-629357553), etc.', 'title': 'CI for GPU packages', 'type': 'issue'}
+ {'action': 'created', 'author': 'leofang', 'comment_id': 630212609.0, 'datetime': '2020-05-18 14:17:44+00:00', 'masked_author': 'username_1', 'text': 'Thanks, @username_0. This is an important request. For the case of CuPy, we have had multiple times hitting bugs when attempting to enable some (experimental) support that upstream did not cover enough in their CIs. Having CF\'s own CI would be very helpful.\r\n\r\nThat said, in our case this could have been completely avoided if the upstream had tested it thoroughly, and I do feel this is the right way to go, especially for GPU packages. The upstream CIs should have a large build matrix (Python ver * NumPy ver * CUDA ver * OS ver * ...) to provide a good coverage. In contrast, CF\'s CIs should only focus on ""getting the packaging right"" and nothing further. Taking CuPy as an example, it is impractical to run its full test suite on CF\'s CIs, as each run takes 1~1.5 hr, and we have 12 builds from the aforementioned matrix. It simply takes too long.', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'leofang', 'comment_id': 631232972.0, 'datetime': '2020-05-20 04:44:19+00:00', 'masked_author': 'username_1', 'text': 'cc: @jakirkham', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'beckermr', 'comment_id': 674448768.0, 'datetime': '2020-08-15 21:24:47+00:00', 'masked_author': 'username_2', 'text': 'cc @scopatz', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'h-vetinari', 'comment_id': 752185867.0, 'datetime': '2020-12-29 18:02:45+00:00', 'masked_author': 'username_0', 'text': 'I wanted to bring up something along the lines of [this](https://github.com/conda-forge/pytorch-cpu-feedstock/issues/7#issuecomment-688525329) again:\r\n\r\n## The birds\r\n\r\nGiven the effort expended for packaging GPU packages, the role of conda(-forge) in the scientific/ML stack (including ""network effect"") & the capabilities of existing conda(-forge) infrastructure, it would kill a lot of metaphorical birds with one stone if conda-forge CI had support for GPUs, because:\r\n* a lot of redundant efforts could be saved\r\n* without sacrificing CI quality\r\n* yielding high-quality packaging with large os-/arch-/version-coverage\r\n\r\n## The stone - A jointly sponsored build queue for conda-forge?\r\n\r\nIn the comment I referenced above, I just mentioned Microsoft (who are by now powering most of the CI of CF) as a possible sponsor for this, but that goes even more so for the companies that are more directly involved, like Nvidia (obviously), facebook (pytorch, but also faiss, etc.) and perhaps others like NumFOCUS, Ursa Labs (arrow), quansight or quantstack.\r\n\r\nI\'m thinking that an opt-in build queue based on a separate, GPU-enabled azure subscription (which is already [feasible](https://github.com/conda-forge/conda-forge.github.io/issues/902#issuecomment-581465550) for CF) would have huge bang-for-buck even just for the companies directly involved (in the form of less time spent by employees on packaging), to say nothing of the ecosystem.\r\n\r\nI apologise for the multi-ping, but I\'m hoping that by bringing different people to the same table, a way forward might emerge more quickly & easily. 🙃 \r\n\r\nSome NVidia / RAPIDS / CuPy folks\r\n@cjnolet @dantegd @username_1 @username_4 @mike-wendt @teju85 \r\nSome Facebook folks\r\n@beauby @ezyang @mdouze @seemethere @soumith \r\nSome NumFOCUS / Quansight / Ursa Labs peeps\r\n@kszucs @pearu @scopatz @rgommers @wesm\r\nMicrosoft\r\n@username_5 \r\nconda-forge / anaconda + other possibly relevant parties\r\n@conda-forge/core @hadim @username_3 @jph00\r\n\r\nHappy holidays!\r\n\r\nPS. I had this idea for a while, but the thought got retriggered by the new GPU support for `pytorch` in conda-forge, that however [times out](https://github.com/conda-forge/pytorch-cpu-feedstock/runs/1598619790) (requiring manual builds) and does not test with actual GPUs (plus having some time to write them words).', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'beckermr', 'comment_id': 752191655.0, 'datetime': '2020-12-29 18:17:49+00:00', 'masked_author': 'username_2', 'text': 'We should all chat offline. We have other things going on around this as well and hope to make progress in the new year.', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'hmaarrfk', 'comment_id': 752220472.0, 'datetime': '2020-12-29 19:50:14+00:00', 'masked_author': 'username_3', 'text': 'An other idea would be to use a self hosted runner.\r\n\r\nhttps://docs.github.com/en/free-pro-team@latest/actions/hosting-your-own-runners/about-self-hosted-runners\r\n\r\nFor windows it is trickier, but for linux we should be ok to pool a few resources maybe.', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'beckermr', 'comment_id': 752229637.0, 'datetime': '2020-12-29 20:24:56+00:00', 'masked_author': 'username_2', 'text': 'There are a bunch of practical and legal issues around this. The technical bits of setting it up are straight forward.', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'kkraus14', 'comment_id': 752239304.0, 'datetime': '2020-12-29 20:59:58+00:00', 'masked_author': 'username_4', 'text': 'cc @datametrician @jakirkham from the NVIDIA side for visibility as well', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'vtbassmatt', 'comment_id': 752649330.0, 'datetime': '2020-12-30 14:54:02+00:00', 'masked_author': 'username_5', 'text': ""Happy New Year! 🎉 \r\n\r\nIn terms of the tech, you can probably use [scale set agents](https://docs.microsoft.com/azure/devops/pipelines/agents/scale-set-agents) with an appropriate choice of VM and image to achieve this.\r\n\r\nFrom a funding/sponsorship perspective, Microsoft's contribution model is free hosted agents and parallelism."", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'beckermr', 'comment_id': 752670559.0, 'datetime': '2020-12-30 15:53:56+00:00', 'masked_author': 'username_2', 'text': '@username_5 are you saying the permissions on the conda-forge account already allow us to use agents w/ GPUs attached?', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'vtbassmatt', 'comment_id': 752671661.0, 'datetime': '2020-12-30 15:57:38+00:00', 'masked_author': 'username_5', 'text': ""Yes, you (whoever is the organization admin) should be able to create a scale set pool pointing to an Azure subscription. The subscription will need a scale set running on the type of VM you prefer, in this case with GPU support. Then any pipelines authorized to use that pool will have access to that GPU-enabled virtual hardware.\r\n\r\nIf this isn't clear, my apologies and I can help out more next week when I'm back at work."", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'leofang', 'comment_id': 752672148.0, 'datetime': '2020-12-30 15:59:26+00:00', 'masked_author': 'username_1', 'text': 'Sounds like a Christmas gift for free!', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'beckermr', 'comment_id': 752674517.0, 'datetime': '2020-12-30 16:07:00+00:00', 'masked_author': 'username_2', 'text': 'That seems perfectly clear! Thank you!\n\n@mariusvniekerk is one of our most knowledgeable azure folks. \n\nWe will give this a shot and see what we find!', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'h-vetinari', 'comment_id': 757142142.0, 'datetime': '2021-01-09 12:27:45+00:00', 'masked_author': 'username_0', 'text': 'Ping @mariusvniekerk :)', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'beckermr', 'comment_id': 757164563.0, 'datetime': '2021-01-09 13:02:08+00:00', 'masked_author': 'username_2', 'text': ""Marius and I chatted. I think I misunderstood what was being said here. We'll need a hosted pool of VMs with gpus to do this."", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'h-vetinari', 'comment_id': 757239644.0, 'datetime': '2021-01-09 14:25:43+00:00', 'masked_author': 'username_0', 'text': 'That was my understanding when I [tried](https://github.com/conda-forge/conda-forge.github.io/issues/1062#issuecomment-752185867) to make the case for bringing together interested/affected parties to come up with (the funding for) such a hosted pool.', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'beckermr', 'comment_id': 797787815.0, 'datetime': '2021-03-12 22:16:37+00:00', 'masked_author': 'username_2', 'text': 'We have action here on multiple fronts. I am going to close this issue in favor of https://github.com/conda-forge/conda-forge.github.io/issues/1272.', 'title': None, 'type': 'comment'}
+ {'action': 'closed', 'author': 'beckermr', 'comment_id': None, 'datetime': '2021-03-12 22:16:38+00:00', 'masked_author': 'username_2', 'text': '', 'title': None, 'type': 'issue'}
+ {'action': 'created', 'author': 'h-vetinari', 'comment_id': 798506357.0, 'datetime': '2021-03-13 15:24:34+00:00', 'masked_author': 'username_0', 'text': ""So, for some context for everyone subscribed to this issue (not least all those people I tagged).\r\n\r\nIn the meantime, I tried to procure some initial funding for the idea of a jointly sponsored build queue from my employer (a small-ish data consulting company based in Switzerland; only a small fraction of our work is related to conda, but we're interested in the health of the ecosystem, particularly from the testing & security side of the story), and got approval for $500/month for a year as an experiment. My hope is that by placing some initial chips on the table, some other players might be enticed to join as well. 🙃 \r\n\r\nThose 6000$/year are roughly the amount to continuously run one NC6 agent on azure (the smallest GPU-instance), and represent around a person-week of engineer time (cf. [NEP46](https://numpy.org/neps/nep-0046-sponsorship-guidelines.html)). I think that should be a drop in the bucket for companies that employ people that spend any non-trivial amount of time concerned with packaging GPU-related software, especially compared to the time lost by having to do it disjointly, resp. the potential time saved by doing it through conda-forge.\r\n\r\nI suggested this to @conda-forge/core, and it turns out that there is at least one other proposal along those lines currently in the pipeline. This would be ideal from my POV, because unifying all those efforts is IMO the ideal scenario (assuming the legalities are solvable). In any case, those discussions are now slowly unfolding, and perhaps provide some background colour to the opening of #1272.\r\n\r\nIn short: it would be amazing if any of the involved people / companies could take this as impetus to chip in something as well. GPU computing is only ever going to get larger, and I believe that sharing some (comparatively low) CI infra costs would provide huge bang-per-buck for people & companies building & using such packages."", 'title': None, 'type': 'comment'}]","<issue_start><issue_comment>Title: CI for GPU packages
+username_0: For more details see discussion there; but maybe there are other/better ways as well?
+
+A non-exhaustive list of packages that are affected by this: [pytorch](https://github.com/conda-forge/pytorch-cpu-feedstock/issues/7), [cupy](https://github.com/conda-forge/cupy-feedstock/pull/59#issuecomment-629584090), [pyarrow](https://github.com/conda-forge/pyarrow-feedstock/pull/101/commits/7c1174e43edfb84bcad3db53aebe01bfb7c5e324), [faiss](https://github.com/conda-forge/faiss-split-feedstock/pull/1#issuecomment-629357553), etc.
+<issue_comment>username_1: Thanks, @username_0. This is an important request. For the case of CuPy, we have had multiple times hitting bugs when attempting to enable some (experimental) support that upstream did not cover enough in their CIs. Having CF's own CI would be very helpful.
+
+That said, in our case this could have been completely avoided if the upstream had tested it thoroughly, and I do feel this is the right way to go, especially for GPU packages. The upstream CIs should have a large build matrix (Python ver * NumPy ver * CUDA ver * OS ver * ...) to provide a good coverage. In contrast, CF's CIs should only focus on ""getting the packaging right"" and nothing further. Taking CuPy as an example, it is impractical to run its full test suite on CF's CIs, as each run takes 1~1.5 hr, and we have 12 builds from the aforementioned matrix. It simply takes too long.
+<issue_comment>username_1: cc: @jakirkham
+<issue_comment>username_2: cc @scopatz
+<issue_comment>username_0: I wanted to bring up something along the lines of [this](https://github.com/conda-forge/pytorch-cpu-feedstock/issues/7#issuecomment-688525329) again:
+
+## The birds
+
+Given the effort expended for packaging GPU packages, the role of conda(-forge) in the scientific/ML stack (including ""network effect"") & the capabilities of existing conda(-forge) infrastructure, it would kill a lot of metaphorical birds with one stone if conda-forge CI had support for GPUs, because:
+* a lot of redundant efforts could be saved
+* without sacrificing CI quality
+* yielding high-quality packaging with large os-/arch-/version-coverage
+
+## The stone - A jointly sponsored build queue for conda-forge?
+
+In the comment I referenced above, I just mentioned Microsoft (who are by now powering most of the CI of CF) as a possible sponsor for this, but that goes even more so for the companies that are more directly involved, like Nvidia (obviously), facebook (pytorch, but also faiss, etc.) and perhaps others like NumFOCUS, Ursa Labs (arrow), quansight or quantstack.
+
+I'm thinking that an opt-in build queue based on a separate, GPU-enabled azure subscription (which is already [feasible](https://github.com/conda-forge/conda-forge.github.io/issues/902#issuecomment-581465550) for CF) would have huge bang-for-buck even just for the companies directly involved (in the form of less time spent by employees on packaging), to say nothing of the ecosystem.
+
+I apologise for the multi-ping, but I'm hoping that by bringing different people to the same table, a way forward might emerge more quickly & easily. 🙃 
+
+Some NVidia / RAPIDS / CuPy folks
+@cjnolet @dantegd @username_1 @username_4 @mike-wendt @teju85 
+Some Facebook folks
+@beauby @ezyang @mdouze @seemethere @soumith 
+Some NumFOCUS / Quansight / Ursa Labs peeps
+@kszucs @pearu @scopatz @rgommers @wesm
+Microsoft
+@username_5 
+conda-forge / anaconda + other possibly relevant parties
+@conda-forge/core @hadim @username_3 @jph00
+
+Happy holidays!
+
+PS. I had this idea for a while, but the thought got retriggered by the new GPU support for `pytorch` in conda-forge, that however [times out](https://github.com/conda-forge/pytorch-cpu-feedstock/runs/1598619790) (requiring manual builds) and does not test with actual GPUs (plus having some time to write them words).
+<issue_comment>username_2: We should all chat offline. We have other things going on around this as well and hope to make progress in the new year.
+<issue_comment>username_3: An other idea would be to use a self hosted runner.
+
+https://docs.github.com/en/free-pro-team@latest/actions/hosting-your-own-runners/about-self-hosted-runners
+
+For windows it is trickier, but for linux we should be ok to pool a few resources maybe.
+<issue_comment>username_2: There are a bunch of practical and legal issues around this. The technical bits of setting it up are straight forward.
+<issue_comment>username_4: cc @datametrician @jakirkham from the NVIDIA side for visibility as well
+<issue_comment>username_5: Happy New Year! 🎉 
+
+In terms of the tech, you can probably use [scale set agents](https://docs.microsoft.com/azure/devops/pipelines/agents/scale-set-agents) with an appropriate choice of VM and image to achieve this.
+
+From a funding/sponsorship perspective, Microsoft's contribution model is free hosted agents and parallelism.
+<issue_comment>username_2: @username_5 are you saying the permissions on the conda-forge account already allow us to use agents w/ GPUs attached?
+<issue_comment>username_5: Yes, you (whoever is the organization admin) should be able to create a scale set pool pointing to an Azure subscription. The subscription will need a scale set running on the type of VM you prefer, in this case with GPU support. Then any pipelines authorized to use that pool will have access to that GPU-enabled virtual hardware.
+
+If this isn't clear, my apologies and I can help out more next week when I'm back at work.
+<issue_comment>username_1: Sounds like a Christmas gift for free!
+<issue_comment>username_2: That seems perfectly clear! Thank you!
+
+@mariusvniekerk is one of our most knowledgeable azure folks. 
+
+We will give this a shot and see what we find!
+<issue_comment>username_0: Ping @mariusvniekerk :)
+<issue_comment>username_2: Marius and I chatted. I think I misunderstood what was being said here. We'll need a hosted pool of VMs with gpus to do this.
+<issue_comment>username_0: That was my understanding when I [tried](https://github.com/conda-forge/conda-forge.github.io/issues/1062#issuecomment-752185867) to make the case for bringing together interested/affected parties to come up with (the funding for) such a hosted pool.
+<issue_comment>username_2: We have action here on multiple fronts. I am going to close this issue in favor of https://github.com/conda-forge/conda-forge.github.io/issues/1272.<issue_closed>
+<issue_comment>username_0: So, for some context for everyone subscribed to this issue (not least all those people I tagged).
+
+In the meantime, I tried to procure some initial funding for the idea of a jointly sponsored build queue from my employer (a small-ish data consulting company based in Switzerland; only a small fraction of our work is related to conda, but we're interested in the health of the ecosystem, particularly from the testing & security side of the story), and got approval for $500/month for a year as an experiment. My hope is that by placing some initial chips on the table, some other players might be enticed to join as well. 🙃 
+
+Those 6000$/year are roughly the amount to continuously run one NC6 agent on azure (the smallest GPU-instance), and represent around a person-week of engineer time (cf. [NEP46](https://numpy.org/neps/nep-0046-sponsorship-guidelines.html)). I think that should be a drop in the bucket for companies that employ people that spend any non-trivial amount of time concerned with packaging GPU-related software, especially compared to the time lost by having to do it disjointly, resp. the potential time saved by doing it through conda-forge.
+
+I suggested this to @conda-forge/core, and it turns out that there is at least one other proposal along those lines currently in the pipeline. This would be ideal from my POV, because unifying all those efforts is IMO the ideal scenario (assuming the legalities are solvable). In any case, those discussions are now slowly unfolding, and perhaps provide some background colour to the opening of #1272.
+
+In short: it would be amazing if any of the involved people / companies could take this as impetus to chip in something as well. GPU computing is only ever going to get larger, and I believe that sharing some (comparatively low) CI infra costs would provide huge bang-per-buck for people & companies building & using such packages."

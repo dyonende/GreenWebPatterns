@@ -1,0 +1,915 @@
+corona-warn-app/cwa-website,1014487797,1806,,"[{'action': 'opened', 'author': 'Ein-Tim', 'comment_id': None, 'datetime': '2021-10-03 18:37:23+00:00', 'masked_author': 'username_0', 'text': ""## Where to find the issue\r\n- https://www.coronawarn.app/de/analysis/\r\n- https://www.coronawarn.app/en/analysis/\r\n\r\n## Describe the issue\r\nThe analysis page is very unresponsive and slow. \r\nHere's a video: \r\n\r\nhttps://user-images.githubusercontent.com/67682506/135767003-2d5e380f-e9ca-4f1f-a2df-b020a7769dce.mp4"", 'title': 'Analysis page: Bad performance', 'type': 'issue'}
+ {'action': 'created', 'author': 'dsarkar', 'comment_id': 933250097.0, 'datetime': '2021-10-04 08:13:26+00:00', 'masked_author': 'username_1', 'text': '@username_0 Thanks for reporting. @username_3 FYI. Any proposals how to approach this issue? Thanks.', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'MikeMcC399', 'comment_id': 933261029.0, 'datetime': '2021-10-04 08:27:41+00:00', 'masked_author': 'username_2', 'text': '@username_0 \r\nFor performance issues it\'s good to have an actual measurement, like you click on a certain button and it took a measured amount of time to produce a result.\r\nIf you have the current value, then you should specify the maximum expected value that you would consider acceptable.\r\n\r\nFinally it would be good to know what system you were using and what the network parameters were.\r\n\r\n---\r\nI timed what I saw you doing in the video on a Windows 10 system with Google Chrome and a measured download internet connection speed of 38.8 Mbps.\r\n\r\nOn the page https://www.coronawarn.app/de/analysis/ I clicked on ""Gesamter Zeitraum"" with ""Täglich"" selected and it took 2.2 seconds to re-display all graphs. I had to set the zoom to 50% so I could see all graphs at once.\r\n\r\nI found that speed acceptable, but of course your measurements and expectations may be different.', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'MikeMcC399', 'comment_id': 933275292.0, 'datetime': '2021-10-04 08:46:48+00:00', 'masked_author': 'username_2', 'text': '@username_0 \r\nUsing browser developer tools it seems that the action you were taken is just redrawing the graphs without using any network connection, so that will probably depend on the processing power of your system. It will be interesting to see the response from @username_3 in any case.', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'Ein-Tim', 'comment_id': 933470322.0, 'datetime': '2021-10-04 13:12:19+00:00', 'masked_author': 'username_0', 'text': 'True, I just used the developer tools myself and yes, indeed there is no more downloading of any numbers going on once on the page. \r\nI recorded another video, this time with the ""Aktivitätsanzeige"" open on the other half of the display (the quality is really bad as GitHub limits file uploads to 10MB, sorry. Below is a zip were you can find the uncompressed video):\r\n\r\nhttps://user-images.githubusercontent.com/67682506/135857046-ba616fb0-2687-4d71-a5ba-901f5acf3501.MP4\r\n\r\nAs you can see, coronawarn.app is sometimes responsible for nearly all of the processing done by the CPU. I\'m very sure that there can be done something to enhance this, viewing the page on older devices must be very slow currently! \r\n\r\n---\r\n\r\nZip with the video:\r\n[Slow.mov.zip](https://github.com/corona-warn-app/cwa-website/files/7278210/Slow.mov.zip)', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'FabioFuschi-SNK', 'comment_id': 934326309.0, 'datetime': '2021-10-05 11:34:53+00:00', 'masked_author': 'username_3', 'text': 'The bad performance comes from the apexchart DOM rendering task. Especially Safari is on this task really slow, i measured time up to 15s on my Safari. The rendering time increases with the data points. The longer the period, the longer the graphs will take to render. That is not a bug, it is the normal behavior if the page.', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'Ein-Tim', 'comment_id': 934351357.0, 'datetime': '2021-10-05 12:11:13+00:00', 'masked_author': 'username_0', 'text': '@username_3 \n\nAh, okay! Thanks for the explanation! Not only Safari has this problem, but Microsoft Edge (Chromium based) is also very slow.\n\nIs there any alternative or any improvement possible here? \nBecause, sad to say, but the normal user will not wait more than ca. 10 sec. for the graphs to show up, if it just shows loading the normal user assumes somethings broken and leaves the page. 😅', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'jucktnich', 'comment_id': 934369946.0, 'datetime': '2021-10-05 12:35:27+00:00', 'masked_author': 'username_4', 'text': '@username_0 you could show an explaining text after some secs', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'Ein-Tim', 'comment_id': 934459433.0, 'datetime': '2021-10-05 14:21:50+00:00', 'masked_author': 'username_0', 'text': ""@username_4 \n\nWould be one option, however, normal users will still not wait for more than ca. 15 sec. (I assume).\nIn general it's really sad that this is the intended behavior, if it's already slow on my MacBook Air with a M1 chip, mid- or low-end devices must be very slow on displaying the pages content..."", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'jucktnich', 'comment_id': 934463102.0, 'datetime': '2021-10-05 14:26:23+00:00', 'masked_author': 'username_4', 'text': ""Wouldn't it be an idea to create svg pictures to show instead for a locally generated graph? (Or even only as a placeholder?)"", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'Ein-Tim', 'comment_id': 934584314.0, 'datetime': '2021-10-05 16:50:09+00:00', 'masked_author': 'username_0', 'text': ""Is there an alternative available? Because, e.g. I don't have any performance problems viewing [WHOs corona dashboard](https://covid19.who.int/)."", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'jucktnich', 'comment_id': 936078128.0, 'datetime': '2021-10-06 11:45:47+00:00', 'masked_author': 'username_4', 'text': ""Btw for me (iOS 15.1 Public Beta 2; iPad Air 4; A14 Bionic; SFSafariViewController (parent process GitHub)) it's pretty fast. Weird, maybe there was an improvement with WebKit 15 (and macs don't got the new update yet)?"", 'title': None, 'type': 'comment'}]","<issue_start><issue_comment>Title: Analysis page: Bad performance
+username_0: ## Where to find the issue
+- https://www.coronawarn.app/de/analysis/
+- https://www.coronawarn.app/en/analysis/
+
+## Describe the issue
+The analysis page is very unresponsive and slow. 
+Here's a video: 
+
+https://user-images.githubusercontent.com/67682506/135767003-2d5e380f-e9ca-4f1f-a2df-b020a7769dce.mp4
+<issue_comment>username_1: @username_0 Thanks for reporting. @username_3 FYI. Any proposals how to approach this issue? Thanks.
+<issue_comment>username_2: @username_0 
+For performance issues it's good to have an actual measurement, like you click on a certain button and it took a measured amount of time to produce a result.
+If you have the current value, then you should specify the maximum expected value that you would consider acceptable.
+
+Finally it would be good to know what system you were using and what the network parameters were.
+
+---
+I timed what I saw you doing in the video on a Windows 10 system with Google Chrome and a measured download internet connection speed of 38.8 Mbps.
+
+On the page https://www.coronawarn.app/de/analysis/ I clicked on ""Gesamter Zeitraum"" with ""Täglich"" selected and it took 2.2 seconds to re-display all graphs. I had to set the zoom to 50% so I could see all graphs at once.
+
+I found that speed acceptable, but of course your measurements and expectations may be different.
+<issue_comment>username_2: @username_0 
+Using browser developer tools it seems that the action you were taken is just redrawing the graphs without using any network connection, so that will probably depend on the processing power of your system. It will be interesting to see the response from @username_3 in any case.
+<issue_comment>username_0: True, I just used the developer tools myself and yes, indeed there is no more downloading of any numbers going on once on the page. 
+I recorded another video, this time with the ""Aktivitätsanzeige"" open on the other half of the display (the quality is really bad as GitHub limits file uploads to 10MB, sorry. Below is a zip were you can find the uncompressed video):
+
+https://user-images.githubusercontent.com/67682506/135857046-ba616fb0-2687-4d71-a5ba-901f5acf3501.MP4
+
+As you can see, coronawarn.app is sometimes responsible for nearly all of the processing done by the CPU. I'm very sure that there can be done something to enhance this, viewing the page on older devices must be very slow currently! 
+
+---
+
+Zip with the video:
+[Slow.mov.zip](https://github.com/corona-warn-app/cwa-website/files/7278210/Slow.mov.zip)
+<issue_comment>username_3: The bad performance comes from the apexchart DOM rendering task. Especially Safari is on this task really slow, i measured time up to 15s on my Safari. The rendering time increases with the data points. The longer the period, the longer the graphs will take to render. That is not a bug, it is the normal behavior if the page.
+<issue_comment>username_0: @username_3 
+
+Ah, okay! Thanks for the explanation! Not only Safari has this problem, but Microsoft Edge (Chromium based) is also very slow.
+
+Is there any alternative or any improvement possible here? 
+Because, sad to say, but the normal user will not wait more than ca. 10 sec. for the graphs to show up, if it just shows loading the normal user assumes somethings broken and leaves the page. 😅
+<issue_comment>username_4: @username_0 you could show an explaining text after some secs
+<issue_comment>username_0: @username_4 
+
+Would be one option, however, normal users will still not wait for more than ca. 15 sec. (I assume).
+In general it's really sad that this is the intended behavior, if it's already slow on my MacBook Air with a M1 chip, mid- or low-end devices must be very slow on displaying the pages content...
+<issue_comment>username_4: Wouldn't it be an idea to create svg pictures to show instead for a locally generated graph? (Or even only as a placeholder?)
+<issue_comment>username_0: Is there an alternative available? Because, e.g. I don't have any performance problems viewing [WHOs corona dashboard](https://covid19.who.int/).
+<issue_comment>username_4: Btw for me (iOS 15.1 Public Beta 2; iPad Air 4; A14 Bionic; SFSafariViewController (parent process GitHub)) it's pretty fast. Weird, maybe there was an improvement with WebKit 15 (and macs don't got the new update yet)?"
+kubernetes/website,411306146,12681,,"[{'action': 'opened', 'author': 'Davidrjx', 'comment_id': None, 'datetime': '2019-02-18 05:20:31+00:00', 'masked_author': 'username_0', 'text': '<!-- Thanks for filing an issue! Before submitting, please fill in the following information. -->\r\n<!-- See https://kubernetes.io/docs/contribute/start/ for guidance on writing an actionable issue description. -->\r\n\r\n<!--Required Information-->\r\n\r\n**This is a...** \r\n<!-- choose one by changing [ ] to [x] -->\r\n- [ ] Feature Request\r\n- [ x] Bug Report\r\n\r\n**Problem:**\r\npod sample yaml with init containers is confusing where until cmd string always is executed successfully at my side.\r\n\r\n**Proposed Solution:**\r\nchange until to a more general one\r\n\r\n**Page to Update:**\r\nhttps://kubernetes.io/docs/concepts/workloads/pods/init-containers/\r\n<!--Optional Information (remove the comment tags around information you would like to include)-->\r\n<!--Kubernetes Version:-->\r\n\r\n<!--Additional Information:-->', 'title': 'Issue with k8s.io/docs/concepts/workloads/pods/init-containers/', 'type': 'issue'}
+ {'action': 'created', 'author': 'sftim', 'comment_id': 465113147.0, 'datetime': '2019-02-19 12:39:13+00:00', 'masked_author': 'username_1', 'text': 'Is this similar to / a duplicate of  #12050 ?', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'DanyC97', 'comment_id': 467817696.0, 'datetime': '2019-02-27 10:55:52+00:00', 'masked_author': 'username_2', 'text': ""sounds like it @username_1 (i don't have the _power_ to close it)"", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'DanyC97', 'comment_id': 475442374.0, 'datetime': '2019-03-21 23:35:01+00:00', 'masked_author': 'username_2', 'text': '/close\r\n\r\nas being duplicate of #12050', 'title': None, 'type': 'comment'}]","<issue_start><issue_comment>Title: Issue with k8s.io/docs/concepts/workloads/pods/init-containers/
+username_0: <!-- Thanks for filing an issue! Before submitting, please fill in the following information. -->
+<!-- See https://kubernetes.io/docs/contribute/start/ for guidance on writing an actionable issue description. -->
+
+<!--Required Information-->
+
+**This is a...** 
+<!-- choose one by changing [ ] to [x] -->
+- [ ] Feature Request
+- [ x] Bug Report
+
+**Problem:**
+pod sample yaml with init containers is confusing where until cmd string always is executed successfully at my side.
+
+**Proposed Solution:**
+change until to a more general one
+
+**Page to Update:**
+https://kubernetes.io/docs/concepts/workloads/pods/init-containers/
+<!--Optional Information (remove the comment tags around information you would like to include)-->
+<!--Kubernetes Version:-->
+
+<!--Additional Information:-->
+<issue_comment>username_1: Is this similar to / a duplicate of  #12050 ?
+<issue_comment>username_2: sounds like it @username_1 (i don't have the _power_ to close it)
+<issue_comment>username_2: /close
+
+as being duplicate of #12050"
+kubernetes/website,743448943,25055,,"[{'action': 'opened', 'author': 'hejun126', 'comment_id': None, 'datetime': '2020-11-16 03:55:44+00:00', 'masked_author': 'username_0', 'text': 'kubeadm init --kubernetes-version=1.19.1 --apiserver-advertise-address=192.168.15.231 --image-repository registry.aliyuncs.com/google_containers --service-cidr=10.1.0.0/16 --pod-network-cidr=10.244.0.0/16\r\n报错[ERROR Port-10250]: Port 10250 is in use\r\nkubeadm reset', 'title': '对 kubeadm 进行故障排查', 'type': 'issue'}
+ {'action': 'created', 'author': 'ydcool', 'comment_id': 728651881.0, 'datetime': '2020-11-17 02:50:13+00:00', 'masked_author': 'username_1', 'text': 'Maybe you should check the usage of port 10250 on your host using `netstat`.\r\nBTW, issues here are aimed for documentation, and you can go [kubeadm](https://github.com/kubernetes/kubeadm) for more technical help.', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'hejun126', 'comment_id': 728653830.0, 'datetime': '2020-11-17 02:56:58+00:00', 'masked_author': 'username_0', 'text': 'This port is because the systemctl enable kubelet command is used. This process takes up four ports 10255 10250 10248 40062', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'RA489', 'comment_id': 728845973.0, 'datetime': '2020-11-17 10:45:31+00:00', 'masked_author': 'username_2', 'text': ""@username_0 The command `kubeadm reset` didn't worked out for you?"", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'RA489', 'comment_id': 728846303.0, 'datetime': '2020-11-17 10:46:12+00:00', 'masked_author': 'username_2', 'text': '/triage needs-information', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'hejun126', 'comment_id': 728848631.0, 'datetime': '2020-11-17 10:50:53+00:00', 'masked_author': 'username_0', 'text': '@username_2 YES,it is not working。', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'tengqm', 'comment_id': 728864612.0, 'datetime': '2020-11-17 11:24:30+00:00', 'masked_author': 'username_3', 'text': ""why don't you kubectl stop kubelet and retry?"", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'hejun126', 'comment_id': 729321648.0, 'datetime': '2020-11-18 01:43:28+00:00', 'masked_author': 'username_0', 'text': 'kubeadm init --pod-network-cidr=10.244.0.0/16 --apiserver-advertise-address=192.168.15.231 --image-repository registry.aliyuncs.com/google_containers', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'hejun126', 'comment_id': 729321753.0, 'datetime': '2020-11-18 01:43:51+00:00', 'masked_author': 'username_0', 'text': 'result is:\r\n[wait-control-plane] Waiting for the kubelet to boot up the control plane as static Pods from directory ""/etc/kubernetes/manifests"". This can take up to 4m0s\r\n[kubelet-check] Initial timeout of 40s passed.\r\n\t\r\n\tUnfortunately, an error has occurred:\r\n\t\ttimed out waiting for the condition\r\n\r\n\tThis error is likely caused by:\r\n\t\t- The kubelet is not running\r\n\t\t- The kubelet is unhealthy due to a misconfiguration of the node in some way (required cgroups disabled)\r\n\r\n\tIf you are on a systemd-powered system, you can try to troubleshoot the error with the following commands:\r\n\t\t- \'systemctl status kubelet\'\r\n\t\t- \'journalctl -xeu kubelet\'\r\n\r\n\tAdditionally, a control plane component may have crashed or exited when started by the container runtime.\r\n\tTo troubleshoot, list all containers using your preferred container runtimes CLI.\r\n\r\n\tHere is one example how you may list all Kubernetes containers running in docker:\r\n\t\t- \'docker ps -a | grep kube | grep -v pause\'\r\n\t\tOnce you have found the failing container, you can inspect its logs with:\r\n\t\t- \'docker logs CONTAINERID\'\r\n\r\nerror execution phase wait-control-plane: couldn\'t initialize a Kubernetes cluster', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'hejun126', 'comment_id': 729322614.0, 'datetime': '2020-11-18 01:46:58+00:00', 'masked_author': 'username_0', 'text': 'kubeadm version\r\nkubeadm version: &version.Info{Major:""1"", Minor:""19"", GitVersion:""v1.19.4"", GitCommit:""se2xy1bknelxn4y8xzxu3trosptip3q5"", GitTreeState:""clean"", BuildDate:""2020-11-11T13:15:05Z"", GoVersion:""go1.15.2"", Compiler:""gc"", Platform:""linux/amd64""}', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'hejun126', 'comment_id': 729322974.0, 'datetime': '2020-11-18 01:48:05+00:00', 'masked_author': 'username_0', 'text': 'kubelet --version\r\nKubernetes v1.19.4', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'hejun126', 'comment_id': 729323073.0, 'datetime': '2020-11-18 01:48:23+00:00', 'masked_author': 'username_0', 'text': 'docker version\r\nClient:\r\n Version:         1.13.1\r\n API version:     1.26\r\n Package version: docker-1.13.1-162.git64e9980.el7.centos.x86_64\r\n Go version:      go1.10.3\r\n Git commit:      64e9980/1.13.1\r\n Built:           Wed Jul  1 14:56:42 2020\r\n OS/Arch:         linux/amd64\r\n\r\nServer:\r\n Version:         1.13.1\r\n API version:     1.26 (minimum version 1.12)\r\n Package version: docker-1.13.1-162.git64e9980.el7.centos.x86_64\r\n Go version:      go1.10.3\r\n Git commit:      64e9980/1.13.1\r\n Built:           Wed Jul  1 14:56:42 2020\r\n OS/Arch:         linux/amd64\r\n Experimental:    false', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'tengqm', 'comment_id': 729332850.0, 'datetime': '2020-11-18 02:19:33+00:00', 'masked_author': 'username_3', 'text': ""@username_0 Not sure if your docker version is supported. You may try ask questions on stackoverflow.com or on #kubernetes-users channel, because this doesn't look like a documentation error. If you find something to improve on the doc side (e.g. https://kubernetes.io/docs/setup/production-environment/container-runtimes/#docker) please file another issue.\r\n\r\n/close"", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'hejun126', 'comment_id': 729335083.0, 'datetime': '2020-11-18 02:26:36+00:00', 'masked_author': 'username_0', 'text': 'add  --v=6   to command \r\n kubeadm init --pod-network-cidr=10.244.0.0/16 --image-repository registry.aliyuncs.com/google_containers --v=6\r\nresult is:\r\nI1118 10:13:22.541992   88868 round_trippers.go:443] GET https://192.168.15.231:6443/healthz?timeout=10s  in 0 milliseconds', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'hejun126', 'comment_id': 729335257.0, 'datetime': '2020-11-18 02:27:07+00:00', 'masked_author': 'username_0', 'text': 'netstat -tlunp\r\nActive Internet connections (only servers)\r\nProto Recv-Q Send-Q Local Address           Foreign Address         State       PID/Program name    \r\ntcp        0      0 127.0.0.1:10248         0.0.0.0:*               LISTEN      89368/kubelet       \r\ntcp        0      0 0.0.0.0:9200            0.0.0.0:*               LISTEN      36212/java          \r\ntcp        0      0 0.0.0.0:9300            0.0.0.0:*               LISTEN      36212/java          \r\ntcp        0      0 127.0.0.1:38882         0.0.0.0:*               LISTEN      89368/kubelet       \r\ntcp        0      0 192.168.15.231:10050    0.0.0.0:*               LISTEN      28461/zabbix_agentd \r\ntcp        0      0 192.168.15.231:12358    0.0.0.0:*               LISTEN      19990/sshd          \r\ntcp6       0      0 :::10250                :::*                    LISTEN      89368/kubelet', 'title': None, 'type': 'comment'}]","<issue_start><issue_comment>Title: 对 kubeadm 进行故障排查
+username_0: kubeadm init --kubernetes-version=1.19.1 --apiserver-advertise-address=192.168.15.231 --image-repository registry.aliyuncs.com/google_containers --service-cidr=10.1.0.0/16 --pod-network-cidr=10.244.0.0/16
+报错[ERROR Port-10250]: Port 10250 is in use
+kubeadm reset
+<issue_comment>username_1: Maybe you should check the usage of port 10250 on your host using `netstat`.
+BTW, issues here are aimed for documentation, and you can go [kubeadm](https://github.com/kubernetes/kubeadm) for more technical help.
+<issue_comment>username_0: This port is because the systemctl enable kubelet command is used. This process takes up four ports 10255 10250 10248 40062
+<issue_comment>username_2: @username_0 The command `kubeadm reset` didn't worked out for you?
+<issue_comment>username_2: /triage needs-information
+<issue_comment>username_0: @username_2 YES,it is not working。
+<issue_comment>username_3: why don't you kubectl stop kubelet and retry?
+<issue_comment>username_0: kubeadm init --pod-network-cidr=10.244.0.0/16 --apiserver-advertise-address=192.168.15.231 --image-repository registry.aliyuncs.com/google_containers
+<issue_comment>username_0: result is:
+[wait-control-plane] Waiting for the kubelet to boot up the control plane as static Pods from directory ""/etc/kubernetes/manifests"". This can take up to 4m0s
+[kubelet-check] Initial timeout of 40s passed.
+	
+	Unfortunately, an error has occurred:
+		timed out waiting for the condition
+
+	This error is likely caused by:
+		- The kubelet is not running
+		- The kubelet is unhealthy due to a misconfiguration of the node in some way (required cgroups disabled)
+
+	If you are on a systemd-powered system, you can try to troubleshoot the error with the following commands:
+		- 'systemctl status kubelet'
+		- 'journalctl -xeu kubelet'
+
+	Additionally, a control plane component may have crashed or exited when started by the container runtime.
+	To troubleshoot, list all containers using your preferred container runtimes CLI.
+
+	Here is one example how you may list all Kubernetes containers running in docker:
+		- 'docker ps -a | grep kube | grep -v pause'
+		Once you have found the failing container, you can inspect its logs with:
+		- 'docker logs CONTAINERID'
+
+error execution phase wait-control-plane: couldn't initialize a Kubernetes cluster
+<issue_comment>username_0: kubeadm version
+kubeadm version: &version.Info{Major:""1"", Minor:""19"", GitVersion:""v1.19.4"", GitCommit:""d360454c9bcd1634cf4cc52d1867af5491dc9c5f"", GitTreeState:""clean"", BuildDate:""2020-11-11T13:15:05Z"", GoVersion:""go1.15.2"", Compiler:""gc"", Platform:""linux/amd64""}
+<issue_comment>username_0: kubelet --version
+Kubernetes v1.19.4
+<issue_comment>username_0: docker version
+Client:
+ Version:         1.13.1
+ API version:     1.26
+ Package version: docker-1.13.1-162.git64e9980.el7.centos.x86_64
+ Go version:      go1.10.3
+ Git commit:      64e9980/1.13.1
+ Built:           Wed Jul  1 14:56:42 2020
+ OS/Arch:         linux/amd64
+
+Server:
+ Version:         1.13.1
+ API version:     1.26 (minimum version 1.12)
+ Package version: docker-1.13.1-162.git64e9980.el7.centos.x86_64
+ Go version:      go1.10.3
+ Git commit:      64e9980/1.13.1
+ Built:           Wed Jul  1 14:56:42 2020
+ OS/Arch:         linux/amd64
+ Experimental:    false
+<issue_comment>username_3: @username_0 Not sure if your docker version is supported. You may try ask questions on stackoverflow.com or on #kubernetes-users channel, because this doesn't look like a documentation error. If you find something to improve on the doc side (e.g. https://kubernetes.io/docs/setup/production-environment/container-runtimes/#docker) please file another issue.
+
+/close
+<issue_comment>username_0: add  --v=6   to command 
+ kubeadm init --pod-network-cidr=10.244.0.0/16 --image-repository registry.aliyuncs.com/google_containers --v=6
+result is:
+I1118 10:13:22.541992   88868 round_trippers.go:443] GET https://192.168.15.231:6443/healthz?timeout=10s  in 0 milliseconds
+<issue_comment>username_0: netstat -tlunp
+Active Internet connections (only servers)
+Proto Recv-Q Send-Q Local Address           Foreign Address         State       PID/Program name    
+tcp        0      0 127.0.0.1:10248         0.0.0.0:*               LISTEN      89368/kubelet       
+tcp        0      0 0.0.0.0:9200            0.0.0.0:*               LISTEN      36212/java          
+tcp        0      0 0.0.0.0:9300            0.0.0.0:*               LISTEN      36212/java          
+tcp        0      0 127.0.0.1:38882         0.0.0.0:*               LISTEN      89368/kubelet       
+tcp        0      0 192.168.15.231:10050    0.0.0.0:*               LISTEN      28461/zabbix_agentd 
+tcp        0      0 192.168.15.231:12358    0.0.0.0:*               LISTEN      19990/sshd          
+tcp6       0      0 :::10250                :::*                    LISTEN      89368/kubelet"
+etcd-io/website,839195300,138,,"[{'action': 'opened', 'author': 'chalin', 'comment_id': None, 'datetime': '2021-03-23 23:09:14+00:00', 'masked_author': 'username_0', 'text': ""An advantage of using a [Netlify `_redirects` file][r] over putting redirect rules in a `netlify.toml`, is that you can now use the full power of Hugo's templating language to generate all or part of the contents programmatically. E.g., see https://github.com/grpc/grpc.io/blob/main/layouts/index.redirects.\r\n\r\n[r]: https://docs.netlify.com/routing/redirects/"", 'title': 'Use a Netlify _redirects file to hold redirects', 'type': 'issue'}
+ {'action': 'created', 'author': 'chalin', 'comment_id': 805346786.0, 'datetime': '2021-03-23 23:26:03+00:00', 'masked_author': 'username_0', 'text': ""Oh, it's interesting to see that the config for this was already present:\r\nhttps://github.com/etcd-io/website/blob/bee20df169f61082eb965d06b614a5383a960b49/config.toml#L133-L138"", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'nate-double-u', 'comment_id': 805349182.0, 'datetime': '2021-03-23 23:32:21+00:00', 'masked_author': 'username_1', 'text': ""That's probably my bad -- I think I added the ones in the netlify.toml."", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'chalin', 'comment_id': 805353421.0, 'datetime': '2021-03-23 23:43:45+00:00', 'masked_author': 'username_0', 'text': 'No worries. Actually, the `netlify.toml` file needs to be fully cleaned out.', 'title': None, 'type': 'comment'}
+ {'action': 'closed', 'author': 'nate-double-u', 'comment_id': None, 'datetime': '2021-03-30 16:23:34+00:00', 'masked_author': 'username_1', 'text': '', 'title': None, 'type': 'issue'}]","<issue_start><issue_comment>Title: Use a Netlify _redirects file to hold redirects
+username_0: An advantage of using a [Netlify `_redirects` file][r] over putting redirect rules in a `netlify.toml`, is that you can now use the full power of Hugo's templating language to generate all or part of the contents programmatically. E.g., see https://github.com/grpc/grpc.io/blob/main/layouts/index.redirects.
+
+[r]: https://docs.netlify.com/routing/redirects/
+<issue_comment>username_0: Oh, it's interesting to see that the config for this was already present:
+https://github.com/etcd-io/website/blob/bee20df169f61082eb965d06b614a5383a960b49/config.toml#L133-L138
+<issue_comment>username_1: That's probably my bad -- I think I added the ones in the netlify.toml.
+<issue_comment>username_0: No worries. Actually, the `netlify.toml` file needs to be fully cleaned out.<issue_closed>"
+lektor/lektor-website,376653353,258,"{'number': 258.0, 'repo': 'lektor-website', 'user_login': 'lektor'}","[{'action': 'opened', 'author': 'Arstman', 'comment_id': None, 'datetime': '2018-11-02T03:11:48Z', 'masked_author': 'username_0', 'text': 'Hi, I add a new project  xinfengtv.com which build 100% with lektor, lektor is a very powerful tool, we love it.\r\n\r\nthanks for your great work!', 'title': 'add new showcase website xinfengtv.com', 'type': 'issue'}
+ {'action': 'created', 'author': 'nixjdm', 'comment_id': 444237422.0, 'datetime': '2018-12-04 20:00:49+00:00', 'masked_author': 'username_1', 'text': ""Hi @username_0! Thank you for the contribution and I'm glad you like Lektor! I made a few small grammar tweaks to your description, while trying to keep the spirit of what you had. If it isn't quite right we can make any needed changes.\r\n\r\nIf your site is or becomes open source, please consider adding a link to this your repository.\r\n\r\nThanks!"", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'Arstman', 'comment_id': 447536889.0, 'datetime': '2018-12-15 04:40:06+00:00', 'masked_author': 'username_0', 'text': 'hi, @username_1  thanks for the grammar , it looks better.', 'title': None, 'type': 'comment'}]","<issue_start><issue_comment>Title: add new showcase website xinfengtv.com
+username_0: Hi, I add a new project  xinfengtv.com which build 100% with lektor, lektor is a very powerful tool, we love it.
+
+thanks for your great work!
+<issue_comment>username_1: Hi @username_0! Thank you for the contribution and I'm glad you like Lektor! I made a few small grammar tweaks to your description, while trying to keep the spirit of what you had. If it isn't quite right we can make any needed changes.
+
+If your site is or becomes open source, please consider adding a link to this your repository.
+
+Thanks!
+<issue_comment>username_0: hi, @username_1  thanks for the grammar , it looks better."
+gohugoio/hugo,431714629,5842,,"[{'action': 'opened', 'author': 'mraible', 'comment_id': None, 'datetime': '2019-04-10 21:02:05+00:00', 'masked_author': 'username_0', 'text': ""I'm helping to migrate the Okta developer blog from Jekyll to Hugo. We're using both Markdown and AsciiDoc and Jekyll renders AsciiDoc using the following plugins:\r\n\r\n```\r\ngroup :jekyll_plugins do\r\n  gem 'jekyll-asciidoc'\r\n  gem 'asciidoctor-rouge'\r\nend\r\n```\r\n\r\nWe have most things working in Hugo, but we've discovered (with the help of @username_1) that Hugo doesn't provide a way to pass configuration to an external helper command, like `asciidoctor`. Here's the code that executes Asciidoctor: https://github.com/gohugoio/hugo/blob/master/helpers/content.go#L626-L650\r\n\r\nThis means I have to define global attributes in every `.adoc` file. For example:\r\n\r\n```\r\n:page-liquid:\r\n:source-highlighter: rouge\r\n:icons: font\r\n```\r\n\r\nIt'd be great if Hugo had a way to pass attributes from the Hugo configuration to the `asciidoctor` command. According to Dan, we're losing a lot of power without that ability."", 'title': 'AsciiDoc: Add support for global document attributes', 'type': 'issue'}
+ {'action': 'created', 'author': 'mojavelinux', 'comment_id': 481865865.0, 'datetime': '2019-04-10 21:07:46+00:00', 'masked_author': 'username_1', 'text': 'Being able to pass global attributes is essential for using Asciidoctor properly (the `-a` flag). Related to this is the ability to specify extensions to load (the `-r` flag).\r\n\r\nOne option is to simply allow extra arguments for the asciidoctor to be specified in the Hugo configuration. This would give the user maximum flexibility while only requiring a very small change to Hugo. There are many such options a user may want to specify. See https://asciidoctor.org/man/asciidoctor/', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'm4c0', 'comment_id': 576771339.0, 'datetime': '2020-01-21 16:45:50+00:00', 'masked_author': 'username_2', 'text': 'Would it make sense to extend the [markup configuration][1] feature to also accept Asciidoc global attributes?\r\n\r\n[1]: https://gohugo.io/getting-started/configuration-markup/', 'title': None, 'type': 'comment'}
+ {'action': 'closed', 'author': 'jmooring', 'comment_id': None, 'datetime': '2021-06-15 02:04:09+00:00', 'masked_author': 'username_3', 'text': '', 'title': None, 'type': 'issue'}
+ {'action': 'created', 'author': 'jmooring', 'comment_id': 861114132.0, 'datetime': '2021-06-15 02:04:09+00:00', 'masked_author': 'username_3', 'text': 'Resolved with https://github.com/gohugoio/hugo/pull/7281', 'title': None, 'type': 'comment'}]","<issue_start><issue_comment>Title: AsciiDoc: Add support for global document attributes
+username_0: I'm helping to migrate the Okta developer blog from Jekyll to Hugo. We're using both Markdown and AsciiDoc and Jekyll renders AsciiDoc using the following plugins:
+
+```
+group :jekyll_plugins do
+  gem 'jekyll-asciidoc'
+  gem 'asciidoctor-rouge'
+end
+```
+
+We have most things working in Hugo, but we've discovered (with the help of @username_1) that Hugo doesn't provide a way to pass configuration to an external helper command, like `asciidoctor`. Here's the code that executes Asciidoctor: https://github.com/gohugoio/hugo/blob/master/helpers/content.go#L626-L650
+
+This means I have to define global attributes in every `.adoc` file. For example:
+
+```
+:page-liquid:
+:source-highlighter: rouge
+:icons: font
+```
+
+It'd be great if Hugo had a way to pass attributes from the Hugo configuration to the `asciidoctor` command. According to Dan, we're losing a lot of power without that ability.
+<issue_comment>username_1: Being able to pass global attributes is essential for using Asciidoctor properly (the `-a` flag). Related to this is the ability to specify extensions to load (the `-r` flag).
+
+One option is to simply allow extra arguments for the asciidoctor to be specified in the Hugo configuration. This would give the user maximum flexibility while only requiring a very small change to Hugo. There are many such options a user may want to specify. See https://asciidoctor.org/man/asciidoctor/
+<issue_comment>username_2: Would it make sense to extend the [markup configuration][1] feature to also accept Asciidoc global attributes?
+
+[1]: https://gohugo.io/getting-started/configuration-markup/<issue_closed>
+<issue_comment>username_3: Resolved with https://github.com/gohugoio/hugo/pull/7281"
+eduardoboucas/staticman,569362132,332,,"[{'action': 'opened', 'author': 'IgorKowalczyk', 'comment_id': None, 'datetime': '2020-02-22 17:01:44+00:00', 'masked_author': 'username_0', 'text': 'When I try to send data to your API that works on Herok, I get an ""Application error"" message just like in the picture.\r\n![unknown](https://user-images.githubusercontent.com/49127376/75096175-4e4b3700-559d-11ea-9fb1-b1869db096a1.png)\r\n\r\nYou will restore an older version, or fix the hosting of your application on Herocco, because I think it\'s your fault, not my form.', 'title': 'App error - Official staticman api on Heroku.', 'type': 'issue'}
+ {'action': 'created', 'author': 'alexwaibel', 'comment_id': 589985429.0, 'datetime': '2020-02-22 18:35:46+00:00', 'masked_author': 'username_1', 'text': '@username_0 support has been dropped for the public instance. Please refer to the README for instructions on how to easily deploy your own instance to the free tier of heroku. Self hosting should provide you a much more reliable experience and the free tier of heroku is more than sufficient. I will be closing this issue but please feel free to post any further questions you may have here.', 'title': None, 'type': 'comment'}
+ {'action': 'closed', 'author': 'alexwaibel', 'comment_id': None, 'datetime': '2020-02-22 18:36:18+00:00', 'masked_author': 'username_1', 'text': '', 'title': None, 'type': 'issue'}
+ {'action': 'created', 'author': 'IgorKowalczyk', 'comment_id': 589990655.0, 'datetime': '2020-02-22 19:33:46+00:00', 'masked_author': 'username_0', 'text': 'I tried to put it on the Heroku, but unfortunately, no guidebook worked for me...', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'alexwaibel', 'comment_id': 589990903.0, 'datetime': '2020-02-22 19:37:07+00:00', 'masked_author': 'username_1', 'text': ""I'm happy to assist you if you can tell me more about what went wrong when deploying your own to Heroku. Unfortunately it is not feasible for us to run a reliable public instance off of this community run project."", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'IgorKowalczyk', 'comment_id': 589991537.0, 'datetime': '2020-02-22 19:44:18+00:00', 'masked_author': 'username_0', 'text': 'Let me explain. I\'ve been doing everything as it\'s been handed down here: https://vincenttam.gitlab.io/post/2018-09-16-staticman-powered-gitlab-pages/2/ and here: https://muffinman.io/running-staticman-on-heroku/ unfortunately I didn\'t get to the correction in the second article because I had problems in the first one.\r\nThe command `heroku config:set RSA_PRIVATE_KEY=""$(cat key.pem)""` did not work. My program was showing only an error: `Program: does not exist`. This may be related to `$ openssl genrsa -out key.pem` or to the ""Stage 2: project config"" section. I don\'t know what could be an error - maybe I misread the manual (I use the translator).\r\n\r\nSorry about my English too. (Translator - not google of course :smile:)', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'alexwaibel', 'comment_id': 589991913.0, 'datetime': '2020-02-22 19:48:50+00:00', 'masked_author': 'username_1', 'text': 'I would recommend consulting the README of this repo which has some more updated instructions. There is a ""Deploy to Heroku"" button in the README which simplifies much of the steps indicated in those links you provided. Additionally, the discussion [at the end of this issue](https://github.com/eduardoboucas/staticman/issues/318) may provide some additional clarity.', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'IgorKowalczyk', 'comment_id': 589992675.0, 'datetime': '2020-02-22 19:57:47+00:00', 'masked_author': 'username_0', 'text': 'Thank you, but I have a problem with the configuration file...\r\n\r\nFrom: `config.sample.json` \r\n```\r\n{\r\n  ""gitlabToken."" ""YOUR_GITLAB_TOKEN.""\r\n  ""githubToken."" ""YOUR_GITHUB_TOKEN.""\r\n  ""rsaPrivateKey."" ""-----BEGIN RSA PRIVATE KEY---YOUR_KEY---END RSA PRIVATE KEY--""\r\n  ""port."" 80\r\n}\r\n```\r\nWith the RSA key copied straight from the Github, change the text ""`YOUR_KEY`"" or something else, and remove the `gitlabToken` line or leave it as it is? Because I haven\'t seen it anywhere.', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'alexwaibel', 'comment_id': 589992960.0, 'datetime': '2020-02-22 20:00:59+00:00', 'masked_author': 'username_1', 'text': 'If you are hosting on GitHub pages, then use the ""githubToken"" key and remove the ""gitlabToken"" key. If you are hosting on GitLab pages, then use the ""gitlabToken"" key and remove the ""githubToken"" key.\r\n\r\nThe text for the ""rsaPrivateKey"" value should be changed to the text of your own private RSA key as a single-line string with `\\n` newline characters.', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'IgorKowalczyk', 'comment_id': 589995581.0, 'datetime': '2020-02-22 20:33:03+00:00', 'masked_author': 'username_0', 'text': ""I don't understand it..."", 'title': None, 'type': 'comment'}
+ {'action': 'reopened', 'author': 'alexwaibel', 'comment_id': None, 'datetime': '2020-02-22 21:22:00+00:00', 'masked_author': 'username_1', 'text': 'When I try to send data to your API that works on Heroku, I get an ""Application error"" message just like in the picture.\r\n![unknown](https://user-images.githubusercontent.com/49127376/75096175-4e4b3700-559d-11ea-9fb1-b1869db096a1.png)\r\n\r\nYou will restore an older version, or fix the hosting of your application on Heroku, because I think it\'s your fault, not my form.', 'title': 'App error - Official staticman api on Heroku.', 'type': 'issue'}
+ {'action': 'created', 'author': 'alexwaibel', 'comment_id': 589999500.0, 'datetime': '2020-02-22 21:22:00+00:00', 'masked_author': 'username_1', 'text': ""Have you created a public/private RSA key pair? If not, [follow the steps outlined here] to create one. Once you have a key pair generated, it'll likely be stored in `~/.ssh/id_rsa`. This is your private RSA key. You can print it to your console with `cat ~/.ssh/id_rsa`. This will show your private key in the form:\r\n\r\n```\r\n-----BEGIN RSA PRIVATE KEY-----\r\nMIICXAIBAAKBgQCqGKukO1De7zhZj6+H0qtjTkVxwTCpvKe4eCZ0FPqri0cb2JZfXJ/DgYSF6vUp\r\nwmJG8wVQZKjeGcjDOL5UlsuusFncCzWBQ7RKNUSesmQRMSGkVb1/3j+skZ6UtW+5u09lHNsj6tQ5\r\n1s1SPrCBkedbNf0Tp0GbMJDyR4e9T04ZZwIDAQABAoGAFijko56+qGyN8M0RVyaRAXz++xTqHBLh\r\n3tx4VgMtrQ+WEgCjhoTwo23KMBAuJGSYnRmoBZM3lMfTKevIkAidPExvYCdm5dYq3XToLkkLv5L2\r\npIIVOFMDG+KESnAFV7l2c+cnzRMW0+b6f8mR1CJzZuxVLL6Q02fvLi55/mbSYxECQQDeAw6fiIQX\r\nGukBI4eMZZt4nscy2o12KyYner3VpoeE+Np2q+Z3pvAMd/aNzQ/W9WaI+NRfcxUJrmfPwIGm63il\r\nAkEAxCL5HQb2bQr4ByorcMWm/hEP2MZzROV73yF41hPsRC9m66KrheO9HPTJuo3/9s5p+sqGxOlF\r\nL0NDt4SkosjgGwJAFklyR1uZ/wPJjj611cdBcztlPdqoxssQGnh85BzCj/u3WqBpE2vjvyyvyI5k\r\nX6zk7S0ljKtt2jny2+00VsBerQJBAJGC1Mg5Oydo5NwD6BiROrPxGo2bpTbu/fhrT8ebHkTz2epl\r\nU9VQQSQzY1oZMVX8i1m5WUTLPz2yLJIBQVdXqhMCQBGoiuSoSjafUhV7i1cEGpb88h5NBYZzWXGZ\r\n37sJ5QsW+sJyoNde3xH8vdXhzU7eT82D6X/scw9RZz+/6rCJ4p0=\r\n-----END RSA PRIVATE KEY-----\r\n```\r\n\r\nAs you can see, here we have a multiline, key string. However, the configuration value must all be on one line. You must make this a single line string with explicit `\\n` newline characters.  You can convert this automatically with the following command: `cat ~/.ssh/id_rsa | sed '$!s/$/\\\\n/' | tr -d '\\n'`.\r\n\r\nThe output, which you will paste into your config file, should appear something like: `-----BEGIN RSA PRIVATE KEY-----\\nMIICXAIBAAKBgQCqGKukO1De7zhZj6+H0qtjTkVxwTCpvKe4eCZ0FPqri0cb2JZfXJ/DgYSF6vUp\\nwmJG8wVQZKjeGcjDOL5UlsuusFncCzWBQ7RKNUSesmQRMSGkVb1/3j+skZ6UtW+5u09lHNsj6tQ5\\n1s1SPrCBkedbNf0Tp0GbMJDyR4e9T04ZZwIDAQABAoGAFijko56+qGyN8M0RVyaRAXz++xTqHBLh\\n3tx4VgMtrQ+WEgCjhoTwo23KMBAuJGSYnRmoBZM3lMfTKevIkAidPExvYCdm5dYq3XToLkkLv5L2\\npIIVOFMDG+KESnAFV7l2c+cnzRMW0+b6f8mR1CJzZuxVLL6Q02fvLi55/mbSYxECQQDeAw6fiIQX\\nGukBI4eMZZt4nscy2o12KyYner3VpoeE+Np2q+Z3pvAMd/aNzQ/W9WaI+NRfcxUJrmfPwIGm63il\\nAkEAxCL5HQb2bQr4ByorcMWm/hEP2MZzROV73yF41hPsRC9m66KrheO9HPTJuo3/9s5p+sqGxOlF\\nL0NDt4SkosjgGwJAFklyR1uZ/wPJjj611cdBcztlPdqoxssQGnh85BzCj/u3WqBpE2vjvyyvyI5k\\nX6zk7S0ljKtt2jny2+00VsBerQJBAJGC1Mg5Oydo5NwD6BiROrPxGo2bpTbu/fhrT8ebHkTz2epl\\nU9VQQSQzY1oZMVX8i1m5WUTLPz2yLJIBQVdXqhMCQBGoiuSoSjafUhV7i1cEGpb88h5NBYZzWXGZ\\n37sJ5QsW+sJyoNde3xH8vdXhzU7eT82D6X/scw9RZz+/6rCJ4p0=\\n-----END RSA PRIVATE KEY-----`"", 'title': None, 'type': 'comment'}
+ {'action': 'closed', 'author': 'alexwaibel', 'comment_id': None, 'datetime': '2020-02-22 21:22:44+00:00', 'masked_author': 'username_1', 'text': '', 'title': None, 'type': 'issue'}
+ {'action': 'created', 'author': 'IgorKowalczyk', 'comment_id': 590097549.0, 'datetime': '2020-02-23 18:02:15+00:00', 'masked_author': 'username_0', 'text': 'When I type the command `heroku config:set RSA_PRIVATE_KEY=""$(cat ./key.pem)""` (I generated the key earlier) I get a message `\'C:\\Program\' is not recognized as an internal or external command,\r\noperable program or batch file.`\r\nI don\'t know why this is happening.', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'alexwaibel', 'comment_id': 590098339.0, 'datetime': '2020-02-23 18:09:03+00:00', 'masked_author': 'username_1', 'text': 'Try using the heroku web interface rather than the command line. See instructions at [this link](https://devcenter.heroku.com/articles/config-vars#managing-config-vars) under the section ""Managing config vars"" and the subsection ""Using the Heroku Dashboard"".', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'IgorKowalczyk', 'comment_id': 590098577.0, 'datetime': '2020-02-23 18:11:44+00:00', 'masked_author': 'username_0', 'text': ""Thank you. I just don't know how to change files like `Profile`. If I can write in a few minutes"", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'alexwaibel', 'comment_id': 590099561.0, 'datetime': '2020-02-23 18:20:17+00:00', 'masked_author': 'username_1', 'text': ""I'm sorry, I don't know what you are referring to. I'm not aware of any `Profile` file, nor should you need to make any file changes to deploy a Heroku instance. All you should have to do is click the deploy button from the README and then configure your config vars as described above. After that, you will still have to configure your website to call your Heroku instance."", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'IgorKowalczyk', 'comment_id': 590099813.0, 'datetime': '2020-02-23 18:22:30+00:00', 'masked_author': 'username_0', 'text': 'The `Procfile` should contain a line: `web: npm start`, Heroku probably does something with this file.', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'alexwaibel', 'comment_id': 590100913.0, 'datetime': '2020-02-23 18:32:15+00:00', 'masked_author': 'username_1', 'text': 'You do not need that file. That guide is outdated and the ""Deploy to Heroku"" button does much of that for you. Again, all you should need to do is click that deploy button from our README and then add your config variables.', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'IgorKowalczyk', 'comment_id': 590101572.0, 'datetime': '2020-02-23 18:38:20+00:00', 'masked_author': 'username_0', 'text': 'I did as in the guide in readme - I entered the first command (on the Herok website) `git clone dycjh@example.com:username_0Bot/staticman.git` (My fork for the repository - current) and the console shows such an error as in the picture.\r\n\r\n![img](https://user-images.githubusercontent.com/49127376/75117683-03502300-5674-11ea-9671-d6a03d339ead.png)', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'alexwaibel', 'comment_id': 590101860.0, 'datetime': '2020-02-23 18:40:58+00:00', 'masked_author': 'username_1', 'text': 'That section of the README is referring to running the server on your own infrastructure. Those steps are not necessary when using Heroku. Again, the **only** steps you need to follow to deploy to heroku are clicking the deploy button and entering your config variables.', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'IgorKowalczyk', 'comment_id': 590102429.0, 'datetime': '2020-02-23 18:46:08+00:00', 'masked_author': 'username_0', 'text': ""But I still don't know how to enter the configuration variables. Maybe it's a Heroku section, like in the picture.\r\n\r\n![img](https://user-images.githubusercontent.com/49127376/75117797-16afbe00-5675-11ea-8d3a-1c5fb4e86767.png)"", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'alexwaibel', 'comment_id': 590103792.0, 'datetime': '2020-02-23 18:59:47+00:00', 'masked_author': 'username_1', 'text': 'Once you have clicked the ""Deploy to Heroku"" button, you will be redirected to the Heroku page. Here you will give your instance a name and click deploy. Once this has finished, click the ""Manage App"" button at the bottom of the screen. At the top there will be a tab called ""Settings"" which you will click. On the settings page, click ""Reveal Config Vars"" and add the configuration values for your instance.', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'IgorKowalczyk', 'comment_id': 590105364.0, 'datetime': '2020-02-23 19:16:04+00:00', 'masked_author': 'username_0', 'text': ""I did as you said. I added those values. I don't know if you need to add `ENV_MODE` yet. When I open my application it shows an error: https://api-igorkowalczyk.herokuapp.com/\r\n\r\n![img](https://user-images.githubusercontent.com/49127376/75118310-4cef3c80-5679-11ea-98aa-12c1a88198f6.png)"", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'alexwaibel', 'comment_id': 590106395.0, 'datetime': '2020-02-23 19:26:22+00:00', 'masked_author': 'username_1', 'text': ""You can check your logs to try to see what exactly went wrong. I believe you must set a value for the port config value as well. I don't believe a NODE_ENV is necessary. Without access to the logs it is hard for me to tell exactly what is wrong with your setup."", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'IgorKowalczyk', 'comment_id': 590106850.0, 'datetime': '2020-02-23 19:31:12+00:00', 'masked_author': 'username_0', 'text': '```\r\n2020-02-23T19:20:25.598063+00:00 heroku[router]: at=error code=H10 desc=""App crashed"" method=GET path=""/"" host=api-igorkowalczyk.herokuapp.com request_id=78c9703b-434e-4863-ba78-497480ee36f4 fwd=""192.168.3.11"" dyno= connect= service= status=503 bytes= protocol=https\r\n2020-02-23T19:20:27.256751+00:00 heroku[router]: at=error code=H10 desc=""App crashed"" method=GET path=""/favicon.ico"" host=api-igorkowalczyk.herokuapp.com request_id=4658d9b4-9ae2-4d65-b645-82c6267ecd59 fwd=""192.168.3.11"" dyno= connect= service= status=503 bytes= protocol=https\r\n2020-02-23T19:22:33.542508+00:00 heroku[router]: at=error code=H10 desc=""App crashed"" method=GET path=""/"" host=api-igorkowalczyk.herokuapp.com request_id=fbe1a40a-5f29-42aa-948f-01c645938cd9 fwd=""172.16.17.32"" dyno= connect= service= status=503 bytes= protocol=https\r\n2020-02-23T19:22:33.743342+00:00 heroku[router]: at=error code=H10 desc=""App crashed"" method=GET path=""/favicon.ico"" host=api-igorkowalczyk.herokuapp.com request_id=a564d5ec-1373-475d-9c25-bbd9614da488 fwd=""172.16.17.32"" dyno= connect= service= status=503 bytes= protocol=https\r\n2020-02-23T19:22:53.201986+00:00 heroku[router]: at=error code=H10 desc=""App crashed"" method=GET path=""/"" host=api-igorkowalczyk.herokuapp.com request_id=b5b345ba-dcd9-49aa-a082-3ce39431130f fwd=""172.16.17.32"" dyno= connect= service= status=503 bytes= protocol=https\r\n2020-02-23T19:22:53.282046+00:00 heroku[router]: at=error code=H10 desc=""App crashed"" method=GET path=""/favicon.ico"" host=api-igorkowalczyk.herokuapp.com request_id=f90c10c8-d5db-4c5e-b47a-6a790f1e6c7c fwd=""172.16.17.32"" dyno= connect= service= status=503 bytes= protocol=https\r\n2020-02-23T19:22:58.118016+00:00 heroku[router]: at=error code=H10 desc=""App crashed"" method=GET path=""/"" host=api-igorkowalczyk.herokuapp.com request_id=fb2ca08f-c24d-42fe-9f0b-514353a41333 fwd=""172.16.17.32"" dyno= connect= service= status=503 bytes= protocol=https\r\n2020-02-23T19:22:58.236792+00:00 heroku[router]: at=error code=H10 desc=""App crashed"" method=GET path=""/favicon.ico"" host=api-igorkowalczyk.herokuapp.com request_id=62319441-afb9-4750-8aee-0f2f488ed82c fwd=""172.16.17.32"" dyno= connect= service= status=503 bytes= protocol=https\r\n2020-02-23T19:23:55.565173+00:00 heroku[router]: at=error code=H10 desc=""App crashed"" method=GET path=""/"" host=api-igorkowalczyk.herokuapp.com request_id=c9abdf9a-1fa2-4394-87d4-e8916b330c38 fwd=""172.16.17.32"" dyno= connect= service= status=503 bytes= protocol=https\r\n2020-02-23T19:23:55.711107+00:00 heroku[router]: at=error code=H10 desc=""App crashed"" method=GET path=""/favicon.ico"" host=api-igorkowalczyk.herokuapp.com request_id=d1dabfe1-7f1d-44b6-9548-bd79d9561aa5 fwd=""172.16.17.32"" dyno= connect= service= status=503 bytes= protocol=https\r\n``` \r\n\r\nThe logs don\'t tell anything. I copied everything that showed up there.', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'alexwaibel', 'comment_id': 590164522.0, 'datetime': '2020-02-24 04:34:16+00:00', 'masked_author': 'username_1', 'text': 'Hmm I went to try to deploy the entire thing myself and am encountering similar issues with the RSA key. I will reopen this issue and investigate when I have time.', 'title': None, 'type': 'comment'}
+ {'action': 'reopened', 'author': 'alexwaibel', 'comment_id': None, 'datetime': '2020-02-24 04:34:16+00:00', 'masked_author': 'username_1', 'text': 'When I try to send data to your API that works on Heroku, I get an ""Application error"" message just like in the picture.\r\n![unknown](https://user-images.githubusercontent.com/49127376/75096175-4e4b3700-559d-11ea-9fb1-b1869db096a1.png)\r\n\r\nYou will restore an older version, or fix the hosting of your application on Heroku, because I think it\'s your fault, not my form.', 'title': 'App error - Official staticman api on Heroku.', 'type': 'issue'}
+ {'action': 'created', 'author': 'IgorKowalczyk', 'comment_id': 590304238.0, 'datetime': '2020-02-24 12:51:18+00:00', 'masked_author': 'username_0', 'text': ""I tried the pull request version but it still doesn't work. Heroku shows only the logs as in the picture.\r\n\r\n![img](https://user-images.githubusercontent.com/49127376/75153864-b2403d80-570c-11ea-943b-f8ccb2c6c38d.png)"", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'alexwaibel', 'comment_id': 590432501.0, 'datetime': '2020-02-24 16:53:28+00:00', 'masked_author': 'username_1', 'text': '@username_0 apologies, I believe my previous instructions for generating an RSA key were incorrect. The RSA_PRIVATE_KEY value you provide to Heroku should not have any `\\n` newline characters. The key should however still all be on one line.\r\n\r\nTo summarize:\r\n* Create RSA key with `ssh-keygen -t rsa -b 4096 -C ""staticman key"" -f ~/.ssh/staticman_key`\r\n* Convert the string to be on one line with `cat ~/.ssh/staticman_key | tr -d \'\\n\'`\r\n\r\nYour key as entered into Heroku should look something like this:\r\n<pre>-----BEGIN RSA PRIVATE KEY-----MIICXAIBAAKBgQCqGKukO1De7zhZj6+H0qtjTkVxwTCpvKe4eCZ0FPqri0cb2JZfXJ/DgYSF6vUpwmJG8wVQZKjeGcjDOL5UlsuusFncCzWBQ7RKNUSesmQRMSGkVb1/3j+skZ6UtW+5u09lHNsj6tQ51s1SPrCBkedbNf0Tp0GbMJDyR4e9T04ZZwIDAQABAoGAFijko56+qGyN8M0RVyaRAXz++xTqHBLh3tx4VgMtrQ+WEgCjhoTwo23KMBAuJGSYnRmoBZM3lMfTKevIkAidPExvYCdm5dYq3XToLkkLv5L2pIIVOFMDG+KESnAFV7l2c+cnzRMW0+b6f8mR1CJzZuxVLL6Q02fvLi55/mbSYxECQQDeAw6fiIQXGukBI4eMZZt4nscy2o12KyYner3VpoeE+Np2q+Z3pvAMd/aNzQ/W9WaI+NRfcxUJrmfPwIGm63ilAkEAxCL5HQb2bQr4ByorcMWm/hEP2MZzROV73yF41hPsRC9m66KrheO9HPTJuo3/9s5p+sqGxOlFL0NDt4SkosjgGwJAFklyR1uZ/wPJjj611cdBcztlPdqoxssQGnh85BzCj/u3WqBpE2vjvyyvyI5kX6zk7S0ljKtt2jny2+00VsBerQJBAJGC1Mg5Oydo5NwD6BiROrPxGo2bpTbu/fhrT8ebHkTz2eplU9VQQSQzY1oZMVX8i1m5WUTLPz2yLJIBQVdXqhMCQBGoiuSoSjafUhV7i1cEGpb88h5NBYZzWXGZ37sJ5QsW+sJyoNde3xH8vdXhzU7eT82D6X/scw9RZz+/6rCJ4p0=-----END RSA PRIVATE KEY-----</pre>', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'IgorKowalczyk', 'comment_id': 590521997.0, 'datetime': '2020-02-24 20:01:31+00:00', 'masked_author': 'username_0', 'text': ""I generated a new key (correct) application still does not work. I don't know what to do next."", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'alexwaibel', 'comment_id': 590523593.0, 'datetime': '2020-02-24 20:05:17+00:00', 'masked_author': 'username_1', 'text': 'I can\'t tell what your error is without some kind of error message or logs. The fix should be merged into dev, but is not yet in master. When clicking the deploy button, ensure you are looking at the README on the dev branch. You also may want to try manually restarting your Heroku infrastructure by going to ""More"" in the top right corner of the dashboard and selecting ""Restart all dynos"".', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'IgorKowalczyk', 'comment_id': 590524574.0, 'datetime': '2020-02-24 20:07:40+00:00', 'masked_author': 'username_0', 'text': ""In my project (fork staticman) I gave dev's master commit to the branch. Still doesn't work. Logs still the same."", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'alexwaibel', 'comment_id': 590541108.0, 'datetime': '2020-02-24 20:48:17+00:00', 'masked_author': 'username_1', 'text': 'You do not appear to have a fork of staticman on your GitHub. Are you referring to a local copy? I have tested the instructions I have provided to you multiple times and I am able to successfully deploy instances without issue. Rather than trying to use your own fork, use the button in the top left of this repo\'s main page to select the dev branch. Once that page loads, use the ""Deploy to Heroku"" button there to deploy this dev branch. When you are redirected to Heroku, you should see that the repo it is deploying from contains `#dev`. \r\n\r\nThe errors you are seeing indicate that there is a problem with your RSA key. Ensure you have generated it using the provided command, and that all newline characters have been removed so that the text is all on one line. The minimal config values needed by this application are GITHUB_TOKEN and RSA_PRIVATE_KEY. Try without any other config values.', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'IgorKowalczyk', 'comment_id': 590708845.0, 'datetime': '2020-02-25 06:39:03+00:00', 'masked_author': 'username_0', 'text': ""My fork is https://github.com/igorkowalczykbot/staticman, because I want to use this account for comments. I'll try today when I have time from the original repository."", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'IgorKowalczyk', 'comment_id': 591052616.0, 'datetime': '2020-02-25 20:27:54+00:00', 'masked_author': 'username_0', 'text': 'I tried the `dev` branch and it still doesn\'t work, I filled in the correct github token (repo access), and correctly generated RSA PRIVATE KEY. The application still returns an error.\r\nHere are the logs.\r\n```\r\n2020-02-25T20:22:03.630277+00:00 heroku[web.1]: State changed from starting to crashed\r\n2020-02-25T20:22:03.611270+00:00 heroku[web.1]: Process exited with status 0\r\n2020-02-25T20:22:11.720865+00:00 heroku[router]: at=error code=H10 desc=""App crashed"" method=GET path=""/"" host=api-igorkowalczyk.herokuapp.com request_id=ce663a5d-d2ac-40df-8732-360c78ea5cef fwd=""192.168.127.12"" dyno= connect= service= status=503 bytes= protocol=https\r\n2020-02-25T20:22:19.808818+00:00 heroku[router]: at=error code=H10 desc=""App crashed"" method=GET path=""/favicon.ico"" host=api-igorkowalczyk.herokuapp.com request_id=41561a29-2a91-4fd0-9f77-9909fe8d8585 fwd=""192.168.127.12"" dyno= connect= service= status=503 bytes= protocol=https\r\n```\r\nI\'ve read the logs to the bug `503`', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'alexwaibel', 'comment_id': 591062887.0, 'datetime': '2020-02-25 20:51:42+00:00', 'masked_author': 'username_1', 'text': ""That part of the logs doesn't indicate what caused the crash. Try leaving the logs console open in one tab and restarting all dynos in another so you can view the full logs. That should hopefully give us a more verbose error message."", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'IgorKowalczyk', 'comment_id': 591265599.0, 'datetime': '2020-02-26 06:39:13+00:00', 'masked_author': 'username_0', 'text': '```\r\n2020-02-26T01:44:27.460725+00:00 app[web.1]:     at NodeRSA.module.exports.NodeRSA.importKey (/app/node_modules/node-rsa/src/NodeRSA.js:185:22)\r\n2020-02-26T01:44:27.460725+00:00 app[web.1]:     at Object.<anonymous> (/app/lib/RSA.js:6:5)\r\n2020-02-26T01:44:27.460726+00:00 app[web.1]:     at Module._compile (internal/modules/cjs/loader.js:1151:30)\r\n2020-02-26T01:44:27.460726+00:00 app[web.1]:     at Object.Module._extensions..js (internal/modules/cjs/loader.js:1171:10)\r\n2020-02-26T01:44:27.460727+00:00 app[web.1]:     at Module.load (internal/modules/cjs/loader.js:1000:32) {\r\n2020-02-26T01:44:27.460727+00:00 app[web.1]:   name: \'InvalidAsn1Error\',\r\n2020-02-26T01:44:27.460727+00:00 app[web.1]:   message: \'encoding too long\'\r\n2020-02-26T01:44:27.460728+00:00 app[web.1]: }\r\n2020-02-26T01:44:27.531480+00:00 heroku[web.1]: State changed from starting to crashed\r\n2020-02-26T01:44:27.516295+00:00 heroku[web.1]: Process exited with status 0\r\n2020-02-26T06:37:53.524000+00:00 heroku[web.1]: State changed from crashed to starting\r\n2020-02-26T06:37:57.576014+00:00 heroku[web.1]: Starting process with command `npm start`\r\n2020-02-26T06:37:59.481212+00:00 app[web.1]: \r\n2020-02-26T06:37:59.481231+00:00 app[web.1]: > staticman@3.0.0 prestart /app\r\n2020-02-26T06:37:59.481232+00:00 app[web.1]: > if [ ! -d node_modules ]; then npm install; fi\r\n2020-02-26T06:37:59.481232+00:00 app[web.1]: \r\n2020-02-26T06:37:59.492289+00:00 app[web.1]: \r\n2020-02-26T06:37:59.492291+00:00 app[web.1]: > staticman@3.0.0 start /app\r\n2020-02-26T06:37:59.492291+00:00 app[web.1]: > node index.js\r\n2020-02-26T06:37:59.492291+00:00 app[web.1]: \r\n2020-02-26T06:37:59.893738+00:00 app[web.1]: Error [InvalidAsn1Error]: encoding too long\r\n2020-02-26T06:37:59.893802+00:00 app[web.1]:     at newInvalidAsn1Error (/app/node_modules/node-rsa/node_modules/asn1/lib/ber/errors.js:7:13)\r\n2020-02-26T06:37:59.893803+00:00 app[web.1]:     at Reader.readLength (/app/node_modules/node-rsa/node_modules/asn1/lib/ber/reader.js:102:13)\r\n2020-02-26T06:37:59.893803+00:00 app[web.1]:     at Reader.readSequence (/app/node_modules/node-rsa/node_modules/asn1/lib/ber/reader.js:135:16)\r\n2020-02-26T06:37:59.893804+00:00 app[web.1]:     at Object.privateImport (/app/node_modules/node-rsa/src/formats/pkcs1.js:63:16)\r\n2020-02-26T06:37:59.893804+00:00 app[web.1]:     at Object.detectAndImport (/app/node_modules/node-rsa/src/formats/formats.js:63:48)\r\n2020-02-26T06:37:59.893805+00:00 app[web.1]:     at NodeRSA.module.exports.NodeRSA.importKey (/app/node_modules/node-rsa/src/NodeRSA.js:185:22)\r\n2020-02-26T06:37:59.893805+00:00 app[web.1]:     at Object.<anonymous> (/app/lib/RSA.js:6:5)\r\n2020-02-26T06:37:59.893806+00:00 app[web.1]:     at Module._compile (internal/modules/cjs/loader.js:1151:30)\r\n2020-02-26T06:37:59.893806+00:00 app[web.1]:     at Object.Module._extensions..js (internal/modules/cjs/loader.js:1171:10)\r\n2020-02-26T06:37:59.893806+00:00 app[web.1]:     at Module.load (internal/modules/cjs/loader.js:1000:32) {\r\n2020-02-26T06:37:59.893807+00:00 app[web.1]:   name: \'InvalidAsn1Error\',\r\n2020-02-26T06:37:59.893807+00:00 app[web.1]:   message: \'encoding too long\'\r\n2020-02-26T06:37:59.893808+00:00 app[web.1]: }\r\n2020-02-26T06:37:59.968328+00:00 heroku[web.1]: State changed from starting to crashed\r\n2020-02-26T06:37:59.972446+00:00 heroku[web.1]: State changed from crashed to starting\r\n2020-02-26T06:37:59.950476+00:00 heroku[web.1]: Process exited with status 0\r\n2020-02-26T06:38:03.842371+00:00 heroku[web.1]: Starting process with command `npm start`\r\n2020-02-26T06:38:05.909035+00:00 app[web.1]: \r\n2020-02-26T06:38:05.909056+00:00 app[web.1]: > staticman@3.0.0 prestart /app\r\n2020-02-26T06:38:05.909057+00:00 app[web.1]: > if [ ! -d node_modules ]; then npm install; fi\r\n2020-02-26T06:38:05.909057+00:00 app[web.1]: \r\n2020-02-26T06:38:05.919382+00:00 app[web.1]: \r\n2020-02-26T06:38:05.919384+00:00 app[web.1]: > staticman@3.0.0 start /app\r\n2020-02-26T06:38:05.919384+00:00 app[web.1]: > node index.js\r\n2020-02-26T06:38:05.919384+00:00 app[web.1]: \r\n2020-02-26T06:38:06.329557+00:00 app[web.1]: Error [InvalidAsn1Error]: encoding too long\r\n2020-02-26T06:38:06.337943+00:00 app[web.1]:     at newInvalidAsn1Error (/app/node_modules/node-rsa/node_modules/asn1/lib/ber/errors.js:7:13)\r\n2020-02-26T06:38:06.337946+00:00 app[web.1]:     at Reader.readLength (/app/node_modules/node-rsa/node_modules/asn1/lib/ber/reader.js:102:13)\r\n2020-02-26T06:38:06.337946+00:00 app[web.1]:     at Reader.readSequence (/app/node_modules/node-rsa/node_modules/asn1/lib/ber/reader.js:135:16)\r\n2020-02-26T06:38:06.337947+00:00 app[web.1]:     at Object.privateImport (/app/node_modules/node-rsa/src/formats/pkcs1.js:63:16)\r\n2020-02-26T06:38:06.337948+00:00 app[web.1]:     at Object.detectAndImport (/app/node_modules/node-rsa/src/formats/formats.js:63:48)\r\n2020-02-26T06:38:06.337948+00:00 app[web.1]:     at NodeRSA.module.exports.NodeRSA.importKey (/app/node_modules/node-rsa/src/NodeRSA.js:185:22)\r\n2020-02-26T06:38:06.337949+00:00 app[web.1]:     at Object.<anonymous> (/app/lib/RSA.js:6:5)\r\n2020-02-26T06:38:06.337950+00:00 app[web.1]:     at Module._compile (internal/modules/cjs/loader.js:1151:30)\r\n2020-02-26T06:38:06.337950+00:00 app[web.1]:     at Object.Module._extensions..js (internal/modules/cjs/loader.js:1171:10)\r\n2020-02-26T06:38:06.337951+00:00 app[web.1]:     at Module.load (internal/modules/cjs/loader.js:1000:32) {\r\n2020-02-26T06:38:06.337952+00:00 app[web.1]:   name: \'InvalidAsn1Error\',\r\n2020-02-26T06:38:06.337952+00:00 app[web.1]:   message: \'encoding too long\'\r\n2020-02-26T06:38:06.337953+00:00 app[web.1]: }\r\n2020-02-26T06:38:06.419069+00:00 heroku[web.1]: State changed from starting to crashed\r\n2020-02-26T06:38:06.401866+00:00 heroku[web.1]: Process exited with status 0\r\n2020-02-26T06:38:37.755263+00:00 heroku[router]: at=error code=H10 desc=""App crashed"" method=GET path=""/"" host=api-igorkowalczyk.herokuapp.com request_id=32830188-8e1c-4997-a6ac-51544bcf9ed2 fwd=""172.16.58.3"" dyno= connect= service= status=503 bytes= protocol=https\r\n``` All logs when restarting', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'alexwaibel', 'comment_id': 591521135.0, 'datetime': '2020-02-26 16:36:34+00:00', 'masked_author': 'username_1', 'text': ""Hmm, definitely still a problem with the RSA key. Can you try generating the key with:\r\n`openssl genrsa -out private.pem 2048`\r\n`cat private.pem | tr -d '\\n'`"", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'IgorKowalczyk', 'comment_id': 591585391.0, 'datetime': '2020-02-26 18:56:16+00:00', 'masked_author': 'username_0', 'text': '`-----END RSA PRIVATE KEY-----z84uLNRXvnMPhnJ73jZbXFoAlkDu3PVgjmQ` This is the key when i generate with second command (i paste first too)', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'alexwaibel', 'comment_id': 591638819.0, 'datetime': '2020-02-26 20:55:18+00:00', 'masked_author': 'username_1', 'text': ""That's not right. The key should appear in your terminal something like:\r\n\r\n`\r\n-----BEGIN RSA PRIVATE KEY-----MIIEowIBAAKCAQEAtvUg5B1ozIO6FHCiO2RXBUOBDVqISFKMSUXM4gZYkN1nrquL0Ii/WImuoPMmnaOKwIIpjXJy5+Zv7LD0sVCGoGzBszWsB3JureJXJbAsOhLSwQ0Gy5nuuYcPy+spZarf+HEyuDIRSgIPwMeWlYBQfQOBIvc4F2UPyYuavLQ/GI7n251USwdYd+kyM0Q/9JFubaadh8n93hOV5AVyIroPgykNM+HyZZzR/F6ss59XDC/R8DQCYNHBiyGwQw9U8ZXbTchQDqyOXWu54ofGWAU3vbdHnlbEu8vgS11H/eb9yr68SZW4u+P3zN5IIuYnCCnBltWW+IBAHUXy4kifdXkFIQIDAQABAoIBABLD/cWoBpHDiRiDnQA+gHZ3wArgmE3iuaTiVetw/zCMpQ/TZJnVDNtF8/VqOzG8DoVEVIK/lG2Ywy4h0FdHjSdzQELjZGu3HwcSyiGBemfSem92qJXFiijZY5Nk4XAeIK7Y3XzrFb7jiz4YuqdG6/qGm348oTI1GXNwsEResIISKeNngk0bF1JB2Wx1mYW3+aBe/oMe40oLjcfNYVi5wotdTQVODm10YecX4iPPcp5YeQxPC4CCWZH8KbnVHNmyVPC0PGJtzNDIXwTwy1oDM1PugXtT5Ux8ntfw0mUoVOM9cuogo9cO5brQR75YNLRQpGX7yWkkr5e3baURVd943mECgYEA4UYvlQCXKzksuGlK8CwE8nK5nIVwT7AuP8/havdJHmn27WZRZDs6Qz0UbWfX8b8vqm4Vu4UBKf+YqsC6odMc9r0U0zv3O4FQkTgrwAoDIjkTd9/ytSugpWl6IUDD+PNFLMb+pbxVArHCE5opdzZf4POSd2W/gtbY/qkKfT5yMZUCgYEAz+ljec1kz7xeWC/scKM+5O0dpDt/v6mPbPQbJhb8bs8Dpa7T+VowAbRUe6HwvQ3Q4JD3qrtL+xVovMTenRNiBKspqJgg00GrMyBtOjhufveo3GTXWuDo6dGGIzxisYfKXmXkT0ItW0IIE2CZOpPQGJjldcKBpPZVmEUp6dHsel0CgYBvNXfN5fG6m8oQ66Hb+M8kZTBuLY2pOT9LrzMH3DXTdto4jhdGFNsJUIDiFa6MICbGyvudi+ZsNkrGmMhJlO+qeuNp+CNv08HTPtiSQB8V6PlMZ1joyTXQEscA3XkhT+7pUP9rEBMjdl9pz+QCfuxMH9JBcRBe5fNPnGGaPJahFQKBgAfOrtKbGOcIHs7W9d0A9FKqaMuLBHAREPa5b++NO2t50Jw/JWyeq2DVAbsmyKCAzVAxgWti3yaNlkJIbkedu7eLKeRP2iO0upYP6KogBl40NJ4aF1AtU/G70XqvQNGD1OCYmOs1A/kCUMVRgk+Fz3GtBCjY5f9o1KwEJN/H50ZtAoGBALdgtwSQNfUGBGVhSsf8wmiDrlN6NdjSXyfYHzbnpRot/LKokF8x2/imMmAWIUxYLAg6TxapWNS+Xm+ut2WqXEs51TGTCkQxOLyIMRgj+lSZDFHy0cAPbmI8bva5+ACVKbtmM3Rk8I+GQ3K5uWXXdZ/00BvKA/b+qOxUmTlFrqsy-----END RSA PRIVATE KEY-----\r\n`\r\n\r\nWhich is the string you would enter into the Heroku config variable. You should not have more characters after the end of `-----END RSA PRIVATE KEY-----`"", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'willymcallister', 'comment_id': 591769150.0, 'datetime': '2020-02-27 04:05:53+00:00', 'masked_author': 'username_2', 'text': 'Thanks to Travis, I was able to get my key accepted at Heroku. The important new feature was the ""-m PEM"" option on ssh-keygen.\r\n\r\nssh-keygen -m PEM -t rsa -b 4096 -C ""staticman key"" -f ~/.ssh/staticman_key\r\nheroku config:add --app ${bridge_app_name} ""RSA_PRIVATE_KEY=$(cat ~/.ssh/staticman_key | tr -d \'\\n\')""\r\nheroku config:add --app ${bridge_app_name} ""GITHUB_TOKEN=${github_token}""', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'IgorKowalczyk', 'comment_id': 591810681.0, 'datetime': '2020-02-27 06:46:23+00:00', 'masked_author': 'username_0', 'text': ""@username_2 When i paste the second comment my output is:\r\n```\r\n'C:\\Program' is not recognized as an internal or external command,\r\noperable program or batch file.\r\n```\r\n---\r\n@username_1 I paste these commends in the Git Bash terminal maybe it's his fault."", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'alexwaibel', 'comment_id': 592093348.0, 'datetime': '2020-02-27 17:56:27+00:00', 'masked_author': 'username_1', 'text': '@username_0 I do not believe Git Bash will work for most of these commands. From what I understand, Git Bash does not include many of the default unix commands. If you are using Windows 10, I recommend giving the [Windows Subsystem for Linux](https://docs.microsoft.com/en-us/windows/wsl/install-win10) a try.', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'IgorKowalczyk', 'comment_id': 592643284.0, 'datetime': '2020-02-28 17:39:34+00:00', 'masked_author': 'username_0', 'text': ""@username_2 I'm already have Heroku CLI installed.\r\n\r\n---\r\n\r\n@username_1 If i have time i will try this solution."", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'IgorKowalczyk', 'comment_id': 593794890.0, 'datetime': '2020-03-03 06:45:32+00:00', 'masked_author': 'username_0', 'text': '@username_1 I generated a new key with Putty - it looks like a regular key from the Git Bash console (only with spaces and new lines). Maybe I\'ll describe all the steps I do - maybe I\'m doing something wrong. \r\n\r\nI go to the `dev` branch on the original project and click on the `readme` button ""Deploy to Heroku""\r\n\r\n2. when I\'m transferred to herok, I give the application the name ""api-igorificator"" (it is available),\r\nI set the region to the USA and wait for the application to be created.\r\n\r\n3. I click the `manage app` and go to ""Config Vars"" settings. In the first field I enter `GITHUB_TOKEN` and copy the account access token generated by github and paste it there. In the second field, I enter `RSA_PRIVATE_KEY` and paste the token generated by the console. I save this section and check if application works.', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'basemwahba', 'comment_id': 594127670.0, 'datetime': '2020-03-03 19:32:24+00:00', 'masked_author': 'username_3', 'text': '@username_1  Thanks so much for your kind patience with @username_0. Your instructions are really helpful\r\n\r\nMy Heroku app URL: https://anasbasem.herokuapp.com It works well (**Hello from Staticman version 3.0.0!**)\r\nHere is my Minimal Staticman v3 Demo URL: https://username_3.github.io/anas\r\nThis is my Github repository: https://github.com/username_3/anas\r\n\r\nBelow is the screenshot from Heroku app log:\r\n\r\n![Screen Shot 2020-03-03 at 9 19 14 PM](https://user-images.githubusercontent.com/14953296/75812031-29717380-5d96-11ea-9024-6e0ef4d194f0.png)\r\n\r\nI appreciate your kind help\r\n\r\nThanks so much', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'basemwahba', 'comment_id': 594251234.0, 'datetime': '2020-03-04 01:02:51+00:00', 'masked_author': 'username_3', 'text': '@username_1 May you please have a quick look at the error in my Heroku app log screenshot in my previous post?\r\n\r\nHere it\'s:\r\n\r\n`2020-03-04T00:53:48.472979+00:00 heroku[router]: at=error code=H12 desc=""Request timeout"" method=POST path=""/v3/entry/github/username_3/anas/master/comments"" host=anasbasem.herokuapp.com request_id=8a24e204-a016-461e-8503-850798dea306 fwd=""172.16.31.10"" dyno=web.1 connect=0ms service=30001ms status=503 bytes=0 protocol=https\r\n`\r\n\r\nIt shows the following error:\r\n\r\n**Application error\r\nAn error occurred in the application and your page could not be served. If you are the application owner, check your logs for details. You can do this from the Heroku CLI with the command\r\nheroku logs --tail**\r\n\r\n![Screen Shot 2020-03-04 at 2 51 40 AM](https://user-images.githubusercontent.com/14953296/75834199-09f13f80-5dc4-11ea-8434-cc492f53a50a.png)\r\n\r\nMay you please advise from where can I fix?\r\n\r\nThanks so much', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'alexwaibel', 'comment_id': 594271205.0, 'datetime': '2020-03-04 01:37:05+00:00', 'masked_author': 'username_1', 'text': '@username_3 do you have a GitHub personal access token in your Heroku config vars? Based on the screenshot from your first post, it seems to be having issues authenticating with GitHub.', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'basemwahba', 'comment_id': 594277918.0, 'datetime': '2020-03-04 02:04:17+00:00', 'masked_author': 'username_3', 'text': '@username_1 Thanks for your time and your response\r\n\r\nYes I have GitHub personal access token\r\n\r\n![Screen Shot 2020-03-04 at 3 59 35 AM](https://user-images.githubusercontent.com/14953296/75837314-2645aa00-5dcd-11ea-8bf4-29acdebf7fe5.png)', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'alexwaibel', 'comment_id': 594294808.0, 'datetime': '2020-03-04 02:41:52+00:00', 'masked_author': 'username_1', 'text': '@username_3 Can you try using this call instead:\r\n`method=POST path=""/v2/entry/username_3/anas/master/comments""`\r\n\r\nI haven\'t had time to test out v3 yet, and it seems like that endpoint may not be working properly.', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'basemwahba', 'comment_id': 594297900.0, 'datetime': '2020-03-04 02:53:49+00:00', 'masked_author': 'username_3', 'text': '@username_1 Thanks again\r\n\r\nI get different message:\r\n`{""success"":false,""errorCode"":""INVALID_VERSION""}`\r\n\r\n![Screen Shot 2020-03-04 at 4 49 02 AM](https://user-images.githubusercontent.com/14953296/75840455-ea621300-5dd3-11ea-8f37-99f878b80df4.png)\r\n\r\nBelow is Heroku app log:\r\n\r\n![Screen Shot 2020-03-04 at 4 47 07 AM](https://user-images.githubusercontent.com/14953296/75840498-0c5b9580-5dd4-11ea-8fde-e1f68d76ef82.png)', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'alexwaibel', 'comment_id': 594302483.0, 'datetime': '2020-03-04 03:12:49+00:00', 'masked_author': 'username_1', 'text': ""@username_0 to be clear, when using puttygen you must:\r\n1. Click 'Generate' ensuring 'RSA' is the type selected and number of bits is 2048\r\n1. Move your mouse around\r\n1. Click 'Conversions' in the top menu, and then 'Export OpenSSH key'\r\n1. Accept the warning about no passphrase, this is expected.\r\n1. Save the key somewhere you'll remember.\r\n1. Open Powershell\r\n1. Use `(Get-Content 'C:\\username\\Downloads\\keyfile') -join '' | Set-Content 'C:\\username\\Downloads\\keyfile'`\r\n1. Use `Get-Content 'C:\\username\\Downloads\\keyfile'` to print your key to the console. Copy this key, being careful to avoid copying any trailing spaces\r\n1. Paste that value into Heroku"", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'alexwaibel', 'comment_id': 594303500.0, 'datetime': '2020-03-04 03:17:01+00:00', 'masked_author': 'username_1', 'text': ""@username_3 You shouldn't be calling a GET request to that endpoint. The /entry endpoints are for posting comment forms to. If you are using a separate bot account (the account your GITHUB_TOKEN belongs to), you'll also need to make sure to hit the /connect endpoint to make sure the bot account is added as a collaborator on your main account.\r\n\r\nYou may find [this link](https://travisdowns.github.io/blog/2020/02/05/now-with-comments.html) helpful if you haven't already seen it."", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'basemwahba', 'comment_id': 594307389.0, 'datetime': '2020-03-04 03:32:29+00:00', 'masked_author': 'username_3', 'text': '**This worked**. I have changed to V2. Then, in the endpoint URL path, I have removed `github` that is between `entry` and before `username_3` Thank you. Thank you very much 🙂 \r\n\r\nFinally, do you have any suggestion to make V3 works?', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'alexwaibel', 'comment_id': 594310595.0, 'datetime': '2020-03-04 03:45:45+00:00', 'masked_author': 'username_1', 'text': ""For /v3 with github, you must authenticate as a GitHub app.\r\n1. Go to your GitHub Settings then Developer settings.\r\n1. Select the 'GitHub Apps' tab and click 'New GitHub App'.\\\r\n1. Name the app, give it a Homepage URL, and give it full Read & Write Pull request access\r\n1. In Heroku, use the GITHUB_APP_ID instead of GITHUB_TOKEN and paste in the App ID from GitHub.\r\n1. Click 'Generate a private key' at the bottom of the GitHub app page\r\n1. Convert that downloaded key to be all on one line and add it to the Heroku config vars as GITHUB_PRIVATE_KEY\r\n\r\nGoing a bit off memory but that should work."", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'basemwahba', 'comment_id': 594312138.0, 'datetime': '2020-03-04 03:52:28+00:00', 'masked_author': 'username_3', 'text': ""@username_1 \r\nThanks again for your usual cooperation. I will follow your instructions exactly and I'm confident that it will work. At the end, will I create something like this: https://github.com/apps/staticman-net/?"", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'alexwaibel', 'comment_id': 594331038.0, 'datetime': '2020-03-04 05:12:29+00:00', 'masked_author': 'username_1', 'text': ""@username_3 yes, although your application doesn't have to be public. It can be created for just your account when you fill out the form to create a new GitHub application."", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'IgorKowalczyk', 'comment_id': 594533681.0, 'datetime': '2020-03-04 13:49:38+00:00', 'masked_author': 'username_0', 'text': 'Yeah. The key needs spaces (new lines) I didn\'t have them. After generating the key with PuTTy and copying it with N++ and pasting it into `RSA_PRIVATE_KEY` the application worked: https://api-igorkowalczyk.herokuapp.com/.\r\nShows ""Hello from Staticman version 3.0.0!`\r\nBut when I go to the site: https://api-igorkowalczyk.herokuapp.com/v2/entry/igorkowalczyk/blog/master shows: ``Cannot GET /v2/entry/igorkowalczyk/blog/master`\r\nI remember ""Invite the bot"", but when I go to the site: https://api-igorkowalczyk.herokuapp.com/v2/connect/igorkowalczyk/blog, I get a sign: `Invitation not found` but I already invited my bot as shown in the screenshot below\r\n\r\n![img](https://user-images.githubusercontent.com/49127376/75885472-ddbada80-5e26-11ea-88a9-9f3950b10dad.png)\r\n\r\nPS: I want to use v2 API, however, seems better to me and it works the same (I guess), no need to add (and create new) applications.', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'alexwaibel', 'comment_id': 594696198.0, 'datetime': '2020-03-04 17:45:13+00:00', 'masked_author': 'username_1', 'text': '@username_0 in your connect call, the username should be that of your bot account not your main account. The connect endpoint is meant to make your bot account accept the collaborator invite.', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'IgorKowalczyk', 'comment_id': 595055500.0, 'datetime': '2020-03-05 06:42:06+00:00', 'masked_author': 'username_0', 'text': 'https://api-igorkowalczyk.herokuapp.com/v2/connect/igorkowalczykbot/blog? But it show the same message.', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'alexwaibel', 'comment_id': 596040997.0, 'datetime': '2020-03-07 03:27:11+00:00', 'masked_author': 'username_1', 'text': '@username_0 I was wrong, it should be your normal account name and not the bot account.\r\n\r\nThe correct form is a GET request to `https://api-igorkowalczyk.herokuapp.com/v2/connect/igorkowalczyk/blog`\r\n\r\n You can try revoking and resending the invitation. Watch the Heroku logs too to see if anything errors are being thrown there. Worst case, you can log in to the bot account and manually accept the invite.', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'IgorKowalczyk', 'comment_id': 596354369.0, 'datetime': '2020-03-09 06:37:18+00:00', 'masked_author': 'username_0', 'text': '`xhr.send(encodeURI(data))` I don\'t know why it sends requests to the site address and `/null`  e.g. ""https://igorkowalczyk.github.io/blog//internet/2020/01/22/null"" and requests aren\'t sent, I don\'t know how to put it to send any to ""https://api-igorkowalczyk.herokuapp.com/SEND COMMNETS""', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'ElArkk', 'comment_id': 599149027.0, 'datetime': '2020-03-14 23:52:41+00:00', 'masked_author': 'username_4', 'text': '@username_1 first of all, thank you for all your support here. I am running my own staticman instance on heroku as well, and trying to get it to work with my github pages blog. I was previously trying to use `v3` using a personal access token. Thanks to you i now finally know that this won\'t work. So now I\'m trying to switch to the GitHub App way as you described above. I have a couple of questions regarding that:\r\n\r\n- In my GitHub app setup, what do I put as `Homepage URL` and `Webhook URL` (both mandatory)?\r\n\r\n- In my staticman repo, in `config.production.json`, what variables do I need to set? Just `githubAppID` and `githubPrivateKey` or also still the `rsaPrivateKey`? And is the following the correct way of getting the variables from my env:\r\n\r\n```\r\n{\r\n  ""githubAppID"": process.env.GITHUB_APP_ID,\r\n  ""githubPrivateKey"": JSON.stringify(process.env.GITHUB_PRIVATE_KEY),\r\n  ""port"": 8080\r\n}\r\n```\r\n\r\nAny help on this would be really appreciated.', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'alexwaibel', 'comment_id': 599873490.0, 'datetime': '2020-03-17 04:38:15+00:00', 'masked_author': 'username_1', 'text': ""@username_0 I'm not really sure what you're asking. That sounds like a problem with how you're submitting the comment form from your website.\r\n\r\n@username_4 Those URLs should be the URL of your staticman instance I believe. I don't think it really matters in this case though. As far as the config values, to run as a GitHub app you'll need rsaPrivateKey, githubAppID, and githubPrivateKey. Note these are two separate private keys."", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'IgorKowalczyk', 'comment_id': 599919097.0, 'datetime': '2020-03-17 07:31:55+00:00', 'masked_author': 'username_0', 'text': 'I\'m asking because my script can\'t send a request to api (and from that I don\'t know if this API works) The script below:\r\n\r\n```js\r\nconst commentForm = document.querySelector(\'.commentform\');\r\nconst commentFormInputs = document.querySelectorAll(\'.commentform-input\');\r\nconst slugInput = document.querySelector(\'.commentform-input-slug\');\r\nconst optionsSlugInput = document.querySelector(\'.commentform-input-optionsslug\');\r\nconst nameInput = document.querySelector(\'.commentform-input-name\');\r\nconst emailInput = document.querySelector(\'.commentform-input-email\');\r\nconst messageInput = document.querySelector(\'.commentform-input-message\');\r\nconst errorMessagesDiv = document.querySelector(\'.commentform-errormessages\');\r\nconst sendFailedDiv = document.querySelector(\'.commentform-sendfailed\');\r\nconst sendSucceededDiv = document.querySelector(\'.commentform-sendsucceeded\');\r\nconst url = \'https://api-igorkowalczyk.herokuapp.com/v2/entry/igorkowalczyk/blog/master\';\r\nfunction post(url, data, callback, errorCallback) {\r\nconst xhr = new XMLHttpRequest();\r\nxhr.open(\'POST\', url);\r\nxhr.setRequestHeader(\'Content-Type\', \'application/x-www-form-urlencoded\');\r\nxhr.onload = function() {\r\nif (xhr.status === 200) {\r\ncallback(xhr.responseText);\r\n} else if (xhr.status !== 200) {\r\nerrorCallback(xhr.responseText);\r\n}\r\n};\r\nxhr.send;\r\n}\r\nif (commentForm) {\r\ncommentForm.addEventListener(\'submit\', (e) => {\r\ne.preventDefault();\r\nerrorMessagesDiv.innerHTML = \'\';\r\nsendFailedDiv.style.display = \'none\';\r\nsendSucceededDiv.style.display = \'none\';\r\nconst slug = slugInput.value.trim();\r\nconst optionsSlug = optionsSlugInput.value.trim();\r\nconst name = nameInput.value.trim();\r\nconst email = emailInput.value.trim();\r\nconst message = messageInput.value.trim();\r\nlet error = false;\r\nlet fatalError = false;\r\nconst messages = [];\r\nif (name.length < 2) {\r\nerror = true;\r\nmessages.push(\'<div class=""commentform-errormessage"">Proszę wpisać imię.</div>\');\r\n}\r\nif (email.search(/^[a-zA-Z0-9.!#$%&’*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\\.[a-zA-Z0-9-]+)*$/) === -1) {\r\nerror = true;\r\nmessages.push(\'<div class=""commentform-errormessage"">Proszę wpisać poprawny e-mail.</div>\');\r\n}\r\nif (message.length < 2) {\r\nerror = true;\r\nmessages.push(\'<div class=""commentform-errormessage"">Proszę wpisać wiadomość.</div>\');\r\n}\r\nif (fatalError) {\r\nreturn false;\r\n}\r\nif (error) {\r\nerrorMessagesDiv.innerHTML = messages.join(\'\');\r\nreturn false;\r\n}\r\nconst params = [];\r\nfor (let i = 0; i < commentFormInputs.length; i++) {\r\nconst input = commentFormInputs[i];\r\nparams.push(`${ input.name }=${ input.value }`);\r\n}\r\npost(\r\nconsole.log(""Hello world!""),\r\ne.target.getAttribute(\'data-action\'),\r\nparams.join(\'&\'),\r\nfunction(text){\r\ncommentForm.reset();\r\nsendSucceededDiv.style.display = \'block\';\r\n},\r\nfunction(text){\r\nsendFailedDiv.style.display = \'block\';\r\n}\r\n);\r\n});\r\n}\r\n```\r\n\r\nAnd HTML (Rendered, Unrendered) here:\r\nhttps://pastebin.com/a4Q9zsDN', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'alexwaibel', 'comment_id': 600271403.0, 'datetime': '2020-03-17 20:04:36+00:00', 'masked_author': 'username_1', 'text': '@username_0 you can try sending the request to the API directly with a REST client like [Postman](https://www.postman.com/) to see if the request is working as expected. From there try replicating that request in your front-end code. The postman request would look something like:\r\n\r\n![image](https://user-images.githubusercontent.com/7026879/76896720-c4734e80-6868-11ea-9207-2e9e54ef1667.png)', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'ElArkk', 'comment_id': 600303228.0, 'datetime': '2020-03-17 21:10:50+00:00', 'masked_author': 'username_4', 'text': ""@username_1 thank you! I'm still somehow getting MISSING_CONFIG_BLOCK errors, which I think can get thrown because of multiple underlying reasons. However, I got `v2` to work finally, so I'll stick to that for now :). Thank you again!"", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'IgorKowalczyk', 'comment_id': 600456671.0, 'datetime': '2020-03-18 06:59:31+00:00', 'masked_author': 'username_0', 'text': '@username_1 But I don\'t care if the API works anymore, the JS script sends out the requests badly, I don\'t know what to do... I reworked it a little bit to send requests from one API, but it still doesn\'t display any errors. Maybe it\'s the fault of this element:\r\n\r\n```js\r\npost(\r\nconsole.log(""Hello world!""),\r\ne.target.getAttribute(\'data-action\'),\r\nparams.join(\'&\'),\r\nfunction(text){\r\ncommentForm.reset();\r\nsendSucceededDiv.style.display = \'block\';\r\n},\r\nfunction(text){\r\nsendFailedDiv.style.display = \'block\';\r\n}\r\n);\r\n});\r\n}\r\n```\r\n\r\nI added console.log there to check if the script works there.', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'alexwaibel', 'comment_id': 600765403.0, 'datetime': '2020-03-18 17:31:33+00:00', 'masked_author': 'username_1', 'text': ""@username_0 well, this repo is strictly for fixing issues found in the Staticman API. I'm sorry, but I don't have the time to go through your project (and everyone else's that posts here) and figure out what's wrong with your front-end code.\r\n\r\nAs I suggested previously, I'd recommend going to bare HTML submission first to get the bare minimum comment submission functionality working and then you can start adding back in the javascript features you'd like to use. Additionally, the JS fetch API makes dealing with requests easier than using XMLHttpRequests in my opinion. You might find [this Stack Overflow post](https://stackoverflow.com/questions/46640024/how-do-i-post-form-data-with-fetch-api) to be helpful."", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'arthrfrts', 'comment_id': 602249014.0, 'datetime': '2020-03-22 18:08:46+00:00', 'masked_author': 'username_5', 'text': 'Hi @username_1! I followed your instructions in this comment, but I\'m getting a `Request timeout`. Here\'s the log trail:\r\n\r\n```\r\n2020-03-22T18:01:39.749062+00:00 app[web.1]: (node:24) UnhandledPromiseRejectionWarning: Error: error:0909006C:PEM routines:get_name:no start line\r\n2020-03-22T18:01:39.749084+00:00 app[web.1]:     at Sign.sign (internal/crypto/sig.js:112:29)\r\n2020-03-22T18:01:39.749084+00:00 app[web.1]:     at Object.sign (/app/node_modules/jwa/index.js:152:45)\r\n2020-03-22T18:01:39.749085+00:00 app[web.1]:     at Object.jwsSign [as sign] (/app/node_modules/jws/lib/sign-stream.js:32:24)\r\n2020-03-22T18:01:39.749085+00:00 app[web.1]:     at Object.module.exports [as sign] (/app/node_modules/jsonwebtoken/sign.js:204:16)\r\n2020-03-22T18:01:39.749086+00:00 app[web.1]:     at getSignedJsonWebToken (/app/node_modules/@octokit/app/dist-node/index.js:31:30)\r\n2020-03-22T18:01:39.749086+00:00 app[web.1]:     at GitHub._authenticate (/app/lib/GitHub.js:58:21)\r\n2020-03-22T18:01:39.749086+00:00 app[web.1]:     at /app/lib/GitHub.js:31:32\r\n2020-03-22T18:01:39.749088+00:00 app[web.1]:     at new GitHub (/app/lib/GitHub.js:46:7)\r\n2020-03-22T18:01:39.749089+00:00 app[web.1]:     at Object.module.exports.create (/app/lib/GitServiceFactory.js:11:14)\r\n2020-03-22T18:01:39.749089+00:00 app[web.1]:     at /app/lib/Staticman.js:32:35\r\n2020-03-22T18:01:39.749089+00:00 app[web.1]:     at new Staticman (/app/lib/Staticman.js:46:7)\r\n2020-03-22T18:01:39.749090+00:00 app[web.1]:     at module.exports (/app/controllers/process.js:126:27)\r\n2020-03-22T18:01:39.749090+00:00 app[web.1]:     at Layer.handle [as handle_request] (/app/node_modules/express/lib/router/layer.js:95:5)\r\n2020-03-22T18:01:39.749090+00:00 app[web.1]:     at next (/app/node_modules/express/lib/router/route.js:137:13)\r\n2020-03-22T18:01:39.749091+00:00 app[web.1]:     at /app/server.js:169:14\r\n2020-03-22T18:01:39.749091+00:00 app[web.1]:     at Layer.handle [as handle_request] (/app/node_modules/express/lib/router/layer.js:95:5)\r\n2020-03-22T18:01:39.749091+00:00 app[web.1]:     at next (/app/node_modules/express/lib/router/route.js:137:13)\r\n2020-03-22T18:01:39.749091+00:00 app[web.1]:     at /app/server.js:144:14\r\n2020-03-22T18:01:39.749092+00:00 app[web.1]:     at Layer.handle [as handle_request] (/app/node_modules/express/lib/router/layer.js:95:5)\r\n2020-03-22T18:01:39.749092+00:00 app[web.1]:     at next (/app/node_modules/express/lib/router/route.js:137:13)\r\n2020-03-22T18:01:39.749092+00:00 app[web.1]:     at /app/server.js:129:14\r\n2020-03-22T18:01:39.749093+00:00 app[web.1]:     at Layer.handle [as handle_request] (/app/node_modules/express/lib/router/layer.js:95:5)\r\n2020-03-22T18:01:39.749171+00:00 app[web.1]: (node:24) UnhandledPromiseRejectionWarning: Unhandled promise rejection. This error originated either by throwing inside of an async function without a catch block, or by rejecting a promise which was not handled with .catch(). To terminate the node process on unhandled promise rejection, use the CLI flag `--unhandled-rejections=strict` (see https://nodejs.org/api/cli.html#cli_unhandled_rejections_mode). (rejection id: 3)\r\n2020-03-22T18:01:39.749239+00:00 app[web.1]: (node:24) [DEP0018] DeprecationWarning: Unhandled promise rejections are deprecated. In the future, promise rejections that are not handled will terminate the Node.js process with a non-zero exit code.\r\n2020-03-22T18:02:09.723405+00:00 heroku[router]: at=error code=H12 desc=""Request timeout"" method=POST path=""/v3/entry/github/esporo/esporo/master/comments"" host=esporo-staticman.herokuapp.com request_id=ebdaa58b-cb1f-4ceb-9a5e-dfd5997bdc2e fwd=""172.16.58.3"" dyno=web.1 connect=0ms service=30001ms status=503 bytes=0 protocol=https\r\n```\r\n\r\nThis only happens when trying to use the v3 endpoint, v2 works fine.', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'alexwaibel', 'comment_id': 605271457.0, 'datetime': '2020-03-27 19:31:04+00:00', 'masked_author': 'username_1', 'text': '@username_5 which endpoint specifically are you trying to use?', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'arthrfrts', 'comment_id': 605706275.0, 'datetime': '2020-03-29 21:41:26+00:00', 'masked_author': 'username_5', 'text': ""@username_1 I'm trying to connect using `/v3/connect/github/<username>/<repository>`."", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'HarishMunagapati', 'comment_id': 631489868.0, 'datetime': '2020-05-20 13:56:45+00:00', 'masked_author': 'username_6', 'text': 'I have the same issue. Does anyone have a fix for it?', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'alexwaibel', 'comment_id': 631713010.0, 'datetime': '2020-05-20 20:38:08+00:00', 'masked_author': 'username_1', 'text': ""@username_5 @username_6 sorry I disappeared in the middle of assisting you with this. I've been quite busy lately and haven't had the necessary bandwidth to devote to this project. For now I'd recommend using v2 and authenticating using a token as that's the most stable and documented approach."", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'HarishMunagapati', 'comment_id': 631929663.0, 'datetime': '2020-05-21 07:23:07+00:00', 'masked_author': 'username_6', 'text': ""Sure, I'll reconfigure with v2 and comeback. When I did it yesterday, it's not showing the comments below the page.\r\nlet me give a shot again."", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'HarishMunagapati', 'comment_id': 631982442.0, 'datetime': '2020-05-21 09:23:05+00:00', 'masked_author': 'username_6', 'text': ""@username_1 @mmistakes Even v2 is not working now, can you please help me with documentation I'm using Minimal Mistakes, latest release v4.19.2"", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'alexwaibel', 'comment_id': 632111545.0, 'datetime': '2020-05-21 14:17:08+00:00', 'masked_author': 'username_1', 'text': '@username_6 take a look at these resources:\r\n* https://travisdowns.github.io/blog/2020/02/05/now-with-comments.html\r\n* https://spinningnumbers.org/a/staticman-heroku.html', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'HarishMunagapati', 'comment_id': 632185676.0, 'datetime': '2020-05-21 16:17:30+00:00', 'masked_author': 'username_6', 'text': '@username_1 I went trough them over multiple times from for last weekdays 😄 \r\n\r\nHere is things confusing me.\r\n1 . ""**_config.yml**"" Staticman url entry\r\nin ""https://travisdowns.github.io/blog/2020/02/05/now-with-comments.html"" its mentioned as \r\n\r\n**staticman_url**: https://${bridge_app_name}.herokuapp.com/v2/entry/${github-username}/${blog-repo}/master/comments\r\n\r\nand in ""https://spinningnumbers.org/a/staticman-heroku.html"" its mentioned as \r\n\r\n**staticmanUrl**: https://spinningnumbers-staticmandev2.herokuapp.com/v2/entry/username_2/username_2.github.io/master/comments\r\n\r\neither of them didn\'t who any logs in my Heroku app and I see the error\r\n _""Sorry, there was an error with your submission. Please make sure all required fields have been completed and try again.""_\r\n\r\nBut luckily today, this worked for me @mmistakes can update in the configuration document.\r\n**endpoint             : ""https://staticman-twn.herokuapp.com/v2/entry/""**\r\n\r\nNow I\'m trying to figure out nested comments.', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'typo3ua', 'comment_id': 752697779.0, 'datetime': '2020-12-30 17:25:18+00:00', 'masked_author': 'username_7', 'text': 'I had the same error ... I made my **rsa private key** in one line, without space and br', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'VincentTam', 'comment_id': 770202433.0, 'datetime': '2021-01-30 12:08:33+00:00', 'masked_author': 'username_8', 'text': ""@username_1 I just saw your comment and I would like to clarify that it's OK to have both of the parameters.  My GitHub and GitLab (demo) projects about Staticman provides a proof.  However, I'm now reading about the recent developments so as to replace my old instance open to public with a personal one."", 'title': None, 'type': 'comment'}]","<issue_start><issue_comment>Title: App error - Official staticman api on Heroku.
+username_0: When I try to send data to your API that works on Herok, I get an ""Application error"" message just like in the picture.
+![unknown](https://user-images.githubusercontent.com/49127376/75096175-4e4b3700-559d-11ea-9fb1-b1869db096a1.png)
+
+You will restore an older version, or fix the hosting of your application on Herocco, because I think it's your fault, not my form.
+<issue_comment>username_1: @username_0 support has been dropped for the public instance. Please refer to the README for instructions on how to easily deploy your own instance to the free tier of heroku. Self hosting should provide you a much more reliable experience and the free tier of heroku is more than sufficient. I will be closing this issue but please feel free to post any further questions you may have here.<issue_closed>
+<issue_comment>username_0: I tried to put it on the Heroku, but unfortunately, no guidebook worked for me...
+<issue_comment>username_1: I'm happy to assist you if you can tell me more about what went wrong when deploying your own to Heroku. Unfortunately it is not feasible for us to run a reliable public instance off of this community run project.
+<issue_comment>username_0: Let me explain. I've been doing everything as it's been handed down here: https://vincenttam.gitlab.io/post/2018-09-16-staticman-powered-gitlab-pages/2/ and here: https://muffinman.io/running-staticman-on-heroku/ unfortunately I didn't get to the correction in the second article because I had problems in the first one.
+The command `heroku config:set RSA_PRIVATE_KEY=""$(cat key.pem)""` did not work. My program was showing only an error: `Program: does not exist`. This may be related to `$ openssl genrsa -out key.pem` or to the ""Stage 2: project config"" section. I don't know what could be an error - maybe I misread the manual (I use the translator).
+
+Sorry about my English too. (Translator - not google of course :smile:)
+<issue_comment>username_1: I would recommend consulting the README of this repo which has some more updated instructions. There is a ""Deploy to Heroku"" button in the README which simplifies much of the steps indicated in those links you provided. Additionally, the discussion [at the end of this issue](https://github.com/eduardoboucas/staticman/issues/318) may provide some additional clarity.
+<issue_comment>username_0: Thank you, but I have a problem with the configuration file...
+
+From: `config.sample.json` 
+```
+{
+  ""gitlabToken."" ""YOUR_GITLAB_TOKEN.""
+  ""githubToken."" ""YOUR_GITHUB_TOKEN.""
+  ""rsaPrivateKey."" ""-----BEGIN RSA PRIVATE KEY---YOUR_KEY---END RSA PRIVATE KEY--""
+  ""port."" 80
+}
+```
+With the RSA key copied straight from the Github, change the text ""`YOUR_KEY`"" or something else, and remove the `gitlabToken` line or leave it as it is? Because I haven't seen it anywhere.
+<issue_comment>username_1: If you are hosting on GitHub pages, then use the ""githubToken"" key and remove the ""gitlabToken"" key. If you are hosting on GitLab pages, then use the ""gitlabToken"" key and remove the ""githubToken"" key.
+
+The text for the ""rsaPrivateKey"" value should be changed to the text of your own private RSA key as a single-line string with `\n` newline characters.
+<issue_comment>username_0: I don't understand it...
+<issue_comment>username_1: When I try to send data to your API that works on Heroku, I get an ""Application error"" message just like in the picture.
+![unknown](https://user-images.githubusercontent.com/49127376/75096175-4e4b3700-559d-11ea-9fb1-b1869db096a1.png)
+
+You will restore an older version, or fix the hosting of your application on Heroku, because I think it's your fault, not my form.
+<issue_comment>username_1: Have you created a public/private RSA key pair? If not, [follow the steps outlined here] to create one. Once you have a key pair generated, it'll likely be stored in `~/.ssh/id_rsa`. This is your private RSA key. You can print it to your console with `cat ~/.ssh/id_rsa`. This will show your private key in the form:
+
+```
+-----BEGIN RSA PRIVATE KEY-----
+MIICXAIBAAKBgQCqGKukO1De7zhZj6+H0qtjTkVxwTCpvKe4eCZ0FPqri0cb2JZfXJ/DgYSF6vUp
+wmJG8wVQZKjeGcjDOL5UlsuusFncCzWBQ7RKNUSesmQRMSGkVb1/3j+skZ6UtW+5u09lHNsj6tQ5
+1s1SPrCBkedbNf0Tp0GbMJDyR4e9T04ZZwIDAQABAoGAFijko56+qGyN8M0RVyaRAXz++xTqHBLh
+3tx4VgMtrQ+WEgCjhoTwo23KMBAuJGSYnRmoBZM3lMfTKevIkAidPExvYCdm5dYq3XToLkkLv5L2
+pIIVOFMDG+KESnAFV7l2c+cnzRMW0+b6f8mR1CJzZuxVLL6Q02fvLi55/mbSYxECQQDeAw6fiIQX
+GukBI4eMZZt4nscy2o12KyYner3VpoeE+Np2q+Z3pvAMd/aNzQ/W9WaI+NRfcxUJrmfPwIGm63il
+AkEAxCL5HQb2bQr4ByorcMWm/hEP2MZzROV73yF41hPsRC9m66KrheO9HPTJuo3/9s5p+sqGxOlF
+L0NDt4SkosjgGwJAFklyR1uZ/wPJjj611cdBcztlPdqoxssQGnh85BzCj/u3WqBpE2vjvyyvyI5k
+X6zk7S0ljKtt2jny2+00VsBerQJBAJGC1Mg5Oydo5NwD6BiROrPxGo2bpTbu/fhrT8ebHkTz2epl
+U9VQQSQzY1oZMVX8i1m5WUTLPz2yLJIBQVdXqhMCQBGoiuSoSjafUhV7i1cEGpb88h5NBYZzWXGZ
+37sJ5QsW+sJyoNde3xH8vdXhzU7eT82D6X/scw9RZz+/6rCJ4p0=
+-----END RSA PRIVATE KEY-----
+```
+
+As you can see, here we have a multiline, key string. However, the configuration value must all be on one line. You must make this a single line string with explicit `\n` newline characters.  You can convert this automatically with the following command: `cat ~/.ssh/id_rsa | sed '$!s/$/\\n/' | tr -d '\n'`.
+
+The output, which you will paste into your config file, should appear something like: `-----BEGIN RSA PRIVATE KEY-----\nMIICXAIBAAKBgQCqGKukO1De7zhZj6+H0qtjTkVxwTCpvKe4eCZ0FPqri0cb2JZfXJ/DgYSF6vUp\nwmJG8wVQZKjeGcjDOL5UlsuusFncCzWBQ7RKNUSesmQRMSGkVb1/3j+skZ6UtW+5u09lHNsj6tQ5\n1s1SPrCBkedbNf0Tp0GbMJDyR4e9T04ZZwIDAQABAoGAFijko56+qGyN8M0RVyaRAXz++xTqHBLh\n3tx4VgMtrQ+WEgCjhoTwo23KMBAuJGSYnRmoBZM3lMfTKevIkAidPExvYCdm5dYq3XToLkkLv5L2\npIIVOFMDG+KESnAFV7l2c+cnzRMW0+b6f8mR1CJzZuxVLL6Q02fvLi55/mbSYxECQQDeAw6fiIQX\nGukBI4eMZZt4nscy2o12KyYner3VpoeE+Np2q+Z3pvAMd/aNzQ/W9WaI+NRfcxUJrmfPwIGm63il\nAkEAxCL5HQb2bQr4ByorcMWm/hEP2MZzROV73yF41hPsRC9m66KrheO9HPTJuo3/9s5p+sqGxOlF\nL0NDt4SkosjgGwJAFklyR1uZ/wPJjj611cdBcztlPdqoxssQGnh85BzCj/u3WqBpE2vjvyyvyI5k\nX6zk7S0ljKtt2jny2+00VsBerQJBAJGC1Mg5Oydo5NwD6BiROrPxGo2bpTbu/fhrT8ebHkTz2epl\nU9VQQSQzY1oZMVX8i1m5WUTLPz2yLJIBQVdXqhMCQBGoiuSoSjafUhV7i1cEGpb88h5NBYZzWXGZ\n37sJ5QsW+sJyoNde3xH8vdXhzU7eT82D6X/scw9RZz+/6rCJ4p0=\n-----END RSA PRIVATE KEY-----`<issue_closed>
+<issue_comment>username_0: When I type the command `heroku config:set RSA_PRIVATE_KEY=""$(cat ./key.pem)""` (I generated the key earlier) I get a message `'C:\Program' is not recognized as an internal or external command,
+operable program or batch file.`
+I don't know why this is happening.
+<issue_comment>username_1: Try using the heroku web interface rather than the command line. See instructions at [this link](https://devcenter.heroku.com/articles/config-vars#managing-config-vars) under the section ""Managing config vars"" and the subsection ""Using the Heroku Dashboard"".
+<issue_comment>username_0: Thank you. I just don't know how to change files like `Profile`. If I can write in a few minutes
+<issue_comment>username_1: I'm sorry, I don't know what you are referring to. I'm not aware of any `Profile` file, nor should you need to make any file changes to deploy a Heroku instance. All you should have to do is click the deploy button from the README and then configure your config vars as described above. After that, you will still have to configure your website to call your Heroku instance.
+<issue_comment>username_0: The `Procfile` should contain a line: `web: npm start`, Heroku probably does something with this file.
+<issue_comment>username_1: You do not need that file. That guide is outdated and the ""Deploy to Heroku"" button does much of that for you. Again, all you should need to do is click that deploy button from our README and then add your config variables.
+<issue_comment>username_0: I did as in the guide in readme - I entered the first command (on the Herok website) `git clone git@github.com:username_0Bot/staticman.git` (My fork for the repository - current) and the console shows such an error as in the picture.
+
+![img](https://user-images.githubusercontent.com/49127376/75117683-03502300-5674-11ea-9671-d6a03d339ead.png)
+<issue_comment>username_1: That section of the README is referring to running the server on your own infrastructure. Those steps are not necessary when using Heroku. Again, the **only** steps you need to follow to deploy to heroku are clicking the deploy button and entering your config variables.
+<issue_comment>username_0: But I still don't know how to enter the configuration variables. Maybe it's a Heroku section, like in the picture.
+
+![img](https://user-images.githubusercontent.com/49127376/75117797-16afbe00-5675-11ea-8d3a-1c5fb4e86767.png)
+<issue_comment>username_1: Once you have clicked the ""Deploy to Heroku"" button, you will be redirected to the Heroku page. Here you will give your instance a name and click deploy. Once this has finished, click the ""Manage App"" button at the bottom of the screen. At the top there will be a tab called ""Settings"" which you will click. On the settings page, click ""Reveal Config Vars"" and add the configuration values for your instance.
+<issue_comment>username_0: I did as you said. I added those values. I don't know if you need to add `ENV_MODE` yet. When I open my application it shows an error: https://api-igorkowalczyk.herokuapp.com/
+
+![img](https://user-images.githubusercontent.com/49127376/75118310-4cef3c80-5679-11ea-98aa-12c1a88198f6.png)
+<issue_comment>username_1: You can check your logs to try to see what exactly went wrong. I believe you must set a value for the port config value as well. I don't believe a NODE_ENV is necessary. Without access to the logs it is hard for me to tell exactly what is wrong with your setup.
+<issue_comment>username_0: ```
+2020-02-23T19:20:25.598063+00:00 heroku[router]: at=error code=H10 desc=""App crashed"" method=GET path=""/"" host=api-igorkowalczyk.herokuapp.com request_id=78c9703b-434e-4863-ba78-497480ee36f4 fwd=""77.111.245.53"" dyno= connect= service= status=503 bytes= protocol=https
+2020-02-23T19:20:27.256751+00:00 heroku[router]: at=error code=H10 desc=""App crashed"" method=GET path=""/favicon.ico"" host=api-igorkowalczyk.herokuapp.com request_id=4658d9b4-9ae2-4d65-b645-82c6267ecd59 fwd=""77.111.245.53"" dyno= connect= service= status=503 bytes= protocol=https
+2020-02-23T19:22:33.542508+00:00 heroku[router]: at=error code=H10 desc=""App crashed"" method=GET path=""/"" host=api-igorkowalczyk.herokuapp.com request_id=fbe1a40a-5f29-42aa-948f-01c645938cd9 fwd=""65.24.251.107"" dyno= connect= service= status=503 bytes= protocol=https
+2020-02-23T19:22:33.743342+00:00 heroku[router]: at=error code=H10 desc=""App crashed"" method=GET path=""/favicon.ico"" host=api-igorkowalczyk.herokuapp.com request_id=a564d5ec-1373-475d-9c25-bbd9614da488 fwd=""65.24.251.107"" dyno= connect= service= status=503 bytes= protocol=https
+2020-02-23T19:22:53.201986+00:00 heroku[router]: at=error code=H10 desc=""App crashed"" method=GET path=""/"" host=api-igorkowalczyk.herokuapp.com request_id=b5b345ba-dcd9-49aa-a082-3ce39431130f fwd=""65.24.251.107"" dyno= connect= service= status=503 bytes= protocol=https
+2020-02-23T19:22:53.282046+00:00 heroku[router]: at=error code=H10 desc=""App crashed"" method=GET path=""/favicon.ico"" host=api-igorkowalczyk.herokuapp.com request_id=f90c10c8-d5db-4c5e-b47a-6a790f1e6c7c fwd=""65.24.251.107"" dyno= connect= service= status=503 bytes= protocol=https
+2020-02-23T19:22:58.118016+00:00 heroku[router]: at=error code=H10 desc=""App crashed"" method=GET path=""/"" host=api-igorkowalczyk.herokuapp.com request_id=fb2ca08f-c24d-42fe-9f0b-514353a41333 fwd=""65.24.251.107"" dyno= connect= service= status=503 bytes= protocol=https
+2020-02-23T19:22:58.236792+00:00 heroku[router]: at=error code=H10 desc=""App crashed"" method=GET path=""/favicon.ico"" host=api-igorkowalczyk.herokuapp.com request_id=62319441-afb9-4750-8aee-0f2f488ed82c fwd=""65.24.251.107"" dyno= connect= service= status=503 bytes= protocol=https
+2020-02-23T19:23:55.565173+00:00 heroku[router]: at=error code=H10 desc=""App crashed"" method=GET path=""/"" host=api-igorkowalczyk.herokuapp.com request_id=c9abdf9a-1fa2-4394-87d4-e8916b330c38 fwd=""65.24.251.107"" dyno= connect= service= status=503 bytes= protocol=https
+2020-02-23T19:23:55.711107+00:00 heroku[router]: at=error code=H10 desc=""App crashed"" method=GET path=""/favicon.ico"" host=api-igorkowalczyk.herokuapp.com request_id=d1dabfe1-7f1d-44b6-9548-bd79d9561aa5 fwd=""65.24.251.107"" dyno= connect= service= status=503 bytes= protocol=https
+``` 
+
+The logs don't tell anything. I copied everything that showed up there.
+<issue_comment>username_1: Hmm I went to try to deploy the entire thing myself and am encountering similar issues with the RSA key. I will reopen this issue and investigate when I have time.
+<issue_comment>username_1: When I try to send data to your API that works on Heroku, I get an ""Application error"" message just like in the picture.
+![unknown](https://user-images.githubusercontent.com/49127376/75096175-4e4b3700-559d-11ea-9fb1-b1869db096a1.png)
+
+You will restore an older version, or fix the hosting of your application on Heroku, because I think it's your fault, not my form.
+<issue_comment>username_0: I tried the pull request version but it still doesn't work. Heroku shows only the logs as in the picture.
+
+![img](https://user-images.githubusercontent.com/49127376/75153864-b2403d80-570c-11ea-943b-f8ccb2c6c38d.png)
+<issue_comment>username_1: @username_0 apologies, I believe my previous instructions for generating an RSA key were incorrect. The RSA_PRIVATE_KEY value you provide to Heroku should not have any `\n` newline characters. The key should however still all be on one line.
+
+To summarize:
+* Create RSA key with `ssh-keygen -t rsa -b 4096 -C ""staticman key"" -f ~/.ssh/staticman_key`
+* Convert the string to be on one line with `cat ~/.ssh/staticman_key | tr -d '\n'`
+
+Your key as entered into Heroku should look something like this:
+<pre>-----BEGIN RSA PRIVATE KEY-----MIICXAIBAAKBgQCqGKukO1De7zhZj6+H0qtjTkVxwTCpvKe4eCZ0FPqri0cb2JZfXJ/DgYSF6vUpwmJG8wVQZKjeGcjDOL5UlsuusFncCzWBQ7RKNUSesmQRMSGkVb1/3j+skZ6UtW+5u09lHNsj6tQ51s1SPrCBkedbNf0Tp0GbMJDyR4e9T04ZZwIDAQABAoGAFijko56+qGyN8M0RVyaRAXz++xTqHBLh3tx4VgMtrQ+WEgCjhoTwo23KMBAuJGSYnRmoBZM3lMfTKevIkAidPExvYCdm5dYq3XToLkkLv5L2pIIVOFMDG+KESnAFV7l2c+cnzRMW0+b6f8mR1CJzZuxVLL6Q02fvLi55/mbSYxECQQDeAw6fiIQXGukBI4eMZZt4nscy2o12KyYner3VpoeE+Np2q+Z3pvAMd/aNzQ/W9WaI+NRfcxUJrmfPwIGm63ilAkEAxCL5HQb2bQr4ByorcMWm/hEP2MZzROV73yF41hPsRC9m66KrheO9HPTJuo3/9s5p+sqGxOlFL0NDt4SkosjgGwJAFklyR1uZ/wPJjj611cdBcztlPdqoxssQGnh85BzCj/u3WqBpE2vjvyyvyI5kX6zk7S0ljKtt2jny2+00VsBerQJBAJGC1Mg5Oydo5NwD6BiROrPxGo2bpTbu/fhrT8ebHkTz2eplU9VQQSQzY1oZMVX8i1m5WUTLPz2yLJIBQVdXqhMCQBGoiuSoSjafUhV7i1cEGpb88h5NBYZzWXGZ37sJ5QsW+sJyoNde3xH8vdXhzU7eT82D6X/scw9RZz+/6rCJ4p0=-----END RSA PRIVATE KEY-----</pre>
+<issue_comment>username_0: I generated a new key (correct) application still does not work. I don't know what to do next.
+<issue_comment>username_1: I can't tell what your error is without some kind of error message or logs. The fix should be merged into dev, but is not yet in master. When clicking the deploy button, ensure you are looking at the README on the dev branch. You also may want to try manually restarting your Heroku infrastructure by going to ""More"" in the top right corner of the dashboard and selecting ""Restart all dynos"".
+<issue_comment>username_0: In my project (fork staticman) I gave dev's master commit to the branch. Still doesn't work. Logs still the same.
+<issue_comment>username_1: You do not appear to have a fork of staticman on your GitHub. Are you referring to a local copy? I have tested the instructions I have provided to you multiple times and I am able to successfully deploy instances without issue. Rather than trying to use your own fork, use the button in the top left of this repo's main page to select the dev branch. Once that page loads, use the ""Deploy to Heroku"" button there to deploy this dev branch. When you are redirected to Heroku, you should see that the repo it is deploying from contains `#dev`. 
+
+The errors you are seeing indicate that there is a problem with your RSA key. Ensure you have generated it using the provided command, and that all newline characters have been removed so that the text is all on one line. The minimal config values needed by this application are GITHUB_TOKEN and RSA_PRIVATE_KEY. Try without any other config values.
+<issue_comment>username_0: My fork is https://github.com/igorkowalczykbot/staticman, because I want to use this account for comments. I'll try today when I have time from the original repository.
+<issue_comment>username_0: I tried the `dev` branch and it still doesn't work, I filled in the correct github token (repo access), and correctly generated RSA PRIVATE KEY. The application still returns an error.
+Here are the logs.
+```
+2020-02-25T20:22:03.630277+00:00 heroku[web.1]: State changed from starting to crashed
+2020-02-25T20:22:03.611270+00:00 heroku[web.1]: Process exited with status 0
+2020-02-25T20:22:11.720865+00:00 heroku[router]: at=error code=H10 desc=""App crashed"" method=GET path=""/"" host=api-igorkowalczyk.herokuapp.com request_id=ce663a5d-d2ac-40df-8732-360c78ea5cef fwd=""77.111.245.66"" dyno= connect= service= status=503 bytes= protocol=https
+2020-02-25T20:22:19.808818+00:00 heroku[router]: at=error code=H10 desc=""App crashed"" method=GET path=""/favicon.ico"" host=api-igorkowalczyk.herokuapp.com request_id=41561a29-2a91-4fd0-9f77-9909fe8d8585 fwd=""77.111.245.66"" dyno= connect= service= status=503 bytes= protocol=https
+```
+I've read the logs to the bug `503`
+<issue_comment>username_1: That part of the logs doesn't indicate what caused the crash. Try leaving the logs console open in one tab and restarting all dynos in another so you can view the full logs. That should hopefully give us a more verbose error message.
+<issue_comment>username_0: ```
+2020-02-26T01:44:27.460725+00:00 app[web.1]:     at NodeRSA.module.exports.NodeRSA.importKey (/app/node_modules/node-rsa/src/NodeRSA.js:185:22)
+2020-02-26T01:44:27.460725+00:00 app[web.1]:     at Object.<anonymous> (/app/lib/RSA.js:6:5)
+2020-02-26T01:44:27.460726+00:00 app[web.1]:     at Module._compile (internal/modules/cjs/loader.js:1151:30)
+2020-02-26T01:44:27.460726+00:00 app[web.1]:     at Object.Module._extensions..js (internal/modules/cjs/loader.js:1171:10)
+2020-02-26T01:44:27.460727+00:00 app[web.1]:     at Module.load (internal/modules/cjs/loader.js:1000:32) {
+2020-02-26T01:44:27.460727+00:00 app[web.1]:   name: 'InvalidAsn1Error',
+2020-02-26T01:44:27.460727+00:00 app[web.1]:   message: 'encoding too long'
+2020-02-26T01:44:27.460728+00:00 app[web.1]: }
+2020-02-26T01:44:27.531480+00:00 heroku[web.1]: State changed from starting to crashed
+2020-02-26T01:44:27.516295+00:00 heroku[web.1]: Process exited with status 0
+2020-02-26T06:37:53.524000+00:00 heroku[web.1]: State changed from crashed to starting
+2020-02-26T06:37:57.576014+00:00 heroku[web.1]: Starting process with command `npm start`
+2020-02-26T06:37:59.481212+00:00 app[web.1]: 
+2020-02-26T06:37:59.481231+00:00 app[web.1]: > staticman@3.0.0 prestart /app
+2020-02-26T06:37:59.481232+00:00 app[web.1]: > if [ ! -d node_modules ]; then npm install; fi
+2020-02-26T06:37:59.481232+00:00 app[web.1]: 
+2020-02-26T06:37:59.492289+00:00 app[web.1]: 
+2020-02-26T06:37:59.492291+00:00 app[web.1]: > staticman@3.0.0 start /app
+2020-02-26T06:37:59.492291+00:00 app[web.1]: > node index.js
+2020-02-26T06:37:59.492291+00:00 app[web.1]: 
+2020-02-26T06:37:59.893738+00:00 app[web.1]: Error [InvalidAsn1Error]: encoding too long
+2020-02-26T06:37:59.893802+00:00 app[web.1]:     at newInvalidAsn1Error (/app/node_modules/node-rsa/node_modules/asn1/lib/ber/errors.js:7:13)
+2020-02-26T06:37:59.893803+00:00 app[web.1]:     at Reader.readLength (/app/node_modules/node-rsa/node_modules/asn1/lib/ber/reader.js:102:13)
+2020-02-26T06:37:59.893803+00:00 app[web.1]:     at Reader.readSequence (/app/node_modules/node-rsa/node_modules/asn1/lib/ber/reader.js:135:16)
+2020-02-26T06:37:59.893804+00:00 app[web.1]:     at Object.privateImport (/app/node_modules/node-rsa/src/formats/pkcs1.js:63:16)
+2020-02-26T06:37:59.893804+00:00 app[web.1]:     at Object.detectAndImport (/app/node_modules/node-rsa/src/formats/formats.js:63:48)
+2020-02-26T06:37:59.893805+00:00 app[web.1]:     at NodeRSA.module.exports.NodeRSA.importKey (/app/node_modules/node-rsa/src/NodeRSA.js:185:22)
+2020-02-26T06:37:59.893805+00:00 app[web.1]:     at Object.<anonymous> (/app/lib/RSA.js:6:5)
+2020-02-26T06:37:59.893806+00:00 app[web.1]:     at Module._compile (internal/modules/cjs/loader.js:1151:30)
+2020-02-26T06:37:59.893806+00:00 app[web.1]:     at Object.Module._extensions..js (internal/modules/cjs/loader.js:1171:10)
+2020-02-26T06:37:59.893806+00:00 app[web.1]:     at Module.load (internal/modules/cjs/loader.js:1000:32) {
+2020-02-26T06:37:59.893807+00:00 app[web.1]:   name: 'InvalidAsn1Error',
+2020-02-26T06:37:59.893807+00:00 app[web.1]:   message: 'encoding too long'
+2020-02-26T06:37:59.893808+00:00 app[web.1]: }
+2020-02-26T06:37:59.968328+00:00 heroku[web.1]: State changed from starting to crashed
+2020-02-26T06:37:59.972446+00:00 heroku[web.1]: State changed from crashed to starting
+2020-02-26T06:37:59.950476+00:00 heroku[web.1]: Process exited with status 0
+2020-02-26T06:38:03.842371+00:00 heroku[web.1]: Starting process with command `npm start`
+2020-02-26T06:38:05.909035+00:00 app[web.1]: 
+2020-02-26T06:38:05.909056+00:00 app[web.1]: > staticman@3.0.0 prestart /app
+2020-02-26T06:38:05.909057+00:00 app[web.1]: > if [ ! -d node_modules ]; then npm install; fi
+2020-02-26T06:38:05.909057+00:00 app[web.1]: 
+2020-02-26T06:38:05.919382+00:00 app[web.1]: 
+2020-02-26T06:38:05.919384+00:00 app[web.1]: > staticman@3.0.0 start /app
+2020-02-26T06:38:05.919384+00:00 app[web.1]: > node index.js
+2020-02-26T06:38:05.919384+00:00 app[web.1]: 
+2020-02-26T06:38:06.329557+00:00 app[web.1]: Error [InvalidAsn1Error]: encoding too long
+2020-02-26T06:38:06.337943+00:00 app[web.1]:     at newInvalidAsn1Error (/app/node_modules/node-rsa/node_modules/asn1/lib/ber/errors.js:7:13)
+2020-02-26T06:38:06.337946+00:00 app[web.1]:     at Reader.readLength (/app/node_modules/node-rsa/node_modules/asn1/lib/ber/reader.js:102:13)
+2020-02-26T06:38:06.337946+00:00 app[web.1]:     at Reader.readSequence (/app/node_modules/node-rsa/node_modules/asn1/lib/ber/reader.js:135:16)
+2020-02-26T06:38:06.337947+00:00 app[web.1]:     at Object.privateImport (/app/node_modules/node-rsa/src/formats/pkcs1.js:63:16)
+2020-02-26T06:38:06.337948+00:00 app[web.1]:     at Object.detectAndImport (/app/node_modules/node-rsa/src/formats/formats.js:63:48)
+2020-02-26T06:38:06.337948+00:00 app[web.1]:     at NodeRSA.module.exports.NodeRSA.importKey (/app/node_modules/node-rsa/src/NodeRSA.js:185:22)
+2020-02-26T06:38:06.337949+00:00 app[web.1]:     at Object.<anonymous> (/app/lib/RSA.js:6:5)
+2020-02-26T06:38:06.337950+00:00 app[web.1]:     at Module._compile (internal/modules/cjs/loader.js:1151:30)
+2020-02-26T06:38:06.337950+00:00 app[web.1]:     at Object.Module._extensions..js (internal/modules/cjs/loader.js:1171:10)
+2020-02-26T06:38:06.337951+00:00 app[web.1]:     at Module.load (internal/modules/cjs/loader.js:1000:32) {
+2020-02-26T06:38:06.337952+00:00 app[web.1]:   name: 'InvalidAsn1Error',
+2020-02-26T06:38:06.337952+00:00 app[web.1]:   message: 'encoding too long'
+2020-02-26T06:38:06.337953+00:00 app[web.1]: }
+2020-02-26T06:38:06.419069+00:00 heroku[web.1]: State changed from starting to crashed
+2020-02-26T06:38:06.401866+00:00 heroku[web.1]: Process exited with status 0
+2020-02-26T06:38:37.755263+00:00 heroku[router]: at=error code=H10 desc=""App crashed"" method=GET path=""/"" host=api-igorkowalczyk.herokuapp.com request_id=32830188-8e1c-4997-a6ac-51544bcf9ed2 fwd=""77.111.245.66"" dyno= connect= service= status=503 bytes= protocol=https
+``` All logs when restarting
+<issue_comment>username_1: Hmm, definitely still a problem with the RSA key. Can you try generating the key with:
+`openssl genrsa -out private.pem 2048`
+`cat private.pem | tr -d '\n'`
+<issue_comment>username_0: `-----END RSA PRIVATE KEY-----z84uLNRXvnMPhnJ73jZbXFoAlkDu3PVgjmQ` This is the key when i generate with second command (i paste first too)
+<issue_comment>username_1: That's not right. The key should appear in your terminal something like:
+
+`
+-----BEGIN RSA PRIVATE KEY-----MIIEowIBAAKCAQEAtvUg5B1ozIO6FHCiO2RXBUOBDVqISFKMSUXM4gZYkN1nrquL0Ii/WImuoPMmnaOKwIIpjXJy5+Zv7LD0sVCGoGzBszWsB3JureJXJbAsOhLSwQ0Gy5nuuYcPy+spZarf+HEyuDIRSgIPwMeWlYBQfQOBIvc4F2UPyYuavLQ/GI7n251USwdYd+kyM0Q/9JFubaadh8n93hOV5AVyIroPgykNM+HyZZzR/F6ss59XDC/R8DQCYNHBiyGwQw9U8ZXbTchQDqyOXWu54ofGWAU3vbdHnlbEu8vgS11H/eb9yr68SZW4u+P3zN5IIuYnCCnBltWW+IBAHUXy4kifdXkFIQIDAQABAoIBABLD/cWoBpHDiRiDnQA+gHZ3wArgmE3iuaTiVetw/zCMpQ/TZJnVDNtF8/VqOzG8DoVEVIK/lG2Ywy4h0FdHjSdzQELjZGu3HwcSyiGBemfSem92qJXFiijZY5Nk4XAeIK7Y3XzrFb7jiz4YuqdG6/qGm348oTI1GXNwsEResIISKeNngk0bF1JB2Wx1mYW3+aBe/oMe40oLjcfNYVi5wotdTQVODm10YecX4iPPcp5YeQxPC4CCWZH8KbnVHNmyVPC0PGJtzNDIXwTwy1oDM1PugXtT5Ux8ntfw0mUoVOM9cuogo9cO5brQR75YNLRQpGX7yWkkr5e3baURVd943mECgYEA4UYvlQCXKzksuGlK8CwE8nK5nIVwT7AuP8/havdJHmn27WZRZDs6Qz0UbWfX8b8vqm4Vu4UBKf+YqsC6odMc9r0U0zv3O4FQkTgrwAoDIjkTd9/ytSugpWl6IUDD+PNFLMb+pbxVArHCE5opdzZf4POSd2W/gtbY/qkKfT5yMZUCgYEAz+ljec1kz7xeWC/scKM+5O0dpDt/v6mPbPQbJhb8bs8Dpa7T+VowAbRUe6HwvQ3Q4JD3qrtL+xVovMTenRNiBKspqJgg00GrMyBtOjhufveo3GTXWuDo6dGGIzxisYfKXmXkT0ItW0IIE2CZOpPQGJjldcKBpPZVmEUp6dHsel0CgYBvNXfN5fG6m8oQ66Hb+M8kZTBuLY2pOT9LrzMH3DXTdto4jhdGFNsJUIDiFa6MICbGyvudi+ZsNkrGmMhJlO+qeuNp+CNv08HTPtiSQB8V6PlMZ1joyTXQEscA3XkhT+7pUP9rEBMjdl9pz+QCfuxMH9JBcRBe5fNPnGGaPJahFQKBgAfOrtKbGOcIHs7W9d0A9FKqaMuLBHAREPa5b++NO2t50Jw/JWyeq2DVAbsmyKCAzVAxgWti3yaNlkJIbkedu7eLKeRP2iO0upYP6KogBl40NJ4aF1AtU/G70XqvQNGD1OCYmOs1A/kCUMVRgk+Fz3GtBCjY5f9o1KwEJN/H50ZtAoGBALdgtwSQNfUGBGVhSsf8wmiDrlN6NdjSXyfYHzbnpRot/LKokF8x2/imMmAWIUxYLAg6TxapWNS+Xm+ut2WqXEs51TGTCkQxOLyIMRgj+lSZDFHy0cAPbmI8bva5+ACVKbtmM3Rk8I+GQ3K5uWXXdZ/00BvKA/b+qOxUmTlFrqsy-----END RSA PRIVATE KEY-----
+`
+
+Which is the string you would enter into the Heroku config variable. You should not have more characters after the end of `-----END RSA PRIVATE KEY-----`
+<issue_comment>username_2: Thanks to Travis, I was able to get my key accepted at Heroku. The important new feature was the ""-m PEM"" option on ssh-keygen.
+
+ssh-keygen -m PEM -t rsa -b 4096 -C ""staticman key"" -f ~/.ssh/staticman_key
+heroku config:add --app ${bridge_app_name} ""RSA_PRIVATE_KEY=$(cat ~/.ssh/staticman_key | tr -d '\n')""
+heroku config:add --app ${bridge_app_name} ""GITHUB_TOKEN=${github_token}""
+<issue_comment>username_0: @username_2 When i paste the second comment my output is:
+```
+'C:\Program' is not recognized as an internal or external command,
+operable program or batch file.
+```
+---
+@username_1 I paste these commends in the Git Bash terminal maybe it's his fault.
+<issue_comment>username_1: @username_0 I do not believe Git Bash will work for most of these commands. From what I understand, Git Bash does not include many of the default unix commands. If you are using Windows 10, I recommend giving the [Windows Subsystem for Linux](https://docs.microsoft.com/en-us/windows/wsl/install-win10) a try.
+<issue_comment>username_0: @username_2 I'm already have Heroku CLI installed.
+
+---
+
+@username_1 If i have time i will try this solution.
+<issue_comment>username_0: @username_1 I generated a new key with Putty - it looks like a regular key from the Git Bash console (only with spaces and new lines). Maybe I'll describe all the steps I do - maybe I'm doing something wrong. 
+
+I go to the `dev` branch on the original project and click on the `readme` button ""Deploy to Heroku""
+
+2. when I'm transferred to herok, I give the application the name ""api-igorificator"" (it is available),
+I set the region to the USA and wait for the application to be created.
+
+3. I click the `manage app` and go to ""Config Vars"" settings. In the first field I enter `GITHUB_TOKEN` and copy the account access token generated by github and paste it there. In the second field, I enter `RSA_PRIVATE_KEY` and paste the token generated by the console. I save this section and check if application works.
+<issue_comment>username_3: @username_1  Thanks so much for your kind patience with @username_0. Your instructions are really helpful
+
+My Heroku app URL: https://anasbasem.herokuapp.com It works well (**Hello from Staticman version 3.0.0!**)
+Here is my Minimal Staticman v3 Demo URL: https://username_3.github.io/anas
+This is my Github repository: https://github.com/username_3/anas
+
+Below is the screenshot from Heroku app log:
+
+![Screen Shot 2020-03-03 at 9 19 14 PM](https://user-images.githubusercontent.com/14953296/75812031-29717380-5d96-11ea-9024-6e0ef4d194f0.png)
+
+I appreciate your kind help
+
+Thanks so much
+<issue_comment>username_3: @username_1 May you please have a quick look at the error in my Heroku app log screenshot in my previous post?
+
+Here it's:
+
+`2020-03-04T00:53:48.472979+00:00 heroku[router]: at=error code=H12 desc=""Request timeout"" method=POST path=""/v3/entry/github/username_3/anas/master/comments"" host=anasbasem.herokuapp.com request_id=8a24e204-a016-461e-8503-850798dea306 fwd=""41.46.157.92"" dyno=web.1 connect=0ms service=30001ms status=503 bytes=0 protocol=https
+`
+
+It shows the following error:
+
+**Application error
+An error occurred in the application and your page could not be served. If you are the application owner, check your logs for details. You can do this from the Heroku CLI with the command
+heroku logs --tail**
+
+![Screen Shot 2020-03-04 at 2 51 40 AM](https://user-images.githubusercontent.com/14953296/75834199-09f13f80-5dc4-11ea-8434-cc492f53a50a.png)
+
+May you please advise from where can I fix?
+
+Thanks so much
+<issue_comment>username_1: @username_3 do you have a GitHub personal access token in your Heroku config vars? Based on the screenshot from your first post, it seems to be having issues authenticating with GitHub.
+<issue_comment>username_3: @username_1 Thanks for your time and your response
+
+Yes I have GitHub personal access token
+
+![Screen Shot 2020-03-04 at 3 59 35 AM](https://user-images.githubusercontent.com/14953296/75837314-2645aa00-5dcd-11ea-8bf4-29acdebf7fe5.png)
+<issue_comment>username_1: @username_3 Can you try using this call instead:
+`method=POST path=""/v2/entry/username_3/anas/master/comments""`
+
+I haven't had time to test out v3 yet, and it seems like that endpoint may not be working properly.
+<issue_comment>username_3: @username_1 Thanks again
+
+I get different message:
+`{""success"":false,""errorCode"":""INVALID_VERSION""}`
+
+![Screen Shot 2020-03-04 at 4 49 02 AM](https://user-images.githubusercontent.com/14953296/75840455-ea621300-5dd3-11ea-8f37-99f878b80df4.png)
+
+Below is Heroku app log:
+
+![Screen Shot 2020-03-04 at 4 47 07 AM](https://user-images.githubusercontent.com/14953296/75840498-0c5b9580-5dd4-11ea-8fde-e1f68d76ef82.png)
+<issue_comment>username_1: @username_0 to be clear, when using puttygen you must:
+1. Click 'Generate' ensuring 'RSA' is the type selected and number of bits is 2048
+1. Move your mouse around
+1. Click 'Conversions' in the top menu, and then 'Export OpenSSH key'
+1. Accept the warning about no passphrase, this is expected.
+1. Save the key somewhere you'll remember.
+1. Open Powershell
+1. Use `(Get-Content 'C:\username\Downloads\keyfile') -join '' | Set-Content 'C:\username\Downloads\keyfile'`
+1. Use `Get-Content 'C:\username\Downloads\keyfile'` to print your key to the console. Copy this key, being careful to avoid copying any trailing spaces
+1. Paste that value into Heroku
+<issue_comment>username_1: @username_3 You shouldn't be calling a GET request to that endpoint. The /entry endpoints are for posting comment forms to. If you are using a separate bot account (the account your GITHUB_TOKEN belongs to), you'll also need to make sure to hit the /connect endpoint to make sure the bot account is added as a collaborator on your main account.
+
+You may find [this link](https://travisdowns.github.io/blog/2020/02/05/now-with-comments.html) helpful if you haven't already seen it.
+<issue_comment>username_3: **This worked**. I have changed to V2. Then, in the endpoint URL path, I have removed `github` that is between `entry` and before `username_3` Thank you. Thank you very much 🙂 
+
+Finally, do you have any suggestion to make V3 works?
+<issue_comment>username_1: For /v3 with github, you must authenticate as a GitHub app.
+1. Go to your GitHub Settings then Developer settings.
+1. Select the 'GitHub Apps' tab and click 'New GitHub App'.\
+1. Name the app, give it a Homepage URL, and give it full Read & Write Pull request access
+1. In Heroku, use the GITHUB_APP_ID instead of GITHUB_TOKEN and paste in the App ID from GitHub.
+1. Click 'Generate a private key' at the bottom of the GitHub app page
+1. Convert that downloaded key to be all on one line and add it to the Heroku config vars as GITHUB_PRIVATE_KEY
+
+Going a bit off memory but that should work.
+<issue_comment>username_3: @username_1 
+Thanks again for your usual cooperation. I will follow your instructions exactly and I'm confident that it will work. At the end, will I create something like this: https://github.com/apps/staticman-net/?
+<issue_comment>username_1: @username_3 yes, although your application doesn't have to be public. It can be created for just your account when you fill out the form to create a new GitHub application.
+<issue_comment>username_0: Yeah. The key needs spaces (new lines) I didn't have them. After generating the key with PuTTy and copying it with N++ and pasting it into `RSA_PRIVATE_KEY` the application worked: https://api-igorkowalczyk.herokuapp.com/.
+Shows ""Hello from Staticman version 3.0.0!`
+But when I go to the site: https://api-igorkowalczyk.herokuapp.com/v2/entry/igorkowalczyk/blog/master shows: ``Cannot GET /v2/entry/igorkowalczyk/blog/master`
+I remember ""Invite the bot"", but when I go to the site: https://api-igorkowalczyk.herokuapp.com/v2/connect/igorkowalczyk/blog, I get a sign: `Invitation not found` but I already invited my bot as shown in the screenshot below
+
+![img](https://user-images.githubusercontent.com/49127376/75885472-ddbada80-5e26-11ea-88a9-9f3950b10dad.png)
+
+PS: I want to use v2 API, however, seems better to me and it works the same (I guess), no need to add (and create new) applications.
+<issue_comment>username_1: @username_0 in your connect call, the username should be that of your bot account not your main account. The connect endpoint is meant to make your bot account accept the collaborator invite.
+<issue_comment>username_0: https://api-igorkowalczyk.herokuapp.com/v2/connect/igorkowalczykbot/blog? But it show the same message.
+<issue_comment>username_1: @username_0 I was wrong, it should be your normal account name and not the bot account.
+
+The correct form is a GET request to `https://api-igorkowalczyk.herokuapp.com/v2/connect/igorkowalczyk/blog`
+
+ You can try revoking and resending the invitation. Watch the Heroku logs too to see if anything errors are being thrown there. Worst case, you can log in to the bot account and manually accept the invite.
+<issue_comment>username_0: `xhr.send(encodeURI(data))` I don't know why it sends requests to the site address and `/null`  e.g. ""https://igorkowalczyk.github.io/blog//internet/2020/01/22/null"" and requests aren't sent, I don't know how to put it to send any to ""https://api-igorkowalczyk.herokuapp.com/SEND COMMNETS""
+<issue_comment>username_4: @username_1 first of all, thank you for all your support here. I am running my own staticman instance on heroku as well, and trying to get it to work with my github pages blog. I was previously trying to use `v3` using a personal access token. Thanks to you i now finally know that this won't work. So now I'm trying to switch to the GitHub App way as you described above. I have a couple of questions regarding that:
+
+- In my GitHub app setup, what do I put as `Homepage URL` and `Webhook URL` (both mandatory)?
+
+- In my staticman repo, in `config.production.json`, what variables do I need to set? Just `githubAppID` and `githubPrivateKey` or also still the `rsaPrivateKey`? And is the following the correct way of getting the variables from my env:
+
+```
+{
+  ""githubAppID"": process.env.GITHUB_APP_ID,
+  ""githubPrivateKey"": JSON.stringify(process.env.GITHUB_PRIVATE_KEY),
+  ""port"": 8080
+}
+```
+
+Any help on this would be really appreciated.
+<issue_comment>username_1: @username_0 I'm not really sure what you're asking. That sounds like a problem with how you're submitting the comment form from your website.
+
+@username_4 Those URLs should be the URL of your staticman instance I believe. I don't think it really matters in this case though. As far as the config values, to run as a GitHub app you'll need rsaPrivateKey, githubAppID, and githubPrivateKey. Note these are two separate private keys.
+<issue_comment>username_0: I'm asking because my script can't send a request to api (and from that I don't know if this API works) The script below:
+
+```js
+const commentForm = document.querySelector('.commentform');
+const commentFormInputs = document.querySelectorAll('.commentform-input');
+const slugInput = document.querySelector('.commentform-input-slug');
+const optionsSlugInput = document.querySelector('.commentform-input-optionsslug');
+const nameInput = document.querySelector('.commentform-input-name');
+const emailInput = document.querySelector('.commentform-input-email');
+const messageInput = document.querySelector('.commentform-input-message');
+const errorMessagesDiv = document.querySelector('.commentform-errormessages');
+const sendFailedDiv = document.querySelector('.commentform-sendfailed');
+const sendSucceededDiv = document.querySelector('.commentform-sendsucceeded');
+const url = 'https://api-igorkowalczyk.herokuapp.com/v2/entry/igorkowalczyk/blog/master';
+function post(url, data, callback, errorCallback) {
+const xhr = new XMLHttpRequest();
+xhr.open('POST', url);
+xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+xhr.onload = function() {
+if (xhr.status === 200) {
+callback(xhr.responseText);
+} else if (xhr.status !== 200) {
+errorCallback(xhr.responseText);
+}
+};
+xhr.send;
+}
+if (commentForm) {
+commentForm.addEventListener('submit', (e) => {
+e.preventDefault();
+errorMessagesDiv.innerHTML = '';
+sendFailedDiv.style.display = 'none';
+sendSucceededDiv.style.display = 'none';
+const slug = slugInput.value.trim();
+const optionsSlug = optionsSlugInput.value.trim();
+const name = nameInput.value.trim();
+const email = emailInput.value.trim();
+const message = messageInput.value.trim();
+let error = false;
+let fatalError = false;
+const messages = [];
+if (name.length < 2) {
+error = true;
+messages.push('<div class=""commentform-errormessage"">Proszę wpisać imię.</div>');
+}
+if (email.search(/^[a-zA-Z0-9.!#$%&’*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/) === -1) {
+error = true;
+messages.push('<div class=""commentform-errormessage"">Proszę wpisać poprawny e-mail.</div>');
+}
+if (message.length < 2) {
+error = true;
+messages.push('<div class=""commentform-errormessage"">Proszę wpisać wiadomość.</div>');
+}
+if (fatalError) {
+return false;
+}
+if (error) {
+errorMessagesDiv.innerHTML = messages.join('');
+return false;
+}
+const params = [];
+for (let i = 0; i < commentFormInputs.length; i++) {
+const input = commentFormInputs[i];
+params.push(`${ input.name }=${ input.value }`);
+}
+post(
+console.log(""Hello world!""),
+e.target.getAttribute('data-action'),
+params.join('&'),
+function(text){
+commentForm.reset();
+sendSucceededDiv.style.display = 'block';
+},
+function(text){
+sendFailedDiv.style.display = 'block';
+}
+);
+});
+}
+```
+
+And HTML (Rendered, Unrendered) here:
+https://pastebin.com/a4Q9zsDN
+<issue_comment>username_1: @username_0 you can try sending the request to the API directly with a REST client like [Postman](https://www.postman.com/) to see if the request is working as expected. From there try replicating that request in your front-end code. The postman request would look something like:
+
+![image](https://user-images.githubusercontent.com/7026879/76896720-c4734e80-6868-11ea-9207-2e9e54ef1667.png)
+<issue_comment>username_4: @username_1 thank you! I'm still somehow getting MISSING_CONFIG_BLOCK errors, which I think can get thrown because of multiple underlying reasons. However, I got `v2` to work finally, so I'll stick to that for now :). Thank you again!
+<issue_comment>username_0: @username_1 But I don't care if the API works anymore, the JS script sends out the requests badly, I don't know what to do... I reworked it a little bit to send requests from one API, but it still doesn't display any errors. Maybe it's the fault of this element:
+
+```js
+post(
+console.log(""Hello world!""),
+e.target.getAttribute('data-action'),
+params.join('&'),
+function(text){
+commentForm.reset();
+sendSucceededDiv.style.display = 'block';
+},
+function(text){
+sendFailedDiv.style.display = 'block';
+}
+);
+});
+}
+```
+
+I added console.log there to check if the script works there.
+<issue_comment>username_1: @username_0 well, this repo is strictly for fixing issues found in the Staticman API. I'm sorry, but I don't have the time to go through your project (and everyone else's that posts here) and figure out what's wrong with your front-end code.
+
+As I suggested previously, I'd recommend going to bare HTML submission first to get the bare minimum comment submission functionality working and then you can start adding back in the javascript features you'd like to use. Additionally, the JS fetch API makes dealing with requests easier than using XMLHttpRequests in my opinion. You might find [this Stack Overflow post](https://stackoverflow.com/questions/46640024/how-do-i-post-form-data-with-fetch-api) to be helpful.
+<issue_comment>username_5: Hi @username_1! I followed your instructions in this comment, but I'm getting a `Request timeout`. Here's the log trail:
+
+```
+2020-03-22T18:01:39.749062+00:00 app[web.1]: (node:24) UnhandledPromiseRejectionWarning: Error: error:0909006C:PEM routines:get_name:no start line
+2020-03-22T18:01:39.749084+00:00 app[web.1]:     at Sign.sign (internal/crypto/sig.js:112:29)
+2020-03-22T18:01:39.749084+00:00 app[web.1]:     at Object.sign (/app/node_modules/jwa/index.js:152:45)
+2020-03-22T18:01:39.749085+00:00 app[web.1]:     at Object.jwsSign [as sign] (/app/node_modules/jws/lib/sign-stream.js:32:24)
+2020-03-22T18:01:39.749085+00:00 app[web.1]:     at Object.module.exports [as sign] (/app/node_modules/jsonwebtoken/sign.js:204:16)
+2020-03-22T18:01:39.749086+00:00 app[web.1]:     at getSignedJsonWebToken (/app/node_modules/@octokit/app/dist-node/index.js:31:30)
+2020-03-22T18:01:39.749086+00:00 app[web.1]:     at GitHub._authenticate (/app/lib/GitHub.js:58:21)
+2020-03-22T18:01:39.749086+00:00 app[web.1]:     at /app/lib/GitHub.js:31:32
+2020-03-22T18:01:39.749088+00:00 app[web.1]:     at new GitHub (/app/lib/GitHub.js:46:7)
+2020-03-22T18:01:39.749089+00:00 app[web.1]:     at Object.module.exports.create (/app/lib/GitServiceFactory.js:11:14)
+2020-03-22T18:01:39.749089+00:00 app[web.1]:     at /app/lib/Staticman.js:32:35
+2020-03-22T18:01:39.749089+00:00 app[web.1]:     at new Staticman (/app/lib/Staticman.js:46:7)
+2020-03-22T18:01:39.749090+00:00 app[web.1]:     at module.exports (/app/controllers/process.js:126:27)
+2020-03-22T18:01:39.749090+00:00 app[web.1]:     at Layer.handle [as handle_request] (/app/node_modules/express/lib/router/layer.js:95:5)
+2020-03-22T18:01:39.749090+00:00 app[web.1]:     at next (/app/node_modules/express/lib/router/route.js:137:13)
+2020-03-22T18:01:39.749091+00:00 app[web.1]:     at /app/server.js:169:14
+2020-03-22T18:01:39.749091+00:00 app[web.1]:     at Layer.handle [as handle_request] (/app/node_modules/express/lib/router/layer.js:95:5)
+2020-03-22T18:01:39.749091+00:00 app[web.1]:     at next (/app/node_modules/express/lib/router/route.js:137:13)
+2020-03-22T18:01:39.749091+00:00 app[web.1]:     at /app/server.js:144:14
+2020-03-22T18:01:39.749092+00:00 app[web.1]:     at Layer.handle [as handle_request] (/app/node_modules/express/lib/router/layer.js:95:5)
+2020-03-22T18:01:39.749092+00:00 app[web.1]:     at next (/app/node_modules/express/lib/router/route.js:137:13)
+2020-03-22T18:01:39.749092+00:00 app[web.1]:     at /app/server.js:129:14
+2020-03-22T18:01:39.749093+00:00 app[web.1]:     at Layer.handle [as handle_request] (/app/node_modules/express/lib/router/layer.js:95:5)
+2020-03-22T18:01:39.749171+00:00 app[web.1]: (node:24) UnhandledPromiseRejectionWarning: Unhandled promise rejection. This error originated either by throwing inside of an async function without a catch block, or by rejecting a promise which was not handled with .catch(). To terminate the node process on unhandled promise rejection, use the CLI flag `--unhandled-rejections=strict` (see https://nodejs.org/api/cli.html#cli_unhandled_rejections_mode). (rejection id: 3)
+2020-03-22T18:01:39.749239+00:00 app[web.1]: (node:24) [DEP0018] DeprecationWarning: Unhandled promise rejections are deprecated. In the future, promise rejections that are not handled will terminate the Node.js process with a non-zero exit code.
+2020-03-22T18:02:09.723405+00:00 heroku[router]: at=error code=H12 desc=""Request timeout"" method=POST path=""/v3/entry/github/esporo/esporo/master/comments"" host=esporo-staticman.herokuapp.com request_id=ebdaa58b-cb1f-4ceb-9a5e-dfd5997bdc2e fwd=""138.36.184.66"" dyno=web.1 connect=0ms service=30001ms status=503 bytes=0 protocol=https
+```
+
+This only happens when trying to use the v3 endpoint, v2 works fine.
+<issue_comment>username_1: @username_5 which endpoint specifically are you trying to use?
+<issue_comment>username_5: @username_1 I'm trying to connect using `/v3/connect/github/<username>/<repository>`.
+<issue_comment>username_6: I have the same issue. Does anyone have a fix for it?
+<issue_comment>username_1: @username_5 @username_6 sorry I disappeared in the middle of assisting you with this. I've been quite busy lately and haven't had the necessary bandwidth to devote to this project. For now I'd recommend using v2 and authenticating using a token as that's the most stable and documented approach.
+<issue_comment>username_6: Sure, I'll reconfigure with v2 and comeback. When I did it yesterday, it's not showing the comments below the page.
+let me give a shot again.
+<issue_comment>username_6: @username_1 @mmistakes Even v2 is not working now, can you please help me with documentation I'm using Minimal Mistakes, latest release v4.19.2
+<issue_comment>username_1: @username_6 take a look at these resources:
+* https://travisdowns.github.io/blog/2020/02/05/now-with-comments.html
+* https://spinningnumbers.org/a/staticman-heroku.html
+<issue_comment>username_6: @username_1 I went trough them over multiple times from for last weekdays 😄 
+
+Here is things confusing me.
+1 . ""**_config.yml**"" Staticman url entry
+in ""https://travisdowns.github.io/blog/2020/02/05/now-with-comments.html"" its mentioned as 
+
+**staticman_url**: https://${bridge_app_name}.herokuapp.com/v2/entry/${github-username}/${blog-repo}/master/comments
+
+and in ""https://spinningnumbers.org/a/staticman-heroku.html"" its mentioned as 
+
+**staticmanUrl**: https://spinningnumbers-staticmandev2.herokuapp.com/v2/entry/username_2/username_2.github.io/master/comments
+
+either of them didn't who any logs in my Heroku app and I see the error
+ _""Sorry, there was an error with your submission. Please make sure all required fields have been completed and try again.""_
+
+But luckily today, this worked for me @mmistakes can update in the configuration document.
+**endpoint             : ""https://staticman-twn.herokuapp.com/v2/entry/""**
+
+Now I'm trying to figure out nested comments.
+<issue_comment>username_7: I had the same error ... I made my **rsa private key** in one line, without space and br
+<issue_comment>username_8: @username_1 I just saw your comment and I would like to clarify that it's OK to have both of the parameters.  My GitHub and GitLab (demo) projects about Staticman provides a proof.  However, I'm now reading about the recent developments so as to replace my old instance open to public with a personal one."
+newrelic/docs-website,809684008,872,,"[{'action': 'opened', 'author': 'jpvajda', 'comment_id': None, 'datetime': '2021-02-16 22:09:04+00:00', 'masked_author': 'username_0', 'text': ""This issue will capture any improvements we'll want to make to the contributor workflow after GA as we'll be learning what is working / not work post GA.\r\n\r\n\r\nTroubleshooting Guide? (lots of little things to get tripped up when contributing do we need to mitigate those?\r\nDefine the branching strategy and perhaps content contributions once approved automatically Deploy via a GH action:: Merge to Develop > PR to Main\r\nHow to work on large batches of content for product releases that can’t be publicly worked on?\r\nPR checks to enforce Markdown linting? \r\nIf there are needs to do content experiments after GA:, can we empower & train the Docs Team to be able to conduct those with Split.io?"", 'title': 'Post GA Contributor enablement checklist', 'type': 'issue'}
+ {'action': 'created', 'author': 'jpvajda', 'comment_id': 780150776.0, 'datetime': '2021-02-16 22:11:23+00:00', 'masked_author': 'username_0', 'text': '@austin-schaefer ideas welcome.', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'bradleycamacho', 'comment_id': 784565437.0, 'datetime': '2021-02-23 22:41:28+00:00', 'masked_author': 'username_1', 'text': 'We are constantly running into issues relating to `SSR` when building the site locally.\r\n\r\n### Steps to reproduce\r\n\r\n1. `yarn`\r\n2. \' yarn start`\r\n3. Sometimes the build will succeed, but sometimes we get thrown an error like the one below:\r\n\r\n`warn The path ""/"" errored during SSR.\r\n Edit its component\r\nnode_modules/@newrelic/gatsby-theme-newrelic/src/components/AnnouncementBanner.js:45:11 to resolve the\r\nerror.`', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'jpvajda', 'comment_id': 784566417.0, 'datetime': '2021-02-23 22:43:31+00:00', 'masked_author': 'username_0', 'text': '@jerelmiller any thoughts on that issue @username_1 reported?', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'bradleycamacho', 'comment_id': 784591747.0, 'datetime': '2021-02-23 23:24:04+00:00', 'masked_author': 'username_1', 'text': ""I will mention that we can usually fix this by running the commands below, but it's really ineffcient to have to build the site, notice the build error, run the commands, and then rebuild. The entire process can take ~10-20 minutes at times.\r\n\r\n`\r\nrm -rf node_modules\r\nyarn\r\nyarn clean\r\nyarn start\r\n`"", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'jpvajda', 'comment_id': 784651372.0, 'datetime': '2021-02-24 01:01:03+00:00', 'masked_author': 'username_0', 'text': ""@username_1 totally, that's the windows equivalent of `restarting the machine` 😄"", 'title': None, 'type': 'comment'}
+ {'action': 'closed', 'author': 'jpvajda', 'comment_id': None, 'datetime': '2021-03-03 01:16:36+00:00', 'masked_author': 'username_0', 'text': '', 'title': None, 'type': 'issue'}]","<issue_start><issue_comment>Title: Post GA Contributor enablement checklist
+username_0: This issue will capture any improvements we'll want to make to the contributor workflow after GA as we'll be learning what is working / not work post GA.
+
+
+Troubleshooting Guide? (lots of little things to get tripped up when contributing do we need to mitigate those?
+Define the branching strategy and perhaps content contributions once approved automatically Deploy via a GH action:: Merge to Develop > PR to Main
+How to work on large batches of content for product releases that can’t be publicly worked on?
+PR checks to enforce Markdown linting? 
+If there are needs to do content experiments after GA:, can we empower & train the Docs Team to be able to conduct those with Split.io?
+<issue_comment>username_0: @austin-schaefer ideas welcome.
+<issue_comment>username_1: We are constantly running into issues relating to `SSR` when building the site locally.
+
+### Steps to reproduce
+
+1. `yarn`
+2. ' yarn start`
+3. Sometimes the build will succeed, but sometimes we get thrown an error like the one below:
+
+`warn The path ""/"" errored during SSR.
+ Edit its component
+node_modules/@newrelic/gatsby-theme-newrelic/src/components/AnnouncementBanner.js:45:11 to resolve the
+error.`
+<issue_comment>username_0: @jerelmiller any thoughts on that issue @username_1 reported?
+<issue_comment>username_1: I will mention that we can usually fix this by running the commands below, but it's really ineffcient to have to build the site, notice the build error, run the commands, and then rebuild. The entire process can take ~10-20 minutes at times.
+
+`
+rm -rf node_modules
+yarn
+yarn clean
+yarn start
+`
+<issue_comment>username_0: @username_1 totally, that's the windows equivalent of `restarting the machine` 😄<issue_closed>"
+hartator/wayback-machine-downloader,803985878,183,,"[{'action': 'opened', 'author': 'Azuraeleth', 'comment_id': None, 'datetime': '2021-02-08 21:30:17+00:00', 'masked_author': 'username_0', 'text': ""Full log from PowerShell here:\r\nPS D:\\test> wayback_machine_downloader http://example.com\r\nDownloading http://example.com to websites/example.com/ from Wayback Machine archives.\r\n\r\nGetting snapshot pagesD:/Ruby30-x64/lib/ruby/gems/3.0.0/gems/wayback_machine_downloader-2.2.1/lib/wayback_machine_downloader/archive_api.rb:8:in `initialize': Invalid argument @ rb_sysopen - http://web.archive.org/cdx/search/xd?url=http://example.com&fl=timestamp,original&collapse=digest&gzip=false&filter=statuscode:200 (Errno::EINVAL)\r\n        from D:/Ruby30-x64/lib/ruby/gems/3.0.0/gems/wayback_machine_downloader-2.2.1/lib/wayback_machine_downloader/archive_api.rb:8:in `open'\r\n        from D:/Ruby30-x64/lib/ruby/gems/3.0.0/gems/wayback_machine_downloader-2.2.1/lib/wayback_machine_downloader/archive_api.rb:8:in `get_raw_list_from_api'\r\n        from D:/Ruby30-x64/lib/ruby/gems/3.0.0/gems/wayback_machine_downloader-2.2.1/lib/wayback_machine_downloader.rb:88:in `get_all_snapshots_to_consider'\r\n        from D:/Ruby30-x64/lib/ruby/gems/3.0.0/gems/wayback_machine_downloader-2.2.1/lib/wayback_machine_downloader.rb:105:in `get_file_list_curated'\r\n        from D:/Ruby30-x64/lib/ruby/gems/3.0.0/gems/wayback_machine_downloader-2.2.1/lib/wayback_machine_downloader.rb:168:in `get_file_list_by_timestamp'\r\n        from D:/Ruby30-x64/lib/ruby/gems/3.0.0/gems/wayback_machine_downloader-2.2.1/lib/wayback_machine_downloader.rb:309:in `file_list_by_timestamp'\r\n        from D:/Ruby30-x64/lib/ruby/gems/3.0.0/gems/wayback_machine_downloader-2.2.1/lib/wayback_machine_downloader.rb:192:in `download_files'\r\n        from D:/Ruby30-x64/lib/ruby/gems/3.0.0/gems/wayback_machine_downloader-2.2.1/bin/wayback_machine_downloader:72:in `<top (required)>'\r\n        from D:/Ruby30-x64/bin/wayback_machine_downloader:23:in `load'\r\n        from D:/Ruby30-x64/bin/wayback_machine_downloader:23:in `<main>'\r\n\r\n\r\nWhat am I missing?"", 'title': 'Getting Errno::EINVAL no matter which site I try to test', 'type': 'issue'}
+ {'action': 'created', 'author': 'SArfrz', 'comment_id': 778620545.0, 'datetime': '2021-02-13 13:36:13+00:00', 'masked_author': 'username_1', 'text': ""I'm also facing the exact same issue, Please let me know if you find any alternative."", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'Darhagonable', 'comment_id': 782720435.0, 'datetime': '2021-02-20 17:37:16+00:00', 'masked_author': 'username_2', 'text': 'I had the same issue running on Windows 10. I tired now again but on a Mac with no issues. I guess it only works on Mac or Linux', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'Keymaker-co', 'comment_id': 785612912.0, 'datetime': '2021-02-25 04:59:52+00:00', 'masked_author': 'username_3', 'text': 'Same!', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'hi-im-karl', 'comment_id': 791104760.0, 'datetime': '2021-03-05 02:41:30+00:00', 'masked_author': 'username_4', 'text': 'Also have this issue, Windows 10 Pro', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'Umesh6361', 'comment_id': 795760721.0, 'datetime': '2021-03-10 17:13:58+00:00', 'masked_author': 'username_5', 'text': 'getting the same issue how to resolve it ??', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'hi-im-karl', 'comment_id': 799787864.0, 'datetime': '2021-03-15 22:09:33+00:00', 'masked_author': 'username_4', 'text': 'Up and running for me now', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'pabs3', 'comment_id': 855775385.0, 'datetime': '2021-06-07 09:38:03+00:00', 'masked_author': 'username_6', 'text': '@hartator I think this is fixed in 2.3.0 and can be closed.', 'title': None, 'type': 'comment'}]","<issue_start><issue_comment>Title: Getting Errno::EINVAL no matter which site I try to test
+username_0: Full log from PowerShell here:
+PS D:\test> wayback_machine_downloader http://example.com
+Downloading http://example.com to websites/example.com/ from Wayback Machine archives.
+
+Getting snapshot pagesD:/Ruby30-x64/lib/ruby/gems/3.0.0/gems/wayback_machine_downloader-2.2.1/lib/wayback_machine_downloader/archive_api.rb:8:in `initialize': Invalid argument @ rb_sysopen - http://web.archive.org/cdx/search/xd?url=http://example.com&fl=timestamp,original&collapse=digest&gzip=false&filter=statuscode:200 (Errno::EINVAL)
+        from D:/Ruby30-x64/lib/ruby/gems/3.0.0/gems/wayback_machine_downloader-2.2.1/lib/wayback_machine_downloader/archive_api.rb:8:in `open'
+        from D:/Ruby30-x64/lib/ruby/gems/3.0.0/gems/wayback_machine_downloader-2.2.1/lib/wayback_machine_downloader/archive_api.rb:8:in `get_raw_list_from_api'
+        from D:/Ruby30-x64/lib/ruby/gems/3.0.0/gems/wayback_machine_downloader-2.2.1/lib/wayback_machine_downloader.rb:88:in `get_all_snapshots_to_consider'
+        from D:/Ruby30-x64/lib/ruby/gems/3.0.0/gems/wayback_machine_downloader-2.2.1/lib/wayback_machine_downloader.rb:105:in `get_file_list_curated'
+        from D:/Ruby30-x64/lib/ruby/gems/3.0.0/gems/wayback_machine_downloader-2.2.1/lib/wayback_machine_downloader.rb:168:in `get_file_list_by_timestamp'
+        from D:/Ruby30-x64/lib/ruby/gems/3.0.0/gems/wayback_machine_downloader-2.2.1/lib/wayback_machine_downloader.rb:309:in `file_list_by_timestamp'
+        from D:/Ruby30-x64/lib/ruby/gems/3.0.0/gems/wayback_machine_downloader-2.2.1/lib/wayback_machine_downloader.rb:192:in `download_files'
+        from D:/Ruby30-x64/lib/ruby/gems/3.0.0/gems/wayback_machine_downloader-2.2.1/bin/wayback_machine_downloader:72:in `<top (required)>'
+        from D:/Ruby30-x64/bin/wayback_machine_downloader:23:in `load'
+        from D:/Ruby30-x64/bin/wayback_machine_downloader:23:in `<main>'
+
+
+What am I missing?
+<issue_comment>username_1: I'm also facing the exact same issue, Please let me know if you find any alternative.
+<issue_comment>username_2: I had the same issue running on Windows 10. I tired now again but on a Mac with no issues. I guess it only works on Mac or Linux
+<issue_comment>username_3: Same!
+<issue_comment>username_4: Also have this issue, Windows 10 Pro
+<issue_comment>username_5: getting the same issue how to resolve it ??
+<issue_comment>username_4: Up and running for me now
+<issue_comment>username_6: @hartator I think this is fixed in 2.3.0 and can be closed."
+pidcodes/pidcodes.github.com,66427150,49,"{'number': 49.0, 'repo': 'pidcodes.github.com', 'user_login': 'pidcodes'}","[{'action': 'opened', 'author': 'stephaneAG', 'comment_id': None, 'datetime': '2015-04-05T10:49:31Z', 'masked_author': 'username_0', 'text': ""Hi\r\nI tried my best to follow the guidelines on pid.codes/howto, I hope it'll be correct enough for you guys\r\nbtw, thanks for allowing us to have VID's\r\n-> now diggin more intoo USB stuff .. ;p\r\n--\r\norg: madtoyslab\r\nvid: 5EED\r\n\r\n+"", 'title': 'First pull request for Madtoyslab ( VIDE: 5EED )', 'type': 'issue'}
+ {'action': 'created', 'author': 'Arachnid', 'comment_id': 89768964.0, 'datetime': '2015-04-05 13:05:57+00:00', 'masked_author': 'username_1', 'text': ""Thanks for your pull request! Please read carefully the guidelines at http://pid.codes/howto/. You must have published source code or schematics for an open source licensed USB device in order to request a PID.\r\n\r\nAlso, your project page says the USB port is for power only, and there is no USB device attached, so it is difficult to see why you need a PID for this application.\r\n\r\nOnce you've published OSS-licensed source for a device that requires a USB PID, please feel free to reopen this pull request or file another one."", 'title': None, 'type': 'comment'}]","<issue_start><issue_comment>Title: First pull request for Madtoyslab ( VIDE: 5EED )
+username_0: Hi
+I tried my best to follow the guidelines on pid.codes/howto, I hope it'll be correct enough for you guys
+btw, thanks for allowing us to have VID's
+-> now diggin more intoo USB stuff .. ;p
+--
+org: madtoyslab
+vid: 5EED
+
++
+<issue_comment>username_1: Thanks for your pull request! Please read carefully the guidelines at http://pid.codes/howto/. You must have published source code or schematics for an open source licensed USB device in order to request a PID.
+
+Also, your project page says the USB port is for power only, and there is no USB device attached, so it is difficult to see why you need a PID for this application.
+
+Once you've published OSS-licensed source for a device that requires a USB PID, please feel free to reopen this pull request or file another one."

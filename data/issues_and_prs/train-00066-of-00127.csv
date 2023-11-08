@@ -1,0 +1,732 @@
+department-of-veterans-affairs/vets-website,816706838,16186,"{'number': 16186.0, 'repo': 'vets-website', 'user_login': 'department-of-veterans-affairs'}","[{'action': 'opened', 'author': 'annaswims', 'comment_id': None, 'datetime': '2021-02-25T18:57:14Z', 'masked_author': 'username_0', 'text': '## Description\r\nthe Source-App-Name header, when properly configured, powers [this graph](http://grafana.vfs.va.gov/d/zGS4XzkMk/backend-to-frontend-app-mapping?orgId=1) and sentry tags. \r\n\r\nthe value was `unknown` and is now `0996-higher-level-review`\r\n## Testing done\r\nlooked at header in browser. \r\n\r\n## Screenshots\r\n\r\n![Screen Shot 2021-02-25 at 1 33 32 PM](https://user-images.githubusercontent.com/19188/109202597-27f04680-7771-11eb-9112-a2a8c5aee732.png)\r\n## Acceptance criteria\r\n- [ ]\r\n\r\n## Definition of done\r\n- [ ] Events are logged appropriately\r\n- [ ] Documentation has been updated, if applicable\r\n- [ ] A link has been provided to the originating GitHub issue (or connected to it via ZenHub)\r\n- [ ] No sensitive information (i.e. PII/credentials/internal URLs/etc.) is captured in logging, hardcoded, or specs', 'title': 'add souce app name for HLR', 'type': 'issue'}
+ {'action': 'created', 'author': 'annaswims', 'comment_id': 786128058.0, 'datetime': '2021-02-25 18:58:37+00:00', 'masked_author': 'username_0', 'text': 'I barely know React, so give this PR a healthy dose of skepticism.', 'title': None, 'type': 'comment'}]","<issue_start><issue_comment>Title: add souce app name for HLR
+username_0: ## Description
+the Source-App-Name header, when properly configured, powers [this graph](http://grafana.vfs.va.gov/d/zGS4XzkMk/backend-to-frontend-app-mapping?orgId=1) and sentry tags. 
+
+the value was `unknown` and is now `0996-higher-level-review`
+## Testing done
+looked at header in browser. 
+
+## Screenshots
+
+![Screen Shot 2021-02-25 at 1 33 32 PM](https://user-images.githubusercontent.com/19188/109202597-27f04680-7771-11eb-9112-a2a8c5aee732.png)
+## Acceptance criteria
+- [ ]
+
+## Definition of done
+- [ ] Events are logged appropriately
+- [ ] Documentation has been updated, if applicable
+- [ ] A link has been provided to the originating GitHub issue (or connected to it via ZenHub)
+- [ ] No sensitive information (i.e. PII/credentials/internal URLs/etc.) is captured in logging, hardcoded, or specs
+<issue_comment>username_0: I barely know React, so give this PR a healthy dose of skepticism."
+dlang/dlang.org,240531718,1797,"{'number': 1797.0, 'repo': 'dlang.org', 'user_login': 'dlang'}","[{'action': 'opened', 'author': 'andralex', 'comment_id': None, 'datetime': '2017-07-05T03:52:16Z', 'masked_author': 'username_0', 'text': ""I've eliminated all $P macros in modules.dd and reflown the text a bit. No content changes. I don't plan to convert all of the spec right now, but this should serve as an example and field test."", 'title': 'Look ma, no $(P ...) - a test drive of <p>-less pages', 'type': 'issue'}
+ {'action': 'created', 'author': 'adamdruppe', 'comment_id': 312991140.0, 'datetime': '2017-07-05 04:01:18+00:00', 'masked_author': 'username_1', 'text': ""just fyi i did this like 18 months ago with adrdox (in fact, as you might recall, the horrible brokeness of ddoc's paragraph handling was actually the straw that broke the camel's back with my decision to start from scratch).\r\n\r\nHere's a random page from the website with full conversion to my syntax:\r\nhttp://dpldocs.info/experimental-docs/source/built_in_rationale.d\r\n\r\nAnd the same one in an earlier stage with just the P ones removed, but the lists still done the traditional way:\r\nhttp://dpldocs.info/experimental-docs/source/dlang.articles.built_in_rationale.d.html\r\n\r\nThese little things really do make a pretty big difference in ease of editing - just fewer random (yet often manual) reflows and stray parens to worry about."", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'andralex', 'comment_id': 313082416.0, 'datetime': '2017-07-05 11:59:08+00:00', 'masked_author': 'username_0', 'text': '@username_1 thanks. Neat lists! Did you do something about tables as well?', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'CyberShadow', 'comment_id': 313083649.0, 'datetime': '2017-07-05 12:05:43+00:00', 'masked_author': 'username_2', 'text': ""@username_0 I had a chat with Stefan on IRC yesterday and I asked him how hard would it be to implement an `EVAL` macro so that:\r\n\r\n```\r\nDdoc\r\n$(JOIN_WITH, _, a, b ,c )\r\nMacros:\r\nDDOC=$(BODY)\r\nJOIN_WITH=$(EVAL (string[] args) { import std.array; return args[1..$].join(args[0]); })\r\n```\r\n\r\nresults in `a_b_c`. He gave me an estimate of 20 minutes for a quick hack on the CTFE-side.\r\n\r\nWhat do you think of the idea? On one hand, it would allow us to do *so much* more with just DDoc; on the other hand, abusing it would put alternative document generators in an unfair position.\r\n\r\n(BTW, the above example seems like it should be easy to do with DDoc, but it's actually impossible due to the special case of one argument - AFAICS you can't implement it so that `$(JOIN_WITH, _, a)` returns exactly `a`! And never even mind the special case of zero arguments.)"", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'wilzbach', 'comment_id': 313084474.0, 'datetime': '2017-07-05 12:10:01+00:00', 'masked_author': 'username_3', 'text': 'I love it! It would prevent _a lot_ of Ddoc hacks, maybe other documentation generators can precompile the EVAL macros like it is done for Diet templates?\r\n\r\nCC @username_4', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'adamdruppe', 'comment_id': 313085952.0, 'datetime': '2017-07-05 12:17:03+00:00', 'masked_author': 'username_1', 'text': 'Yeah. To test that, I did the std.allocator page:\n\nhttp://dpldocs.info/experimental-docs/source/std.experimental.allocator.building_blocks.d.html\n\n(though I am likely to revert that specific file just because I am sick of the merge conflicts from upstream!)\n\nSyntax is described here:\nhttp://dpldocs.info/experimental-docs/adrdox.syntax.html\n\ntables here:\nhttp://dpldocs.info/experimental-docs/adrdox.syntax.html#tables', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 's-ludwig', 'comment_id': 313151413.0, 'datetime': '2017-07-05 16:13:54+00:00', 'masked_author': 'username_4', 'text': ""Ugh, that would make real-time generation of documentation, like I'm currently doing with the embedded variant of DDOX, a no-go due to the performance implications. To me this seems like a pretty huge hammer for a simple thing like documentation generation."", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'adamdruppe', 'comment_id': 313154474.0, 'datetime': '2017-07-05 16:25:16+00:00', 'masked_author': 'username_1', 'text': 'Yeah, I\'m against EVAL too. Heck, in adrdox, I even removed user-defined macros. I sometimes regret that and have considered adding my script interpreter to it, but then I look back at the official dlang repository and see the confusing mess of macros defined all over the place with very little consistency and am reminded ""oh yeah, THAT\'S why I killed it"".\n\nWith EVAL, you\'d have the mess of macros AND whatever else comes out with a very complicated implementation. While there\'s potential to simplify and unify macros with D functions, I fear it would in reality make things even worse than it is now to read the sources AND break every third party doc gen.', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'CyberShadow', 'comment_id': 313155249.0, 'datetime': '2017-07-05 16:28:14+00:00', 'masked_author': 'username_2', 'text': ""We already run D code as part of the dlang.org build process, no going around this, and the amount of D code involved is only going to grow. Moving it into DDoc itself is not going to change whether we run D code or not during the build, but it will certainly make a lot of things much easier, and not require many little helper programs that try to parse HTML DOMs or use crude regex hacks to do things that DDoc itself can't."", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'adamdruppe', 'comment_id': 313157752.0, 'datetime': '2017-07-05 16:37:19+00:00', 'masked_author': 'username_1', 'text': ""Some things, sure, but it will also likely not be able to do everything you want anyway, meaning those external D programs are still necessary.\n\nD code inside ddoc will still have ddoc's limitations, and probably CTFE's limitations too. That means you (probably) won't be able to download external files to construct the homepage, or read other pages to create a cross-reference or table of contents. Those things will still be done externally so the EVAL will fail to significantly simplify the website build while still complicating the ddoc implementation."", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'andralex', 'comment_id': 313171170.0, 'datetime': '2017-07-05 17:27:28+00:00', 'masked_author': 'username_0', 'text': ""@username_2 there is something disquieting about adding this much unstructured power to a macro engine. There's this nice article about it: http://www.cs.usfca.edu/~parrt/papers/mvc.templates.pdf."", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'CyberShadow', 'comment_id': 313176304.0, 'datetime': '2017-07-05 17:46:49+00:00', 'masked_author': 'username_2', 'text': 'Fair enough!', 'title': None, 'type': 'comment'}]","<issue_start><issue_comment>Title: Look ma, no $(P ...) - a test drive of <p>-less pages
+username_0: I've eliminated all $P macros in modules.dd and reflown the text a bit. No content changes. I don't plan to convert all of the spec right now, but this should serve as an example and field test.
+<issue_comment>username_1: just fyi i did this like 18 months ago with adrdox (in fact, as you might recall, the horrible brokeness of ddoc's paragraph handling was actually the straw that broke the camel's back with my decision to start from scratch).
+
+Here's a random page from the website with full conversion to my syntax:
+http://dpldocs.info/experimental-docs/source/built_in_rationale.d
+
+And the same one in an earlier stage with just the P ones removed, but the lists still done the traditional way:
+http://dpldocs.info/experimental-docs/source/dlang.articles.built_in_rationale.d.html
+
+These little things really do make a pretty big difference in ease of editing - just fewer random (yet often manual) reflows and stray parens to worry about.
+<issue_comment>username_0: @username_1 thanks. Neat lists! Did you do something about tables as well?
+<issue_comment>username_2: @username_0 I had a chat with Stefan on IRC yesterday and I asked him how hard would it be to implement an `EVAL` macro so that:
+
+```
+Ddoc
+$(JOIN_WITH, _, a, b ,c )
+Macros:
+DDOC=$(BODY)
+JOIN_WITH=$(EVAL (string[] args) { import std.array; return args[1..$].join(args[0]); })
+```
+
+results in `a_b_c`. He gave me an estimate of 20 minutes for a quick hack on the CTFE-side.
+
+What do you think of the idea? On one hand, it would allow us to do *so much* more with just DDoc; on the other hand, abusing it would put alternative document generators in an unfair position.
+
+(BTW, the above example seems like it should be easy to do with DDoc, but it's actually impossible due to the special case of one argument - AFAICS you can't implement it so that `$(JOIN_WITH, _, a)` returns exactly `a`! And never even mind the special case of zero arguments.)
+<issue_comment>username_3: I love it! It would prevent _a lot_ of Ddoc hacks, maybe other documentation generators can precompile the EVAL macros like it is done for Diet templates?
+
+CC @username_4
+<issue_comment>username_1: Yeah. To test that, I did the std.allocator page:
+
+http://dpldocs.info/experimental-docs/source/std.experimental.allocator.building_blocks.d.html
+
+(though I am likely to revert that specific file just because I am sick of the merge conflicts from upstream!)
+
+Syntax is described here:
+http://dpldocs.info/experimental-docs/adrdox.syntax.html
+
+tables here:
+http://dpldocs.info/experimental-docs/adrdox.syntax.html#tables
+<issue_comment>username_4: Ugh, that would make real-time generation of documentation, like I'm currently doing with the embedded variant of DDOX, a no-go due to the performance implications. To me this seems like a pretty huge hammer for a simple thing like documentation generation.
+<issue_comment>username_1: Yeah, I'm against EVAL too. Heck, in adrdox, I even removed user-defined macros. I sometimes regret that and have considered adding my script interpreter to it, but then I look back at the official dlang repository and see the confusing mess of macros defined all over the place with very little consistency and am reminded ""oh yeah, THAT'S why I killed it"".
+
+With EVAL, you'd have the mess of macros AND whatever else comes out with a very complicated implementation. While there's potential to simplify and unify macros with D functions, I fear it would in reality make things even worse than it is now to read the sources AND break every third party doc gen.
+<issue_comment>username_2: We already run D code as part of the dlang.org build process, no going around this, and the amount of D code involved is only going to grow. Moving it into DDoc itself is not going to change whether we run D code or not during the build, but it will certainly make a lot of things much easier, and not require many little helper programs that try to parse HTML DOMs or use crude regex hacks to do things that DDoc itself can't.
+<issue_comment>username_1: Some things, sure, but it will also likely not be able to do everything you want anyway, meaning those external D programs are still necessary.
+
+D code inside ddoc will still have ddoc's limitations, and probably CTFE's limitations too. That means you (probably) won't be able to download external files to construct the homepage, or read other pages to create a cross-reference or table of contents. Those things will still be done externally so the EVAL will fail to significantly simplify the website build while still complicating the ddoc implementation.
+<issue_comment>username_0: @username_2 there is something disquieting about adding this much unstructured power to a macro engine. There's this nice article about it: http://www.cs.usfca.edu/~parrt/papers/mvc.templates.pdf.
+<issue_comment>username_2: Fair enough!"
+kubernetes/website,429326936,13612,,"[{'action': 'opened', 'author': 'vkoloupaev', 'comment_id': None, 'datetime': '2019-04-04 14:57:00+00:00', 'masked_author': 'username_0', 'text': '**This is a Bug Report**\r\n\r\n<!-- Thanks for filing an issue! Before submitting, please fill in the following information. -->\r\n<!-- See https://kubernetes.io/docs/contribute/start/ for guidance on writing an actionable issue description. -->\r\nI am studying Kubernetes.  I am doing the labs from LFS258-labs_V2019-02-19.pdf. I have the problem with 3.1. LABS Step 10.\r\nkubeadm init --kubernetes-version 1.13.1 --pod-network-cidr 192.168.0.0/16 | tee kubeadm-init.out\r\n\r\n<!--Required Information-->\r\n**Problem:**\r\nroot@ubuntu:~# kubeadm init --kubernetes-version 1.13.1 --pod-network-cidr 192.168.0.0/16 | tee kubeadm-init.out\r\n[init] Using Kubernetes version: v1.13.1\r\n[preflight] Running pre-flight checks\r\n[preflight] Pulling images required for setting up a Kubernetes cluster\r\n[preflight] This might take a minute or two, depending on the speed of your internet connection\r\n[preflight] You can also perform this action in beforehand using \'kubeadm config images pull\'\r\n[kubelet-start] Writing kubelet environment file with flags to file ""/var/lib/kubelet/kubeadm-flags.env""\r\n[kubelet-start] Writing kubelet configuration to file ""/var/lib/kubelet/config.yaml""\r\n[kubelet-start] Activating the kubelet service\r\n[certs] Using certificateDir folder ""/etc/kubernetes/pki""\r\n[certs] Using existing etcd/ca certificate authority\r\n[certs] Using existing apiserver-etcd-client certificate and key on disk\r\n[certs] Using existing etcd/server certificate and key on disk\r\n[certs] Using existing etcd/peer certificate and key on disk\r\n[certs] Using existing etcd/healthcheck-client certificate and key on disk\r\n[certs] Using existing ca certificate authority\r\n[certs] Using existing apiserver certificate and key on disk\r\n[certs] Using existing apiserver-kubelet-client certificate and key on disk\r\n[certs] Using existing front-proxy-ca certificate authority\r\n[certs] Using existing front-proxy-client certificate and key on disk\r\n[certs] Using the existing ""sa"" key\r\n[kubeconfig] Using kubeconfig folder ""/etc/kubernetes""\r\n[kubeconfig] Using existing up-to-date kubeconfig file: ""/etc/kubernetes/admin.conf""\r\n[kubeconfig] Using existing up-to-date kubeconfig file: ""/etc/kubernetes/kubelet.conf""\r\n[kubeconfig] Using existing up-to-date kubeconfig file: ""/etc/kubernetes/controller-manager.conf""\r\n[kubeconfig] Using existing up-to-date kubeconfig file: ""/etc/kubernetes/scheduler.conf""\r\n[control-plane] Using manifest folder ""/etc/kubernetes/manifests""\r\n[control-plane] Creating static Pod manifest for ""kube-apiserver""\r\n[control-plane] Creating static Pod manifest for ""kube-controller-manager""\r\n[control-plane] Creating static Pod manifest for ""kube-scheduler""\r\n[etcd] Creating static Pod manifest for local etcd in ""/etc/kubernetes/manifests""\r\n[wait-control-plane] Waiting for the kubelet to boot up the control plane as static Pods from directory ""/etc/kubernetes/manifests"". This can take up to 4m0s\r\n[kubelet-check] Initial timeout of 40s passed.\r\n\r\n\r\nUnfortunately, an error has occurred:\r\n        timed out waiting for the condition\r\n\r\nThis error is likely caused by:\r\n        - The kubelet is not running\r\n        - The kubelet is unhealthy due to a misconfiguration of the node in some way (required cgroups disabled)\r\n\r\nIf you are on a systemd-powered system, you can try to troubleshoot the error with the following commands:\r\n        - \'systemctl status kubelet\'\r\n        - \'journalctl -xeu kubelet\'\r\n\r\nAdditionally, a control plane component may have crashed or exited when started by the container runtime.\r\nTo troubleshoot, list all containers using your preferred container runtimes CLI, e.g. docker.\r\nHere is one example how you may list all Kubernetes containers running in docker:\r\n        - \'docker ps -a | grep kube | grep -v pause\'\r\n        Once you have found the failing container, you can inspect its logs with:\r\n        - \'docker logs CONTAINERID\'\r\nerror execution phase wait-control-plane: couldn\'t initialize a Kubernetes cluster\r\nroot@ubuntu:~#\r\n\r\n\r\n**Proposed Solution:**\r\n\r\n\r\n**Page to Update:**\r\nhttps://kubernetes.io/...\r\n\r\n<!--Optional Information (remove the comment tags around information you would like to include)-->\r\n<!--Kubernetes Version:-->\r\nClient Version: version.Info{Major:""1"", Minor:""13"", GitVersion:""v1.13.1"", GitCommit:""caf86f4uutaoxfysmf7anj01xl6sv3ps"", GitTreeState:""clean"", BuildDate:""2018-12-13T10:39:04Z"", GoVersion:""go1.11.2"", Compiler:""gc"", Platform:""linux/amd64""}\r\nThe connection to the server localhost:8080 was refused - did you specify the right host or port?\r\n\r\n<!--Additional Information:-->', 'title': 'Issue with k8s.io/docs/home/', 'type': 'issue'}
+ {'action': 'created', 'author': 'neolit123', 'comment_id': 479955807.0, 'datetime': '2019-04-04 15:53:10+00:00', 'masked_author': 'username_1', 'text': '/sig cluster-lifecycle\r\n/priority awaiting-more-evidence\r\n\r\nplease show logs from the kubelet using `journalctl -xeu kubelet` right after it fails.\r\nalso try running kubeadm with `--v=2`', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'vkoloupaev', 'comment_id': 479966832.0, 'datetime': '2019-04-04 16:21:14+00:00', 'masked_author': 'username_0', 'text': 'Hi Lubomir,\r\n\r\nI am sending you the output of “journalctl -xeu kubelet” command  and the output of “kubeadm init --kubernetes-version 2 --pod-network-cidr 192.168.0.0/16 | tee kubeadm-init.out”.\r\nCould you please let me know how this issue can be resolved?\r\n\r\nThanks,\r\nVictor\r\n\r\nroot@ubuntu:~# journalctl -xeu kubelet\r\nApr 04 14:25:13 ubuntu kubelet[15169]: E0404 14:25:13.208078   15169 kubelet.go:2266] node ""ubuntu"" not found\r\nApr 04 14:25:13 ubuntu kubelet[15169]: E0404 14:25:13.309380   15169 kubelet.go:2266] node ""ubuntu"" not found\r\nApr 04 14:25:13 ubuntu kubelet[15169]: E0404 14:25:13.423794   15169 kubelet.go:2266] node ""ubuntu"" not found\r\nApr 04 14:25:13 ubuntu kubelet[15169]: E0404 14:25:13.524646   15169 kubelet.go:2266] node ""ubuntu"" not found\r\nApr 04 14:25:13 ubuntu kubelet[15169]: E0404 14:25:13.625700   15169 kubelet.go:2266] node ""ubuntu"" not found\r\nApr 04 14:25:13 ubuntu kubelet[15169]: E0404 14:25:13.727147   15169 kubelet.go:2266] node ""ubuntu"" not found\r\nApr 04 14:25:13 ubuntu kubelet[15169]: E0404 14:25:13.828040   15169 kubelet.go:2266] node ""ubuntu"" not found\r\nApr 04 14:25:13 ubuntu kubelet[15169]: E0404 14:25:13.928856   15169 kubelet.go:2266] node ""ubuntu"" not found\r\nApr 04 14:25:14 ubuntu kubelet[15169]: E0404 14:25:14.004336   15169 reflector.go:134] k8s.io/kubernetes/pkg/kubelet/config/apiserver.go:47: Failed to list *v1.Pod: Get https://192.168.2.175:6443/a\r\nApr 04 14:25:14 ubuntu kubelet[15169]: E0404 14:25:14.005281   15169 reflector.go:134] k8s.io/kubernetes/pkg/kubelet/kubelet.go:453: Failed to list *v1.Node: Get https://192.168.2.175:6443/api/v1/n\r\nApr 04 14:25:14 ubuntu kubelet[15169]: E0404 14:25:14.005975   15169 reflector.go:134] k8s.io/kubernetes/pkg/kubelet/kubelet.go:444: Failed to list *v1.Service: Get https://192.168.2.175:6443/api/v\r\nApr 04 14:25:14 ubuntu kubelet[15169]: E0404 14:25:14.029791   15169 kubelet.go:2266] node ""ubuntu"" not found\r\nApr 04 14:25:14 ubuntu kubelet[15169]: E0404 14:25:14.130990   15169 kubelet.go:2266] node ""ubuntu"" not found\r\nApr 04 14:25:14 ubuntu kubelet[15169]: E0404 14:25:14.232075   15169 kubelet.go:2266] node ""ubuntu"" not found\r\nApr 04 14:25:14 ubuntu kubelet[15169]: E0404 14:25:14.333118   15169 kubelet.go:2266] node ""ubuntu"" not found\r\nApr 04 14:25:14 ubuntu kubelet[15169]: E0404 14:25:14.434035   15169 kubelet.go:2266] node ""ubuntu"" not found\r\nApr 04 14:25:14 ubuntu kubelet[15169]: E0404 14:25:14.535048   15169 kubelet.go:2266] node ""ubuntu"" not found\r\nApr 04 14:25:14 ubuntu kubelet[15169]: E0404 14:25:14.635446   15169 kubelet.go:2266] node ""ubuntu"" not found\r\nApr 04 14:25:14 ubuntu kubelet[15169]: E0404 14:25:14.735711   15169 kubelet.go:2266] node ""ubuntu"" not found\r\nApr 04 14:25:14 ubuntu kubelet[15169]: E0404 14:25:14.836131   15169 kubelet.go:2266] node ""ubuntu"" not found\r\nApr 04 14:25:14 ubuntu kubelet[15169]: E0404 14:25:14.936675   15169 kubelet.go:2266] node ""ubuntu"" not found\r\nApr 04 14:25:15 ubuntu kubelet[15169]: E0404 14:25:15.005223   15169 reflector.go:134] k8s.io/kubernetes/pkg/kubelet/config/apiserver.go:47: Failed to list *v1.Pod: Get https://192.168.2.175:6443/a\r\nApr 04 14:25:15 ubuntu kubelet[15169]: E0404 14:25:15.007250   15169 reflector.go:134] k8s.io/kubernetes/pkg/kubelet/kubelet.go:453: Failed to list *v1.Node: Get https://192.168.2.175:6443/api/v1/n\r\nApr 04 14:25:15 ubuntu kubelet[15169]: E0404 14:25:15.008266   15169 reflector.go:134] k8s.io/kubernetes/pkg/kubelet/kubelet.go:444: Failed to list *v1.Service: Get https://192.168.2.175:6443/api/v\r\nApr 04 14:25:15 ubuntu kubelet[15169]: E0404 14:25:15.037456   15169 kubelet.go:2266] node ""ubuntu"" not found\r\nApr 04 14:25:15 ubuntu kubelet[15169]: E0404 14:25:15.138065   15169 kubelet.go:2266] node ""ubuntu"" not found\r\nApr 04 14:25:15 ubuntu kubelet[15169]: E0404 14:25:15.238312   15169 kubelet.go:2266] node ""ubuntu"" not found\r\nApr 04 14:25:15 ubuntu kubelet[15169]: E0404 14:25:15.339354   15169 kubelet.go:2266] node ""ubuntu"" not found\r\nApr 04 14:25:15 ubuntu kubelet[15169]: E0404 14:25:15.440405   15169 kubelet.go:2266] node ""ubuntu"" not found\r\nApr 04 14:25:15 ubuntu kubelet[15169]: E0404 14:25:15.541058   15169 kubelet.go:2266] node ""ubuntu"" not found\r\nApr 04 14:25:15 ubuntu kubelet[15169]: E0404 14:25:15.642181   15169 kubelet.go:2266] node ""ubuntu"" not found\r\nApr 04 14:25:15 ubuntu kubelet[15169]: E0404 14:25:15.717297   15169 eviction_manager.go:243] eviction manager: failed to get summary stats: failed to get node info: node ""ubuntu"" not found\r\nApr 04 14:25:15 ubuntu kubelet[15169]: E0404 14:25:15.743361   15169 kubelet.go:2266] node ""ubuntu"" not found\r\nApr 04 14:25:15 ubuntu kubelet[15169]: E0404 14:25:15.844882   15169 kubelet.go:2266] node ""ubuntu"" not found\r\nApr 04 14:25:15 ubuntu kubelet[15169]: E0404 14:25:15.945237   15169 kubelet.go:2266] node ""ubuntu"" not found\r\nApr 04 14:25:16 ubuntu kubelet[15169]: E0404 14:25:16.008343   15169 reflector.go:134] k8s.io/kubernetes/pkg/kubelet/kubelet.go:453: Failed to list *v1.Node: Get https://192.168.2.175:6443/api/v1/n\r\nApr 04 14:25:16 ubuntu kubelet[15169]: E0404 14:25:16.010116   15169 reflector.go:134] k8s.io/kubernetes/pkg/kubelet/kubelet.go:444: Failed to list *v1.Service: Get https://192.168.2.175:6443/api/v\r\nApr 04 14:25:16 ubuntu kubelet[15169]: E0404 14:25:16.010129   15169 reflector.go:134] k8s.io/kubernetes/pkg/kubelet/config/apiserver.go:47: Failed to list *v1.Pod: Get https://192.168.2.175:6443/a\r\nApr 04 14:25:16 ubuntu kubelet[15169]: E0404 14:25:16.046365   15169 kubelet.go:2266] node ""ubuntu"" not found\r\nApr 04 14:25:16 ubuntu kubelet[15169]: E0404 14:25:16.147424   15169 kubelet.go:2266] node ""ubuntu"" not found\r\nApr 04 14:25:16 ubuntu kubelet[15169]: E0404 14:25:16.249664   15169 kubelet.go:2266] node ""ubuntu"" not found\r\nApr 04 14:25:16 ubuntu kubelet[15169]: E0404 14:25:16.351533   15169 kubelet.go:2266] node ""ubuntu"" not found\r\nApr 04 14:25:16 ubuntu kubelet[15169]: E0404 14:25:16.457940   15169 kubelet.go:2266] node ""ubuntu"" not found\r\nApr 04 14:25:16 ubuntu kubelet[15169]: W0404 14:25:16.468898   15169 cni.go:203] Unable to update cni config: No networks found in /etc/cni/net.d\r\nApr 04 14:25:16 ubuntu kubelet[15169]: E0404 14:25:16.469436   15169 kubelet.go:2192] Container runtime network not ready: NetworkReady=false reason:NetworkPluginNotReady message:docker: network pl\r\nApr 04 14:25:16 ubuntu kubelet[15169]: E0404 14:25:16.562357   15169 kubelet.go:2266] node ""ubuntu"" not found\r\nApr 04 14:25:16 ubuntu kubelet[15169]: I0404 14:25:16.598642   15169 kubelet_node_status.go:278] Setting node annotation to enable volume controller attach/detach\r\nApr 04 14:25:16 ubuntu kubelet[15169]: I0404 14:25:16.612660   15169 kubelet_node_status.go:72] Attempting to register node ubuntu\r\nApr 04 14:25:16 ubuntu kubelet[15169]: E0404 14:25:16.613354   15169 kubelet_node_status.go:94] Unable to register node ""ubuntu"" with API server: Post https://192.168.2.175:6443/api/v1/nodes: dial\r\nApr 04 14:25:16 ubuntu kubelet[15169]: E0404 14:25:16.663567   15169 kubelet.go:2266] node ""ubuntu"" not found\r\nApr 04 14:25:16 ubuntu kubelet[15169]: E0404 14:25:16.765090   15169 kubelet.go:2266] node ""ubuntu"" not found\r\nApr 04 14:25:16 ubuntu kubelet[15169]: E0404 14:25:16.866400   15169 kubelet.go:2266] node ""ubuntu"" not found\r\nApr 04 14:25:16 ubuntu kubelet[15169]: E0404 14:25:16.975709   15169 kubelet.go:2266] node ""ubuntu"" not found\r\nApr 04 14:25:17 ubuntu kubelet[15169]: E0404 14:25:17.013353   15169 reflector.go:134] k8s.io/kubernetes/pkg/kubelet/kubelet.go:453: Failed to list *v1.Node: Get https://192.168.2.175:6443/api/v1/n\r\nApr 04 14:25:17 ubuntu kubelet[15169]: E0404 14:25:17.013405   15169 reflector.go:134] k8s.io/kubernetes/pkg/kubelet/kubelet.go:444: Failed to list *v1.Service: Get https://192.168.2.175:6443/api/v\r\nApr 04 14:25:17 ubuntu kubelet[15169]: E0404 14:25:17.016478   15169 reflector.go:134] k8s.io/kubernetes/pkg/kubelet/config/apiserver.go:47: Failed to list *v1.Pod: Get https://192.168.2.175:6443/a\r\nApr 04 14:25:17 ubuntu kubelet[15169]: I0404 14:25:17.041833   15169 kubelet_node_status.go:278] Setting node annotation to enable volume controller attach/detach\r\n\r\n\r\nroot@ubuntu:~# kubeadm init --kubernetes-version 2 --pod-network-cidr 192.168.0.0/16 | tee kubeadm-init.out\r\nversion ""2"" doesn\'t match patterns for neither semantic version nor labels (stable, latest, ...)\r\nroot@ubuntu:~#', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'neolit123', 'comment_id': 479969586.0, 'datetime': '2019-04-04 16:28:52+00:00', 'masked_author': 'username_1', 'text': 'you need to use something like `--kubernetes-version=1.13.1`\r\ntry sending the logs again after that.', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'vkoloupaev', 'comment_id': 479971491.0, 'datetime': '2019-04-04 16:34:23+00:00', 'masked_author': 'username_0', 'text': 'Hi Lubomir,\r\n\r\nI have only this version.\r\nCould you please let me know what can I do in this case?\r\n\r\nThanks,\r\nVictor\r\n\r\nroot@ubuntu:~# kubectl version\r\nClient Version: version.Info{Major:""1"", Minor:""13"", GitVersion:""v1.13.1"", GitCommit:""ax5kh6jaqkcd2tiexxs8v6xjo8yv8a6b"", GitTreeState:""clean"", BuildDate:""2018-12-13T10:39:04Z"", GoVersion:""go1.11.2"", Compiler:""gc"", Platform:""linux/amd64""}\r\nThe connection to the server localhost:8080 was refused - did you specify the right host or port?\r\nroot@ubuntu:~#', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'neolit123', 'comment_id': 479972127.0, 'datetime': '2019-04-04 16:36:09+00:00', 'masked_author': 'username_1', 'text': '`kubeadm init --kubernetes-version 2 ...`\r\nis not a valid command\r\ntry:\r\n`kubeadm init --kubernetes-version 1.13.1 ...`', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'vkoloupaev', 'comment_id': 479973091.0, 'datetime': '2019-04-04 16:38:51+00:00', 'masked_author': 'username_0', 'text': 'Hi Lubomir,\r\n\r\nWould you like me to run “kubeadm init --kubernetes-version 1.13.1 --pod-network-cidr 192.168.0.0/16 | tee kubeadm-init.out” again?\r\n\r\nThanks,\r\nVictor', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'neolit123', 'comment_id': 479973347.0, 'datetime': '2019-04-04 16:39:37+00:00', 'masked_author': 'username_1', 'text': 'yes, exactly.', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'neolit123', 'comment_id': 479973412.0, 'datetime': '2019-04-04 16:39:51+00:00', 'masked_author': 'username_1', 'text': 'also add `--v=2` to the command line.', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'vkoloupaev', 'comment_id': 479976481.0, 'datetime': '2019-04-04 16:48:39+00:00', 'masked_author': 'username_0', 'text': 'Should I run this command?\r\n\r\nkubeadm init --kubernetes-version 1.13.1 --pod-network-cidr 192.168.0.0/16 | tee kubeadm-init.out --v=2', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'neolit123', 'comment_id': 479979909.0, 'datetime': '2019-04-04 16:58:17+00:00', 'masked_author': 'username_1', 'text': 'try \r\n```\r\nkubeadm init --kubernetes-version 1.13.1 --pod-network-cidr 192.168.0.0/16 --v=2 | tee kubeadm-init.out\r\n```\r\n\r\nwhere is the CIDR value coming from?\r\n192.168.0.0/16', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'vkoloupaev', 'comment_id': 479980146.0, 'datetime': '2019-04-04 16:58:57+00:00', 'masked_author': 'username_0', 'text': 'Hi Lubomir,\r\n\r\nI run two commands.\r\n\r\nroot@ubuntu:~# kubeadm init --kubernetes-version 1.13.1 --pod-network-cidr 192.168.0.0/16 | tee kubeadm-init.out\r\n[init] Using Kubernetes version: v1.13.1\r\n[preflight] Running pre-flight checks\r\n[preflight] Pulling images required for setting up a Kubernetes cluster\r\n[preflight] This might take a minute or two, depending on the speed of your internet connection\r\n[preflight] You can also perform this action in beforehand using \'kubeadm config images pull\'\r\n[kubelet-start] Writing kubelet environment file with flags to file ""/var/lib/kubelet/kubeadm-flags.env""\r\n[kubelet-start] Writing kubelet configuration to file ""/var/lib/kubelet/config.yaml""\r\n[kubelet-start] Activating the kubelet service\r\n[certs] Using certificateDir folder ""/etc/kubernetes/pki""\r\n[certs] Using existing etcd/ca certificate authority\r\n[certs] Using existing apiserver-etcd-client certificate and key on disk\r\n[certs] Using existing etcd/peer certificate and key on disk\r\n[certs] Using existing etcd/server certificate and key on disk\r\n[certs] Using existing etcd/healthcheck-client certificate and key on disk\r\n[certs] Using existing ca certificate authority\r\n[certs] Using existing apiserver-kubelet-client certificate and key on disk\r\n[certs] Using existing apiserver certificate and key on disk\r\n[certs] Using existing front-proxy-ca certificate authority\r\n[certs] Using existing front-proxy-client certificate and key on disk\r\n[certs] Using the existing ""sa"" key\r\n[kubeconfig] Using kubeconfig folder ""/etc/kubernetes""\r\n[kubeconfig] Using existing up-to-date kubeconfig file: ""/etc/kubernetes/admin.conf""\r\n[kubeconfig] Using existing up-to-date kubeconfig file: ""/etc/kubernetes/kubelet.conf""\r\n[kubeconfig] Using existing up-to-date kubeconfig file: ""/etc/kubernetes/controller-manager.conf""\r\n[kubeconfig] Using existing up-to-date kubeconfig file: ""/etc/kubernetes/scheduler.conf""\r\n[control-plane] Using manifest folder ""/etc/kubernetes/manifests""\r\n[control-plane] Creating static Pod manifest for ""kube-apiserver""\r\n[control-plane] Creating static Pod manifest for ""kube-controller-manager""\r\n[control-plane] Creating static Pod manifest for ""kube-scheduler""\r\n[etcd] Creating static Pod manifest for local etcd in ""/etc/kubernetes/manifests""\r\n[wait-control-plane] Waiting for the kubelet to boot up the control plane as static Pods from directory ""/etc/kubernetes/manifests"". This can take up to 4m0s\r\n[kubelet-check] Initial timeout of 40s passed.\r\nerror execution phase wait-control-plane: couldn\'t initialize a Kubernetes cluster\r\n\r\nUnfortunately, an error has occurred:\r\n        timed out waiting for the condition\r\n\r\nThis error is likely caused by:\r\n        - The kubelet is not running\r\n        - The kubelet is unhealthy due to a misconfiguration of the node in some way (required cgroups disabled)\r\n\r\nIf you are on a systemd-powered system, you can try to troubleshoot the error with the following commands:\r\n        - \'systemctl status kubelet\'\r\n        - \'journalctl -xeu kubelet\'\r\n\r\nAdditionally, a control plane component may have crashed or exited when started by the container runtime.\r\nTo troubleshoot, list all containers using your preferred container runtimes CLI, e.g. docker.\r\nHere is one example how you may list all Kubernetes containers running in docker:\r\n        - \'docker ps -a | grep kube | grep -v pause\'\r\n        Once you have found the failing container, you can inspect its logs with:\r\n        - \'docker logs CONTAINERID\'\r\nroot@ubuntu:~#\r\nroot@ubuntu:~#\r\nroot@ubuntu:~#\r\nroot@ubuntu:~#\r\nroot@ubuntu:~# kubeadm init --kubernetes-version 1.13.1 --pod-network-cidr 192.168.0.0/16 | tee kubeadm-init.out --v=2\r\ntee: option \'--version\' doesn\'t allow an argument\r\nTry \'tee --help\' for more information.\r\nroot@ubuntu:~#\r\n\r\nFrom: Koloupaev, Victor\r\nSent: Thursday, April 4, 2019 12:48 PM\r\nTo: \'kubernetes/website\' <lyhxr@example.com>; kubernetes/website <upchh@example.com>\r\nCc: Author <envkt@example.com>\r\nSubject: RE: [kubernetes/website] Issue with k8s.io/docs/home/ (#13612)\r\n\r\nShould I run this command?\r\n\r\nkubeadm init --kubernetes-version 1.13.1 --pod-network-cidr 192.168.0.0/16 | tee kubeadm-init.out --v=2', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'neolit123', 'comment_id': 479980814.0, 'datetime': '2019-04-04 17:00:47+00:00', 'masked_author': 'username_1', 'text': '```\r\nkubeadm init --kubernetes-version 1.13.1 --pod-network-cidr 192.168.0.0/16 --v=2 | tee kubeadm-init.out\r\n```', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'vkoloupaev', 'comment_id': 479986961.0, 'datetime': '2019-04-04 17:18:24+00:00', 'masked_author': 'username_0', 'text': 'Hi Lubomir,\r\n\r\nI am sending you the output.\r\n\r\nRegards,\r\nVictor\r\n\r\nroot@ubuntu:~# kubeadm init --kubernetes-version 1.13.1 --pod-network-cidr 192.168.0.0/16 --v=2 | tee kubeadm-init.out\r\nI0404 17:06:29.030877   11560 feature_gate.go:206] feature gates: &{map[]}\r\n[init] Using Kubernetes version: v1.13.1\r\n[preflight] Running pre-flight checks\r\nI0404 17:06:29.031486   11560 checks.go:572] validating Kubernetes and kubeadm version\r\nI0404 17:06:29.031535   11560 checks.go:171] validating if the firewall is enabled and active\r\nI0404 17:06:29.051968   11560 checks.go:208] validating availability of port 6443\r\nI0404 17:06:29.052099   11560 checks.go:208] validating availability of port 10251\r\nI0404 17:06:29.052143   11560 checks.go:208] validating availability of port 10252\r\nI0404 17:06:29.052188   11560 checks.go:283] validating the existence of file /etc/kubernetes/manifests/kube-apiserver.yaml\r\nI0404 17:06:29.052216   11560 checks.go:283] validating the existence of file /etc/kubernetes/manifests/kube-controller-manager.yaml\r\nI0404 17:06:29.052239   11560 checks.go:283] validating the existence of file /etc/kubernetes/manifests/kube-scheduler.yaml\r\nI0404 17:06:29.052282   11560 checks.go:283] validating the existence of file /etc/kubernetes/manifests/etcd.yaml\r\nI0404 17:06:29.052466   11560 checks.go:430] validating if the connectivity type is via proxy or direct\r\nI0404 17:06:29.052729   11560 checks.go:466] validating http connectivity to first IP address in the CIDR\r\nI0404 17:06:29.052935   11560 checks.go:466] validating http connectivity to first IP address in the CIDR\r\nI0404 17:06:29.052965   11560 checks.go:104] validating the container runtime\r\nI0404 17:06:29.139524   11560 checks.go:130] validating if the service is enabled and active\r\nI0404 17:06:29.178388   11560 checks.go:332] validating the contents of file /proc/sys/net/bridge/bridge-nf-call-iptables\r\nI0404 17:06:29.178729   11560 checks.go:332] validating the contents of file /proc/sys/net/ipv4/ip_forward\r\nI0404 17:06:29.178896   11560 checks.go:644] validating whether swap is enabled or not\r\nI0404 17:06:29.179028   11560 checks.go:373] validating the presence of executable ip\r\nI0404 17:06:29.179230   11560 checks.go:373] validating the presence of executable iptables\r\nI0404 17:06:29.179409   11560 checks.go:373] validating the presence of executable mount\r\nI0404 17:06:29.179472   11560 checks.go:373] validating the presence of executable nsenter\r\nI0404 17:06:29.179626   11560 checks.go:373] validating the presence of executable ebtables\r\nI0404 17:06:29.179768   11560 checks.go:373] validating the presence of executable ethtool\r\nI0404 17:06:29.179934   11560 checks.go:373] validating the presence of executable socat\r\nI0404 17:06:29.180078   11560 checks.go:373] validating the presence of executable tc\r\nI0404 17:06:29.180121   11560 checks.go:373] validating the presence of executable touch\r\nI0404 17:06:29.180241   11560 checks.go:515] running all checks\r\nI0404 17:06:29.247660   11560 checks.go:403] checking whether the given node name is reachable using net.LookupHost\r\nI0404 17:06:29.253204   11560 checks.go:613] validating kubelet version\r\nI0404 17:06:29.406053   11560 checks.go:130] validating if the service is enabled and active\r\nI0404 17:06:29.443574   11560 checks.go:208] validating availability of port 10250\r\nI0404 17:06:29.443895   11560 checks.go:208] validating availability of port 2379\r\nI0404 17:06:29.444103   11560 checks.go:208] validating availability of port 2380\r\nI0404 17:06:29.444260   11560 checks.go:245] validating the existence and emptiness of directory /var/lib/etcd\r\n[preflight] Pulling images required for setting up a Kubernetes cluster\r\n[preflight] This might take a minute or two, depending on the speed of your internet connection\r\n[preflight] You can also perform this action in beforehand using \'kubeadm config images pull\'\r\nI0404 17:06:29.527755   11560 checks.go:833] image exists: k8s.gcr.io/kube-apiserver:v1.13.1\r\nI0404 17:06:29.602715   11560 checks.go:833] image exists: k8s.gcr.io/kube-controller-manager:v1.13.1\r\nI0404 17:06:29.679171   11560 checks.go:833] image exists: k8s.gcr.io/kube-scheduler:v1.13.1\r\nI0404 17:06:29.754915   11560 checks.go:833] image exists: k8s.gcr.io/kube-proxy:v1.13.1\r\nI0404 17:06:29.831668   11560 checks.go:833] image exists: k8s.gcr.io/pause:3.1\r\nI0404 17:06:29.915576   11560 checks.go:833] image exists: k8s.gcr.io/etcd:3.2.24\r\nI0404 17:06:29.996042   11560 checks.go:833] image exists: k8s.gcr.io/coredns:1.2.6\r\nI0404 17:06:29.996251   11560 kubelet.go:71] Stopping the kubelet\r\n[kubelet-start] Writing kubelet environment file with flags to file ""/var/lib/kubelet/kubeadm-flags.env""\r\n[kubelet-start] Writing kubelet configuration to file ""/var/lib/kubelet/config.yaml""\r\nI0404 17:06:30.137377   11560 kubelet.go:89] Starting the kubelet\r\n[kubelet-start] Activating the kubelet service\r\n[certs] Using certificateDir folder ""/etc/kubernetes/pki""\r\n[certs] Using existing front-proxy-ca certificate authority\r\n[certs] Using existing front-proxy-client certificate and key on disk\r\n[certs] Using existing etcd/ca certificate authority\r\n[certs] Using existing etcd/peer certificate and key on disk\r\n[certs] Using existing etcd/server certificate and key on disk\r\n[certs] Using existing etcd/healthcheck-client certificate and key on disk\r\n[certs] Using existing apiserver-etcd-client certificate and key on disk\r\n[certs] Using existing ca certificate authority\r\n[certs] Using existing apiserver-kubelet-client certificate and key on disk\r\n[certs] Using existing apiserver certificate and key on disk\r\nI0404 17:06:30.736402   11560 certs.go:72] creating a new public/private key files for signing service account users\r\n[certs] Using the existing ""sa"" key\r\n[kubeconfig] Using kubeconfig folder ""/etc/kubernetes""\r\nI0404 17:06:31.272051   11560 kubeconfig.go:92] creating kubeconfig file for admin.conf\r\n[kubeconfig] Using existing up-to-date kubeconfig file: ""/etc/kubernetes/admin.conf""\r\nI0404 17:06:31.696251   11560 kubeconfig.go:92] creating kubeconfig file for kubelet.conf\r\n[kubeconfig] Using existing up-to-date kubeconfig file: ""/etc/kubernetes/kubelet.conf""\r\nI0404 17:06:32.274310   11560 kubeconfig.go:92] creating kubeconfig file for controller-manager.conf\r\nI0404 17:06:33.537226   11560 kubeconfig.go:92] creating kubeconfig file for scheduler.conf\r\n[Truncated]\n\r\nUnfortunately, an error has occurred:\r\n        timed out waiting for the condition\r\n\r\nThis error is likely caused by:\r\n        - The kubelet is not running\r\n        - The kubelet is unhealthy due to a misconfiguration of the node in some way (required cgroups disabled)\r\n\r\nIf you are on a systemd-powered system, you can try to troubleshoot the error with the following commands:\r\n        - \'systemctl status kubelet\'\r\n        - \'journalctl -xeu kubelet\'\r\n\r\nAdditionally, a control plane component may have crashed or exited when started by the container runtime.\r\nTo troubleshoot, list all containers using your preferred container runtimes CLI, e.g. docker.\r\nHere is one example how you may list all Kubernetes containers running in docker:\r\n        - \'docker ps -a | grep kube | grep -v pause\'\r\n        Once you have found the failing container, you can inspect its logs with:\r\n        - \'docker logs CONTAINERID\'\r\nerror execution phase wait-control-plane: couldn\'t initialize a Kubernetes cluster\r\nroot@ubuntu:~#', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'neolit123', 'comment_id': 479988825.0, 'datetime': '2019-04-04 17:23:50+00:00', 'masked_author': 'username_1', 'text': ""these are NOT official documents on how to run kubeadm i don't know what that is.\r\ntry here:\r\nhttps://kubernetes.io/docs/setup/independent/create-cluster-kubeadm/"", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'vkoloupaev', 'comment_id': 479989930.0, 'datetime': '2019-04-04 17:27:08+00:00', 'masked_author': 'username_0', 'text': 'Could you please send me the command to do it?', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'neolit123', 'comment_id': 479990505.0, 'datetime': '2019-04-04 17:28:46+00:00', 'masked_author': 'username_1', 'text': '@username_0 \r\n\r\nthis is issue tracker is not a support forum.\r\ntry stack overflow / slack or some of our support channels:\r\nhttps://github.com/kubernetes/community/blob/master/contributors/guide/issue-triage.md#user-support-response-example\r\n\r\nthank you.\r\n/close', 'title': None, 'type': 'comment'}]","<issue_start><issue_comment>Title: Issue with k8s.io/docs/home/
+username_0: **This is a Bug Report**
+
+<!-- Thanks for filing an issue! Before submitting, please fill in the following information. -->
+<!-- See https://kubernetes.io/docs/contribute/start/ for guidance on writing an actionable issue description. -->
+I am studying Kubernetes.  I am doing the labs from LFS258-labs_V2019-02-19.pdf. I have the problem with 3.1. LABS Step 10.
+kubeadm init --kubernetes-version 1.13.1 --pod-network-cidr 192.168.0.0/16 | tee kubeadm-init.out
+
+<!--Required Information-->
+**Problem:**
+root@ubuntu:~# kubeadm init --kubernetes-version 1.13.1 --pod-network-cidr 192.168.0.0/16 | tee kubeadm-init.out
+[init] Using Kubernetes version: v1.13.1
+[preflight] Running pre-flight checks
+[preflight] Pulling images required for setting up a Kubernetes cluster
+[preflight] This might take a minute or two, depending on the speed of your internet connection
+[preflight] You can also perform this action in beforehand using 'kubeadm config images pull'
+[kubelet-start] Writing kubelet environment file with flags to file ""/var/lib/kubelet/kubeadm-flags.env""
+[kubelet-start] Writing kubelet configuration to file ""/var/lib/kubelet/config.yaml""
+[kubelet-start] Activating the kubelet service
+[certs] Using certificateDir folder ""/etc/kubernetes/pki""
+[certs] Using existing etcd/ca certificate authority
+[certs] Using existing apiserver-etcd-client certificate and key on disk
+[certs] Using existing etcd/server certificate and key on disk
+[certs] Using existing etcd/peer certificate and key on disk
+[certs] Using existing etcd/healthcheck-client certificate and key on disk
+[certs] Using existing ca certificate authority
+[certs] Using existing apiserver certificate and key on disk
+[certs] Using existing apiserver-kubelet-client certificate and key on disk
+[certs] Using existing front-proxy-ca certificate authority
+[certs] Using existing front-proxy-client certificate and key on disk
+[certs] Using the existing ""sa"" key
+[kubeconfig] Using kubeconfig folder ""/etc/kubernetes""
+[kubeconfig] Using existing up-to-date kubeconfig file: ""/etc/kubernetes/admin.conf""
+[kubeconfig] Using existing up-to-date kubeconfig file: ""/etc/kubernetes/kubelet.conf""
+[kubeconfig] Using existing up-to-date kubeconfig file: ""/etc/kubernetes/controller-manager.conf""
+[kubeconfig] Using existing up-to-date kubeconfig file: ""/etc/kubernetes/scheduler.conf""
+[control-plane] Using manifest folder ""/etc/kubernetes/manifests""
+[control-plane] Creating static Pod manifest for ""kube-apiserver""
+[control-plane] Creating static Pod manifest for ""kube-controller-manager""
+[control-plane] Creating static Pod manifest for ""kube-scheduler""
+[etcd] Creating static Pod manifest for local etcd in ""/etc/kubernetes/manifests""
+[wait-control-plane] Waiting for the kubelet to boot up the control plane as static Pods from directory ""/etc/kubernetes/manifests"". This can take up to 4m0s
+[kubelet-check] Initial timeout of 40s passed.
+
+
+Unfortunately, an error has occurred:
+        timed out waiting for the condition
+
+This error is likely caused by:
+        - The kubelet is not running
+        - The kubelet is unhealthy due to a misconfiguration of the node in some way (required cgroups disabled)
+
+If you are on a systemd-powered system, you can try to troubleshoot the error with the following commands:
+        - 'systemctl status kubelet'
+        - 'journalctl -xeu kubelet'
+
+Additionally, a control plane component may have crashed or exited when started by the container runtime.
+To troubleshoot, list all containers using your preferred container runtimes CLI, e.g. docker.
+Here is one example how you may list all Kubernetes containers running in docker:
+        - 'docker ps -a | grep kube | grep -v pause'
+        Once you have found the failing container, you can inspect its logs with:
+        - 'docker logs CONTAINERID'
+error execution phase wait-control-plane: couldn't initialize a Kubernetes cluster
+root@ubuntu:~#
+
+
+**Proposed Solution:**
+
+
+**Page to Update:**
+https://kubernetes.io/...
+
+<!--Optional Information (remove the comment tags around information you would like to include)-->
+<!--Kubernetes Version:-->
+Client Version: version.Info{Major:""1"", Minor:""13"", GitVersion:""v1.13.1"", GitCommit:""eec55b9ba98609a46fee712359c7b5b365bdd920"", GitTreeState:""clean"", BuildDate:""2018-12-13T10:39:04Z"", GoVersion:""go1.11.2"", Compiler:""gc"", Platform:""linux/amd64""}
+The connection to the server localhost:8080 was refused - did you specify the right host or port?
+
+<!--Additional Information:-->
+<issue_comment>username_1: /sig cluster-lifecycle
+/priority awaiting-more-evidence
+
+please show logs from the kubelet using `journalctl -xeu kubelet` right after it fails.
+also try running kubeadm with `--v=2`
+<issue_comment>username_0: Hi Lubomir,
+
+I am sending you the output of “journalctl -xeu kubelet” command  and the output of “kubeadm init --kubernetes-version 2 --pod-network-cidr 192.168.0.0/16 | tee kubeadm-init.out”.
+Could you please let me know how this issue can be resolved?
+
+Thanks,
+Victor
+
+root@ubuntu:~# journalctl -xeu kubelet
+Apr 04 14:25:13 ubuntu kubelet[15169]: E0404 14:25:13.208078   15169 kubelet.go:2266] node ""ubuntu"" not found
+Apr 04 14:25:13 ubuntu kubelet[15169]: E0404 14:25:13.309380   15169 kubelet.go:2266] node ""ubuntu"" not found
+Apr 04 14:25:13 ubuntu kubelet[15169]: E0404 14:25:13.423794   15169 kubelet.go:2266] node ""ubuntu"" not found
+Apr 04 14:25:13 ubuntu kubelet[15169]: E0404 14:25:13.524646   15169 kubelet.go:2266] node ""ubuntu"" not found
+Apr 04 14:25:13 ubuntu kubelet[15169]: E0404 14:25:13.625700   15169 kubelet.go:2266] node ""ubuntu"" not found
+Apr 04 14:25:13 ubuntu kubelet[15169]: E0404 14:25:13.727147   15169 kubelet.go:2266] node ""ubuntu"" not found
+Apr 04 14:25:13 ubuntu kubelet[15169]: E0404 14:25:13.828040   15169 kubelet.go:2266] node ""ubuntu"" not found
+Apr 04 14:25:13 ubuntu kubelet[15169]: E0404 14:25:13.928856   15169 kubelet.go:2266] node ""ubuntu"" not found
+Apr 04 14:25:14 ubuntu kubelet[15169]: E0404 14:25:14.004336   15169 reflector.go:134] k8s.io/kubernetes/pkg/kubelet/config/apiserver.go:47: Failed to list *v1.Pod: Get https://192.168.2.175:6443/a
+Apr 04 14:25:14 ubuntu kubelet[15169]: E0404 14:25:14.005281   15169 reflector.go:134] k8s.io/kubernetes/pkg/kubelet/kubelet.go:453: Failed to list *v1.Node: Get https://192.168.2.175:6443/api/v1/n
+Apr 04 14:25:14 ubuntu kubelet[15169]: E0404 14:25:14.005975   15169 reflector.go:134] k8s.io/kubernetes/pkg/kubelet/kubelet.go:444: Failed to list *v1.Service: Get https://192.168.2.175:6443/api/v
+Apr 04 14:25:14 ubuntu kubelet[15169]: E0404 14:25:14.029791   15169 kubelet.go:2266] node ""ubuntu"" not found
+Apr 04 14:25:14 ubuntu kubelet[15169]: E0404 14:25:14.130990   15169 kubelet.go:2266] node ""ubuntu"" not found
+Apr 04 14:25:14 ubuntu kubelet[15169]: E0404 14:25:14.232075   15169 kubelet.go:2266] node ""ubuntu"" not found
+Apr 04 14:25:14 ubuntu kubelet[15169]: E0404 14:25:14.333118   15169 kubelet.go:2266] node ""ubuntu"" not found
+Apr 04 14:25:14 ubuntu kubelet[15169]: E0404 14:25:14.434035   15169 kubelet.go:2266] node ""ubuntu"" not found
+Apr 04 14:25:14 ubuntu kubelet[15169]: E0404 14:25:14.535048   15169 kubelet.go:2266] node ""ubuntu"" not found
+Apr 04 14:25:14 ubuntu kubelet[15169]: E0404 14:25:14.635446   15169 kubelet.go:2266] node ""ubuntu"" not found
+Apr 04 14:25:14 ubuntu kubelet[15169]: E0404 14:25:14.735711   15169 kubelet.go:2266] node ""ubuntu"" not found
+Apr 04 14:25:14 ubuntu kubelet[15169]: E0404 14:25:14.836131   15169 kubelet.go:2266] node ""ubuntu"" not found
+Apr 04 14:25:14 ubuntu kubelet[15169]: E0404 14:25:14.936675   15169 kubelet.go:2266] node ""ubuntu"" not found
+Apr 04 14:25:15 ubuntu kubelet[15169]: E0404 14:25:15.005223   15169 reflector.go:134] k8s.io/kubernetes/pkg/kubelet/config/apiserver.go:47: Failed to list *v1.Pod: Get https://192.168.2.175:6443/a
+Apr 04 14:25:15 ubuntu kubelet[15169]: E0404 14:25:15.007250   15169 reflector.go:134] k8s.io/kubernetes/pkg/kubelet/kubelet.go:453: Failed to list *v1.Node: Get https://192.168.2.175:6443/api/v1/n
+Apr 04 14:25:15 ubuntu kubelet[15169]: E0404 14:25:15.008266   15169 reflector.go:134] k8s.io/kubernetes/pkg/kubelet/kubelet.go:444: Failed to list *v1.Service: Get https://192.168.2.175:6443/api/v
+Apr 04 14:25:15 ubuntu kubelet[15169]: E0404 14:25:15.037456   15169 kubelet.go:2266] node ""ubuntu"" not found
+Apr 04 14:25:15 ubuntu kubelet[15169]: E0404 14:25:15.138065   15169 kubelet.go:2266] node ""ubuntu"" not found
+Apr 04 14:25:15 ubuntu kubelet[15169]: E0404 14:25:15.238312   15169 kubelet.go:2266] node ""ubuntu"" not found
+Apr 04 14:25:15 ubuntu kubelet[15169]: E0404 14:25:15.339354   15169 kubelet.go:2266] node ""ubuntu"" not found
+Apr 04 14:25:15 ubuntu kubelet[15169]: E0404 14:25:15.440405   15169 kubelet.go:2266] node ""ubuntu"" not found
+Apr 04 14:25:15 ubuntu kubelet[15169]: E0404 14:25:15.541058   15169 kubelet.go:2266] node ""ubuntu"" not found
+Apr 04 14:25:15 ubuntu kubelet[15169]: E0404 14:25:15.642181   15169 kubelet.go:2266] node ""ubuntu"" not found
+Apr 04 14:25:15 ubuntu kubelet[15169]: E0404 14:25:15.717297   15169 eviction_manager.go:243] eviction manager: failed to get summary stats: failed to get node info: node ""ubuntu"" not found
+Apr 04 14:25:15 ubuntu kubelet[15169]: E0404 14:25:15.743361   15169 kubelet.go:2266] node ""ubuntu"" not found
+Apr 04 14:25:15 ubuntu kubelet[15169]: E0404 14:25:15.844882   15169 kubelet.go:2266] node ""ubuntu"" not found
+Apr 04 14:25:15 ubuntu kubelet[15169]: E0404 14:25:15.945237   15169 kubelet.go:2266] node ""ubuntu"" not found
+Apr 04 14:25:16 ubuntu kubelet[15169]: E0404 14:25:16.008343   15169 reflector.go:134] k8s.io/kubernetes/pkg/kubelet/kubelet.go:453: Failed to list *v1.Node: Get https://192.168.2.175:6443/api/v1/n
+Apr 04 14:25:16 ubuntu kubelet[15169]: E0404 14:25:16.010116   15169 reflector.go:134] k8s.io/kubernetes/pkg/kubelet/kubelet.go:444: Failed to list *v1.Service: Get https://192.168.2.175:6443/api/v
+Apr 04 14:25:16 ubuntu kubelet[15169]: E0404 14:25:16.010129   15169 reflector.go:134] k8s.io/kubernetes/pkg/kubelet/config/apiserver.go:47: Failed to list *v1.Pod: Get https://192.168.2.175:6443/a
+Apr 04 14:25:16 ubuntu kubelet[15169]: E0404 14:25:16.046365   15169 kubelet.go:2266] node ""ubuntu"" not found
+Apr 04 14:25:16 ubuntu kubelet[15169]: E0404 14:25:16.147424   15169 kubelet.go:2266] node ""ubuntu"" not found
+Apr 04 14:25:16 ubuntu kubelet[15169]: E0404 14:25:16.249664   15169 kubelet.go:2266] node ""ubuntu"" not found
+Apr 04 14:25:16 ubuntu kubelet[15169]: E0404 14:25:16.351533   15169 kubelet.go:2266] node ""ubuntu"" not found
+Apr 04 14:25:16 ubuntu kubelet[15169]: E0404 14:25:16.457940   15169 kubelet.go:2266] node ""ubuntu"" not found
+Apr 04 14:25:16 ubuntu kubelet[15169]: W0404 14:25:16.468898   15169 cni.go:203] Unable to update cni config: No networks found in /etc/cni/net.d
+Apr 04 14:25:16 ubuntu kubelet[15169]: E0404 14:25:16.469436   15169 kubelet.go:2192] Container runtime network not ready: NetworkReady=false reason:NetworkPluginNotReady message:docker: network pl
+Apr 04 14:25:16 ubuntu kubelet[15169]: E0404 14:25:16.562357   15169 kubelet.go:2266] node ""ubuntu"" not found
+Apr 04 14:25:16 ubuntu kubelet[15169]: I0404 14:25:16.598642   15169 kubelet_node_status.go:278] Setting node annotation to enable volume controller attach/detach
+Apr 04 14:25:16 ubuntu kubelet[15169]: I0404 14:25:16.612660   15169 kubelet_node_status.go:72] Attempting to register node ubuntu
+Apr 04 14:25:16 ubuntu kubelet[15169]: E0404 14:25:16.613354   15169 kubelet_node_status.go:94] Unable to register node ""ubuntu"" with API server: Post https://192.168.2.175:6443/api/v1/nodes: dial
+Apr 04 14:25:16 ubuntu kubelet[15169]: E0404 14:25:16.663567   15169 kubelet.go:2266] node ""ubuntu"" not found
+Apr 04 14:25:16 ubuntu kubelet[15169]: E0404 14:25:16.765090   15169 kubelet.go:2266] node ""ubuntu"" not found
+Apr 04 14:25:16 ubuntu kubelet[15169]: E0404 14:25:16.866400   15169 kubelet.go:2266] node ""ubuntu"" not found
+Apr 04 14:25:16 ubuntu kubelet[15169]: E0404 14:25:16.975709   15169 kubelet.go:2266] node ""ubuntu"" not found
+Apr 04 14:25:17 ubuntu kubelet[15169]: E0404 14:25:17.013353   15169 reflector.go:134] k8s.io/kubernetes/pkg/kubelet/kubelet.go:453: Failed to list *v1.Node: Get https://192.168.2.175:6443/api/v1/n
+Apr 04 14:25:17 ubuntu kubelet[15169]: E0404 14:25:17.013405   15169 reflector.go:134] k8s.io/kubernetes/pkg/kubelet/kubelet.go:444: Failed to list *v1.Service: Get https://192.168.2.175:6443/api/v
+Apr 04 14:25:17 ubuntu kubelet[15169]: E0404 14:25:17.016478   15169 reflector.go:134] k8s.io/kubernetes/pkg/kubelet/config/apiserver.go:47: Failed to list *v1.Pod: Get https://192.168.2.175:6443/a
+Apr 04 14:25:17 ubuntu kubelet[15169]: I0404 14:25:17.041833   15169 kubelet_node_status.go:278] Setting node annotation to enable volume controller attach/detach
+
+
+root@ubuntu:~# kubeadm init --kubernetes-version 2 --pod-network-cidr 192.168.0.0/16 | tee kubeadm-init.out
+version ""2"" doesn't match patterns for neither semantic version nor labels (stable, latest, ...)
+root@ubuntu:~#
+<issue_comment>username_1: you need to use something like `--kubernetes-version=1.13.1`
+try sending the logs again after that.
+<issue_comment>username_0: Hi Lubomir,
+
+I have only this version.
+Could you please let me know what can I do in this case?
+
+Thanks,
+Victor
+
+root@ubuntu:~# kubectl version
+Client Version: version.Info{Major:""1"", Minor:""13"", GitVersion:""v1.13.1"", GitCommit:""eec55b9ba98609a46fee712359c7b5b365bdd920"", GitTreeState:""clean"", BuildDate:""2018-12-13T10:39:04Z"", GoVersion:""go1.11.2"", Compiler:""gc"", Platform:""linux/amd64""}
+The connection to the server localhost:8080 was refused - did you specify the right host or port?
+root@ubuntu:~#
+<issue_comment>username_1: `kubeadm init --kubernetes-version 2 ...`
+is not a valid command
+try:
+`kubeadm init --kubernetes-version 1.13.1 ...`
+<issue_comment>username_0: Hi Lubomir,
+
+Would you like me to run “kubeadm init --kubernetes-version 1.13.1 --pod-network-cidr 192.168.0.0/16 | tee kubeadm-init.out” again?
+
+Thanks,
+Victor
+<issue_comment>username_1: yes, exactly.
+<issue_comment>username_1: also add `--v=2` to the command line.
+<issue_comment>username_0: Should I run this command?
+
+kubeadm init --kubernetes-version 1.13.1 --pod-network-cidr 192.168.0.0/16 | tee kubeadm-init.out --v=2
+<issue_comment>username_1: try 
+```
+kubeadm init --kubernetes-version 1.13.1 --pod-network-cidr 192.168.0.0/16 --v=2 | tee kubeadm-init.out
+```
+
+where is the CIDR value coming from?
+192.168.0.0/16
+<issue_comment>username_0: Hi Lubomir,
+
+I run two commands.
+
+root@ubuntu:~# kubeadm init --kubernetes-version 1.13.1 --pod-network-cidr 192.168.0.0/16 | tee kubeadm-init.out
+[init] Using Kubernetes version: v1.13.1
+[preflight] Running pre-flight checks
+[preflight] Pulling images required for setting up a Kubernetes cluster
+[preflight] This might take a minute or two, depending on the speed of your internet connection
+[preflight] You can also perform this action in beforehand using 'kubeadm config images pull'
+[kubelet-start] Writing kubelet environment file with flags to file ""/var/lib/kubelet/kubeadm-flags.env""
+[kubelet-start] Writing kubelet configuration to file ""/var/lib/kubelet/config.yaml""
+[kubelet-start] Activating the kubelet service
+[certs] Using certificateDir folder ""/etc/kubernetes/pki""
+[certs] Using existing etcd/ca certificate authority
+[certs] Using existing apiserver-etcd-client certificate and key on disk
+[certs] Using existing etcd/peer certificate and key on disk
+[certs] Using existing etcd/server certificate and key on disk
+[certs] Using existing etcd/healthcheck-client certificate and key on disk
+[certs] Using existing ca certificate authority
+[certs] Using existing apiserver-kubelet-client certificate and key on disk
+[certs] Using existing apiserver certificate and key on disk
+[certs] Using existing front-proxy-ca certificate authority
+[certs] Using existing front-proxy-client certificate and key on disk
+[certs] Using the existing ""sa"" key
+[kubeconfig] Using kubeconfig folder ""/etc/kubernetes""
+[kubeconfig] Using existing up-to-date kubeconfig file: ""/etc/kubernetes/admin.conf""
+[kubeconfig] Using existing up-to-date kubeconfig file: ""/etc/kubernetes/kubelet.conf""
+[kubeconfig] Using existing up-to-date kubeconfig file: ""/etc/kubernetes/controller-manager.conf""
+[kubeconfig] Using existing up-to-date kubeconfig file: ""/etc/kubernetes/scheduler.conf""
+[control-plane] Using manifest folder ""/etc/kubernetes/manifests""
+[control-plane] Creating static Pod manifest for ""kube-apiserver""
+[control-plane] Creating static Pod manifest for ""kube-controller-manager""
+[control-plane] Creating static Pod manifest for ""kube-scheduler""
+[etcd] Creating static Pod manifest for local etcd in ""/etc/kubernetes/manifests""
+[wait-control-plane] Waiting for the kubelet to boot up the control plane as static Pods from directory ""/etc/kubernetes/manifests"". This can take up to 4m0s
+[kubelet-check] Initial timeout of 40s passed.
+error execution phase wait-control-plane: couldn't initialize a Kubernetes cluster
+
+Unfortunately, an error has occurred:
+        timed out waiting for the condition
+
+This error is likely caused by:
+        - The kubelet is not running
+        - The kubelet is unhealthy due to a misconfiguration of the node in some way (required cgroups disabled)
+
+If you are on a systemd-powered system, you can try to troubleshoot the error with the following commands:
+        - 'systemctl status kubelet'
+        - 'journalctl -xeu kubelet'
+
+Additionally, a control plane component may have crashed or exited when started by the container runtime.
+To troubleshoot, list all containers using your preferred container runtimes CLI, e.g. docker.
+Here is one example how you may list all Kubernetes containers running in docker:
+        - 'docker ps -a | grep kube | grep -v pause'
+        Once you have found the failing container, you can inspect its logs with:
+        - 'docker logs CONTAINERID'
+root@ubuntu:~#
+root@ubuntu:~#
+root@ubuntu:~#
+root@ubuntu:~#
+root@ubuntu:~# kubeadm init --kubernetes-version 1.13.1 --pod-network-cidr 192.168.0.0/16 | tee kubeadm-init.out --v=2
+tee: option '--version' doesn't allow an argument
+Try 'tee --help' for more information.
+root@ubuntu:~#
+
+From: Koloupaev, Victor
+Sent: Thursday, April 4, 2019 12:48 PM
+To: 'kubernetes/website' <reply@reply.github.com>; kubernetes/website <website@noreply.github.com>
+Cc: Author <author@noreply.github.com>
+Subject: RE: [kubernetes/website] Issue with k8s.io/docs/home/ (#13612)
+
+Should I run this command?
+
+kubeadm init --kubernetes-version 1.13.1 --pod-network-cidr 192.168.0.0/16 | tee kubeadm-init.out --v=2
+<issue_comment>username_1: ```
+kubeadm init --kubernetes-version 1.13.1 --pod-network-cidr 192.168.0.0/16 --v=2 | tee kubeadm-init.out
+```
+<issue_comment>username_0: Hi Lubomir,
+
+I am sending you the output.
+
+Regards,
+Victor
+
+root@ubuntu:~# kubeadm init --kubernetes-version 1.13.1 --pod-network-cidr 192.168.0.0/16 --v=2 | tee kubeadm-init.out
+I0404 17:06:29.030877   11560 feature_gate.go:206] feature gates: &{map[]}
+[init] Using Kubernetes version: v1.13.1
+[preflight] Running pre-flight checks
+I0404 17:06:29.031486   11560 checks.go:572] validating Kubernetes and kubeadm version
+I0404 17:06:29.031535   11560 checks.go:171] validating if the firewall is enabled and active
+I0404 17:06:29.051968   11560 checks.go:208] validating availability of port 6443
+I0404 17:06:29.052099   11560 checks.go:208] validating availability of port 10251
+I0404 17:06:29.052143   11560 checks.go:208] validating availability of port 10252
+I0404 17:06:29.052188   11560 checks.go:283] validating the existence of file /etc/kubernetes/manifests/kube-apiserver.yaml
+I0404 17:06:29.052216   11560 checks.go:283] validating the existence of file /etc/kubernetes/manifests/kube-controller-manager.yaml
+I0404 17:06:29.052239   11560 checks.go:283] validating the existence of file /etc/kubernetes/manifests/kube-scheduler.yaml
+I0404 17:06:29.052282   11560 checks.go:283] validating the existence of file /etc/kubernetes/manifests/etcd.yaml
+I0404 17:06:29.052466   11560 checks.go:430] validating if the connectivity type is via proxy or direct
+I0404 17:06:29.052729   11560 checks.go:466] validating http connectivity to first IP address in the CIDR
+I0404 17:06:29.052935   11560 checks.go:466] validating http connectivity to first IP address in the CIDR
+I0404 17:06:29.052965   11560 checks.go:104] validating the container runtime
+I0404 17:06:29.139524   11560 checks.go:130] validating if the service is enabled and active
+I0404 17:06:29.178388   11560 checks.go:332] validating the contents of file /proc/sys/net/bridge/bridge-nf-call-iptables
+I0404 17:06:29.178729   11560 checks.go:332] validating the contents of file /proc/sys/net/ipv4/ip_forward
+I0404 17:06:29.178896   11560 checks.go:644] validating whether swap is enabled or not
+I0404 17:06:29.179028   11560 checks.go:373] validating the presence of executable ip
+I0404 17:06:29.179230   11560 checks.go:373] validating the presence of executable iptables
+I0404 17:06:29.179409   11560 checks.go:373] validating the presence of executable mount
+I0404 17:06:29.179472   11560 checks.go:373] validating the presence of executable nsenter
+I0404 17:06:29.179626   11560 checks.go:373] validating the presence of executable ebtables
+I0404 17:06:29.179768   11560 checks.go:373] validating the presence of executable ethtool
+I0404 17:06:29.179934   11560 checks.go:373] validating the presence of executable socat
+I0404 17:06:29.180078   11560 checks.go:373] validating the presence of executable tc
+I0404 17:06:29.180121   11560 checks.go:373] validating the presence of executable touch
+I0404 17:06:29.180241   11560 checks.go:515] running all checks
+I0404 17:06:29.247660   11560 checks.go:403] checking whether the given node name is reachable using net.LookupHost
+I0404 17:06:29.253204   11560 checks.go:613] validating kubelet version
+I0404 17:06:29.406053   11560 checks.go:130] validating if the service is enabled and active
+I0404 17:06:29.443574   11560 checks.go:208] validating availability of port 10250
+I0404 17:06:29.443895   11560 checks.go:208] validating availability of port 2379
+I0404 17:06:29.444103   11560 checks.go:208] validating availability of port 2380
+I0404 17:06:29.444260   11560 checks.go:245] validating the existence and emptiness of directory /var/lib/etcd
+[preflight] Pulling images required for setting up a Kubernetes cluster
+[preflight] This might take a minute or two, depending on the speed of your internet connection
+[preflight] You can also perform this action in beforehand using 'kubeadm config images pull'
+I0404 17:06:29.527755   11560 checks.go:833] image exists: k8s.gcr.io/kube-apiserver:v1.13.1
+I0404 17:06:29.602715   11560 checks.go:833] image exists: k8s.gcr.io/kube-controller-manager:v1.13.1
+I0404 17:06:29.679171   11560 checks.go:833] image exists: k8s.gcr.io/kube-scheduler:v1.13.1
+I0404 17:06:29.754915   11560 checks.go:833] image exists: k8s.gcr.io/kube-proxy:v1.13.1
+I0404 17:06:29.831668   11560 checks.go:833] image exists: k8s.gcr.io/pause:3.1
+I0404 17:06:29.915576   11560 checks.go:833] image exists: k8s.gcr.io/etcd:3.2.24
+I0404 17:06:29.996042   11560 checks.go:833] image exists: k8s.gcr.io/coredns:1.2.6
+I0404 17:06:29.996251   11560 kubelet.go:71] Stopping the kubelet
+[kubelet-start] Writing kubelet environment file with flags to file ""/var/lib/kubelet/kubeadm-flags.env""
+[kubelet-start] Writing kubelet configuration to file ""/var/lib/kubelet/config.yaml""
+I0404 17:06:30.137377   11560 kubelet.go:89] Starting the kubelet
+[kubelet-start] Activating the kubelet service
+[certs] Using certificateDir folder ""/etc/kubernetes/pki""
+[certs] Using existing front-proxy-ca certificate authority
+[certs] Using existing front-proxy-client certificate and key on disk
+[certs] Using existing etcd/ca certificate authority
+[certs] Using existing etcd/peer certificate and key on disk
+[certs] Using existing etcd/server certificate and key on disk
+[certs] Using existing etcd/healthcheck-client certificate and key on disk
+[certs] Using existing apiserver-etcd-client certificate and key on disk
+[certs] Using existing ca certificate authority
+[certs] Using existing apiserver-kubelet-client certificate and key on disk
+[certs] Using existing apiserver certificate and key on disk
+I0404 17:06:30.736402   11560 certs.go:72] creating a new public/private key files for signing service account users
+[certs] Using the existing ""sa"" key
+[kubeconfig] Using kubeconfig folder ""/etc/kubernetes""
+I0404 17:06:31.272051   11560 kubeconfig.go:92] creating kubeconfig file for admin.conf
+[kubeconfig] Using existing up-to-date kubeconfig file: ""/etc/kubernetes/admin.conf""
+I0404 17:06:31.696251   11560 kubeconfig.go:92] creating kubeconfig file for kubelet.conf
+[kubeconfig] Using existing up-to-date kubeconfig file: ""/etc/kubernetes/kubelet.conf""
+I0404 17:06:32.274310   11560 kubeconfig.go:92] creating kubeconfig file for controller-manager.conf
+I0404 17:06:33.537226   11560 kubeconfig.go:92] creating kubeconfig file for scheduler.conf
+[Truncated]
+
+Unfortunately, an error has occurred:
+        timed out waiting for the condition
+
+This error is likely caused by:
+        - The kubelet is not running
+        - The kubelet is unhealthy due to a misconfiguration of the node in some way (required cgroups disabled)
+
+If you are on a systemd-powered system, you can try to troubleshoot the error with the following commands:
+        - 'systemctl status kubelet'
+        - 'journalctl -xeu kubelet'
+
+Additionally, a control plane component may have crashed or exited when started by the container runtime.
+To troubleshoot, list all containers using your preferred container runtimes CLI, e.g. docker.
+Here is one example how you may list all Kubernetes containers running in docker:
+        - 'docker ps -a | grep kube | grep -v pause'
+        Once you have found the failing container, you can inspect its logs with:
+        - 'docker logs CONTAINERID'
+error execution phase wait-control-plane: couldn't initialize a Kubernetes cluster
+root@ubuntu:~#
+<issue_comment>username_1: these are NOT official documents on how to run kubeadm i don't know what that is.
+try here:
+https://kubernetes.io/docs/setup/independent/create-cluster-kubeadm/
+<issue_comment>username_0: Could you please send me the command to do it?
+<issue_comment>username_1: @username_0 
+
+this is issue tracker is not a support forum.
+try stack overflow / slack or some of our support channels:
+https://github.com/kubernetes/community/blob/master/contributors/guide/issue-triage.md#user-support-response-example
+
+thank you.
+/close"
+stevenschobert/instafeed.js,32541940,95,,"[{'action': 'opened', 'author': 'mcclaskiem', 'comment_id': None, 'datetime': '2014-04-30T14:56:27Z', 'masked_author': 'username_0', 'text': 'I really love the simplicity but power of instafeed.js. I was curious if there is any sort of back end script out there that can assign an approved variable to a photo and then be called in the image filter so that ones with ""approved"" will be shown. \r\n\r\nBasically I would want to set it up so that I can use this to populate a back-end and then go through and assign variables through some sort of form. Following that alter the script so that it calls the cached images with the approved filter.', 'title': 'Moderating Photos seen on Client side', 'type': 'issue'}
+ {'action': 'created', 'author': 'jegheddermilos', 'comment_id': 68617690.0, 'datetime': '2015-01-04 02:05:44+00:00', 'masked_author': 'username_1', 'text': 'Did anyone find a solution to this? :)', 'title': None, 'type': 'comment'}]","<issue_start><issue_comment>Title: Moderating Photos seen on Client side
+username_0: I really love the simplicity but power of instafeed.js. I was curious if there is any sort of back end script out there that can assign an approved variable to a photo and then be called in the image filter so that ones with ""approved"" will be shown. 
+
+Basically I would want to set it up so that I can use this to populate a back-end and then go through and assign variables through some sort of form. Following that alter the script so that it calls the cached images with the approved filter.
+<issue_comment>username_1: Did anyone find a solution to this? :)"
+cake-build/website,336017044,543,,"[{'action': 'opened', 'author': 'Jericho', 'comment_id': None, 'datetime': '2018-06-26 22:41:59+00:00', 'masked_author': 'username_0', 'text': ""The Cake.AddinDiscoverer tool has discovered discrepencies between the YAML files currently on Cake's web site and the packages discovered on Nuget.org:\r\n\r\nYAML files to be deleted:\r\n\r\n\r\nYAML files to be created:\r\n- Cake.Android.AvdManager\r\n- Cake.Aws.ElasticBeanstalk.Dev\r\n- Cake.AWS.Lambda\r\n- Cake.AzCopy\r\n- Cake.Bower\r\n- Cake.Bridge\r\n- Cake.BuildSystems.Module\r\n- Cake.CakeBoss\r\n- Cake.CK.Pack\r\n- Cake.ClickTwice\r\n- Cake.ConventionalChangelog\r\n- Cake.Deploy.Azure.Authentication\r\n- Cake.Deploy.Azure.ResourceManager\r\n- Cake.Deploy.Bot.LUIS\r\n- Cake.Deploy.Variables\r\n- Cake.DeployParams\r\n- Cake.DocCreator\r\n- Cake.DocumentDb\r\n- Cake.Eazfuscator.Net\r\n- Cake.Flyway\r\n- Cake.FtpDeploy\r\n- Cake.Git.NonPortable\r\n- Cake.GitHubUtility\r\n- Cake.Gradle\r\n- Cake.Graph\r\n- Cake.Handlebars\r\n- Cake.HandlebarsDotNet\r\n- Cake.Helm\r\n- Cake.HgVersion\r\n- Cake.Jira\r\n- Cake.Karma\r\n- Cake.LittleHelpers\r\n- Cake.Mage\r\n- Cake.Markdown-Pdf\r\n- Cake.Mix\r\n- Cake.MonoApiTools\r\n- Cake.Netlify\r\n- Cake.NewRelic\r\n- Cake.Npx\r\n- Cake.NSpec\r\n- Cake.NSwag.Console\r\n- Cake.NuGet\r\n- Cake.OssIndex\r\n- Cake.PinNuGetDependency\r\n- Cake.Recipe\r\n- Cake.ScheduledTasks\r\n- Cake.Scripting.Abstractions\r\n- Cake.Scripting.Transport\r\n- Cake.ServiceOrchestration\r\n- Cake.SimpleHTTPServer\r\n- Cake.SquareLogo\r\n- Cake.Storm.Android\r\n- Cake.Storm.Environment\r\n- Cake.Storm.Fluent\r\n- Cake.Storm.Fluent.Android\r\n- Cake.Storm.Fluent.DotNetCore\r\n- Cake.Storm.Fluent.iOS\r\n- Cake.Storm.Fluent.NuGet\r\n- Cake.Storm.Fluent.Transformations\r\n- Cake.Storm.iOS\r\n- Cake.Storm.JsonBuildConfiguration\r\n- Cake.Storm.Nuget\r\n- Cake.Testing\r\n- Cake.Tin\r\n- Cake.TravisCI\r\n- Cake.Umbraco.PackageUploader\r\n- Cake.UncUtils\r\n- Cake.UServer\r\n- Cake.Utility\r\n- Cake.ViewCompiler\r\n- Cake.VSforMac\r\n- Cake.WindowsAppStore\r\n- Cake.Wyam.Recipe\r\n- Cake.Xamarin.Build\r\n[Truncated]\n- Cake.Plist\r\n- Cake.Powershell\r\n- Cake.ProjHelpers\r\n- Cake.Putty\r\n- Cake.Raygun\r\n- Cake.ReSharperReports\r\n- Cake.Services\r\n- Cake.Slack\r\n- Cake.SqlServer\r\n- Cake.SqlTools\r\n- Cake.Terraform\r\n- Cake.Tfx\r\n- Cake.Topshelf\r\n- Cake.Twitter\r\n- Cake.VersionReader\r\n- Cake.VsCode\r\n- Cake.VsixSignTool\r\n- Cake.VsMetrics\r\n- Cake.WebDeploy\r\n- Cake.Webpack"", 'title': 'Synchronizing YAML files', 'type': 'issue'}
+ {'action': 'closed', 'author': 'Jericho', 'comment_id': None, 'datetime': '2018-06-27 00:01:37+00:00', 'masked_author': 'username_0', 'text': '', 'title': None, 'type': 'issue'}]","<issue_start><issue_comment>Title: Synchronizing YAML files
+username_0: The Cake.AddinDiscoverer tool has discovered discrepencies between the YAML files currently on Cake's web site and the packages discovered on Nuget.org:
+
+YAML files to be deleted:
+
+
+YAML files to be created:
+- Cake.Android.AvdManager
+- Cake.Aws.ElasticBeanstalk.Dev
+- Cake.AWS.Lambda
+- Cake.AzCopy
+- Cake.Bower
+- Cake.Bridge
+- Cake.BuildSystems.Module
+- Cake.CakeBoss
+- Cake.CK.Pack
+- Cake.ClickTwice
+- Cake.ConventionalChangelog
+- Cake.Deploy.Azure.Authentication
+- Cake.Deploy.Azure.ResourceManager
+- Cake.Deploy.Bot.LUIS
+- Cake.Deploy.Variables
+- Cake.DeployParams
+- Cake.DocCreator
+- Cake.DocumentDb
+- Cake.Eazfuscator.Net
+- Cake.Flyway
+- Cake.FtpDeploy
+- Cake.Git.NonPortable
+- Cake.GitHubUtility
+- Cake.Gradle
+- Cake.Graph
+- Cake.Handlebars
+- Cake.HandlebarsDotNet
+- Cake.Helm
+- Cake.HgVersion
+- Cake.Jira
+- Cake.Karma
+- Cake.LittleHelpers
+- Cake.Mage
+- Cake.Markdown-Pdf
+- Cake.Mix
+- Cake.MonoApiTools
+- Cake.Netlify
+- Cake.NewRelic
+- Cake.Npx
+- Cake.NSpec
+- Cake.NSwag.Console
+- Cake.NuGet
+- Cake.OssIndex
+- Cake.PinNuGetDependency
+- Cake.Recipe
+- Cake.ScheduledTasks
+- Cake.Scripting.Abstractions
+- Cake.Scripting.Transport
+- Cake.ServiceOrchestration
+- Cake.SimpleHTTPServer
+- Cake.SquareLogo
+- Cake.Storm.Android
+- Cake.Storm.Environment
+- Cake.Storm.Fluent
+- Cake.Storm.Fluent.Android
+- Cake.Storm.Fluent.DotNetCore
+- Cake.Storm.Fluent.iOS
+- Cake.Storm.Fluent.NuGet
+- Cake.Storm.Fluent.Transformations
+- Cake.Storm.iOS
+- Cake.Storm.JsonBuildConfiguration
+- Cake.Storm.Nuget
+- Cake.Testing
+- Cake.Tin
+- Cake.TravisCI
+- Cake.Umbraco.PackageUploader
+- Cake.UncUtils
+- Cake.UServer
+- Cake.Utility
+- Cake.ViewCompiler
+- Cake.VSforMac
+- Cake.WindowsAppStore
+- Cake.Wyam.Recipe
+- Cake.Xamarin.Build
+[Truncated]
+- Cake.Plist
+- Cake.Powershell
+- Cake.ProjHelpers
+- Cake.Putty
+- Cake.Raygun
+- Cake.ReSharperReports
+- Cake.Services
+- Cake.Slack
+- Cake.SqlServer
+- Cake.SqlTools
+- Cake.Terraform
+- Cake.Tfx
+- Cake.Topshelf
+- Cake.Twitter
+- Cake.VersionReader
+- Cake.VsCode
+- Cake.VsixSignTool
+- Cake.VsMetrics
+- Cake.WebDeploy
+- Cake.Webpack<issue_closed>"
+kubernetes/website,351086479,9877,,"[{'action': 'opened', 'author': 'lyongjn', 'comment_id': None, 'datetime': '2018-08-16 07:27:05+00:00', 'masked_author': 'username_0', 'text': '<!-- Thanks for filing an issue! Before submitting, please fill in the following information. -->\r\n<!-- See https://kubernetes.io/docs/contribute/start/ for guidance on writing an actionable issue description. -->\r\n\r\n<!--Required Information-->\r\n\r\n**This is a...** \r\n<!-- choose one by changing [ ] to [x] -->\r\n- [ ] Feature Request\r\n- [ x] Bug Report\r\n\r\n**Problem:**\r\nThe section of ""Install with Powershell from PSGallery"" includes a powershell named install-kubectl.ps1, which can be found at this website : https://www.powershellgallery.com/packages/install-kubectl/1.6/Content/install-kubectl.ps1.\r\n\r\nMy os version is Windows 10, when I executes install-kubectl.ps1, one error occurs : \r\n    Invoke-WebRequest : 基础连接已经关闭: 发送时发生错误。\r\n\r\n**Proposed Solution:**\r\nI googled this error and found a solution for this by adding this scripts to install-kubectl.ps1.\r\n$AllProtocols = [System.Net.SecurityProtocolType]\'Ssl3,Tls,Tls11,Tls12\'\r\n[System.Net.ServicePointManager]::SecurityProtocol = $AllProtocols\r\nThis reason is the k8s website uses the tls1.2 protocal, but .NET only support ssl v3 and tls 1.0.\r\nSee this  website for further information : https://stackoverflow.com/questions/36265534/invoke-webrequest-ssl-fails/36266735#36266735.\r\n\r\n**Page to Update:**\r\nhttps://kubernetes.io/...\r\n\r\n<!--Optional Information (remove the comment tags around information you would like to include)-->\r\n<!--Kubernetes Version:-->\r\n\r\n<!--Additional Information:-->', 'title': 'Issue with k8s.io//docs/tasks/tools/install-kubectl/ [File: /content/en/docs/tasks/tools/install-kubectl.md]', 'type': 'issue'}
+ {'action': 'created', 'author': 'eelco-de-boer', 'comment_id': 430162334.0, 'datetime': '2018-10-16 09:12:26+00:00', 'masked_author': 'username_1', 'text': '@lucperkins Well the problem lies in this package that you link to on the website.\r\nDo you know or does one of maintainers of this repo have contact with the maintainer of this installation package on the PSGallery? He needs to fix this on PSGallery, but it has not seen an update since a year there.\r\n\r\nSo there are two options:\r\n1. Remove the PSGallery installation option from https://kubernetes.io/docs/tasks/tools/install-kubectl/\r\n2. Wake up the maintainer of the package on PSGallery to update the install script with the appropriate TLS1.2 setting like @username_0 said.', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'it-praktyk', 'comment_id': 456774679.0, 'datetime': '2019-01-23 11:55:12+00:00', 'masked_author': 'username_2', 'text': ""The script install-kubectl.ps1 was updated to v. 1.7 by @bottkars yesterday. I've tested it, works correctly on W2K8 R2 and PowerShell 3.0.\r\n\r\nIMHO, the issue can be closed now."", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'Aprilmei', 'comment_id': 458531780.0, 'datetime': '2019-01-29 13:03:15+00:00', 'masked_author': 'username_3', 'text': ""The same issue on my windows 10. v1.7 doesn't work there"", 'title': None, 'type': 'comment'}
+ {'action': 'closed', 'author': 'lyongjn', 'comment_id': None, 'datetime': '2019-03-12 07:56:09+00:00', 'masked_author': 'username_0', 'text': '', 'title': None, 'type': 'issue'}]","<issue_start><issue_comment>Title: Issue with k8s.io//docs/tasks/tools/install-kubectl/ [File: /content/en/docs/tasks/tools/install-kubectl.md]
+username_0: <!-- Thanks for filing an issue! Before submitting, please fill in the following information. -->
+<!-- See https://kubernetes.io/docs/contribute/start/ for guidance on writing an actionable issue description. -->
+
+<!--Required Information-->
+
+**This is a...** 
+<!-- choose one by changing [ ] to [x] -->
+- [ ] Feature Request
+- [ x] Bug Report
+
+**Problem:**
+The section of ""Install with Powershell from PSGallery"" includes a powershell named install-kubectl.ps1, which can be found at this website : https://www.powershellgallery.com/packages/install-kubectl/1.6/Content/install-kubectl.ps1.
+
+My os version is Windows 10, when I executes install-kubectl.ps1, one error occurs : 
+    Invoke-WebRequest : 基础连接已经关闭: 发送时发生错误。
+
+**Proposed Solution:**
+I googled this error and found a solution for this by adding this scripts to install-kubectl.ps1.
+$AllProtocols = [System.Net.SecurityProtocolType]'Ssl3,Tls,Tls11,Tls12'
+[System.Net.ServicePointManager]::SecurityProtocol = $AllProtocols
+This reason is the k8s website uses the tls1.2 protocal, but .NET only support ssl v3 and tls 1.0.
+See this  website for further information : https://stackoverflow.com/questions/36265534/invoke-webrequest-ssl-fails/36266735#36266735.
+
+**Page to Update:**
+https://kubernetes.io/...
+
+<!--Optional Information (remove the comment tags around information you would like to include)-->
+<!--Kubernetes Version:-->
+
+<!--Additional Information:-->
+<issue_comment>username_1: @lucperkins Well the problem lies in this package that you link to on the website.
+Do you know or does one of maintainers of this repo have contact with the maintainer of this installation package on the PSGallery? He needs to fix this on PSGallery, but it has not seen an update since a year there.
+
+So there are two options:
+1. Remove the PSGallery installation option from https://kubernetes.io/docs/tasks/tools/install-kubectl/
+2. Wake up the maintainer of the package on PSGallery to update the install script with the appropriate TLS1.2 setting like @username_0 said.
+<issue_comment>username_2: The script install-kubectl.ps1 was updated to v. 1.7 by @bottkars yesterday. I've tested it, works correctly on W2K8 R2 and PowerShell 3.0.
+
+IMHO, the issue can be closed now.
+<issue_comment>username_3: The same issue on my windows 10. v1.7 doesn't work there<issue_closed>"
+flutter/website,318362419,977,"{'number': 977.0, 'repo': 'website', 'user_login': 'flutter'}","[{'action': 'opened', 'author': 'rock3r', 'comment_id': None, 'datetime': '2018-04-27T10:44:07Z', 'masked_author': 'username_0', 'text': ""This PR is for the first section of the work to create the `flutter-for-ios.md` document. Writing by @niamh-power on Novoda's behalf, I am just a proxy.\r\n\r\nFollowing the same rough format as the `flutter-for-android.md` document, with iOS details instead.\r\n\r\nThe following sections have been created:\r\n\r\n* How do I navigate between pages?\r\n* Navigating to other apps"", 'title': 'Flutter for iOS —\xa0Navigation section', 'type': 'issue'}
+ {'action': 'created', 'author': 'Hixie', 'comment_id': 392970450.0, 'datetime': '2018-05-29 22:38:16+00:00', 'masked_author': 'username_1', 'text': '(Blocked on #965.)', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'Sfshaza', 'comment_id': 393022897.0, 'datetime': '2018-05-30 03:59:08+00:00', 'masked_author': 'username_2', 'text': ""I'm including @mjohnsullivan's feedback in PR https://github.com/flutter/website/pull/1046.\r\n\r\nClosing this."", 'title': None, 'type': 'comment'}]","<issue_start><issue_comment>Title: Flutter for iOS — Navigation section
+username_0: This PR is for the first section of the work to create the `flutter-for-ios.md` document. Writing by @niamh-power on Novoda's behalf, I am just a proxy.
+
+Following the same rough format as the `flutter-for-android.md` document, with iOS details instead.
+
+The following sections have been created:
+
+* How do I navigate between pages?
+* Navigating to other apps
+<issue_comment>username_1: (Blocked on #965.)
+<issue_comment>username_2: I'm including @mjohnsullivan's feedback in PR https://github.com/flutter/website/pull/1046.
+
+Closing this."
+dotnet-foundation/website,850030173,838,,"[{'action': 'opened', 'author': 'smoothdeveloper', 'comment_id': None, 'datetime': '2021-04-05 02:48:12+00:00', 'masked_author': 'username_0', 'text': 'Hello, this issue is for me to propose adjustments to the code of conduct of dotnet foundation.\r\n\r\nI’ll start by saying my opinion that code of conducts can’t solve issues stemming from intolerance, they provide a tool / a framework to deal with situations where it is necessary, but their effectiveness in removing the cause of intolerance is not established.\r\n\r\nSolving intolerance requires space for civil exchange, and opposing views not being suppressed or dissed.\r\n\r\nAlso, when issues are severe, a code of conduct can’t be a substitute to actual law and its enforcements, in that context, for activists looking to further their particular cause, it is on the legislation in respective nations that focus should be put.\r\n\r\nI’ll state the main issues I have with our current code of conducts:\r\n\r\n# permanent ban\r\n\r\nI’m from a country where death penalty was removed, I personally oppose to death penalty (sorry for bringing personal political views to explain the case), evicting a person from a community, in permanent fashion may cause significant harm to the person, and is akin to a death penalty.\r\n\r\nIf things are that drastic, it is for law to be put in use for remediation, not code of conduct.\r\n\r\nThere should always be a path, however thinning, allowing a community member which incurred issues to reintegrate it, and for the community to do it’s best to smoothen that, which helps the offender on a journey to adjust own behaviour, and restore what makes a community binds.\r\n\r\nI suggest the idea of permanent ban to be plainly removed.\r\n\r\n# pledge\r\n\r\nI’d prefer pledge to be expressed on abstracts and fundamental terms around tolerance and freedom, without giving specific issues that are varying with time, morals, locations, etc.\r\n\r\nIf this doesn’t meet adhesion, then, there is an extra cost, which I describe below:\r\n\r\nI’ve encountered circumstance where people engage on topics listed in the pledge, and discussion be totally curtailed because it stirs people to share their personal views (which is healthy in the right context).\r\n\r\nCurtailing those discussions is detrimental if the pledge itself bring the issues to awareness, I believe the intent is to reduce intolerance, and for this, people need to face opposing views, in a constructive context.\r\n\r\nIf for reasons specific to dotnet foundation, the detailed list would stand, because of our community taking a stand in raising awareness on those, then a space for discussion which accepts opposing views being exchanged in civil manner, needs to be provided in the community.\r\n\r\nThis will solve intolerant views remaining static, and it will solve people being intolerant to people having intolerant opinions (even if kept outside of the community) to remain with their issues hindering their own ability to collaborate with anyone disregarding personal views.\r\n\r\nThis is, in my book, the best way for people to work on overcoming intolerance in others, and intolerance to soften, by having discussion and mediation space, and / or, by working on ourselves to overcome opposing views even existing.\r\n\r\nIf the list stands, am I able to propose additions to it? Who has the hand on deciding the sort order of the issues?\r\n\r\n# enforcement\r\n\r\nIn order to provide transparency, and also help give a sense of the type of issues encountered in specific communities, as to better address them, and share the experience across communities when facing similar issues, I propose that the actual enforcement incurs the decision to be put in a public record.\r\n\r\nThis public record shouldn’t expose any personal details, but highlight the key points of the issue which occured, how the decision for the actual measure was taken.\r\n\r\nPossibly, people who put the decision should also probably put their name and the vote they given (for, against, abstain), to stand for the decision.\r\n\r\nThe record should only list the (temporary) bans.\r\n\r\nI don’t have the edits to propose, I’m seeking to initiate the discussion on those suggestions and let the rest take natural course.', 'title': 'Discussing potential adjustments to the code of conduct.', 'type': 'issue'}
+ {'action': 'created', 'author': 'ReedCopsey', 'comment_id': 814219663.0, 'datetime': '2021-04-06 15:37:11+00:00', 'masked_author': 'username_1', 'text': ""And here I strongly disagree. Conflating death with removing somebody from a specific community, after deliberation and with reasonable cause, is frankly ridiculous.\r\n\r\nAs somebody who has, unfortunately, been involved in actively organizing various online communities over the years, permanent bans are typically a very last resort, and only used in extreme circumstances. At the point where they are typically considered, IMO they're warranted. \r\n\r\nAllowing people who have done significant harm to a community the opportunity to return can be extremely detrimental as well ... the feeling of safety of the people who did not do wrong is also important."", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'mary-perret-1986', 'comment_id': 814523143.0, 'datetime': '2021-04-07 00:47:25+00:00', 'masked_author': 'username_2', 'text': 'Again it\'s not to so much about life or death, but just to illustrate the point that hasty (not saying they are but when we don\'t really have a full pictures of who actually are oppressors, it\'s hard to really tell why people certain folks behave badly) and permanent decisions might be just as destructive as the ones you intend to stop.\r\n\r\nAlso sorry if I\'m being seen as a naive ""do-gooder"" of some sort, just wanted to give what I think is a more balanced and hopefully more nuanced vision of the things.\r\n\r\nOne last thing, and just in case, to set the record straight, I\'m not making excuses for bad behaviours.', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'smoothdeveloper', 'comment_id': 814561770.0, 'datetime': '2021-04-07 02:50:04+00:00', 'masked_author': 'username_0', 'text': 'With this, we could save readership a bit of time when they acknowledge the document setting the vibe in the community, we could remove ""permanent ban section"".\r\n\r\nFor the record of bans, I figured it would expose to risks around background search for personal views, so there is more work on my end to see if there is a better way, I think having a grasp of issues faced in the community would help contributing enhancements to the document and more importantly, the community to deal with similar occurrences before they escalate.\r\n\r\nRight now, only the community leaders have that information, if this is even tracked, and also, the power or mean of enforcement may be abused in certain cases.\r\n\r\nYou can read about this type of issue in http://paul-m-jones.com/post/2016/01/19/on-the-proposed-php-code-of-conduct/ but it is long read to get full context.\r\n\r\nIt shows that even people having full cognition of code of conduct can have a bit of misjudgement in how enforcement takes place.\r\n\r\nSo I\'ll retract the idea of record for now.\r\n\r\nFor the pledge, @username_1 , @username_2 do you have an opinion on making it more abstract?\r\n\r\nIt is quite a long read, and I don\'t see political opinions being even listed as falling under the protection of the code of conduct, which seems like an important omission (hence my questions in the issue).\r\n\r\nAs I explained in the issue itself, I\'d prefer a more abstract and short description about all the various factors of discrimination our society brews, this would cut short that part of the discussion, and be more resilient for new factors of discrimination taking ground in society and having impact on the community.\r\n\r\nThanks for your valuable feedback.', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'voronoipotato', 'comment_id': 820701026.0, 'datetime': '2021-04-15 20:10:42+00:00', 'masked_author': 'username_3', 'text': ""Some behavior and the confusion about the rules has made it abundantly clear that making the CoC more abstract will simply lead to more people not understanding what is and is not appropriate. It is clear that we must be explicit. Any change to the CoC will be debated to death and so should not be done lightly. Some believe the idea that they have a right to exterminate their professional peers is a political issue and as a result I don't see that entering the CoC any time soon. Finally regarding bans, a failure to remove people who push others out is simply a ban on those who follow the rules. Given that the rules appear to be working for most, as we have had remarkably few bans and remarkably few ethics complaints I see many reasons that a change could have the opportunity to cause great harm. Also we do not control the DotNet Code of Conduct, the DotNet Foundation does."", 'title': None, 'type': 'comment'}]","<issue_start><issue_comment>Title: Discussing potential adjustments to the code of conduct.
+username_0: Hello, this issue is for me to propose adjustments to the code of conduct of dotnet foundation.
+
+I’ll start by saying my opinion that code of conducts can’t solve issues stemming from intolerance, they provide a tool / a framework to deal with situations where it is necessary, but their effectiveness in removing the cause of intolerance is not established.
+
+Solving intolerance requires space for civil exchange, and opposing views not being suppressed or dissed.
+
+Also, when issues are severe, a code of conduct can’t be a substitute to actual law and its enforcements, in that context, for activists looking to further their particular cause, it is on the legislation in respective nations that focus should be put.
+
+I’ll state the main issues I have with our current code of conducts:
+
+# permanent ban
+
+I’m from a country where death penalty was removed, I personally oppose to death penalty (sorry for bringing personal political views to explain the case), evicting a person from a community, in permanent fashion may cause significant harm to the person, and is akin to a death penalty.
+
+If things are that drastic, it is for law to be put in use for remediation, not code of conduct.
+
+There should always be a path, however thinning, allowing a community member which incurred issues to reintegrate it, and for the community to do it’s best to smoothen that, which helps the offender on a journey to adjust own behaviour, and restore what makes a community binds.
+
+I suggest the idea of permanent ban to be plainly removed.
+
+# pledge
+
+I’d prefer pledge to be expressed on abstracts and fundamental terms around tolerance and freedom, without giving specific issues that are varying with time, morals, locations, etc.
+
+If this doesn’t meet adhesion, then, there is an extra cost, which I describe below:
+
+I’ve encountered circumstance where people engage on topics listed in the pledge, and discussion be totally curtailed because it stirs people to share their personal views (which is healthy in the right context).
+
+Curtailing those discussions is detrimental if the pledge itself bring the issues to awareness, I believe the intent is to reduce intolerance, and for this, people need to face opposing views, in a constructive context.
+
+If for reasons specific to dotnet foundation, the detailed list would stand, because of our community taking a stand in raising awareness on those, then a space for discussion which accepts opposing views being exchanged in civil manner, needs to be provided in the community.
+
+This will solve intolerant views remaining static, and it will solve people being intolerant to people having intolerant opinions (even if kept outside of the community) to remain with their issues hindering their own ability to collaborate with anyone disregarding personal views.
+
+This is, in my book, the best way for people to work on overcoming intolerance in others, and intolerance to soften, by having discussion and mediation space, and / or, by working on ourselves to overcome opposing views even existing.
+
+If the list stands, am I able to propose additions to it? Who has the hand on deciding the sort order of the issues?
+
+# enforcement
+
+In order to provide transparency, and also help give a sense of the type of issues encountered in specific communities, as to better address them, and share the experience across communities when facing similar issues, I propose that the actual enforcement incurs the decision to be put in a public record.
+
+This public record shouldn’t expose any personal details, but highlight the key points of the issue which occured, how the decision for the actual measure was taken.
+
+Possibly, people who put the decision should also probably put their name and the vote they given (for, against, abstain), to stand for the decision.
+
+The record should only list the (temporary) bans.
+
+I don’t have the edits to propose, I’m seeking to initiate the discussion on those suggestions and let the rest take natural course.
+<issue_comment>username_1: And here I strongly disagree. Conflating death with removing somebody from a specific community, after deliberation and with reasonable cause, is frankly ridiculous.
+
+As somebody who has, unfortunately, been involved in actively organizing various online communities over the years, permanent bans are typically a very last resort, and only used in extreme circumstances. At the point where they are typically considered, IMO they're warranted. 
+
+Allowing people who have done significant harm to a community the opportunity to return can be extremely detrimental as well ... the feeling of safety of the people who did not do wrong is also important.
+<issue_comment>username_2: Again it's not to so much about life or death, but just to illustrate the point that hasty (not saying they are but when we don't really have a full pictures of who actually are oppressors, it's hard to really tell why people certain folks behave badly) and permanent decisions might be just as destructive as the ones you intend to stop.
+
+Also sorry if I'm being seen as a naive ""do-gooder"" of some sort, just wanted to give what I think is a more balanced and hopefully more nuanced vision of the things.
+
+One last thing, and just in case, to set the record straight, I'm not making excuses for bad behaviours.
+<issue_comment>username_0: With this, we could save readership a bit of time when they acknowledge the document setting the vibe in the community, we could remove ""permanent ban section"".
+
+For the record of bans, I figured it would expose to risks around background search for personal views, so there is more work on my end to see if there is a better way, I think having a grasp of issues faced in the community would help contributing enhancements to the document and more importantly, the community to deal with similar occurrences before they escalate.
+
+Right now, only the community leaders have that information, if this is even tracked, and also, the power or mean of enforcement may be abused in certain cases.
+
+You can read about this type of issue in http://paul-m-jones.com/post/2016/01/19/on-the-proposed-php-code-of-conduct/ but it is long read to get full context.
+
+It shows that even people having full cognition of code of conduct can have a bit of misjudgement in how enforcement takes place.
+
+So I'll retract the idea of record for now.
+
+For the pledge, @username_1 , @username_2 do you have an opinion on making it more abstract?
+
+It is quite a long read, and I don't see political opinions being even listed as falling under the protection of the code of conduct, which seems like an important omission (hence my questions in the issue).
+
+As I explained in the issue itself, I'd prefer a more abstract and short description about all the various factors of discrimination our society brews, this would cut short that part of the discussion, and be more resilient for new factors of discrimination taking ground in society and having impact on the community.
+
+Thanks for your valuable feedback.
+<issue_comment>username_3: Some behavior and the confusion about the rules has made it abundantly clear that making the CoC more abstract will simply lead to more people not understanding what is and is not appropriate. It is clear that we must be explicit. Any change to the CoC will be debated to death and so should not be done lightly. Some believe the idea that they have a right to exterminate their professional peers is a political issue and as a result I don't see that entering the CoC any time soon. Finally regarding bans, a failure to remove people who push others out is simply a ban on those who follow the rules. Given that the rules appear to be working for most, as we have had remarkably few bans and remarkably few ethics complaints I see many reasons that a change could have the opportunity to cause great harm. Also we do not control the DotNet Code of Conduct, the DotNet Foundation does."

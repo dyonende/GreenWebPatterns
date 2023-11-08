@@ -1,0 +1,919 @@
+eduardoboucas/staticman,389697095,243,,"[{'action': 'opened', 'author': 'robinmetral', 'comment_id': None, 'datetime': '2018-12-11 10:36:07+00:00', 'masked_author': 'username_0', 'text': '@username_3 you know your software - would this be possible?', 'title': ' Make a staticman app instead of hitting the Github API to avoid hitting quotas', 'type': 'issue'}
+ {'action': 'created', 'author': 'erised', 'comment_id': 446467588.0, 'datetime': '2018-12-12 05:32:24+00:00', 'masked_author': 'username_1', 'text': '@username_0 \r\nI am in process of creating an app that does exactly that. It is still in development and is in a private repository. I can extend invitation if you want to look or contribute. \r\n\r\nI expect it to be completed by end of this month.', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'robinmetral', 'comment_id': 446479033.0, 'datetime': '2018-12-12 06:37:05+00:00', 'masked_author': 'username_0', 'text': ""Good to hear @username_1!\r\nLet me know when it's ready, I can help with testing :slightly_smiling_face:"", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'erised', 'comment_id': 446548302.0, 'datetime': '2018-12-12 11:02:42+00:00', 'masked_author': 'username_1', 'text': '@username_0 Sure. I will let you know.', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'MichielDP', 'comment_id': 447280827.0, 'datetime': '2018-12-14 10:18:55+00:00', 'masked_author': 'username_2', 'text': ""Just a friendly wake-up call to @username_3. Staticman is awesome, but right now, it's hitting its limit and people are developing alternatives. Please find the time to develop a solution so we can continue using this fantastic app without this very anoying limitation."", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'eduardoboucas', 'comment_id': 447296229.0, 'datetime': '2018-12-14 11:20:59+00:00', 'masked_author': 'username_3', 'text': ""Hi everyone. I'm sorry that some people are frustrated with the project, I can relate to that. But please remember that the code is fully open-source, which means anyone can simply run their own instance, with their own GitHub account, and bypass all these limitations. The issue we're seeing here is really a problem with the free, public instance I decided to host for everyone. In hindsight, this probably wasn't the best of ideas, because it puts pressure on me to be the sole gatekeeper of this service.\r\n\r\nI've not abandoned the project and I'm thinking of solutions to solve both problems: the problem that a single GitHub account acting on behalf of everyone isn't maintainable, and the problem that in the current scheme of things, where the public instance that I run is the centrepiece of the project, I represent a bottleneck.\r\n\r\nFor example, I'm keen on the idea of rebuilding Staticman as a [Netlify function](https://www.netlify.com/docs/functions/), so that effectively everyone is running their own instance (for free) rather than relying on a centralised service (which I'm covering the costs for). In this scenario, people would provide access to their own GitHub account, which commits would be made from, thus removing the issue of quota limits.\r\n\r\nAll I can say is that your patience is much appreciated and I'd love to hear everyone's thoughts on how we can make this more manageable for everyone."", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'erised', 'comment_id': 447299228.0, 'datetime': '2018-12-14 11:34:21+00:00', 'masked_author': 'username_1', 'text': '@username_3 The best solution in my opinion, would simply be a GitHub app.\r\nGitHub Apps also have their call limits, but they have this per installation. \r\n\r\nIf repo A & repo B, install an app on their repos, each gets 5k hits per hour. \r\nI have already started working on this, I will present it here when it is prsentable.\r\n\r\nTill then, I am also open to any discussion that how we can make it work for everybody.', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'robinmetral', 'comment_id': 447535151.0, 'datetime': '2018-12-15 04:01:24+00:00', 'masked_author': 'username_0', 'text': 'Thanks for the updates @username_3 ! :raised_hands: \r\n\r\nA Netlify function would be great as a simpler solution to people wanting to self-host their instance.\r\n\r\nHowever one of the things I love with Staticman is how simple it is to set it up only using a Github repo!\r\n\r\nI think that many people would benefit from such a ""centralized"" service, be it for testing or to allow comments on small websites and blogs (GH pages for example), where setting up Netlify+AWS Lamba to run a self-hosted instance seems like a lot of trouble.\r\n\r\nIn this case a Github app would probably be the best solution! @username_1 can you consider making your working repo public so that we can take a look and maybe contribute? :slightly_smiling_face:', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'erised', 'comment_id': 447553959.0, 'datetime': '2018-12-15 09:34:24+00:00', 'masked_author': 'username_1', 'text': ""@username_0 Please give me a day or two. \r\n\r\nI want to finish a few tasks by myself. \r\nI don't want myself to be an embarrasment as this is my first project. \r\nI just need it to be presentable with a few features. Then, i will work on it with everyone."", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'eduardoboucas', 'comment_id': 447558218.0, 'datetime': '2018-12-15 10:33:30+00:00', 'masked_author': 'username_3', 'text': ""No reason to feel embarrassed at all! We all appreciate the effort you're putting in. Whenever you feel comfortable showing your code, I'm happy to review and help you change anything that needs tweaking."", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'maciek134', 'comment_id': 447610167.0, 'datetime': '2018-12-16 01:18:34+00:00', 'masked_author': 'username_4', 'text': ""@username_1 if you need any help I'd be happy to assist as well."", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'MichielDP', 'comment_id': 447853772.0, 'datetime': '2018-12-17 13:55:22+00:00', 'masked_author': 'username_2', 'text': ""Thanks for your reply @username_3. Staticman running in a netlify function sounds like a very good idea. I'm looking forward to you testing this out and, if found feasible, giving us feedback on how to set it up for ourselves. Keep up the good work :D"", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'eduardoboucas', 'comment_id': 453754860.0, 'datetime': '2019-01-12 15:10:34+00:00', 'masked_author': 'username_3', 'text': ""Hi all.\r\n\r\nI had a go at implementing Staticman as a GitHub App, which should fix many of the issues people are seeing at the moment. Can I ask for some volunteers to help me test it? Here's how:\r\n\r\n1. Remove `staticmanapp` as a collaborator\r\n1. Go to https://github.com/apps/staticman-net and install the application on your repository\r\n1. Submit a comment as usual, but use `https://dev.staticman.net` instead of `https://api.staticman.net` as the base URL.\r\n\r\nAny help is much appreciated."", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'rliebling', 'comment_id': 453777167.0, 'datetime': '2019-01-12 20:06:54+00:00', 'masked_author': 'username_5', 'text': 'Hi @username_3 \r\n\r\nGreat to hear the news from you!\r\n\r\nNot sure if i\'ve just done something wrong but i\'m getting `500` errors.  I removed `staticmanapp` as a collaborator.  I installed the staticman-net github app with access to my repo.  And, i tried submitting a comment to https://dev.staticman.net/v2/entry/username_5/my_blog/master/comments.  After retrying a couple times i tried curl\'ing the `/v2/connect/username_5/my_blog` endpoint and also got a `500` response.  \r\n\r\nNote that i\'m using Hugo with the engimo them which has staticman support built in, but i\'ve never successfully used staticman before (as my invitation was ""not found"").  Also I\'m testing using Hugo on my localhost - assume the post-id stuff wouldn\'t cause the problem, but i mention in case i\'m wrong.  The request that\'s failing is (as copied from chrome debugger, removing user agent and cookies: \r\n\r\n```\r\ncurl -i  \'https://dev.staticman.net/v2/entry/username_5/my_blog/master/comments\' -H \'authority: dev.staticman.net\' -H \'cache-control: max-age=0\' -H \'origin: http://localhost:1313\' -H \'upgrade-insecure-requests: 1\' -H \'content-type: application/x-www-form-urlencoded\' -H \'accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8\' -H \'accept-encoding: gzip, deflate, br\' -H \'accept-language: en-US,en;q=0.9\' --data \'options%5BpostId%5D=dc33308b4aef09b40e86a6783d501abd&options%5Bredirect%5D=http%3A%2F%2Flocalhost%3A1313%2Fposts%2Fmore_on_tech_debt%2F%23submission-success&options%5BredirectError%5D=http%3A%2F%2Flocalhost%3A1313%2Fposts%2Fmore_on_tech_debt%2F%23submission-failure&fields%5Bhoneypot%5D=&fields%5Bpermalink%5D=%2Fposts%2Fmore_on_tech_debt%2F&fields%5Bparent_id%5D=&fields%5Bcontent%5D=test+comment&fields%5Bauthor%5D=rich&fields%5Bemail%5D=username_5%40gmail.com&fields%5Bsite%5D=https%3A%2F%2Fexample.com\' --compressed\r\n```', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'eduardoboucas', 'comment_id': 453778742.0, 'datetime': '2019-01-12 20:31:18+00:00', 'masked_author': 'username_3', 'text': 'Thanks for the feedback. I’ll try to debug it tonight using your sample request and will come back with my findings. \r\n\r\nThank you all for your patience.', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'eduardoboucas', 'comment_id': 453789473.0, 'datetime': '2019-01-12 23:37:29+00:00', 'masked_author': 'username_3', 'text': ""@username_5 Your site doesn't seem to be configured properly. I don't see a configuration file for Staticman on https://github.com/username_5/my_blog."", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'rliebling', 'comment_id': 453794960.0, 'datetime': '2019-01-13 01:44:18+00:00', 'masked_author': 'username_5', 'text': 'Ah!  My bad!  Had only configured locally and never pushed to GH as my invite had not been accepted.  And, did this testing having forgotten all about that!  \r\n\r\nSorry - I should have checked and figured this out myself.\r\n\r\nI\'ve fixed that now, however, and still getting `500` response.  I don\'t want you having to go about debugging my config if you think that\'s likely the issue.  I\'ll try looking at the code to understand better what it\'s doing.  But, one quick thing to confirm:  if i configure `  path: ""data/comments/{options.postId}""\r\n` inside `staticman.yml` should i need that directory/path to already exist?', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'eduardoboucas', 'comment_id': 453842336.0, 'datetime': '2019-01-13 16:10:45+00:00', 'masked_author': 'username_3', 'text': ""@username_5 Your config is fine, it was an issue with an environment variable on the development instance. I've fixed it, tested again and it seems to be working.\r\n\r\nYou can see a submission here: https://github.com/username_5/my_blog/commit/e36206d3ffe075d1fedeb2845af0cb94bf5ae04f"", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'rliebling', 'comment_id': 453842705.0, 'datetime': '2019-01-13 16:15:09+00:00', 'masked_author': 'username_5', 'text': '@username_3 Thanks so much for this project, moving it to a github app, and for your help here!', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'simonarnell', 'comment_id': 453867964.0, 'datetime': '2019-01-13 21:38:56+00:00', 'masked_author': 'username_6', 'text': 'Thanks @username_3. This seems to working great for me on my project. https://github.com/username_6/GDPRDPIAT', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'eduardoboucas', 'comment_id': 453876235.0, 'datetime': '2019-01-13 23:35:02+00:00', 'masked_author': 'username_3', 'text': ""I've updated the comment above to point to the new `v3` endpoint. The idea is that people will carry on using `v1` or `v2` endpoints if they're using the legacy `staticmanapp` authentication method, whilst people that have installed the new GitHub App will use the `v3` endpoints."", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'willymcallister', 'comment_id': 453893524.0, 'datetime': '2019-01-14 03:14:06+00:00', 'masked_author': 'username_7', 'text': 'Staticman app v3 works great at https://spinningnumbers.org/a/staticman.html <https://spinningnumbers.org/a/staticman.html> \n\nthanks so much for this valuable service.\n  - Willy McAllister', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'robinmetral', 'comment_id': 454016954.0, 'datetime': '2019-01-14 14:09:35+00:00', 'masked_author': 'username_0', 'text': '@username_3 this is amazing!! :tada: \r\n\r\nWorks perfectly on my end, THANK YOU for everything! :smiley:', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'dancwilliams', 'comment_id': 454139676.0, 'datetime': '2019-01-14 19:55:12+00:00', 'masked_author': 'username_8', 'text': 'Looks like this is working great for me.  I am having a few issues with Mailgun, but I think that is on my side.  Everything else looks good (reCaptcha, posts, etc.).', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'willymcallister', 'comment_id': 454905594.0, 'datetime': '2019-01-16 19:21:17+00:00', 'masked_author': 'username_7', 'text': ""My site is on github-pages. I'm using the App with the v3 endpoint, per Eduardo's edited instructions. When I submit a comment it is accepted and shows up in _data/comments. However, github-pages/Jekyll does not trigger a rebuild of the parent article. I waited the suggested 10 minutes for github-pages to react. If I make a trivial change to an unrelated article and push, the rebuild is triggered promptly and the comment appears.\r\nhttps://spinningnumbers.org/a/staticman.html, https://github.com/username_7/username_7.github.io"", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'unpreceden7ed', 'comment_id': 455792863.0, 'datetime': '2019-01-19 16:09:59+00:00', 'masked_author': 'username_9', 'text': ""Hello. I'm attempting to use this GitHub application for a project I'm associated with and I'm running into some issues. \r\n\r\nWhen using v3 of the API listed above, I'm receiving an _INVALID_VERSION_ error. I've removed _staticmanapp_ as a collaborator. I don't have admin access to the repo, so I'm checking with someone to ensure the application is pointing to that repo correctly. If this information is valid however, is there any other reason why one would receive a versioning error?"", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'adamebell', 'comment_id': 455793406.0, 'datetime': '2019-01-19 16:16:55+00:00', 'masked_author': 'username_10', 'text': 'I\'ve authenticated the staticman app but I\'m getting a too may requests error. Below is the cURL of hte request being sent by my form, any idea if i\'ve got this set up incorrectly?\r\n\r\n\r\n`curl ""https://api.staticman.net/v3/entry/github/username_10/username_10.github.io/master""\r\n -H ""User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:64.0) Gecko/20100101 Firefox/64.0""\r\n -H ""Accept: text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8""\r\n -H ""Accept-Language: en-US,en;q=0.5""\r\n --compressed\r\n -H ""Referer: https://username_10.com/Books-I-Read-In-2018-Pt-1/""\r\n -H ""Content-Type: application/x-www-form-urlencoded""\r\n -H ""DNT: 1""\r\n -H ""Connection: keep-alive""\r\n -H ""Cookie: __cfduid=df5ab0bcb2c608a9ab02df3ab3355c80f1547911561""\r\n -H ""Upgrade-Insecure-Requests: 1""\r\n -H ""Pragma: no-cache""\r\n -H ""Cache-Control: no-cache""\r\n --data ""options""%""5Bredirect""%""5D=""%""2FBooks-I-Read-In-2018-Pt-1""%""2F&options""%""5Bslug""%""5D=Books-I-Read-In-2018-Pt-1&fields""%""5Bname""%""5D=adam&fields""%""5Bemail""%""5D=aemerson511""%""40gmail.com&fields""%""5Bmessage""%""5D=test+test+test&action=""`', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'dancwilliams', 'comment_id': 455795988.0, 'datetime': '2019-01-19 16:51:09+00:00', 'masked_author': 'username_8', 'text': '@username_10\r\n\r\nUse dev.staticman.net as the API endpoint if you are using the app. It looks like you are still using api.staticman.net.', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'eduardoboucas', 'comment_id': 455796463.0, 'datetime': '2019-01-19 16:56:54+00:00', 'masked_author': 'username_3', 'text': 'The new functionality is still on the development instance (dev.staticman.net). I’ll release it to the main API sometime this week, now that it seems to work well for everyone.', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'unpreceden7ed', 'comment_id': 455801042.0, 'datetime': '2019-01-19 17:53:57+00:00', 'masked_author': 'username_9', 'text': 'I\'ve noticed others are using curl express the error they are receiving, so here is a request from my repo: `curl -d """" -X POST https://dev.staticman.net/v3/entry/github/duellinksmeta/duellinksmeta/master\r\n{""success"":false,""errorCode"":""INVALID_VERSION""}`', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'cloudwheels', 'comment_id': 455804684.0, 'datetime': '2019-01-19 18:39:42+00:00', 'masked_author': 'username_11', 'text': 'Hi, I appreciate you\'re working hard on this and this may just be a user config error, but I just get a 500 error back with no error message other than {success:false}.\r\nMy repo is at: \r\n\r\nhttps://github.com/hortigraph/hortigraph.github.io/\r\n\r\n\r\nThe request / response is:\r\n\r\nRequest URL: https://dev.staticman.net/v3/entry/github/hortigraph/hortigraph.github.io/master/comments\r\nRequest Method: POST\r\nStatus Code: 500 \r\nRemote Address: 192.168.3.11:443\r\nReferrer Policy: no-referrer-when-downgrade\r\n\r\nRequest headers:\r\n\r\naccess-control-allow-headers: Origin, X-Requested-With, Content-Type, Accept\r\naccess-control-allow-origin: *\r\ncf-ray: 49bb3c136f74bbd8-LHR\r\ncontent-length: 17\r\ncontent-type: application/json; charset=utf-8\r\ndate: Sat, 19 Jan 2019 18:06:21 GMT\r\netag: W/""se2xy1bknelxn4y8xzxu3trosptip3q5""\r\nexpect-ct: max-age=604800, report-uri=""https://report-uri.cloudflare.com/cdn-cgi/beacon/expect-ct""\r\nserver: cloudflare\r\nstatus: 500\r\nvia: 1.1 vegur\r\nx-powered-by: Express\r\n\r\nResponse Headers:\r\n\r\nProvisional headers are shown\r\nAccept: */*\r\nContent-Type: application/x-www-form-urlencoded\r\nOrigin: https://hortigraph.github.io\r\nReferer: https://hortigraph.github.io/rhs/r-2101-2/\r\nUser-Agent: Mozilla/5.0 (X11; CrOS x86_64 11316.82.1) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/72.0.3626.59 Safari/537.36\r\n\r\nForm data:\r\n\r\nfields[message]: comment\r\nfields[name]: name\r\nfields[email]: efpyi@example.com\r\nfields[url]: \r\noptions[slug]: r-2101-2\r\nfields[hidden]: \r\n\r\n\r\n/staticman.yml \r\n\r\n```\r\n\r\ncomments:\r\n  # (*) REQUIRED\r\n  #\r\n  # Names of the fields the form is allowed to submit. If a field that is\r\n  # not here is part of the request, an error will be thrown.\r\n  allowedFields: [""name"", ""email"", ""url"", ""message""]\r\n\r\n  # (*) REQUIRED WHEN USING NOTIFICATIONS\r\n  #\r\n  # When allowedOrigins is defined, only requests sent from one of the domains\r\n  # listed will be accepted. The origin is sent as part as the `options` object\r\n  # (e.g. <input name=""options[origin]"" value=""http://yourdomain.com/post1"")\r\n  # allowedOrigins: [""yourdomain.com""]\r\n\r\n  # (*) REQUIRED\r\n  #\r\n  # Name of the branch being used. Must match the one sent in the URL of the\r\n  # request.\r\n  branch: ""master""\r\n\r\n  commitMessage: ""New comment by {fields.name}""\r\n\r\n  # (*) REQUIRED\r\n  #\r\n  # Destination path (filename) for the data files. Accepts placeholders.\r\n  filename: ""comment-{@timestamp}""\r\n\r\n  # The format of the generated data files. Accepted values are ""json"", ""yaml""\r\n[Truncated]\n  # Names of required files. If any of these isn\'t in the request or is empty,\r\n  # an error will be thrown.\r\n  requiredFields: [""name"", ""email"", ""message""]\r\n\r\n  # List of transformations to apply to any of the fields supplied. Keys are\r\n  # the name of the field and values are possible transformation types.\r\n  transforms:\r\n    email: md5\r\n\r\n  # reCaptcha\r\n  # Register your domain at https://www.google.com/recaptcha/ and choose reCAPTCHA V2\r\n  reCaptcha:\r\n    enabled: false\r\n    siteKey: #""6LdRBykTAAAAAFB46MnIu6ixuxwu9W1ihFF8G60Q""\r\n    # Encrypt reCaptcha secret key using Staticman /encrypt endpoint\r\n    # For more information, https://staticman.net/docs/encryption\r\n    secret: #""ngw6fo1pu3tjgnp9jnlp7vnwvfqb9yn7""\r\n\r\n\r\n```', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'adamebell', 'comment_id': 455810185.0, 'datetime': '2019-01-19 19:53:57+00:00', 'masked_author': 'username_10', 'text': '@username_3 @username_0 thanks for the quick reply, that was definitely an error on my part but now I\'m getting the same ""Invalid Version"" error that @username_9 is getting', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'cloudwheels', 'comment_id': 455810268.0, 'datetime': '2019-01-19 19:55:08+00:00', 'masked_author': 'username_11', 'text': 'My POST url above is suffixed with /comments\r\nMy understanding was that this is then used by staticman.yml to allow different configs, e.g. to /posts\r\nIf I post to the \'raw\' URL https://dev.staticman.net/v3/entry/github/hortigraph/hortigraph.github.io/master\r\nI also get an error response\r\n```\r\n{\r\n    ""success"": false,\r\n    ""errorCode"": ""INVALID_VERSION""\r\n}\r\n```', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'dancwilliams', 'comment_id': 455811664.0, 'datetime': '2019-01-19 20:14:17+00:00', 'masked_author': 'username_8', 'text': 'It is my understanding, and how I I have always used the API, that you have your username, then repo, then branch, and finally the directory where you want your comments placed. I have never used it with the raw branch.\r\n\r\nIn my brief testing it looks like the directory is required after the branch in the API URL.', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'dancwilliams', 'comment_id': 455813315.0, 'datetime': '2019-01-19 20:40:33+00:00', 'masked_author': 'username_8', 'text': '@username_11 \r\n\r\nYes, I misspoke in my comment above. My apologies.  The property field refers to the block in your config file. \r\n\r\nWhen I perform a POST to your API endpoint I get the following:\r\n\r\n```\r\niPad:~# curl -d """" -X POST https://dev.staticman.net/v3/entry/github/hortigraph/hortigraph.github.io/master/comments\r\n{""success"":false,""errorCode"":""MISSING_PARAMS"",""data"":[""fields""]}\r\n```\r\n\r\nThis is “good” as it means it is looking for the required fields as defined in you config file.', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'adamebell', 'comment_id': 455813594.0, 'datetime': '2019-01-19 20:45:03+00:00', 'masked_author': 'username_10', 'text': 'I\'m also getting MISSING_CONFIG_BLOCK now, and it seems to only happen if I have a validly formatted .yml file as staticman.yml in my directory (I had a junk file in there where I improperly re-downloaded the sample file and it threw a different error).\r\n\r\nI\'m trying to narrow down if the issues lie with the yml file itself or something with my call.\r\n\r\ncURL:\r\n`curl ""https://dev.staticman.net/v3/entry/github/username_10/username_10.github.io/master/data/"" -H ""User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:64.0) Gecko/20100101 Firefox/64.0"" -H ""Accept: text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8"" -H ""Accept-Language: en-US,en;q=0.5"" --compressed -H ""Referer: https://username_10.com/What-is-this/"" -H ""Content-Type: application/x-www-form-urlencoded"" -H ""DNT: 1"" -H ""Connection: keep-alive"" -H ""Cookie: __cfduid=df5ab0bcb2c608a9ab02df3ab3355c80f1547911561"" -H ""Upgrade-Insecure-Requests: 1"" -H ""Pragma: no-cache"" -H ""Cache-Control: no-cache"" --data ""options""%""5Bredirect""%""5D=""%""2FWhat-is-this""%""2F&options""%""5Bslug""%""5D=What-is-this&fields""%""5Burl""%""5D=""%""2FWhat-is-this""%""2F&fields""%""5Bpostname""%""5D+type""%""3D=What+is+this+going+to+be""%""3F&fields""%""5Bname""%""5D=Adam&fields""%""5Bemail""%""5D=aemerson511""%""40gmail.com&fields""%""5Bmessage""%""5D=wooooooork&action=""`', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'cloudwheels', 'comment_id': 455813694.0, 'datetime': '2019-01-19 20:46:32+00:00', 'masked_author': 'username_11', 'text': ""@username_8 thanks again: I noticed other folks with recent errors are mainly posting to an endpoint without a field.\r\n\r\nYes, I think the app is accessing the repo somehow. \r\nIt's when I post with fields I get the error. If I post with required fields missing, or fields that aren't specified in the accepted values, I don't get any specific error messages though, just success:false"", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'unpreceden7ed', 'comment_id': 455813842.0, 'datetime': '2019-01-19 20:48:32+00:00', 'masked_author': 'username_9', 'text': ""With the following comment between @username_8 and @username_11, I was able to get the instance working. \r\n\r\nAs Dan mentioned, going from v2 to v3, the _property_  parameter within the API is no longer optional (at least seems that way). This was discovered through cloud's comment. After adding that to my API and adjusting the _staticman.yml_ file with this property, I was able to successfully submit a POST and received the expected file within the correct place (i.e. the _path_ variable with in the YAML file). \r\n\r\nThanks again 👍"", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'dancwilliams', 'comment_id': 455814095.0, 'datetime': '2019-01-19 20:51:35+00:00', 'masked_author': 'username_8', 'text': '@username_10 \r\n\r\nThe `path` field is missing from your config file.  See my functional config file [here](\r\nhttps://github.com/username_8/dcwtest/blob/master/staticman.yml)', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'cloudwheels', 'comment_id': 455814560.0, 'datetime': '2019-01-19 20:57:45+00:00', 'masked_author': 'username_11', 'text': ""@username_9 I'm very happy for you 👍 \r\n\r\nNow to work out what my problem is, cos I think the config is correct, I'm posting to a url + FIELD with a matching config block, and it looks like it's not a problem with the API as others are working.\r\n\r\nThis is Jekyll on GH pages, which requires a _config.yml, which is where staticman V1 picked up it's config: maybe some confusion there...dunno.\r\n\r\nOh for a meaningful error message @username_3 please ???\r\n\r\nLooking forward to that moment of clarity...."", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'dancwilliams', 'comment_id': 455815130.0, 'datetime': '2019-01-19 21:06:09+00:00', 'masked_author': 'username_8', 'text': '@username_11 \r\n\r\nI agree, your config file does look good.  I am looking around to see if anything else jumps out at me.', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'adamebell', 'comment_id': 455815409.0, 'datetime': '2019-01-19 21:10:14+00:00', 'masked_author': 'username_10', 'text': '@username_8 Awesome, it\'s working now. For anyone else still struggling, I\'ll post what I have.\r\n\r\nI took Dan\'s config file and just modified the filenames and other relevant fields, and then used the following HTML for the comment form (relies on materialize css, is currently ugly but functional). I\'m using jekyll, so I have this in an _includes file called statcman.html and then in my post layout I just include it at the bottom:\r\n\r\n`<div class=""container light-blue lighten-5""> \r\n <h3>Comment here</h3>\r\n <div class=""row"">\r\n\t<div class=""col s1""></div>\r\n    <form class=""col s10"" method=""POST"" action=""https://dev.staticman.net/v3/entry/github/username_10/username_10.github.io/master/comments"">\r\n\t\t<input name=""options[redirect]"" type=""hidden"" value=""https://username_10.com{{ page.url }}"">\r\n  <!-- e.g. ""2016-01-02-this-is-a-post"" -->\r\n\t\t<input name=""options[slug]"" type=""hidden"" value=""{{ page.slug }}"">\r\n\t\t<input name=""fields[url]"" type=""hidden"" value=""{{ page.url }}"">\r\n\t\t<input name=""fields[postname] type=""hidden"" value=""{{ page.title }}"">\r\n      <div class=""row"">\r\n        <div class=""input-field col s12 m6"">\r\n\t\t  <i class=""material-icons prefix"">account_circle</i>\r\n          <input name=""fields[name]"" type=""text"" class=""validate"">\r\n          <label for=""fields[name]"">Name</label>\r\n        </div>\r\n        <div class=""input-field col s12 m6"">\r\n\t\t  <i class=""material-icons prefix"">email</i>\r\n          <input name=""fields[email]"" type=""email"" class=""validate"">\r\n          <label for=""fields[email]"">Email</label>\r\n        </div>\r\n      </div>\r\n      <div class=""row"">\r\n        <div class=""input-field col s12"">\r\n          <textarea name=""fields[message]"" type=""text"" class=""validate""></textarea>\r\n          <label for=""fields[message]"">Your Comment Here</label>\r\n        </div>\r\n      </div>\r\n  <button class=""btn waves-effect waves-light"" type=""submit"" name=""action"">Submit Comment\r\n    <i class=""material-icons right"">send</i>\r\n  </button>    \r\n  </form>\r\n  <div class=""col s1"">\r\n  </div>\r\n </div>`', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'cloudwheels', 'comment_id': 455818254.0, 'datetime': '2019-01-19 21:52:07+00:00', 'masked_author': 'username_11', 'text': ""@username_9 Thanks for the moral support.\r\nAgree, there's some problem parsing the yaml.\r\nI've checked, removed and re-added theapp, and added to my personal repos in case it was anything to do with the repo being under an organisation. In any event, I appear to be talking to the app, so it's there I think, just having problems, which pretty much must be to do with the yaml, I just can't figure it out!"", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'cloudwheels', 'comment_id': 455819557.0, 'datetime': '2019-01-19 22:11:52+00:00', 'masked_author': 'username_11', 'text': ""@username_8 @username_9 and all.\r\nI am at peace.\r\n\r\nIn the chain of things this MUST boil down to the content of my staticman.yml (unless the test after reinstalling the app didn't reflect that change)\r\nI replaced with the standard sample: https://github.com/username_3/staticman/edit/master/staticman.sample.yml \r\nchanging only the sitename.\r\n\r\nSo, thanks for this great advancement @username_3 : 3 more confirmed happy customers for v3 within the last hour. Perhaps some clarification on docs & improved error messages needed?\r\n\r\nMy issues are all user support, so no follow up required thanks, but I will report this back to mmistakes/minimal-mistakes#2034 as referncved earlier which may need changes to the bundled staticman.yml\r\n\r\nThanks again 👍"", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'unpreceden7ed', 'comment_id': 455821215.0, 'datetime': '2019-01-19 22:40:19+00:00', 'masked_author': 'username_9', 'text': '@username_11 \r\n\r\nI wanted to test a theory similar to yours and I saw different results. I decided to create a repository from scratch, take the sample YAML file from Staticman, not edit it and use curl against it. My results proved successful.\r\n\r\n`curl -d ""efpyi@example.com"" -X POST https://dev.staticman.net/v3/entry/github/username_9/staticman-test/master/comments\r\n{""success"":false,""data"":[""name"",""message""],""rawError"":{""_smErrorCode"":""MISSING_REQUIRED_FIELDS"",""data"":[""name"",""message""]},""errorCode"":""MISSING_REQUIRED_FIELDS""}`\r\nIn above response, I only gave the parameters an email and received the message I spoke about earlier with the missing parameters.\r\n\r\n`curl -d ""fields[email]=foobar@gmail.com&fields[name]=John Doe&fields[message]=A message to you"" -X POST https://dev.staticman.net/v3/entry/github/username_9/staticman-test/master/comments\r\n{""success"":true,""fields"":{""email"":""726f7c3769f32d3da4656ea906d02adb"",""name"":""John Doe"",""message"":""A message to you"",""date"":1547936943}}`\r\nIn this response, I gave it the required parameters and received successful response. \r\n\r\nThe only step left would be actually implement a form within my repository (https://github.com/username_9/staticman-test) and use it against the staticman bot itself. The fact that I\'m not able to reproduce at least this much with your repository seems odd, but I wouldn\'t know where else to tell you begin searching at this point. 🤔', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'snirp', 'comment_id': 457488477.0, 'datetime': '2019-01-25 08:03:51+00:00', 'masked_author': 'username_12', 'text': 'I can confirm that V3 works well for me.', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'davidomarf', 'comment_id': 458998298.0, 'datetime': '2019-01-30 15:58:41+00:00', 'masked_author': 'username_13', 'text': 'I just got it working on my website. Thanks all of you for being so awesome and wholesome!', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'willymcallister', 'comment_id': 460442144.0, 'datetime': '2019-02-04 22:40:29+00:00', 'masked_author': 'username_7', 'text': '', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'zinefer', 'comment_id': 462631827.0, 'datetime': '2019-02-12 06:21:18+00:00', 'masked_author': 'username_14', 'text': 'I use a botpot field that is intended for a user to leave blank. However, these blank fields are appearing in the comment files added by Staticman. Is it possible to strip empty fields from the comment files?\r\n\r\nMaybe a feature request to strip blank fields that are not in allowedFields would be more appropriate.', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'robinmetral', 'comment_id': 462651732.0, 'datetime': '2019-02-12 07:46:23+00:00', 'masked_author': 'username_0', 'text': ""@username_14 @username_7 maybe you should post [new issues](https://github.com/username_3/staticman/issues/new) for this!\r\n\r\nYour problem will have much more visibility than as a message on a thread with 50+ comments, and it'll let us keep issues organized :slightly_smiling_face: \r\n\r\nClosing this for now, feel free to reopen if relevant :wave:"", 'title': None, 'type': 'comment'}
+ {'action': 'closed', 'author': 'robinmetral', 'comment_id': None, 'datetime': '2019-02-12 07:46:24+00:00', 'masked_author': 'username_0', 'text': '', 'title': None, 'type': 'issue'}
+ {'action': 'created', 'author': 'domguard', 'comment_id': 467189375.0, 'datetime': '2019-02-25 21:25:18+00:00', 'masked_author': 'username_15', 'text': 'Testing the v3 api I only get this error:\r\ncurl -d ""fields[name]=dom&fields[email]=truc@truc.net&fields[message]=test"" -X POST https://dev.staticman.net/v3/entry/github/username_15/onlefay-comm/master/comments\r\n{""success"":false}\r\nDoes my github repository need to be public for the app to be able to push comments ?', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'MyGuySi', 'comment_id': 471256101.0, 'datetime': '2019-03-10 07:58:02+00:00', 'masked_author': 'username_16', 'text': 'I started to add Staticman to my project today and ran into troubles with V2, presumably because of the rate limiting. Decided to give V3 a go and it just worked great first time 👍 \r\n\r\nMight be worth considering updating the docs on the website because V2 was pretty much unusable for me.', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'robinmetral', 'comment_id': 471257168.0, 'datetime': '2019-03-10 08:17:01+00:00', 'masked_author': 'username_0', 'text': ""Agreed @username_16, I'm sure @username_3 would be open to a PR :slightly_smiling_face:"", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'valzi', 'comment_id': 473601118.0, 'datetime': '2019-03-16 23:27:35+00:00', 'masked_author': 'username_17', 'text': 'I followed the instructions except that I do not understand step 3. I typed in the URL and got ""Cannot GET /v3/entry/github/username_17/light-transmuter/master"". Where am I supposed to go to submit the comment?', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'robinmetral', 'comment_id': 473633859.0, 'datetime': '2019-03-17 08:37:44+00:00', 'masked_author': 'username_0', 'text': '@username_17 this URL is the one that your comment form has to POST to. The [Get started](https://staticman.net/docs/) doc is a good place to start building with Staticman :slightly_smiling_face:', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'valzi', 'comment_id': 473700870.0, 'datetime': '2019-03-17 18:49:31+00:00', 'masked_author': 'username_17', 'text': ""Thanks, I get it now. I made some other mistake apparently though, because now I'm getting this when I try to submit a comment.\r\n\r\n![image](https://user-images.githubusercontent.com/4284600/54496277-17f83880-48b3-11e9-8437-621054f1d3b2.png)\r\n\r\n\r\nI'll have to study the config options for a while."", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'pacollins', 'comment_id': 491551276.0, 'datetime': '2019-05-11 23:23:05+00:00', 'masked_author': 'username_18', 'text': 'I don\'t have reCAPTCHA set but keep getting this error:\r\n```\r\n{""success"":false,""message"":""Missing reCAPTCHA API credentials"",""rawError"":{""_smErrorCode"":""RECAPTCHA_MISSING_CREDENTIALS""},""errorCode"":""RECAPTCHA_MISSING_CREDENTIALS""}\r\n```', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'deadlydog', 'comment_id': 502470075.0, 'datetime': '2019-06-16 17:19:35+00:00', 'masked_author': 'username_19', 'text': ""I think the v3 Staticman app may be broken, but I'm not certain. See #294 for more details."", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'pacollins', 'comment_id': 502472123.0, 'datetime': '2019-06-16 17:49:24+00:00', 'masked_author': 'username_18', 'text': ""Thanks for this update. I'm sure the app just scaled past what his service\ncould handle. I'll probably look for another solution (like Netlify)."", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'VincentTam', 'comment_id': 508704008.0, 'datetime': '2019-07-05 09:55:09+00:00', 'masked_author': 'username_20', 'text': ""@username_18 That's a duplicate of #223."", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'VincentTam', 'comment_id': 508919602.0, 'datetime': '2019-07-06 11:41:54+00:00', 'masked_author': 'username_20', 'text': 'In the reCATPCHA section of your Staticman config, even if `enabled: false`, if you *didn\'t* comment out the unused `siteKey` and `secret`, that can contribute to an error.  Here, you\'ve passed the value `null` to these two attributes.\r\n\r\nTo avoid that you may either comment out the whole line (e.g. https://github.com/username_20/BJPubTest1)\r\n\r\n```yml\r\n  # reCaptcha\r\n  # Register your domain at https://www.google.com/recaptcha/ and choose reCAPTCHA V2\r\n  reCaptcha:\r\n    enabled: false\r\n    #siteKey: ""6LdRBykTAAAAAFB46MnIu6ixuxwu9W1ihFF8G60Q""\r\n    # Encrypt reCaptcha secret key using Staticman /encrypt endpoint\r\n    # For more information, https://staticman.net/docs/encryption\r\n    #secret: ""caf86f4uutaoxfysmf7anj01xl6sv3ps""\r\n```\r\n\r\nor use an empty string `""""` instead of `null`. (e.g. [Hugo Future Imperfect Slim](https://github.com/username_18/hugo-future-imperfect-slim/blob/master/exampleSite/staticman.yml#L61-L65))\r\n\r\n```yml\r\n  # reCaptcha\r\n  # Register your domain at https://www.google.com/recaptcha/ and choose reCAPTCHA V2\r\n  reCaptcha:\r\n    enabled: false\r\n    #siteKey: """"\r\n    # Encrypt reCaptcha secret key using Staticman /encrypt endpoint\r\n    # For more information, https://staticman.net/docs/encryption\r\n    #secret: """"\r\n```\r\n\r\nReference:\r\n\r\n1.  My experiement with Staticman\'s reCAPTCHA support in https://github.com/daattali/beautiful-jekyll/pull/514#issuecomment-508817895\r\n2. [My blog post about different types of Staticman errors](https://vincenttam.gitlab.io/post/2018-12-25-staticman-repo-setup-errors/)', 'title': None, 'type': 'comment'}]","<issue_start><issue_comment>Title:  Make a staticman app instead of hitting the Github API to avoid hitting quotas
+username_0: @username_3 you know your software - would this be possible?
+<issue_comment>username_1: @username_0 
+I am in process of creating an app that does exactly that. It is still in development and is in a private repository. I can extend invitation if you want to look or contribute. 
+
+I expect it to be completed by end of this month.
+<issue_comment>username_0: Good to hear @username_1!
+Let me know when it's ready, I can help with testing :slightly_smiling_face:
+<issue_comment>username_1: @username_0 Sure. I will let you know.
+<issue_comment>username_2: Just a friendly wake-up call to @username_3. Staticman is awesome, but right now, it's hitting its limit and people are developing alternatives. Please find the time to develop a solution so we can continue using this fantastic app without this very anoying limitation.
+<issue_comment>username_3: Hi everyone. I'm sorry that some people are frustrated with the project, I can relate to that. But please remember that the code is fully open-source, which means anyone can simply run their own instance, with their own GitHub account, and bypass all these limitations. The issue we're seeing here is really a problem with the free, public instance I decided to host for everyone. In hindsight, this probably wasn't the best of ideas, because it puts pressure on me to be the sole gatekeeper of this service.
+
+I've not abandoned the project and I'm thinking of solutions to solve both problems: the problem that a single GitHub account acting on behalf of everyone isn't maintainable, and the problem that in the current scheme of things, where the public instance that I run is the centrepiece of the project, I represent a bottleneck.
+
+For example, I'm keen on the idea of rebuilding Staticman as a [Netlify function](https://www.netlify.com/docs/functions/), so that effectively everyone is running their own instance (for free) rather than relying on a centralised service (which I'm covering the costs for). In this scenario, people would provide access to their own GitHub account, which commits would be made from, thus removing the issue of quota limits.
+
+All I can say is that your patience is much appreciated and I'd love to hear everyone's thoughts on how we can make this more manageable for everyone.
+<issue_comment>username_1: @username_3 The best solution in my opinion, would simply be a GitHub app.
+GitHub Apps also have their call limits, but they have this per installation. 
+
+If repo A & repo B, install an app on their repos, each gets 5k hits per hour. 
+I have already started working on this, I will present it here when it is prsentable.
+
+Till then, I am also open to any discussion that how we can make it work for everybody.
+<issue_comment>username_0: Thanks for the updates @username_3 ! :raised_hands: 
+
+A Netlify function would be great as a simpler solution to people wanting to self-host their instance.
+
+However one of the things I love with Staticman is how simple it is to set it up only using a Github repo!
+
+I think that many people would benefit from such a ""centralized"" service, be it for testing or to allow comments on small websites and blogs (GH pages for example), where setting up Netlify+AWS Lamba to run a self-hosted instance seems like a lot of trouble.
+
+In this case a Github app would probably be the best solution! @username_1 can you consider making your working repo public so that we can take a look and maybe contribute? :slightly_smiling_face:
+<issue_comment>username_1: @username_0 Please give me a day or two. 
+
+I want to finish a few tasks by myself. 
+I don't want myself to be an embarrasment as this is my first project. 
+I just need it to be presentable with a few features. Then, i will work on it with everyone.
+<issue_comment>username_3: No reason to feel embarrassed at all! We all appreciate the effort you're putting in. Whenever you feel comfortable showing your code, I'm happy to review and help you change anything that needs tweaking.
+<issue_comment>username_4: @username_1 if you need any help I'd be happy to assist as well.
+<issue_comment>username_2: Thanks for your reply @username_3. Staticman running in a netlify function sounds like a very good idea. I'm looking forward to you testing this out and, if found feasible, giving us feedback on how to set it up for ourselves. Keep up the good work :D
+<issue_comment>username_3: Hi all.
+
+I had a go at implementing Staticman as a GitHub App, which should fix many of the issues people are seeing at the moment. Can I ask for some volunteers to help me test it? Here's how:
+
+1. Remove `staticmanapp` as a collaborator
+1. Go to https://github.com/apps/staticman-net and install the application on your repository
+1. Submit a comment as usual, but use `https://dev.staticman.net` instead of `https://api.staticman.net` as the base URL.
+
+Any help is much appreciated.
+<issue_comment>username_5: Hi @username_3 
+
+Great to hear the news from you!
+
+Not sure if i've just done something wrong but i'm getting `500` errors.  I removed `staticmanapp` as a collaborator.  I installed the staticman-net github app with access to my repo.  And, i tried submitting a comment to https://dev.staticman.net/v2/entry/username_5/my_blog/master/comments.  After retrying a couple times i tried curl'ing the `/v2/connect/username_5/my_blog` endpoint and also got a `500` response.  
+
+Note that i'm using Hugo with the engimo them which has staticman support built in, but i've never successfully used staticman before (as my invitation was ""not found"").  Also I'm testing using Hugo on my localhost - assume the post-id stuff wouldn't cause the problem, but i mention in case i'm wrong.  The request that's failing is (as copied from chrome debugger, removing user agent and cookies: 
+
+```
+curl -i  'https://dev.staticman.net/v2/entry/username_5/my_blog/master/comments' -H 'authority: dev.staticman.net' -H 'cache-control: max-age=0' -H 'origin: http://localhost:1313' -H 'upgrade-insecure-requests: 1' -H 'content-type: application/x-www-form-urlencoded' -H 'accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8' -H 'accept-encoding: gzip, deflate, br' -H 'accept-language: en-US,en;q=0.9' --data 'options%5BpostId%5D=dc33308b4aef09b40e86a6783d501abd&options%5Bredirect%5D=http%3A%2F%2Flocalhost%3A1313%2Fposts%2Fmore_on_tech_debt%2F%23submission-success&options%5BredirectError%5D=http%3A%2F%2Flocalhost%3A1313%2Fposts%2Fmore_on_tech_debt%2F%23submission-failure&fields%5Bhoneypot%5D=&fields%5Bpermalink%5D=%2Fposts%2Fmore_on_tech_debt%2F&fields%5Bparent_id%5D=&fields%5Bcontent%5D=test+comment&fields%5Bauthor%5D=rich&fields%5Bemail%5D=username_5%40gmail.com&fields%5Bsite%5D=https%3A%2F%2Fexample.com' --compressed
+```
+<issue_comment>username_3: Thanks for the feedback. I’ll try to debug it tonight using your sample request and will come back with my findings. 
+
+Thank you all for your patience.
+<issue_comment>username_3: @username_5 Your site doesn't seem to be configured properly. I don't see a configuration file for Staticman on https://github.com/username_5/my_blog.
+<issue_comment>username_5: Ah!  My bad!  Had only configured locally and never pushed to GH as my invite had not been accepted.  And, did this testing having forgotten all about that!  
+
+Sorry - I should have checked and figured this out myself.
+
+I've fixed that now, however, and still getting `500` response.  I don't want you having to go about debugging my config if you think that's likely the issue.  I'll try looking at the code to understand better what it's doing.  But, one quick thing to confirm:  if i configure `  path: ""data/comments/{options.postId}""
+` inside `staticman.yml` should i need that directory/path to already exist?
+<issue_comment>username_3: @username_5 Your config is fine, it was an issue with an environment variable on the development instance. I've fixed it, tested again and it seems to be working.
+
+You can see a submission here: https://github.com/username_5/my_blog/commit/e36206d3ffe075d1fedeb2845af0cb94bf5ae04f
+<issue_comment>username_5: @username_3 Thanks so much for this project, moving it to a github app, and for your help here!
+<issue_comment>username_6: Thanks @username_3. This seems to working great for me on my project. https://github.com/username_6/GDPRDPIAT
+<issue_comment>username_3: I've updated the comment above to point to the new `v3` endpoint. The idea is that people will carry on using `v1` or `v2` endpoints if they're using the legacy `staticmanapp` authentication method, whilst people that have installed the new GitHub App will use the `v3` endpoints.
+<issue_comment>username_7: Staticman app v3 works great at https://spinningnumbers.org/a/staticman.html <https://spinningnumbers.org/a/staticman.html> 
+
+thanks so much for this valuable service.
+  - Willy McAllister
+<issue_comment>username_0: @username_3 this is amazing!! :tada: 
+
+Works perfectly on my end, THANK YOU for everything! :smiley:
+<issue_comment>username_8: Looks like this is working great for me.  I am having a few issues with Mailgun, but I think that is on my side.  Everything else looks good (reCaptcha, posts, etc.).
+<issue_comment>username_7: My site is on github-pages. I'm using the App with the v3 endpoint, per Eduardo's edited instructions. When I submit a comment it is accepted and shows up in _data/comments. However, github-pages/Jekyll does not trigger a rebuild of the parent article. I waited the suggested 10 minutes for github-pages to react. If I make a trivial change to an unrelated article and push, the rebuild is triggered promptly and the comment appears.
+https://spinningnumbers.org/a/staticman.html, https://github.com/username_7/username_7.github.io
+<issue_comment>username_9: Hello. I'm attempting to use this GitHub application for a project I'm associated with and I'm running into some issues. 
+
+When using v3 of the API listed above, I'm receiving an _INVALID_VERSION_ error. I've removed _staticmanapp_ as a collaborator. I don't have admin access to the repo, so I'm checking with someone to ensure the application is pointing to that repo correctly. If this information is valid however, is there any other reason why one would receive a versioning error?
+<issue_comment>username_10: I've authenticated the staticman app but I'm getting a too may requests error. Below is the cURL of hte request being sent by my form, any idea if i've got this set up incorrectly?
+
+
+`curl ""https://api.staticman.net/v3/entry/github/username_10/username_10.github.io/master""
+ -H ""User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:64.0) Gecko/20100101 Firefox/64.0""
+ -H ""Accept: text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8""
+ -H ""Accept-Language: en-US,en;q=0.5""
+ --compressed
+ -H ""Referer: https://username_10.com/Books-I-Read-In-2018-Pt-1/""
+ -H ""Content-Type: application/x-www-form-urlencoded""
+ -H ""DNT: 1""
+ -H ""Connection: keep-alive""
+ -H ""Cookie: __cfduid=df5ab0bcb2c608a9ab02df3ab3355c80f1547911561""
+ -H ""Upgrade-Insecure-Requests: 1""
+ -H ""Pragma: no-cache""
+ -H ""Cache-Control: no-cache""
+ --data ""options""%""5Bredirect""%""5D=""%""2FBooks-I-Read-In-2018-Pt-1""%""2F&options""%""5Bslug""%""5D=Books-I-Read-In-2018-Pt-1&fields""%""5Bname""%""5D=adam&fields""%""5Bemail""%""5D=aemerson511""%""40gmail.com&fields""%""5Bmessage""%""5D=test+test+test&action=""`
+<issue_comment>username_8: @username_10
+
+Use dev.staticman.net as the API endpoint if you are using the app. It looks like you are still using api.staticman.net.
+<issue_comment>username_3: The new functionality is still on the development instance (dev.staticman.net). I’ll release it to the main API sometime this week, now that it seems to work well for everyone.
+<issue_comment>username_9: I've noticed others are using curl express the error they are receiving, so here is a request from my repo: `curl -d """" -X POST https://dev.staticman.net/v3/entry/github/duellinksmeta/duellinksmeta/master
+{""success"":false,""errorCode"":""INVALID_VERSION""}`
+<issue_comment>username_11: Hi, I appreciate you're working hard on this and this may just be a user config error, but I just get a 500 error back with no error message other than {success:false}.
+My repo is at: 
+
+https://github.com/hortigraph/hortigraph.github.io/
+
+
+The request / response is:
+
+Request URL: https://dev.staticman.net/v3/entry/github/hortigraph/hortigraph.github.io/master/comments
+Request Method: POST
+Status Code: 500 
+Remote Address: 104.27.141.78:443
+Referrer Policy: no-referrer-when-downgrade
+
+Request headers:
+
+access-control-allow-headers: Origin, X-Requested-With, Content-Type, Accept
+access-control-allow-origin: *
+cf-ray: 49bb3c136f74bbd8-LHR
+content-length: 17
+content-type: application/json; charset=utf-8
+date: Sat, 19 Jan 2019 18:06:21 GMT
+etag: W/""11-UIVUdQWNarX1D9mk06okyEMbpS8""
+expect-ct: max-age=604800, report-uri=""https://report-uri.cloudflare.com/cdn-cgi/beacon/expect-ct""
+server: cloudflare
+status: 500
+via: 1.1 vegur
+x-powered-by: Express
+
+Response Headers:
+
+Provisional headers are shown
+Accept: */*
+Content-Type: application/x-www-form-urlencoded
+Origin: https://hortigraph.github.io
+Referer: https://hortigraph.github.io/rhs/r-2101-2/
+User-Agent: Mozilla/5.0 (X11; CrOS x86_64 11316.82.1) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/72.0.3626.59 Safari/537.36
+
+Form data:
+
+fields[message]: comment
+fields[name]: name
+fields[email]: nigel@nigelwheeler.com
+fields[url]: 
+options[slug]: r-2101-2
+fields[hidden]: 
+
+
+/staticman.yml 
+
+```
+
+comments:
+  # (*) REQUIRED
+  #
+  # Names of the fields the form is allowed to submit. If a field that is
+  # not here is part of the request, an error will be thrown.
+  allowedFields: [""name"", ""email"", ""url"", ""message""]
+
+  # (*) REQUIRED WHEN USING NOTIFICATIONS
+  #
+  # When allowedOrigins is defined, only requests sent from one of the domains
+  # listed will be accepted. The origin is sent as part as the `options` object
+  # (e.g. <input name=""options[origin]"" value=""http://yourdomain.com/post1"")
+  # allowedOrigins: [""yourdomain.com""]
+
+  # (*) REQUIRED
+  #
+  # Name of the branch being used. Must match the one sent in the URL of the
+  # request.
+  branch: ""master""
+
+  commitMessage: ""New comment by {fields.name}""
+
+  # (*) REQUIRED
+  #
+  # Destination path (filename) for the data files. Accepts placeholders.
+  filename: ""comment-{@timestamp}""
+
+  # The format of the generated data files. Accepted values are ""json"", ""yaml""
+[Truncated]
+  # Names of required files. If any of these isn't in the request or is empty,
+  # an error will be thrown.
+  requiredFields: [""name"", ""email"", ""message""]
+
+  # List of transformations to apply to any of the fields supplied. Keys are
+  # the name of the field and values are possible transformation types.
+  transforms:
+    email: md5
+
+  # reCaptcha
+  # Register your domain at https://www.google.com/recaptcha/ and choose reCAPTCHA V2
+  reCaptcha:
+    enabled: false
+    siteKey: #""6LdRBykTAAAAAFB46MnIu6ixuxwu9W1ihFF8G60Q""
+    # Encrypt reCaptcha secret key using Staticman /encrypt endpoint
+    # For more information, https://staticman.net/docs/encryption
+    secret: #""PznnZGu3P6eTHRPLORniSq+J61YEf+A9zmColXDM5icqF49gbunH51B8+h+i2IvewpuxtA9TFoK68TuhUp/X3YKmmqhXasegHYabY50fqF9nJh9npWNhvITdkQHeaOqnFXUIwxfiEeUt49Yoa2waRR7a5LdRAP3SVM8hz0KIBT4=""
+
+
+```
+<issue_comment>username_10: @username_3 @username_0 thanks for the quick reply, that was definitely an error on my part but now I'm getting the same ""Invalid Version"" error that @username_9 is getting
+<issue_comment>username_11: My POST url above is suffixed with /comments
+My understanding was that this is then used by staticman.yml to allow different configs, e.g. to /posts
+If I post to the 'raw' URL https://dev.staticman.net/v3/entry/github/hortigraph/hortigraph.github.io/master
+I also get an error response
+```
+{
+    ""success"": false,
+    ""errorCode"": ""INVALID_VERSION""
+}
+```
+<issue_comment>username_8: It is my understanding, and how I I have always used the API, that you have your username, then repo, then branch, and finally the directory where you want your comments placed. I have never used it with the raw branch.
+
+In my brief testing it looks like the directory is required after the branch in the API URL.
+<issue_comment>username_8: @username_11 
+
+Yes, I misspoke in my comment above. My apologies.  The property field refers to the block in your config file. 
+
+When I perform a POST to your API endpoint I get the following:
+
+```
+iPad:~# curl -d """" -X POST https://dev.staticman.net/v3/entry/github/hortigraph/hortigraph.github.io/master/comments
+{""success"":false,""errorCode"":""MISSING_PARAMS"",""data"":[""fields""]}
+```
+
+This is “good” as it means it is looking for the required fields as defined in you config file.
+<issue_comment>username_10: I'm also getting MISSING_CONFIG_BLOCK now, and it seems to only happen if I have a validly formatted .yml file as staticman.yml in my directory (I had a junk file in there where I improperly re-downloaded the sample file and it threw a different error).
+
+I'm trying to narrow down if the issues lie with the yml file itself or something with my call.
+
+cURL:
+`curl ""https://dev.staticman.net/v3/entry/github/username_10/username_10.github.io/master/data/"" -H ""User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:64.0) Gecko/20100101 Firefox/64.0"" -H ""Accept: text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8"" -H ""Accept-Language: en-US,en;q=0.5"" --compressed -H ""Referer: https://username_10.com/What-is-this/"" -H ""Content-Type: application/x-www-form-urlencoded"" -H ""DNT: 1"" -H ""Connection: keep-alive"" -H ""Cookie: __cfduid=df5ab0bcb2c608a9ab02df3ab3355c80f1547911561"" -H ""Upgrade-Insecure-Requests: 1"" -H ""Pragma: no-cache"" -H ""Cache-Control: no-cache"" --data ""options""%""5Bredirect""%""5D=""%""2FWhat-is-this""%""2F&options""%""5Bslug""%""5D=What-is-this&fields""%""5Burl""%""5D=""%""2FWhat-is-this""%""2F&fields""%""5Bpostname""%""5D+type""%""3D=What+is+this+going+to+be""%""3F&fields""%""5Bname""%""5D=Adam&fields""%""5Bemail""%""5D=aemerson511""%""40gmail.com&fields""%""5Bmessage""%""5D=wooooooork&action=""`
+<issue_comment>username_11: @username_8 thanks again: I noticed other folks with recent errors are mainly posting to an endpoint without a field.
+
+Yes, I think the app is accessing the repo somehow. 
+It's when I post with fields I get the error. If I post with required fields missing, or fields that aren't specified in the accepted values, I don't get any specific error messages though, just success:false
+<issue_comment>username_9: With the following comment between @username_8 and @username_11, I was able to get the instance working. 
+
+As Dan mentioned, going from v2 to v3, the _property_  parameter within the API is no longer optional (at least seems that way). This was discovered through cloud's comment. After adding that to my API and adjusting the _staticman.yml_ file with this property, I was able to successfully submit a POST and received the expected file within the correct place (i.e. the _path_ variable with in the YAML file). 
+
+Thanks again 👍
+<issue_comment>username_8: @username_10 
+
+The `path` field is missing from your config file.  See my functional config file [here](
+https://github.com/username_8/dcwtest/blob/master/staticman.yml)
+<issue_comment>username_11: @username_9 I'm very happy for you 👍 
+
+Now to work out what my problem is, cos I think the config is correct, I'm posting to a url + FIELD with a matching config block, and it looks like it's not a problem with the API as others are working.
+
+This is Jekyll on GH pages, which requires a _config.yml, which is where staticman V1 picked up it's config: maybe some confusion there...dunno.
+
+Oh for a meaningful error message @username_3 please ???
+
+Looking forward to that moment of clarity....
+<issue_comment>username_8: @username_11 
+
+I agree, your config file does look good.  I am looking around to see if anything else jumps out at me.
+<issue_comment>username_10: @username_8 Awesome, it's working now. For anyone else still struggling, I'll post what I have.
+
+I took Dan's config file and just modified the filenames and other relevant fields, and then used the following HTML for the comment form (relies on materialize css, is currently ugly but functional). I'm using jekyll, so I have this in an _includes file called statcman.html and then in my post layout I just include it at the bottom:
+
+`<div class=""container light-blue lighten-5""> 
+ <h3>Comment here</h3>
+ <div class=""row"">
+	<div class=""col s1""></div>
+    <form class=""col s10"" method=""POST"" action=""https://dev.staticman.net/v3/entry/github/username_10/username_10.github.io/master/comments"">
+		<input name=""options[redirect]"" type=""hidden"" value=""https://username_10.com{{ page.url }}"">
+  <!-- e.g. ""2016-01-02-this-is-a-post"" -->
+		<input name=""options[slug]"" type=""hidden"" value=""{{ page.slug }}"">
+		<input name=""fields[url]"" type=""hidden"" value=""{{ page.url }}"">
+		<input name=""fields[postname] type=""hidden"" value=""{{ page.title }}"">
+      <div class=""row"">
+        <div class=""input-field col s12 m6"">
+		  <i class=""material-icons prefix"">account_circle</i>
+          <input name=""fields[name]"" type=""text"" class=""validate"">
+          <label for=""fields[name]"">Name</label>
+        </div>
+        <div class=""input-field col s12 m6"">
+		  <i class=""material-icons prefix"">email</i>
+          <input name=""fields[email]"" type=""email"" class=""validate"">
+          <label for=""fields[email]"">Email</label>
+        </div>
+      </div>
+      <div class=""row"">
+        <div class=""input-field col s12"">
+          <textarea name=""fields[message]"" type=""text"" class=""validate""></textarea>
+          <label for=""fields[message]"">Your Comment Here</label>
+        </div>
+      </div>
+  <button class=""btn waves-effect waves-light"" type=""submit"" name=""action"">Submit Comment
+    <i class=""material-icons right"">send</i>
+  </button>    
+  </form>
+  <div class=""col s1"">
+  </div>
+ </div>`
+<issue_comment>username_11: @username_9 Thanks for the moral support.
+Agree, there's some problem parsing the yaml.
+I've checked, removed and re-added theapp, and added to my personal repos in case it was anything to do with the repo being under an organisation. In any event, I appear to be talking to the app, so it's there I think, just having problems, which pretty much must be to do with the yaml, I just can't figure it out!
+<issue_comment>username_11: @username_8 @username_9 and all.
+I am at peace.
+
+In the chain of things this MUST boil down to the content of my staticman.yml (unless the test after reinstalling the app didn't reflect that change)
+I replaced with the standard sample: https://github.com/username_3/staticman/edit/master/staticman.sample.yml 
+changing only the sitename.
+
+So, thanks for this great advancement @username_3 : 3 more confirmed happy customers for v3 within the last hour. Perhaps some clarification on docs & improved error messages needed?
+
+My issues are all user support, so no follow up required thanks, but I will report this back to mmistakes/minimal-mistakes#2034 as referncved earlier which may need changes to the bundled staticman.yml
+
+Thanks again 👍
+<issue_comment>username_9: @username_11 
+
+I wanted to test a theory similar to yours and I saw different results. I decided to create a repository from scratch, take the sample YAML file from Staticman, not edit it and use curl against it. My results proved successful.
+
+`curl -d ""fields[email]=foobar@gmail.com"" -X POST https://dev.staticman.net/v3/entry/github/username_9/staticman-test/master/comments
+{""success"":false,""data"":[""name"",""message""],""rawError"":{""_smErrorCode"":""MISSING_REQUIRED_FIELDS"",""data"":[""name"",""message""]},""errorCode"":""MISSING_REQUIRED_FIELDS""}`
+In above response, I only gave the parameters an email and received the message I spoke about earlier with the missing parameters.
+
+`curl -d ""fields[email]=foobar@gmail.com&fields[name]=John Doe&fields[message]=A message to you"" -X POST https://dev.staticman.net/v3/entry/github/username_9/staticman-test/master/comments
+{""success"":true,""fields"":{""email"":""726f7c3769f32d3da4656ea906d02adb"",""name"":""John Doe"",""message"":""A message to you"",""date"":1547936943}}`
+In this response, I gave it the required parameters and received successful response. 
+
+The only step left would be actually implement a form within my repository (https://github.com/username_9/staticman-test) and use it against the staticman bot itself. The fact that I'm not able to reproduce at least this much with your repository seems odd, but I wouldn't know where else to tell you begin searching at this point. 🤔
+<issue_comment>username_12: I can confirm that V3 works well for me.
+<issue_comment>username_13: I just got it working on my website. Thanks all of you for being so awesome and wholesome!
+<issue_comment>username_14: I use a botpot field that is intended for a user to leave blank. However, these blank fields are appearing in the comment files added by Staticman. Is it possible to strip empty fields from the comment files?
+
+Maybe a feature request to strip blank fields that are not in allowedFields would be more appropriate.
+<issue_comment>username_0: @username_14 @username_7 maybe you should post [new issues](https://github.com/username_3/staticman/issues/new) for this!
+
+Your problem will have much more visibility than as a message on a thread with 50+ comments, and it'll let us keep issues organized :slightly_smiling_face: 
+
+Closing this for now, feel free to reopen if relevant :wave:<issue_closed>
+<issue_comment>username_15: Testing the v3 api I only get this error:
+curl -d ""fields[name]=dom&fields[email]=truc@truc.net&fields[message]=test"" -X POST https://dev.staticman.net/v3/entry/github/username_15/onlefay-comm/master/comments
+{""success"":false}
+Does my github repository need to be public for the app to be able to push comments ?
+<issue_comment>username_16: I started to add Staticman to my project today and ran into troubles with V2, presumably because of the rate limiting. Decided to give V3 a go and it just worked great first time 👍 
+
+Might be worth considering updating the docs on the website because V2 was pretty much unusable for me.
+<issue_comment>username_0: Agreed @username_16, I'm sure @username_3 would be open to a PR :slightly_smiling_face:
+<issue_comment>username_17: I followed the instructions except that I do not understand step 3. I typed in the URL and got ""Cannot GET /v3/entry/github/username_17/light-transmuter/master"". Where am I supposed to go to submit the comment?
+<issue_comment>username_0: @username_17 this URL is the one that your comment form has to POST to. The [Get started](https://staticman.net/docs/) doc is a good place to start building with Staticman :slightly_smiling_face:
+<issue_comment>username_17: Thanks, I get it now. I made some other mistake apparently though, because now I'm getting this when I try to submit a comment.
+
+![image](https://user-images.githubusercontent.com/4284600/54496277-17f83880-48b3-11e9-8437-621054f1d3b2.png)
+
+
+I'll have to study the config options for a while.
+<issue_comment>username_18: I don't have reCAPTCHA set but keep getting this error:
+```
+{""success"":false,""message"":""Missing reCAPTCHA API credentials"",""rawError"":{""_smErrorCode"":""RECAPTCHA_MISSING_CREDENTIALS""},""errorCode"":""RECAPTCHA_MISSING_CREDENTIALS""}
+```
+<issue_comment>username_19: I think the v3 Staticman app may be broken, but I'm not certain. See #294 for more details.
+<issue_comment>username_18: Thanks for this update. I'm sure the app just scaled past what his service
+could handle. I'll probably look for another solution (like Netlify).
+<issue_comment>username_20: @username_18 That's a duplicate of #223.
+<issue_comment>username_20: In the reCATPCHA section of your Staticman config, even if `enabled: false`, if you *didn't* comment out the unused `siteKey` and `secret`, that can contribute to an error.  Here, you've passed the value `null` to these two attributes.
+
+To avoid that you may either comment out the whole line (e.g. https://github.com/username_20/BJPubTest1)
+
+```yml
+  # reCaptcha
+  # Register your domain at https://www.google.com/recaptcha/ and choose reCAPTCHA V2
+  reCaptcha:
+    enabled: false
+    #siteKey: ""6LdRBykTAAAAAFB46MnIu6ixuxwu9W1ihFF8G60Q""
+    # Encrypt reCaptcha secret key using Staticman /encrypt endpoint
+    # For more information, https://staticman.net/docs/encryption
+    #secret: ""PznnZGu3P6eTHRPLORniSq+J61YEf+A9zmColXDM5icqF49gbunH51B8+h+i2IvewpuxtA9TFoK68TuhUp/X3YKmmqhXasegHYabY50fqF9nJh9npWNhvITdkQHeaOqnFXUIwxfiEeUt49Yoa2waRR7a5LdRAP3SVM8hz0KIBT4=""
+```
+
+or use an empty string `""""` instead of `null`. (e.g. [Hugo Future Imperfect Slim](https://github.com/username_18/hugo-future-imperfect-slim/blob/master/exampleSite/staticman.yml#L61-L65))
+
+```yml
+  # reCaptcha
+  # Register your domain at https://www.google.com/recaptcha/ and choose reCAPTCHA V2
+  reCaptcha:
+    enabled: false
+    #siteKey: """"
+    # Encrypt reCaptcha secret key using Staticman /encrypt endpoint
+    # For more information, https://staticman.net/docs/encryption
+    #secret: """"
+```
+
+Reference:
+
+1.  My experiement with Staticman's reCAPTCHA support in https://github.com/daattali/beautiful-jekyll/pull/514#issuecomment-508817895
+2. [My blog post about different types of Staticman errors](https://vincenttam.gitlab.io/post/2018-12-25-staticman-repo-setup-errors/)"
+kubernetes/website,524292483,17630,,"[{'action': 'opened', 'author': 'lfshr', 'comment_id': None, 'datetime': '2019-11-18 11:02:06+00:00', 'masked_author': 'username_0', 'text': '**This is a Bug Report**\r\n\r\n<!-- Thanks for filing an issue! Before submitting, please fill in the following information. -->\r\n<!-- See https://kubernetes.io/docs/contribute/start/ for guidance on writing an actionable issue description. -->\r\n\r\n<!--Required Information-->\r\nkubectl PowerShell example does not work in Windows. `cat` is an alias for Get-Content, which by default parses a file line-by-line.\r\n\r\n**Proposed Solution:**\r\nChange PowerShell example to use the -Raw flag in Get-Content cmdlet (and change `cat` to `Get-Content` to avoid alias ambiguity).\r\n\r\n```\r\nkubectl patch deployment patch-demo --patch $(Get-Content patch-file.yaml -Raw)\r\n```\r\n\r\n**Page to Update:**\r\nhttps://kubernetes.io/docs/tasks/run-application/update-api-object-kubectl-patch/\r\n\r\n<!--Optional Information (remove the comment tags around information you would like to include)-->\r\n<!--Kubernetes Version:-->\r\n\r\n<!--Additional Information:-->', 'title': 'Patch PowerShell example does not work on Windows', 'type': 'issue'}
+ {'action': 'created', 'author': 'aimeeu', 'comment_id': 555153651.0, 'datetime': '2019-11-18 18:45:10+00:00', 'masked_author': 'username_1', 'text': '/sig windows', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'sftim', 'comment_id': 555174918.0, 'datetime': '2019-11-18 19:37:12+00:00', 'masked_author': 'username_2', 'text': '/sig windows', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'sftim', 'comment_id': 555175424.0, 'datetime': '2019-11-18 19:38:19+00:00', 'masked_author': 'username_2', 'text': 'Seems like a valid fix\r\n/priority backlog\r\n/good-first-issue', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'rashmi43', 'comment_id': 555925018.0, 'datetime': '2019-11-20 09:45:24+00:00', 'masked_author': 'username_3', 'text': 'I would like to take this up.', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'unyilmelenoyska', 'comment_id': 557530820.0, 'datetime': '2019-11-22 13:26:18+00:00', 'masked_author': 'username_4', 'text': '[Subscribe] ( https://www.youtube.com/watch?v=m-9fXtTEwDE )', 'title': None, 'type': 'comment'}]","<issue_start><issue_comment>Title: Patch PowerShell example does not work on Windows
+username_0: **This is a Bug Report**
+
+<!-- Thanks for filing an issue! Before submitting, please fill in the following information. -->
+<!-- See https://kubernetes.io/docs/contribute/start/ for guidance on writing an actionable issue description. -->
+
+<!--Required Information-->
+kubectl PowerShell example does not work in Windows. `cat` is an alias for Get-Content, which by default parses a file line-by-line.
+
+**Proposed Solution:**
+Change PowerShell example to use the -Raw flag in Get-Content cmdlet (and change `cat` to `Get-Content` to avoid alias ambiguity).
+
+```
+kubectl patch deployment patch-demo --patch $(Get-Content patch-file.yaml -Raw)
+```
+
+**Page to Update:**
+https://kubernetes.io/docs/tasks/run-application/update-api-object-kubectl-patch/
+
+<!--Optional Information (remove the comment tags around information you would like to include)-->
+<!--Kubernetes Version:-->
+
+<!--Additional Information:-->
+<issue_comment>username_1: /sig windows
+<issue_comment>username_2: /sig windows
+<issue_comment>username_2: Seems like a valid fix
+/priority backlog
+/good-first-issue
+<issue_comment>username_3: I would like to take this up.
+<issue_comment>username_4: [Subscribe] ( https://www.youtube.com/watch?v=m-9fXtTEwDE )"
+adobe/aem-core-wcm-components,568486243,927,,"[{'action': 'opened', 'author': 'auniverseaway', 'comment_id': None, 'datetime': '2020-02-20 18:23:34+00:00', 'masked_author': 'username_0', 'text': ""## Feature Request\r\n\r\n**Is your feature request related to a problem? Please describe.**\r\nMaybe?\r\n\r\n* You cannot vertically or horizontally center a container item.\r\n* You cannot re-order container items based on breakpoint.\r\n* You cannot define per-breakpoint container values (background, foreground, etc.).\r\n* You cannot set a minimum height for a container or item\r\n* You cannot use VH in editor.html without an infinite scroll bug.\r\n* Items cannot vertically stretch to match siblings.\r\n* You cannot set a universal gutter (or gap) between items\r\n\r\n**Describe the solution you'd like**\r\n\r\nThe Dx (also known as Dexter) team wants to contribute our Flex Container component.\r\n\r\nIt is mostly based on flexbox with other niceties thrown in:\r\n\r\n### Component per-breakpoint features (individually configurable per mobile, tablet, desktop)\r\n* Set item (child) order\r\n* Set justify-content\r\n* Set align-items\r\n* Set align-content\r\n* Set background image\r\n* Set background color\r\n* Set foreground color\r\n* Set gap (to simulate the CSS grid gap feature)\r\n* Set min height (px or vh)\r\n\r\n### Flex item per-breakpoint features (configurable per mobile, tablet, desktop)\r\n* Set width (auto, column 1-12, %, px)\r\n* Set min height (px or vh)\r\n\r\n### One size fits all features\r\n* Container CTA - Ability to make the entire container clickable (with notice of accessibility concerns)\r\n* Enable Container - Similar to Bootstrap's container: contstrain max widths using a 'container' CSS class.\r\n* Accessibility Attributes - Ability to set element, landmark name, and landmark label.\r\n\r\n### Overall features that come with (i.e. required) and useful for other components\r\n* dxPolicy - An inheritance scheme for content policy properties that will pick up component-level props first if present. API similarity to ValueMap.\r\n* Component Governance Render Condition - The ability to completely remove dialog property selection if a boolean is set at the policy level to turn the property off. If policy property is set, page-level author cannot change property. ACLs allow for admins and template authors to still view and edit dialog properties.\r\n* Context-Aware Datasource - A datasource to power granite selects & colorfields that allows tennant / brand / locale specific properties.\r\n* Author VH - The ability to set CSS vertical height without editor.html infinitely scrolling.\r\n* Author Watch - The ability to execute javascript after component edit without using MutationObserver in both author and publish.\r\n* OSGi breakpoint service - The ability to configure breakpoint pixel values to satisfy per-breakpoint configs above.\r\n\r\n**Are there alternatives?**\r\nCSS Grid, but it's not IE11 compatible (without transpiling / decent authorability)\r\n\r\n**Documentation**\r\nhttps://css-tricks.com/snippets/css/a-guide-to-flexbox/\r\n\r\nAs I find time, I'll put some videos together in an AEM context. Most of the docs are probably covered with the above criteria."", 'title': 'Contribute Adobe Dx Flex Container', 'type': 'issue'}
+ {'action': 'created', 'author': 'vladbailescu', 'comment_id': 589515290.0, 'datetime': '2020-02-21 06:16:52+00:00', 'masked_author': 'username_1', 'text': '@username_0 , looking forward to this contribution!', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'gabrielwalt', 'comment_id': 683868107.0, 'datetime': '2020-08-31 15:56:11+00:00', 'masked_author': 'username_2', 'text': 'Closing as this seems to be contributed to the adobe-dx repo.', 'title': None, 'type': 'comment'}
+ {'action': 'closed', 'author': 'gabrielwalt', 'comment_id': None, 'datetime': '2020-08-31 15:56:11+00:00', 'masked_author': 'username_2', 'text': '', 'title': None, 'type': 'issue'}]","<issue_start><issue_comment>Title: Contribute Adobe Dx Flex Container
+username_0: ## Feature Request
+
+**Is your feature request related to a problem? Please describe.**
+Maybe?
+
+* You cannot vertically or horizontally center a container item.
+* You cannot re-order container items based on breakpoint.
+* You cannot define per-breakpoint container values (background, foreground, etc.).
+* You cannot set a minimum height for a container or item
+* You cannot use VH in editor.html without an infinite scroll bug.
+* Items cannot vertically stretch to match siblings.
+* You cannot set a universal gutter (or gap) between items
+
+**Describe the solution you'd like**
+
+The Dx (also known as Dexter) team wants to contribute our Flex Container component.
+
+It is mostly based on flexbox with other niceties thrown in:
+
+### Component per-breakpoint features (individually configurable per mobile, tablet, desktop)
+* Set item (child) order
+* Set justify-content
+* Set align-items
+* Set align-content
+* Set background image
+* Set background color
+* Set foreground color
+* Set gap (to simulate the CSS grid gap feature)
+* Set min height (px or vh)
+
+### Flex item per-breakpoint features (configurable per mobile, tablet, desktop)
+* Set width (auto, column 1-12, %, px)
+* Set min height (px or vh)
+
+### One size fits all features
+* Container CTA - Ability to make the entire container clickable (with notice of accessibility concerns)
+* Enable Container - Similar to Bootstrap's container: contstrain max widths using a 'container' CSS class.
+* Accessibility Attributes - Ability to set element, landmark name, and landmark label.
+
+### Overall features that come with (i.e. required) and useful for other components
+* dxPolicy - An inheritance scheme for content policy properties that will pick up component-level props first if present. API similarity to ValueMap.
+* Component Governance Render Condition - The ability to completely remove dialog property selection if a boolean is set at the policy level to turn the property off. If policy property is set, page-level author cannot change property. ACLs allow for admins and template authors to still view and edit dialog properties.
+* Context-Aware Datasource - A datasource to power granite selects & colorfields that allows tennant / brand / locale specific properties.
+* Author VH - The ability to set CSS vertical height without editor.html infinitely scrolling.
+* Author Watch - The ability to execute javascript after component edit without using MutationObserver in both author and publish.
+* OSGi breakpoint service - The ability to configure breakpoint pixel values to satisfy per-breakpoint configs above.
+
+**Are there alternatives?**
+CSS Grid, but it's not IE11 compatible (without transpiling / decent authorability)
+
+**Documentation**
+https://css-tricks.com/snippets/css/a-guide-to-flexbox/
+
+As I find time, I'll put some videos together in an AEM context. Most of the docs are probably covered with the above criteria.
+<issue_comment>username_1: @username_0 , looking forward to this contribution!
+<issue_comment>username_2: Closing as this seems to be contributed to the adobe-dx repo.<issue_closed>"
+conda-forge/conda-forge.github.io,544781245,950,,"[{'action': 'opened', 'author': 'beckermr', 'comment_id': None, 'datetime': '2020-01-02 22:52:04+00:00', 'masked_author': 'username_0', 'text': 'I’d be in favor of building out a generic x86-64 chanel/label which uses none of nocona optimizations. \r\n\r\n<!--\r\nThanks for reporting your issue.\r\nPlease fill out the sections below.\r\n-->\r\nIssue:\r\n\r\n<br/>\r\nEnvironment (<code>conda list</code>):\r\n<details>\r\n\r\n```\r\n$ conda list\r\n\r\n```\r\n</details>\r\n\r\n<br/>\r\nDetails about  <code>conda</code> and system ( <code>conda info</code> ):\r\n<details>\r\n\r\n```\r\n$ conda info\r\n\r\n```\r\n</details>', 'title': 'generic x86-64 channel/label', 'type': 'issue'}
+ {'action': 'created', 'author': 'isuruf', 'comment_id': 570405636.0, 'datetime': '2020-01-02 23:55:21+00:00', 'masked_author': 'username_1', 'text': ""I'm okay with changing `-march=nocona` to `-march=k8`, and rebuilding a few packages, but rebuilding all is a big ask."", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'beckermr', 'comment_id': 570411986.0, 'datetime': '2020-01-03 00:20:31+00:00', 'masked_author': 'username_0', 'text': 'This seems fine. We can start with the set that were selected for aarch/ppc64le and then add others as people need them.', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'mingwandroid', 'comment_id': 570732817.0, 'datetime': '2020-01-03 23:52:02+00:00', 'masked_author': 'username_2', 'text': 'Do you have statistics and benchmarks you can point to for a costs/benefits analysis here?', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'beckermr', 'comment_id': 570733362.0, 'datetime': '2020-01-03 23:55:28+00:00', 'masked_author': 'username_0', 'text': ""I am not sure what exactly you are looking for @username_2, but I don't have anything offhand. \r\n\r\nI am an academic and keep running into very old machines that lack more recent instructions like SSE3. It is hard to say how many people have had this problem, but I have seen it twice. \r\n\r\nPer the discussion above, the idea would be to have a very small channel with generic x86-64 builds for these cases.\r\n\r\nI don't feel very strongly here, so happy to be punt or be convinced otherwise! :)"", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'mingwandroid', 'comment_id': 570733716.0, 'datetime': '2020-01-03 23:58:02+00:00', 'masked_author': 'username_2', 'text': ""It might be nice to process our binaries to figure out when they need rebuilding for this channel. Many won't touch SSE3 for example and rebuilding those would be a bit of a waste."", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'beckermr', 'comment_id': 570733894.0, 'datetime': '2020-01-03 23:59:23+00:00', 'masked_author': 'username_0', 'text': 'For sure! The other way to do this would be to use virtual packages and have conda build embed the required instructions directly in the package requirements. I am guessing you have thoughts on that.', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'mingwandroid', 'comment_id': 570734432.0, 'datetime': '2020-01-04 00:02:34+00:00', 'masked_author': 'username_2', 'text': ""I wish I had time for thoughts! Sounds nice though. I've not looked at virtual packages yet."", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'scopatz', 'comment_id': 570944324.0, 'datetime': '2020-01-05 20:23:51+00:00', 'masked_author': 'username_3', 'text': 'This would be nice to have to swich on as needed', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'beckermr', 'comment_id': 570987496.0, 'datetime': '2020-01-06 03:14:35+00:00', 'masked_author': 'username_0', 'text': 'Ok. I’m game to work on this after the openmp stuff goes through. So the simplest path is a migrator with some custom compilers. I’m more inclined to go after the virtual package since it solves bigger problems. TBH we probably need both since if some package won’t install due to having say sse3, we will want to build a version without.', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'isuruf', 'comment_id': 570988377.0, 'datetime': '2020-01-06 03:20:25+00:00', 'masked_author': 'username_1', 'text': ""I don't think we need a custom compiler or a custom channel. Packages that really care about sse3 have runtime detection of the cpu like openblas, gmp, etc."", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'beckermr', 'comment_id': 570989702.0, 'datetime': '2020-01-06 03:28:59+00:00', 'masked_author': 'username_0', 'text': 'Ok. I’m not going to push it. I’ve seen illegal instruction errors on two different machines now. It could be people using march=native too.', 'title': None, 'type': 'comment'}
+ {'action': 'closed', 'author': 'beckermr', 'comment_id': None, 'datetime': '2020-01-06 03:29:07+00:00', 'masked_author': 'username_0', 'text': '', 'title': None, 'type': 'issue'}
+ {'action': 'created', 'author': 'beckermr', 'comment_id': 570989717.0, 'datetime': '2020-01-06 03:29:07+00:00', 'masked_author': 'username_0', 'text': 'Closing for now.', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'isuruf', 'comment_id': 570990118.0, 'datetime': '2020-01-06 03:31:40+00:00', 'masked_author': 'username_1', 'text': ""What I meant was that I'm fine with changing `nocona` to `k8`."", 'title': None, 'type': 'comment'}
+ {'action': 'reopened', 'author': 'beckermr', 'comment_id': None, 'datetime': '2020-01-06 03:33:51+00:00', 'masked_author': 'username_0', 'text': 'I’d be in favor of building out a generic x86-64 chanel/label which uses none of nocona optimizations. \r\n\r\n<!--\r\nThanks for reporting your issue.\r\nPlease fill out the sections below.\r\n-->\r\nIssue:\r\n\r\n<br/>\r\nEnvironment (<code>conda list</code>):\r\n<details>\r\n\r\n```\r\n$ conda list\r\n\r\n```\r\n</details>\r\n\r\n<br/>\r\nDetails about  <code>conda</code> and system ( <code>conda info</code> ):\r\n<details>\r\n\r\n```\r\n$ conda info\r\n\r\n```\r\n</details>', 'title': 'generic x86-64 channel/label', 'type': 'issue'}
+ {'action': 'created', 'author': 'beckermr', 'comment_id': 570990547.0, 'datetime': '2020-01-06 03:34:20+00:00', 'masked_author': 'username_0', 'text': 'Ahhhh. Yeah we could go that route.', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'beckermr', 'comment_id': 571158752.0, 'datetime': '2020-01-06 14:31:03+00:00', 'masked_author': 'username_0', 'text': ""Bumping @username_4 @username_2 since I think they were involved when defaults set its `march` flags. What do y'all think if conda-forge goes with `k8` instead of `nocona`?"", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'jjhelmus', 'comment_id': 571168961.0, 'datetime': '2020-01-06 14:57:08+00:00', 'masked_author': 'username_4', 'text': ""`k8` would be fine.  From what I recall `nocona` was selected as `k8` was not documented in the GCC manual at the time. It looks to be documented now.  \r\n\r\nThe only CPU that I am aware of that `nocona` will causes issue with but `k8` should be alright with are the [first generation 130 nm SledgeHammer Opteron](https://en.wikipedia.org/wiki/Opteron#Opteron_(130_nm_SOI)) processors which lack SSE3.  I'm surprised at how long these seem to remain in service.  \r\n\r\nI have a suspicion that some of the illegal instruction errors are a result of virtualization rather than limitation of the actual hardware."", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'beckermr', 'comment_id': 571171983.0, 'datetime': '2020-01-06 15:04:28+00:00', 'masked_author': 'username_0', 'text': 'Good call on virtualization! \r\n\r\nIt appears that the [node](https://en.wikipedia.org/wiki/List_of_AMD_Opteron_microprocessors#Opteron_6100-series_%22Magny-Cours%22_(45_nm)) I had trouble with should have this instruction, but it is not listed in `/proc/cpuinfo`\r\n\r\n```\r\nprocessor\t: 15\r\nvendor_id\t: AuthenticAMD\r\ncpu family\t: 16\r\nmodel\t\t: 9\r\nmodel name\t: AMD Opteron(tm) Processor 6128\r\nstepping\t: 1\r\nmicrocode\t: 0x10000d9\r\ncpu MHz\t\t: 2000.000\r\ncache size\t: 512 KB\r\nphysical id\t: 1\r\nsiblings\t: 8\r\ncore id\t\t: 3\r\ncpu cores\t: 8\r\napicid\t\t: 39\r\ninitial apicid\t: 23\r\nfpu\t\t: yes\r\nfpu_exception\t: yes\r\ncpuid level\t: 5\r\nwp\t\t: yes\r\nflags\t\t: fpu vme de pse tsc msr pae mce cx8 apic sep mtrr pge mca cmov pat pse36 clflush mmx fxsr sse sse2 ht syscall nx mmxext fxsr_opt pdpe1gb rdtscp lm 3dnowext 3dnow constant_tsc art rep_good nopl nonstop_tsc extd_apicid amd_dcm pni monitor cx16 popcnt lahf_lm cmp_legacy svm extapic cr8_legacy abm sse4a misalignsse 3dnowprefetch osvw ibs skinit wdt nodeid_msr hw_pstate retpoline_amd ibp_disable vmmcall npt lbrv svm_lock nrip_save pausefilter\r\nbogomips\t: 4000.04\r\nTLB size\t: 1024 4K pages\r\nclflush size\t: 64\r\ncache_alignment\t: 64\r\naddress sizes\t: 48 bits physical, 48 bits virtual\r\npower management: ts ttp tm stc 100mhzsteps hwpstate\r\n```', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'beckermr', 'comment_id': 571300750.0, 'datetime': '2020-01-06 20:27:54+00:00', 'masked_author': 'username_0', 'text': 'It looks like the kernel is listing this as pni and not sse3 which are the same instruction sets as far as I can tell. I vote to shelve this convo for a while and see if any more issues bubble up.', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'beckermr', 'comment_id': 750896875.0, 'datetime': '2020-12-24 14:24:34+00:00', 'masked_author': 'username_0', 'text': 'Nothing bubbled up for over a year here. I am going to close this for now as it seems this is not needed.', 'title': None, 'type': 'comment'}
+ {'action': 'closed', 'author': 'beckermr', 'comment_id': None, 'datetime': '2020-12-24 14:24:34+00:00', 'masked_author': 'username_0', 'text': '', 'title': None, 'type': 'issue'}]","<issue_start><issue_comment>Title: generic x86-64 channel/label
+username_0: I’d be in favor of building out a generic x86-64 chanel/label which uses none of nocona optimizations. 
+
+<!--
+Thanks for reporting your issue.
+Please fill out the sections below.
+-->
+Issue:
+
+<br/>
+Environment (<code>conda list</code>):
+<details>
+
+```
+$ conda list
+
+```
+</details>
+
+<br/>
+Details about  <code>conda</code> and system ( <code>conda info</code> ):
+<details>
+
+```
+$ conda info
+
+```
+</details>
+<issue_comment>username_1: I'm okay with changing `-march=nocona` to `-march=k8`, and rebuilding a few packages, but rebuilding all is a big ask.
+<issue_comment>username_0: This seems fine. We can start with the set that were selected for aarch/ppc64le and then add others as people need them.
+<issue_comment>username_2: Do you have statistics and benchmarks you can point to for a costs/benefits analysis here?
+<issue_comment>username_0: I am not sure what exactly you are looking for @username_2, but I don't have anything offhand. 
+
+I am an academic and keep running into very old machines that lack more recent instructions like SSE3. It is hard to say how many people have had this problem, but I have seen it twice. 
+
+Per the discussion above, the idea would be to have a very small channel with generic x86-64 builds for these cases.
+
+I don't feel very strongly here, so happy to be punt or be convinced otherwise! :)
+<issue_comment>username_2: It might be nice to process our binaries to figure out when they need rebuilding for this channel. Many won't touch SSE3 for example and rebuilding those would be a bit of a waste.
+<issue_comment>username_0: For sure! The other way to do this would be to use virtual packages and have conda build embed the required instructions directly in the package requirements. I am guessing you have thoughts on that.
+<issue_comment>username_2: I wish I had time for thoughts! Sounds nice though. I've not looked at virtual packages yet.
+<issue_comment>username_3: This would be nice to have to swich on as needed
+<issue_comment>username_0: Ok. I’m game to work on this after the openmp stuff goes through. So the simplest path is a migrator with some custom compilers. I’m more inclined to go after the virtual package since it solves bigger problems. TBH we probably need both since if some package won’t install due to having say sse3, we will want to build a version without.
+<issue_comment>username_1: I don't think we need a custom compiler or a custom channel. Packages that really care about sse3 have runtime detection of the cpu like openblas, gmp, etc.
+<issue_comment>username_0: Ok. I’m not going to push it. I’ve seen illegal instruction errors on two different machines now. It could be people using march=native too.<issue_closed>
+<issue_comment>username_0: Closing for now.
+<issue_comment>username_1: What I meant was that I'm fine with changing `nocona` to `k8`.
+<issue_comment>username_0: I’d be in favor of building out a generic x86-64 chanel/label which uses none of nocona optimizations. 
+
+<!--
+Thanks for reporting your issue.
+Please fill out the sections below.
+-->
+Issue:
+
+<br/>
+Environment (<code>conda list</code>):
+<details>
+
+```
+$ conda list
+
+```
+</details>
+
+<br/>
+Details about  <code>conda</code> and system ( <code>conda info</code> ):
+<details>
+
+```
+$ conda info
+
+```
+</details>
+<issue_comment>username_0: Ahhhh. Yeah we could go that route.
+<issue_comment>username_0: Bumping @username_4 @username_2 since I think they were involved when defaults set its `march` flags. What do y'all think if conda-forge goes with `k8` instead of `nocona`?
+<issue_comment>username_4: `k8` would be fine.  From what I recall `nocona` was selected as `k8` was not documented in the GCC manual at the time. It looks to be documented now.  
+
+The only CPU that I am aware of that `nocona` will causes issue with but `k8` should be alright with are the [first generation 130 nm SledgeHammer Opteron](https://en.wikipedia.org/wiki/Opteron#Opteron_(130_nm_SOI)) processors which lack SSE3.  I'm surprised at how long these seem to remain in service.  
+
+I have a suspicion that some of the illegal instruction errors are a result of virtualization rather than limitation of the actual hardware.
+<issue_comment>username_0: Good call on virtualization! 
+
+It appears that the [node](https://en.wikipedia.org/wiki/List_of_AMD_Opteron_microprocessors#Opteron_6100-series_%22Magny-Cours%22_(45_nm)) I had trouble with should have this instruction, but it is not listed in `/proc/cpuinfo`
+
+```
+processor	: 15
+vendor_id	: AuthenticAMD
+cpu family	: 16
+model		: 9
+model name	: AMD Opteron(tm) Processor 6128
+stepping	: 1
+microcode	: 0x10000d9
+cpu MHz		: 2000.000
+cache size	: 512 KB
+physical id	: 1
+siblings	: 8
+core id		: 3
+cpu cores	: 8
+apicid		: 39
+initial apicid	: 23
+fpu		: yes
+fpu_exception	: yes
+cpuid level	: 5
+wp		: yes
+flags		: fpu vme de pse tsc msr pae mce cx8 apic sep mtrr pge mca cmov pat pse36 clflush mmx fxsr sse sse2 ht syscall nx mmxext fxsr_opt pdpe1gb rdtscp lm 3dnowext 3dnow constant_tsc art rep_good nopl nonstop_tsc extd_apicid amd_dcm pni monitor cx16 popcnt lahf_lm cmp_legacy svm extapic cr8_legacy abm sse4a misalignsse 3dnowprefetch osvw ibs skinit wdt nodeid_msr hw_pstate retpoline_amd ibp_disable vmmcall npt lbrv svm_lock nrip_save pausefilter
+bogomips	: 4000.04
+TLB size	: 1024 4K pages
+clflush size	: 64
+cache_alignment	: 64
+address sizes	: 48 bits physical, 48 bits virtual
+power management: ts ttp tm stc 100mhzsteps hwpstate
+```
+<issue_comment>username_0: It looks like the kernel is listing this as pni and not sse3 which are the same instruction sets as far as I can tell. I vote to shelve this convo for a while and see if any more issues bubble up.
+<issue_comment>username_0: Nothing bubbled up for over a year here. I am going to close this for now as it seems this is not needed.<issue_closed>"
+facebook/docusaurus,706121933,3471,,"[{'action': 'opened', 'author': 'niheaven', 'comment_id': None, 'datetime': '2020-09-22 06:45:04+00:00', 'masked_author': 'username_0', 'text': '## 🐛 Bug Report\r\n\r\nWhen linking to static assets (pdf or xlsx, etc.) directly from markdown files, and if the file is under some co-locate subdir and has Chinese characters in its path name (filename or dirname), then the parsing engine will give some error as following:\r\n\r\n```\r\n./docs/doc2.md\r\nModule not found: Can\'t resolve \'./0202测试.pdf\' in \'xxx\\docusaurus\\docs\'./docs/doc2.md\r\nModule not found: Can\'t resolve \'./test测试.pdf\' in \'xxx\\docusaurus\\docs\'./docs/doc2.md\r\nModule not found: Can\'t resolve \'./测试 est.pdf\' in \'xxx\\docusaurus\\docs\'\r\n```\r\n\r\n### Have you read the [Contributing Guidelines on issues](https://github.com/facebook/docusaurus/blob/master/CONTRIBUTING.md#reporting-new-issues)?\r\n\r\nYES\r\n\r\n## To Reproduce\r\n\r\n1. Create some dummy files and dirs under docs, e.g., `测试/test.pdf`, `test/测试.pdf`, `0202/测试.pdf`\r\n1. Link to these files in md file under docs, e.g., `doc2.md`, using markdown\'s syntax (`Link to [subdir with Chinese path name 1](test/测试.pdf)`) (Webpack\'s works well `<a ... require(\'./0202/测试.pdf\').default ... /a>`)\r\n1. Save `doc2.md` \r\n\r\n## Expected behavior\r\n\r\n<!--\r\n  How did you expect your project to behave?\r\n  It’s fine if you’re not sure your understanding is correct.\r\n  Write down what you thought would happen.\r\n-->\r\n\r\nNo error, move these files to `assests` and create clickable links\r\n\r\n## Actual Behavior\r\n\r\n<!--\r\n  Did something go wrong?\r\n  Is something broken, or not behaving as you expected?\r\n  Describe this section in detail, and attach screenshots if possible.\r\n  Don\'t only say ""it doesn\'t work""!\r\n-->\r\n\r\n```\r\n× Client\r\n  Compiled with some errors in 83.04ms\r\n\r\n\r\n\r\n./docs/doc2.md\r\nModule not found: Can\'t resolve \'./0202测试.pdf\' in \'xxx\\docusaurus\\docs\'./docs/doc2.md\r\nModule not found: Can\'t resolve \'./test测试.pdf\' in \'xxx\\docusaurus\\docs\'./docs/doc2.md\r\nModule not found: Can\'t resolve \'./测试 est.pdf\' in \'xxx\\docusaurus\\docs\'\r\n```\r\n\r\nOh, line breaks got wrong, too...\r\n\r\n## Your Environment\r\n\r\n<!-- Include as many relevant details about the environment you experienced the bug in -->\r\n\r\n- Docusaurus version used: 2.0.0-alpha.64\r\n- Environment name and version: Edge 85.0.564.51, Node.js 12.18.4\r\n- Operating system and version: Windows 10 19042.487 64bit\r\n\r\n## Reproducible Demo\r\n\r\n(Paste the link to an example repo, including a `siteConfig.js`, and exact instructions to reproduce the issue.)\r\n\r\n<!--\r\n  What happens if you skip this step?\r\n\r\n  Someone will read your bug report, and maybe will be able to help you,\r\n  but it’s unlikely that it will get much attention from the team. Eventually,\r\n  the issue will likely get closed in favor of issues that have reproducible demos.\r\n\r\n  Please remember that:\r\n\r\n    * Issues without reproducible demos have a very low priority.\r\n    * The person fixing the bug would have to do that anyway. Please be respectful of their time.\r\n    * You might figure out the issues yourself as you work on extracting it.\r\n\r\n  Thanks for helping us help you!\r\n-->\r\n\r\nJust add some Chinese named files and dirs...', 'title': ""[v2] Couldn't link to static assets with Chinese characters under sub-dir"", 'type': 'issue'}
+ {'action': 'created', 'author': 'slorber', 'comment_id': 700608244.0, 'datetime': '2020-09-29 10:15:38+00:00', 'masked_author': 'username_1', 'text': ""Hi,\r\n\r\nI'm sorry but I'm unable to reproduce this issue.\r\n\r\n![image](https://user-images.githubusercontent.com/749374/94545867-667ae700-024d-11eb-8809-d756bf65c9b4.png)\r\n\r\n![image](https://user-images.githubusercontent.com/749374/94545843-5ebb4280-024d-11eb-8713-f78018e678c9.png)\r\n\r\n![image](https://user-images.githubusercontent.com/749374/94545893-6e3a8b80-024d-11eb-9ee6-9a2e0c128e29.png)\r\n\r\n\r\nI would need a full repro to be able to debug this and be sure it's not an error on your side."", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'slorber', 'comment_id': 705694637.0, 'datetime': '2020-10-08 16:49:43+00:00', 'masked_author': 'username_1', 'text': 'no answer so closing', 'title': None, 'type': 'comment'}
+ {'action': 'closed', 'author': 'slorber', 'comment_id': None, 'datetime': '2020-10-08 16:49:43+00:00', 'masked_author': 'username_1', 'text': '', 'title': None, 'type': 'issue'}
+ {'action': 'created', 'author': 'niheaven', 'comment_id': 705972043.0, 'datetime': '2020-10-09 05:13:46+00:00', 'masked_author': 'username_0', 'text': 'Sorry, on vacation...\r\n\r\nPlease check https://github.com/username_0/docusaurus-debug, and output on my machine likes:\r\n\r\n![image](https://user-images.githubusercontent.com/5832170/95545680-2c6dca00-0a31-11eb-8aa2-f6eced5df993.png)\r\n\r\n`init commit` runs well.', 'title': None, 'type': 'comment'}
+ {'action': 'reopened', 'author': 'slorber', 'comment_id': None, 'datetime': '2020-10-09 07:22:30+00:00', 'masked_author': 'username_1', 'text': '## 🐛 Bug Report\r\n\r\nWhen linking to static assets (pdf or xlsx, etc.) directly from markdown files, and if the file is under some co-locate subdir and has Chinese characters in its path name (filename or dirname), then the parsing engine will give some error as following:\r\n\r\n```\r\n./docs/doc2.md\r\nModule not found: Can\'t resolve \'./0202测试.pdf\' in \'xxx\\docusaurus\\docs\'./docs/doc2.md\r\nModule not found: Can\'t resolve \'./test测试.pdf\' in \'xxx\\docusaurus\\docs\'./docs/doc2.md\r\nModule not found: Can\'t resolve \'./测试 est.pdf\' in \'xxx\\docusaurus\\docs\'\r\n```\r\n\r\n### Have you read the [Contributing Guidelines on issues](https://github.com/facebook/docusaurus/blob/master/CONTRIBUTING.md#reporting-new-issues)?\r\n\r\nYES\r\n\r\n## To Reproduce\r\n\r\n1. Create some dummy files and dirs under docs, e.g., `测试/test.pdf`, `test/测试.pdf`, `0202/测试.pdf`\r\n1. Link to these files in md file under docs, e.g., `doc2.md`, using markdown\'s syntax (`Link to [subdir with Chinese path name 1](test/测试.pdf)`) (Webpack\'s works well `<a ... require(\'./0202/测试.pdf\').default ... /a>`)\r\n1. Save `doc2.md` \r\n\r\n## Expected behavior\r\n\r\n<!--\r\n  How did you expect your project to behave?\r\n  It’s fine if you’re not sure your understanding is correct.\r\n  Write down what you thought would happen.\r\n-->\r\n\r\nNo error, move these files to `assests` and create clickable links\r\n\r\n## Actual Behavior\r\n\r\n<!--\r\n  Did something go wrong?\r\n  Is something broken, or not behaving as you expected?\r\n  Describe this section in detail, and attach screenshots if possible.\r\n  Don\'t only say ""it doesn\'t work""!\r\n-->\r\n\r\n```\r\n× Client\r\n  Compiled with some errors in 83.04ms\r\n\r\n\r\n\r\n./docs/doc2.md\r\nModule not found: Can\'t resolve \'./0202测试.pdf\' in \'xxx\\docusaurus\\docs\'./docs/doc2.md\r\nModule not found: Can\'t resolve \'./test测试.pdf\' in \'xxx\\docusaurus\\docs\'./docs/doc2.md\r\nModule not found: Can\'t resolve \'./测试 est.pdf\' in \'xxx\\docusaurus\\docs\'\r\n```\r\n\r\nOh, line breaks got wrong, too...\r\n\r\n## Your Environment\r\n\r\n<!-- Include as many relevant details about the environment you experienced the bug in -->\r\n\r\n- Docusaurus version used: 2.0.0-alpha.64\r\n- Environment name and version: Edge 85.0.564.51, Node.js 12.18.4\r\n- Operating system and version: Windows 10 19042.487 64bit\r\n\r\n## Reproducible Demo\r\n\r\n(Paste the link to an example repo, including a `siteConfig.js`, and exact instructions to reproduce the issue.)\r\n\r\n<!--\r\n  What happens if you skip this step?\r\n\r\n  Someone will read your bug report, and maybe will be able to help you,\r\n  but it’s unlikely that it will get much attention from the team. Eventually,\r\n  the issue will likely get closed in favor of issues that have reproducible demos.\r\n\r\n  Please remember that:\r\n\r\n    * Issues without reproducible demos have a very low priority.\r\n    * The person fixing the bug would have to do that anyway. Please be respectful of their time.\r\n    * You might figure out the issues yourself as you work on extracting it.\r\n\r\n  Thanks for helping us help you!\r\n-->\r\n\r\nJust add some Chinese named files and dirs...', 'title': ""[v2] Couldn't link to static assets with Chinese characters under sub-dir"", 'type': 'issue'}
+ {'action': 'created', 'author': 'slorber', 'comment_id': 706018456.0, 'datetime': '2020-10-09 07:23:57+00:00', 'masked_author': 'username_1', 'text': ""Thanks, let's reopen.\r\n\r\nI don't have windows to test the repro, unfortunately, but people have reported that using other shells (like PowerShell) could solve problem. Can you try some other Windows shell if possible?"", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'niheaven', 'comment_id': 706065076.0, 'datetime': '2020-10-09 09:07:34+00:00', 'masked_author': 'username_0', 'text': 'What I use is PowerShell 7, and I also tried PowerShell 5.1, CMD and nu shell. Unfortunately, the same error...\r\n\r\n`npm run start` cannot work, too.\r\n\r\nIt seems like parsing engine treat `./assets/测试.pdf` as `./assets\\测试.pdf` in Windows and the backslash is used as an escape character.', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'hotlong', 'comment_id': 754369716.0, 'datetime': '2021-01-05 03:36:36+00:00', 'masked_author': 'username_2', 'text': '|                                                                                                                                                                                                 ^\r\n  119 | <p>{`其次写说明并提交更改：`}</p>\r\n  120 | <p><img alt={""提交更改""} src={require(""!url-loader?limit=10000&name=assets/images/[name]-[hash].[ext]&fallback=file-loader!C:\\Users\\steedos\\Documents\\GitHub\\steedos-website\\website\\static\\assets\\ubuntu\\git提交更改.png"").default}  /></p>\r\n  121 | <p>{`如果没有 git 客户端可选择取消打开 git 客户端，并在 vscode 中登陆 git 账号：`}</p>\r\n```', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'slorber', 'comment_id': 833587241.0, 'datetime': '2021-05-06 14:52:45+00:00', 'masked_author': 'username_1', 'text': 'Should be fixed by https://github.com/facebook/docusaurus/pull/4736\r\n\r\nPlease let me know if you still have an issue', 'title': None, 'type': 'comment'}
+ {'action': 'closed', 'author': 'slorber', 'comment_id': None, 'datetime': '2021-05-06 14:52:45+00:00', 'masked_author': 'username_1', 'text': '', 'title': None, 'type': 'issue'}]","<issue_start><issue_comment>Title: [v2] Couldn't link to static assets with Chinese characters under sub-dir
+username_0: ## 🐛 Bug Report
+
+When linking to static assets (pdf or xlsx, etc.) directly from markdown files, and if the file is under some co-locate subdir and has Chinese characters in its path name (filename or dirname), then the parsing engine will give some error as following:
+
+```
+./docs/doc2.md
+Module not found: Can't resolve './0202测试.pdf' in 'xxx\docusaurus\docs'./docs/doc2.md
+Module not found: Can't resolve './test测试.pdf' in 'xxx\docusaurus\docs'./docs/doc2.md
+Module not found: Can't resolve './测试 est.pdf' in 'xxx\docusaurus\docs'
+```
+
+### Have you read the [Contributing Guidelines on issues](https://github.com/facebook/docusaurus/blob/master/CONTRIBUTING.md#reporting-new-issues)?
+
+YES
+
+## To Reproduce
+
+1. Create some dummy files and dirs under docs, e.g., `测试/test.pdf`, `test/测试.pdf`, `0202/测试.pdf`
+1. Link to these files in md file under docs, e.g., `doc2.md`, using markdown's syntax (`Link to [subdir with Chinese path name 1](test/测试.pdf)`) (Webpack's works well `<a ... require('./0202/测试.pdf').default ... /a>`)
+1. Save `doc2.md` 
+
+## Expected behavior
+
+<!--
+  How did you expect your project to behave?
+  It’s fine if you’re not sure your understanding is correct.
+  Write down what you thought would happen.
+-->
+
+No error, move these files to `assests` and create clickable links
+
+## Actual Behavior
+
+<!--
+  Did something go wrong?
+  Is something broken, or not behaving as you expected?
+  Describe this section in detail, and attach screenshots if possible.
+  Don't only say ""it doesn't work""!
+-->
+
+```
+× Client
+  Compiled with some errors in 83.04ms
+
+
+
+./docs/doc2.md
+Module not found: Can't resolve './0202测试.pdf' in 'xxx\docusaurus\docs'./docs/doc2.md
+Module not found: Can't resolve './test测试.pdf' in 'xxx\docusaurus\docs'./docs/doc2.md
+Module not found: Can't resolve './测试 est.pdf' in 'xxx\docusaurus\docs'
+```
+
+Oh, line breaks got wrong, too...
+
+## Your Environment
+
+<!-- Include as many relevant details about the environment you experienced the bug in -->
+
+- Docusaurus version used: 2.0.0-alpha.64
+- Environment name and version: Edge 85.0.564.51, Node.js 12.18.4
+- Operating system and version: Windows 10 19042.487 64bit
+
+## Reproducible Demo
+
+(Paste the link to an example repo, including a `siteConfig.js`, and exact instructions to reproduce the issue.)
+
+<!--
+  What happens if you skip this step?
+
+  Someone will read your bug report, and maybe will be able to help you,
+  but it’s unlikely that it will get much attention from the team. Eventually,
+  the issue will likely get closed in favor of issues that have reproducible demos.
+
+  Please remember that:
+
+    * Issues without reproducible demos have a very low priority.
+    * The person fixing the bug would have to do that anyway. Please be respectful of their time.
+    * You might figure out the issues yourself as you work on extracting it.
+
+  Thanks for helping us help you!
+-->
+
+Just add some Chinese named files and dirs...
+<issue_comment>username_1: Hi,
+
+I'm sorry but I'm unable to reproduce this issue.
+
+![image](https://user-images.githubusercontent.com/749374/94545867-667ae700-024d-11eb-8809-d756bf65c9b4.png)
+
+![image](https://user-images.githubusercontent.com/749374/94545843-5ebb4280-024d-11eb-8713-f78018e678c9.png)
+
+![image](https://user-images.githubusercontent.com/749374/94545893-6e3a8b80-024d-11eb-9ee6-9a2e0c128e29.png)
+
+
+I would need a full repro to be able to debug this and be sure it's not an error on your side.
+<issue_comment>username_1: no answer so closing<issue_closed>
+<issue_comment>username_0: Sorry, on vacation...
+
+Please check https://github.com/username_0/docusaurus-debug, and output on my machine likes:
+
+![image](https://user-images.githubusercontent.com/5832170/95545680-2c6dca00-0a31-11eb-8aa2-f6eced5df993.png)
+
+`init commit` runs well.
+<issue_comment>username_1: ## 🐛 Bug Report
+
+When linking to static assets (pdf or xlsx, etc.) directly from markdown files, and if the file is under some co-locate subdir and has Chinese characters in its path name (filename or dirname), then the parsing engine will give some error as following:
+
+```
+./docs/doc2.md
+Module not found: Can't resolve './0202测试.pdf' in 'xxx\docusaurus\docs'./docs/doc2.md
+Module not found: Can't resolve './test测试.pdf' in 'xxx\docusaurus\docs'./docs/doc2.md
+Module not found: Can't resolve './测试 est.pdf' in 'xxx\docusaurus\docs'
+```
+
+### Have you read the [Contributing Guidelines on issues](https://github.com/facebook/docusaurus/blob/master/CONTRIBUTING.md#reporting-new-issues)?
+
+YES
+
+## To Reproduce
+
+1. Create some dummy files and dirs under docs, e.g., `测试/test.pdf`, `test/测试.pdf`, `0202/测试.pdf`
+1. Link to these files in md file under docs, e.g., `doc2.md`, using markdown's syntax (`Link to [subdir with Chinese path name 1](test/测试.pdf)`) (Webpack's works well `<a ... require('./0202/测试.pdf').default ... /a>`)
+1. Save `doc2.md` 
+
+## Expected behavior
+
+<!--
+  How did you expect your project to behave?
+  It’s fine if you’re not sure your understanding is correct.
+  Write down what you thought would happen.
+-->
+
+No error, move these files to `assests` and create clickable links
+
+## Actual Behavior
+
+<!--
+  Did something go wrong?
+  Is something broken, or not behaving as you expected?
+  Describe this section in detail, and attach screenshots if possible.
+  Don't only say ""it doesn't work""!
+-->
+
+```
+× Client
+  Compiled with some errors in 83.04ms
+
+
+
+./docs/doc2.md
+Module not found: Can't resolve './0202测试.pdf' in 'xxx\docusaurus\docs'./docs/doc2.md
+Module not found: Can't resolve './test测试.pdf' in 'xxx\docusaurus\docs'./docs/doc2.md
+Module not found: Can't resolve './测试 est.pdf' in 'xxx\docusaurus\docs'
+```
+
+Oh, line breaks got wrong, too...
+
+## Your Environment
+
+<!-- Include as many relevant details about the environment you experienced the bug in -->
+
+- Docusaurus version used: 2.0.0-alpha.64
+- Environment name and version: Edge 85.0.564.51, Node.js 12.18.4
+- Operating system and version: Windows 10 19042.487 64bit
+
+## Reproducible Demo
+
+(Paste the link to an example repo, including a `siteConfig.js`, and exact instructions to reproduce the issue.)
+
+<!--
+  What happens if you skip this step?
+
+  Someone will read your bug report, and maybe will be able to help you,
+  but it’s unlikely that it will get much attention from the team. Eventually,
+  the issue will likely get closed in favor of issues that have reproducible demos.
+
+  Please remember that:
+
+    * Issues without reproducible demos have a very low priority.
+    * The person fixing the bug would have to do that anyway. Please be respectful of their time.
+    * You might figure out the issues yourself as you work on extracting it.
+
+  Thanks for helping us help you!
+-->
+
+Just add some Chinese named files and dirs...
+<issue_comment>username_1: Thanks, let's reopen.
+
+I don't have windows to test the repro, unfortunately, but people have reported that using other shells (like PowerShell) could solve problem. Can you try some other Windows shell if possible?
+<issue_comment>username_0: What I use is PowerShell 7, and I also tried PowerShell 5.1, CMD and nu shell. Unfortunately, the same error...
+
+`npm run start` cannot work, too.
+
+It seems like parsing engine treat `./assets/测试.pdf` as `./assets\测试.pdf` in Windows and the backslash is used as an escape character.
+<issue_comment>username_2: |                                                                                                                                                                                                 ^
+  119 | <p>{`其次写说明并提交更改：`}</p>
+  120 | <p><img alt={""提交更改""} src={require(""!url-loader?limit=10000&name=assets/images/[name]-[hash].[ext]&fallback=file-loader!C:\Users\steedos\Documents\GitHub\steedos-website\website\static\assets\ubuntu\git提交更改.png"").default}  /></p>
+  121 | <p>{`如果没有 git 客户端可选择取消打开 git 客户端，并在 vscode 中登陆 git 账号：`}</p>
+```
+<issue_comment>username_1: Should be fixed by https://github.com/facebook/docusaurus/pull/4736
+
+Please let me know if you still have an issue<issue_closed>"
+GDQuest/website,550813992,151,,"[{'action': 'opened', 'author': 'NathanLovato', 'comment_id': None, 'datetime': '2020-01-16 13:40:16+00:00', 'masked_author': 'username_0', 'text': ""See https://github.com/GDQuest/blender-power-sequencer/issues/420 for more information.\r\n\r\nI've started writing the guide and I'm opening a branch named content/power-sequencer-getting-started where you will find the sections ready to fill up.\r\n\r\n@username_1 would you write that? If you can, I'll edit after you're done."", 'title': 'Write a Getting Started guide for Power Sequencer', 'type': 'issue'}
+ {'action': 'created', 'author': 'johnnygossdev', 'comment_id': 575272801.0, 'datetime': '2020-01-16 18:00:51+00:00', 'masked_author': 'username_1', 'text': ""Sure! Thanks for that - I'll make a start in the next few days."", 'title': None, 'type': 'comment'}
+ {'action': 'closed', 'author': 'NathanLovato', 'comment_id': None, 'datetime': '2020-01-31 02:31:12+00:00', 'masked_author': 'username_0', 'text': '', 'title': None, 'type': 'issue'}]","<issue_start><issue_comment>Title: Write a Getting Started guide for Power Sequencer
+username_0: See https://github.com/GDQuest/blender-power-sequencer/issues/420 for more information.
+
+I've started writing the guide and I'm opening a branch named content/power-sequencer-getting-started where you will find the sections ready to fill up.
+
+@username_1 would you write that? If you can, I'll edit after you're done.
+<issue_comment>username_1: Sure! Thanks for that - I'll make a start in the next few days.<issue_closed>"

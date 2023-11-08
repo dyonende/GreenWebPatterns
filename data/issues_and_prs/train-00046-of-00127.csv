@@ -1,0 +1,747 @@
+sindresorhus/pageres,194586363,288,"{'number': 288.0, 'repo': 'pageres', 'user_login': 'sindresorhus'}","[{'action': 'opened', 'author': 'vasco-santos', 'comment_id': None, 'datetime': '2016-12-09T12:34:49Z', 'masked_author': 'username_0', 'text': '', 'title': 'Issue 239 - incremental number for filename', 'type': 'issue'}
+ {'action': 'created', 'author': 'corysimmons', 'comment_id': 266018806.0, 'datetime': '2016-12-09 13:53:58+00:00', 'masked_author': 'username_1', 'text': ""- [ ] Nice Feature\r\n- [ ] Adhering to code style\r\n- [ ] Docs\r\n- [ ] Tests\r\n- [ ] References an issue that it solves\r\n\r\nThis might be the best PR I've ever seen on GitHub."", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'sindresorhus', 'comment_id': 266023600.0, 'datetime': '2016-12-09 14:16:27+00:00', 'masked_author': 'username_2', 'text': ""Thanks for working on this @username_0 :)\r\n\r\nI don't really see the point of making the delimiter configurable. I think we should just default to `(1)` like Chrome and many other apps do. We already have way too many option in Pageres. This seems non-essential.\r\n\r\nUse https://github.com/username_2/unused-filename"", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'corysimmons', 'comment_id': 266027253.0, 'datetime': '2016-12-09 14:33:32+00:00', 'masked_author': 'username_1', 'text': ""It sucks that Chrome, and other apps, append a nasty ` (x)` to filenames though. Not for any technical reason that I can think of, but just because it looks stupid/nasty (to me, and I'm sure others).\r\n\r\nIt's like that nasty ` copy` to ` copy 2` thing OSX does.\r\n\r\n![image](https://cloud.githubusercontent.com/assets/224636/21052086/3c078e8c-bdf1-11e6-8e6a-aa031e33e316.png)\r\n\r\nI don't think there is a standard between operating systems/apps for the naming convention of duplicated files, so I'm not sure why trying to adhere to one here makes sense.\r\n\r\nIt seems fine to use https://github.com/username_2/unused-filename to do this, but unused-filename doesn't offer customizing. Would you consider adding the ability to customize to unused-filename?"", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'sindresorhus', 'comment_id': 266029215.0, 'datetime': '2016-12-09 14:41:38+00:00', 'masked_author': 'username_2', 'text': '""Stupid/nasty"" is not a constructive argument. The parens make it clearer that the number is not part of the filename.', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'vasco-santos', 'comment_id': 266029705.0, 'datetime': '2016-12-09 14:43:43+00:00', 'masked_author': 'username_0', 'text': ""Thanks @username_1 :)\r\n\r\nHello @username_2, I made the delimiter configurable because there were different opinions about the convention to use in the issue's discussion. \r\n\r\nNevertheless, I am available to define a default behavior if it is the best option. I can also change the 'increment' option name to another name that is clearer for the user. \r\n\r\nI didn't know the [unused-filename](https://github.com/username_2/unused-filename) project. I will check it when possible."", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'corysimmons', 'comment_id': 266036359.0, 'datetime': '2016-12-09 15:10:09+00:00', 'masked_author': 'username_1', 'text': '""XYZ isn\'t constructive"" is literally the least-constructive/most-overused phrase in FOSS. Please inspect the meaning of comments before accusing them of being nonconstructive.\r\n\r\n""it looks stupid/nasty"" was a light-hearted way of saying some people don\'t like that ""convention"" (aka: non-existent OS standard) and would just like the ability to customize it to their tastes.\r\n\r\nAgain, no one cares if you make parens (or whatever) the default (in fact, it\'s probably a good idea to for unused-filename to [default to OS-specific conventions](https://github.com/username_2/unused-filename/issues/3)), we\'d just like to be empowered to customize more things and less purism -- unless there\'s a good reason for the purism which I\'m happy to hear about.\r\n\r\nI\'ll bow out of this PR now since I\'m afraid further discussion will detract from @username_0 good work.', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'sindresorhus', 'comment_id': 266200712.0, 'datetime': '2016-12-10 11:12:23+00:00', 'masked_author': 'username_2', 'text': 'Any suggestion? Maybe `overwrite` and with `true` by default.', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'vasco-santos', 'comment_id': 270790435.0, 'datetime': '2017-01-05 23:40:26+00:00', 'masked_author': 'username_0', 'text': '@username_2 is this new version ok?', 'title': None, 'type': 'comment'}]","<issue_start><issue_comment>Title: Issue 239 - incremental number for filename
+username_0: 
+<issue_comment>username_1: - [ ] Nice Feature
+- [ ] Adhering to code style
+- [ ] Docs
+- [ ] Tests
+- [ ] References an issue that it solves
+
+This might be the best PR I've ever seen on GitHub.
+<issue_comment>username_2: Thanks for working on this @username_0 :)
+
+I don't really see the point of making the delimiter configurable. I think we should just default to `(1)` like Chrome and many other apps do. We already have way too many option in Pageres. This seems non-essential.
+
+Use https://github.com/username_2/unused-filename
+<issue_comment>username_1: It sucks that Chrome, and other apps, append a nasty ` (x)` to filenames though. Not for any technical reason that I can think of, but just because it looks stupid/nasty (to me, and I'm sure others).
+
+It's like that nasty ` copy` to ` copy 2` thing OSX does.
+
+![image](https://cloud.githubusercontent.com/assets/224636/21052086/3c078e8c-bdf1-11e6-8e6a-aa031e33e316.png)
+
+I don't think there is a standard between operating systems/apps for the naming convention of duplicated files, so I'm not sure why trying to adhere to one here makes sense.
+
+It seems fine to use https://github.com/username_2/unused-filename to do this, but unused-filename doesn't offer customizing. Would you consider adding the ability to customize to unused-filename?
+<issue_comment>username_2: ""Stupid/nasty"" is not a constructive argument. The parens make it clearer that the number is not part of the filename.
+<issue_comment>username_0: Thanks @username_1 :)
+
+Hello @username_2, I made the delimiter configurable because there were different opinions about the convention to use in the issue's discussion. 
+
+Nevertheless, I am available to define a default behavior if it is the best option. I can also change the 'increment' option name to another name that is clearer for the user. 
+
+I didn't know the [unused-filename](https://github.com/username_2/unused-filename) project. I will check it when possible.
+<issue_comment>username_1: ""XYZ isn't constructive"" is literally the least-constructive/most-overused phrase in FOSS. Please inspect the meaning of comments before accusing them of being nonconstructive.
+
+""it looks stupid/nasty"" was a light-hearted way of saying some people don't like that ""convention"" (aka: non-existent OS standard) and would just like the ability to customize it to their tastes.
+
+Again, no one cares if you make parens (or whatever) the default (in fact, it's probably a good idea to for unused-filename to [default to OS-specific conventions](https://github.com/username_2/unused-filename/issues/3)), we'd just like to be empowered to customize more things and less purism -- unless there's a good reason for the purism which I'm happy to hear about.
+
+I'll bow out of this PR now since I'm afraid further discussion will detract from @username_0 good work.
+<issue_comment>username_2: Any suggestion? Maybe `overwrite` and with `true` by default.
+<issue_comment>username_0: @username_2 is this new version ok?"
+pallets/flask-website,385414657,75,"{'number': 75.0, 'repo': 'flask-website', 'user_login': 'pallets'}","[{'action': 'opened', 'author': 'dhyanpatel', 'comment_id': None, 'datetime': '2018-11-28T19:07:47Z', 'masked_author': 'username_0', 'text': 'Removed these Dead Links:\r\n- Steven Harms Website\r\n- Planete GT LL\r\n- Battlefield3 Development News Aggregator\r\n- Get Python 3\r\n- saallergy.info (It was filled with Adware)\r\n- Cockerel', 'title': 'Removed Dead Links from poweredby.html', 'type': 'issue'}
+ {'action': 'created', 'author': 'miguelgrinberg', 'comment_id': 453860297.0, 'datetime': '2019-01-13 19:54:39+00:00', 'masked_author': 'username_1', 'text': 'This issue will be automatically closed due to being inactive for more than six months. Please reopen if you need more assistance.', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'miguelgrinberg', 'comment_id': 453861350.0, 'datetime': '2019-01-13 20:08:28+00:00', 'masked_author': 'username_1', 'text': 'Sorry for the issue noise... was doing some batch clean up on my own issues and a few Flask ones slipped.', 'title': None, 'type': 'comment'}]","<issue_start><issue_comment>Title: Removed Dead Links from poweredby.html
+username_0: Removed these Dead Links:
+- Steven Harms Website
+- Planete GT LL
+- Battlefield3 Development News Aggregator
+- Get Python 3
+- saallergy.info (It was filled with Adware)
+- Cockerel
+<issue_comment>username_1: This issue will be automatically closed due to being inactive for more than six months. Please reopen if you need more assistance.
+<issue_comment>username_1: Sorry for the issue noise... was doing some batch clean up on my own issues and a few Flask ones slipped."
+department-of-veterans-affairs/vets-website,170705478,2708,,"[{'action': 'created', 'author': 'koconnor719', 'comment_id': 239335964.0, 'datetime': '2016-08-12 00:53:38+00:00', 'masked_author': 'username_0', 'text': '@markolson can you pls. test this and see if an issue on our end?  \r\n\r\n@username_1', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'akainic', 'comment_id': 239352389.0, 'datetime': '2016-08-12 03:20:27+00:00', 'masked_author': 'username_1', 'text': ""Sounds like maybe one of the redirects was not taken down that should be in order for this form to work. Unfortunately I can't test on my personal machine because it won't even let me open that form, but I'll test once in the office tomorrow on the PC in the back."", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'koconnor719', 'comment_id': 239424517.0, 'datetime': '2016-08-12 11:35:41+00:00', 'masked_author': 'username_0', 'text': ""Ahhh so this isn't us?!? I think Marina was working on this last redirect ...\r\n\r\n\r\n\r\nSent with Good (www.good.com)\r\n\r\n\r\n-----Original Message-----"", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'koconnor719', 'comment_id': 242062801.0, 'datetime': '2016-08-24 13:27:09+00:00', 'masked_author': 'username_0', 'text': '@username_1 pls. advise of a response.', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'koconnor719', 'comment_id': 244096728.0, 'datetime': '2016-09-01 14:29:34+00:00', 'masked_author': 'username_0', 'text': 'new user comment on this issue; can you pls. test and make sure this is working properly:)\r\n\r\n\r\nFrom: <ychag@example.com> on behalf of ""Vets.gov"" <envkt@example.com>\r\nDate: Thursday, September 1, 2016 at 8:04 AM\r\nTo: VA VETS GOV <hzdkv@example.com>\r\nSubject: [EXTERNAL] [veterans.uservoice.com] New comment on \'Fix the 1010EZ-AD Form\'\r\n\r\nVets.gov Feedback\r\nveterans.uservoice.com               \r\n New comment on \'Fix the 1010EZ-AD Form\'\r\n\r\nPosted in Vets.gov » Technical Issues\r\n\r\n           \r\n 0\r\nAnonymous commented on Fix the 1010EZ-AD Form\r\nThe 1010EZ Form is still not fixed. This should be fixed asap. It came up only for about a few days or so, and now, it is doing exactly what it was doing before. It is embarrassing when I get someone referred to our office and this happens to us when I am trying to help Service Members, Veterans or their Families.\r\n\r\nDelete\tMark as Spam', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'akainic', 'comment_id': 244130698.0, 'datetime': '2016-09-01 16:13:55+00:00', 'masked_author': 'username_1', 'text': ""I tried pulling up the 1010EZ-AD link on vets.gov using Internet Explorer and it worked fine. The fact that it doesn't work in other browsers is consistent with how it was before HCA. That functionality is no better or worse than it always was.\r\n\r\nThe only difference is that there is an option to print the form, but the link to that is redirected to vets.gov (looks like the original link was on med.va.gov?). We might need to take down that one particular redirect to help veterans print out the 1010EZ-AD and apply that way."", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'koconnor719', 'comment_id': 244390419.0, 'datetime': '2016-09-02 14:28:09+00:00', 'masked_author': 'username_0', 'text': 'posted and closed (this feature is being tracked by HEC developers as an enhancement)\r\n\r\nThank you for your feedback. The old Active Duty form was only available using specific browser settings (Explorer, and specific versions of Adobe), and this is still the case on vets.gov. We understand that accessibility is important and that Veterans need to be able to access these services using any modern browser, from any device. Our team is working on this enhancement, so please check back on vets.gov later this year. \r\n\r\nPlease note that you can also continue to use the call center to apply, 1-877-222-8387.\r\n\r\nvets.gov team', 'title': None, 'type': 'comment'}
+ {'action': 'closed', 'author': 'koconnor719', 'comment_id': None, 'datetime': '2016-09-02 14:28:09+00:00', 'masked_author': 'username_0', 'text': '', 'title': None, 'type': 'issue'}]","<issue_start><issue_comment>username_0: @markolson can you pls. test this and see if an issue on our end?  
+
+@username_1
+<issue_comment>username_1: Sounds like maybe one of the redirects was not taken down that should be in order for this form to work. Unfortunately I can't test on my personal machine because it won't even let me open that form, but I'll test once in the office tomorrow on the PC in the back.
+<issue_comment>username_0: Ahhh so this isn't us?!? I think Marina was working on this last redirect ...
+
+
+
+Sent with Good (www.good.com)
+
+
+-----Original Message-----
+<issue_comment>username_0: @username_1 pls. advise of a response.
+<issue_comment>username_0: new user comment on this issue; can you pls. test and make sure this is working properly:)
+
+
+From: <no-reply=veterans.uservoice.com@feedback-poweredby.uservoice.com> on behalf of ""Vets.gov"" <no-reply@veterans.uservoice.com>
+Date: Thursday, September 1, 2016 at 8:04 AM
+To: VA VETS GOV <VAVETSGOV-TEAM@va.gov>
+Subject: [EXTERNAL] [veterans.uservoice.com] New comment on 'Fix the 1010EZ-AD Form'
+
+Vets.gov Feedback
+veterans.uservoice.com               
+ New comment on 'Fix the 1010EZ-AD Form'
+
+Posted in Vets.gov » Technical Issues
+
+           
+ 0
+Anonymous commented on Fix the 1010EZ-AD Form
+The 1010EZ Form is still not fixed. This should be fixed asap. It came up only for about a few days or so, and now, it is doing exactly what it was doing before. It is embarrassing when I get someone referred to our office and this happens to us when I am trying to help Service Members, Veterans or their Families.
+
+Delete	Mark as Spam
+<issue_comment>username_1: I tried pulling up the 1010EZ-AD link on vets.gov using Internet Explorer and it worked fine. The fact that it doesn't work in other browsers is consistent with how it was before HCA. That functionality is no better or worse than it always was.
+
+The only difference is that there is an option to print the form, but the link to that is redirected to vets.gov (looks like the original link was on med.va.gov?). We might need to take down that one particular redirect to help veterans print out the 1010EZ-AD and apply that way.
+<issue_comment>username_0: posted and closed (this feature is being tracked by HEC developers as an enhancement)
+
+Thank you for your feedback. The old Active Duty form was only available using specific browser settings (Explorer, and specific versions of Adobe), and this is still the case on vets.gov. We understand that accessibility is important and that Veterans need to be able to access these services using any modern browser, from any device. Our team is working on this enhancement, so please check back on vets.gov later this year. 
+
+Please note that you can also continue to use the call center to apply, 1-877-222-8387.
+
+vets.gov team<issue_closed>"
+microsoft/TypeScript-Website,691560937,1017,"{'number': 1017.0, 'repo': 'TypeScript-Website', 'user_login': 'microsoft'}","[{'action': 'opened', 'author': 'JoshuaKGoldberg', 'comment_id': None, 'datetime': '2020-09-03T01:49:24Z', 'masked_author': 'username_0', 'text': 'Started from pairing with @username_1 over Twitch: https://www.twitch.tv/videos/729447355 on these [Figma designs](https://www.figma.com/file/x8FJrNqj6oupqWn1s3uMg4/Website?node-id=1113%3A0).\r\n\r\n**Initial notes (9/2)**: I decided to take Orta\'s advice and stop midway through implementing it, and get a good night\'s sleep instead 😄. But I\'m excited about this page and plan on working on it more later this week/end if there\'s still work to be done. The major things left are:\r\n- [x] Hook up typed search to the query param (https://github.com/microsoft/TypeSearch/pull/38)\r\n- [x] ~Sending a _second_ search for the `@types/` / non-`@types` version of a module, depending on what the user searches, and turn the list of `@types/` packages into a `Set<string>` to inform the `definitelyTyped` prop of `HitResult`~ Looks like Algolia actually does have the types support data in its results? -> Yes! Resolved in 5d966e30.\r\n- [x] Add the npm/yarn/pnpm selector\r\n    - [x] Store it in localStorage\r\n- [x] Format the results rows nicely 💅  _(and add the ""Powered by Algolia"" notice)_\r\n    - [x] General layout/fonts\r\n    - [x] Colors & image styling\r\n    - [x] Time recency\r\n    - [x] Mobile responsiveness\r\n    - [x] Use a ~markdown~ quick regex parser to convert package descriptions to plaintext\r\n- [x] Add an initial search on the page\r\n    - [ ] Figure out what that initial search should be\r\n- [x] General QA and miscellaneous resultant bug fixes\r\n    - [x] Potential crash: querying for `reactrer` shows a `description` equal to `null` \r\n\r\n**Update 9/3** ([tweet](https://twitter.com/username_0/status/1301752211475759105)): Mostly done with the basic logic; still needs some touchups and quality polish.\r\n\r\n**Update 9/4** Should be ready for review! I\'ve played with it a bunch and am happy so far with it. The remaining questions I have are:\r\n* What should initial homepage search query be?\r\n* What should the ""no results found"" indicator be? _(read: is this silly placeholder logo variant the right kind of silly?)_\r\n\r\n<table>\r\n<thead>\r\n<tr>\r\n<th>State</th>\r\n<th>Desktop</th>\r\n<th>Tablet</th>\r\n<th>Mobile</th>\r\n</tr>\r\n</thead>\r\n<tbody>\r\n<tr>\r\n<th>Initial</th>\r\n<td><img alt=""Desktop screenshot of initial state"" src=""https://user-images.githubusercontent.com/3335181/92290849-b3d09680-eee3-11ea-8782-a9dbd46480fb.png"" /></td>\r\n<td><img alt=""Tablet screenshot of initial state"" src=""https://user-images.githubusercontent.com/3335181/92291007-82a49600-eee4-11ea-824b-b604f548349b.png"" /></td>\r\n<td><img alt=""Mobile screenshot of initial state"" src=""https://user-images.githubusercontent.com/3335181/92291370-5427ba80-eee6-11ea-801b-27e3848a8aa4.png"" /></td>\r\n</tr>\r\n<tr>\r\n<th>Results</th>\r\n<td><img alt=""Desktop screenshot of results state"" src=""https://user-images.githubusercontent.com/3335181/92290872-d19dfb80-eee3-11ea-9e2d-ff8afe0c25fe.png"" /></td>\r\n<td><img alt=""Tablet screenshot of results state"" src=""https://user-images.githubusercontent.com/3335181/92291185-6ce3a080-eee5-11ea-9579-02c8772ad0e4.png"" /></td>\r\n<td><img alt=""Mobile screenshot of results state"" src=""https://user-images.githubusercontent.com/3335181/92291341-39554600-eee6-11ea-9ef0-5071ac3c19a7.png"" /></td>\r\n</tr>\r\n<tr>\r\n<th>No Results</th>\r\n<td><img alt=""Desktop screenshot of no results state"" src=""https://user-images.githubusercontent.com/3335181/92291429-994bec80-eee6-11ea-8b6d-ecff4330cab2.png"" /></td>\r\n<td>\r\n<img alt=""Tablet screenshot of no results state"" src=""https://user-images.githubusercontent.com/3335181/92291318-188cf080-eee6-11ea-8bd6-557b83bb5a9c.png"" /></td>\r\n<td><img alt=""Mobile screenshot of no results state"" src=""https://user-images.githubusercontent.com/3335181/92291303-0ad76b00-eee6-11ea-9cfb-525df261b49a.png"" /></td>\r\n</tr>\r\n</tbody>\r\n</table>\r\n\r\nCo-authored-by: Orta Therox <dycjh@example.com>', 'title': 'Types search page', 'type': 'issue'}
+ {'action': 'created', 'author': 'orta', 'comment_id': 687655756.0, 'datetime': '2020-09-05 19:56:52+00:00', 'masked_author': 'username_1', 'text': 'haha, that no results, cloning and trying locally', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'orta', 'comment_id': 687665120.0, 'datetime': '2020-09-05 21:25:45+00:00', 'masked_author': 'username_1', 'text': ""I've applied all my feedback inline directly (dark mode, some UX / copy changes), this is pretty much shippable right now.\r\n\r\nI do have an unresolved question: What do you think the interaction pattern for linking to the source for the DTS should be? e.g. I'm looking at this:\r\n\r\n![Screen Shot 2020-09-05 at 5 25 03 PM](https://user-images.githubusercontent.com/49038/92313689-8562c200-ef9c-11ea-9354-163feef527a2.png)\r\n \r\nAnd I want to go to the async dep, should:\r\n\r\n - make just the title an anchor?\r\n - support clicking o the row in any section other than the code?\r\n - other?"", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'JoshuaKGoldberg', 'comment_id': 687673705.0, 'datetime': '2020-09-05 23:00:26+00:00', 'masked_author': 'username_0', 'text': ""Yeah that's a good question... how about this:\r\n\r\n* DLs: link to npm\r\n* Via: link to the GitHub source, as the GH repository for built-in and the DefinitelyTyped repository\r\n* Module > name: link to npm\r\n\r\nEverything else _feels_ like non-link plain text to me...\r\n\r\nAdditionally, as @danvk mentioned, it'd be great to have the install commands copy & pasteable, like on npmjs.com."", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'orta', 'comment_id': 687798121.0, 'datetime': '2020-09-06 14:03:34+00:00', 'masked_author': 'username_1', 'text': ""OK, I've given it an Intl pass, and handled my own on the DT link.\r\n\r\nRe: copy, I'm alright with this technique, it conceptually playground links happen in the code samples \r\n\r\n![Screen Shot 2020-09-06 at 10 04 49 AM](https://user-images.githubusercontent.com/49038/92327513-2f3b6080-f028-11ea-839b-80c87219749e.png)"", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'orta', 'comment_id': 687798176.0, 'datetime': '2020-09-06 14:03:45+00:00', 'masked_author': 'username_1', 'text': 'Good to merge on green', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'orta', 'comment_id': 687812332.0, 'datetime': '2020-09-06 14:59:07+00:00', 'masked_author': 'username_1', 'text': ""OK, cool, let's do this"", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'orta', 'comment_id': 687813356.0, 'datetime': '2020-09-06 15:02:56+00:00', 'masked_author': 'username_1', 'text': 'After https://github.com/microsoft/TypeScript-Website/actions/runs/241781529 completes, then https://www.staging-typescript.org/dt/search should work', 'title': None, 'type': 'comment'}]","<issue_start><issue_comment>Title: Types search page
+username_0: Started from pairing with @username_1 over Twitch: https://www.twitch.tv/videos/729447355 on these [Figma designs](https://www.figma.com/file/x8FJrNqj6oupqWn1s3uMg4/Website?node-id=1113%3A0).
+
+**Initial notes (9/2)**: I decided to take Orta's advice and stop midway through implementing it, and get a good night's sleep instead 😄. But I'm excited about this page and plan on working on it more later this week/end if there's still work to be done. The major things left are:
+- [x] Hook up typed search to the query param (https://github.com/microsoft/TypeSearch/pull/38)
+- [x] ~Sending a _second_ search for the `@types/` / non-`@types` version of a module, depending on what the user searches, and turn the list of `@types/` packages into a `Set<string>` to inform the `definitelyTyped` prop of `HitResult`~ Looks like Algolia actually does have the types support data in its results? -> Yes! Resolved in 5d966e30.
+- [x] Add the npm/yarn/pnpm selector
+    - [x] Store it in localStorage
+- [x] Format the results rows nicely 💅  _(and add the ""Powered by Algolia"" notice)_
+    - [x] General layout/fonts
+    - [x] Colors & image styling
+    - [x] Time recency
+    - [x] Mobile responsiveness
+    - [x] Use a ~markdown~ quick regex parser to convert package descriptions to plaintext
+- [x] Add an initial search on the page
+    - [ ] Figure out what that initial search should be
+- [x] General QA and miscellaneous resultant bug fixes
+    - [x] Potential crash: querying for `reactrer` shows a `description` equal to `null` 
+
+**Update 9/3** ([tweet](https://twitter.com/username_0/status/1301752211475759105)): Mostly done with the basic logic; still needs some touchups and quality polish.
+
+**Update 9/4** Should be ready for review! I've played with it a bunch and am happy so far with it. The remaining questions I have are:
+* What should initial homepage search query be?
+* What should the ""no results found"" indicator be? _(read: is this silly placeholder logo variant the right kind of silly?)_
+
+<table>
+<thead>
+<tr>
+<th>State</th>
+<th>Desktop</th>
+<th>Tablet</th>
+<th>Mobile</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<th>Initial</th>
+<td><img alt=""Desktop screenshot of initial state"" src=""https://user-images.githubusercontent.com/3335181/92290849-b3d09680-eee3-11ea-8782-a9dbd46480fb.png"" /></td>
+<td><img alt=""Tablet screenshot of initial state"" src=""https://user-images.githubusercontent.com/3335181/92291007-82a49600-eee4-11ea-824b-b604f548349b.png"" /></td>
+<td><img alt=""Mobile screenshot of initial state"" src=""https://user-images.githubusercontent.com/3335181/92291370-5427ba80-eee6-11ea-801b-27e3848a8aa4.png"" /></td>
+</tr>
+<tr>
+<th>Results</th>
+<td><img alt=""Desktop screenshot of results state"" src=""https://user-images.githubusercontent.com/3335181/92290872-d19dfb80-eee3-11ea-9e2d-ff8afe0c25fe.png"" /></td>
+<td><img alt=""Tablet screenshot of results state"" src=""https://user-images.githubusercontent.com/3335181/92291185-6ce3a080-eee5-11ea-9579-02c8772ad0e4.png"" /></td>
+<td><img alt=""Mobile screenshot of results state"" src=""https://user-images.githubusercontent.com/3335181/92291341-39554600-eee6-11ea-9ef0-5071ac3c19a7.png"" /></td>
+</tr>
+<tr>
+<th>No Results</th>
+<td><img alt=""Desktop screenshot of no results state"" src=""https://user-images.githubusercontent.com/3335181/92291429-994bec80-eee6-11ea-8b6d-ecff4330cab2.png"" /></td>
+<td>
+<img alt=""Tablet screenshot of no results state"" src=""https://user-images.githubusercontent.com/3335181/92291318-188cf080-eee6-11ea-8bd6-557b83bb5a9c.png"" /></td>
+<td><img alt=""Mobile screenshot of no results state"" src=""https://user-images.githubusercontent.com/3335181/92291303-0ad76b00-eee6-11ea-9cfb-525df261b49a.png"" /></td>
+</tr>
+</tbody>
+</table>
+
+Co-authored-by: Orta Therox <username_1.therox+gh@gmail.com>
+<issue_comment>username_1: haha, that no results, cloning and trying locally
+<issue_comment>username_1: I've applied all my feedback inline directly (dark mode, some UX / copy changes), this is pretty much shippable right now.
+
+I do have an unresolved question: What do you think the interaction pattern for linking to the source for the DTS should be? e.g. I'm looking at this:
+
+![Screen Shot 2020-09-05 at 5 25 03 PM](https://user-images.githubusercontent.com/49038/92313689-8562c200-ef9c-11ea-9354-163feef527a2.png)
+ 
+And I want to go to the async dep, should:
+
+ - make just the title an anchor?
+ - support clicking o the row in any section other than the code?
+ - other?
+<issue_comment>username_0: Yeah that's a good question... how about this:
+
+* DLs: link to npm
+* Via: link to the GitHub source, as the GH repository for built-in and the DefinitelyTyped repository
+* Module > name: link to npm
+
+Everything else _feels_ like non-link plain text to me...
+
+Additionally, as @danvk mentioned, it'd be great to have the install commands copy & pasteable, like on npmjs.com.
+<issue_comment>username_1: OK, I've given it an Intl pass, and handled my own on the DT link.
+
+Re: copy, I'm alright with this technique, it conceptually playground links happen in the code samples 
+
+![Screen Shot 2020-09-06 at 10 04 49 AM](https://user-images.githubusercontent.com/49038/92327513-2f3b6080-f028-11ea-839b-80c87219749e.png)
+<issue_comment>username_1: Good to merge on green
+<issue_comment>username_1: OK, cool, let's do this
+<issue_comment>username_1: After https://github.com/microsoft/TypeScript-Website/actions/runs/241781529 completes, then https://www.staging-typescript.org/dt/search should work"
+actix/actix-website,455383605,90,"{'number': 90.0, 'repo': 'actix-website', 'user_login': 'actix'}","[{'action': 'opened', 'author': 'cldershem', 'comment_id': None, 'datetime': '2019-06-12T19:24:43Z', 'masked_author': 'username_0', 'text': 'This is a tracking issue for addressing #87, actix/actix-web#722, and actix/actix-web#901. The first round of updates will be just getting the code updated to run on v1.0. There will be further passes to address if the content is still accurate and the patterns ares still best practices.\r\n\r\n# Sections\r\n- [ ] actix.rs/\r\n    - [X] basic example\r\n    - [ ] flexible responders\r\n    - [x] powerful extractors\r\n    - [x] easy form handling\r\n    - [x] request routing\r\n    - [ ] General Text\r\n        - is ""Feature Rich"" still accurate, specifically WebSockets?\r\n- [X] community\r\n- [X] code\r\n- [ ] translations\r\n- [ ] documentation\r\n    - [ ] Intro\r\n        - [ ] Welcome\r\n        - [ ] What is Actix\r\n        - [ ] Installation\r\n            - [ ] minimum version for actix-web\r\n            - [ ] assumed version for guide\r\n    - [ ] Basics\r\n        - [ ] Getting Started\r\n        - [ ] Application\r\n        - [ ] Server\r\n        - [ ] Handlers\r\n        - [ ] Extractors\r\n    - [ ] Advanced\r\n        - [ ] Errors\r\n        - [ ] URL Dispatch\r\n        - [ ] Requests\r\n        - [ ] Responses\r\n        - [ ] Testing\r\n        - [ ] Middlewares\r\n        - [ ] Static Files\r\n    - [ ] Protocols\r\n        - [ ] Websockets\r\n        - [ ] HTTP/2.0\r\n    - [ ] Patterns\r\n        - [ ] Autoreloading\r\n        - [ ] Databases\r\n        - [ ] Sentry\r\n    - [ ] API Documentation\r\n        - [ ] actix\r\n        - [ ] actix-web\r\n            - should this link to [docs.rs](https://docs.rs/actix-web/1.0.0/actix_web/)?', 'title': '[WIP] Update website docs to 1.0.', 'type': 'issue'}
+ {'action': 'created', 'author': 'cldershem', 'comment_id': 501489972.0, 'datetime': '2019-06-12 23:24:12+00:00', 'masked_author': 'username_0', 'text': 'Questions:\r\n- should examples include `use`?\r\n- should examples include `HttpServer::new()`?\r\n- should the main index be rewritten to pull in examples from working code like the rest of the site?\r\n- Should examples use `App::new().service()` or `App::new().route()`?', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'robjtede', 'comment_id': 501623641.0, 'datetime': '2019-06-13 09:22:56+00:00', 'masked_author': 'username_1', 'text': 'its not clear to me what you mean by this', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'cldershem', 'comment_id': 506818923.0, 'datetime': '2019-06-28 17:40:32+00:00', 'masked_author': 'username_0', 'text': 'I have everything as up-to-date as I can get without some outside help. I am by no means an `actix` expert, I just had some free time and wanted to stop reading the wrong examples myself. I have made a lot of notes (see above and below) about what needs to be checked. My goal with this PR is only to get the docs accurate for `actix-web` 1.0. I know there are many things that can be reworked to be better, but I think those should be the focus of another future rewrite.\r\n\r\n- All pages need to be checked\r\n    - [ ] accurate for v1.0+\r\n    - [ ] links work\r\n    - [ ] code works\r\n    - [ ] code formatted coherently\r\n    - [ ] code examples are clear\r\n- [ ] actix.rs/index\r\n- [ ] community\r\n- [ ] code\r\n- [ ] translations\r\n    - [ ] these may need to be removed until they can be updated\r\n- [ ] getting started\r\n- [ ] application\r\n    - is `Arc` note still correct?\r\n    - are multiple `apps` still possible?\r\n        - should this be updated to be ""multiple services""?\r\n- [ ] server\r\n    - signals/messaging all needs to be checked by someone who knows this better\r\n    - keep alive needs to be checked by someoene who knows this better\r\n- [ ] handlers\r\n    - are forms still required to be url-encoded\r\n- [ ] errors\r\n- [ ] url-dispatch\r\n    - [ ] maybe an example of `service` vs `route` vs `resource`\r\n- [ ] requests\r\n    - [ ] should multipart have an example\r\n- [ ] responses\r\n    - [ ] chunked encoding needs to be rewritten\r\n    - is it a bug that you can use `.encoding()` without the middleware,\r\n      but it doesn\'t actually change the encoding?\r\n- [ ] testing\r\n    - is streaming section correct?\r\n- [ ] middlewares\r\n- [ ] static files\r\n- [ ] websockets\r\n- [ ] http/2.0\r\n- [ ] autoreloading\r\n- [ ] database\r\n    - this needs to be rewritten\r\n    - [this branch needs some help](https://github.com/username_0/actix-website/tree/update1.0-db/examples/databases)\r\n- [ ] sentry\r\n    - this should probably be removed until they updated to 1.0.', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'fafhrd91', 'comment_id': 506926282.0, 'datetime': '2019-06-29 04:46:38+00:00', 'masked_author': 'username_2', 'text': ""i'd just merge and continue to work in separate smaller PRs\r\n\r\n@username_0 what do you think?"", 'title': None, 'type': 'comment'}]","<issue_start><issue_comment>Title: [WIP] Update website docs to 1.0.
+username_0: This is a tracking issue for addressing #87, actix/actix-web#722, and actix/actix-web#901. The first round of updates will be just getting the code updated to run on v1.0. There will be further passes to address if the content is still accurate and the patterns ares still best practices.
+
+# Sections
+- [ ] actix.rs/
+    - [X] basic example
+    - [ ] flexible responders
+    - [x] powerful extractors
+    - [x] easy form handling
+    - [x] request routing
+    - [ ] General Text
+        - is ""Feature Rich"" still accurate, specifically WebSockets?
+- [X] community
+- [X] code
+- [ ] translations
+- [ ] documentation
+    - [ ] Intro
+        - [ ] Welcome
+        - [ ] What is Actix
+        - [ ] Installation
+            - [ ] minimum version for actix-web
+            - [ ] assumed version for guide
+    - [ ] Basics
+        - [ ] Getting Started
+        - [ ] Application
+        - [ ] Server
+        - [ ] Handlers
+        - [ ] Extractors
+    - [ ] Advanced
+        - [ ] Errors
+        - [ ] URL Dispatch
+        - [ ] Requests
+        - [ ] Responses
+        - [ ] Testing
+        - [ ] Middlewares
+        - [ ] Static Files
+    - [ ] Protocols
+        - [ ] Websockets
+        - [ ] HTTP/2.0
+    - [ ] Patterns
+        - [ ] Autoreloading
+        - [ ] Databases
+        - [ ] Sentry
+    - [ ] API Documentation
+        - [ ] actix
+        - [ ] actix-web
+            - should this link to [docs.rs](https://docs.rs/actix-web/1.0.0/actix_web/)?
+<issue_comment>username_0: Questions:
+- should examples include `use`?
+- should examples include `HttpServer::new()`?
+- should the main index be rewritten to pull in examples from working code like the rest of the site?
+- Should examples use `App::new().service()` or `App::new().route()`?
+<issue_comment>username_1: its not clear to me what you mean by this
+<issue_comment>username_0: I have everything as up-to-date as I can get without some outside help. I am by no means an `actix` expert, I just had some free time and wanted to stop reading the wrong examples myself. I have made a lot of notes (see above and below) about what needs to be checked. My goal with this PR is only to get the docs accurate for `actix-web` 1.0. I know there are many things that can be reworked to be better, but I think those should be the focus of another future rewrite.
+
+- All pages need to be checked
+    - [ ] accurate for v1.0+
+    - [ ] links work
+    - [ ] code works
+    - [ ] code formatted coherently
+    - [ ] code examples are clear
+- [ ] actix.rs/index
+- [ ] community
+- [ ] code
+- [ ] translations
+    - [ ] these may need to be removed until they can be updated
+- [ ] getting started
+- [ ] application
+    - is `Arc` note still correct?
+    - are multiple `apps` still possible?
+        - should this be updated to be ""multiple services""?
+- [ ] server
+    - signals/messaging all needs to be checked by someone who knows this better
+    - keep alive needs to be checked by someoene who knows this better
+- [ ] handlers
+    - are forms still required to be url-encoded
+- [ ] errors
+- [ ] url-dispatch
+    - [ ] maybe an example of `service` vs `route` vs `resource`
+- [ ] requests
+    - [ ] should multipart have an example
+- [ ] responses
+    - [ ] chunked encoding needs to be rewritten
+    - is it a bug that you can use `.encoding()` without the middleware,
+      but it doesn't actually change the encoding?
+- [ ] testing
+    - is streaming section correct?
+- [ ] middlewares
+- [ ] static files
+- [ ] websockets
+- [ ] http/2.0
+- [ ] autoreloading
+- [ ] database
+    - this needs to be rewritten
+    - [this branch needs some help](https://github.com/username_0/actix-website/tree/update1.0-db/examples/databases)
+- [ ] sentry
+    - this should probably be removed until they updated to 1.0.
+<issue_comment>username_2: i'd just merge and continue to work in separate smaller PRs
+
+@username_0 what do you think?"
+RSS-Bridge/rss-bridge,304113638,639,"{'number': 639.0, 'repo': 'rss-bridge', 'user_login': 'RSS-Bridge'}","[{'action': 'opened', 'author': 'JackNUMBER', 'comment_id': None, 'datetime': '2018-03-10T23:06:31Z', 'masked_author': 'username_0', 'text': 'Update Steam bridge. Fixes #637 \r\n- Run free or not yet released games\r\n- Add several properties to output\r\n- Remove sorts (they are not supported anymore on the source)\r\n- Resolve ghost elements (when games hasn\'t any price)\r\n- Resolve wrong returned price\r\n\r\nTest user: **test_rss_bridge**\r\nTest url: http://store.steampowered.com/wishlist/id/test_rss_bridge\r\n\r\nTypical Json output:\r\n```    {\r\n        ""uri"": ""http:\\/\\/store.steampowered.com\\/app\\/268500\\/"",\r\n        ""title"": ""XCOM 2"",\r\n        ""type"": ""Game"",\r\n        ""cover"": ""https:\\/\\/steamcdn-a.akamaihd.net\\/steam\\/apps\\/268500\\/header.jpg?t=1520456385"",\r\n        ""timestamp"": 1520722576,\r\n        ""isBuyable"": 1,\r\n        ""hasDiscount"": 1,\r\n        ""isFree"": 0,\r\n        ""priority"": 2,\r\n        ""price"": 16.49,\r\n        ""discount"": {\r\n            ""value"": ""-67%"",\r\n            ""oldPrice"": 49.99,\r\n            ""newPrice"": 16.49\r\n        },\r\n        ""enclosures"": [\r\n            ""https:\\/\\/steamcdn-a.akamaihd.net\\/steam\\/apps\\/268500\\/header.jpg?t=1520456385"",\r\n            ""https:\\/\\/steamcdn-a.akamaihd.net\\/steam\\/apps\\/268500\\/ss_ca76303e136d2ea500b8e6546d4319502ae8862a.jpg"",\r\n            ""https:\\/\\/steamcdn-a.akamaihd.net\\/steam\\/apps\\/268500\\/ss_b2694a32e6211c47b886ee76eabdbcc41cf4b408.jpg"",\r\n            ""https:\\/\\/steamcdn-a.akamaihd.net\\/steam\\/apps\\/268500\\/ss_40f86a3cb9a959b4116de2b88f1a52dd8fb7c519.jpg"",\r\n            ""https:\\/\\/steamcdn-a.akamaihd.net\\/steam\\/apps\\/268500\\/ss_c42d24a1bd8a9d9d50cbda9772ca3aae5348ce0e.jpg""\r\n        ]\r\n    }\r\n```', 'title': 'Fix SteamBridge (#637)', 'type': 'issue'}
+ {'action': 'created', 'author': 'teromene', 'comment_id': 372242324.0, 'datetime': '2018-03-12 09:23:05+00:00', 'masked_author': 'username_1', 'text': 'Merged, thanks !', 'title': None, 'type': 'comment'}]","<issue_start><issue_comment>Title: Fix SteamBridge (#637)
+username_0: Update Steam bridge. Fixes #637 
+- Run free or not yet released games
+- Add several properties to output
+- Remove sorts (they are not supported anymore on the source)
+- Resolve ghost elements (when games hasn't any price)
+- Resolve wrong returned price
+
+Test user: **test_rss_bridge**
+Test url: http://store.steampowered.com/wishlist/id/test_rss_bridge
+
+Typical Json output:
+```    {
+        ""uri"": ""http:\/\/store.steampowered.com\/app\/268500\/"",
+        ""title"": ""XCOM 2"",
+        ""type"": ""Game"",
+        ""cover"": ""https:\/\/steamcdn-a.akamaihd.net\/steam\/apps\/268500\/header.jpg?t=1520456385"",
+        ""timestamp"": 1520722576,
+        ""isBuyable"": 1,
+        ""hasDiscount"": 1,
+        ""isFree"": 0,
+        ""priority"": 2,
+        ""price"": 16.49,
+        ""discount"": {
+            ""value"": ""-67%"",
+            ""oldPrice"": 49.99,
+            ""newPrice"": 16.49
+        },
+        ""enclosures"": [
+            ""https:\/\/steamcdn-a.akamaihd.net\/steam\/apps\/268500\/header.jpg?t=1520456385"",
+            ""https:\/\/steamcdn-a.akamaihd.net\/steam\/apps\/268500\/ss_ca76303e136d2ea500b8e6546d4319502ae8862a.jpg"",
+            ""https:\/\/steamcdn-a.akamaihd.net\/steam\/apps\/268500\/ss_b2694a32e6211c47b886ee76eabdbcc41cf4b408.jpg"",
+            ""https:\/\/steamcdn-a.akamaihd.net\/steam\/apps\/268500\/ss_40f86a3cb9a959b4116de2b88f1a52dd8fb7c519.jpg"",
+            ""https:\/\/steamcdn-a.akamaihd.net\/steam\/apps\/268500\/ss_c42d24a1bd8a9d9d50cbda9772ca3aae5348ce0e.jpg""
+        ]
+    }
+```
+<issue_comment>username_1: Merged, thanks !"
+department-of-veterans-affairs/vets-website,202239391,4724,,"[{'action': 'opened', 'author': 'mollyblake', 'comment_id': None, 'datetime': '2017-01-20 20:52:05+00:00', 'masked_author': 'username_0', 'text': '@username_1 @username_2 \r\nPer SME recommendations, we would like to combine the content from two pages into one page.  The pages are:\r\n\r\n[1] Radiogenic Risk Activities\r\n/disability-benefits/conditions/exposure-to-hazardous-materials/radiogenic-risk-activities/\r\nAND\r\n[2] Ionizing Radiation\r\n/disability-benefits/conditions/exposure-to-hazardous-materials/ionizing-radiation/\r\n\r\nThe content is as follows: \r\n\r\nRadiation Exposure\r\n\r\nFind out if you can get disability compensation or benefits for illnesses—including some cancers—believed to be caused by contact with radiation during military service.\r\n\r\nCan I get disability benefits from VA?\r\n\r\nYou may be able to get disability benefits if you have an illness that’s on the list of those believed to be caused by radiation—or that doctors say may be caused by radiation—and if you had contact with ionizing radiation while serving in the military by:\r\n\r\n- Being part of atmospheric nuclear weapons testing, or\r\n- Serving in the postwar occupation of Hiroshima or Nagasaki, or\r\n- Being a prisoner of war (POW) in Japan, or\r\n- Working as an x-ray technician, in a reactor plant, or in nuclear medicine or radiography (while on active duty or during active or inactive duty for training in the Reserves), or\r\n- Doing tasks like those of a Department of Energy (DOE) employee that make them a member of the Special Exposure Cohort (See 42 U.S.C. 7384L(14)), or \r\n- Part of underground nuclear weapons testing at Amchitka Island, Alaska, or\r\n- Being assigned to a gaseous diffusion plant at Paducah, Kentucky, or\r\n- Being assigned to a gaseous diffusion plant at Portsmouth, Ohio, or\r\n- Being assigned to a gaseous diffusion plant at Area K-25 at Oak Ridge, Tennessee\r\n\r\nTo qualify for benefits, your illness must have appeared within a certain period of time. And you must have been discharged from the military under conditions other than dishonorable.\r\n\r\nWho’s covered?\r\nVeterans\r\n\r\nWhat kind of disability benefits can I get?\r\nHealth care\r\nCompensation (payments)\r\n\r\nHow do I get these benefits?\r\nYou’ll need to apply for benefits.\r\n\r\nWhen you apply, we’ll ask the military branch that you served with (or the Defense Threat Reduction Agency) to give us a range of how much radiation they think you may have come into contact with. We’ll use the highest level of the range they report to decide on your benefits. [See 38 CFR 3.311(b)(5) for more information]( https://www.law.cornell.edu/cfr/text/38/3.311)\r\n\r\n(Apply for benefits)[/disability-benefits/apply-for-benefits/]', 'title': 'Combining two pages in Disability branch', 'type': 'issue'}
+ {'action': 'created', 'author': 'rroueche', 'comment_id': 276139341.0, 'datetime': '2017-01-30 18:01:03+00:00', 'masked_author': 'username_1', 'text': ""Reminder to me: before removing the obsolete page, I need to make sure I've checked the site for that URL and update it to the combined page URL. I'll also need to submit an issue for a redirect."", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'bethpotts', 'comment_id': 277255654.0, 'datetime': '2017-02-03 14:13:12+00:00', 'masked_author': 'username_2', 'text': ""Note from Molly in the dup issue I just closed:\nHere's the new page -- ready for Eagle Eyes @username_2 to copy edit. FYI @username_1\nhttps://vetsgov-pr-3324.herokuapp.com/disability-benefits/conditions/exposure-to-hazardous-materials/radiogenic-risk-activities/"", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'bethpotts', 'comment_id': 277256434.0, 'datetime': '2017-02-03 14:16:32+00:00', 'masked_author': 'username_2', 'text': 'I created a new issue for the next step: copyediting.', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'mollyblake', 'comment_id': 277277226.0, 'datetime': '2017-02-03 15:30:17+00:00', 'masked_author': 'username_0', 'text': 'Closing!', 'title': None, 'type': 'comment'}
+ {'action': 'closed', 'author': 'mollyblake', 'comment_id': None, 'datetime': '2017-02-03 15:30:40+00:00', 'masked_author': 'username_0', 'text': '', 'title': None, 'type': 'issue'}
+ {'action': 'created', 'author': 'rroueche', 'comment_id': 277280041.0, 'datetime': '2017-02-03 15:39:49+00:00', 'masked_author': 'username_1', 'text': ""@username_0 I'm actually going to re-open bc I still need to:\r\n\r\n1. Remove obsolete page from folder\r\n2. Work w/tech team to redirect old obsolete page URL to the consolidated page URL."", 'title': None, 'type': 'comment'}
+ {'action': 'reopened', 'author': 'rroueche', 'comment_id': None, 'datetime': '2017-02-03 15:39:49+00:00', 'masked_author': 'username_1', 'text': '@username_1 @username_2 \r\nPer SME recommendations, we would like to combine the content from two pages into one page.  The pages are:\r\n\r\n[1] Radiogenic Risk Activities\r\n/disability-benefits/conditions/exposure-to-hazardous-materials/radiogenic-risk-activities/\r\nAND\r\n[2] Ionizing Radiation\r\n/disability-benefits/conditions/exposure-to-hazardous-materials/ionizing-radiation/\r\n\r\nThe content is as follows: \r\n\r\nRadiation Exposure\r\n\r\nFind out if you can get disability compensation or benefits for illnesses—including some cancers—believed to be caused by contact with radiation during military service.\r\n\r\nCan I get disability benefits from VA?\r\n\r\nYou may be able to get disability benefits if you have an illness that’s on the list of those believed to be caused by radiation—or that doctors say may be caused by radiation—and if you had contact with ionizing radiation while serving in the military by:\r\n\r\n- Being part of atmospheric nuclear weapons testing, or\r\n- Serving in the postwar occupation of Hiroshima or Nagasaki, or\r\n- Being a prisoner of war (POW) in Japan, or\r\n- Working as an x-ray technician, in a reactor plant, or in nuclear medicine or radiography (while on active duty or during active or inactive duty for training in the Reserves), or\r\n- Doing tasks like those of a Department of Energy (DOE) employee that make them a member of the Special Exposure Cohort (See 42 U.S.C. 7384L(14)), or \r\n- Part of underground nuclear weapons testing at Amchitka Island, Alaska, or\r\n- Being assigned to a gaseous diffusion plant at Paducah, Kentucky, or\r\n- Being assigned to a gaseous diffusion plant at Portsmouth, Ohio, or\r\n- Being assigned to a gaseous diffusion plant at Area K-25 at Oak Ridge, Tennessee\r\n\r\nTo qualify for benefits, your illness must have appeared within a certain period of time. And you must have been discharged from the military under conditions other than dishonorable.\r\n\r\nWho’s covered?\r\nVeterans\r\n\r\nWhat kind of disability benefits can I get?\r\nHealth care\r\nCompensation (payments)\r\n\r\nHow do I get these benefits?\r\nYou’ll need to apply for benefits.\r\n\r\nWhen you apply, we’ll ask the military branch that you served with (or the Defense Threat Reduction Agency) to give us a range of how much radiation they think you may have come into contact with. We’ll use the highest level of the range they report to decide on your benefits. [See 38 CFR 3.311(b)(5) for more information]( https://www.law.cornell.edu/cfr/text/38/3.311)\r\n\r\n(Apply for benefits)[/disability-benefits/apply-for-benefits/]', 'title': 'Combining two pages in Disability branch', 'type': 'issue'}
+ {'action': 'created', 'author': 'rroueche', 'comment_id': 280710745.0, 'datetime': '2017-02-17 17:17:15+00:00', 'masked_author': 'username_1', 'text': '@username_0 and @username_2 do we want the piano key for this to be called ""Radiation Exposure"" and also the page URL to be ""Radiation Exposure"" ?', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'mollyblake', 'comment_id': 280723446.0, 'datetime': '2017-02-17 18:06:18+00:00', 'masked_author': 'username_0', 'text': 'IMHO yes.  Defer to @username_2 on final', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'bethpotts', 'comment_id': 280802486.0, 'datetime': '2017-02-18 00:21:29+00:00', 'masked_author': 'username_2', 'text': ""@username_1 @username_0 Yes! Let's rename both the piano key and the url: Radiation Exposure / radiation-exposure\nThanks for your help with this, Rachael!"", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'rroueche', 'comment_id': 281143678.0, 'datetime': '2017-02-20 17:52:53+00:00', 'masked_author': 'username_1', 'text': 'No problem! We should be all set, the changes are in staging, and James will set the redirects to go live at the same time that we merge this PR. Still scheduled for Feb 23.', 'title': None, 'type': 'comment'}
+ {'action': 'closed', 'author': 'bethpotts', 'comment_id': None, 'datetime': '2017-02-24 17:59:22+00:00', 'masked_author': 'username_2', 'text': '', 'title': None, 'type': 'issue'}]","<issue_start><issue_comment>Title: Combining two pages in Disability branch
+username_0: @username_1 @username_2 
+Per SME recommendations, we would like to combine the content from two pages into one page.  The pages are:
+
+[1] Radiogenic Risk Activities
+/disability-benefits/conditions/exposure-to-hazardous-materials/radiogenic-risk-activities/
+AND
+[2] Ionizing Radiation
+/disability-benefits/conditions/exposure-to-hazardous-materials/ionizing-radiation/
+
+The content is as follows: 
+
+Radiation Exposure
+
+Find out if you can get disability compensation or benefits for illnesses—including some cancers—believed to be caused by contact with radiation during military service.
+
+Can I get disability benefits from VA?
+
+You may be able to get disability benefits if you have an illness that’s on the list of those believed to be caused by radiation—or that doctors say may be caused by radiation—and if you had contact with ionizing radiation while serving in the military by:
+
+- Being part of atmospheric nuclear weapons testing, or
+- Serving in the postwar occupation of Hiroshima or Nagasaki, or
+- Being a prisoner of war (POW) in Japan, or
+- Working as an x-ray technician, in a reactor plant, or in nuclear medicine or radiography (while on active duty or during active or inactive duty for training in the Reserves), or
+- Doing tasks like those of a Department of Energy (DOE) employee that make them a member of the Special Exposure Cohort (See 42 U.S.C. 7384L(14)), or 
+- Part of underground nuclear weapons testing at Amchitka Island, Alaska, or
+- Being assigned to a gaseous diffusion plant at Paducah, Kentucky, or
+- Being assigned to a gaseous diffusion plant at Portsmouth, Ohio, or
+- Being assigned to a gaseous diffusion plant at Area K-25 at Oak Ridge, Tennessee
+
+To qualify for benefits, your illness must have appeared within a certain period of time. And you must have been discharged from the military under conditions other than dishonorable.
+
+Who’s covered?
+Veterans
+
+What kind of disability benefits can I get?
+Health care
+Compensation (payments)
+
+How do I get these benefits?
+You’ll need to apply for benefits.
+
+When you apply, we’ll ask the military branch that you served with (or the Defense Threat Reduction Agency) to give us a range of how much radiation they think you may have come into contact with. We’ll use the highest level of the range they report to decide on your benefits. [See 38 CFR 3.311(b)(5) for more information]( https://www.law.cornell.edu/cfr/text/38/3.311)
+
+(Apply for benefits)[/disability-benefits/apply-for-benefits/]
+<issue_comment>username_1: Reminder to me: before removing the obsolete page, I need to make sure I've checked the site for that URL and update it to the combined page URL. I'll also need to submit an issue for a redirect.
+<issue_comment>username_2: Note from Molly in the dup issue I just closed:
+Here's the new page -- ready for Eagle Eyes @username_2 to copy edit. FYI @username_1
+https://vetsgov-pr-3324.herokuapp.com/disability-benefits/conditions/exposure-to-hazardous-materials/radiogenic-risk-activities/
+<issue_comment>username_2: I created a new issue for the next step: copyediting.
+<issue_comment>username_0: Closing!<issue_closed>
+<issue_comment>username_1: @username_0 I'm actually going to re-open bc I still need to:
+
+1. Remove obsolete page from folder
+2. Work w/tech team to redirect old obsolete page URL to the consolidated page URL.
+<issue_comment>username_1: @username_1 @username_2 
+Per SME recommendations, we would like to combine the content from two pages into one page.  The pages are:
+
+[1] Radiogenic Risk Activities
+/disability-benefits/conditions/exposure-to-hazardous-materials/radiogenic-risk-activities/
+AND
+[2] Ionizing Radiation
+/disability-benefits/conditions/exposure-to-hazardous-materials/ionizing-radiation/
+
+The content is as follows: 
+
+Radiation Exposure
+
+Find out if you can get disability compensation or benefits for illnesses—including some cancers—believed to be caused by contact with radiation during military service.
+
+Can I get disability benefits from VA?
+
+You may be able to get disability benefits if you have an illness that’s on the list of those believed to be caused by radiation—or that doctors say may be caused by radiation—and if you had contact with ionizing radiation while serving in the military by:
+
+- Being part of atmospheric nuclear weapons testing, or
+- Serving in the postwar occupation of Hiroshima or Nagasaki, or
+- Being a prisoner of war (POW) in Japan, or
+- Working as an x-ray technician, in a reactor plant, or in nuclear medicine or radiography (while on active duty or during active or inactive duty for training in the Reserves), or
+- Doing tasks like those of a Department of Energy (DOE) employee that make them a member of the Special Exposure Cohort (See 42 U.S.C. 7384L(14)), or 
+- Part of underground nuclear weapons testing at Amchitka Island, Alaska, or
+- Being assigned to a gaseous diffusion plant at Paducah, Kentucky, or
+- Being assigned to a gaseous diffusion plant at Portsmouth, Ohio, or
+- Being assigned to a gaseous diffusion plant at Area K-25 at Oak Ridge, Tennessee
+
+To qualify for benefits, your illness must have appeared within a certain period of time. And you must have been discharged from the military under conditions other than dishonorable.
+
+Who’s covered?
+Veterans
+
+What kind of disability benefits can I get?
+Health care
+Compensation (payments)
+
+How do I get these benefits?
+You’ll need to apply for benefits.
+
+When you apply, we’ll ask the military branch that you served with (or the Defense Threat Reduction Agency) to give us a range of how much radiation they think you may have come into contact with. We’ll use the highest level of the range they report to decide on your benefits. [See 38 CFR 3.311(b)(5) for more information]( https://www.law.cornell.edu/cfr/text/38/3.311)
+
+(Apply for benefits)[/disability-benefits/apply-for-benefits/]
+<issue_comment>username_1: @username_0 and @username_2 do we want the piano key for this to be called ""Radiation Exposure"" and also the page URL to be ""Radiation Exposure"" ?
+<issue_comment>username_0: IMHO yes.  Defer to @username_2 on final
+<issue_comment>username_2: @username_1 @username_0 Yes! Let's rename both the piano key and the url: Radiation Exposure / radiation-exposure
+Thanks for your help with this, Rachael!
+<issue_comment>username_1: No problem! We should be all set, the changes are in staging, and James will set the redirects to go live at the same time that we merge this PR. Still scheduled for Feb 23.<issue_closed>"
+flutter/website,632478543,4196,,"[{'action': 'opened', 'author': 'GokulDas027', 'comment_id': None, 'datetime': '2020-06-06 13:55:21+00:00', 'masked_author': 'username_0', 'text': ""Page URL: https://flutter.dev/docs/development/platform-integration/platform-channels.html\r\nPage source: https://github.com/flutter/website/tree/master/src/docs/development/platform-integration/platform-channels.md\r\n\r\n``final int result = await platform.invokeMethod('getBatteryLevel');``\r\n\r\nDescription of issue:\r\nIsn't the result passed by the platform is in ``List<dynamic>`` type?\r\n\r\nThe message(of type String) passed through ``result.success()`` from the native code is received as ``List<dynamic>`` for me, and having trouble."", 'title': ""'Writing custom platform-specific code' page issue"", 'type': 'issue'}
+ {'action': 'created', 'author': 'GokulDas027', 'comment_id': 640065236.0, 'datetime': '2020-06-06 13:57:39+00:00', 'masked_author': 'username_0', 'text': ""Or am I missing something here?\r\n\r\nPlease forgive if it's false positive"", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'GokulDas027', 'comment_id': 640069705.0, 'datetime': '2020-06-06 14:28:15+00:00', 'masked_author': 'username_0', 'text': ""False positive, seems like some issue i caused at the native level, fixed now. don't know how.. i tried it multiple times before posting this issue.."", 'title': None, 'type': 'comment'}
+ {'action': 'closed', 'author': 'GokulDas027', 'comment_id': None, 'datetime': '2020-06-06 14:28:15+00:00', 'masked_author': 'username_0', 'text': '', 'title': None, 'type': 'issue'}]","<issue_start><issue_comment>Title: 'Writing custom platform-specific code' page issue
+username_0: Page URL: https://flutter.dev/docs/development/platform-integration/platform-channels.html
+Page source: https://github.com/flutter/website/tree/master/src/docs/development/platform-integration/platform-channels.md
+
+``final int result = await platform.invokeMethod('getBatteryLevel');``
+
+Description of issue:
+Isn't the result passed by the platform is in ``List<dynamic>`` type?
+
+The message(of type String) passed through ``result.success()`` from the native code is received as ``List<dynamic>`` for me, and having trouble.
+<issue_comment>username_0: Or am I missing something here?
+
+Please forgive if it's false positive
+<issue_comment>username_0: False positive, seems like some issue i caused at the native level, fixed now. don't know how.. i tried it multiple times before posting this issue..<issue_closed>"
+hexpm/hexpm,624972894,943,,"[{'action': 'opened', 'author': 'dotdotdotpaul', 'comment_id': None, 'datetime': '2020-05-26 15:26:49+00:00', 'masked_author': 'username_0', 'text': 'Example:\r\n\r\nIf you go to the [Phoenix PubSub docs](https://hexdocs.pm/phoenix_pubsub/Phoenix.PubSub.html) and search for ""pool"" you get exactly one result, which is in the Phoenix.Tracker behaviour, and that\'s probably not what you were looking for.\r\n\r\nHowever, search for `pool_size` and you add the Phoenix.PubSub.child_spec function to the list, and that\'s _probably_ what you were looking for.\r\n\r\nExpected (Requested?) Behavior:\r\n\r\nSeems like when searching, underscores in the source material should be treated as word breaks so that you can match on ""partial underscores"", useful for searching for configuration elements (which are often snake-cased, like this one).  So a search for ""pool"" should bring up matches on `pool_size` as well as `pools` and `use_pool?` (I made up the last one as an example).\r\n\r\nPreferably, if the input search term has an underscore, the underscore should match underscores (so searching for ""pool_size"" only matches `pool_size` and/or `max_pool_size`, but not `pool size`', 'title': 'Underscores (_) in documentation not treated as word break in search', 'type': 'issue'}
+ {'action': 'created', 'author': 'ericmj', 'comment_id': 634097977.0, 'datetime': '2020-05-26 15:28:35+00:00', 'masked_author': 'username_1', 'text': 'Please open this issue on: https://github.com/elixir-lang/ex_doc', 'title': None, 'type': 'comment'}
+ {'action': 'closed', 'author': 'ericmj', 'comment_id': None, 'datetime': '2020-05-26 15:28:35+00:00', 'masked_author': 'username_1', 'text': '', 'title': None, 'type': 'issue'}
+ {'action': 'created', 'author': 'dotdotdotpaul', 'comment_id': 634123817.0, 'datetime': '2020-05-26 16:11:19+00:00', 'masked_author': 'username_0', 'text': ""My bad, I thought it was powered by hexdocs.pm's service(s)."", 'title': None, 'type': 'comment'}]","<issue_start><issue_comment>Title: Underscores (_) in documentation not treated as word break in search
+username_0: Example:
+
+If you go to the [Phoenix PubSub docs](https://hexdocs.pm/phoenix_pubsub/Phoenix.PubSub.html) and search for ""pool"" you get exactly one result, which is in the Phoenix.Tracker behaviour, and that's probably not what you were looking for.
+
+However, search for `pool_size` and you add the Phoenix.PubSub.child_spec function to the list, and that's _probably_ what you were looking for.
+
+Expected (Requested?) Behavior:
+
+Seems like when searching, underscores in the source material should be treated as word breaks so that you can match on ""partial underscores"", useful for searching for configuration elements (which are often snake-cased, like this one).  So a search for ""pool"" should bring up matches on `pool_size` as well as `pools` and `use_pool?` (I made up the last one as an example).
+
+Preferably, if the input search term has an underscore, the underscore should match underscores (so searching for ""pool_size"" only matches `pool_size` and/or `max_pool_size`, but not `pool size`
+<issue_comment>username_1: Please open this issue on: https://github.com/elixir-lang/ex_doc<issue_closed>
+<issue_comment>username_0: My bad, I thought it was powered by hexdocs.pm's service(s)."
+newrelic/docs-website,870023380,2040,"{'number': 2040.0, 'repo': 'docs-website', 'user_login': 'newrelic'}","[{'action': 'opened', 'author': 'lchapman4', 'comment_id': None, 'datetime': '2021-04-28T14:39:38Z', 'masked_author': 'username_0', 'text': ""expanded the windows example to include more examples from powershell, app, system as well as others\r\n\r\n<!-- Thanks for contributing to our docs! -->\r\n\r\n<!-- For Japanese readers: \r\nもしドキュメントの日本語訳で問題を見つけた場合はPRではなくissueを提出してください。\r\n日本語訳へのPRについてはまだ取り込む準備ができていません。-->\r\n\r\n### Give us some context\r\n\r\n* What problems does this PR solve?\r\n* Add any context that will help us review your changes such as testing notes,\r\n  links to related docs, screenshots, etc.\r\n* If your issue relates to an existing GitHub issue, please link to it.\r\n\r\n### Are you making a change to site code?\r\n\r\nIf you're changing site code (rather than the content of a doc), please follow\r\n[conventional commit standards](https://www.conventionalcommits.org/en/v1.0.0/)\r\nin your commit messages and pull request title."", 'title': 'updated winlog example', 'type': 'issue'}
+ {'action': 'created', 'author': 'bradleycamacho', 'comment_id': 828605815.0, 'datetime': '2021-04-28 16:42:02+00:00', 'masked_author': 'username_1', 'text': 'Thanks for the edit @username_0 ! Review this now', 'title': None, 'type': 'comment'}]","<issue_start><issue_comment>Title: updated winlog example
+username_0: expanded the windows example to include more examples from powershell, app, system as well as others
+
+<!-- Thanks for contributing to our docs! -->
+
+<!-- For Japanese readers: 
+もしドキュメントの日本語訳で問題を見つけた場合はPRではなくissueを提出してください。
+日本語訳へのPRについてはまだ取り込む準備ができていません。-->
+
+### Give us some context
+
+* What problems does this PR solve?
+* Add any context that will help us review your changes such as testing notes,
+  links to related docs, screenshots, etc.
+* If your issue relates to an existing GitHub issue, please link to it.
+
+### Are you making a change to site code?
+
+If you're changing site code (rather than the content of a doc), please follow
+[conventional commit standards](https://www.conventionalcommits.org/en/v1.0.0/)
+in your commit messages and pull request title.
+<issue_comment>username_1: Thanks for the edit @username_0 ! Review this now"
+appveyor/website,583905756,714,,"[{'action': 'opened', 'author': 'HariSekhon', 'comment_id': None, 'datetime': '2020-03-18 17:55:30+00:00', 'masked_author': 'username_0', 'text': ""On Debian 9 in docker (btw the terminal messes up every time due to some terminal escape codes it goes to the top of the screen and then overwrites output which makes it hard to differentiate):\r\n```\r\n$ pwsh\r\nPowerShell 7.0.0\r\nCopyright (c) Microsoft Corporation. All rights reserved.\r\n\r\nhttps://aka.ms/powershell\r\nType 'help' to get help.\r\n\r\nPS /pwd> Install-Module AppVeyorBYOC -Scope CurrentUser -Force; Import-Module AppVeyorBYOC\r\nConfiguring 'Process' build cloud in AppVeyor                                                                                                                                                                      A new AppVeyor build cloud 'cc4f10fbacca' has been added.                                                                                                                                                                                                                                                                                                                                                                             Ensure build worker image is available for AppVeyor projects\r\nAppVeyor build worker image 'Linux' already exists.\r\n\r\nInstalling AppVeyor Host AgentrBYOC\r\nOS: Linux\r\nConnect-AppVeyorToComputer -AppVeyorUrl https://ci.appveyor.com -ApiToken <token>\r\nDownloading appveyor-host-agent.deb...\r\nInstalling Host Agent...cess...\r\nSelecting previously unselected package appveyor-host-agent.\r\n(Reading database ... 10397 files and directories currently installed.)\r\nPreparing to unpack /tmp/appveyor-host-agent.deb ...\r\nUnpacking appveyor-host-agent (7.0.2546) ...\r\nSetting up appveyor-host-agent (7.0.2546) ...\r\nSomething went wrong and Host Agent was not installed\r\nConnect-AppVeyorToComputer: Error installing Host Agent\r\n```"", 'title': 'BYOC - Connect-AppVeyorToComputer: Error installing Host Agent', 'type': 'issue'}]","<issue_start><issue_comment>Title: BYOC - Connect-AppVeyorToComputer: Error installing Host Agent
+username_0: On Debian 9 in docker (btw the terminal messes up every time due to some terminal escape codes it goes to the top of the screen and then overwrites output which makes it hard to differentiate):
+```
+$ pwsh
+PowerShell 7.0.0
+Copyright (c) Microsoft Corporation. All rights reserved.
+
+https://aka.ms/powershell
+Type 'help' to get help.
+
+PS /pwd> Install-Module AppVeyorBYOC -Scope CurrentUser -Force; Import-Module AppVeyorBYOC
+Configuring 'Process' build cloud in AppVeyor                                                                                                                                                                      A new AppVeyor build cloud 'cc4f10fbacca' has been added.                                                                                                                                                                                                                                                                                                                                                                             Ensure build worker image is available for AppVeyor projects
+AppVeyor build worker image 'Linux' already exists.
+
+Installing AppVeyor Host AgentrBYOC
+OS: Linux
+Connect-AppVeyorToComputer -AppVeyorUrl https://ci.appveyor.com -ApiToken <token>
+Downloading appveyor-host-agent.deb...
+Installing Host Agent...cess...
+Selecting previously unselected package appveyor-host-agent.
+(Reading database ... 10397 files and directories currently installed.)
+Preparing to unpack /tmp/appveyor-host-agent.deb ...
+Unpacking appveyor-host-agent (7.0.2546) ...
+Setting up appveyor-host-agent (7.0.2546) ...
+Something went wrong and Host Agent was not installed
+Connect-AppVeyorToComputer: Error installing Host Agent
+```"
+lirantal/is-website-vulnerable,503158916,14,,"[{'action': 'opened', 'author': 'smeijer', 'comment_id': None, 'datetime': '2019-10-06 20:51:03+00:00', 'masked_author': 'username_0', 'text': '## Expected Behavior\r\n\r\nSome vulnerability report should be shown as output\r\n\r\n## Current Behavior\r\n\r\n```\r\nλ npx is-website-vulnerable http://google.com\r\nnpx: installed 235 in 24.612s\r\nURL is not defined\r\n```\r\n\r\n## Steps to Reproduce (for bugs)\r\n\r\n1. run `npx is-website-vulnerable http://google.com`\r\n2. wait for results\r\n3. read error `URL is not defined`\r\n\r\n## Your Environment\r\n\r\n- Library Version used: latest\r\n- Node.js version: 8.16.1\r\n- Operating System: Windows 10, up to date', 'title': 'Throws error ""URL is not defined""', 'type': 'issue'}
+ {'action': 'created', 'author': 'lirantal', 'comment_id': 538787347.0, 'datetime': '2019-10-06 20:57:00+00:00', 'masked_author': 'username_1', 'text': ""I see it's on Windows, will look into it!"", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'lirantal', 'comment_id': 538787743.0, 'datetime': '2019-10-06 21:01:43+00:00', 'masked_author': 'username_1', 'text': ""@ahmedkrmn as I see you're running Windows can you take a look into this issue since @username_0 reported it on a Windows OS? I don't have that handy to verify quickly"", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'doncullen', 'comment_id': 538871470.0, 'datetime': '2019-10-07 07:22:20+00:00', 'masked_author': 'username_2', 'text': 'Getting same issue. \r\n\r\nRunning Ubuntu via Windows Subsystem for Linux (WSL).  Distro info:\r\n\r\nDISTRIB_ID=Ubuntu\r\nDISTRIB_RELEASE=16.04\r\nDISTRIB_CODENAME=xenial\r\nDISTRIB_DESCRIPTION=""Ubuntu 16.04.6 LTS""\r\n\r\nWindows version: Microsoft Windows [Version 10.0.18362.388]\r\n\r\nnpm --v:  6.5.0\r\nnode --version: v9.11.2', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'lirantal', 'comment_id': 538881941.0, 'datetime': '2019-10-07 07:55:48+00:00', 'masked_author': 'username_1', 'text': ""@username_2 @username_0 while I didn't fix it, I added some debugging so we can see what's going on. Can you run:\r\n\r\n```\r\nDEBUG=* npx is-website-vulnerable http://google.com\r\n```\r\n\r\nand tell me what you see? it should show what URL is being passed to lighthouse to run the audits. Like this:\r\n\r\n![image](https://user-images.githubusercontent.com/316371/66294166-029b3800-e8f1-11e9-8a79-c361b98c9675.png)"", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'lirantal', 'comment_id': 538883001.0, 'datetime': '2019-10-07 07:59:00+00:00', 'masked_author': 'username_1', 'text': ""@username_2 @username_0 actually, just found the issue - I'm using the latest lighthouse version which requires Node.js >= 10 and you are both using older Node.js versions (6 and 8) (see reference of issue here: https://github.com/GoogleChrome/lighthouse/issues/8909#issuecomment-490852992)\r\n\r\nCan you upgrade your Node.js instances and check?"", 'title': None, 'type': 'comment'}
+ {'action': 'closed', 'author': 'lirantal', 'comment_id': None, 'datetime': '2019-10-07 08:18:01+00:00', 'masked_author': 'username_1', 'text': '', 'title': None, 'type': 'issue'}
+ {'action': 'created', 'author': 'lirantal', 'comment_id': 538890069.0, 'datetime': '2019-10-07 08:19:43+00:00', 'masked_author': 'username_1', 'text': ':tada: This issue has been resolved in version 1.2.0 :tada:\n\nThe release is available on:\n- [npm package (@latest dist-tag)](https://www.npmjs.com/package/is-website-vulnerable)\n- [GitHub release](https://github.com/username_1/is-website-vulnerable/releases/tag/v1.2.0)\n\nYour **[semantic-release](https://github.com/semantic-release/semantic-release)** bot :package::rocket:', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'lirantal', 'comment_id': 538891959.0, 'datetime': '2019-10-07 08:24:51+00:00', 'masked_author': 'username_1', 'text': ""@username_2 @username_0 if you don't/can't upgrade your Node.js versions to >= 10 then you might still be able to use it - I added a workaround to allow lighthouse to run with your old Node.js versions. Nothing required on your part except from re-running it (if you installed `is-website-vulnerable` as a global module then make sure you upgrade it to 1.2.0 with `npm install -g is-website-vulnerable@1.2.0`"", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'lirantal', 'comment_id': 538898905.0, 'datetime': '2019-10-07 08:43:31+00:00', 'masked_author': 'username_1', 'text': 'Cool stuff!', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'smeijer', 'comment_id': 539104046.0, 'datetime': '2019-10-07 16:49:24+00:00', 'masked_author': 'username_0', 'text': ""Can confirm that it's working on v8.16 now as well.\r\n\r\n```\r\nλ npx is-website-vulnerable http://google.com\r\nnpx: installed 237 in 13.715s\r\n\r\n  Website: https://www.google.com/?gws_rd=ssl\r\n\r\n  ○ No JavaScript libraries detected with publicly known security vulnerabilities\r\n\r\n  [0] Total vulnerabilities\r\n  [2312.85ms] execution time\r\n\r\n  vulnerabilities powered by Snyk.io (https://snyk.io/vuln?type=npm)\r\n```"", 'title': None, 'type': 'comment'}]","<issue_start><issue_comment>Title: Throws error ""URL is not defined""
+username_0: ## Expected Behavior
+
+Some vulnerability report should be shown as output
+
+## Current Behavior
+
+```
+λ npx is-website-vulnerable http://google.com
+npx: installed 235 in 24.612s
+URL is not defined
+```
+
+## Steps to Reproduce (for bugs)
+
+1. run `npx is-website-vulnerable http://google.com`
+2. wait for results
+3. read error `URL is not defined`
+
+## Your Environment
+
+- Library Version used: latest
+- Node.js version: 8.16.1
+- Operating System: Windows 10, up to date
+<issue_comment>username_1: I see it's on Windows, will look into it!
+<issue_comment>username_1: @ahmedkrmn as I see you're running Windows can you take a look into this issue since @username_0 reported it on a Windows OS? I don't have that handy to verify quickly
+<issue_comment>username_2: Getting same issue. 
+
+Running Ubuntu via Windows Subsystem for Linux (WSL).  Distro info:
+
+DISTRIB_ID=Ubuntu
+DISTRIB_RELEASE=16.04
+DISTRIB_CODENAME=xenial
+DISTRIB_DESCRIPTION=""Ubuntu 16.04.6 LTS""
+
+Windows version: Microsoft Windows [Version 10.0.18362.388]
+
+npm --v:  6.5.0
+node --version: v9.11.2
+<issue_comment>username_1: @username_2 @username_0 while I didn't fix it, I added some debugging so we can see what's going on. Can you run:
+
+```
+DEBUG=* npx is-website-vulnerable http://google.com
+```
+
+and tell me what you see? it should show what URL is being passed to lighthouse to run the audits. Like this:
+
+![image](https://user-images.githubusercontent.com/316371/66294166-029b3800-e8f1-11e9-8a79-c361b98c9675.png)
+<issue_comment>username_1: @username_2 @username_0 actually, just found the issue - I'm using the latest lighthouse version which requires Node.js >= 10 and you are both using older Node.js versions (6 and 8) (see reference of issue here: https://github.com/GoogleChrome/lighthouse/issues/8909#issuecomment-490852992)
+
+Can you upgrade your Node.js instances and check?<issue_closed>
+<issue_comment>username_1: :tada: This issue has been resolved in version 1.2.0 :tada:
+
+The release is available on:
+- [npm package (@latest dist-tag)](https://www.npmjs.com/package/is-website-vulnerable)
+- [GitHub release](https://github.com/username_1/is-website-vulnerable/releases/tag/v1.2.0)
+
+Your **[semantic-release](https://github.com/semantic-release/semantic-release)** bot :package::rocket:
+<issue_comment>username_1: @username_2 @username_0 if you don't/can't upgrade your Node.js versions to >= 10 then you might still be able to use it - I added a workaround to allow lighthouse to run with your old Node.js versions. Nothing required on your part except from re-running it (if you installed `is-website-vulnerable` as a global module then make sure you upgrade it to 1.2.0 with `npm install -g is-website-vulnerable@1.2.0`
+<issue_comment>username_1: Cool stuff!
+<issue_comment>username_0: Can confirm that it's working on v8.16 now as well.
+
+```
+λ npx is-website-vulnerable http://google.com
+npx: installed 237 in 13.715s
+
+  Website: https://www.google.com/?gws_rd=ssl
+
+  ○ No JavaScript libraries detected with publicly known security vulnerabilities
+
+  [0] Total vulnerabilities
+  [2312.85ms] execution time
+
+  vulnerabilities powered by Snyk.io (https://snyk.io/vuln?type=npm)
+```"
+getnikola/nikola,104940175,2023,,"[{'action': 'opened', 'author': 'Kwpolska', 'comment_id': None, 'datetime': '2015-09-04 18:09:52+00:00', 'masked_author': 'username_0', 'text': 'The section implementation thinks that:\r\n\r\n * I have a million sections, one per date\r\n * `/pl/pl/blog` is a good thing (it isn’t!)\r\n\r\n\r\n```\r\n.  render_indexes:output/blog/2011/02/11/index.html\r\n.  render_indexes:output/blog/2010/12/12/index.html\r\n.  render_indexes:output/blog/2012/03/05/index.html\r\n.  render_indexes:output/blog/2011/10/20/index.html\r\n.  render_indexes:output/blog/2011/02/07/index.html\r\n.  render_indexes:output/blog/2014/09/15/index.html\r\n.  render_indexes:output/blog/2011/10/13/index.html\r\n.  render_indexes:output/blog/2011/01/22/index.html\r\n.  render_indexes:output/blog/2015/07/06/index.html\r\n.  render_indexes:output/blog/2013/11/16/index.html\r\n.  render_indexes:output/blog/2013/12/31/index.html\r\n.  render_indexes:output/blog/2010/12/27/index.html\r\n.  render_indexes:output/blog/2012/06/03/index.html\r\n.  render_indexes:output/blog/2012/11/11/index.html\r\n.  render_indexes:output/blog/2011/08/03/index.html\r\n.  render_indexes:output/blog/2011/08/28/index.html\r\n.  render_indexes:output/blog/2010/10/02/index.html\r\n.  render_indexes:output/blog/2012/09/19/index.html\r\n.  render_indexes:output/blog/2013/09/01/index.html\r\n.  render_indexes:output/blog/2010/00/00/index.html\r\n.  render_indexes:output/blog/2015/05/30/index.html\r\n.  render_indexes:output/blog/2012/12/02/index.html\r\n.  render_indexes:output/blog/2011/01/06/index.html\r\n.  render_indexes:output/blog/2015/07/23/index.html\r\n.  render_indexes:output/blog/2015/01/30/index.html\r\n.  render_indexes:output/blog/2014/08/26/index.html\r\n.  render_indexes:output/blog/2012/07/18/index.html\r\n.  render_indexes:output/blog/2012/12/29/index.html\r\n.  render_indexes:output/blog/2012/02/25/index.html\r\n.  render_indexes:output/blog/2013/02/08/index.html\r\n.  render_indexes:output/blog/2014/11/07/index.html\r\n.  render_indexes:output/blog/2014/10/13/index.html\r\n.  render_indexes:output/blog/2014/11/09/index.html\r\n.  render_indexes:output/blog/2010/11/03/index.html\r\n.  render_indexes:output/blog/2011/03/05/index.html\r\n.  render_indexes:output/blog/2012/11/14/index.html\r\n.  render_indexes:output/blog/2014/08/01/index.html\r\n.  render_indexes:output/blog/2013/02/09/index.html\r\n.  render_indexes:output/pl/pl/blog/2012/11/14/index.html\r\n.  render_indexes:output/pl/pl/blog/2014/11/07/index.html\r\n.  render_indexes:output/pl/pl/blog/2012/03/05/index.html\r\n.  render_indexes:output/pl/pl/blog/2014/09/15/index.html\r\n.  render_indexes:output/pl/pl/blog/2013/12/31/index.html\r\n.  render_indexes:output/pl/pl/blog/2012/02/25/index.html\r\n.  render_indexes:output/pl/pl/blog/2012/09/19/index.html\r\n.  render_indexes:output/pl/pl/blog/2011/03/05/index.html\r\n.  render_indexes:output/pl/pl/blog/2010/12/27/index.html\r\n.  render_indexes:output/pl/pl/blog/2013/02/08/index.html\r\n.  render_indexes:output/pl/pl/blog/2011/01/06/index.html\r\n.  render_indexes:output/pl/pl/blog/2010/00/00/index.html\r\n.  render_indexes:output/pl/pl/blog/2011/02/11/index.html\r\n.  render_indexes:output/pl/pl/blog/2013/02/09/index.html\r\n.  render_indexes:output/pl/pl/blog/2011/10/20/index.html\r\n.  render_indexes:output/pl/pl/blog/2013/09/01/index.html\r\n.  render_indexes:output/pl/pl/blog/2010/11/03/index.html\r\n.  render_indexes:output/pl/pl/blog/2014/11/09/index.html\r\n.  render_indexes:output/pl/pl/blog/2012/12/29/index.html\r\n.  render_indexes:output/pl/pl/blog/2010/12/12/index.html\r\n.  render_indexes:output/pl/pl/blog/2011/08/03/index.html\r\n.  render_indexes:output/pl/pl/blog/2011/08/28/index.html\r\n.  render_indexes:output/pl/pl/blog/2010/10/02/index.html\r\n.  render_indexes:output/pl/pl/blog/2015/07/06/index.html\r\n.  render_indexes:output/pl/pl/blog/2015/05/30/index.html\r\n.  render_indexes:output/pl/pl/blog/2015/01/30/index.html\r\n.  render_indexes:output/pl/pl/blog/2011/10/13/index.html\r\n.  render_indexes:output/pl/pl/blog/2012/07/18/index.html\r\n.  render_indexes:output/pl/pl/blog/2014/10/13/index.html\r\n.  render_indexes:output/pl/pl/blog/2012/06/03/index.html\r\n.  render_indexes:output/pl/pl/blog/2012/11/11/index.html\r\n.  render_indexes:output/pl/pl/blog/2014/08/26/index.html\r\n.  render_indexes:output/pl/pl/blog/2011/02/07/index.html\r\n.  render_indexes:output/pl/pl/blog/2013/11/16/index.html\r\n.  render_indexes:output/pl/pl/blog/2012/12/02/index.html\r\n.  render_indexes:output/pl/pl/blog/2015/07/23/index.html\r\n.  render_indexes:output/pl/pl/blog/2011/01/22/index.html\r\n.  render_indexes:output/pl/pl/blog/2014/08/01/index.html', 'title': 'Garbage section files rendered on blog with pretty URLs', 'type': 'issue'}
+ {'action': 'created', 'author': 'Aeyoun', 'comment_id': 137813605.0, 'datetime': '2015-09-04 18:31:27+00:00', 'masked_author': 'username_1', 'text': 'What options did you use to create those URLs?', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'Kwpolska', 'comment_id': 137814266.0, 'datetime': '2015-09-04 18:35:21+00:00', 'masked_author': 'username_0', 'text': 'Nothing special.\r\n\r\n```py\r\nTRANSLATIONS = {\r\n    DEFAULT_LANG: """",\r\n    # Example for another language:\r\n    ""pl"": ""./pl"",\r\n}\r\nPOSTS = ((""posts/*.rst"", ""blog"", ""post.tmpl""),\r\n         (""posts/*.ipynb"", ""blog"", ""post.tmpl""))\r\n```\r\n\r\nPlus `posts/2014/08/01/foo.rst` as input file.', 'title': None, 'type': 'comment'}
+ {'action': 'closed', 'author': 'Aeyoun', 'comment_id': None, 'datetime': '2015-09-06 15:34:33+00:00', 'masked_author': 'username_1', 'text': '', 'title': None, 'type': 'issue'}
+ {'action': 'created', 'author': 'Kwpolska', 'comment_id': 138094352.0, 'datetime': '2015-09-06 15:46:24+00:00', 'masked_author': 'username_0', 'text': 'Seems to work fine.\r\n\r\nI have a section usage question: if I enable sections from meta data, what do I get and where? Where do the section pages go? Can I keep my existing /blog/ URL structure and yet have sections?', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'Aeyoun', 'comment_id': 138094517.0, 'datetime': '2015-09-06 15:49:27+00:00', 'masked_author': 'username_1', 'text': 'Metadata-powered sections still create their indexes in /section-slug/index.html|atom. Post addresses are unmodified. So you can indeed keep your URLs and get new sections. Right now, you have one auto-section called ""blog"". Enabling metadata section would put every post in the uncategorized section.', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'Kwpolska', 'comment_id': 138094911.0, 'datetime': '2015-09-06 15:53:24+00:00', 'masked_author': 'username_0', 'text': ""Awesome!\r\n\r\n    sed 's/.. category/.. section//'"", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'Aeyoun', 'comment_id': 138095065.0, 'datetime': '2015-09-06 15:56:49+00:00', 'masked_author': 'username_1', 'text': '@username_0 you can still use post.section_color() (for headlines? a border or other small UI?) and .post.section_link() for (breadcrumb navigation (top -> section name)?)  in your theme.', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'Kwpolska', 'comment_id': 138095174.0, 'datetime': '2015-09-06 15:59:52+00:00', 'masked_author': 'username_0', 'text': 'will try that, too', 'title': None, 'type': 'comment'}]","<issue_start><issue_comment>Title: Garbage section files rendered on blog with pretty URLs
+username_0: The section implementation thinks that:
+
+ * I have a million sections, one per date
+ * `/pl/pl/blog` is a good thing (it isn’t!)
+
+
+```
+.  render_indexes:output/blog/2011/02/11/index.html
+.  render_indexes:output/blog/2010/12/12/index.html
+.  render_indexes:output/blog/2012/03/05/index.html
+.  render_indexes:output/blog/2011/10/20/index.html
+.  render_indexes:output/blog/2011/02/07/index.html
+.  render_indexes:output/blog/2014/09/15/index.html
+.  render_indexes:output/blog/2011/10/13/index.html
+.  render_indexes:output/blog/2011/01/22/index.html
+.  render_indexes:output/blog/2015/07/06/index.html
+.  render_indexes:output/blog/2013/11/16/index.html
+.  render_indexes:output/blog/2013/12/31/index.html
+.  render_indexes:output/blog/2010/12/27/index.html
+.  render_indexes:output/blog/2012/06/03/index.html
+.  render_indexes:output/blog/2012/11/11/index.html
+.  render_indexes:output/blog/2011/08/03/index.html
+.  render_indexes:output/blog/2011/08/28/index.html
+.  render_indexes:output/blog/2010/10/02/index.html
+.  render_indexes:output/blog/2012/09/19/index.html
+.  render_indexes:output/blog/2013/09/01/index.html
+.  render_indexes:output/blog/2010/00/00/index.html
+.  render_indexes:output/blog/2015/05/30/index.html
+.  render_indexes:output/blog/2012/12/02/index.html
+.  render_indexes:output/blog/2011/01/06/index.html
+.  render_indexes:output/blog/2015/07/23/index.html
+.  render_indexes:output/blog/2015/01/30/index.html
+.  render_indexes:output/blog/2014/08/26/index.html
+.  render_indexes:output/blog/2012/07/18/index.html
+.  render_indexes:output/blog/2012/12/29/index.html
+.  render_indexes:output/blog/2012/02/25/index.html
+.  render_indexes:output/blog/2013/02/08/index.html
+.  render_indexes:output/blog/2014/11/07/index.html
+.  render_indexes:output/blog/2014/10/13/index.html
+.  render_indexes:output/blog/2014/11/09/index.html
+.  render_indexes:output/blog/2010/11/03/index.html
+.  render_indexes:output/blog/2011/03/05/index.html
+.  render_indexes:output/blog/2012/11/14/index.html
+.  render_indexes:output/blog/2014/08/01/index.html
+.  render_indexes:output/blog/2013/02/09/index.html
+.  render_indexes:output/pl/pl/blog/2012/11/14/index.html
+.  render_indexes:output/pl/pl/blog/2014/11/07/index.html
+.  render_indexes:output/pl/pl/blog/2012/03/05/index.html
+.  render_indexes:output/pl/pl/blog/2014/09/15/index.html
+.  render_indexes:output/pl/pl/blog/2013/12/31/index.html
+.  render_indexes:output/pl/pl/blog/2012/02/25/index.html
+.  render_indexes:output/pl/pl/blog/2012/09/19/index.html
+.  render_indexes:output/pl/pl/blog/2011/03/05/index.html
+.  render_indexes:output/pl/pl/blog/2010/12/27/index.html
+.  render_indexes:output/pl/pl/blog/2013/02/08/index.html
+.  render_indexes:output/pl/pl/blog/2011/01/06/index.html
+.  render_indexes:output/pl/pl/blog/2010/00/00/index.html
+.  render_indexes:output/pl/pl/blog/2011/02/11/index.html
+.  render_indexes:output/pl/pl/blog/2013/02/09/index.html
+.  render_indexes:output/pl/pl/blog/2011/10/20/index.html
+.  render_indexes:output/pl/pl/blog/2013/09/01/index.html
+.  render_indexes:output/pl/pl/blog/2010/11/03/index.html
+.  render_indexes:output/pl/pl/blog/2014/11/09/index.html
+.  render_indexes:output/pl/pl/blog/2012/12/29/index.html
+.  render_indexes:output/pl/pl/blog/2010/12/12/index.html
+.  render_indexes:output/pl/pl/blog/2011/08/03/index.html
+.  render_indexes:output/pl/pl/blog/2011/08/28/index.html
+.  render_indexes:output/pl/pl/blog/2010/10/02/index.html
+.  render_indexes:output/pl/pl/blog/2015/07/06/index.html
+.  render_indexes:output/pl/pl/blog/2015/05/30/index.html
+.  render_indexes:output/pl/pl/blog/2015/01/30/index.html
+.  render_indexes:output/pl/pl/blog/2011/10/13/index.html
+.  render_indexes:output/pl/pl/blog/2012/07/18/index.html
+.  render_indexes:output/pl/pl/blog/2014/10/13/index.html
+.  render_indexes:output/pl/pl/blog/2012/06/03/index.html
+.  render_indexes:output/pl/pl/blog/2012/11/11/index.html
+.  render_indexes:output/pl/pl/blog/2014/08/26/index.html
+.  render_indexes:output/pl/pl/blog/2011/02/07/index.html
+.  render_indexes:output/pl/pl/blog/2013/11/16/index.html
+.  render_indexes:output/pl/pl/blog/2012/12/02/index.html
+.  render_indexes:output/pl/pl/blog/2015/07/23/index.html
+.  render_indexes:output/pl/pl/blog/2011/01/22/index.html
+.  render_indexes:output/pl/pl/blog/2014/08/01/index.html
+<issue_comment>username_1: What options did you use to create those URLs?
+<issue_comment>username_0: Nothing special.
+
+```py
+TRANSLATIONS = {
+    DEFAULT_LANG: """",
+    # Example for another language:
+    ""pl"": ""./pl"",
+}
+POSTS = ((""posts/*.rst"", ""blog"", ""post.tmpl""),
+         (""posts/*.ipynb"", ""blog"", ""post.tmpl""))
+```
+
+Plus `posts/2014/08/01/foo.rst` as input file.<issue_closed>
+<issue_comment>username_0: Seems to work fine.
+
+I have a section usage question: if I enable sections from meta data, what do I get and where? Where do the section pages go? Can I keep my existing /blog/ URL structure and yet have sections?
+<issue_comment>username_1: Metadata-powered sections still create their indexes in /section-slug/index.html|atom. Post addresses are unmodified. So you can indeed keep your URLs and get new sections. Right now, you have one auto-section called ""blog"". Enabling metadata section would put every post in the uncategorized section.
+<issue_comment>username_0: Awesome!
+
+    sed 's/.. category/.. section//'
+<issue_comment>username_1: @username_0 you can still use post.section_color() (for headlines? a border or other small UI?) and .post.section_link() for (breadcrumb navigation (top -> section name)?)  in your theme.
+<issue_comment>username_0: will try that, too"

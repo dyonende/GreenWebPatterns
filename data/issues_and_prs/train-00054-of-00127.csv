@@ -1,0 +1,269 @@
+11ty/11ty-website,635216564,639,,"[{'action': 'opened', 'author': 'Dermah', 'comment_id': None, 'datetime': '2020-06-09 08:23:19+00:00', 'masked_author': 'username_0', 'text': ""The entry that came in at Performance Rank Number 42 exists in the [author's page](https://www.11ty.dev/authors/timseverien/) and the [`fastestSites.json`](https://github.com/11ty/11ty-website/blob/master/_data/fastestSites.json#L1537-L1545), but is missing from the Performance Leaderboard. Probably because the site's data filename has a `.` in it.\r\n\r\n![A screenshot of the performance leaderboard showing entry 41 and 43. Entry 42 Is missing between the two.](https://user-images.githubusercontent.com/2516806/84120185-ce2bdd00-aa78-11ea-85e2-5e9cb25fba43.png)\r\n\r\nThis bug affects a [couple of other sites](https://www.11ty.dev/authors/justusthane/) cough [one of which is mine](https://www.11ty.dev/authors/dermah/) cough.\r\n\r\nThis is the line that populates the information for perf ranks: https://github.com/11ty/11ty-website/blob/d508831542171384761c5cd3938b22f1efab712b/leaderboard/perf.njk#L41\r\n\r\nSo in the `findSiteDataByUrl` filter I added a log to see what `sites` looks like. Most of the key-values in `sites` look like:\r\n\r\n```js\r\n  everylayout:\r\n   { name: 'Every Layout',\r\n     url: 'https://every-layout.dev/',\r\n     description:\r\n      'Through a series of simple, composable layouts, Every Layout will teach you how to better harness the built-in algorithms that power browsers and CSS.',\r\n     twitter: 'layoutplusplus',\r\n     authoredBy: [ 'hankchizljaw', 'heydonworks' ],\r\n     featured: true },\r\n```\r\n\r\nbut the object for timseverien's site looks like\r\n\r\n```js\r\n  timseverien:\r\n   { com:\r\n      { url: 'https://timseverien.com',\r\n        name: 'Tim Severien’s Blog',\r\n        description: 'A blog about web development and creative coding',\r\n        twitter: 'timseverien',\r\n        source_url: 'https://github.com/timseverien/timseverien.com' } },\r\n```\r\n\r\nI'm guessing this is because their `_data/sites/` files is named `timseverien.com.json` and the object gets pathed by the dots in the filename. Replacing the `.`'s in the filename with `-`'s makes the site show up.\r\n\r\nThe [Global Data Files docs mention how to make sub-objects using folders](https://www.11ty.dev/docs/data-global/#folders), but I wasn't sure if using dots to achieve the same thing is expected behaviour. Happy to open an issue and PR over in eleventy if this is a bug from there."", 'title': ""Leaderboards don't display sites that have dots in the _data filename"", 'type': 'issue'}
+ {'action': 'closed', 'author': 'zachleat', 'comment_id': None, 'datetime': '2020-09-07 20:10:44+00:00', 'masked_author': 'username_1', 'text': '', 'title': None, 'type': 'issue'}
+ {'action': 'created', 'author': 'zachleat', 'comment_id': 688495999.0, 'datetime': '2020-09-07 20:10:44+00:00', 'masked_author': 'username_1', 'text': 'Going to close this as it’s a duplicate of the bug you filed at #1242—thank you!', 'title': None, 'type': 'comment'}]","<issue_start><issue_comment>Title: Leaderboards don't display sites that have dots in the _data filename
+username_0: The entry that came in at Performance Rank Number 42 exists in the [author's page](https://www.11ty.dev/authors/timseverien/) and the [`fastestSites.json`](https://github.com/11ty/11ty-website/blob/master/_data/fastestSites.json#L1537-L1545), but is missing from the Performance Leaderboard. Probably because the site's data filename has a `.` in it.
+
+![A screenshot of the performance leaderboard showing entry 41 and 43. Entry 42 Is missing between the two.](https://user-images.githubusercontent.com/2516806/84120185-ce2bdd00-aa78-11ea-85e2-5e9cb25fba43.png)
+
+This bug affects a [couple of other sites](https://www.11ty.dev/authors/justusthane/) cough [one of which is mine](https://www.11ty.dev/authors/dermah/) cough.
+
+This is the line that populates the information for perf ranks: https://github.com/11ty/11ty-website/blob/d508831542171384761c5cd3938b22f1efab712b/leaderboard/perf.njk#L41
+
+So in the `findSiteDataByUrl` filter I added a log to see what `sites` looks like. Most of the key-values in `sites` look like:
+
+```js
+  everylayout:
+   { name: 'Every Layout',
+     url: 'https://every-layout.dev/',
+     description:
+      'Through a series of simple, composable layouts, Every Layout will teach you how to better harness the built-in algorithms that power browsers and CSS.',
+     twitter: 'layoutplusplus',
+     authoredBy: [ 'hankchizljaw', 'heydonworks' ],
+     featured: true },
+```
+
+but the object for timseverien's site looks like
+
+```js
+  timseverien:
+   { com:
+      { url: 'https://timseverien.com',
+        name: 'Tim Severien’s Blog',
+        description: 'A blog about web development and creative coding',
+        twitter: 'timseverien',
+        source_url: 'https://github.com/timseverien/timseverien.com' } },
+```
+
+I'm guessing this is because their `_data/sites/` files is named `timseverien.com.json` and the object gets pathed by the dots in the filename. Replacing the `.`'s in the filename with `-`'s makes the site show up.
+
+The [Global Data Files docs mention how to make sub-objects using folders](https://www.11ty.dev/docs/data-global/#folders), but I wasn't sure if using dots to achieve the same thing is expected behaviour. Happy to open an issue and PR over in eleventy if this is a bug from there.<issue_closed>
+<issue_comment>username_1: Going to close this as it’s a duplicate of the bug you filed at #1242—thank you!"
+nodejs/nodejs.org,746348645,3534,,"[{'action': 'opened', 'author': 'AlphaDio', 'comment_id': None, 'datetime': '2020-11-19 08:11:37+00:00', 'masked_author': 'username_0', 'text': ""That's a nice list of Black lives that have been reaped by Police Brutality and Injustice you have there.\r\n\r\nAre you going to also feature a list of all the people of other ethnicities that have been unjustly killed by a police officer who was high on power?\r\n\r\nI can show you the video of a young white man begging for 30 mins while aimed at by a police officer who spent that time abusing him and humiliating him until he finally shot him.\r\n\r\nDid the life of that guy mattered?"", 'title': 'Are you guys going to talk about the White lives that have been reaped by Police Brutality?', 'type': 'issue'}
+ {'action': 'closed', 'author': 'nickmccurdy', 'comment_id': None, 'datetime': '2020-11-20 18:48:17+00:00', 'masked_author': 'username_1', 'text': '', 'title': None, 'type': 'issue'}
+ {'action': 'created', 'author': 'nickmccurdy', 'comment_id': 731346491.0, 'datetime': '2020-11-20 18:48:17+00:00', 'masked_author': 'username_1', 'text': '#3229', 'title': None, 'type': 'comment'}]","<issue_start><issue_comment>Title: Are you guys going to talk about the White lives that have been reaped by Police Brutality?
+username_0: That's a nice list of Black lives that have been reaped by Police Brutality and Injustice you have there.
+
+Are you going to also feature a list of all the people of other ethnicities that have been unjustly killed by a police officer who was high on power?
+
+I can show you the video of a young white man begging for 30 mins while aimed at by a police officer who spent that time abusing him and humiliating him until he finally shot him.
+
+Did the life of that guy mattered?<issue_closed>
+<issue_comment>username_1: #3229"
+processing/p5.js-website,422609428,438,"{'number': 438.0, 'repo': 'p5.js-website', 'user_login': 'processing'}","[{'action': 'opened', 'author': 'GaurangTandon', 'comment_id': None, 'datetime': '2019-03-19T08:54:05Z', 'masked_author': 'username_0', 'text': 'fixes #435 \r\nChanges made are as described in #435', 'title': 'Improve developer docs markdown files', 'type': 'issue'}
+ {'action': 'created', 'author': 'limzykenneth', 'comment_id': 474319911.0, 'datetime': '2019-03-19 11:26:32+00:00', 'masked_author': 'username_1', 'text': 'Added some line comments. As mentioned in the issue, I think it may be worth to move the file structure explanation to the documents explaining how to add examples or how to add i18n etc, at least the finer details should be there and the introduction in `README.md` or Getting Started should be a very general this is where things are.', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'lmccart', 'comment_id': 797828904.0, 'datetime': '2021-03-13 00:22:28+00:00', 'masked_author': 'username_2', 'text': ""I'm going to close this since there doesn't seem to be further energy here. Let's revisit if these comments can be addressed. Thanks!"", 'title': None, 'type': 'comment'}]","<issue_start><issue_comment>Title: Improve developer docs markdown files
+username_0: fixes #435 
+Changes made are as described in #435
+<issue_comment>username_1: Added some line comments. As mentioned in the issue, I think it may be worth to move the file structure explanation to the documents explaining how to add examples or how to add i18n etc, at least the finer details should be there and the introduction in `README.md` or Getting Started should be a very general this is where things are.
+<issue_comment>username_2: I'm going to close this since there doesn't seem to be further energy here. Let's revisit if these comments can be addressed. Thanks!"
+gohugoio/hugo,423014279,5768,,"[{'action': 'opened', 'author': 'dmulter', 'comment_id': None, 'datetime': '2019-03-20 00:35:15+00:00', 'masked_author': 'username_0', 'text': 'The highlight shortcode provides a great solution for more control over code blocks, including line numbers and line highlighting. The downside is the content is no longer parseable Markdown. This interferes with sharing Markdown content with other content tools and sites.\r\n\r\nThe approach used in Gatsby is quite nice via the [gatsby-remark-prismjs](https://www.gatsbyjs.org/packages/gatsby-remark-prismjs/) plugin. A similar approach would basically allow code blocks like:\r\n\r\n<pre>\r\n```python{4}\r\ndef foo():\r\n  x = 1\r\n  y = 2\r\n  z = 3\r\n```\r\n</pre>\r\n\r\nWhich would highlight line 4. Copy and paste of the Markdown content to other tools would safely ignore the extended syntax, but still render the code block. I am not suggesting changing the use of Highlight, only extending Markdown support to handle the Highlight shortcode for people.', 'title': 'Feature: Add extended code block markdown syntax', 'type': 'issue'}
+ {'action': 'created', 'author': 'dmulter', 'comment_id': 514803286.0, 'datetime': '2019-07-24 21:16:21+00:00', 'masked_author': 'username_0', 'text': 'I often cross-post content between my Hugo powered blog and other content sites. With the current Hugo markdown, I must go back and edit all my code blocks when pasting to other sites. The feature I proposed would solve this problem. I would think others would find it valuable as well. I also think Gatsby could be leading the way others like Hugo might want to emulate.\r\n\r\nThanks for the consideration!', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'bep', 'comment_id': 557318610.0, 'datetime': '2019-11-21 23:27:37+00:00', 'masked_author': 'username_1', 'text': ""A variation of this is implemented and comes in Hugo 0.60 in the form of CommonMark attributes (it's still a proposal, but I would suspect closer to spec than the plugin above)."", 'title': None, 'type': 'comment'}
+ {'action': 'closed', 'author': 'bep', 'comment_id': None, 'datetime': '2019-11-25 15:17:51+00:00', 'masked_author': 'username_1', 'text': '', 'title': None, 'type': 'issue'}
+ {'action': 'created', 'author': 'bep', 'comment_id': 558201114.0, 'datetime': '2019-11-25 15:17:51+00:00', 'masked_author': 'username_1', 'text': 'This is now merged.', 'title': None, 'type': 'comment'}]","<issue_start><issue_comment>Title: Feature: Add extended code block markdown syntax
+username_0: The highlight shortcode provides a great solution for more control over code blocks, including line numbers and line highlighting. The downside is the content is no longer parseable Markdown. This interferes with sharing Markdown content with other content tools and sites.
+
+The approach used in Gatsby is quite nice via the [gatsby-remark-prismjs](https://www.gatsbyjs.org/packages/gatsby-remark-prismjs/) plugin. A similar approach would basically allow code blocks like:
+
+<pre>
+```python{4}
+def foo():
+  x = 1
+  y = 2
+  z = 3
+```
+</pre>
+
+Which would highlight line 4. Copy and paste of the Markdown content to other tools would safely ignore the extended syntax, but still render the code block. I am not suggesting changing the use of Highlight, only extending Markdown support to handle the Highlight shortcode for people.
+<issue_comment>username_0: I often cross-post content between my Hugo powered blog and other content sites. With the current Hugo markdown, I must go back and edit all my code blocks when pasting to other sites. The feature I proposed would solve this problem. I would think others would find it valuable as well. I also think Gatsby could be leading the way others like Hugo might want to emulate.
+
+Thanks for the consideration!
+<issue_comment>username_1: A variation of this is implemented and comes in Hugo 0.60 in the form of CommonMark attributes (it's still a proposal, but I would suspect closer to spec than the plugin above).<issue_closed>
+<issue_comment>username_1: This is now merged."
+gohugoio/hugo,541096772,6650,,"[{'action': 'opened', 'author': 'jakejarvis', 'comment_id': None, 'datetime': '2019-12-20 17:01:05+00:00', 'masked_author': 'username_0', 'text': 'Not an urgent bug, but I have an image shortcode capable of passing a markdown caption that\'s retrieved by `.Inner`. Everything renders correctly as HTML (same as v0.61) but my `render-link.html` hook doesn\'t seem to be called by it. \r\n\r\nThis might be a bigger problem with `markdownify` not calling the new hooks?\r\n\r\n```\r\nHugo Static Site Generator v0.62.0-DEV-8A58EBB3/extended darwin/amd64 BuildDate: 2019-12-20T11:59:39-0500\r\n```\r\n\r\n---\r\n\r\nshortcodes/image.html:\r\n```\r\n{{ with .Inner }}\r\n<figcaption>{{ . | markdownify | safeHTML }}</figcaption>\r\n{{ end }}\r\n```\r\n\r\n_default/_markup/render-link.html:\r\n```\r\ntesting....this doesn\'t appear <a href=""{{ .Destination | safeURL }}"" target=""_blank"">{{ .Text | safeHTML }}</a> \r\n```\r\n\r\n---\r\n\r\ntest.md:\r\n```\r\n{{< image >}}A caption [linking to Google](https://google.com).{{< /image >}}\r\n```\r\n\r\nrenders...\r\n\r\n```\r\nA caption <a href=""https://google.com"">linking to Google</a>.\r\n```\r\n\r\ninstead of...\r\n\r\n```\r\nA caption testing....this doesn\'t appear <a href=""https://google.com"" target=""_blank"">linking to Google</a>.\r\n```\r\n\r\n---\r\n\r\nHope this makes sense!', 'title': 'Markdown links passed to shortcode via .Inner not affected by render-link hook', 'type': 'issue'}
+ {'action': 'created', 'author': 'bep', 'comment_id': 568002165.0, 'datetime': '2019-12-20 17:03:42+00:00', 'masked_author': 'username_1', 'text': ""* Markdownify doesn't (currently) support these hooks. It was a little harder/time consuming so I dropped it (for now, anyway).\r\n* That said, `.RenderString` which is markdownofiy's new more powerful cousin, does support it."", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'jakejarvis', 'comment_id': 568002662.0, 'datetime': '2019-12-20 17:05:17+00:00', 'masked_author': 'username_0', 'text': 'Will give `.RenderString` a shot, thanks!', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'jakejarvis', 'comment_id': 568005693.0, 'datetime': '2019-12-20 17:14:43+00:00', 'masked_author': 'username_0', 'text': '`{{ with .Inner }} {{ $.Page.RenderString . }} {{ end }}` works great. 👍', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'jmooring', 'comment_id': 808481766.0, 'datetime': '2021-03-26 20:08:50+00:00', 'masked_author': 'username_2', 'text': 'It seems like this issue was resolved with creation of the [.RenderString](https://gohugo.io/functions/renderstring/) page method. For example, within a shortcode:\r\n\r\n```\r\n{{ .Inner | .Page.RenderString }}\r\n```\r\n\r\nCan we close this issue?', 'title': None, 'type': 'comment'}
+ {'action': 'closed', 'author': 'bep', 'comment_id': None, 'datetime': '2021-03-26 21:02:55+00:00', 'masked_author': 'username_1', 'text': '', 'title': None, 'type': 'issue'}]","<issue_start><issue_comment>Title: Markdown links passed to shortcode via .Inner not affected by render-link hook
+username_0: Not an urgent bug, but I have an image shortcode capable of passing a markdown caption that's retrieved by `.Inner`. Everything renders correctly as HTML (same as v0.61) but my `render-link.html` hook doesn't seem to be called by it. 
+
+This might be a bigger problem with `markdownify` not calling the new hooks?
+
+```
+Hugo Static Site Generator v0.62.0-DEV-8A58EBB3/extended darwin/amd64 BuildDate: 2019-12-20T11:59:39-0500
+```
+
+---
+
+shortcodes/image.html:
+```
+{{ with .Inner }}
+<figcaption>{{ . | markdownify | safeHTML }}</figcaption>
+{{ end }}
+```
+
+_default/_markup/render-link.html:
+```
+testing....this doesn't appear <a href=""{{ .Destination | safeURL }}"" target=""_blank"">{{ .Text | safeHTML }}</a> 
+```
+
+---
+
+test.md:
+```
+{{< image >}}A caption [linking to Google](https://google.com).{{< /image >}}
+```
+
+renders...
+
+```
+A caption <a href=""https://google.com"">linking to Google</a>.
+```
+
+instead of...
+
+```
+A caption testing....this doesn't appear <a href=""https://google.com"" target=""_blank"">linking to Google</a>.
+```
+
+---
+
+Hope this makes sense!
+<issue_comment>username_1: * Markdownify doesn't (currently) support these hooks. It was a little harder/time consuming so I dropped it (for now, anyway).
+* That said, `.RenderString` which is markdownofiy's new more powerful cousin, does support it.
+<issue_comment>username_0: Will give `.RenderString` a shot, thanks!
+<issue_comment>username_0: `{{ with .Inner }} {{ $.Page.RenderString . }} {{ end }}` works great. 👍
+<issue_comment>username_2: It seems like this issue was resolved with creation of the [.RenderString](https://gohugo.io/functions/renderstring/) page method. For example, within a shortcode:
+
+```
+{{ .Inner | .Page.RenderString }}
+```
+
+Can we close this issue?<issue_closed>"
+frida/frida-website,540029362,156,,"[{'action': 'opened', 'author': '4masaka', 'comment_id': None, 'datetime': '2019-12-19 02:06:16+00:00', 'masked_author': 'username_0', 'text': 'I want to translate the frida docs into Japanese. \r\nCan I fork the repository and release the Japanese translation?\r\n\r\nThank you!', 'title': 'Translation into Japanese', 'type': 'issue'}
+ {'action': 'created', 'author': 'oleavr', 'comment_id': 568616280.0, 'datetime': '2019-12-24 00:54:04+00:00', 'masked_author': 'username_1', 'text': 'That would be awesome! How about porting our website to use [jekyll-multiple-languages-plugin](https://github.com/kurtsson/jekyll-multiple-languages-plugin)?', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': '4masaka', 'comment_id': 568622361.0, 'datetime': '2019-12-24 01:38:18+00:00', 'masked_author': 'username_0', 'text': ""I think that's a good idea! in that case, how do I contribute?"", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'oleavr', 'comment_id': 568623489.0, 'datetime': '2019-12-24 01:45:29+00:00', 'masked_author': 'username_1', 'text': 'Cool! You can clone the repo, make the changes, and then open a pull-request for review. Would recommend opening it early, while the work is still in progress, so you can get early feedback.', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': '4masaka', 'comment_id': 568834656.0, 'datetime': '2019-12-25 04:15:32+00:00', 'masked_author': 'username_0', 'text': 'OK. Could you please tell me version of ruby and jekyll? because I want to create the same environment that the website running.', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'oleavr', 'comment_id': 569373028.0, 'datetime': '2019-12-28 01:24:11+00:00', 'masked_author': 'username_1', 'text': ""Build machine's Ruby and Jekyll are:\r\n\r\n```sh\r\n$ ruby --version\r\nruby 2.3.7p456 (2018-03-28 revision 63024) [universal.x86_64-darwin18]\r\n$ jekyll --version\r\njekyll 3.7.3\r\n```\r\n\r\nAnd its installed gems:\r\n\r\n```\r\n$ gem query --local\r\n\r\n*** LOCAL GEMS ***\r\n\r\nactivesupport (4.2.10)\r\naddressable (2.5.2)\r\nbigdecimal (1.2.8)\r\nCFPropertyList (2.2.8)\r\ncolorator (1.1.0)\r\nconcurrent-ruby (1.0.5)\r\ndid_you_mean (1.0.0)\r\nem-websocket (0.5.1)\r\neventmachine (1.2.5)\r\nfaraday (0.14.0)\r\nffi (1.9.23)\r\nforwardable-extended (2.6.0)\r\ngemoji (3.0.0)\r\nhtml-pipeline (2.7.1)\r\nhttp_parser.rb (0.6.0)\r\ni18n (0.9.5)\r\nio-console (0.4.5)\r\njekyll (3.7.3)\r\njekyll-avatar (0.5.0)\r\njekyll-feed (0.9.3)\r\njekyll-gist (1.5.0)\r\njekyll-redirect-from (0.13.0)\r\njekyll-sass-converter (1.5.2)\r\njekyll-seo-tag (2.4.0)\r\njekyll-sitemap (1.2.0)\r\njekyll-watch (2.0.0)\r\njemoji (0.9.0)\r\njson (1.8.3.1)\r\nkramdown (1.16.2)\r\nlibxml-ruby (2.9.0)\r\nliquid (4.0.0)\r\nlisten (3.1.5)\r\nmercenary (0.3.6)\r\nminitest (5.8.5)\r\nmulti_json (1.13.1)\r\nmultipart-post (2.0.0)\r\nnet-telnet (0.1.1)\r\nnokogiri (1.5.6)\r\noctokit (4.8.0)\r\npathutil (0.16.1)\r\npower_assert (0.2.6)\r\npsych (2.1.0.1)\r\npublic_suffix (3.0.2)\r\npygments.rb (1.2.1)\r\nrake (10.4.2)\r\nrb-fsevent (0.10.2)\r\nrb-inotify (0.9.10)\r\nrdoc (4.2.1)\r\nrouge (3.1.1)\r\nruby_dep (1.5.0)\r\nsafe_yaml (1.0.4)\r\nsass (3.5.5)\r\nsass-listen (4.0.0)\r\nsawyer (0.8.1)\r\nsqlite3 (1.3.11)\r\ntest-unit (3.1.5)\r\nthread_safe (0.3.6)\r\ntzinfo (1.2.5)\r\n```\r\n\r\n(Safe to ignore the non-jekyll gems.)\r\n\r\nDon't worry too much about running the exact same version though – I'm happy to upgrade to the latest in case you end up using features from it."", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'XieEDeHeiShou', 'comment_id': 587442862.0, 'datetime': '2020-02-18 12:46:09+00:00', 'masked_author': 'username_2', 'text': 'How should we translate ?\r\n\r\n0. Translate the whole file using `tf` tag (Translated version may be out of date both in structure and content when the english version is updated)? \r\n\r\n0. Translate only strings using `t` tag (Translated version may be out of date in part of its content, but the structure is remained when the english version is updated.)?', 'title': None, 'type': 'comment'}]","<issue_start><issue_comment>Title: Translation into Japanese
+username_0: I want to translate the frida docs into Japanese. 
+Can I fork the repository and release the Japanese translation?
+
+Thank you!
+<issue_comment>username_1: That would be awesome! How about porting our website to use [jekyll-multiple-languages-plugin](https://github.com/kurtsson/jekyll-multiple-languages-plugin)?
+<issue_comment>username_0: I think that's a good idea! in that case, how do I contribute?
+<issue_comment>username_1: Cool! You can clone the repo, make the changes, and then open a pull-request for review. Would recommend opening it early, while the work is still in progress, so you can get early feedback.
+<issue_comment>username_0: OK. Could you please tell me version of ruby and jekyll? because I want to create the same environment that the website running.
+<issue_comment>username_1: Build machine's Ruby and Jekyll are:
+
+```sh
+$ ruby --version
+ruby 2.3.7p456 (2018-03-28 revision 63024) [universal.x86_64-darwin18]
+$ jekyll --version
+jekyll 3.7.3
+```
+
+And its installed gems:
+
+```
+$ gem query --local
+
+*** LOCAL GEMS ***
+
+activesupport (4.2.10)
+addressable (2.5.2)
+bigdecimal (1.2.8)
+CFPropertyList (2.2.8)
+colorator (1.1.0)
+concurrent-ruby (1.0.5)
+did_you_mean (1.0.0)
+em-websocket (0.5.1)
+eventmachine (1.2.5)
+faraday (0.14.0)
+ffi (1.9.23)
+forwardable-extended (2.6.0)
+gemoji (3.0.0)
+html-pipeline (2.7.1)
+http_parser.rb (0.6.0)
+i18n (0.9.5)
+io-console (0.4.5)
+jekyll (3.7.3)
+jekyll-avatar (0.5.0)
+jekyll-feed (0.9.3)
+jekyll-gist (1.5.0)
+jekyll-redirect-from (0.13.0)
+jekyll-sass-converter (1.5.2)
+jekyll-seo-tag (2.4.0)
+jekyll-sitemap (1.2.0)
+jekyll-watch (2.0.0)
+jemoji (0.9.0)
+json (1.8.3.1)
+kramdown (1.16.2)
+libxml-ruby (2.9.0)
+liquid (4.0.0)
+listen (3.1.5)
+mercenary (0.3.6)
+minitest (5.8.5)
+multi_json (1.13.1)
+multipart-post (2.0.0)
+net-telnet (0.1.1)
+nokogiri (1.5.6)
+octokit (4.8.0)
+pathutil (0.16.1)
+power_assert (0.2.6)
+psych (2.1.0.1)
+public_suffix (3.0.2)
+pygments.rb (1.2.1)
+rake (10.4.2)
+rb-fsevent (0.10.2)
+rb-inotify (0.9.10)
+rdoc (4.2.1)
+rouge (3.1.1)
+ruby_dep (1.5.0)
+safe_yaml (1.0.4)
+sass (3.5.5)
+sass-listen (4.0.0)
+sawyer (0.8.1)
+sqlite3 (1.3.11)
+test-unit (3.1.5)
+thread_safe (0.3.6)
+tzinfo (1.2.5)
+```
+
+(Safe to ignore the non-jekyll gems.)
+
+Don't worry too much about running the exact same version though – I'm happy to upgrade to the latest in case you end up using features from it.
+<issue_comment>username_2: How should we translate ?
+
+0. Translate the whole file using `tf` tag (Translated version may be out of date both in structure and content when the english version is updated)? 
+
+0. Translate only strings using `t` tag (Translated version may be out of date in part of its content, but the structure is remained when the english version is updated.)?"
+usds/website,185503622,209,,"[{'action': 'opened', 'author': 'davidrkaufman', 'comment_id': None, 'datetime': '2016-10-26 20:38:05+00:00', 'masked_author': 'username_0', 'text': 'The copy that should appear under the benefits tab is showing at the bottom of ""who we\'re hiring"". I\'m not sure why after checking out the HTML.\r\n\r\n**Health insurance**\r\n\r\nAll joining full-time for more than three months are eligible to receive health insurance. Many employees will also be eligible for dental and vision plans and will be automatically covered by basic life insurance with the option to elect into additional coverage. Your HR contact will go over the benefits that apply to your offer.\r\n\r\n**Retirement**\r\n\r\nMany employees joining the U.S. Digital Service for at least one year will be eligible for the Thrift Savings Plan, the government’s version of a 401k, which offers up to five percent matching.\r\n\r\n**Commuter**\r\n\r\nEmployees who commute by public transportation may receive subsidies for commuting costs. This benefit aims to reduce traffic congestion, conserve energy, and improve air quality.\r\n\r\nThe logo of the United States Digital Service\r\nResources\r\nDigital Services Playbook\r\nU.S. Web Design Standards\r\nTechFAR Handbook\r\nPrivacy Policy\r\nReports', 'title': 'Benefits Tab on Join Us is Blank', 'type': 'issue'}
+ {'action': 'created', 'author': 'davidrkaufman', 'comment_id': 256960455.0, 'datetime': '2016-10-28 16:04:34+00:00', 'masked_author': 'username_0', 'text': '@username_1 the friendliest of pings', 'title': None, 'type': 'comment'}
+ {'action': 'closed', 'author': 'chrisfrommann', 'comment_id': None, 'datetime': '2016-11-01 23:02:50+00:00', 'masked_author': 'username_1', 'text': '', 'title': None, 'type': 'issue'}
+ {'action': 'created', 'author': 'chrisfrommann', 'comment_id': 257724990.0, 'datetime': '2016-11-01 23:02:50+00:00', 'masked_author': 'username_1', 'text': 'Fixed ✅', 'title': None, 'type': 'comment'}]","<issue_start><issue_comment>Title: Benefits Tab on Join Us is Blank
+username_0: The copy that should appear under the benefits tab is showing at the bottom of ""who we're hiring"". I'm not sure why after checking out the HTML.
+
+**Health insurance**
+
+All joining full-time for more than three months are eligible to receive health insurance. Many employees will also be eligible for dental and vision plans and will be automatically covered by basic life insurance with the option to elect into additional coverage. Your HR contact will go over the benefits that apply to your offer.
+
+**Retirement**
+
+Many employees joining the U.S. Digital Service for at least one year will be eligible for the Thrift Savings Plan, the government’s version of a 401k, which offers up to five percent matching.
+
+**Commuter**
+
+Employees who commute by public transportation may receive subsidies for commuting costs. This benefit aims to reduce traffic congestion, conserve energy, and improve air quality.
+
+The logo of the United States Digital Service
+Resources
+Digital Services Playbook
+U.S. Web Design Standards
+TechFAR Handbook
+Privacy Policy
+Reports
+<issue_comment>username_0: @username_1 the friendliest of pings<issue_closed>
+<issue_comment>username_1: Fixed ✅"

@@ -1,0 +1,629 @@
+jaspervdj/hakyll,78110781,349,"{'number': 349.0, 'repo': 'hakyll', 'user_login': 'jaspervdj'}","[{'action': 'opened', 'author': 'netzwerg', 'comment_id': None, 'datetime': '2015-05-19T14:26:58Z', 'masked_author': 'username_0', 'text': 'When publishing a Hakyll-based site to GitHub, it is very convenient to clone the `master`/`gh-pages` branch of the destination repo directly to the `_site` folder.\r\n\r\nTaking my own blog as an example:\r\n```\r\ngit clone -b source https://github.com/username_0/username_0.github.com.git \r\ncd username_0.github.com\r\ngit clone -b master https://github.com/username_0/username_0.github.com.git _site \r\n``` \r\nThis allows to edit the sources, build the site, and publish the final pages from a single directory tree.\r\n\r\nUnfortunately, `cabal run clean` wipes the complete `_site` folder (including the `.git` folder required for the above strategy to work).\r\n\r\nThe suggested change keeps a potentially existing `_site/.git` folder upon `clean`.\r\n\r\n*Disclaimer:* I am new to Hakyll/Haskell, please refactor/refine/rewrite as needed -- tia!', 'title': 'Keep .git when cleaning destinationDirectory', 'type': 'issue'}
+ {'action': 'created', 'author': 'nagisa', 'comment_id': 103590525.0, 'datetime': '2015-05-19 16:57:35+00:00', 'masked_author': 'username_1', 'text': 'Such change was proposed multiple times and it was declined multiple times as well on the grounds of \r\n\r\n* `destinationDirectory` being owned by hakyll;\r\n* There existing multiple ways to track files inside directory without putting `.git` into it;\r\n* many more special directories that might want to not be deleted.', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'netzwerg', 'comment_id': 103770868.0, 'datetime': '2015-05-20 06:00:09+00:00', 'masked_author': 'username_0', 'text': 'Thanks for your clarifications. I must have missed the issues that already dealt with similar suggestions (or is there a mailing-list where these discussions are happening?).', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'nagisa', 'comment_id': 103803189.0, 'datetime': '2015-05-20 08:06:51+00:00', 'masked_author': 'username_1', 'text': 'I believe none of the past proposals have moved past message on IRC (and we, sadly, keep no logs). \r\n\r\nKeep in mind, that I have no decision-making power in this project and am just stating opinion that was prevalent a few months ago; I’d reopen this for now and see what @username_2 has to say on this 😊', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'netzwerg', 'comment_id': 103816096.0, 'datetime': '2015-05-20 09:00:13+00:00', 'masked_author': 'username_0', 'text': ""Ok, l have re-opened it -- let's wait and see :-)"", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'jaspervdj', 'comment_id': 106769681.0, 'datetime': '2015-05-29 10:39:37+00:00', 'masked_author': 'username_2', 'text': ""I think you can use `$GIT_DIR` and `$GIT_WORK_DIR` for this, but I'm open to discussion. Thanks for handling this so far @username_1."", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'cryptica', 'comment_id': 244405225.0, 'datetime': '2016-09-02 15:19:53+00:00', 'masked_author': 'username_3', 'text': ""Keeping the .git folder in the destination directory would also allow to keep it as a submodule in the gh-pages branch of the same repo (as in https://github.com/shiftyp/submodule-gh-pages-example), therefore separating source and built files while keeping easy deployment to GitHub. I don't think that works easily with $GIT_DIR and $GIT_WORK_DIR.\r\n\r\nAs for other special directories, maybe all . directories within the destination directory could be kept?"", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'listx', 'comment_id': 244408874.0, 'datetime': '2016-09-02 15:33:12+00:00', 'masked_author': 'username_4', 'text': ""FWIW, I use rsync as part of a post-build script, like this:\r\n\r\n```\r\ndest='username_4.github.io/'\r\ntarg='_site/'\r\nrsync -ahP --no-whole-file --inplace --delete --exclude=.git $targ $dest                                                                                                           \r\ncp -f .gitignore $dest\r\n```\r\n\r\nwhere `username_4.github.io` is its own git repo.\r\n\r\nI think if we do go ahead with keeping the `.git` folder (or any other special folders) within `_site` untouched, we should make the user define all such special cases explicitly; i.e., let's not implicitly treat some particular files/paths as special."", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'cryptica', 'comment_id': 244411196.0, 'datetime': '2016-09-02 15:41:53+00:00', 'masked_author': 'username_3', 'text': 'I like the idea of keeping the built files in the same repository, but on a separate branch. By including it as a submodule, there is need to call cp or rsync in a post-build script.\r\n\r\nAdding an option to specify which directories to keep within `_site` would also work and be perfectly acceptable for me.', 'title': None, 'type': 'comment'}]","<issue_start><issue_comment>Title: Keep .git when cleaning destinationDirectory
+username_0: When publishing a Hakyll-based site to GitHub, it is very convenient to clone the `master`/`gh-pages` branch of the destination repo directly to the `_site` folder.
+
+Taking my own blog as an example:
+```
+git clone -b source https://github.com/username_0/username_0.github.com.git 
+cd username_0.github.com
+git clone -b master https://github.com/username_0/username_0.github.com.git _site 
+``` 
+This allows to edit the sources, build the site, and publish the final pages from a single directory tree.
+
+Unfortunately, `cabal run clean` wipes the complete `_site` folder (including the `.git` folder required for the above strategy to work).
+
+The suggested change keeps a potentially existing `_site/.git` folder upon `clean`.
+
+*Disclaimer:* I am new to Hakyll/Haskell, please refactor/refine/rewrite as needed -- tia!
+<issue_comment>username_1: Such change was proposed multiple times and it was declined multiple times as well on the grounds of 
+
+* `destinationDirectory` being owned by hakyll;
+* There existing multiple ways to track files inside directory without putting `.git` into it;
+* many more special directories that might want to not be deleted.
+<issue_comment>username_0: Thanks for your clarifications. I must have missed the issues that already dealt with similar suggestions (or is there a mailing-list where these discussions are happening?).
+<issue_comment>username_1: I believe none of the past proposals have moved past message on IRC (and we, sadly, keep no logs). 
+
+Keep in mind, that I have no decision-making power in this project and am just stating opinion that was prevalent a few months ago; I’d reopen this for now and see what @username_2 has to say on this 😊
+<issue_comment>username_0: Ok, l have re-opened it -- let's wait and see :-)
+<issue_comment>username_2: I think you can use `$GIT_DIR` and `$GIT_WORK_DIR` for this, but I'm open to discussion. Thanks for handling this so far @username_1.
+<issue_comment>username_3: Keeping the .git folder in the destination directory would also allow to keep it as a submodule in the gh-pages branch of the same repo (as in https://github.com/shiftyp/submodule-gh-pages-example), therefore separating source and built files while keeping easy deployment to GitHub. I don't think that works easily with $GIT_DIR and $GIT_WORK_DIR.
+
+As for other special directories, maybe all . directories within the destination directory could be kept?
+<issue_comment>username_4: FWIW, I use rsync as part of a post-build script, like this:
+
+```
+dest='username_4.github.io/'
+targ='_site/'
+rsync -ahP --no-whole-file --inplace --delete --exclude=.git $targ $dest                                                                                                           
+cp -f .gitignore $dest
+```
+
+where `username_4.github.io` is its own git repo.
+
+I think if we do go ahead with keeping the `.git` folder (or any other special folders) within `_site` untouched, we should make the user define all such special cases explicitly; i.e., let's not implicitly treat some particular files/paths as special.
+<issue_comment>username_3: I like the idea of keeping the built files in the same repository, but on a separate branch. By including it as a submodule, there is need to call cp or rsync in a post-build script.
+
+Adding an option to specify which directories to keep within `_site` would also work and be perfectly acceptable for me."
+emberjs/website,98734526,2276,,"[{'action': 'opened', 'author': 'maxcal', 'comment_id': None, 'datetime': '2015-08-03 12:37:40+00:00', 'masked_author': 'username_0', 'text': '![image](https://cloud.githubusercontent.com/assets/765647/9037466/ffbaf660-39eb-11e5-8f5e-ef725edbc57e.png)\r\n\r\n*Now is it JSONApiSerializer or JSONAPISerializer  or ...*\r\n\r\nWhile the uppercase headers might look nice they are a usability disaster as it makes it difficult to figure out what the components are actually named - which is pretty dang important for an API in a case sensitive language!\r\n\r\nRemoving the text transform for the API headers is pretty easy and is pretty big usability boost.\r\n```CSS\r\nbody.api h1 {\r\n    text-transform: none;\r\n}\r\n```\r\n\r\n![image](https://cloud.githubusercontent.com/assets/765647/9037532/8ddc72ac-39ec-11e5-8176-bcde755cfe86.png)\r\n \r\nWill try to write a PR time and energy permitting.', 'title': ""Don't uppercase API headers."", 'type': 'issue'}
+ {'action': 'closed', 'author': 'trek', 'comment_id': None, 'datetime': '2015-08-06 20:25:59+00:00', 'masked_author': 'username_1', 'text': '', 'title': None, 'type': 'issue'}
+ {'action': 'created', 'author': 'trek', 'comment_id': 128497739.0, 'datetime': '2015-08-06 20:25:59+00:00', 'masked_author': 'username_1', 'text': 'handled by https://github.com/emberjs/website/pull/2277', 'title': None, 'type': 'comment'}]","<issue_start><issue_comment>Title: Don't uppercase API headers.
+username_0: ![image](https://cloud.githubusercontent.com/assets/765647/9037466/ffbaf660-39eb-11e5-8f5e-ef725edbc57e.png)
+
+*Now is it JSONApiSerializer or JSONAPISerializer  or ...*
+
+While the uppercase headers might look nice they are a usability disaster as it makes it difficult to figure out what the components are actually named - which is pretty dang important for an API in a case sensitive language!
+
+Removing the text transform for the API headers is pretty easy and is pretty big usability boost.
+```CSS
+body.api h1 {
+    text-transform: none;
+}
+```
+
+![image](https://cloud.githubusercontent.com/assets/765647/9037532/8ddc72ac-39ec-11e5-8176-bcde755cfe86.png)
+ 
+Will try to write a PR time and energy permitting.<issue_closed>
+<issue_comment>username_1: handled by https://github.com/emberjs/website/pull/2277"
+ethereum/ethereum-org-website,973669026,3650,"{'number': 3650.0, 'repo': 'ethereum-org-website', 'user_login': 'ethereum'}","[{'action': 'opened', 'author': 'jmcook1186', 'comment_id': None, 'datetime': '2021-08-18T13:28:42Z', 'masked_author': 'username_0', 'text': 'Hello,\r\n\r\nhope it is OK that I had a bash at this. \r\n\r\n## Description \r\nThis PR includes a draft page on ethereum energy consumption for review and refinement as per [Issue 3020](https://github.com/ethereum/ethereum-org-website/issues/3020). I pulled info from the NFT page as suggested in the notes there as well as the blog by Carl Beek as suggested in the issue conversation thread.\r\n\r\nThanks! \r\n\r\n## Related Issue\r\n#3020 #3072', 'title': 'add ethereum energy consumption page', 'type': 'issue'}
+ {'action': 'created', 'author': 'jmcook1186', 'comment_id': 919937357.0, 'datetime': '2021-09-15 11:30:47+00:00', 'masked_author': 'username_0', 'text': 'Ok, I amended the page according to the review comments - agree with everything, of course. \r\n\r\nAlso noticed that the calculations of energy consumption per 100k transactions that were inherited from the previous version of the page assumed 10k validators which seems to me to be over an order of magnitude too low. I updated them assuming 200k validators, which i think gives a conservative estimate. Also rewrote this section to make it (hopefully) more readable.\r\n\r\nThanks!', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'minimalsm', 'comment_id': 920902478.0, 'datetime': '2021-09-16 13:27:47+00:00', 'masked_author': 'username_1', 'text': ""Hey @username_0 made some more edits. \r\n\r\nFYI I've suggested the edits above (You can just click 'Commit suggestion' if you agree with the changes) - we recently released a [style guide](https://ethereum.org/en/contributing/style-guide) where we decided to use proof-of-work over PoW consistently to reduce user cognitive load (i.e. they don't have to remember recently learned terms)."", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'jmcook1186', 'comment_id': 920991266.0, 'datetime': '2021-09-16 15:12:41+00:00', 'masked_author': 'username_0', 'text': 'Hi, agree with all edits - thanks!', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'jmcook1186', 'comment_id': 922021267.0, 'datetime': '2021-09-17 19:12:09+00:00', 'masked_author': 'username_0', 'text': 'Realised my mistake in the energy calculations - there may be 180k validators but there can be many validators per node. Eth R&D Discord suggest 3-4k individual nodes currently, so 10k is conservative estimate for post merge. Calculations still need further validation, but at least that piece makes more sense now. Cheers.', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'minimalsm', 'comment_id': 964138309.0, 'datetime': '2021-11-09 13:11:52+00:00', 'masked_author': 'username_1', 'text': '', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'minimalsm', 'comment_id': 985451547.0, 'datetime': '2021-12-03 11:42:04+00:00', 'masked_author': 'username_1', 'text': 'Waiting on another team member to review (early next week?)', 'title': None, 'type': 'comment'}]","<issue_start><issue_comment>Title: add ethereum energy consumption page
+username_0: Hello,
+
+hope it is OK that I had a bash at this. 
+
+## Description 
+This PR includes a draft page on ethereum energy consumption for review and refinement as per [Issue 3020](https://github.com/ethereum/ethereum-org-website/issues/3020). I pulled info from the NFT page as suggested in the notes there as well as the blog by Carl Beek as suggested in the issue conversation thread.
+
+Thanks! 
+
+## Related Issue
+#3020 #3072
+<issue_comment>username_0: Ok, I amended the page according to the review comments - agree with everything, of course. 
+
+Also noticed that the calculations of energy consumption per 100k transactions that were inherited from the previous version of the page assumed 10k validators which seems to me to be over an order of magnitude too low. I updated them assuming 200k validators, which i think gives a conservative estimate. Also rewrote this section to make it (hopefully) more readable.
+
+Thanks!
+<issue_comment>username_1: Hey @username_0 made some more edits. 
+
+FYI I've suggested the edits above (You can just click 'Commit suggestion' if you agree with the changes) - we recently released a [style guide](https://ethereum.org/en/contributing/style-guide) where we decided to use proof-of-work over PoW consistently to reduce user cognitive load (i.e. they don't have to remember recently learned terms).
+<issue_comment>username_0: Hi, agree with all edits - thanks!
+<issue_comment>username_0: Realised my mistake in the energy calculations - there may be 180k validators but there can be many validators per node. Eth R&D Discord suggest 3-4k individual nodes currently, so 10k is conservative estimate for post merge. Calculations still need further validation, but at least that piece makes more sense now. Cheers.
+<issue_comment>username_1: Waiting on another team member to review (early next week?)"
+newrelic/docs-website,1093981734,5502,"{'number': 5502.0, 'repo': 'docs-website', 'user_login': 'newrelic'}","[{'action': 'opened', 'author': 'sbetea', 'comment_id': None, 'datetime': '2022-01-05T04:57:24Z', 'masked_author': 'username_0', 'text': 'added this text: \r\n\r\nUse PowerShell on Windows hosts, rather than the Command Prompt window, since the Command Prompt window can handle quotation marks in unexpected ways.\r\n\r\n...to the Important Callout section in the New Relic CLI Obfuscation.\r\n\r\n<!-- Thanks for contributing to our docs! -->\r\n\r\n<!-- For Japanese readers: \r\nもしドキュメントの日本語訳で問題を見つけた場合はPRではなくissueを提出してください。\r\n日本語訳へのPRについてはまだ取り込む準備ができていません。-->\r\n\r\nPlease follow [conventional commit standards](https://www.conventionalcommits.org/en/v1.0.0/)\r\nin your commit messages and pull request title.\r\n\r\n## Give us some context\r\n\r\n* What problems does this PR solve?\r\n* Add any context that will help us review your changes such as testing notes,\r\n  links to related docs, screenshots, etc.\r\n* If your issue relates to an existing GitHub issue, please link to it.', 'title': 'Update secrets-management.mdx', 'type': 'issue'}
+ {'action': 'created', 'author': 'urbiz-nr', 'comment_id': 1005396657.0, 'datetime': '2022-01-05 05:35:19+00:00', 'masked_author': 'username_1', 'text': ""@username_0 - could you please sign the CLA so we can merge the PR? It's a one time thing!"", 'title': None, 'type': 'comment'}]","<issue_start><issue_comment>Title: Update secrets-management.mdx
+username_0: added this text: 
+
+Use PowerShell on Windows hosts, rather than the Command Prompt window, since the Command Prompt window can handle quotation marks in unexpected ways.
+
+...to the Important Callout section in the New Relic CLI Obfuscation.
+
+<!-- Thanks for contributing to our docs! -->
+
+<!-- For Japanese readers: 
+もしドキュメントの日本語訳で問題を見つけた場合はPRではなくissueを提出してください。
+日本語訳へのPRについてはまだ取り込む準備ができていません。-->
+
+Please follow [conventional commit standards](https://www.conventionalcommits.org/en/v1.0.0/)
+in your commit messages and pull request title.
+
+## Give us some context
+
+* What problems does this PR solve?
+* Add any context that will help us review your changes such as testing notes,
+  links to related docs, screenshots, etc.
+* If your issue relates to an existing GitHub issue, please link to it.
+<issue_comment>username_1: @username_0 - could you please sign the CLA so we can merge the PR? It's a one time thing!"
+devopsdays/devopsdays-web,308982761,4254,"{'number': 4254.0, 'repo': 'devopsdays-web', 'user_login': 'devopsdays'}","[{'action': 'opened', 'author': 'Roderick-Jonsson', 'comment_id': None, 'datetime': '2018-03-27T14:02:34Z', 'masked_author': 'username_0', 'text': '- Adding community sponsor section\r\n- Adding community sponsors', 'title': '[ZRH-2018] Add Jazoon and Powercoders as community sponsors', 'type': 'issue'}
+ {'action': 'created', 'author': 'Roderick-Jonsson', 'comment_id': 376541260.0, 'datetime': '2018-03-27 14:15:41+00:00', 'masked_author': 'username_0', 'text': 'I got an Issue here:\r\nWhen looking at the build https://deploy-preview-4254--devopsdays-web.netlify.com/events/2018-zurich/welcome/\r\n\r\nI see the community sponsor section showing up, but without sponsors. Can someone help me debug.', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'Roderick-Jonsson', 'comment_id': 376593254.0, 'datetime': '2018-03-27 16:42:20+00:00', 'masked_author': 'username_0', 'text': '@MikeRosTX Awesome! Thanks for helping out so fast 👍', 'title': None, 'type': 'comment'}]","<issue_start><issue_comment>Title: [ZRH-2018] Add Jazoon and Powercoders as community sponsors
+username_0: - Adding community sponsor section
+- Adding community sponsors
+<issue_comment>username_0: I got an Issue here:
+When looking at the build https://deploy-preview-4254--devopsdays-web.netlify.com/events/2018-zurich/welcome/
+
+I see the community sponsor section showing up, but without sponsors. Can someone help me debug.
+<issue_comment>username_0: @MikeRosTX Awesome! Thanks for helping out so fast 👍"
+datenanfragen/website,1019350039,735,,"[{'action': 'opened', 'author': 'baltpeter', 'comment_id': None, 'datetime': '2021-10-06T22:16:24Z', 'masked_author': 'username_0', 'text': 'On our [“My saved data” page](https://www.datarequests.org/id-data-controls/), you can enter your details for them to be prefilled in the generator. You can also add your own fields which is useful for example if you have multiple email addresses.\r\n\r\nIn the generator, we have a dropdown where you can manually add them to the identification data (we call them ""fixed fields""):\r\n\r\nhttps://user-images.githubusercontent.com/4048809/136290810-21ce7184-86d6-4a61-a7d1-7e59289e5960.mp4\r\n\r\nBut fields that are already present in the ID data are still displayed even though clicking them again won\'t do anything (or add them a second time, which doesn\'t make sense either):\r\n\r\nhttps://user-images.githubusercontent.com/4048809/136290977-81f97abb-dd76-4c09-950a-c944783ff872.mp4\r\n\r\nInstead, we should hide fields that are already present in the ID data (and have the same value!).', 'title': 'Hide fixed fields with same value as the generator in the dropdown', 'type': 'issue'}
+ {'action': 'created', 'author': 'marlonemmerich', 'comment_id': 945045510.0, 'datetime': '2021-10-17 04:03:26+00:00', 'masked_author': 'username_1', 'text': ""Hello, friend! I created a PR (https://github.com/datenanfragen/website/pull/788)\r\nPlease, check if now makes sense for you: now, if the new field have the same type and value of anyone that was before inserted we don't insert.\r\n\r\nIf i did any mistakes or if you need more help, just tell me!\r\n\r\nHave a nice day!"", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'Jaagrav', 'comment_id': 945049614.0, 'datetime': '2021-10-17 04:54:13+00:00', 'masked_author': 'username_2', 'text': 'Oh crap, I thought this issue was going to go stale cause you were assigned 10 days ago 😅 \r\nAnyway in my PR I hide the fixed field like requested in the issue, you can close my PR if you want to.', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'marlonemmerich', 'comment_id': 945137857.0, 'datetime': '2021-10-17 14:43:53+00:00', 'masked_author': 'username_1', 'text': ""Oh god, sorry =\\\r\nI had some problems, I just had time to do this yesterday\r\nBut your'e right: the issue told to hide the fields and I don't did that, you put more energy on this and did a great job!\r\nI really understand if we use your PR instead of mine!"", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'marlonemmerich', 'comment_id': 945139308.0, 'datetime': '2021-10-17 14:52:48+00:00', 'masked_author': 'username_1', 'text': 'I have a idea! You did a confirmation with a alert. What you think if we use this modal confirmation? Like this:\r\n![zlomklo](https://user-images.githubusercontent.com/52637919/137632754-e5d675f0-c168-4ce5-93ca-ac6442d53f26.png)\r\n\r\nMaybe I can do this! In this case, you and me get a hacktoberfest PR ;)', 'title': None, 'type': 'comment'}
+ {'action': 'closed', 'author': 'zner0L', 'comment_id': None, 'datetime': '2021-12-23 13:07:35+00:00', 'masked_author': 'username_3', 'text': '', 'title': None, 'type': 'issue'}]","<issue_start><issue_comment>Title: Hide fixed fields with same value as the generator in the dropdown
+username_0: On our [“My saved data” page](https://www.datarequests.org/id-data-controls/), you can enter your details for them to be prefilled in the generator. You can also add your own fields which is useful for example if you have multiple email addresses.
+
+In the generator, we have a dropdown where you can manually add them to the identification data (we call them ""fixed fields""):
+
+https://user-images.githubusercontent.com/4048809/136290810-21ce7184-86d6-4a61-a7d1-7e59289e5960.mp4
+
+But fields that are already present in the ID data are still displayed even though clicking them again won't do anything (or add them a second time, which doesn't make sense either):
+
+https://user-images.githubusercontent.com/4048809/136290977-81f97abb-dd76-4c09-950a-c944783ff872.mp4
+
+Instead, we should hide fields that are already present in the ID data (and have the same value!).
+<issue_comment>username_1: Hello, friend! I created a PR (https://github.com/datenanfragen/website/pull/788)
+Please, check if now makes sense for you: now, if the new field have the same type and value of anyone that was before inserted we don't insert.
+
+If i did any mistakes or if you need more help, just tell me!
+
+Have a nice day!
+<issue_comment>username_2: Oh crap, I thought this issue was going to go stale cause you were assigned 10 days ago 😅 
+Anyway in my PR I hide the fixed field like requested in the issue, you can close my PR if you want to.
+<issue_comment>username_1: Oh god, sorry =\
+I had some problems, I just had time to do this yesterday
+But your'e right: the issue told to hide the fields and I don't did that, you put more energy on this and did a great job!
+I really understand if we use your PR instead of mine!
+<issue_comment>username_1: I have a idea! You did a confirmation with a alert. What you think if we use this modal confirmation? Like this:
+![zlomklo](https://user-images.githubusercontent.com/52637919/137632754-e5d675f0-c168-4ce5-93ca-ac6442d53f26.png)
+
+Maybe I can do this! In this case, you and me get a hacktoberfest PR ;)<issue_closed>"
+girldevelopit/gdi-website,164870412,468,,"[{'action': 'opened', 'author': 'GretchenLynd', 'comment_id': None, 'datetime': '2016-07-11 15:48:58+00:00', 'masked_author': 'username_0', 'text': ""Please add the following bio for LaVonna:  \r\n\r\n**\r\n![lavonna headshot](https://cloud.githubusercontent.com/assets/8474648/16736975/94b63edc-474c-11e6-83c9-5103a0e306a7.jpg)\r\n**\r\nLaVonna Ricketts, Program Director\r\nLaVonna is committed to organizations that cultivate spreading knowledge, continuous learning, and social impact. She fights to create equal career and educational opportunities for women. \r\nLaVonna comes from a background in education. She holds a master’s degree in Education Policy from the University of Pennsylvania, and has worked with an array of education, community, and girls' empowerment organizations, including the Philadelphia Center for Arts and Technology, Girls Prep/Public Prep, and the Girl Scouts. Most recently, LaVonna was the Director of Operations with KIPP Philadelphia Elementary Academy.\r\nLaVonna believes her professional and personal work should always be grounded in developing programs, policies, and systems that benefit the individuals that they directly impact, as well as improve the lives and well-being of the connecting communities."", 'title': ""Add LaVonna's bio to the About page"", 'type': 'issue'}
+ {'action': 'created', 'author': 'intersim', 'comment_id': 231872933.0, 'datetime': '2016-07-11 21:35:45+00:00', 'masked_author': 'username_1', 'text': '@username_0 happy to help on this!', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'Roenok', 'comment_id': 231893120.0, 'datetime': '2016-07-11 23:13:27+00:00', 'masked_author': 'username_2', 'text': ""Thanks @username_1! Looks like we'll have an odd number of profiles. Maybe center the new bio below the existing ones?"", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'intersim', 'comment_id': 231907927.0, 'datetime': '2016-07-12 00:48:45+00:00', 'masked_author': 'username_1', 'text': ""@username_2 Looks good to me, I just put in a PR with a center column below the other 2 bios. Here's a screenshot, it's a little zoomed out so the layout would be a little easier to see: \r\n![screen shot 2016-07-11 at 8 47 24 pm](https://cloud.githubusercontent.com/assets/12717458/16751576/c476748c-47a8-11e6-88c0-c5a57faf5571.png)"", 'title': None, 'type': 'comment'}
+ {'action': 'closed', 'author': 'kstack7', 'comment_id': None, 'datetime': '2016-07-12 05:39:14+00:00', 'masked_author': 'username_3', 'text': '', 'title': None, 'type': 'issue'}
+ {'action': 'created', 'author': 'kstack7', 'comment_id': 231943022.0, 'datetime': '2016-07-12 05:45:32+00:00', 'masked_author': 'username_3', 'text': 'Just as a follow-up, you can view the changes on staging: https://girl-develop-it-staging.herokuapp.com/about', 'title': None, 'type': 'comment'}]","<issue_start><issue_comment>Title: Add LaVonna's bio to the About page
+username_0: Please add the following bio for LaVonna:  
+
+**
+![lavonna headshot](https://cloud.githubusercontent.com/assets/8474648/16736975/94b63edc-474c-11e6-83c9-5103a0e306a7.jpg)
+**
+LaVonna Ricketts, Program Director
+LaVonna is committed to organizations that cultivate spreading knowledge, continuous learning, and social impact. She fights to create equal career and educational opportunities for women. 
+LaVonna comes from a background in education. She holds a master’s degree in Education Policy from the University of Pennsylvania, and has worked with an array of education, community, and girls' empowerment organizations, including the Philadelphia Center for Arts and Technology, Girls Prep/Public Prep, and the Girl Scouts. Most recently, LaVonna was the Director of Operations with KIPP Philadelphia Elementary Academy.
+LaVonna believes her professional and personal work should always be grounded in developing programs, policies, and systems that benefit the individuals that they directly impact, as well as improve the lives and well-being of the connecting communities.
+<issue_comment>username_1: @username_0 happy to help on this!
+<issue_comment>username_2: Thanks @username_1! Looks like we'll have an odd number of profiles. Maybe center the new bio below the existing ones?
+<issue_comment>username_1: @username_2 Looks good to me, I just put in a PR with a center column below the other 2 bios. Here's a screenshot, it's a little zoomed out so the layout would be a little easier to see: 
+![screen shot 2016-07-11 at 8 47 24 pm](https://cloud.githubusercontent.com/assets/12717458/16751576/c476748c-47a8-11e6-88c0-c5a57faf5571.png)<issue_closed>
+<issue_comment>username_3: Just as a follow-up, you can view the changes on staging: https://girl-develop-it-staging.herokuapp.com/about"
+elementary/website,503076327,2262,,"[{'action': 'opened', 'author': '4jNsY6fCVqZv', 'comment_id': None, 'datetime': '2019-10-06 09:39:29+00:00', 'masked_author': 'username_0', 'text': 'Do you already host your website & servers with green and sustainable energy?', 'title': 'Fridays for Future & elementary OS website?', 'type': 'issue'}
+ {'action': 'created', 'author': 'lewisgoddard', 'comment_id': 538784460.0, 'datetime': '2019-10-06 20:23:01+00:00', 'masked_author': 'username_1', 'text': '', 'title': None, 'type': 'comment'}
+ {'action': 'closed', 'author': 'danrabbit', 'comment_id': None, 'datetime': '2019-10-06 22:56:48+00:00', 'masked_author': 'username_2', 'text': '', 'title': None, 'type': 'issue'}
+ {'action': 'created', 'author': '4jNsY6fCVqZv', 'comment_id': 539453585.0, 'datetime': '2019-10-08 10:32:12+00:00', 'masked_author': 'username_0', 'text': ""Thank you for your information! But that doesn't really make Digital Ocean a sustainable provider from the ground up, does it? Could you think about switching providers? I am happy to contribute my research work!"", 'title': None, 'type': 'comment'}]","<issue_start><issue_comment>Title: Fridays for Future & elementary OS website?
+username_0: Do you already host your website & servers with green and sustainable energy?<issue_closed>
+<issue_comment>username_0: Thank you for your information! But that doesn't really make Digital Ocean a sustainable provider from the ground up, does it? Could you think about switching providers? I am happy to contribute my research work!"
+jscraftcamp/website,349760381,547,,"[{'action': 'opened', 'author': 'wolframkriesing', 'comment_id': None, 'datetime': '2018-08-11 20:07:36+00:00', 'masked_author': 'username_0', 'text': ""## Why food?\r\n\r\nNo Food, no craftsmanship! Even the best people/coder need a full stomach - help us get some delicious energy-restorings for our guests. Of course as a sponsor you can either have a say in what to serve or you can leave it completely up to us to choose the right developers nutriment. And last year we got them all fed, so it's not as hard as it sounds :).\r\n\r\n## How does it work?\r\n\r\nWe need about 800,- (8,- pP)\r\n\r\nLast year we asked some food companies for offers and had the sponsor confirm that amount up front. Once the food was delivered on the day the sponsor pulled out the credit card and made all attendees happy by enabling them to fill up their stomaches. And boy, they had been happier and their energy levels had been restored and they went for another half a day ... [until the party][party].\r\n\r\n[party]: https://github.com/jscraftcamp/website/issues/201"", 'title': 'Sponsor needed for lunch on Saturday 🍱 🍔 🍕 🌮 🍇', 'type': 'issue'}
+ {'action': 'created', 'author': 'Vannsl', 'comment_id': 470177824.0, 'datetime': '2019-03-06 16:33:04+00:00', 'masked_author': 'username_1', 'text': 'We (SinnerSchrader) will propably pay for the lunch on Saturday (just waiting for the final approval)', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'Vannsl', 'comment_id': 470189758.0, 'datetime': '2019-03-06 17:02:55+00:00', 'masked_author': 'username_1', 'text': '@username_0 would it be okay if you sent SinnerSchrader an invoice?', 'title': None, 'type': 'comment'}
+ {'action': 'closed', 'author': 'wolframkriesing', 'comment_id': None, 'datetime': '2019-05-14 20:04:43+00:00', 'masked_author': 'username_0', 'text': '', 'title': None, 'type': 'issue'}]","<issue_start><issue_comment>Title: Sponsor needed for lunch on Saturday 🍱 🍔 🍕 🌮 🍇
+username_0: ## Why food?
+
+No Food, no craftsmanship! Even the best people/coder need a full stomach - help us get some delicious energy-restorings for our guests. Of course as a sponsor you can either have a say in what to serve or you can leave it completely up to us to choose the right developers nutriment. And last year we got them all fed, so it's not as hard as it sounds :).
+
+## How does it work?
+
+We need about 800,- (8,- pP)
+
+Last year we asked some food companies for offers and had the sponsor confirm that amount up front. Once the food was delivered on the day the sponsor pulled out the credit card and made all attendees happy by enabling them to fill up their stomaches. And boy, they had been happier and their energy levels had been restored and they went for another half a day ... [until the party][party].
+
+[party]: https://github.com/jscraftcamp/website/issues/201
+<issue_comment>username_1: We (SinnerSchrader) will propably pay for the lunch on Saturday (just waiting for the final approval)
+<issue_comment>username_1: @username_0 would it be okay if you sent SinnerSchrader an invoice?<issue_closed>"
+getnikola/nikola,481974401,3291,,"[{'action': 'opened', 'author': 'tdimitrov', 'comment_id': None, 'datetime': '2019-08-18 09:44:56+00:00', 'masked_author': 'username_0', 'text': '<!--\r\nBefore creating an issue:\r\n* make sure you are using an up-to-date version of Nikola\r\n* search for existing issues that might be related\r\n\r\nDescribe your requested features as precisely as possible. -->\r\n\r\nI\'m building few custom pages for a Nikola powered site and I stumbled upon a minor issue. I wanted to override the footer of just one of the pages. As it is a single page CONTENT_FOOTER doesn\'t help, as it will update the content of all pages/posts.\r\n\r\nMy second idea was to add a small template override, similar to this one, but for the footer:\r\n\r\n`<%block name=""extra_head"">\r\n    ${parent.extra_head()}\r\n    <link rel=""stylesheet"" href=""assets/bootstrap-social.css"">\r\n    <link rel=""stylesheet"" href=""https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css"">\r\n</%block>`\r\n\r\nI noticed that no such block exists in base.tmpl:\r\n\r\n`<div class=""container"" id=""content"" role=""main"">\r\n    <div class=""body-content"">\r\n        <!--Body content-->\r\n        ${template_hooks[\'page_header\']()}\r\n        <%block name=""content""></%block>\r\n        <!--End of body content-->\r\n\r\n        <footer id=""footer"">\r\n            ${content_footer}\r\n            ${template_hooks[\'page_footer\']()}\r\n        </footer>\r\n    </div>\r\n</div>`\r\n\r\nDo you think it\'s a good idea to add extra_footer block, which one can easily override for their needs?\r\n\r\nPlease check my PR, it\'s done for bootstrap4 theme.', 'title': 'extra_footer block in base.tmpl', 'type': 'issue'}
+ {'action': 'created', 'author': 'tdimitrov', 'comment_id': 522307051.0, 'datetime': '2019-08-18 09:46:45+00:00', 'masked_author': 'username_0', 'text': 'Link to the PR: https://github.com/getnikola/nikola/pull/3292', 'title': None, 'type': 'comment'}
+ {'action': 'closed', 'author': 'Kwpolska', 'comment_id': None, 'datetime': '2019-10-30 18:58:54+00:00', 'masked_author': 'username_1', 'text': '', 'title': None, 'type': 'issue'}
+ {'action': 'created', 'author': 'Kwpolska', 'comment_id': 548064371.0, 'datetime': '2019-10-30 18:58:54+00:00', 'masked_author': 'username_1', 'text': '#3292 was merged.', 'title': None, 'type': 'comment'}]","<issue_start><issue_comment>Title: extra_footer block in base.tmpl
+username_0: <!--
+Before creating an issue:
+* make sure you are using an up-to-date version of Nikola
+* search for existing issues that might be related
+
+Describe your requested features as precisely as possible. -->
+
+I'm building few custom pages for a Nikola powered site and I stumbled upon a minor issue. I wanted to override the footer of just one of the pages. As it is a single page CONTENT_FOOTER doesn't help, as it will update the content of all pages/posts.
+
+My second idea was to add a small template override, similar to this one, but for the footer:
+
+`<%block name=""extra_head"">
+    ${parent.extra_head()}
+    <link rel=""stylesheet"" href=""assets/bootstrap-social.css"">
+    <link rel=""stylesheet"" href=""https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css"">
+</%block>`
+
+I noticed that no such block exists in base.tmpl:
+
+`<div class=""container"" id=""content"" role=""main"">
+    <div class=""body-content"">
+        <!--Body content-->
+        ${template_hooks['page_header']()}
+        <%block name=""content""></%block>
+        <!--End of body content-->
+
+        <footer id=""footer"">
+            ${content_footer}
+            ${template_hooks['page_footer']()}
+        </footer>
+    </div>
+</div>`
+
+Do you think it's a good idea to add extra_footer block, which one can easily override for their needs?
+
+Please check my PR, it's done for bootstrap4 theme.
+<issue_comment>username_0: Link to the PR: https://github.com/getnikola/nikola/pull/3292<issue_closed>
+<issue_comment>username_1: #3292 was merged."
+facebook/docusaurus,472619741,1699,,"[{'action': 'opened', 'author': 'Saeris', 'comment_id': None, 'datetime': '2019-07-25 01:20:47+00:00', 'masked_author': 'username_0', 'text': ""Hi there! I'm part of the team over at @codesandbox and we've recently been working on a new feature set that allows our users to create their own custom Templates, which like our official templates allows them to quickly start a new project from pre-configured boilerplate code. This functionality is similar to what you might find in a CLI scaffolding tool, such as the one Docusaurus v2 features.\r\n\r\nRecently I took the time to see if Docusaurus v2 would run inside of our container sandboxes, which it indeed does with the minor addition of a `sandbox.config.json` to specify the execution environment (without it, our GitHub importer defaults to react based on the project's dependencies). You can check out an example template here:\r\n\r\nhttps://codesandbox.io/s/docusaurus-template-8hm7z\r\n\r\nThis template was created by first using our GitHub importer, which allows us to take the content of any repository or a subfolder within a repository to quickly create a new sandbox. In this case, I simply ran your CLI tool to generate the new project files and added the above mentioned config file. Here's an example from our templates repository and an import link to create a new sandbox from that repo:\r\n\r\nhttps://github.com/codesandbox/codesandbox-templates/tree/master/packages/container/docusaurus-template\r\n\r\nhttps://codesandbox.io/s/github/codesandbox/codesandbox-templates/tree/master/packages/container/docusaurus-template\r\n\r\nOne of our goals with Templates is that we want to empower framework developers to quickly add and maintain their own templates inside of CodeSandbox, which the community can then subscribe to in order to quickly create new sandboxes. We're still nailing down the exact flow for linking a Template to a GitHub repository, but it is a key milestone on our roadmap as our plan is to move all of our official templates to repositories. The goal here is that we want to provide a better experience for users by allowing both framework maintainers and the open source community to quickly make updates and resolve issues without necessitating involvement on our part.\r\n\r\nSo as far as my proposal goes, Docusaurus could create and maintain their own custom template by adding a new package to the `packages` directory of this repository, which would contain the output from the CLI plus the required config file, similar to the example linked above. I'll keep in contact and provide support in setting up a template based on that package once everything is in place on our end. From there, it would be the Docusaurus team's responsibility to keep that package up to date, which would keep the linked template up to date as well.\r\n\r\nI would very much like to hear your thoughts on this! Any feedback you might have would be highly appreciated!"", 'title': '[v2] Proposal: Official CodeSandbox Template', 'type': 'issue'}
+ {'action': 'created', 'author': 'endiliey', 'comment_id': 515389440.0, 'datetime': '2019-07-26 09:58:02+00:00', 'masked_author': 'username_1', 'text': '@username_0 is it possible to sync it with the template hosted in our repo ? https://github.com/facebook/docusaurus/tree/master/packages/docusaurus-init/templates/classic\r\n\r\nOtherwise it seems that we have to keep sending PR to that repo to be in sync', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'Saeris', 'comment_id': 515410595.0, 'datetime': '2019-07-26 11:01:27+00:00', 'masked_author': 'username_0', 'text': ""@username_1 a quick glance indicates to me that it could be possible. The only thing missing that's a requirement is the `sandbox.config.json` which is required to break out of environment auto-detection to use a node container environment. If it's not too big of a deal to add that to the template, then yes you can just use that.\r\n\r\nWhile not all of your users would want to use CodeSandbox, having that config file will make it easy for them to import their project should they want to."", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'Saeris', 'comment_id': 515411321.0, 'datetime': '2019-07-26 11:04:34+00:00', 'masked_author': 'username_0', 'text': ""@username_1 also the idea here is that your team would maintain the template repo instead of us. I plan to delete the directory in the repository I linked in the original post at a later date. It's just there for now to explore a proof of concept."", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'endiliey', 'comment_id': 515412072.0, 'datetime': '2019-07-26 11:07:49+00:00', 'masked_author': 'username_1', 'text': ""Good idea. Actually that's what we wanted. We want the actual push access to maintain a template repo. Otherwise sending PR to keep it in sync will be very slow.\r\n\r\nWill there be a codesandbox organization repo for templates maybe ? or maybe we can create our own cc @yangshun @wgao19"", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'Saeris', 'comment_id': 515428724.0, 'datetime': '2019-07-26 12:18:15+00:00', 'masked_author': 'username_0', 'text': 'We don\'t want our users to have to rely on us at all as far as linking a template to a github repository goes. You can literally use the [template](https://github.com/facebook/docusaurus/tree/master/packages/docusaurus-init/templates/classic) hosted in your repo which you linked above and all you should need to do to have it published inside CodeSandbox as a custom template is:\r\n\r\n1) have the required config file in the repo,\r\n2) through our app, define a new custom template and link the sandbox to that repository.\r\n\r\nTo clear up any misunderstanding, right now the templates we list inside the create sandbox modal under the Client and Container tabs are the ""official"" templates which we maintain, which we want to move away from. The next step for our rollout of custom templates is to provide users the ability to follow custom templates created by other users, and along with that we\'re going to build out a community page where you can search for and follow community created templates, which will show up under their own tab in the create sandbox modal. This way users can curate which templates they want to use and anyone can publish their own.\r\n\r\nIt\'s simply too cumbersome to maintain a list inside of our organization\'s repos. Ideally we would like to transfer stewardship of the existing ""official"" templates to the maintainers of their respective frameworks, however in some cases (primarily ""Client"" templates), this isn\'t possible yet because they rely on some custom execution logic which we refer to as ""environments"".\r\n\r\nDocusaurus, however, runs inside of our node environment because it relies on complex build tooling to generate site content. Gatsby works in the same way. It would be infeasible to run the entirety of Gatsby\'s build process inside the browser, that\'s why we have it running inside of a docker container instead.\r\n\r\nAs another example, React is a client template, meaning we compile everything inside the browser. A common misconception is that it\'s being compiled by `react-scripts` since it\'s based on `create-react-app`. Since we have to maintain that execution environment ourselves, it\'s not currently possible to transfer maintenance of our React template to the React team. In the future we may have a system that will allow users to build their own client execution environment, but for now all custom client templates must be based on one of the existing official client templates (this is where template auto-detection comes in, our GitHub importer infers what execution environment to use based on dependencies).', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'endiliey', 'comment_id': 515435244.0, 'datetime': '2019-07-26 12:41:26+00:00', 'masked_author': 'username_1', 'text': 'I agree !\r\n\r\nWell i guess the path forward now is just for us to maintain our own template and add the required config and publish it as codesandbox template.', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'Saeris', 'comment_id': 515442854.0, 'datetime': '2019-07-26 13:04:29+00:00', 'masked_author': 'username_0', 'text': 'Yeah I\'ll keep you posted about when we roll out the publishing features!\r\n\r\nAs for the ""official"" templates, those were all added by request or our own initiative. In the future the way we list them may change, as it would make more sense to flag custom templates through an admin interface rather than hard-code them into the app as we do now. Flagging a template as ""official"" could be thought of as like a user verification system like on Twitter. There\'s for sure a lot of room for improvement in this area!', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'slorber', 'comment_id': 702196874.0, 'datetime': '2020-10-01 15:01:47+00:00', 'masked_author': 'username_2', 'text': ""Hi @username_0. I'm late to the party, but found this issue interesting and would like it to be completed.\r\n\r\nDo you still work for CodeSandbox? \r\nDo you have any up-to-date news to share about how we could create an official Docusaurus template on CodeSandbox?\r\n\r\nAs we have MLH interns joining us, that could be a nice task for one of them."", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'Saeris', 'comment_id': 702321320.0, 'datetime': '2020-10-01 18:33:53+00:00', 'masked_author': 'username_0', 'text': 'Hey @username_2! Yeah I\'m no longer officially with the team at CodeSandbox, however I can still be of help. We actually shipped the ability for anyone to create and share their own templates with the community a while back, so it\'s actually quite easy to publish and maintain an official template on your end. Here\'s some reading on that subject:\r\n\r\nhttps://codesandbox.io/post/hello-template-universe-goodbye-project-setup\r\n\r\nhttps://codesandbox.io/docs/templates\r\n\r\nWhen you create a template, you can set it\'s visibility to public, which means that it will show up in the Create Sandbox wizard under the Explore tab when a user searches for ""docusaurus"". That\'s one way to go about it.\r\n\r\nAlternatively, CodeSandbox treats all GitHub imported sandboxes as templates ([more on that here](https://codesandbox.io/docs/git)), so for a project like this I would go with either creating a separate template repository or an example/demo folder in this one which can be imported using the [GitHub Import Wizard](https://codesandbox.io/docs/importing#import-from-github). The only extra step you should need to make that work is to add a `sandbox.config.json` configuration file in the root folder of the example project. That file is used by CodeSandbox to configure the editor environment and override the default sandbox execution environment detection. In this case, you want to specify that this is a `node` template. While CodeSandbox uses some heuristics to figure this out on it\'s own, a lot of the time it defaults to `create-react-app`, which wouldn\'t work for this particular project. Here\'s the config from the example template I linked in my original post;\r\n\r\n```json\r\n{\r\n  ""infiniteLoopProtection"": true,\r\n  ""hardReloadOnChange"": false,\r\n  ""view"": ""browser"",\r\n  ""template"": ""node""\r\n}\r\n```\r\n\r\nTo get the template you create added to one of the curated lists in the Create Sandbox Wizard, you would need to reach out to the folks at CodeSandbox directly and request it. Opening an issue in [their repository](https://github.com/codesandbox/codesandbox-client/issues) should work. Include a link to the template you create in that post.\r\n\r\nSo to summarize that in a few steps:\r\n\r\n1) create a template repository or example/demo folder in this repository\r\n2) place the starter files there (whatever the default files for a new docusaurus app are)\r\n3) create a `sandbox.config.json` and place it in the same root directory as the starter files\r\n4) verify that that repository can be imported using CodeSandbox\'s import wizard\r\n5) copy the link to that GitHub imported sandbox\r\n6) file a new issue requesting that sandbox be added to one of the curated sandbox lists\r\n\r\nTo maintain that template, all you should need to do is commit changes to the files created in step 2. Those changes will be picked up by CodeSandbox automatically, no further interaction with their team should be necessary.\r\n\r\nHope that helps!', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'slorber', 'comment_id': 702768038.0, 'datetime': '2020-10-02 14:31:40+00:00', 'masked_author': 'username_2', 'text': 'Thanks for all these infos @username_0 👍 \r\n\r\nWhat I think we could do is:\r\n- Use our docusaurus-init cli to create the `./codeSandboxTemplates/docusaurus-init` folder\r\n- Add `./codeSandboxTemplates/docusaurus-init/sandbox.config.json`\r\n- Ensure the template dependency versions are bumped when we release new versions to keep it up to date\r\n- Have a command to ""regen"" the template from the docusaurus-init cli, so that it\'s kept up to date from time to time (we don\'t change the init template very often)\r\n\r\nAlso, I\'ll see if we could get a `docusaurus.new` domain registered that link to that code sandbox.\r\n\r\nDoes it make sense to you?', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'Saeris', 'comment_id': 702819681.0, 'datetime': '2020-10-02 16:05:42+00:00', 'masked_author': 'username_0', 'text': ""That sounds good to me! Let me know if you have any other questions and I'll do my best to come up with solutions."", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'sammychinedu2ky', 'comment_id': 718132126.0, 'datetime': '2020-10-28 18:39:33+00:00', 'masked_author': 'username_3', 'text': ""I'm going to work on this issue"", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'sammychinedu2ky', 'comment_id': 725225081.0, 'datetime': '2020-11-11 06:16:51+00:00', 'masked_author': 'username_3', 'text': '#3717', 'title': None, 'type': 'comment'}
+ {'action': 'closed', 'author': 'slorber', 'comment_id': None, 'datetime': '2020-11-16 15:20:17+00:00', 'masked_author': 'username_2', 'text': '', 'title': None, 'type': 'issue'}
+ {'action': 'created', 'author': 'slorber', 'comment_id': 728157316.0, 'datetime': '2020-11-16 16:04:42+00:00', 'masked_author': 'username_2', 'text': ""Let's keep it open for now,  as we need:\r\n- Add documentation, highlight the ease to try Docusaurus (why not embedded codesandbox in Docusaurus 🤪 )\r\n- Ask for adding it to official templates (https://github.com/codesandbox/codesandbox-client/issues/5135)\r\n- docusaurus.new domain?"", 'title': None, 'type': 'comment'}
+ {'action': 'reopened', 'author': 'slorber', 'comment_id': None, 'datetime': '2020-11-16 16:18:35+00:00', 'masked_author': 'username_2', 'text': ""Hi there! I'm part of the team over at @codesandbox and we've recently been working on a new feature set that allows our users to create their own custom Templates, which like our official templates allows them to quickly start a new project from pre-configured boilerplate code. This functionality is similar to what you might find in a CLI scaffolding tool, such as the one Docusaurus v2 features.\r\n\r\nRecently I took the time to see if Docusaurus v2 would run inside of our container sandboxes, which it indeed does with the minor addition of a `sandbox.config.json` to specify the execution environment (without it, our GitHub importer defaults to react based on the project's dependencies). You can check out an example template here:\r\n\r\nhttps://codesandbox.io/s/docusaurus-template-8hm7z\r\n\r\nThis template was created by first using our GitHub importer, which allows us to take the content of any repository or a subfolder within a repository to quickly create a new sandbox. In this case, I simply ran your CLI tool to generate the new project files and added the above mentioned config file. Here's an example from our templates repository and an import link to create a new sandbox from that repo:\r\n\r\nhttps://github.com/codesandbox/codesandbox-templates/tree/master/packages/container/docusaurus-template\r\n\r\nhttps://codesandbox.io/s/github/codesandbox/codesandbox-templates/tree/master/packages/container/docusaurus-template\r\n\r\nOne of our goals with Templates is that we want to empower framework developers to quickly add and maintain their own templates inside of CodeSandbox, which the community can then subscribe to in order to quickly create new sandboxes. We're still nailing down the exact flow for linking a Template to a GitHub repository, but it is a key milestone on our roadmap as our plan is to move all of our official templates to repositories. The goal here is that we want to provide a better experience for users by allowing both framework maintainers and the open source community to quickly make updates and resolve issues without necessitating involvement on our part.\r\n\r\nSo as far as my proposal goes, Docusaurus could create and maintain their own custom template by adding a new package to the `packages` directory of this repository, which would contain the output from the CLI plus the required config file, similar to the example linked above. I'll keep in contact and provide support in setting up a template based on that package once everything is in place on our end. From there, it would be the Docusaurus team's responsibility to keep that package up to date, which would keep the linked template up to date as well.\r\n\r\nI would very much like to hear your thoughts on this! Any feedback you might have would be highly appreciated!"", 'title': '[v2] Proposal: Official CodeSandbox Template', 'type': 'issue'}
+ {'action': 'created', 'author': 'sammychinedu2ky', 'comment_id': 728742694.0, 'datetime': '2020-11-17 07:31:05+00:00', 'masked_author': 'username_3', 'text': ""Awesome. So I guess I would have to wait till it's ready before I document. Since I would be making reference to the official template in codesandbox during documentation"", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'sammychinedu2ky', 'comment_id': 746050517.0, 'datetime': '2020-12-16 10:26:46+00:00', 'masked_author': 'username_3', 'text': '`Ask for adding it to official templates`\r\nPlease is there any update on adding Docusaurus to the official templates on CodeSandbox', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'slorber', 'comment_id': 746475449.0, 'datetime': '2020-12-16 15:28:21+00:00', 'masked_author': 'username_2', 'text': ""@username_3 unfortunately no 😅 \r\n\r\nI don't have more infos that what is written here: https://github.com/codesandbox/codesandbox-client/issues/5135"", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'sammychinedu2ky', 'comment_id': 746498737.0, 'datetime': '2020-12-16 15:41:43+00:00', 'masked_author': 'username_3', 'text': 'chai... ok I just made a comment on the issue you linked 😅', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'slorber', 'comment_id': 761855622.0, 'datetime': '2021-01-17 18:15:52+00:00', 'masked_author': 'username_2', 'text': ""Hi @username_3 \r\n\r\nUntil the CodeSandbox PR is merged, I was able to get a subdomain redirecting to the up to date classic template: new.docusaurus.io\r\n\r\nIf you want to add some doc about it let me know, otherwise, I'll do it within next week."", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'sammychinedu2ky', 'comment_id': 761894714.0, 'datetime': '2021-01-17 22:50:36+00:00', 'masked_author': 'username_3', 'text': 'Alright thanks for the update. I would work on that😁', 'title': None, 'type': 'comment'}
+ {'action': 'closed', 'author': 'slorber', 'comment_id': None, 'datetime': '2021-01-19 15:00:08+00:00', 'masked_author': 'username_2', 'text': '', 'title': None, 'type': 'issue'}]","<issue_start><issue_comment>Title: [v2] Proposal: Official CodeSandbox Template
+username_0: Hi there! I'm part of the team over at @codesandbox and we've recently been working on a new feature set that allows our users to create their own custom Templates, which like our official templates allows them to quickly start a new project from pre-configured boilerplate code. This functionality is similar to what you might find in a CLI scaffolding tool, such as the one Docusaurus v2 features.
+
+Recently I took the time to see if Docusaurus v2 would run inside of our container sandboxes, which it indeed does with the minor addition of a `sandbox.config.json` to specify the execution environment (without it, our GitHub importer defaults to react based on the project's dependencies). You can check out an example template here:
+
+https://codesandbox.io/s/docusaurus-template-8hm7z
+
+This template was created by first using our GitHub importer, which allows us to take the content of any repository or a subfolder within a repository to quickly create a new sandbox. In this case, I simply ran your CLI tool to generate the new project files and added the above mentioned config file. Here's an example from our templates repository and an import link to create a new sandbox from that repo:
+
+https://github.com/codesandbox/codesandbox-templates/tree/master/packages/container/docusaurus-template
+
+https://codesandbox.io/s/github/codesandbox/codesandbox-templates/tree/master/packages/container/docusaurus-template
+
+One of our goals with Templates is that we want to empower framework developers to quickly add and maintain their own templates inside of CodeSandbox, which the community can then subscribe to in order to quickly create new sandboxes. We're still nailing down the exact flow for linking a Template to a GitHub repository, but it is a key milestone on our roadmap as our plan is to move all of our official templates to repositories. The goal here is that we want to provide a better experience for users by allowing both framework maintainers and the open source community to quickly make updates and resolve issues without necessitating involvement on our part.
+
+So as far as my proposal goes, Docusaurus could create and maintain their own custom template by adding a new package to the `packages` directory of this repository, which would contain the output from the CLI plus the required config file, similar to the example linked above. I'll keep in contact and provide support in setting up a template based on that package once everything is in place on our end. From there, it would be the Docusaurus team's responsibility to keep that package up to date, which would keep the linked template up to date as well.
+
+I would very much like to hear your thoughts on this! Any feedback you might have would be highly appreciated!
+<issue_comment>username_1: @username_0 is it possible to sync it with the template hosted in our repo ? https://github.com/facebook/docusaurus/tree/master/packages/docusaurus-init/templates/classic
+
+Otherwise it seems that we have to keep sending PR to that repo to be in sync
+<issue_comment>username_0: @username_1 a quick glance indicates to me that it could be possible. The only thing missing that's a requirement is the `sandbox.config.json` which is required to break out of environment auto-detection to use a node container environment. If it's not too big of a deal to add that to the template, then yes you can just use that.
+
+While not all of your users would want to use CodeSandbox, having that config file will make it easy for them to import their project should they want to.
+<issue_comment>username_0: @username_1 also the idea here is that your team would maintain the template repo instead of us. I plan to delete the directory in the repository I linked in the original post at a later date. It's just there for now to explore a proof of concept.
+<issue_comment>username_1: Good idea. Actually that's what we wanted. We want the actual push access to maintain a template repo. Otherwise sending PR to keep it in sync will be very slow.
+
+Will there be a codesandbox organization repo for templates maybe ? or maybe we can create our own cc @yangshun @wgao19
+<issue_comment>username_0: We don't want our users to have to rely on us at all as far as linking a template to a github repository goes. You can literally use the [template](https://github.com/facebook/docusaurus/tree/master/packages/docusaurus-init/templates/classic) hosted in your repo which you linked above and all you should need to do to have it published inside CodeSandbox as a custom template is:
+
+1) have the required config file in the repo,
+2) through our app, define a new custom template and link the sandbox to that repository.
+
+To clear up any misunderstanding, right now the templates we list inside the create sandbox modal under the Client and Container tabs are the ""official"" templates which we maintain, which we want to move away from. The next step for our rollout of custom templates is to provide users the ability to follow custom templates created by other users, and along with that we're going to build out a community page where you can search for and follow community created templates, which will show up under their own tab in the create sandbox modal. This way users can curate which templates they want to use and anyone can publish their own.
+
+It's simply too cumbersome to maintain a list inside of our organization's repos. Ideally we would like to transfer stewardship of the existing ""official"" templates to the maintainers of their respective frameworks, however in some cases (primarily ""Client"" templates), this isn't possible yet because they rely on some custom execution logic which we refer to as ""environments"".
+
+Docusaurus, however, runs inside of our node environment because it relies on complex build tooling to generate site content. Gatsby works in the same way. It would be infeasible to run the entirety of Gatsby's build process inside the browser, that's why we have it running inside of a docker container instead.
+
+As another example, React is a client template, meaning we compile everything inside the browser. A common misconception is that it's being compiled by `react-scripts` since it's based on `create-react-app`. Since we have to maintain that execution environment ourselves, it's not currently possible to transfer maintenance of our React template to the React team. In the future we may have a system that will allow users to build their own client execution environment, but for now all custom client templates must be based on one of the existing official client templates (this is where template auto-detection comes in, our GitHub importer infers what execution environment to use based on dependencies).
+<issue_comment>username_1: I agree !
+
+Well i guess the path forward now is just for us to maintain our own template and add the required config and publish it as codesandbox template.
+<issue_comment>username_0: Yeah I'll keep you posted about when we roll out the publishing features!
+
+As for the ""official"" templates, those were all added by request or our own initiative. In the future the way we list them may change, as it would make more sense to flag custom templates through an admin interface rather than hard-code them into the app as we do now. Flagging a template as ""official"" could be thought of as like a user verification system like on Twitter. There's for sure a lot of room for improvement in this area!
+<issue_comment>username_2: Hi @username_0. I'm late to the party, but found this issue interesting and would like it to be completed.
+
+Do you still work for CodeSandbox? 
+Do you have any up-to-date news to share about how we could create an official Docusaurus template on CodeSandbox?
+
+As we have MLH interns joining us, that could be a nice task for one of them.
+<issue_comment>username_0: Hey @username_2! Yeah I'm no longer officially with the team at CodeSandbox, however I can still be of help. We actually shipped the ability for anyone to create and share their own templates with the community a while back, so it's actually quite easy to publish and maintain an official template on your end. Here's some reading on that subject:
+
+https://codesandbox.io/post/hello-template-universe-goodbye-project-setup
+
+https://codesandbox.io/docs/templates
+
+When you create a template, you can set it's visibility to public, which means that it will show up in the Create Sandbox wizard under the Explore tab when a user searches for ""docusaurus"". That's one way to go about it.
+
+Alternatively, CodeSandbox treats all GitHub imported sandboxes as templates ([more on that here](https://codesandbox.io/docs/git)), so for a project like this I would go with either creating a separate template repository or an example/demo folder in this one which can be imported using the [GitHub Import Wizard](https://codesandbox.io/docs/importing#import-from-github). The only extra step you should need to make that work is to add a `sandbox.config.json` configuration file in the root folder of the example project. That file is used by CodeSandbox to configure the editor environment and override the default sandbox execution environment detection. In this case, you want to specify that this is a `node` template. While CodeSandbox uses some heuristics to figure this out on it's own, a lot of the time it defaults to `create-react-app`, which wouldn't work for this particular project. Here's the config from the example template I linked in my original post;
+
+```json
+{
+  ""infiniteLoopProtection"": true,
+  ""hardReloadOnChange"": false,
+  ""view"": ""browser"",
+  ""template"": ""node""
+}
+```
+
+To get the template you create added to one of the curated lists in the Create Sandbox Wizard, you would need to reach out to the folks at CodeSandbox directly and request it. Opening an issue in [their repository](https://github.com/codesandbox/codesandbox-client/issues) should work. Include a link to the template you create in that post.
+
+So to summarize that in a few steps:
+
+1) create a template repository or example/demo folder in this repository
+2) place the starter files there (whatever the default files for a new docusaurus app are)
+3) create a `sandbox.config.json` and place it in the same root directory as the starter files
+4) verify that that repository can be imported using CodeSandbox's import wizard
+5) copy the link to that GitHub imported sandbox
+6) file a new issue requesting that sandbox be added to one of the curated sandbox lists
+
+To maintain that template, all you should need to do is commit changes to the files created in step 2. Those changes will be picked up by CodeSandbox automatically, no further interaction with their team should be necessary.
+
+Hope that helps!
+<issue_comment>username_2: Thanks for all these infos @username_0 👍 
+
+What I think we could do is:
+- Use our docusaurus-init cli to create the `./codeSandboxTemplates/docusaurus-init` folder
+- Add `./codeSandboxTemplates/docusaurus-init/sandbox.config.json`
+- Ensure the template dependency versions are bumped when we release new versions to keep it up to date
+- Have a command to ""regen"" the template from the docusaurus-init cli, so that it's kept up to date from time to time (we don't change the init template very often)
+
+Also, I'll see if we could get a `docusaurus.new` domain registered that link to that code sandbox.
+
+Does it make sense to you?
+<issue_comment>username_0: That sounds good to me! Let me know if you have any other questions and I'll do my best to come up with solutions.
+<issue_comment>username_3: I'm going to work on this issue
+<issue_comment>username_3: #3717<issue_closed>
+<issue_comment>username_2: Let's keep it open for now,  as we need:
+- Add documentation, highlight the ease to try Docusaurus (why not embedded codesandbox in Docusaurus 🤪 )
+- Ask for adding it to official templates (https://github.com/codesandbox/codesandbox-client/issues/5135)
+- docusaurus.new domain?
+<issue_comment>username_2: Hi there! I'm part of the team over at @codesandbox and we've recently been working on a new feature set that allows our users to create their own custom Templates, which like our official templates allows them to quickly start a new project from pre-configured boilerplate code. This functionality is similar to what you might find in a CLI scaffolding tool, such as the one Docusaurus v2 features.
+
+Recently I took the time to see if Docusaurus v2 would run inside of our container sandboxes, which it indeed does with the minor addition of a `sandbox.config.json` to specify the execution environment (without it, our GitHub importer defaults to react based on the project's dependencies). You can check out an example template here:
+
+https://codesandbox.io/s/docusaurus-template-8hm7z
+
+This template was created by first using our GitHub importer, which allows us to take the content of any repository or a subfolder within a repository to quickly create a new sandbox. In this case, I simply ran your CLI tool to generate the new project files and added the above mentioned config file. Here's an example from our templates repository and an import link to create a new sandbox from that repo:
+
+https://github.com/codesandbox/codesandbox-templates/tree/master/packages/container/docusaurus-template
+
+https://codesandbox.io/s/github/codesandbox/codesandbox-templates/tree/master/packages/container/docusaurus-template
+
+One of our goals with Templates is that we want to empower framework developers to quickly add and maintain their own templates inside of CodeSandbox, which the community can then subscribe to in order to quickly create new sandboxes. We're still nailing down the exact flow for linking a Template to a GitHub repository, but it is a key milestone on our roadmap as our plan is to move all of our official templates to repositories. The goal here is that we want to provide a better experience for users by allowing both framework maintainers and the open source community to quickly make updates and resolve issues without necessitating involvement on our part.
+
+So as far as my proposal goes, Docusaurus could create and maintain their own custom template by adding a new package to the `packages` directory of this repository, which would contain the output from the CLI plus the required config file, similar to the example linked above. I'll keep in contact and provide support in setting up a template based on that package once everything is in place on our end. From there, it would be the Docusaurus team's responsibility to keep that package up to date, which would keep the linked template up to date as well.
+
+I would very much like to hear your thoughts on this! Any feedback you might have would be highly appreciated!
+<issue_comment>username_3: Awesome. So I guess I would have to wait till it's ready before I document. Since I would be making reference to the official template in codesandbox during documentation
+<issue_comment>username_3: `Ask for adding it to official templates`
+Please is there any update on adding Docusaurus to the official templates on CodeSandbox
+<issue_comment>username_2: @username_3 unfortunately no 😅 
+
+I don't have more infos that what is written here: https://github.com/codesandbox/codesandbox-client/issues/5135
+<issue_comment>username_3: chai... ok I just made a comment on the issue you linked 😅
+<issue_comment>username_2: Hi @username_3 
+
+Until the CodeSandbox PR is merged, I was able to get a subdomain redirecting to the up to date classic template: new.docusaurus.io
+
+If you want to add some doc about it let me know, otherwise, I'll do it within next week.
+<issue_comment>username_3: Alright thanks for the update. I would work on that😁<issue_closed>"
+GDQuest/website,534976676,126,"{'number': 126.0, 'repo': 'website', 'user_login': 'GDQuest'}","[{'action': 'opened', 'author': 'razcore-art', 'comment_id': None, 'datetime': '2019-12-09T14:42:22Z', 'masked_author': 'username_0', 'text': ""- [x] moved (i.e. removed the other location - open-source folder)\r\n  documentation from posts to docs (hugo-theme-learn)\r\n- [x] added GDQuest logo\r\n- [x] organized menu:\r\n  * Guides\r\n    + Make Games with Godot\r\n      - Beginner Edition\r\n      - Developer Edition\r\n  * Guidelines\r\n    + GDQuest's Best Practices\r\n      - Communication\r\n      - Godot - GDScript\r\n      - Blender - Python\r\n      - Making Videos\r\n    + Contributing to\r\n      - GDQuest Projects\r\n      - Make Games with Godot Guides\r\n  * Blender Power Sequencer\r\n    + Documentation\r\n  * Cheatsheets\r\n    + Spacemacs\r\n- [x] change theme variation to blue (not that we discussed about this...)\r\n- [x] add main page menu entry for docs\r\n- [ ] write chapters & pages to tie the documents together\r\n- took the liberty to reorganize the main menu:\r\n1. products\r\n2. news\r\n3. tuts\r\n4. docs\r\n5. about\r\n\r\ncloses #125"", 'title': 'Feature/docs', 'type': 'issue'}
+ {'action': 'created', 'author': 'razcore-art', 'comment_id': 563270821.0, 'datetime': '2019-12-09 14:45:30+00:00', 'masked_author': 'username_0', 'text': 'Forgot to select **DRAFT** option, but this is a **DRAFT** - some content still needs to be written, other (power sequencer) needs to be rewritten.', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'razcore-art', 'comment_id': 563283781.0, 'datetime': '2019-12-09 15:11:52+00:00', 'masked_author': 'username_0', 'text': ""I think we need to change the link on the logo to point to the docs root page and not the main site as it's a bit counter-intuitive I feel. We instead can extend the menu with extra entries that go back or to other places (like the shop etc.)"", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'NathanLovato', 'comment_id': 563291179.0, 'datetime': '2019-12-09 15:26:29+00:00', 'masked_author': 'username_1', 'text': 'To me it\'s good as it is, going back to the homepage:\r\n\r\n1. It\'s consistent with the rest of the website\r\n2. The logo says GDQuest, it takes you to the GDQuest website\r\n\r\nThere should probably be two ways at least to get back to the main site. This logo _and_ a menu entry with explicit text, e.g. ""Back to GDQuest.com"" or ""Back to the Website"", something that makes sense for visitors.', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'razcore-art', 'comment_id': 563295508.0, 'datetime': '2019-12-09 15:36:23+00:00', 'masked_author': 'username_0', 'text': 'The reason I said that about the logo is that there\'s no way to go to the main docs page except for the entry in the breadcrums at the top:\r\n![image](https://user-images.githubusercontent.com/1177508/70449206-4efa2400-1aaa-11ea-8782-3dbb74373992.png)\r\n\r\nWe then should include something in the menu as well, like ""Back to GDQuest.com""', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'NathanLovato', 'comment_id': 563295816.0, 'datetime': '2019-12-09 15:37:06+00:00', 'masked_author': 'username_1', 'text': 'The main thing I see at the moment is you deleted files but didn\'t set up aliases in the moved files\' front matter. We need them, otherwise, we\'ll get dead links on search engines and error reports. The alias should point to the content\'s old location relative to the `content/` directory.\r\n\r\nSome minor remarks:\r\n\r\n- I\'d remove the hyphens in page titles. E.g. `Godot - GDScriopt` -> `Godot GDScript`\r\n- `GDQuest\'s Best Practices` -> `Best Practices`. I think our best practices are meant for everyone, and it\'s already on the GDQuest website.\r\n\r\nYou put your two guides in these docs. They\'re not really documentation to me, I think they fit the tutorials section a bit more. The reason is I think visitors may go to tutorials way more naturally than check the ""docs"". The tutorial section isn\'t incredible UX-wise but we\'ll get to improving it as well.', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'razcore-art', 'comment_id': 563296127.0, 'datetime': '2019-12-09 15:37:49+00:00', 'masked_author': 'username_0', 'text': 'Or another idea is to have a logo for the docs: GDQuest Documents (this is how I\'m renaming it by the way, instead of ""Learn with GDQuest"", as it\'s more generic). And then it makes sense to click on the logo and have it go back to the main docs index page.', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'razcore-art', 'comment_id': 563296828.0, 'datetime': '2019-12-09 15:39:28+00:00', 'masked_author': 'username_0', 'text': ""Alright, I'll keep that in mind and bring back the aliases."", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'razcore-art', 'comment_id': 563297824.0, 'datetime': '2019-12-09 15:41:43+00:00', 'masked_author': 'username_0', 'text': ""I'm not entirely sure having 2 pages for the power sequencer:\r\n\r\n- Blender Power Sequencer\r\n  - Documentation\r\n\r\nIf we had more than documentation it would make sense to have a chapter like this but without it... don't know, it seems like an extra click to get to the actual content. I'm thinking that the Blender Power Sequencer page can be a (news) post, while the power sequencer documentation can be in the docs."", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'razcore-art', 'comment_id': 563299291.0, 'datetime': '2019-12-09 15:45:06+00:00', 'masked_author': 'username_0', 'text': ""On the other hand the theme is meant to be used with chapters and that's the reason why I kept a chapter for `Cheatsheets` although there's only one in there at the moment - `Spacemacs`.\r\n\r\nAnother idea is to have:\r\n\r\n- Documents\r\n  - Blender Power Sequencer\r\n\r\nSo the other way around and other documents could go in there with time."", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'NathanLovato', 'comment_id': 563300366.0, 'datetime': '2019-12-09 15:47:32+00:00', 'masked_author': 'username_1', 'text': ""Documentation is a quick reference, it shouldn't be the only page. There should certainly be a page to explain what Power Sequencer is and how to use its docs. I'm also still looking to make videos for the team to talk more about workflow, e.g. cutting and trimming. So it shouldn't stay as a single page either moving forward.\r\n\r\nThe front page shouldn't be a news post as it'll sink and get lost in the website's archives. For someone exploring our website, who won't necessarily know we make different tools, they'll need a page to give them context on what power sequencer is. I should probably rework that page to fit the docs though."", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'razcore-art', 'comment_id': 563301637.0, 'datetime': '2019-12-09 15:50:27+00:00', 'masked_author': 'username_0', 'text': 'So the theme can have multiple levels in the menu as you can see with the `Guidelines` where we have `Contributing to` & `Best Practices` so what about something like:\r\n\r\n- Documents (or Docs)\r\n  - Blender Power Sequencer\r\n    - Entry 1\r\n    - Entry 2\r\n  - Godot Steering Toolkit\r\n  - Etc.', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'razcore-art', 'comment_id': 563303693.0, 'datetime': '2019-12-09 15:55:07+00:00', 'masked_author': 'username_0', 'text': 'I suppose the reason why I added ""Learn Godot"" to this part of the site is cause they were under `open-source` from where other documents ended up here. Didn\'t think about the tutorials section at the time.', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'razcore-art', 'comment_id': 563477790.0, 'datetime': '2019-12-09 22:54:55+00:00', 'masked_author': 'username_0', 'text': ""So because the blender power sequencer reference document is written as a shortcode, there's no way to easily generate the TOC so we need a better way. My simple fix would be to just rewrite the Python script to generate the Markdown directly instead of the JSON data. Should be simple enough as Markdown is super basic."", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'razcore-art', 'comment_id': 563487160.0, 'datetime': '2019-12-09 23:26:21+00:00', 'masked_author': 'username_0', 'text': ""In the end I rewrote `toc.html` partial, it wasn't difficult. I'm just not sure about the layout of the TOC, it's a very long list, but I don't know what other options we have."", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'razcore-art', 'comment_id': 563931158.0, 'datetime': '2019-12-10 08:51:57+00:00', 'masked_author': 'username_0', 'text': ""Alright, I'm done with this @username_1"", 'title': None, 'type': 'comment'}]","<issue_start><issue_comment>Title: Feature/docs
+username_0: - [x] moved (i.e. removed the other location - open-source folder)
+  documentation from posts to docs (hugo-theme-learn)
+- [x] added GDQuest logo
+- [x] organized menu:
+  * Guides
+    + Make Games with Godot
+      - Beginner Edition
+      - Developer Edition
+  * Guidelines
+    + GDQuest's Best Practices
+      - Communication
+      - Godot - GDScript
+      - Blender - Python
+      - Making Videos
+    + Contributing to
+      - GDQuest Projects
+      - Make Games with Godot Guides
+  * Blender Power Sequencer
+    + Documentation
+  * Cheatsheets
+    + Spacemacs
+- [x] change theme variation to blue (not that we discussed about this...)
+- [x] add main page menu entry for docs
+- [ ] write chapters & pages to tie the documents together
+- took the liberty to reorganize the main menu:
+1. products
+2. news
+3. tuts
+4. docs
+5. about
+
+closes #125
+<issue_comment>username_0: Forgot to select **DRAFT** option, but this is a **DRAFT** - some content still needs to be written, other (power sequencer) needs to be rewritten.
+<issue_comment>username_0: I think we need to change the link on the logo to point to the docs root page and not the main site as it's a bit counter-intuitive I feel. We instead can extend the menu with extra entries that go back or to other places (like the shop etc.)
+<issue_comment>username_1: To me it's good as it is, going back to the homepage:
+
+1. It's consistent with the rest of the website
+2. The logo says GDQuest, it takes you to the GDQuest website
+
+There should probably be two ways at least to get back to the main site. This logo _and_ a menu entry with explicit text, e.g. ""Back to GDQuest.com"" or ""Back to the Website"", something that makes sense for visitors.
+<issue_comment>username_0: The reason I said that about the logo is that there's no way to go to the main docs page except for the entry in the breadcrums at the top:
+![image](https://user-images.githubusercontent.com/1177508/70449206-4efa2400-1aaa-11ea-8782-3dbb74373992.png)
+
+We then should include something in the menu as well, like ""Back to GDQuest.com""
+<issue_comment>username_1: The main thing I see at the moment is you deleted files but didn't set up aliases in the moved files' front matter. We need them, otherwise, we'll get dead links on search engines and error reports. The alias should point to the content's old location relative to the `content/` directory.
+
+Some minor remarks:
+
+- I'd remove the hyphens in page titles. E.g. `Godot - GDScriopt` -> `Godot GDScript`
+- `GDQuest's Best Practices` -> `Best Practices`. I think our best practices are meant for everyone, and it's already on the GDQuest website.
+
+You put your two guides in these docs. They're not really documentation to me, I think they fit the tutorials section a bit more. The reason is I think visitors may go to tutorials way more naturally than check the ""docs"". The tutorial section isn't incredible UX-wise but we'll get to improving it as well.
+<issue_comment>username_0: Or another idea is to have a logo for the docs: GDQuest Documents (this is how I'm renaming it by the way, instead of ""Learn with GDQuest"", as it's more generic). And then it makes sense to click on the logo and have it go back to the main docs index page.
+<issue_comment>username_0: Alright, I'll keep that in mind and bring back the aliases.
+<issue_comment>username_0: I'm not entirely sure having 2 pages for the power sequencer:
+
+- Blender Power Sequencer
+  - Documentation
+
+If we had more than documentation it would make sense to have a chapter like this but without it... don't know, it seems like an extra click to get to the actual content. I'm thinking that the Blender Power Sequencer page can be a (news) post, while the power sequencer documentation can be in the docs.
+<issue_comment>username_0: On the other hand the theme is meant to be used with chapters and that's the reason why I kept a chapter for `Cheatsheets` although there's only one in there at the moment - `Spacemacs`.
+
+Another idea is to have:
+
+- Documents
+  - Blender Power Sequencer
+
+So the other way around and other documents could go in there with time.
+<issue_comment>username_1: Documentation is a quick reference, it shouldn't be the only page. There should certainly be a page to explain what Power Sequencer is and how to use its docs. I'm also still looking to make videos for the team to talk more about workflow, e.g. cutting and trimming. So it shouldn't stay as a single page either moving forward.
+
+The front page shouldn't be a news post as it'll sink and get lost in the website's archives. For someone exploring our website, who won't necessarily know we make different tools, they'll need a page to give them context on what power sequencer is. I should probably rework that page to fit the docs though.
+<issue_comment>username_0: So the theme can have multiple levels in the menu as you can see with the `Guidelines` where we have `Contributing to` & `Best Practices` so what about something like:
+
+- Documents (or Docs)
+  - Blender Power Sequencer
+    - Entry 1
+    - Entry 2
+  - Godot Steering Toolkit
+  - Etc.
+<issue_comment>username_0: I suppose the reason why I added ""Learn Godot"" to this part of the site is cause they were under `open-source` from where other documents ended up here. Didn't think about the tutorials section at the time.
+<issue_comment>username_0: So because the blender power sequencer reference document is written as a shortcode, there's no way to easily generate the TOC so we need a better way. My simple fix would be to just rewrite the Python script to generate the Markdown directly instead of the JSON data. Should be simple enough as Markdown is super basic.
+<issue_comment>username_0: In the end I rewrote `toc.html` partial, it wasn't difficult. I'm just not sure about the layout of the TOC, it's a very long list, but I don't know what other options we have.
+<issue_comment>username_0: Alright, I'm done with this @username_1"
+gohugoio/hugo,251958651,3823,,"[{'action': 'opened', 'author': 'the1900', 'comment_id': None, 'datetime': '2017-08-22 13:33:41+00:00', 'masked_author': 'username_0', 'text': 'This is output from latest release version for windows. \r\n\r\n``` bash\r\n$ hugo version\r\nHugo Static Site Generator v0.20 windows/amd64 BuildDate: 2017-04-10T07:14:04+09:00\r\n```\r\n\r\nIs this just wrong number or something has a problem with deploy system?', 'title': 'Is windows version of hugo trustfully 0.26?', 'type': 'issue'}
+ {'action': 'created', 'author': 'bep', 'comment_id': 324038991.0, 'datetime': '2017-08-22 14:12:38+00:00', 'masked_author': 'username_1', 'text': 'Since you are the first to complain, I would suggest a third option: You have an old version floating around in the `PATH`. Try `./hugo version`.', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'the1900', 'comment_id': 324044607.0, 'datetime': '2017-08-22 14:30:47+00:00', 'masked_author': 'username_0', 'text': '@username_1  Right before, I downloaded from https://github.com/gohugoio/hugo/releases/download/v0.26/hugo_0.26_Windows-64bit.zip and run `hugo version` \r\n\r\nThe result on powershell.\r\n``` powershell\r\nPS D:\\Desktop2\\hugo_0.26_Windows-64bit> hugo version\r\nHugo Static Site Generator v0.20 windows/amd64 BuildDate: 2017-04-10T07:14:04+09:00\r\nPS D:\\Desktop2\\hugo_0.26_Windows-64bit>\r\n```', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'bep', 'comment_id': 324054719.0, 'datetime': '2017-08-22 15:02:48+00:00', 'masked_author': 'username_1', 'text': 'Try my suggestion exactly as I wrote it.', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'the1900', 'comment_id': 324055969.0, 'datetime': '2017-08-22 15:06:49+00:00', 'masked_author': 'username_0', 'text': ""Oh I'm sorry it was my mistake. I didn't realize there is a more hugo binary in my path.\r\nThanks ."", 'title': None, 'type': 'comment'}
+ {'action': 'closed', 'author': 'the1900', 'comment_id': None, 'datetime': '2017-08-22 15:06:59+00:00', 'masked_author': 'username_0', 'text': '', 'title': None, 'type': 'issue'}]","<issue_start><issue_comment>Title: Is windows version of hugo trustfully 0.26?
+username_0: This is output from latest release version for windows. 
+
+``` bash
+$ hugo version
+Hugo Static Site Generator v0.20 windows/amd64 BuildDate: 2017-04-10T07:14:04+09:00
+```
+
+Is this just wrong number or something has a problem with deploy system?
+<issue_comment>username_1: Since you are the first to complain, I would suggest a third option: You have an old version floating around in the `PATH`. Try `./hugo version`.
+<issue_comment>username_0: @username_1  Right before, I downloaded from https://github.com/gohugoio/hugo/releases/download/v0.26/hugo_0.26_Windows-64bit.zip and run `hugo version` 
+
+The result on powershell.
+``` powershell
+PS D:\Desktop2\hugo_0.26_Windows-64bit> hugo version
+Hugo Static Site Generator v0.20 windows/amd64 BuildDate: 2017-04-10T07:14:04+09:00
+PS D:\Desktop2\hugo_0.26_Windows-64bit>
+```
+<issue_comment>username_1: Try my suggestion exactly as I wrote it.
+<issue_comment>username_0: Oh I'm sorry it was my mistake. I didn't realize there is a more hugo binary in my path.
+Thanks .<issue_closed>"
+dlang/dlang.org,315175644,2349,"{'number': 2349.0, 'repo': 'dlang.org', 'user_login': 'dlang'}","[{'action': 'opened', 'author': 'GilesBathgate', 'comment_id': None, 'datetime': '2018-04-17T18:19:10Z', 'masked_author': 'username_0', 'text': ""It seems that nogc is prefixed with @ in all the other documentation but doesn't seem to be within the formal grammar. This change updates the grammar to be consistent."", 'title': ""Add missing '@' to nogc"", 'type': 'issue'}
+ {'action': 'created', 'author': 'GilesBathgate', 'comment_id': 382094039.0, 'datetime': '2018-04-17 18:25:20+00:00', 'masked_author': 'username_0', 'text': 'also @property on the same page, hmm If I follow the grammar correctly it would mean I have to use @@safe and @@system etc. @wilzbach thoughts?', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'rainers', 'comment_id': 382099077.0, 'datetime': '2018-04-17 18:41:51+00:00', 'masked_author': 'username_1', 'text': ""I'd recommend removing all `@`s from the PropertyIdentifiers. `@safe` is not a single token, you can also write\r\n```\r\n@\r\nsafe\r\nint foo();\r\n```\r\nI can't say I like that..."", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'quickfur', 'comment_id': 382102056.0, 'datetime': '2018-04-17 18:51:04+00:00', 'masked_author': 'username_2', 'text': ""@username_1  Wow, I had no idea `@` was treated separately like that.  That's... scary.  I hope to never encounter code that has whitespace between `@` and the identifier!"", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'GilesBathgate', 'comment_id': 382104601.0, 'datetime': '2018-04-17 18:59:21+00:00', 'masked_author': 'username_0', 'text': ""Hmm, `PropertyIdentifier` isn't even the right name for that grammar rule anymore is it?"", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'GilesBathgate', 'comment_id': 385053135.0, 'datetime': '2018-04-27 18:19:09+00:00', 'masked_author': 'username_0', 'text': ""@username_1 It didn't seem to help. @username_3 Any ideas?"", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'CyberShadow', 'comment_id': 385149690.0, 'datetime': '2018-04-28 07:40:21+00:00', 'masked_author': 'username_3', 'text': 'The error is:\r\n\r\n```\r\n! Extra }, or forgotten \\endgroup.\r\n<recently read> \\egroup \r\n                        \r\nl.6014  \r\n         align (4):\r\n```\r\n\r\nHere is the surrounding generated tex source:\r\n\r\n```tex\r\n\\begin{lstlisting}\r\nstruct S\r\n{\r\n  align (1):\r\n    byte a;   // placed at offset 0\r\n    int b;    // placed at offset 1\r\n    long c;   // placed at offset 5\r\n}\r\nauto sz = S.sizeof;  // 16\r\n\\end{lstlisting}\r\n\\par\r\n        The alignment for the fields of an aggregate does not affect the alignment\r\n        of the aggregate itself - that is affected by the alignment setting outside\r\n        of the aggregate. \\par\r\n\\par\r\n\\begin{lstlisting}\r\nalign (2) struct S\r\n{\r\n  align (1):\r\n    byte a;   // placed at offset 0\r\n    int b;    // placed at offset 1\r\n    long c;   // placed at offset 5\r\n}\r\nauto sz = S.sizeof;  // 14\r\n\\end{lstlisting}\r\n\\par\r\n        Setting the alignment of a field aligns it to that power of 2, regardless\r\n        of the size of the field. \\par\r\n\\par\r\n\\begin{lstlisting}\r\nstruct S\r\n{\r\n  align (4):           // <---------------------------- ERROR HERE\r\n    byte a;   // placed at offset 0\r\n    byte b;   // placed at offset 4\r\n    short c;  // placed at offset 8\r\n}\r\nauto sz = S.sizeof;  // 12\r\n\\end{lstlisting}\r\n```\r\n\r\nI see absolutely nothing wrong with it.\r\n\r\n@andralex I recall you recently ran into a similar problem, and successfully worked around it. Any idea?', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'GilesBathgate', 'comment_id': 385200745.0, 'datetime': '2018-04-28 19:38:47+00:00', 'masked_author': 'username_0', 'text': '@username_1 I have found a workaround, and the documentation now builds correctly.', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'rainers', 'comment_id': 385230191.0, 'datetime': '2018-04-29 06:52:24+00:00', 'masked_author': 'username_1', 'text': ""@username_0 Thank you for your perseverence. I guess the problem was that there are links to `Property` from elsewhere, too.\r\n\r\nLooking at it again, there are still quite some inconsistencies and omissions regarding attributes, storage classes and function attributes. But that's for another PR."", 'title': None, 'type': 'comment'}]","<issue_start><issue_comment>Title: Add missing '@' to nogc
+username_0: It seems that nogc is prefixed with @ in all the other documentation but doesn't seem to be within the formal grammar. This change updates the grammar to be consistent.
+<issue_comment>username_0: also @property on the same page, hmm If I follow the grammar correctly it would mean I have to use @@safe and @@system etc. @wilzbach thoughts?
+<issue_comment>username_1: I'd recommend removing all `@`s from the PropertyIdentifiers. `@safe` is not a single token, you can also write
+```
+@
+safe
+int foo();
+```
+I can't say I like that...
+<issue_comment>username_2: @username_1  Wow, I had no idea `@` was treated separately like that.  That's... scary.  I hope to never encounter code that has whitespace between `@` and the identifier!
+<issue_comment>username_0: Hmm, `PropertyIdentifier` isn't even the right name for that grammar rule anymore is it?
+<issue_comment>username_0: @username_1 It didn't seem to help. @username_3 Any ideas?
+<issue_comment>username_3: The error is:
+
+```
+! Extra }, or forgotten \endgroup.
+<recently read> \egroup 
+                        
+l.6014  
+         align (4):
+```
+
+Here is the surrounding generated tex source:
+
+```tex
+\begin{lstlisting}
+struct S
+{
+  align (1):
+    byte a;   // placed at offset 0
+    int b;    // placed at offset 1
+    long c;   // placed at offset 5
+}
+auto sz = S.sizeof;  // 16
+\end{lstlisting}
+\par
+        The alignment for the fields of an aggregate does not affect the alignment
+        of the aggregate itself - that is affected by the alignment setting outside
+        of the aggregate. \par
+\par
+\begin{lstlisting}
+align (2) struct S
+{
+  align (1):
+    byte a;   // placed at offset 0
+    int b;    // placed at offset 1
+    long c;   // placed at offset 5
+}
+auto sz = S.sizeof;  // 14
+\end{lstlisting}
+\par
+        Setting the alignment of a field aligns it to that power of 2, regardless
+        of the size of the field. \par
+\par
+\begin{lstlisting}
+struct S
+{
+  align (4):           // <---------------------------- ERROR HERE
+    byte a;   // placed at offset 0
+    byte b;   // placed at offset 4
+    short c;  // placed at offset 8
+}
+auto sz = S.sizeof;  // 12
+\end{lstlisting}
+```
+
+I see absolutely nothing wrong with it.
+
+@andralex I recall you recently ran into a similar problem, and successfully worked around it. Any idea?
+<issue_comment>username_0: @username_1 I have found a workaround, and the documentation now builds correctly.
+<issue_comment>username_1: @username_0 Thank you for your perseverence. I guess the problem was that there are links to `Property` from elsewhere, too.
+
+Looking at it again, there are still quite some inconsistencies and omissions regarding attributes, storage classes and function attributes. But that's for another PR."
+protocol/nft-website,1112440111,191,,"[{'action': 'opened', 'author': 'blockchain-artwork', 'comment_id': None, 'datetime': '2022-01-24 10:19:29+00:00', 'masked_author': 'username_0', 'text': '1/24/22\n     Hello.  I am a NFT/digital artist.  I believe I may have come up with an idea that would dramatically increase the purpose and value of NFT artwork:\n     By making my gallery a non-profit, my clients become donors upon purchasing an art piece, in this case an NFT.  The transaction is made with cryptocurrency, which is a form of cash, making the purchase from the gallery 100% deductible.  As you may know, the creator of an NFT collection retains a royalty from all future sales of that NFT (10% is standard).  Upon the resale of the NFT, in this case, that ten percent royalty would be coming back to gallery, a charitable organization.  So the buyer of my original NFT artwork now gets to write-off the original purchase price from the gallery and 10% of the resale price from the automatic royalty payment, as well as 90% percent of the resale price.  However, the new buyer, to my knowledge, is only able to deduct 10% of his purchase price as that is all that is going back to the charity (gallery).  This also effectively creates a ""Forever Donation"" to the charitable organization or trust involved.\n     I was hoping to find a way for the resale buyer, effectively every buyer, to be eligible for the 100% deduction.  I thought possibly by adding a contract upon purchase that obligates every seller of the NFT to donate the proceeds back to the gallery (charity).  As long as this contract was adhered to all sales, as well as purchases, of the NFT would be one hundred percent deductible.  If I understand that correctly that means as a buyer/donor you get a 100% charitable deduction from the original purchase from the gallery (charity), then are able to re-assess and reset price for new fair market value, and upon resale, under the aforementioned contract of 100% re-donation, get another 100+% charitable deduction, which includes any profit.  Not to mention you get to write the next buyer\'s deduction.  Another approach may be to assign a 100% royalty to the collection, as the creator and charitable foundation are one in the same; the nonprofit gallery. \n     The NFT\'s I am referring to are a series of 129 avatars.  The collection is akin to a set of trading cards or collectables, except as these are passed around and traded they increase in value.  My hope is to create a new charitable investment instrument that could increase the value of all NFT artwork and give our community of artists more power to compliment our creations with purpose.  More ways for our art to really DO something.\n(https://opensea.io/collection/bunee-bloxxx)\nThank you for your time and energy.  Be well.\nSincerely,\nblockchain.artwork \nkenaa@example.com\nhttps://linktr.ee/blockchain.artwork', 'title': 'Charitable Investment Instruments', 'type': 'issue'}]","<issue_start><issue_comment>Title: Charitable Investment Instruments
+username_0: 1/24/22
+     Hello.  I am a NFT/digital artist.  I believe I may have come up with an idea that would dramatically increase the purpose and value of NFT artwork:
+     By making my gallery a non-profit, my clients become donors upon purchasing an art piece, in this case an NFT.  The transaction is made with cryptocurrency, which is a form of cash, making the purchase from the gallery 100% deductible.  As you may know, the creator of an NFT collection retains a royalty from all future sales of that NFT (10% is standard).  Upon the resale of the NFT, in this case, that ten percent royalty would be coming back to gallery, a charitable organization.  So the buyer of my original NFT artwork now gets to write-off the original purchase price from the gallery and 10% of the resale price from the automatic royalty payment, as well as 90% percent of the resale price.  However, the new buyer, to my knowledge, is only able to deduct 10% of his purchase price as that is all that is going back to the charity (gallery).  This also effectively creates a ""Forever Donation"" to the charitable organization or trust involved.
+     I was hoping to find a way for the resale buyer, effectively every buyer, to be eligible for the 100% deduction.  I thought possibly by adding a contract upon purchase that obligates every seller of the NFT to donate the proceeds back to the gallery (charity).  As long as this contract was adhered to all sales, as well as purchases, of the NFT would be one hundred percent deductible.  If I understand that correctly that means as a buyer/donor you get a 100% charitable deduction from the original purchase from the gallery (charity), then are able to re-assess and reset price for new fair market value, and upon resale, under the aforementioned contract of 100% re-donation, get another 100+% charitable deduction, which includes any profit.  Not to mention you get to write the next buyer's deduction.  Another approach may be to assign a 100% royalty to the collection, as the creator and charitable foundation are one in the same; the nonprofit gallery. 
+     The NFT's I am referring to are a series of 129 avatars.  The collection is akin to a set of trading cards or collectables, except as these are passed around and traded they increase in value.  My hope is to create a new charitable investment instrument that could increase the value of all NFT artwork and give our community of artists more power to compliment our creations with purpose.  More ways for our art to really DO something.
+(https://opensea.io/collection/bunee-bloxxx)
+Thank you for your time and energy.  Be well.
+Sincerely,
+blockchain.artwork 
+blockchain.artwork@yahoo.com
+https://linktr.ee/blockchain.artwork"

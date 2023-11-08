@@ -1,0 +1,523 @@
+flutter/website,318371139,978,"{'number': 978.0, 'repo': 'website', 'user_login': 'flutter'}","[{'action': 'opened', 'author': 'rock3r', 'comment_id': None, 'datetime': '2018-04-27T11:17:07Z', 'masked_author': 'username_0', 'text': ""This PR is for the third section of the work to create the `flutter-for-ios.md` document. Writing by @niamh-power on Novoda's behalf, I am just a proxy.\r\n\r\nFollowing the same rough format as the `flutter-for-android.md` document, with iOS details instead.\r\n\r\nThe following sections have been created:\r\n\r\n* Asynchronous UI\r\n* How do you move work to a background thread?\r\n* How do I make network requests?\r\n* How do I show the progress of a long-running task in Flutter?\r\n\r\n⚠️ **This requires #977 to be merged first!** ⚠️"", 'title': 'Flutter for iOS — Threading & Async section', 'type': 'issue'}
+ {'action': 'created', 'author': 'rock3r', 'comment_id': 385896514.0, 'datetime': '2018-05-02 08:03:07+00:00', 'masked_author': 'username_0', 'text': 'Contents covered in #993, closing this. Will address comments on that one.', 'title': None, 'type': 'comment'}]","<issue_start><issue_comment>Title: Flutter for iOS — Threading & Async section
+username_0: This PR is for the third section of the work to create the `flutter-for-ios.md` document. Writing by @niamh-power on Novoda's behalf, I am just a proxy.
+
+Following the same rough format as the `flutter-for-android.md` document, with iOS details instead.
+
+The following sections have been created:
+
+* Asynchronous UI
+* How do you move work to a background thread?
+* How do I make network requests?
+* How do I show the progress of a long-running task in Flutter?
+
+⚠️ **This requires #977 to be merged first!** ⚠️
+<issue_comment>username_0: Contents covered in #993, closing this. Will address comments on that one."
+conda-forge/conda-forge.github.io,189508469,269,,"[{'action': 'opened', 'author': 'jakirkham', 'comment_id': None, 'datetime': '2016-11-15 21:14:46+00:00', 'masked_author': 'username_0', 'text': ""@username_4 commented on [Fri Sep 02 2016](https://github.com/conda-forge/conda-smithy/issues/291)\n\nHi,\nDid you ever think about building conda package for ARM architecture ? \nSince August 2015, conda is [officially supporting ARMv7l architecture](https://www.continuum.io/content/conda-support-raspberry-pi-2-and-power8-le). \nIt is possible to start ARM Docker container from an intel-64 arch [thanks to qemu-arm-static](https://sedden.github.io/blog/2016/04/11/automated-builds-for-arm-docker-containers-on-intel-hosts/). It could be used to build every conda-forge packages for arm platform with travis-ci or circle-ci. \n\nNow a day [I'm ](https://anaconda.org/poppy-project/repo?page=1)building almost every conda packages I need for my ARM board because there few official builds, but I think that it could have a growing ARM/Raspberry Pi community if there were more official or at least conda-forge packets.\n\nDo you think that there is too few ARM users for conda package that it does not worth it ?\n\n\n---\n\n@username_0 commented on [Mon Sep 05 2016](https://github.com/conda-forge/conda-smithy/issues/291#issuecomment-244841736)\n\nThere's a good chance that one will need to run such a Docker container in privileged mode. Not sure that CircleCI or other CIs support that.\n\n---\n\n@username_0 commented on [Mon Sep 05 2016](https://github.com/conda-forge/conda-smithy/issues/291#issuecomment-244841993)\n\nThis may be a good [tool]( https://github.com/rancher/vm ) for containerizing VMs.\n\n---\n\n@username_4 commented on [Mon Sep 12 2016](https://github.com/conda-forge/conda-smithy/issues/291#issuecomment-246479121)\n\nThere is no need to run container in privileged mode. Usualy to run an ARM docker image on a x86_64 host it needs a kernel with [binfmt_misc](https://en.wikipedia.org/wiki/Binfmt_misc) support, which is the case for travis-ci but not for CircleCI.\r\n\r\nBut, with a minor modification on qemu, it is possible to embed it on the image and run the ARM image without anything special on the host.\r\n\r\nI made a POC image on [username_4/miniconda-armv7](https://github.com/username_4/docker-miniconda-armv7). \n\n---\n\n@groutr commented on [Sat Sep 24 2016](https://github.com/conda-forge/conda-smithy/issues/291#issuecomment-249361112)\n\nI wonder if, in this case, using the linaro tool chain to cross compile would be a good a option. \n\n---\n\n@username_4 commented on [Mon Sep 26 2016](https://github.com/conda-forge/conda-smithy/issues/291#issuecomment-249518662)\n\nI think that the Docker idea is better than the cross-compliation, it *emulates* the whole system, which is easier to integrate with the actual conda & conda-forge scripts.\r\nIn background, they both use Qemu for the ARM emulation, so the overhead is the same.\n\n---\n\n@pelson commented on [Thu Sep 29 2016](https://github.com/conda-forge/conda-smithy/issues/291#issuecomment-250477700)\n\nI'm totally up for this. I've suffered conda build on the RaspberryPi and it was a terrible experience (`conda build ...` ... wait.... wait some more... go to sleep `fail`. `conda build...`... wait ... wait some more ... go to work .... `fail`). My recipes lived in https://github.com/pelson/raspberrypi-conda-recipes and I got quite a way into the stack (in fact, many of those recipes were the basis for conda-forge recipes).\r\n\r\nThe major things that I'd want to consider though:\r\n\r\n * how we reduce the impact on build time for the existing conda-forge system\r\n * whether we can improve on the existing noarch conda concept to save us having duplicate conda distributions for non-compiled things\r\n * how we integrate this into conda-forge without breaking existing feedstocks (that may not yet compile on ARM) \n\n---\n\n@username_0 commented on [Thu Sep 29 2016](https://github.com/conda-forge/conda-smithy/issues/291#issuecomment-250497667)\n\nOne idea I was toying with earlier was actually having another org for this. It may sound a bit extreme, but this is something that one of the Homebrew devs did when they wanted to support Mac OS 10.4 (Tiger). At least worth keeping in the back of our minds if nothing else.\r\n\r\nxref: https://github.com/mistydemeo/tigerbrew\n\n---\n\n@username_4 commented on [Thu Sep 29 2016](https://github.com/conda-forge/conda-smithy/issues/291#issuecomment-250501478)\n\nThe problem of build time is really an issue we have to deal with. Throw Qemu the build time on my i7-5557U@3Ghz laptop is two time **slower** than on Raspberry Pi 3. \r\nI mainly use a Odroid XU4 which is far faster than a Raspberry Pi for testing new builds rules.\r\n\r\nI think that we can use another free CI provider, in the same way you separate Linux and OSX build with CircleCi and Travis CI. This would solve the impact on build time for x64_86 build, and avoid labelling the existing build as faild.\r\n\r\nAnother solution could be to use a paid farm of ARM hardware which run Jenkins or Drone on it. Scaleway have great and cheap hardware, but I suppose that managing money and donations for build is out of the scope of conda-forge.\r\n\r\n\n\n---\n\n@pelson commented on [Thu Sep 29 2016](https://github.com/conda-forge/conda-smithy/issues/291#issuecomment-250504085)\n\nManaging money is achievable (e.g. NumFOCUS), managing *hardware* is harder (and the software infrastructure around it) - it would ultimately take time away from other conda-forge activities. I have long wanted a CI service where we can attach donated systems (e.g. personal laptop cycles, corporately donated AWS instances etc.), but we aren't there *yet* 😉 .\r\n\r\nYour Qemu experience doesn't sound like it was much fun 😄  \n\n---\n\n@username_0 commented on [Tue Nov 15 2016](https://github.com/conda-forge/conda-smithy/issues/291#issuecomment-260770308)\n\nI'm going to move this over to the webpage repo for a few reasons.\r\n\r\n1. This is an organization discussion.\r\n2. It will get more visibility.\r\n\r\nHope that is ok. Thanks everyone for bring this up and providing interesting suggestions. Looking forward to seeing what others might contribute."", 'title': 'Build conda packages on linux-armv7l arch (e.g. Raspberry Pi)', 'type': 'issue'}
+ {'action': 'created', 'author': 'jakirkham', 'comment_id': 260771233.0, 'datetime': '2016-11-15 21:17:47+00:00', 'masked_author': 'username_0', 'text': 'cc @MaxNoe', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'jjhelmus', 'comment_id': 271763453.0, 'datetime': '2017-01-11 02:49:28+00:00', 'masked_author': 'username_1', 'text': ""I'm been building a bunch of conda packages for the Raspberry Pi 2/3 (armv7l) and 1/0 (armv6l).  They are available on the [rpi channel on Anaconda.org](https://anaconda.org/rpi).  \r\n\r\nThe recipes were mostly derived from `conda-forge` (thanks all for such a great resources) and are available in the [username_1/rpi-recipes](https://github.com/username_1/rpi-recipes) repo.  I'll be adding docs, a README, proper license, etc and likely renaming this repo in the next week but wanted to give `conda-forge` folks a heads up."", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'ChrisBarker-NOAA', 'comment_id': 271933348.0, 'datetime': '2017-01-11 17:25:37+00:00', 'masked_author': 'username_2', 'text': 'Is the pi identifiable as a unique platform by conda?\r\n\r\ni.e. is there any reason these packages couldn\'t be put up on the same conda-forge channel?\r\n\r\nMaybe there is no reason TO put them in the same channel -- but I kinda like the ""branding"" advantage of being able to use conda-forge for everything :-)', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'dopplershift', 'comment_id': 271944839.0, 'datetime': '2017-01-11 18:04:49+00:00', 'masked_author': 'username_3', 'text': ""Well, unless I'm mistaken, one big difference is that @username_1 is building the packages manually--or at least locally. No raspberry pi CI services I'm aware of."", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'ChrisBarker-NOAA', 'comment_id': 271945185.0, 'datetime': '2017-01-11 18:06:08+00:00', 'masked_author': 'username_2', 'text': 'yeah -- probably not.\r\n\r\nBut you can still push to the same anaconda.org channel by hand, yes?\r\n\r\nMaybe we want to keep the channel ""clean"" in that sense, though.', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'show0k', 'comment_id': 271945799.0, 'datetime': '2017-01-11 18:07:59+00:00', 'masked_author': 'username_4', 'text': '@username_2 There is a tag for any platform, and as @username_1 said, it is the armv7l tag for Raspberry Pi 2/3 and armv6l for Raspberry Pi 1. \r\nIf building all conda-forge packages for Raspberry Pi is too much work for the impact, a solution could be too activate manually the armv7l building process. \r\nIn this way, the conda-forge project will get the hype effect (and the community) of Raspberry Pi with a a minimum work.\r\n\r\nMoreover, to add a word on my first post on the technical solutions to build conda packages for ARM, I change a bit my mind. Quemu is a great project, but using it for ARM emulation will cause 5% of time some strange bugs which take lot of time to resolve.\r\nWhatever the community of people which are involved (conda-forge or another) I think we have to host a CI software (circle-ci or travis) on ARM hardware. \r\n[Scaleway](https://www.scaleway.com/) is the most famous  (the only ?) cloud provider of ARM bare-metal server, and it is quite cheap.', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'jjhelmus', 'comment_id': 272032631.0, 'datetime': '2017-01-11 23:47:54+00:00', 'masked_author': 'username_1', 'text': ""The packages in the `rpi` channel were made locally by a two Raspberry Pi 3's and a Raspberry Pi 1 and Zero.  Since they are not made as part of the standard conda-forge workflow I'm of the opinion that they  should not be included in the `conda-forge` channel.\r\n\r\nI think it would be really cool if linux-armv7l packages could be built by conda-forge using a CI solution (even an optional one) but do not have the time to work on the technical challenge around this at the moment.  \r\n\r\n@username_4 Thanks for the details on QEMU and ARM bare metal hosting, I'll have the check out Scaleway's offerings.   I know there are a few places that offer hosted Raspberry Pis which might be another option worth looking into."", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'ChrisBarker-NOAA', 'comment_id': 272035853.0, 'datetime': '2017-01-12 00:06:00+00:00', 'masked_author': 'username_2', 'text': ""all sounds good.\r\n\r\n@username_1: I think it's really cool that you're doing this!"", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'scopatz', 'comment_id': 415095662.0, 'datetime': '2018-08-22 16:32:53+00:00', 'masked_author': 'username_5', 'text': '@username_0 Cool!', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'zbeekman', 'comment_id': 431984854.0, 'datetime': '2018-10-22 21:02:28+00:00', 'masked_author': 'username_6', 'text': ""Is there ARM64/aarch64 support for conda somehow? (Even if I have to compile sources myself?)\r\n\r\nI'm relatively new to conda/anaconda, and have been tasked with porting https://github.com/ParaToolsInc/taucmdr to aarch64. Thanks."", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'ChrisBarker-NOAA', 'comment_id': 432027310.0, 'datetime': '2018-10-22 23:29:05+00:00', 'masked_author': 'username_2', 'text': ""@username_1: wouldn't that require an ARM CI? or is it possible to cross-compile?"", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'jjhelmus', 'comment_id': 432837571.0, 'datetime': '2018-10-24 21:38:42+00:00', 'masked_author': 'username_1', 'text': 'Shippable provides an [ARM based CI](http://docs.shippable.com/platform/tutorial/workflow/run-ci-builds-on-arm/) which is free for open source projects.  I was hoping that it can be used by conda-forge for aarch64 builds.', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'zbeekman', 'comment_id': 432846593.0, 'datetime': '2018-10-24 22:13:32+00:00', 'masked_author': 'username_6', 'text': 'See also: https://github.com/sedden/docker-rpi-plex-server/issues/1\n\nIt looks like you can *probably* do this with Docker on Travis-CI.', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'show0k', 'comment_id': 432853032.0, 'datetime': '2018-10-24 22:41:41+00:00', 'masked_author': 'username_4', 'text': ""@username_6 It was the purpose of my first message on that thread. I even did a [docker image](https://github.com/username_4/docker-miniconda-armv7) for ARM with conda (I didn't test if it still works).\r\n\r\nBut.. after many attempts, it has two drawbacks:\r\n- It is very slow. Two x86 2Ghz vCPU are far slower than a Raspbery Pi 2 for instance. So more builds will hang after 1h of compilation on travis-ci\r\n- Some builds fail due to qemu, it's rare but it happens and very hard (impossible ?) and annoying to fix. \r\n\r\nI think the best solution is to use GitLab CI with ARM computers. With GitLab CI you can add any computer with docker installed as a worker, even of it's behind a NAT. An efficient solution could be to pay for ARM servers on [Scaleway](https://www.scaleway.com/virtual-cloud-servers/#anchor_arm) (the only ARM server provider as far as I know) and use the autoscaling feature of GitLab which works with docker machine (in a way similar than [this](https://about.gitlab.com/2018/06/19/autoscale-continuous-deployment-gitlab-runner-digital-ocean/)) to start and stop ARM servers on demand.\r\n\r\nAs GitLab CI workers can work behind a NAT, many people can share a Raspberry Pi connected with Docker on it. But it has to be used only for testing builds and not packaging otherwise it could create security issues."", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'hmaarrfk', 'comment_id': 449576331.0, 'datetime': '2018-12-22 15:03:29+00:00', 'masked_author': 'username_7', 'text': 'It seems that there are a few common key architectures that might be useful:\r\n\r\n1. The RaspberryPi. Most people are on raspbian which targets armv7l  (32 bit, hardware floating point)\r\n2. aarch64 (64 bit, hardware floating point)\r\n\r\nare there any other hardware platforms we should target?', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'jjhelmus', 'comment_id': 451314360.0, 'datetime': '2019-01-03 23:46:09+00:00', 'masked_author': 'username_1', 'text': ""There are two primary ARM platforms that would be useful to support, 64-bit ARMv8 typically referred to as **aarch64**, and 32-bit ARMv7.  There are a number of variations in floating point hardware support in ARMv7 cores.  Many Linux distributions target the subset of these cores which provide at least VFP3-D16 hardware floating point. This subset is often referred to as **armhf** after the Debian port.\r\n\r\nRaspberry Pis use a variety of CPU depending on the model. The 1 and Zeros have ARMv6, the original 2 has ARMv7 and the 2 version 1.2 and all 3's have a ARMv8 CPU.  Although ARMv8 supports 64-bit mode most Raspberry Pi distributions boot into 32-bit mode and `uname -p` will report the processor as `armv7l`.  Raspbian run the same binaries on all models and therefore targets ARMv6 with VFPv2 which is a key difference between Raspbian and the armhf port of Debian.  \r\n\r\nConda packages could be made for armv6l for use on the Raspberry Pi 1 and Zero but I suspect armv7l and aarch64 packages would be more useful.  There should be no issues using armv7l conda packages on Raspberry Pi 2 and 3 running Raspbian if the packages uses the same architecture compiler flags as the Debian armhf port.\r\n\r\n[Berryconda](https://github.com/username_1/berryconda) provides armv6l and armv7l packages that work on the various models of Raspberry Pis.  The armv7l packages target a different hardware minimum than the Debian armhf port, specifically armv7l VFPv4 with NEON, and may not work on other armv7 systems.  Berryconda uses system provided compilers.  @gaiar has done some work on building armv7 compilers, see username_1/berryconda#39.  \r\n\r\nI created an initial set of of packages for aarch64 which are available on Anaconda.org in the [username_1/label/aarch64_bootstrap](https://anaconda.org/username_1/repo?type=any&label=aarch64_bootstrap) channel.  These include gcc 7.3.0 compilers which create binaries compatible with glibc 2.17 which is used in CentOS 7.  7 was the first CentOS release to support aarch64.  The compilers were built on a Ubunutu 18.04 host so those packages must be run on a system with glibc 2.27 or newer but the other packages should work on anything newer than CentOS 7."", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'hmaarrfk', 'comment_id': 451337244.0, 'datetime': '2019-01-04 02:18:44+00:00', 'masked_author': 'username_7', 'text': ""@username_1 it seems strange that the compiler won't run on the same machine as the target. My thought are that this makes it harder to test on CIs.\r\n\r\nIs there any way to recompile the compilers so that they run on CentOS 7+?"", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'jjhelmus', 'comment_id': 460871000.0, 'datetime': '2019-02-06 01:33:19+00:00', 'masked_author': 'username_1', 'text': 'Yes, the compilers in the `c4aarch64` channel can be run on CentOS 7 and newer systems.', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'jmreicha', 'comment_id': 487419036.0, 'datetime': '2019-04-28 21:57:59+00:00', 'masked_author': 'username_8', 'text': 'Has there been any update on using Shippable for builds?  In my own testing it has been much faster than qemu (by at least 5-10x).', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'hmaarrfk', 'comment_id': 487421304.0, 'datetime': '2019-04-28 22:36:20+00:00', 'masked_author': 'username_7', 'text': 'Our conclusion, with @username_12 was that while shippable might build faster, there is a hard 1 hour limit on it, meaning it would be really difficult to make it scalable. Furthermore, we only get 1 build at a time. For challenging packages, this means that a single package can create a huge backlog.\r\n\r\nFor now, we are using manual shippable builds to test if an error is due to qemu or not.', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'jmreicha', 'comment_id': 487422400.0, 'datetime': '2019-04-28 22:53:52+00:00', 'masked_author': 'username_8', 'text': '@username_7 I see, thanks for the explanation.  Would there be any interest in seeing if the Works on Arm project would be interested in helping host builds directly to work around some of these limits or has that option been ruled out already?\r\n\r\n[Works on Arm](https://www.worksonarm.com/cluster/) provides bare metal arm resources (which is also the driver behind the Shippable integration).', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'hmaarrfk', 'comment_id': 487422694.0, 'datetime': '2019-04-28 22:59:16+00:00', 'masked_author': 'username_7', 'text': 'Honestly, I would be interested. We are hitting a few errors involving precision on numpy. I suspect we will hit others on scipy and so on as we go down the scientific stack.', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'hmaarrfk', 'comment_id': 487422736.0, 'datetime': '2019-04-28 22:59:48+00:00', 'masked_author': 'username_7', 'text': 'not too sure about  the governance of conda-forge, but maybe a few of those involved (ie. not me) can chime in,', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'jmreicha', 'comment_id': 487614446.0, 'datetime': '2019-04-29 14:59:09+00:00', 'masked_author': 'username_8', 'text': '@username_10 Is this something you can help out with?  Does this sound like something worth filing a proposal for in the worksonarm repo?', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'isuruf', 'comment_id': 487665066.0, 'datetime': '2019-04-29 17:14:01+00:00', 'masked_author': 'username_9', 'text': '@username_8, sure. we can add another CI service to conda-smithy. We already have support for azure, circleci, travis, appveyor. Having another is not an issue.', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'vielmetti', 'comment_id': 487681758.0, 'datetime': '2019-04-29 18:00:06+00:00', 'masked_author': 'username_10', 'text': ""@username_8 @username_9 \r\n\r\nIf I were to pick adding one I might pick Drone Cloud, which runs x86 + arm64 + 32-bit Arm, runs on equipment provided by @packethost , and is relatively easy to configure (especially since I see that you're already good at CI).\r\n\r\nhttps://cloud.drone.io/\r\n\r\nFree for open source projects."", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'hmaarrfk', 'comment_id': 487686227.0, 'datetime': '2019-04-29 18:13:07+00:00', 'masked_author': 'username_7', 'text': ""Azure has ALOT of resources now. I wouldn't think of an other CI for x86 64 bit for a while now.\r\n\r\nThe reason we are using qemu for aarch64 by default is because we have so many resources of x86.\r\n\r\nSome other requirements were that the systems would integrate with the github permission model, where individual users in an organization were given rights to certain repos but not others."", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'vielmetti', 'comment_id': 487687731.0, 'datetime': '2019-04-29 18:17:34+00:00', 'masked_author': 'username_10', 'text': 'Which version of qemu are you running? (I ask only because some CI systems ran into problems with 2.x versions, e.g. for Java JIT work; 3.x solves that, and 4.x is just now coming out.)\r\n\r\nOur experience with native Arm builds vs emulation is that we have seen up to 5x performance improvements. That matters mostly when you are trying not to have a build be the slowest job in the batch.', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'isuruf', 'comment_id': 487688910.0, 'datetime': '2019-04-29 18:20:55+00:00', 'masked_author': 'username_9', 'text': ""@username_10, true. a native build will be awesome. I see that drone cloud implements permissions using github permissions, so that's a good thing. It also has docker support and configuration using yaml.\r\n\r\nOne questions is, what are the limits of the resources in drone cloud? Is there a time limit for a job? How many parallel jobs can happen at a time?"", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'vielmetti', 'comment_id': 487690546.0, 'datetime': '2019-04-29 18:25:30+00:00', 'masked_author': 'username_10', 'text': ""@username_9 - here is the announcement for Drone Cloud, for reference and to describe the hardware\r\n\r\nhttps://blog.drone.io/drone-cloud/\r\n\r\nI don't know the exact job limits, perhaps @droneio can chime in on that."", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'vielmetti', 'comment_id': 487763169.0, 'datetime': '2019-04-29 22:15:19+00:00', 'masked_author': 'username_10', 'text': 'Re job limits:\r\n\r\nBrad Rydzewski\r\n@username_11\r\n14:37\r\n@username_10 drone (open source, or cloud) set a default 60 minute limit for pipeline execution. Only a drone admin can increase this limit.\r\nbut otherwise, no limits.', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'hmaarrfk', 'comment_id': 487791708.0, 'datetime': '2019-04-30 00:47:48+00:00', 'masked_author': 'username_7', 'text': 'unlimited concurrent jobs? might be worth while. 1 hour is somewhat problematic due to long build times on scientific packages that have been giving us trouble in qemu, but maybe we can try???\r\n\r\nI have https://github.com/archiconda/ somewhat setup with shippable. If anybody wants to play around with drone there feel free to ask me for access.', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'jmreicha', 'comment_id': 487794917.0, 'datetime': '2019-04-30 01:11:13+00:00', 'masked_author': 'username_8', 'text': ""Does anybody know how busy the build servers are now (for arm builds)?  Are there any metrics on things like load, build times or concurrent number of builds?  I think the 1 hour build timeout can increased but don't know for sure."", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'isuruf', 'comment_id': 487795183.0, 'datetime': '2019-04-30 01:13:48+00:00', 'masked_author': 'username_9', 'text': '@username_8, we can try using drone and can switch to azure if that becomes a problem. Also 1 hour limit on native is almost the same as 6 hour limit on azure with qemu.', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'bradrydzewski', 'comment_id': 487796186.0, 'datetime': '2019-04-30 01:21:37+00:00', 'masked_author': 'username_11', 'text': 'Drone Cloud has plenty of capacity for arm64 and we can always provision more. We unfortunately have limited arm32 capacity, although perhaps @username_10 can help if this becomes an issue :)', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'vielmetti', 'comment_id': 487797750.0, 'datetime': '2019-04-30 01:34:00+00:00', 'masked_author': 'username_10', 'text': 'I would be happy to help if capacity becomes an issue, @username_11 ! We should kick the tires on an Ampere server at some point, if only to know how those systems proof out compared to others.', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'hmaarrfk', 'comment_id': 487799120.0, 'datetime': '2019-04-30 01:44:49+00:00', 'masked_author': 'username_7', 'text': ""just as an FYI, we haven't focused on aarch32 out of laziness kinda. aarch64 seemed like the more appropriate place to start since those involved in gettnig things up and running were more interested in that platform. It shouldn't be impossible to get aarch32 up and running, but somebody would have to build the compilers."", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'mariusvniekerk', 'comment_id': 487946387.0, 'datetime': '2019-04-30 13:12:13+00:00', 'masked_author': 'username_12', 'text': 'For some of the longer build duration packages on aarch64 we will also be able to build them on more dedicated hosts with azure pipelines agents on them. This should be possible after the release of dotnet core 3.0', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'mariusvniekerk', 'comment_id': 487946670.0, 'datetime': '2019-04-30 13:13:06+00:00', 'masked_author': 'username_12', 'text': ""It would be awesome to build the majority of packages that don't need weird things on drone though."", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'jjhelmus', 'comment_id': 487947656.0, 'datetime': '2019-04-30 13:16:07+00:00', 'masked_author': 'username_1', 'text': 'I played around with Drone last night and the lack of Docker in Docker for non-trusted repositories seemed like it would complicate things a bit but was not a show stopper.  I also found that container entry-points are bypasses by default which seemed unusual.', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'jjhelmus', 'comment_id': 487949036.0, 'datetime': '2019-04-30 13:20:01+00:00', 'masked_author': 'username_1', 'text': ""I used `crosstools-ng` to create aarch32 gcc 8.3.0 compilers a while back but haven't had the time to put them into a conda recipe. I'm hopeful I will have some time to do this during PyCon this week."", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'jmreicha', 'comment_id': 488774847.0, 'datetime': '2019-05-02 18:10:27+00:00', 'masked_author': 'username_8', 'text': '@username_11 Is there any (easy) way to get around the `untrusted repositories cannot mount host volumes` issue?\r\n\r\nSeems like that is going to be a problem for doing Docker in Docker builds.', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'bradrydzewski', 'comment_id': 488779795.0, 'datetime': '2019-05-02 18:25:13+00:00', 'masked_author': 'username_11', 'text': '@username_8 drone provides a plugin for building and publishing docker image. Check out http://plugins.drone.io/drone-plugins/drone-docker/. Since Drone Cloud is a shared environment we cannot allow host machine volumes mounts for security reasons.', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'jmreicha', 'comment_id': 488801891.0, 'datetime': '2019-05-02 19:29:41+00:00', 'masked_author': 'username_8', 'text': ""Okay, thanks.  I'm going to have to rethink how I am doing things a little bit."", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'jmreicha', 'comment_id': 489278446.0, 'datetime': '2019-05-04 00:43:27+00:00', 'masked_author': 'username_8', 'text': ""So I made an interesting discovery, maybe somebody can tell me what's going on.\r\n\r\nI have a build working with Drone, but the only way I have found to get it to complete instead of timing out at the one hour mark is to comment the `run_conda_forge_build_setup` line in the [build_steps.sh](https://github.com/conda-forge/fluids-feedstock/blob/master/.azure-pipelines/build_steps.sh#L27) script.\r\n\r\nOnce I remove that line my test build time drops down to 18 minutes.  The weird thing is that line only seems to affect the aarch64 builds.  Any ideas?"", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'isuruf', 'comment_id': 489280108.0, 'datetime': '2019-05-04 01:01:08+00:00', 'masked_author': 'username_9', 'text': 'Might be because it sets `CONDA_BLD_PATH` which is on a mounted volume.', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'jmreicha', 'comment_id': 489280318.0, 'datetime': '2019-05-04 01:03:56+00:00', 'masked_author': 'username_8', 'text': 'More info.  I used the azure pipelines code as a base for creating my drone configs.\r\n\r\nThere is a reference to `run_conda_forge_build_setup` in [configure_feedstock](https://github.com/conda-forge/conda-smithy/blob/master/conda_smithy/configure_feedstock.py#L1018) which I basically copied into my code.', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'jmreicha', 'comment_id': 489286851.0, 'datetime': '2019-05-04 02:35:21+00:00', 'masked_author': 'username_8', 'text': ""@username_9 Probably okay to skip then since Drone doesn't do anything with volume mounts?"", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'isuruf', 'comment_id': 489305802.0, 'datetime': '2019-05-04 08:13:07+00:00', 'masked_author': 'username_9', 'text': ""No. There's multiple things happening in that script and prints useful information. Can you debug what the issue is?"", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'jmreicha', 'comment_id': 489339545.0, 'datetime': '2019-05-04 16:00:03+00:00', 'masked_author': 'username_8', 'text': ""I'll see what I can do - I'm having trouble understanding where the build setup is coming from and what it is doing.  Here's what I see in the `conda smithy rerender`.\r\n\r\n```\r\nappveyor:\r\n  all_platforms:\r\n  - win\r\n  enabled: true\r\n  image: Visual Studio 2017\r\n  platforms: Windows\r\n  secure:\r\n    BINSTAR_TOKEN: tumuXLL8PU75WMnRDemRy02ruEq2RpNxeK3dz0MjFssnosPm2v4EFjfNB4PTotA1\r\nazure:\r\n  all_platforms:\r\n  - linux\r\n  - win\r\n  - osx\r\n  build_id: 690\r\n  enabled: true\r\n  force: true\r\n  platforms: Linux,OSX,Windows\r\n  project_id: 84710dde-1620-425b-80d0-4cf5baca359d\r\n  project_name: feedstock-builds\r\n  timeout_minutes: 360\r\n  upload_packages: false\r\n  user_or_org: conda-forge\r\nbuild_setup: 'run_conda_forge_build_setup\r\n\r\n  '\r\nchannels:\r\n  sources:\r\n  - conda-forge\r\n  - defaults\r\n  targets:\r\n  - - conda-forge\r\n    - main\r\ncircle:\r\n  enabled: false\r\ncompiler_stack: comp7\r\nconfigs:\r\n- - linux_aarch64_\r\n  - linux-aarch64\r\n  - true\r\ndocker:\r\n  command: bash\r\n  executable: docker\r\n  image: condaforge/linux-anvil-aarch64\r\n  interactive: true\r\ndrone:\r\n  all_platforms:\r\n  - linux_aarch64\r\n  enabled: true\r\n  platforms: Linux\r\nexclusive_config_file: /home/username_8/anaconda3/conda_build_config.yaml\r\nfast_finish: ''\r\ngithub:\r\n  branch_name: master\r\n  repo_name: nodejs-feedstock\r\n  user_or_org: conda-forge\r\nidle_timeout_minutes: null\r\nlinux:\r\n  enabled: true\r\nlinux_aarch64:\r\n  enabled: true\r\nlinux_ppc64le:\r\n  enabled: true\r\nmaintainers:\r\n- minrk\r\n- msarahan\r\n- pelson\r\nmax_py_ver: '37'\r\nmax_r_ver: '35'\r\nmin_py_ver: '27'\r\nmin_r_ver: '34'\r\nnoarch_python: false\r\nosx:\r\n  enabled: true\r\noutputs:\r\n- nodejs\r\n...\r\n```\r\n\r\nWhat are some other things to look at to debug?"", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'isuruf', 'comment_id': 489339706.0, 'datetime': '2019-05-04 16:01:55+00:00', 'masked_author': 'username_9', 'text': 'That script is coming from `conda-forge-ci-setup` package. Try running the commands from that script instead of running the script and remove steps one by one to see what affects the build', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'jmreicha', 'comment_id': 489345316.0, 'datetime': '2019-05-04 17:05:11+00:00', 'masked_author': 'username_8', 'text': 'Think I might have found the problem.\r\n\r\nIt looks like the build_setup script is setting the CPU count to 2 and it never gets updated after that.\r\n\r\nI updated the local [build.sh script](https://github.com/username_8/nodejs-feedstock/blob/12.x/recipe/build.sh) to spit out the configured number of CPUs and you can see the results in my [test build](https://cloud.drone.io/username_8/nodejs-feedstock/74/1/2) (line 584 and 585).', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'isuruf', 'comment_id': 489348801.0, 'datetime': '2019-05-04 17:44:55+00:00', 'masked_author': 'username_9', 'text': ""What's a reasonable value for CPU_COUNT on drone?\r\nIn recipes we use `make -j${CPU_COUNT}`, so that there'll be parallel jobs, but not too much so that resources like memory are not exhausted."", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'vielmetti', 'comment_id': 489349426.0, 'datetime': '2019-05-04 17:52:04+00:00', 'masked_author': 'username_10', 'text': 'The physical hardware is a 96-core, 128GB ThunderX, best described as ""lots of weak cores"". It\'s very hard for most build systems to schedule things so that they successfully use all 96 cores at once, and it\'s also super rare to absorb the whole memory footprint in a single go. I would crank it all the way up, see what you get, and then govern it back down as experience teaches you.\r\n\r\n@packethost has other arm64 hardware in the available pool that has fewer core but better oomph per core, if/when that gets added to the @droneio system then CPU_COUNT could potentially vary between runs.\r\n\r\nBasically I\'d like to optimize for build times, if you end up getting throttled on something other than CPU that would be something to explore in more detail.', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'jmreicha', 'comment_id': 489365701.0, 'datetime': '2019-05-04 21:08:09+00:00', 'masked_author': 'username_8', 'text': ""I think the build is using all the cores then if that value doesn't get set, and the build time is around 16-18 minutes, but I will do some more testing to verify."", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'jmreicha', 'comment_id': 489681223.0, 'datetime': '2019-05-06 16:19:44+00:00', 'masked_author': 'username_8', 'text': 'I opened a [PR](https://github.com/conda-forge/conda-smithy/pull/1069) to add Drone.  I could use a hand with the CI integration if anyone is interested.', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'yunqu', 'comment_id': 490206750.0, 'datetime': '2019-05-07 18:39:29+00:00', 'masked_author': 'username_13', 'text': 'One thing to mention is that if you are not willing to touch QEMU / docker, you can always use the Amazon AWS to open an aarch64 instance for you. This way you save a lot of efforts when you come across potential QEMU bugs (we have seen QEMU bugs when cross compiling bazel on aarch64).', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'vielmetti', 'comment_id': 490208485.0, 'datetime': '2019-05-07 18:44:19+00:00', 'masked_author': 'username_10', 'text': '@username_13 - have those Bazel+QEMU bugs been reported? I would love to help track those down. I know that QEMU 3.x fixed a bunch of issues that were present in QEMU 2.x.', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'yunqu', 'comment_id': 490209424.0, 'datetime': '2019-05-07 18:47:08+00:00', 'masked_author': 'username_13', 'text': ""@username_10 I don't think so. Original issue here: https://github.com/bazelbuild/bazel/issues/7135 That issue is not related to this issue though."", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'isuruf', 'comment_id': 491617531.0, 'datetime': '2019-05-12 18:20:53+00:00', 'masked_author': 'username_9', 'text': 'Does anyone know if cloud.drone.io support jsonnet documents?', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'vielmetti', 'comment_id': 493289656.0, 'datetime': '2019-05-17 01:52:39+00:00', 'masked_author': 'username_10', 'text': ""Hi @username_9 \r\n\r\nI see docs on the `jsonnet` extension for Drone here\r\n\r\nhttps://docs.drone.io/extend/config/jsonnet/\r\n\r\nI've asked in their forum at https://discourse.drone.io/t/drone-cloud-and-jsonnet/4621 and will hope for an answer."", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'vielmetti', 'comment_id': 493312357.0, 'datetime': '2019-05-17 04:09:36+00:00', 'masked_author': 'username_10', 'text': 'from Brad at Drone in the above forum:\r\n\r\nHey Ed,\r\n\r\nRight now the only option is to use the jsonnet command line utility to generate a yaml file from jsonnet, and commit the generated yaml to your repository. This is what we do for all 100+ Drone repositories. We absolutely will support native jsonnet in the future, but we first need to work through some of the security implications – it is not considered safe to evaluate untrusted jsonnet files server-side [1].\r\n\r\n[1] https://jsonnet.org/ref/bindings.html#server_side', 'title': None, 'type': 'comment'}
+ {'action': 'closed', 'author': 'scopatz', 'comment_id': None, 'datetime': '2019-05-24 06:07:38+00:00', 'masked_author': 'username_5', 'text': '', 'title': None, 'type': 'issue'}
+ {'action': 'created', 'author': 'isuruf', 'comment_id': 582715699.0, 'datetime': '2020-02-06 03:10:49+00:00', 'masked_author': 'username_9', 'text': '@username_10, is it possible to get access to an aarch64 server mainly for building packages that take longer than 1 hour given by Drone CI? (And also for debugging some package build failures)', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'vielmetti', 'comment_id': 582717057.0, 'datetime': '2020-02-06 03:17:36+00:00', 'masked_author': 'username_10', 'text': 'Hi @username_9 - I\'d be happy to review a proposal for access to an Arm server to help things out, either short term or long term.\r\n\r\nhttps://github.com/worksonarm/cluster is our ""Works on Arm"" cluster project, and we regularly get proposals to support CI/CD and debugging efforts. To make a request just open an issue and it will get a look from me at Packet and from folks at Arm. There\'s a pretty good crew working on servers in this environment + I\'m also happy to introduce you to other people with relevant interest and experience.', 'title': None, 'type': 'comment'}]","<issue_start><issue_comment>Title: Build conda packages on linux-armv7l arch (e.g. Raspberry Pi)
+username_0: @username_4 commented on [Fri Sep 02 2016](https://github.com/conda-forge/conda-smithy/issues/291)
+
+Hi,
+Did you ever think about building conda package for ARM architecture ? 
+Since August 2015, conda is [officially supporting ARMv7l architecture](https://www.continuum.io/content/conda-support-raspberry-pi-2-and-power8-le). 
+It is possible to start ARM Docker container from an intel-64 arch [thanks to qemu-arm-static](https://sedden.github.io/blog/2016/04/11/automated-builds-for-arm-docker-containers-on-intel-hosts/). It could be used to build every conda-forge packages for arm platform with travis-ci or circle-ci. 
+
+Now a day [I'm ](https://anaconda.org/poppy-project/repo?page=1)building almost every conda packages I need for my ARM board because there few official builds, but I think that it could have a growing ARM/Raspberry Pi community if there were more official or at least conda-forge packets.
+
+Do you think that there is too few ARM users for conda package that it does not worth it ?
+
+
+---
+
+@username_0 commented on [Mon Sep 05 2016](https://github.com/conda-forge/conda-smithy/issues/291#issuecomment-244841736)
+
+There's a good chance that one will need to run such a Docker container in privileged mode. Not sure that CircleCI or other CIs support that.
+
+---
+
+@username_0 commented on [Mon Sep 05 2016](https://github.com/conda-forge/conda-smithy/issues/291#issuecomment-244841993)
+
+This may be a good [tool]( https://github.com/rancher/vm ) for containerizing VMs.
+
+---
+
+@username_4 commented on [Mon Sep 12 2016](https://github.com/conda-forge/conda-smithy/issues/291#issuecomment-246479121)
+
+There is no need to run container in privileged mode. Usualy to run an ARM docker image on a x86_64 host it needs a kernel with [binfmt_misc](https://en.wikipedia.org/wiki/Binfmt_misc) support, which is the case for travis-ci but not for CircleCI.
+
+But, with a minor modification on qemu, it is possible to embed it on the image and run the ARM image without anything special on the host.
+
+I made a POC image on [username_4/miniconda-armv7](https://github.com/username_4/docker-miniconda-armv7). 
+
+---
+
+@groutr commented on [Sat Sep 24 2016](https://github.com/conda-forge/conda-smithy/issues/291#issuecomment-249361112)
+
+I wonder if, in this case, using the linaro tool chain to cross compile would be a good a option. 
+
+---
+
+@username_4 commented on [Mon Sep 26 2016](https://github.com/conda-forge/conda-smithy/issues/291#issuecomment-249518662)
+
+I think that the Docker idea is better than the cross-compliation, it *emulates* the whole system, which is easier to integrate with the actual conda & conda-forge scripts.
+In background, they both use Qemu for the ARM emulation, so the overhead is the same.
+
+---
+
+@pelson commented on [Thu Sep 29 2016](https://github.com/conda-forge/conda-smithy/issues/291#issuecomment-250477700)
+
+I'm totally up for this. I've suffered conda build on the RaspberryPi and it was a terrible experience (`conda build ...` ... wait.... wait some more... go to sleep `fail`. `conda build...`... wait ... wait some more ... go to work .... `fail`). My recipes lived in https://github.com/pelson/raspberrypi-conda-recipes and I got quite a way into the stack (in fact, many of those recipes were the basis for conda-forge recipes).
+
+The major things that I'd want to consider though:
+
+ * how we reduce the impact on build time for the existing conda-forge system
+ * whether we can improve on the existing noarch conda concept to save us having duplicate conda distributions for non-compiled things
+ * how we integrate this into conda-forge without breaking existing feedstocks (that may not yet compile on ARM) 
+
+---
+
+@username_0 commented on [Thu Sep 29 2016](https://github.com/conda-forge/conda-smithy/issues/291#issuecomment-250497667)
+
+One idea I was toying with earlier was actually having another org for this. It may sound a bit extreme, but this is something that one of the Homebrew devs did when they wanted to support Mac OS 10.4 (Tiger). At least worth keeping in the back of our minds if nothing else.
+
+xref: https://github.com/mistydemeo/tigerbrew
+
+---
+
+@username_4 commented on [Thu Sep 29 2016](https://github.com/conda-forge/conda-smithy/issues/291#issuecomment-250501478)
+
+The problem of build time is really an issue we have to deal with. Throw Qemu the build time on my i7-5557U@3Ghz laptop is two time **slower** than on Raspberry Pi 3. 
+I mainly use a Odroid XU4 which is far faster than a Raspberry Pi for testing new builds rules.
+
+I think that we can use another free CI provider, in the same way you separate Linux and OSX build with CircleCi and Travis CI. This would solve the impact on build time for x64_86 build, and avoid labelling the existing build as faild.
+
+Another solution could be to use a paid farm of ARM hardware which run Jenkins or Drone on it. Scaleway have great and cheap hardware, but I suppose that managing money and donations for build is out of the scope of conda-forge.
+
+
+
+---
+
+@pelson commented on [Thu Sep 29 2016](https://github.com/conda-forge/conda-smithy/issues/291#issuecomment-250504085)
+
+Managing money is achievable (e.g. NumFOCUS), managing *hardware* is harder (and the software infrastructure around it) - it would ultimately take time away from other conda-forge activities. I have long wanted a CI service where we can attach donated systems (e.g. personal laptop cycles, corporately donated AWS instances etc.), but we aren't there *yet* 😉 .
+
+Your Qemu experience doesn't sound like it was much fun 😄  
+
+---
+
+@username_0 commented on [Tue Nov 15 2016](https://github.com/conda-forge/conda-smithy/issues/291#issuecomment-260770308)
+
+I'm going to move this over to the webpage repo for a few reasons.
+
+1. This is an organization discussion.
+2. It will get more visibility.
+
+Hope that is ok. Thanks everyone for bring this up and providing interesting suggestions. Looking forward to seeing what others might contribute.
+<issue_comment>username_0: cc @MaxNoe
+<issue_comment>username_1: I'm been building a bunch of conda packages for the Raspberry Pi 2/3 (armv7l) and 1/0 (armv6l).  They are available on the [rpi channel on Anaconda.org](https://anaconda.org/rpi).  
+
+The recipes were mostly derived from `conda-forge` (thanks all for such a great resources) and are available in the [username_1/rpi-recipes](https://github.com/username_1/rpi-recipes) repo.  I'll be adding docs, a README, proper license, etc and likely renaming this repo in the next week but wanted to give `conda-forge` folks a heads up.
+<issue_comment>username_2: Is the pi identifiable as a unique platform by conda?
+
+i.e. is there any reason these packages couldn't be put up on the same conda-forge channel?
+
+Maybe there is no reason TO put them in the same channel -- but I kinda like the ""branding"" advantage of being able to use conda-forge for everything :-)
+<issue_comment>username_3: Well, unless I'm mistaken, one big difference is that @username_1 is building the packages manually--or at least locally. No raspberry pi CI services I'm aware of.
+<issue_comment>username_2: yeah -- probably not.
+
+But you can still push to the same anaconda.org channel by hand, yes?
+
+Maybe we want to keep the channel ""clean"" in that sense, though.
+<issue_comment>username_4: @username_2 There is a tag for any platform, and as @username_1 said, it is the armv7l tag for Raspberry Pi 2/3 and armv6l for Raspberry Pi 1. 
+If building all conda-forge packages for Raspberry Pi is too much work for the impact, a solution could be too activate manually the armv7l building process. 
+In this way, the conda-forge project will get the hype effect (and the community) of Raspberry Pi with a a minimum work.
+
+Moreover, to add a word on my first post on the technical solutions to build conda packages for ARM, I change a bit my mind. Quemu is a great project, but using it for ARM emulation will cause 5% of time some strange bugs which take lot of time to resolve.
+Whatever the community of people which are involved (conda-forge or another) I think we have to host a CI software (circle-ci or travis) on ARM hardware. 
+[Scaleway](https://www.scaleway.com/) is the most famous  (the only ?) cloud provider of ARM bare-metal server, and it is quite cheap.
+<issue_comment>username_1: The packages in the `rpi` channel were made locally by a two Raspberry Pi 3's and a Raspberry Pi 1 and Zero.  Since they are not made as part of the standard conda-forge workflow I'm of the opinion that they  should not be included in the `conda-forge` channel.
+
+I think it would be really cool if linux-armv7l packages could be built by conda-forge using a CI solution (even an optional one) but do not have the time to work on the technical challenge around this at the moment.  
+
+@username_4 Thanks for the details on QEMU and ARM bare metal hosting, I'll have the check out Scaleway's offerings.   I know there are a few places that offer hosted Raspberry Pis which might be another option worth looking into.
+<issue_comment>username_2: all sounds good.
+
+@username_1: I think it's really cool that you're doing this!
+<issue_comment>username_5: @username_0 Cool!
+<issue_comment>username_6: Is there ARM64/aarch64 support for conda somehow? (Even if I have to compile sources myself?)
+
+I'm relatively new to conda/anaconda, and have been tasked with porting https://github.com/ParaToolsInc/taucmdr to aarch64. Thanks.
+<issue_comment>username_2: @username_1: wouldn't that require an ARM CI? or is it possible to cross-compile?
+<issue_comment>username_1: Shippable provides an [ARM based CI](http://docs.shippable.com/platform/tutorial/workflow/run-ci-builds-on-arm/) which is free for open source projects.  I was hoping that it can be used by conda-forge for aarch64 builds.
+<issue_comment>username_6: See also: https://github.com/sedden/docker-rpi-plex-server/issues/1
+
+It looks like you can *probably* do this with Docker on Travis-CI.
+<issue_comment>username_4: @username_6 It was the purpose of my first message on that thread. I even did a [docker image](https://github.com/username_4/docker-miniconda-armv7) for ARM with conda (I didn't test if it still works).
+
+But.. after many attempts, it has two drawbacks:
+- It is very slow. Two x86 2Ghz vCPU are far slower than a Raspbery Pi 2 for instance. So more builds will hang after 1h of compilation on travis-ci
+- Some builds fail due to qemu, it's rare but it happens and very hard (impossible ?) and annoying to fix. 
+
+I think the best solution is to use GitLab CI with ARM computers. With GitLab CI you can add any computer with docker installed as a worker, even of it's behind a NAT. An efficient solution could be to pay for ARM servers on [Scaleway](https://www.scaleway.com/virtual-cloud-servers/#anchor_arm) (the only ARM server provider as far as I know) and use the autoscaling feature of GitLab which works with docker machine (in a way similar than [this](https://about.gitlab.com/2018/06/19/autoscale-continuous-deployment-gitlab-runner-digital-ocean/)) to start and stop ARM servers on demand.
+
+As GitLab CI workers can work behind a NAT, many people can share a Raspberry Pi connected with Docker on it. But it has to be used only for testing builds and not packaging otherwise it could create security issues.
+<issue_comment>username_7: It seems that there are a few common key architectures that might be useful:
+
+1. The RaspberryPi. Most people are on raspbian which targets armv7l  (32 bit, hardware floating point)
+2. aarch64 (64 bit, hardware floating point)
+
+are there any other hardware platforms we should target?
+<issue_comment>username_1: There are two primary ARM platforms that would be useful to support, 64-bit ARMv8 typically referred to as **aarch64**, and 32-bit ARMv7.  There are a number of variations in floating point hardware support in ARMv7 cores.  Many Linux distributions target the subset of these cores which provide at least VFP3-D16 hardware floating point. This subset is often referred to as **armhf** after the Debian port.
+
+Raspberry Pis use a variety of CPU depending on the model. The 1 and Zeros have ARMv6, the original 2 has ARMv7 and the 2 version 1.2 and all 3's have a ARMv8 CPU.  Although ARMv8 supports 64-bit mode most Raspberry Pi distributions boot into 32-bit mode and `uname -p` will report the processor as `armv7l`.  Raspbian run the same binaries on all models and therefore targets ARMv6 with VFPv2 which is a key difference between Raspbian and the armhf port of Debian.  
+
+Conda packages could be made for armv6l for use on the Raspberry Pi 1 and Zero but I suspect armv7l and aarch64 packages would be more useful.  There should be no issues using armv7l conda packages on Raspberry Pi 2 and 3 running Raspbian if the packages uses the same architecture compiler flags as the Debian armhf port.
+
+[Berryconda](https://github.com/username_1/berryconda) provides armv6l and armv7l packages that work on the various models of Raspberry Pis.  The armv7l packages target a different hardware minimum than the Debian armhf port, specifically armv7l VFPv4 with NEON, and may not work on other armv7 systems.  Berryconda uses system provided compilers.  @gaiar has done some work on building armv7 compilers, see username_1/berryconda#39.  
+
+I created an initial set of of packages for aarch64 which are available on Anaconda.org in the [username_1/label/aarch64_bootstrap](https://anaconda.org/username_1/repo?type=any&label=aarch64_bootstrap) channel.  These include gcc 7.3.0 compilers which create binaries compatible with glibc 2.17 which is used in CentOS 7.  7 was the first CentOS release to support aarch64.  The compilers were built on a Ubunutu 18.04 host so those packages must be run on a system with glibc 2.27 or newer but the other packages should work on anything newer than CentOS 7.
+<issue_comment>username_7: @username_1 it seems strange that the compiler won't run on the same machine as the target. My thought are that this makes it harder to test on CIs.
+
+Is there any way to recompile the compilers so that they run on CentOS 7+?
+<issue_comment>username_1: Yes, the compilers in the `c4aarch64` channel can be run on CentOS 7 and newer systems.
+<issue_comment>username_8: Has there been any update on using Shippable for builds?  In my own testing it has been much faster than qemu (by at least 5-10x).
+<issue_comment>username_7: Our conclusion, with @username_12 was that while shippable might build faster, there is a hard 1 hour limit on it, meaning it would be really difficult to make it scalable. Furthermore, we only get 1 build at a time. For challenging packages, this means that a single package can create a huge backlog.
+
+For now, we are using manual shippable builds to test if an error is due to qemu or not.
+<issue_comment>username_8: @username_7 I see, thanks for the explanation.  Would there be any interest in seeing if the Works on Arm project would be interested in helping host builds directly to work around some of these limits or has that option been ruled out already?
+
+[Works on Arm](https://www.worksonarm.com/cluster/) provides bare metal arm resources (which is also the driver behind the Shippable integration).
+<issue_comment>username_7: Honestly, I would be interested. We are hitting a few errors involving precision on numpy. I suspect we will hit others on scipy and so on as we go down the scientific stack.
+<issue_comment>username_7: not too sure about  the governance of conda-forge, but maybe a few of those involved (ie. not me) can chime in,
+<issue_comment>username_8: @username_10 Is this something you can help out with?  Does this sound like something worth filing a proposal for in the worksonarm repo?
+<issue_comment>username_9: @username_8, sure. we can add another CI service to conda-smithy. We already have support for azure, circleci, travis, appveyor. Having another is not an issue.
+<issue_comment>username_10: @username_8 @username_9 
+
+If I were to pick adding one I might pick Drone Cloud, which runs x86 + arm64 + 32-bit Arm, runs on equipment provided by @packethost , and is relatively easy to configure (especially since I see that you're already good at CI).
+
+https://cloud.drone.io/
+
+Free for open source projects.
+<issue_comment>username_7: Azure has ALOT of resources now. I wouldn't think of an other CI for x86 64 bit for a while now.
+
+The reason we are using qemu for aarch64 by default is because we have so many resources of x86.
+
+Some other requirements were that the systems would integrate with the github permission model, where individual users in an organization were given rights to certain repos but not others.
+<issue_comment>username_10: Which version of qemu are you running? (I ask only because some CI systems ran into problems with 2.x versions, e.g. for Java JIT work; 3.x solves that, and 4.x is just now coming out.)
+
+Our experience with native Arm builds vs emulation is that we have seen up to 5x performance improvements. That matters mostly when you are trying not to have a build be the slowest job in the batch.
+<issue_comment>username_9: @username_10, true. a native build will be awesome. I see that drone cloud implements permissions using github permissions, so that's a good thing. It also has docker support and configuration using yaml.
+
+One questions is, what are the limits of the resources in drone cloud? Is there a time limit for a job? How many parallel jobs can happen at a time?
+<issue_comment>username_10: @username_9 - here is the announcement for Drone Cloud, for reference and to describe the hardware
+
+https://blog.drone.io/drone-cloud/
+
+I don't know the exact job limits, perhaps @droneio can chime in on that.
+<issue_comment>username_10: Re job limits:
+
+Brad Rydzewski
+@username_11
+14:37
+@username_10 drone (open source, or cloud) set a default 60 minute limit for pipeline execution. Only a drone admin can increase this limit.
+but otherwise, no limits.
+<issue_comment>username_7: unlimited concurrent jobs? might be worth while. 1 hour is somewhat problematic due to long build times on scientific packages that have been giving us trouble in qemu, but maybe we can try???
+
+I have https://github.com/archiconda/ somewhat setup with shippable. If anybody wants to play around with drone there feel free to ask me for access.
+<issue_comment>username_8: Does anybody know how busy the build servers are now (for arm builds)?  Are there any metrics on things like load, build times or concurrent number of builds?  I think the 1 hour build timeout can increased but don't know for sure.
+<issue_comment>username_9: @username_8, we can try using drone and can switch to azure if that becomes a problem. Also 1 hour limit on native is almost the same as 6 hour limit on azure with qemu.
+<issue_comment>username_11: Drone Cloud has plenty of capacity for arm64 and we can always provision more. We unfortunately have limited arm32 capacity, although perhaps @username_10 can help if this becomes an issue :)
+<issue_comment>username_10: I would be happy to help if capacity becomes an issue, @username_11 ! We should kick the tires on an Ampere server at some point, if only to know how those systems proof out compared to others.
+<issue_comment>username_7: just as an FYI, we haven't focused on aarch32 out of laziness kinda. aarch64 seemed like the more appropriate place to start since those involved in gettnig things up and running were more interested in that platform. It shouldn't be impossible to get aarch32 up and running, but somebody would have to build the compilers.
+<issue_comment>username_12: For some of the longer build duration packages on aarch64 we will also be able to build them on more dedicated hosts with azure pipelines agents on them. This should be possible after the release of dotnet core 3.0
+<issue_comment>username_12: It would be awesome to build the majority of packages that don't need weird things on drone though.
+<issue_comment>username_1: I played around with Drone last night and the lack of Docker in Docker for non-trusted repositories seemed like it would complicate things a bit but was not a show stopper.  I also found that container entry-points are bypasses by default which seemed unusual.
+<issue_comment>username_1: I used `crosstools-ng` to create aarch32 gcc 8.3.0 compilers a while back but haven't had the time to put them into a conda recipe. I'm hopeful I will have some time to do this during PyCon this week.
+<issue_comment>username_8: @username_11 Is there any (easy) way to get around the `untrusted repositories cannot mount host volumes` issue?
+
+Seems like that is going to be a problem for doing Docker in Docker builds.
+<issue_comment>username_11: @username_8 drone provides a plugin for building and publishing docker image. Check out http://plugins.drone.io/drone-plugins/drone-docker/. Since Drone Cloud is a shared environment we cannot allow host machine volumes mounts for security reasons.
+<issue_comment>username_8: Okay, thanks.  I'm going to have to rethink how I am doing things a little bit.
+<issue_comment>username_8: So I made an interesting discovery, maybe somebody can tell me what's going on.
+
+I have a build working with Drone, but the only way I have found to get it to complete instead of timing out at the one hour mark is to comment the `run_conda_forge_build_setup` line in the [build_steps.sh](https://github.com/conda-forge/fluids-feedstock/blob/master/.azure-pipelines/build_steps.sh#L27) script.
+
+Once I remove that line my test build time drops down to 18 minutes.  The weird thing is that line only seems to affect the aarch64 builds.  Any ideas?
+<issue_comment>username_9: Might be because it sets `CONDA_BLD_PATH` which is on a mounted volume.
+<issue_comment>username_8: More info.  I used the azure pipelines code as a base for creating my drone configs.
+
+There is a reference to `run_conda_forge_build_setup` in [configure_feedstock](https://github.com/conda-forge/conda-smithy/blob/master/conda_smithy/configure_feedstock.py#L1018) which I basically copied into my code.
+<issue_comment>username_8: @username_9 Probably okay to skip then since Drone doesn't do anything with volume mounts?
+<issue_comment>username_9: No. There's multiple things happening in that script and prints useful information. Can you debug what the issue is?
+<issue_comment>username_8: I'll see what I can do - I'm having trouble understanding where the build setup is coming from and what it is doing.  Here's what I see in the `conda smithy rerender`.
+
+```
+appveyor:
+  all_platforms:
+  - win
+  enabled: true
+  image: Visual Studio 2017
+  platforms: Windows
+  secure:
+    BINSTAR_TOKEN: tumuXLL8PU75WMnRDemRy02ruEq2RpNxeK3dz0MjFssnosPm2v4EFjfNB4PTotA1
+azure:
+  all_platforms:
+  - linux
+  - win
+  - osx
+  build_id: 690
+  enabled: true
+  force: true
+  platforms: Linux,OSX,Windows
+  project_id: 84710dde-1620-425b-80d0-4cf5baca359d
+  project_name: feedstock-builds
+  timeout_minutes: 360
+  upload_packages: false
+  user_or_org: conda-forge
+build_setup: 'run_conda_forge_build_setup
+
+  '
+channels:
+  sources:
+  - conda-forge
+  - defaults
+  targets:
+  - - conda-forge
+    - main
+circle:
+  enabled: false
+compiler_stack: comp7
+configs:
+- - linux_aarch64_
+  - linux-aarch64
+  - true
+docker:
+  command: bash
+  executable: docker
+  image: condaforge/linux-anvil-aarch64
+  interactive: true
+drone:
+  all_platforms:
+  - linux_aarch64
+  enabled: true
+  platforms: Linux
+exclusive_config_file: /home/username_8/anaconda3/conda_build_config.yaml
+fast_finish: ''
+github:
+  branch_name: master
+  repo_name: nodejs-feedstock
+  user_or_org: conda-forge
+idle_timeout_minutes: null
+linux:
+  enabled: true
+linux_aarch64:
+  enabled: true
+linux_ppc64le:
+  enabled: true
+maintainers:
+- minrk
+- msarahan
+- pelson
+max_py_ver: '37'
+max_r_ver: '35'
+min_py_ver: '27'
+min_r_ver: '34'
+noarch_python: false
+osx:
+  enabled: true
+outputs:
+- nodejs
+...
+```
+
+What are some other things to look at to debug?
+<issue_comment>username_9: That script is coming from `conda-forge-ci-setup` package. Try running the commands from that script instead of running the script and remove steps one by one to see what affects the build
+<issue_comment>username_8: Think I might have found the problem.
+
+It looks like the build_setup script is setting the CPU count to 2 and it never gets updated after that.
+
+I updated the local [build.sh script](https://github.com/username_8/nodejs-feedstock/blob/12.x/recipe/build.sh) to spit out the configured number of CPUs and you can see the results in my [test build](https://cloud.drone.io/username_8/nodejs-feedstock/74/1/2) (line 584 and 585).
+<issue_comment>username_9: What's a reasonable value for CPU_COUNT on drone?
+In recipes we use `make -j${CPU_COUNT}`, so that there'll be parallel jobs, but not too much so that resources like memory are not exhausted.
+<issue_comment>username_10: The physical hardware is a 96-core, 128GB ThunderX, best described as ""lots of weak cores"". It's very hard for most build systems to schedule things so that they successfully use all 96 cores at once, and it's also super rare to absorb the whole memory footprint in a single go. I would crank it all the way up, see what you get, and then govern it back down as experience teaches you.
+
+@packethost has other arm64 hardware in the available pool that has fewer core but better oomph per core, if/when that gets added to the @droneio system then CPU_COUNT could potentially vary between runs.
+
+Basically I'd like to optimize for build times, if you end up getting throttled on something other than CPU that would be something to explore in more detail.
+<issue_comment>username_8: I think the build is using all the cores then if that value doesn't get set, and the build time is around 16-18 minutes, but I will do some more testing to verify.
+<issue_comment>username_8: I opened a [PR](https://github.com/conda-forge/conda-smithy/pull/1069) to add Drone.  I could use a hand with the CI integration if anyone is interested.
+<issue_comment>username_13: One thing to mention is that if you are not willing to touch QEMU / docker, you can always use the Amazon AWS to open an aarch64 instance for you. This way you save a lot of efforts when you come across potential QEMU bugs (we have seen QEMU bugs when cross compiling bazel on aarch64).
+<issue_comment>username_10: @username_13 - have those Bazel+QEMU bugs been reported? I would love to help track those down. I know that QEMU 3.x fixed a bunch of issues that were present in QEMU 2.x.
+<issue_comment>username_13: @username_10 I don't think so. Original issue here: https://github.com/bazelbuild/bazel/issues/7135 That issue is not related to this issue though.
+<issue_comment>username_9: Does anyone know if cloud.drone.io support jsonnet documents?
+<issue_comment>username_10: Hi @username_9 
+
+I see docs on the `jsonnet` extension for Drone here
+
+https://docs.drone.io/extend/config/jsonnet/
+
+I've asked in their forum at https://discourse.drone.io/t/drone-cloud-and-jsonnet/4621 and will hope for an answer.
+<issue_comment>username_10: from Brad at Drone in the above forum:
+
+Hey Ed,
+
+Right now the only option is to use the jsonnet command line utility to generate a yaml file from jsonnet, and commit the generated yaml to your repository. This is what we do for all 100+ Drone repositories. We absolutely will support native jsonnet in the future, but we first need to work through some of the security implications – it is not considered safe to evaluate untrusted jsonnet files server-side [1].
+
+[1] https://jsonnet.org/ref/bindings.html#server_side<issue_closed>
+<issue_comment>username_9: @username_10, is it possible to get access to an aarch64 server mainly for building packages that take longer than 1 hour given by Drone CI? (And also for debugging some package build failures)
+<issue_comment>username_10: Hi @username_9 - I'd be happy to review a proposal for access to an Arm server to help things out, either short term or long term.
+
+https://github.com/worksonarm/cluster is our ""Works on Arm"" cluster project, and we regularly get proposals to support CI/CD and debugging efforts. To make a request just open an issue and it will get a look from me at Packet and from folks at Arm. There's a pretty good crew working on servers in this environment + I'm also happy to introduce you to other people with relevant interest and experience."
+lektor/lektor-website,352303705,242,"{'number': 242.0, 'repo': 'lektor-website', 'user_login': 'lektor'}","[{'action': 'opened', 'author': 'franktisellano', 'comment_id': None, 'datetime': '2018-08-20T21:30:24Z', 'masked_author': 'username_0', 'text': 'Added my personal site, powered by Lektor, to the Showcase. Hope I did everything properly! (Not ready to open-source yet but will do soon.)', 'title': 'Added the personal site of Frank Tisellano to the Showcase', 'type': 'issue'}
+ {'action': 'created', 'author': 'nixjdm', 'comment_id': 422454388.0, 'datetime': '2018-09-18 16:09:23+00:00', 'masked_author': 'username_1', 'text': 'Looks good! Do let us know if you open source it :)', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'franktisellano', 'comment_id': 422973026.0, 'datetime': '2018-09-19 21:59:41+00:00', 'masked_author': 'username_0', 'text': 'Thanks! Will do. \n\n>', 'title': None, 'type': 'comment'}]","<issue_start><issue_comment>Title: Added the personal site of Frank Tisellano to the Showcase
+username_0: Added my personal site, powered by Lektor, to the Showcase. Hope I did everything properly! (Not ready to open-source yet but will do soon.)
+<issue_comment>username_1: Looks good! Do let us know if you open source it :)
+<issue_comment>username_0: Thanks! Will do. 
+
+>"
+styled-components/styled-components-website,273140837,173,"{'number': 173.0, 'repo': 'styled-components-website', 'user_login': 'styled-components'}","[{'action': 'opened', 'author': 'morajabi', 'comment_id': None, 'datetime': '2017-11-11T12:02:51Z', 'masked_author': 'username_0', 'text': 'Fixes #171\r\n\r\nI used `axios`', 'title': 'feat: add image proxy for img shield badges ', 'type': 'issue'}
+ {'action': 'created', 'author': 'morajabi', 'comment_id': 343761193.0, 'datetime': '2017-11-12 19:35:00+00:00', 'masked_author': 'username_0', 'text': ""OK! just wanted to be clear it's not a normal image."", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'philpl', 'comment_id': 343783948.0, 'datetime': '2017-11-13 01:00:02+00:00', 'masked_author': 'username_1', 'text': '@username_0 I don’t think it’s quite ready yet :)\r\n\r\nRegarding Max’s comment, I do think as well that /r is a rather random name (haha, get it?! *r*andom... I’ll see myself out)\r\n\r\nWe could just do /proxy really.', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'morajabi', 'comment_id': 343883691.0, 'datetime': '2017-11-13 10:54:42+00:00', 'masked_author': 'username_0', 'text': ""@username_1 You've got really good eyes 👏 , I need to practice on that."", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'philpl', 'comment_id': 343918587.0, 'datetime': '2017-11-13 13:28:06+00:00', 'masked_author': 'username_1', 'text': ""👀 let's get this merged"", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'morajabi', 'comment_id': 343918961.0, 'datetime': '2017-11-13 13:29:35+00:00', 'masked_author': 'username_0', 'text': '👀', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'philpl', 'comment_id': 343923783.0, 'datetime': '2017-11-13 13:48:50+00:00', 'masked_author': 'username_1', 'text': ""@username_0 So a couple of things:\r\n\r\n- Found a couple of bugs (see review)\r\n- Instead of a 404 a 500 is thrown for images which don't exist\r\n- Several comments should really be deleted i.e. (`// Are we sure about `?maxAge=3600`?`, and `// (P.S It's funny we call `next()` to pass it to Next 😆 )` :wink:)\r\n- `res.append('X-Cache', 'MISS')` is missing meaning we don't see a `HIT`/`MISS` header"", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'morajabi', 'comment_id': 343924422.0, 'datetime': '2017-11-13 13:51:08+00:00', 'masked_author': 'username_0', 'text': ""what do you mean by res.append('X-Cache', 'MISS') is missing meaning we don't see a HIT/MISS header"", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'philpl', 'comment_id': 343924954.0, 'datetime': '2017-11-13 13:53:11+00:00', 'masked_author': 'username_1', 'text': ""@username_0 so for the `cachedRender` call we append a new header to the response, which is called `X-Cache`, a really common name for cache headers. By setting it to `HIT` (LRU was used) or `MISS` (LRU was not used & updated), we can easily see whether we're getting a cached response or an actual one."", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'morajabi', 'comment_id': 343927854.0, 'datetime': '2017-11-13 14:03:32+00:00', 'masked_author': 'username_0', 'text': ""@username_1 I'm using that just like you did."", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'morajabi', 'comment_id': 343945324.0, 'datetime': '2017-11-13 15:01:07+00:00', 'masked_author': 'username_0', 'text': '""Instead of a 404 a 500 is thrown for images which don\'t exist"" Wrong. I pass non-existents to `next`', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'morajabi', 'comment_id': 343946901.0, 'datetime': '2017-11-13 15:06:09+00:00', 'masked_author': 'username_0', 'text': '👀', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'philpl', 'comment_id': 343951190.0, 'datetime': '2017-11-13 15:19:21+00:00', 'masked_author': 'username_1', 'text': '@username_0 Haha I don\'t mean to frustrate you, sorry. But you\'ll have to hold on a little longer.\r\n\r\nRegarding the forwarding, I guess the object existence check is insufficient:\r\n\r\n```\r\n$ http get \'http://localhost:3000/proxy/xyz.svg\'\r\n\r\nHTTP/1.1 500 Internal Server Error\r\nConnection: keep-alive\r\nContent-Length: 5\r\nContent-Type: text/html; charset=utf-8\r\nDate: Mon, 13 Nov 2017 15:16:02 GMT\r\nETag: W/""5-fy9qFc+NorJ+Wkr0e1jnrXHAs9k""\r\nX-Powered-By: Next.js 2.4.8\r\nError\r\n```\r\n\r\nAs you can see this goes through your code and not the next.js handler. But you\'ll just need to send a 404. There\'s no need to use the request like a middleware, it\'ll just need to send a 404.\r\n\r\nRegarding the caching; the header is there indeed, but it seems that I\'m never receiving a cached response:\r\n\r\n```\r\n$ http get \'http://localhost:3000/proxy/size.svg\'\r\n\r\nHTTP/1.1 200 OK\r\nConnection: keep-alive\r\nContent-Length: 961\r\nContent-Type: image/svg+xml;charset=utf-8\r\nDate: Mon, 13 Nov 2017 15:18:45 GMT\r\nX-Cache: MISS\r\n```', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'morajabi', 'comment_id': 343952244.0, 'datetime': '2017-11-13 15:22:27+00:00', 'masked_author': 'username_0', 'text': '@username_1 are you sure you are running the server not by `yarn dev`?', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'philpl', 'comment_id': 343952807.0, 'datetime': '2017-11-13 15:24:08+00:00', 'masked_author': 'username_1', 'text': ""@username_0 oh, you're right. I done goofed. So the caching works.\r\n\r\nSo only the 404 code is left."", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'morajabi', 'comment_id': 343952922.0, 'datetime': '2017-11-13 15:24:29+00:00', 'masked_author': 'username_0', 'text': 'done.', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'morajabi', 'comment_id': 343954591.0, 'datetime': '2017-11-13 15:29:33+00:00', 'masked_author': 'username_0', 'text': ""@username_1  DO NOT ENCOURAGE BAD PRACTICES 😄  I don't have eslint installed globally."", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'morajabi', 'comment_id': 343955062.0, 'datetime': '2017-11-13 15:31:00+00:00', 'masked_author': 'username_0', 'text': 'What do you mean we missed it in lint-staged?', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'morajabi', 'comment_id': 343957538.0, 'datetime': '2017-11-13 15:38:26+00:00', 'masked_author': 'username_0', 'text': ""@username_1 I'm going to buy some cookies 🍪  for you and let's celebrate this huge success!"", 'title': None, 'type': 'comment'}]","<issue_start><issue_comment>Title: feat: add image proxy for img shield badges 
+username_0: Fixes #171
+
+I used `axios`
+<issue_comment>username_0: OK! just wanted to be clear it's not a normal image.
+<issue_comment>username_1: @username_0 I don’t think it’s quite ready yet :)
+
+Regarding Max’s comment, I do think as well that /r is a rather random name (haha, get it?! *r*andom... I’ll see myself out)
+
+We could just do /proxy really.
+<issue_comment>username_0: @username_1 You've got really good eyes 👏 , I need to practice on that.
+<issue_comment>username_1: 👀 let's get this merged
+<issue_comment>username_0: 👀
+<issue_comment>username_1: @username_0 So a couple of things:
+
+- Found a couple of bugs (see review)
+- Instead of a 404 a 500 is thrown for images which don't exist
+- Several comments should really be deleted i.e. (`// Are we sure about `?maxAge=3600`?`, and `// (P.S It's funny we call `next()` to pass it to Next 😆 )` :wink:)
+- `res.append('X-Cache', 'MISS')` is missing meaning we don't see a `HIT`/`MISS` header
+<issue_comment>username_0: what do you mean by res.append('X-Cache', 'MISS') is missing meaning we don't see a HIT/MISS header
+<issue_comment>username_1: @username_0 so for the `cachedRender` call we append a new header to the response, which is called `X-Cache`, a really common name for cache headers. By setting it to `HIT` (LRU was used) or `MISS` (LRU was not used & updated), we can easily see whether we're getting a cached response or an actual one.
+<issue_comment>username_0: @username_1 I'm using that just like you did.
+<issue_comment>username_0: ""Instead of a 404 a 500 is thrown for images which don't exist"" Wrong. I pass non-existents to `next`
+<issue_comment>username_0: 👀
+<issue_comment>username_1: @username_0 Haha I don't mean to frustrate you, sorry. But you'll have to hold on a little longer.
+
+Regarding the forwarding, I guess the object existence check is insufficient:
+
+```
+$ http get 'http://localhost:3000/proxy/xyz.svg'
+
+HTTP/1.1 500 Internal Server Error
+Connection: keep-alive
+Content-Length: 5
+Content-Type: text/html; charset=utf-8
+Date: Mon, 13 Nov 2017 15:16:02 GMT
+ETag: W/""5-fy9qFc+NorJ+Wkr0e1jnrXHAs9k""
+X-Powered-By: Next.js 2.4.8
+Error
+```
+
+As you can see this goes through your code and not the next.js handler. But you'll just need to send a 404. There's no need to use the request like a middleware, it'll just need to send a 404.
+
+Regarding the caching; the header is there indeed, but it seems that I'm never receiving a cached response:
+
+```
+$ http get 'http://localhost:3000/proxy/size.svg'
+
+HTTP/1.1 200 OK
+Connection: keep-alive
+Content-Length: 961
+Content-Type: image/svg+xml;charset=utf-8
+Date: Mon, 13 Nov 2017 15:18:45 GMT
+X-Cache: MISS
+```
+<issue_comment>username_0: @username_1 are you sure you are running the server not by `yarn dev`?
+<issue_comment>username_1: @username_0 oh, you're right. I done goofed. So the caching works.
+
+So only the 404 code is left.
+<issue_comment>username_0: done.
+<issue_comment>username_0: @username_1  DO NOT ENCOURAGE BAD PRACTICES 😄  I don't have eslint installed globally.
+<issue_comment>username_0: What do you mean we missed it in lint-staged?
+<issue_comment>username_0: @username_1 I'm going to buy some cookies 🍪  for you and let's celebrate this huge success!"

@@ -1,0 +1,209 @@
+SeleniumHQ/seleniumhq.github.io,1093420623,912,,"[{'action': 'opened', 'author': 'ojintoad', 'comment_id': None, 'datetime': '2022-01-04 14:39:47+00:00', 'masked_author': 'username_0', 'text': '### What happened?\n\nMy team is planning on upgrading the grid and reviewed the [Getting started with Selenium Grid instructions.](https://www.selenium.dev/documentation/grid/getting_started/)\r\n\r\nFor the two Grid configuration types, it describes sizes of Grid infrastructure that each type is appropriate for.\r\n\r\n* Hub and Node(s) -> ""These roles are suitable for small and middle-sized Grids.""\r\n* Distributed -> ""This setup is more suitable for large Grids.""\r\n\r\nThere isn\'t any definition of what the large/middle/small sizes represent. Could we update the documentation to know how it defines these terms? This might be important especially if the definition for these terms changed at all from the Grid 3 -> Grid 4 implementation. Teams may need to adjust their infra sizing or configurations when they upgrade.\r\n\r\n[At least one user has asked this on the user forums.](https://groups.google.com/g/selenium-users/c/tPBo4uMKA1E/m/CGp-rYuuBwAJ)\r\n\r\nI got an answer for my team\'s own Selenium Grid setup of 280 slots distributed across 20 nodes being a middle size grid though it would require some powerful nodes/hubs to accommodate. That is accurate regarding our current Selenium Grid 3 setup.\n\n### What browsers and operating systems are you seeing the problem on?\n\nNot applicable - documentation bug on [Getting started with Selenium Grid instructions.](https://www.selenium.dev/documentation/grid/getting_started/)', 'title': '[🐛 Bug]: Documentation does not define Large/Middle/Small Grid sizes', 'type': 'issue'}]","<issue_start><issue_comment>Title: [🐛 Bug]: Documentation does not define Large/Middle/Small Grid sizes
+username_0: ### What happened?
+
+My team is planning on upgrading the grid and reviewed the [Getting started with Selenium Grid instructions.](https://www.selenium.dev/documentation/grid/getting_started/)
+
+For the two Grid configuration types, it describes sizes of Grid infrastructure that each type is appropriate for.
+
+* Hub and Node(s) -> ""These roles are suitable for small and middle-sized Grids.""
+* Distributed -> ""This setup is more suitable for large Grids.""
+
+There isn't any definition of what the large/middle/small sizes represent. Could we update the documentation to know how it defines these terms? This might be important especially if the definition for these terms changed at all from the Grid 3 -> Grid 4 implementation. Teams may need to adjust their infra sizing or configurations when they upgrade.
+
+[At least one user has asked this on the user forums.](https://groups.google.com/g/selenium-users/c/tPBo4uMKA1E/m/CGp-rYuuBwAJ)
+
+I got an answer for my team's own Selenium Grid setup of 280 slots distributed across 20 nodes being a middle size grid though it would require some powerful nodes/hubs to accommodate. That is accurate regarding our current Selenium Grid 3 setup.
+
+### What browsers and operating systems are you seeing the problem on?
+
+Not applicable - documentation bug on [Getting started with Selenium Grid instructions.](https://www.selenium.dev/documentation/grid/getting_started/)"
+GDQuest/website,750314381,243,,"[{'action': 'opened', 'author': 'chepecarlos', 'comment_id': None, 'datetime': '2020-11-25 02:46:41+00:00', 'masked_author': 'username_0', 'text': ""- [x] Bug report.\r\n- [ ] Feature request.\r\n\r\n## Bug report ##\r\n\r\n<!-- If you're reporting a bug, please fill this section. -->\r\n\r\n**What is the current behavior?**\r\nThe videos within the BPS documentation do not load\r\n![Imagen Problema](https://i.imgur.com/ZY3Iawn.png)\r\nsource: (https://www.gdquest.com/docs/power-sequencer/getting-started/)\r\n**What is the expected behavior?**\r\nsee a small video of how to use the tool"", 'title': 'Video does not load in documentation', 'type': 'issue'}
+ {'action': 'closed', 'author': 'NathanLovato', 'comment_id': None, 'datetime': '2020-11-25 05:48:59+00:00', 'masked_author': 'username_1', 'text': '', 'title': None, 'type': 'issue'}]","<issue_start><issue_comment>Title: Video does not load in documentation
+username_0: - [x] Bug report.
+- [ ] Feature request.
+
+## Bug report ##
+
+<!-- If you're reporting a bug, please fill this section. -->
+
+**What is the current behavior?**
+The videos within the BPS documentation do not load
+![Imagen Problema](https://i.imgur.com/ZY3Iawn.png)
+source: (https://www.gdquest.com/docs/power-sequencer/getting-started/)
+**What is the expected behavior?**
+see a small video of how to use the tool<issue_closed>"
+gohugoio/hugo,755721986,8010,"{'number': 8010.0, 'repo': 'hugo', 'user_login': 'gohugoio'}","[{'action': 'opened', 'author': 'kevinawoo', 'comment_id': None, 'datetime': '2020-12-03T00:48:48Z', 'masked_author': 'username_0', 'text': ""User are are able to specify `version` in the frontmatter, following the [semver format](https://semver.org/) for sorting. Pages that don't have `version` will be sorted to the end."", 'title': 'Adds ability to sort ByVersion (following semver format)', 'type': 'issue'}
+ {'action': 'created', 'author': 'alexlafreniere', 'comment_id': 1014673638.0, 'datetime': '2022-01-17 15:41:10+00:00', 'masked_author': 'username_1', 'text': 'If there is any way I can contribute to moving this PR along please let me know. We are desperately seeking proper sorting for semantic version numbers on our Hugo-powered documentation site. Given the age of the PR, does it make more sense to re-open a new PR against the latest version of Hugo rather than attempt to solve the merge conflicts?', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'jmooring', 'comment_id': 1014711269.0, 'datetime': '2022-01-17 16:24:49+00:00', 'masked_author': 'username_2', 'text': 'Neither.\r\n\r\nPlease create an issue (proposal) to describe the problem and why it is important. I wouldn\'t invest any time in a PR unless the project lead indicates that it would even be considered.\r\n\r\nPersonally, I would rather see this functionality added to the existing sort function. Something like:\r\n\r\n```\r\n{{ range (sort .Pages ""Params.version"" ""semVerAsc"" ) }}\r\n{{ range (sort .Pages ""Params.version"" ""semVerDesc"" ) }}\r\n```\r\n\r\nBenefits:\r\n- I can use any front matter field name (e.g., version, release, sw_ver)\r\n- I can sort anything, not just page collections', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'alexlafreniere', 'comment_id': 1014791392.0, 'datetime': '2022-01-17 18:12:59+00:00', 'masked_author': 'username_1', 'text': 'An even better idea! Drawing up a proposal now. Thank you for the input and guidance.', 'title': None, 'type': 'comment'}]","<issue_start><issue_comment>Title: Adds ability to sort ByVersion (following semver format)
+username_0: User are are able to specify `version` in the frontmatter, following the [semver format](https://semver.org/) for sorting. Pages that don't have `version` will be sorted to the end.
+<issue_comment>username_1: If there is any way I can contribute to moving this PR along please let me know. We are desperately seeking proper sorting for semantic version numbers on our Hugo-powered documentation site. Given the age of the PR, does it make more sense to re-open a new PR against the latest version of Hugo rather than attempt to solve the merge conflicts?
+<issue_comment>username_2: Neither.
+
+Please create an issue (proposal) to describe the problem and why it is important. I wouldn't invest any time in a PR unless the project lead indicates that it would even be considered.
+
+Personally, I would rather see this functionality added to the existing sort function. Something like:
+
+```
+{{ range (sort .Pages ""Params.version"" ""semVerAsc"" ) }}
+{{ range (sort .Pages ""Params.version"" ""semVerDesc"" ) }}
+```
+
+Benefits:
+- I can use any front matter field name (e.g., version, release, sw_ver)
+- I can sort anything, not just page collections
+<issue_comment>username_1: An even better idea! Drawing up a proposal now. Thank you for the input and guidance."
+OperationCode/front-end,341418443,14,,"[{'action': 'opened', 'author': 'kylemh', 'comment_id': None, 'datetime': '2018-07-16 07:44:27+00:00', 'masked_author': 'username_0', 'text': ""<!-- Please fill out one of the sections below based on the type of issue you're creating -->\r\n# Feature\r\n## Why is this feature being added?\r\n<!-- What problem is it solving? What value does it add? -->\r\n- This will prevent human error in terms of merging changes to `common/components` without checking it's story for any needed changes.\r\n\r\n## What should your feature do?\r\nEnsure that edits to components always match up with it's Story.\r\n\r\n**Defined as done**: \r\n- I am unable to open a PR with code changed in `common/components` without a bot commenting on the fact and reminding maintainers to check the component's corresponding Story for feature parity."", 'title': 'Create PR bot that reminds maintainers to check Story parity', 'type': 'issue'}
+ {'action': 'created', 'author': 'wimo7083', 'comment_id': 419740522.0, 'datetime': '2018-09-09 19:53:27+00:00', 'masked_author': 'username_1', 'text': 'Are you imaginging:\r\n1. User creates a PR\r\n2. Bot checks if files in `common/components` is changed. \r\n3. Bot adds a message saying something telling them to verify that `common/components/$component/__stories__/*` has all the required documents?', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'kylemh', 'comment_id': 419743154.0, 'datetime': '2018-09-09 20:35:08+00:00', 'masked_author': 'username_0', 'text': ""Exactly. I'd specify required documents as API parity"", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'wimo7083', 'comment_id': 420117542.0, 'datetime': '2018-09-11 01:41:38+00:00', 'masked_author': 'username_1', 'text': 'So is this needed haha?', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'kylemh', 'comment_id': 420125592.0, 'datetime': '2018-09-11 02:29:43+00:00', 'masked_author': 'username_0', 'text': ""While the script you made is helpful, I don't know how to enforce its usage when new components are created. This issue acknowledges that it's probably tough to enforce good practices, so at least a reminder when a common component is changed for us to ensure that the Story has parity would be nice. It's one of many possible ways to instill good Storybook practices within the repository."", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'dmarchante', 'comment_id': 426375493.0, 'datetime': '2018-10-02 18:10:15+00:00', 'masked_author': 'username_2', 'text': 'assigning myself', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'kylemh', 'comment_id': 466724793.0, 'datetime': '2019-02-24 01:37:26+00:00', 'masked_author': 'username_0', 'text': 'Re-opening issue for claiming!', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'IAMOTZ', 'comment_id': 509032149.0, 'datetime': '2019-07-07 21:27:53+00:00', 'masked_author': 'username_3', 'text': 'Hi @username_0 \r\nI would like to work on this.', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'kylemh', 'comment_id': 509046445.0, 'datetime': '2019-07-08 01:05:41+00:00', 'masked_author': 'username_0', 'text': '@username_3 feel free to dive in! I look forward to seeing your work.', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'IAMOTZ', 'comment_id': 511526156.0, 'datetime': '2019-07-15 18:55:13+00:00', 'masked_author': 'username_3', 'text': ""Hi @username_0 \r\nI just finished creating the first version of the Github app. Since its a whole project on its own and I don't know where to fit it in this repository, I've pushed it to a repository [here](https://github.com/username_3/pr-bot). I have installed and tested it out on some of my repos and it works fine. \r\nYou can test it out by creating a PR that affects the files in the `common` or `components` folder in [this repository](https://github.com/username_3/Clone-TypeRacer). Feel free to create as many PRs as you want, the repo is a test repo.\r\n\r\nThese are some of the questions I need to be answered to finish up the work on this bot:\r\n- Where would the project code be hosted in `OperationCode` Github? (Its currently hosted in my Github repository)\r\n- Where would the project be deployed? (Its currently deployed on my local machine)\r\n- Can you suggest a better name for the project? (The current name is `pr-bot`)\r\n\r\nThanks."", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'kylemh', 'comment_id': 511530992.0, 'datetime': '2019-07-15 19:08:52+00:00', 'masked_author': 'username_0', 'text': ""Very cool idea to separate the project into it's own repo!\r\n\r\nI made a test PR in that repo, but the PR didn't receive a comment.\r\n\r\nOne way you can abstract this bot better is to allow the message itself to be customizable. You can do it in the way that you allowed for customization of the file paths, but perhaps somebody wants to have different messages depending on what files are changed!\r\n\r\nIn that case, it may be better to expect an array of config blobs which describe a message per path.\r\n\r\nYou could potentially abstract things further in the future, by not assuming the user wants to add a message in a comment from the bot. A long term goal would allow users to define an action (GitHook, API request, comment, add label on GH, etc.) - this bot can be very, very powerful.\r\n\r\nIn terms of naming the bot, I like the idea of calling it `DiffDetector`."", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'IAMOTZ', 'comment_id': 511542980.0, 'datetime': '2019-07-15 19:46:35+00:00', 'masked_author': 'username_3', 'text': ""Thanks a lot for the feedback @username_0, the suggestions are definitely something I would work on.\r\n\r\nAbout the PR you created that did not receive a comment, it's because the project is deployed on my local machine and my machine was not active when you tested it. I would try to deploy the project to Heroku ASAP so as to make it easier to test. I would let you know as soon as I'm done with this.\r\n\r\nHow can I go about getting this project in its own repo in `OperationsCode`?"", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'kylemh', 'comment_id': 511555573.0, 'datetime': '2019-07-15 20:23:46+00:00', 'masked_author': 'username_0', 'text': 'Would you like to integrate this bot as part of OperationCode?\r\n\r\nI have no qualms about that, but I figured that you might want control of the repository, being its creator.', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'IAMOTZ', 'comment_id': 516423619.0, 'datetime': '2019-07-30 13:40:55+00:00', 'masked_author': 'username_3', 'text': ""Hi @username_0 \r\nSorry for the late response, my days have been pretty busy.\r\nI've tried implementing your feedback by making the file paths and messages the app uses customizable. Now, you can have multiple file paths with different messages attached to them.\r\n\r\nI also utilized the [Github App Manifest](https://developer.github.com/apps/building-github-apps/creating-github-apps-from-a-manifest/)  to make it very easy for someone else to set up and install the app. I updated instructions to the README on configuring and testing the app.\r\n\r\nNow, OperationCode can fork the repository from mine, configure it, deploy it, then install it in any of its repositories.\r\n\r\nLooking forward to more feedback on my implementation and any contribution to make the app better."", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'kylemh', 'comment_id': 536943942.0, 'datetime': '2019-10-01 09:07:47+00:00', 'masked_author': 'username_0', 'text': ""We're going to move towards creating a component library where we won't need to police this as much."", 'title': None, 'type': 'comment'}
+ {'action': 'closed', 'author': 'kylemh', 'comment_id': None, 'datetime': '2019-10-01 09:07:47+00:00', 'masked_author': 'username_0', 'text': '', 'title': None, 'type': 'issue'}]","<issue_start><issue_comment>Title: Create PR bot that reminds maintainers to check Story parity
+username_0: <!-- Please fill out one of the sections below based on the type of issue you're creating -->
+# Feature
+## Why is this feature being added?
+<!-- What problem is it solving? What value does it add? -->
+- This will prevent human error in terms of merging changes to `common/components` without checking it's story for any needed changes.
+
+## What should your feature do?
+Ensure that edits to components always match up with it's Story.
+
+**Defined as done**: 
+- I am unable to open a PR with code changed in `common/components` without a bot commenting on the fact and reminding maintainers to check the component's corresponding Story for feature parity.
+<issue_comment>username_1: Are you imaginging:
+1. User creates a PR
+2. Bot checks if files in `common/components` is changed. 
+3. Bot adds a message saying something telling them to verify that `common/components/$component/__stories__/*` has all the required documents?
+<issue_comment>username_0: Exactly. I'd specify required documents as API parity
+<issue_comment>username_1: So is this needed haha?
+<issue_comment>username_0: While the script you made is helpful, I don't know how to enforce its usage when new components are created. This issue acknowledges that it's probably tough to enforce good practices, so at least a reminder when a common component is changed for us to ensure that the Story has parity would be nice. It's one of many possible ways to instill good Storybook practices within the repository.
+<issue_comment>username_2: assigning myself
+<issue_comment>username_0: Re-opening issue for claiming!
+<issue_comment>username_3: Hi @username_0 
+I would like to work on this.
+<issue_comment>username_0: @username_3 feel free to dive in! I look forward to seeing your work.
+<issue_comment>username_3: Hi @username_0 
+I just finished creating the first version of the Github app. Since its a whole project on its own and I don't know where to fit it in this repository, I've pushed it to a repository [here](https://github.com/username_3/pr-bot). I have installed and tested it out on some of my repos and it works fine. 
+You can test it out by creating a PR that affects the files in the `common` or `components` folder in [this repository](https://github.com/username_3/Clone-TypeRacer). Feel free to create as many PRs as you want, the repo is a test repo.
+
+These are some of the questions I need to be answered to finish up the work on this bot:
+- Where would the project code be hosted in `OperationCode` Github? (Its currently hosted in my Github repository)
+- Where would the project be deployed? (Its currently deployed on my local machine)
+- Can you suggest a better name for the project? (The current name is `pr-bot`)
+
+Thanks.
+<issue_comment>username_0: Very cool idea to separate the project into it's own repo!
+
+I made a test PR in that repo, but the PR didn't receive a comment.
+
+One way you can abstract this bot better is to allow the message itself to be customizable. You can do it in the way that you allowed for customization of the file paths, but perhaps somebody wants to have different messages depending on what files are changed!
+
+In that case, it may be better to expect an array of config blobs which describe a message per path.
+
+You could potentially abstract things further in the future, by not assuming the user wants to add a message in a comment from the bot. A long term goal would allow users to define an action (GitHook, API request, comment, add label on GH, etc.) - this bot can be very, very powerful.
+
+In terms of naming the bot, I like the idea of calling it `DiffDetector`.
+<issue_comment>username_3: Thanks a lot for the feedback @username_0, the suggestions are definitely something I would work on.
+
+About the PR you created that did not receive a comment, it's because the project is deployed on my local machine and my machine was not active when you tested it. I would try to deploy the project to Heroku ASAP so as to make it easier to test. I would let you know as soon as I'm done with this.
+
+How can I go about getting this project in its own repo in `OperationsCode`?
+<issue_comment>username_0: Would you like to integrate this bot as part of OperationCode?
+
+I have no qualms about that, but I figured that you might want control of the repository, being its creator.
+<issue_comment>username_3: Hi @username_0 
+Sorry for the late response, my days have been pretty busy.
+I've tried implementing your feedback by making the file paths and messages the app uses customizable. Now, you can have multiple file paths with different messages attached to them.
+
+I also utilized the [Github App Manifest](https://developer.github.com/apps/building-github-apps/creating-github-apps-from-a-manifest/)  to make it very easy for someone else to set up and install the app. I updated instructions to the README on configuring and testing the app.
+
+Now, OperationCode can fork the repository from mine, configure it, deploy it, then install it in any of its repositories.
+
+Looking forward to more feedback on my implementation and any contribution to make the app better.
+<issue_comment>username_0: We're going to move towards creating a component library where we won't need to police this as much.<issue_closed>"
+ember-learn/ember-website,491009008,398,"{'number': 398.0, 'repo': 'ember-website', 'user_login': 'ember-learn'}","[{'action': 'opened', 'author': 'Turbo87', 'comment_id': None, 'datetime': '2019-09-09T10:19:45Z', 'masked_author': 'username_0', 'text': ""I haven't had a lot of time and energy lately to do any meaningful contributions so I'm moving myself to alumni status for now."", 'title': 'team: Move myself to `alumni` team', 'type': 'issue'}
+ {'action': 'created', 'author': 'Turbo87', 'comment_id': 529471726.0, 'datetime': '2019-09-09 13:22:30+00:00', 'masked_author': 'username_0', 'text': 'just to make this clear, I\'m not ""leaving"", just adjusting my status to the current situation 😉', 'title': None, 'type': 'comment'}]","<issue_start><issue_comment>Title: team: Move myself to `alumni` team
+username_0: I haven't had a lot of time and energy lately to do any meaningful contributions so I'm moving myself to alumni status for now.
+<issue_comment>username_0: just to make this clear, I'm not ""leaving"", just adjusting my status to the current situation 😉"
+gohugoio/hugo,393727123,5557,,"[{'action': 'opened', 'author': 'ItalyPaleAle', 'comment_id': None, 'datetime': '2018-12-23T06:24:11Z', 'masked_author': 'username_0', 'text': 'I\'m using the pagination module to list articles. On the `page/1.html` file, it correctly creates a redirect to my `index.html`. However, the redirect uses absolute permalinks even if my site is configured with `relativeURLs: true` and `canonifyURLs: false`.\r\n\r\nThis is the content of `page/1.html` generated (line breaks added for legibility):\r\n\r\n````html\r\n<!DOCTYPE html>\r\n<html>\r\n\r\n<head>\r\n\t<title>https://withblue.ink/</title>\r\n\t<link rel=""canonical"" href=""https://withblue.ink/"" />\r\n\t<meta name=""robots"" content=""noindex"">\r\n\t<meta charset=""utf-8"" />\r\n\t<meta http-equiv=""refresh"" content=""0; url=https://withblue.ink/"" />\r\n</head>\r\n\r\n</html>\r\n````\r\n\r\nWhat I\'m expecting:\r\n\r\n````html\r\n<!DOCTYPE html>\r\n<html>\r\n\r\n<head>\r\n\t<title>https://withblue.ink/</title>\r\n\t<link rel=""canonical"" href=""../index.html"" />\r\n\t<meta name=""robots"" content=""noindex"">\r\n\t<meta charset=""utf-8"" />\r\n\t<meta http-equiv=""refresh"" content=""0; url=../index.html"" />\r\n</head>\r\n\r\n</html>\r\n````', 'title': 'Pagination: page 1 redirect should be able to use relative links', 'type': 'issue'}
+ {'action': 'created', 'author': 'felicianotech', 'comment_id': 450018183.0, 'datetime': '2018-12-26 20:05:31+00:00', 'masked_author': 'username_1', 'text': ""That redirect is powered by Hugo Aliases. According to the docs, they are absolute URLs no matter what. I was going to see if I could make a change but then I learned that aliases support custom templates. You'll be able to make your own template that uses relative links instead.\r\n\r\nhttps://gohugo.io/content-management/urls/#customize"", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'felicianotech', 'comment_id': 450019404.0, 'datetime': '2018-12-26 20:14:08+00:00', 'masked_author': 'username_1', 'text': 'Though the way I understand this, this is basically a duplicate of https://github.com/gohugoio/hugo/issues/5314.', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'ItalyPaleAle', 'comment_id': 450747616.0, 'datetime': '2019-01-01 18:14:57+00:00', 'masked_author': 'username_0', 'text': ""I think it's a similar issue to #5314, meaning that could fix the issue as well (although requires more awareness). Is there a reason why the Aliases module can't support UglyURLs settings?"", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'jmooring', 'comment_id': 817869345.0, 'datetime': '2021-04-12 14:40:36+00:00', 'masked_author': 'username_2', 'text': 'This is not a duplicate of #5314.\r\nThis issue is related to `relativeURLs = true`. It is _not_ related to `uglyURLs = true`.\r\nThere is a workaround: create a custom template (layous/alias.html) using [this](https://github.com/gohugoio/hugo/blob/master/tpl/tplimpl/embedded/templates/alias.html) as a starting point.\r\n\r\nThis could be resolved in the embedded template  if `.Site.relativeURLs` were exposed to templates, but I expect that would make the relative/canonify/webroot-in-subdir confusion worse.', 'title': None, 'type': 'comment'}]","<issue_start><issue_comment>Title: Pagination: page 1 redirect should be able to use relative links
+username_0: I'm using the pagination module to list articles. On the `page/1.html` file, it correctly creates a redirect to my `index.html`. However, the redirect uses absolute permalinks even if my site is configured with `relativeURLs: true` and `canonifyURLs: false`.
+
+This is the content of `page/1.html` generated (line breaks added for legibility):
+
+````html
+<!DOCTYPE html>
+<html>
+
+<head>
+	<title>https://withblue.ink/</title>
+	<link rel=""canonical"" href=""https://withblue.ink/"" />
+	<meta name=""robots"" content=""noindex"">
+	<meta charset=""utf-8"" />
+	<meta http-equiv=""refresh"" content=""0; url=https://withblue.ink/"" />
+</head>
+
+</html>
+````
+
+What I'm expecting:
+
+````html
+<!DOCTYPE html>
+<html>
+
+<head>
+	<title>https://withblue.ink/</title>
+	<link rel=""canonical"" href=""../index.html"" />
+	<meta name=""robots"" content=""noindex"">
+	<meta charset=""utf-8"" />
+	<meta http-equiv=""refresh"" content=""0; url=../index.html"" />
+</head>
+
+</html>
+````
+<issue_comment>username_1: That redirect is powered by Hugo Aliases. According to the docs, they are absolute URLs no matter what. I was going to see if I could make a change but then I learned that aliases support custom templates. You'll be able to make your own template that uses relative links instead.
+
+https://gohugo.io/content-management/urls/#customize
+<issue_comment>username_1: Though the way I understand this, this is basically a duplicate of https://github.com/gohugoio/hugo/issues/5314.
+<issue_comment>username_0: I think it's a similar issue to #5314, meaning that could fix the issue as well (although requires more awareness). Is there a reason why the Aliases module can't support UglyURLs settings?
+<issue_comment>username_2: This is not a duplicate of #5314.
+This issue is related to `relativeURLs = true`. It is _not_ related to `uglyURLs = true`.
+There is a workaround: create a custom template (layous/alias.html) using [this](https://github.com/gohugoio/hugo/blob/master/tpl/tplimpl/embedded/templates/alias.html) as a starting point.
+
+This could be resolved in the embedded template  if `.Site.relativeURLs` were exposed to templates, but I expect that would make the relative/canonify/webroot-in-subdir confusion worse."
+getnikola/nikola,94818753,1889,,"[{'action': 'opened', 'author': 'erdgeist', 'comment_id': None, 'datetime': '2015-07-13 21:43:21+00:00', 'masked_author': 'username_0', 'text': 'Currently, filtering posts that go into post-lists only works with tags or slugs. In the legacy site I currently want to migrate, I have views in the form of /press/releases/<year>/ that would filter by date but could also filter by globbing the path name. I wonder if there is a generic way to filter by multiple meta data entries.\r\n\r\nWhile we\'re at it: once you add powerful filters to post-lists and get something what is called ""the loop"" in php sites, i.e. filter/sort/slice/templatize, the currently implemented indexes for posts-by-year, posts-by-author and posts-by-category just become special cases of these posts-lists. You could basically create paginated indexes for all posts-list queries and offer rss feeds for each of them, too.', 'title': 'Augment post-list directive with more filters', 'type': 'issue'}
+ {'action': 'created', 'author': 'Kwpolska', 'comment_id': 121930203.0, 'datetime': '2015-07-16 11:28:05+00:00', 'masked_author': 'username_1', 'text': 'For `date`: https://gist.github.com/username_1/2779f7d1ea006971aad1\r\n\r\n(I’ll relicense to MIT if wanted)', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'Kwpolska', 'comment_id': 124846612.0, 'datetime': '2015-07-25 13:13:48+00:00', 'masked_author': 'username_1', 'text': '`categories` added.', 'title': None, 'type': 'comment'}
+ {'action': 'closed', 'author': 'Kwpolska', 'comment_id': None, 'datetime': '2016-07-18 18:07:34+00:00', 'masked_author': 'username_1', 'text': '', 'title': None, 'type': 'issue'}]","<issue_start><issue_comment>Title: Augment post-list directive with more filters
+username_0: Currently, filtering posts that go into post-lists only works with tags or slugs. In the legacy site I currently want to migrate, I have views in the form of /press/releases/<year>/ that would filter by date but could also filter by globbing the path name. I wonder if there is a generic way to filter by multiple meta data entries.
+
+While we're at it: once you add powerful filters to post-lists and get something what is called ""the loop"" in php sites, i.e. filter/sort/slice/templatize, the currently implemented indexes for posts-by-year, posts-by-author and posts-by-category just become special cases of these posts-lists. You could basically create paginated indexes for all posts-list queries and offer rss feeds for each of them, too.
+<issue_comment>username_1: For `date`: https://gist.github.com/username_1/2779f7d1ea006971aad1
+
+(I’ll relicense to MIT if wanted)
+<issue_comment>username_1: `categories` added.<issue_closed>"
+AdoptOpenJDK/openjdk-website,405952857,401,"{'number': 401.0, 'repo': 'openjdk-website', 'user_login': 'AdoptOpenJDK'}","[{'action': 'opened', 'author': 'ParkerM', 'comment_id': None, 'datetime': '2019-02-02T06:09:15Z', 'masked_author': 'username_0', 'text': 'Fix for #400. Replaces usages of non-standard `unzip` in Win32/64 installation string templates with an equivalent Powershell command: \r\n```powershell\r\nExpand-Archive -Path .\\FILENAME -DestinationPath .\r\n```\r\n\r\n##### Checklist\r\n\r\n- [x] `npm test` passes\r\n- [ ] documentation is changed or added\r\n- [x] contribution guidelines followed [here](https://github.com/AdoptOpenJDK/openjdk-website/blob/master/CONTRIBUTING.md)', 'title': 'Update Windows install commands to use standard Powershell unzip', 'type': 'issue'}]","<issue_start><issue_comment>Title: Update Windows install commands to use standard Powershell unzip
+username_0: Fix for #400. Replaces usages of non-standard `unzip` in Win32/64 installation string templates with an equivalent Powershell command: 
+```powershell
+Expand-Archive -Path .\FILENAME -DestinationPath .
+```
+
+##### Checklist
+
+- [x] `npm test` passes
+- [ ] documentation is changed or added
+- [x] contribution guidelines followed [here](https://github.com/AdoptOpenJDK/openjdk-website/blob/master/CONTRIBUTING.md)"

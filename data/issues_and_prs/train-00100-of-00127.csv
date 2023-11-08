@@ -1,0 +1,141 @@
+kubernetes/website,992523998,29657,"{'number': 29657.0, 'repo': 'website', 'user_login': 'kubernetes'}","[{'action': 'opened', 'author': 'jlbutler', 'comment_id': None, 'datetime': '2021-09-09T18:44:37Z', 'masked_author': 'username_0', 'text': ""Merge 'main' onto dev-1.23 integration branch."", 'title': 'merged main onto dev-1.23', 'type': 'issue'}
+ {'action': 'created', 'author': 'jlbutler', 'comment_id': 916352029.0, 'datetime': '2021-09-09 18:51:54+00:00', 'masked_author': 'username_0', 'text': '/hold', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'reylejano', 'comment_id': 916393120.0, 'datetime': '2021-09-09 19:56:55+00:00', 'masked_author': 'username_1', 'text': 'Build error with commit 9d5769e, fixed in the same PR https://github.com/kubernetes/website/pull/29626 with commit 6fe1e16', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'jlbutler', 'comment_id': 916394661.0, 'datetime': '2021-09-09 19:59:28+00:00', 'masked_author': 'username_0', 'text': '/hold cancel', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'PI-Victor', 'comment_id': 916461582.0, 'datetime': '2021-09-09 21:49:24+00:00', 'masked_author': 'username_2', 'text': ""unfortunately i lost my super powers and can't approve anymore, but LGTM!"", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'sftim', 'comment_id': 916823498.0, 'datetime': '2021-09-10 11:10:43+00:00', 'masked_author': 'username_3', 'text': ""Ah, that's a tiny bit annoying.\r\n/committee steering\r\n\r\nfor the announcement changes."", 'title': None, 'type': 'comment'}]","<issue_start><issue_comment>Title: merged main onto dev-1.23
+username_0: Merge 'main' onto dev-1.23 integration branch.
+<issue_comment>username_0: /hold
+<issue_comment>username_1: Build error with commit 9d5769e, fixed in the same PR https://github.com/kubernetes/website/pull/29626 with commit 6fe1e16
+<issue_comment>username_0: /hold cancel
+<issue_comment>username_2: unfortunately i lost my super powers and can't approve anymore, but LGTM!
+<issue_comment>username_3: Ah, that's a tiny bit annoying.
+/committee steering
+
+for the announcement changes."
+gohugoio/hugo,276818741,4121,,"[{'action': 'opened', 'author': 'Siassei', 'comment_id': None, 'datetime': '2017-11-26 11:49:04+00:00', 'masked_author': 'username_0', 'text': '**project structure**\r\n```\r\n- content\r\n  - info\r\n    - _index.md\r\n    - about.md\r\n- themes/abc/layouts\r\n  - _default\r\n    - baseof.html\r\n    - list.html\r\n    - single.html\r\n  - info\r\n    - baseof.html\r\n    - list.html\r\n    - single.html\r\n```\r\n**_default/baseof.html**\r\n```\r\n<!DOCTYPE html>\r\n<html lang=""{{ .Site.Language.Lang }}"">\r\n  <head>\r\n    {{ partial ""head.html"" . }}\r\n  </head>\r\n\t<body class=""is-loading"">\r\n\r\n  <div id=""wrapper"">\r\n    <header id=""header"">\r\n      {{ partial ""header.html"" . }}\r\n    </header>\r\n\r\n    <div id=""main"">\r\n      {{ partial ""menu-top.html"" . }}\r\n      {{ partial ""alter-hline.html"" . }}\r\n      {{ partial ""content.html"" . }}\r\n    </div>\r\n\r\n    <footer id=""footer"">\r\n      {{ partial ""footer.html"" . }}\r\n    </footer>\r\n  </div>\r\n\r\n  <div id=""bg""></div>\r\n\r\n\t</body>\r\n</html>\r\n```\r\n**partials/content.html**\r\n```\r\n<div id=""content"">\r\n  <div id=""sidebar-left"">\r\n    {{ block ""content-sidebar-left"" . }}\r\n    {{ end }}\r\n  </div>\r\n  <div id=""view"">\r\n    {{ block ""content-view"" . }}\r\n    <h1>{{ .Type }}-baseof</h1>\r\n    {{ end }}\r\n  </div>\r\n  <div id=""sidebar-right"">\r\n    {{ block ""content-sidebar-right"" . }}\r\n    {{ end }}\r\n  </div>\r\n</div>\r\n```\r\n\r\n1. **themes/abc/layouts/info/baseof.html**\r\n  If that file only contains lines as above, the info/baseof.html do not replace the block at the default/baseof.html. \r\n`{{ define ""content-view"" }}abcd{{ end }}`\r\nThat is very ugly and breaks for me a lot of power. Why I can not ""subtheming"" the base-template for different sections with block syntax?\r\n(maybe the problem contains on the effect of question 2?)\r\n\r\n2. If themes/abc/layouts/info/baseof.html is delete then the **block definitions in the partial ""content.html""** do not work correctly. Hugo does not match the present ""info/....html"" files for the info content of the project. The output for e.g. ""content-view"" is the default output `<h1>info-baseof</h1>`\r\nIf I put the lines of the partial into the _default/baseof.html then the info content use the ""info/....html"" layouts.', 'title': ""Base Template with block definitions in partial's does not work"", 'type': 'issue'}
+ {'action': 'created', 'author': 'bep', 'comment_id': 347011315.0, 'datetime': '2017-11-26 14:13:00+00:00', 'masked_author': 'username_1', 'text': ""Block definitions in partials aren't supported.\r\n\r\nIf you want to discuss alternatives, ask at https://discourse.gohugo.io/"", 'title': None, 'type': 'comment'}
+ {'action': 'closed', 'author': 'bep', 'comment_id': None, 'datetime': '2017-11-26 14:13:00+00:00', 'masked_author': 'username_1', 'text': '', 'title': None, 'type': 'issue'}]","<issue_start><issue_comment>Title: Base Template with block definitions in partial's does not work
+username_0: **project structure**
+```
+- content
+  - info
+    - _index.md
+    - about.md
+- themes/abc/layouts
+  - _default
+    - baseof.html
+    - list.html
+    - single.html
+  - info
+    - baseof.html
+    - list.html
+    - single.html
+```
+**_default/baseof.html**
+```
+<!DOCTYPE html>
+<html lang=""{{ .Site.Language.Lang }}"">
+  <head>
+    {{ partial ""head.html"" . }}
+  </head>
+	<body class=""is-loading"">
+
+  <div id=""wrapper"">
+    <header id=""header"">
+      {{ partial ""header.html"" . }}
+    </header>
+
+    <div id=""main"">
+      {{ partial ""menu-top.html"" . }}
+      {{ partial ""alter-hline.html"" . }}
+      {{ partial ""content.html"" . }}
+    </div>
+
+    <footer id=""footer"">
+      {{ partial ""footer.html"" . }}
+    </footer>
+  </div>
+
+  <div id=""bg""></div>
+
+	</body>
+</html>
+```
+**partials/content.html**
+```
+<div id=""content"">
+  <div id=""sidebar-left"">
+    {{ block ""content-sidebar-left"" . }}
+    {{ end }}
+  </div>
+  <div id=""view"">
+    {{ block ""content-view"" . }}
+    <h1>{{ .Type }}-baseof</h1>
+    {{ end }}
+  </div>
+  <div id=""sidebar-right"">
+    {{ block ""content-sidebar-right"" . }}
+    {{ end }}
+  </div>
+</div>
+```
+
+1. **themes/abc/layouts/info/baseof.html**
+  If that file only contains lines as above, the info/baseof.html do not replace the block at the default/baseof.html. 
+`{{ define ""content-view"" }}abcd{{ end }}`
+That is very ugly and breaks for me a lot of power. Why I can not ""subtheming"" the base-template for different sections with block syntax?
+(maybe the problem contains on the effect of question 2?)
+
+2. If themes/abc/layouts/info/baseof.html is delete then the **block definitions in the partial ""content.html""** do not work correctly. Hugo does not match the present ""info/....html"" files for the info content of the project. The output for e.g. ""content-view"" is the default output `<h1>info-baseof</h1>`
+If I put the lines of the partial into the _default/baseof.html then the info content use the ""info/....html"" layouts.
+<issue_comment>username_1: Block definitions in partials aren't supported.
+
+If you want to discuss alternatives, ask at https://discourse.gohugo.io/<issue_closed>"
+processing/p5.js-website,307430965,174,,"[{'action': 'opened', 'author': 'brysonian', 'comment_id': None, 'datetime': '2018-03-21 21:50:50+00:00', 'masked_author': 'username_0', 'text': 'Would it make sense to transition the new site to a more modern set of tools? Neither grunt nor backbone are actively maintained anymore or in popular use. I worry that it makes editing the sites difficult for the uninitiated to use tools that are increasingly difficult to find support for.', 'title': 'JavaScript stack', 'type': 'issue'}
+ {'action': 'created', 'author': 'limzykenneth', 'comment_id': 375237838.0, 'datetime': '2018-03-22 09:49:04+00:00', 'masked_author': 'username_1', 'text': 'I disagree that grunt or backbone are not suit for purpose. Both of them are mature frameworks with still numerous users around the world and it definitely isn\'t difficult to find support for either of them as both are well documented and have a big community of users behind it. \r\n\r\nIt\'s tempting to move to more ""modern"" set of tools because they are popular now but I would argue unless something is broken (now or soon) or there are enormous benefit to switching, it won\'t be worth the effort to rewrite the site just for the sake of chasing popularity. That\'s just what I think.', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'brysonian', 'comment_id': 375244353.0, 'datetime': '2018-03-22 10:11:21+00:00', 'masked_author': 'username_0', 'text': '""Chasing popularity"" is harsh and mischaracterizes and belittles a very real concern. Neither of these tools are actively maintained; with no active development in years. They were a great choice when the site was initially built, but not now, not if the site is being updated. No one starting to learn more advanced JavaScript development toolchains and methodologies in 2018 should be starting here and the p5 site is a wonderful opportunity for users to do just that. Especially for learners who would like to use this as a way to learn modern contemporary web development techniques, these just aren\'t the right tools anymore.', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'limzykenneth', 'comment_id': 375259745.0, 'datetime': '2018-03-22 10:45:09+00:00', 'masked_author': 'username_1', 'text': ""I just think it is unfair to declare them dead just because they didn't have the commit frequency of current more popular projects despite having over 500,000 downloads from npm every week. Many people are using them and they are very viable tools even for developing new websites.\r\n\r\nDiffferent framework serves different purposes and determining whether a tool is right or not based on its commit frequency and not whether is fits the project or not just doesn't feel right to me. I mean if there are obvious flaws to the current framework or obvious benefit to the new one then yes a change would make sense, for example, the main p5.js repo switched from using jshint for linting to eslint for linting because jscs is deprecated and eslint can replace both jscs and jshint plus also enabling prettifying code precommit all with the same rule.\r\n\r\nI guess my point is beyond not having a high enough commit frequency, what is wrong with the current tools?"", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'brysonian', 'comment_id': 375293615.0, 'datetime': '2018-03-22 12:54:11+00:00', 'masked_author': 'username_0', 'text': ""Again, I don't appreciate the combative tone; disagreement is a feature of community, not a bug.\r\n\r\nCurious to pit one metric (commit frequency) vs another (npm downloads) to make a point. Especially when  commit frequency is generally considered an indicator of a community's commitment, interest, and thus future lifetime of a project. And when, in this particular case, the npm download stats tilt vastly in favor of other tools. Yes grunt has a healthy 500k, webpack on the other hand a measly 3M, backbone 200k, react only 2M and vue 300k, assemble 9k, gatsby (as an arbitrary SSG) 130k.  \r\n\r\nBut yes absolutely the project should dictate the tools, that's why i indicated some of those above. Some of the needs of this project though are more complex, the project itself has a pedagogical purpose beyond just spitting out a website. Teaching new learners tools that are more likely to be around in a few years, tools that are in wider usage, tools that better contribute to establishing oneself as a web developer. Part of this project is to offer an environment for people to extend their web development skills, some of those people may even want to get a job doing javascript dev. Offering a safe and supportive place to learn tools to further these goals is important.\r\n\r\nOn the technical side there are a few reasons. For grunt, it's configuration is as obtuse as webpack, without the added benefits of asset bundling, tree shaking, code splitting, and most importantly, browser targeting. Of course these are all achievable through plugins, but why add those dependencies when these should be core tasks? And as for automation, there is nothing Grunt can do that cannot be done with NPM scripts, so why add the complexity?\r\n\r\nFor backbone, there is the lack of support for es6 syntax, which leads to peculiarly idiosyncratic object based syntax for module definition that doesn't translate well to other contexts. p5 (as well as processing, OF, cinder, Cocoa, Swift, etc) users are familiar with a more method based approach to reasoning about application lifecycles that map better to frameworks like react, angular, or vue. This of course goes both ways, learning one of these frameworks better prepares you for designing programs in OF, cinder, Cocoa, and swift. Also the lack of es6 support means no tree shaking and no code splitting no matter what build tool you are using. JavaScript has changed dramatically since backbone (which incidentally i used for years) was first developed and the fact that the framework doesn't reflect those changes doesn't show maturity but a stubborn conservatism at best, and a flat out disinterest at (a more likely) worst. Assemble is another problem all together, it has failed to live up to what anyone wanted. A SSG that fails to generate static pages for every endpoint is not a useful SSG. Issues like #149 would not be a problem with a better tool, either a tool that mixes static and dynamic data handling, or one that takes a purely static approach. \r\n\r\nThe title of the issue is unfortunate because it suggests that i'm pushing for a new JS framework, but this isn't at all what I had in mind. As far as the specific technical requirements of the project I think the onus is on anyone to show why pure SSGs like Jekyll, or even more purpose-built tools like GitBook (or an outside option, docusaurus) are not the obvious first choice."", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'Zalastax', 'comment_id': 375309631.0, 'datetime': '2018-03-22 13:41:14+00:00', 'masked_author': 'username_2', 'text': ""I found the tone to be OK.\r\nThe most important thing to remember is that someone has to make and review all the changes.\r\nUnless there are big road-blocks in the current setup, there should be a big caution in making big architectural changes.\r\nStatus quo is a powerful force.\r\n\r\nI think this could be easily resolved in one way or the other if we took a look at core values of p5.js-website, which I can't find. Are they the same as for [p5.js](https://p5js.org/community/)?"", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'limzykenneth', 'comment_id': 375310791.0, 'datetime': '2018-03-22 13:44:35+00:00', 'masked_author': 'username_1', 'text': 'I\'m sorry if I\'ve come across as agressive or too combative, as you mentioned disagreement is a feature not a bug and I greatly appreciate your input. \r\n\r\nCiting numbers is just to illustrate that the projects are not dead/obselete by any means, I believe they are perfectly valid tools (even if I don\'t always use them myself) and shouldn\'t be dismissed just because they are deemed less ""modern"".\r\n\r\nI don\'t want to come across opposed to switching out anything, I just want to make clear that the reason anything is switched out and chosen is because of potential benefits and not perceived popularity. As such yes I very much appreciate your argument on grunt being obtuse while not offering much value on its own, while I may argue that\'s just grunt\'s design choices and it works for those who are familiar with it, I actually agree with the point made which is why I don\'t usually use them for my own project. The same more or less goes for backbone and assemble.\r\n\r\nHow about this? We can come up with potential solution/frameworks combination etc of modernizing the website codebase and solving hard to solve bugs while having a clear plan of how we may proceed, for example: completely rewriting the website from scratch is obviously going to take a lot of effort that we may not be able to spare at the moment but switching out maybe grunt for webpack is something we can investigate before trying something else.', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'brysonian', 'comment_id': 376885265.0, 'datetime': '2018-03-28 13:24:56+00:00', 'masked_author': 'username_0', 'text': ""Thanks @username_1. I totally agree that novelty shouldn't drive decisions about a project. I think your proposed solution sounds great. I can start experimenting with a webpack and npm script config and see if that simplifies things. I think an iterative approach with an end goal of simplification is great."", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'lmccart', 'comment_id': 381148466.0, 'datetime': '2018-04-13 14:13:42+00:00', 'masked_author': 'username_3', 'text': ""Hey thanks for this discussion everyone. @username_2 the principles are the same as p5.js generally -- but even those aren't totally clear, we are in the process of documenting design guidelines more clearly. @username_1 I hear your concern, and I think the iterative/simplification approach sounds like a good balance here.\r\n\r\nTo elaborate, my general preference is to try to put off a rewrite of the entire site because this is difficult for me to do right now time-wise. I also feel that there are certain parts of the website that are somewhat hacky and I'd love to have more eyes on them. There are likely better solutions that I just couldn't think of. In general, I see incremental updates to tools as a way to push that further off into the future. If @username_0 has some energy to put into this work, I'd say it's very welcome. We can look at the proposed tools and updates and weigh the benefits of updating against the potential larger structural changes they would require."", 'title': None, 'type': 'comment'}]","<issue_start><issue_comment>Title: JavaScript stack
+username_0: Would it make sense to transition the new site to a more modern set of tools? Neither grunt nor backbone are actively maintained anymore or in popular use. I worry that it makes editing the sites difficult for the uninitiated to use tools that are increasingly difficult to find support for.
+<issue_comment>username_1: I disagree that grunt or backbone are not suit for purpose. Both of them are mature frameworks with still numerous users around the world and it definitely isn't difficult to find support for either of them as both are well documented and have a big community of users behind it. 
+
+It's tempting to move to more ""modern"" set of tools because they are popular now but I would argue unless something is broken (now or soon) or there are enormous benefit to switching, it won't be worth the effort to rewrite the site just for the sake of chasing popularity. That's just what I think.
+<issue_comment>username_0: ""Chasing popularity"" is harsh and mischaracterizes and belittles a very real concern. Neither of these tools are actively maintained; with no active development in years. They were a great choice when the site was initially built, but not now, not if the site is being updated. No one starting to learn more advanced JavaScript development toolchains and methodologies in 2018 should be starting here and the p5 site is a wonderful opportunity for users to do just that. Especially for learners who would like to use this as a way to learn modern contemporary web development techniques, these just aren't the right tools anymore.
+<issue_comment>username_1: I just think it is unfair to declare them dead just because they didn't have the commit frequency of current more popular projects despite having over 500,000 downloads from npm every week. Many people are using them and they are very viable tools even for developing new websites.
+
+Diffferent framework serves different purposes and determining whether a tool is right or not based on its commit frequency and not whether is fits the project or not just doesn't feel right to me. I mean if there are obvious flaws to the current framework or obvious benefit to the new one then yes a change would make sense, for example, the main p5.js repo switched from using jshint for linting to eslint for linting because jscs is deprecated and eslint can replace both jscs and jshint plus also enabling prettifying code precommit all with the same rule.
+
+I guess my point is beyond not having a high enough commit frequency, what is wrong with the current tools?
+<issue_comment>username_0: Again, I don't appreciate the combative tone; disagreement is a feature of community, not a bug.
+
+Curious to pit one metric (commit frequency) vs another (npm downloads) to make a point. Especially when  commit frequency is generally considered an indicator of a community's commitment, interest, and thus future lifetime of a project. And when, in this particular case, the npm download stats tilt vastly in favor of other tools. Yes grunt has a healthy 500k, webpack on the other hand a measly 3M, backbone 200k, react only 2M and vue 300k, assemble 9k, gatsby (as an arbitrary SSG) 130k.  
+
+But yes absolutely the project should dictate the tools, that's why i indicated some of those above. Some of the needs of this project though are more complex, the project itself has a pedagogical purpose beyond just spitting out a website. Teaching new learners tools that are more likely to be around in a few years, tools that are in wider usage, tools that better contribute to establishing oneself as a web developer. Part of this project is to offer an environment for people to extend their web development skills, some of those people may even want to get a job doing javascript dev. Offering a safe and supportive place to learn tools to further these goals is important.
+
+On the technical side there are a few reasons. For grunt, it's configuration is as obtuse as webpack, without the added benefits of asset bundling, tree shaking, code splitting, and most importantly, browser targeting. Of course these are all achievable through plugins, but why add those dependencies when these should be core tasks? And as for automation, there is nothing Grunt can do that cannot be done with NPM scripts, so why add the complexity?
+
+For backbone, there is the lack of support for es6 syntax, which leads to peculiarly idiosyncratic object based syntax for module definition that doesn't translate well to other contexts. p5 (as well as processing, OF, cinder, Cocoa, Swift, etc) users are familiar with a more method based approach to reasoning about application lifecycles that map better to frameworks like react, angular, or vue. This of course goes both ways, learning one of these frameworks better prepares you for designing programs in OF, cinder, Cocoa, and swift. Also the lack of es6 support means no tree shaking and no code splitting no matter what build tool you are using. JavaScript has changed dramatically since backbone (which incidentally i used for years) was first developed and the fact that the framework doesn't reflect those changes doesn't show maturity but a stubborn conservatism at best, and a flat out disinterest at (a more likely) worst. Assemble is another problem all together, it has failed to live up to what anyone wanted. A SSG that fails to generate static pages for every endpoint is not a useful SSG. Issues like #149 would not be a problem with a better tool, either a tool that mixes static and dynamic data handling, or one that takes a purely static approach. 
+
+The title of the issue is unfortunate because it suggests that i'm pushing for a new JS framework, but this isn't at all what I had in mind. As far as the specific technical requirements of the project I think the onus is on anyone to show why pure SSGs like Jekyll, or even more purpose-built tools like GitBook (or an outside option, docusaurus) are not the obvious first choice.
+<issue_comment>username_2: I found the tone to be OK.
+The most important thing to remember is that someone has to make and review all the changes.
+Unless there are big road-blocks in the current setup, there should be a big caution in making big architectural changes.
+Status quo is a powerful force.
+
+I think this could be easily resolved in one way or the other if we took a look at core values of p5.js-website, which I can't find. Are they the same as for [p5.js](https://p5js.org/community/)?
+<issue_comment>username_1: I'm sorry if I've come across as agressive or too combative, as you mentioned disagreement is a feature not a bug and I greatly appreciate your input. 
+
+Citing numbers is just to illustrate that the projects are not dead/obselete by any means, I believe they are perfectly valid tools (even if I don't always use them myself) and shouldn't be dismissed just because they are deemed less ""modern"".
+
+I don't want to come across opposed to switching out anything, I just want to make clear that the reason anything is switched out and chosen is because of potential benefits and not perceived popularity. As such yes I very much appreciate your argument on grunt being obtuse while not offering much value on its own, while I may argue that's just grunt's design choices and it works for those who are familiar with it, I actually agree with the point made which is why I don't usually use them for my own project. The same more or less goes for backbone and assemble.
+
+How about this? We can come up with potential solution/frameworks combination etc of modernizing the website codebase and solving hard to solve bugs while having a clear plan of how we may proceed, for example: completely rewriting the website from scratch is obviously going to take a lot of effort that we may not be able to spare at the moment but switching out maybe grunt for webpack is something we can investigate before trying something else.
+<issue_comment>username_0: Thanks @username_1. I totally agree that novelty shouldn't drive decisions about a project. I think your proposed solution sounds great. I can start experimenting with a webpack and npm script config and see if that simplifies things. I think an iterative approach with an end goal of simplification is great.
+<issue_comment>username_3: Hey thanks for this discussion everyone. @username_2 the principles are the same as p5.js generally -- but even those aren't totally clear, we are in the process of documenting design guidelines more clearly. @username_1 I hear your concern, and I think the iterative/simplification approach sounds like a good balance here.
+
+To elaborate, my general preference is to try to put off a rewrite of the entire site because this is difficult for me to do right now time-wise. I also feel that there are certain parts of the website that are somewhat hacky and I'd love to have more eyes on them. There are likely better solutions that I just couldn't think of. In general, I see incremental updates to tools as a way to push that further off into the future. If @username_0 has some energy to put into this work, I'd say it's very welcome. We can look at the proposed tools and updates and weigh the benefits of updating against the potential larger structural changes they would require."

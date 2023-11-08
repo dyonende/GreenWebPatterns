@@ -1,0 +1,1085 @@
+newrelic/developer-website,795573158,1077,,"[{'action': 'opened', 'author': 'timglaser', 'comment_id': None, 'datetime': '2021-01-28 00:57:35+00:00', 'masked_author': 'username_0', 'text': ""### Is your feature request related to a problem? Please describe\r\n\r\nCurrently, updating the version of the UI component docs requires the following toil:\r\n\r\n1. **Find out if the docs are out of date**: There is currently not a process setup to trigger response to the 3rd party components being updated. This leaves the documentation getting out of date too easily.\r\n\r\n2. **Determine which components to include from 1st party bundle**: We do not yet have access to a 3rd party UI components bundle that includes the documentation and live preview code. Rather we are relying on the 1st party bundle, requiring us to determine which components are ok to show in the developer site. \r\n\r\n3. **Manually create an mdx file per component**: There are changes already in progress to address this step but time will need to be invested to carry the intentions forwaara\r\n\r\n4. Add side nav entries for each added component\r\n\r\n5. Add any newly necessary mocks to allow the 1st party sdk bundle to execute during build time of the developer site. This is a step added towards no longer needing to create the mdx files. Presumably this will only be needed once in a while, not every time. If a new mock is needed it will fail the build.\r\n\r\n6. Determine if the live preview for any of the new components are not functioning well in the developer site. If not, add them to the exclusion list until ready.\r\n\r\n### Describe the solution you'd like\r\n\r\nThe dream: When 3rd party SDK updates are made available for customers to use them on production, the component docs on the developer site are also updated on the same day.\r\n\r\nHere are the things that seem necessary for the toil to be reduced enough for that to become a reality:\r\n* Generate a 3rd party sdk docs bundle (includes docs, live previews and the component category where the component category would be used in site navigation). Alternatively, if generating the 3rd party sdk docs bundle is still not feasible, the 1st party docs bundle could include metadata about which components, props, methods, etc are also available for 3rd party.\r\n* Provide a clean and reliable/stable way to programmatically find out what the current version of the 3rd party sdk is on in production, either by polling or via a signal that triggers a notification to the developer site team or the developer site automation.\r\n* Minimize and eventually eliminate code changes necessary in the developer site in order to point to a new version of the 3rd party sdk. No more creating mdx files (a plan is underway on that already). No more updating side nav (generate it based on metadata provided in the sdk bundle).\r\n\r\nThe above could of course get worked towards in phases, approaching closer and closer to full automation.\r\n\r\n### Describe why this important to you\r\n\r\nThe public docs should be kept up to date as the 3rd party components get updated. At times the components are getting updated at least weekly in which case the docs should get updated at least weekly. Stepping through the above toil weekly would be unfortunate."", 'title': 'Reduce toil required to update component docs version', 'type': 'issue'}
+ {'action': 'created', 'author': 'jerelmiller', 'comment_id': 768789555.0, 'datetime': '2021-01-28 04:22:05+00:00', 'masked_author': 'username_1', 'text': '+1', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'jpvajda', 'comment_id': 769315185.0, 'datetime': '2021-01-28 19:21:05+00:00', 'masked_author': 'username_2', 'text': ""@username_1 you mentioned you resolved some of this toil, could you provide what you've done so we can keep track of what's left. 😄"", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'jpvajda', 'comment_id': 769316695.0, 'datetime': '2021-01-28 19:23:37+00:00', 'masked_author': 'username_2', 'text': ""@username_1 can you document how this works now that you've done some of this work in the contributing guide?"", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'jerelmiller', 'comment_id': 769514410.0, 'datetime': '2021-01-29 01:38:35+00:00', 'masked_author': 'username_1', 'text': 'Certainly! We just released an update to the developer site that now sources the documentation into GraphQL and uses that to power the SDK docs pages (#1078). With that change, we now auto generate a page for each component/API which removes the need for creating `.mdx` files for each of them. \r\n\r\nI\'ve also just opened a PR that will talk about how to upgrade the SDK (#1082) in the contributing guide. I\'m not sure we\'ll fully be able to get rid of the step to add the component to the sidenav, mostly due to the fact that we ""categorize"" each of those components into a specific nav subsection, but the number steps now needed to upgrade the SDK should be much more reasonable.\r\n\r\nNow all we need is a 3rd party docs bundle and that would make things super nice for us 😄', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'jpvajda', 'comment_id': 770006911.0, 'datetime': '2021-01-29 19:36:34+00:00', 'masked_author': 'username_2', 'text': ""@username_1 we haven't demo'd the dev site lately, could we briefly touch on what we did here in next week's demo?"", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'jerelmiller', 'comment_id': 770008640.0, 'datetime': '2021-01-29 19:40:08+00:00', 'masked_author': 'username_1', 'text': 'Sure thing!', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'jpvajda', 'comment_id': 961497859.0, 'datetime': '2021-11-04 23:05:23+00:00', 'masked_author': 'username_2', 'text': 'This came up again.. 🙌', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'jpvajda', 'comment_id': 962049517.0, 'datetime': '2021-11-05 16:44:06+00:00', 'masked_author': 'username_2', 'text': ""I've linked the internal JIRA ticket and will try to get a status on this from the Core team."", 'title': None, 'type': 'comment'}]","<issue_start><issue_comment>Title: Reduce toil required to update component docs version
+username_0: ### Is your feature request related to a problem? Please describe
+
+Currently, updating the version of the UI component docs requires the following toil:
+
+1. **Find out if the docs are out of date**: There is currently not a process setup to trigger response to the 3rd party components being updated. This leaves the documentation getting out of date too easily.
+
+2. **Determine which components to include from 1st party bundle**: We do not yet have access to a 3rd party UI components bundle that includes the documentation and live preview code. Rather we are relying on the 1st party bundle, requiring us to determine which components are ok to show in the developer site. 
+
+3. **Manually create an mdx file per component**: There are changes already in progress to address this step but time will need to be invested to carry the intentions forwaara
+
+4. Add side nav entries for each added component
+
+5. Add any newly necessary mocks to allow the 1st party sdk bundle to execute during build time of the developer site. This is a step added towards no longer needing to create the mdx files. Presumably this will only be needed once in a while, not every time. If a new mock is needed it will fail the build.
+
+6. Determine if the live preview for any of the new components are not functioning well in the developer site. If not, add them to the exclusion list until ready.
+
+### Describe the solution you'd like
+
+The dream: When 3rd party SDK updates are made available for customers to use them on production, the component docs on the developer site are also updated on the same day.
+
+Here are the things that seem necessary for the toil to be reduced enough for that to become a reality:
+* Generate a 3rd party sdk docs bundle (includes docs, live previews and the component category where the component category would be used in site navigation). Alternatively, if generating the 3rd party sdk docs bundle is still not feasible, the 1st party docs bundle could include metadata about which components, props, methods, etc are also available for 3rd party.
+* Provide a clean and reliable/stable way to programmatically find out what the current version of the 3rd party sdk is on in production, either by polling or via a signal that triggers a notification to the developer site team or the developer site automation.
+* Minimize and eventually eliminate code changes necessary in the developer site in order to point to a new version of the 3rd party sdk. No more creating mdx files (a plan is underway on that already). No more updating side nav (generate it based on metadata provided in the sdk bundle).
+
+The above could of course get worked towards in phases, approaching closer and closer to full automation.
+
+### Describe why this important to you
+
+The public docs should be kept up to date as the 3rd party components get updated. At times the components are getting updated at least weekly in which case the docs should get updated at least weekly. Stepping through the above toil weekly would be unfortunate.
+<issue_comment>username_1: +1
+<issue_comment>username_2: @username_1 you mentioned you resolved some of this toil, could you provide what you've done so we can keep track of what's left. 😄
+<issue_comment>username_2: @username_1 can you document how this works now that you've done some of this work in the contributing guide?
+<issue_comment>username_1: Certainly! We just released an update to the developer site that now sources the documentation into GraphQL and uses that to power the SDK docs pages (#1078). With that change, we now auto generate a page for each component/API which removes the need for creating `.mdx` files for each of them. 
+
+I've also just opened a PR that will talk about how to upgrade the SDK (#1082) in the contributing guide. I'm not sure we'll fully be able to get rid of the step to add the component to the sidenav, mostly due to the fact that we ""categorize"" each of those components into a specific nav subsection, but the number steps now needed to upgrade the SDK should be much more reasonable.
+
+Now all we need is a 3rd party docs bundle and that would make things super nice for us 😄
+<issue_comment>username_2: @username_1 we haven't demo'd the dev site lately, could we briefly touch on what we did here in next week's demo?
+<issue_comment>username_1: Sure thing!
+<issue_comment>username_2: This came up again.. 🙌
+<issue_comment>username_2: I've linked the internal JIRA ticket and will try to get a status on this from the Core team."
+bitcoin-core/bitcoincore.org,790243508,740,"{'number': 740.0, 'repo': 'bitcoincore.org', 'user_login': 'bitcoin-core'}","[{'action': 'opened', 'author': 'laanwj', 'comment_id': None, 'datetime': '2021-01-20T19:13:35Z', 'masked_author': 'username_0', 'text': ""The licensing status of this file is unclear. It can be found in enough places by now, and as this site is about Bitcoin Core (a specific implementation), not about Bitcoin in general, the whitepaper doesn't necessarily need to be hosted here.\r\n\r\nUnless anyone can point to an explicit place where Satoshi licensed it under a free license, legally it is safer to remove it from the bitcoin-core.org site."", 'title': 'Remove bitcoin.pdf', 'type': 'issue'}
+ {'action': 'created', 'author': 'MarcoFalke', 'comment_id': 763891452.0, 'datetime': '2021-01-20 19:50:17+00:00', 'masked_author': 'username_1', 'text': ""ACK c131308cb9cf3538ba9db04a3002a76e6f334f62 checked that this is only removing links, doesn't change content"", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'harding', 'comment_id': 763914672.0, 'datetime': '2021-01-20 20:33:23+00:00', 'masked_author': 'username_2', 'text': ""About half of the links removed in this PR point to document on the Bitcoin.org server, not the BitcoinCore.org server.  Is that deliberate?  Bitcoin.org has the strongest claim to being able to host the document as that's where Nakamoto first posted it and (AFAIK) he's never asked for it to be removed from there.\r\n\r\nIf we remove this from the website out of legal concerns, I think that would imply we'd also need to `git filter-branch` rewrite history to remove the document from the git history.  Otherwise, we're still providing the document in some sense.  I don't have an objection to doing this (carefully, with people prepared to verify that's the only change made, and somebody standing by to fix the website hosting verification script if necessary).\r\n\r\nI'd personally prefer to continue hosting the document.  Given that Nakamoto shared everything else he did under his psuedonym, I think we can argue that we're acting in good faith by sharing this document also.  That said, I agree it would be legally safer to remove it, hosting it is not a part of Bitcoin Core's mission, and that there are plenty of other copies available elsewhere for those who want to read it."", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'harding', 'comment_id': 763918992.0, 'datetime': '2021-01-20 20:41:26+00:00', 'masked_author': 'username_2', 'text': 'Code review ACK c131308cb9cf3538ba9db04a3002a76e6f334f62', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'luke-jr', 'comment_id': 763944646.0, 'datetime': '2021-01-20 21:03:01+00:00', 'masked_author': 'username_3', 'text': 'Could have just linked to bitcoin.org? Oh well\r\n\r\n(IANAL, but I imagine bitcoin.org at least should have an implicit license to distribute it unmodified since Satoshi himself put it there)', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'Cobra-Bitcoin', 'comment_id': 764416770.0, 'datetime': '2021-01-21 06:36:35+00:00', 'masked_author': 'username_4', 'text': 'This was merged really quickly...', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'nopara73', 'comment_id': 764480329.0, 'datetime': '2021-01-21 08:49:37+00:00', 'masked_author': 'username_5', 'text': ""It saddens me that fraudsters are bullying open source Bitcoin contribitors. Don't get demotivated though, what you're doing is crucial for the future of humanity. Keep up the hard work guys!"", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'cculianu', 'comment_id': 764481683.0, 'datetime': '2021-01-21 08:52:13+00:00', 'masked_author': 'username_6', 'text': ""In practice you guys have not followed the original vision proposed by Satoshi in the white paper since about 2015 or so. It's good to know that finally the last nail is in the bitcoin coffin has been hammered-in with this commit. \r\n\r\nYou are congratulating yourselves on it --  As if you guys just accomplished a great feat.\r\n\r\nIndeed, congratulations are in order.  The mental gymnastics required to participate in BTC these days deserves a congratulatory medal, at the very least."", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'Seccour', 'comment_id': 764489652.0, 'datetime': '2021-01-21 09:05:59+00:00', 'masked_author': 'username_7', 'text': ""Here you go: https://web.archive.org/web/20091129231620/https://sourceforge.net/projects/bitcoin/\r\n\r\nFeel free to put back the Bitcoin Whitepaper on the site.\r\n\r\nNext time instead of complying to threats, you could just make people aware of them and let the community defend you. We shouldn't let bullies like Craig Steven Wright (Who is NOT Satoshi Nakamoto, will never be, and who also never contributed to Bitcoin or wrote any of the content present on the whitepaper) have it their way."", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'pavlenex', 'comment_id': 764490901.0, 'datetime': '2021-01-21 09:08:13+00:00', 'masked_author': 'username_8', 'text': 'I understand that contributors want to contribute without spending time on drama. Unfortunately, this will be one of those issues that will cause way more drama and provide material to the ""Bitcoin Core Coin"" narrative.\r\n\r\nPerhaps a link to bitcoin.org would\'ve been better than removal. I don\'t think we should be bending to these malicious actors. Maybe the [COPA](https://open-patent.org/) alliance can be of help.', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'SamuraiXa', 'comment_id': 764493066.0, 'datetime': '2021-01-21 09:12:00+00:00', 'masked_author': 'username_9', 'text': 'Your opinion is irrelevant. \r\nBcash is centralized.', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'karozagorus', 'comment_id': 764494130.0, 'datetime': '2021-01-21 09:13:58+00:00', 'masked_author': 'username_10', 'text': 'You guys are fucking idiots for removing it.', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'karozagorus', 'comment_id': 764497087.0, 'datetime': '2021-01-21 09:18:52+00:00', 'masked_author': 'username_10', 'text': ""Seriously @username_0, you are giving more power to the fraud called Craig Steven Wright, you immediately caved like a coward. He been attacking my friend, Hodlonaut, in UK court for over 2 years now, and you guys just keep credence to him. Thanks, seriously. I'm starting to seriously believe you guys seriously don't consider the bigger picture ever."", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'aviv57', 'comment_id': 764501389.0, 'datetime': '2021-01-21 09:26:20+00:00', 'masked_author': 'username_11', 'text': 'This is ridiculous, \r\nThe bitcoin white paper is public, we want it to be in bitcoincore.org.', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'SamuraiXa', 'comment_id': 764506147.0, 'datetime': '2021-01-21 09:34:14+00:00', 'masked_author': 'username_9', 'text': ""Without the whitepaper on bitcoincore.org, how would I know I'm running the right Bitcoin ?!"", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'sosojni', 'comment_id': 764510435.0, 'datetime': '2021-01-21 09:41:35+00:00', 'masked_author': 'username_12', 'text': 'Is this for real? Are you for real?', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'Iamtutut', 'comment_id': 764521243.0, 'datetime': '2021-01-21 10:00:49+00:00', 'masked_author': 'username_13', 'text': 'I didn\'t think there would be such cowardice by @username_0\r\nThe copyright office doesn\'t very the merits of a claim, it just registers it. Period. They stated on their website (may 22 2019):\r\nhttps://www.copyright.gov/press-media-info/press-updates.html?loclr=twcop\r\n\r\nSee also for reference: https://thebitcoinnews.com/us-copyright-office-responds-to-craig-wrights-bitcoin-registrations/\r\n- Arthur VAN PELT in Holland is also registred as the owner of the Whitepaper: TX0008745988 / 2019-05-21\r\n- Jurgen Etienne Guido DEBO is also registred as the owner of the Whitepaper: TXu002162384 / 2019-05-22 \r\n- ""Satoshi Nakamoto"" per se is also registred as the owner of the Whitepaper: TX0008749890 / 2019-05-30\r\n- Satoshi Nakamoto, pseud. of WEI LIU is also registred as the owner of the Whitepaper: TX0008726120 / 2019-05-24\r\n- ....\r\n\r\nThe licensing is CRISTAL CLEAR: The WP was released in the cypherpunk mailing list that has an anti copyright policy to any content distributed there, plus the code is under MIT license.\r\nNobody can enforce any other kind of licensing. You can ask Stephan Kinsella (patent attorney) hos opinion on the subject: https://twitter.com/NSKinsella\r\n\r\nThe WP ought to be on the bitcoin core site and repo.', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'midnightmagic', 'comment_id': 764525156.0, 'datetime': '2021-01-21 10:07:05+00:00', 'masked_author': 'username_14', 'text': ""Based on the timing, and the lack of knowledge about the fact that the jerkwad also sent demand letters to a half dozen other places, wumpus et al did a reasonable thing. It's not like there's not plenty of options now. Get off their back, fools, unless you have the hundreds of thousands it takes to mount a vigourous legal defence and want to put it in a defence trust.\r\n\r\nAll y'all's perspective right now is retrospectively knowing that the demand letters were sent, and were sent to multiple other victims. This was not knowledge almost anyone had even just a few hours ago."", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'godSaysHODL', 'comment_id': 764526190.0, 'datetime': '2021-01-21 10:08:53+00:00', 'masked_author': 'username_15', 'text': ""anyone who ACK'd this, should be removed from the ability to merge"", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'karozagorus', 'comment_id': 764527620.0, 'datetime': '2021-01-21 10:11:32+00:00', 'masked_author': 'username_10', 'text': '@username_2 and @username_1 are both complicit.', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'chovy', 'comment_id': 764531142.0, 'datetime': '2021-01-21 10:17:40+00:00', 'masked_author': 'username_16', 'text': 'maybe you guys can fix the $14 fee problem rather than this horseshit.', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'Sjors', 'comment_id': 764531499.0, 'datetime': '2021-01-21 10:18:17+00:00', 'masked_author': 'username_17', 'text': ""There's not much we can do in the short run about bullying lawyers, but there is something we can do about unhinged commenters. I suggest locking this thread :-)"", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'beeforbacon', 'comment_id': 764532637.0, 'datetime': '2021-01-21 10:20:12+00:00', 'masked_author': 'username_18', 'text': 'Can someone put up a pull request to reinstate the white paper? Thanks.', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'karozagorus', 'comment_id': 764533055.0, 'datetime': '2021-01-21 10:20:54+00:00', 'masked_author': 'username_10', 'text': ""@username_17 we have the right to debate this, Bitcoin is everyone's."", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'godSaysHODL', 'comment_id': 764533101.0, 'datetime': '2021-01-21 10:20:59+00:00', 'masked_author': 'username_15', 'text': 'The mempool has not gone above a 10 dollar need to get into the next block since 2017, so maybe learn how to set your own fee or use lightning  before you hop on board with scams.', 'title': None, 'type': 'comment'}]","<issue_start><issue_comment>Title: Remove bitcoin.pdf
+username_0: The licensing status of this file is unclear. It can be found in enough places by now, and as this site is about Bitcoin Core (a specific implementation), not about Bitcoin in general, the whitepaper doesn't necessarily need to be hosted here.
+
+Unless anyone can point to an explicit place where Satoshi licensed it under a free license, legally it is safer to remove it from the bitcoin-core.org site.
+<issue_comment>username_1: ACK c131308cb9cf3538ba9db04a3002a76e6f334f62 checked that this is only removing links, doesn't change content
+<issue_comment>username_2: About half of the links removed in this PR point to document on the Bitcoin.org server, not the BitcoinCore.org server.  Is that deliberate?  Bitcoin.org has the strongest claim to being able to host the document as that's where Nakamoto first posted it and (AFAIK) he's never asked for it to be removed from there.
+
+If we remove this from the website out of legal concerns, I think that would imply we'd also need to `git filter-branch` rewrite history to remove the document from the git history.  Otherwise, we're still providing the document in some sense.  I don't have an objection to doing this (carefully, with people prepared to verify that's the only change made, and somebody standing by to fix the website hosting verification script if necessary).
+
+I'd personally prefer to continue hosting the document.  Given that Nakamoto shared everything else he did under his psuedonym, I think we can argue that we're acting in good faith by sharing this document also.  That said, I agree it would be legally safer to remove it, hosting it is not a part of Bitcoin Core's mission, and that there are plenty of other copies available elsewhere for those who want to read it.
+<issue_comment>username_2: Code review ACK c131308cb9cf3538ba9db04a3002a76e6f334f62
+<issue_comment>username_3: Could have just linked to bitcoin.org? Oh well
+
+(IANAL, but I imagine bitcoin.org at least should have an implicit license to distribute it unmodified since Satoshi himself put it there)
+<issue_comment>username_4: This was merged really quickly...
+<issue_comment>username_5: It saddens me that fraudsters are bullying open source Bitcoin contribitors. Don't get demotivated though, what you're doing is crucial for the future of humanity. Keep up the hard work guys!
+<issue_comment>username_6: In practice you guys have not followed the original vision proposed by Satoshi in the white paper since about 2015 or so. It's good to know that finally the last nail is in the bitcoin coffin has been hammered-in with this commit. 
+
+You are congratulating yourselves on it --  As if you guys just accomplished a great feat.
+
+Indeed, congratulations are in order.  The mental gymnastics required to participate in BTC these days deserves a congratulatory medal, at the very least.
+<issue_comment>username_7: Here you go: https://web.archive.org/web/20091129231620/https://sourceforge.net/projects/bitcoin/
+
+Feel free to put back the Bitcoin Whitepaper on the site.
+
+Next time instead of complying to threats, you could just make people aware of them and let the community defend you. We shouldn't let bullies like Craig Steven Wright (Who is NOT Satoshi Nakamoto, will never be, and who also never contributed to Bitcoin or wrote any of the content present on the whitepaper) have it their way.
+<issue_comment>username_8: I understand that contributors want to contribute without spending time on drama. Unfortunately, this will be one of those issues that will cause way more drama and provide material to the ""Bitcoin Core Coin"" narrative.
+
+Perhaps a link to bitcoin.org would've been better than removal. I don't think we should be bending to these malicious actors. Maybe the [COPA](https://open-patent.org/) alliance can be of help.
+<issue_comment>username_9: Your opinion is irrelevant. 
+Bcash is centralized.
+<issue_comment>username_10: You guys are fucking idiots for removing it.
+<issue_comment>username_10: Seriously @username_0, you are giving more power to the fraud called Craig Steven Wright, you immediately caved like a coward. He been attacking my friend, Hodlonaut, in UK court for over 2 years now, and you guys just keep credence to him. Thanks, seriously. I'm starting to seriously believe you guys seriously don't consider the bigger picture ever.
+<issue_comment>username_11: This is ridiculous, 
+The bitcoin white paper is public, we want it to be in bitcoincore.org.
+<issue_comment>username_9: Without the whitepaper on bitcoincore.org, how would I know I'm running the right Bitcoin ?!
+<issue_comment>username_12: Is this for real? Are you for real?
+<issue_comment>username_13: I didn't think there would be such cowardice by @username_0
+The copyright office doesn't very the merits of a claim, it just registers it. Period. They stated on their website (may 22 2019):
+https://www.copyright.gov/press-media-info/press-updates.html?loclr=twcop
+
+See also for reference: https://thebitcoinnews.com/us-copyright-office-responds-to-craig-wrights-bitcoin-registrations/
+- Arthur VAN PELT in Holland is also registred as the owner of the Whitepaper: TX0008745988 / 2019-05-21
+- Jurgen Etienne Guido DEBO is also registred as the owner of the Whitepaper: TXu002162384 / 2019-05-22 
+- ""Satoshi Nakamoto"" per se is also registred as the owner of the Whitepaper: TX0008749890 / 2019-05-30
+- Satoshi Nakamoto, pseud. of WEI LIU is also registred as the owner of the Whitepaper: TX0008726120 / 2019-05-24
+- ....
+
+The licensing is CRISTAL CLEAR: The WP was released in the cypherpunk mailing list that has an anti copyright policy to any content distributed there, plus the code is under MIT license.
+Nobody can enforce any other kind of licensing. You can ask Stephan Kinsella (patent attorney) hos opinion on the subject: https://twitter.com/NSKinsella
+
+The WP ought to be on the bitcoin core site and repo.
+<issue_comment>username_14: Based on the timing, and the lack of knowledge about the fact that the jerkwad also sent demand letters to a half dozen other places, wumpus et al did a reasonable thing. It's not like there's not plenty of options now. Get off their back, fools, unless you have the hundreds of thousands it takes to mount a vigourous legal defence and want to put it in a defence trust.
+
+All y'all's perspective right now is retrospectively knowing that the demand letters were sent, and were sent to multiple other victims. This was not knowledge almost anyone had even just a few hours ago.
+<issue_comment>username_15: anyone who ACK'd this, should be removed from the ability to merge
+<issue_comment>username_10: @username_2 and @username_1 are both complicit.
+<issue_comment>username_16: maybe you guys can fix the $14 fee problem rather than this horseshit.
+<issue_comment>username_17: There's not much we can do in the short run about bullying lawyers, but there is something we can do about unhinged commenters. I suggest locking this thread :-)
+<issue_comment>username_18: Can someone put up a pull request to reinstate the white paper? Thanks.
+<issue_comment>username_10: @username_17 we have the right to debate this, Bitcoin is everyone's.
+<issue_comment>username_15: The mempool has not gone above a 10 dollar need to get into the next block since 2017, so maybe learn how to set your own fee or use lightning  before you hop on board with scams."
+reactiveui/website,425159647,320,,"[{'action': 'opened', 'author': 'slowik21861', 'comment_id': None, 'datetime': '2019-03-25 23:26:39+00:00', 'masked_author': 'username_0', 'text': 'Examples of Xamarin Forms have bugs (cannot compile with Visual Studio 2017 for Mac) and all other examples reference to old versions of framework. Documentation and all videos, blog posts and other media are obsolete.', 'title': 'Issue with examples mentioned on website', 'type': 'issue'}
+ {'action': 'created', 'author': 'glennawatson', 'comment_id': 476417025.0, 'datetime': '2019-03-25 23:33:10+00:00', 'masked_author': 'username_1', 'text': ""Hey there. Can you provide specific examples. Going to close this specific bug since it's not something that can be actioned."", 'title': None, 'type': 'comment'}
+ {'action': 'closed', 'author': 'glennawatson', 'comment_id': None, 'datetime': '2019-03-25 23:33:11+00:00', 'masked_author': 'username_1', 'text': '', 'title': None, 'type': 'issue'}
+ {'action': 'created', 'author': 'slowik21861', 'comment_id': 476458524.0, 'datetime': '2019-03-26 03:14:16+00:00', 'masked_author': 'username_0', 'text': 'For example\r\nhttps://github.com/reactiveui/ReactiveUI/tree/master/samples/xamarin-forms\r\nTwo examples in this folder use old versions of Nuget packages. After upgrade they cannot be compiled because of radical changes made in new version of library (9.x).\r\nInitial example (https://reactiveui.net/docs/getting-started/) also uses older data types so I could not prepare this example by copy/paste from text to Visual Studio solution because with PowerShell command ""Install-Package ReactiveUI.WPF"" I just installed newest version of framework.', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'glennawatson', 'comment_id': 476459327.0, 'datetime': '2019-03-26 03:18:53+00:00', 'masked_author': 'username_1', 'text': 'Cinephile is rxui 9.* Which is the xamarin example. The getting started works fine.', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'glennawatson', 'comment_id': 476462408.0, 'datetime': '2019-03-26 03:36:02+00:00', 'masked_author': 'username_1', 'text': 'https://github.com/reactiveui/ReactiveUI/blob/8b0825e4882e57be5d1d0d008abd1c5eacd47d28/samples/xamarin-forms/Cinephile/Cinephile/Cinephile.csproj#L14\r\n\r\nThe master detail could be updated, will do that work soon.', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'slowik21861', 'comment_id': 476465138.0, 'datetime': '2019-03-26 03:51:45+00:00', 'masked_author': 'username_0', 'text': 'Please, give me some time. Maybe I have made mistake copying code to VS. I prefer to prepare my own solutions instead of cloning repos. If I find any error, I will describe it in detail.', 'title': None, 'type': 'comment'}]","<issue_start><issue_comment>Title: Issue with examples mentioned on website
+username_0: Examples of Xamarin Forms have bugs (cannot compile with Visual Studio 2017 for Mac) and all other examples reference to old versions of framework. Documentation and all videos, blog posts and other media are obsolete.
+<issue_comment>username_1: Hey there. Can you provide specific examples. Going to close this specific bug since it's not something that can be actioned.<issue_closed>
+<issue_comment>username_0: For example
+https://github.com/reactiveui/ReactiveUI/tree/master/samples/xamarin-forms
+Two examples in this folder use old versions of Nuget packages. After upgrade they cannot be compiled because of radical changes made in new version of library (9.x).
+Initial example (https://reactiveui.net/docs/getting-started/) also uses older data types so I could not prepare this example by copy/paste from text to Visual Studio solution because with PowerShell command ""Install-Package ReactiveUI.WPF"" I just installed newest version of framework.
+<issue_comment>username_1: Cinephile is rxui 9.* Which is the xamarin example. The getting started works fine.
+<issue_comment>username_1: https://github.com/reactiveui/ReactiveUI/blob/8b0825e4882e57be5d1d0d008abd1c5eacd47d28/samples/xamarin-forms/Cinephile/Cinephile/Cinephile.csproj#L14
+
+The master detail could be updated, will do that work soon.
+<issue_comment>username_0: Please, give me some time. Maybe I have made mistake copying code to VS. I prefer to prepare my own solutions instead of cloning repos. If I find any error, I will describe it in detail."
+gohugoio/hugo,656083803,7480,,"[{'action': 'opened', 'author': 'case', 'comment_id': None, 'datetime': '2020-07-13 19:26:12+00:00', 'masked_author': 'username_0', 'text': 'Per the ""Page.URL is deprecated"" warnings (related to #4117), I\'m wondering if you\'d consider including the filename and/or line number that is triggering the warning?\r\n\r\nI\'m new to Hugo, so please forgive my ignorance here. :) I\'m helping a friend with a few small tasks for his Hugo-powered site, and have checked all the `.URL` instances I could find by doing a global search in VS Code. All appear to be menu- and navigation-related, not `Page` context.\r\n\r\nI\'ve tried the various tips in the forum posts that discuss the `Page.URL` deprecation, but none have worked. I\'ve also looked through closed Issues and PRs here, in username_0 this has been discussed already, but I didn\'t find this mentioned.\r\n\r\nA few people have asked in the forum about filenames and line numbers, to help with debugging this:\r\n\r\n- https://discourse.gohugo.io/t/warn-doesnt-say-what-filename-the-warning-is-from/25111\r\n- https://discourse.gohugo.io/t/detailed-warnings/22107/7\r\n\r\nThanks in advance for considering, and I appreciate your work on Hugo and with its community!', 'title': 'Show filenames and line numbers in deprecation warnings?', 'type': 'issue'}
+ {'action': 'created', 'author': 'bep', 'comment_id': 657750434.0, 'datetime': '2020-07-13 19:34:10+00:00', 'masked_author': 'username_1', 'text': ""So, I agree, and this has been requested before, the problem is: I don't know how to do it in a simple way."", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'djtimone', 'comment_id': 658018855.0, 'datetime': '2020-07-14 07:28:06+00:00', 'masked_author': 'username_2', 'text': 'Maybe somebody have little ideas or plan how we can do this', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'bep', 'comment_id': 658789446.0, 'datetime': '2020-07-15 14:07:11+00:00', 'masked_author': 'username_1', 'text': 'So, adding the line-numbers etc. to the WARNING is very hard. But what we could do is to add a flag called `--fail-on-deprecation` or something that did a `panic(msg)`-- that would create the proper error message, I think.', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'case', 'comment_id': 658901203.0, 'datetime': '2020-07-15 17:30:50+00:00', 'masked_author': 'username_0', 'text': 'That would work for us!', 'title': None, 'type': 'comment'}]","<issue_start><issue_comment>Title: Show filenames and line numbers in deprecation warnings?
+username_0: Per the ""Page.URL is deprecated"" warnings (related to #4117), I'm wondering if you'd consider including the filename and/or line number that is triggering the warning?
+
+I'm new to Hugo, so please forgive my ignorance here. :) I'm helping a friend with a few small tasks for his Hugo-powered site, and have checked all the `.URL` instances I could find by doing a global search in VS Code. All appear to be menu- and navigation-related, not `Page` context.
+
+I've tried the various tips in the forum posts that discuss the `Page.URL` deprecation, but none have worked. I've also looked through closed Issues and PRs here, in username_0 this has been discussed already, but I didn't find this mentioned.
+
+A few people have asked in the forum about filenames and line numbers, to help with debugging this:
+
+- https://discourse.gohugo.io/t/warn-doesnt-say-what-filename-the-warning-is-from/25111
+- https://discourse.gohugo.io/t/detailed-warnings/22107/7
+
+Thanks in advance for considering, and I appreciate your work on Hugo and with its community!
+<issue_comment>username_1: So, I agree, and this has been requested before, the problem is: I don't know how to do it in a simple way.
+<issue_comment>username_2: Maybe somebody have little ideas or plan how we can do this
+<issue_comment>username_1: So, adding the line-numbers etc. to the WARNING is very hard. But what we could do is to add a flag called `--fail-on-deprecation` or something that did a `panic(msg)`-- that would create the proper error message, I think.
+<issue_comment>username_0: That would work for us!"
+halogenica/beautifulhugo,944892927,403,,"[{'action': 'opened', 'author': 'whatacold', 'comment_id': None, 'datetime': '2021-07-15 00:31:50+00:00', 'masked_author': 'username_0', 'text': 'The RSS href in posts are empty with html:\r\n```html\r\n<a href="""" title=""RSS"">\r\n              <span class=""fa-stack fa-lg"">\r\n                <i class=""fas fa-circle fa-stack-2x""></i>\r\n                <i class=""fas fa-rss fa-stack-1x fa-inverse""></i>\r\n              </span>\r\n            </a>\r\n```\r\n\r\nFor example: http://localhost:1313/blog/2019-11-25-start-a-new-urxvt-terminal-on-emacs/\r\n\r\nBut it\'s okay on the homepage and section pages.', 'title': 'Empty RSS href in posts', 'type': 'issue'}
+ {'action': 'created', 'author': 'RoneoOrg', 'comment_id': 888661887.0, 'datetime': '2021-07-28 22:28:04+00:00', 'masked_author': 'username_1', 'text': ""Hi @username_0,\r\n\r\nI'm not facing this issue, is your code available somewhere online?\r\nYou can compare your code to [my repo](https://framagit.org/roneo/roneo.frama.io), the result can be seen on [roneo.org](https://roneo.org/en/)"", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'whatacold', 'comment_id': 894265631.0, 'datetime': '2021-08-06 13:36:19+00:00', 'masked_author': 'username_0', 'text': 'Still not working after trying:\r\n1. using your beautifulhugo theme commit https://github.com/username_1/beautifulhugo/tree/74363aabe231e5d7d0a14f780ec8fc077f822f2c\r\n2. using the latest hugo version `hugo v0.87.0-B0C541E4+extended`\r\n\r\nIt looks like `{{ with .OutputFormats.Get ""RSS"" }}` is false for blog post, but I can\'t figure out why:(', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'whatacold', 'comment_id': 894295268.0, 'datetime': '2021-08-06 14:20:24+00:00', 'masked_author': 'username_0', 'text': 'I don\'t get it, maybe I simply don\'t show it on post pages, by hacking that part of `layouts/partials/footer.html` to as follows:\r\n```\r\n          {{ if .Site.Params.rss }}\r\n          {{ with .OutputFormats.Get ""RSS"" }}\r\n          <li>\r\n              <a href=""{{ .RelPermalink }}"" title=""RSS"">\r\n                  <span class=""fa-stack fa-lg"">\r\n                      <i class=""fas fa-circle fa-stack-2x""></i>\r\n                      <i class=""fas fa-rss fa-stack-1x fa-inverse""></i>\r\n                  </span>\r\n              </a>\r\n          </li>\r\n          {{ end }}\r\n          {{ end }}\r\n```', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'RoneoOrg', 'comment_id': 894305487.0, 'datetime': '2021-08-06 14:36:29+00:00', 'masked_author': 'username_1', 'text': 'Give a try to\r\n\r\n```\r\n          {{ if .Site.Params.rss }}\r\n          <li>\r\n            <a href=""{{ with .OutputFormats.Get ""RSS"" }}{{ .RelPermalink }}{{ end }}"" title=""RSS"">\r\n              <span class=""fa-stack fa-lg"">\r\n                <i class=""fas fa-circle fa-stack-2x""></i>\r\n                <i class=""fas fa-rss fa-stack-1x fa-inverse""></i>\r\n              </span>\r\n            </a>\r\n          </li>\r\n          {{ end }}\r\n```\r\nReference: https://github.com/username_1/WonderfulHugo/blob/74363aabe231e5d7d0a14f780ec8fc077f822f2c/layouts/partials/footer.html#L21\r\n\r\nSee also https://framagit.org/roneo/roneo.frama.io/-/blob/master/layouts/_default/rss.xml\r\nand https://github.com/halogenica/beautifulhugo/issues/330', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'whatacold', 'comment_id': 894603203.0, 'datetime': '2021-08-07 04:33:03+00:00', 'masked_author': 'username_0', 'text': 'Seems like this snippet is what it was before I worked-around it.\r\n\r\nMy understanding is that hugo doesn\'t assign `{{ with .OutputFormats.Get ""RSS"" }}` internally, so there is nothing beautifulhugo can do here. But I don\'t have the energy to investigate it further on the hugo code base.\r\n\r\nBTW, which hugo version do you use?', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'RoneoOrg', 'comment_id': 896265457.0, 'datetime': '2021-08-10 19:39:19+00:00', 'masked_author': 'username_1', 'text': ""I'm using `hugo_extended:0.80.0` on roneo.org.\r\nHint: you can check which version is used by a project in his `gitlab-ci.yml`\r\nFor example: https://framagit.org/roneo/roneo.frama.io/-/blob/master/.gitlab-ci.yml#L1"", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'whatacold', 'comment_id': 896899646.0, 'datetime': '2021-08-11 14:57:47+00:00', 'masked_author': 'username_0', 'text': ""Thanks for the pointer, I also use this version.\r\n\r\nI'm going to build your sites and see how it works, if I have the time."", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'RoneoOrg', 'comment_id': 924657935.0, 'datetime': '2021-09-22 07:23:13+00:00', 'masked_author': 'username_1', 'text': ""Hi @username_0, could you please close this issue and re-open if you have time to make a test and face a problem?\r\n(let's try to keep this bug tracker not-too-scary 😅 !)"", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'whatacold', 'comment_id': 926777644.0, 'datetime': '2021-09-24 16:50:39+00:00', 'masked_author': 'username_0', 'text': 'OK, the workaround I took was not to show RSS on posts.', 'title': None, 'type': 'comment'}
+ {'action': 'closed', 'author': 'whatacold', 'comment_id': None, 'datetime': '2021-09-24 16:50:40+00:00', 'masked_author': 'username_0', 'text': '', 'title': None, 'type': 'issue'}
+ {'action': 'created', 'author': 'GSGBen', 'comment_id': 1003257254.0, 'datetime': '2021-12-31 03:45:26+00:00', 'masked_author': 'username_2', 'text': 'I\'ve fixed this. The issue is that the `page` type doesn\'t have an RSS feed output, and it wouldn\'t make sense to - it\'d only show updates for that page. This also brings up that the RSS button in different sections shows a specific RSS link for that section, that only has posts for that section.\r\n\r\nA clearer model is to simply use the same single site (home page) RSS link for all, assuming you show posts on your front page.\r\n\r\nIn `<beautifulhugo>/layouts/partials/footer.html`, change\r\n\r\n```html\r\n<a href=""{{ with .OutputFormats.Get ""RSS"" }}{{ .RelPermalink }}{{ end }}"" title=""RSS"">\r\n```\r\n\r\nto\r\n\r\n```html\r\n<a href=""{{ printf ""%s%s"" site.BaseURL ""index.xml""}}"" title=""RSS"">\r\n```\r\n\r\nIf you want a fixed version of the previous functionality, where it uses the page\'s (section\'s) RSS feed if it exists, otherwise falls back to the main site one, change it to:\r\n\r\n```html\r\n<a href=""\r\n{{ if (.OutputFormats.Get ""RSS"") }}\r\n  {{ (.OutputFormats.Get ""RSS"").RelPermalink }}\r\n{{ else }}\r\n  {{ printf ""%s%s"" site.BaseURL ""index.xml""}}\r\n{{ end }}\r\n"" title=""RSS"">\r\n```', 'title': None, 'type': 'comment'}]","<issue_start><issue_comment>Title: Empty RSS href in posts
+username_0: The RSS href in posts are empty with html:
+```html
+<a href="""" title=""RSS"">
+              <span class=""fa-stack fa-lg"">
+                <i class=""fas fa-circle fa-stack-2x""></i>
+                <i class=""fas fa-rss fa-stack-1x fa-inverse""></i>
+              </span>
+            </a>
+```
+
+For example: http://localhost:1313/blog/2019-11-25-start-a-new-urxvt-terminal-on-emacs/
+
+But it's okay on the homepage and section pages.
+<issue_comment>username_1: Hi @username_0,
+
+I'm not facing this issue, is your code available somewhere online?
+You can compare your code to [my repo](https://framagit.org/roneo/roneo.frama.io), the result can be seen on [roneo.org](https://roneo.org/en/)
+<issue_comment>username_0: Still not working after trying:
+1. using your beautifulhugo theme commit https://github.com/username_1/beautifulhugo/tree/74363aabe231e5d7d0a14f780ec8fc077f822f2c
+2. using the latest hugo version `hugo v0.87.0-B0C541E4+extended`
+
+It looks like `{{ with .OutputFormats.Get ""RSS"" }}` is false for blog post, but I can't figure out why:(
+<issue_comment>username_0: I don't get it, maybe I simply don't show it on post pages, by hacking that part of `layouts/partials/footer.html` to as follows:
+```
+          {{ if .Site.Params.rss }}
+          {{ with .OutputFormats.Get ""RSS"" }}
+          <li>
+              <a href=""{{ .RelPermalink }}"" title=""RSS"">
+                  <span class=""fa-stack fa-lg"">
+                      <i class=""fas fa-circle fa-stack-2x""></i>
+                      <i class=""fas fa-rss fa-stack-1x fa-inverse""></i>
+                  </span>
+              </a>
+          </li>
+          {{ end }}
+          {{ end }}
+```
+<issue_comment>username_1: Give a try to
+
+```
+          {{ if .Site.Params.rss }}
+          <li>
+            <a href=""{{ with .OutputFormats.Get ""RSS"" }}{{ .RelPermalink }}{{ end }}"" title=""RSS"">
+              <span class=""fa-stack fa-lg"">
+                <i class=""fas fa-circle fa-stack-2x""></i>
+                <i class=""fas fa-rss fa-stack-1x fa-inverse""></i>
+              </span>
+            </a>
+          </li>
+          {{ end }}
+```
+Reference: https://github.com/username_1/WonderfulHugo/blob/74363aabe231e5d7d0a14f780ec8fc077f822f2c/layouts/partials/footer.html#L21
+
+See also https://framagit.org/roneo/roneo.frama.io/-/blob/master/layouts/_default/rss.xml
+and https://github.com/halogenica/beautifulhugo/issues/330
+<issue_comment>username_0: Seems like this snippet is what it was before I worked-around it.
+
+My understanding is that hugo doesn't assign `{{ with .OutputFormats.Get ""RSS"" }}` internally, so there is nothing beautifulhugo can do here. But I don't have the energy to investigate it further on the hugo code base.
+
+BTW, which hugo version do you use?
+<issue_comment>username_1: I'm using `hugo_extended:0.80.0` on roneo.org.
+Hint: you can check which version is used by a project in his `gitlab-ci.yml`
+For example: https://framagit.org/roneo/roneo.frama.io/-/blob/master/.gitlab-ci.yml#L1
+<issue_comment>username_0: Thanks for the pointer, I also use this version.
+
+I'm going to build your sites and see how it works, if I have the time.
+<issue_comment>username_1: Hi @username_0, could you please close this issue and re-open if you have time to make a test and face a problem?
+(let's try to keep this bug tracker not-too-scary 😅 !)
+<issue_comment>username_0: OK, the workaround I took was not to show RSS on posts.<issue_closed>
+<issue_comment>username_2: I've fixed this. The issue is that the `page` type doesn't have an RSS feed output, and it wouldn't make sense to - it'd only show updates for that page. This also brings up that the RSS button in different sections shows a specific RSS link for that section, that only has posts for that section.
+
+A clearer model is to simply use the same single site (home page) RSS link for all, assuming you show posts on your front page.
+
+In `<beautifulhugo>/layouts/partials/footer.html`, change
+
+```html
+<a href=""{{ with .OutputFormats.Get ""RSS"" }}{{ .RelPermalink }}{{ end }}"" title=""RSS"">
+```
+
+to
+
+```html
+<a href=""{{ printf ""%s%s"" site.BaseURL ""index.xml""}}"" title=""RSS"">
+```
+
+If you want a fixed version of the previous functionality, where it uses the page's (section's) RSS feed if it exists, otherwise falls back to the main site one, change it to:
+
+```html
+<a href=""
+{{ if (.OutputFormats.Get ""RSS"") }}
+  {{ (.OutputFormats.Get ""RSS"").RelPermalink }}
+{{ else }}
+  {{ printf ""%s%s"" site.BaseURL ""index.xml""}}
+{{ end }}
+"" title=""RSS"">
+```"
+flutter/website,1058499905,6491,,"[{'action': 'opened', 'author': 'JRoCsTuDi0DeVandPr0', 'comment_id': None, 'datetime': '2021-11-19 12:56:30+00:00', 'masked_author': 'username_0', 'text': ""### Page URL\n\nhttps://docs.flutter.dev/get-started/install/\n\n### Page source\n\nhttps://github.com/flutter/website/tree/main/src/get-started/install/index.md\n\n### Describe the problem\n\nMy Samsung Galaxy A12 won't load the boot menu when I try to run recovery mode. It just takes me to the download screen and from that point when you click to proceed with the install, it will just say downloading until either the battery drains or remains what appears to be frozen on that I'm particular screen.\n\n### Expected fix\n\nIs there any possible advice on how to restore this device as it appears to be running a corrupted version of Android 11..?\n\n### Additional context\n\nI can't seem to pull the boot menu so any help in that area would be absolutely amazing."", 'title': ""[PAGE ISSUE]: 'Install'"", 'type': 'issue'}
+ {'action': 'created', 'author': 'danagbemava-nc', 'comment_id': 974094181.0, 'datetime': '2021-11-19 13:56:16+00:00', 'masked_author': 'username_1', 'text': 'Hi @username_0, do you care to explain how what you\'re describing is an issue with the ""install"" page?', 'title': None, 'type': 'comment'}]","<issue_start><issue_comment>Title: [PAGE ISSUE]: 'Install'
+username_0: ### Page URL
+
+https://docs.flutter.dev/get-started/install/
+
+### Page source
+
+https://github.com/flutter/website/tree/main/src/get-started/install/index.md
+
+### Describe the problem
+
+My Samsung Galaxy A12 won't load the boot menu when I try to run recovery mode. It just takes me to the download screen and from that point when you click to proceed with the install, it will just say downloading until either the battery drains or remains what appears to be frozen on that I'm particular screen.
+
+### Expected fix
+
+Is there any possible advice on how to restore this device as it appears to be running a corrupted version of Android 11..?
+
+### Additional context
+
+I can't seem to pull the boot menu so any help in that area would be absolutely amazing.
+<issue_comment>username_1: Hi @username_0, do you care to explain how what you're describing is an issue with the ""install"" page?"
+smaranjitghose/awesome-portfolio-websites,782579273,452,"{'number': 452.0, 'repo': 'awesome-portfolio-websites', 'user_login': 'smaranjitghose'}","[{'action': 'opened', 'author': 'RitikPandey1', 'comment_id': None, 'datetime': '2021-01-09T10:31:16Z', 'masked_author': 'username_0', 'text': '**Proposed Changes**\r\nTitle: Semi Bold\r\nAuthors: Medium\r\nConference: Regular\r\nIssue #423\r\nfor font weight values reference : https://developer.mozilla.org/en-US/docs/Web/CSS/font-weight', 'title': 'Fixed issues ""Research Page Card Modification: Fonts""', 'type': 'issue'}
+ {'action': 'created', 'author': 'smaranjitghose', 'comment_id': 757141782.0, 'datetime': '2021-01-09 12:23:52+00:00', 'masked_author': 'username_1', 'text': 'Use Poppins as the font please', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'smaranjitghose', 'comment_id': 757141892.0, 'datetime': '2021-01-09 12:24:52+00:00', 'masked_author': 'username_1', 'text': 'While doing multiple changes that end up in a single PR, try to rebase them and squash the commits into a single commit. Makes the code more readable in long term!', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'RitikPandey1', 'comment_id': 757179058.0, 'datetime': '2021-01-09 13:18:03+00:00', 'masked_author': 'username_0', 'text': 'done 👍', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'RitikPandey1', 'comment_id': 757180956.0, 'datetime': '2021-01-09 13:20:05+00:00', 'masked_author': 'username_0', 'text': ""I don't know how to rebase the commits ,could you please tell me or refer some article"", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'smaranjitghose', 'comment_id': 757190610.0, 'datetime': '2021-01-09 13:30:25+00:00', 'masked_author': 'username_1', 'text': '[An article on Rebase](https://medium.com/osedea/git-rebase-powerful-command-507bbac4a234)\r\n[Squash Commits](https://gist.github.com/patik/b8a9dc5cd356f9f6f980)', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'RitikPandey1', 'comment_id': 757193403.0, 'datetime': '2021-01-09 13:33:05+00:00', 'masked_author': 'username_0', 'text': 'Thanks ! 👍', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'RitikPandey1', 'comment_id': 757204183.0, 'datetime': '2021-01-09 13:43:42+00:00', 'masked_author': 'username_0', 'text': 'done', 'title': None, 'type': 'comment'}]","<issue_start><issue_comment>Title: Fixed issues ""Research Page Card Modification: Fonts""
+username_0: **Proposed Changes**
+Title: Semi Bold
+Authors: Medium
+Conference: Regular
+Issue #423
+for font weight values reference : https://developer.mozilla.org/en-US/docs/Web/CSS/font-weight
+<issue_comment>username_1: Use Poppins as the font please
+<issue_comment>username_1: While doing multiple changes that end up in a single PR, try to rebase them and squash the commits into a single commit. Makes the code more readable in long term!
+<issue_comment>username_0: done 👍
+<issue_comment>username_0: I don't know how to rebase the commits ,could you please tell me or refer some article
+<issue_comment>username_1: [An article on Rebase](https://medium.com/osedea/git-rebase-powerful-command-507bbac4a234)
+[Squash Commits](https://gist.github.com/patik/b8a9dc5cd356f9f6f980)
+<issue_comment>username_0: Thanks ! 👍
+<issue_comment>username_0: done"
+swcarpentry/website,153249024,371,,"[{'action': 'opened', 'author': 'jduckles', 'comment_id': None, 'datetime': '2016-05-05 14:53:30+00:00', 'masked_author': 'username_0', 'text': ""Moving discussion here from this thread: http://lists.software-carpentry.org/pipermail/discuss_lists.software-carpentry.org/2016-May/004337.html\r\n'"", 'title': 'Word and PowerPoint ""all wrong""?', 'type': 'issue'}
+ {'action': 'created', 'author': 'snacktavish', 'comment_id': 217191731.0, 'datetime': '2016-05-05 15:49:18+00:00', 'masked_author': 'username_1', 'text': 'There was a lot of discussion on list of use of Excel in academia. I mentioned this back and forth to an ecologist pal who asked ""wait, how do they input their data?"" Our examples use pre-existing data, but I don\'t know of other alternatives for getting from a handwritten field notebook to tabular data. So the argument ""don\'t use excel"" I think is intended to mean  don\'t use excel for statistical analyses, but it is valuable to consider that there is often going to be an excel or excel-like step in the process. Or are there alternatives that I don\'t know of? Plain text is not a fun way to input tabular data.', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'mikej888', 'comment_id': 217195737.0, 'datetime': '2016-05-05 16:04:12+00:00', 'masked_author': 'username_2', 'text': '', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'SpacedGirl', 'comment_id': 217215049.0, 'datetime': '2016-05-05 17:17:42+00:00', 'masked_author': 'username_3', 'text': ""I'm of the same mind as 'username_1' about needing an excel like step [think in some ways R removes the need...trying to remember my very limited use of it] but not the case for other programs ie.python/fortran/matlab\r\n\r\nMike ---> think both your original purpose and what was discussed was rather substantial in nature and both discussions were informative for myself.\r\n\r\nThink the painful part was in part  having an actual discussion rather than making apples to oranges comparisions. I personally find science related discussion really painful generally compared to discussions I have with others....both in and out of academia. [Not quite sure though]"", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'jttkim', 'comment_id': 217407555.0, 'datetime': '2016-05-06 10:34:27+00:00', 'masked_author': 'username_4', 'text': '', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'gvwilson', 'comment_id': 236545679.0, 'datetime': '2016-08-01 10:30:24+00:00', 'masked_author': 'username_5', 'text': 'Any action needed?', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'mikej888', 'comment_id': 236547547.0, 'datetime': '2016-08-01 10:40:34+00:00', 'masked_author': 'username_2', 'text': '@username_5, discussion seems to have fizzled out. If issues relating to the way in which the tools people used are referred to re-arise then the relevant bits of  http://swcarpentry.github.io/training-course/tips/ can be cited.', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'SpacedGirl', 'comment_id': 236695771.0, 'datetime': '2016-08-01 20:22:10+00:00', 'masked_author': 'username_3', 'text': ""Pretty confused by @username_5 's question of action [saw this in an email] --> do you mean about high-volume channel or the other discussion above etc.?\r\n\r\nI might be inclined to rejoin the discussion list if there are those wishing to discuss either rather than per usual SWF protocols of people shuffling issues to a garbage bin rather than acknowledging own thoughts.\r\n\r\nTo summarize, need to know what action to start/stop."", 'title': None, 'type': 'comment'}
+ {'action': 'closed', 'author': 'jduckles', 'comment_id': None, 'datetime': '2016-12-02 17:08:27+00:00', 'masked_author': 'username_0', 'text': '', 'title': None, 'type': 'issue'}
+ {'action': 'created', 'author': 'jduckles', 'comment_id': 264506639.0, 'datetime': '2016-12-02 17:08:27+00:00', 'masked_author': 'username_0', 'text': 'Closing this issue as discussion has stalled/', 'title': None, 'type': 'comment'}]","<issue_start><issue_comment>Title: Word and PowerPoint ""all wrong""?
+username_0: Moving discussion here from this thread: http://lists.software-carpentry.org/pipermail/discuss_lists.software-carpentry.org/2016-May/004337.html
+'
+<issue_comment>username_1: There was a lot of discussion on list of use of Excel in academia. I mentioned this back and forth to an ecologist pal who asked ""wait, how do they input their data?"" Our examples use pre-existing data, but I don't know of other alternatives for getting from a handwritten field notebook to tabular data. So the argument ""don't use excel"" I think is intended to mean  don't use excel for statistical analyses, but it is valuable to consider that there is often going to be an excel or excel-like step in the process. Or are there alternatives that I don't know of? Plain text is not a fun way to input tabular data.
+<issue_comment>username_3: I'm of the same mind as 'username_1' about needing an excel like step [think in some ways R removes the need...trying to remember my very limited use of it] but not the case for other programs ie.python/fortran/matlab
+
+Mike ---> think both your original purpose and what was discussed was rather substantial in nature and both discussions were informative for myself.
+
+Think the painful part was in part  having an actual discussion rather than making apples to oranges comparisions. I personally find science related discussion really painful generally compared to discussions I have with others....both in and out of academia. [Not quite sure though]
+<issue_comment>username_5: Any action needed?
+<issue_comment>username_2: @username_5, discussion seems to have fizzled out. If issues relating to the way in which the tools people used are referred to re-arise then the relevant bits of  http://swcarpentry.github.io/training-course/tips/ can be cited.
+<issue_comment>username_3: Pretty confused by @username_5 's question of action [saw this in an email] --> do you mean about high-volume channel or the other discussion above etc.?
+
+I might be inclined to rejoin the discussion list if there are those wishing to discuss either rather than per usual SWF protocols of people shuffling issues to a garbage bin rather than acknowledging own thoughts.
+
+To summarize, need to know what action to start/stop.<issue_closed>
+<issue_comment>username_0: Closing this issue as discussion has stalled/"
+eduardoboucas/staticman,223503173,101,,"[{'action': 'opened', 'author': 'oservieres', 'comment_id': None, 'datetime': '2017-04-21 21:34:58+00:00', 'masked_author': 'username_0', 'text': 'Hi there,\r\n\r\nFirst of all, this project is gorgeous ! Congrats for all your work, and for the effort of providing a hosted version.\r\n\r\nBut infortunately, I have a problem with the hosted version ;)\r\n\r\nWhen I try to submit my comment, your server gives this response : \r\n\r\nStatus code : `400`\r\nBody : `{""success"":false}`\r\n\r\nstaticman.yml : \r\n\r\n```\r\ncomments:\r\n\r\n  allowedFields: [""email"", ""name"", ""message""]\r\n\r\n  branch: ""comments""\r\n\r\n  commitMessage: ""Add comment to article""\r\n\r\n  filename: ""entry{@timestamp}""\r\n\r\n  format: ""yaml""\r\n\r\n  generatedFields:\r\n    date:\r\n      type: date\r\n      options:\r\n        format: ""timestamp-seconds""\r\n\r\n  moderation: true\r\n\r\n  name: ""deudtens.com""\r\n\r\n  path: ""source/_comments/{options.slug}""\r\n\r\n  requiredFields: [""email"", ""name"", ""message""]\r\n\r\n  transforms:\r\n    email: md5\r\n```\r\n\r\nForm HTML : \r\n\r\n```\r\n    <form method=""POST"" action=""https://api.staticman.net/v2/entry/username_0/blog-deudtens/comments/"">\r\n      <input name=""options[redirect]"" type=""hidden"" value=""https://www.deudtens.com"">\r\n      <input name=""options[slug]"" type=""hidden"" value=""{{ page.url }}"">\r\n      <label>Votre nom : <input name=""fields[name]"" type=""text""></label>\r\n      <label>Votre E-mail : <input name=""fields[email]"" type=""email""></label>\r\n      <label>Votre message : <textarea name=""fields[message]""></textarea></label>\r\n\r\n      <button type=""submit"">Envoyer</button>\r\n    </form>\r\n```\r\n\r\nMy blog repo : https://github.com/username_0/blog-deudtens\r\n\r\nI just don\'t understand what\'s happening, and I have no error message to guide me.\r\n\r\nDo not hesitate to ask for more information if needed,\r\nThank you.', 'title': 'Error \'{""success"":false}\' but no other information available', 'type': 'issue'}
+ {'action': 'created', 'author': 'eduardoboucas', 'comment_id': 297148232.0, 'datetime': '2017-04-25 20:02:52+00:00', 'masked_author': 'username_1', 'text': ""I have just cloned your repository and tried running the site, but I'm getting a few build errors. Can you help?"", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'oservieres', 'comment_id': 297152556.0, 'datetime': '2017-04-25 20:19:14+00:00', 'masked_author': 'username_0', 'text': 'Thank you for your attention ! But my website is powered by Sculpin, not Jekyll.', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'eduardoboucas', 'comment_id': 297158814.0, 'datetime': '2017-04-25 20:42:58+00:00', 'masked_author': 'username_1', 'text': 'Oh, that explains it! Could you provide some installation instructions so I can get it running?', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'oservieres', 'comment_id': 297248572.0, 'datetime': '2017-04-26 06:10:32+00:00', 'masked_author': 'username_0', 'text': ""I don't wanna bother you installing PHP and Sculpin. I'm not satisfied by the docker containers available either. Instead, I deployed the form on my website. See at the bottom of page : https://www.deudtens.com/deployez-en-production-des-le-debut-du-projet/\r\n\r\nYou can play with it as much as you want."", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'jonathanyeong', 'comment_id': 311726051.0, 'datetime': '2017-06-28 17:11:02+00:00', 'masked_author': 'username_2', 'text': 'Firstly, thanks so much for building staticman. I\'m actually getting the same issue on my site as well. It\'s running HTTPS (not sure if that makes a difference). I\'ve added staticmanpp as a collaborator to my repo.\r\n\r\nHere\'s the repo: https://github.com/username_2/personal-site. \r\n\r\nstaticman.yml:\r\n\r\n```\r\ncomments:\r\n  allowedFields: [""name"", ""email"", ""url"", ""message""]\r\n  branch: ""master""\r\n  commitMessage: ""Add Staticman data""\r\n  filename: ""entry{@timestamp}""\r\n  format: ""yaml""\r\n  generatedFields:\r\n    date:\r\n      type: date\r\n      options:\r\n        format: ""timestamp-seconds""\r\n  moderation: true\r\n  name: ""username_2.com""\r\n  path: ""_data/comments/{options.slug}""\r\n  requiredFields: [""name"", ""email"", ""message""]\r\n  transforms:\r\n    email: md5\r\n```\r\n\r\nmy form (found in `_layouts/post.html`).\r\n\r\n```\r\n<form method=""POST"" action=""https://api.staticman.net/v2/entry/username_2/personal-site/master/comments"">\r\n  <input name=""options[redirect]"" type=""hidden"" value=""https://username_2.com"">\r\n  <!-- e.g. ""2016-01-02-this-is-a-post"" -->\r\n  <input name=""options[slug]"" type=""hidden"" value=""{{ page.slug }}"">\r\n  <label><input name=""fields[name]"" type=""text"">Name</label>\r\n  <label><input name=""fields[email]"" type=""email"">E-mail</label>\r\n  <label><textarea name=""fields[message]""></textarea>Message</label>\r\n\r\n  <button type=""submit"">Go!</button>\r\n</form>\r\n```\r\n\r\nI am also submitting this form on localhost.\r\n\r\nI doubt this makes a difference, but here\'s what I\'ve tried doing:\r\n\r\n- Restarting the jekyll server to make sure it picks up the `staticman.yml` file.\r\n- Changing the action link to: `https://api.staticman.net/v2/entry/username_2/personal-site/master`\r\n\r\nAny suggestions?', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'eduardoboucas', 'comment_id': 312461750.0, 'datetime': '2017-07-01 23:49:44+00:00', 'masked_author': 'username_1', 'text': ""A lot of people seem to be having these issues (see #108). I'm looking into this, please bare with me."", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'eduardoboucas', 'comment_id': 312463191.0, 'datetime': '2017-07-02 00:28:07+00:00', 'masked_author': 'username_1', 'text': ""@username_2 I can't find a `staticman.yml` file in your repo anymore, so I can't debug with your site."", 'title': None, 'type': 'comment'}
+ {'action': 'closed', 'author': 'eduardoboucas', 'comment_id': None, 'datetime': '2017-07-02 00:28:27+00:00', 'masked_author': 'username_1', 'text': '', 'title': None, 'type': 'issue'}
+ {'action': 'created', 'author': 'eduardoboucas', 'comment_id': 312463202.0, 'datetime': '2017-07-02 00:28:27+00:00', 'masked_author': 'username_1', 'text': 'Closing in favour of #108.', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'jonathanyeong', 'comment_id': 312511654.0, 'datetime': '2017-07-02 19:23:41+00:00', 'masked_author': 'username_2', 'text': ""@username_1 Apologies, I ended up removing staticman because it wasn't working. I went through the setup steps again and I ended up getting it working. \r\n\r\nI was still getting the {'success': false} issue when I was running this back on my local host. However, when I pushed my changes it all worked on localhost (https://github.com/username_2/personal-site/pull/25). \r\n\r\nI'm not sure if this information will help at all. Thank you for building this app!"", 'title': None, 'type': 'comment'}]","<issue_start><issue_comment>Title: Error '{""success"":false}' but no other information available
+username_0: Hi there,
+
+First of all, this project is gorgeous ! Congrats for all your work, and for the effort of providing a hosted version.
+
+But infortunately, I have a problem with the hosted version ;)
+
+When I try to submit my comment, your server gives this response : 
+
+Status code : `400`
+Body : `{""success"":false}`
+
+staticman.yml : 
+
+```
+comments:
+
+  allowedFields: [""email"", ""name"", ""message""]
+
+  branch: ""comments""
+
+  commitMessage: ""Add comment to article""
+
+  filename: ""entry{@timestamp}""
+
+  format: ""yaml""
+
+  generatedFields:
+    date:
+      type: date
+      options:
+        format: ""timestamp-seconds""
+
+  moderation: true
+
+  name: ""deudtens.com""
+
+  path: ""source/_comments/{options.slug}""
+
+  requiredFields: [""email"", ""name"", ""message""]
+
+  transforms:
+    email: md5
+```
+
+Form HTML : 
+
+```
+    <form method=""POST"" action=""https://api.staticman.net/v2/entry/username_0/blog-deudtens/comments/"">
+      <input name=""options[redirect]"" type=""hidden"" value=""https://www.deudtens.com"">
+      <input name=""options[slug]"" type=""hidden"" value=""{{ page.url }}"">
+      <label>Votre nom : <input name=""fields[name]"" type=""text""></label>
+      <label>Votre E-mail : <input name=""fields[email]"" type=""email""></label>
+      <label>Votre message : <textarea name=""fields[message]""></textarea></label>
+
+      <button type=""submit"">Envoyer</button>
+    </form>
+```
+
+My blog repo : https://github.com/username_0/blog-deudtens
+
+I just don't understand what's happening, and I have no error message to guide me.
+
+Do not hesitate to ask for more information if needed,
+Thank you.
+<issue_comment>username_1: I have just cloned your repository and tried running the site, but I'm getting a few build errors. Can you help?
+<issue_comment>username_0: Thank you for your attention ! But my website is powered by Sculpin, not Jekyll.
+<issue_comment>username_1: Oh, that explains it! Could you provide some installation instructions so I can get it running?
+<issue_comment>username_0: I don't wanna bother you installing PHP and Sculpin. I'm not satisfied by the docker containers available either. Instead, I deployed the form on my website. See at the bottom of page : https://www.deudtens.com/deployez-en-production-des-le-debut-du-projet/
+
+You can play with it as much as you want.
+<issue_comment>username_2: Firstly, thanks so much for building staticman. I'm actually getting the same issue on my site as well. It's running HTTPS (not sure if that makes a difference). I've added staticmanpp as a collaborator to my repo.
+
+Here's the repo: https://github.com/username_2/personal-site. 
+
+staticman.yml:
+
+```
+comments:
+  allowedFields: [""name"", ""email"", ""url"", ""message""]
+  branch: ""master""
+  commitMessage: ""Add Staticman data""
+  filename: ""entry{@timestamp}""
+  format: ""yaml""
+  generatedFields:
+    date:
+      type: date
+      options:
+        format: ""timestamp-seconds""
+  moderation: true
+  name: ""username_2.com""
+  path: ""_data/comments/{options.slug}""
+  requiredFields: [""name"", ""email"", ""message""]
+  transforms:
+    email: md5
+```
+
+my form (found in `_layouts/post.html`).
+
+```
+<form method=""POST"" action=""https://api.staticman.net/v2/entry/username_2/personal-site/master/comments"">
+  <input name=""options[redirect]"" type=""hidden"" value=""https://username_2.com"">
+  <!-- e.g. ""2016-01-02-this-is-a-post"" -->
+  <input name=""options[slug]"" type=""hidden"" value=""{{ page.slug }}"">
+  <label><input name=""fields[name]"" type=""text"">Name</label>
+  <label><input name=""fields[email]"" type=""email"">E-mail</label>
+  <label><textarea name=""fields[message]""></textarea>Message</label>
+
+  <button type=""submit"">Go!</button>
+</form>
+```
+
+I am also submitting this form on localhost.
+
+I doubt this makes a difference, but here's what I've tried doing:
+
+- Restarting the jekyll server to make sure it picks up the `staticman.yml` file.
+- Changing the action link to: `https://api.staticman.net/v2/entry/username_2/personal-site/master`
+
+Any suggestions?
+<issue_comment>username_1: A lot of people seem to be having these issues (see #108). I'm looking into this, please bare with me.
+<issue_comment>username_1: @username_2 I can't find a `staticman.yml` file in your repo anymore, so I can't debug with your site.<issue_closed>
+<issue_comment>username_1: Closing in favour of #108.
+<issue_comment>username_2: @username_1 Apologies, I ended up removing staticman because it wasn't working. I went through the setup steps again and I ended up getting it working. 
+
+I was still getting the {'success': false} issue when I was running this back on my local host. However, when I pushed my changes it all worked on localhost (https://github.com/username_2/personal-site/pull/25). 
+
+I'm not sure if this information will help at all. Thank you for building this app!"
+carbon-design-system/carbon-website,548230254,766,,"[{'action': 'opened', 'author': 'jnm2377', 'comment_id': None, 'datetime': '2020-01-10 18:37:47+00:00', 'masked_author': 'username_0', 'text': ""### Summary\r\n\r\nIcon library page currently only shows the regular name for icons, but we don't have anywhere that lists icons according to their `icons-react` name. i.e. `Misuse24` `CheckmarkFilled24`, etc.\r\n\r\n### Desired outcome\r\n\r\nInclude react names in the icon library cards.\r\n\r\ncc: @username_2"", 'title': '[icon library] - add react icon names to icon cards', 'type': 'issue'}
+ {'action': 'created', 'author': 'vpicone', 'comment_id': 573801595.0, 'datetime': '2020-01-13 18:24:14+00:00', 'masked_author': 'username_1', 'text': ""I'll take this, the hold up on this previously was how we want to display it: tooltip vs button that copies to clipboard etc."", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'vpicone', 'comment_id': 573814279.0, 'datetime': '2020-01-13 18:52:26+00:00', 'masked_author': 'username_1', 'text': ""Ideally we'd have an overflow menu that would present:\r\n- React\r\n- SVG Download\r\n- Angular maybe?\r\n\r\n\r\nWe could also have the icons themselves be clickable to copy the React code (our preferred implementation)"", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'vpicone', 'comment_id': 573815201.0, 'datetime': '2020-01-13 18:54:31+00:00', 'masked_author': 'username_1', 'text': ""@username_2 which size would it make sense to have copied here do you think? Maybe this would be a good time to implement the `<Checkmark size='sm' />` api."", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'joshblack', 'comment_id': 573828226.0, 'datetime': '2020-01-13 19:24:56+00:00', 'masked_author': 'username_2', 'text': ""@username_1 my hunch would be 16 or 20, icons in a broader sense should be revisited so that we could do things like what you're suggesting.\r\n\r\nIf we want to, we could expose the module base name (like `CheckmarkFilled`) and share info about the sizes, but I totally understand if that'd be confusing.\r\n\r\nFor icon packages, most likely we'll want to only expose React as Angular/Vue do not have active attention dedicated to them (in fact Angular hasn't been published in the previous minors due to build issues)"", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'vpicone', 'comment_id': 573831268.0, 'datetime': '2020-01-13 19:31:28+00:00', 'masked_author': 'username_1', 'text': ""@username_2 that makes sense, I think the only other thing we'd want is a `download` menu item then @laurenmrice"", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'chrisconnors-ibm', 'comment_id': 575711203.0, 'datetime': '2020-01-17 17:02:53+00:00', 'masked_author': 'username_3', 'text': 'We do not want to provide a way to easily download SVGs from the icon page. This leads to orphaned icons in product endpoints that never catch iterations or updates.', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'joshblack', 'comment_id': 575711740.0, 'datetime': '2020-01-17 17:04:18+00:00', 'masked_author': 'username_2', 'text': ""How did we want to handle SVG downloads for presentations? I think that's one case that did come up recently for wanting to download them."", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'chrisconnors-ibm', 'comment_id': 575712563.0, 'datetime': '2020-01-17 17:06:19+00:00', 'masked_author': 'username_3', 'text': 'This is more of a pictograms use case, so maybe we do something different there. but the net is for a preso you can get them all from the repo as part of the package or you can dl the illustrator master file.', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'chrisconnors-ibm', 'comment_id': 575713277.0, 'datetime': '2020-01-17 17:08:07+00:00', 'masked_author': 'username_3', 'text': 'if you need just one from the repo, the raw button gets you https://raw.githubusercontent.com/carbon-design-system/carbon/master/packages/icons/svg/32/badge.svg', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'chrisconnors-ibm', 'comment_id': 575714648.0, 'datetime': '2020-01-17 17:11:35+00:00', 'masked_author': 'username_3', 'text': 'to summarize - no raw or download svg from the icon cards or pages please', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'mjabbink', 'comment_id': 575750032.0, 'datetime': '2020-01-17 18:51:42+00:00', 'masked_author': 'username_4', 'text': 'I think this is a must for pictograms. It’s  a weekly request and even from my boss Terry and some other executives. They do not want to poke around in GitHub.\r\n\r\nI’s also extend this functionality to UI icons as the same request comes up there as well but less frequent. Not all people use Sketch or even understand GitHub for that matter but want to use and have access to individual icons.\r\n\r\nHolding them sacred also pushes people to do worse shit that I’ve seen equally or more distasteful.\r\n\r\nLet’s please proceed with this. I understand the downsides but the entire team and a very large number of users will appreciate this.', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'mjabbink', 'comment_id': 575750221.0, 'datetime': '2020-01-17 18:52:17+00:00', 'masked_author': 'username_4', 'text': 'So if i wan’t clear. Please execute this issue.', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'chrisconnors-ibm', 'comment_id': 575820578.0, 'datetime': '2020-01-17 22:31:13+00:00', 'masked_author': 'username_3', 'text': 'If we do this for _icons_ we will _encourage_ people to do the easy thing (grab the SVG/DL the icon) rather than the _right thing_ (access our icons via the packages, or the design kits) and the FIRST PERSON to notice and complain about teams using an icon we\'ve iterated on in their applications (think: copy icon) will be you, @username_4. And you\'re going to be complaining a lot more then because they will never, ever, track down that SVG code and fix it.\r\n\r\nWe\'ve already (and always) said ""make direct DL possible for pictograms, because orphaning them doesn\'t matter"", so please by all means add direct dl to these cards: https://www.carbondesignsystem.com/guidelines/pictograms/library \r\n\r\n…but that should probably be a separate issue. Up to you all.\r\n\r\nI suspect @username_6 has a spec for these types of functionality.', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'chrisconnors-ibm', 'comment_id': 575822610.0, 'datetime': '2020-01-17 22:39:22+00:00', 'masked_author': 'username_3', 'text': 'We should add a link somewhere to the .ai master file in the repo: https://github.com/carbon-design-system/carbon/blob/master/packages/icons/master/ui-icon-master.ai', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'mjabbink', 'comment_id': 575850667.0, 'datetime': '2020-01-18 01:10:38+00:00', 'masked_author': 'username_4', 'text': 'I’m more inclined to this for Pictograms. I’m not so sure holding back on icons is a real preventative measure against poor behavior. I also do not foresee adjustments to icons. I see new ones being added as we do plenty of that but date we have not modified many icons over the past year. Unless you consider the 16px ones you and Conrad did. I would be fine with first releasing this functionality with pictograms then icons later to test the waters.', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'aagonzales', 'comment_id': 577749384.0, 'datetime': '2020-01-23 16:07:39+00:00', 'masked_author': 'username_5', 'text': ""While encouraging people to use icons through the Sketch library works if you're a Sketch user its starting not to scale as we introduce other tools, like Axure and Adobe XD. Right now the icons aren't available in those tools and accessing them from the website is easier than having to have a second tool (Sketch) or getting them from GitHub which many designers are comfortable with outside of issue creation. Sketch licenses are also hard to come by outside of design.\r\n\r\nNot using the icon symbol in Sketch is the same as detaching a symbol, it only really hurts the person that does it. I think accommodating for these other usages by adding the download to the website will be more helpful than worrying about people not using the Sketch library."", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'designertyler', 'comment_id': 577749730.0, 'datetime': '2020-01-23 16:08:28+00:00', 'masked_author': 'username_6', 'text': ""I tried to summarize the requirements mentioned here so we can generate design specs. Let me know if we're missing any or if some should be a phase 1 or phase 2, 3, 4, etc. \r\n\r\n**Requirement 1: Add react icon names to icon card**\r\nAs a product developer want to see the different sized React icon names so I can copy and paste the correct size into my project.\r\n\r\n\r\n**Requirement 1.2: Add angular icon names to icon card (?)**\r\nAs a product developer want to see the different sized Angular icon names so I can copy and paste the correct size into my project.\r\n\r\n\r\n**Requirement 2: Enable direct download for pictograms**\r\nAs a product designer I want to download the SVG asset of a specific pictogram so I can use it in my project.\r\n\r\n\r\n**Requirement 2.2: Enable bulk download for pictograms**\r\nAs a product designer I want to select multiple Pictogram SVG's and download all at once so I don't have to repeat the same action to get all the pictograms for my project.\r\n\r\n\r\n**Requirement 3: Inform the preferred method to get icon assets**\r\nAs a product designer I can learn how to get the icon asset in Sketch without directly downloading the SVG.\r\n\r\n\r\n**Requirement 4: Enable direct download for icons**\r\nAs a product designer I want to download the SVG asset of a specific icon so I can use it in my project.\r\n\r\n**Requirement 4.2: Enable bulk download for icons**\r\nAs a product designer I want to select multiple icon SVG's and download all at once so I don't have to repeat the same action to get all the pictograms for my project."", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'mjabbink', 'comment_id': 577761915.0, 'datetime': '2020-01-23 16:34:39+00:00', 'masked_author': 'username_4', 'text': 'Please proceed with issue defined above. Meaning direct download and copy for both icons and Pictograms', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'joshblack', 'comment_id': 577808165.0, 'datetime': '2020-01-23 18:24:54+00:00', 'masked_author': 'username_2', 'text': ""Just a heads up @username_1 I'm updating our icon metadata structure to make it easier to parse for different meta fields, let me know if you want to sync up on this work 👍"", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'vpicone', 'comment_id': 577877813.0, 'datetime': '2020-01-23 21:08:59+00:00', 'masked_author': 'username_1', 'text': ""@username_2 sounds good, a list of changes would suffice! we do the flattening of the metadata ourselves at run time at the moment.\r\n\r\n@username_3 Downloading svg's is a real use case, linking to the master file isn't a solution for things like keynote/powerpoint/non-sketch design tools.\r\n\r\nNot sure why pictograms and icons would be treated different. I've always felt the bespoke asset per size icon routine was a mistake. SVG = **scaleable** vector graphic. We're using them like sprites."", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'vpicone', 'comment_id': 577883554.0, 'datetime': '2020-01-23 21:23:49+00:00', 'masked_author': 'username_1', 'text': '@username_6 Requirement 4 and 5 seem the same. Icons and Pictograms are treated very similarly by the website so realistically things would be added in tandem.', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'vpicone', 'comment_id': 577990518.0, 'datetime': '2020-01-24 04:53:02+00:00', 'masked_author': 'username_1', 'text': '@username_2 the biggest blocker/hurdle for me is the sizes in the icon names at this point. I feel like a bit of a broken record for saying this, but these are scaleable vector graphics, they shouldn’t be bespoke sprites at individual sizes.\r\n\r\nHaving the copied code read `Chevron16` or `Chevron24` and making an assumption on which size they want (**and the assuming that they’d even know what that number means or what the other options are**) is untenable to me.', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'joshblack', 'comment_id': 578196463.0, 'datetime': '2020-01-24 16:14:46+00:00', 'masked_author': 'username_2', 'text': 'I think one goal of the project would be to only maintain one asset per icon. What was observed was that certain assets rendered poorly on a wide breadth of devices/screens when drawn on 16px artboards. I believe this is what caused the situation that we have today. Could you share how this problem could be addressed?', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'vpicone', 'comment_id': 582577949.0, 'datetime': '2020-02-05 19:42:46+00:00', 'masked_author': 'username_1', 'text': 'blocked by https://github.com/carbon-design-system/carbon/issues/5170', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'vpicone', 'comment_id': 582638950.0, 'datetime': '2020-02-05 22:14:09+00:00', 'masked_author': 'username_1', 'text': '@username_6 it looked like you were about to drop a 🔥 spec for this. \r\n\r\nhttps://github.com/carbon-design-system/carbon-website/issues/766#issuecomment-577749730\r\n\r\n@laurenmrice did you have something for it?', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'designertyler', 'comment_id': 582935528.0, 'datetime': '2020-02-06 14:39:24+00:00', 'masked_author': 'username_6', 'text': ""@username_1 This is based on specs we had a while ago. I'd wait for the 👍 from @username_4 and @username_7 before you start slinging code.\r\n\r\n![Icon page components](https://user-images.githubusercontent.com/19270502/73946824-27fa7b80-48bc-11ea-905c-9ebba7ad565a.png)"", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'chrisconnors-ibm', 'comment_id': 582959152.0, 'datetime': '2020-02-06 15:29:14+00:00', 'masked_author': 'username_3', 'text': 'What does “copy” do here? Ask was “code snippet to summon from package”, but that’s not clear. And at what size would you get?\n\nSent from my iPhone\n\n>', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'chrisconnors-ibm', 'comment_id': 583073251.0, 'datetime': '2020-02-06 19:35:22+00:00', 'masked_author': 'username_3', 'text': 'Proposal:\r\n1. **Programatic Name** on card (ie `add--filled`) - make it clickable to put the programatic name on the clipboard\r\n2. Menu: “**Copy component code**” - component code to clipboard (NOT THE RAW SVG)\r\n3. Menu: “**Download**” - direct download of 32 asset (from the repo ie https://raw.githubusercontent.com/carbon-design-system/carbon/master/packages/icons/svg/32/badge.svg)\r\n4. Menu: **View in repo**” link to asset repo (if they want the raw SVG they can get it here, the friction to do so should reduce the likelihood **ON PURPOSE**)\r\n\r\nThe big unanswered question is how to express the size prop for 2 (this is distinct from what the package does with that prop).\r\n\r\nThe Icon Library page should also have a link to the AI Master; esp if a search result is 0\r\n“No icons found; if you’d like to create (and submit) an icon asset, base the work on the assets in [this master file](https://github.com/carbon-design-system/carbon/blob/master/packages/icons/master/ui-icon-master.ai?raw=true).”', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'jeanservaas', 'comment_id': 583545372.0, 'datetime': '2020-02-07 18:35:22+00:00', 'masked_author': 'username_7', 'text': ""Thanks @username_6 the above spec is correct @username_1 with a couple of modifications. No need to look at Chiu's old hex codes from the spec, those are old just pull in the overflow component from Carbon.\r\n\r\nIn order to make sure that there is no truncation in the overflow menu at 1056 we are going to ditch the icons.\r\n\r\n![image](https://user-images.githubusercontent.com/43144260/74055048-daa60900-49a4-11ea-8796-ab7c6185b0bb.png)\r\n\r\n\r\nThere's a battle raging over the content of the dropdown... @username_1 has proposed that the menu say:\r\n\r\n- Download SVG\r\n- React\r\n\r\n**Anna, Jan and Lauren made several good points against this:**\r\n\r\n1. React is our default therefore any code you're copying from Carbon is react — we don't say react before every code snippet on the website\r\n\r\n2. We need a action verb, not just a proper noun with no explanation\r\n\r\n**Proposed change:**\r\n\r\n**- Download SVG**\r\n\r\n**- Copy code**"", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'mjabbink', 'comment_id': 583548273.0, 'datetime': '2020-02-07 18:42:03+00:00', 'masked_author': 'username_4', 'text': 'need to clarify what “Copy code” is doing. I would assume it’s react if only one option presented. Do we need to even do it for developers? Could it only be a download asset action? That seems to be the use case/audience. Have we had devs wanting to Copy React? Let’s only do this for the folks that are clamoring for it. I have only heard this from designers and non designers.', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'chrisconnors-ibm', 'comment_id': 583555418.0, 'datetime': '2020-02-07 18:59:48+00:00', 'masked_author': 'username_3', 'text': ""@username_0's main asks here were:\r\n\r\n1. display the programatic name like  `add-filled`\r\n2. get the react code onto the clipboard\r\n\r\nThe programatic name is important for designers too since they need that value to specify which icon FED should use in a spec.\r\n\r\nShe can confirm."", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'chrisconnors-ibm', 'comment_id': 583592936.0, 'datetime': '2020-02-07 20:16:41+00:00', 'masked_author': 'username_3', 'text': ""There's no need to articulate the file type (svg). If you select 'Download', a file appears in your downloads folder."", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'mjabbink', 'comment_id': 583686080.0, 'datetime': '2020-02-08 01:40:46+00:00', 'masked_author': 'username_4', 'text': 'Don’t you think people want to know what they’re downloading? I certainly do. I see more reason to keep it than to remove. It’s clear and not harmful or ugly.', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'chrisconnors-ibm', 'comment_id': 584196965.0, 'datetime': '2020-02-10 16:04:29+00:00', 'masked_author': 'username_3', 'text': ""I think if it's not obvious that you're going to get an image file for the icon, it will be when it shows up in your Downloads folder 2 seconds later :) Does the he actual filetype (svg vs .png etc.) really matter at that point?"", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'vpicone', 'comment_id': 584469406.0, 'datetime': '2020-02-11 03:59:40+00:00', 'masked_author': 'username_1', 'text': ""Currently the carbon react OverflowMenu breaks the page if there's more than a few hundred. Implementation of this behavior is going to be slowed by either creating our own or waiting for a fix upstream from Carbon.\r\n\r\nAdded on to this issue: https://github.com/carbon-design-system/carbon/issues/5079#issuecomment-584469193"", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'chrisconnors-ibm', 'comment_id': 584883821.0, 'datetime': '2020-02-11 22:18:12+00:00', 'masked_author': 'username_3', 'text': ""we could forgo the menu and have icon buttons on each card. the obvious downside is that at the smallest cardsize, it gets pretty busy. but at least it'd be there until the issue can be unblocked.\r\n![01 Icon Library](https://user-images.githubusercontent.com/35537391/74284600-0d783600-4cf2-11ea-8ebd-ab732a5723bb.png)\r\n\r\nwhen the user hovers over the code icon, display the react name in a tooltip:\r\n![02 Hover - display react name tip](https://user-images.githubusercontent.com/35537391/74284630-1ff26f80-4cf2-11ea-9f69-ee3c98d12fb4.png)\r\n\r\nif they click on the code icon, copy the react name to the clipboard and confirm in the tooltip:\r\n![03 Click - confirm copy](https://user-images.githubusercontent.com/35537391/74284669-36003000-4cf2-11ea-943e-c5cad1d0f328.png)\r\n\r\nif the hover over the dl icon, tell them what what the button does in a tooltip:\r\n![04 Hover - download SVG tip](https://user-images.githubusercontent.com/35537391/74284699-4b755a00-4cf2-11ea-813a-cd415e78c5a2.png)\r\n\r\nif they click the dl icon, confirm their download in the tooltip:\r\n![05 Click - confirm download](https://user-images.githubusercontent.com/35537391/74284725-5f20c080-4cf2-11ea-955f-9f49a87fda4a.png)"", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'mjabbink', 'comment_id': 584885990.0, 'datetime': '2020-02-11 22:23:59+00:00', 'masked_author': 'username_4', 'text': 'Could work. a bit busy but the most straight forward and immediate', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'mjabbink', 'comment_id': 585351257.0, 'datetime': '2020-02-12 18:29:45+00:00', 'masked_author': 'username_4', 'text': '@username_1 confirming you solved for overflow approach to work. That one seems to be best strategy because it encourages a more considered download behavior or decision.', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'chrisconnors-ibm', 'comment_id': 585354104.0, 'datetime': '2020-02-12 18:36:18+00:00', 'masked_author': 'username_3', 'text': ""@username_4 @username_7 even if the two actions go in that menu, the spec doesn't yet cover how/where to display the react name."", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'aagonzales', 'comment_id': 585387504.0, 'datetime': '2020-02-12 19:53:25+00:00', 'masked_author': 'username_5', 'text': ""Are you talking about the path name? Doesn't that depend on which size is being called."", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'chrisconnors-ibm', 'comment_id': 585395785.0, 'datetime': '2020-02-12 20:12:00+00:00', 'masked_author': 'username_3', 'text': 'no - the asset name itself.\r\n![image](https://user-images.githubusercontent.com/35537391/74373205-01e84600-4daa-11ea-9043-958650881074.png)', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'aagonzales', 'comment_id': 585402306.0, 'datetime': '2020-02-12 20:28:07+00:00', 'masked_author': 'username_5', 'text': '- Why does the download tooltip say the action but the code tooltip say the name and not the action that will be preformed? \r\n- What is the user getting when the click react code? Just the name, a path?\r\n- Is this supposed to be an MVP? Whatever happened to whole icon drawer that Shixie made?', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'aagonzales', 'comment_id': 585407952.0, 'datetime': '2020-02-12 20:42:06+00:00', 'masked_author': 'username_5', 'text': ""For what it's worth I like this solution. Its clean and keeps the users attention on the actual icons. The action icons upfront though nice for quicker access, I think make it harder to visual scan across the page. \r\n\r\n![image](https://user-images.githubusercontent.com/11670886/74375227-94d2b180-4da5-11ea-82ad-c8c910c6ced6.png)"", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'mjabbink', 'comment_id': 585408468.0, 'datetime': '2020-02-12 20:43:24+00:00', 'masked_author': 'username_4', 'text': 'Me too. Go with this.\r\n\r\nLast question is if SVG is cap and does React need initial cap?', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'chrisconnors-ibm', 'comment_id': 585423498.0, 'datetime': '2020-02-12 21:21:19+00:00', 'masked_author': 'username_3', 'text': ""Any menu-based proposal depends on this issue being fixed:\r\nhttps://github.com/carbon-design-system/carbon/issues/5079#issuecomment-584469193\r\n\r\nIt's been open for 9 days, and currently in the backlog unassigned. If the answer is do nothing until we can deliver a menu based approach, that delivery is an indeterminate date."", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'jeanservaas', 'comment_id': 585440289.0, 'datetime': '2020-02-12 22:02:43+00:00', 'masked_author': 'username_7', 'text': 'Hey icon fanatics!!!\r\n\r\nand @username_1 \r\n\r\nAfter a long talk with Vince, Anna, mike and Lauren and I this is the new solution / spec that we landed on\r\n\r\n<img width=""367"" alt=""image"" src=""https://user-images.githubusercontent.com/43144260/74381439-124fef00-4db1-11ea-8709-c0d411e468de.png"">\r\n\r\n\r\nOnce react code is copied to clipboard you will get a tooltip verification — for download this is not needed\r\n\r\n<img width=""325"" alt=""image"" src=""https://user-images.githubusercontent.com/43144260/74381319-d3219e00-4db0-11ea-9342-4d79805768b5.png"">', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'chrisconnors-ibm', 'comment_id': 585457079.0, 'datetime': '2020-02-12 22:47:14+00:00', 'masked_author': 'username_3', 'text': 'How will someone see the react name? (Without pasting it somewhere)', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'aagonzales', 'comment_id': 585460128.0, 'datetime': '2020-02-12 22:56:19+00:00', 'masked_author': 'username_5', 'text': ""**Plot twist** here's the alternative design we're going to try since IDL will only have download and it weird to only have on item in and overflow menu. This functionality mimics what we did in [v9](https://v9.carbondesignsystem.com/guidelines/iconography/library). The action will not be active on mobile because that use-case seems invalid if not rare. \r\n\r\n1. No actions icon are shown by default\r\n2. When a user hovers or focuses on an icon tile, download and copy functions will appear.\r\n3. When hovering/focusing on an individual action icon a tooltip will appear.\r\n\r\n![image](https://user-images.githubusercontent.com/11670886/74384732-960cda00-4db7-11ea-8e73-fcc3acb749ec.png)"", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'chrisconnors-ibm', 'comment_id': 585464133.0, 'datetime': '2020-02-12 23:08:26+00:00', 'masked_author': 'username_3', 'text': 'plot twists are the best', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'jeanservaas', 'comment_id': 585515858.0, 'datetime': '2020-02-13 02:18:29+00:00', 'masked_author': 'username_7', 'text': 'Plot twist number two... \r\n\r\n- Let\'s move those guys to the bottom — same dimensions and functionality; even with wrapping names at 1056, the top of the card is going to get napalmed with activity on hover\r\n\r\n- also, Anna\'s spec doesn\'t show it, but we\'d need to move the names up to have only an 8px separation from the top, making the margin uneven\r\n\r\n- the original IDL had them at the bottom on hover I believe and CPC is never wrong\r\n\r\n- yes, after 48 hours of jibber jabber this is basically just Chris\'s spec on hover\r\n\r\n<img width=""706"" alt=""image"" src=""https://user-images.githubusercontent.com/43144260/74395328-ab443180-4dd4-11ea-88b2-ef7f8431559b.png"">', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'vpicone', 'comment_id': 585539396.0, 'datetime': '2020-02-13 04:03:16+00:00', 'masked_author': 'username_1', 'text': ""In the icon meeting I suggested this approach using the react 'atom' logo. We might want to revisit that considering we have 3 other frameworks that use angle brackets. @username_3 can you spin up a react icon for us? 2px stroke width please."", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'mjabbink', 'comment_id': 585543471.0, 'datetime': '2020-02-13 04:23:35+00:00', 'masked_author': 'username_4', 'text': '@conradennis can spin up the react atom icon', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'mjabbink', 'comment_id': 585543843.0, 'datetime': '2020-02-13 04:25:22+00:00', 'masked_author': 'username_4', 'text': 'Confirming IDL download only and in pictogram library as well', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'chrisconnors-ibm', 'comment_id': 585866888.0, 'datetime': '2020-02-13 17:11:42+00:00', 'masked_author': 'username_3', 'text': ""@conradennis if the react icon meant to live on the bottom right of the card, it needs to scale cleanly down to 16 x 16.\r\n\r\nTo clarify @username_4's comment I think he's saying for the IDL Icon Library and Pictogram library pages (both sights) they should only offer the dl icon.\r\n\r\nFinally maybe this effort is a good opportunity to get the IDL icon/pictogram library pages and the carbon equivalents identical (filtering controls differ in style and geometry right now) 🤞"", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'mjabbink', 'comment_id': 586471486.0, 'datetime': '2020-02-14 21:03:07+00:00', 'masked_author': 'username_4', 'text': '@username_3 good point. I have an issue to simplify the hierarchy of the icons to be more flat like the Pictograms were done. Too many headers. We can just keep the top level.\r\nhttps://app.zenhub.com/workspaces/auxiliary-squad-5deea70733c75ceaf1bfacae/issues/carbon-design-system/design-language-website/348', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'mjabbink', 'comment_id': 586475004.0, 'datetime': '2020-02-14 21:14:08+00:00', 'masked_author': 'username_4', 'text': '@conradennis we should se the React icon and download icons side by side in design situation', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'mjabbink', 'comment_id': 586475169.0, 'datetime': '2020-02-14 21:14:38+00:00', 'masked_author': 'username_4', 'text': 'This is my hack to see what it would look like\r\n\r\n<img width=""703"" alt=""Screen Shot 2020-02-14 at 3 13 19 PM"" src=""https://user-images.githubusercontent.com/32881239/74568009-af8b5e80-4f3c-11ea-9a6b-6cf5a89bd5bf.png"">', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'mjabbink', 'comment_id': 586475699.0, 'datetime': '2020-02-14 21:16:12+00:00', 'masked_author': 'username_4', 'text': 'Can’t we assume </> will work in Carbon site?', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'chrisconnors-ibm', 'comment_id': 586489326.0, 'datetime': '2020-02-14 21:58:53+00:00', 'masked_author': 'username_3', 'text': '@username_4  - I am referring to the search and filter controls. \r\n\r\nIDL:\r\n![image](https://user-images.githubusercontent.com/35537391/74570962-2deefd00-4f4b-11ea-8ac9-f819e81eaa45.png)\r\n\r\nCDS:\r\n![image](https://user-images.githubusercontent.com/35537391/74571003-3ba48280-4f4b-11ea-8e18-95c63d76ec18.png)', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'chrisconnors-ibm', 'comment_id': 586490125.0, 'datetime': '2020-02-14 22:01:36+00:00', 'masked_author': 'username_3', 'text': 'The headings help people figure out where they live in the plugin:\r\n![image](https://user-images.githubusercontent.com/35537391/74571196-7dcdc400-4f4b-11ea-87e1-d8a80d4c93db.png)\r\n\r\nWe could investigate other ways to convey that though.', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'chrisconnors-ibm', 'comment_id': 586503309.0, 'datetime': '2020-02-14 22:29:38+00:00', 'masked_author': 'username_3', 'text': ""I think in a meeting I wasn't part of @username_1 @username_7 maybe others thought if we use the react icon people won't be surprised that what they got was react code.\r\n\r\nI was ok with `</>`."", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'mjabbink', 'comment_id': 586548299.0, 'datetime': '2020-02-15 03:19:48+00:00', 'masked_author': 'username_4', 'text': 'I’m ok with </> and prefer it over react atom unless that is really more clear.', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'mjabbink', 'comment_id': 586548408.0, 'datetime': '2020-02-15 03:21:05+00:00', 'masked_author': 'username_4', 'text': 'Also we went UI icons to be clear since we have several types of iconography. UI icons, app icons and Pictograms', 'title': None, 'type': 'comment'}
+ {'action': 'closed', 'author': 'vpicone', 'comment_id': None, 'datetime': '2020-02-17 17:45:38+00:00', 'masked_author': 'username_1', 'text': '', 'title': None, 'type': 'issue'}
+ {'action': 'created', 'author': 'chrisconnors-ibm', 'comment_id': 587128446.0, 'datetime': '2020-02-17 19:22:26+00:00', 'masked_author': 'username_3', 'text': 'cc @username_5 @username_7', 'title': None, 'type': 'comment'}
+ {'action': 'reopened', 'author': 'chrisconnors-ibm', 'comment_id': None, 'datetime': '2020-02-17 19:22:26+00:00', 'masked_author': 'username_3', 'text': '### Summary\r\n\r\nIcon library page currently only shows the regular name for icons, but we don\'t have anywhere that lists icons according to their `icons-react` name. i.e. `Misuse24` `CheckmarkFilled24`, etc.\r\n\r\n### Desired outcome\r\n\r\noverflow menu allowing ""export of icons""\r\n- raw svg\r\n- download svg\r\n- react component\r\n\r\ncc: @username_2', 'title': '[icon library] - add react icon names and download functionality to icon cards', 'type': 'issue'}
+ {'action': 'created', 'author': 'aagonzales', 'comment_id': 587129857.0, 'datetime': '2020-02-17 19:27:18+00:00', 'masked_author': 'username_5', 'text': 'I think now that it has been deployed any outstanding issues or bugs need to be opened in a new issue.', 'title': None, 'type': 'comment'}
+ {'action': 'closed', 'author': 'vpicone', 'comment_id': None, 'datetime': '2020-02-17 20:39:41+00:00', 'masked_author': 'username_1', 'text': '', 'title': None, 'type': 'issue'}
+ {'action': 'reopened', 'author': 'mjabbink', 'comment_id': None, 'datetime': '2020-02-17 21:41:44+00:00', 'masked_author': 'username_4', 'text': '### Summary\r\n\r\nIcon library page currently only shows the regular name for icons, but we don\'t have anywhere that lists icons according to their `icons-react` name. i.e. `Misuse24` `CheckmarkFilled24`, etc.\r\n\r\n### Desired outcome\r\n\r\noverflow menu allowing ""export of icons""\r\n- raw svg\r\n- download svg\r\n- react component\r\n\r\ncc: @username_2', 'title': '[icon library] - add react icon names and download functionality to icon cards', 'type': 'issue'}
+ {'action': 'created', 'author': 'mjabbink', 'comment_id': 587167828.0, 'datetime': '2020-02-17 21:41:44+00:00', 'masked_author': 'username_4', 'text': 'This is meant for IDL as well and Pictograms', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'aagonzales', 'comment_id': 587169171.0, 'datetime': '2020-02-17 21:47:31+00:00', 'masked_author': 'username_5', 'text': '[this issue that will never be closed]\r\n\r\nFYI this is the carbon-website repo, it may need to be moved or a new issue opened for IDL.', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'vpicone', 'comment_id': 587170048.0, 'datetime': '2020-02-17 21:51:38+00:00', 'masked_author': 'username_1', 'text': '@username_4 the PR you just closed in IDL is adding them there (https://github.com/carbon-design-system/design-language-website/pull/439)\r\n\r\nPictograms _were_ included in the initial PR and are live.', 'title': None, 'type': 'comment'}
+ {'action': 'closed', 'author': 'vpicone', 'comment_id': None, 'datetime': '2020-02-17 21:51:53+00:00', 'masked_author': 'username_1', 'text': '', 'title': None, 'type': 'issue'}
+ {'action': 'created', 'author': 'chrisconnors-ibm', 'comment_id': 587173064.0, 'datetime': '2020-02-17 22:04:42+00:00', 'masked_author': 'username_3', 'text': 'I thought Pictograms (IDL and CDS) and Icon cards (IDL) were only supposed to get the DL button:\r\nhttps://github.com/carbon-design-system/carbon-website/issues/766#issuecomment-585543843', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'mjabbink', 'comment_id': 587174889.0, 'datetime': '2020-02-17 22:12:50+00:00', 'masked_author': 'username_4', 'text': 'Yes, download only', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'vpicone', 'comment_id': 587176978.0, 'datetime': '2020-02-17 22:22:07+00:00', 'masked_author': 'username_1', 'text': ""@username_4 @username_3 It seems like pictograms would be _more_ requested for use in keynote/outside of our libraries. Is there a reason we wouldn't want folks to download it?"", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'mjabbink', 'comment_id': 587178625.0, 'datetime': '2020-02-17 22:30:10+00:00', 'masked_author': 'username_4', 'text': '@username_1 yes, pictograms and icons are to have download functionality', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'chrisconnors-ibm', 'comment_id': 587179844.0, 'datetime': '2020-02-17 22:36:03+00:00', 'masked_author': 'username_3', 'text': 'https://github.com/carbon-design-system/carbon-website/issues/766#issuecomment-585543843\r\n\r\nAt issue is whether either IDL Pictogram cards or IDL Icon Cards get the code `</>` action', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'mjabbink', 'comment_id': 587183059.0, 'datetime': '2020-02-17 22:52:57+00:00', 'masked_author': 'username_4', 'text': 'go for it.', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'mjabbink', 'comment_id': 587183309.0, 'datetime': '2020-02-17 22:54:33+00:00', 'masked_author': 'username_4', 'text': 'I thought that saying DL only for icons and pictograms was clear. But if you all think </> is useful in Idl for pictograms then do it. I was thinking it was not but I based that on my own opinion only.', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'mjabbink', 'comment_id': 587183404.0, 'datetime': '2020-02-17 22:55:02+00:00', 'masked_author': 'username_4', 'text': 'Could have both really even if the </> is hardly ever used.', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'vpicone', 'comment_id': 587214731.0, 'datetime': '2020-02-18 00:33:04+00:00', 'masked_author': 'username_1', 'text': ""@username_3 we have the `pictograms-react` library, not sure why we wouldn't have the copy code button for them on CDS.\r\n\r\nRight now CDS has both buttons for both libraries, IDL has just download for both libraries. Not sure what the issue is?"", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'mjabbink', 'comment_id': 587224212.0, 'datetime': '2020-02-18 00:50:35+00:00', 'masked_author': 'username_4', 'text': 'We can have the libraries be identical I guess. Not harm to have copy code in IDL and I’m all for making them be exactly the same.', 'title': None, 'type': 'comment'}]","<issue_start><issue_comment>Title: [icon library] - add react icon names to icon cards
+username_0: ### Summary
+
+Icon library page currently only shows the regular name for icons, but we don't have anywhere that lists icons according to their `icons-react` name. i.e. `Misuse24` `CheckmarkFilled24`, etc.
+
+### Desired outcome
+
+Include react names in the icon library cards.
+
+cc: @username_2
+<issue_comment>username_1: I'll take this, the hold up on this previously was how we want to display it: tooltip vs button that copies to clipboard etc.
+<issue_comment>username_1: Ideally we'd have an overflow menu that would present:
+- React
+- SVG Download
+- Angular maybe?
+
+
+We could also have the icons themselves be clickable to copy the React code (our preferred implementation)
+<issue_comment>username_1: @username_2 which size would it make sense to have copied here do you think? Maybe this would be a good time to implement the `<Checkmark size='sm' />` api.
+<issue_comment>username_2: @username_1 my hunch would be 16 or 20, icons in a broader sense should be revisited so that we could do things like what you're suggesting.
+
+If we want to, we could expose the module base name (like `CheckmarkFilled`) and share info about the sizes, but I totally understand if that'd be confusing.
+
+For icon packages, most likely we'll want to only expose React as Angular/Vue do not have active attention dedicated to them (in fact Angular hasn't been published in the previous minors due to build issues)
+<issue_comment>username_1: @username_2 that makes sense, I think the only other thing we'd want is a `download` menu item then @laurenmrice
+<issue_comment>username_3: We do not want to provide a way to easily download SVGs from the icon page. This leads to orphaned icons in product endpoints that never catch iterations or updates.
+<issue_comment>username_2: How did we want to handle SVG downloads for presentations? I think that's one case that did come up recently for wanting to download them.
+<issue_comment>username_3: This is more of a pictograms use case, so maybe we do something different there. but the net is for a preso you can get them all from the repo as part of the package or you can dl the illustrator master file.
+<issue_comment>username_3: if you need just one from the repo, the raw button gets you https://raw.githubusercontent.com/carbon-design-system/carbon/master/packages/icons/svg/32/badge.svg
+<issue_comment>username_3: to summarize - no raw or download svg from the icon cards or pages please
+<issue_comment>username_4: I think this is a must for pictograms. It’s  a weekly request and even from my boss Terry and some other executives. They do not want to poke around in GitHub.
+
+I’s also extend this functionality to UI icons as the same request comes up there as well but less frequent. Not all people use Sketch or even understand GitHub for that matter but want to use and have access to individual icons.
+
+Holding them sacred also pushes people to do worse shit that I’ve seen equally or more distasteful.
+
+Let’s please proceed with this. I understand the downsides but the entire team and a very large number of users will appreciate this.
+<issue_comment>username_4: So if i wan’t clear. Please execute this issue.
+<issue_comment>username_3: If we do this for _icons_ we will _encourage_ people to do the easy thing (grab the SVG/DL the icon) rather than the _right thing_ (access our icons via the packages, or the design kits) and the FIRST PERSON to notice and complain about teams using an icon we've iterated on in their applications (think: copy icon) will be you, @username_4. And you're going to be complaining a lot more then because they will never, ever, track down that SVG code and fix it.
+
+We've already (and always) said ""make direct DL possible for pictograms, because orphaning them doesn't matter"", so please by all means add direct dl to these cards: https://www.carbondesignsystem.com/guidelines/pictograms/library 
+
+…but that should probably be a separate issue. Up to you all.
+
+I suspect @username_6 has a spec for these types of functionality.
+<issue_comment>username_3: We should add a link somewhere to the .ai master file in the repo: https://github.com/carbon-design-system/carbon/blob/master/packages/icons/master/ui-icon-master.ai
+<issue_comment>username_4: I’m more inclined to this for Pictograms. I’m not so sure holding back on icons is a real preventative measure against poor behavior. I also do not foresee adjustments to icons. I see new ones being added as we do plenty of that but date we have not modified many icons over the past year. Unless you consider the 16px ones you and Conrad did. I would be fine with first releasing this functionality with pictograms then icons later to test the waters.
+<issue_comment>username_5: While encouraging people to use icons through the Sketch library works if you're a Sketch user its starting not to scale as we introduce other tools, like Axure and Adobe XD. Right now the icons aren't available in those tools and accessing them from the website is easier than having to have a second tool (Sketch) or getting them from GitHub which many designers are comfortable with outside of issue creation. Sketch licenses are also hard to come by outside of design.
+
+Not using the icon symbol in Sketch is the same as detaching a symbol, it only really hurts the person that does it. I think accommodating for these other usages by adding the download to the website will be more helpful than worrying about people not using the Sketch library.
+<issue_comment>username_6: I tried to summarize the requirements mentioned here so we can generate design specs. Let me know if we're missing any or if some should be a phase 1 or phase 2, 3, 4, etc. 
+
+**Requirement 1: Add react icon names to icon card**
+As a product developer want to see the different sized React icon names so I can copy and paste the correct size into my project.
+
+
+**Requirement 1.2: Add angular icon names to icon card (?)**
+As a product developer want to see the different sized Angular icon names so I can copy and paste the correct size into my project.
+
+
+**Requirement 2: Enable direct download for pictograms**
+As a product designer I want to download the SVG asset of a specific pictogram so I can use it in my project.
+
+
+**Requirement 2.2: Enable bulk download for pictograms**
+As a product designer I want to select multiple Pictogram SVG's and download all at once so I don't have to repeat the same action to get all the pictograms for my project.
+
+
+**Requirement 3: Inform the preferred method to get icon assets**
+As a product designer I can learn how to get the icon asset in Sketch without directly downloading the SVG.
+
+
+**Requirement 4: Enable direct download for icons**
+As a product designer I want to download the SVG asset of a specific icon so I can use it in my project.
+
+**Requirement 4.2: Enable bulk download for icons**
+As a product designer I want to select multiple icon SVG's and download all at once so I don't have to repeat the same action to get all the pictograms for my project.
+<issue_comment>username_4: Please proceed with issue defined above. Meaning direct download and copy for both icons and Pictograms
+<issue_comment>username_2: Just a heads up @username_1 I'm updating our icon metadata structure to make it easier to parse for different meta fields, let me know if you want to sync up on this work 👍
+<issue_comment>username_1: @username_2 sounds good, a list of changes would suffice! we do the flattening of the metadata ourselves at run time at the moment.
+
+@username_3 Downloading svg's is a real use case, linking to the master file isn't a solution for things like keynote/powerpoint/non-sketch design tools.
+
+Not sure why pictograms and icons would be treated different. I've always felt the bespoke asset per size icon routine was a mistake. SVG = **scaleable** vector graphic. We're using them like sprites.
+<issue_comment>username_1: @username_6 Requirement 4 and 5 seem the same. Icons and Pictograms are treated very similarly by the website so realistically things would be added in tandem.
+<issue_comment>username_1: @username_2 the biggest blocker/hurdle for me is the sizes in the icon names at this point. I feel like a bit of a broken record for saying this, but these are scaleable vector graphics, they shouldn’t be bespoke sprites at individual sizes.
+
+Having the copied code read `Chevron16` or `Chevron24` and making an assumption on which size they want (**and the assuming that they’d even know what that number means or what the other options are**) is untenable to me.
+<issue_comment>username_2: I think one goal of the project would be to only maintain one asset per icon. What was observed was that certain assets rendered poorly on a wide breadth of devices/screens when drawn on 16px artboards. I believe this is what caused the situation that we have today. Could you share how this problem could be addressed?
+<issue_comment>username_1: blocked by https://github.com/carbon-design-system/carbon/issues/5170
+<issue_comment>username_1: @username_6 it looked like you were about to drop a 🔥 spec for this. 
+
+https://github.com/carbon-design-system/carbon-website/issues/766#issuecomment-577749730
+
+@laurenmrice did you have something for it?
+<issue_comment>username_6: @username_1 This is based on specs we had a while ago. I'd wait for the 👍 from @username_4 and @username_7 before you start slinging code.
+
+![Icon page components](https://user-images.githubusercontent.com/19270502/73946824-27fa7b80-48bc-11ea-905c-9ebba7ad565a.png)
+<issue_comment>username_3: What does “copy” do here? Ask was “code snippet to summon from package”, but that’s not clear. And at what size would you get?
+
+Sent from my iPhone
+
+>
+<issue_comment>username_3: Proposal:
+1. **Programatic Name** on card (ie `add--filled`) - make it clickable to put the programatic name on the clipboard
+2. Menu: “**Copy component code**” - component code to clipboard (NOT THE RAW SVG)
+3. Menu: “**Download**” - direct download of 32 asset (from the repo ie https://raw.githubusercontent.com/carbon-design-system/carbon/master/packages/icons/svg/32/badge.svg)
+4. Menu: **View in repo**” link to asset repo (if they want the raw SVG they can get it here, the friction to do so should reduce the likelihood **ON PURPOSE**)
+
+The big unanswered question is how to express the size prop for 2 (this is distinct from what the package does with that prop).
+
+The Icon Library page should also have a link to the AI Master; esp if a search result is 0
+“No icons found; if you’d like to create (and submit) an icon asset, base the work on the assets in [this master file](https://github.com/carbon-design-system/carbon/blob/master/packages/icons/master/ui-icon-master.ai?raw=true).”
+<issue_comment>username_7: Thanks @username_6 the above spec is correct @username_1 with a couple of modifications. No need to look at Chiu's old hex codes from the spec, those are old just pull in the overflow component from Carbon.
+
+In order to make sure that there is no truncation in the overflow menu at 1056 we are going to ditch the icons.
+
+![image](https://user-images.githubusercontent.com/43144260/74055048-daa60900-49a4-11ea-8796-ab7c6185b0bb.png)
+
+
+There's a battle raging over the content of the dropdown... @username_1 has proposed that the menu say:
+
+- Download SVG
+- React
+
+**Anna, Jan and Lauren made several good points against this:**
+
+1. React is our default therefore any code you're copying from Carbon is react — we don't say react before every code snippet on the website
+
+2. We need a action verb, not just a proper noun with no explanation
+
+**Proposed change:**
+
+**- Download SVG**
+
+**- Copy code**
+<issue_comment>username_4: need to clarify what “Copy code” is doing. I would assume it’s react if only one option presented. Do we need to even do it for developers? Could it only be a download asset action? That seems to be the use case/audience. Have we had devs wanting to Copy React? Let’s only do this for the folks that are clamoring for it. I have only heard this from designers and non designers.
+<issue_comment>username_3: @username_0's main asks here were:
+
+1. display the programatic name like  `add-filled`
+2. get the react code onto the clipboard
+
+The programatic name is important for designers too since they need that value to specify which icon FED should use in a spec.
+
+She can confirm.
+<issue_comment>username_3: There's no need to articulate the file type (svg). If you select 'Download', a file appears in your downloads folder.
+<issue_comment>username_4: Don’t you think people want to know what they’re downloading? I certainly do. I see more reason to keep it than to remove. It’s clear and not harmful or ugly.
+<issue_comment>username_3: I think if it's not obvious that you're going to get an image file for the icon, it will be when it shows up in your Downloads folder 2 seconds later :) Does the he actual filetype (svg vs .png etc.) really matter at that point?
+<issue_comment>username_1: Currently the carbon react OverflowMenu breaks the page if there's more than a few hundred. Implementation of this behavior is going to be slowed by either creating our own or waiting for a fix upstream from Carbon.
+
+Added on to this issue: https://github.com/carbon-design-system/carbon/issues/5079#issuecomment-584469193
+<issue_comment>username_3: we could forgo the menu and have icon buttons on each card. the obvious downside is that at the smallest cardsize, it gets pretty busy. but at least it'd be there until the issue can be unblocked.
+![01 Icon Library](https://user-images.githubusercontent.com/35537391/74284600-0d783600-4cf2-11ea-8ebd-ab732a5723bb.png)
+
+when the user hovers over the code icon, display the react name in a tooltip:
+![02 Hover - display react name tip](https://user-images.githubusercontent.com/35537391/74284630-1ff26f80-4cf2-11ea-9f69-ee3c98d12fb4.png)
+
+if they click on the code icon, copy the react name to the clipboard and confirm in the tooltip:
+![03 Click - confirm copy](https://user-images.githubusercontent.com/35537391/74284669-36003000-4cf2-11ea-943e-c5cad1d0f328.png)
+
+if the hover over the dl icon, tell them what what the button does in a tooltip:
+![04 Hover - download SVG tip](https://user-images.githubusercontent.com/35537391/74284699-4b755a00-4cf2-11ea-813a-cd415e78c5a2.png)
+
+if they click the dl icon, confirm their download in the tooltip:
+![05 Click - confirm download](https://user-images.githubusercontent.com/35537391/74284725-5f20c080-4cf2-11ea-955f-9f49a87fda4a.png)
+<issue_comment>username_4: Could work. a bit busy but the most straight forward and immediate
+<issue_comment>username_4: @username_1 confirming you solved for overflow approach to work. That one seems to be best strategy because it encourages a more considered download behavior or decision.
+<issue_comment>username_3: @username_4 @username_7 even if the two actions go in that menu, the spec doesn't yet cover how/where to display the react name.
+<issue_comment>username_5: Are you talking about the path name? Doesn't that depend on which size is being called.
+<issue_comment>username_3: no - the asset name itself.
+![image](https://user-images.githubusercontent.com/35537391/74373205-01e84600-4daa-11ea-9043-958650881074.png)
+<issue_comment>username_5: - Why does the download tooltip say the action but the code tooltip say the name and not the action that will be preformed? 
+- What is the user getting when the click react code? Just the name, a path?
+- Is this supposed to be an MVP? Whatever happened to whole icon drawer that Shixie made?
+<issue_comment>username_5: For what it's worth I like this solution. Its clean and keeps the users attention on the actual icons. The action icons upfront though nice for quicker access, I think make it harder to visual scan across the page. 
+
+![image](https://user-images.githubusercontent.com/11670886/74375227-94d2b180-4da5-11ea-82ad-c8c910c6ced6.png)
+<issue_comment>username_4: Me too. Go with this.
+
+Last question is if SVG is cap and does React need initial cap?
+<issue_comment>username_3: Any menu-based proposal depends on this issue being fixed:
+https://github.com/carbon-design-system/carbon/issues/5079#issuecomment-584469193
+
+It's been open for 9 days, and currently in the backlog unassigned. If the answer is do nothing until we can deliver a menu based approach, that delivery is an indeterminate date.
+<issue_comment>username_7: Hey icon fanatics!!!
+
+and @username_1 
+
+After a long talk with Vince, Anna, mike and Lauren and I this is the new solution / spec that we landed on
+
+<img width=""367"" alt=""image"" src=""https://user-images.githubusercontent.com/43144260/74381439-124fef00-4db1-11ea-8709-c0d411e468de.png"">
+
+
+Once react code is copied to clipboard you will get a tooltip verification — for download this is not needed
+
+<img width=""325"" alt=""image"" src=""https://user-images.githubusercontent.com/43144260/74381319-d3219e00-4db0-11ea-9342-4d79805768b5.png"">
+<issue_comment>username_3: How will someone see the react name? (Without pasting it somewhere)
+<issue_comment>username_5: **Plot twist** here's the alternative design we're going to try since IDL will only have download and it weird to only have on item in and overflow menu. This functionality mimics what we did in [v9](https://v9.carbondesignsystem.com/guidelines/iconography/library). The action will not be active on mobile because that use-case seems invalid if not rare. 
+
+1. No actions icon are shown by default
+2. When a user hovers or focuses on an icon tile, download and copy functions will appear.
+3. When hovering/focusing on an individual action icon a tooltip will appear.
+
+![image](https://user-images.githubusercontent.com/11670886/74384732-960cda00-4db7-11ea-8e73-fcc3acb749ec.png)
+<issue_comment>username_3: plot twists are the best
+<issue_comment>username_7: Plot twist number two... 
+
+- Let's move those guys to the bottom — same dimensions and functionality; even with wrapping names at 1056, the top of the card is going to get napalmed with activity on hover
+
+- also, Anna's spec doesn't show it, but we'd need to move the names up to have only an 8px separation from the top, making the margin uneven
+
+- the original IDL had them at the bottom on hover I believe and CPC is never wrong
+
+- yes, after 48 hours of jibber jabber this is basically just Chris's spec on hover
+
+<img width=""706"" alt=""image"" src=""https://user-images.githubusercontent.com/43144260/74395328-ab443180-4dd4-11ea-88b2-ef7f8431559b.png"">
+<issue_comment>username_1: In the icon meeting I suggested this approach using the react 'atom' logo. We might want to revisit that considering we have 3 other frameworks that use angle brackets. @username_3 can you spin up a react icon for us? 2px stroke width please.
+<issue_comment>username_4: @conradennis can spin up the react atom icon
+<issue_comment>username_4: Confirming IDL download only and in pictogram library as well
+<issue_comment>username_3: @conradennis if the react icon meant to live on the bottom right of the card, it needs to scale cleanly down to 16 x 16.
+
+To clarify @username_4's comment I think he's saying for the IDL Icon Library and Pictogram library pages (both sights) they should only offer the dl icon.
+
+Finally maybe this effort is a good opportunity to get the IDL icon/pictogram library pages and the carbon equivalents identical (filtering controls differ in style and geometry right now) 🤞
+<issue_comment>username_4: @username_3 good point. I have an issue to simplify the hierarchy of the icons to be more flat like the Pictograms were done. Too many headers. We can just keep the top level.
+https://app.zenhub.com/workspaces/auxiliary-squad-5deea70733c75ceaf1bfacae/issues/carbon-design-system/design-language-website/348
+<issue_comment>username_4: @conradennis we should se the React icon and download icons side by side in design situation
+<issue_comment>username_4: This is my hack to see what it would look like
+
+<img width=""703"" alt=""Screen Shot 2020-02-14 at 3 13 19 PM"" src=""https://user-images.githubusercontent.com/32881239/74568009-af8b5e80-4f3c-11ea-9a6b-6cf5a89bd5bf.png"">
+<issue_comment>username_4: Can’t we assume </> will work in Carbon site?
+<issue_comment>username_3: @username_4  - I am referring to the search and filter controls. 
+
+IDL:
+![image](https://user-images.githubusercontent.com/35537391/74570962-2deefd00-4f4b-11ea-8ac9-f819e81eaa45.png)
+
+CDS:
+![image](https://user-images.githubusercontent.com/35537391/74571003-3ba48280-4f4b-11ea-8e18-95c63d76ec18.png)
+<issue_comment>username_3: The headings help people figure out where they live in the plugin:
+![image](https://user-images.githubusercontent.com/35537391/74571196-7dcdc400-4f4b-11ea-87e1-d8a80d4c93db.png)
+
+We could investigate other ways to convey that though.
+<issue_comment>username_3: I think in a meeting I wasn't part of @username_1 @username_7 maybe others thought if we use the react icon people won't be surprised that what they got was react code.
+
+I was ok with `</>`.
+<issue_comment>username_4: I’m ok with </> and prefer it over react atom unless that is really more clear.
+<issue_comment>username_4: Also we went UI icons to be clear since we have several types of iconography. UI icons, app icons and Pictograms<issue_closed>
+<issue_comment>username_3: cc @username_5 @username_7
+<issue_comment>username_3: ### Summary
+
+Icon library page currently only shows the regular name for icons, but we don't have anywhere that lists icons according to their `icons-react` name. i.e. `Misuse24` `CheckmarkFilled24`, etc.
+
+### Desired outcome
+
+overflow menu allowing ""export of icons""
+- raw svg
+- download svg
+- react component
+
+cc: @username_2
+<issue_comment>username_5: I think now that it has been deployed any outstanding issues or bugs need to be opened in a new issue.<issue_closed>
+<issue_comment>username_4: ### Summary
+
+Icon library page currently only shows the regular name for icons, but we don't have anywhere that lists icons according to their `icons-react` name. i.e. `Misuse24` `CheckmarkFilled24`, etc.
+
+### Desired outcome
+
+overflow menu allowing ""export of icons""
+- raw svg
+- download svg
+- react component
+
+cc: @username_2
+<issue_comment>username_4: This is meant for IDL as well and Pictograms
+<issue_comment>username_5: [this issue that will never be closed]
+
+FYI this is the carbon-website repo, it may need to be moved or a new issue opened for IDL.
+<issue_comment>username_1: @username_4 the PR you just closed in IDL is adding them there (https://github.com/carbon-design-system/design-language-website/pull/439)
+
+Pictograms _were_ included in the initial PR and are live.<issue_closed>
+<issue_comment>username_3: I thought Pictograms (IDL and CDS) and Icon cards (IDL) were only supposed to get the DL button:
+https://github.com/carbon-design-system/carbon-website/issues/766#issuecomment-585543843
+<issue_comment>username_4: Yes, download only
+<issue_comment>username_1: @username_4 @username_3 It seems like pictograms would be _more_ requested for use in keynote/outside of our libraries. Is there a reason we wouldn't want folks to download it?
+<issue_comment>username_4: @username_1 yes, pictograms and icons are to have download functionality
+<issue_comment>username_3: https://github.com/carbon-design-system/carbon-website/issues/766#issuecomment-585543843
+
+At issue is whether either IDL Pictogram cards or IDL Icon Cards get the code `</>` action
+<issue_comment>username_4: go for it.
+<issue_comment>username_4: I thought that saying DL only for icons and pictograms was clear. But if you all think </> is useful in Idl for pictograms then do it. I was thinking it was not but I based that on my own opinion only.
+<issue_comment>username_4: Could have both really even if the </> is hardly ever used.
+<issue_comment>username_1: @username_3 we have the `pictograms-react` library, not sure why we wouldn't have the copy code button for them on CDS.
+
+Right now CDS has both buttons for both libraries, IDL has just download for both libraries. Not sure what the issue is?
+<issue_comment>username_4: We can have the libraries be identical I guess. Not harm to have copy code in IDL and I’m all for making them be exactly the same."
+google/web-starter-kit,190221946,904,,"[{'action': 'opened', 'author': 'zhenyanghua', 'comment_id': None, 'datetime': '2016-11-18 02:39:13+00:00', 'masked_author': 'username_0', 'text': 'After removing the line `""only"": ""gulpfile.babel.js"",` in the `.babelrc` file,\r\nI created a class:\r\n```\r\nexport default class App {\r\n  constructor() {\r\n    console.log(""Cool"")\r\n  }\r\n}\r\n```\r\nThen, I imported it on in the first line of the default main.js, and call it at the end:\r\n```\r\nimport App from \'./app\'\r\n/*!\r\n *\r\n *  Web Starter Kit\r\n *  Copyright 2015 Google Inc. All rights reserved.\r\n *\r\n *  Licensed under the Apache License, Version 2.0 (the ""License"");\r\n *  you may not use this file except in compliance with the License.\r\n *  You may obtain a copy of the License at\r\n *\r\n *    https://www.apache.org/licenses/LICENSE-2.0\r\n *\r\n *  Unless required by applicable law or agreed to in writing, software\r\n *  distributed under the License is distributed on an ""AS IS"" BASIS,\r\n *  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.\r\n *  See the License for the specific language governing permissions and\r\n *  limitations under the License\r\n *\r\n */\r\n/* eslint-env browser */\r\n(function() {\r\n  \'use strict\';\r\n\r\n  // Check to make sure service workers are supported in the current browser,\r\n  // and that the current page is accessed from a secure origin. Using a\r\n  // service worker from an insecure origin will trigger JS console errors. See\r\n  // http://www.chromium.org/Home/chromium-security/prefer-secure-origins-for-powerful-new-features\r\n  var isLocalhost = Boolean(window.location.hostname === \'localhost\' ||\r\n      // [::1] is the IPv6 localhost address.\r\n      window.location.hostname === \'[::1]\' ||\r\n      // 127.0.0.1/8 is considered localhost for IPv4.\r\n      window.location.hostname.match(\r\n        /^127(?:\\.(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)){3}$/\r\n      )\r\n    );\r\n\r\n  if (\'serviceWorker\' in navigator &&\r\n      (window.location.protocol === \'https:\' || isLocalhost)) {\r\n    navigator.serviceWorker.register(\'service-worker.js\')\r\n    .then(function(registration) {\r\n      // updatefound is fired if service-worker.js changes.\r\n      registration.onupdatefound = function() {\r\n        // updatefound is also fired the very first time the SW is installed,\r\n        // and there\'s no need to prompt for a reload at that point.\r\n        // So check here to see if the page is already controlled,\r\n        // i.e. whether there\'s an existing service worker.\r\n        if (navigator.serviceWorker.controller) {\r\n          // The updatefound event implies that registration.installing is set:\r\n          // https://slightlyoff.github.io/ServiceWorker/spec/service_worker/index.html#service-worker-container-updatefound-event\r\n          var installingWorker = registration.installing;\r\n\r\n          installingWorker.onstatechange = function() {\r\n            switch (installingWorker.state) {\r\n              case \'installed\':\r\n                // At this point, the old content will have been purged and the\r\n                // fresh content will have been added to the cache.\r\n                // It\'s the perfect time to display a ""New content is\r\n                // available; please refresh."" message in the page\'s interface.\r\n                break;\r\n\r\n              case \'redundant\':\r\n                throw new Error(\'The installing \' +\r\n                                \'service worker became redundant.\');\r\n\r\n              default:\r\n                // Ignore\r\n            }\r\n          };\r\n        }\r\n      };\r\n    }).catch(function(e) {\r\n      console.error(\'Error during service worker registration:\', e);\r\n    });\r\n  }\r\n\r\n  // Your custom JavaScript goes here\r\n\r\n  const app = new App();\r\n\r\n})();\r\n\r\n```\r\n\r\nIt threw me this **Uncaught ReferenceError: require is not defined(…)**,\r\nand the error point to the first line of the main.js where the statement ""import App from \'./app\'"" is.', 'title': 'Uncaught ReferenceError: require is not defined(…)', 'type': 'issue'}
+ {'action': 'created', 'author': 'verlok', 'comment_id': 263046685.0, 'datetime': '2016-11-26 06:13:55+00:00', 'masked_author': 'username_1', 'text': 'Hi, we get the same error. \r\nWe tried both the latest release from June and the latest version from master. None worked.', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'DiegoTonini', 'comment_id': 263503037.0, 'datetime': '2016-11-29 08:07:50+00:00', 'masked_author': 'username_2', 'text': 'Same bug for me. The kit is not usable until google will solve this bug.', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'Sam-Hoult', 'comment_id': 269705545.0, 'datetime': '2016-12-29 22:46:41+00:00', 'masked_author': 'username_3', 'text': 'Same issue, all I want to do is write sexy es2015', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'lilianchisca', 'comment_id': 269864496.0, 'datetime': '2016-12-31 13:13:25+00:00', 'masked_author': 'username_4', 'text': 'You can use this recipe to add support for es6 modules: \r\n[Setting up Browserify with Babelify](https://github.com/yeoman/generator-webapp/blob/master/docs/recipes/browserify.md)', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'anhuiliujun', 'comment_id': 286330819.0, 'datetime': '2017-03-14 06:05:37+00:00', 'masked_author': 'username_5', 'text': 'Same issue, how to write es2015', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'owzzz', 'comment_id': 286451277.0, 'datetime': '2017-03-14 15:09:37+00:00', 'masked_author': 'username_6', 'text': ""Any word on this? It'd be great if this worked out of the box as opposed to having to hack the project to include browserify/babelify."", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'eapostol', 'comment_id': 308599341.0, 'datetime': '2017-06-15 01:02:37+00:00', 'masked_author': 'username_7', 'text': 'Its June 2017. This issue is still happening. Any idea on whether it will be supported?', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'kr1stjans', 'comment_id': 317120486.0, 'datetime': '2017-07-21 21:50:02+00:00', 'masked_author': 'username_8', 'text': 'Can anyone post ""hacked"" solution? I lost days on this issue.', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'balazsorban44', 'comment_id': 327897297.0, 'datetime': '2017-09-07 19:17:50+00:00', 'masked_author': 'username_9', 'text': 'Same problem here.', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'alexandonie', 'comment_id': 331743867.0, 'datetime': '2017-09-24 22:13:44+00:00', 'masked_author': 'username_10', 'text': ""You get those errors because the boilerplate doesn't support ES6 modules at the moment. If you feel like you don't really make use of the modules then you can still keep your code in separate files but you'll have to import them one by one in `gulp.babel.js` (see line 110).\r\n\r\nIf your app structure is heavily based on ES6 modules and you'd like to keep using that then you'll have to use a js bundler like browserify, webpack, etc. \r\nI had a little play with the boilerplate and this is the solution I came up with:\r\n\r\n`gulp.task('scripts', () =>\r\n    gulp.src('./src/scripts/main.js')\r\n    .pipe(webpack({\r\n      output: {\r\n        filename: '[name].js'\r\n      },\r\n      module: {\r\n        rules: [\r\n          {\r\n            test: /\\.js$/,\r\n            exclude: /(node_modules|bower_components)/,\r\n            use: {\r\n              loader: 'babel-loader',\r\n              options: {\r\n                presets: ['env']\r\n              }\r\n            }\r\n          }\r\n        ]\r\n      },\r\n      devtool: '#inline-source-map'\r\n    }))\r\n    .pipe(gulp.dest('.tmp/scripts'))\r\n    .pipe($.sourcemaps.init({ loadMaps: true }))\r\n    .pipe($.uglify())\r\n    .pipe($.rename('main.min.js'))\r\n    // Output files\r\n    .pipe($.size({title: 'scripts'}))\r\n    .pipe($.sourcemaps.write('.'))\r\n    .pipe(gulp.dest('dist/scripts'))\r\n    .pipe(gulp.dest('.tmp/scripts'))\r\n);`\r\n\r\nDon't forget to:\r\n**install the required dependencies**\r\n`npm install --save-dev webpack-stream babel-loader babel-preset-env gulp-rename`\r\n\r\n**import the bundler at the top of the file between the other imports**\r\n`import webpack from 'webpack-stream';`\r\n\r\nHope this helps.\r\n\r\nP.S: if the sourcemaps don't show the correct file, give the browser a refresh."", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'czechue', 'comment_id': 345476893.0, 'datetime': '2017-11-18 22:42:50+00:00', 'masked_author': 'username_11', 'text': '@username_10 Thank you very much, this solution saved my day. And I have spent few hours trying to figure it out by myself.  Thanks again!', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'YongX', 'comment_id': 357931545.0, 'datetime': '2018-01-16 11:25:22+00:00', 'masked_author': 'username_12', 'text': '@username_10 Thank you, your solution saved my day too.', 'title': None, 'type': 'comment'}]","<issue_start><issue_comment>Title: Uncaught ReferenceError: require is not defined(…)
+username_0: After removing the line `""only"": ""gulpfile.babel.js"",` in the `.babelrc` file,
+I created a class:
+```
+export default class App {
+  constructor() {
+    console.log(""Cool"")
+  }
+}
+```
+Then, I imported it on in the first line of the default main.js, and call it at the end:
+```
+import App from './app'
+/*!
+ *
+ *  Web Starter Kit
+ *  Copyright 2015 Google Inc. All rights reserved.
+ *
+ *  Licensed under the Apache License, Version 2.0 (the ""License"");
+ *  you may not use this file except in compliance with the License.
+ *  You may obtain a copy of the License at
+ *
+ *    https://www.apache.org/licenses/LICENSE-2.0
+ *
+ *  Unless required by applicable law or agreed to in writing, software
+ *  distributed under the License is distributed on an ""AS IS"" BASIS,
+ *  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ *  See the License for the specific language governing permissions and
+ *  limitations under the License
+ *
+ */
+/* eslint-env browser */
+(function() {
+  'use strict';
+
+  // Check to make sure service workers are supported in the current browser,
+  // and that the current page is accessed from a secure origin. Using a
+  // service worker from an insecure origin will trigger JS console errors. See
+  // http://www.chromium.org/Home/chromium-security/prefer-secure-origins-for-powerful-new-features
+  var isLocalhost = Boolean(window.location.hostname === 'localhost' ||
+      // [::1] is the IPv6 localhost address.
+      window.location.hostname === '[::1]' ||
+      // 127.0.0.1/8 is considered localhost for IPv4.
+      window.location.hostname.match(
+        /^127(?:\.(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)){3}$/
+      )
+    );
+
+  if ('serviceWorker' in navigator &&
+      (window.location.protocol === 'https:' || isLocalhost)) {
+    navigator.serviceWorker.register('service-worker.js')
+    .then(function(registration) {
+      // updatefound is fired if service-worker.js changes.
+      registration.onupdatefound = function() {
+        // updatefound is also fired the very first time the SW is installed,
+        // and there's no need to prompt for a reload at that point.
+        // So check here to see if the page is already controlled,
+        // i.e. whether there's an existing service worker.
+        if (navigator.serviceWorker.controller) {
+          // The updatefound event implies that registration.installing is set:
+          // https://slightlyoff.github.io/ServiceWorker/spec/service_worker/index.html#service-worker-container-updatefound-event
+          var installingWorker = registration.installing;
+
+          installingWorker.onstatechange = function() {
+            switch (installingWorker.state) {
+              case 'installed':
+                // At this point, the old content will have been purged and the
+                // fresh content will have been added to the cache.
+                // It's the perfect time to display a ""New content is
+                // available; please refresh."" message in the page's interface.
+                break;
+
+              case 'redundant':
+                throw new Error('The installing ' +
+                                'service worker became redundant.');
+
+              default:
+                // Ignore
+            }
+          };
+        }
+      };
+    }).catch(function(e) {
+      console.error('Error during service worker registration:', e);
+    });
+  }
+
+  // Your custom JavaScript goes here
+
+  const app = new App();
+
+})();
+
+```
+
+It threw me this **Uncaught ReferenceError: require is not defined(…)**,
+and the error point to the first line of the main.js where the statement ""import App from './app'"" is.
+<issue_comment>username_1: Hi, we get the same error. 
+We tried both the latest release from June and the latest version from master. None worked.
+<issue_comment>username_2: Same bug for me. The kit is not usable until google will solve this bug.
+<issue_comment>username_3: Same issue, all I want to do is write sexy es2015
+<issue_comment>username_4: You can use this recipe to add support for es6 modules: 
+[Setting up Browserify with Babelify](https://github.com/yeoman/generator-webapp/blob/master/docs/recipes/browserify.md)
+<issue_comment>username_5: Same issue, how to write es2015
+<issue_comment>username_6: Any word on this? It'd be great if this worked out of the box as opposed to having to hack the project to include browserify/babelify.
+<issue_comment>username_7: Its June 2017. This issue is still happening. Any idea on whether it will be supported?
+<issue_comment>username_8: Can anyone post ""hacked"" solution? I lost days on this issue.
+<issue_comment>username_9: Same problem here.
+<issue_comment>username_10: You get those errors because the boilerplate doesn't support ES6 modules at the moment. If you feel like you don't really make use of the modules then you can still keep your code in separate files but you'll have to import them one by one in `gulp.babel.js` (see line 110).
+
+If your app structure is heavily based on ES6 modules and you'd like to keep using that then you'll have to use a js bundler like browserify, webpack, etc. 
+I had a little play with the boilerplate and this is the solution I came up with:
+
+`gulp.task('scripts', () =>
+    gulp.src('./src/scripts/main.js')
+    .pipe(webpack({
+      output: {
+        filename: '[name].js'
+      },
+      module: {
+        rules: [
+          {
+            test: /\.js$/,
+            exclude: /(node_modules|bower_components)/,
+            use: {
+              loader: 'babel-loader',
+              options: {
+                presets: ['env']
+              }
+            }
+          }
+        ]
+      },
+      devtool: '#inline-source-map'
+    }))
+    .pipe(gulp.dest('.tmp/scripts'))
+    .pipe($.sourcemaps.init({ loadMaps: true }))
+    .pipe($.uglify())
+    .pipe($.rename('main.min.js'))
+    // Output files
+    .pipe($.size({title: 'scripts'}))
+    .pipe($.sourcemaps.write('.'))
+    .pipe(gulp.dest('dist/scripts'))
+    .pipe(gulp.dest('.tmp/scripts'))
+);`
+
+Don't forget to:
+**install the required dependencies**
+`npm install --save-dev webpack-stream babel-loader babel-preset-env gulp-rename`
+
+**import the bundler at the top of the file between the other imports**
+`import webpack from 'webpack-stream';`
+
+Hope this helps.
+
+P.S: if the sourcemaps don't show the correct file, give the browser a refresh.
+<issue_comment>username_11: @username_10 Thank you very much, this solution saved my day. And I have spent few hours trying to figure it out by myself.  Thanks again!
+<issue_comment>username_12: @username_10 Thank you, your solution saved my day too."
+eduardoboucas/staticman,398969174,260,,"[{'action': 'opened', 'author': 'donaldboulton', 'comment_id': None, 'datetime': '2019-01-14T16:30:10Z', 'masked_author': 'username_0', 'text': 'Have not been able to get staticman to work since November 2018 nor the popcorn repo example, My site and the popcorn example says to many requests and most of the time there is an error with your submission. Move it to netlify, its free and no limits.\r\nIf its not going to work anymore then tell everyone so we do not waste our time.\r\nTried everything api v1 and api v2, it never works.', 'title': 'Staticman is dead', 'type': 'issue'}
+ {'action': 'created', 'author': 'dancwilliams', 'comment_id': 454105167.0, 'datetime': '2019-01-14 18:13:41+00:00', 'masked_author': 'username_1', 'text': '@username_0 \r\n\r\nHave you looked at #243 ?', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'VincentTam', 'comment_id': 454211099.0, 'datetime': '2019-01-15 00:03:54+00:00', 'masked_author': 'username_2', 'text': ""@username_0 I've notified you the power of Staticman v3 through [a comment](https://github.com/username_0/DWB/pull/40) on your post [*Staticman with GitLab*](https://donboulton.com/2018-02-26-post-staticman-with-gitlab)."", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'donaldboulton', 'comment_id': 455245367.0, 'datetime': '2019-01-17 16:52:01+00:00', 'masked_author': 'username_0', 'text': 'Everything in my site correct and I get this error with api v3,\r\n`{""success"":false,""rawError"":{""name"":""HttpError"",""status"":404,""headers"":{""access-control-allow-origin"":""*"",""access-control-expose-headers"":""ETag, Link, Location, Retry-After, X-GitHub-OTP, X-RateLimit-Limit, X-RateLimit-Remaining, X-RateLimit-Reset, X-OAuth-Scopes, X-Accepted-OAuth-Scopes, X-Poll-Interval, X-GitHub-Media-Type"",""connection"":""close"",""content-encoding"":""gzip"",""content-security-policy"":""default-src \'none\'"",""content-type"":""application/json; charset=utf-8"",""date"":""Thu, 17 Jan 2019 16:16:34 GMT"",""referrer-policy"":""origin-when-cross-origin, strict-origin-when-cross-origin"",""server"":""GitHub.com"",""status"":""404 Not Found"",""strict-transport-security"":""max-age=31536000; includeSubdomains; preload"",""transfer-encoding"":""chunked"",""x-content-type-options"":""nosniff"",""x-frame-options"":""deny"",""x-github-media-type"":""github.machine-man-preview; format=json"",""x-github-request-id"":""D6C2:66C1:4C3E69:B9A514:5C40AA62"",""x-xss-protection"":""1; mode=block""},""request"":{""method"":""GET"",""url"":""https://api.github.com/repos/username_0/DWB/installation"",""headers"":{""accept"":""application/vnd.github.machine-man-preview+json"",""user-agent"":""Staticman agent octokit.js/16.8.0 Node.js/11.6.0 (Linux 4.4; x64)"",""authorization"":""Bearer ngw6fo1pu3tjgnp9jnlp7vnwvfqb9yn7fIAphVZod1Pj1REdXFo_tTVGp7tD9gq5BU4G0sjvUou5zHEh9F4AybDFVwr8VR1fO-jyFINuAQ2gghCUEDF6v5e3yRl2MICAWLxrB59UEyZsmgd1AwG9q9swgAFkLSVawbE4lMY9RCzvTKI87188226VXw0s3p8h5w8D_-JnCcZWbSrbFkoFUVnyQb8YaaqnvhSCqB5PuqdS7sxA123kdZPFeojIoV6gZpN-xvCYbnnxI_L1_nwsghmaBTZyulET1E1EB3VEn5oekYTr3xjtSktrBc0ars94G2RVqkiMP--kOn1cdqlfgtex61mSCil5E1Mn6Ump7aq7W7islTBK4A""},""request"":{""timeout"":5000,""validate"":{""owner"":{""required"":true,""type"":""string""},""repo"":{""required"":true,""type"":""string""}}}},""documentation_url"":""https://developer.github.com/v3/apps/#find-repository-installation"",""_smErrorCode"":""GITHUB_READING_FILE""},""errorCode"":""GITHUB_READING_FILE""}`\r\n\r\nWhen I moved to Netlify I started having weird issues like the above, no clue whats up, My email, gpg keys, hooks and tokens are correct. Got Me???', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'VincentTam', 'comment_id': 496978210.0, 'datetime': '2019-05-29 15:08:48+00:00', 'masked_author': 'username_2', 'text': ""@username_0 Please format your raw JSON error so that it's more readable, and describe what you've done to get this error, so that we can reproduce it.\r\n\r\nIt seems that you've [forked](https://framagit.org/username_0/staticman) [my fork on Framagit](https://framagit.org/staticman-gitlab-pages/staticman), and you're running your own local `Node.js` instance. From the message `origin-when-cross-origin`, it seems to be a CORS error, which is common in modern browsers.  The proper way to locally test Staticman is to use an HTTP client like Postman.  From the `errorCode`, it seems that your API path is incorrect.  Anyways, that's just my guess."", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'donaldboulton', 'comment_id': 497004429.0, 'datetime': '2019-05-29 16:12:12+00:00', 'masked_author': 'username_0', 'text': 'Using netlify functions now issue is a mute point CLOSING', 'title': None, 'type': 'comment'}
+ {'action': 'closed', 'author': 'donaldboulton', 'comment_id': None, 'datetime': '2019-05-29 16:12:12+00:00', 'masked_author': 'username_0', 'text': '', 'title': None, 'type': 'issue'}
+ {'action': 'created', 'author': 'pacollins', 'comment_id': 504625532.0, 'datetime': '2019-06-22 04:00:36+00:00', 'masked_author': 'username_3', 'text': '@username_0 Do you have a link to your repo where you have switched to netlify functions?', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'VincentTam', 'comment_id': 507425033.0, 'datetime': '2019-07-01 21:03:27+00:00', 'masked_author': 'username_2', 'text': '@username_3 From the tone of his previous comments, it seems that your questions has to be answered by somebody else.  Perhaps you\'re referring to the repo for his web site: https://github.com/username_0/DWB/.  If you type ""netlify"" in the search box, you\'ll see an array of merged PR\'s ""automatically generated by Netlify CMS"".', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'donaldboulton', 'comment_id': 526207826.0, 'datetime': '2019-08-29 14:21:06+00:00', 'masked_author': 'username_0', 'text': ""Tested staticman again. with v3  and the install app on github, it worked great for about 10 days and like always in the past 6 yrs Staticman is Still Dead again.\r\n`\r\nAccess to XMLHttpRequest at 'https://api.staticman.net/v3/entry/github/username_0/publiuslogic/master/ratings' from origin 'https://publiuslogic.com' has been blocked by CORS policy: No 'Access-Control-Allow-Origin' header is present on the requested resource.\r\napi.staticman.net/v3/entry/github/username_0/publiuslogic/master/ratings:1 Failed to load resource: net::ERR_FAILED`\r\n\r\nIts the same on many other sites like [Gatsby Central](https://www.gatsbycentral.com/gatsby-v2-refactoring-cheat-sheet)\r\n\r\nOn Gatsby Central you get the same response error as my publiuslogic.com site on ratings, and a Heroku error on comments as:\r\n\r\nApplication error on\r\nhttps://api.staticman.net/v2/entry/GatsbyCentral/gatsbycentral.com/master/comments\r\n\r\nAn error occurred in the application and your page could not be served. If you are the application owner, check your logs for details. You can do this from the Heroku CLI with the command\r\nheroku logs --tail.\r\n\r\nWhay is this working then broken whats up."", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'VincentTam', 'comment_id': 526362319.0, 'datetime': '2019-08-29 21:08:29+00:00', 'masked_author': 'username_2', 'text': ""That's reported in #307."", 'title': None, 'type': 'comment'}]","<issue_start><issue_comment>Title: Staticman is dead
+username_0: Have not been able to get staticman to work since November 2018 nor the popcorn repo example, My site and the popcorn example says to many requests and most of the time there is an error with your submission. Move it to netlify, its free and no limits.
+If its not going to work anymore then tell everyone so we do not waste our time.
+Tried everything api v1 and api v2, it never works.
+<issue_comment>username_1: @username_0 
+
+Have you looked at #243 ?
+<issue_comment>username_2: @username_0 I've notified you the power of Staticman v3 through [a comment](https://github.com/username_0/DWB/pull/40) on your post [*Staticman with GitLab*](https://donboulton.com/2018-02-26-post-staticman-with-gitlab).
+<issue_comment>username_0: Everything in my site correct and I get this error with api v3,
+`{""success"":false,""rawError"":{""name"":""HttpError"",""status"":404,""headers"":{""access-control-allow-origin"":""*"",""access-control-expose-headers"":""ETag, Link, Location, Retry-After, X-GitHub-OTP, X-RateLimit-Limit, X-RateLimit-Remaining, X-RateLimit-Reset, X-OAuth-Scopes, X-Accepted-OAuth-Scopes, X-Poll-Interval, X-GitHub-Media-Type"",""connection"":""close"",""content-encoding"":""gzip"",""content-security-policy"":""default-src 'none'"",""content-type"":""application/json; charset=utf-8"",""date"":""Thu, 17 Jan 2019 16:16:34 GMT"",""referrer-policy"":""origin-when-cross-origin, strict-origin-when-cross-origin"",""server"":""GitHub.com"",""status"":""404 Not Found"",""strict-transport-security"":""max-age=31536000; includeSubdomains; preload"",""transfer-encoding"":""chunked"",""x-content-type-options"":""nosniff"",""x-frame-options"":""deny"",""x-github-media-type"":""github.machine-man-preview; format=json"",""x-github-request-id"":""D6C2:66C1:4C3E69:B9A514:5C40AA62"",""x-xss-protection"":""1; mode=block""},""request"":{""method"":""GET"",""url"":""https://api.github.com/repos/username_0/DWB/installation"",""headers"":{""accept"":""application/vnd.github.machine-man-preview+json"",""user-agent"":""Staticman agent octokit.js/16.8.0 Node.js/11.6.0 (Linux 4.4; x64)"",""authorization"":""Bearer eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJpYXQiOjE1NDc3NDE3OTQsImV4cCI6MTU0Nzc0MTg1NCwiaXNzIjoiMjM1MTUifQ.fIAphVZod1Pj1REdXFo_tTVGp7tD9gq5BU4G0sjvUou5zHEh9F4AybDFVwr8VR1fO-jyFINuAQ2gghCUEDF6v5e3yRl2MICAWLxrB59UEyZsmgd1AwG9q9swgAFkLSVawbE4lMY9RCzvTKI87188226VXw0s3p8h5w8D_-JnCcZWbSrbFkoFUVnyQb8YaaqnvhSCqB5PuqdS7sxA123kdZPFeojIoV6gZpN-xvCYbnnxI_L1_nwsghmaBTZyulET1E1EB3VEn5oekYTr3xjtSktrBc0ars94G2RVqkiMP--kOn1cdqlfgtex61mSCil5E1Mn6Ump7aq7W7islTBK4A""},""request"":{""timeout"":5000,""validate"":{""owner"":{""required"":true,""type"":""string""},""repo"":{""required"":true,""type"":""string""}}}},""documentation_url"":""https://developer.github.com/v3/apps/#find-repository-installation"",""_smErrorCode"":""GITHUB_READING_FILE""},""errorCode"":""GITHUB_READING_FILE""}`
+
+When I moved to Netlify I started having weird issues like the above, no clue whats up, My email, gpg keys, hooks and tokens are correct. Got Me???
+<issue_comment>username_2: @username_0 Please format your raw JSON error so that it's more readable, and describe what you've done to get this error, so that we can reproduce it.
+
+It seems that you've [forked](https://framagit.org/username_0/staticman) [my fork on Framagit](https://framagit.org/staticman-gitlab-pages/staticman), and you're running your own local `Node.js` instance. From the message `origin-when-cross-origin`, it seems to be a CORS error, which is common in modern browsers.  The proper way to locally test Staticman is to use an HTTP client like Postman.  From the `errorCode`, it seems that your API path is incorrect.  Anyways, that's just my guess.
+<issue_comment>username_0: Using netlify functions now issue is a mute point CLOSING<issue_closed>
+<issue_comment>username_3: @username_0 Do you have a link to your repo where you have switched to netlify functions?
+<issue_comment>username_2: @username_3 From the tone of his previous comments, it seems that your questions has to be answered by somebody else.  Perhaps you're referring to the repo for his web site: https://github.com/username_0/DWB/.  If you type ""netlify"" in the search box, you'll see an array of merged PR's ""automatically generated by Netlify CMS"".
+<issue_comment>username_0: Tested staticman again. with v3  and the install app on github, it worked great for about 10 days and like always in the past 6 yrs Staticman is Still Dead again.
+`
+Access to XMLHttpRequest at 'https://api.staticman.net/v3/entry/github/username_0/publiuslogic/master/ratings' from origin 'https://publiuslogic.com' has been blocked by CORS policy: No 'Access-Control-Allow-Origin' header is present on the requested resource.
+api.staticman.net/v3/entry/github/username_0/publiuslogic/master/ratings:1 Failed to load resource: net::ERR_FAILED`
+
+Its the same on many other sites like [Gatsby Central](https://www.gatsbycentral.com/gatsby-v2-refactoring-cheat-sheet)
+
+On Gatsby Central you get the same response error as my publiuslogic.com site on ratings, and a Heroku error on comments as:
+
+Application error on
+https://api.staticman.net/v2/entry/GatsbyCentral/gatsbycentral.com/master/comments
+
+An error occurred in the application and your page could not be served. If you are the application owner, check your logs for details. You can do this from the Heroku CLI with the command
+heroku logs --tail.
+
+Whay is this working then broken whats up.
+<issue_comment>username_2: That's reported in #307."

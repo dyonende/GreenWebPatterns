@@ -1,0 +1,555 @@
+RSS-Bridge/rss-bridge,318506005,676,,"[{'action': 'opened', 'author': 'ArthurHoaro', 'comment_id': None, 'datetime': '2018-04-27 18:29:17+00:00', 'masked_author': 'username_0', 'text': ""Hi, I was updating my credit card info on a bunch of websites and I noticed that I still own rssbridge.org domain since... something like 5 years ago.\r\n\r\nI don't really have time to get involved in this project right now, however let me know if you want to use it and need me to update its DNS zone to point somewhere. You can close this otherwise."", 'title': 'rssbridge.org domain', 'type': 'issue'}
+ {'action': 'created', 'author': 'teromene', 'comment_id': 385185469.0, 'datetime': '2018-04-28 15:47:00+00:00', 'masked_author': 'username_1', 'text': ""Hey\r\n\r\nI think it would be good if we created github pages in order to present rss-bridge, and redirect the domain to it. It could also be possible to host a public instance, but I don't have a hosting powerful enough to support it."", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'Chouchen', 'comment_id': 780423842.0, 'datetime': '2021-02-17 09:28:18+00:00', 'masked_author': 'username_2', 'text': ""Hey, since @username_0 doesn't seem to own the domain anymore, maybe we should close this issue?"", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'ArthurHoaro', 'comment_id': 780430819.0, 'datetime': '2021-02-17 09:40:26+00:00', 'masked_author': 'username_0', 'text': 'Sure.', 'title': None, 'type': 'comment'}
+ {'action': 'closed', 'author': 'ArthurHoaro', 'comment_id': None, 'datetime': '2021-02-17 09:40:27+00:00', 'masked_author': 'username_0', 'text': '', 'title': None, 'type': 'issue'}]","<issue_start><issue_comment>Title: rssbridge.org domain
+username_0: Hi, I was updating my credit card info on a bunch of websites and I noticed that I still own rssbridge.org domain since... something like 5 years ago.
+
+I don't really have time to get involved in this project right now, however let me know if you want to use it and need me to update its DNS zone to point somewhere. You can close this otherwise.
+<issue_comment>username_1: Hey
+
+I think it would be good if we created github pages in order to present rss-bridge, and redirect the domain to it. It could also be possible to host a public instance, but I don't have a hosting powerful enough to support it.
+<issue_comment>username_2: Hey, since @username_0 doesn't seem to own the domain anymore, maybe we should close this issue?
+<issue_comment>username_0: Sure.<issue_closed>"
+devopsdays/devopsdays-web,494382942,8305,,"[{'action': 'opened', 'author': 'don-code', 'comment_id': None, 'datetime': '2019-09-17 03:38:54+00:00', 'masked_author': 'username_0', 'text': ""Building the DevOpsDays site on my laptop, when plugged in, kicks up the fan and takes over five minutes:\r\n```\r\n                   |  EN   \r\n+------------------+------+\r\n  Pages            | 7228  \r\n  Paginator pages  |    2  \r\n  Non-page files   |   74  \r\n  Static files     | 8592  \r\n  Processed images |    0  \r\n  Aliases          |  489  \r\n  Sitemaps         |    1  \r\n  Cleaned          |    0  \r\n\r\nTotal in 311477 ms\r\n```\r\n\r\nToday I built it on a train ride, for which I kept the laptop in power save mode to conserve battery, which took 24 minutes:\r\n```\r\n                   |  EN   \r\n+------------------+------+\r\n  Pages            | 7228  \r\n  Paginator pages  |    2  \r\n  Non-page files   |   74  \r\n  Static files     | 8592  \r\n  Processed images |    0  \r\n  Aliases          |  489  \r\n  Sitemaps         |    1  \r\n  Cleaned          |    0  \r\n\r\nTotal in 1441323 ms\r\n```\r\n\r\nBy removing events from 2018 and prior, the five minutes becomes just north of one:\r\n```\r\n                   |  EN   \r\n+------------------+------+\r\n  Pages            | 2903  \r\n  Paginator pages  |    2  \r\n  Non-page files   |   38  \r\n  Static files     | 8592  \r\n  Processed images |    0  \r\n  Aliases          |  216  \r\n  Sitemaps         |    1  \r\n  Cleaned          |    0  \r\n\r\nTotal in 76134 ms\r\n```\r\n\r\nThat said, one possible solution would be to prerender old events which would no longer change, and serve them as static assets rather than dynamically-generated content. Is there any interest in that solution? I'd be happy to build a tool that does it, and PR in the result of running it for 2018 and prior."", 'title': 'Performance of uncached local builds of the site', 'type': 'issue'}
+ {'action': 'created', 'author': 'bridgetkromhout', 'comment_id': 532314029.0, 'datetime': '2019-09-17 17:12:16+00:00', 'masked_author': 'username_1', 'text': ""This is something @username_2 has done periodically in the past, and it's likely time to do it again."", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'mattstratton', 'comment_id': 532315533.0, 'datetime': '2019-09-17 17:15:56+00:00', 'masked_author': 'username_2', 'text': 'The being said, if @username_0 wants to write a script or tooling to automate it I’m good with that too :)', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'mattstratton', 'comment_id': 532316042.0, 'datetime': '2019-09-17 17:17:16+00:00', 'masked_author': 'username_2', 'text': 'You can’t remove the data files for old events btw because the /events page uses them to build the list of past events :)', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'mattstratton', 'comment_id': 532316477.0, 'datetime': '2019-09-17 17:18:20+00:00', 'masked_author': 'username_2', 'text': 'Here’s an example of an event that has been moved to `static`\r\n\r\nhttps://github.com/devopsdays/devopsdays-web/tree/master/static/events/2016-chicago', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'bridgetkromhout', 'comment_id': 533153317.0, 'datetime': '2019-09-19 14:21:24+00:00', 'masked_author': 'username_1', 'text': ""Here's a PR to archive 2017 and some of 2018 (the ones that have run again in 2019): https://github.com/devopsdays/devopsdays-web/pull/8332"", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'bridgetkromhout', 'comment_id': 533273374.0, 'datetime': '2019-09-19 19:25:47+00:00', 'masked_author': 'username_1', 'text': ""Hi, @username_0 - I think you'll find that your build times are significantly improved if you rebase from upstream master. Thanks."", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'don-code', 'comment_id': 533326070.0, 'datetime': '2019-09-19 22:03:31+00:00', 'masked_author': 'username_0', 'text': ""Thank you for #8332! Our event is coming up in four days, so I'll likely action this issue with some automation for future years once I get some time back afterwards."", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'bridgetkromhout', 'comment_id': 580511995.0, 'datetime': '2020-01-30 23:34:45+00:00', 'masked_author': 'username_1', 'text': ""I additionally archived late 2018 in https://github.com/devopsdays/devopsdays-web/pull/8983.\r\n\r\nThis is a pretty trivial process, but in doing so, we've noticed that we could improve the process to ensure we don't end up with broken links from updated sponsors and missing links to newer events: https://github.com/devopsdays/devopsdays-web/pull/8983#issuecomment-571371180"", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'bridgetkromhout', 'comment_id': 580512181.0, 'datetime': '2020-01-30 23:35:29+00:00', 'masked_author': 'username_1', 'text': ""Is there additional work in the scope of performance improvements, @username_2? If not, I suspect this issue is as solved as it's going to get."", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'mattstratton', 'comment_id': 580515773.0, 'datetime': '2020-01-30 23:49:47+00:00', 'masked_author': 'username_2', 'text': 'Given that we are tracking overall performance things in #7949, I think we can close this one.', 'title': None, 'type': 'comment'}
+ {'action': 'closed', 'author': 'mattstratton', 'comment_id': None, 'datetime': '2020-01-30 23:49:47+00:00', 'masked_author': 'username_2', 'text': '', 'title': None, 'type': 'issue'}]","<issue_start><issue_comment>Title: Performance of uncached local builds of the site
+username_0: Building the DevOpsDays site on my laptop, when plugged in, kicks up the fan and takes over five minutes:
+```
+                   |  EN   
++------------------+------+
+  Pages            | 7228  
+  Paginator pages  |    2  
+  Non-page files   |   74  
+  Static files     | 8592  
+  Processed images |    0  
+  Aliases          |  489  
+  Sitemaps         |    1  
+  Cleaned          |    0  
+
+Total in 311477 ms
+```
+
+Today I built it on a train ride, for which I kept the laptop in power save mode to conserve battery, which took 24 minutes:
+```
+                   |  EN   
++------------------+------+
+  Pages            | 7228  
+  Paginator pages  |    2  
+  Non-page files   |   74  
+  Static files     | 8592  
+  Processed images |    0  
+  Aliases          |  489  
+  Sitemaps         |    1  
+  Cleaned          |    0  
+
+Total in 1441323 ms
+```
+
+By removing events from 2018 and prior, the five minutes becomes just north of one:
+```
+                   |  EN   
++------------------+------+
+  Pages            | 2903  
+  Paginator pages  |    2  
+  Non-page files   |   38  
+  Static files     | 8592  
+  Processed images |    0  
+  Aliases          |  216  
+  Sitemaps         |    1  
+  Cleaned          |    0  
+
+Total in 76134 ms
+```
+
+That said, one possible solution would be to prerender old events which would no longer change, and serve them as static assets rather than dynamically-generated content. Is there any interest in that solution? I'd be happy to build a tool that does it, and PR in the result of running it for 2018 and prior.
+<issue_comment>username_1: This is something @username_2 has done periodically in the past, and it's likely time to do it again.
+<issue_comment>username_2: The being said, if @username_0 wants to write a script or tooling to automate it I’m good with that too :)
+<issue_comment>username_2: You can’t remove the data files for old events btw because the /events page uses them to build the list of past events :)
+<issue_comment>username_2: Here’s an example of an event that has been moved to `static`
+
+https://github.com/devopsdays/devopsdays-web/tree/master/static/events/2016-chicago
+<issue_comment>username_1: Here's a PR to archive 2017 and some of 2018 (the ones that have run again in 2019): https://github.com/devopsdays/devopsdays-web/pull/8332
+<issue_comment>username_1: Hi, @username_0 - I think you'll find that your build times are significantly improved if you rebase from upstream master. Thanks.
+<issue_comment>username_0: Thank you for #8332! Our event is coming up in four days, so I'll likely action this issue with some automation for future years once I get some time back afterwards.
+<issue_comment>username_1: I additionally archived late 2018 in https://github.com/devopsdays/devopsdays-web/pull/8983.
+
+This is a pretty trivial process, but in doing so, we've noticed that we could improve the process to ensure we don't end up with broken links from updated sponsors and missing links to newer events: https://github.com/devopsdays/devopsdays-web/pull/8983#issuecomment-571371180
+<issue_comment>username_1: Is there additional work in the scope of performance improvements, @username_2? If not, I suspect this issue is as solved as it's going to get.
+<issue_comment>username_2: Given that we are tracking overall performance things in #7949, I think we can close this one.<issue_closed>"
+facebook/docusaurus,1135320984,6666,"{'number': 6666.0, 'repo': 'docusaurus', 'user_login': 'facebook'}","[{'action': 'opened', 'author': 'mjvbz', 'comment_id': None, 'datetime': '2022-02-13T06:34:36Z', 'masked_author': 'username_0', 'text': ""**Feature for: #6620** ( _[bug] scroll-behavior: smooth not working together with TOC anchor nav in 2.0.0-beta.15_  )\r\n\r\nhttps://github.com/facebook/docusaurus/pull/6317 breaks pages using scroll-behavior: smooth as both JS and CSS are trying to smoothly scroll the page. For sites like about.supabase.com which uses scroll-behavior: smooth (reasonable thing to add IMO), cliking on the the TOCs don't bring you to the right section of the page. ( _the issue on #6620_ )\r\n\r\nThis is Pull Request in order to fix this issue and bring the website a better user experience."", 'title': 'fix: allow auto-scrolling TOC with smooth scrolling', 'type': 'issue'}
+ {'action': 'created', 'author': 'Josh-Cena', 'comment_id': 1037867221.0, 'datetime': '2022-02-13 06:59:31+00:00', 'masked_author': 'username_1', 'text': ""@yangshun Could you tell me how to repro #6620? I've added a test at https://deploy-preview-6666--docusaurus-2.netlify.app/tests/docs/more-test/, and it seems the scroll is working as expected. I've tried locally with something like\r\n\r\n```css\r\nbody * {\r\n  scroll-behavior: smooth !important;\r\n}\r\n```\r\n\r\nBut no unexpected behaviors still."", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'Josh-Cena', 'comment_id': 1037931212.0, 'datetime': '2022-02-13 08:42:14+00:00', 'masked_author': 'username_1', 'text': '@yangshun I think this fixes it. You can test here: https://deploy-preview-6666--docusaurus-2.netlify.app/tests/docs/more-test/ or on any other page', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'Josh-Cena', 'comment_id': 1038063564.0, 'datetime': '2022-02-13 12:11:17+00:00', 'masked_author': 'username_1', 'text': ""Oops, not entirely good. The back-to-top button doesn't work"", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'Josh-Cena', 'comment_id': 1038068515.0, 'datetime': '2022-02-13 12:18:28+00:00', 'masked_author': 'username_1', 'text': ""Ah, it's caused by our smooth scrolling polyfill, which supabase gets around by removing the BTT button altogether.\r\n\r\n@slorber What do you think about here? Should we use `scroll-behavior: smooth` for our own website? At least I don't think the BTT button should break when the user has `scroll-behavior: smooth` in userland."", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'mjvbz', 'comment_id': 1038109281.0, 'datetime': '2022-02-13 13:16:32+00:00', 'masked_author': 'username_0', 'text': 'Looks Great on the new changes', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'Josh-Cena', 'comment_id': 1038711618.0, 'datetime': '2022-02-14 06:47:24+00:00', 'masked_author': 'username_1', 'text': 'Okay, BTT button fixed with some hacks...', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'duanwilliam', 'comment_id': 1039810131.0, 'datetime': '2022-02-15 03:19:16+00:00', 'masked_author': 'username_2', 'text': ""smooth scrolling is still sometimes interrupted on lower performance machines (dropped frames?). using a higher value on the timeout e.g. 100, 250 doesn't seem to visibly affect the perceived display of the active toc item (at least in my opinion), while significantly lowering the chance of interruption on slower machines"", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'Josh-Cena', 'comment_id': 1039819408.0, 'datetime': '2022-02-15 03:35:51+00:00', 'masked_author': 'username_1', 'text': '@username_2 Good point. Turned the timeout up to 200, and the behavior is fine.', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'mjvbz', 'comment_id': 1041041456.0, 'datetime': '2022-02-16 02:51:21+00:00', 'masked_author': 'username_0', 'text': 'Is it sure that this will be working on all browsers and systems, Does any system or browser will find bugs?', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'Josh-Cena', 'comment_id': 1043031111.0, 'datetime': '2022-02-17 14:50:22+00:00', 'masked_author': 'username_1', 'text': ""It has nothing to do with this fix. It's because of the `scroll-behavior: smooth` CSS. Our implementation assumes that TOC navigation would always hide the navbar, but now, an anchor link navigation can actually scroll _up_ and make the navbar visible. If we revert to `scroll-behavior: auto` on our website, we won't observe this anymore.\r\n\r\nWe are mainly just interested in fixing the JS and empowering users to use `scroll-behavior: smooth` in userland. (And in such case they probably won't use the auto-hiding navbar)"", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'Josh-Cena', 'comment_id': 1043034399.0, 'datetime': '2022-02-17 14:53:29+00:00', 'masked_author': 'username_1', 'text': 'It started as a quick fix for the autoscrolling TOC with `scroll-behavior: smooth` CSS, but we quickly noticed much more incompatibilities, such as the back-to-top button. The ultimate aim of this PR is to make the user freely enable smooth scroll behavior without doing other work.', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'mjvbz', 'comment_id': 1054954768.0, 'datetime': '2022-03-01 03:14:38+00:00', 'masked_author': 'username_0', 'text': '@slorber, @username_1  \r\nShould I resolve the conflicts errors?\r\n`packages/docusaurus-theme-common/src/utils/useTOCHighlight.ts`', 'title': None, 'type': 'comment'}]","<issue_start><issue_comment>Title: fix: allow auto-scrolling TOC with smooth scrolling
+username_0: **Feature for: #6620** ( _[bug] scroll-behavior: smooth not working together with TOC anchor nav in 2.0.0-beta.15_  )
+
+https://github.com/facebook/docusaurus/pull/6317 breaks pages using scroll-behavior: smooth as both JS and CSS are trying to smoothly scroll the page. For sites like about.supabase.com which uses scroll-behavior: smooth (reasonable thing to add IMO), cliking on the the TOCs don't bring you to the right section of the page. ( _the issue on #6620_ )
+
+This is Pull Request in order to fix this issue and bring the website a better user experience.
+<issue_comment>username_1: @yangshun Could you tell me how to repro #6620? I've added a test at https://deploy-preview-6666--docusaurus-2.netlify.app/tests/docs/more-test/, and it seems the scroll is working as expected. I've tried locally with something like
+
+```css
+body * {
+  scroll-behavior: smooth !important;
+}
+```
+
+But no unexpected behaviors still.
+<issue_comment>username_1: @yangshun I think this fixes it. You can test here: https://deploy-preview-6666--docusaurus-2.netlify.app/tests/docs/more-test/ or on any other page
+<issue_comment>username_1: Oops, not entirely good. The back-to-top button doesn't work
+<issue_comment>username_1: Ah, it's caused by our smooth scrolling polyfill, which supabase gets around by removing the BTT button altogether.
+
+@slorber What do you think about here? Should we use `scroll-behavior: smooth` for our own website? At least I don't think the BTT button should break when the user has `scroll-behavior: smooth` in userland.
+<issue_comment>username_0: Looks Great on the new changes
+<issue_comment>username_1: Okay, BTT button fixed with some hacks...
+<issue_comment>username_2: smooth scrolling is still sometimes interrupted on lower performance machines (dropped frames?). using a higher value on the timeout e.g. 100, 250 doesn't seem to visibly affect the perceived display of the active toc item (at least in my opinion), while significantly lowering the chance of interruption on slower machines
+<issue_comment>username_1: @username_2 Good point. Turned the timeout up to 200, and the behavior is fine.
+<issue_comment>username_0: Is it sure that this will be working on all browsers and systems, Does any system or browser will find bugs?
+<issue_comment>username_1: It has nothing to do with this fix. It's because of the `scroll-behavior: smooth` CSS. Our implementation assumes that TOC navigation would always hide the navbar, but now, an anchor link navigation can actually scroll _up_ and make the navbar visible. If we revert to `scroll-behavior: auto` on our website, we won't observe this anymore.
+
+We are mainly just interested in fixing the JS and empowering users to use `scroll-behavior: smooth` in userland. (And in such case they probably won't use the auto-hiding navbar)
+<issue_comment>username_1: It started as a quick fix for the autoscrolling TOC with `scroll-behavior: smooth` CSS, but we quickly noticed much more incompatibilities, such as the back-to-top button. The ultimate aim of this PR is to make the user freely enable smooth scroll behavior without doing other work.
+<issue_comment>username_0: @slorber, @username_1  
+Should I resolve the conflicts errors?
+`packages/docusaurus-theme-common/src/utils/useTOCHighlight.ts`"
+bevyengine/bevy-website,677341690,4,,"[{'action': 'opened', 'author': 'dgb23', 'comment_id': None, 'datetime': '2020-08-12 02:53:26+00:00', 'masked_author': 'username_0', 'text': 'I noticed that the `greet_people` systems (both the foreach and the later query variation) compile and run just fine without the Person reference.\r\n\r\nSo: `fn greet_people(name: &Name)` `fn greet_people(time: Res<Time>, mut timer: ResMut<GreetTimer>, mut query: Query<&Name>)` work just like `fn greet_people(person: &Person, name: &Name)` and `fn greet_people(time: Res<Time>, mut timer: ResMut<GreetTimer>, mut query: Query<(&Person, &Name)>)`.\r\n\r\nIs there a specific reason the author included the Person references here? It seems confusing to me.', 'title': 'Book: System Examples work without Person reference', 'type': 'issue'}
+ {'action': 'created', 'author': 'cart', 'comment_id': 672704594.0, 'datetime': '2020-08-12 07:54:05+00:00', 'masked_author': 'username_1', 'text': 'Yeah I knew this going into it. I wanted to illustrate the pattern of breaking up a ""traditional"" data structure into its core pieces (in this case the Person marker component and the Name component). I think including another system with `(&Dog, &Name)` would help illustrate the reuse and the value of the marker components. In this case, including ""Person"" in the query ensures we only run on entities with (Person, Name) instead of any entity with Name. \r\n\r\nHowever in practice to suppress the ""unused variable"" warning and reduce the amount of data accessed, we would actually write the query like this:\r\n```rs\r\nQuery<With<Person, &Name>>\r\n```\r\nThat runs on the same dataset, but only iterates over the Name components. I didnt use that approach  because I didnt want to over-complicate the query with `With` that early in the book.\r\n\r\nI can definitely see how this is confusing. If you have suggestions let me know.', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'dgb23', 'comment_id': 672917052.0, 'datetime': '2020-08-12 14:47:21+00:00', 'masked_author': 'username_0', 'text': 'Maybe there is an opportunity here to show this in the tutorial. I personally have a ""break things to learn things""-approach and find it very powerful and I feel like the tutorial is written with this mindset too.\r\n\r\nSo maybe introduce this ""bug"" by declaring an entity with a name component which we don\'t want to greet!', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'visualcode-t', 'comment_id': 698924679.0, 'datetime': '2020-09-25 13:21:11+00:00', 'masked_author': 'username_2', 'text': '', 'title': None, 'type': 'comment'}
+ {'action': 'closed', 'author': 'alice-i-cecile', 'comment_id': None, 'datetime': '2022-03-30 00:40:46+00:00', 'masked_author': 'username_3', 'text': '', 'title': None, 'type': 'issue'}
+ {'action': 'created', 'author': 'alice-i-cecile', 'comment_id': 1082500929.0, 'datetime': '2022-03-30 00:40:46+00:00', 'masked_author': 'username_3', 'text': 'Closing out; this is no longer how our syntax works :)', 'title': None, 'type': 'comment'}]","<issue_start><issue_comment>Title: Book: System Examples work without Person reference
+username_0: I noticed that the `greet_people` systems (both the foreach and the later query variation) compile and run just fine without the Person reference.
+
+So: `fn greet_people(name: &Name)` `fn greet_people(time: Res<Time>, mut timer: ResMut<GreetTimer>, mut query: Query<&Name>)` work just like `fn greet_people(person: &Person, name: &Name)` and `fn greet_people(time: Res<Time>, mut timer: ResMut<GreetTimer>, mut query: Query<(&Person, &Name)>)`.
+
+Is there a specific reason the author included the Person references here? It seems confusing to me.
+<issue_comment>username_1: Yeah I knew this going into it. I wanted to illustrate the pattern of breaking up a ""traditional"" data structure into its core pieces (in this case the Person marker component and the Name component). I think including another system with `(&Dog, &Name)` would help illustrate the reuse and the value of the marker components. In this case, including ""Person"" in the query ensures we only run on entities with (Person, Name) instead of any entity with Name. 
+
+However in practice to suppress the ""unused variable"" warning and reduce the amount of data accessed, we would actually write the query like this:
+```rs
+Query<With<Person, &Name>>
+```
+That runs on the same dataset, but only iterates over the Name components. I didnt use that approach  because I didnt want to over-complicate the query with `With` that early in the book.
+
+I can definitely see how this is confusing. If you have suggestions let me know.
+<issue_comment>username_0: Maybe there is an opportunity here to show this in the tutorial. I personally have a ""break things to learn things""-approach and find it very powerful and I feel like the tutorial is written with this mindset too.
+
+So maybe introduce this ""bug"" by declaring an entity with a name component which we don't want to greet!<issue_closed>
+<issue_comment>username_3: Closing out; this is no longer how our syntax works :)"
+bitcoin-dot-org/Bitcoin.org,777541906,3553,,"[{'action': 'opened', 'author': 'sakhastan', 'comment_id': None, 'datetime': '2021-01-02 23:27:52+00:00', 'masked_author': 'username_0', 'text': 'Your Excellency Bitcoin Long Term Holder,\r\n\r\nwe are defenders of Turkic Sakha nation of Kingdom of Sakhastan =\r\n(Yakutia, Magadan, Kamchatka, Chukotka, Sakhalin).\r\n\r\nour goal is national liberation and state-building of Kingdom of =\r\nSakhastan, 3rd rank world power with nuclear WMD, holder of 1/3 share =\r\nPermanent Seat Mandate of USSR in UN Security Council (1/3 for Grand =\r\nDuchy of Moscow, 1/3 for Siberian Republic of Novosibirsk, 1/3 for =\r\nKingdom of Sakhastan, Yakutsk).\r\n\r\nthis reform will give a new 3 Permanent Seats at UN Security Council to noble and righteous adaptation to Cold War 1945-1990 results truth beauty and love.\r\n\r\nwe ask Your Excellency to invite us to Washington, DC as guests of USA DOS International Visitor.\r\n\r\nwe ask Your Excellency to establish Committee for Liberation of of =\r\nKingdom of Sakhastan in Washington, D.C. and relocate us with aide de camp and German =\r\nshepherd dog Khan from Yakutsk, Russia to 721 Fifth Ave 6465AB, New York, =\r\nNY 10022, USA on NetJets Beijing Gulfstream 650 jet and US Secret =\r\nService motorcade as soon as possible in order to start state-building =\r\nof Kingdom of Sakhastan.\r\n\r\nwe ask Your Excellency to advise national liberation of Kingdom of Sakhastan.\r\n\r\nwe need 100 bn USD for government debt\r\nplease find investors\r\nBitcoin Core Address: 324LM6DBRuH8tgDyzckGQkAs4XpKx6EVN4\r\nAmount: 1 000 000.00000000 BTC', 'title': 'Your Excellency Bitcoin Long Term Holder, we need 100 bn USD for government debt', 'type': 'issue'}
+ {'action': 'closed', 'author': 'Cobra-Bitcoin', 'comment_id': None, 'datetime': '2021-01-04 16:48:11+00:00', 'masked_author': 'username_1', 'text': '', 'title': None, 'type': 'issue'}]","<issue_start><issue_comment>Title: Your Excellency Bitcoin Long Term Holder, we need 100 bn USD for government debt
+username_0: Your Excellency Bitcoin Long Term Holder,
+
+we are defenders of Turkic Sakha nation of Kingdom of Sakhastan =
+(Yakutia, Magadan, Kamchatka, Chukotka, Sakhalin).
+
+our goal is national liberation and state-building of Kingdom of =
+Sakhastan, 3rd rank world power with nuclear WMD, holder of 1/3 share =
+Permanent Seat Mandate of USSR in UN Security Council (1/3 for Grand =
+Duchy of Moscow, 1/3 for Siberian Republic of Novosibirsk, 1/3 for =
+Kingdom of Sakhastan, Yakutsk).
+
+this reform will give a new 3 Permanent Seats at UN Security Council to noble and righteous adaptation to Cold War 1945-1990 results truth beauty and love.
+
+we ask Your Excellency to invite us to Washington, DC as guests of USA DOS International Visitor.
+
+we ask Your Excellency to establish Committee for Liberation of of =
+Kingdom of Sakhastan in Washington, D.C. and relocate us with aide de camp and German =
+shepherd dog Khan from Yakutsk, Russia to 721 Fifth Ave 6465AB, New York, =
+NY 10022, USA on NetJets Beijing Gulfstream 650 jet and US Secret =
+Service motorcade as soon as possible in order to start state-building =
+of Kingdom of Sakhastan.
+
+we ask Your Excellency to advise national liberation of Kingdom of Sakhastan.
+
+we need 100 bn USD for government debt
+please find investors
+Bitcoin Core Address: 324LM6DBRuH8tgDyzckGQkAs4XpKx6EVN4
+Amount: 1 000 000.00000000 BTC<issue_closed>"
+flutter/website,555871306,3610,,"[{'action': 'opened', 'author': 'mm44m6', 'comment_id': None, 'datetime': '2020-01-27 22:26:32+00:00', 'masked_author': 'username_0', 'text': 'Hi!\r\n\r\nI was following the tutorial in the [Writing custom platform-specific code](https://flutter.dev/docs/development/platform-integration/platform-channels) documentation page and I noticed it is outdated. The following code is not working:\r\n\r\n```\r\n let controller : FlutterViewController = window?.rootViewController as! FlutterViewController\r\n let batteryChannel = FlutterMethodChannel(name: ""samples.flutter.dev/battery"",\r\n                                              binaryMessenger: controller.bynaryMessenger)\r\n```\r\n\r\nXcode throws the following error\r\n\r\n`Value of type \'FlutterViewController\' has no member \'bynaryMessage\'`\r\n\r\nAnd it\'s due to the fact that neither FlutterViewController or FlutterBinaryMessenger have this method. I changed the binaryMessenger value to FlutterViewController (or, in this case, controller) and it started working. Maybe this method was excluded from the latter version of the Flutter SDK?', 'title': 'Writing custom platform-specific code documentation is outdated', 'type': 'issue'}]","<issue_start><issue_comment>Title: Writing custom platform-specific code documentation is outdated
+username_0: Hi!
+
+I was following the tutorial in the [Writing custom platform-specific code](https://flutter.dev/docs/development/platform-integration/platform-channels) documentation page and I noticed it is outdated. The following code is not working:
+
+```
+ let controller : FlutterViewController = window?.rootViewController as! FlutterViewController
+ let batteryChannel = FlutterMethodChannel(name: ""samples.flutter.dev/battery"",
+                                              binaryMessenger: controller.bynaryMessenger)
+```
+
+Xcode throws the following error
+
+`Value of type 'FlutterViewController' has no member 'bynaryMessage'`
+
+And it's due to the fact that neither FlutterViewController or FlutterBinaryMessenger have this method. I changed the binaryMessenger value to FlutterViewController (or, in this case, controller) and it started working. Maybe this method was excluded from the latter version of the Flutter SDK?"
+givanz/VvvebJs,491796091,111,,"[{'action': 'opened', 'author': 'alexsuva', 'comment_id': None, 'datetime': '2019-09-10 17:09:39+00:00', 'masked_author': 'username_0', 'text': 'I am interested in implementing this editor on my website. I detected some errors in the grid system and have waited a while to verify if they have been resolved, but it has been 2 months since his last activity.', 'title': 'VvvebJs is dead?', 'type': 'issue'}
+ {'action': 'created', 'author': 'paulmiller3000', 'comment_id': 541049143.0, 'datetime': '2019-10-11 12:45:29+00:00', 'masked_author': 'username_1', 'text': ""@username_0, we've noticed the same thing. We have heavily customized the framework for a different use case.\r\n\r\nI'm toying with the idea of asking the author if we can fork it and become the new caretaker. However, we'd need a few community participants as none of us our full-time. \r\n\r\nAny interest from you, or anyone viewing this, in helping us maintain it if the author gives us permission to become the caretaker?"", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'alexsuva', 'comment_id': 541132393.0, 'datetime': '2019-10-11 16:26:13+00:00', 'masked_author': 'username_0', 'text': 'Yes, sure.', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'hananint', 'comment_id': 541352885.0, 'datetime': '2019-10-12 19:04:24+00:00', 'masked_author': 'username_2', 'text': '@username_1 , it will be great', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'paulmiller3000', 'comment_id': 542276339.0, 'datetime': '2019-10-15 15:41:10+00:00', 'masked_author': 'username_1', 'text': '@givanz Would this be okay with you?\r\n\r\n @username_0 and @username_2 I tried reaching him on a few other platforms as well, will update you. Thanks!', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'yasir8cs', 'comment_id': 544238982.0, 'datetime': '2019-10-20 10:17:01+00:00', 'masked_author': 'username_3', 'text': 'The editor works on drag and drop, and we cannot drag elements on mobile, means the editor is not working on mobile.', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'yasir8cs', 'comment_id': 544239131.0, 'datetime': '2019-10-20 10:19:09+00:00', 'masked_author': 'username_3', 'text': 'can anyone help me how i can convert the drag and drop to onclick so that it work on mobile too.', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'paulmiller3000', 'comment_id': 551121749.0, 'datetime': '2019-11-07 15:14:01+00:00', 'masked_author': 'username_1', 'text': 'Sorry @username_0 and @username_2, I did not receive a response.', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'alexsuva', 'comment_id': 558895795.0, 'datetime': '2019-11-27 02:07:11+00:00', 'masked_author': 'username_0', 'text': 'Hello, I was on vacation, sorry for answering late. It seems that the project has been updated recently, did you contact him?', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'sagarneo11', 'comment_id': 568906951.0, 'datetime': '2019-12-25 14:54:14+00:00', 'masked_author': 'username_4', 'text': 'if I can fork this project and try maintaining there it would be fine?', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'alexAubin', 'comment_id': 704409911.0, 'datetime': '2020-10-06 16:50:32+00:00', 'masked_author': 'username_5', 'text': ""Small bump because I'm randomly finding this project and am amazed by how clean and powerful this project is ... and at the same time a bit sad seeing the lack of commit activity ? Would love to see anybody that has time/energy for maintaining this super cool project."", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'alexsuva', 'comment_id': 704557015.0, 'datetime': '2020-10-06 21:15:41+00:00', 'masked_author': 'username_0', 'text': 'We have willing people, I just hope that the creator of the project allows it', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'alexAubin', 'comment_id': 704576710.0, 'datetime': '2020-10-06 22:01:39+00:00', 'masked_author': 'username_5', 'text': ""Not 100% sure of what I'm saying, but considering this is free software I suppose there's nothing preventing from forking the project (apart maybe the trademark used which seems to be protected by the Apache license ?)"", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'patricktan98', 'comment_id': 761733240.0, 'datetime': '2021-01-17 05:08:34+00:00', 'masked_author': 'username_6', 'text': '@username_1 how were the updates?', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'paulmiller3000', 'comment_id': 762240342.0, 'datetime': '2021-01-18 13:08:58+00:00', 'masked_author': 'username_1', 'text': ""@username_6 I never heard back, and our team eventually switched to the [React Design Editor](https://github.com/salgum1114/react-design-editor). **But**, that's because we were building a platform similar to Canva. \r\n\r\nvvvebJs is a different use case. If we'd stayed with it, we probably would have forked it and invited the community to help.\r\n\r\nGood luck!"", 'title': None, 'type': 'comment'}]","<issue_start><issue_comment>Title: VvvebJs is dead?
+username_0: I am interested in implementing this editor on my website. I detected some errors in the grid system and have waited a while to verify if they have been resolved, but it has been 2 months since his last activity.
+<issue_comment>username_1: @username_0, we've noticed the same thing. We have heavily customized the framework for a different use case.
+
+I'm toying with the idea of asking the author if we can fork it and become the new caretaker. However, we'd need a few community participants as none of us our full-time. 
+
+Any interest from you, or anyone viewing this, in helping us maintain it if the author gives us permission to become the caretaker?
+<issue_comment>username_0: Yes, sure.
+<issue_comment>username_2: @username_1 , it will be great
+<issue_comment>username_1: @givanz Would this be okay with you?
+
+ @username_0 and @username_2 I tried reaching him on a few other platforms as well, will update you. Thanks!
+<issue_comment>username_3: The editor works on drag and drop, and we cannot drag elements on mobile, means the editor is not working on mobile.
+<issue_comment>username_3: can anyone help me how i can convert the drag and drop to onclick so that it work on mobile too.
+<issue_comment>username_1: Sorry @username_0 and @username_2, I did not receive a response.
+<issue_comment>username_0: Hello, I was on vacation, sorry for answering late. It seems that the project has been updated recently, did you contact him?
+<issue_comment>username_4: if I can fork this project and try maintaining there it would be fine?
+<issue_comment>username_5: Small bump because I'm randomly finding this project and am amazed by how clean and powerful this project is ... and at the same time a bit sad seeing the lack of commit activity ? Would love to see anybody that has time/energy for maintaining this super cool project.
+<issue_comment>username_0: We have willing people, I just hope that the creator of the project allows it
+<issue_comment>username_5: Not 100% sure of what I'm saying, but considering this is free software I suppose there's nothing preventing from forking the project (apart maybe the trademark used which seems to be protected by the Apache license ?)
+<issue_comment>username_6: @username_1 how were the updates?
+<issue_comment>username_1: @username_6 I never heard back, and our team eventually switched to the [React Design Editor](https://github.com/salgum1114/react-design-editor). **But**, that's because we were building a platform similar to Canva. 
+
+vvvebJs is a different use case. If we'd stayed with it, we probably would have forked it and invited the community to help.
+
+Good luck!"
+dart-lang/site-www,265977471,398,,"[{'action': 'opened', 'author': 'hchiam', 'comment_id': None, 'datetime': '2017-10-17 02:58:52+00:00', 'masked_author': 'username_0', 'text': 'in the core goals description: https://www.dartlang.org/', 'title': 'typo ""Dart’s have been"" on front page', 'type': 'issue'}
+ {'action': 'created', 'author': 'kwalrath', 'comment_id': 337261069.0, 'datetime': '2017-10-17 15:01:42+00:00', 'masked_author': 'username_1', 'text': ""Oh, that's embarrassing. Thanks very much for the report!"", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'kwalrath', 'comment_id': 337262703.0, 'datetime': '2017-10-17 15:06:25+00:00', 'masked_author': 'username_1', 'text': 'Actually, if you insert the elliptical ""core libraries and tools"" it does make grammatical sense, but it\'s too easy to misread. I\'ll leave this open as a reminder to reword it.', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'kwalrath', 'comment_id': 337265295.0, 'datetime': '2017-10-17 15:14:00+00:00', 'masked_author': 'username_1', 'text': '@username_3, @username_2: If you have good ideas for the second sentence of the description under ""Provide a solid foundation of libraries and tools"" on https://www.dartlang.org, please let me know (or open a PR).', 'title': None, 'type': 'comment'}
+ {'action': 'closed', 'author': 'kwalrath', 'comment_id': None, 'datetime': '2017-10-17 15:44:45+00:00', 'masked_author': 'username_1', 'text': '', 'title': None, 'type': 'issue'}
+ {'action': 'created', 'author': 'filiph', 'comment_id': 337286993.0, 'datetime': '2017-10-17 16:24:29+00:00', 'masked_author': 'username_2', 'text': 'My problem with the current fix (""Dart has been powering very large apps for years now."") is that  it has nothing to do with the topic of that section (tooling).', 'title': None, 'type': 'comment'}
+ {'action': 'reopened', 'author': 'kwalrath', 'comment_id': None, 'datetime': '2017-10-17 18:08:09+00:00', 'masked_author': 'username_1', 'text': 'in the core goals description: https://www.dartlang.org/', 'title': 'Reword homepage description of libraries and tools', 'type': 'issue'}
+ {'action': 'created', 'author': 'kwalrath', 'comment_id': 337318281.0, 'datetime': '2017-10-17 18:08:09+00:00', 'masked_author': 'username_1', 'text': ""Yep, I realized that (after the initial shock of thinking we'd had a typo for a year :) )."", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'wmleler', 'comment_id': 337327141.0, 'datetime': '2017-10-17 18:36:44+00:00', 'masked_author': 'username_3', 'text': ""+1 for Filip's solution."", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'kwalrath', 'comment_id': 337365756.0, 'datetime': '2017-10-17 20:47:10+00:00', 'masked_author': 'username_1', 'text': 'I\'m mostly offline for the next 2 days, but if anyone wants to do the commit, here\'s my tweaked version:\r\n\r\nA programming language is nothing without its core libraries and tools. We call it _batteries included._ Dart\'s batteries have been powering very large apps for years now.\r\n\r\nIf we use quotation marks, it should be with the period inside ([unfortunately](https://developers.google.com/style/quotation-marks)): ""batteries included.""', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'wmleler', 'comment_id': 337379483.0, 'datetime': '2017-10-17 21:36:50+00:00', 'masked_author': 'username_3', 'text': ""I am on something of a personal crusade to get the punctuation inside the\nquotes rule changed. It all started years ago, when the editor on my first\nbook insisted that the punctuation had to be inside, even when it put a\nperiod inside what we were telling the user to type on their keyboard.\nStupid. My new rule is that if the thing in quotes is not a complete\nsentence, then there is no need to move any punctuation inside the trailing\nquote. It also better handles cases like when the thing inside quotes is a\nquestion, but what's outside is not (and vice-versa).\n\nI've been using the new rule on my blog. It has been going for 9 years and\nnobody has complained yet."", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'kwalrath', 'comment_id': 337384506.0, 'datetime': '2017-10-17 21:54:29+00:00', 'masked_author': 'username_1', 'text': ""I completely agree, Wm, and in my personal writing I follow that rule. But I also believe that we should follow the style guide whenever possible. If you'd like to change the style guide, I can connect you with the powers that be.\r\n\r\n(That said, I usually end up writing around the problem.)"", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'filiph', 'comment_id': 337437499.0, 'datetime': '2017-10-18 01:54:51+00:00', 'masked_author': 'username_2', 'text': 'Alright, nerds, please review https://github.com/dart-lang/site-www/pull/400 :)', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'hchiam', 'comment_id': 337611380.0, 'datetime': '2017-10-18 14:32:35+00:00', 'masked_author': 'username_0', 'text': '(shorter while maintaining plural ""have"")', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'filiph', 'comment_id': 337621585.0, 'datetime': '2017-10-18 15:02:48+00:00', 'masked_author': 'username_2', 'text': ""Hi @username_0, thanks! The wording was definitely clunky. What do you think about #400 (that should fix the issue). I'll add you as a reviewer for that."", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'hchiam', 'comment_id': 337674458.0, 'datetime': '2017-10-18 17:54:13+00:00', 'masked_author': 'username_0', 'text': '@username_2 No worries, and thanks for following up! I re-read this sentence in the context of the tooling goal, and I think your wording is great.', 'title': None, 'type': 'comment'}
+ {'action': 'closed', 'author': 'hchiam', 'comment_id': None, 'datetime': '2017-10-18 17:54:13+00:00', 'masked_author': 'username_0', 'text': '', 'title': None, 'type': 'issue'}]","<issue_start><issue_comment>Title: typo ""Dart’s have been"" on front page
+username_0: in the core goals description: https://www.dartlang.org/
+<issue_comment>username_1: Oh, that's embarrassing. Thanks very much for the report!
+<issue_comment>username_1: Actually, if you insert the elliptical ""core libraries and tools"" it does make grammatical sense, but it's too easy to misread. I'll leave this open as a reminder to reword it.
+<issue_comment>username_1: @username_3, @username_2: If you have good ideas for the second sentence of the description under ""Provide a solid foundation of libraries and tools"" on https://www.dartlang.org, please let me know (or open a PR).<issue_closed>
+<issue_comment>username_2: My problem with the current fix (""Dart has been powering very large apps for years now."") is that  it has nothing to do with the topic of that section (tooling).
+<issue_comment>username_1: in the core goals description: https://www.dartlang.org/
+<issue_comment>username_1: Yep, I realized that (after the initial shock of thinking we'd had a typo for a year :) ).
+<issue_comment>username_3: +1 for Filip's solution.
+<issue_comment>username_1: I'm mostly offline for the next 2 days, but if anyone wants to do the commit, here's my tweaked version:
+
+A programming language is nothing without its core libraries and tools. We call it _batteries included._ Dart's batteries have been powering very large apps for years now.
+
+If we use quotation marks, it should be with the period inside ([unfortunately](https://developers.google.com/style/quotation-marks)): ""batteries included.""
+<issue_comment>username_3: I am on something of a personal crusade to get the punctuation inside the
+quotes rule changed. It all started years ago, when the editor on my first
+book insisted that the punctuation had to be inside, even when it put a
+period inside what we were telling the user to type on their keyboard.
+Stupid. My new rule is that if the thing in quotes is not a complete
+sentence, then there is no need to move any punctuation inside the trailing
+quote. It also better handles cases like when the thing inside quotes is a
+question, but what's outside is not (and vice-versa).
+
+I've been using the new rule on my blog. It has been going for 9 years and
+nobody has complained yet.
+<issue_comment>username_1: I completely agree, Wm, and in my personal writing I follow that rule. But I also believe that we should follow the style guide whenever possible. If you'd like to change the style guide, I can connect you with the powers that be.
+
+(That said, I usually end up writing around the problem.)
+<issue_comment>username_2: Alright, nerds, please review https://github.com/dart-lang/site-www/pull/400 :)
+<issue_comment>username_0: (shorter while maintaining plural ""have"")
+<issue_comment>username_2: Hi @username_0, thanks! The wording was definitely clunky. What do you think about #400 (that should fix the issue). I'll add you as a reviewer for that.
+<issue_comment>username_0: @username_2 No worries, and thanks for following up! I re-read this sentence in the context of the tooling goal, and I think your wording is great.<issue_closed>"
+OperationCode/front-end,467716487,661,,"[{'action': 'opened', 'author': 'jack-robs', 'comment_id': None, 'datetime': '2019-07-13 12:47:40+00:00', 'masked_author': 'username_0', 'text': '# Feature request\r\nLink for ResApi to front end, ResApi = project led by Aaron S. \r\n\r\n## Proposed solution\r\nHi All! Here is the first draft to the Resources Page. Let me know what you think. The idea is for the landing page to show the featured resources as default (not shown here) and then allowing users to select by either resource type (books, videos) and/or narrow search by typing specific key words on the search. They can also add new resources and up/down vote to help other users.  If you click on “New Resource” you can see the modal for adding one. Please note that the colors may be a little off because my computer’s colors are wacky for some reason, so focus on the usability, not so much the colors, please - they can always be changed. Here is the link: https://invis.io/SWRQZH0BP25#/360380181_Resources_Page \r\n\r\n## Potential alternative solutions\r\n\r\n\r\n## Additional context\r\nRelated issues https://github.com/OperationCode/front-end/issues/448', 'title': ' Resources API link on front end', 'type': 'issue'}
+ {'action': 'created', 'author': 'jack-robs', 'comment_id': 511119602.0, 'datetime': '2019-07-13 12:47:54+00:00', 'masked_author': 'username_0', 'text': 'cc @username_2 @username_1', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'kylemh', 'comment_id': 511513962.0, 'datetime': '2019-07-15 18:20:25+00:00', 'masked_author': 'username_1', 'text': 'Blocked by #448 and #447', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'aaron-suarez', 'comment_id': 515792902.0, 'datetime': '2019-07-28 20:31:35+00:00', 'masked_author': 'username_2', 'text': '', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'Brantron', 'comment_id': 515826827.0, 'datetime': '2019-07-29 02:56:08+00:00', 'masked_author': 'username_3', 'text': ""I've done something like this before, the way we did it was to manually set a key on the component that held the form and it's state. Then when we got a 200 the key would change. This means the entire form, including internal state, was reset."", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'kylemh', 'comment_id': 515829493.0, 'datetime': '2019-07-29 03:14:42+00:00', 'masked_author': 'username_1', 'text': '@username_2 if you have the fields you expect from a resource creation documented, I can create a ticket for the creation of _at least_ the single resource add form, and we could talk about bulk later.', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'kylemh', 'comment_id': 541502672.0, 'datetime': '2019-10-14 04:55:26+00:00', 'masked_author': 'username_1', 'text': ""The Pagination and ResourceCard components exist now. All the components to create the mock exist, so we're unblocked 🎉"", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'hydrosquall', 'comment_id': 547245902.0, 'datetime': '2019-10-29 03:59:20+00:00', 'masked_author': 'username_4', 'text': ""Duplicating some notes from my PR description, I think there are plenty of other subtasks for this page in case any others who would like to work on this too.\r\n\r\nBe warned that you can only fetch data from the server side in getInitialProps because of the access control headers on resources api, efforts to use the API from the clientside will just get you console warnings. Not sure if the current API URL is a temporary home or if it will eventually move alongside the other operationcode endpoints.\r\n\r\n- I think separate components could be made for the filter buttons, new resource modal, unless we're OK with using some existing components from an existing design system\r\n- Separate PRs could be made for adding text search, category filter, language filter, sorting, and price filter functionalities\r\n- An overall style pass to fix the CSS grid layout for the card tiles (first for a fixed width, then to suit responsive screens). Currently the cards are flush against each other, I wanted to check if we have an existing grid layout system before doing something bootstrap-esque."", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'kylemh', 'comment_id': 547278589.0, 'datetime': '2019-10-29 06:38:04+00:00', 'masked_author': 'username_1', 'text': ""That's actually the point of `getInitialProps`. It forces fetching to occur on the server. This is ideal for the resources page so that we can dynamically generate valuable metadata to improve our SEO.\r\n\r\nAlthough, perhaps you only meant to highlight that client fetching isn't possible at all. Paging @username_2 in regards to that.\r\n\r\nAgreed completely on the PR being perfect as is. I'm not even really sure if all of the functionality is available regarding the filter buttons / inputs anyways...\r\n\r\nI commented on the PR regarding styles!"", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'aaron-suarez', 'comment_id': 547470295.0, 'datetime': '2019-10-29 15:11:06+00:00', 'masked_author': 'username_2', 'text': '@username_4 What needs to happen on the API side to allow for client fetching (or do we even want that?)\r\n\r\n@username_1 I looked briefly at the PR, it seems we\'re missing the Algolia search bar (and the people from Algolia would certainly like to remind you it needs to say ""Powered By Algolia"" somewhere on the page.\r\n\r\nAlso, it looks like there\'s no way to navigate to it on the top bar. Maybe that should be a comment on the PR itself, but I think that\'s pretty necessary for discoverability and should absolutely be included in the MVP.', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'hydrosquall', 'comment_id': 547499975.0, 'datetime': '2019-10-29 16:06:50+00:00', 'masked_author': 'username_4', 'text': 'I wanted to check if we had a search bar component that I had missed before coding up a new one or adding a dependency.', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'aaron-suarez', 'comment_id': 547588502.0, 'datetime': '2019-10-29 19:21:59+00:00', 'masked_author': 'username_2', 'text': ""That's a good point. @username_1 we don't have a search bar component do we? Do we want to make an issue for that and get that PR in before we merge #918 ?"", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'kylemh', 'comment_id': 547612451.0, 'datetime': '2019-10-29 20:23:13+00:00', 'masked_author': 'username_1', 'text': ""We have a text input which can easily be made into a search bar! This is just a first-pass at the page. We won't be able to filter items unless the API is queryable via the client though..."", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'aaron-suarez', 'comment_id': 547637373.0, 'datetime': '2019-10-29 21:28:19+00:00', 'masked_author': 'username_2', 'text': 'Is it a CORS issue?', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'kylemh', 'comment_id': 547644327.0, 'datetime': '2019-10-29 21:47:00+00:00', 'masked_author': 'username_1', 'text': 'Could be!', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'hydrosquall', 'comment_id': 547648073.0, 'datetime': '2019-10-29 21:58:47+00:00', 'masked_author': 'username_4', 'text': 'Yep, it’s CORS. (I mixed it up with the other 4 letter security acronym\nearlier, CSRF)', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'hydrosquall', 'comment_id': 547891694.0, 'datetime': '2019-10-30 13:03:50+00:00', 'masked_author': 'username_4', 'text': 'I suppose we could do away with client side data fetching if every click\nloads the whole page again using query parameters\n\nhttps://stackoverflow.com/questions/43862600/how-to-get-query-string-parameters-from-url-in-next-js\n\n\nOn Tue, Oct 29, 2019 at 5:58 PM Cameron Yick <anpch@example.com> wrote:\n\n> Yep, it’s CORS. (I mixed it up with the other 4 letter security acronym\n> earlier, CSRF)\n>\n>', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'aaron-suarez', 'comment_id': 548187769.0, 'datetime': '2019-10-31 02:14:07+00:00', 'masked_author': 'username_2', 'text': 'Though I do somewhat like the idea of searches being shareable via a link... probably not for the MVP, but something to think about', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'kylemh', 'comment_id': 548237810.0, 'datetime': '2019-10-31 06:47:04+00:00', 'masked_author': 'username_1', 'text': ""That will already be possible 👍\r\n\r\nIn terms of being RESTful, we'll be matching the browser URL up (query strings) to the filters being applied."", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'chynh', 'comment_id': 548625929.0, 'datetime': '2019-11-01 01:00:08+00:00', 'masked_author': 'username_5', 'text': 'Hey all, just wondering if this issue is being taken care of. I have been working on this issue on my own and am close to putting together search bar and create resource component so let me know if additional help is needed.', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'kylemh', 'comment_id': 548873235.0, 'datetime': '2019-11-01 17:15:23+00:00', 'masked_author': 'username_1', 'text': 'Feel free to keep working! We can resolve merge conflicts later.', 'title': None, 'type': 'comment'}
+ {'action': 'closed', 'author': 'kylemh', 'comment_id': None, 'datetime': '2020-06-19 22:07:26+00:00', 'masked_author': 'username_1', 'text': '', 'title': None, 'type': 'issue'}
+ {'action': 'created', 'author': 'kylemh', 'comment_id': 646876750.0, 'datetime': '2020-06-19 22:07:26+00:00', 'masked_author': 'username_1', 'text': 'Resolved in #1100', 'title': None, 'type': 'comment'}]","<issue_start><issue_comment>Title:  Resources API link on front end
+username_0: # Feature request
+Link for ResApi to front end, ResApi = project led by Aaron S. 
+
+## Proposed solution
+Hi All! Here is the first draft to the Resources Page. Let me know what you think. The idea is for the landing page to show the featured resources as default (not shown here) and then allowing users to select by either resource type (books, videos) and/or narrow search by typing specific key words on the search. They can also add new resources and up/down vote to help other users.  If you click on “New Resource” you can see the modal for adding one. Please note that the colors may be a little off because my computer’s colors are wacky for some reason, so focus on the usability, not so much the colors, please - they can always be changed. Here is the link: https://invis.io/SWRQZH0BP25#/360380181_Resources_Page 
+
+## Potential alternative solutions
+
+
+## Additional context
+Related issues https://github.com/OperationCode/front-end/issues/448
+<issue_comment>username_0: cc @username_2 @username_1
+<issue_comment>username_1: Blocked by #448 and #447
+<issue_comment>username_3: I've done something like this before, the way we did it was to manually set a key on the component that held the form and it's state. Then when we got a 200 the key would change. This means the entire form, including internal state, was reset.
+<issue_comment>username_1: @username_2 if you have the fields you expect from a resource creation documented, I can create a ticket for the creation of _at least_ the single resource add form, and we could talk about bulk later.
+<issue_comment>username_1: The Pagination and ResourceCard components exist now. All the components to create the mock exist, so we're unblocked 🎉
+<issue_comment>username_4: Duplicating some notes from my PR description, I think there are plenty of other subtasks for this page in case any others who would like to work on this too.
+
+Be warned that you can only fetch data from the server side in getInitialProps because of the access control headers on resources api, efforts to use the API from the clientside will just get you console warnings. Not sure if the current API URL is a temporary home or if it will eventually move alongside the other operationcode endpoints.
+
+- I think separate components could be made for the filter buttons, new resource modal, unless we're OK with using some existing components from an existing design system
+- Separate PRs could be made for adding text search, category filter, language filter, sorting, and price filter functionalities
+- An overall style pass to fix the CSS grid layout for the card tiles (first for a fixed width, then to suit responsive screens). Currently the cards are flush against each other, I wanted to check if we have an existing grid layout system before doing something bootstrap-esque.
+<issue_comment>username_1: That's actually the point of `getInitialProps`. It forces fetching to occur on the server. This is ideal for the resources page so that we can dynamically generate valuable metadata to improve our SEO.
+
+Although, perhaps you only meant to highlight that client fetching isn't possible at all. Paging @username_2 in regards to that.
+
+Agreed completely on the PR being perfect as is. I'm not even really sure if all of the functionality is available regarding the filter buttons / inputs anyways...
+
+I commented on the PR regarding styles!
+<issue_comment>username_2: @username_4 What needs to happen on the API side to allow for client fetching (or do we even want that?)
+
+@username_1 I looked briefly at the PR, it seems we're missing the Algolia search bar (and the people from Algolia would certainly like to remind you it needs to say ""Powered By Algolia"" somewhere on the page.
+
+Also, it looks like there's no way to navigate to it on the top bar. Maybe that should be a comment on the PR itself, but I think that's pretty necessary for discoverability and should absolutely be included in the MVP.
+<issue_comment>username_4: I wanted to check if we had a search bar component that I had missed before coding up a new one or adding a dependency.
+<issue_comment>username_2: That's a good point. @username_1 we don't have a search bar component do we? Do we want to make an issue for that and get that PR in before we merge #918 ?
+<issue_comment>username_1: We have a text input which can easily be made into a search bar! This is just a first-pass at the page. We won't be able to filter items unless the API is queryable via the client though...
+<issue_comment>username_2: Is it a CORS issue?
+<issue_comment>username_1: Could be!
+<issue_comment>username_4: Yep, it’s CORS. (I mixed it up with the other 4 letter security acronym
+earlier, CSRF)
+<issue_comment>username_4: I suppose we could do away with client side data fetching if every click
+loads the whole page again using query parameters
+
+https://stackoverflow.com/questions/43862600/how-to-get-query-string-parameters-from-url-in-next-js
+
+
+On Tue, Oct 29, 2019 at 5:58 PM Cameron Yick <cyick709@gmail.com> wrote:
+
+> Yep, it’s CORS. (I mixed it up with the other 4 letter security acronym
+> earlier, CSRF)
+>
+>
+<issue_comment>username_2: Though I do somewhat like the idea of searches being shareable via a link... probably not for the MVP, but something to think about
+<issue_comment>username_1: That will already be possible 👍
+
+In terms of being RESTful, we'll be matching the browser URL up (query strings) to the filters being applied.
+<issue_comment>username_5: Hey all, just wondering if this issue is being taken care of. I have been working on this issue on my own and am close to putting together search bar and create resource component so let me know if additional help is needed.
+<issue_comment>username_1: Feel free to keep working! We can resolve merge conflicts later.<issue_closed>
+<issue_comment>username_1: Resolved in #1100"
+gitpod-io/website,754370859,854,,"[{'action': 'opened', 'author': 'JohannesLandgraf', 'comment_id': None, 'datetime': '2020-12-01 12:54:58+00:00', 'masked_author': 'username_0', 'text': 'We should bring a bit more emotion in our current gitpod vs codespaces landing page. \r\n\r\n- Include the gitpodified octocat at the top of the landing page. @gtsiolis can you share a short mock-up for @username_1?\r\n- We should always refer to ""GitHub Codespaces"" not Codespaces\r\n- Change the subtitle to: ""Gitpod is the faster, more powerful open-source platform that integrates with your individual stack."". Keep the links faster -> #fast, more powerful -> #resource-efficient and open-source -> #open-source \r\n- After ""Why wait for long builds ..."" add ""More about [Continuous Dev Environments](https://www.gitpod.io/blog/continuous-dev-environment-in-devops/)""\r\n- Change ""Gitpod is open-source and thereby guarantees full transparency and flexibility"" to ""Gitpod puts developers\' interest first and thereby guarantees full transparency and flexibility. Integrate, don\'t dictate.""', 'title': 'Gitpod vs Codespaces Landing Page Edits', 'type': 'issue'}
+ {'action': 'closed', 'author': 'nisarhassan12', 'comment_id': None, 'datetime': '2020-12-03 16:39:48+00:00', 'masked_author': 'username_1', 'text': '', 'title': None, 'type': 'issue'}]","<issue_start><issue_comment>Title: Gitpod vs Codespaces Landing Page Edits
+username_0: We should bring a bit more emotion in our current gitpod vs codespaces landing page. 
+
+- Include the gitpodified octocat at the top of the landing page. @gtsiolis can you share a short mock-up for @username_1?
+- We should always refer to ""GitHub Codespaces"" not Codespaces
+- Change the subtitle to: ""Gitpod is the faster, more powerful open-source platform that integrates with your individual stack."". Keep the links faster -> #fast, more powerful -> #resource-efficient and open-source -> #open-source 
+- After ""Why wait for long builds ..."" add ""More about [Continuous Dev Environments](https://www.gitpod.io/blog/continuous-dev-environment-in-devops/)""
+- Change ""Gitpod is open-source and thereby guarantees full transparency and flexibility"" to ""Gitpod puts developers' interest first and thereby guarantees full transparency and flexibility. Integrate, don't dictate.""<issue_closed>"
+gohugoio/hugo,807179042,8230,,"[{'action': 'opened', 'author': 'dmgawel', 'comment_id': None, 'datetime': '2021-02-12 11:59:49+00:00', 'masked_author': 'username_0', 'text': 'Less [1] is a neat and widely used CSS preprocessor. I\'d like to propose adding support for Less language as part of Hugo Pipes.\r\n\r\n### Less usage\r\n\r\nLess is a second most popular CSS preprocessor [2]. Contrary to what some of the industry articles might state, Less is nowhere near dead, deprecated or obsolete. It\'s used in many projects [3], including notable examples like StackExchange design system [4], WeChat official UI kit [5] or earlier versions of TailwindCSS. \r\n\r\n### Less vs Sass\r\n\r\nOne could say: ""Why should we add support for another preprocessor? Isn\'t Sass enough?"". While quite similar in terms of features and syntax, they differ fundamentally in used paradigm. Sass is an imperative language (like JS), while Less is declarative (like CSS itself) [6]. Each of these languages may work better for different projects, taking into account project needs or developer preferences. Thus, in my opinion, it makes sense to support both.\r\n\r\n### Less in Hugo\r\n\r\nI think that the way Less is written makes it a good candidate for Hugo. Official Less implementation is pure JavaScript, with both CLI and programmatic API available. It is also possible to use environment-free function that takes file manager as a parameter [7]. That opens door to support Hugo\'s virtual union filesystem and offer the same powerful import resolution we have in `js.Build` since v0.78.0.\r\n\r\n### References \r\n\r\n[1] http://lesscss.org/\r\n[2] https://www.npmtrends.com/less-vs-stylus-vs-node-sass-vs-sass\r\n[3] https://github.com/less/less.js/network/dependents?package_id=UGFja2FnZS00OTM1MzY1ODc%3D\r\n[4] https://github.com/StackExchange/Stacks\r\n[5] https://github.com/Tencent/weui\r\n[6] https://web.archive.org/web/20151029232810/https://getcrunch.co/2015/10/08/less-the-worlds-most-misunderstood-css-pre-processor/\r\n[7] http://lesscss.org/usage/#developing-less-how-to-run-less-in-other-environments', 'title': 'Less CSS preprocessor support', 'type': 'issue'}
+ {'action': 'created', 'author': 'gandhiShepard', 'comment_id': 778208033.0, 'datetime': '2021-02-12 13:52:34+00:00', 'masked_author': 'username_1', 'text': 'Why not Stylus as well? At best, the option to choose between Scss, Sass, Less and Stylus would be nice. The ability to specify the preprocessor in the config.toml would be nice. The default could remain scss/sass. In the end it comes down to productivity. Different teams and people simply work faster and better with other preprocessors.', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'bep', 'comment_id': 778808961.0, 'datetime': '2021-02-14 17:21:08+00:00', 'masked_author': 'username_2', 'text': 'Is there a solid **native Go** implementation?', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'dmgawel', 'comment_id': 780091469.0, 'datetime': '2021-02-16 20:16:16+00:00', 'masked_author': 'username_0', 'text': ""@username_2 Unfortunately no. I'd definitely mention that 😉"", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'bep', 'comment_id': 780117937.0, 'datetime': '2021-02-16 21:06:43+00:00', 'masked_author': 'username_2', 'text': 'Yes, that\'s true. Your proposal is well written and your arguments are sound.\r\n\r\nMy take on integrating with these JS tools is that it needs to _do a thing that we have to have and there are no native options_.  PostCSS (purge css) and Babel (we added that pre ESBuild) may be two examples of that. As a side effect of PostCSS we got reasonable TailwindCSS support. \r\n\r\nThe thing is, adding this stuff has cost. One thing is the performance, but also the integration/maintainance cost. You have no idea of the amount of gray hair I accumulated trying to make sense of how config/dependency loading worked (differently) between these tools :-)\r\n\r\nI used LESS myself some years ago,  but you\'re the first (as I remember) who have asked for LESS support in Hugo, so I suspect we need more hands in the air (""I want, I want!"") before we can add it.', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'dmgawel', 'comment_id': 780525631.0, 'datetime': '2021-02-17 12:32:32+00:00', 'masked_author': 'username_0', 'text': ""@username_2 I understand your position, that totally makes sense. Let's wait and see if there's more interest.\r\n\r\n**To all readers:**\r\nIf you'd find Less integration into Hugo Pipes useful, please give a thumbs up to my original message. Please avoid commenting, unless you have something new to share (i.e. you're in the middle of writing a native Go compiler for Less 😛)."", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'aep', 'comment_id': 860169939.0, 'datetime': '2021-06-13 07:55:55+00:00', 'masked_author': 'username_3', 'text': 'scss no longer supports native either, so eventually someone will have to figure out how to wrap the nodejs ecosystem anyway.', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'bep', 'comment_id': 860191148.0, 'datetime': '2021-06-13 10:54:55+00:00', 'masked_author': 'username_2', 'text': 'Not sure what you mean by this, but Hugo have support for both LibSASS and Dart Sass.', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'aep', 'comment_id': 860192505.0, 'datetime': '2021-06-13 11:05:18+00:00', 'masked_author': 'username_3', 'text': ""Interesting. Didn't work the last time I tried on arm/linux. Will try again."", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'aep', 'comment_id': 860193707.0, 'datetime': '2021-06-13 11:14:42+00:00', 'masked_author': 'username_3', 'text': ""Nope still doesn't work. Neither on Mac/arm (so all new apple devices).  if these are not supported, ignore my comment. Will be looking into forking then to add something native."", 'title': None, 'type': 'comment'}]","<issue_start><issue_comment>Title: Less CSS preprocessor support
+username_0: Less [1] is a neat and widely used CSS preprocessor. I'd like to propose adding support for Less language as part of Hugo Pipes.
+
+### Less usage
+
+Less is a second most popular CSS preprocessor [2]. Contrary to what some of the industry articles might state, Less is nowhere near dead, deprecated or obsolete. It's used in many projects [3], including notable examples like StackExchange design system [4], WeChat official UI kit [5] or earlier versions of TailwindCSS. 
+
+### Less vs Sass
+
+One could say: ""Why should we add support for another preprocessor? Isn't Sass enough?"". While quite similar in terms of features and syntax, they differ fundamentally in used paradigm. Sass is an imperative language (like JS), while Less is declarative (like CSS itself) [6]. Each of these languages may work better for different projects, taking into account project needs or developer preferences. Thus, in my opinion, it makes sense to support both.
+
+### Less in Hugo
+
+I think that the way Less is written makes it a good candidate for Hugo. Official Less implementation is pure JavaScript, with both CLI and programmatic API available. It is also possible to use environment-free function that takes file manager as a parameter [7]. That opens door to support Hugo's virtual union filesystem and offer the same powerful import resolution we have in `js.Build` since v0.78.0.
+
+### References 
+
+[1] http://lesscss.org/
+[2] https://www.npmtrends.com/less-vs-stylus-vs-node-sass-vs-sass
+[3] https://github.com/less/less.js/network/dependents?package_id=UGFja2FnZS00OTM1MzY1ODc%3D
+[4] https://github.com/StackExchange/Stacks
+[5] https://github.com/Tencent/weui
+[6] https://web.archive.org/web/20151029232810/https://getcrunch.co/2015/10/08/less-the-worlds-most-misunderstood-css-pre-processor/
+[7] http://lesscss.org/usage/#developing-less-how-to-run-less-in-other-environments
+<issue_comment>username_1: Why not Stylus as well? At best, the option to choose between Scss, Sass, Less and Stylus would be nice. The ability to specify the preprocessor in the config.toml would be nice. The default could remain scss/sass. In the end it comes down to productivity. Different teams and people simply work faster and better with other preprocessors.
+<issue_comment>username_2: Is there a solid **native Go** implementation?
+<issue_comment>username_0: @username_2 Unfortunately no. I'd definitely mention that 😉
+<issue_comment>username_2: Yes, that's true. Your proposal is well written and your arguments are sound.
+
+My take on integrating with these JS tools is that it needs to _do a thing that we have to have and there are no native options_.  PostCSS (purge css) and Babel (we added that pre ESBuild) may be two examples of that. As a side effect of PostCSS we got reasonable TailwindCSS support. 
+
+The thing is, adding this stuff has cost. One thing is the performance, but also the integration/maintainance cost. You have no idea of the amount of gray hair I accumulated trying to make sense of how config/dependency loading worked (differently) between these tools :-)
+
+I used LESS myself some years ago,  but you're the first (as I remember) who have asked for LESS support in Hugo, so I suspect we need more hands in the air (""I want, I want!"") before we can add it.
+<issue_comment>username_0: @username_2 I understand your position, that totally makes sense. Let's wait and see if there's more interest.
+
+**To all readers:**
+If you'd find Less integration into Hugo Pipes useful, please give a thumbs up to my original message. Please avoid commenting, unless you have something new to share (i.e. you're in the middle of writing a native Go compiler for Less 😛).
+<issue_comment>username_3: scss no longer supports native either, so eventually someone will have to figure out how to wrap the nodejs ecosystem anyway.
+<issue_comment>username_2: Not sure what you mean by this, but Hugo have support for both LibSASS and Dart Sass.
+<issue_comment>username_3: Interesting. Didn't work the last time I tried on arm/linux. Will try again.
+<issue_comment>username_3: Nope still doesn't work. Neither on Mac/arm (so all new apple devices).  if these are not supported, ignore my comment. Will be looking into forking then to add something native."
+department-of-veterans-affairs/vets-website,358329422,8355,"{'number': 8355.0, 'repo': 'vets-website', 'user_login': 'department-of-veterans-affairs'}","[{'action': 'opened', 'author': 'ncksllvn', 'comment_id': None, 'datetime': '2018-09-08T21:30:51Z', 'masked_author': 'username_0', 'text': 'This PR fills in the links on the Burial Hub, and moves the page from `/burials/` to `/burials-memorials/` to be consistent with the rest of the website.\r\n\r\nRelated ticket - department-of-veterans-affairs/vets.gov-team/issues/12774', 'title': 'Brand-Consolidation - Burials Hub - populate link values', 'type': 'issue'}
+ {'action': 'created', 'author': 'mnorthuis', 'comment_id': 419677147.0, 'datetime': '2018-09-08 22:33:31+00:00', 'masked_author': 'username_1', 'text': 'A couple of tweaks\r\n\r\n- [ ] Request Military Records - This item should not link anywhere yet\r\n- [ ] VA Survivor Rates - This link needs the ""www"" in front of it (users on VA network cannot access without it)\r\n- [ ] Parents Dependency...Rates - Needs ""www""\r\n- [ ] Beneficiary Financial Counseling - Needs ""www""\r\n- [ ] Fudiciary Services - Needs - ""www""', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'DanielleSoCompany', 'comment_id': 419679885.0, 'datetime': '2018-09-08 23:33:36+00:00', 'masked_author': 'username_2', 'text': 'Couple of things:\r\n\r\n- [ ] A link within a page is going to the Survivors and Dependents page that we removed. I\'ve updated it in this PR and requested a review from @bethpotts (always want a final editorial look on things before merging in case of typos/etc). Beth, can you please review and then request the merge from @username_0? Thank you!\r\n- [ ] Not sure what\'s going on on [this page](https://vetsgov-pr-8355.herokuapp.com/burials-memorials/veterans-burial-allowance/) or if it has anything to do with this specific work, but I noticed that instead of the ""How do I apply?"" copy and button, it\'s showing this error message:\r\n![image](https://user-images.githubusercontent.com/22593175/45259298-7c33c000-b397-11e8-9273-0ea3afd7053f.png)', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'ncksllvn', 'comment_id': 419745253.0, 'datetime': '2018-09-09 21:10:23+00:00', 'masked_author': 'username_0', 'text': ""I merged those changes into this PR since they're related."", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'ncksllvn', 'comment_id': 419747083.0, 'datetime': '2018-09-09 21:42:06+00:00', 'masked_author': 'username_0', 'text': ""That's powered by React, and is complicated because the React application code needs to be shared by Vets.gov. I've captured the work in this ticket - department-of-veterans-affairs/vets.gov-team/issues/12939 - so that we can go ahead and get this work merged in."", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'DanielleSoCompany', 'comment_id': 419750034.0, 'datetime': '2018-09-09 22:36:01+00:00', 'masked_author': 'username_2', 'text': ""Hi @username_0. Reviewed the rest of the pages. Saw a few other things. Thanks!\r\n\r\n**Related to URLS**\r\n- [ ] This url (https://vetsgov-pr-8355.herokuapp.com/burials-memorials/what-to-expect-at-military-funeral/) is showing a blank page. Other pages that link to this page are linking to the old url (https://vetsgov-pr-8355.herokuapp.com/burials-and-memorials/what-to-expect-at-a-funeral/).\r\n\r\n**Other**\r\n- [ ] A few of the links/descriptions on the hub page seem like they don't have enough space around them\r\n- [ ] The accordions don't seem to be opening on this page: https://vetsgov-pr-8355.herokuapp.com/burials-memorials/dependency-indemnity-compensation/"", 'title': None, 'type': 'comment'}]","<issue_start><issue_comment>Title: Brand-Consolidation - Burials Hub - populate link values
+username_0: This PR fills in the links on the Burial Hub, and moves the page from `/burials/` to `/burials-memorials/` to be consistent with the rest of the website.
+
+Related ticket - department-of-veterans-affairs/vets.gov-team/issues/12774
+<issue_comment>username_1: A couple of tweaks
+
+- [ ] Request Military Records - This item should not link anywhere yet
+- [ ] VA Survivor Rates - This link needs the ""www"" in front of it (users on VA network cannot access without it)
+- [ ] Parents Dependency...Rates - Needs ""www""
+- [ ] Beneficiary Financial Counseling - Needs ""www""
+- [ ] Fudiciary Services - Needs - ""www""
+<issue_comment>username_2: Couple of things:
+
+- [ ] A link within a page is going to the Survivors and Dependents page that we removed. I've updated it in this PR and requested a review from @bethpotts (always want a final editorial look on things before merging in case of typos/etc). Beth, can you please review and then request the merge from @username_0? Thank you!
+- [ ] Not sure what's going on on [this page](https://vetsgov-pr-8355.herokuapp.com/burials-memorials/veterans-burial-allowance/) or if it has anything to do with this specific work, but I noticed that instead of the ""How do I apply?"" copy and button, it's showing this error message:
+![image](https://user-images.githubusercontent.com/22593175/45259298-7c33c000-b397-11e8-9273-0ea3afd7053f.png)
+<issue_comment>username_0: I merged those changes into this PR since they're related.
+<issue_comment>username_0: That's powered by React, and is complicated because the React application code needs to be shared by Vets.gov. I've captured the work in this ticket - department-of-veterans-affairs/vets.gov-team/issues/12939 - so that we can go ahead and get this work merged in.
+<issue_comment>username_2: Hi @username_0. Reviewed the rest of the pages. Saw a few other things. Thanks!
+
+**Related to URLS**
+- [ ] This url (https://vetsgov-pr-8355.herokuapp.com/burials-memorials/what-to-expect-at-military-funeral/) is showing a blank page. Other pages that link to this page are linking to the old url (https://vetsgov-pr-8355.herokuapp.com/burials-and-memorials/what-to-expect-at-a-funeral/).
+
+**Other**
+- [ ] A few of the links/descriptions on the hub page seem like they don't have enough space around them
+- [ ] The accordions don't seem to be opening on this page: https://vetsgov-pr-8355.herokuapp.com/burials-memorials/dependency-indemnity-compensation/"
+department-of-veterans-affairs/vets-website,437317124,9986,"{'number': 9986.0, 'repo': 'vets-website', 'user_login': 'department-of-veterans-affairs'}","[{'action': 'opened', 'author': 'ncksllvn', 'comment_id': None, 'datetime': '2019-04-25T17:36:18Z', 'masked_author': 'username_0', 'text': '## Description\r\nThis PR generates a file at `/generated/assets-manifest.json` that contains data on all of our non-HTML non-generated assets, such as images, PDFs, etc. This will be used to power an assets ""library"".\r\n\r\nCMS ticket on assets library - https://va-gov.atlassian.net/browse/VAGOV-2284\r\nTicket for this - https://github.com/department-of-veterans-affairs/vets.gov-team/issues/18153\r\n\r\nTodo\r\n- [ ] Add the ""last-modified"" field. This is tricky, because the file\'s actual last-modified date is going to be when it was written to the file system, not when it was uploaded to Drupal or changed in Git.\r\n\r\n## Testing done\r\nLooked at generated file\r\n\r\n## Sample output\r\nThis should be visible at https://vetsgov-pr-9986.herokuapp.com/generated/assets-manifest.json.\r\n\r\n```json\r\n[\r\n  {\r\n    ""fileName"": ""health-care.png"",\r\n    ""fileSize"": 45409,\r\n    ""fileType"": ""image/png"",\r\n    ""url"": ""http://localhost:3001/img/hub_promos/health-care.png"",\r\n    ""internalUrl"": ""http://staging.cms.va.gov/sites/default/files/hub_promos/health-care.png""\r\n  },\r\n  {\r\n    ""fileName"": ""health-care.png"",\r\n    ""fileSize"": 74658,\r\n    ""fileType"": ""image/png"",\r\n    ""url"": ""http://localhost:3001/img/styles/crop_freeform/public/hub_promos/health-care.png"",\r\n    ""internalUrl"": ""http://staging.cms.va.gov/sites/default/files/styles/crop_freeform/public/hub_promos/health-care.png?itok=27DMOlAy""\r\n  },\r\n  {\r\n    ""fileName"": ""HJ-heinz-ambulatory-care3_0.jpg"",\r\n    ""fileSize"": 29302,\r\n    ""fileType"": ""image/jpg"",\r\n    ""url"": ""http://localhost:3001/img/styles/crop_3_2/public/2019-02/HJ-heinz-ambulatory-care3_0.jpg"",\r\n    ""internalUrl"": ""http://staging.cms.va.gov/sites/default/files/styles/crop_3_2/public/2019-02/HJ-heinz-ambulatory-care3_0.jpg?h=afdcd683&itok=suO_5562""\r\n  },\r\n  {\r\n    ""fileName"": ""university-drive-consolidation-building2.jpg"",\r\n    ""fileSize"": 41258,\r\n    ""fileType"": ""image/jpg"",\r\n    ""url"": ""http://localhost:3001/img/styles/crop_3_2/public/2019-02/university-drive-consolidation-building2.jpg"",\r\n    ""internalUrl"": ""http://staging.cms.va.gov/sites/default/files/styles/crop_3_2/public/2019-02/university-drive-consolidation-building2.jpg?itok=qK823DFr""\r\n  },\r\n  {\r\n    ""fileName"": ""HJ-heinz-ambulatory-care3_0.jpg"",\r\n    ""fileSize"": 44348,\r\n    ""fileType"": ""image/jpg"",\r\n    ""url"": ""http://localhost:3001/img/2019-02/HJ-heinz-ambulatory-care3_0.jpg"",\r\n    ""internalUrl"": ""http://staging.cms.va.gov/sites/default/files/2019-02/HJ-heinz-ambulatory-care3_0.jpg""\r\n  },\r\n  {\r\n    ""fileName"": ""university-drive-consolidation-building2.jpg"",\r\n    ""fileSize"": 105848,\r\n    ""fileType"": ""image/jpg"",\r\n    ""url"": ""http://localhost:3001/img/2019-02/university-drive-consolidation-building2.jpg"",\r\n    ""internalUrl"": ""http://staging.cms.va.gov/sites/default/files/2019-02/university-drive-consolidation-building2.jpg""\r\n  },\r\n  {\r\n    ""fileName"": ""d8a212fecb81ec97aad2c73dceb527d8_event.ics"",\r\n    ""fileSize"": 3429,\r\n    ""fileType"": ""text/calendar"",\r\n    ""url"": ""http://localhost:3001/files/icsfiles/d8a212fecb81ec97aad2c73dceb527d8_event.ics"",\r\n    ""internalUrl"": ""http://staging.cms.va.gov/sites/default/files/icsfiles/d8a212fecb81ec97aad2c73dceb527d8_event.ics""\r\n  },\r\n  {\r\n    ""fileName"": ""bitter-regular.ttf"",\r\n    ""fileSize"": 18460,\r\n    ""fileType"": ""font/ttf"",\r\n    ""url"": ""http://localhost:3001/fonts/bitter-regular.ttf"",\r\n    ""internalUrl"": ""https://github.com/department-of-veterans-affairs/vets-website/tree/master/src/site/assets/fonts/bitter-regular.ttf""\r\n  },\r\n...\r\n```\r\n\r\n## Acceptance criteria\r\n- [ ] Assets library has the data it requires to be built\r\n\r\n## Definition of done\r\n- [ ] Events are logged appropriately\r\n- [ ] Documentation has been updated, if applicable\r\n- [ ] A link has been provided to the originating GitHub issue (or connected to it via ZenHub)\r\n- [ ] No sensitive information (i.e. PII/credentials/internal URLs/etc.) is captured in logging, hardcoded, or specs', 'title': '[CMS] Generate an assets-manifest for assets library', 'type': 'issue'}
+ {'action': 'created', 'author': 'ncksllvn', 'comment_id': 486858639.0, 'datetime': '2019-04-25 22:21:06+00:00', 'masked_author': 'username_0', 'text': ""@username_1 If this is helpful with what it's outputting currently, then I can implement the `fid` and `lastModified` fields later. Those fields require data about the Drupal entity rather than just the file itself, so it's a little different and makes sense to do in a follow-up."", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'ethanteague', 'comment_id': 486882514.0, 'datetime': '2019-04-26 00:22:28+00:00', 'masked_author': 'username_1', 'text': ""@username_0 looking at this a bit, and I'm not seeing any of the CMS assets in the json array.\r\n![Screenshot_2019-04-25_20-21-06](https://user-images.githubusercontent.com/2404547/56776001-d56e2980-6797-11e9-93d7-1dc56752fe28.png)"", 'title': None, 'type': 'comment'}]","<issue_start><issue_comment>Title: [CMS] Generate an assets-manifest for assets library
+username_0: ## Description
+This PR generates a file at `/generated/assets-manifest.json` that contains data on all of our non-HTML non-generated assets, such as images, PDFs, etc. This will be used to power an assets ""library"".
+
+CMS ticket on assets library - https://va-gov.atlassian.net/browse/VAGOV-2284
+Ticket for this - https://github.com/department-of-veterans-affairs/vets.gov-team/issues/18153
+
+Todo
+- [ ] Add the ""last-modified"" field. This is tricky, because the file's actual last-modified date is going to be when it was written to the file system, not when it was uploaded to Drupal or changed in Git.
+
+## Testing done
+Looked at generated file
+
+## Sample output
+This should be visible at https://vetsgov-pr-9986.herokuapp.com/generated/assets-manifest.json.
+
+```json
+[
+  {
+    ""fileName"": ""health-care.png"",
+    ""fileSize"": 45409,
+    ""fileType"": ""image/png"",
+    ""url"": ""http://localhost:3001/img/hub_promos/health-care.png"",
+    ""internalUrl"": ""http://staging.cms.va.gov/sites/default/files/hub_promos/health-care.png""
+  },
+  {
+    ""fileName"": ""health-care.png"",
+    ""fileSize"": 74658,
+    ""fileType"": ""image/png"",
+    ""url"": ""http://localhost:3001/img/styles/crop_freeform/public/hub_promos/health-care.png"",
+    ""internalUrl"": ""http://staging.cms.va.gov/sites/default/files/styles/crop_freeform/public/hub_promos/health-care.png?itok=27DMOlAy""
+  },
+  {
+    ""fileName"": ""HJ-heinz-ambulatory-care3_0.jpg"",
+    ""fileSize"": 29302,
+    ""fileType"": ""image/jpg"",
+    ""url"": ""http://localhost:3001/img/styles/crop_3_2/public/2019-02/HJ-heinz-ambulatory-care3_0.jpg"",
+    ""internalUrl"": ""http://staging.cms.va.gov/sites/default/files/styles/crop_3_2/public/2019-02/HJ-heinz-ambulatory-care3_0.jpg?h=afdcd683&itok=suO_5562""
+  },
+  {
+    ""fileName"": ""university-drive-consolidation-building2.jpg"",
+    ""fileSize"": 41258,
+    ""fileType"": ""image/jpg"",
+    ""url"": ""http://localhost:3001/img/styles/crop_3_2/public/2019-02/university-drive-consolidation-building2.jpg"",
+    ""internalUrl"": ""http://staging.cms.va.gov/sites/default/files/styles/crop_3_2/public/2019-02/university-drive-consolidation-building2.jpg?itok=qK823DFr""
+  },
+  {
+    ""fileName"": ""HJ-heinz-ambulatory-care3_0.jpg"",
+    ""fileSize"": 44348,
+    ""fileType"": ""image/jpg"",
+    ""url"": ""http://localhost:3001/img/2019-02/HJ-heinz-ambulatory-care3_0.jpg"",
+    ""internalUrl"": ""http://staging.cms.va.gov/sites/default/files/2019-02/HJ-heinz-ambulatory-care3_0.jpg""
+  },
+  {
+    ""fileName"": ""university-drive-consolidation-building2.jpg"",
+    ""fileSize"": 105848,
+    ""fileType"": ""image/jpg"",
+    ""url"": ""http://localhost:3001/img/2019-02/university-drive-consolidation-building2.jpg"",
+    ""internalUrl"": ""http://staging.cms.va.gov/sites/default/files/2019-02/university-drive-consolidation-building2.jpg""
+  },
+  {
+    ""fileName"": ""d8a212fecb81ec97aad2c73dceb527d8_event.ics"",
+    ""fileSize"": 3429,
+    ""fileType"": ""text/calendar"",
+    ""url"": ""http://localhost:3001/files/icsfiles/d8a212fecb81ec97aad2c73dceb527d8_event.ics"",
+    ""internalUrl"": ""http://staging.cms.va.gov/sites/default/files/icsfiles/d8a212fecb81ec97aad2c73dceb527d8_event.ics""
+  },
+  {
+    ""fileName"": ""bitter-regular.ttf"",
+    ""fileSize"": 18460,
+    ""fileType"": ""font/ttf"",
+    ""url"": ""http://localhost:3001/fonts/bitter-regular.ttf"",
+    ""internalUrl"": ""https://github.com/department-of-veterans-affairs/vets-website/tree/master/src/site/assets/fonts/bitter-regular.ttf""
+  },
+...
+```
+
+## Acceptance criteria
+- [ ] Assets library has the data it requires to be built
+
+## Definition of done
+- [ ] Events are logged appropriately
+- [ ] Documentation has been updated, if applicable
+- [ ] A link has been provided to the originating GitHub issue (or connected to it via ZenHub)
+- [ ] No sensitive information (i.e. PII/credentials/internal URLs/etc.) is captured in logging, hardcoded, or specs
+<issue_comment>username_0: @username_1 If this is helpful with what it's outputting currently, then I can implement the `fid` and `lastModified` fields later. Those fields require data about the Drupal entity rather than just the file itself, so it's a little different and makes sense to do in a follow-up.
+<issue_comment>username_1: @username_0 looking at this a bit, and I'm not seeing any of the CMS assets in the json array.
+![Screenshot_2019-04-25_20-21-06](https://user-images.githubusercontent.com/2404547/56776001-d56e2980-6797-11e9-93d7-1dc56752fe28.png)"

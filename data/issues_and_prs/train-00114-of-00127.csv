@@ -1,0 +1,357 @@
+facebook/docusaurus,572389493,2339,,"[{'action': 'opened', 'author': 'LukasGentele', 'comment_id': None, 'datetime': '2020-02-27 22:04:59+00:00', 'masked_author': 'username_0', 'text': '<!--\r\n  Consider requesting the feature on https://docusaurus-2.netlify.com/feedback/ instead.\r\n  Feature requests on v1 are more likely to be missed as we\'re focusing on building v2.\r\n-->\r\n\r\n## 🚀 Feature\r\nCurrently, I can set `href` for nav and footer links in `docusaurus.config.js` for the classic-theme but they always render with `target=""_blank""`. It would be great if that could be disabled/changed, so that the link will open in the current browser tab rather than opening a new one. \r\n\r\n## Have you read the [Contributing Guidelines on issues]\r\nYes\r\n\r\n## Motivation\r\nI think it is such an essential thing that it should be part of the classic-theme. I mean I could eject the header and footer and just do it myself but that would disconnect me from the theme which seems a little overpowered for such a small change.\r\n\r\n## Pitch\r\nThere could be a config option next to `href` to control the target, e.g. `linkTarget` with a default value of `_blank` or an option `targetBlank` with default value `true`.\r\n\r\n<!--\r\n  What happens if you skip this step?\r\n\r\n  Someone will read your feature proposal and maybe will be able to help you,\r\n  but it’s unlikely that it will get much attention from the team. Eventually,\r\n  the issue will likely get closed in favor of issues that have better explanations\r\n\r\n  Thanks for helping us help you!\r\n-->', 'title': '[v2] links: nav & footer links (href) without target=""_blank""', 'type': 'issue'}
+ {'action': 'created', 'author': 'lex111', 'comment_id': 592327567.0, 'datetime': '2020-02-28 05:56:53+00:00', 'masked_author': 'username_1', 'text': ""You can add the `target` attribute, and thereby override the default value, eg:\r\n\r\n```\r\n{\r\n  href: 'https://github.com/facebook/docusaurus',\r\n  label: 'GitHub',\r\n  position: 'right',\r\n  target: '_self',\r\n},\r\n```"", 'title': None, 'type': 'comment'}
+ {'action': 'closed', 'author': 'lex111', 'comment_id': None, 'datetime': '2020-02-28 05:56:53+00:00', 'masked_author': 'username_1', 'text': '', 'title': None, 'type': 'issue'}
+ {'action': 'created', 'author': 'LukasGentele', 'comment_id': 592767563.0, 'datetime': '2020-02-28 22:58:10+00:00', 'masked_author': 'username_0', 'text': 'Thanks, @username_1. Any way this is possible for the `navbar.logo` option as well? Adding `target` does not seem to do anything for the logo option.', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'lex111', 'comment_id': 592775521.0, 'datetime': '2020-02-28 23:26:43+00:00', 'masked_author': 'username_1', 'text': 'Is it really necessary for a logo? I mean, do you really want external link to open in the current tab when you click on the logo? FYI was [recently](https://github.com/facebook/docusaurus/pull/2253) allowed to add an external link to `logo.href`, in which case it will open in a new tab (as expected).\r\nIf you mean that the internal link in the logo opens in a new tab, then this is also a rather strange behavior and is not familiar to most users.\r\nWe focus on the expected UX - this is when external links open in a new tab, and all the rest in the current one.', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'LukasGentele', 'comment_id': 592778043.0, 'datetime': '2020-02-28 23:35:08+00:00', 'masked_author': 'username_0', 'text': 'Got it but in my case it is expected actually and currently, it is very strange from a UX perspective. You can see what I mean here: https://devspace.sh/cli/docs/introduction\r\n\r\nTo explain what happens here: I have a website hosted on netlify and I only proxy the /docs/* routes to the docusaurus page => That means the / route is **not** made with docusaurus. However, using a `to` link, would load the wrong site using javascript. So, I need an `href` link but with `target=_self`.', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'lex111', 'comment_id': 592782150.0, 'datetime': '2020-02-28 23:51:29+00:00', 'masked_author': 'username_1', 'text': ""Hmm, aha, if you set `href` as '/' then this will not work, there will be a 404 error. This is actually not a common use case. But it seems to me, we can add the ability to set the `target` attribute for logo url :thinking:."", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'LukasGentele', 'comment_id': 592789937.0, 'datetime': '2020-02-29 00:25:10+00:00', 'masked_author': 'username_0', 'text': 'Yes, exactly. I got the 404 with to:/, so I switched to using href. Having logo.target would be great. Let me know if you want a PR for this.', 'title': None, 'type': 'comment'}
+ {'action': 'reopened', 'author': 'lex111', 'comment_id': None, 'datetime': '2020-02-29 10:43:11+00:00', 'masked_author': 'username_1', 'text': '<!--\r\n  Consider requesting the feature on https://docusaurus-2.netlify.com/feedback/ instead.\r\n  Feature requests on v1 are more likely to be missed as we\'re focusing on building v2.\r\n-->\r\n\r\n## 🚀 Feature\r\nCurrently, I can set `href` for nav and footer links in `docusaurus.config.js` for the classic-theme but they always render with `target=""_blank""`. It would be great if that could be disabled/changed, so that the link will open in the current browser tab rather than opening a new one. \r\n\r\n## Have you read the [Contributing Guidelines on issues]\r\nYes\r\n\r\n## Motivation\r\nI think it is such an essential thing that it should be part of the classic-theme. I mean I could eject the header and footer and just do it myself but that would disconnect me from the theme which seems a little overpowered for such a small change.\r\n\r\n## Pitch\r\nThere could be a config option next to `href` to control the target, e.g. `linkTarget` with a default value of `_blank` or an option `targetBlank` with default value `true`.\r\n\r\n<!--\r\n  What happens if you skip this step?\r\n\r\n  Someone will read your feature proposal and maybe will be able to help you,\r\n  but it’s unlikely that it will get much attention from the team. Eventually,\r\n  the issue will likely get closed in favor of issues that have better explanations\r\n\r\n  Thanks for helping us help you!\r\n-->', 'title': '[v2] links: nav & footer links (href) without target=""_blank""', 'type': 'issue'}
+ {'action': 'closed', 'author': 'yangshun', 'comment_id': None, 'datetime': '2020-02-29 11:27:58+00:00', 'masked_author': 'username_2', 'text': '', 'title': None, 'type': 'issue'}]","<issue_start><issue_comment>Title: [v2] links: nav & footer links (href) without target=""_blank""
+username_0: <!--
+  Consider requesting the feature on https://docusaurus-2.netlify.com/feedback/ instead.
+  Feature requests on v1 are more likely to be missed as we're focusing on building v2.
+-->
+
+## 🚀 Feature
+Currently, I can set `href` for nav and footer links in `docusaurus.config.js` for the classic-theme but they always render with `target=""_blank""`. It would be great if that could be disabled/changed, so that the link will open in the current browser tab rather than opening a new one. 
+
+## Have you read the [Contributing Guidelines on issues]
+Yes
+
+## Motivation
+I think it is such an essential thing that it should be part of the classic-theme. I mean I could eject the header and footer and just do it myself but that would disconnect me from the theme which seems a little overpowered for such a small change.
+
+## Pitch
+There could be a config option next to `href` to control the target, e.g. `linkTarget` with a default value of `_blank` or an option `targetBlank` with default value `true`.
+
+<!--
+  What happens if you skip this step?
+
+  Someone will read your feature proposal and maybe will be able to help you,
+  but it’s unlikely that it will get much attention from the team. Eventually,
+  the issue will likely get closed in favor of issues that have better explanations
+
+  Thanks for helping us help you!
+-->
+<issue_comment>username_1: You can add the `target` attribute, and thereby override the default value, eg:
+
+```
+{
+  href: 'https://github.com/facebook/docusaurus',
+  label: 'GitHub',
+  position: 'right',
+  target: '_self',
+},
+```<issue_closed>
+<issue_comment>username_0: Thanks, @username_1. Any way this is possible for the `navbar.logo` option as well? Adding `target` does not seem to do anything for the logo option.
+<issue_comment>username_1: Is it really necessary for a logo? I mean, do you really want external link to open in the current tab when you click on the logo? FYI was [recently](https://github.com/facebook/docusaurus/pull/2253) allowed to add an external link to `logo.href`, in which case it will open in a new tab (as expected).
+If you mean that the internal link in the logo opens in a new tab, then this is also a rather strange behavior and is not familiar to most users.
+We focus on the expected UX - this is when external links open in a new tab, and all the rest in the current one.
+<issue_comment>username_0: Got it but in my case it is expected actually and currently, it is very strange from a UX perspective. You can see what I mean here: https://devspace.sh/cli/docs/introduction
+
+To explain what happens here: I have a website hosted on netlify and I only proxy the /docs/* routes to the docusaurus page => That means the / route is **not** made with docusaurus. However, using a `to` link, would load the wrong site using javascript. So, I need an `href` link but with `target=_self`.
+<issue_comment>username_1: Hmm, aha, if you set `href` as '/' then this will not work, there will be a 404 error. This is actually not a common use case. But it seems to me, we can add the ability to set the `target` attribute for logo url :thinking:.
+<issue_comment>username_0: Yes, exactly. I got the 404 with to:/, so I switched to using href. Having logo.target would be great. Let me know if you want a PR for this.
+<issue_comment>username_1: <!--
+  Consider requesting the feature on https://docusaurus-2.netlify.com/feedback/ instead.
+  Feature requests on v1 are more likely to be missed as we're focusing on building v2.
+-->
+
+## 🚀 Feature
+Currently, I can set `href` for nav and footer links in `docusaurus.config.js` for the classic-theme but they always render with `target=""_blank""`. It would be great if that could be disabled/changed, so that the link will open in the current browser tab rather than opening a new one. 
+
+## Have you read the [Contributing Guidelines on issues]
+Yes
+
+## Motivation
+I think it is such an essential thing that it should be part of the classic-theme. I mean I could eject the header and footer and just do it myself but that would disconnect me from the theme which seems a little overpowered for such a small change.
+
+## Pitch
+There could be a config option next to `href` to control the target, e.g. `linkTarget` with a default value of `_blank` or an option `targetBlank` with default value `true`.
+
+<!--
+  What happens if you skip this step?
+
+  Someone will read your feature proposal and maybe will be able to help you,
+  but it’s unlikely that it will get much attention from the team. Eventually,
+  the issue will likely get closed in favor of issues that have better explanations
+
+  Thanks for helping us help you!
+--><issue_closed>"
+AgileVentures/WebsiteOne,205573342,1550,,"[{'action': 'opened', 'author': 'mtc2013', 'comment_id': None, 'datetime': '2017-02-06 12:45:30+00:00', 'masked_author': 'username_0', 'text': 'I already have premium mob since I have a higher tier:\r\n\r\n![bug](https://cloud.githubusercontent.com/assets/3909918/22647554/3ab0aaf0-ec40-11e6-8d0b-9013ba912e3e.JPG)', 'title': 'bug in display of upgrade', 'type': 'issue'}
+ {'action': 'created', 'author': 'tansaku', 'comment_id': 278065956.0, 'datetime': '2017-02-07 17:02:54+00:00', 'masked_author': 'username_1', 'text': 'at the moment our local system is showing your membership as Premium, even though you are on PremiumMob\r\n\r\n```\r\nirb(main):019:0> u = User.find_by slug: \'michael-c\'\r\nirb(main):024:0> u.membership_type\r\n=> ""Premium""\r\nirb(main):025:0> u.subscription\r\n=> #<Premium id: 2, type: ""Premium"", started_at: ""2016-10-25 16:46:55"", ended_at: nil, user_id: 21, plan_id: 1>\r\n```', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'tansaku', 'comment_id': 278067339.0, 'datetime': '2017-02-07 17:06:50+00:00', 'masked_author': 'username_1', 'text': ""which partly reflects our systems lack of representational power in terms of how subscriptions change, but also possibly the way in which you upgraded - taking out a new subscription for Premium Mob ... and then me manipulating it on Stripe to upgrade to Premium F2F. There is now an upgrade path (for Premium Mob at least) that should work better for this, but there's work to do to make sure accurate representations of user status are maintained.\r\n\r\nfor now I will update your plan manually and hopefully you'll see the correct banner (i.e. none in the first instance ...)"", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'tansaku', 'comment_id': 278067712.0, 'datetime': '2017-02-07 17:07:57+00:00', 'masked_author': 'username_1', 'text': '```\r\nirb(main):028:0> p = Plan.find 3\r\n=> #<Plan id: 3, name: ""Premium F2F"", free_trial_length_days: 0, third_party_identifier: ""premiumf2f"", amount: 5000, created_at: ""2017-01-18 10:58:08"", updated_at: ""2017-01-18 10:58:08"", category: nil>\r\nirb(main):029:0> u.subscription.plan = p\r\n=> #<Plan id: 3, name: ""Premium F2F"", free_trial_length_days: 0, third_party_identifier: ""premiumf2f"", amount: 5000, created_at: ""2017-01-18 10:58:08"", updated_at: ""2017-01-18 10:58:08"", category: nil>\r\nirb(main):030:0> u.subscription.save\r\n=> true\r\nirb(main):031:0> u.membership_type\r\n=> ""Premium F2F""\r\n```\r\n\r\nlet me know what you see when you next look at the site', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'tansaku', 'comment_id': 278072315.0, 'datetime': '2017-02-07 17:21:33+00:00', 'masked_author': 'username_1', 'text': ""I've also followed up and manually updated all the subscriptions and titles until I've got them matching what my records in Paypal and Stripe say - if we're lucky one day we'll be big enough to deserve an admin interface for all this :-)"", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'tansaku', 'comment_id': 278320493.0, 'datetime': '2017-02-08 12:50:01+00:00', 'masked_author': 'username_1', 'text': '@username_0 so do you see the correct landing page now?  I would have thought you would see no button now - if so, we could close this issue ...', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'tansaku', 'comment_id': 278632874.0, 'datetime': '2017-02-09 12:56:10+00:00', 'masked_author': 'username_1', 'text': 'so @username_0 still seeing the wrong thing ... hmm', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'tansaku', 'comment_id': 278633688.0, 'datetime': '2017-02-09 13:00:05+00:00', 'masked_author': 'username_1', 'text': 'so this is the logic:\r\n\r\n```erb\r\n<% if current_user %>\r\n    <% if current_user.membership_type == \'Basic\' %>\r\n        <% path = new_subscription_path %>\r\n        <% message = \'Upgrade to Premium for additional support\' %>\r\n    <% elsif current_user.membership_type == \'Premium\' %>\r\n        <% path = new_subscription_path(plan: \'premiummob\') %>\r\n        <% message = \'Upgrade to Premium Mob for group sessions with a Mentor\' %>\r\n    <% end %>\r\n<% else %>\r\n    <% path = new_user_registration_path %>\r\n    <% message = \'Sign up now to start coding!\' %>\r\n<% end %>\r\n```\r\n\r\nwhich we should remove from the view, but anyway, hmm, seems like my attempted change didn\'t go through - maybe I didn\'t save properly ... have done again and after a reload it should work for you now ...\r\n\r\n```\r\nirb(main):002:0> u.membership_type\r\n=> ""Premium F2F""\r\n```', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'tansaku', 'comment_id': 278634635.0, 'datetime': '2017-02-09 13:04:31+00:00', 'masked_author': 'username_1', 'text': 'all the others seem to be updated okay - just you not for some reason - apologies', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'tansaku', 'comment_id': 282278725.0, 'datetime': '2017-02-24 12:21:12+00:00', 'masked_author': 'username_1', 'text': 'fixed now right @username_0 ?', 'title': None, 'type': 'comment'}
+ {'action': 'closed', 'author': 'tansaku', 'comment_id': None, 'datetime': '2017-02-24 12:21:12+00:00', 'masked_author': 'username_1', 'text': '', 'title': None, 'type': 'issue'}]","<issue_start><issue_comment>Title: bug in display of upgrade
+username_0: I already have premium mob since I have a higher tier:
+
+![bug](https://cloud.githubusercontent.com/assets/3909918/22647554/3ab0aaf0-ec40-11e6-8d0b-9013ba912e3e.JPG)
+<issue_comment>username_1: at the moment our local system is showing your membership as Premium, even though you are on PremiumMob
+
+```
+irb(main):019:0> u = User.find_by slug: 'michael-c'
+irb(main):024:0> u.membership_type
+=> ""Premium""
+irb(main):025:0> u.subscription
+=> #<Premium id: 2, type: ""Premium"", started_at: ""2016-10-25 16:46:55"", ended_at: nil, user_id: 21, plan_id: 1>
+```
+<issue_comment>username_1: which partly reflects our systems lack of representational power in terms of how subscriptions change, but also possibly the way in which you upgraded - taking out a new subscription for Premium Mob ... and then me manipulating it on Stripe to upgrade to Premium F2F. There is now an upgrade path (for Premium Mob at least) that should work better for this, but there's work to do to make sure accurate representations of user status are maintained.
+
+for now I will update your plan manually and hopefully you'll see the correct banner (i.e. none in the first instance ...)
+<issue_comment>username_1: ```
+irb(main):028:0> p = Plan.find 3
+=> #<Plan id: 3, name: ""Premium F2F"", free_trial_length_days: 0, third_party_identifier: ""premiumf2f"", amount: 5000, created_at: ""2017-01-18 10:58:08"", updated_at: ""2017-01-18 10:58:08"", category: nil>
+irb(main):029:0> u.subscription.plan = p
+=> #<Plan id: 3, name: ""Premium F2F"", free_trial_length_days: 0, third_party_identifier: ""premiumf2f"", amount: 5000, created_at: ""2017-01-18 10:58:08"", updated_at: ""2017-01-18 10:58:08"", category: nil>
+irb(main):030:0> u.subscription.save
+=> true
+irb(main):031:0> u.membership_type
+=> ""Premium F2F""
+```
+
+let me know what you see when you next look at the site
+<issue_comment>username_1: I've also followed up and manually updated all the subscriptions and titles until I've got them matching what my records in Paypal and Stripe say - if we're lucky one day we'll be big enough to deserve an admin interface for all this :-)
+<issue_comment>username_1: @username_0 so do you see the correct landing page now?  I would have thought you would see no button now - if so, we could close this issue ...
+<issue_comment>username_1: so @username_0 still seeing the wrong thing ... hmm
+<issue_comment>username_1: so this is the logic:
+
+```erb
+<% if current_user %>
+    <% if current_user.membership_type == 'Basic' %>
+        <% path = new_subscription_path %>
+        <% message = 'Upgrade to Premium for additional support' %>
+    <% elsif current_user.membership_type == 'Premium' %>
+        <% path = new_subscription_path(plan: 'premiummob') %>
+        <% message = 'Upgrade to Premium Mob for group sessions with a Mentor' %>
+    <% end %>
+<% else %>
+    <% path = new_user_registration_path %>
+    <% message = 'Sign up now to start coding!' %>
+<% end %>
+```
+
+which we should remove from the view, but anyway, hmm, seems like my attempted change didn't go through - maybe I didn't save properly ... have done again and after a reload it should work for you now ...
+
+```
+irb(main):002:0> u.membership_type
+=> ""Premium F2F""
+```
+<issue_comment>username_1: all the others seem to be updated okay - just you not for some reason - apologies
+<issue_comment>username_1: fixed now right @username_0 ?<issue_closed>"
+corona-warn-app/cwa-website,755250914,636,,"[{'action': 'opened', 'author': 'loki-cui', 'comment_id': None, 'datetime': '2020-12-02 12:56:40+00:00', 'masked_author': 'username_0', 'text': '## Where to find the issue\r\nno details yet\r\n\r\n## Describe the issue\r\nThere are a lot of question on how the acquisition of the bluetooth signal exactly works and there is no FAQ entry to answer such questions.\r\n\r\n## Suggested change\r\nPls. find below some first proposals that could be added in the section ""Application"" / ""Anwendung"" \r\n\r\n**DE**\r\n\r\n### Wie funktioniert die Erfassung via Bluthooth-Signal und welche Logik steckt dahinter?\r\n\r\n**Wie lang muss die Begegnung sein, damit sie gezählt wird?** \r\nDie durch die Corona-Warn-App genutzte Schnittstelle der jeweiligen Geräte führt alle 3 bis 5 Minuten einen 4-sekündigen Scan durch. Damit eine Begegnung sicher erfasst wird, muss sie mindestens 5 Minuten andauern. Das bedeutet aber auch, dass eine sehr kurze Begegnung erfasst werden kann, sofern sie in den 4-sekündigen Scanvorgang fällt. Zum Beispiel kann eine 4-sekündige Begegnung an der Ampel zur Anzeige einer Begegnung mit einem niedrigen Risiko führen.\r\n\r\n**Werden Begegnungen, die nicht in diesen Scan-Vorgang fallen, dann nicht gezählt?**\r\nDas ist richtig. Allerdings werden Begegnungen gemäß der Vorgaben des Robert-Koch-Instituts erst gezählt, wenn sie über mehrere Minuten angedauert haben, d.h. implizit eh innerhalb mehrere Scanvorgänge erfasst wurden.\r\n\r\n**Was ist der maximale Abstand, damit eine Begegnung erfasst wird?**\r\nEs werden alle Begegnungen so lange gezählt, wie das Bluetooth-Signal reicht. Auf freier Sicht der Handys kann die Sichtweise durchaus 15m oder mehr betragen. \r\n\r\n**Wie ist die Reichweite des Bluetooth-Signals und wie verändert es sich bei Dämpfung (Handy in der Tasche, etc.)?**\r\nEine Anzeige von Risikobegegnungen wird in der Regel nicht beeinträchtigt und eventuelle Umgebungseinflüsse sind in unserem Berechnungsalgorithmen berücksichtigt. Mit Bluetooth LE haben wir aber auch eine Technik im Einsatz, die durch Umgebungsfaktoren beeinflussbar ist.\r\n\r\n\r\n**EN**\r\n\r\n### How does the acquisition via Bluthooth signal actually work and what is the logic behind it?\r\n\r\n**How long must the encounter be for it to be counted? \r\nThe interface of the respective devices used by the Corona-Warn-App carries out a 4-second scan every 3 to 5 minutes. For an encounter to be reliably detected, it must last at least 5 minutes. However, this also means that a very short encounter can be detected, provided it falls within the 4-second scan. For example, a 4-second encounter at a traffic light can result in a low-risk encounter being displayed.\r\n\r\n**Are encounters that do not fall within this scan not counted?\r\nThis is correct. However, according to the specifications of the Robert Koch Institute, encounters are only counted if they have lasted for several minutes, i.e. if they have been implicitly recorded within several scanning processes anyway.\r\n\r\n**What is the maximum distance for an encounter to be recorded?\r\nAll encounters are counted as long as the Bluetooth signal lasts. On free view of the cell phones the visibility can be 15m or more. \r\n\r\n**What is the range of the Bluetooth signal and how does it change with attenuation (cell phone in the pocket, etc.)?**\r\nA display of risk encounters is usually not affected and possible environmental influences are taken into account in our calculation algorithm. With Bluetooth LE, however, we also have a technology in use that can be influenced by environmental factors.', 'title': 'New FAQ entry reg. blutooth measurments', 'type': 'issue'}
+ {'action': 'created', 'author': 'loki-cui', 'comment_id': 737213935.0, 'datetime': '2020-12-02 12:57:16+00:00', 'masked_author': 'username_0', 'text': '@username_2 : Would you mind reading the English version? ;)', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'Ein-Tim', 'comment_id': 737258259.0, 'datetime': '2020-12-02 14:19:05+00:00', 'masked_author': 'username_1', 'text': '@username_0 \nI think it would be good to not use ""Bluetooth LE"" but rather the full term: ""Bluetooth Low Energy"". \nThis will help non-technical users to understand it better, I think 👍', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'MikeMcC399', 'comment_id': 737259592.0, 'datetime': '2020-12-02 14:21:21+00:00', 'masked_author': 'username_2', 'text': 'I\'m happy to do that!\r\n\r\nIn both languages Bluetooth is spelled incorrectly in the title as ""Bluthooth"".\r\nAlso in the title of this issue ""New FAQ entry reg. blutooth measurments"" bluetooth and measurements are spelled incorrectly.\r\n\r\nI have some problems with the German text though, before I get to the English translation! Maybe you could get it put into a PR so it can be commented on line by line?', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'dsarkar', 'comment_id': 737798228.0, 'datetime': '2020-12-03 09:47:45+00:00', 'masked_author': 'username_3', 'text': '- Corrected Bluetooth in the text\r\n- Low Energy added', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'MikeMcC399', 'comment_id': 737812313.0, 'datetime': '2020-12-03 09:58:37+00:00', 'masked_author': 'username_2', 'text': '@username_3 \r\nIt\'s a minor point, but ""measurments"" in the title of the issue is still spelled incorrectly.\r\nI\'m just working on some detailed comments on the English text and I will post them later today.', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'loki-cui', 'comment_id': 737833825.0, 'datetime': '2020-12-03 10:16:55+00:00', 'masked_author': 'username_0', 'text': ""Okay, changing LE to Low Energy and correct the obvious misspelling in 'Bluethooth' is done ;)\r\n\r\nWhat do you think about a content change in such a direction? (I'll start with DE only and will only do a translation if we agree on the content)\r\n\r\n### Wie funktioniert die Erfassung von Begegnungen via Bluethooth-Signal und wie wird mein Infektionsrisiko berechnet?\r\n\r\nDas Infektionsrisiko wird aus folgenden Faktoren berechnet:\r\n\r\n(1)\tDauer der Begegnung\r\n(2)\tAbstand bei der Begegnung \r\n(3)\tZeit, die seit der Begegnung vergangen ist\r\n(4)\tInfektiosität (abgeleitet aus der Information, wann und ob die Symptome eingesetzt haben)\r\n\r\nÜberschreitet der daraus ermittelte Risikowert eine [Schwelle](https://github.com/corona-warn-app/cwa-documentation/blob/master/solution_architecture.md#risk-score-calculation), die das Robert Koch-Institut vorgibt, erhalten die Benutzer*innen eine Benachrichtigung über ein erhöhtes Infektionsrisiko. Sollten die genannten Schwellenwerte unterschritten worden sein, sind zwar die Bedingungen für eine Begegnung mit erhöhtem Risiko nicht erfüllt, die Anzahl an Begegnungen würde sich aber trotzdem erhöhen. \r\n\r\n**Wie lang muss die Begegnung sein, damit sie gezählt wird?**\r\nDie durch die Corona-Warn-App genutzte Schnittstelle der jeweiligen Geräte führt alle 3 bis 5 Minuten einen 4-sekündigen Scan nach anderen Geräten durch. Sehr kurze Begegnungen - bspw. eine Begegnung an einer Ampel oder auf einem Parkplatz - können daher zwar in den Scan-Vorgang fallen, werden jedoch nur als Begegnung mit niedrigem Risiko aufgeführt. Abhängig von der Dauer, Abstand, Zeit und Infektiosität dieser Begegnung, erhalten die Nutzer*innen eine Meldung mit entsprechend niedrigem Risiko (grün) oder hohem Risiko (rot). \r\n\r\n**Wie ist die Reichweite des Bluetooth-Signals?**\r\nEs werden alle Begegnungen so lange gezählt, wie das Bluetooth-Signal reicht. Auf freier Sicht der Handys kann die Sichtweise durchaus 15m oder mehr betragen.\r\n\r\n**Wie verändert sich die Reichweite bei Dämpfung (Handy in der Tasche, etc.)?**\r\nDie Anzeige von Risikobegegnungen wird in der Regel nicht beeinträchtigt und eventuelle Umgebungseinflüsse wurden in den Berechnungsalgorithmen berücksichtigt. Mit Bluetooth Low Energy haben wir aber jedoch eine Technik im Einsatz, die durch Umgebungsfaktoren beeinflussbar ist.\r\n\r\n**Wie verhält sich die Corona-Warn-App, wenn eine infizierte Person in einem Abstand von 5 bis 10 Metern am Haus vorbeiläuft? Wird diese „Begegnung“ erfasst?**\r\nSelbst wenn es in dieser Situation nicht zu einer Begegnung mit einem erhöhten Risiko kommt, ist es technisch durchaus möglich, dass die Kennung anderer Nutzer*innen empfangen wurde, beispielsweise, wenn das eigene Telefon auf der Fensterbank lag. Durch diese „Begegnung“ würde sich zwar keine Begegnung mit erhöhtem Risiko ergeben, durchaus aber die Anzahl der Begegnungen verändern."", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'MikeMcC399', 'comment_id': 737861289.0, 'datetime': '2020-12-03 10:45:25+00:00', 'masked_author': 'username_2', 'text': '@username_0 \r\nSince you asked me to comment on the original English version, that is what I did. I will still let you have these comments, even though you have now re-written the German text. You might see what I was having difficulty with in the first version. I will look at your new German version.\r\n\r\nI think anything you write should be based on explaining, extending or translating what is already in the app documentation on https://github.com/corona-warn-app/cwa-documentation/blob/master/cwa-risk-assessment.md', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'MikeMcC399', 'comment_id': 737862224.0, 'datetime': '2020-12-03 10:47:26+00:00', 'masked_author': 'username_2', 'text': '@username_0 \r\nThe comments are now obsolete, but I am posting them anyway.\r\n\r\nOriginal text | Comments\r\n-- | --\r\nHow does   the acquisition via Bluetooth signal actually work and what is the logic   behind it? | \xa0\r\n**How   long must the encounter be for it to be counted? | Suggest: ""How long must the   encounter last for it to be counted?""\r\nThe   interface of the respective devices used by the Corona-Warn-App carries out a   4-second scan every 3 to 5 minutes. | Suggest: ""Each mobile   device used by the Corona-Warn-App carries out a 4-second scan every 3 to 5   minutes.""\r\nFor an   encounter to be reliably detected, it must last at least 5 minutes. | This isn\'t about reliably   detecting. It is about registering the encounter as a candidate for increased   risk, if in addition the encounter was also measured as close enough.   Suggest: ""For an encounter to be used in the evaluation for increased   risk, it must last at least 5 minutes, which means that it must have been   detected at least in two consecutive scans."" This however contradicts   what it said in   https://github.com/corona-warn-app/cwa-documentation/blob/master/cwa-risk-assessment.md   ""All encounters for a diagnosis key that lasted less than 10 minutes in   total (regardless of how close the smartphones came during that time) or   during which the smartphones were more than 8 meters (>73 dB attenuation)   apart on average (regardless of how long the encounter lasted) are discarded   as negligible risk.""\r\nHowever,   this also means that a very short encounter can be detected, provided it   falls within the 4-second scan. | ""this"" in this   sentence refers to the first sentence of the paragraph, so it is difficult to   understand.\r\nFor   example, a 4-second encounter at a traffic light can result in a low-risk   encounter being displayed. | You could combine the two   sentences and say: ""A short single encounter during the 4-second scan,   such as at a traffic light, can be later used in the evaluation for low   risk.""\r\n**Are   encounters that do not fall within this scan not counted? | This is a double negative.   Suggest ""What happens to encounters outside the 4-second scan?""\r\nThis is   correct. | This sentence answers the   question in the sub-title. If the title is changed then the answer would need   to be changed to ""Encounters outside the 4-second scan are not   registered.""\r\nHowever,   according to the specifications of the Robert Koch Institute, encounters are   only counted if they have lasted for several minutes, i.e. if they have been   implicitly recorded within several scanning processes anyway. | This sentence answers another   question, but this question was already answered in the previous sub-title.   Also it introduces the Robert Koch Institute in the middle of the   explanation, which is confusing, as though this is the only place where RKI   has something to say. Suggest removing this sentence and adding an   explanation into the sentence about 5 minutes as already written above.\r\n**What   is the maximum distance for an encounter to be recorded? | \xa0\r\nAll   encounters are counted as long as the Bluetooth signal lasts. | This sentence sounds like it is   describing time not distance. Suggest: ""All encounters are recorded   independently of the distance.""\r\nOn free   view of the cell phones the visibility can be 15m or more. | Signals from the Bluetooth Low   Energy technology used by the Corona-Warn-App can reach other mobile devices   which are 15 meters distant or even further away outdoors. Any encounters   which were more than 8 meters away are however discarded in the risk assessment.\r\n**What   is the range of the Bluetooth signal and how does it change with attenuation   (cell phone in the pocket, etc.)? | This question is mixed up with   the previous one. I suggest removing this question and combining with the   previous one.\r\nA   display of risk encounters is usually not affected and possible environmental   influences are taken into account in our calculation algorithm. With   Bluetooth LE, however, we also have a technology in use that can be   influenced by environmental factors. | This contradicts what it said in   https://github.com/corona-warn-app/cwa-documentation/blob/master/cwa-risk-assessment.md.   Environment does affect the signal and cannot be taken into account. The   mobile device can\'t detect for instance if there is a physical separation   between another device, such as in an apartment block with a wooden floor /   ceiling between flats on adjacent floors.', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'loki-cui', 'comment_id': 737868979.0, 'datetime': '2020-12-03 11:01:02+00:00', 'masked_author': 'username_0', 'text': 'Sorry that our work has overlapped ;) Hope the new proposal fits better. \r\n\r\nWe\'d like to enhance the FAQ section by less technical information in order to also provide some basic information for ""normal users"" that just want to understand the app better. So please consider this in your review :)', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'MikeMcC399', 'comment_id': 737905010.0, 'datetime': '2020-12-03 12:15:07+00:00', 'masked_author': 'username_2', 'text': '@username_0 \r\nAt first glance, your new proposal is much more readable. I will take a detailed look at it soon.\r\n\r\nIn the heading:\r\n""Wie funktioniert die Erfassung von Begegnungen via **Bluethooth**-Signal und wie wird mein Infektionsrisiko berechnet?""\r\nBluetooth is still spelled incorrectly though.', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'heinezen', 'comment_id': 738075279.0, 'datetime': '2020-12-03 15:22:37+00:00', 'masked_author': 'username_4', 'text': '* I don\'t think ""Sichtweise"" and ""freie Sicht"" are applicable here\r\n* Imo this sentence should come first as it contains the most relevant info\r\n\r\nWenn sich zwischen den Geräten keine Hindernisse befinden, kann die Reichweite durchaus 15m oder mehr betragen.', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'daimpi', 'comment_id': 738086735.0, 'datetime': '2020-12-03 15:40:41+00:00', 'masked_author': 'username_5', 'text': 'This is a very important point: in the best case (calibrated) BLE attenuation works as a noisy proxy for distance, but in non-optimal conditions this becomes very unreliable to put it mildly (cf. e.g. [here](https://github.com/corona-warn-app/cwa-documentation/issues/394#issuecomment-691083023) and [here](https://github.com/corona-warn-app/cwa-documentation/issues/321)). And contrary to the original text there is actually **no** mechanism within CWA or ENF which would mitigate this at least not to my knowledge.', 'title': None, 'type': 'comment'}
+ {'action': 'closed', 'author': 'loki-cui', 'comment_id': None, 'datetime': '2020-12-07 09:38:26+00:00', 'masked_author': 'username_0', 'text': '', 'title': None, 'type': 'issue'}
+ {'action': 'reopened', 'author': 'loki-cui', 'comment_id': None, 'datetime': '2020-12-07 09:38:51+00:00', 'masked_author': 'username_0', 'text': '## Where to find the issue\r\nno details yet\r\n\r\n## Describe the issue\r\nThere are a lot of questions on how the acquisition of the Bluetooth signal exactly works and there is no FAQ entry to answer such questions.\r\n\r\n## Suggested change\r\nPls. find below some first proposals that could be added in the section ""Application"" / ""Anwendung"" \r\n\r\n**DE**\r\n\r\n### Wie funktioniert die Erfassung via Bluethooth-Signal und welche Logik steckt dahinter?\r\n\r\n**Wie lang muss die Begegnung sein, damit sie gezählt wird?** \r\nDie durch die Corona-Warn-App genutzte Schnittstelle der jeweiligen Geräte führt alle 3 bis 5 Minuten einen 4-sekündigen Scan durch. Damit eine Begegnung sicher erfasst wird, muss sie mindestens 5 Minuten andauern. Das bedeutet aber auch, dass eine sehr kurze Begegnung erfasst werden kann, sofern sie in den 4-sekündigen Scanvorgang fällt. Zum Beispiel kann eine 4-sekündige Begegnung an der Ampel zur Anzeige einer Begegnung mit einem niedrigen Risiko führen.\r\n\r\n**Werden Begegnungen, die nicht in diesen Scan-Vorgang fallen, dann nicht gezählt?**\r\nDas ist richtig. Allerdings werden Begegnungen gemäß der Vorgaben des Robert-Koch-Instituts erst gezählt, wenn sie über mehrere Minuten angedauert haben, d.h. implizit eh innerhalb mehrere Scanvorgänge erfasst wurden.\r\n\r\n**Was ist der maximale Abstand, damit eine Begegnung erfasst wird?**\r\nEs werden alle Begegnungen so lange gezählt, wie das Bluetooth-Signal reicht. Auf freier Sicht der Handys kann die Sichtweise durchaus 15m oder mehr betragen. \r\n\r\n**Wie ist die Reichweite des Bluetooth-Signals und wie verändert es sich bei Dämpfung (Handy in der Tasche, etc.)?**\r\nEine Anzeige von Risikobegegnungen wird in der Regel nicht beeinträchtigt und eventuelle Umgebungseinflüsse sind in unserem Berechnungsalgorithmen berücksichtigt. Mit Bluetooth Low Energy (LE) haben wir aber auch eine Technik im Einsatz, die durch Umgebungsfaktoren beeinflussbar ist.\r\n\r\n\r\n**EN**\r\n\r\n### How does the acquisition via Bluetooth signal actually work and what is the logic behind it?\r\n\r\n**How long must the encounter be for it to be counted?**\r\nThe interface of the respective devices used by the Corona-Warn-App carries out a 4-second scan every 3 to 5 minutes. For an encounter to be reliably detected, it must last at least 5 minutes. However, this also means that a very short encounter can be detected, provided it falls within the 4-second scan. For example, a 4-second encounter at a traffic light can result in a low-risk encounter being displayed.\r\n\r\n**Are encounters that do not fall within this scan not counted?**\r\nThis is correct. However, according to the specifications of the Robert Koch Institute, encounters are only counted if they have lasted for several minutes, i.e. if they have been implicitly recorded within several scanning processes anyway.\r\n\r\n**What is the maximum distance for an encounter to be recorded?**\r\nAll encounters are counted as long as the Bluetooth signal lasts. On free view of the cell phones, the visibility can be 15m or more. \r\n\r\n**What is the range of the Bluetooth signal and how does it change with attenuation (cell phone in the pocket, etc.)?**\r\nA display of risk encounters is usually not affected and possible environmental influences are taken into account in our calculation algorithm. With Bluetooth Low Energy (LE), however, we also have a technology in use that can be influenced by environmental factors.', 'title': 'New FAQ entry reg. bluetooth measurements', 'type': 'issue'}
+ {'action': 'created', 'author': 'loki-cui', 'comment_id': 739799397.0, 'datetime': '2020-12-07 09:39:32+00:00', 'masked_author': 'username_0', 'text': 'sorry for closing and opening ->pressed the wrong button by mistake...', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'loki-cui', 'comment_id': 746216406.0, 'datetime': '2020-12-16 12:29:22+00:00', 'masked_author': 'username_0', 'text': ""Thank you all for your feedback. We're trying to take everything into account, but as the issue will be completey revised and splitted into separate questions after the release 1.9.1, I'd to close this one."", 'title': None, 'type': 'comment'}
+ {'action': 'closed', 'author': 'loki-cui', 'comment_id': None, 'datetime': '2020-12-16 12:29:22+00:00', 'masked_author': 'username_0', 'text': '', 'title': None, 'type': 'issue'}
+ {'action': 'created', 'author': 'vaggelisdouros', 'comment_id': 748686001.0, 'datetime': '2020-12-20 23:22:29+00:00', 'masked_author': 'username_6', 'text': '2 questions from my side:\r\n\r\na) can you provide the formula that translates the bluetooth signal attenuation (measured in dB) into distance (measured in meters)? In multiple cases, it is mentioned that a 73 dB attenuation corresponds to a distance of 8 meters, whereas 55 dB are translated into 1.5 meters, but i have not found the formula used or at least a reference to a paper/textbook.\r\n\r\nb) In the updated diagram for risk calculation with enf v2, it is unclear to me how the time where the signal attenuation is  between 63 dB and 73 dB is taken into account. Unless there is a typo, It seems that this signal is considered harmless and does not take part in the calculation of the weighted exposure time (even with a 0.5 coefficient), therefore i do not really understand whether the threshold is set to 73 db or 63 dB [https://github.com/corona-warn-app/cwa-documentation/blob/master/images/risk_calculation/risk_calculation_enf_v2_overview.pdf](url)', 'title': None, 'type': 'comment'}]","<issue_start><issue_comment>Title: New FAQ entry reg. blutooth measurments
+username_0: ## Where to find the issue
+no details yet
+
+## Describe the issue
+There are a lot of question on how the acquisition of the bluetooth signal exactly works and there is no FAQ entry to answer such questions.
+
+## Suggested change
+Pls. find below some first proposals that could be added in the section ""Application"" / ""Anwendung"" 
+
+**DE**
+
+### Wie funktioniert die Erfassung via Bluthooth-Signal und welche Logik steckt dahinter?
+
+**Wie lang muss die Begegnung sein, damit sie gezählt wird?** 
+Die durch die Corona-Warn-App genutzte Schnittstelle der jeweiligen Geräte führt alle 3 bis 5 Minuten einen 4-sekündigen Scan durch. Damit eine Begegnung sicher erfasst wird, muss sie mindestens 5 Minuten andauern. Das bedeutet aber auch, dass eine sehr kurze Begegnung erfasst werden kann, sofern sie in den 4-sekündigen Scanvorgang fällt. Zum Beispiel kann eine 4-sekündige Begegnung an der Ampel zur Anzeige einer Begegnung mit einem niedrigen Risiko führen.
+
+**Werden Begegnungen, die nicht in diesen Scan-Vorgang fallen, dann nicht gezählt?**
+Das ist richtig. Allerdings werden Begegnungen gemäß der Vorgaben des Robert-Koch-Instituts erst gezählt, wenn sie über mehrere Minuten angedauert haben, d.h. implizit eh innerhalb mehrere Scanvorgänge erfasst wurden.
+
+**Was ist der maximale Abstand, damit eine Begegnung erfasst wird?**
+Es werden alle Begegnungen so lange gezählt, wie das Bluetooth-Signal reicht. Auf freier Sicht der Handys kann die Sichtweise durchaus 15m oder mehr betragen. 
+
+**Wie ist die Reichweite des Bluetooth-Signals und wie verändert es sich bei Dämpfung (Handy in der Tasche, etc.)?**
+Eine Anzeige von Risikobegegnungen wird in der Regel nicht beeinträchtigt und eventuelle Umgebungseinflüsse sind in unserem Berechnungsalgorithmen berücksichtigt. Mit Bluetooth LE haben wir aber auch eine Technik im Einsatz, die durch Umgebungsfaktoren beeinflussbar ist.
+
+
+**EN**
+
+### How does the acquisition via Bluthooth signal actually work and what is the logic behind it?
+
+**How long must the encounter be for it to be counted? 
+The interface of the respective devices used by the Corona-Warn-App carries out a 4-second scan every 3 to 5 minutes. For an encounter to be reliably detected, it must last at least 5 minutes. However, this also means that a very short encounter can be detected, provided it falls within the 4-second scan. For example, a 4-second encounter at a traffic light can result in a low-risk encounter being displayed.
+
+**Are encounters that do not fall within this scan not counted?
+This is correct. However, according to the specifications of the Robert Koch Institute, encounters are only counted if they have lasted for several minutes, i.e. if they have been implicitly recorded within several scanning processes anyway.
+
+**What is the maximum distance for an encounter to be recorded?
+All encounters are counted as long as the Bluetooth signal lasts. On free view of the cell phones the visibility can be 15m or more. 
+
+**What is the range of the Bluetooth signal and how does it change with attenuation (cell phone in the pocket, etc.)?**
+A display of risk encounters is usually not affected and possible environmental influences are taken into account in our calculation algorithm. With Bluetooth LE, however, we also have a technology in use that can be influenced by environmental factors.
+<issue_comment>username_0: @username_2 : Would you mind reading the English version? ;)
+<issue_comment>username_1: @username_0 
+I think it would be good to not use ""Bluetooth LE"" but rather the full term: ""Bluetooth Low Energy"". 
+This will help non-technical users to understand it better, I think 👍
+<issue_comment>username_2: I'm happy to do that!
+
+In both languages Bluetooth is spelled incorrectly in the title as ""Bluthooth"".
+Also in the title of this issue ""New FAQ entry reg. blutooth measurments"" bluetooth and measurements are spelled incorrectly.
+
+I have some problems with the German text though, before I get to the English translation! Maybe you could get it put into a PR so it can be commented on line by line?
+<issue_comment>username_3: - Corrected Bluetooth in the text
+- Low Energy added
+<issue_comment>username_2: @username_3 
+It's a minor point, but ""measurments"" in the title of the issue is still spelled incorrectly.
+I'm just working on some detailed comments on the English text and I will post them later today.
+<issue_comment>username_0: Okay, changing LE to Low Energy and correct the obvious misspelling in 'Bluethooth' is done ;)
+
+What do you think about a content change in such a direction? (I'll start with DE only and will only do a translation if we agree on the content)
+
+### Wie funktioniert die Erfassung von Begegnungen via Bluethooth-Signal und wie wird mein Infektionsrisiko berechnet?
+
+Das Infektionsrisiko wird aus folgenden Faktoren berechnet:
+
+(1)	Dauer der Begegnung
+(2)	Abstand bei der Begegnung 
+(3)	Zeit, die seit der Begegnung vergangen ist
+(4)	Infektiosität (abgeleitet aus der Information, wann und ob die Symptome eingesetzt haben)
+
+Überschreitet der daraus ermittelte Risikowert eine [Schwelle](https://github.com/corona-warn-app/cwa-documentation/blob/master/solution_architecture.md#risk-score-calculation), die das Robert Koch-Institut vorgibt, erhalten die Benutzer*innen eine Benachrichtigung über ein erhöhtes Infektionsrisiko. Sollten die genannten Schwellenwerte unterschritten worden sein, sind zwar die Bedingungen für eine Begegnung mit erhöhtem Risiko nicht erfüllt, die Anzahl an Begegnungen würde sich aber trotzdem erhöhen. 
+
+**Wie lang muss die Begegnung sein, damit sie gezählt wird?**
+Die durch die Corona-Warn-App genutzte Schnittstelle der jeweiligen Geräte führt alle 3 bis 5 Minuten einen 4-sekündigen Scan nach anderen Geräten durch. Sehr kurze Begegnungen - bspw. eine Begegnung an einer Ampel oder auf einem Parkplatz - können daher zwar in den Scan-Vorgang fallen, werden jedoch nur als Begegnung mit niedrigem Risiko aufgeführt. Abhängig von der Dauer, Abstand, Zeit und Infektiosität dieser Begegnung, erhalten die Nutzer*innen eine Meldung mit entsprechend niedrigem Risiko (grün) oder hohem Risiko (rot). 
+
+**Wie ist die Reichweite des Bluetooth-Signals?**
+Es werden alle Begegnungen so lange gezählt, wie das Bluetooth-Signal reicht. Auf freier Sicht der Handys kann die Sichtweise durchaus 15m oder mehr betragen.
+
+**Wie verändert sich die Reichweite bei Dämpfung (Handy in der Tasche, etc.)?**
+Die Anzeige von Risikobegegnungen wird in der Regel nicht beeinträchtigt und eventuelle Umgebungseinflüsse wurden in den Berechnungsalgorithmen berücksichtigt. Mit Bluetooth Low Energy haben wir aber jedoch eine Technik im Einsatz, die durch Umgebungsfaktoren beeinflussbar ist.
+
+**Wie verhält sich die Corona-Warn-App, wenn eine infizierte Person in einem Abstand von 5 bis 10 Metern am Haus vorbeiläuft? Wird diese „Begegnung“ erfasst?**
+Selbst wenn es in dieser Situation nicht zu einer Begegnung mit einem erhöhten Risiko kommt, ist es technisch durchaus möglich, dass die Kennung anderer Nutzer*innen empfangen wurde, beispielsweise, wenn das eigene Telefon auf der Fensterbank lag. Durch diese „Begegnung“ würde sich zwar keine Begegnung mit erhöhtem Risiko ergeben, durchaus aber die Anzahl der Begegnungen verändern.
+<issue_comment>username_2: @username_0 
+Since you asked me to comment on the original English version, that is what I did. I will still let you have these comments, even though you have now re-written the German text. You might see what I was having difficulty with in the first version. I will look at your new German version.
+
+I think anything you write should be based on explaining, extending or translating what is already in the app documentation on https://github.com/corona-warn-app/cwa-documentation/blob/master/cwa-risk-assessment.md
+<issue_comment>username_2: @username_0 
+The comments are now obsolete, but I am posting them anyway.
+
+Original text | Comments
+-- | --
+How does   the acquisition via Bluetooth signal actually work and what is the logic   behind it? |  
+**How   long must the encounter be for it to be counted? | Suggest: ""How long must the   encounter last for it to be counted?""
+The   interface of the respective devices used by the Corona-Warn-App carries out a   4-second scan every 3 to 5 minutes. | Suggest: ""Each mobile   device used by the Corona-Warn-App carries out a 4-second scan every 3 to 5   minutes.""
+For an   encounter to be reliably detected, it must last at least 5 minutes. | This isn't about reliably   detecting. It is about registering the encounter as a candidate for increased   risk, if in addition the encounter was also measured as close enough.   Suggest: ""For an encounter to be used in the evaluation for increased   risk, it must last at least 5 minutes, which means that it must have been   detected at least in two consecutive scans."" This however contradicts   what it said in   https://github.com/corona-warn-app/cwa-documentation/blob/master/cwa-risk-assessment.md   ""All encounters for a diagnosis key that lasted less than 10 minutes in   total (regardless of how close the smartphones came during that time) or   during which the smartphones were more than 8 meters (>73 dB attenuation)   apart on average (regardless of how long the encounter lasted) are discarded   as negligible risk.""
+However,   this also means that a very short encounter can be detected, provided it   falls within the 4-second scan. | ""this"" in this   sentence refers to the first sentence of the paragraph, so it is difficult to   understand.
+For   example, a 4-second encounter at a traffic light can result in a low-risk   encounter being displayed. | You could combine the two   sentences and say: ""A short single encounter during the 4-second scan,   such as at a traffic light, can be later used in the evaluation for low   risk.""
+**Are   encounters that do not fall within this scan not counted? | This is a double negative.   Suggest ""What happens to encounters outside the 4-second scan?""
+This is   correct. | This sentence answers the   question in the sub-title. If the title is changed then the answer would need   to be changed to ""Encounters outside the 4-second scan are not   registered.""
+However,   according to the specifications of the Robert Koch Institute, encounters are   only counted if they have lasted for several minutes, i.e. if they have been   implicitly recorded within several scanning processes anyway. | This sentence answers another   question, but this question was already answered in the previous sub-title.   Also it introduces the Robert Koch Institute in the middle of the   explanation, which is confusing, as though this is the only place where RKI   has something to say. Suggest removing this sentence and adding an   explanation into the sentence about 5 minutes as already written above.
+**What   is the maximum distance for an encounter to be recorded? |  
+All   encounters are counted as long as the Bluetooth signal lasts. | This sentence sounds like it is   describing time not distance. Suggest: ""All encounters are recorded   independently of the distance.""
+On free   view of the cell phones the visibility can be 15m or more. | Signals from the Bluetooth Low   Energy technology used by the Corona-Warn-App can reach other mobile devices   which are 15 meters distant or even further away outdoors. Any encounters   which were more than 8 meters away are however discarded in the risk assessment.
+**What   is the range of the Bluetooth signal and how does it change with attenuation   (cell phone in the pocket, etc.)? | This question is mixed up with   the previous one. I suggest removing this question and combining with the   previous one.
+A   display of risk encounters is usually not affected and possible environmental   influences are taken into account in our calculation algorithm. With   Bluetooth LE, however, we also have a technology in use that can be   influenced by environmental factors. | This contradicts what it said in   https://github.com/corona-warn-app/cwa-documentation/blob/master/cwa-risk-assessment.md.   Environment does affect the signal and cannot be taken into account. The   mobile device can't detect for instance if there is a physical separation   between another device, such as in an apartment block with a wooden floor /   ceiling between flats on adjacent floors.
+<issue_comment>username_0: Sorry that our work has overlapped ;) Hope the new proposal fits better. 
+
+We'd like to enhance the FAQ section by less technical information in order to also provide some basic information for ""normal users"" that just want to understand the app better. So please consider this in your review :)
+<issue_comment>username_2: @username_0 
+At first glance, your new proposal is much more readable. I will take a detailed look at it soon.
+
+In the heading:
+""Wie funktioniert die Erfassung von Begegnungen via **Bluethooth**-Signal und wie wird mein Infektionsrisiko berechnet?""
+Bluetooth is still spelled incorrectly though.
+<issue_comment>username_4: * I don't think ""Sichtweise"" and ""freie Sicht"" are applicable here
+* Imo this sentence should come first as it contains the most relevant info
+
+Wenn sich zwischen den Geräten keine Hindernisse befinden, kann die Reichweite durchaus 15m oder mehr betragen.
+<issue_comment>username_5: This is a very important point: in the best case (calibrated) BLE attenuation works as a noisy proxy for distance, but in non-optimal conditions this becomes very unreliable to put it mildly (cf. e.g. [here](https://github.com/corona-warn-app/cwa-documentation/issues/394#issuecomment-691083023) and [here](https://github.com/corona-warn-app/cwa-documentation/issues/321)). And contrary to the original text there is actually **no** mechanism within CWA or ENF which would mitigate this at least not to my knowledge.<issue_closed>
+<issue_comment>username_0: ## Where to find the issue
+no details yet
+
+## Describe the issue
+There are a lot of questions on how the acquisition of the Bluetooth signal exactly works and there is no FAQ entry to answer such questions.
+
+## Suggested change
+Pls. find below some first proposals that could be added in the section ""Application"" / ""Anwendung"" 
+
+**DE**
+
+### Wie funktioniert die Erfassung via Bluethooth-Signal und welche Logik steckt dahinter?
+
+**Wie lang muss die Begegnung sein, damit sie gezählt wird?** 
+Die durch die Corona-Warn-App genutzte Schnittstelle der jeweiligen Geräte führt alle 3 bis 5 Minuten einen 4-sekündigen Scan durch. Damit eine Begegnung sicher erfasst wird, muss sie mindestens 5 Minuten andauern. Das bedeutet aber auch, dass eine sehr kurze Begegnung erfasst werden kann, sofern sie in den 4-sekündigen Scanvorgang fällt. Zum Beispiel kann eine 4-sekündige Begegnung an der Ampel zur Anzeige einer Begegnung mit einem niedrigen Risiko führen.
+
+**Werden Begegnungen, die nicht in diesen Scan-Vorgang fallen, dann nicht gezählt?**
+Das ist richtig. Allerdings werden Begegnungen gemäß der Vorgaben des Robert-Koch-Instituts erst gezählt, wenn sie über mehrere Minuten angedauert haben, d.h. implizit eh innerhalb mehrere Scanvorgänge erfasst wurden.
+
+**Was ist der maximale Abstand, damit eine Begegnung erfasst wird?**
+Es werden alle Begegnungen so lange gezählt, wie das Bluetooth-Signal reicht. Auf freier Sicht der Handys kann die Sichtweise durchaus 15m oder mehr betragen. 
+
+**Wie ist die Reichweite des Bluetooth-Signals und wie verändert es sich bei Dämpfung (Handy in der Tasche, etc.)?**
+Eine Anzeige von Risikobegegnungen wird in der Regel nicht beeinträchtigt und eventuelle Umgebungseinflüsse sind in unserem Berechnungsalgorithmen berücksichtigt. Mit Bluetooth Low Energy (LE) haben wir aber auch eine Technik im Einsatz, die durch Umgebungsfaktoren beeinflussbar ist.
+
+
+**EN**
+
+### How does the acquisition via Bluetooth signal actually work and what is the logic behind it?
+
+**How long must the encounter be for it to be counted?**
+The interface of the respective devices used by the Corona-Warn-App carries out a 4-second scan every 3 to 5 minutes. For an encounter to be reliably detected, it must last at least 5 minutes. However, this also means that a very short encounter can be detected, provided it falls within the 4-second scan. For example, a 4-second encounter at a traffic light can result in a low-risk encounter being displayed.
+
+**Are encounters that do not fall within this scan not counted?**
+This is correct. However, according to the specifications of the Robert Koch Institute, encounters are only counted if they have lasted for several minutes, i.e. if they have been implicitly recorded within several scanning processes anyway.
+
+**What is the maximum distance for an encounter to be recorded?**
+All encounters are counted as long as the Bluetooth signal lasts. On free view of the cell phones, the visibility can be 15m or more. 
+
+**What is the range of the Bluetooth signal and how does it change with attenuation (cell phone in the pocket, etc.)?**
+A display of risk encounters is usually not affected and possible environmental influences are taken into account in our calculation algorithm. With Bluetooth Low Energy (LE), however, we also have a technology in use that can be influenced by environmental factors.
+<issue_comment>username_0: sorry for closing and opening ->pressed the wrong button by mistake...
+<issue_comment>username_0: Thank you all for your feedback. We're trying to take everything into account, but as the issue will be completey revised and splitted into separate questions after the release 1.9.1, I'd to close this one.<issue_closed>
+<issue_comment>username_6: 2 questions from my side:
+
+a) can you provide the formula that translates the bluetooth signal attenuation (measured in dB) into distance (measured in meters)? In multiple cases, it is mentioned that a 73 dB attenuation corresponds to a distance of 8 meters, whereas 55 dB are translated into 1.5 meters, but i have not found the formula used or at least a reference to a paper/textbook.
+
+b) In the updated diagram for risk calculation with enf v2, it is unclear to me how the time where the signal attenuation is  between 63 dB and 73 dB is taken into account. Unless there is a typo, It seems that this signal is considered harmless and does not take part in the calculation of the weighted exposure time (even with a 0.5 coefficient), therefore i do not really understand whether the threshold is set to 73 db or 63 dB [https://github.com/corona-warn-app/cwa-documentation/blob/master/images/risk_calculation/risk_calculation_enf_v2_overview.pdf](url)"
+newrelic/docs-website,927408247,2786,"{'number': 2786.0, 'repo': 'docs-website', 'user_login': 'newrelic'}","[{'action': 'opened', 'author': 'keegoid-nr', 'comment_id': None, 'datetime': '2021-06-22T16:09:05Z', 'masked_author': 'username_0', 'text': ""Memory should be specified in units of GiB since memory modules contain multiples of 1024 bytes (powers of base 2).\r\n\r\n- https://en.wikipedia.org/wiki/Gigabyte#:~:text=the%20capacity%20of%20modern%20computer%20random%20access%20memory%20devices%2C%20such%20as%20dimm%20modules%2C%20is%20always%20a%20multiple%20of%20a%20power%20of%201024\r\n- https://en.wikipedia.org/wiki/Gigabyte#Base_2_(binary)\r\n\r\nThis aligns our Docker requirements with our Kubernetes requirements section which already correctly specifies memory in base 2 units using Kubernete's Mi or Gi.\r\n\r\n### Give us some context\r\n\r\nCorrect units on memory to match industry standards.\r\nhttps://en.wikipedia.org/wiki/Byte#History_of_the_conflicting_definitions"", 'title': 'Correct memory units from GB to GiB', 'type': 'issue'}
+ {'action': 'created', 'author': 'mmfred', 'comment_id': 866184781.0, 'datetime': '2021-06-22 17:27:08+00:00', 'masked_author': 'username_1', 'text': 'Thanks for the PR @username_0!', 'title': None, 'type': 'comment'}]","<issue_start><issue_comment>Title: Correct memory units from GB to GiB
+username_0: Memory should be specified in units of GiB since memory modules contain multiples of 1024 bytes (powers of base 2).
+
+- https://en.wikipedia.org/wiki/Gigabyte#:~:text=the%20capacity%20of%20modern%20computer%20random%20access%20memory%20devices%2C%20such%20as%20dimm%20modules%2C%20is%20always%20a%20multiple%20of%20a%20power%20of%201024
+- https://en.wikipedia.org/wiki/Gigabyte#Base_2_(binary)
+
+This aligns our Docker requirements with our Kubernetes requirements section which already correctly specifies memory in base 2 units using Kubernete's Mi or Gi.
+
+### Give us some context
+
+Correct units on memory to match industry standards.
+https://en.wikipedia.org/wiki/Byte#History_of_the_conflicting_definitions
+<issue_comment>username_1: Thanks for the PR @username_0!"
+appveyor/website,431004076,604,"{'number': 604.0, 'repo': 'website', 'user_login': 'appveyor'}","[{'action': 'opened', 'author': 'zilbuz', 'comment_id': None, 'datetime': '2019-04-09T14:36:20Z', 'masked_author': 'username_0', 'text': ""The configuration name is set in the `Configuration` environment variable instead of `CONFIGURATION`. This doesn't matter for cmd or Powershell because they are case-insensitive but if you're trying to access it from MSYS2's Bash, it won't work because of the difference in casing."", 'title': 'Set correct casing for `Configuration` environement variable', 'type': 'issue'}
+ {'action': 'created', 'author': 'IlyaFinkelshteyn', 'comment_id': 481861227.0, 'datetime': '2019-04-10 20:53:47+00:00', 'masked_author': 'username_1', 'text': 'Thank you for your contribution. However we are not sure we will merge it. The reason is that Linux Build Agent creates them all upper case. And now we are merging Windows and Linux Build Agents code bases and all AppVeyor environment variables will be upper case on both platforms.', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'zilbuz', 'comment_id': 482030368.0, 'datetime': '2019-04-11 08:59:03+00:00', 'masked_author': 'username_0', 'text': 'Alright, fair enough. Any rough idea when this merge will occur?', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'IlyaFinkelshteyn', 'comment_id': 482135180.0, 'datetime': '2019-04-11 14:22:12+00:00', 'masked_author': 'username_1', 'text': 'In next couple of months, cannot be more specific. Please subscribe to the ""Technical updates"" at https://ci.appveyor.com/notifications to minimize surprises.', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'zilbuz', 'comment_id': 482161031.0, 'datetime': '2019-04-11 15:24:58+00:00', 'masked_author': 'username_0', 'text': 'Will do, thanks :)', 'title': None, 'type': 'comment'}]","<issue_start><issue_comment>Title: Set correct casing for `Configuration` environement variable
+username_0: The configuration name is set in the `Configuration` environment variable instead of `CONFIGURATION`. This doesn't matter for cmd or Powershell because they are case-insensitive but if you're trying to access it from MSYS2's Bash, it won't work because of the difference in casing.
+<issue_comment>username_1: Thank you for your contribution. However we are not sure we will merge it. The reason is that Linux Build Agent creates them all upper case. And now we are merging Windows and Linux Build Agents code bases and all AppVeyor environment variables will be upper case on both platforms.
+<issue_comment>username_0: Alright, fair enough. Any rough idea when this merge will occur?
+<issue_comment>username_1: In next couple of months, cannot be more specific. Please subscribe to the ""Technical updates"" at https://ci.appveyor.com/notifications to minimize surprises.
+<issue_comment>username_0: Will do, thanks :)"

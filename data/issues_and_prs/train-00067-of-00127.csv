@@ -1,0 +1,902 @@
+nodejs/nodejs.org,202443358,1109,"{'number': 1109.0, 'repo': 'nodejs.org', 'user_login': 'nodejs'}","[{'action': 'opened', 'author': 'jessicaquynh', 'comment_id': None, 'datetime': '2017-01-23T04:22:30Z', 'masked_author': 'username_0', 'text': ""This is was an issue opened on the nodejs/node repository before guides were transferred directly to node/nodejs.org.\r\n\r\nThis PR contains a first go at a guide on backpressures, and missing some vital points that I do not feel equipped to answer. I have left some empty spaces for them! I would appreciate anyone's input on the content, structure, and any additions to the guide.\r\n\r\nSome points to expand on would be the problems that streams pose which are solved by backpressure. I think I hit most of the points, but I don't think I'm versed enough to go into detail.\r\n\r\nThere is also space for an example app, but again, I am not familiar on the current best practices on building streams and for implementing your own backpressure. \r\n\r\nThanks!\r\n\r\nRefs: https://github.com/nodejs/node/issues/10766"", 'title': 'Add guide: ""Backpressuring in Streams""', 'type': 'issue'}
+ {'action': 'created', 'author': 'lpinca', 'comment_id': 274444190.0, 'datetime': '2017-01-23 09:56:58+00:00', 'masked_author': 'username_1', 'text': 'cc: @nodejs/streams', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'eljefedelrodeodeljefe', 'comment_id': 280934876.0, 'datetime': '2017-02-19 17:44:06+00:00', 'masked_author': 'username_2', 'text': ""@username_0 can you incorporate Matteo's comments?"", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'jessicaquynh', 'comment_id': 280961455.0, 'datetime': '2017-02-20 00:10:57+00:00', 'masked_author': 'username_0', 'text': ""@username_2 yes definitely! sorry I've been mia on this issue .. will submit changes tomorrow night!"", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'mcollina', 'comment_id': 281269600.0, 'datetime': '2017-02-21 07:52:34+00:00', 'masked_author': 'username_3', 'text': ""As we have a backpressure (or flow-control) mechanism in place, the maximum amount of data that can flow is controlled by downstream, hence the focus on `Writable` is correct. However this is not explicit. We should also note that calling\xa0`readable.push` whenever data is ready is as bad as `readable.on('data', data => writable.write(data))`."", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'jessicaquynh', 'comment_id': 282593384.0, 'datetime': '2017-02-26 22:25:05+00:00', 'masked_author': 'username_0', 'text': 'Sorry it took so long to update the guide. Hope I interpreted the change requests correctly. Ultimately, I am still not 100% what constitutes best practice for building streams. \r\n\r\nWould it be fair to say that best practice is also non-contradictory practice? As in, ""you have a good stream if you did not do A, B, C""?', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'mcollina', 'comment_id': 282658763.0, 'datetime': '2017-02-27 08:38:17+00:00', 'masked_author': 'username_3', 'text': ""Yes! The golden rule of streams is **to always respect backpressure**, A) never `push()` if you are not asked, and B) never call `write()` after it returns `false` but wait for `'drain'` instead. The latter holds more power for me and help me reason about things better.\r\n\r\nThe third rule: C) streams changes between different node versions, and the library you use. Be careful and test things."", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'jessicaquynh', 'comment_id': 292445170.0, 'datetime': '2017-04-07 05:32:14+00:00', 'masked_author': 'username_0', 'text': ""Sorry for the static on this! I took a look back on this, realized some grammar was off and fixed some  formatting.\r\n\r\nAdded in a few pointers mentioned earlier in the thread, though they didn't necessarily close off all the reviews.\r\n\r\nSkimmed out the example application because I felt that was redundant since there are a rich supply of examples found in the documentation, and I didn't want to reinvent the wheel. \r\n\r\nI only have one question and that's in regards to the implementation of a Writable stream. Are there any mistakes one can make in `_write()` or `_writev()` that would damage backpressure? They seem like pretty foolproof functions to me.\r\n\r\nShould the guide extend its scope and talk about creating a custom writable wtream from scratch then? As in:\r\n\r\n```\r\nMyWritable.prototype.write = function(chunk, enc, cb) {\r\n  // code that respects return value here\r\n}\r\n\r\nutil.inherits(MyWritable, Stream);\r\n```\r\n\r\nThanks for all the help! Hope to land this soon!"", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'mcollina', 'comment_id': 292460854.0, 'datetime': '2017-04-07 07:17:32+00:00', 'masked_author': 'username_3', 'text': ""@username_0 `_writev` goes in combination with `.cork()`, and it is especially useful if we are writing to a stream directly. The biggest mistake is this pattern:\r\n\r\n```js\r\nws.cork()\r\nws.write('hello ')\r\nws.write('world ')\r\nws.uncork()\r\n\r\nws.cork()\r\nws.write('from ')\r\nws.write('Matteo')\r\nws.uncork()\r\n```\r\n\r\nThis will cause two transfers into C++ realm, making the use of cork() a bit useless the correct pattern is:\r\n\r\n```js\r\nws.cork()\r\nws.write('hello ')\r\nws.write('world ')\r\nprocess.nextTick(doUncork, ws)\r\n\r\nws.cork()\r\nws.write('from ')\r\nws.write('Matteo')\r\nprocess.nextTick(doUncork, ws)\r\n\r\n// as a global function\r\nfunction doUncork (stream) {\r\n  stream.uncork()\r\n}\r\n```\r\n\r\n`cork()` can be called as many times we want, we just need to be careful to call `uncork()` the same amount of times to make it flow again."", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'jessicaquynh', 'comment_id': 292618725.0, 'datetime': '2017-04-07 18:39:31+00:00', 'masked_author': 'username_0', 'text': ""@username_3 Thank you for your input and help! I've added the changes to the writable section!"", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'mcollina', 'comment_id': 294144510.0, 'datetime': '2017-04-14 12:19:08+00:00', 'masked_author': 'username_3', 'text': 'LGTM', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'fhemberger', 'comment_id': 296384059.0, 'datetime': '2017-04-22 16:18:44+00:00', 'masked_author': 'username_4', 'text': 'Great, thank you!', 'title': None, 'type': 'comment'}]","<issue_start><issue_comment>Title: Add guide: ""Backpressuring in Streams""
+username_0: This is was an issue opened on the nodejs/node repository before guides were transferred directly to node/nodejs.org.
+
+This PR contains a first go at a guide on backpressures, and missing some vital points that I do not feel equipped to answer. I have left some empty spaces for them! I would appreciate anyone's input on the content, structure, and any additions to the guide.
+
+Some points to expand on would be the problems that streams pose which are solved by backpressure. I think I hit most of the points, but I don't think I'm versed enough to go into detail.
+
+There is also space for an example app, but again, I am not familiar on the current best practices on building streams and for implementing your own backpressure. 
+
+Thanks!
+
+Refs: https://github.com/nodejs/node/issues/10766
+<issue_comment>username_1: cc: @nodejs/streams
+<issue_comment>username_2: @username_0 can you incorporate Matteo's comments?
+<issue_comment>username_0: @username_2 yes definitely! sorry I've been mia on this issue .. will submit changes tomorrow night!
+<issue_comment>username_3: As we have a backpressure (or flow-control) mechanism in place, the maximum amount of data that can flow is controlled by downstream, hence the focus on `Writable` is correct. However this is not explicit. We should also note that calling `readable.push` whenever data is ready is as bad as `readable.on('data', data => writable.write(data))`.
+<issue_comment>username_0: Sorry it took so long to update the guide. Hope I interpreted the change requests correctly. Ultimately, I am still not 100% what constitutes best practice for building streams. 
+
+Would it be fair to say that best practice is also non-contradictory practice? As in, ""you have a good stream if you did not do A, B, C""?
+<issue_comment>username_3: Yes! The golden rule of streams is **to always respect backpressure**, A) never `push()` if you are not asked, and B) never call `write()` after it returns `false` but wait for `'drain'` instead. The latter holds more power for me and help me reason about things better.
+
+The third rule: C) streams changes between different node versions, and the library you use. Be careful and test things.
+<issue_comment>username_0: Sorry for the static on this! I took a look back on this, realized some grammar was off and fixed some  formatting.
+
+Added in a few pointers mentioned earlier in the thread, though they didn't necessarily close off all the reviews.
+
+Skimmed out the example application because I felt that was redundant since there are a rich supply of examples found in the documentation, and I didn't want to reinvent the wheel. 
+
+I only have one question and that's in regards to the implementation of a Writable stream. Are there any mistakes one can make in `_write()` or `_writev()` that would damage backpressure? They seem like pretty foolproof functions to me.
+
+Should the guide extend its scope and talk about creating a custom writable wtream from scratch then? As in:
+
+```
+MyWritable.prototype.write = function(chunk, enc, cb) {
+  // code that respects return value here
+}
+
+util.inherits(MyWritable, Stream);
+```
+
+Thanks for all the help! Hope to land this soon!
+<issue_comment>username_3: @username_0 `_writev` goes in combination with `.cork()`, and it is especially useful if we are writing to a stream directly. The biggest mistake is this pattern:
+
+```js
+ws.cork()
+ws.write('hello ')
+ws.write('world ')
+ws.uncork()
+
+ws.cork()
+ws.write('from ')
+ws.write('Matteo')
+ws.uncork()
+```
+
+This will cause two transfers into C++ realm, making the use of cork() a bit useless the correct pattern is:
+
+```js
+ws.cork()
+ws.write('hello ')
+ws.write('world ')
+process.nextTick(doUncork, ws)
+
+ws.cork()
+ws.write('from ')
+ws.write('Matteo')
+process.nextTick(doUncork, ws)
+
+// as a global function
+function doUncork (stream) {
+  stream.uncork()
+}
+```
+
+`cork()` can be called as many times we want, we just need to be careful to call `uncork()` the same amount of times to make it flow again.
+<issue_comment>username_0: @username_3 Thank you for your input and help! I've added the changes to the writable section!
+<issue_comment>username_3: LGTM
+<issue_comment>username_4: Great, thank you!"
+moment/momentjs.com,249184610,446,"{'number': 446.0, 'repo': 'momentjs.com', 'user_login': 'moment'}","[{'action': 'opened', 'author': 'jackiecheu', 'comment_id': None, 'datetime': '2017-08-09T22:50:11Z', 'masked_author': 'username_0', 'text': 'Trying to create a PowerShell installation script for the Windows systems, based on the original Bash script, as well as adding some details to the readme.md.', 'title': 'Adding Powershell script to compile Windows installation', 'type': 'issue'}
+ {'action': 'created', 'author': 'maggiepint', 'comment_id': 322055004.0, 'datetime': '2017-08-13 17:26:25+00:00', 'masked_author': 'username_1', 'text': ""@username_0 - I think you're in pretty good shape here, but please do sign the CLA."", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'mj1856', 'comment_id': 328183989.0, 'datetime': '2017-09-08 18:52:03+00:00', 'masked_author': 'username_2', 'text': '@username_0  - 🏓 ping!  (please sign the CLA)', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'jackiecheu', 'comment_id': 328253649.0, 'datetime': '2017-09-09 04:32:15+00:00', 'masked_author': 'username_0', 'text': 'Hi Matt,\r\n\r\n\r\nThanks for the following up! However, I believe I signed the CLA a while ago. When I login to the CLA page again today, it said I have signed, see attached screenshot. Is there some other action item I have missed?\r\n\r\n\r\nThanks,\r\n\r\nJackie', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'mj1856', 'comment_id': 328302276.0, 'datetime': '2017-09-09 20:42:28+00:00', 'masked_author': 'username_2', 'text': 'Hmmm...  Maybe try pushing another commit?  Even a one char change just to get the bot to retry.', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'jackiecheu', 'comment_id': 330697507.0, 'datetime': '2017-09-19 22:59:58+00:00', 'masked_author': 'username_0', 'text': 'Sure Matt, just re-commit with minor changes from the online editor. Hope it will work this time.\n\n\nThanks,\n\nJackie', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'marwahaha', 'comment_id': 351593527.0, 'datetime': '2017-12-14 02:55:07+00:00', 'masked_author': 'username_3', 'text': ""@username_0 - the issue is that you need to add your email to your Github profile. (I think it's the `jache@microsoft.com` email.)\r\n\r\n```\r\ncommit edc83249c0b23e49a1eb2e911ac048aad34a2e36\r\nAuthor: username_0 <envkt@example.com>\r\nDate:   Tue Sep 19 15:58:12 2017 -0700\r\n\r\n    Re-attempt to commit by making minor changes\r\n\r\ncommit 62475271088b5dc73cdd4c62ad929c21a1986ba0\r\nAuthor: Jackie Cheung <efpyi@example.com>\r\nDate:   Wed Aug 9 15:44:27 2017 -0700\r\n\r\n    Adding Powershell script to compile Windows installation\r\n\r\n```"", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'marwahaha', 'comment_id': 460091155.0, 'datetime': '2019-02-03 21:38:55+00:00', 'masked_author': 'username_3', 'text': 'closing in favor of https://github.com/moment/momentjs.com/pull/554', 'title': None, 'type': 'comment'}]","<issue_start><issue_comment>Title: Adding Powershell script to compile Windows installation
+username_0: Trying to create a PowerShell installation script for the Windows systems, based on the original Bash script, as well as adding some details to the readme.md.
+<issue_comment>username_1: @username_0 - I think you're in pretty good shape here, but please do sign the CLA.
+<issue_comment>username_2: @username_0  - 🏓 ping!  (please sign the CLA)
+<issue_comment>username_0: Hi Matt,
+
+
+Thanks for the following up! However, I believe I signed the CLA a while ago. When I login to the CLA page again today, it said I have signed, see attached screenshot. Is there some other action item I have missed?
+
+
+Thanks,
+
+Jackie
+<issue_comment>username_2: Hmmm...  Maybe try pushing another commit?  Even a one char change just to get the bot to retry.
+<issue_comment>username_0: Sure Matt, just re-commit with minor changes from the online editor. Hope it will work this time.
+
+
+Thanks,
+
+Jackie
+<issue_comment>username_3: @username_0 - the issue is that you need to add your email to your Github profile. (I think it's the `jache@microsoft.com` email.)
+
+```
+commit edc83249c0b23e49a1eb2e911ac048aad34a2e36
+Author: username_0 <30635464+username_0@users.noreply.github.com>
+Date:   Tue Sep 19 15:58:12 2017 -0700
+
+    Re-attempt to commit by making minor changes
+
+commit 62475271088b5dc73cdd4c62ad929c21a1986ba0
+Author: Jackie Cheung <jache@microsoft.com>
+Date:   Wed Aug 9 15:44:27 2017 -0700
+
+    Adding Powershell script to compile Windows installation
+
+```
+<issue_comment>username_3: closing in favor of https://github.com/moment/momentjs.com/pull/554"
+flutter/website,569406187,3727,,"[{'action': 'opened', 'author': 'sfshaza2', 'comment_id': None, 'datetime': '2020-02-22 23:06:58+00:00', 'masked_author': 'username_0', 'text': 'At least, all of the files that aren\'t included markdown files. The following list is what I see in my branch where I have already corrected a number of files, esp in the cookbook (I\'ve deleted the files that begin with underbar from this list, as they are included files):\r\n\r\n```\r\ndocs [links] $ find . -name ""*md"" | xargs egrep -L ""description:""\r\n./development/ui/interactive.md\r\n./development/ui/advanced/gestures.md\r\n./development/ui/advanced/slivers.md\r\n./development/ui/advanced/index.md\r\n./development/ui/splash-screen/index.md\r\n./development/ui/widgets-intro.md\r\n./development/ui/navigation.md\r\n./development/ui/index.md\r\n./development/ui/animations/staggered-animations.md\r\n./development/ui/widgets/text.md\r\n./development/ui/widgets/input.md\r\n./development/ui/widgets/assets.md\r\n./development/ui/widgets/basics.md\r\n./development/ui/widgets/painting.md\r\n./development/ui/widgets/animation.md\r\n./development/ui/widgets/cupertino.md\r\n./development/ui/widgets/accessibility.md\r\n./development/ui/widgets/async.md\r\n./development/ui/widgets/scrolling.md\r\n./development/ui/widgets/interaction.md\r\n./development/ui/widgets/material.md\r\n./development/ui/widgets/styling.md\r\n./development/ui/widgets/layout.md\r\n./development/tools/index.md\r\n./development/tools/devtools/cli.md\r\n./development/tools/devtools/index.md\r\n./development/tools/sdk/index.md\r\n./development/data-and-backend/state-mgmt/declarative.md\r\n./development/data-and-backend/state-mgmt/index.md\r\n./development/data-and-backend/state-mgmt/options.md\r\n./development/data-and-backend/state-mgmt/ephemeral-vs-app.md\r\n./development/data-and-backend/index.md\r\n./development/accessibility-and-localization/index.md\r\n./development/index.md\r\n./development/packages-and-plugins/index.md\r\n./development/add-to-app/performance.md\r\n./development/add-to-app/ios/index.md\r\n./development/add-to-app/android/index.md\r\n./development/add-to-app/android/_initial-route-cached-engine.md\r\n./development/platform-integration/index.md\r\n./resources/inside-flutter.md\r\n./resources/technical-overview.md\r\n./resources/platform-adaptations.md\r\n./resources/design-docs.md\r\n./cookbook/design/index.md\r\n./cookbook/forms/index.md\r\n./cookbook/lists/index.md\r\n./cookbook/images/index.md\r\n./cookbook/plugins/index.md\r\n./cookbook/networking/index.md\r\n./cookbook/navigation/index.md\r\n./cookbook/animation/index.md\r\n./cookbook/testing/unit/mocking.md\r\n./cookbook/testing/unit/introduction.md\r\n./cookbook/testing/unit/index.md\r\n./cookbook/testing/widget/tap-drag.md\r\n./cookbook/testing/widget/introduction.md\r\n./cookbook/testing/widget/index.md\r\n./cookbook/testing/widget/finders.md\r\n./cookbook/testing/integration/profiling.md\r\n./cookbook/testing/integration/introduction.md\r\n./cookbook/testing/integration/scrolling.md\r\n./cookbook/testing/integration/index.md\r\n./cookbook/testing/index.md\r\n./cookbook/gestures/index.md\r\n./cookbook/persistence/index.md\r\n./cookbook/maintenance/index.md\r\n./testing/index.md\r\n./perf/power.md\r\n./perf/memory.md\r\n./reference/widgets.md\r\n./reference/tutorials.md\r\n./reference/crash-reporting.md\r\n./get-started/codelab-web.md\r\n./get-started/install/chromeos.md\r\n./get-started/install/windows.md\r\n./get-started/install/linux.md\r\n./get-started/install/_chromeos-android-sdk-setup.md\r\n./get-started/install/macos.md\r\n./get-started/install/index.md\r\n./get-started/index.md\r\n```\r\n\r\nAlso, many of the index files are placeholders and I don\'t think we care about adding a description to those - though I haven\'t verified that. Just for the record, when there is no description field, when the site is generated, jekyll grabs the first paragraph of the text to use as the description. The first paragraph of many pages includes links, which ends up inserting an ""illegal"" link into the metadata.\r\n\r\nJust add a description. :D', 'title': 'All markdown files should contain a description: field in the front matter', 'type': 'issue'}
+ {'action': 'created', 'author': 'legalcodes', 'comment_id': 590454605.0, 'datetime': '2020-02-24 17:34:00+00:00', 'masked_author': 'username_1', 'text': 'https://github.com/flutter/website/issues/3717', 'title': None, 'type': 'comment'}
+ {'action': 'closed', 'author': 'sfshaza2', 'comment_id': None, 'datetime': '2020-03-25 15:05:34+00:00', 'masked_author': 'username_0', 'text': '', 'title': None, 'type': 'issue'}
+ {'action': 'created', 'author': 'sfshaza2', 'comment_id': 603892955.0, 'datetime': '2020-03-25 15:05:34+00:00', 'masked_author': 'username_0', 'text': 'Fixed. Closing.', 'title': None, 'type': 'comment'}]","<issue_start><issue_comment>Title: All markdown files should contain a description: field in the front matter
+username_0: At least, all of the files that aren't included markdown files. The following list is what I see in my branch where I have already corrected a number of files, esp in the cookbook (I've deleted the files that begin with underbar from this list, as they are included files):
+
+```
+docs [links] $ find . -name ""*md"" | xargs egrep -L ""description:""
+./development/ui/interactive.md
+./development/ui/advanced/gestures.md
+./development/ui/advanced/slivers.md
+./development/ui/advanced/index.md
+./development/ui/splash-screen/index.md
+./development/ui/widgets-intro.md
+./development/ui/navigation.md
+./development/ui/index.md
+./development/ui/animations/staggered-animations.md
+./development/ui/widgets/text.md
+./development/ui/widgets/input.md
+./development/ui/widgets/assets.md
+./development/ui/widgets/basics.md
+./development/ui/widgets/painting.md
+./development/ui/widgets/animation.md
+./development/ui/widgets/cupertino.md
+./development/ui/widgets/accessibility.md
+./development/ui/widgets/async.md
+./development/ui/widgets/scrolling.md
+./development/ui/widgets/interaction.md
+./development/ui/widgets/material.md
+./development/ui/widgets/styling.md
+./development/ui/widgets/layout.md
+./development/tools/index.md
+./development/tools/devtools/cli.md
+./development/tools/devtools/index.md
+./development/tools/sdk/index.md
+./development/data-and-backend/state-mgmt/declarative.md
+./development/data-and-backend/state-mgmt/index.md
+./development/data-and-backend/state-mgmt/options.md
+./development/data-and-backend/state-mgmt/ephemeral-vs-app.md
+./development/data-and-backend/index.md
+./development/accessibility-and-localization/index.md
+./development/index.md
+./development/packages-and-plugins/index.md
+./development/add-to-app/performance.md
+./development/add-to-app/ios/index.md
+./development/add-to-app/android/index.md
+./development/add-to-app/android/_initial-route-cached-engine.md
+./development/platform-integration/index.md
+./resources/inside-flutter.md
+./resources/technical-overview.md
+./resources/platform-adaptations.md
+./resources/design-docs.md
+./cookbook/design/index.md
+./cookbook/forms/index.md
+./cookbook/lists/index.md
+./cookbook/images/index.md
+./cookbook/plugins/index.md
+./cookbook/networking/index.md
+./cookbook/navigation/index.md
+./cookbook/animation/index.md
+./cookbook/testing/unit/mocking.md
+./cookbook/testing/unit/introduction.md
+./cookbook/testing/unit/index.md
+./cookbook/testing/widget/tap-drag.md
+./cookbook/testing/widget/introduction.md
+./cookbook/testing/widget/index.md
+./cookbook/testing/widget/finders.md
+./cookbook/testing/integration/profiling.md
+./cookbook/testing/integration/introduction.md
+./cookbook/testing/integration/scrolling.md
+./cookbook/testing/integration/index.md
+./cookbook/testing/index.md
+./cookbook/gestures/index.md
+./cookbook/persistence/index.md
+./cookbook/maintenance/index.md
+./testing/index.md
+./perf/power.md
+./perf/memory.md
+./reference/widgets.md
+./reference/tutorials.md
+./reference/crash-reporting.md
+./get-started/codelab-web.md
+./get-started/install/chromeos.md
+./get-started/install/windows.md
+./get-started/install/linux.md
+./get-started/install/_chromeos-android-sdk-setup.md
+./get-started/install/macos.md
+./get-started/install/index.md
+./get-started/index.md
+```
+
+Also, many of the index files are placeholders and I don't think we care about adding a description to those - though I haven't verified that. Just for the record, when there is no description field, when the site is generated, jekyll grabs the first paragraph of the text to use as the description. The first paragraph of many pages includes links, which ends up inserting an ""illegal"" link into the metadata.
+
+Just add a description. :D
+<issue_comment>username_1: https://github.com/flutter/website/issues/3717<issue_closed>
+<issue_comment>username_0: Fixed. Closing."
+department-of-veterans-affairs/vets-website,134180385,1211,,"[{'action': 'opened', 'author': 'awong-dev', 'comment_id': None, 'datetime': '2016-02-17 05:11:31+00:00', 'masked_author': 'username_0', 'text': 'https://developers.google.com/analytics/devguides/collection/analyticsjs/user-timings\r\n\r\nWe should have metrics and telemetry for performance of our site. That way we can have more insight into if we\'re messing up mobile users or users with older browsers, etc.\r\n\r\nIn particular, if we are going to target mobile links (rural areas) which are characterized as ""long fat pipes) we need to \r\n  (a) reduce payload size [cost, not necessarily speed...but maybe speed on 2g]\r\n  (b) avoid round-trips [latency is much higher on mobile links], especially serialized round-trips on APIs\r\n  (c) expect older browsers on low-powered devices meaning careful about assuming JS is fast and that large DOMs are okay because JS on ARM phones can be abysmally slow (esp on old versions of browsers) and memory is obviously smaller.', 'title': 'Instrument performance telemetry', 'type': 'issue'}
+ {'action': 'created', 'author': 'awong-dev', 'comment_id': 185025923.0, 'datetime': '2016-02-17 05:11:45+00:00', 'masked_author': 'username_0', 'text': 'Tagging @MarinaMartin', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'carlmjohnson', 'comment_id': 229130137.0, 'datetime': '2016-06-28 17:57:56+00:00', 'masked_author': 'username_1', 'text': 'Our performance on first load is not very good at the moment: http://www.webpagetest.org/result/160628_D0_Z6P/', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'carlmjohnson', 'comment_id': 229240725.0, 'datetime': '2016-06-29 02:34:26+00:00', 'masked_author': 'username_1', 'text': ""Here's our performance from my home network (FiOS) according to [boom](https://github.com/rakyll/boom):\r\n\r\n```shell\r\n$ boom https://vets.gov\r\n200 / 200 Booooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooo! 100.00 %\r\n\r\nSummary:\r\n  Total:        9.2354 secs.\r\n  Slowest:      5.7514 secs.\r\n  Fastest:      1.1435 secs.\r\n  Average:      2.0935 secs.\r\n  Requests/sec: 21.6557\r\n  Total Data Received:  2675000 bytes.\r\n  Response Size per Request:    13375 bytes.\r\n\r\nStatus code distribution:\r\n  [200] 200 responses\r\n\r\nResponse time histogram:\r\n  1.144 [1]     |\r\n  1.604 [80]    |∎∎∎∎∎∎∎∎∎∎∎∎∎∎∎∎∎∎∎∎∎∎∎∎∎∎∎∎∎∎∎∎∎∎∎∎∎∎∎∎\r\n  2.065 [49]    |∎∎∎∎∎∎∎∎∎∎∎∎∎∎∎∎∎∎∎∎∎∎∎∎\r\n  2.526 [4]     |∎∎\r\n  2.987 [18]    |∎∎∎∎∎∎∎∎∎\r\n  3.447 [38]    |∎∎∎∎∎∎∎∎∎∎∎∎∎∎∎∎∎∎∎\r\n  3.908 [2]     |∎\r\n  4.369 [6]     |∎∎∎\r\n  4.830 [1]     |\r\n  5.291 [0]     |\r\n  5.751 [1]     |\r\n\r\nLatency distribution:\r\n  10% in 1.2692 secs.\r\n  25% in 1.3459 secs.\r\n  50% in 1.7437 secs.\r\n  75% in 2.9476 secs.\r\n  90% in 3.2507 secs.\r\n  95% in 3.4619 secs.\r\n  99% in 4.7970 secs.\r\n```"", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'carlmjohnson', 'comment_id': 229241015.0, 'datetime': '2016-06-29 02:36:51+00:00', 'masked_author': 'username_1', 'text': ""For comparison, here's my personal website (low traffic, static HTML, hosted on a single private virtual server):\r\n\r\n```\r\n$ boom https://username_1.net\r\n\r\nSummary:\r\n  Total:        0.8751 secs.\r\n  Slowest:      0.3842 secs.\r\n  Fastest:      0.1017 secs.\r\n  Average:      0.2044 secs.\r\n  Requests/sec: 228.5513\r\n\r\nStatus code distribution:\r\n  [200] 200 responses\r\n\r\nResponse time histogram:\r\n  0.102 [1]     |\r\n  0.130 [28]    |∎∎∎∎∎∎∎∎∎∎∎∎∎∎∎∎∎∎∎∎∎∎\r\n  0.158 [50]    |∎∎∎∎∎∎∎∎∎∎∎∎∎∎∎∎∎∎∎∎∎∎∎∎∎∎∎∎∎∎∎∎∎∎∎∎∎∎∎∎\r\n  0.186 [40]    |∎∎∎∎∎∎∎∎∎∎∎∎∎∎∎∎∎∎∎∎∎∎∎∎∎∎∎∎∎∎∎∎\r\n  0.215 [22]    |∎∎∎∎∎∎∎∎∎∎∎∎∎∎∎∎∎\r\n  0.243 [9]     |∎∎∎∎∎∎∎\r\n  0.271 [0]     |\r\n  0.299 [7]     |∎∎∎∎∎\r\n  0.328 [20]    |∎∎∎∎∎∎∎∎∎∎∎∎∎∎∎∎\r\n  0.356 [7]     |∎∎∎∎∎\r\n  0.384 [16]    |∎∎∎∎∎∎∎∎∎∎∎∎\r\n\r\nLatency distribution:\r\n  10% in 0.1194 secs.\r\n  25% in 0.1445 secs.\r\n  50% in 0.1753 secs.\r\n  75% in 0.2871 secs.\r\n  90% in 0.3474 secs.\r\n  95% in 0.3689 secs.\r\n  99% in 0.3841 secs.\r\n```"", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'awong-dev', 'comment_id': 229242676.0, 'datetime': '2016-06-29 02:50:03+00:00', 'masked_author': 'username_0', 'text': 'Part of this is due to TIC requirements.  What is the meat of this test? Is\r\nit just a short packet or is there a large payload.\r\n\r\nAlso... YOU HAVE PERCENTILES!!! YAY!', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'awong-dev', 'comment_id': 229243116.0, 'datetime': '2016-06-29 02:53:23+00:00', 'masked_author': 'username_0', 'text': ""Due to our current network topology, things entering through the east coast\r\ngateway will be the slowest since we for a transcontinental hop into\r\ngovcloud.\r\n\r\nI notice the locale for your page's test is Dulles VA. The other gateway is\r\nin Austin. I'm curious what you get if you try austin.\r\n\r\nAlso, our DNS is even RR, not geolocated.  Thus, we can actually incur a 2\r\ntrans-continental hit per load. <3 TIC. Not.\r\n\r\nOn Tue, Jun 28, 2016 at 7:49 PM, Albert J. Wong (王重傑） <upchh@example.com>\r\nwrote:\r\n\r\n> Part of this is due to TIC requirements.  What is the meat of this test?\r\n> Is it just a short packet or is there a large payload.\r\n>\r\n> Also... YOU HAVE PERCENTILES!!! YAY!\r\n>\r\n>"", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'carlmjohnson', 'comment_id': 229366649.0, 'datetime': '2016-06-29 14:07:23+00:00', 'masked_author': 'username_1', 'text': 'Yeah, I think the topology is the most likely culprit, because the actual download after first byte is very fast. Once we move everything to govcloud, it should be considerably less latent.\r\n\r\nBoom works by just downloading the raw page (no images or other associated files). It\'s mostly good as a way of getting a sense of how long it takes to get a connection. webpagetest.org on the other hand renders the whole page in a virtual browser, so it\'s better for getting a sense how long it will take for users to see the page.\r\n\r\nIn terms of setting up telemetry, it would be good to have these scripts run regularly and then dump the output somewhere (S3?), so that we can make graphs of speed over time and check it every few weeks. At my old company we did a ""tech huddle"" every Monday to go over the numbers: how many 500s, how long is the longest DB transaction, etc. and then make tickets if anything got worse.\r\n\r\nMaking a script for webpagetest.org shouldn\'t be too hard. Once you have a key you can run `curl ""http://www.webpagetest.org/runtest.php?url=https://www.vets.gov&f=json&k=KEY""` and you\'ll get a response like\r\n\r\n```json\r\n{\r\n        ""data"": {\r\n                ""detailCSV"": ""http://www.webpagetest.org/result/160628_33_10RF/requests.csv"",\r\n                ""jsonUrl"": ""http://www.webpagetest.org/jsonResult.php?test=160628_33_10RF"",\r\n                ""ownerKey"": ""747ffe160351d5dfb49a8d5fb75776c81827eaba"",\r\n                ""summaryCSV"": ""http://www.webpagetest.org/result/160628_33_10RF/page_data.csv"",\r\n                ""testId"": ""160628_33_10RF"",\r\n                ""userUrl"": ""http://www.webpagetest.org/result/160628_33_10RF/"",\r\n                ""xmlUrl"": ""http://www.webpagetest.org/xmlResult/160628_33_10RF/""\r\n        },\r\n        ""statusCode"": 200,\r\n        ""statusText"": ""Ok""\r\n}\r\n```\r\n\r\nThen if you grab data.jsonUrl, you get the full data trace with all the timing info we\'d need.', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'koconnor719', 'comment_id': 249978861.0, 'datetime': '2016-09-27 19:54:26+00:00', 'masked_author': 'username_2', 'text': 'james pls. move to dev ops repo:)', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'jkassemi', 'comment_id': 250026794.0, 'datetime': '2016-09-27 23:16:38+00:00', 'masked_author': 'username_3', 'text': ""@username_2, dev ops is working on collecting information on time to first byte and response latency, but I think this is still relevant for the google analytics integration and collecting timing information (DOM load, first paint) from the client's perspective.\r\n\r\nCan you point me to who's got details on the GA integration?"", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'koconnor719', 'comment_id': 250430343.0, 'datetime': '2016-09-29 10:35:13+00:00', 'masked_author': 'username_2', 'text': 'For GA integration we have been waiting on an ad hoc person . You should check w Bob .\r\n\r\n\r\n\r\nSent with Good (www.good.com)\r\n\r\n\r\n-----Original Message-----', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'jkassemi', 'comment_id': 251143825.0, 'datetime': '2016-10-03 15:49:23+00:00', 'masked_author': 'username_3', 'text': ""Spoke with @robertfairhead regarding our current GA integration. We're already collecting some useful performance information there. I've opened an issue in devops to cover further metrics collection for prometheus."", 'title': None, 'type': 'comment'}
+ {'action': 'closed', 'author': 'jkassemi', 'comment_id': None, 'datetime': '2016-10-03 15:49:24+00:00', 'masked_author': 'username_3', 'text': '', 'title': None, 'type': 'issue'}]","<issue_start><issue_comment>Title: Instrument performance telemetry
+username_0: https://developers.google.com/analytics/devguides/collection/analyticsjs/user-timings
+
+We should have metrics and telemetry for performance of our site. That way we can have more insight into if we're messing up mobile users or users with older browsers, etc.
+
+In particular, if we are going to target mobile links (rural areas) which are characterized as ""long fat pipes) we need to 
+  (a) reduce payload size [cost, not necessarily speed...but maybe speed on 2g]
+  (b) avoid round-trips [latency is much higher on mobile links], especially serialized round-trips on APIs
+  (c) expect older browsers on low-powered devices meaning careful about assuming JS is fast and that large DOMs are okay because JS on ARM phones can be abysmally slow (esp on old versions of browsers) and memory is obviously smaller.
+<issue_comment>username_0: Tagging @MarinaMartin
+<issue_comment>username_1: Our performance on first load is not very good at the moment: http://www.webpagetest.org/result/160628_D0_Z6P/
+<issue_comment>username_1: Here's our performance from my home network (FiOS) according to [boom](https://github.com/rakyll/boom):
+
+```shell
+$ boom https://vets.gov
+200 / 200 Booooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooo! 100.00 %
+
+Summary:
+  Total:        9.2354 secs.
+  Slowest:      5.7514 secs.
+  Fastest:      1.1435 secs.
+  Average:      2.0935 secs.
+  Requests/sec: 21.6557
+  Total Data Received:  2675000 bytes.
+  Response Size per Request:    13375 bytes.
+
+Status code distribution:
+  [200] 200 responses
+
+Response time histogram:
+  1.144 [1]     |
+  1.604 [80]    |∎∎∎∎∎∎∎∎∎∎∎∎∎∎∎∎∎∎∎∎∎∎∎∎∎∎∎∎∎∎∎∎∎∎∎∎∎∎∎∎
+  2.065 [49]    |∎∎∎∎∎∎∎∎∎∎∎∎∎∎∎∎∎∎∎∎∎∎∎∎
+  2.526 [4]     |∎∎
+  2.987 [18]    |∎∎∎∎∎∎∎∎∎
+  3.447 [38]    |∎∎∎∎∎∎∎∎∎∎∎∎∎∎∎∎∎∎∎
+  3.908 [2]     |∎
+  4.369 [6]     |∎∎∎
+  4.830 [1]     |
+  5.291 [0]     |
+  5.751 [1]     |
+
+Latency distribution:
+  10% in 1.2692 secs.
+  25% in 1.3459 secs.
+  50% in 1.7437 secs.
+  75% in 2.9476 secs.
+  90% in 3.2507 secs.
+  95% in 3.4619 secs.
+  99% in 4.7970 secs.
+```
+<issue_comment>username_1: For comparison, here's my personal website (low traffic, static HTML, hosted on a single private virtual server):
+
+```
+$ boom https://username_1.net
+
+Summary:
+  Total:        0.8751 secs.
+  Slowest:      0.3842 secs.
+  Fastest:      0.1017 secs.
+  Average:      0.2044 secs.
+  Requests/sec: 228.5513
+
+Status code distribution:
+  [200] 200 responses
+
+Response time histogram:
+  0.102 [1]     |
+  0.130 [28]    |∎∎∎∎∎∎∎∎∎∎∎∎∎∎∎∎∎∎∎∎∎∎
+  0.158 [50]    |∎∎∎∎∎∎∎∎∎∎∎∎∎∎∎∎∎∎∎∎∎∎∎∎∎∎∎∎∎∎∎∎∎∎∎∎∎∎∎∎
+  0.186 [40]    |∎∎∎∎∎∎∎∎∎∎∎∎∎∎∎∎∎∎∎∎∎∎∎∎∎∎∎∎∎∎∎∎
+  0.215 [22]    |∎∎∎∎∎∎∎∎∎∎∎∎∎∎∎∎∎
+  0.243 [9]     |∎∎∎∎∎∎∎
+  0.271 [0]     |
+  0.299 [7]     |∎∎∎∎∎
+  0.328 [20]    |∎∎∎∎∎∎∎∎∎∎∎∎∎∎∎∎
+  0.356 [7]     |∎∎∎∎∎
+  0.384 [16]    |∎∎∎∎∎∎∎∎∎∎∎∎
+
+Latency distribution:
+  10% in 0.1194 secs.
+  25% in 0.1445 secs.
+  50% in 0.1753 secs.
+  75% in 0.2871 secs.
+  90% in 0.3474 secs.
+  95% in 0.3689 secs.
+  99% in 0.3841 secs.
+```
+<issue_comment>username_0: Part of this is due to TIC requirements.  What is the meat of this test? Is
+it just a short packet or is there a large payload.
+
+Also... YOU HAVE PERCENTILES!!! YAY!
+<issue_comment>username_0: Due to our current network topology, things entering through the east coast
+gateway will be the slowest since we for a transcontinental hop into
+govcloud.
+
+I notice the locale for your page's test is Dulles VA. The other gateway is
+in Austin. I'm curious what you get if you try austin.
+
+Also, our DNS is even RR, not geolocated.  Thus, we can actually incur a 2
+trans-continental hit per load. <3 TIC. Not.
+
+On Tue, Jun 28, 2016 at 7:49 PM, Albert J. Wong (王重傑） <awong.dev@gmail.com>
+wrote:
+
+> Part of this is due to TIC requirements.  What is the meat of this test?
+> Is it just a short packet or is there a large payload.
+>
+> Also... YOU HAVE PERCENTILES!!! YAY!
+>
+>
+<issue_comment>username_1: Yeah, I think the topology is the most likely culprit, because the actual download after first byte is very fast. Once we move everything to govcloud, it should be considerably less latent.
+
+Boom works by just downloading the raw page (no images or other associated files). It's mostly good as a way of getting a sense of how long it takes to get a connection. webpagetest.org on the other hand renders the whole page in a virtual browser, so it's better for getting a sense how long it will take for users to see the page.
+
+In terms of setting up telemetry, it would be good to have these scripts run regularly and then dump the output somewhere (S3?), so that we can make graphs of speed over time and check it every few weeks. At my old company we did a ""tech huddle"" every Monday to go over the numbers: how many 500s, how long is the longest DB transaction, etc. and then make tickets if anything got worse.
+
+Making a script for webpagetest.org shouldn't be too hard. Once you have a key you can run `curl ""http://www.webpagetest.org/runtest.php?url=https://www.vets.gov&f=json&k=KEY""` and you'll get a response like
+
+```json
+{
+        ""data"": {
+                ""detailCSV"": ""http://www.webpagetest.org/result/160628_33_10RF/requests.csv"",
+                ""jsonUrl"": ""http://www.webpagetest.org/jsonResult.php?test=160628_33_10RF"",
+                ""ownerKey"": ""747ffe160351d5dfb49a8d5fb75776c81827eaba"",
+                ""summaryCSV"": ""http://www.webpagetest.org/result/160628_33_10RF/page_data.csv"",
+                ""testId"": ""160628_33_10RF"",
+                ""userUrl"": ""http://www.webpagetest.org/result/160628_33_10RF/"",
+                ""xmlUrl"": ""http://www.webpagetest.org/xmlResult/160628_33_10RF/""
+        },
+        ""statusCode"": 200,
+        ""statusText"": ""Ok""
+}
+```
+
+Then if you grab data.jsonUrl, you get the full data trace with all the timing info we'd need.
+<issue_comment>username_2: james pls. move to dev ops repo:)
+<issue_comment>username_3: @username_2, dev ops is working on collecting information on time to first byte and response latency, but I think this is still relevant for the google analytics integration and collecting timing information (DOM load, first paint) from the client's perspective.
+
+Can you point me to who's got details on the GA integration?
+<issue_comment>username_2: For GA integration we have been waiting on an ad hoc person . You should check w Bob .
+
+
+
+Sent with Good (www.good.com)
+
+
+-----Original Message-----
+<issue_comment>username_3: Spoke with @robertfairhead regarding our current GA integration. We're already collecting some useful performance information there. I've opened an issue in devops to cover further metrics collection for prometheus.<issue_closed>"
+istio/istio.io,570258142,6551,"{'number': 6551.0, 'repo': 'istio.io', 'user_login': 'istio'}","[{'action': 'opened', 'author': 'howardjohn', 'comment_id': None, 'datetime': '2020-02-25T01:54:48Z', 'masked_author': 'username_0', 'text': '', 'title': 'Initial attempt at upgrade notice', 'type': 'issue'}
+ {'action': 'created', 'author': 'mandarjog', 'comment_id': 594295089.0, 'datetime': '2020-03-04 02:43:02+00:00', 'masked_author': 'username_1', 'text': '@username_2 this needs to have `automtls` notes as well.', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'incfly', 'comment_id': 594710265.0, 'datetime': '2020-03-04 18:00:49+00:00', 'masked_author': 'username_2', 'text': 'Automatic mutual TLS now is default enabled. Traffic between sidecars are automatically configured as mutual TLS. You can disable this explicitly if you worry about the encryption overhead, `-- set values.global.mtls.auto=false` in install. For more details, see \r\n`https://preliminary.istio.io/docs/tasks/security/authentication/auto-mtls/`', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'mandarjog', 'comment_id': 595006792.0, 'datetime': '2020-03-05 03:15:46+00:00', 'masked_author': 'username_1', 'text': 'who is empowered to merge it ?', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'howardjohn', 'comment_id': 595007196.0, 'datetime': '2020-03-05 03:17:42+00:00', 'masked_author': 'username_0', 'text': '@ericvn ?', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'mandarjog', 'comment_id': 595007352.0, 'datetime': '2020-03-05 03:18:20+00:00', 'masked_author': 'username_1', 'text': ""I am already trying to add something here and can't because history has been rewritten :-)"", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'howardjohn', 'comment_id': 595010085.0, 'datetime': '2020-03-05 03:30:10+00:00', 'masked_author': 'username_0', 'text': 'sorry did I revert some changes you made? I had to rebase but I thought I included everything', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'fpesce', 'comment_id': 595367027.0, 'datetime': '2020-03-05 18:04:24+00:00', 'masked_author': 'username_3', 'text': ""@username_1 : Doc WG have approval power. If important documentation are not approved by noon, I'll probably force merge them to get the release out, and we'll update doc later for the nits."", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'incfly', 'comment_id': 595375246.0, 'datetime': '2020-03-05 18:22:01+00:00', 'masked_author': 'username_2', 'text': ""I haven't seen auto mTLS is included in the notice, as I provided a sample paragraph in https://github.com/istio/istio.io/pull/6551#issuecomment-594710265"", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'johnma14', 'comment_id': 595393491.0, 'datetime': '2020-03-05 19:03:38+00:00', 'masked_author': 'username_4', 'text': '@username_2 I think your comments somehow got buried under all the other reviews. Apologies. Will push out another change on this file with the auto mtls comments. That needs to go in here. Thanks for bringing it up.', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'incfly', 'comment_id': 595394406.0, 'datetime': '2020-03-05 19:05:50+00:00', 'masked_author': 'username_2', 'text': 'Thanks!', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'howardjohn', 'comment_id': 595398199.0, 'datetime': '2020-03-05 19:14:30+00:00', 'masked_author': 'username_0', 'text': '/retest', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'linsun', 'comment_id': 595417882.0, 'datetime': '2020-03-05 19:56:56+00:00', 'masked_author': 'username_5', 'text': 'nice job @username_0 - thanks for putting this together', 'title': None, 'type': 'comment'}]","<issue_start><issue_comment>Title: Initial attempt at upgrade notice
+username_0: 
+<issue_comment>username_1: @username_2 this needs to have `automtls` notes as well.
+<issue_comment>username_2: Automatic mutual TLS now is default enabled. Traffic between sidecars are automatically configured as mutual TLS. You can disable this explicitly if you worry about the encryption overhead, `-- set values.global.mtls.auto=false` in install. For more details, see 
+`https://preliminary.istio.io/docs/tasks/security/authentication/auto-mtls/`
+<issue_comment>username_1: who is empowered to merge it ?
+<issue_comment>username_0: @ericvn ?
+<issue_comment>username_1: I am already trying to add something here and can't because history has been rewritten :-)
+<issue_comment>username_0: sorry did I revert some changes you made? I had to rebase but I thought I included everything
+<issue_comment>username_3: @username_1 : Doc WG have approval power. If important documentation are not approved by noon, I'll probably force merge them to get the release out, and we'll update doc later for the nits.
+<issue_comment>username_2: I haven't seen auto mTLS is included in the notice, as I provided a sample paragraph in https://github.com/istio/istio.io/pull/6551#issuecomment-594710265
+<issue_comment>username_4: @username_2 I think your comments somehow got buried under all the other reviews. Apologies. Will push out another change on this file with the auto mtls comments. That needs to go in here. Thanks for bringing it up.
+<issue_comment>username_2: Thanks!
+<issue_comment>username_0: /retest
+<issue_comment>username_5: nice job @username_0 - thanks for putting this together"
+crystal-lang/crystal-website,832281007,126,,"[{'action': 'opened', 'author': 'straight-shoota', 'comment_id': None, 'datetime': '2021-03-15 23:33:36+00:00', 'masked_author': 'username_0', 'text': ""Since https://github.com/crystal-lang/shards/pull/262 the manpages `shards.1` and `shard.yml.5` are generated from asciidoc source.\r\nAs a benefit it allows to transform the content to other formats. We can import it into this repo to replace the *The shards command* page - which is effectively just an HTML version of the manpage. Mkdocs doesn't support asciidoc directly, but it can be convert to markdown via HTML or docbook. `pandoc` can't read asciidoc, so adoc->md is a two-step process.\r\n\r\nThe result of importing the markdown transformation isn't that great. It's okay and gets the job done. The important benefit is it avoids maintaing the same content twice.\r\n\r\nBut unfortunately it doesn't integrate nicely on terms of UX. It's essentially just a manpage and formatted like a man page. Some formatting can be automatically fixed, but others is hard to do.\r\n* The asciidoc source includes language tags for syntax highlighting. But it seems they don't propagate to the markdown transformation.\r\n* Highlights for code and bold text are also a bit wanky, but I suppose that's mostly due to strange manpage conventions. This can be improved in the asciidoc source.\r\n* Currently there are sub-headers for every command. But they don't exist in the manpage-targeted asciidoc source. So in-document navigation is reduced.\r\n\r\nI have some hope in Pandoc's filter system. It's quite powerful and allows custom modifications to the transformation process. It's still a bit of a task to find out how exactly to do things.\r\nBut it looks like it could help improve many of the smaller problems."", 'title': 'Import manual pages from shards', 'type': 'issue'}]","<issue_start><issue_comment>Title: Import manual pages from shards
+username_0: Since https://github.com/crystal-lang/shards/pull/262 the manpages `shards.1` and `shard.yml.5` are generated from asciidoc source.
+As a benefit it allows to transform the content to other formats. We can import it into this repo to replace the *The shards command* page - which is effectively just an HTML version of the manpage. Mkdocs doesn't support asciidoc directly, but it can be convert to markdown via HTML or docbook. `pandoc` can't read asciidoc, so adoc->md is a two-step process.
+
+The result of importing the markdown transformation isn't that great. It's okay and gets the job done. The important benefit is it avoids maintaing the same content twice.
+
+But unfortunately it doesn't integrate nicely on terms of UX. It's essentially just a manpage and formatted like a man page. Some formatting can be automatically fixed, but others is hard to do.
+* The asciidoc source includes language tags for syntax highlighting. But it seems they don't propagate to the markdown transformation.
+* Highlights for code and bold text are also a bit wanky, but I suppose that's mostly due to strange manpage conventions. This can be improved in the asciidoc source.
+* Currently there are sub-headers for every command. But they don't exist in the manpage-targeted asciidoc source. So in-document navigation is reduced.
+
+I have some hope in Pandoc's filter system. It's quite powerful and allows custom modifications to the transformation process. It's still a bit of a task to find out how exactly to do things.
+But it looks like it could help improve many of the smaller problems."
+elementary/website,221207012,1647,,"[{'action': 'opened', 'author': 'JustSteveKing', 'comment_id': None, 'datetime': '2017-04-12 09:43:35+00:00', 'masked_author': 'username_0', 'text': '### Expected behavior\r\n\r\nA modern code base which uses technologies that were created this side of 2010\r\n\r\n### Actual behavior\r\n\r\nSomething my grandmother wrote\r\n\r\n### Steps to reproduce the behavior\r\n\r\n1. Open browser\r\n2. Look at code in repo\r\n3. Feel 100% better about my rushed code jobs', 'title': 'Update codebase', 'type': 'issue'}
+ {'action': 'created', 'author': 'JustSteveKing', 'comment_id': 293528067.0, 'datetime': '2017-04-12 09:47:59+00:00', 'masked_author': 'username_0', 'text': '[Update](https://twitter.com/username_0/status/852092264004407296)', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'btkostner', 'comment_id': 293580567.0, 'datetime': '2017-04-12 13:42:57+00:00', 'masked_author': 'username_1', 'text': ""While I agree that it's not pretty and can be improved many places, it works and has little dependency on other libraries. I would love to sit down and rewrite this the best way I can, but there is a lot of other stuff that takes priority right now.\r\n\r\nIf you have any specific issues with the code, or any _actual_ improvements that should be made, feel free to file a detailed issue."", 'title': None, 'type': 'comment'}
+ {'action': 'closed', 'author': 'btkostner', 'comment_id': None, 'datetime': '2017-04-12 13:42:57+00:00', 'masked_author': 'username_1', 'text': '', 'title': None, 'type': 'issue'}
+ {'action': 'created', 'author': 'JustSteveKing', 'comment_id': 293584061.0, 'datetime': '2017-04-12 13:53:41+00:00', 'masked_author': 'username_0', 'text': ""Surely a modern code base and using libraries would actually increase the standard of the site? It appears that you have reinvented the wheel because you wanted it to be square.\r\n\r\nThis follows no specific design pattern, there is code smell everywhere, and maintaining this must be an absolute headache.\r\n\r\nYou use Stripe for payments, you need translations, you want speed and awesomeness but you don't want any dependencies, and you don't want to use a framework for ease .... none of this makes sense. Welcome to 2017, we have composer and coding standards"", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'btkostner', 'comment_id': 293604700.0, 'datetime': '2017-04-12 14:58:25+00:00', 'masked_author': 'username_1', 'text': 'A modern code base would definitely help the standard of the site, but we would be at the same road in a couple of years. Before this site we had a site with codeigniter. It worked, but could be a pain trying to overcome some of the library code. Originally this site was completely static, with only some PHP for things like translations and download links. Over time it started growing into more dynamic content and got harder and harder to refactor into ""clean"" code. Here is where we are know.\r\n\r\nI would like to know what we reinvented. Aside from maybe the markdown parsing, everything here is pretty basic, or in a library with composer.\r\n\r\nI come from a JavaScript background, so PHP tools are kinda foreign to me. I do completely agree that this repo needs some quality assurance tools for PHP, but in my searches I\'ve come up with only really basic tools. I recently found `phpqa` which seems to have a good amount of useful tools, and a linter that actually does stuff. Hopefully soon I\'ll be able to integrate it with our PR process. Let me know some packages you use and I\'ll check them out.\r\n\r\nMy statement on dependencies might have came out the wrong way. It\'s not that we don\'t like depending on packages, it\'s that we don\'t want to tie our code to a huge framework like laravel, or code ignitor, or what ever else awesome new PHP framework is out. Most of them are designed for huge database driven websites. Completely overkill for a site that is mostly static content. Not to mention it would increase our response time 300%.\r\n\r\nComposer is a recent addition and at the time namespace usage wasn\'t huge in the code base so autoloading is kinda pointless.', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'JustSteveKing', 'comment_id': 293607448.0, 'datetime': '2017-04-12 15:06:38+00:00', 'masked_author': 'username_0', 'text': ""Laravel is not exactly huge .... yes it has a few dependencies which it loads in, but all of these are there to make the system super useful. Translations are easy, emailing is easy, integrating with social providers is easy, integrating with Stripe is easy, sending transactional emails is easy.\r\n\r\nSeriously, using such an old code base makes me question the quality of the code in the OS itself. If the web tech is this bad - do I trust the tech in the OS?\r\n\r\nFor what you need, you could even get away with a sqlite database, if you do that little database stuff. Look into Laravel and what it could offer you. If you don't want to go that large possible look at Slim3 framework which is a micro framework. Look at symfony components or Silex, or anything but legacy procedural code with a fluttering of OOP and no architectural pattern.\r\n\r\nWeb application management should be easy and a breeze. Where do you store the products you use in Stripe? Do you have manual entries in the code to display them? Surely this makes things slower each time you want to add a new one? It means a developer has to add the new prduct instead of getting a simple helper to update the web.\r\n\r\nIt is sites like this that make PHP seem like a lesser programming language. PHP can be just as powerful as some of the heavier hitters like Python or Ruby. Spend 2 hours looking through Laravel documentation or looking at the Laracasts website and watch the free serieses and you will see how much this could really improve. You could even start getting slack notifications each time a download is started, or a product is purchased.\r\n\r\nThis code makes me sad"", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'btkostner', 'comment_id': 293617448.0, 'datetime': '2017-04-12 15:34:57+00:00', 'masked_author': 'username_1', 'text': ""I have looked at laravel, and in fact have used it. It's very nice, but it is _very_ large a framework. We don't need it, and we don't want anything that large. The OOP files you saw were an attempt at updating the code base, but sadly until someone sits down and rewrites all the files, it's going to be in that bad state of in between. I'm not disagreeing with you about the old code, or the need to do a more OOP style, or the need for a code style and linting. But like I said, we have other things that we are currently working on, and updating this code base is a large undertaking."", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'cassidyjames', 'comment_id': 293620789.0, 'datetime': '2017-04-12 15:45:14+00:00', 'masked_author': 'username_2', 'text': 'Obviously trolls.', 'title': None, 'type': 'comment'}]","<issue_start><issue_comment>Title: Update codebase
+username_0: ### Expected behavior
+
+A modern code base which uses technologies that were created this side of 2010
+
+### Actual behavior
+
+Something my grandmother wrote
+
+### Steps to reproduce the behavior
+
+1. Open browser
+2. Look at code in repo
+3. Feel 100% better about my rushed code jobs
+<issue_comment>username_0: [Update](https://twitter.com/username_0/status/852092264004407296)
+<issue_comment>username_1: While I agree that it's not pretty and can be improved many places, it works and has little dependency on other libraries. I would love to sit down and rewrite this the best way I can, but there is a lot of other stuff that takes priority right now.
+
+If you have any specific issues with the code, or any _actual_ improvements that should be made, feel free to file a detailed issue.<issue_closed>
+<issue_comment>username_0: Surely a modern code base and using libraries would actually increase the standard of the site? It appears that you have reinvented the wheel because you wanted it to be square.
+
+This follows no specific design pattern, there is code smell everywhere, and maintaining this must be an absolute headache.
+
+You use Stripe for payments, you need translations, you want speed and awesomeness but you don't want any dependencies, and you don't want to use a framework for ease .... none of this makes sense. Welcome to 2017, we have composer and coding standards
+<issue_comment>username_1: A modern code base would definitely help the standard of the site, but we would be at the same road in a couple of years. Before this site we had a site with codeigniter. It worked, but could be a pain trying to overcome some of the library code. Originally this site was completely static, with only some PHP for things like translations and download links. Over time it started growing into more dynamic content and got harder and harder to refactor into ""clean"" code. Here is where we are know.
+
+I would like to know what we reinvented. Aside from maybe the markdown parsing, everything here is pretty basic, or in a library with composer.
+
+I come from a JavaScript background, so PHP tools are kinda foreign to me. I do completely agree that this repo needs some quality assurance tools for PHP, but in my searches I've come up with only really basic tools. I recently found `phpqa` which seems to have a good amount of useful tools, and a linter that actually does stuff. Hopefully soon I'll be able to integrate it with our PR process. Let me know some packages you use and I'll check them out.
+
+My statement on dependencies might have came out the wrong way. It's not that we don't like depending on packages, it's that we don't want to tie our code to a huge framework like laravel, or code ignitor, or what ever else awesome new PHP framework is out. Most of them are designed for huge database driven websites. Completely overkill for a site that is mostly static content. Not to mention it would increase our response time 300%.
+
+Composer is a recent addition and at the time namespace usage wasn't huge in the code base so autoloading is kinda pointless.
+<issue_comment>username_0: Laravel is not exactly huge .... yes it has a few dependencies which it loads in, but all of these are there to make the system super useful. Translations are easy, emailing is easy, integrating with social providers is easy, integrating with Stripe is easy, sending transactional emails is easy.
+
+Seriously, using such an old code base makes me question the quality of the code in the OS itself. If the web tech is this bad - do I trust the tech in the OS?
+
+For what you need, you could even get away with a sqlite database, if you do that little database stuff. Look into Laravel and what it could offer you. If you don't want to go that large possible look at Slim3 framework which is a micro framework. Look at symfony components or Silex, or anything but legacy procedural code with a fluttering of OOP and no architectural pattern.
+
+Web application management should be easy and a breeze. Where do you store the products you use in Stripe? Do you have manual entries in the code to display them? Surely this makes things slower each time you want to add a new one? It means a developer has to add the new prduct instead of getting a simple helper to update the web.
+
+It is sites like this that make PHP seem like a lesser programming language. PHP can be just as powerful as some of the heavier hitters like Python or Ruby. Spend 2 hours looking through Laravel documentation or looking at the Laracasts website and watch the free serieses and you will see how much this could really improve. You could even start getting slack notifications each time a download is started, or a product is purchased.
+
+This code makes me sad
+<issue_comment>username_1: I have looked at laravel, and in fact have used it. It's very nice, but it is _very_ large a framework. We don't need it, and we don't want anything that large. The OOP files you saw were an attempt at updating the code base, but sadly until someone sits down and rewrites all the files, it's going to be in that bad state of in between. I'm not disagreeing with you about the old code, or the need to do a more OOP style, or the need for a code style and linting. But like I said, we have other things that we are currently working on, and updating this code base is a large undertaking.
+<issue_comment>username_2: Obviously trolls."
+quarkusio/quarkusio.github.io,832792225,933,,"[{'action': 'opened', 'author': 'jclingan', 'comment_id': None, 'datetime': '2021-03-16 13:20:14+00:00', 'masked_author': 'username_0', 'text': '```\r\n- id: AMicroserviceStoryArchitecturaltransitionwitheasepoweredbyQuarkusandOpenShiftEnglishYouTube-2021-03-16\r\n  type: video \r\n  title: ""A Microservice Story - Architectural transition with ease powered by Quarkus and OpenShift [English]""\r\n  date: ""2021-03-16""\r\n  author: ""OpenShift Anwender""\r\n  note: ""Raffael presents an exciting microservice story explaining how to modernize a monolithic (Java) application architecture towards a modern stack based on Quarkus and Red Hat OpenShift.""\r\n  url: ""https://www.youtube.com/watch?v=heAE7tTleYE""\r\n  urldate: ""2021-03-16""\r\n\r\n```', 'title': 'Add A Microservice Story - Architectural transition with ease powered by Quarkus and OpenShift [English] to Publications', 'type': 'issue'}
+ {'action': 'closed', 'author': 'maxandersen', 'comment_id': None, 'datetime': '2021-07-14 15:59:17+00:00', 'masked_author': 'username_1', 'text': '', 'title': None, 'type': 'issue'}
+ {'action': 'created', 'author': 'maxandersen', 'comment_id': 880014644.0, 'datetime': '2021-07-14 15:59:17+00:00', 'masked_author': 'username_1', 'text': 'Closed by fetchpub as detected to already be included.', 'title': None, 'type': 'comment'}]","<issue_start><issue_comment>Title: Add A Microservice Story - Architectural transition with ease powered by Quarkus and OpenShift [English] to Publications
+username_0: ```
+- id: AMicroserviceStoryArchitecturaltransitionwitheasepoweredbyQuarkusandOpenShiftEnglishYouTube-2021-03-16
+  type: video 
+  title: ""A Microservice Story - Architectural transition with ease powered by Quarkus and OpenShift [English]""
+  date: ""2021-03-16""
+  author: ""OpenShift Anwender""
+  note: ""Raffael presents an exciting microservice story explaining how to modernize a monolithic (Java) application architecture towards a modern stack based on Quarkus and Red Hat OpenShift.""
+  url: ""https://www.youtube.com/watch?v=heAE7tTleYE""
+  urldate: ""2021-03-16""
+
+```<issue_closed>
+<issue_comment>username_1: Closed by fetchpub as detected to already be included."
+godotengine/godot-website,704544578,178,"{'number': 178.0, 'repo': 'godot-website', 'user_login': 'godotengine'}","[{'action': 'opened', 'author': 'pycbouh', 'comment_id': None, 'datetime': '2020-09-18T17:35:58Z', 'masked_author': 'username_0', 'text': 'Now, this is a big one. Closes #47. Read up on that issue if you want to know how this has come to be.\r\n\r\nThis PR unlocks the ability to internationalize our website to a number of languages. Main changes are as follows:\r\n\r\n* Added the `RainLab.Translate` plugin for OctoberCMS, allowing for translations;\r\n* Created a custom `GodotEngine.Utility` plugin to extend the functionality of the Translate plugin to suit our needs;\r\n* Covered almost all existing pages making texts translatable (with a couple of exceptions, see below);\r\n* Partially translated those pages to Russian (mostly to test things, but the translations are proper);\r\n* Added a locale switcher to the footer.\r\n\r\n**Commits are purposefully unsquashed.** I hope this would allow to check the code and the layouts easier. There is a lot to check and I\'ve tried to make commits as concise and related to one subject as possible. Be advised, though, that though I\'ve tried to address all of the technical details in the first few commits, some issues arose later on. I\'ve tried to keep things separate as much as possible still.\r\n\r\n### How does it work?\r\n\r\nThe system is two-fold. RainLab.Translate provides the low level tools for translations to be applied to the texts. Unfortunately, this plugin operates on an internal database while we prefer to keep translations in files so that they can be maintained via Weblate. The Translate plugin supports files, but only CSV (via import) and YAML (via scanning). We rely on YAML files as the only reasonable way to automate things.\r\n\r\nHowever, actual translations are kept in PO files, as is the longstanding tradition when translating Godot resources. Those PO files are generated from the actual template code of the website using GodotEngine.Utility. They can then be moved anywhere outside of the system, edited and re-added. As RainLab.Translate is not able to handle PO files directly, we use them to generate YAML files. The Translate plugin happily scans them and adds translated strings. The rest is controlled by it.\r\n\r\nTo enforce a language on a page the path of a URL is used. For example, `https://godotengine.org/features` can be translated into Russian by changing the URL to `https://godotengine.org/ru/features`. On the subsequent requests to the website the locale is remembered and kept, even if the URL is not containing the locale code. These links can be cached by search engines. We may need to think about how we want to handle that. At the very least, canonical meta-tags are required.\r\n\r\nAs mentioned before, there is now the locale selector at the bottom of each page. So manual editing of URLs is not needed.\r\n\r\n### How to translate the website?\r\n\r\nCompared to the approach described in the linked issue things got a bit simpler. Text still needs to be wrapped in a particular construct, however it\'s just one function call. There is a small extra detail here: as we are using PHP, single quotation marks are pretty powerless, and double quotation marks are ""magical"". This is utilized in the following manner:\r\n\r\n* For single lines of texts (buttons, headers, etc) use a single quotation mark: `{{ TR(\'Some text\') }}`;\r\n* For multiline statements, especially containing markup and formatting, use a double quotation mark: `{{ TR(""Some text"") }}`.\r\n\r\nHere\'s the example from the actual code:\r\n\r\n```twig\r\n      <h2>{{ TR(\'The game engine you waited&nbsp;for.\') }}</h2>\r\n\r\n      <p>\r\n        {{ TR(""\r\n        Godot provides a huge set of common tools, so you can just focus on\r\n        making your game without reinventing the wheel.\r\n        "") }}\r\n      </p>\r\n```\r\n\r\nTechnically, this is it. Though one has to remember to escape single and double quotes in the corresponding strings (with a backslash).\r\n\r\n```twig\r\n    {{ TR(""\r\n    By joining Godot communities, you agree to follow Godot\'s\r\n    <a href=\\""/code-of-conduct\\"">Code of Conduct</a>.\r\n    "") }}\r\n```\r\n\r\n### How to work with PO files?\r\n\r\nTo generate PO files a locale must exist. To add a new locale use the admin panel (*Translate > Manage Languages*). This step cannot be automated as it must be performed on the actual database. To generate the necessary files, use the following command: `php artisan godotengine:addi18n es` (where `es` is the code for the locale; it must match with the code entered in the admin panel).\r\n\r\n```shell\r\nroot@28925d7870fb:/var/www/html# php artisan godotengine:addi18n es\r\nAdding ""es"" translation.\r\nWriting translation PO file themes/godotengine/i18n/po/messages.es.po.\r\nWriting translation YAML file themes/godotengine/i18n/es.yaml.\r\nUpdating Theme configuration.\r\nSuccessfully added ""es"" translation.\r\n```\r\n\r\nPO files are updated using another command: `php artisan godotengine:extracti18n` (no arguments). This command scans Twig templates for the calls to the aforementioned `TR` function and extracts all calls using string literals for arguments. Firstly, a base file is generated anew. Then this file is merged using `msgmerge` with the PO file for each locale. That\'s it, the resulting PO files can be edited. `msgmerge` tries to fuzzy map similar messages too, so small changes to the original lines can be propagated through translations without any loss of values.\r\n\r\n```shell\r\nroot@28925d7870fb:/var/www/html# php artisan godotengine:extracti18n\r\nStarting message extraction.\r\nScanning Layout files.\r\nScanning Page files.\r\nScanning Partial files.\r\nMerging extracted messages with the current base file.\r\nWriting extracted messages to the base file.\r\nUpdating locale-specific files.\r\n........ done.\r\nSuccessfully updated ""ru"" translation; file themes/godotengine/i18n/po/messages.ru.po has been written.\r\nFinished message extraction.\r\n```\r\n\r\n[Truncated]\n\r\n6. The titles of the most pages are translated automagically, because they match the strings already present in the system. But for the downloads page, at least, I\'ve had to come up with a way to change it to a translated variant via some use of placeholders:\r\n\r\n```swift\r\n{% put head_title %}{{ TR(\'Download\') ~ \' | Linux\' }}{% endput %}\r\n```\r\n\r\nThis can be applied to any page that requires adjustments. But, like I\'ve said, it mostly *just works*:\r\n\r\n```swift\r\n<title>Godot Engine - {% placeholder head_title default %}{{ TR(this.page.title) }}{% endplaceholder %}</title>\r\n```\r\n\r\n-----\r\n\r\nI am sure something important must\'ve skipped my mind. So please ask any questions you have.\r\n\r\nPS. I have to say, it\'s super freaking cool to [see the website translated](https://user-images.githubusercontent.com/11782833/93628162-c7edbb00-f9ee-11ea-9620-dd9ba5f2f550.png).\r\n\r\n/cc @akien-mga @username_1 @Geequlim', 'title': 'Allow internationalization of the website', 'type': 'issue'}
+ {'action': 'created', 'author': 'Calinou', 'comment_id': 792780230.0, 'datetime': '2021-03-08 14:09:42+00:00', 'masked_author': 'username_1', 'text': ""@username_0 I was thinking about this PR and ways to simplify it, since right now, it adds quite a lot of complexity. Why not use [Weblate's YAML support](https://docs.weblate.org/en/latest/formats.html#yaml-files) directly so we don't have to convert between PO and YAML? While YAML is a less advanced format, we most likely won't need things like pluralization in the website translations."", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'pycbouh', 'comment_id': 792807010.0, 'datetime': '2021-03-08 14:51:32+00:00', 'masked_author': 'username_0', 'text': ""I didn't consider that, but at a glance this doesn't seem like an optimal solution. How well formed do the keys need to be? Is there a size limit to a key? Can they be merged in a similar manner to `msgmerge`?\r\n\r\nPO allows us to preserve the untranslated content as is, which removes the need to sanitize it, doesn't introduce an artificial size limit, increases uniqueness of keys. It also seems that Weblate supports a specific format of YAML files, so we'd have to convert from October i18n YAML to Ruby YAML. Just to clarify, YAML is only a part of this picture because it's the only feasible way to interface with October. If we could use PO files directly, I'd prefer us to do that, but alas.\r\n\r\nI don't think that this PRs implementation is that complex, but I understand your hesitation as a sole maintainer of our web ecosystem. For my part, I hope that the plugin won't require maintanance at all, it's pretty straightforward. I can document the code better, if required. Using it shouldn't be a problem neither."", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'pycbouh', 'comment_id': 848995146.0, 'datetime': '2021-05-26 17:55:14+00:00', 'masked_author': 'username_0', 'text': ""This PR is very outdated and hard to rebase unless there is very good reason for it. As the main concern is complexity, and I don't think we'll get anything better in that regard with October, I'll close it for now. We better move to a better CMS, I guess.\r\n\r\nThis can be salvaged if needs be."", 'title': None, 'type': 'comment'}]","<issue_start><issue_comment>Title: Allow internationalization of the website
+username_0: Now, this is a big one. Closes #47. Read up on that issue if you want to know how this has come to be.
+
+This PR unlocks the ability to internationalize our website to a number of languages. Main changes are as follows:
+
+* Added the `RainLab.Translate` plugin for OctoberCMS, allowing for translations;
+* Created a custom `GodotEngine.Utility` plugin to extend the functionality of the Translate plugin to suit our needs;
+* Covered almost all existing pages making texts translatable (with a couple of exceptions, see below);
+* Partially translated those pages to Russian (mostly to test things, but the translations are proper);
+* Added a locale switcher to the footer.
+
+**Commits are purposefully unsquashed.** I hope this would allow to check the code and the layouts easier. There is a lot to check and I've tried to make commits as concise and related to one subject as possible. Be advised, though, that though I've tried to address all of the technical details in the first few commits, some issues arose later on. I've tried to keep things separate as much as possible still.
+
+### How does it work?
+
+The system is two-fold. RainLab.Translate provides the low level tools for translations to be applied to the texts. Unfortunately, this plugin operates on an internal database while we prefer to keep translations in files so that they can be maintained via Weblate. The Translate plugin supports files, but only CSV (via import) and YAML (via scanning). We rely on YAML files as the only reasonable way to automate things.
+
+However, actual translations are kept in PO files, as is the longstanding tradition when translating Godot resources. Those PO files are generated from the actual template code of the website using GodotEngine.Utility. They can then be moved anywhere outside of the system, edited and re-added. As RainLab.Translate is not able to handle PO files directly, we use them to generate YAML files. The Translate plugin happily scans them and adds translated strings. The rest is controlled by it.
+
+To enforce a language on a page the path of a URL is used. For example, `https://godotengine.org/features` can be translated into Russian by changing the URL to `https://godotengine.org/ru/features`. On the subsequent requests to the website the locale is remembered and kept, even if the URL is not containing the locale code. These links can be cached by search engines. We may need to think about how we want to handle that. At the very least, canonical meta-tags are required.
+
+As mentioned before, there is now the locale selector at the bottom of each page. So manual editing of URLs is not needed.
+
+### How to translate the website?
+
+Compared to the approach described in the linked issue things got a bit simpler. Text still needs to be wrapped in a particular construct, however it's just one function call. There is a small extra detail here: as we are using PHP, single quotation marks are pretty powerless, and double quotation marks are ""magical"". This is utilized in the following manner:
+
+* For single lines of texts (buttons, headers, etc) use a single quotation mark: `{{ TR('Some text') }}`;
+* For multiline statements, especially containing markup and formatting, use a double quotation mark: `{{ TR(""Some text"") }}`.
+
+Here's the example from the actual code:
+
+```twig
+      <h2>{{ TR('The game engine you waited&nbsp;for.') }}</h2>
+
+      <p>
+        {{ TR(""
+        Godot provides a huge set of common tools, so you can just focus on
+        making your game without reinventing the wheel.
+        "") }}
+      </p>
+```
+
+Technically, this is it. Though one has to remember to escape single and double quotes in the corresponding strings (with a backslash).
+
+```twig
+    {{ TR(""
+    By joining Godot communities, you agree to follow Godot's
+    <a href=\""/code-of-conduct\"">Code of Conduct</a>.
+    "") }}
+```
+
+### How to work with PO files?
+
+To generate PO files a locale must exist. To add a new locale use the admin panel (*Translate > Manage Languages*). This step cannot be automated as it must be performed on the actual database. To generate the necessary files, use the following command: `php artisan godotengine:addi18n es` (where `es` is the code for the locale; it must match with the code entered in the admin panel).
+
+```shell
+root@28925d7870fb:/var/www/html# php artisan godotengine:addi18n es
+Adding ""es"" translation.
+Writing translation PO file themes/godotengine/i18n/po/messages.es.po.
+Writing translation YAML file themes/godotengine/i18n/es.yaml.
+Updating Theme configuration.
+Successfully added ""es"" translation.
+```
+
+PO files are updated using another command: `php artisan godotengine:extracti18n` (no arguments). This command scans Twig templates for the calls to the aforementioned `TR` function and extracts all calls using string literals for arguments. Firstly, a base file is generated anew. Then this file is merged using `msgmerge` with the PO file for each locale. That's it, the resulting PO files can be edited. `msgmerge` tries to fuzzy map similar messages too, so small changes to the original lines can be propagated through translations without any loss of values.
+
+```shell
+root@28925d7870fb:/var/www/html# php artisan godotengine:extracti18n
+Starting message extraction.
+Scanning Layout files.
+Scanning Page files.
+Scanning Partial files.
+Merging extracted messages with the current base file.
+Writing extracted messages to the base file.
+Updating locale-specific files.
+........ done.
+Successfully updated ""ru"" translation; file themes/godotengine/i18n/po/messages.ru.po has been written.
+Finished message extraction.
+```
+
+[Truncated]
+
+6. The titles of the most pages are translated automagically, because they match the strings already present in the system. But for the downloads page, at least, I've had to come up with a way to change it to a translated variant via some use of placeholders:
+
+```swift
+{% put head_title %}{{ TR('Download') ~ ' | Linux' }}{% endput %}
+```
+
+This can be applied to any page that requires adjustments. But, like I've said, it mostly *just works*:
+
+```swift
+<title>Godot Engine - {% placeholder head_title default %}{{ TR(this.page.title) }}{% endplaceholder %}</title>
+```
+
+-----
+
+I am sure something important must've skipped my mind. So please ask any questions you have.
+
+PS. I have to say, it's super freaking cool to [see the website translated](https://user-images.githubusercontent.com/11782833/93628162-c7edbb00-f9ee-11ea-9620-dd9ba5f2f550.png).
+
+/cc @akien-mga @username_1 @Geequlim
+<issue_comment>username_1: @username_0 I was thinking about this PR and ways to simplify it, since right now, it adds quite a lot of complexity. Why not use [Weblate's YAML support](https://docs.weblate.org/en/latest/formats.html#yaml-files) directly so we don't have to convert between PO and YAML? While YAML is a less advanced format, we most likely won't need things like pluralization in the website translations.
+<issue_comment>username_0: I didn't consider that, but at a glance this doesn't seem like an optimal solution. How well formed do the keys need to be? Is there a size limit to a key? Can they be merged in a similar manner to `msgmerge`?
+
+PO allows us to preserve the untranslated content as is, which removes the need to sanitize it, doesn't introduce an artificial size limit, increases uniqueness of keys. It also seems that Weblate supports a specific format of YAML files, so we'd have to convert from October i18n YAML to Ruby YAML. Just to clarify, YAML is only a part of this picture because it's the only feasible way to interface with October. If we could use PO files directly, I'd prefer us to do that, but alas.
+
+I don't think that this PRs implementation is that complex, but I understand your hesitation as a sole maintainer of our web ecosystem. For my part, I hope that the plugin won't require maintanance at all, it's pretty straightforward. I can document the code better, if required. Using it shouldn't be a problem neither.
+<issue_comment>username_0: This PR is very outdated and hard to rebase unless there is very good reason for it. As the main concern is complexity, and I don't think we'll get anything better in that regard with October, I'll close it for now. We better move to a better CMS, I guess.
+
+This can be salvaged if needs be."
+gohugoio/hugo,626696293,7330,"{'number': 7330.0, 'repo': 'hugo', 'user_login': 'gohugoio'}","[{'action': 'opened', 'author': 'Aescetic', 'comment_id': None, 'datetime': '2020-05-28T17:46:36Z', 'masked_author': 'username_0', 'text': 'See #7329.\r\n\r\nHere is my particular case of ""paired shortcodes"":\r\n\r\n```\r\n{{< section >}}\r\n\r\nLorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam efficitur luctus hendrerit. Nullam nunc massa, placerat non pharetra sit amet, facilisis sed est. Proin convallis arcu eget blandit accumsan.\r\n\r\nEtiam eu metus nec est consectetur efficitur a sed eros. Proin nec fermentum metus. Ut vulputate erat ante, a egestas purus mollis eu. Donec porttitor lacus elementum, laoreet odio in, mollis odio. Proin dui libero, bibendum eu dapibus in, lobortis a sapien.\r\n\r\nNulla condimentum turpis nibh, sit amet rhoncus dui sodales sit amet. Vestibulum tincidunt tempor magna, in pellentesque quam rhoncus eu. Nam gravida metus et elit mollis, at posuere mauris venenatis.\r\n\r\n{{< section />}}\r\n```\r\n\r\nThis is a partial fix, because there is a catch. (There is always a catch.) Two, in fact.\r\n\r\n**I)**\r\n\r\n```\r\n{{% mdshortcode %}}Stuff to `process` in the *center*.{{% /mdshortcode %}}\r\n```\r\n\r\nShortcodes defined with `%` may ""escape"" some of the closing HTML tags in one or more templates. Don\'t ask me how this happens — I don\'t know.\r\n\r\n**II)**\r\n\r\nFrom:\r\n\r\n```\r\n{{< highlight go >}} A bunch of code here {{< /highlight >}}\r\n```\r\n\r\nTo:\r\n\r\n```\r\n{{< highlight go >}} A bunch of code here {{< highlight />}}\r\n```\r\n\r\nThe closing slash must be moved from before `highlight` (as described in the documentation) to before the right angle bracket. To leave the slash where it is may cause precisely the same fatal error as before.\r\n\r\nThe reasons for these strange phenomena are not clear to me, as I have no prior experience with Go in any capacity whatsoever.\r\n\r\nYou are welcome to do whatever you want with this code, @username_1, but don\'t tell me that my problems don\'t real.', 'title': 'Partial fix for fatal crash on use of so-called ""paired shortcodes""', 'type': 'issue'}
+ {'action': 'created', 'author': 'bep', 'comment_id': 635529167.0, 'datetime': '2020-05-28 18:47:02+00:00', 'masked_author': 'username_1', 'text': 'If you can add a failing test case that this PR fixes it would be easier to understand; I also need that before I can consider merging this.', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'Aescetic', 'comment_id': 635629619.0, 'datetime': '2020-05-28 21:56:26+00:00', 'masked_author': 'username_0', 'text': 'I would do as you request, but just let me show you something.\r\n\r\nWith my commit and the following shortcode template:\r\n\r\n```html\r\n<div class=""flex-l mv0 pa3 center"">\r\n    <article class=""center mw7"">\r\n        <div class=""nested-copy-line-height lh-copy f6 nested-links nested-img mid-gray"">\r\n            {{ .Get 0 }}\r\n        </div>\r\n    </article>\r\n</div>\r\n```\r\n\r\n...This in `_index.md`:\r\n\r\n```\r\n{{% section %}}\r\n\r\ntesting 1 2 3\r\n\r\n{{% section /%}}\r\n```\r\n\r\n...Produces the following generated output:\r\n\r\n```html\r\n<pre>\r\n    <code>    </div>\r\n    </article>\r\n    </code>\r\n</pre>\r\n<!-- raw HTML omitted -->\r\n<p>testing 1 2 3</p>\r\n<!-- raw HTML omitted -->\r\n<pre>\r\n    <code>    </div>\r\n    </article>\r\n    </code>\r\n</pre>\r\n```\r\n\r\nWhy is this? I have no idea.\r\n\r\nWhile this in `_index.md`:\r\n\r\n```\r\n{{< section >}}\r\n\r\n# This is a headline\r\n\r\n## The is a subheadline\r\n\r\n*This is italicized text.*\r\n\r\n**This is bolded text.**\r\n\r\nLorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam efficitur luctus\r\nhendrerit. Nullam nunc massa, placerat non pharetra sit amet, facilisis sed est.\r\nProin convallis arcu eget blandit accumsan. Morbi volutpat elit ac nibh\r\nporttitor tristique. Duis congue pellentesque sem et convallis. Etiam eu metus\r\nnec est consectetur efficitur a sed eros. Proin nec fermentum metus. Ut\r\nvulputate erat ante, a egestas purus mollis eu. Donec porttitor lacus elementum,\r\nlaoreet odio in, mollis odio. Proin dui libero, bibendum eu dapibus in, lobortis\r\na sapien. Nulla condimentum turpis nibh, sit amet rhoncus dui sodales sit amet.\r\nVestibulum tincidunt tempor magna, in pellentesque quam rhoncus eu. Nam gravida\r\nmetus et elit mollis, at posuere mauris venenatis.\r\n\r\n{{< section />}}\r\n```\r\n\r\n...Works as expected, formatting and all, while this:\r\n\r\n```\r\n{{% section %}}\r\n\r\ntesting 1 2 3\r\n\r\n{{% /section %}}\r\n```\r\n[Truncated]\n...Both produce the following build error:\r\n\r\n```\r\nBuilding sites … ERROR [DATE AND TIME] Unable to locate template for shortcode """" in page ""_index.md""\r\nBuilt in 177 ms\r\nError: Error building site: logged 1 error(s)\r\n```\r\n\r\nWithout my commit, variations with the slash before the name of the shortcode produce the following build error:\r\n\r\n```\r\nBuilt in 70 ms\r\nError: Error building site: ""[...]/content/_index.md:xx:yy"": failed to extract shortcode: shortcode "">}}"" has no .Inner, yet a closing tag was provided\r\n```\r\n\r\n...And variations with the slash before the right angle bracket produce the stack trace described in issue #7322.\r\n\r\nI\'m sure that this is a very simple parsing problem, but it is no less an impenetrable mystery to me. I simply do not have the domain-specific knowledge — of the language or of the project — to even begin to untangle this.\r\n\r\nI\'ve taken this as far as I can. If you or another guru o\' Hugo don\'t know why these things be like it is, then I guess no one understands what the **** is happening here.', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'bep', 'comment_id': 635639959.0, 'datetime': '2020-05-28 22:23:13+00:00', 'masked_author': 'username_1', 'text': 'The formatting question you raise is documented and has nothing to do with the ""crash"". You cannot copy a fraction of a big site and tell me that ""this case fails"" when there are millions of similar working examples out there. I\'m not doubting that the problem is real, but the devil is in the detail -- we need a failing test to be able to fix this.', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'Aescetic', 'comment_id': 636015053.0, 'datetime': '2020-05-29 14:48:35+00:00', 'masked_author': 'username_0', 'text': 'Is parsing behavior dependent on site and/or theme configuration?\r\n\r\nUnder what conditions does Hugo consider an unhandled (fatal) exception to be an acceptable outcome?\r\n\r\nI have observed this behavior on the following versions:\r\n\r\n* hugo_0.71.1_macOS-64bit\r\n* hugo_0.71.1_macOS-32bit\r\n* hugo_0.70.0_macOS-32bit\r\n* hugo_extended_0.71.1_macOS-64bit\r\n* hugo_extended_0.70.0_macOS-64bit\r\n* hugo_0.70.0_macOS-64bit\r\n* hugo_extended_0.68.3_macOS-64bit\r\n* hugo_extended_0.63.2_macOS-64bit\r\n* hugo_0.63.1_macOS-64bit\r\n\r\nThe last version to correctly parse the name of a shortcode was `v0.61.0`.\r\n\r\nAre or are not these messages evidence of parsing error?\r\n\r\n```\r\nBuilding sites … ERROR [DATE AND TIME] Unable to locate template for shortcode """" in page ""_index.md""\r\n```\r\n\r\n```\r\nError: Error building site: ""[...]/content/_index.md:xx:yy"": failed to extract shortcode: shortcode "">}}"" has no .Inner, yet a closing tag was provided\r\n```\r\n\r\nShould the ellipsis in `shortcode ""...""` not name the shortcode used, e.g., `youtube`, `figure`, or `section`?\r\n\r\nThank you for your time.', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'Aescetic', 'comment_id': 643525971.0, 'datetime': '2020-06-12 23:57:40+00:00', 'masked_author': 'username_0', 'text': 'As a user, I like Hugo a lot.\r\n\r\nAs a guru, Hugo\'s shortcode parsing mechanism is too verbose to be understood by mortal man.\r\n\r\nTo help alleviate this problem, I have conceived the kernel of a parsing mechanism that is thick, solid, tight — as well as a number of other unspecified but highly positive attributes.\r\n\r\nI begin by defining the pattern of a well-formed shortcode as a regular expression.\r\n\r\nThis pattern is compiled to a finite automaton named `scRex`. It consists of five parts: `ftype`, `name`, `posi`, `keyw`, and `etypf`.\r\n\r\nIn addition to `scRex`, there is an automaton named `scLooseRex`, which is used to capture the set of identifiable shortcodes, well- and ill-formed both.\r\n\r\n```golang\r\n// `scRex` is the regular expression automaton that matches all valid shortcode\r\n// variant forms, including simple, paired, and self-closing. A paired shortcode\r\n// is like a div tag, and usually has inner content, e.g., `<div>alpha bravo\r\n// charlie</div>`; a simple shortcode is like an img tag, e.g., `<img\r\n// src=""sauce.jpg"" />`; and a self-closing shortcode is like a paired tag made\r\n// singular, with no inner content, e.g., `div i=""1"" ii=""2"" iii=3 />.\r\n// The structure of a shortcode has five parts, two of them optional. They are:\r\n// ftype: the opening token of a shortcode; specifies the formatting type of the\r\n//        inner content (if any)\r\n// name: the name of the shortcode; corresponds to the template\r\n// posi: positional parameters passed to the template, if any\r\n// keyw: keyword parameters passed to the template, if any\r\n// epytf: the terminating token of the shortcode\r\nvar ftype =  `(?P<ftype>{{[<%])[ \\t]+`\r\nvar name = `/?(?P<name>[-\\w]+)[ \\t]+`\r\nvar posi =   `(?P<posi>(?:\\w+[ \\t]+)+)?`\r\nvar keyw = strings.Join([]string{\r\n    `(?P<keyw>(?:\\w+=(?:`,\r\n    `\\w+`,                       // 1. Captures word-type unquoted content.\r\n    `|\'[^\'\\\\]*(?:\\\\.[^\'\\\\]*)*\'`, // 2. Captures singly- and doubly-quoted strings,\r\n    `|""[^""\\\\]*(?:\\\\.[^""\\\\]*)*""`, //    including escaped quotation marks of their\r\n    `)[ \\t]+)+)?`,               //    respective type.\r\n}, """")\r\nvar epytf =  `(?P<epytf>/?[%>]}})`\r\nvar scRex = regexp.MustCompile(ftype + name + posi + keyw + epytf)\r\nvar scLooseRex = regexp.MustCompile(ftype + `.*?` + epytf)\r\n\r\n// Where `scRex` matches both opening and closing tags, `isClosingRex` matches\r\n// closing tags only. The name pattern differs from the former in that the\r\n// leading slash before the name — the indicator of a closing tag — is\r\n// mandatory. It is used solely to determine the ""closing-ness"" of a tag.\r\nvar nameIsClosingPattern = `/[-\\w]+`\r\nvar isClosingPattern = ftype + nameIsClosingPattern\r\nvar isClosingRex = regexp.MustCompile(isClosingPattern)\r\n```\r\n\r\n`scRex` comes very close to matching all well-formed shortcodes and no others, but to do this with just one pattern would require ""more powerful"" regular expression features than Go support.\r\n\r\n```golang\r\n// Used to guarantee that a shortcode has the same leading and trailing ftype.\r\nvar validFtypes = []string{""{{<.*?>}}"", ""{{%.*?%}}""}\r\nvar validFtypesPattern = strings.Join(validFtypes, ""|"")\r\nvar validFtypeRex = regexp.MustCompile(validFtypesPattern)\r\n```\r\n\r\nTo discriminate between opening, closing, and self-closing shortcodes:\r\n\r\n```golang\r\n// Where `scRex` matches both opening and closing tags, `isClosingRex` matches\r\n// closing tags only. The name pattern differs from the former in that the\r\n// leading slash before the name — the indicator of a closing tag — is\r\n// mandatory. It is used solely to determine the ""closing-ness"" of a tag.\r\nvar nameIsClosingPattern = `/[-\\w]+`\r\nvar isClosingPattern = ftype + nameIsClosingPattern\r\nvar isClosingRex = regexp.MustCompile(isClosingPattern)\r\n\r\n// Matches self-closing shortcodes. In the program logic, self-closing\r\n// shortcodes have a higher priority than ""merely"" closing shortcodes.\r\nvar isSelfClosingPattern = `/>}}`\r\nvar isSelfClosingRex = regexp.MustCompile(isSelfClosingPattern)\r\n```\r\n\r\nFinally we see the expressions used to extract positional and keyword parameters individually:\r\n\r\n```golang\r\n// Matches a valid positional parameter.\r\nvar extractPosiPattern = `(?P<positional>\\w+)[ \\t]+`\r\n[Truncated]\n    fmt.Println(""=== === === ==="")\r\n    fmt.Println(renderPage(content, scs))\r\n    fmt.Println(""=== === === ==="")\r\n    fmt.Println(""=== === === ==="")\r\n}\r\n```\r\n\r\n*Et Voilà.*\r\n\r\nIt is worth saying again that this code is very tight.\r\n\r\n*This code is very tight.*\r\n\r\nI think it is reasonably idiomatic, but I have spent a total of just a few hours with Go.\r\n\r\nIn closing, this mechanism is nearly an order of magnitude more terse than what Hugo has currently, and several times more comprehensible.\r\n\r\nI believe you will find it very useful indeed.\r\n\r\nPlease let me know if there is anything you would like to know.', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'moorereason', 'comment_id': 643628499.0, 'datetime': '2020-06-13 14:06:31+00:00', 'masked_author': 'username_2', 'text': ""We still need a failing test for this PR.  By that we don't mean in a comment on this PR.  We need actual code in a `*_test.go` file.  Preferably, the first commit in this PR would add the failing tests.\r\n\r\nRegarding your miles-long comment, I doubt anyone is going to read that very closely (if at all).  If you want to rewrite the shortcode parser, open a separate issue to discuss your proposal.  Instead of pasting a bunch of code into a comment, create a new branch for your changes so that your implementation can be easily reviewed, tested, and benchmarked."", 'title': None, 'type': 'comment'}]","<issue_start><issue_comment>Title: Partial fix for fatal crash on use of so-called ""paired shortcodes""
+username_0: See #7329.
+
+Here is my particular case of ""paired shortcodes"":
+
+```
+{{< section >}}
+
+Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam efficitur luctus hendrerit. Nullam nunc massa, placerat non pharetra sit amet, facilisis sed est. Proin convallis arcu eget blandit accumsan.
+
+Etiam eu metus nec est consectetur efficitur a sed eros. Proin nec fermentum metus. Ut vulputate erat ante, a egestas purus mollis eu. Donec porttitor lacus elementum, laoreet odio in, mollis odio. Proin dui libero, bibendum eu dapibus in, lobortis a sapien.
+
+Nulla condimentum turpis nibh, sit amet rhoncus dui sodales sit amet. Vestibulum tincidunt tempor magna, in pellentesque quam rhoncus eu. Nam gravida metus et elit mollis, at posuere mauris venenatis.
+
+{{< section />}}
+```
+
+This is a partial fix, because there is a catch. (There is always a catch.) Two, in fact.
+
+**I)**
+
+```
+{{% mdshortcode %}}Stuff to `process` in the *center*.{{% /mdshortcode %}}
+```
+
+Shortcodes defined with `%` may ""escape"" some of the closing HTML tags in one or more templates. Don't ask me how this happens — I don't know.
+
+**II)**
+
+From:
+
+```
+{{< highlight go >}} A bunch of code here {{< /highlight >}}
+```
+
+To:
+
+```
+{{< highlight go >}} A bunch of code here {{< highlight />}}
+```
+
+The closing slash must be moved from before `highlight` (as described in the documentation) to before the right angle bracket. To leave the slash where it is may cause precisely the same fatal error as before.
+
+The reasons for these strange phenomena are not clear to me, as I have no prior experience with Go in any capacity whatsoever.
+
+You are welcome to do whatever you want with this code, @username_1, but don't tell me that my problems don't real.
+<issue_comment>username_1: If you can add a failing test case that this PR fixes it would be easier to understand; I also need that before I can consider merging this.
+<issue_comment>username_0: I would do as you request, but just let me show you something.
+
+With my commit and the following shortcode template:
+
+```html
+<div class=""flex-l mv0 pa3 center"">
+    <article class=""center mw7"">
+        <div class=""nested-copy-line-height lh-copy f6 nested-links nested-img mid-gray"">
+            {{ .Get 0 }}
+        </div>
+    </article>
+</div>
+```
+
+...This in `_index.md`:
+
+```
+{{% section %}}
+
+testing 1 2 3
+
+{{% section /%}}
+```
+
+...Produces the following generated output:
+
+```html
+<pre>
+    <code>    </div>
+    </article>
+    </code>
+</pre>
+<!-- raw HTML omitted -->
+<p>testing 1 2 3</p>
+<!-- raw HTML omitted -->
+<pre>
+    <code>    </div>
+    </article>
+    </code>
+</pre>
+```
+
+Why is this? I have no idea.
+
+While this in `_index.md`:
+
+```
+{{< section >}}
+
+# This is a headline
+
+## The is a subheadline
+
+*This is italicized text.*
+
+**This is bolded text.**
+
+Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam efficitur luctus
+hendrerit. Nullam nunc massa, placerat non pharetra sit amet, facilisis sed est.
+Proin convallis arcu eget blandit accumsan. Morbi volutpat elit ac nibh
+porttitor tristique. Duis congue pellentesque sem et convallis. Etiam eu metus
+nec est consectetur efficitur a sed eros. Proin nec fermentum metus. Ut
+vulputate erat ante, a egestas purus mollis eu. Donec porttitor lacus elementum,
+laoreet odio in, mollis odio. Proin dui libero, bibendum eu dapibus in, lobortis
+a sapien. Nulla condimentum turpis nibh, sit amet rhoncus dui sodales sit amet.
+Vestibulum tincidunt tempor magna, in pellentesque quam rhoncus eu. Nam gravida
+metus et elit mollis, at posuere mauris venenatis.
+
+{{< section />}}
+```
+
+...Works as expected, formatting and all, while this:
+
+```
+{{% section %}}
+
+testing 1 2 3
+
+{{% /section %}}
+```
+[Truncated]
+...Both produce the following build error:
+
+```
+Building sites … ERROR [DATE AND TIME] Unable to locate template for shortcode """" in page ""_index.md""
+Built in 177 ms
+Error: Error building site: logged 1 error(s)
+```
+
+Without my commit, variations with the slash before the name of the shortcode produce the following build error:
+
+```
+Built in 70 ms
+Error: Error building site: ""[...]/content/_index.md:xx:yy"": failed to extract shortcode: shortcode "">}}"" has no .Inner, yet a closing tag was provided
+```
+
+...And variations with the slash before the right angle bracket produce the stack trace described in issue #7322.
+
+I'm sure that this is a very simple parsing problem, but it is no less an impenetrable mystery to me. I simply do not have the domain-specific knowledge — of the language or of the project — to even begin to untangle this.
+
+I've taken this as far as I can. If you or another guru o' Hugo don't know why these things be like it is, then I guess no one understands what the **** is happening here.
+<issue_comment>username_1: The formatting question you raise is documented and has nothing to do with the ""crash"". You cannot copy a fraction of a big site and tell me that ""this case fails"" when there are millions of similar working examples out there. I'm not doubting that the problem is real, but the devil is in the detail -- we need a failing test to be able to fix this.
+<issue_comment>username_0: Is parsing behavior dependent on site and/or theme configuration?
+
+Under what conditions does Hugo consider an unhandled (fatal) exception to be an acceptable outcome?
+
+I have observed this behavior on the following versions:
+
+* hugo_0.71.1_macOS-64bit
+* hugo_0.71.1_macOS-32bit
+* hugo_0.70.0_macOS-32bit
+* hugo_extended_0.71.1_macOS-64bit
+* hugo_extended_0.70.0_macOS-64bit
+* hugo_0.70.0_macOS-64bit
+* hugo_extended_0.68.3_macOS-64bit
+* hugo_extended_0.63.2_macOS-64bit
+* hugo_0.63.1_macOS-64bit
+
+The last version to correctly parse the name of a shortcode was `v0.61.0`.
+
+Are or are not these messages evidence of parsing error?
+
+```
+Building sites … ERROR [DATE AND TIME] Unable to locate template for shortcode """" in page ""_index.md""
+```
+
+```
+Error: Error building site: ""[...]/content/_index.md:xx:yy"": failed to extract shortcode: shortcode "">}}"" has no .Inner, yet a closing tag was provided
+```
+
+Should the ellipsis in `shortcode ""...""` not name the shortcode used, e.g., `youtube`, `figure`, or `section`?
+
+Thank you for your time.
+<issue_comment>username_0: As a user, I like Hugo a lot.
+
+As a guru, Hugo's shortcode parsing mechanism is too verbose to be understood by mortal man.
+
+To help alleviate this problem, I have conceived the kernel of a parsing mechanism that is thick, solid, tight — as well as a number of other unspecified but highly positive attributes.
+
+I begin by defining the pattern of a well-formed shortcode as a regular expression.
+
+This pattern is compiled to a finite automaton named `scRex`. It consists of five parts: `ftype`, `name`, `posi`, `keyw`, and `etypf`.
+
+In addition to `scRex`, there is an automaton named `scLooseRex`, which is used to capture the set of identifiable shortcodes, well- and ill-formed both.
+
+```golang
+// `scRex` is the regular expression automaton that matches all valid shortcode
+// variant forms, including simple, paired, and self-closing. A paired shortcode
+// is like a div tag, and usually has inner content, e.g., `<div>alpha bravo
+// charlie</div>`; a simple shortcode is like an img tag, e.g., `<img
+// src=""sauce.jpg"" />`; and a self-closing shortcode is like a paired tag made
+// singular, with no inner content, e.g., `div i=""1"" ii=""2"" iii=3 />.
+// The structure of a shortcode has five parts, two of them optional. They are:
+// ftype: the opening token of a shortcode; specifies the formatting type of the
+//        inner content (if any)
+// name: the name of the shortcode; corresponds to the template
+// posi: positional parameters passed to the template, if any
+// keyw: keyword parameters passed to the template, if any
+// epytf: the terminating token of the shortcode
+var ftype =  `(?P<ftype>{{[<%])[ \t]+`
+var name = `/?(?P<name>[-\w]+)[ \t]+`
+var posi =   `(?P<posi>(?:\w+[ \t]+)+)?`
+var keyw = strings.Join([]string{
+    `(?P<keyw>(?:\w+=(?:`,
+    `\w+`,                       // 1. Captures word-type unquoted content.
+    `|'[^'\\]*(?:\\.[^'\\]*)*'`, // 2. Captures singly- and doubly-quoted strings,
+    `|""[^""\\]*(?:\\.[^""\\]*)*""`, //    including escaped quotation marks of their
+    `)[ \t]+)+)?`,               //    respective type.
+}, """")
+var epytf =  `(?P<epytf>/?[%>]}})`
+var scRex = regexp.MustCompile(ftype + name + posi + keyw + epytf)
+var scLooseRex = regexp.MustCompile(ftype + `.*?` + epytf)
+
+// Where `scRex` matches both opening and closing tags, `isClosingRex` matches
+// closing tags only. The name pattern differs from the former in that the
+// leading slash before the name — the indicator of a closing tag — is
+// mandatory. It is used solely to determine the ""closing-ness"" of a tag.
+var nameIsClosingPattern = `/[-\w]+`
+var isClosingPattern = ftype + nameIsClosingPattern
+var isClosingRex = regexp.MustCompile(isClosingPattern)
+```
+
+`scRex` comes very close to matching all well-formed shortcodes and no others, but to do this with just one pattern would require ""more powerful"" regular expression features than Go support.
+
+```golang
+// Used to guarantee that a shortcode has the same leading and trailing ftype.
+var validFtypes = []string{""{{<.*?>}}"", ""{{%.*?%}}""}
+var validFtypesPattern = strings.Join(validFtypes, ""|"")
+var validFtypeRex = regexp.MustCompile(validFtypesPattern)
+```
+
+To discriminate between opening, closing, and self-closing shortcodes:
+
+```golang
+// Where `scRex` matches both opening and closing tags, `isClosingRex` matches
+// closing tags only. The name pattern differs from the former in that the
+// leading slash before the name — the indicator of a closing tag — is
+// mandatory. It is used solely to determine the ""closing-ness"" of a tag.
+var nameIsClosingPattern = `/[-\w]+`
+var isClosingPattern = ftype + nameIsClosingPattern
+var isClosingRex = regexp.MustCompile(isClosingPattern)
+
+// Matches self-closing shortcodes. In the program logic, self-closing
+// shortcodes have a higher priority than ""merely"" closing shortcodes.
+var isSelfClosingPattern = `/>}}`
+var isSelfClosingRex = regexp.MustCompile(isSelfClosingPattern)
+```
+
+Finally we see the expressions used to extract positional and keyword parameters individually:
+
+```golang
+// Matches a valid positional parameter.
+var extractPosiPattern = `(?P<positional>\w+)[ \t]+`
+[Truncated]
+    fmt.Println(""=== === === ==="")
+    fmt.Println(renderPage(content, scs))
+    fmt.Println(""=== === === ==="")
+    fmt.Println(""=== === === ==="")
+}
+```
+
+*Et Voilà.*
+
+It is worth saying again that this code is very tight.
+
+*This code is very tight.*
+
+I think it is reasonably idiomatic, but I have spent a total of just a few hours with Go.
+
+In closing, this mechanism is nearly an order of magnitude more terse than what Hugo has currently, and several times more comprehensible.
+
+I believe you will find it very useful indeed.
+
+Please let me know if there is anything you would like to know.
+<issue_comment>username_2: We still need a failing test for this PR.  By that we don't mean in a comment on this PR.  We need actual code in a `*_test.go` file.  Preferably, the first commit in this PR would add the failing tests.
+
+Regarding your miles-long comment, I doubt anyone is going to read that very closely (if at all).  If you want to rewrite the shortcode parser, open a separate issue to discuss your proposal.  Instead of pasting a bunch of code into a comment, create a new branch for your changes so that your implementation can be easily reviewed, tested, and benchmarked."

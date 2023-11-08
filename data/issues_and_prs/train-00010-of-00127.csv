@@ -1,0 +1,345 @@
+dlang/dlang.org,209022812,1577,"{'number': 1577.0, 'repo': 'dlang.org', 'user_login': 'dlang'}","[{'action': 'opened', 'author': 'wilzbach', 'comment_id': None, 'datetime': '2017-02-21T02:05:22Z', 'masked_author': 'username_0', 'text': 'This is a modified version of my favorite DLang example for Associative Arrays because:\r\n\r\n- shows iteration through arrays and associative arrays\r\n- uses tuples (!)\r\n- has real world use cases (e.g. DNA sequencing)\r\n- it\'s very concise and ""beautiful"" (-> easy to understand)\r\n\r\nHence I think it could be worthwhile to list this as an example to the reader.\r\n\r\n(Follow-up to https://github.com/dlang/dlang.org/pull/1573)', 'title': 'Hashmap: add example for iteration and tuple counting', 'type': 'issue'}
+ {'action': 'created', 'author': 'wilzbach', 'comment_id': 281229617.0, 'datetime': '2017-02-21 02:41:21+00:00', 'masked_author': 'username_0', 'text': '', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'wilzbach', 'comment_id': 281885653.0, 'datetime': '2017-02-23 03:40:42+00:00', 'masked_author': 'username_0', 'text': 'Fair enough - I just wanted to keep the example as simple as possible, but you have made a good case. I updated the example to use `byCodeUnit` instead ;-)', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'CyberShadow', 'comment_id': 282944600.0, 'datetime': '2017-02-28 05:15:28+00:00', 'masked_author': 'username_1', 'text': 'TBH, this is nice, but if I were to see this code in the wild I\'d just wonder why bother with tuples and ranges if you can use simple dull arrays and achieve the same thing with less code and better performance:\r\n```\r\n        import std.stdio : writefln;\r\n\r\n        int[char[2]] aa;\r\n\r\n        // The string `arr` has a limited alphabet: {A, C, G, T}\r\n        // Thus, for better performance, iteration can be done _without_ decoding\r\n        auto arr = ""AGATAGA"";\r\n\r\n        // iterate over all pairs in the string and observe each pair\r\n        // (\'A\', \'G\'), (\'G\', \'A\'), (\'A\', \'T\'), ...\r\n        foreach (i; 0..arr.length-1)\r\n            aa[arr[i..$][0..2]]++;\r\n\r\n        // iterate over all key/value pairs of the Associative Array\r\n        foreach (key, value; aa)\r\n            writefln(""key: %s, value: %d"", key, value);\r\n```\r\n\r\nSo, not sure about this example\'s illustrative powers. D arrays are awesome too!', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'wilzbach', 'comment_id': 349912067.0, 'datetime': '2017-12-07 09:30:41+00:00', 'masked_author': 'username_0', 'text': 'This now uses this example & rebased to master.', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'CyberShadow', 'comment_id': 350065026.0, 'datetime': '2017-12-07 19:10:51+00:00', 'masked_author': 'username_1', 'text': ""I don't remember what the original version looked like any more, but LGTM!"", 'title': None, 'type': 'comment'}]","<issue_start><issue_comment>Title: Hashmap: add example for iteration and tuple counting
+username_0: This is a modified version of my favorite DLang example for Associative Arrays because:
+
+- shows iteration through arrays and associative arrays
+- uses tuples (!)
+- has real world use cases (e.g. DNA sequencing)
+- it's very concise and ""beautiful"" (-> easy to understand)
+
+Hence I think it could be worthwhile to list this as an example to the reader.
+
+(Follow-up to https://github.com/dlang/dlang.org/pull/1573)
+<issue_comment>username_0: Fair enough - I just wanted to keep the example as simple as possible, but you have made a good case. I updated the example to use `byCodeUnit` instead ;-)
+<issue_comment>username_1: TBH, this is nice, but if I were to see this code in the wild I'd just wonder why bother with tuples and ranges if you can use simple dull arrays and achieve the same thing with less code and better performance:
+```
+        import std.stdio : writefln;
+
+        int[char[2]] aa;
+
+        // The string `arr` has a limited alphabet: {A, C, G, T}
+        // Thus, for better performance, iteration can be done _without_ decoding
+        auto arr = ""AGATAGA"";
+
+        // iterate over all pairs in the string and observe each pair
+        // ('A', 'G'), ('G', 'A'), ('A', 'T'), ...
+        foreach (i; 0..arr.length-1)
+            aa[arr[i..$][0..2]]++;
+
+        // iterate over all key/value pairs of the Associative Array
+        foreach (key, value; aa)
+            writefln(""key: %s, value: %d"", key, value);
+```
+
+So, not sure about this example's illustrative powers. D arrays are awesome too!
+<issue_comment>username_0: This now uses this example & rebased to master.
+<issue_comment>username_1: I don't remember what the original version looked like any more, but LGTM!"
+AdoptOpenJDK/openjdk-website,310963770,237,,"[{'action': 'opened', 'author': 'karianna', 'comment_id': None, 'datetime': '2018-04-03 19:18:57+00:00', 'masked_author': 'username_0', 'text': 'I figure this issue can capture some more of the permanent discussion and ideas.\r\n\r\n=Strawman I=\r\n\r\nhttps://docs.google.com/drawings/d/1h0b6-5jN5nESo48maZcLctImHcEO0uvMs_qrlKT1nzs/edit?usp=sharing', 'title': 'Website overhaul proposals', 'type': 'issue'}
+ {'action': 'created', 'author': 'karianna', 'comment_id': 378541187.0, 'datetime': '2018-04-04 09:37:41+00:00', 'masked_author': 'username_0', 'text': 'Hi all - I’ve updated “Strawman I” slightly - Is this the sort of thing we want to go for?  If so I can ask our designer to mock this up properly for further discussion', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'tellison', 'comment_id': 379483958.0, 'datetime': '2018-04-07 16:59:57+00:00', 'masked_author': 'username_1', 'text': 'I think the design is too cluttered now, and we need a different approach for the website design.  Here\'s my proposal for a redesign.\r\n\r\n## Background\r\n\r\nThe AdoptOpenJDK website started with a single ""big blue button"" to keep things really simple about downloading the best JDK to date.  The button links to the latest build for the platform detected by the browser information.\r\n\r\nOver time we have grown to include lots more platforms, an archive of previous release and nightly builds, installers, Docker images, etc.  To accommodate these the website has acquired extra buttons and menu options which start to clutter the homepage.  The website user now needs to know a great deal of technical information about what they want as they start to navigate through the pages to find a particular download.\r\n\r\nWe currently offer seven variants of OpenJDK-based builds, across up to eight or so platforms.  We soon intend to also offer experimental OpenJDK code stream builds, and possibly small footprint builds of each of these!\r\n\r\n## Proposal\r\n\r\nThe proposal is to get back to a simple user experience by using a ""recommender"" or ""digital product advisor"" approach.  Users who come to the AdoptOpenJDK website home page will be guided through a set of selections to determine their user profile and intended use for the download.  Based upon this information the website will offer the most appropriate download for the visitors needs.\r\n\r\nOver time we can change the recommendations for a user, even where the questions remain the same; for example, if we wish to promote a particular configuration.\r\n\r\nThere are many examples of this digital product advisor on websites today, helping users to pick the right laptop, coffee flavour, or even dog collar.  See http://www.guided-selling.org/tag/product-advisor/  and http://www.myproductadvisor.com/mpa/base/home.do  In this case we are ""selling"" a free software download.\r\n\r\n## Design\r\n\r\nThe design falls into two main categories.\r\n - Determining the usage profile: gathering enough information about the user and their intended usage to be able to make a download recommendation.\r\n - The visual representation of the information gathering: how we design the user interface to determine the usage profile.\r\n\r\n## User profile\r\n\r\nThoughts on how to categorize our website visitors...\r\n - I\'m an application user and just need Java to run Minecraft etc.  I don\'t really know or care much about it.\r\n - I\'m a sys admin and need to install Java on my server as a default system runtime for people to use.\r\n - I want to put Java onto my VM running in the cloud.  I want it as a container / Docker image.\r\n - I am a Java developer and need a JDK with all the development tools, or to put alongside my Java IDE.\r\n - I want to contribute to the implementation of Java itself.  I know about OpenJDK and need a binary to test.\r\n - I am an application developer and want to redistribute Java with my application.  I care about footprint and performance, and want to see the trade off of each for my application.\r\n - I\'m a power-user and know exactly what I want, take me straight to the full list of options, and let me quickly filter them by version, platform, VM, etc. easily.\r\n\r\n## Visual Representation\r\n\r\nThe home page should be visually appealing, and lead users through a small number of steps to determine their profile and offer the most appropriate download.\r\n\r\nUsing pictures and icons is preferable to text, and sliders and wheels to indicate strength of opinion on topics rather than simple ""yes"" or ""no"" questions.  Look at some of the examples given on the website above (http://www.guided-selling.org/5-best-product-advisor-examples-of-2015/) to get an idea.\r\n\r\nWhile being mobile friendly is good, bear in mind that Java is typically not downloaded from a mobile device.', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'karianna', 'comment_id': 379487872.0, 'datetime': '2018-04-07 18:00:23+00:00', 'masked_author': 'username_0', 'text': 'I agree with doing some Ux requirement gathering, workshops etc on this.  However, the new trend of the guided selling / product advisor is the _opposite_ of what a primarily technical audiences want (it\'s great for general purpose B2C for sure).  We need to do the user research but I strongly suspect the majority of users will have at least some technical know how and will most likely be Java developers and will therefore want the minimum of clicks (drop off opportunities) to get their Adopt Binary.  As an aside I\'ll drag in jClarity\'s Web Ux person who was instrumental in figuring this stuff out for our audience (software developers).  So I guess the first question we nee dto answer is ""who\'s the dominant user?""', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'karianna', 'comment_id': 425994660.0, 'datetime': '2018-10-01 17:33:24+00:00', 'masked_author': 'username_0', 'text': ""I'm afraid not, we're still battling the last few build and infra issues on 11 and 8 releases before turning our eyes on this."", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'karianna', 'comment_id': 1039023340.0, 'datetime': '2022-02-14 12:21:38+00:00', 'masked_author': 'username_0', 'text': 'We are no longer enhancing this legacy website.  Please see the adoptium.net website.', 'title': None, 'type': 'comment'}
+ {'action': 'closed', 'author': 'karianna', 'comment_id': None, 'datetime': '2022-02-14 12:21:38+00:00', 'masked_author': 'username_0', 'text': '', 'title': None, 'type': 'issue'}]","<issue_start><issue_comment>Title: Website overhaul proposals
+username_0: I figure this issue can capture some more of the permanent discussion and ideas.
+
+=Strawman I=
+
+https://docs.google.com/drawings/d/1h0b6-5jN5nESo48maZcLctImHcEO0uvMs_qrlKT1nzs/edit?usp=sharing
+<issue_comment>username_0: Hi all - I’ve updated “Strawman I” slightly - Is this the sort of thing we want to go for?  If so I can ask our designer to mock this up properly for further discussion
+<issue_comment>username_1: I think the design is too cluttered now, and we need a different approach for the website design.  Here's my proposal for a redesign.
+
+## Background
+
+The AdoptOpenJDK website started with a single ""big blue button"" to keep things really simple about downloading the best JDK to date.  The button links to the latest build for the platform detected by the browser information.
+
+Over time we have grown to include lots more platforms, an archive of previous release and nightly builds, installers, Docker images, etc.  To accommodate these the website has acquired extra buttons and menu options which start to clutter the homepage.  The website user now needs to know a great deal of technical information about what they want as they start to navigate through the pages to find a particular download.
+
+We currently offer seven variants of OpenJDK-based builds, across up to eight or so platforms.  We soon intend to also offer experimental OpenJDK code stream builds, and possibly small footprint builds of each of these!
+
+## Proposal
+
+The proposal is to get back to a simple user experience by using a ""recommender"" or ""digital product advisor"" approach.  Users who come to the AdoptOpenJDK website home page will be guided through a set of selections to determine their user profile and intended use for the download.  Based upon this information the website will offer the most appropriate download for the visitors needs.
+
+Over time we can change the recommendations for a user, even where the questions remain the same; for example, if we wish to promote a particular configuration.
+
+There are many examples of this digital product advisor on websites today, helping users to pick the right laptop, coffee flavour, or even dog collar.  See http://www.guided-selling.org/tag/product-advisor/  and http://www.myproductadvisor.com/mpa/base/home.do  In this case we are ""selling"" a free software download.
+
+## Design
+
+The design falls into two main categories.
+ - Determining the usage profile: gathering enough information about the user and their intended usage to be able to make a download recommendation.
+ - The visual representation of the information gathering: how we design the user interface to determine the usage profile.
+
+## User profile
+
+Thoughts on how to categorize our website visitors...
+ - I'm an application user and just need Java to run Minecraft etc.  I don't really know or care much about it.
+ - I'm a sys admin and need to install Java on my server as a default system runtime for people to use.
+ - I want to put Java onto my VM running in the cloud.  I want it as a container / Docker image.
+ - I am a Java developer and need a JDK with all the development tools, or to put alongside my Java IDE.
+ - I want to contribute to the implementation of Java itself.  I know about OpenJDK and need a binary to test.
+ - I am an application developer and want to redistribute Java with my application.  I care about footprint and performance, and want to see the trade off of each for my application.
+ - I'm a power-user and know exactly what I want, take me straight to the full list of options, and let me quickly filter them by version, platform, VM, etc. easily.
+
+## Visual Representation
+
+The home page should be visually appealing, and lead users through a small number of steps to determine their profile and offer the most appropriate download.
+
+Using pictures and icons is preferable to text, and sliders and wheels to indicate strength of opinion on topics rather than simple ""yes"" or ""no"" questions.  Look at some of the examples given on the website above (http://www.guided-selling.org/5-best-product-advisor-examples-of-2015/) to get an idea.
+
+While being mobile friendly is good, bear in mind that Java is typically not downloaded from a mobile device.
+<issue_comment>username_0: I agree with doing some Ux requirement gathering, workshops etc on this.  However, the new trend of the guided selling / product advisor is the _opposite_ of what a primarily technical audiences want (it's great for general purpose B2C for sure).  We need to do the user research but I strongly suspect the majority of users will have at least some technical know how and will most likely be Java developers and will therefore want the minimum of clicks (drop off opportunities) to get their Adopt Binary.  As an aside I'll drag in jClarity's Web Ux person who was instrumental in figuring this stuff out for our audience (software developers).  So I guess the first question we nee dto answer is ""who's the dominant user?""
+<issue_comment>username_0: I'm afraid not, we're still battling the last few build and infra issues on 11 and 8 releases before turning our eyes on this.
+<issue_comment>username_0: We are no longer enhancing this legacy website.  Please see the adoptium.net website.<issue_closed>"
+ethereum/ethereum-org-website,889528251,3030,,"[{'action': 'opened', 'author': 'PaulApivat', 'comment_id': None, 'datetime': '2021-05-12 02:12:41+00:00', 'masked_author': 'username_0', 'text': 'We\'ll consider [our article policy](https://ethereum.org/en/contributing/adding-articles/) when reviewing the tutorial, so please take a look there first.\r\n\r\n**Tag your tutorial**\r\n\r\nSQL, Querying, Analytics, Getting Started, Dune Analytics, Blocks, Transaction, Gas\r\n\r\n<!-- What topics are covered in your tutorial? Check out the current tags on https://ethereum.org/en/developers/tutorials/ but feel free to add new ones -->\r\n\r\n**Tutorial title**\r\n\r\nTITLE: Learn Foundational Ethereum Topics with SQL\r\n\r\n<!-- What is the title of your tutorial?-->\r\n\r\n**Tutorial description**\r\n\r\nThis tutorial helps readers understand fundamental Ethereum concepts including transactions, blocks and gas by querying on-chain data with Structured Query Language (SQL).\r\n\r\n<!-- Summarise what the user should be able to accomplish by following tutorial -->\r\n\r\n**Publication**\r\n\r\nCurrently published on my site:        https://paulapivat.com/post/query_ethereum/\r\n\r\n<!-- If it\'s been published elsewhere already, let us know -->\r\n\r\n**Skill level**\r\n\r\nBeginner.\r\n\r\nThis tutorial is aimed at data analyst and/or enthusiast who would like to query on-chain data without running a client or node.\r\n\r\n<!-- What level of experience does someone need to be to complete the tutorial? Beginner/Intermediate/Advanced -->\r\n\r\n**Paste in your tutorial below**\r\n\r\n<!-- Please paste in markdown -->\r\n\r\n\r\n### Table of contents\r\n\r\n- [Introduction](#introduction)\r\n- [Transactions](#transactions)\r\n- [Breaking Down Transactions](#breaking_down_transactions)\r\n- [Blocks](#blocks)\r\n- [Gas](#gas)\r\n\r\n\r\n### Introduction\r\n\r\nMany Ethereum tutorials target developers, but there’s a lack of educational resources for data analyst or for people who wish to see on-chain data without running a client or node. \r\n\r\nThis tutorial helps readers understand fundamental Ethereum concepts including transactions, blocks and gas by querying on-chain data with structured query language (SQL) through an interface provided by [Dune Analytics](https://duneanalytics.com/).\r\n\r\nOn-chain data can help us understand Ethereum, the network, and as an economy for computing power and should serve as a base for understanding challenges facing Ethereum today (i.e., rising gas prices) and, more importantly, discussions around scaling solutions.\r\n\r\n\r\n### Transactions\r\n\r\nA user’s journey on Ethereum starts with initializing a user-controlled account or an entity with an ETH balance. There are two account types - user-controlled or a smart contract (see [ethereum.org](https://ethereum.org/en/developers/docs/accounts/)). \r\n\r\nAny account can be viewed on a block explorer like [Etherscan](https://etherscan.io/). Block explorers are a portal to Ethereum’s data. They display, in real-time, data on blocks, transactions, miners, accounts and other on-chain activity (see [here](https://ethereum.org/en/developers/docs/data-and-analytics/block-explorers/#top)). \r\n\r\nHowever, a user may wish to query the data directly to reconcile the information provided by external block explorers. [Dune Analytics](https://duneanalytics.com/) provides this capability to anyone with some knowledge of SQL.\r\n\r\nFor reference, the smart contract account for the Ethereum Foundation (EF) can be viewed on [Etherscan](https://etherscan.io/address/0xde0b295669a9fd93d5f28d9ec85e40f4cb697bae). \r\n\r\nOne thing to note is that all accounts, including the EF’s, has a public address that can be used to send and receive transactions. \r\n\r\nThe account balance on Etherscan comprises regular transactions and internal transactions. Internal transactions, despite the name, are not *actual* transactions that change the state of the chain. They are value transfers initiated by executing a contract ([source](https://ethereum.stackexchange.com/questions/3417/how-to-get-contract-internal-transactions)). Since internal transactions have no signature, they are **not** included on the blockchain and cannot be queried with Dune Analytics.\r\n\r\nTherefore, this tutorial will focus on regular transactions. This can be queried as such:\r\n\r\n```\r\nWITH temp_table AS (\r\nSELECT \r\n    hash,\r\n    block_number,\r\n    block_time,\r\n    ""from"",\r\n[Truncated]\n![ef_daily_gas](./ef_daily_gas.png)\r\n\r\nWe can see gas prices paid in transaction to the Ethereum Foundation address over the years. Here is the query:\r\n\r\n```\r\nSELECT \r\n    block_time,\r\n    gas_price / 1e9 AS gas_price_gwei,\r\n    value / 1e18 AS eth_sent\r\nFROM ethereum.""transactions""\r\nWHERE ""to"" = \'\\xde0B295669a9FD93d5F28D9Ec85E40f4cb697BAe\'   \r\nORDER BY block_time DESC\r\n```\r\n### Summary\r\n\r\nWith this tutorial, we understand foundational Ethereum concepts and how the Ethereum blockchain works by querying and getting a feel for on-chain data. \r\n\r\nThe dashboard that holds all code used in this tutorial can be found [here](https://duneanalytics.com/paulapivat/Learn-Ethereum).\r\n\r\nFor more use of data to explore web3 [find me on Twitter](https://twitter.com/paulapivat).', 'title': 'Tutorial Submission: Learn Foundational Ethereum Topics with SQL', 'type': 'issue'}
+ {'action': 'created', 'author': 'wackerow', 'comment_id': 839429844.0, 'datetime': '2021-05-12 04:46:34+00:00', 'masked_author': 'username_1', 'text': ""@username_0 Thanks for posting this! We'll take a closer look soon and try to get back to you within a week or two."", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'PaulApivat', 'comment_id': 839432242.0, 'datetime': '2021-05-12 04:53:29+00:00', 'masked_author': 'username_0', 'text': '@username_1 thank you! \r\n\r\nHappy to make edits if needed.', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'PaulApivat', 'comment_id': 851120318.0, 'datetime': '2021-05-31 02:14:41+00:00', 'masked_author': 'username_0', 'text': ""Hello @username_1 , just follow-up to see if there's anything you'd like me to edit/adjust for this piece? thank you!"", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'wackerow', 'comment_id': 851811786.0, 'datetime': '2021-06-01 05:14:16+00:00', 'masked_author': 'username_1', 'text': ""@username_0 Hey, sorry for the delays in moving on this. At a glance it looks good, but it's on my list to take a closer look tomorrow. In the meantime, not sure where the image assets are. Would you mind tossing this into a PR with the images and we can take it from there? If not I can help put it together if you point me toward the images. Thanks!"", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'PaulApivat', 'comment_id': 851889816.0, 'datetime': '2021-06-01 07:21:59+00:00', 'masked_author': 'username_0', 'text': ""Hi @username_1 sure thing, I've posted the images assets here in the order they appear in the tutorial (along with link name) below.\r\n\r\nLet me know if this works, thank you!\r\n\r\n**Image Assets Below**\r\n\r\netherscan_view\r\n\r\n![image](https://user-images.githubusercontent.com/4058461/120282051-e6c58080-c2e3-11eb-9ec1-1faf6e1337ca.png)\r\n\r\ndune_view\r\n\r\n![image](https://user-images.githubusercontent.com/4058461/120282106-f5139c80-c2e3-11eb-8892-bbd9223d25b7.png)\r\n\r\nparent_hash\r\n\r\n![image](https://user-images.githubusercontent.com/4058461/120282169-09579980-c2e4-11eb-9bc7-d35a27bb857b.png)\r\n\r\nlist_of_txn\r\n\r\n![image](https://user-images.githubusercontent.com/4058461/120282221-15dbf200-c2e4-11eb-8520-6a1ef4de81b5.png)\r\n\r\nsuccessful_txn\r\n\r\n![image](https://user-images.githubusercontent.com/4058461/120282276-212f1d80-c2e4-11eb-87c6-6494e290cbe1.png)\r\n\r\ndaily_blocks\r\n\r\n![image](https://user-images.githubusercontent.com/4058461/120282313-2ab88580-c2e4-11eb-8a03-fa4ec769aba7.png)\r\n\r\navg_daily_blocks\r\n\r\n![image](https://user-images.githubusercontent.com/4058461/120282355-3441ed80-c2e4-11eb-9aef-19971099be2e.png)\r\n\r\navg_gas_limit\r\n\r\n![image](https://user-images.githubusercontent.com/4058461/120282385-3c9a2880-c2e4-11eb-9937-476707006732.png)\r\n\r\ndaily_gas_used\r\n\r\n![image](https://user-images.githubusercontent.com/4058461/120282413-4459cd00-c2e4-11eb-913a-8c0183cd6acf.png)\r\n\r\ngas_demand_supply\r\n\r\n![image](https://user-images.githubusercontent.com/4058461/120282445-4cb20800-c2e4-11eb-81e6-25bf669a1509.png)\r\n\r\nef_daily_gas\r\n\r\n![image](https://user-images.githubusercontent.com/4058461/120282460-53407f80-c2e4-11eb-9744-9f63a8662a05.png)"", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'wackerow', 'comment_id': 856833042.0, 'datetime': '2021-06-08 14:47:18+00:00', 'masked_author': 'username_1', 'text': ""@username_0 No need, these will work.. we're just still back logged, appreciate you bearing with us"", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'EYEFOUREYE', 'comment_id': 886115110.0, 'datetime': '2021-07-24 21:48:07+00:00', 'masked_author': 'username_2', 'text': '#1461', 'title': None, 'type': 'comment'}
+ {'action': 'closed', 'author': 'wackerow', 'comment_id': None, 'datetime': '2021-07-30 04:36:43+00:00', 'masked_author': 'username_1', 'text': '', 'title': None, 'type': 'issue'}
+ {'action': 'created', 'author': 'wackerow', 'comment_id': 889622414.0, 'datetime': '2021-07-30 04:38:25+00:00', 'masked_author': 'username_1', 'text': '@username_0 Thanks for being patient! Looks good, just put this into a PR (with slight adjustments to fit our site) and merged it in, thanks again!', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'PaulApivat', 'comment_id': 890328140.0, 'datetime': '2021-07-31 10:40:53+00:00', 'masked_author': 'username_0', 'text': '@username_1 Thank you so much! \r\n\r\nIs there anything else I should follow up with at this point?', 'title': None, 'type': 'comment'}]","<issue_start><issue_comment>Title: Tutorial Submission: Learn Foundational Ethereum Topics with SQL
+username_0: We'll consider [our article policy](https://ethereum.org/en/contributing/adding-articles/) when reviewing the tutorial, so please take a look there first.
+
+**Tag your tutorial**
+
+SQL, Querying, Analytics, Getting Started, Dune Analytics, Blocks, Transaction, Gas
+
+<!-- What topics are covered in your tutorial? Check out the current tags on https://ethereum.org/en/developers/tutorials/ but feel free to add new ones -->
+
+**Tutorial title**
+
+TITLE: Learn Foundational Ethereum Topics with SQL
+
+<!-- What is the title of your tutorial?-->
+
+**Tutorial description**
+
+This tutorial helps readers understand fundamental Ethereum concepts including transactions, blocks and gas by querying on-chain data with Structured Query Language (SQL).
+
+<!-- Summarise what the user should be able to accomplish by following tutorial -->
+
+**Publication**
+
+Currently published on my site:        https://paulapivat.com/post/query_ethereum/
+
+<!-- If it's been published elsewhere already, let us know -->
+
+**Skill level**
+
+Beginner.
+
+This tutorial is aimed at data analyst and/or enthusiast who would like to query on-chain data without running a client or node.
+
+<!-- What level of experience does someone need to be to complete the tutorial? Beginner/Intermediate/Advanced -->
+
+**Paste in your tutorial below**
+
+<!-- Please paste in markdown -->
+
+
+### Table of contents
+
+- [Introduction](#introduction)
+- [Transactions](#transactions)
+- [Breaking Down Transactions](#breaking_down_transactions)
+- [Blocks](#blocks)
+- [Gas](#gas)
+
+
+### Introduction
+
+Many Ethereum tutorials target developers, but there’s a lack of educational resources for data analyst or for people who wish to see on-chain data without running a client or node. 
+
+This tutorial helps readers understand fundamental Ethereum concepts including transactions, blocks and gas by querying on-chain data with structured query language (SQL) through an interface provided by [Dune Analytics](https://duneanalytics.com/).
+
+On-chain data can help us understand Ethereum, the network, and as an economy for computing power and should serve as a base for understanding challenges facing Ethereum today (i.e., rising gas prices) and, more importantly, discussions around scaling solutions.
+
+
+### Transactions
+
+A user’s journey on Ethereum starts with initializing a user-controlled account or an entity with an ETH balance. There are two account types - user-controlled or a smart contract (see [ethereum.org](https://ethereum.org/en/developers/docs/accounts/)). 
+
+Any account can be viewed on a block explorer like [Etherscan](https://etherscan.io/). Block explorers are a portal to Ethereum’s data. They display, in real-time, data on blocks, transactions, miners, accounts and other on-chain activity (see [here](https://ethereum.org/en/developers/docs/data-and-analytics/block-explorers/#top)). 
+
+However, a user may wish to query the data directly to reconcile the information provided by external block explorers. [Dune Analytics](https://duneanalytics.com/) provides this capability to anyone with some knowledge of SQL.
+
+For reference, the smart contract account for the Ethereum Foundation (EF) can be viewed on [Etherscan](https://etherscan.io/address/0xde0b295669a9fd93d5f28d9ec85e40f4cb697bae). 
+
+One thing to note is that all accounts, including the EF’s, has a public address that can be used to send and receive transactions. 
+
+The account balance on Etherscan comprises regular transactions and internal transactions. Internal transactions, despite the name, are not *actual* transactions that change the state of the chain. They are value transfers initiated by executing a contract ([source](https://ethereum.stackexchange.com/questions/3417/how-to-get-contract-internal-transactions)). Since internal transactions have no signature, they are **not** included on the blockchain and cannot be queried with Dune Analytics.
+
+Therefore, this tutorial will focus on regular transactions. This can be queried as such:
+
+```
+WITH temp_table AS (
+SELECT 
+    hash,
+    block_number,
+    block_time,
+    ""from"",
+[Truncated]
+![ef_daily_gas](./ef_daily_gas.png)
+
+We can see gas prices paid in transaction to the Ethereum Foundation address over the years. Here is the query:
+
+```
+SELECT 
+    block_time,
+    gas_price / 1e9 AS gas_price_gwei,
+    value / 1e18 AS eth_sent
+FROM ethereum.""transactions""
+WHERE ""to"" = '\xde0B295669a9FD93d5F28D9Ec85E40f4cb697BAe'   
+ORDER BY block_time DESC
+```
+### Summary
+
+With this tutorial, we understand foundational Ethereum concepts and how the Ethereum blockchain works by querying and getting a feel for on-chain data. 
+
+The dashboard that holds all code used in this tutorial can be found [here](https://duneanalytics.com/paulapivat/Learn-Ethereum).
+
+For more use of data to explore web3 [find me on Twitter](https://twitter.com/paulapivat).
+<issue_comment>username_1: @username_0 Thanks for posting this! We'll take a closer look soon and try to get back to you within a week or two.
+<issue_comment>username_0: @username_1 thank you! 
+
+Happy to make edits if needed.
+<issue_comment>username_0: Hello @username_1 , just follow-up to see if there's anything you'd like me to edit/adjust for this piece? thank you!
+<issue_comment>username_1: @username_0 Hey, sorry for the delays in moving on this. At a glance it looks good, but it's on my list to take a closer look tomorrow. In the meantime, not sure where the image assets are. Would you mind tossing this into a PR with the images and we can take it from there? If not I can help put it together if you point me toward the images. Thanks!
+<issue_comment>username_0: Hi @username_1 sure thing, I've posted the images assets here in the order they appear in the tutorial (along with link name) below.
+
+Let me know if this works, thank you!
+
+**Image Assets Below**
+
+etherscan_view
+
+![image](https://user-images.githubusercontent.com/4058461/120282051-e6c58080-c2e3-11eb-9ec1-1faf6e1337ca.png)
+
+dune_view
+
+![image](https://user-images.githubusercontent.com/4058461/120282106-f5139c80-c2e3-11eb-8892-bbd9223d25b7.png)
+
+parent_hash
+
+![image](https://user-images.githubusercontent.com/4058461/120282169-09579980-c2e4-11eb-9bc7-d35a27bb857b.png)
+
+list_of_txn
+
+![image](https://user-images.githubusercontent.com/4058461/120282221-15dbf200-c2e4-11eb-8520-6a1ef4de81b5.png)
+
+successful_txn
+
+![image](https://user-images.githubusercontent.com/4058461/120282276-212f1d80-c2e4-11eb-87c6-6494e290cbe1.png)
+
+daily_blocks
+
+![image](https://user-images.githubusercontent.com/4058461/120282313-2ab88580-c2e4-11eb-8a03-fa4ec769aba7.png)
+
+avg_daily_blocks
+
+![image](https://user-images.githubusercontent.com/4058461/120282355-3441ed80-c2e4-11eb-9aef-19971099be2e.png)
+
+avg_gas_limit
+
+![image](https://user-images.githubusercontent.com/4058461/120282385-3c9a2880-c2e4-11eb-9937-476707006732.png)
+
+daily_gas_used
+
+![image](https://user-images.githubusercontent.com/4058461/120282413-4459cd00-c2e4-11eb-913a-8c0183cd6acf.png)
+
+gas_demand_supply
+
+![image](https://user-images.githubusercontent.com/4058461/120282445-4cb20800-c2e4-11eb-81e6-25bf669a1509.png)
+
+ef_daily_gas
+
+![image](https://user-images.githubusercontent.com/4058461/120282460-53407f80-c2e4-11eb-9744-9f63a8662a05.png)
+<issue_comment>username_1: @username_0 No need, these will work.. we're just still back logged, appreciate you bearing with us
+<issue_comment>username_2: #1461<issue_closed>
+<issue_comment>username_1: @username_0 Thanks for being patient! Looks good, just put this into a PR (with slight adjustments to fit our site) and merged it in, thanks again!
+<issue_comment>username_0: @username_1 Thank you so much! 
+
+Is there anything else I should follow up with at this point?"
+sass/sass-site,664984440,461,,"[{'action': 'opened', 'author': 'golavr', 'comment_id': None, 'datetime': '2020-07-24 07:51:18+00:00', 'masked_author': 'username_0', 'text': ""Sass should not be a platform for political agendas.\r\nSaas is part of open source community which is non political by its nature.\r\nWe share ideas, help each other w/o asking people what their political standpoint.\r\nThe content is irrelevant and i'm not going to address it.\r\n\r\nPlease remove the banner.\r\nThe world is facing many challenges over the recent months, starting a war over open source platforms won't help no one.\r\n\r\n![image](https://user-images.githubusercontent.com/22896741/88370578-f22e4e00-cd9a-11ea-8607-745457494755.png)"", 'title': 'Sass Black Lives Matter Banner', 'type': 'issue'}
+ {'action': 'created', 'author': 'nex3', 'comment_id': 663722319.0, 'datetime': '2020-07-24 20:33:05+00:00', 'masked_author': 'username_1', 'text': 'Technical work is inseparable from politics, whether that\'s by causing or preventing harm to people, embedding biases in our products or working to highlight those biases so we move past them, pointedly avoiding any statement that could be too political or standing up for the rights of our fellow human beings. Even you are engaging in political action by demanding our silence on the subject of Black lives.\r\n\r\nSass in particular has always been a political project. From its earliest days it sought to empower designers, who tended to have a much stronger representation of marginalized groups than their engineering counterparts, and in so doing it gave these marginalized people a larger place and a louder voice in tech as a whole. The most prominent voices in the Sass community have always been people of color, queer people, and women, and empowering those people is a political act in an industry dominated by straight white men.\r\n\r\nSaying ""Black Lives Matter"" isn\'t an abstract political point. It\'s a matter of life and death, particularly for our many Black users and contributors. Police violence is a part of their lives as Sass is a part of their lives, and we take a stand against that violence because we care about them as not just users but as whole people.', 'title': None, 'type': 'comment'}
+ {'action': 'closed', 'author': 'nex3', 'comment_id': None, 'datetime': '2020-07-24 20:33:05+00:00', 'masked_author': 'username_1', 'text': '', 'title': None, 'type': 'issue'}]","<issue_start><issue_comment>Title: Sass Black Lives Matter Banner
+username_0: Sass should not be a platform for political agendas.
+Saas is part of open source community which is non political by its nature.
+We share ideas, help each other w/o asking people what their political standpoint.
+The content is irrelevant and i'm not going to address it.
+
+Please remove the banner.
+The world is facing many challenges over the recent months, starting a war over open source platforms won't help no one.
+
+![image](https://user-images.githubusercontent.com/22896741/88370578-f22e4e00-cd9a-11ea-8607-745457494755.png)
+<issue_comment>username_1: Technical work is inseparable from politics, whether that's by causing or preventing harm to people, embedding biases in our products or working to highlight those biases so we move past them, pointedly avoiding any statement that could be too political or standing up for the rights of our fellow human beings. Even you are engaging in political action by demanding our silence on the subject of Black lives.
+
+Sass in particular has always been a political project. From its earliest days it sought to empower designers, who tended to have a much stronger representation of marginalized groups than their engineering counterparts, and in so doing it gave these marginalized people a larger place and a louder voice in tech as a whole. The most prominent voices in the Sass community have always been people of color, queer people, and women, and empowering those people is a political act in an industry dominated by straight white men.
+
+Saying ""Black Lives Matter"" isn't an abstract political point. It's a matter of life and death, particularly for our many Black users and contributors. Police violence is a part of their lives as Sass is a part of their lives, and we take a stand against that violence because we care about them as not just users but as whole people.<issue_closed>"
+AgileVentures/WebsiteOne,210471429,1565,,"[{'action': 'opened', 'author': 'tansaku', 'comment_id': None, 'datetime': '2017-02-27 12:34:13+00:00', 'masked_author': 'username_0', 'text': 'Marufa suggested we have a faq popup for pages like http://www.agileventures.org/premium to make the pages shorter and easier to navigate - I think we can use detail/summary tags to achieve this.\r\n\r\nhttps://www.w3schools.com/tags/tag_summary.asp', 'title': 'adjust premium description pages to have popup info from headings', 'type': 'issue'}
+ {'action': 'created', 'author': 'tansaku', 'comment_id': 284006091.0, 'datetime': '2017-03-03 16:47:50+00:00', 'masked_author': 'username_0', 'text': '```\r\nAs a site owner\r\nSo that I can sustain the site with revenue from Premium \r\nI would like for the overview of a plan to look concise and be easy to review, with more details available on click\r\nAs opposed to currently where all the text is laid out in one big go.\r\n```', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'tansaku', 'comment_id': 284790342.0, 'datetime': '2017-03-07 17:11:53+00:00', 'masked_author': 'username_0', 'text': ""I've done a mockup of a new version of an expandable list of Premium benefits here: http://websiteone-staging.herokuapp.com/premium"", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'weedySeaDragon', 'comment_id': 284880249.0, 'datetime': '2017-03-07 22:25:06+00:00', 'masked_author': 'username_1', 'text': 'It\'s great that you have the mockup.  It\'s always _so_ much easier to comment on a tangible example. :-) \r\n\r\nMy main reaction is that you need to re-craft some of those items because they are answering the question ""what""  but when describing a benefit, you want to answer **""WHY""** as in ""Why would I care?  Why would this be helpful to me?""\r\n\r\nEx:\r\n\r\n  -  **JetBrains Integrated Development Environment (IDE) licence (worth £15 a month)**\r\n\r\nis really answering _what_.  Re-state it to provide the _why this is valuable_ right up front. (Then you can provide the _what_ details in the full description:\r\n\r\n  -  **Free use of the full-powered RubyMine development software on your AgileVenture projects. (A £60/year value)**\r\n\r\nThat\'s a quick, rough example.  (""full-powered"" should be replaced by something better.)  But you get the idea.\r\nI would be happy to brainstorm with others on this if it\'s helpful. \r\n\r\n\r\nI would also suggest that you don\'t use bullets that expand.  You want all of that information to be there immediately!  You really do want your reader to see all of it; you don\'t want to hide it or have them do any additional steps to see it.  You\'re trying to convince them; you don\'t want any barriers whatsoever.  (Perhaps your mockup was just using some default CSS that does that and you don\'t really intend the final version to have it.)\r\n\r\n\r\nJust like the 3 rule of buying real estate are ""Location, location, location"" the 3 rules of getting £ are ""Benefit, benefit, benefit"" :-)', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'tansaku', 'comment_id': 285122797.0, 'datetime': '2017-03-08 18:18:20+00:00', 'masked_author': 'username_0', 'text': '@username_1 love the re-wording - I\'ve deployed that to http://www.agileventures.org/premium\r\n\r\nfeel free to add further changes to http://websiteone-staging.herokuapp.com/premium or indeed just write out other suggested re-wordings in another ticket (since this one is specifically for the popups - I\'ve opened another for the re-wording #1583) - I agree that answering ""why"" rather than ""what"" would be a huge improvement\r\n\r\nAs regards the popup elements, that was something we settled on through a series of marketing meetings (you\'re welcome to join (maybe too early ...) or catch the videos - all in the #marketing channel).\r\n\r\nI think one of the problems we have with the site is too much text all over the place - although that\'s an intuition rather than something that I can currently prove with hard data - although I suspect our bounce rate might improve if we reduced text length.\r\n\r\nI take your point that ""You want all of that information to be there immediately!"", but I worry that when there\'s a lot of text in the page (as we have in many others), some people just click away in disgust, feeling overwhelmed with the text.\r\n\r\nWell perhaps we can move towards A/B testing that and seeing what the Google Analytics tell us ...', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'weedySeaDragon', 'comment_id': 285154935.0, 'datetime': '2017-03-08 20:12:16+00:00', 'masked_author': 'username_1', 'text': ""I totally agree about keeping things shorter and less overwhelming. My view is that on a page that is this important, you don't want the popups.  Instead you need to keep the text short and focused.\r\n\r\nThere are definitely places where popups are great. (ex: FAQs)."", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'tansaku', 'comment_id': 286092525.0, 'datetime': '2017-03-13 12:24:15+00:00', 'masked_author': 'username_0', 'text': 'Just discussed in Marketing and consensus is that ""expandable"" elements for faq is good and maybe just have two sentence headlines for feature and no extra description', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'tansaku', 'comment_id': 299486156.0, 'datetime': '2017-05-05 14:51:38+00:00', 'masked_author': 'username_0', 'text': 'so I think I blew away changes we might have had on the staging server ... when I copied the production data over ...', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'tansaku', 'comment_id': 299491820.0, 'datetime': '2017-05-05 15:12:22+00:00', 'masked_author': 'username_0', 'text': ""right, well I've updated the faq section on the production premium page: https://www.agileventures.org/premium#faq"", 'title': None, 'type': 'comment'}
+ {'action': 'closed', 'author': 'tansaku', 'comment_id': None, 'datetime': '2017-07-07 15:54:55+00:00', 'masked_author': 'username_0', 'text': '', 'title': None, 'type': 'issue'}]","<issue_start><issue_comment>Title: adjust premium description pages to have popup info from headings
+username_0: Marufa suggested we have a faq popup for pages like http://www.agileventures.org/premium to make the pages shorter and easier to navigate - I think we can use detail/summary tags to achieve this.
+
+https://www.w3schools.com/tags/tag_summary.asp
+<issue_comment>username_0: ```
+As a site owner
+So that I can sustain the site with revenue from Premium 
+I would like for the overview of a plan to look concise and be easy to review, with more details available on click
+As opposed to currently where all the text is laid out in one big go.
+```
+<issue_comment>username_0: I've done a mockup of a new version of an expandable list of Premium benefits here: http://websiteone-staging.herokuapp.com/premium
+<issue_comment>username_1: It's great that you have the mockup.  It's always _so_ much easier to comment on a tangible example. :-) 
+
+My main reaction is that you need to re-craft some of those items because they are answering the question ""what""  but when describing a benefit, you want to answer **""WHY""** as in ""Why would I care?  Why would this be helpful to me?""
+
+Ex:
+
+  -  **JetBrains Integrated Development Environment (IDE) licence (worth £15 a month)**
+
+is really answering _what_.  Re-state it to provide the _why this is valuable_ right up front. (Then you can provide the _what_ details in the full description:
+
+  -  **Free use of the full-powered RubyMine development software on your AgileVenture projects. (A £60/year value)**
+
+That's a quick, rough example.  (""full-powered"" should be replaced by something better.)  But you get the idea.
+I would be happy to brainstorm with others on this if it's helpful. 
+
+
+I would also suggest that you don't use bullets that expand.  You want all of that information to be there immediately!  You really do want your reader to see all of it; you don't want to hide it or have them do any additional steps to see it.  You're trying to convince them; you don't want any barriers whatsoever.  (Perhaps your mockup was just using some default CSS that does that and you don't really intend the final version to have it.)
+
+
+Just like the 3 rule of buying real estate are ""Location, location, location"" the 3 rules of getting £ are ""Benefit, benefit, benefit"" :-)
+<issue_comment>username_0: @username_1 love the re-wording - I've deployed that to http://www.agileventures.org/premium
+
+feel free to add further changes to http://websiteone-staging.herokuapp.com/premium or indeed just write out other suggested re-wordings in another ticket (since this one is specifically for the popups - I've opened another for the re-wording #1583) - I agree that answering ""why"" rather than ""what"" would be a huge improvement
+
+As regards the popup elements, that was something we settled on through a series of marketing meetings (you're welcome to join (maybe too early ...) or catch the videos - all in the #marketing channel).
+
+I think one of the problems we have with the site is too much text all over the place - although that's an intuition rather than something that I can currently prove with hard data - although I suspect our bounce rate might improve if we reduced text length.
+
+I take your point that ""You want all of that information to be there immediately!"", but I worry that when there's a lot of text in the page (as we have in many others), some people just click away in disgust, feeling overwhelmed with the text.
+
+Well perhaps we can move towards A/B testing that and seeing what the Google Analytics tell us ...
+<issue_comment>username_1: I totally agree about keeping things shorter and less overwhelming. My view is that on a page that is this important, you don't want the popups.  Instead you need to keep the text short and focused.
+
+There are definitely places where popups are great. (ex: FAQs).
+<issue_comment>username_0: Just discussed in Marketing and consensus is that ""expandable"" elements for faq is good and maybe just have two sentence headlines for feature and no extra description
+<issue_comment>username_0: so I think I blew away changes we might have had on the staging server ... when I copied the production data over ...
+<issue_comment>username_0: right, well I've updated the faq section on the production premium page: https://www.agileventures.org/premium#faq<issue_closed>"

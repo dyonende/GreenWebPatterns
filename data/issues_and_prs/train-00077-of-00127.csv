@@ -1,0 +1,407 @@
+datacommonsorg/website,943848206,1037,,"[{'action': 'opened', 'author': 'beets', 'comment_id': None, 'datetime': '2021-07-13 21:38:49+00:00', 'masked_author': 'username_0', 'text': 'we are currently showing the mprop, but we should also use observation units on the chart. if the units are different, we should not display timelines in the same chart.\r\n\r\ne.g. unclear what the units are in the chart:\r\nhttps://autopush.datacommons.org/tools/timeline#place=geoId%2F06%2CgeoId%2F26&statsVar=Annual_Consumption_Coal_ElectricPower&chart=%7B%22consumption%22%3Afalse%2C%22cost%22%3Afalse%2C%22heatContent%22%3Afalse%7D\r\nvs\r\nhttps://datacommons.org/browser/geoId/06?statVar=Annual_Consumption_Coal_ElectricPower', 'title': '[timeline] use units from the observations as y-axis label', 'type': 'issue'}
+ {'action': 'created', 'author': 'beets', 'comment_id': 879420818.0, 'datetime': '2021-07-13 21:39:10+00:00', 'masked_author': 'username_0', 'text': 'we should also include the units in the tooltip', 'title': None, 'type': 'comment'}
+ {'action': 'closed', 'author': 'shifucun', 'comment_id': None, 'datetime': '2021-07-16 00:43:40+00:00', 'masked_author': 'username_1', 'text': '', 'title': None, 'type': 'issue'}]","<issue_start><issue_comment>Title: [timeline] use units from the observations as y-axis label
+username_0: we are currently showing the mprop, but we should also use observation units on the chart. if the units are different, we should not display timelines in the same chart.
+
+e.g. unclear what the units are in the chart:
+https://autopush.datacommons.org/tools/timeline#place=geoId%2F06%2CgeoId%2F26&statsVar=Annual_Consumption_Coal_ElectricPower&chart=%7B%22consumption%22%3Afalse%2C%22cost%22%3Afalse%2C%22heatContent%22%3Afalse%7D
+vs
+https://datacommons.org/browser/geoId/06?statVar=Annual_Consumption_Coal_ElectricPower
+<issue_comment>username_0: we should also include the units in the tooltip<issue_closed>"
+hexpm/hexpm,1104828996,1108,,"[{'action': 'opened', 'author': 'J3RN', 'comment_id': None, 'datetime': '2022-01-15 19:39:58+00:00', 'masked_author': 'username_0', 'text': 'This leaves ambiguous a few items:\r\n- If a list of licenses is specified, should they be interpreted as being `and`ed or `or`ed together? If the answer is one of these, how would I convey the other?\r\n- How do I convey an exception, such as ""Apache-2.0 WITH LLVM-exception""\r\n- How do I convery ""Apache-2.0 or later""?\r\n\r\nIn my opinion (which you\'re free to ignore :sweat_smile:) the answer to this is to supersede the `licenses` field with a `license_expression` field containing an [SPDX Expression](https://spdx.github.io/spdx-spec/SPDX-license-expressions/). SPDX Expression unambiguously convey `and`s, `or`s, `with`s, and ""or later"" (via `-or-later` or `+`, depending on GNU vs non-GNU).', 'title': 'Ambiguity regarding multiple licenses', 'type': 'issue'}
+ {'action': 'created', 'author': 'ericmj', 'comment_id': 1013789522.0, 'datetime': '2022-01-16 01:28:05+00:00', 'masked_author': 'username_1', 'text': 'The `licenses` field is meant to list the licenses the project is licensed under, `or` or `and` does not matter to it.\r\n\r\nDo you have examples of projects in the Hex ecosystem with licenses this complex and why they need to express the licenses with expressions in this field?', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'J3RN', 'comment_id': 1013949423.0, 'datetime': '2022-01-16 20:46:14+00:00', 'masked_author': 'username_0', 'text': ""I don't know of any packages currently on Hex with a complex license, but I could ship one today :wink: Many of the foundational technologies that the ecosystem relies on have more than simple a license, including [LLVM](https://releases.llvm.org/12.0.0/LICENSE.TXT) (`Apache-2.0 with LLVM-exception`) which is used by BEAMJIT and [wxWindows/wxWidgets](https://www.wxwidgets.org/about/licence/) (`LPGL-2.0-or-later with WxWindows-exception-3.1`) which underlies the `wx` system used by `:debugger`, `:observer`."", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'supersimple', 'comment_id': 1015544888.0, 'datetime': '2022-01-18 15:48:58+00:00', 'masked_author': 'username_2', 'text': 'This is an interesting situation @username_0 \r\nWe are in the process of normalizing licenses because many packages are using identifiers that are not recognized (IMO this has to be done before we can go any further with licenses.)\r\nI am especially curious about the ""with"" option, but I do think we\'ll have to consider how that feature would fit into our normalization process. The purpose of normalization is to make reading the licenses more understandable. Adding and, or, with can give us an infinite number of licenses (which makes normalization pointless perhaps.)\r\nI\'d like your thoughts on how that feature could work?', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'J3RN', 'comment_id': 1016008018.0, 'datetime': '2022-01-19 02:05:24+00:00', 'masked_author': 'username_0', 'text': '@username_2 Fortunately for us, the good folks over at SPDX have a solution to normalizing all kinds of crazy licenses, including composite licenses, licenses with exceptions, and even user-defined licenses: [SPDX License Expressions](https://spdx.github.io/spdx-spec/SPDX-license-expressions/). The SPDX specification also specifies and unambiguous grammar for parsing licenses expressions into their constituent parts (the licenses, the operators, the exceptions, etc). FWIW, the Rust ecosystem has a [`spdx` crate](https://docs.rs/spdx/0.8.0/spdx/index.html) for [parsing these expressions](https://docs.rs/spdx/0.8.0/spdx/expression/struct.Expression.html#method.parse) which could be used as a reference when building our own.', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'J3RN', 'comment_id': 1016015482.0, 'datetime': '2022-01-19 02:19:46+00:00', 'masked_author': 'username_0', 'text': 'Speaking of Rust, a quick Google reveals that [the `license` field in a crate package manifest must be a valid SPDX 2.1 license expression](https://doc.rust-lang.org/cargo/reference/manifest.html#the-license-and-license-file-fields).', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'lpil', 'comment_id': 1019571253.0, 'datetime': '2022-01-23 21:29:37+00:00', 'masked_author': 'username_3', 'text': ""I think conforming to the SPDX standard would be sensible, seeing as it's already widely used and the rules are unambiguous and powerful enough for real-world use in larger ecosystems than ours.\r\n\r\nSupporting SPDX expressions does make the list of multiple licences redundant, but so long as we decide whether licences are `and`'d or `or`'d then they can be compatible."", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'ericmj', 'comment_id': 1025198146.0, 'datetime': '2022-01-30 18:11:03+00:00', 'masked_author': 'username_1', 'text': 'To be clear we are conforming to the SPDX license identifiers but we do not support expressions.\r\n\r\nBetween `and` and `or` which one is most common/useful? We can pick that one as how a list of licenses should behave.\r\n\r\nWhen there are projects in the community that require expressions we can reconsider supporting them but right now they do not seem to be needed so I would like to avoid the extra maintenance work for something that 10000+ packages has not needed so far.', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'lpil', 'comment_id': 1025242762.0, 'datetime': '2022-01-30 22:06:17+00:00', 'masked_author': 'username_3', 'text': 'Given we don\'t know whether existing projects are using `and` or `or`, and their both being relatively common, I would speculate that they are currently both in use, but some proportion of those users are using the config format incorrectly.\r\n\r\nRE maintenance, the SPDX ABNF [grammar](https://github.com/spdx/spdx-spec/blob/a05c12a2dd4652b1396fd2659f2cd3ea1f37faba/chapters/SPDX-license-expressions.md#annex-d-spdx-license-expressions-normative) is thankfully very simple. We\'d only need to parse a string in this format to validate an expression.\r\n\r\n```ABNF\r\nidstring = 1*(ALPHA / DIGIT / ""-"" / ""."" )\r\n\r\nlicense-id = <short form license identifier in Annex A.1>\r\n\r\nlicense-exception-id = <short form license exception identifier in Annex A.2>\r\n\r\nlicense-ref = [""DocumentRef-""1*(idstring)"":""]""LicenseRef-""1*(idstring)\r\n\r\nsimple-expression = license-id / license-id""+"" / license-ref\r\n\r\ncompound-expression = simple-expression /\r\n  simple-expression ""WITH"" license-exception-id /\r\n  compound-expression ""AND"" compound-expression /\r\n  compound-expression ""OR"" compound-expression /\r\n  ""("" compound-expression "")""\r\n\r\nlicense-expression = simple-expression / compound-expression\r\n```\r\n\r\nIf there was a Hex package that parsed SPDX licences would that ease the development cost concern for you?\r\n\r\n```erlang\r\n-spec validate_spdx_licence_expression(binary()) -> ok | error.\r\n```', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'ericmj', 'comment_id': 1025253354.0, 'datetime': '2022-01-30 23:04:06+00:00', 'masked_author': 'username_1', 'text': ""I am not so worried about the parsing itself, we already have [spdx](https://github.com/username_2/spdx) that validates license identifiers that we could add the parsing to. But updating the Hex package metadata specification involves changes to (I think) at least 7 repositories. We also just introduced enforcement of spdx identifiers with deprecations and eventually error messages that users will have to deal with.\r\n\r\nIntroducing more changes for something that doesn't seem to be actively used does not make sense to me when there are so many other things that needs development time."", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'lpil', 'comment_id': 1025256386.0, 'datetime': '2022-01-30 23:17:50+00:00', 'masked_author': 'username_3', 'text': 'That\'s very reasonable.\r\n\r\nWhat would a migration path be for people who are currently using the list as `AND` and people who are currently using licences that cannot be represented with `OR`\'d licences? Could there be some value which means ""see the licence file for details""?', 'title': None, 'type': 'comment'}]","<issue_start><issue_comment>Title: Ambiguity regarding multiple licenses
+username_0: This leaves ambiguous a few items:
+- If a list of licenses is specified, should they be interpreted as being `and`ed or `or`ed together? If the answer is one of these, how would I convey the other?
+- How do I convey an exception, such as ""Apache-2.0 WITH LLVM-exception""
+- How do I convery ""Apache-2.0 or later""?
+
+In my opinion (which you're free to ignore :sweat_smile:) the answer to this is to supersede the `licenses` field with a `license_expression` field containing an [SPDX Expression](https://spdx.github.io/spdx-spec/SPDX-license-expressions/). SPDX Expression unambiguously convey `and`s, `or`s, `with`s, and ""or later"" (via `-or-later` or `+`, depending on GNU vs non-GNU).
+<issue_comment>username_1: The `licenses` field is meant to list the licenses the project is licensed under, `or` or `and` does not matter to it.
+
+Do you have examples of projects in the Hex ecosystem with licenses this complex and why they need to express the licenses with expressions in this field?
+<issue_comment>username_0: I don't know of any packages currently on Hex with a complex license, but I could ship one today :wink: Many of the foundational technologies that the ecosystem relies on have more than simple a license, including [LLVM](https://releases.llvm.org/12.0.0/LICENSE.TXT) (`Apache-2.0 with LLVM-exception`) which is used by BEAMJIT and [wxWindows/wxWidgets](https://www.wxwidgets.org/about/licence/) (`LPGL-2.0-or-later with WxWindows-exception-3.1`) which underlies the `wx` system used by `:debugger`, `:observer`.
+<issue_comment>username_2: This is an interesting situation @username_0 
+We are in the process of normalizing licenses because many packages are using identifiers that are not recognized (IMO this has to be done before we can go any further with licenses.)
+I am especially curious about the ""with"" option, but I do think we'll have to consider how that feature would fit into our normalization process. The purpose of normalization is to make reading the licenses more understandable. Adding and, or, with can give us an infinite number of licenses (which makes normalization pointless perhaps.)
+I'd like your thoughts on how that feature could work?
+<issue_comment>username_0: @username_2 Fortunately for us, the good folks over at SPDX have a solution to normalizing all kinds of crazy licenses, including composite licenses, licenses with exceptions, and even user-defined licenses: [SPDX License Expressions](https://spdx.github.io/spdx-spec/SPDX-license-expressions/). The SPDX specification also specifies and unambiguous grammar for parsing licenses expressions into their constituent parts (the licenses, the operators, the exceptions, etc). FWIW, the Rust ecosystem has a [`spdx` crate](https://docs.rs/spdx/0.8.0/spdx/index.html) for [parsing these expressions](https://docs.rs/spdx/0.8.0/spdx/expression/struct.Expression.html#method.parse) which could be used as a reference when building our own.
+<issue_comment>username_0: Speaking of Rust, a quick Google reveals that [the `license` field in a crate package manifest must be a valid SPDX 2.1 license expression](https://doc.rust-lang.org/cargo/reference/manifest.html#the-license-and-license-file-fields).
+<issue_comment>username_3: I think conforming to the SPDX standard would be sensible, seeing as it's already widely used and the rules are unambiguous and powerful enough for real-world use in larger ecosystems than ours.
+
+Supporting SPDX expressions does make the list of multiple licences redundant, but so long as we decide whether licences are `and`'d or `or`'d then they can be compatible.
+<issue_comment>username_1: To be clear we are conforming to the SPDX license identifiers but we do not support expressions.
+
+Between `and` and `or` which one is most common/useful? We can pick that one as how a list of licenses should behave.
+
+When there are projects in the community that require expressions we can reconsider supporting them but right now they do not seem to be needed so I would like to avoid the extra maintenance work for something that 10000+ packages has not needed so far.
+<issue_comment>username_3: Given we don't know whether existing projects are using `and` or `or`, and their both being relatively common, I would speculate that they are currently both in use, but some proportion of those users are using the config format incorrectly.
+
+RE maintenance, the SPDX ABNF [grammar](https://github.com/spdx/spdx-spec/blob/a05c12a2dd4652b1396fd2659f2cd3ea1f37faba/chapters/SPDX-license-expressions.md#annex-d-spdx-license-expressions-normative) is thankfully very simple. We'd only need to parse a string in this format to validate an expression.
+
+```ABNF
+idstring = 1*(ALPHA / DIGIT / ""-"" / ""."" )
+
+license-id = <short form license identifier in Annex A.1>
+
+license-exception-id = <short form license exception identifier in Annex A.2>
+
+license-ref = [""DocumentRef-""1*(idstring)"":""]""LicenseRef-""1*(idstring)
+
+simple-expression = license-id / license-id""+"" / license-ref
+
+compound-expression = simple-expression /
+  simple-expression ""WITH"" license-exception-id /
+  compound-expression ""AND"" compound-expression /
+  compound-expression ""OR"" compound-expression /
+  ""("" compound-expression "")""
+
+license-expression = simple-expression / compound-expression
+```
+
+If there was a Hex package that parsed SPDX licences would that ease the development cost concern for you?
+
+```erlang
+-spec validate_spdx_licence_expression(binary()) -> ok | error.
+```
+<issue_comment>username_1: I am not so worried about the parsing itself, we already have [spdx](https://github.com/username_2/spdx) that validates license identifiers that we could add the parsing to. But updating the Hex package metadata specification involves changes to (I think) at least 7 repositories. We also just introduced enforcement of spdx identifiers with deprecations and eventually error messages that users will have to deal with.
+
+Introducing more changes for something that doesn't seem to be actively used does not make sense to me when there are so many other things that needs development time.
+<issue_comment>username_3: That's very reasonable.
+
+What would a migration path be for people who are currently using the list as `AND` and people who are currently using licences that cannot be represented with `OR`'d licences? Could there be some value which means ""see the licence file for details""?"
+gohugoio/hugo,209262168,3077,,"[{'action': 'opened', 'author': 'zorn', 'comment_id': None, 'datetime': '2017-02-21T20:23:58Z', 'masked_author': 'username_0', 'text': ""First, I'd like to say thank you -- really enjoying using Hugo on a fews sites.\r\n\r\nI think I found an issue. With my new site I'm trying to use data files to power some of the content. The [docs](https://gohugo.io/extras/datafiles/) say data files work with LiveReload but in my experience the LiveReload only works when editing an **existing** data file. If I launch the local hugo server and then add a data file it is not showing up as an accessible variable."", 'title': 'Data files edits only showing up during LiveReload if data file existed at launch of server. New files are not detected.', 'type': 'issue'}
+ {'action': 'created', 'author': 'bep', 'comment_id': 312560515.0, 'datetime': '2017-07-03 06:32:31+00:00', 'masked_author': 'username_1', 'text': '@username_0 I have tested this locally with the newest Hugo on `macOS` and TOML data files and can not reproduce this issue.\r\n\r\nCan you retest this with the latest Hugo, and if still and issue, provide more information, such as \r\n\r\n* What OS running?\r\n* What data files format used?', 'title': None, 'type': 'comment'}
+ {'action': 'closed', 'author': 'bep', 'comment_id': None, 'datetime': '2017-12-20 21:03:07+00:00', 'masked_author': 'username_1', 'text': '', 'title': None, 'type': 'issue'}]","<issue_start><issue_comment>Title: Data files edits only showing up during LiveReload if data file existed at launch of server. New files are not detected.
+username_0: First, I'd like to say thank you -- really enjoying using Hugo on a fews sites.
+
+I think I found an issue. With my new site I'm trying to use data files to power some of the content. The [docs](https://gohugo.io/extras/datafiles/) say data files work with LiveReload but in my experience the LiveReload only works when editing an **existing** data file. If I launch the local hugo server and then add a data file it is not showing up as an accessible variable.
+<issue_comment>username_1: @username_0 I have tested this locally with the newest Hugo on `macOS` and TOML data files and can not reproduce this issue.
+
+Can you retest this with the latest Hugo, and if still and issue, provide more information, such as 
+
+* What OS running?
+* What data files format used?<issue_closed>"
+gitpod-io/website,616640102,630,"{'number': 630.0, 'repo': 'website', 'user_login': 'gitpod-io'}","[{'action': 'opened', 'author': 'jankeromnes', 'comment_id': None, 'datetime': '2020-05-12T13:04:41Z', 'masked_author': 'username_0', 'text': ""@username_1 wrote a fantastic step-by-step guide to Laravel in Gitpod:\r\n\r\nhttps://notes.etin.space/posts/gitpodifying-a-new-laravel-application\r\n\r\nI think we should add a link to it in Gitpod's PHP guide.\r\n\r\nMany thanks Etin for powering through this, and for putting together very clear and helpful configuration steps! 💯"", 'title': ""[docs] Add link to @obasekietinosa's Laravel guide in Gitpod's PHP guide"", 'type': 'issue'}
+ {'action': 'created', 'author': 'obasekietinosa', 'comment_id': 627524218.0, 'datetime': '2020-05-12 18:45:35+00:00', 'masked_author': 'username_1', 'text': 'Thanks Jan. It was a pleasure writing it.\r\nHoping it makes it in to the Guide.', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'jankeromnes', 'comment_id': 630058578.0, 'datetime': '2020-05-18 09:22:41+00:00', 'masked_author': 'username_0', 'text': '@username_2 Review timed out, merging as is. 😄 🚀', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'JesterOrNot', 'comment_id': 630538334.0, 'datetime': '2020-05-19 02:22:09+00:00', 'masked_author': 'username_2', 'text': 'Sorry LGTM.', 'title': None, 'type': 'comment'}]","<issue_start><issue_comment>Title: [docs] Add link to @obasekietinosa's Laravel guide in Gitpod's PHP guide
+username_0: @username_1 wrote a fantastic step-by-step guide to Laravel in Gitpod:
+
+https://notes.etin.space/posts/gitpodifying-a-new-laravel-application
+
+I think we should add a link to it in Gitpod's PHP guide.
+
+Many thanks Etin for powering through this, and for putting together very clear and helpful configuration steps! 💯
+<issue_comment>username_1: Thanks Jan. It was a pleasure writing it.
+Hoping it makes it in to the Guide.
+<issue_comment>username_0: @username_2 Review timed out, merging as is. 😄 🚀
+<issue_comment>username_2: Sorry LGTM."
+kubernetes/website,798427869,26346,,"[{'action': 'opened', 'author': 'sftim', 'comment_id': None, 'datetime': '2021-02-01 14:55:57+00:00', 'masked_author': 'username_0', 'text': '**This is a Feature Request**\r\n\r\n<!-- Please only use this template for submitting feature/enhancement requests -->\r\n<!-- See https://kubernetes.io/docs/contribute/start/ for guidance on writing an actionable issue description. -->\r\n\r\n**What would you like to be added**\r\nCustomResourceDefinitions and new internal APIs might refer to objects across namespaces. However, there are risks / challenges.\r\n\r\nDocument these.\r\n\r\n**Why is this needed**\r\n1. People who are considering using a cross-namespace reference in the API they are designing will want an opportunity to read about these.\r\n2. Someone else providing feedback on that API might like a stable URI for the page that warns about the risks.\r\n\r\n\r\n**Comments**\r\n\r\n@deads2k [suggested](https://kubernetes.slack.com/archives/C0EG7JC6T/p1612186078072600?thread_ts=1611967173.070000&cid=C0EG7JC6T) this list of risks / shortcomings / whatever:\r\n\r\nCross namespace references\r\n- create issues with leaking information about one namespace into another namespace - (status messages for instance)\r\n- [risk] potential invasions into other namespaces - ""give me that one over there"" that either require exceptional checks\r\n- [can add] referential integrity issues that one party cannot solve - referencing a namespace doesn\'t imply the power to control the other namespace\r\n- [have] unclear semantics on deletion - if a namespace is referenced by other namespaces, what should a delete do?  should it clean up or force the namespace to remain alive?\r\n- [have]    unclear semantics on creation - if a namespaces is created after its reference, is it the one we\'re waiting for or is it a different one created in the same name\r\n\r\n\r\n/kind feature\r\n/sig api-machinery\r\n/language en', 'title': 'Improve documentation about cross-namespace references', 'type': 'issue'}
+ {'action': 'created', 'author': 'kbhawkey', 'comment_id': 771141438.0, 'datetime': '2021-02-01 20:37:05+00:00', 'masked_author': 'username_1', 'text': '/triage accepted', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'jai', 'comment_id': 830097497.0, 'datetime': '2021-04-30 13:32:33+00:00', 'masked_author': 'username_2', 'text': 'Looks like a list was typed up here: https://github.com/kubernetes/community/pull/5455/files - I guess we can re-use the same content?\r\n\r\n@username_0 where should this be documented?', 'title': None, 'type': 'comment'}]","<issue_start><issue_comment>Title: Improve documentation about cross-namespace references
+username_0: **This is a Feature Request**
+
+<!-- Please only use this template for submitting feature/enhancement requests -->
+<!-- See https://kubernetes.io/docs/contribute/start/ for guidance on writing an actionable issue description. -->
+
+**What would you like to be added**
+CustomResourceDefinitions and new internal APIs might refer to objects across namespaces. However, there are risks / challenges.
+
+Document these.
+
+**Why is this needed**
+1. People who are considering using a cross-namespace reference in the API they are designing will want an opportunity to read about these.
+2. Someone else providing feedback on that API might like a stable URI for the page that warns about the risks.
+
+
+**Comments**
+
+@deads2k [suggested](https://kubernetes.slack.com/archives/C0EG7JC6T/p1612186078072600?thread_ts=1611967173.070000&cid=C0EG7JC6T) this list of risks / shortcomings / whatever:
+
+Cross namespace references
+- create issues with leaking information about one namespace into another namespace - (status messages for instance)
+- [risk] potential invasions into other namespaces - ""give me that one over there"" that either require exceptional checks
+- [can add] referential integrity issues that one party cannot solve - referencing a namespace doesn't imply the power to control the other namespace
+- [have] unclear semantics on deletion - if a namespace is referenced by other namespaces, what should a delete do?  should it clean up or force the namespace to remain alive?
+- [have]    unclear semantics on creation - if a namespaces is created after its reference, is it the one we're waiting for or is it a different one created in the same name
+
+
+/kind feature
+/sig api-machinery
+/language en
+<issue_comment>username_1: /triage accepted
+<issue_comment>username_2: Looks like a list was typed up here: https://github.com/kubernetes/community/pull/5455/files - I guess we can re-use the same content?
+
+@username_0 where should this be documented?"
+cdnjs/new-website,395043267,262,"{'number': 262.0, 'repo': 'new-website', 'user_login': 'cdnjs'}","[{'action': 'opened', 'author': 'MattIPv4', 'comment_id': None, 'datetime': '2019-01-01T00:01:04Z', 'masked_author': 'username_0', 'text': ""- Resolves https://github.com/cdnjs/new-website/issues/152 [SRI support on search] (includes, closes https://github.com/cdnjs/new-website/pull/251)\r\n - Resolves https://github.com/cdnjs/new-website/issues/92 [Missing robots.txt]\r\n - Resolves https://github.com/cdnjs/new-website/issues/258 [GitHub banner issues]\r\n - Resolves https://github.com/cdnjs/new-website/issues/143 [BreadcrumbList implementation] (includes _modified_, closes https://github.com/cdnjs/new-website/pull/178)\r\n - Resolves https://github.com/cdnjs/new-website/issues/255 [Throng dep vuln] (includes, closes https://github.com/cdnjs/new-website/pull/256)\r\n - Resolves https://github.com/cdnjs/new-website/issues/18  [Mobile issues]\r\n\r\nAdditionally:\r\n - Update usage stats on about\r\n - Add me (username_0) to about\r\n - Overhaul home (responsive, some key info added)\r\n - Fix brand consistency\r\n - Re-order navigation to prioritise browsing libraries\r\n - Fix bad footer margin\r\n\r\nHappy New Year! Let's get cdnjs off to a great start in 2019 🎉"", 'title': '[Website] A load of updates', 'type': 'issue'}
+ {'action': 'created', 'author': 'MattIPv4', 'comment_id': 450726436.0, 'datetime': '2019-01-01 12:38:04+00:00', 'masked_author': 'username_0', 'text': '@username_1 How would you suggest splitting this all up then? Quite a bit of it is intertwined and would likely cause conflicts being split up', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'PeterDaveHello', 'comment_id': 450726570.0, 'datetime': '2019-01-01 12:41:12+00:00', 'masked_author': 'username_1', 'text': '@username_0 One topic, one PR. Conflucts are possible, so there mey be rebasing and conflicts resolving before getting merged.', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'MattIPv4', 'comment_id': 450726713.0, 'datetime': '2019-01-01 12:45:00+00:00', 'masked_author': 'username_0', 'text': ""@username_1 Is there a reason for splitting it up into different PRs though? The commits are split up per change so everything is pretty easily traceable.\r\n\r\nSplitting everything up just makes a load of extra work and issues that frankly I don't want to be dealing with."", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'PeterDaveHello', 'comment_id': 450726859.0, 'datetime': '2019-01-01 12:47:32+00:00', 'masked_author': 'username_1', 'text': ""@username_0 It's hard to review, and revice.\n\nI guess the reason of extra works is trying to do many things one time, which is not needed."", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'MattIPv4', 'comment_id': 450726929.0, 'datetime': '2019-01-01 12:48:52+00:00', 'masked_author': 'username_0', 'text': ""@username_1 The reason I've packed everything in at once is because some of these changes have been sitting in stale PRs or issues for a long time and I'd rather have them all in one PR so they can just be actually dealt with."", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'PeterDaveHello', 'comment_id': 450726999.0, 'datetime': '2019-01-01 12:50:16+00:00', 'masked_author': 'username_1', 'text': ""When I need to review a pull request, I need to review the diff of codes, the outcomes, I don't think it's a good idea to cherrypick every commit in it, instead, per issue per pull request, which means per branch to review, that I think it's a good idea."", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'PeterDaveHello', 'comment_id': 450727022.0, 'datetime': '2019-01-01 12:50:46+00:00', 'masked_author': 'username_1', 'text': ""Isn't about stale or not, you can still pick or revise staling PR separately."", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'MattIPv4', 'comment_id': 450727183.0, 'datetime': '2019-01-01 12:54:06+00:00', 'masked_author': 'username_0', 'text': ""I really don't have the time or energy to go through all the changes I've made to better cdnjs here again and split them up and then resolve all the conflicts that I've already resolve once here.\r\n\r\nIf you or someone else want to, feel free, or this PR can just chill like all the others here with no progress."", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'PeterDaveHello', 'comment_id': 450727307.0, 'datetime': '2019-01-01 12:56:14+00:00', 'masked_author': 'username_1', 'text': ""@username_0 I'd do it when I have time, but the same here, a proper peer review process won't cost less time or energy than doing the changes, so mixing them up increases the worklod of reviewing, with all due respect."", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'PeterDaveHello', 'comment_id': 450727628.0, 'datetime': '2019-01-01 13:01:59+00:00', 'masked_author': 'username_1', 'text': ""@username_0 btw, the review process itself, do you have suggestion about not cherrypick every single commit of them for this PR but can certainly be sure each one works well? I don't know yet. These changes seem not testable to me as a reviewer :("", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'MattIPv4', 'comment_id': 450727811.0, 'datetime': '2019-01-01 13:05:29+00:00', 'masked_author': 'username_0', 'text': ""@username_1 If I was reviewing this, I would spool up the local web server with the changes present and then work through the list I provided at the top of what should be changed and fixed and verify that it's all okay. At the same time just check for anything that is obviously broken due to these changes."", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'PeterDaveHello', 'comment_id': 450729225.0, 'datetime': '2019-01-01 13:33:42+00:00', 'masked_author': 'username_1', 'text': ""@username_0 thanks, but this method can't deal with the interaction between different changes, and it's also not strict enough. \n\nI think #261 is something good to follow, same topic, different steps/commits."", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'MattIPv4', 'comment_id': 450978676.0, 'datetime': '2019-01-02 20:40:55+00:00', 'masked_author': 'username_0', 'text': ""- Resolves https://github.com/cdnjs/new-website/issues/152 [SRI support on search] (includes, closes https://github.com/cdnjs/new-website/pull/251)\r\n - Resolves https://github.com/cdnjs/new-website/issues/92 [Missing robots.txt]\r\n - **RESPONSIVENESS** Resolves https://github.com/cdnjs/new-website/issues/258 [GitHub banner issues]\r\n - **RESPONSIVENESS** Resolves https://github.com/cdnjs/new-website/issues/143 [BreadcrumbList implementation] (includes _modified_, closes https://github.com/cdnjs/new-website/pull/178)\r\n - Resolves https://github.com/cdnjs/new-website/issues/255 [Throng dep vuln] (includes, closes https://github.com/cdnjs/new-website/pull/256)\r\n - **RESPONSIVENESS** Resolves https://github.com/cdnjs/new-website/issues/18  [Mobile issues]\r\n\r\nAdditionally:\r\n - **INFO** Update usage stats on about\r\n - **INFO** Add me (username_0) to about\r\n - **INFO/RESPONSIVENESS** Overhaul home (responsive, some key info added)\r\n - Fix brand consistency\r\n - **RESPONSIVENESS** Re-order navigation to prioritise browsing libraries\r\n - **RESPONSIVENESS** Fix bad footer margin\r\n\r\nHappy New Year! Let's get cdnjs off to a great start in 2019 🎉"", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'Glennmen', 'comment_id': 451169052.0, 'datetime': '2019-01-03 15:03:07+00:00', 'masked_author': 'username_2', 'text': ""@username_0 What is the use of this PR... You should never combine different features/improvements into a single PR.\r\n\r\nAnyways my code shouldn't be in here, there already is a PR for it and @username_1 will review it once he has the time."", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'PeterDaveHello', 'comment_id': 451171973.0, 'datetime': '2019-01-03 15:13:15+00:00', 'masked_author': 'username_1', 'text': '@username_2 sorry for the delay again and thanks for your understanding', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'MattIPv4', 'comment_id': 451172256.0, 'datetime': '2019-01-03 15:14:07+00:00', 'masked_author': 'username_0', 'text': ""@username_2 Hi, the reason behind this PR was fixing quite a few stale issues and PRs to get them sorted for the new year. Previous projects I've worked on were fine with mega PRs, evidently not so here. This PR is in the process of being split up and I have pinged @username_1 in the relevant PRs."", 'title': None, 'type': 'comment'}]","<issue_start><issue_comment>Title: [Website] A load of updates
+username_0: - Resolves https://github.com/cdnjs/new-website/issues/152 [SRI support on search] (includes, closes https://github.com/cdnjs/new-website/pull/251)
+ - Resolves https://github.com/cdnjs/new-website/issues/92 [Missing robots.txt]
+ - Resolves https://github.com/cdnjs/new-website/issues/258 [GitHub banner issues]
+ - Resolves https://github.com/cdnjs/new-website/issues/143 [BreadcrumbList implementation] (includes _modified_, closes https://github.com/cdnjs/new-website/pull/178)
+ - Resolves https://github.com/cdnjs/new-website/issues/255 [Throng dep vuln] (includes, closes https://github.com/cdnjs/new-website/pull/256)
+ - Resolves https://github.com/cdnjs/new-website/issues/18  [Mobile issues]
+
+Additionally:
+ - Update usage stats on about
+ - Add me (username_0) to about
+ - Overhaul home (responsive, some key info added)
+ - Fix brand consistency
+ - Re-order navigation to prioritise browsing libraries
+ - Fix bad footer margin
+
+Happy New Year! Let's get cdnjs off to a great start in 2019 🎉
+<issue_comment>username_0: @username_1 How would you suggest splitting this all up then? Quite a bit of it is intertwined and would likely cause conflicts being split up
+<issue_comment>username_1: @username_0 One topic, one PR. Conflucts are possible, so there mey be rebasing and conflicts resolving before getting merged.
+<issue_comment>username_0: @username_1 Is there a reason for splitting it up into different PRs though? The commits are split up per change so everything is pretty easily traceable.
+
+Splitting everything up just makes a load of extra work and issues that frankly I don't want to be dealing with.
+<issue_comment>username_1: @username_0 It's hard to review, and revice.
+
+I guess the reason of extra works is trying to do many things one time, which is not needed.
+<issue_comment>username_0: @username_1 The reason I've packed everything in at once is because some of these changes have been sitting in stale PRs or issues for a long time and I'd rather have them all in one PR so they can just be actually dealt with.
+<issue_comment>username_1: When I need to review a pull request, I need to review the diff of codes, the outcomes, I don't think it's a good idea to cherrypick every commit in it, instead, per issue per pull request, which means per branch to review, that I think it's a good idea.
+<issue_comment>username_1: Isn't about stale or not, you can still pick or revise staling PR separately.
+<issue_comment>username_0: I really don't have the time or energy to go through all the changes I've made to better cdnjs here again and split them up and then resolve all the conflicts that I've already resolve once here.
+
+If you or someone else want to, feel free, or this PR can just chill like all the others here with no progress.
+<issue_comment>username_1: @username_0 I'd do it when I have time, but the same here, a proper peer review process won't cost less time or energy than doing the changes, so mixing them up increases the worklod of reviewing, with all due respect.
+<issue_comment>username_1: @username_0 btw, the review process itself, do you have suggestion about not cherrypick every single commit of them for this PR but can certainly be sure each one works well? I don't know yet. These changes seem not testable to me as a reviewer :(
+<issue_comment>username_0: @username_1 If I was reviewing this, I would spool up the local web server with the changes present and then work through the list I provided at the top of what should be changed and fixed and verify that it's all okay. At the same time just check for anything that is obviously broken due to these changes.
+<issue_comment>username_1: @username_0 thanks, but this method can't deal with the interaction between different changes, and it's also not strict enough. 
+
+I think #261 is something good to follow, same topic, different steps/commits.
+<issue_comment>username_0: - Resolves https://github.com/cdnjs/new-website/issues/152 [SRI support on search] (includes, closes https://github.com/cdnjs/new-website/pull/251)
+ - Resolves https://github.com/cdnjs/new-website/issues/92 [Missing robots.txt]
+ - **RESPONSIVENESS** Resolves https://github.com/cdnjs/new-website/issues/258 [GitHub banner issues]
+ - **RESPONSIVENESS** Resolves https://github.com/cdnjs/new-website/issues/143 [BreadcrumbList implementation] (includes _modified_, closes https://github.com/cdnjs/new-website/pull/178)
+ - Resolves https://github.com/cdnjs/new-website/issues/255 [Throng dep vuln] (includes, closes https://github.com/cdnjs/new-website/pull/256)
+ - **RESPONSIVENESS** Resolves https://github.com/cdnjs/new-website/issues/18  [Mobile issues]
+
+Additionally:
+ - **INFO** Update usage stats on about
+ - **INFO** Add me (username_0) to about
+ - **INFO/RESPONSIVENESS** Overhaul home (responsive, some key info added)
+ - Fix brand consistency
+ - **RESPONSIVENESS** Re-order navigation to prioritise browsing libraries
+ - **RESPONSIVENESS** Fix bad footer margin
+
+Happy New Year! Let's get cdnjs off to a great start in 2019 🎉
+<issue_comment>username_2: @username_0 What is the use of this PR... You should never combine different features/improvements into a single PR.
+
+Anyways my code shouldn't be in here, there already is a PR for it and @username_1 will review it once he has the time.
+<issue_comment>username_1: @username_2 sorry for the delay again and thanks for your understanding
+<issue_comment>username_0: @username_2 Hi, the reason behind this PR was fixing quite a few stale issues and PRs to get them sorted for the new year. Previous projects I've worked on were fine with mega PRs, evidently not so here. This PR is in the process of being split up and I have pinged @username_1 in the relevant PRs."
+nodejs/nodejs.org,139543062,564,"{'number': 564.0, 'repo': 'nodejs.org', 'user_login': 'nodejs'}","[{'action': 'opened', 'author': 'TheAlphaNerd', 'comment_id': None, 'datetime': '2016-03-09T10:50:21Z', 'masked_author': 'username_0', 'text': ""Both LTS and Stable now have PPC 64le versions. Let's publish that on\r\nthe downloads page of nodejs.org\r\n\r\nedit: simplified this pr\r\n\r\n/cc @username_2 @jasnell"", 'title': 'add ppc binaries to download-matrix', 'type': 'issue'}
+ {'action': 'created', 'author': 'rvagg', 'comment_id': 194240481.0, 'datetime': '2016-03-09 10:56:02+00:00', 'masked_author': 'username_1', 'text': ""pls don't merge this yet, discussion going on here needs to come to a conclusion: https://github.com/nodejs/build/issues/205#issuecomment-187464137"", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'TheAlphaNerd', 'comment_id': 194242202.0, 'datetime': '2016-03-09 11:02:38+00:00', 'masked_author': 'username_0', 'text': 'thanks for the context @username_1\r\n\r\nJust noticed it was missing after being added and didn\'t connect the dots\r\n\r\nHow it looks now for example\r\n\r\n<img width=""1010"" alt=""screen shot 2016-03-09 at 3 01 15 am"" src=""https://cloud.githubusercontent.com/assets/498775/13633349/4decba36-e5a3-11e5-9e04-4c540d0270cd.png"">\r\n\r\nI don\'t think it looks terribly cluttered, but I have no problem closing this in lieu of a better fix', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'rvagg', 'comment_id': 194251650.0, 'datetime': '2016-03-09 11:31:00+00:00', 'masked_author': 'username_1', 'text': 'My concerns are both about clutter and usability, which are obviously connected concepts. I believe it\'s becoming increasingly difficult for users to select the downloads that they need and the expanding list is adding to the confusion.\r\n\r\nWe have targets on this list that have very low usage, PPC is clearly going to be one of those as it\'s not a mass-market platform, it also carries the confusing history of being an Apple architecture up until the switch to Intel. ""SunOS"" is problematic because it\'s really just SmartOS (these binaries won\'t work on Solaris) and its download numbers are tiny (SmartOS users are pkgin to get their Node most of the time I think). The ""Docker Image"" isn\'t a download link per se and arguably doesn\'t belong on this particular list. ARM Binaries don\'t come near the Intel-based platforms in terms of download numbers and users appear to have problems self-selecting which one they need—based on issue regularly filed against nodejs/node, so we could probably move it and improve how we present them.\r\n\r\nAnd to blunt, inclusion of SmartOS and PPC binaries on this page are more about marketing for their respective platform owners than about giving actual users a place to download binaries. It\'s much more likely that both of these platforms will have more convenient ways of consuming binaries than downloading from here. I have no problem with flag waving here, we all benefit from being able to show the diversity of support Node has, I\'d just rather it be done in a way that increases difficulty for the vast bulk of visitors to this page who have no interest in uncommon platforms.\r\n\r\n/cc @nodejs/build', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'mhdawson', 'comment_id': 194356363.0, 'datetime': '2016-03-09 15:49:34+00:00', 'masked_author': 'username_2', 'text': ""Based on earlier discussion I think we'd discussed 2 sections.  One with the downloads for Linux, Windows and Mac and then a second section with the rest.  I was going to try to look at that today."", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'mhdawson', 'comment_id': 194499285.0, 'datetime': '2016-03-09 20:43:35+00:00', 'masked_author': 'username_2', 'text': 'This is a first cut at what I had in mind:\r\n \r\n![downloadpage-updated](https://cloud.githubusercontent.com/assets/9373002/13649828/a94515da-e60d-11e5-9018-fd6e62537491.png)', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'mhdawson', 'comment_id': 194556405.0, 'datetime': '2016-03-09 23:00:09+00:00', 'masked_author': 'username_2', 'text': '@username_1 is what I have any better in respect to your concerns ?', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'rvagg', 'comment_id': 194799730.0, 'datetime': '2016-03-10 11:25:16+00:00', 'masked_author': 'username_1', 'text': 'Yeah, although I think we could do some better wording.\r\n\r\nSome suggestions, mainly for someone implementing this on @nodejs/website:\r\n\r\n* Remove ""Primary Downloads"", it doesn\'t really add much\r\n* Change heading of second section to ""Advanced download options"" (can\'t think of anything better atm)\r\n* Move the Python note far down to the bottom (using a footnote symbol?), or even remove it, it\'s a distraction\r\n* The ""Current version"" bit could be improved, maybe at the top somewhere.', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'fhemberger', 'comment_id': 194812011.0, 'datetime': '2016-03-10 11:57:55+00:00', 'masked_author': 'username_3', 'text': 'Why not use the term ""Additional Platforms"" for ARM, SunOS, PPC, Docker and the downloads provided by IBM?\r\n\r\n![](https://cloud.githubusercontent.com/assets/153481/13668842/a22a8d0e-e6bf-11e5-94c1-cc8463ccc14d.png)', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'rvagg', 'comment_id': 194818399.0, 'datetime': '2016-03-10 12:25:00+00:00', 'masked_author': 'username_1', 'text': 'I could live with that', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'silverwind', 'comment_id': 194818632.0, 'datetime': '2016-03-10 12:25:58+00:00', 'masked_author': 'username_4', 'text': 'Maybe replace that Python notice with a ""See below for additional platforms""?', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'fhemberger', 'comment_id': 194820816.0, 'datetime': '2016-03-10 12:35:44+00:00', 'masked_author': 'username_3', 'text': 'We could also put the unordered list below the ""additional platforms"" section. I think it even makes more sense that way.\r\n\r\nHow about this for the ""Current version"" issue?\r\n![](https://cloud.githubusercontent.com/assets/153481/13669590/dc78fa04-e6c4-11e5-91f2-e7efe5b5731c.png)\r\n\r\nWe could get rid of the ""download-header"" class as well, it\'s no longer used.', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'silverwind', 'comment_id': 194821574.0, 'datetime': '2016-03-10 12:37:36+00:00', 'masked_author': 'username_4', 'text': '@username_3 +1 to that.', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'silverwind', 'comment_id': 194822130.0, 'datetime': '2016-03-10 12:38:45+00:00', 'masked_author': 'username_4', 'text': ""On a unrelated note, could someone update @nodejs-github-bot's avatar to use the same one as the org? The current one doesn't work too well on dark backgrounds:\r\n\r\n![bb](https://cloud.githubusercontent.com/assets/115237/13669673/4c41480a-e6c5-11e5-8993-a6f18d11d228.png)"", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'fhemberger', 'comment_id': 194825611.0, 'datetime': '2016-03-10 12:43:07+00:00', 'masked_author': 'username_3', 'text': 'Quick mockup of combined changes\r\n\r\n![](https://cloud.githubusercontent.com/assets/153481/13669778/fab96cbe-e6c5-11e5-9eb0-b2a4abea9fe4.png)', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'silverwind', 'comment_id': 194829524.0, 'datetime': '2016-03-10 12:52:06+00:00', 'masked_author': 'username_4', 'text': ""1) Get rid of the python notice, build requirements are mentioned better in the README.me\r\n2) These are ranked by popularity, right? Doesn't ARM get more downloads than SunOS nowadays which could justify moving it above SunOS."", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'fhemberger', 'comment_id': 194829903.0, 'datetime': '2016-03-10 12:54:00+00:00', 'masked_author': 'username_3', 'text': '@username_4 :+1:', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'silverwind', 'comment_id': 194830619.0, 'datetime': '2016-03-10 12:57:18+00:00', 'masked_author': 'username_4', 'text': 'Oh, and ""Install Node.js via package manager"" could be shortened to ""Install via package manager"".', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'mhdawson', 'comment_id': 194840355.0, 'datetime': '2016-03-10 13:35:25+00:00', 'masked_author': 'username_2', 'text': ""The point of the original change is that the ppc le binaries are now official and provided on the community download site.  So I'd want something like:\r\n\r\n![additionalplatofrms](https://cloud.githubusercontent.com/assets/9373002/13670962/07a5a8dc-e69b-11e5-933e-17fd7152d8ab.png)"", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'stevemao', 'comment_id': 195117766.0, 'datetime': '2016-03-11 00:33:41+00:00', 'masked_author': 'username_5', 'text': 'Why do we need to list 3 IBM links that all link to the same page?', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'silverwind', 'comment_id': 195119305.0, 'datetime': '2016-03-11 00:40:49+00:00', 'masked_author': 'username_4', 'text': '@phillipj thanks, looking good now!', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'silverwind', 'comment_id': 195119695.0, 'datetime': '2016-03-11 00:42:54+00:00', 'masked_author': 'username_4', 'text': ""@username_3 any reason why you changed the LTS label in these screenshots? Imho, it's not ideal that the text now wraps to another line and the old text was fine imho."", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'jbergstroem', 'comment_id': 195121390.0, 'datetime': '2016-03-11 00:51:50+00:00', 'masked_author': 'username_6', 'text': ""What differentiates the ppc builds from for instance stuff we build on joyent or arm? I mean, what does 'official' imply here? For instance, we already know that calling the joyent builds `sunos` is incorrect since it won't really run on sunos. What we need is a sunos host for that to actually start working properly again. Would that denote its 'offical' standing?\r\n\r\nWe're deploying the servers, setting up the ci and building it through our release with shasum's generated by us. Might make sense to clarify this."", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'fhemberger', 'comment_id': 195177301.0, 'datetime': '2016-03-11 04:36:37+00:00', 'masked_author': 'username_3', 'text': '@username_4 The screenshot was taken from the live website, text was changed in #570.', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'silverwind', 'comment_id': 195207451.0, 'datetime': '2016-03-11 05:52:17+00:00', 'masked_author': 'username_4', 'text': ""Ah, right. Well then let's make the button slightly wider to stop the wrapping."", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'mhdawson', 'comment_id': 195372651.0, 'datetime': '2016-03-11 13:53:33+00:00', 'masked_author': 'username_2', 'text': 'As I think @username_6 indicates, in my mind the ""Unofficial provided by IBM"" is for the cases were we don\'t have the builds in the community ci yet.   The original purpose of this PR was to reflect that we now build PPC le binaries as part of the regular releases and to have the page provide links to the binaries which are already available in ""All downloads"" directory.  For example: https://nodejs.org/dist/v4.4.0/', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'silverwind', 'comment_id': 195477633.0, 'datetime': '2016-03-11 17:52:56+00:00', 'masked_author': 'username_4', 'text': '@username_3 I fixed the download button in https://github.com/nodejs/nodejs.org/commit/22bf803874aec29200e959d34b13403f8f1e2d01.', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'mhdawson', 'comment_id': 196511339.0, 'datetime': '2016-03-14 20:36:54+00:00', 'masked_author': 'username_2', 'text': '@username_3  any comments on my proposed modification ?', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'fhemberger', 'comment_id': 196660186.0, 'datetime': '2016-03-15 04:58:12+00:00', 'masked_author': 'username_3', 'text': '@username_2 Sure, this makes sense. So go ahead. ;)', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'mhdawson', 'comment_id': 196825094.0, 'datetime': '2016-03-15 13:47:35+00:00', 'masked_author': 'username_2', 'text': ""@username_1  you good with my suggestion as well ? If so we'll either update this PR to reflect that or submit a new one."", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'TheAlphaNerd', 'comment_id': 197033988.0, 'datetime': '2016-03-15 21:40:30+00:00', 'masked_author': 'username_0', 'text': 'I have updated the PR to now split up the downloads as has been suggested. My only concern ATM is that the there is the chance additional information is now getting hidden under the fold. On Chrome, on a macbook bro, with default resolution and no toolbars everything below the version number is hidden below the fold and it is not clear that people should be scrolling.\r\n\r\n@nodejs/website thoughts?\r\n\r\n<img width=""452"" alt=""screen shot 2016-03-15 at 2 32 00 pm"" src=""https://cloud.githubusercontent.com/assets/498775/13794947/dc2e5238-eabb-11e5-81e7-5b8cabfad35b.png"">', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'TheAlphaNerd', 'comment_id': 197057894.0, 'datetime': '2016-03-15 22:49:27+00:00', 'masked_author': 'username_0', 'text': '@username_3 do you have any suggestions about the styles? Not getting a good lay out in the table due to one column having too much text', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'fhemberger', 'comment_id': 197128714.0, 'datetime': '2016-03-16 03:01:02+00:00', 'masked_author': 'username_3', 'text': '@username_0 Just a quick mock, how about this:\r\n\r\n![](https://cloud.githubusercontent.com/assets/153481/13800532/5c898042-eb2a-11e5-839f-facad0fb9fb7.png)\r\n\r\n```css\r\n.download-matrix td span {\r\n    font-size: 0.8em;\r\n}\r\n```\r\n\r\n```html\r\n<tr>\r\n\t<th>Linux on Power Systems</th>\r\n\t<td colspan=""3"">\r\n\t\t<a href=""#"">64-bit le</a>\r\n\t\t<span>Official Node.js release</span>\r\n\t</td>\r\n\t<td colspan=""3"">\r\n\t\t<a href=""#"">64-bit be</a>\r\n\t\t<span>Unofficial, provided by IBM</span>\r\n\t</td>\r\n</tr>\r\n```\r\n\r\n---\r\n\r\nAs you\'re already working on it, can you please also move the ""current version"" below the headline? (see https://github.com/nodejs/nodejs.org/pull/564#issuecomment-194825611)\r\n\r\n```css\r\n/* style for .download-header h1 can be removed */\r\n.download-header span {\r\n    display: block;\r\n    color: #999; /* ""light-gray"" in stylus */\r\n    font-size: 0.8em;\r\n}\r\n```\r\n\r\n```html\r\n<div class=""download-header"">\r\n    <h1>Downloads <span>Current version v4.4.0</span></h1>\r\n</div>\r\n```\r\n\r\nThen I think we\'re good to go.', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'TheAlphaNerd', 'comment_id': 197612791.0, 'datetime': '2016-03-16 23:57:13+00:00', 'masked_author': 'username_0', 'text': '@username_3 Thanks for the detailed notes, that made things so much simpler!!!\r\n\r\nMoving the version to the top not only makes sense, but it solves the problem with the fold!\r\n\r\nI believe I\'ve gotten everything right now except for remove the python notice at the bottom which was mentioned by @username_4. I feel like that should perhaps have it\'s own discussion. \r\n\r\nHere is the latest version, please take a look at the style changes I made to make sure they are above board\r\n\r\n<img width=""524"" alt=""screen shot 2016-03-16 at 4 54 23 pm"" src=""https://cloud.githubusercontent.com/assets/498775/13832284/15cc3a6e-eb98-11e5-934d-d3aec454f445.png"">', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'rvagg', 'comment_id': 197642874.0, 'datetime': '2016-03-17 01:41:30+00:00', 'masked_author': 'username_1', 'text': ""Could we put ARM above SmartOS? It gets more downloads and this is a primary place for some of those folks to go, particularly ARMv6 which isn't served by any other source afaik. SmartOS have their pkg ecosystem as the primary place to get builds already."", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'TheAlphaNerd', 'comment_id': 197644397.0, 'datetime': '2016-03-17 01:45:53+00:00', 'masked_author': 'username_0', 'text': '@username_1 not a problem updating . How would you feel about arm being included primary list?\r\n\r\n<img width=""536"" alt=""screen shot 2016-03-16 at 6 44 50 pm"" src=""https://cloud.githubusercontent.com/assets/498775/13833886/3864dedc-eba7-11e5-80a4-0782c994443f.png"">', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'rvagg', 'comment_id': 197645443.0, 'datetime': '2016-03-17 01:48:29+00:00', 'masked_author': 'username_1', 'text': ""ARM just isn't in the same league as x (yet), we can reevaluate if that changes significantly\r\n\r\n![arm no competition](https://nodejs.org/metrics/summaries/arch.png)"", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'fhemberger', 'comment_id': 197717860.0, 'datetime': '2016-03-17 05:50:19+00:00', 'masked_author': 'username_3', 'text': '@username_0 There\'s still a wide margin between the ""Downloads"" headline and the version. Otherwise LGTM. Thank you for taking care of all those changes … :+1: \r\n\r\nAs soon as you push your changes, I think we\'re good to go.', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'mhdawson', 'comment_id': 197868428.0, 'datetime': '2016-03-17 12:59:12+00:00', 'masked_author': 'username_2', 'text': 'lgtm from me', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'TheAlphaNerd', 'comment_id': 197956368.0, 'datetime': '2016-03-17 16:19:23+00:00', 'masked_author': 'username_0', 'text': '@username_3 What do you think of this?\r\n\r\n<img width=""552"" alt=""screen shot 2016-03-17 at 9 17 53 am"" src=""https://cloud.githubusercontent.com/assets/498775/13852846/49283154-ec21-11e5-9542-e5fd84a1b232.png"">', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'fhemberger', 'comment_id': 197976621.0, 'datetime': '2016-03-17 17:05:45+00:00', 'masked_author': 'username_3', 'text': '@username_0 Perfect, go for it!', 'title': None, 'type': 'comment'}]","<issue_start><issue_comment>Title: add ppc binaries to download-matrix
+username_0: Both LTS and Stable now have PPC 64le versions. Let's publish that on
+the downloads page of nodejs.org
+
+edit: simplified this pr
+
+/cc @username_2 @jasnell
+<issue_comment>username_1: pls don't merge this yet, discussion going on here needs to come to a conclusion: https://github.com/nodejs/build/issues/205#issuecomment-187464137
+<issue_comment>username_0: thanks for the context @username_1
+
+Just noticed it was missing after being added and didn't connect the dots
+
+How it looks now for example
+
+<img width=""1010"" alt=""screen shot 2016-03-09 at 3 01 15 am"" src=""https://cloud.githubusercontent.com/assets/498775/13633349/4decba36-e5a3-11e5-9e04-4c540d0270cd.png"">
+
+I don't think it looks terribly cluttered, but I have no problem closing this in lieu of a better fix
+<issue_comment>username_1: My concerns are both about clutter and usability, which are obviously connected concepts. I believe it's becoming increasingly difficult for users to select the downloads that they need and the expanding list is adding to the confusion.
+
+We have targets on this list that have very low usage, PPC is clearly going to be one of those as it's not a mass-market platform, it also carries the confusing history of being an Apple architecture up until the switch to Intel. ""SunOS"" is problematic because it's really just SmartOS (these binaries won't work on Solaris) and its download numbers are tiny (SmartOS users are pkgin to get their Node most of the time I think). The ""Docker Image"" isn't a download link per se and arguably doesn't belong on this particular list. ARM Binaries don't come near the Intel-based platforms in terms of download numbers and users appear to have problems self-selecting which one they need—based on issue regularly filed against nodejs/node, so we could probably move it and improve how we present them.
+
+And to blunt, inclusion of SmartOS and PPC binaries on this page are more about marketing for their respective platform owners than about giving actual users a place to download binaries. It's much more likely that both of these platforms will have more convenient ways of consuming binaries than downloading from here. I have no problem with flag waving here, we all benefit from being able to show the diversity of support Node has, I'd just rather it be done in a way that increases difficulty for the vast bulk of visitors to this page who have no interest in uncommon platforms.
+
+/cc @nodejs/build
+<issue_comment>username_2: Based on earlier discussion I think we'd discussed 2 sections.  One with the downloads for Linux, Windows and Mac and then a second section with the rest.  I was going to try to look at that today.
+<issue_comment>username_2: This is a first cut at what I had in mind:
+ 
+![downloadpage-updated](https://cloud.githubusercontent.com/assets/9373002/13649828/a94515da-e60d-11e5-9018-fd6e62537491.png)
+<issue_comment>username_2: @username_1 is what I have any better in respect to your concerns ?
+<issue_comment>username_1: Yeah, although I think we could do some better wording.
+
+Some suggestions, mainly for someone implementing this on @nodejs/website:
+
+* Remove ""Primary Downloads"", it doesn't really add much
+* Change heading of second section to ""Advanced download options"" (can't think of anything better atm)
+* Move the Python note far down to the bottom (using a footnote symbol?), or even remove it, it's a distraction
+* The ""Current version"" bit could be improved, maybe at the top somewhere.
+<issue_comment>username_3: Why not use the term ""Additional Platforms"" for ARM, SunOS, PPC, Docker and the downloads provided by IBM?
+
+![](https://cloud.githubusercontent.com/assets/153481/13668842/a22a8d0e-e6bf-11e5-94c1-cc8463ccc14d.png)
+<issue_comment>username_1: I could live with that
+<issue_comment>username_4: Maybe replace that Python notice with a ""See below for additional platforms""?
+<issue_comment>username_3: We could also put the unordered list below the ""additional platforms"" section. I think it even makes more sense that way.
+
+How about this for the ""Current version"" issue?
+![](https://cloud.githubusercontent.com/assets/153481/13669590/dc78fa04-e6c4-11e5-91f2-e7efe5b5731c.png)
+
+We could get rid of the ""download-header"" class as well, it's no longer used.
+<issue_comment>username_4: @username_3 +1 to that.
+<issue_comment>username_4: On a unrelated note, could someone update @nodejs-github-bot's avatar to use the same one as the org? The current one doesn't work too well on dark backgrounds:
+
+![bb](https://cloud.githubusercontent.com/assets/115237/13669673/4c41480a-e6c5-11e5-8993-a6f18d11d228.png)
+<issue_comment>username_3: Quick mockup of combined changes
+
+![](https://cloud.githubusercontent.com/assets/153481/13669778/fab96cbe-e6c5-11e5-9eb0-b2a4abea9fe4.png)
+<issue_comment>username_4: 1) Get rid of the python notice, build requirements are mentioned better in the README.me
+2) These are ranked by popularity, right? Doesn't ARM get more downloads than SunOS nowadays which could justify moving it above SunOS.
+<issue_comment>username_3: @username_4 :+1:
+<issue_comment>username_4: Oh, and ""Install Node.js via package manager"" could be shortened to ""Install via package manager"".
+<issue_comment>username_2: The point of the original change is that the ppc le binaries are now official and provided on the community download site.  So I'd want something like:
+
+![additionalplatofrms](https://cloud.githubusercontent.com/assets/9373002/13670962/07a5a8dc-e69b-11e5-933e-17fd7152d8ab.png)
+<issue_comment>username_5: Why do we need to list 3 IBM links that all link to the same page?
+<issue_comment>username_4: @phillipj thanks, looking good now!
+<issue_comment>username_4: @username_3 any reason why you changed the LTS label in these screenshots? Imho, it's not ideal that the text now wraps to another line and the old text was fine imho.
+<issue_comment>username_6: What differentiates the ppc builds from for instance stuff we build on joyent or arm? I mean, what does 'official' imply here? For instance, we already know that calling the joyent builds `sunos` is incorrect since it won't really run on sunos. What we need is a sunos host for that to actually start working properly again. Would that denote its 'offical' standing?
+
+We're deploying the servers, setting up the ci and building it through our release with shasum's generated by us. Might make sense to clarify this.
+<issue_comment>username_3: @username_4 The screenshot was taken from the live website, text was changed in #570.
+<issue_comment>username_4: Ah, right. Well then let's make the button slightly wider to stop the wrapping.
+<issue_comment>username_2: As I think @username_6 indicates, in my mind the ""Unofficial provided by IBM"" is for the cases were we don't have the builds in the community ci yet.   The original purpose of this PR was to reflect that we now build PPC le binaries as part of the regular releases and to have the page provide links to the binaries which are already available in ""All downloads"" directory.  For example: https://nodejs.org/dist/v4.4.0/
+<issue_comment>username_4: @username_3 I fixed the download button in https://github.com/nodejs/nodejs.org/commit/22bf803874aec29200e959d34b13403f8f1e2d01.
+<issue_comment>username_2: @username_3  any comments on my proposed modification ?
+<issue_comment>username_3: @username_2 Sure, this makes sense. So go ahead. ;)
+<issue_comment>username_2: @username_1  you good with my suggestion as well ? If so we'll either update this PR to reflect that or submit a new one.
+<issue_comment>username_0: I have updated the PR to now split up the downloads as has been suggested. My only concern ATM is that the there is the chance additional information is now getting hidden under the fold. On Chrome, on a macbook bro, with default resolution and no toolbars everything below the version number is hidden below the fold and it is not clear that people should be scrolling.
+
+@nodejs/website thoughts?
+
+<img width=""452"" alt=""screen shot 2016-03-15 at 2 32 00 pm"" src=""https://cloud.githubusercontent.com/assets/498775/13794947/dc2e5238-eabb-11e5-81e7-5b8cabfad35b.png"">
+<issue_comment>username_0: @username_3 do you have any suggestions about the styles? Not getting a good lay out in the table due to one column having too much text
+<issue_comment>username_3: @username_0 Just a quick mock, how about this:
+
+![](https://cloud.githubusercontent.com/assets/153481/13800532/5c898042-eb2a-11e5-839f-facad0fb9fb7.png)
+
+```css
+.download-matrix td span {
+    font-size: 0.8em;
+}
+```
+
+```html
+<tr>
+	<th>Linux on Power Systems</th>
+	<td colspan=""3"">
+		<a href=""#"">64-bit le</a>
+		<span>Official Node.js release</span>
+	</td>
+	<td colspan=""3"">
+		<a href=""#"">64-bit be</a>
+		<span>Unofficial, provided by IBM</span>
+	</td>
+</tr>
+```
+
+---
+
+As you're already working on it, can you please also move the ""current version"" below the headline? (see https://github.com/nodejs/nodejs.org/pull/564#issuecomment-194825611)
+
+```css
+/* style for .download-header h1 can be removed */
+.download-header span {
+    display: block;
+    color: #999; /* ""light-gray"" in stylus */
+    font-size: 0.8em;
+}
+```
+
+```html
+<div class=""download-header"">
+    <h1>Downloads <span>Current version v4.4.0</span></h1>
+</div>
+```
+
+Then I think we're good to go.
+<issue_comment>username_0: @username_3 Thanks for the detailed notes, that made things so much simpler!!!
+
+Moving the version to the top not only makes sense, but it solves the problem with the fold!
+
+I believe I've gotten everything right now except for remove the python notice at the bottom which was mentioned by @username_4. I feel like that should perhaps have it's own discussion. 
+
+Here is the latest version, please take a look at the style changes I made to make sure they are above board
+
+<img width=""524"" alt=""screen shot 2016-03-16 at 4 54 23 pm"" src=""https://cloud.githubusercontent.com/assets/498775/13832284/15cc3a6e-eb98-11e5-934d-d3aec454f445.png"">
+<issue_comment>username_1: Could we put ARM above SmartOS? It gets more downloads and this is a primary place for some of those folks to go, particularly ARMv6 which isn't served by any other source afaik. SmartOS have their pkg ecosystem as the primary place to get builds already.
+<issue_comment>username_0: @username_1 not a problem updating . How would you feel about arm being included primary list?
+
+<img width=""536"" alt=""screen shot 2016-03-16 at 6 44 50 pm"" src=""https://cloud.githubusercontent.com/assets/498775/13833886/3864dedc-eba7-11e5-80a4-0782c994443f.png"">
+<issue_comment>username_1: ARM just isn't in the same league as x (yet), we can reevaluate if that changes significantly
+
+![arm no competition](https://nodejs.org/metrics/summaries/arch.png)
+<issue_comment>username_3: @username_0 There's still a wide margin between the ""Downloads"" headline and the version. Otherwise LGTM. Thank you for taking care of all those changes … :+1: 
+
+As soon as you push your changes, I think we're good to go.
+<issue_comment>username_2: lgtm from me
+<issue_comment>username_0: @username_3 What do you think of this?
+
+<img width=""552"" alt=""screen shot 2016-03-17 at 9 17 53 am"" src=""https://cloud.githubusercontent.com/assets/498775/13852846/49283154-ec21-11e5-9542-e5fd84a1b232.png"">
+<issue_comment>username_3: @username_0 Perfect, go for it!"

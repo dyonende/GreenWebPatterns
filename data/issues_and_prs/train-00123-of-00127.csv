@@ -1,0 +1,530 @@
+kubernetes/website,820349253,26802,,"[{'action': 'opened', 'author': 'nigelainscoe', 'comment_id': None, 'datetime': '2021-03-02 20:14:08+00:00', 'masked_author': 'username_0', 'text': 'The # Output decoded secrets without external tools command:\r\n`kubectl get secret my-secret -o go-template=\'{{range $k,$v := .data}}{{""### ""}}{{$k}}{{""\\n""}}{{$v|base64decode}}{{""\\n\\n""}}{{end}}\'`\r\n\r\nreturns ""`The system cannot find the path specified.`"" when executed on Windows. Works fine on WSL Ubuntu', 'title': 'Issue with k8s.io/docs/reference/kubectl/cheatsheet/', 'type': 'issue'}
+ {'action': 'created', 'author': 'sftim', 'comment_id': 789571833.0, 'datetime': '2021-03-03 09:28:08+00:00', 'masked_author': 'username_1', 'text': 'That looks like it should “just work” providing the quoting is correct.\r\n\r\n@username_0 what output do you get from `kubectl get secret my-secret -o json`? (please redact anything confidential!)\r\nAlso, what shell are you using?\r\n\r\n/triage needs-information\r\n(possibly /triage support)', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'nigelainscoe', 'comment_id': 794582511.0, 'datetime': '2021-03-09 23:09:00+00:00', 'masked_author': 'username_0', 'text': 'I get what I expected, i.e. \r\n\r\n```\r\napiVersion: v1\r\ndata:\r\n  key: aGVCbG=====================EU0VyMWM=\r\nkind: Secret\r\nmetadata:\r\n  creationTimestamp: ""2021-03-05T11:03:25Z""\r\n  labels:\r\n    velero.io/backup-name: test-xxxxxx\r\n    velero.io/restore-name: test-xxxx\r\n  name: xxxx-xxxxxxx-key\r\n  namespace: test-xxxxxxx\r\n  resourceVersion: ""18681715""\r\n  selfLink: /api/v1/namespaces/test-xxxxxxxx/secrets/xxxxx-xxxxxxx-key\r\n  uid: dfa3c277-908b-4320-8ea2-b2a41f6e2dd5\r\ntype: Opaque\r\n```\r\nThe shell I\'m using is cmdr which is just a wrapper for Windows command prompt\r\n\r\nI also tried it with a PowerShell prompt which gives yet another different error: \r\n`error: error parsing template {{range $k,$v := .data}}{{###, template: output:1: unexpected ""#"" in command`\r\n\r\nAnd again with PowerShell issuing a simple `kubectl get secret my-secret -o json` returns the expected base64 encoded secret.', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'DanielHabenicht', 'comment_id': 865057716.0, 'datetime': '2021-06-21 14:02:00+00:00', 'masked_author': 'username_2', 'text': 'Did you find a solution @username_0 ?\r\n\r\nI\'ve got the exact same issue, albeit through a different tool: \r\n\r\nUsing `kubectl get secrets dev-values --kubeconfig ./.kubeconfig -o go-template=\'{{range $k,$v := .data}}{{printf \\""%s: \\"" $k}}{{if not $v}}{{$v}}{{else}}{{$v | base64decode}}{{end}}{{\\""\\\\n\\""}}{{end}}\'` in an npm script yields the same error. (NPM executes the command in windows command line, as well as I know) \r\n\r\nExecuting the command on the powershell works flawlessly.', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'sftim', 'comment_id': 865060478.0, 'datetime': '2021-06-21 14:05:26+00:00', 'masked_author': 'username_1', 'text': 'This might be a shell quoting issue. Maybe the cheat sheet entry could caution readers that the example uses POSIX shell quoting.', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'DanielHabenicht', 'comment_id': 865076117.0, 'datetime': '2021-06-21 14:24:58+00:00', 'masked_author': 'username_2', 'text': '@username_1 for my part you are absolutley right, escaping mania:\r\n\r\n```\r\nkubectl get secret dev-values --kubeconfig ./.kubeconfig -o go-template=\'{{range $k,$v := .data}}{{printf \\\\\\""%s: \\\\\\"" $k}}{{if not $v}}{{$v}}{{else}}{{$v | base64decode}}{{end}}{{\\\\\\""\\\\n\\\\\\""}}{{end}}\'\r\n```\r\n\r\nI had to set `npm config set script-shell powershell` npm to execute in the powershell instead of commandline. \r\nThen NPM seems to unescape for the first time, then powershell for the second time and then kubectl takes over. :D\r\n\r\nFor why it does not work in the commandline. IDK, but there are multiple stackoverflows having issues with double and single quotes in cmd.', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'DanielHabenicht', 'comment_id': 865087304.0, 'datetime': '2021-06-21 14:40:04+00:00', 'masked_author': 'username_2', 'text': 'For using commandline you just have to get rid of the single quotes: \r\nFor NPM with Commandline:\r\n```\r\nkubectl get secrets indicarus-dev-values -o go-template=\\""{{range $k,$v := .data}}{{printf \\\\\\""%s: \\\\\\"" $k}}{{if not $v}}{{$v}}{{else}}{{$v | base64decode}}{{end}}{{\\\\\\""\\\\n\\\\\\""}}{{end}}\\""\r\n```\r\nDirectly on commandline:\r\n```cmd\r\nget secrets dev-values  -o go-template=""{{range $k,$v := .data}}{{printf \\""%s: \\"" $k}}{{if not $v}}{{$v}}{{else}}{{$v | base64decode}}{{end}}{{\\""\\\\n\\""}}{{end}}""\r\n```', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'nigelainscoe', 'comment_id': 867142703.0, 'datetime': '2021-06-23 20:41:18+00:00', 'masked_author': 'username_0', 'text': 'That fixes it. Please update the docs and you can close this issue.', 'title': None, 'type': 'comment'}
+ {'action': 'closed', 'author': 'nigelainscoe', 'comment_id': None, 'datetime': '2021-06-23 20:41:18+00:00', 'masked_author': 'username_0', 'text': '', 'title': None, 'type': 'issue'}]","<issue_start><issue_comment>Title: Issue with k8s.io/docs/reference/kubectl/cheatsheet/
+username_0: The # Output decoded secrets without external tools command:
+`kubectl get secret my-secret -o go-template='{{range $k,$v := .data}}{{""### ""}}{{$k}}{{""\n""}}{{$v|base64decode}}{{""\n\n""}}{{end}}'`
+
+returns ""`The system cannot find the path specified.`"" when executed on Windows. Works fine on WSL Ubuntu
+<issue_comment>username_1: That looks like it should “just work” providing the quoting is correct.
+
+@username_0 what output do you get from `kubectl get secret my-secret -o json`? (please redact anything confidential!)
+Also, what shell are you using?
+
+/triage needs-information
+(possibly /triage support)
+<issue_comment>username_0: I get what I expected, i.e. 
+
+```
+apiVersion: v1
+data:
+  key: aGVCbG=====================EU0VyMWM=
+kind: Secret
+metadata:
+  creationTimestamp: ""2021-03-05T11:03:25Z""
+  labels:
+    velero.io/backup-name: test-xxxxxx
+    velero.io/restore-name: test-xxxx
+  name: xxxx-xxxxxxx-key
+  namespace: test-xxxxxxx
+  resourceVersion: ""18681715""
+  selfLink: /api/v1/namespaces/test-xxxxxxxx/secrets/xxxxx-xxxxxxx-key
+  uid: dfa3c277-908b-4320-8ea2-b2a41f6e2dd5
+type: Opaque
+```
+The shell I'm using is cmdr which is just a wrapper for Windows command prompt
+
+I also tried it with a PowerShell prompt which gives yet another different error: 
+`error: error parsing template {{range $k,$v := .data}}{{###, template: output:1: unexpected ""#"" in command`
+
+And again with PowerShell issuing a simple `kubectl get secret my-secret -o json` returns the expected base64 encoded secret.
+<issue_comment>username_2: Did you find a solution @username_0 ?
+
+I've got the exact same issue, albeit through a different tool: 
+
+Using `kubectl get secrets dev-values --kubeconfig ./.kubeconfig -o go-template='{{range $k,$v := .data}}{{printf \""%s: \"" $k}}{{if not $v}}{{$v}}{{else}}{{$v | base64decode}}{{end}}{{\""\\n\""}}{{end}}'` in an npm script yields the same error. (NPM executes the command in windows command line, as well as I know) 
+
+Executing the command on the powershell works flawlessly.
+<issue_comment>username_1: This might be a shell quoting issue. Maybe the cheat sheet entry could caution readers that the example uses POSIX shell quoting.
+<issue_comment>username_2: @username_1 for my part you are absolutley right, escaping mania:
+
+```
+kubectl get secret dev-values --kubeconfig ./.kubeconfig -o go-template='{{range $k,$v := .data}}{{printf \\\""%s: \\\"" $k}}{{if not $v}}{{$v}}{{else}}{{$v | base64decode}}{{end}}{{\\\""\\n\\\""}}{{end}}'
+```
+
+I had to set `npm config set script-shell powershell` npm to execute in the powershell instead of commandline. 
+Then NPM seems to unescape for the first time, then powershell for the second time and then kubectl takes over. :D
+
+For why it does not work in the commandline. IDK, but there are multiple stackoverflows having issues with double and single quotes in cmd.
+<issue_comment>username_2: For using commandline you just have to get rid of the single quotes: 
+For NPM with Commandline:
+```
+kubectl get secrets indicarus-dev-values -o go-template=\""{{range $k,$v := .data}}{{printf \\\""%s: \\\"" $k}}{{if not $v}}{{$v}}{{else}}{{$v | base64decode}}{{end}}{{\\\""\\n\\\""}}{{end}}\""
+```
+Directly on commandline:
+```cmd
+get secrets dev-values  -o go-template=""{{range $k,$v := .data}}{{printf \""%s: \"" $k}}{{if not $v}}{{$v}}{{else}}{{$v | base64decode}}{{end}}{{\""\\n\""}}{{end}}""
+```
+<issue_comment>username_0: That fixes it. Please update the docs and you can close this issue.<issue_closed>"
+kubernetes/website,867640401,27733,,"[{'action': 'opened', 'author': 'hobin2017', 'comment_id': None, 'datetime': '2021-04-26 12:18:14+00:00', 'masked_author': 'username_0', 'text': 'Is it possible to use `metadata.annotations.field01=val01` to select objects? This confuse me since the `annotations` is a field of `metadata`. If it is possible, the field selector is more powerful than the label selector.', 'title': 'Improvement for k8s.io/docs/concepts/overview/working-with-objects/field-selectors/', 'type': 'issue'}
+ {'action': 'created', 'author': 'sftim', 'comment_id': 827950582.0, 'datetime': '2021-04-27 21:43:10+00:00', 'masked_author': 'username_1', 'text': 'Field selectors only works with certain limited fields. See https://kubernetes.io/docs/concepts/overview/working-with-objects/field-selectors/#supported-fields\r\n\r\n/kind support', 'title': None, 'type': 'comment'}]","<issue_start><issue_comment>Title: Improvement for k8s.io/docs/concepts/overview/working-with-objects/field-selectors/
+username_0: Is it possible to use `metadata.annotations.field01=val01` to select objects? This confuse me since the `annotations` is a field of `metadata`. If it is possible, the field selector is more powerful than the label selector.
+<issue_comment>username_1: Field selectors only works with certain limited fields. See https://kubernetes.io/docs/concepts/overview/working-with-objects/field-selectors/#supported-fields
+
+/kind support"
+lektor/lektor-website,268046929,164,,"[{'action': 'opened', 'author': 'brianly', 'comment_id': None, 'datetime': '2017-10-24T14:08:40Z', 'masked_author': 'username_0', 'text': ""I wanted to install on Windows 10. Thinking that ImageMagick might be a pain to install I tried installation under [WSL](https://msdn.microsoft.com/en-us/commandline/wsl/about). When I do this I find that [install.sh](https://github.com/lektor/lektor-website/blob/master/assets/install.sh) resolves some odd installation directories:\r\n\r\n```\r\nusername_0@Aotearoa:~$ curl -sf https://www.getlektor.com/install.sh | sh\r\n()\r\nWelcome to Lektor\r\n()\r\nThis script will install Lektor on your computer.\r\n()\r\nInstalling at:\r\n  bin: /mnt/c/Go/bin\r\n  app: /mnt/c/Go/lib/lektor\r\n()\r\nContinue? [Yn]\r\n```\r\n\r\nI have Go installed under Windows and it seems to want to install there. If I look at my $PATH variable under WSL it looks like it includes values from Linux and Windows:\r\n\r\n```\r\nusername_0@Aotearoa:~$ $PATH\r\n-bash: /usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/mnt/c/Windows/System32:/mnt/c/Windows:/mnt/c/Windows/System32/wbem:/mnt/c/Windows/System32/WindowsPowerShell/v1.0:/mnt/c/Program: No such file or directory\r\n```\r\n\r\nI haven't done enough research to understand the expected behaviour with paths, but I see similar behavior on another computer running WSL under Windows 10."", 'title': 'Installation under Bash on Ubuntu on Windows (WSL) has odd path resolution', 'type': 'issue'}
+ {'action': 'created', 'author': 'brianly', 'comment_id': 339007041.0, 'datetime': '2017-10-24 14:21:42+00:00', 'masked_author': 'username_0', 'text': 'It looks like it is [possible to detect](https://stackoverflow.com/questions/38859145/detect-ubuntu-on-windows-vs-native-ubuntu-from-bash-script) that you are running under Bash on Windows.', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'MrCroft', 'comment_id': 346305289.0, 'datetime': '2017-11-22 10:14:42+00:00', 'masked_author': 'username_1', 'text': '@username_0 I\'ve just found out, after banging my head against the wall a few times (not really), that there are 2 versions to that.\r\n1. If you\'ve installed WSL the `lxrun` way:\r\n```\r\n[HKEY_CURRENT_USER\\Software\\Microsoft\\Windows\\CurrentVersion\\Lxss]\r\n""AppendNtPath""=dword:00000000\r\n```\r\n\r\n2. If you\'ve installed WSL from the Windows Store (like I did):\r\n```\r\n[HKEY_LOCAL_MACHINE\\SYSTEM\\CurrentControlSet\\Services\\LxssManager]\r\n""DistributionFlags""=dword:fffffffd\r\n```\r\nI\'ve found them both courtesy of @benhillis\r\nJust wanted to mention both, in case anyone reaches this and the first way doesn\'t work for them if they\'ve installed WSL from the Store.', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'nixjdm', 'comment_id': 387474145.0, 'datetime': '2018-05-08 17:09:58+00:00', 'masked_author': 'username_2', 'text': ""@username_0 I know this issues is a bit old, but for the record, I agree that we want installs to be as low friction as possible, and updates to the install.ps1 and install.sh files to that effect are great. I don't personally have Windows, or Windows experience that's at all recent though, so I'm labeling this as 'help wanted'."", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'xlotlu', 'comment_id': 618711098.0, 'datetime': '2020-04-23 22:50:48+00:00', 'masked_author': 'username_3', 'text': '@username_0 if you still wanna fix this, the secret is in `posix_find_bin_dir()` in the code I linked. Ideally only a small tweak to `POSIX_BIN_DIRS` would do it, but also check the result of `posix_find_lib_dir()`.', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'xlotlu', 'comment_id': 636894141.0, 'datetime': '2020-06-01 14:32:03+00:00', 'masked_author': 'username_3', 'text': ""Closing this for lack of feedback. It's also been a long time since the report and the installer has been overhauled. If it's still an issue please reopen."", 'title': None, 'type': 'comment'}
+ {'action': 'closed', 'author': 'xlotlu', 'comment_id': None, 'datetime': '2020-06-01 14:32:03+00:00', 'masked_author': 'username_3', 'text': '', 'title': None, 'type': 'issue'}]","<issue_start><issue_comment>Title: Installation under Bash on Ubuntu on Windows (WSL) has odd path resolution
+username_0: I wanted to install on Windows 10. Thinking that ImageMagick might be a pain to install I tried installation under [WSL](https://msdn.microsoft.com/en-us/commandline/wsl/about). When I do this I find that [install.sh](https://github.com/lektor/lektor-website/blob/master/assets/install.sh) resolves some odd installation directories:
+
+```
+username_0@Aotearoa:~$ curl -sf https://www.getlektor.com/install.sh | sh
+()
+Welcome to Lektor
+()
+This script will install Lektor on your computer.
+()
+Installing at:
+  bin: /mnt/c/Go/bin
+  app: /mnt/c/Go/lib/lektor
+()
+Continue? [Yn]
+```
+
+I have Go installed under Windows and it seems to want to install there. If I look at my $PATH variable under WSL it looks like it includes values from Linux and Windows:
+
+```
+username_0@Aotearoa:~$ $PATH
+-bash: /usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/mnt/c/Windows/System32:/mnt/c/Windows:/mnt/c/Windows/System32/wbem:/mnt/c/Windows/System32/WindowsPowerShell/v1.0:/mnt/c/Program: No such file or directory
+```
+
+I haven't done enough research to understand the expected behaviour with paths, but I see similar behavior on another computer running WSL under Windows 10.
+<issue_comment>username_0: It looks like it is [possible to detect](https://stackoverflow.com/questions/38859145/detect-ubuntu-on-windows-vs-native-ubuntu-from-bash-script) that you are running under Bash on Windows.
+<issue_comment>username_1: @username_0 I've just found out, after banging my head against the wall a few times (not really), that there are 2 versions to that.
+1. If you've installed WSL the `lxrun` way:
+```
+[HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Lxss]
+""AppendNtPath""=dword:00000000
+```
+
+2. If you've installed WSL from the Windows Store (like I did):
+```
+[HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\LxssManager]
+""DistributionFlags""=dword:fffffffd
+```
+I've found them both courtesy of @benhillis
+Just wanted to mention both, in case anyone reaches this and the first way doesn't work for them if they've installed WSL from the Store.
+<issue_comment>username_2: @username_0 I know this issues is a bit old, but for the record, I agree that we want installs to be as low friction as possible, and updates to the install.ps1 and install.sh files to that effect are great. I don't personally have Windows, or Windows experience that's at all recent though, so I'm labeling this as 'help wanted'.
+<issue_comment>username_3: @username_0 if you still wanna fix this, the secret is in `posix_find_bin_dir()` in the code I linked. Ideally only a small tweak to `POSIX_BIN_DIRS` would do it, but also check the result of `posix_find_lib_dir()`.
+<issue_comment>username_3: Closing this for lack of feedback. It's also been a long time since the report and the installer has been overhauled. If it's still an issue please reopen.<issue_closed>"
+RSS-Bridge/rss-bridge,483209344,1268,,"[{'action': 'opened', 'author': 'em92', 'comment_id': None, 'datetime': '2019-08-21 05:37:05+00:00', 'masked_author': 'username_0', 'text': ""Let's have scenario. We have feed with discount (example https://feed.eugenemolotov.ru/?action=display&bridge=Steam&userid=76561198260599288&only_discount=on&format=Atom )\r\n\r\nSo time ago, there was a discount. My rss reader fetched item from feed. This item's id is `http://store.steampowered.com/app/519860/`. Some time later, Steam stopped giving discounts. Ok.\r\n\r\nThen, when discount appears again, there will be item in feed. But it will have the same id, and IMHO it won't appear again in my rss reader (at least as new item).\r\n\r\n@username_1 as you are bridge maintainer, any comments?"", 'title': '[SteamBridge] Question about items', 'type': 'issue'}
+ {'action': 'created', 'author': 'em92', 'comment_id': 523304167.0, 'datetime': '2019-08-21 05:38:05+00:00', 'masked_author': 'username_0', 'text': 'Not sure about `Bridge-Request` label. Ignore this label.', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'JackNUMBER', 'comment_id': 523396763.0, 'datetime': '2019-08-21 10:24:32+00:00', 'masked_author': 'username_1', 'text': ""I see the usecase. My RSS reader doesn't use ids.\r\nAt the moment I haven't any solution, if you have feel free to contribute 😉 \r\nI will think about it."", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'JackNUMBER', 'comment_id': 528000502.0, 'datetime': '2019-09-04 17:22:11+00:00', 'masked_author': 'username_1', 'text': '@username_0 \r\nI checked what it is possible to do, here my report.\r\n\r\nTo provide and use an ID we need  a _variable information_ (like a ""sale start date"") from the source or a storage in RSS-Bridge to keep a generated ID in memory. There is neither of them 😂\r\n\r\nThen, the possible ways :\r\n- **generate a new id at each call** (generated on the fly) → useless in any case\r\n- **generate the id from the price** (kind of _variable information_) → if a new sale come with the same price, the ID will be the same \r\n- **generate the id from the current date** (_variable information_)  → each day the sale will the effective your rss reader will be triggered\r\n- **generate the id from the current month + the price** → it\'s highly unusual for sale to be applied twice a month and if the case come you might have to buy it the first time ^^\r\n\r\nIn all way the id will not be really uniq (related to a specific sale). \r\nThen, the better solution seems the last one. BUT it\'s not elegant and it\'s a trick for a dedicated case.\r\n\r\n@username_2 Any opinion?', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'LogMANOriginal', 'comment_id': 552131488.0, 'datetime': '2019-11-09 19:51:23+00:00', 'masked_author': 'username_2', 'text': 'Unfortunately there is no persistent state in RSS-Bridge with which you could determine if the state changed between calls. From the [JSON data](https://store.steampowered.com/wishlist/profiles/76561198260599288/wishlistdata?p=0) it looks as if each element under ""subs"" has its own unique ID. Maybe the ID changes for every sale?\r\n\r\nAlternatively there seems to be an open Steam API that might be worth looking into: https://steamcommunity.com/dev\r\n\r\nThis service has a ""Last Change Number"" that looks unique: https://steamdb.info/app/519860/\r\nBut I\'m not sure where they pull it from (maybe the API above?)', 'title': None, 'type': 'comment'}
+ {'action': 'closed', 'author': 'dvikan', 'comment_id': None, 'datetime': '2022-03-26 06:23:06+00:00', 'masked_author': 'username_3', 'text': '', 'title': None, 'type': 'issue'}
+ {'action': 'created', 'author': 'dvikan', 'comment_id': 1079803610.0, 'datetime': '2022-03-27 00:47:01+00:00', 'masked_author': 'username_3', 'text': 'Is this still relevant? Im thinking we would need to find some unique information for it to produce a ""new"" feed item.', 'title': None, 'type': 'comment'}
+ {'action': 'reopened', 'author': 'dvikan', 'comment_id': None, 'datetime': '2022-03-27 00:47:01+00:00', 'masked_author': 'username_3', 'text': ""Let's have scenario. We have feed with discount (example https://feed.eugenemolotov.ru/?action=display&bridge=Steam&userid=76561198260599288&only_discount=on&format=Atom )\r\n\r\nSo time ago, there was a discount. My rss reader fetched item from feed. This item's id is `http://store.steampowered.com/app/519860/`. Some time later, Steam stopped giving discounts. Ok.\r\n\r\nThen, when discount appears again, there will be item in feed. But it will have the same id, and IMHO it won't appear again in my rss reader (at least as new item).\r\n\r\n@username_1 as you are bridge maintainer, any comments?"", 'title': '[SteamBridge] Question about items', 'type': 'issue'}
+ {'action': 'created', 'author': 'em92', 'comment_id': 1079861352.0, 'datetime': '2022-03-27 07:00:08+00:00', 'masked_author': 'username_0', 'text': 'Yes', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'LogMANOriginal', 'comment_id': 1079870413.0, 'datetime': '2022-03-27 07:28:22+00:00', 'masked_author': 'username_2', 'text': 'This is a possible use case for #1380.', 'title': None, 'type': 'comment'}]","<issue_start><issue_comment>Title: [SteamBridge] Question about items
+username_0: Let's have scenario. We have feed with discount (example https://feed.eugenemolotov.ru/?action=display&bridge=Steam&userid=76561198260599288&only_discount=on&format=Atom )
+
+So time ago, there was a discount. My rss reader fetched item from feed. This item's id is `http://store.steampowered.com/app/519860/`. Some time later, Steam stopped giving discounts. Ok.
+
+Then, when discount appears again, there will be item in feed. But it will have the same id, and IMHO it won't appear again in my rss reader (at least as new item).
+
+@username_1 as you are bridge maintainer, any comments?
+<issue_comment>username_0: Not sure about `Bridge-Request` label. Ignore this label.
+<issue_comment>username_1: I see the usecase. My RSS reader doesn't use ids.
+At the moment I haven't any solution, if you have feel free to contribute 😉 
+I will think about it.
+<issue_comment>username_1: @username_0 
+I checked what it is possible to do, here my report.
+
+To provide and use an ID we need  a _variable information_ (like a ""sale start date"") from the source or a storage in RSS-Bridge to keep a generated ID in memory. There is neither of them 😂
+
+Then, the possible ways :
+- **generate a new id at each call** (generated on the fly) → useless in any case
+- **generate the id from the price** (kind of _variable information_) → if a new sale come with the same price, the ID will be the same 
+- **generate the id from the current date** (_variable information_)  → each day the sale will the effective your rss reader will be triggered
+- **generate the id from the current month + the price** → it's highly unusual for sale to be applied twice a month and if the case come you might have to buy it the first time ^^
+
+In all way the id will not be really uniq (related to a specific sale). 
+Then, the better solution seems the last one. BUT it's not elegant and it's a trick for a dedicated case.
+
+@username_2 Any opinion?
+<issue_comment>username_2: Unfortunately there is no persistent state in RSS-Bridge with which you could determine if the state changed between calls. From the [JSON data](https://store.steampowered.com/wishlist/profiles/76561198260599288/wishlistdata?p=0) it looks as if each element under ""subs"" has its own unique ID. Maybe the ID changes for every sale?
+
+Alternatively there seems to be an open Steam API that might be worth looking into: https://steamcommunity.com/dev
+
+This service has a ""Last Change Number"" that looks unique: https://steamdb.info/app/519860/
+But I'm not sure where they pull it from (maybe the API above?)<issue_closed>
+<issue_comment>username_3: Is this still relevant? Im thinking we would need to find some unique information for it to produce a ""new"" feed item.
+<issue_comment>username_3: Let's have scenario. We have feed with discount (example https://feed.eugenemolotov.ru/?action=display&bridge=Steam&userid=76561198260599288&only_discount=on&format=Atom )
+
+So time ago, there was a discount. My rss reader fetched item from feed. This item's id is `http://store.steampowered.com/app/519860/`. Some time later, Steam stopped giving discounts. Ok.
+
+Then, when discount appears again, there will be item in feed. But it will have the same id, and IMHO it won't appear again in my rss reader (at least as new item).
+
+@username_1 as you are bridge maintainer, any comments?
+<issue_comment>username_0: Yes
+<issue_comment>username_2: This is a possible use case for #1380."
+gohugoio/hugo,143334688,2016,"{'number': 2016.0, 'repo': 'hugo', 'user_login': 'gohugoio'}","[{'action': 'opened', 'author': 'digitalcraftsman', 'comment_id': None, 'datetime': '2016-03-24T19:12:58Z', 'masked_author': 'username_0', 'text': 'Currently, Algolia crawls the [demo](http://hugodocs.netlify.com/) of the potentially new redesign. **Before merging** this pull request I need to contact the folks at Algolia so that they crawl the actual docs instead.\n\nTake a look at the this [screencast](http://sendvid.com/j81f49yb) to see the search form in action.\n\nI added the custom stylesheet next to the HTML to avoid potential caching issues.', 'title': 'docs: Add search form powered by Algolia', 'type': 'issue'}]","<issue_start><issue_comment>Title: docs: Add search form powered by Algolia
+username_0: Currently, Algolia crawls the [demo](http://hugodocs.netlify.com/) of the potentially new redesign. **Before merging** this pull request I need to contact the folks at Algolia so that they crawl the actual docs instead.
+
+Take a look at the this [screencast](http://sendvid.com/j81f49yb) to see the search form in action.
+
+I added the custom stylesheet next to the HTML to avoid potential caching issues."
+google/web-starter-kit,284586586,961,"{'number': 961.0, 'repo': 'web-starter-kit', 'user_login': 'google'}","[{'action': 'opened', 'author': 'imkarthikk', 'comment_id': None, 'datetime': '2017-12-26T17:29:32Z', 'masked_author': 'username_0', 'text': 'The dot bothered me so much. So changing it to a line rather than a bullet point.', 'title': 'Changing Bullet to Horizontal Line', 'type': 'issue'}
+ {'action': 'created', 'author': 'imkarthikk', 'comment_id': 353992676.0, 'datetime': '2017-12-26 17:30:51+00:00', 'masked_author': 'username_0', 'text': 'I signed it!', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'Montesdodgers13', 'comment_id': 354006327.0, 'datetime': '2017-12-26 19:49:28+00:00', 'masked_author': 'username_1', 'text': 'On Tue, Dec 26, 2017 at 11:48 AM Victor Valle <ychag@example.com>\nwrote:\n\n>\n>', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'Montesdodgers13', 'comment_id': 372059935.0, 'datetime': '2018-03-10 19:46:27+00:00', 'masked_author': 'username_1', 'text': ""---------- Forwarded message ----------\nFrom: <lyhxr@example.com>\nDate: Saturday, March 10, 2018\nSubject: [Python Infrastructure status] Update : PyPI Maintenance\nTo: dycjh@example.com\n\n\nPyPI Maintenance <http://stspg.io/18c033eb5>\nIncident Report for Python Infrastructure\nAn Incident Update Has Been Posted\nWe've completed the first of two migrations. The second should complete in\nthe next 5 minutes and we'll be back online if all goes well.\nMar 10, 14:21 UTC\nPrevious Updates\nMonitoring\nPyPI requires a database migration that necessitates an exclusive lock on a\nbusy table.\n\nIn order to perform this we're going to temporarily place PyPI into\nmaintenance mode.\nMar 10, 14:06 UTC\nThis incident affects: pypi.python.org.\nView status page <https://status.python.org> or manage your subscription\n<https://status.python.org/manage/2l3dptn5rjrk> to these emails.\nPowered by Statuspage\n<https://www.statuspage.io/?utm_source=inapp&utm_medium=powered-by&utm_campaign=status.python.org&utm_content=email-notifications>\n\n\n\n--"", 'title': None, 'type': 'comment'}]","<issue_start><issue_comment>Title: Changing Bullet to Horizontal Line
+username_0: The dot bothered me so much. So changing it to a line rather than a bullet point.
+<issue_comment>username_0: I signed it!
+<issue_comment>username_1: On Tue, Dec 26, 2017 at 11:48 AM Victor Valle <raiders13@calebvalle.com>
+wrote:
+
+>
+>
+<issue_comment>username_1: ---------- Forwarded message ----------
+From: <notifications@mail.status.python.org>
+Date: Saturday, March 10, 2018
+Subject: [Python Infrastructure status] Update : PyPI Maintenance
+To: raiders13@calebvalle.com
+
+
+PyPI Maintenance <http://stspg.io/18c033eb5>
+Incident Report for Python Infrastructure
+An Incident Update Has Been Posted
+We've completed the first of two migrations. The second should complete in
+the next 5 minutes and we'll be back online if all goes well.
+Mar 10, 14:21 UTC
+Previous Updates
+Monitoring
+PyPI requires a database migration that necessitates an exclusive lock on a
+busy table.
+
+In order to perform this we're going to temporarily place PyPI into
+maintenance mode.
+Mar 10, 14:06 UTC
+This incident affects: pypi.python.org.
+View status page <https://status.python.org> or manage your subscription
+<https://status.python.org/manage/2l3dptn5rjrk> to these emails.
+Powered by Statuspage
+<https://www.statuspage.io/?utm_source=inapp&utm_medium=powered-by&utm_campaign=status.python.org&utm_content=email-notifications>
+
+
+
+--"
+ethereum/ethereum-org-website,1103885770,5105,,"[{'action': 'opened', 'author': 'samajammin', 'comment_id': None, 'datetime': '2022-01-14 16:40:46+00:00', 'masked_author': 'username_0', 'text': '*To make our work more accessible and to foster more community collaboration, our team publishes an overview of our quarterly roadmap goals. See last quarter\'s roadmap here: #4215.*\r\n\r\n**Greetings fellow Ethereans!**\r\n\r\nHappy new year! [Our vision with ethereum.org](https://ethereum.org/en/about/) continues to be to create the best portal for Ethereum\'s growing community, and to serve as the front door to Ethereum for millions of new visitors each month. Here\'s a look at our major Q1 initiatives to advance this vision.\r\n\r\n## 🔀 Rebrand ""Eth2""\r\n\r\nThe highly anticipated network upgrade known as ""[the merge](https://ethereum.org/en/eth2/merge/)"" is approaching. Once that upgrade takes place later this year, there will no longer be two distinct Ethereum networks or concepts of ""Eth1"" and ""Eth2"" - there will just be the Ethereum network we all know in love.\r\n\r\nIn preparation for this event, we’re revamping our [Eth2 resources](https://ethereum.org/en/eth2/) and [Ethereum Staking Launchpad](https://launchpad.ethereum.org/en/) in order to explain this evolution, reduce confusion and prevent FUD within the community. This quarter we\'ll reorganize these resources and update the terminology on these pages to best reflect the reality of these Ethereum network upgrades.\r\n\r\nWe’ve already kicked off work and would love your input! Get involved here:\r\n\r\n[https://github.com/ethereum/ethereum-org-website/pull/4915](https://github.com/ethereum/ethereum-org-website/pull/4915)\r\n\r\n## 🖥\xa0Run a node\r\n\r\nWhat does it mean to run an Ethereum node? What are the software and hardware requirements? What’s the value in participating, even for someone who isn’t mining or staking? For many users, this can be a daunting topic. \r\n\r\nWe’ll ship a beginner-friendly resource that answers these questions for users and provides them a clear path to get a node up and running on the Ethereum network. We’ve already begun work on this page - you can view the PR here: https://github.com/ethereum/ethereum-org-website/pull/5008\r\n\r\nWe welcome feedback!\r\n\r\n## 🥩 Simplify staking\r\n\r\nRunning a node and participating as a validator is a core component of getting involved as an Ethereum community member. We want to make this process as simple and easy as possible for anyone.\r\n\r\nWe\'ll add content resources and update user flows (both on [ethereum.org](https://ethereum.org/en/) and [launchpad.ethereum.org](https://launchpad.ethereum.org/en/)) to improve the UX for anyone interested in staking, including walkthroughs on how to first set up a staking node on a risk-free testnet.\r\n\r\n[Learn more about staking](https://ethereum.org/en/eth2/staking/)\r\n\r\n## 💕 Onboard onto Layer 2\r\n\r\nGas fees were a hot topic of 2021. The [teams working on layer 2 systems](https://l2beat.com/) labored valiantly over the past few years to ship Ethereum scaling solutions in 2021 that are currently\xa0[10-50 times cheaper than transacting on layer 1](https://l2fees.info/). However, we know this space is only getting started and an adequate non-technical resource for onboarding new users onto these L2s does not exist\xa0**yet.**\r\n\r\nWe will create a simple educational page explaining what layer 2 is, how to get funds onto a layer 2, and other ways to enjoy Ethereum’s scaling solutions. #L222\r\n\r\n[Learn more about layer 2 rollups](https://ethereum.org/en/developers/docs/scaling/layer-2-rollups/)\r\n\r\n## ✨ Explain Web3\r\n\r\nGlobal [search volume for “web3” is skyrocketing](https://trends.google.com/trends/explore?date=today%205-y&q=web3)\xa0as more newcomers discover this space and want to partake in the user-owned internet. However, many existing results are incomplete summaries or outdated news articles destined to become obsolete. This entropy is unfortunate as many of the emotive and poignant ideas in Ethereum are encompassed within web3, yet there is a lack of curated, understandable information on it.\r\n\r\nWe’ll create a dedicated page to provide a web3 introduction to non-technical users. Given that web3 is a relatively new and evolving nomenclature, we believe it’s vital that any authority providing information on the topic is open-source and translated in many languages, allowing for community contribution and iteration on what web3 means (and what it doesn’t).\r\n\r\n## 📲 Increase accessibility\r\n\r\nContinuing to improve our website accessibility is key to achieving our vision for our global community. Inline with [our design principles](https://ethereum.org/en/contributing/design-principles/), we\'re investing in making our site universally accessible.\r\n\r\nThis quarter we\'ll take steps to audit [ethereum.org](http://ethereum.org/) and identify actionable improvements to enhance the experience, e.g. for screen readers and for keyboard navigation.\r\n\r\nHave specific suggestions? We\'d love to hear from you - please [create an issue](https://github.com/ethereum/ethereum-org-website/issues/new/choose).\r\n\r\n## 🖼 Create new illustrations\r\n\r\nYou may have noticed that most of our [ethereum.org artwork](https://ethereum.org/en/assets/) has been re-used multiple times across our site 😅. As we continue to launch new resource pages on the website, our appetite for visual art that helps communicate concepts of Ethereum continues to grow. We’re excited to collaborate with more artists from the community to create new illustrations for the website! \r\n\r\nKnow of an artist you love, whose aesthetic you think would work well on the site? Let us know!\r\n\r\n## 👩\u200d🎨 Hire a Product Designer\r\n\r\nOur team is growing! [We\'re hiring a Product Designer](https://ethereum.org/en/about/product-designer/) who will collaborate with our product and engineering team to create slick, fun and functional web products visited by tens of millions of diverse Ethereum users each year. \r\n\r\nWe’re progressing with candidate interviews and expect to extend a job offer by the end of the month, so stay tuned for an announcement around this. We’re beyond excited to bring a full-time designer onboard to accelerate our product development.\r\n\r\n[Find a job in Ethereum](https://ethereum.org/en/community/get-involved/)\r\n\r\n## 🎓 Redesign the Learn page\r\n\r\nThere is a lot to learn in the Ethereum ecosystem. Currently [ethereum.org](http://ethereum.org/) provides an ever-growing list of disconnected pages that users must piece together independently. Our long-lived [""Learn"" page](https://ethereum.org/en/learn/) provides a scattered list of topics without much rhyme or reason behind the sequence or importance of these topics.\r\n\r\nWe\'ll redesign this page into a more holistic knowledge base and rework the ""Learn"" site navigation to improve our content hierarchy for users and create more structured pathways to learning Ethereum that visitors can navigate based on their areas of interest and current level of knowledge.\r\n\r\n## 💰 Refine the Wallet pages\r\n\r\nWallets are an integral part to Ethereum onboarding and network participation. It\'s no surprise that a huge amount of traffic goes to [our wallets pages](https://ethereum.org/en/wallets/) (>10% of total pageviews).\r\n\r\nSince we\'ve built these pages, we\'ve received a ton of helpful feedback. Among the most prominent is that we present an overwhelming number of choices that makes picking a wallet exhausting for new users. This quarter we\'ll improve our curation of wallets, add new feature filters to help users compare wallets, and add a few ""editors choice"" to reduce decision fatigue.\r\n\r\n[Truncated]\n\r\nUnfortunately, with rapid growth also came an abundance of scammers trying to steal funds from honest members (check out our [security page](https://ethereum.org/en/security/) for tips on protecting yourself) or spammers shilling their low-quality projects. We have already implemented robust automation to prevent such bad actors from scamming, but we will further explore ways to protect our community in Q1.\r\n\r\nLastly, we aim to add several new\xa0[ethereum.org](http://ethereum.org/)\xa0guides to our Discord server. These guides are trusted members of the community who help direct new members, answer questions, fight scammers, and help shepherd meaningful conversation.\r\n\r\nInterested?\xa0[Join and the discord](https://discord.gg/CetY6Y4)\xa0and say hey 👋\r\n\r\n## 🎨 Ecosystem Support Program (ESP) website redesign\r\n\r\nThe [ESP initiative](https://esp.ethereum.foundation/en/) within the Ethereum Foundation (formerly known as the Grants Program) continues to be a critical source of funding and support for projects within the Ethereum ecosystem. Our team is giving this website a facelift, revamping the flow of the site to make the process of applying for support clearer and more accessible & streamlining our backend integrations to improve internal operations of this valuable program.\r\n\r\nThis quarter we’ll launch this new website! [Follow along with our progress](https://github.com/ethereum/esp-website/tree/esp-redesign).\r\n\r\n## How does that sound?\r\n\r\nWe always appreciate feedback on our roadmap! Our guiding principles are based on delivering the most value in the shortest time, so if there\'s something you think we should work on, please let us know! We welcome ideas and PRs from anyone in the community.\r\n\r\nWant to connect in person? Some of our team will be at [ETHDenver](https://www.ethdenver.com/) - reach out to us at [@ethdotorg on Twitter](https://twitter.com/ethdotorg) if you\'re around - we\'d love to chat with our contributors!\r\n\r\n[Learn more about contributing](https://ethereum.org/en/contributing/), hit us up on Twitter, or hop in [our Discord](https://discord.gg/CetY6Y4).', 'title': 'Q1 2022 ethereum.org product roadmap', 'type': 'issue'}
+ {'action': 'created', 'author': 'ghostizbud', 'comment_id': 1013867407.0, 'datetime': '2022-01-16 12:30:49+00:00', 'masked_author': 'username_1', 'text': 'I think what ETH needs is not PRing murge purge etc but vision for broader application in broader economy', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': '666love', 'comment_id': 1013881376.0, 'datetime': '2022-01-16 13:59:09+00:00', 'masked_author': 'username_2', 'text': 'cool！', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'samajammin', 'comment_id': 1016099332.0, 'datetime': '2022-01-19 05:30:25+00:00', 'masked_author': 'username_0', 'text': '## Q1 KPIs\r\n\r\n- Translation Program\r\n  - Reach 5,000 project members in [Crowdin](https://crowdin.com/project/ethereum-org) (+15% vs. Q4 2021)\r\n  - Translate 1,000,000 words (+13% vs. Q4 2021)\r\n  - Average 290 active contributors per month (+3% vs. Q4 2021)\r\n  - Update 35 [content buckets](https://ethereum.org/en/contributing/translation-program/content-versions/) across all languages\r\n  - Launch 5 new languages to the site ([39 currently live](https://ethereum.org/en/languages/))\r\n- Community\r\n  - Hit 40 GitHub contributors (+25% vs. Q4 2021)\r\n  - Gain 10 power contributors (at least 3 PRs or 1 significant feature)\r\n  - Add 3 new Discord guides (+33% vs. Q4 2021)\r\n  - Distribute 250 POAPs, excluding community calls (+20% vs. Q4 2021)\r\n  - Allow 0 PRs to be open longer than 1 month\r\n  - Allow 0 issues to be open longer than 6 months', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'chok-chok', 'comment_id': 1042100908.0, 'datetime': '2022-02-16 19:48:06+00:00', 'masked_author': 'username_3', 'text': 'Love the plan to provide guidance on how to run node!', 'title': None, 'type': 'comment'}]","<issue_start><issue_comment>Title: Q1 2022 ethereum.org product roadmap
+username_0: *To make our work more accessible and to foster more community collaboration, our team publishes an overview of our quarterly roadmap goals. See last quarter's roadmap here: #4215.*
+
+**Greetings fellow Ethereans!**
+
+Happy new year! [Our vision with ethereum.org](https://ethereum.org/en/about/) continues to be to create the best portal for Ethereum's growing community, and to serve as the front door to Ethereum for millions of new visitors each month. Here's a look at our major Q1 initiatives to advance this vision.
+
+## 🔀 Rebrand ""Eth2""
+
+The highly anticipated network upgrade known as ""[the merge](https://ethereum.org/en/eth2/merge/)"" is approaching. Once that upgrade takes place later this year, there will no longer be two distinct Ethereum networks or concepts of ""Eth1"" and ""Eth2"" - there will just be the Ethereum network we all know in love.
+
+In preparation for this event, we’re revamping our [Eth2 resources](https://ethereum.org/en/eth2/) and [Ethereum Staking Launchpad](https://launchpad.ethereum.org/en/) in order to explain this evolution, reduce confusion and prevent FUD within the community. This quarter we'll reorganize these resources and update the terminology on these pages to best reflect the reality of these Ethereum network upgrades.
+
+We’ve already kicked off work and would love your input! Get involved here:
+
+[https://github.com/ethereum/ethereum-org-website/pull/4915](https://github.com/ethereum/ethereum-org-website/pull/4915)
+
+## 🖥 Run a node
+
+What does it mean to run an Ethereum node? What are the software and hardware requirements? What’s the value in participating, even for someone who isn’t mining or staking? For many users, this can be a daunting topic. 
+
+We’ll ship a beginner-friendly resource that answers these questions for users and provides them a clear path to get a node up and running on the Ethereum network. We’ve already begun work on this page - you can view the PR here: https://github.com/ethereum/ethereum-org-website/pull/5008
+
+We welcome feedback!
+
+## 🥩 Simplify staking
+
+Running a node and participating as a validator is a core component of getting involved as an Ethereum community member. We want to make this process as simple and easy as possible for anyone.
+
+We'll add content resources and update user flows (both on [ethereum.org](https://ethereum.org/en/) and [launchpad.ethereum.org](https://launchpad.ethereum.org/en/)) to improve the UX for anyone interested in staking, including walkthroughs on how to first set up a staking node on a risk-free testnet.
+
+[Learn more about staking](https://ethereum.org/en/eth2/staking/)
+
+## 💕 Onboard onto Layer 2
+
+Gas fees were a hot topic of 2021. The [teams working on layer 2 systems](https://l2beat.com/) labored valiantly over the past few years to ship Ethereum scaling solutions in 2021 that are currently [10-50 times cheaper than transacting on layer 1](https://l2fees.info/). However, we know this space is only getting started and an adequate non-technical resource for onboarding new users onto these L2s does not exist **yet.**
+
+We will create a simple educational page explaining what layer 2 is, how to get funds onto a layer 2, and other ways to enjoy Ethereum’s scaling solutions. #L222
+
+[Learn more about layer 2 rollups](https://ethereum.org/en/developers/docs/scaling/layer-2-rollups/)
+
+## ✨ Explain Web3
+
+Global [search volume for “web3” is skyrocketing](https://trends.google.com/trends/explore?date=today%205-y&q=web3) as more newcomers discover this space and want to partake in the user-owned internet. However, many existing results are incomplete summaries or outdated news articles destined to become obsolete. This entropy is unfortunate as many of the emotive and poignant ideas in Ethereum are encompassed within web3, yet there is a lack of curated, understandable information on it.
+
+We’ll create a dedicated page to provide a web3 introduction to non-technical users. Given that web3 is a relatively new and evolving nomenclature, we believe it’s vital that any authority providing information on the topic is open-source and translated in many languages, allowing for community contribution and iteration on what web3 means (and what it doesn’t).
+
+## 📲 Increase accessibility
+
+Continuing to improve our website accessibility is key to achieving our vision for our global community. Inline with [our design principles](https://ethereum.org/en/contributing/design-principles/), we're investing in making our site universally accessible.
+
+This quarter we'll take steps to audit [ethereum.org](http://ethereum.org/) and identify actionable improvements to enhance the experience, e.g. for screen readers and for keyboard navigation.
+
+Have specific suggestions? We'd love to hear from you - please [create an issue](https://github.com/ethereum/ethereum-org-website/issues/new/choose).
+
+## 🖼 Create new illustrations
+
+You may have noticed that most of our [ethereum.org artwork](https://ethereum.org/en/assets/) has been re-used multiple times across our site 😅. As we continue to launch new resource pages on the website, our appetite for visual art that helps communicate concepts of Ethereum continues to grow. We’re excited to collaborate with more artists from the community to create new illustrations for the website! 
+
+Know of an artist you love, whose aesthetic you think would work well on the site? Let us know!
+
+## 👩‍🎨 Hire a Product Designer
+
+Our team is growing! [We're hiring a Product Designer](https://ethereum.org/en/about/product-designer/) who will collaborate with our product and engineering team to create slick, fun and functional web products visited by tens of millions of diverse Ethereum users each year. 
+
+We’re progressing with candidate interviews and expect to extend a job offer by the end of the month, so stay tuned for an announcement around this. We’re beyond excited to bring a full-time designer onboard to accelerate our product development.
+
+[Find a job in Ethereum](https://ethereum.org/en/community/get-involved/)
+
+## 🎓 Redesign the Learn page
+
+There is a lot to learn in the Ethereum ecosystem. Currently [ethereum.org](http://ethereum.org/) provides an ever-growing list of disconnected pages that users must piece together independently. Our long-lived [""Learn"" page](https://ethereum.org/en/learn/) provides a scattered list of topics without much rhyme or reason behind the sequence or importance of these topics.
+
+We'll redesign this page into a more holistic knowledge base and rework the ""Learn"" site navigation to improve our content hierarchy for users and create more structured pathways to learning Ethereum that visitors can navigate based on their areas of interest and current level of knowledge.
+
+## 💰 Refine the Wallet pages
+
+Wallets are an integral part to Ethereum onboarding and network participation. It's no surprise that a huge amount of traffic goes to [our wallets pages](https://ethereum.org/en/wallets/) (>10% of total pageviews).
+
+Since we've built these pages, we've received a ton of helpful feedback. Among the most prominent is that we present an overwhelming number of choices that makes picking a wallet exhausting for new users. This quarter we'll improve our curation of wallets, add new feature filters to help users compare wallets, and add a few ""editors choice"" to reduce decision fatigue.
+
+[Truncated]
+
+Unfortunately, with rapid growth also came an abundance of scammers trying to steal funds from honest members (check out our [security page](https://ethereum.org/en/security/) for tips on protecting yourself) or spammers shilling their low-quality projects. We have already implemented robust automation to prevent such bad actors from scamming, but we will further explore ways to protect our community in Q1.
+
+Lastly, we aim to add several new [ethereum.org](http://ethereum.org/) guides to our Discord server. These guides are trusted members of the community who help direct new members, answer questions, fight scammers, and help shepherd meaningful conversation.
+
+Interested? [Join and the discord](https://discord.gg/CetY6Y4) and say hey 👋
+
+## 🎨 Ecosystem Support Program (ESP) website redesign
+
+The [ESP initiative](https://esp.ethereum.foundation/en/) within the Ethereum Foundation (formerly known as the Grants Program) continues to be a critical source of funding and support for projects within the Ethereum ecosystem. Our team is giving this website a facelift, revamping the flow of the site to make the process of applying for support clearer and more accessible & streamlining our backend integrations to improve internal operations of this valuable program.
+
+This quarter we’ll launch this new website! [Follow along with our progress](https://github.com/ethereum/esp-website/tree/esp-redesign).
+
+## How does that sound?
+
+We always appreciate feedback on our roadmap! Our guiding principles are based on delivering the most value in the shortest time, so if there's something you think we should work on, please let us know! We welcome ideas and PRs from anyone in the community.
+
+Want to connect in person? Some of our team will be at [ETHDenver](https://www.ethdenver.com/) - reach out to us at [@ethdotorg on Twitter](https://twitter.com/ethdotorg) if you're around - we'd love to chat with our contributors!
+
+[Learn more about contributing](https://ethereum.org/en/contributing/), hit us up on Twitter, or hop in [our Discord](https://discord.gg/CetY6Y4).
+<issue_comment>username_1: I think what ETH needs is not PRing murge purge etc but vision for broader application in broader economy
+<issue_comment>username_2: cool！
+<issue_comment>username_0: ## Q1 KPIs
+
+- Translation Program
+  - Reach 5,000 project members in [Crowdin](https://crowdin.com/project/ethereum-org) (+15% vs. Q4 2021)
+  - Translate 1,000,000 words (+13% vs. Q4 2021)
+  - Average 290 active contributors per month (+3% vs. Q4 2021)
+  - Update 35 [content buckets](https://ethereum.org/en/contributing/translation-program/content-versions/) across all languages
+  - Launch 5 new languages to the site ([39 currently live](https://ethereum.org/en/languages/))
+- Community
+  - Hit 40 GitHub contributors (+25% vs. Q4 2021)
+  - Gain 10 power contributors (at least 3 PRs or 1 significant feature)
+  - Add 3 new Discord guides (+33% vs. Q4 2021)
+  - Distribute 250 POAPs, excluding community calls (+20% vs. Q4 2021)
+  - Allow 0 PRs to be open longer than 1 month
+  - Allow 0 issues to be open longer than 6 months
+<issue_comment>username_3: Love the plan to provide guidance on how to run node!"
+apache/apisix-website,1015749789,640,,"[{'action': 'opened', 'author': 'juzhiyuan', 'comment_id': None, 'datetime': '2021-10-05 00:12:37+00:00', 'masked_author': 'username_0', 'text': ""Hi, @username_1's all PRs have been merged just now, this issue is to track UI issues :)\r\n\r\nWelcome to leave your questions here."", 'title': 'New landing page Issues', 'type': 'issue'}
+ {'action': 'created', 'author': 'juzhiyuan', 'comment_id': 933953342.0, 'datetime': '2021-10-05 00:14:40+00:00', 'masked_author': 'username_0', 'text': '![image](https://user-images.githubusercontent.com/2106987/135941062-724e4e8f-23ed-4668-9757-367ae7aace34.png)\r\n\r\nIn the Events part, some links are broken. cc @guoqqqi', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'juzhiyuan', 'comment_id': 933955100.0, 'datetime': '2021-10-05 00:18:36+00:00', 'masked_author': 'username_0', 'text': ""![image](https://user-images.githubusercontent.com/2106987/135941242-4555e0dc-d271-4872-8d79-e9f1286b3a7d.png)\r\n\r\n1. This Video is muted, I couldn't play it with audio;\r\n2. How about using YouTube's playlist here? so visitors could watch and play more videos. For Chinese, we could change the Playlist to Apache APISIX's Bilibili.\r\n\r\ncc @username_1 @moonming"", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'juzhiyuan', 'comment_id': 933955720.0, 'datetime': '2021-10-05 00:19:53+00:00', 'masked_author': 'username_0', 'text': '![image](https://user-images.githubusercontent.com/2106987/135941406-275f27cf-27ca-4f0b-8d68-636a4aaccbd2.png)\r\n\r\nHi @username_2, I remember that you removed the Logos from Home page, may I know the action context?', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'juzhiyuan', 'comment_id': 933956937.0, 'datetime': '2021-10-05 00:22:19+00:00', 'masked_author': 'username_0', 'text': ""![image](https://user-images.githubusercontent.com/2106987/135941489-970d7493-beea-4a0d-b8db-b507936b9fc3.png)\r\n![image](https://user-images.githubusercontent.com/2106987/135941505-944cbfd2-dcaf-40b6-961d-b0c8610635cc.png)\r\n\r\nThis is a historical issue, due to the ASF's policy, new users couldn't join #apisix's Slack via fixed invitation link, see https://github.com/apache/apisix/discussions/4932#discussioncomment-1302029\r\n\r\nWe need to update website's description."", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': '1502shivam-singh', 'comment_id': 934383893.0, 'datetime': '2021-10-05 12:53:10+00:00', 'masked_author': 'username_1', 'text': 'I guess a nice option.', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'juzhiyuan', 'comment_id': 934390984.0, 'datetime': '2021-10-05 13:01:55+00:00', 'masked_author': 'username_0', 'text': 'ya, I would suggest using a Playlist here :)', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': '1502shivam-singh', 'comment_id': 934394672.0, 'datetime': '2021-10-05 13:05:56+00:00', 'masked_author': 'username_1', 'text': 'Oh okay, surprisingly there is no events tab any more ? Where do we link the events to, blog pages ?', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'juzhiyuan', 'comment_id': 934449969.0, 'datetime': '2021-10-05 14:10:12+00:00', 'masked_author': 'username_0', 'text': 'Ya, maybe @username_3 could explain why we remove the Events page and using the events tag 🤔', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'liuxiran', 'comment_id': 935787876.0, 'datetime': '2021-10-06 08:59:03+00:00', 'masked_author': 'username_2', 'text': 'yep @username_0 , asf has a requirement that the home page of the Apache project website cannot list ""powered by"" companies, but we can list them on a separate page, so we move all our showcase to the https://apisix.apache.org/showcase', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'juzhiyuan', 'comment_id': 935814873.0, 'datetime': '2021-10-06 09:16:19+00:00', 'masked_author': 'username_0', 'text': 'All right, need @username_1 help to update this case 😆', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'Serendipity96', 'comment_id': 939268272.0, 'datetime': '2021-10-09 09:53:01+00:00', 'masked_author': 'username_3', 'text': 'hi @username_0 @username_1, some release notes under the Events tab, but these are duplicates of those under the Release tab. Since release notes under the Release tab are implemented with auto-generation, the release notes under the Events tab seems to be redundant. Thus, remove the release notes under Events tab maybe a  good choice. After removing the redundant release notes from the Events tab, there are only a few event-related documents under the Events tab, which is not sufficient enough to support a tab. So @yzeng25 migrated the article to the blog and added the events tag.', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'juzhiyuan', 'comment_id': 939271496.0, 'datetime': '2021-10-09 10:15:17+00:00', 'masked_author': 'username_0', 'text': 'get', 'title': None, 'type': 'comment'}]","<issue_start><issue_comment>Title: New landing page Issues
+username_0: Hi, @username_1's all PRs have been merged just now, this issue is to track UI issues :)
+
+Welcome to leave your questions here.
+<issue_comment>username_0: ![image](https://user-images.githubusercontent.com/2106987/135941062-724e4e8f-23ed-4668-9757-367ae7aace34.png)
+
+In the Events part, some links are broken. cc @guoqqqi
+<issue_comment>username_0: ![image](https://user-images.githubusercontent.com/2106987/135941242-4555e0dc-d271-4872-8d79-e9f1286b3a7d.png)
+
+1. This Video is muted, I couldn't play it with audio;
+2. How about using YouTube's playlist here? so visitors could watch and play more videos. For Chinese, we could change the Playlist to Apache APISIX's Bilibili.
+
+cc @username_1 @moonming
+<issue_comment>username_0: ![image](https://user-images.githubusercontent.com/2106987/135941406-275f27cf-27ca-4f0b-8d68-636a4aaccbd2.png)
+
+Hi @username_2, I remember that you removed the Logos from Home page, may I know the action context?
+<issue_comment>username_0: ![image](https://user-images.githubusercontent.com/2106987/135941489-970d7493-beea-4a0d-b8db-b507936b9fc3.png)
+![image](https://user-images.githubusercontent.com/2106987/135941505-944cbfd2-dcaf-40b6-961d-b0c8610635cc.png)
+
+This is a historical issue, due to the ASF's policy, new users couldn't join #apisix's Slack via fixed invitation link, see https://github.com/apache/apisix/discussions/4932#discussioncomment-1302029
+
+We need to update website's description.
+<issue_comment>username_1: I guess a nice option.
+<issue_comment>username_0: ya, I would suggest using a Playlist here :)
+<issue_comment>username_1: Oh okay, surprisingly there is no events tab any more ? Where do we link the events to, blog pages ?
+<issue_comment>username_0: Ya, maybe @username_3 could explain why we remove the Events page and using the events tag 🤔
+<issue_comment>username_2: yep @username_0 , asf has a requirement that the home page of the Apache project website cannot list ""powered by"" companies, but we can list them on a separate page, so we move all our showcase to the https://apisix.apache.org/showcase
+<issue_comment>username_0: All right, need @username_1 help to update this case 😆
+<issue_comment>username_3: hi @username_0 @username_1, some release notes under the Events tab, but these are duplicates of those under the Release tab. Since release notes under the Release tab are implemented with auto-generation, the release notes under the Events tab seems to be redundant. Thus, remove the release notes under Events tab maybe a  good choice. After removing the redundant release notes from the Events tab, there are only a few event-related documents under the Events tab, which is not sufficient enough to support a tab. So @yzeng25 migrated the article to the blog and added the events tag.
+<issue_comment>username_0: get"
+fedspendingtransparency/usaspending-website,246122822,352,"{'number': 352.0, 'repo': 'usaspending-website', 'user_login': 'fedspendingtransparency'}","[{'action': 'opened', 'author': 'ebdabbs', 'comment_id': None, 'datetime': '2017-07-27T18:05:28Z', 'masked_author': 'username_0', 'text': '- Access links to agency profile pages from `/agency`\r\n- All agencies, their budget authority, and percent of total US budget are displayed in a sortable table \r\n- The table updates to show matching results as a user types in the search bar', 'title': 'Agency Landing Page', 'type': 'issue'}
+ {'action': 'created', 'author': 'geoffgeiling', 'comment_id': 318449700.0, 'datetime': '2017-07-27 18:37:42+00:00', 'masked_author': 'username_1', 'text': ""It doesn't appear the percentages are correct on the landing page. They should be matching whatever is on the actual profile page\r\nDepartment of Energy is 0.9% on agency profile page and .01% on agency landing page\r\n\r\n![screen shot 2017-07-27 at 2 36 05 pm](https://user-images.githubusercontent.com/19841060/28686403-1989c24c-72d9-11e7-9495-940d2d6d7c76.png)\r\n![screen shot 2017-07-27 at 2 36 22 pm](https://user-images.githubusercontent.com/19841060/28686410-22cc25ca-72d9-11e7-8377-814a4355cd60.png)"", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'ebdabbs', 'comment_id': 318753058.0, 'datetime': '2017-07-28 20:22:50+00:00', 'masked_author': 'username_0', 'text': '@username_1 Good catch, the value coming back from the API was was in decimal form and needed to be multiplied by 100. Should be fixed now.', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'mab6bf', 'comment_id': 319686418.0, 'datetime': '2017-08-02 14:18:14+00:00', 'masked_author': 'username_2', 'text': 'The container gutters disappear at widths > 1640px \r\n<img width=""1660"" alt=""screen shot 2017-08-02 at 10 17 26 am"" src=""https://user-images.githubusercontent.com/4449046/28877937-dce425e8-776b-11e7-918a-649b1964b378.png"">', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'ebdabbs', 'comment_id': 320017608.0, 'datetime': '2017-08-03 16:15:29+00:00', 'masked_author': 'username_0', 'text': '@username_2 fixed gutter at widths > 1640px\r\n<img width=""1362"" alt=""screen shot 2017-08-03 at 12 11 32 pm"" src=""https://user-images.githubusercontent.com/7108785/28931812-517b5b7c-7845-11e7-88ec-eadc672eb26f.png"">', 'title': None, 'type': 'comment'}]","<issue_start><issue_comment>Title: Agency Landing Page
+username_0: - Access links to agency profile pages from `/agency`
+- All agencies, their budget authority, and percent of total US budget are displayed in a sortable table 
+- The table updates to show matching results as a user types in the search bar
+<issue_comment>username_1: It doesn't appear the percentages are correct on the landing page. They should be matching whatever is on the actual profile page
+Department of Energy is 0.9% on agency profile page and .01% on agency landing page
+
+![screen shot 2017-07-27 at 2 36 05 pm](https://user-images.githubusercontent.com/19841060/28686403-1989c24c-72d9-11e7-9495-940d2d6d7c76.png)
+![screen shot 2017-07-27 at 2 36 22 pm](https://user-images.githubusercontent.com/19841060/28686410-22cc25ca-72d9-11e7-8377-814a4355cd60.png)
+<issue_comment>username_0: @username_1 Good catch, the value coming back from the API was was in decimal form and needed to be multiplied by 100. Should be fixed now.
+<issue_comment>username_2: The container gutters disappear at widths > 1640px 
+<img width=""1660"" alt=""screen shot 2017-08-02 at 10 17 26 am"" src=""https://user-images.githubusercontent.com/4449046/28877937-dce425e8-776b-11e7-918a-649b1964b378.png"">
+<issue_comment>username_0: @username_2 fixed gutter at widths > 1640px
+<img width=""1362"" alt=""screen shot 2017-08-03 at 12 11 32 pm"" src=""https://user-images.githubusercontent.com/7108785/28931812-517b5b7c-7845-11e7-88ec-eadc672eb26f.png"">"
+nodejs/nodejs.org,322873018,1654,,"[{'action': 'opened', 'author': 'gtewallace', 'comment_id': None, 'datetime': '2018-05-14 15:42:33+00:00', 'masked_author': 'username_0', 'text': '<!--\r\nThanks for wanting to report an issue you\'ve found on the nodejs.org website.\r\n\r\nFor issues regarding the Node.js API docs, please head over to:\r\nhttps://github.com/nodejs/node/issues/ (prefix your issue name with ""doc"")\r\n\r\nFor general questions about Node.js:\r\nhttps://github.com/nodejs/help/issues/\r\n\r\nPlease fill in the template below by replacing the HTML comments with an\r\nappropriate answer. If unsure about something, just do as best as you\'re able.\r\nIf you are reporting a visual glitch, it will be much easier for us to fix it\r\nwhen you attach a screenshot as well.\r\n\r\nThank you!\r\n-->\r\n\r\n* **URL**:\r\n* **Browser version**:\r\n* **Operating system**:\r\n\r\n<!-- Enter your issue details below this comment. -->\r\nHi all,\r\n\r\nThe Node Foundation has created an HTML version of the Annual Node.js User Survey report and we\'d like to host it here.\r\n\r\nWe think it makes sense since we will also make the data (PII removed) available for download for others in the community to perform their own analysis. We also have some nice executive summary powerpoint slides we can place here for others to use.\r\n\r\nThere\'s one aspect of the report that needs to be updated - we have a click to tweet button under every chart and we\'d need to update the URL path in the tweets to match the eventual path of the report here on github.\r\n\r\nOur goal is to have the report go live on May 31.\r\n\r\nI look forward to everyone\'s thoughts.\r\n\r\nThanks!', 'title': 'Add Annual Survey Web Report', 'type': 'issue'}
+ {'action': 'created', 'author': 'bnb', 'comment_id': 388991606.0, 'datetime': '2018-05-14 23:11:58+00:00', 'masked_author': 'username_1', 'text': ""@username_0 if there's a standalone HTML version of the report, it hopefully shouldn't be too difficult PR it into this repository and get it published on the site.\r\n\r\n@username_3 @username_2 @MylesBorins do y'all think we could help @username_0 with this?"", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'gtewallace', 'comment_id': 389143080.0, 'datetime': '2018-05-15 12:06:45+00:00', 'masked_author': 'username_0', 'text': ""thanks @username_1 \r\n\r\nIt's self contained - I have already tested publishing it as a GHP - we had it up in a matter of minutes in a test repo. That gives me confidence it *should* be relatively straightforward.\r\n\r\n@username_3 @username_2 @MylesBorins I look forward to your thoughts.\r\n\r\nGreg"", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'mhdawson', 'comment_id': 389512510.0, 'datetime': '2018-05-16 13:09:58+00:00', 'masked_author': 'username_2', 'text': '+1 from me.  @username_3 any concerns?', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'gtewallace', 'comment_id': 389542172.0, 'datetime': '2018-05-16 14:36:36+00:00', 'masked_author': 'username_0', 'text': 'great news! thanks all!\r\n\r\nJust to confirm, the path with be: https://nodejs.org/en/user-survey-report\r\n\r\nIs that right?\r\n\r\nIf so, my colleague @alexcontini will update the HTML file with the new path and I will open a PR with all the assets.\r\n\r\nThanks again!\r\n\r\nGreg', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'fhemberger', 'comment_id': 389781008.0, 'datetime': '2018-05-17 08:05:05+00:00', 'masked_author': 'username_3', 'text': ""We might need to adjust the HTML a bit to fit into the website design properly, but we can help you with that once you've submitted the PR."", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'gtewallace', 'comment_id': 389850809.0, 'datetime': '2018-05-17 12:35:05+00:00', 'masked_author': 'username_0', 'text': ""@username_3 awesome - that would be great. Can we keep the page private or unpublished until May 31? \r\n\r\n@alexcontini - can you please go ahead and update the links in the tweet buttons with this path: https://nodejs.org/en/user-survey-report\r\n\r\n Then I'll open the PR. \r\n\r\nThanks!\r\n\r\nGreg"", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'fhemberger', 'comment_id': 390182954.0, 'datetime': '2018-05-18 11:50:08+00:00', 'masked_author': 'username_3', 'text': ""@username_0 What's in the GitHub repo is public. But if @alexcontini prepares everything locally and submits the PR on 31st, we're good."", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'bnb', 'comment_id': 390807512.0, 'datetime': '2018-05-21 22:57:27+00:00', 'masked_author': 'username_1', 'text': '@username_2 this is what we did for [Node by Numbers](https://nodesource.com/node-by-numbers) at NodeSource, and it does indeed seem to be the best path.', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'bnb', 'comment_id': 390807650.0, 'datetime': '2018-05-21 22:58:09+00:00', 'masked_author': 'username_1', 'text': 'correction: We did routing on sub-paths. So /node-by-numbers and /node-by-numbers/2016', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'gtewallace', 'comment_id': 392826890.0, 'datetime': '2018-05-29 15:45:50+00:00', 'masked_author': 'username_0', 'text': ""@username_3 Hi!\r\n\r\nOn second thought, is it ok if I give you a zip with all the web report assets? \r\n\r\nLMK if that's OK and what's the best way.\r\n\r\nThanks!!"", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'fhemberger', 'comment_id': 392905814.0, 'datetime': '2018-05-29 19:12:33+00:00', 'masked_author': 'username_3', 'text': ""@username_0 I'll have a look at it and get back to you."", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'gtewallace', 'comment_id': 392924569.0, 'datetime': '2018-05-29 20:02:45+00:00', 'masked_author': 'username_0', 'text': 'Sounds good, thanks!', 'title': None, 'type': 'comment'}
+ {'action': 'closed', 'author': 'fhemberger', 'comment_id': None, 'datetime': '2018-05-31 07:51:51+00:00', 'masked_author': 'username_3', 'text': '', 'title': None, 'type': 'issue'}
+ {'action': 'created', 'author': 'gtewallace', 'comment_id': 396365068.0, 'datetime': '2018-06-11 19:51:14+00:00', 'masked_author': 'username_0', 'text': 'Hi everyone!! Is it possible to get the GA code added to the survey page/pages? \r\n\r\nthanks again!\r\n\r\nGreg', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'fhemberger', 'comment_id': 396456159.0, 'datetime': '2018-06-12 03:42:47+00:00', 'masked_author': 'username_3', 'text': '@username_0 Sure: https://github.com/nodejs/nodejs.org/pull/1688', 'title': None, 'type': 'comment'}]","<issue_start><issue_comment>Title: Add Annual Survey Web Report
+username_0: <!--
+Thanks for wanting to report an issue you've found on the nodejs.org website.
+
+For issues regarding the Node.js API docs, please head over to:
+https://github.com/nodejs/node/issues/ (prefix your issue name with ""doc"")
+
+For general questions about Node.js:
+https://github.com/nodejs/help/issues/
+
+Please fill in the template below by replacing the HTML comments with an
+appropriate answer. If unsure about something, just do as best as you're able.
+If you are reporting a visual glitch, it will be much easier for us to fix it
+when you attach a screenshot as well.
+
+Thank you!
+-->
+
+* **URL**:
+* **Browser version**:
+* **Operating system**:
+
+<!-- Enter your issue details below this comment. -->
+Hi all,
+
+The Node Foundation has created an HTML version of the Annual Node.js User Survey report and we'd like to host it here.
+
+We think it makes sense since we will also make the data (PII removed) available for download for others in the community to perform their own analysis. We also have some nice executive summary powerpoint slides we can place here for others to use.
+
+There's one aspect of the report that needs to be updated - we have a click to tweet button under every chart and we'd need to update the URL path in the tweets to match the eventual path of the report here on github.
+
+Our goal is to have the report go live on May 31.
+
+I look forward to everyone's thoughts.
+
+Thanks!
+<issue_comment>username_1: @username_0 if there's a standalone HTML version of the report, it hopefully shouldn't be too difficult PR it into this repository and get it published on the site.
+
+@username_3 @username_2 @MylesBorins do y'all think we could help @username_0 with this?
+<issue_comment>username_0: thanks @username_1 
+
+It's self contained - I have already tested publishing it as a GHP - we had it up in a matter of minutes in a test repo. That gives me confidence it *should* be relatively straightforward.
+
+@username_3 @username_2 @MylesBorins I look forward to your thoughts.
+
+Greg
+<issue_comment>username_2: +1 from me.  @username_3 any concerns?
+<issue_comment>username_0: great news! thanks all!
+
+Just to confirm, the path with be: https://nodejs.org/en/user-survey-report
+
+Is that right?
+
+If so, my colleague @alexcontini will update the HTML file with the new path and I will open a PR with all the assets.
+
+Thanks again!
+
+Greg
+<issue_comment>username_3: We might need to adjust the HTML a bit to fit into the website design properly, but we can help you with that once you've submitted the PR.
+<issue_comment>username_0: @username_3 awesome - that would be great. Can we keep the page private or unpublished until May 31? 
+
+@alexcontini - can you please go ahead and update the links in the tweet buttons with this path: https://nodejs.org/en/user-survey-report
+
+ Then I'll open the PR. 
+
+Thanks!
+
+Greg
+<issue_comment>username_3: @username_0 What's in the GitHub repo is public. But if @alexcontini prepares everything locally and submits the PR on 31st, we're good.
+<issue_comment>username_1: @username_2 this is what we did for [Node by Numbers](https://nodesource.com/node-by-numbers) at NodeSource, and it does indeed seem to be the best path.
+<issue_comment>username_1: correction: We did routing on sub-paths. So /node-by-numbers and /node-by-numbers/2016
+<issue_comment>username_0: @username_3 Hi!
+
+On second thought, is it ok if I give you a zip with all the web report assets? 
+
+LMK if that's OK and what's the best way.
+
+Thanks!!
+<issue_comment>username_3: @username_0 I'll have a look at it and get back to you.
+<issue_comment>username_0: Sounds good, thanks!<issue_closed>
+<issue_comment>username_0: Hi everyone!! Is it possible to get the GA code added to the survey page/pages? 
+
+thanks again!
+
+Greg
+<issue_comment>username_3: @username_0 Sure: https://github.com/nodejs/nodejs.org/pull/1688"
+redhat-openstack/website,141703490,475,,"[{'action': 'opened', 'author': 'apevec', 'comment_id': None, 'datetime': '2016-03-17 20:50:25+00:00', 'masked_author': 'username_0', 'text': 'Looks like cert setup is not right for blogs subsite?', 'title': 'https://blogs.rdoproject.org/ NET::ERR_CERT_COMMON_NAME_INVALID', 'type': 'issue'}
+ {'action': 'created', 'author': 'apevec', 'comment_id': 221528750.0, 'datetime': '2016-05-25 10:02:09+00:00', 'masked_author': 'username_0', 'text': 'blogs.rdoproject.org uses an invalid security certificate.\r\nThe certificate is only valid for the following names: *.enovance.com, enovance.com\r\nThe certificate expired on 03/10/2016 01:00 PM. The current time is 05/25/2016 12:01 PM.', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'apevec', 'comment_id': 224519147.0, 'datetime': '2016-06-08 08:10:50+00:00', 'masked_author': 'username_0', 'text': 'Looks like this was fixed by redirecting https -> httpd\r\n\r\nConnecting to blogs.rdoproject.org (blogs.rdoproject.org)|94.143.114.220|:443... connected.\r\nHTTP request sent, awaiting response... \r\n  HTTP/1.1 301 Moved Permanently\r\n  Date: Wed, 08 Jun 2016 07:21:09 GMT\r\n  Server: Apache\r\n  X-Powered-By: W3 Total Cache/0.9.4.1\r\n  Set-Cookie: redirect_count=1; path=/\r\n  Location: http://blogs.rdoproject.org/', 'title': None, 'type': 'comment'}
+ {'action': 'closed', 'author': 'apevec', 'comment_id': None, 'datetime': '2016-06-08 08:10:50+00:00', 'masked_author': 'username_0', 'text': '', 'title': None, 'type': 'issue'}]","<issue_start><issue_comment>Title: https://blogs.rdoproject.org/ NET::ERR_CERT_COMMON_NAME_INVALID
+username_0: Looks like cert setup is not right for blogs subsite?
+<issue_comment>username_0: blogs.rdoproject.org uses an invalid security certificate.
+The certificate is only valid for the following names: *.enovance.com, enovance.com
+The certificate expired on 03/10/2016 01:00 PM. The current time is 05/25/2016 12:01 PM.
+<issue_comment>username_0: Looks like this was fixed by redirecting https -> httpd
+
+Connecting to blogs.rdoproject.org (blogs.rdoproject.org)|94.143.114.220|:443... connected.
+HTTP request sent, awaiting response... 
+  HTTP/1.1 301 Moved Permanently
+  Date: Wed, 08 Jun 2016 07:21:09 GMT
+  Server: Apache
+  X-Powered-By: W3 Total Cache/0.9.4.1
+  Set-Cookie: redirect_count=1; path=/
+  Location: http://blogs.rdoproject.org/<issue_closed>"

@@ -1,0 +1,476 @@
+department-of-veterans-affairs/vets-website,676985039,13816,"{'number': 13816.0, 'repo': 'vets-website', 'user_login': 'department-of-veterans-affairs'}","[{'action': 'opened', 'author': 'hinzed1127', 'comment_id': None, 'datetime': '2020-08-11T15:42:59Z', 'masked_author': 'username_0', 'text': '## Description\r\n\r\nThis adds a11y fixes recommended by @username_1\r\n\r\nClose department-of-veterans-affairs/va.gov-team#7767\r\n\r\n## Testing done\r\n\r\nVisual verification of parity in appearance between the updates and existing pages/components\r\n\r\n## Screenshots\r\nCompare https://staging.va.gov/sign-in/ and the sign-in modal with the review instance. Other than negligible differences with ""A secure account powered by ID.me"" (line height differences not worth changing), appearance should be the same\r\n\r\n## Acceptance criteria\r\n- [ ] Pages/Components look the same with the requested a11y fixes\r\n\r\n## Definition of done\r\n- [ ] Events are logged appropriately\r\n- [ ] Documentation has been updated, if applicable\r\n- [ ] A link has been provided to the originating GitHub issue (or connected to it via ZenHub)\r\n- [ ] No sensitive information (i.e. PII/credentials/internal URLs/etc.) is captured in logging, hardcoded, or specs', 'title': 'Accessibility updates for sign-in page and modal', 'type': 'issue'}
+ {'action': 'created', 'author': 'hinzed1127', 'comment_id': 672028520.0, 'datetime': '2020-08-11 15:46:55+00:00', 'masked_author': 'username_0', 'text': '@username_1 the only recommendation I didn\'t end up adding from your report was wrapping the ""One site. A lifetime of benefits and services at your fingertips"" `h2` in a `<div class=""va-introtext"" >`. From what I could tell, that class adds some base styles that were already being applied elsewhere.', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'jenstrickland', 'comment_id': 672045455.0, 'datetime': '2020-08-11 15:59:58+00:00', 'masked_author': 'username_1', 'text': 'Having it be an `h2` is important. The styling only serves sighted users, but the heading tag provides screen readers, translation users, and other assistive tech the content hierarchy in non-visual ways.', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'hinzed1127', 'comment_id': 672080761.0, 'datetime': '2020-08-11 16:42:19+00:00', 'masked_author': 'username_0', 'text': 'I updated that, too, but looks like I forgot it in the modal. Should be fixed now!', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'jhonnyoddball', 'comment_id': 673038258.0, 'datetime': '2020-08-12 18:28:56+00:00', 'masked_author': 'username_2', 'text': 'cc @1Copenut', 'title': None, 'type': 'comment'}]","<issue_start><issue_comment>Title: Accessibility updates for sign-in page and modal
+username_0: ## Description
+
+This adds a11y fixes recommended by @username_1
+
+Close department-of-veterans-affairs/va.gov-team#7767
+
+## Testing done
+
+Visual verification of parity in appearance between the updates and existing pages/components
+
+## Screenshots
+Compare https://staging.va.gov/sign-in/ and the sign-in modal with the review instance. Other than negligible differences with ""A secure account powered by ID.me"" (line height differences not worth changing), appearance should be the same
+
+## Acceptance criteria
+- [ ] Pages/Components look the same with the requested a11y fixes
+
+## Definition of done
+- [ ] Events are logged appropriately
+- [ ] Documentation has been updated, if applicable
+- [ ] A link has been provided to the originating GitHub issue (or connected to it via ZenHub)
+- [ ] No sensitive information (i.e. PII/credentials/internal URLs/etc.) is captured in logging, hardcoded, or specs
+<issue_comment>username_0: @username_1 the only recommendation I didn't end up adding from your report was wrapping the ""One site. A lifetime of benefits and services at your fingertips"" `h2` in a `<div class=""va-introtext"" >`. From what I could tell, that class adds some base styles that were already being applied elsewhere.
+<issue_comment>username_1: Having it be an `h2` is important. The styling only serves sighted users, but the heading tag provides screen readers, translation users, and other assistive tech the content hierarchy in non-visual ways.
+<issue_comment>username_0: I updated that, too, but looks like I forgot it in the modal. Should be fixed now!
+<issue_comment>username_2: cc @1Copenut"
+AdoptOpenJDK/openjdk-website,491277770,562,,"[{'action': 'opened', 'author': 'vielmetti', 'comment_id': None, 'datetime': '2019-09-09 19:18:43+00:00', 'masked_author': 'username_0', 'text': ""As part of the 2019-2020 Works on Arm project year, we're looking through all of the sponsored projects to identify how the sponsorship contributions are credited and to make this all consistent.\r\n\r\nI'll sync up with @username_1 to make sure that the source text at https://github.com/AdoptOpenJDK/openjdk-website/blob/master/src/handlebars/sponsors.handlebars accurately reflects current reality. I don't have updated text yet."", 'title': 'Adjust sponsorship text for Packet / Works on Arm for aarch64 (arm64) support', 'type': 'issue'}
+ {'action': 'created', 'author': 'vielmetti', 'comment_id': 538797421.0, 'datetime': '2019-10-06 23:06:18+00:00', 'masked_author': 'username_0', 'text': 'hey @username_1 I have this in mind at the moment; would love to sync up with you regarding it.', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'gdams', 'comment_id': 538897781.0, 'datetime': '2019-10-07 08:40:30+00:00', 'masked_author': 'username_1', 'text': ""hi @username_0! Sorry this slipped right past me! Drop me a message on slack when you're around and we'll work out a time to do this!"", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'vielmetti', 'comment_id': 539707436.0, 'datetime': '2019-10-08 21:15:04+00:00', 'masked_author': 'username_0', 'text': '@username_1 I am on Pacific Time this week, trying to stick to Eastern Time hours. Will ping in the a.m.', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'vielmetti', 'comment_id': 540584306.0, 'datetime': '2019-10-10 13:33:49+00:00', 'masked_author': 'username_0', 'text': 'Best to plan this for next week as Arm TechCon conference travel (and announcements, including a bunch of CI-related announcements) have me fully committed for this week.', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'vielmetti', 'comment_id': 612715086.0, 'datetime': '2020-04-13 02:00:43+00:00', 'masked_author': 'username_0', 'text': 'Thanks for tracking this, @username_2 and @username_1 . Since I last corresponded, Packet has a new logo as a consequence of our acquisition by Equinix. Looking forward to getting this sorted; you can let me know what assets we need to update.', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'gdams', 'comment_id': 613280954.0, 'datetime': '2020-04-14 07:45:49+00:00', 'masked_author': 'username_1', 'text': ""Hi Ed, I'll try and get the new logo added this week!"", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'gdams', 'comment_id': 613303415.0, 'datetime': '2020-04-14 08:33:57+00:00', 'masked_author': 'username_1', 'text': '@username_0 logo updated here: https://github.com/AdoptOpenJDK/openjdk-website/pull/701', 'title': None, 'type': 'comment'}
+ {'action': 'closed', 'author': 'karianna', 'comment_id': None, 'datetime': '2020-04-14 10:06:52+00:00', 'masked_author': 'username_2', 'text': '', 'title': None, 'type': 'issue'}
+ {'action': 'created', 'author': 'vielmetti', 'comment_id': 614130201.0, 'datetime': '2020-04-15 16:06:03+00:00', 'masked_author': 'username_0', 'text': 'New text as well (reflecting acquisition) @username_1 @username_2 \r\n\r\nPacket, an Equinix company, is the leader in automated bare metal. We focus on making infrastructure a competitive advantage for digital businesses with developer-friendly bare metal and a neutral, secure, interconnected ecosystem of networks, software, and solution partners.\r\n\r\nPacket combines unmatched geographic reach, interconnection prowess, and a neutral ecosystem approach with automation to create a trusted, friction-free customer experience. Our mission is to protect, connect, and power the digital world with physical infrastructure that moves at software speed.', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'karianna', 'comment_id': 614140178.0, 'datetime': '2020-04-15 16:23:58+00:00', 'masked_author': 'username_2', 'text': 'https://github.com/AdoptOpenJDK/openjdk-website/pull/705', 'title': None, 'type': 'comment'}]","<issue_start><issue_comment>Title: Adjust sponsorship text for Packet / Works on Arm for aarch64 (arm64) support
+username_0: As part of the 2019-2020 Works on Arm project year, we're looking through all of the sponsored projects to identify how the sponsorship contributions are credited and to make this all consistent.
+
+I'll sync up with @username_1 to make sure that the source text at https://github.com/AdoptOpenJDK/openjdk-website/blob/master/src/handlebars/sponsors.handlebars accurately reflects current reality. I don't have updated text yet.
+<issue_comment>username_0: hey @username_1 I have this in mind at the moment; would love to sync up with you regarding it.
+<issue_comment>username_1: hi @username_0! Sorry this slipped right past me! Drop me a message on slack when you're around and we'll work out a time to do this!
+<issue_comment>username_0: @username_1 I am on Pacific Time this week, trying to stick to Eastern Time hours. Will ping in the a.m.
+<issue_comment>username_0: Best to plan this for next week as Arm TechCon conference travel (and announcements, including a bunch of CI-related announcements) have me fully committed for this week.
+<issue_comment>username_0: Thanks for tracking this, @username_2 and @username_1 . Since I last corresponded, Packet has a new logo as a consequence of our acquisition by Equinix. Looking forward to getting this sorted; you can let me know what assets we need to update.
+<issue_comment>username_1: Hi Ed, I'll try and get the new logo added this week!
+<issue_comment>username_1: @username_0 logo updated here: https://github.com/AdoptOpenJDK/openjdk-website/pull/701<issue_closed>
+<issue_comment>username_0: New text as well (reflecting acquisition) @username_1 @username_2 
+
+Packet, an Equinix company, is the leader in automated bare metal. We focus on making infrastructure a competitive advantage for digital businesses with developer-friendly bare metal and a neutral, secure, interconnected ecosystem of networks, software, and solution partners.
+
+Packet combines unmatched geographic reach, interconnection prowess, and a neutral ecosystem approach with automation to create a trusted, friction-free customer experience. Our mission is to protect, connect, and power the digital world with physical infrastructure that moves at software speed.
+<issue_comment>username_2: https://github.com/AdoptOpenJDK/openjdk-website/pull/705"
+flutter/website,491658695,2982,,"[{'action': 'opened', 'author': 'ksilz', 'comment_id': None, 'datetime': '2019-09-10 13:02:12+00:00', 'masked_author': 'username_0', 'text': 'I followed the section on [""Writing platform-specific code""](https://flutter.dev/docs/development/platform-integration/platform-channels). The code presented there for reading the battery level in Swift (Step 5b) doesn\'t compile in Swift 5:\r\n- There\'s a typo (`bynaryMessenger` instead of `binaryMessenger`).\r\n- A class name has changed &mdash; from `UIDeviceBatteryState` to `UIDevice.BatteryState`.\r\n\r\nPlease note that in Xcode, I updated the Flutter project to Swift 5.\r\n\r\nHere\'s the error I got with the current code from the site:\r\n\r\n````\r\nFailed to build iOS app\r\nError output from Xcode build:\r\n↳\r\n    ** BUILD FAILED **\r\n\r\n\r\nXcode\'s output:\r\n↳\r\n    /Users/karsten/workspaces/me/services/company-c/apps/ca_test_flutter/ios/Runner/AppDelegate.swift:22:64: error: value of type \'FlutterViewController\' has no member \'bynaryMessenger\'; did you mean \'binaryMessenger\'?\r\n                                                  binaryMessenger: controller.bynaryMessenger)\r\n                                                                   ^~~~~~~~~~ ~~~~~~~~~~~~~~~\r\n                                                                              binaryMessenger\r\n    Flutter.FlutterViewController:26:14: note: \'binaryMessenger\' declared here\r\n        open var binaryMessenger: FlutterBinaryMessenger! { get }\r\n                 ^\r\n    /Users/karsten/workspaces/me/services/company-c/apps/ca_test_flutter/ios/Runner/AppDelegate.swift:39:31: error: \'UIDeviceBatteryState\' has been renamed to \'UIDevice.BatteryState\'\r\n        if device.batteryState == UIDeviceBatteryState.unknown {\r\n                                  ^~~~~~~~~~~~~~~~~~~~\r\n                                  UIDevice.BatteryState\r\n    UIKit.UIDeviceBatteryState:2:18: note: \'UIDeviceBatteryState\' was obsoleted in Swift 4.2\r\n    public typealias UIDeviceBatteryState = UIDevice.BatteryState\r\n                     ^\r\n    note: Using new build systemnote: Planning buildnote: Constructing build description\r\n\r\nCould not build the application for the simulator.\r\nError launching application on iPhone 5s.\r\n````\r\n\r\nTo fix this, lines 8 & 9 need to be replaced:\r\n\r\n````\r\nlet batteryChannel = FlutterMethodChannel(name: ""com.betterprojectsfaster.test.ca.flutter/battery"",\r\n                                              binaryMessenger: controller.binaryMessenger)\r\n````\r\n\r\nThe second code sample needs this line 4:\r\n\r\n````\r\nif device.batteryState == UIDevice.BatteryState.unknown {\r\n````\r\n\r\nHere\'s my environment:\r\n- macOS 10.14.6\r\n- Project created with Flutter 1.7\r\n- Xcode 10.3', 'title': 'Docs: ""Platform integration"" - ""Writing platform-specific code"" doesn\'t compile in Swift 5', 'type': 'issue'}
+ {'action': 'created', 'author': 'MiroCaseiro', 'comment_id': 532840394.0, 'datetime': '2019-09-18 19:53:53+00:00', 'masked_author': 'username_1', 'text': 'I getting the same error. Is there any fix?', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'johnpryan', 'comment_id': 538576506.0, 'datetime': '2019-10-04 22:11:44+00:00', 'masked_author': 'username_2', 'text': 'Related: https://github.com/flutter/flutter/issues/41231', 'title': None, 'type': 'comment'}
+ {'action': 'closed', 'author': 'sfshaza2', 'comment_id': None, 'datetime': '2019-10-07 16:43:56+00:00', 'masked_author': 'username_3', 'text': '', 'title': None, 'type': 'issue'}]","<issue_start><issue_comment>Title: Docs: ""Platform integration"" - ""Writing platform-specific code"" doesn't compile in Swift 5
+username_0: I followed the section on [""Writing platform-specific code""](https://flutter.dev/docs/development/platform-integration/platform-channels). The code presented there for reading the battery level in Swift (Step 5b) doesn't compile in Swift 5:
+- There's a typo (`bynaryMessenger` instead of `binaryMessenger`).
+- A class name has changed &mdash; from `UIDeviceBatteryState` to `UIDevice.BatteryState`.
+
+Please note that in Xcode, I updated the Flutter project to Swift 5.
+
+Here's the error I got with the current code from the site:
+
+````
+Failed to build iOS app
+Error output from Xcode build:
+↳
+    ** BUILD FAILED **
+
+
+Xcode's output:
+↳
+    /Users/karsten/workspaces/me/services/company-c/apps/ca_test_flutter/ios/Runner/AppDelegate.swift:22:64: error: value of type 'FlutterViewController' has no member 'bynaryMessenger'; did you mean 'binaryMessenger'?
+                                                  binaryMessenger: controller.bynaryMessenger)
+                                                                   ^~~~~~~~~~ ~~~~~~~~~~~~~~~
+                                                                              binaryMessenger
+    Flutter.FlutterViewController:26:14: note: 'binaryMessenger' declared here
+        open var binaryMessenger: FlutterBinaryMessenger! { get }
+                 ^
+    /Users/karsten/workspaces/me/services/company-c/apps/ca_test_flutter/ios/Runner/AppDelegate.swift:39:31: error: 'UIDeviceBatteryState' has been renamed to 'UIDevice.BatteryState'
+        if device.batteryState == UIDeviceBatteryState.unknown {
+                                  ^~~~~~~~~~~~~~~~~~~~
+                                  UIDevice.BatteryState
+    UIKit.UIDeviceBatteryState:2:18: note: 'UIDeviceBatteryState' was obsoleted in Swift 4.2
+    public typealias UIDeviceBatteryState = UIDevice.BatteryState
+                     ^
+    note: Using new build systemnote: Planning buildnote: Constructing build description
+
+Could not build the application for the simulator.
+Error launching application on iPhone 5s.
+````
+
+To fix this, lines 8 & 9 need to be replaced:
+
+````
+let batteryChannel = FlutterMethodChannel(name: ""com.betterprojectsfaster.test.ca.flutter/battery"",
+                                              binaryMessenger: controller.binaryMessenger)
+````
+
+The second code sample needs this line 4:
+
+````
+if device.batteryState == UIDevice.BatteryState.unknown {
+````
+
+Here's my environment:
+- macOS 10.14.6
+- Project created with Flutter 1.7
+- Xcode 10.3
+<issue_comment>username_1: I getting the same error. Is there any fix?
+<issue_comment>username_2: Related: https://github.com/flutter/flutter/issues/41231<issue_closed>"
+corona-warn-app/cwa-website,894287891,1288,,"[{'action': 'opened', 'author': 'heinezen', 'comment_id': None, 'datetime': '2021-05-18 11:42:43+00:00', 'masked_author': 'username_0', 'text': '----\r\nThe term ""incompatibility"" can also be a bit problematic IMO, so we maybe have to choose a more ""tame"" term in the app and the FAQ.', 'title': 'FAQ - Revise articles about incompatibility warning card', 'type': 'issue'}
+ {'action': 'created', 'author': 'heinezen', 'comment_id': 843100163.0, 'datetime': '2021-05-18 11:45:46+00:00', 'masked_author': 'username_0', 'text': '@username_2 I assume you would want to write or draft the articles? :)\r\n\r\nIn any case, we will try to further improve the articles with user feedback.', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'MikeMcC399', 'comment_id': 843126192.0, 'datetime': '2021-05-18 12:23:51+00:00', 'masked_author': 'username_1', 'text': '@username_0 \r\nDo we know what percentage of users will see the partial incompatible issue or the full incompatibility issue? My guess is that partial incompatibility is very low numbers and full incompatibility almost zero.\r\n\r\nAt the moment the app is released for minimum API 23 (Android 6 and above) and BLE has been available since Android 4.1. It is not possible to install on a device earlier than Android 6 (neither through the Google Play Store, nor by sideloading). The only report in GitHub so far since the release of 2.2.1 was about an Android 6 device which did not support peripheral mode.\r\n\r\nUsers who install the app from Google Play Store are prevented from installing on a device with no Bluetooth support or with no Bluetooth Low Energy support, because this is ruled out by the current manifest file.\r\n\r\nIf the article is spilt, you could try structuring them so that the introduction is less technical (like the text you proposed) then further down the article provide more technical details for those who would like to know. When I added the version number I looked for a quick, simple and non-contentious change, so certainly this can be optimized and better integrated.', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'heinezen', 'comment_id': 843179771.0, 'datetime': '2021-05-18 13:38:39+00:00', 'masked_author': 'username_0', 'text': ""@username_1 We don't know the total number of users that are affected, but the numbers are indeed very low. However, they are not low enough to be insignificant because a few older but popular devices did not receive updates to support peripheral mode.\r\n\r\nFor the FP2, we know that peripheral mode was not supported with [Android 7 as the OS](https://forum.fairphone.com/t/corona-warn-app-von-fdroid-inkompatibel-auf-fp2/71072). They only recently fixed this with their Android 9 update. A Samsung device with Android 7 was also reported to have an incompatibility warning in the Play Store."", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'fynngodau', 'comment_id': 843202499.0, 'datetime': '2021-05-18 14:06:25+00:00', 'masked_author': 'username_2', 'text': 'Thanks for the info, will add it to CCTG FAQ.', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'fynngodau', 'comment_id': 843448889.0, 'datetime': '2021-05-18 18:52:57+00:00', 'masked_author': 'username_2', 'text': 'In the community slack, @username_3 shared a review by a user who was confused because the incompatibility warning was only sometimes showing. We should that this can happen when the status cannot be reliably detected.', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'vaubaehn', 'comment_id': 843465473.0, 'datetime': '2021-05-18 19:17:58+00:00', 'masked_author': 'username_3', 'text': 'I hope that it is possible to find a good solution to prevent/to fix intermittent changes of the state. Hence, I propose to add something like ""currently there are a few reports of users who experience intermittent changes of the state. We\'re looking into this and will fix this in an upcoming release"" or similar...', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'vaubaehn', 'comment_id': 843466996.0, 'datetime': '2021-05-18 19:20:25+00:00', 'masked_author': 'username_3', 'text': '@username_2 and still all the best for the final exams! :D', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'fynngodau', 'comment_id': 843526734.0, 'datetime': '2021-05-18 20:17:34+00:00', 'masked_author': 'username_2', 'text': ""From looking at the code again, we reconstructed a more precise definition when this happens: if Android version < 8.0 and Bluetooth is turned off, detection doesn't work – then, no warning card is shown in any case."", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'MikeMcC399', 'comment_id': 843851629.0, 'datetime': '2021-05-19 08:04:00+00:00', 'masked_author': 'username_1', 'text': '@username_2 \r\nIt would be great to have an explanation of how the checks are done, just for a better understanding.\r\n\r\nAlso good luck from me for your Abi exams! ☘️ 🤞🏻', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'dsarkar', 'comment_id': 843855046.0, 'datetime': '2021-05-19 08:08:13+00:00', 'masked_author': 'username_4', 'text': '@username_2 Fingers crossed!', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'Ein-Tim', 'comment_id': 843862226.0, 'datetime': '2021-05-19 08:16:20+00:00', 'masked_author': 'username_5', 'text': 'Also from my side! Good luck!', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'heinezen', 'comment_id': 844259503.0, 'datetime': '2021-05-19 16:18:50+00:00', 'masked_author': 'username_0', 'text': 'I though about something like *""eingeschränkte Sendefähigkeit/limited usage""*, but that is even longer and probably too vague :D Maybe it should be ""XY not available"" where XY is something that describes peripheral mode.\r\n\r\nThe alerty warning triangle could be replaced with an ""info"" exclamation mark.\r\n\r\nAnyway, good luck for your exams :)', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'heinezen', 'comment_id': 844967102.0, 'datetime': '2021-05-20 10:35:52+00:00', 'masked_author': 'username_0', 'text': ""@username_5 @username_2 @username_1 @username_3 @username_4 \r\n\r\nI've added a few reviews from the store, so we can better judge where the problems with the current message are. Most of them are misinterpretations of the warning card."", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'fynngodau', 'comment_id': 846196666.0, 'datetime': '2021-05-21 19:26:47+00:00', 'masked_author': 'username_2', 'text': 'I\'m assuming you meant an ""(i)"" icon here?\r\n\r\nI have opened a new Android issue to discuss these two items further: https://github.com/corona-warn-app/cwa-app-android/issues/3260', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'MikeMcC399', 'comment_id': 846392559.0, 'datetime': '2021-05-22 11:08:26+00:00', 'masked_author': 'username_1', 'text': ""I think a blog article would be good, combined with a mention in the new features section of the next version of the Android app. It's unfortunate that this didn't happen with the 2.2 Android release, which might have prepared users for the added warning. Probably most users will have automatically updated by now, so there will not be many new occurrences of the error message. Even so, it would be good to put out a message and make the reasoning clear to affected users (in addition to any changes to the FAQ article.)\r\n\r\nIt would be great if the reaction from users was that they are grateful for the additional tests done by the app, and grateful for the additional information, instead of just being annoyed.\r\n\r\nPerhaps we could have a description of the problem:\r\n- why didn't the Google Play Store detect the missing BLE functionality and prevent installation or provide a warning?\r\n- why didn't the app check in earlier releases?\r\n\r\nHow was this solved in the 2.2 Android app versions?\r\n\r\nWhat is the recommended course of action for a user getting an incompatibility message?\r\n\r\nI have some ideas about how the app could be made more appealing, and I will post these soon to https://github.com/corona-warn-app/cwa-app-android/issues/3260."", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'fynngodau', 'comment_id': 846532051.0, 'datetime': '2021-05-23 09:24:58+00:00', 'masked_author': 'username_2', 'text': 'I opened #1291 to incorporate our ideas and am looking forward to your feedback.', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'heinezen', 'comment_id': 846578504.0, 'datetime': '2021-05-23 15:11:36+00:00', 'masked_author': 'username_0', 'text': 'We will answer the Play Store reviews directly with an explanation (maybe even before 2.3 releases).', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'MikeMcC399', 'comment_id': 847204683.0, 'datetime': '2021-05-24 17:16:45+00:00', 'masked_author': 'username_1', 'text': ""I don't have an personal experience with a device which is incompatible, but I suspect that for most users of such devices that the only practical solution will be to update to a newer device. The devices which I have owned have always offered firmware updates automatically and I doubt if a device manufacturer will plan to update older firmware / device driver just because a user has contacted them.\r\n\r\nThe possibility that the only solution to the issue would be to update to a newer device is not mentioned, and I think it probably should be mentioned."", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'fynngodau', 'comment_id': 847315494.0, 'datetime': '2021-05-24 20:32:27+00:00', 'masked_author': 'username_2', 'text': 'I\'m afraid that this is true. However, I am not in favor of adding the advice to buy a new device. It is, in most cases, not a practical solution. The (monetary and environmental) cost is at an imbalance with the benefit. For this reason, such an advice might upset users.\r\n\r\nThe should convey the advice: ""Your app is working fine and your device is okay, but be aware of this limitation.""\r\n\r\nOf course depending on how this is formulated, adding the advice you proposed might make it sound more like: ""It is not a good idea to use the app on this device. Better get a new one.""', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'MikeMcC399', 'comment_id': 847587595.0, 'datetime': '2021-05-25 06:40:54+00:00', 'masked_author': 'username_1', 'text': ""@username_2 \r\n\r\n- For partial incompatibility getting a new device is probably not worth it.\r\n- For full incompatibility a new device is probably the only option if a user wants to have exposure notification capabilities linked to BLE. For environmental or cost concerns, there is also the option of obtaining a device second-hand. In any case that should be the user's decision. I just wanted to avoid raising a reader's hopes too high that they could solve the problem for their existing device."", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'heinezen', 'comment_id': 847832906.0, 'datetime': '2021-05-25 12:37:32+00:00', 'masked_author': 'username_0', 'text': ""@username_1 @username_2 \r\n\r\nIMO recommending getting a new device wouldn't come across well because it is a very expensive solution. It will sound out of touch. Of course it depends how it's worded, but I would also not be in favour of putting it in."", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'heinezen', 'comment_id': 864562550.0, 'datetime': '2021-06-20 14:22:23+00:00', 'masked_author': 'username_0', 'text': 'Fixed by https://github.com/corona-warn-app/cwa-website/pull/1291', 'title': None, 'type': 'comment'}
+ {'action': 'closed', 'author': 'heinezen', 'comment_id': None, 'datetime': '2021-06-20 14:22:24+00:00', 'masked_author': 'username_0', 'text': '', 'title': None, 'type': 'issue'}]","<issue_start><issue_comment>Title: FAQ - Revise articles about incompatibility warning card
+username_0: ----
+The term ""incompatibility"" can also be a bit problematic IMO, so we maybe have to choose a more ""tame"" term in the app and the FAQ.
+<issue_comment>username_0: @username_2 I assume you would want to write or draft the articles? :)
+
+In any case, we will try to further improve the articles with user feedback.
+<issue_comment>username_1: @username_0 
+Do we know what percentage of users will see the partial incompatible issue or the full incompatibility issue? My guess is that partial incompatibility is very low numbers and full incompatibility almost zero.
+
+At the moment the app is released for minimum API 23 (Android 6 and above) and BLE has been available since Android 4.1. It is not possible to install on a device earlier than Android 6 (neither through the Google Play Store, nor by sideloading). The only report in GitHub so far since the release of 2.2.1 was about an Android 6 device which did not support peripheral mode.
+
+Users who install the app from Google Play Store are prevented from installing on a device with no Bluetooth support or with no Bluetooth Low Energy support, because this is ruled out by the current manifest file.
+
+If the article is spilt, you could try structuring them so that the introduction is less technical (like the text you proposed) then further down the article provide more technical details for those who would like to know. When I added the version number I looked for a quick, simple and non-contentious change, so certainly this can be optimized and better integrated.
+<issue_comment>username_0: @username_1 We don't know the total number of users that are affected, but the numbers are indeed very low. However, they are not low enough to be insignificant because a few older but popular devices did not receive updates to support peripheral mode.
+
+For the FP2, we know that peripheral mode was not supported with [Android 7 as the OS](https://forum.fairphone.com/t/corona-warn-app-von-fdroid-inkompatibel-auf-fp2/71072). They only recently fixed this with their Android 9 update. A Samsung device with Android 7 was also reported to have an incompatibility warning in the Play Store.
+<issue_comment>username_2: Thanks for the info, will add it to CCTG FAQ.
+<issue_comment>username_2: In the community slack, @username_3 shared a review by a user who was confused because the incompatibility warning was only sometimes showing. We should that this can happen when the status cannot be reliably detected.
+<issue_comment>username_3: I hope that it is possible to find a good solution to prevent/to fix intermittent changes of the state. Hence, I propose to add something like ""currently there are a few reports of users who experience intermittent changes of the state. We're looking into this and will fix this in an upcoming release"" or similar...
+<issue_comment>username_3: @username_2 and still all the best for the final exams! :D
+<issue_comment>username_2: From looking at the code again, we reconstructed a more precise definition when this happens: if Android version < 8.0 and Bluetooth is turned off, detection doesn't work – then, no warning card is shown in any case.
+<issue_comment>username_1: @username_2 
+It would be great to have an explanation of how the checks are done, just for a better understanding.
+
+Also good luck from me for your Abi exams! ☘️ 🤞🏻
+<issue_comment>username_4: @username_2 Fingers crossed!
+<issue_comment>username_5: Also from my side! Good luck!
+<issue_comment>username_0: I though about something like *""eingeschränkte Sendefähigkeit/limited usage""*, but that is even longer and probably too vague :D Maybe it should be ""XY not available"" where XY is something that describes peripheral mode.
+
+The alerty warning triangle could be replaced with an ""info"" exclamation mark.
+
+Anyway, good luck for your exams :)
+<issue_comment>username_0: @username_5 @username_2 @username_1 @username_3 @username_4 
+
+I've added a few reviews from the store, so we can better judge where the problems with the current message are. Most of them are misinterpretations of the warning card.
+<issue_comment>username_2: I'm assuming you meant an ""(i)"" icon here?
+
+I have opened a new Android issue to discuss these two items further: https://github.com/corona-warn-app/cwa-app-android/issues/3260
+<issue_comment>username_1: I think a blog article would be good, combined with a mention in the new features section of the next version of the Android app. It's unfortunate that this didn't happen with the 2.2 Android release, which might have prepared users for the added warning. Probably most users will have automatically updated by now, so there will not be many new occurrences of the error message. Even so, it would be good to put out a message and make the reasoning clear to affected users (in addition to any changes to the FAQ article.)
+
+It would be great if the reaction from users was that they are grateful for the additional tests done by the app, and grateful for the additional information, instead of just being annoyed.
+
+Perhaps we could have a description of the problem:
+- why didn't the Google Play Store detect the missing BLE functionality and prevent installation or provide a warning?
+- why didn't the app check in earlier releases?
+
+How was this solved in the 2.2 Android app versions?
+
+What is the recommended course of action for a user getting an incompatibility message?
+
+I have some ideas about how the app could be made more appealing, and I will post these soon to https://github.com/corona-warn-app/cwa-app-android/issues/3260.
+<issue_comment>username_2: I opened #1291 to incorporate our ideas and am looking forward to your feedback.
+<issue_comment>username_0: We will answer the Play Store reviews directly with an explanation (maybe even before 2.3 releases).
+<issue_comment>username_1: I don't have an personal experience with a device which is incompatible, but I suspect that for most users of such devices that the only practical solution will be to update to a newer device. The devices which I have owned have always offered firmware updates automatically and I doubt if a device manufacturer will plan to update older firmware / device driver just because a user has contacted them.
+
+The possibility that the only solution to the issue would be to update to a newer device is not mentioned, and I think it probably should be mentioned.
+<issue_comment>username_2: I'm afraid that this is true. However, I am not in favor of adding the advice to buy a new device. It is, in most cases, not a practical solution. The (monetary and environmental) cost is at an imbalance with the benefit. For this reason, such an advice might upset users.
+
+The should convey the advice: ""Your app is working fine and your device is okay, but be aware of this limitation.""
+
+Of course depending on how this is formulated, adding the advice you proposed might make it sound more like: ""It is not a good idea to use the app on this device. Better get a new one.""
+<issue_comment>username_1: @username_2 
+
+- For partial incompatibility getting a new device is probably not worth it.
+- For full incompatibility a new device is probably the only option if a user wants to have exposure notification capabilities linked to BLE. For environmental or cost concerns, there is also the option of obtaining a device second-hand. In any case that should be the user's decision. I just wanted to avoid raising a reader's hopes too high that they could solve the problem for their existing device.
+<issue_comment>username_0: @username_1 @username_2 
+
+IMO recommending getting a new device wouldn't come across well because it is a very expensive solution. It will sound out of touch. Of course it depends how it's worded, but I would also not be in favour of putting it in.
+<issue_comment>username_0: Fixed by https://github.com/corona-warn-app/cwa-website/pull/1291<issue_closed>"
+kubernetes/website,480732094,15857,"{'number': 15857.0, 'repo': 'website', 'user_login': 'kubernetes'}","[{'action': 'opened', 'author': 'yoonian', 'comment_id': None, 'datetime': '2019-08-14T15:03:42Z', 'masked_author': 'username_0', 'text': '- change images of the command output to text.\r\n- split long text in PowerShell command into multiple lines.\r\n\r\nrefer to https://github.com/kubernetes/website/issues/15833', 'title': 'Refactor user-guide-windows-nodes', 'type': 'issue'}
+ {'action': 'created', 'author': 'tengqm', 'comment_id': 521489294.0, 'datetime': '2019-08-15 02:20:40+00:00', 'masked_author': 'username_1', 'text': 'file name is ""flannel-master-kubeclt-get-pods.png "", are you serious?', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'xiangpengzhao', 'comment_id': 521618253.0, 'datetime': '2019-08-15 12:05:14+00:00', 'masked_author': 'username_2', 'text': '/cc @feiskyer', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'xiangpengzhao', 'comment_id': 521874046.0, 'datetime': '2019-08-16 03:48:31+00:00', 'masked_author': 'username_2', 'text': '/assign @username_1', 'title': None, 'type': 'comment'}]","<issue_start><issue_comment>Title: Refactor user-guide-windows-nodes
+username_0: - change images of the command output to text.
+- split long text in PowerShell command into multiple lines.
+
+refer to https://github.com/kubernetes/website/issues/15833
+<issue_comment>username_1: file name is ""flannel-master-kubeclt-get-pods.png "", are you serious?
+<issue_comment>username_2: /cc @feiskyer
+<issue_comment>username_2: /assign @username_1"
+corona-warn-app/cwa-website,684115553,308,"{'number': 308.0, 'repo': 'cwa-website', 'user_login': 'corona-warn-app'}","[{'action': 'opened', 'author': 'vaubaehn', 'comment_id': None, 'datetime': '2020-08-23T04:55:05Z', 'masked_author': 'username_0', 'text': '@GPclips kindly [invited to create a PR](https://github.com/corona-warn-app/cwa-app-android/issues/998#issuecomment-678142777) to add an entry to the FAQ concerning error message \'Cause 9002: Something went wrong. timeout\' as discussed in #998.\r\n\r\nThanks to the support of @Jo-Achim and @Gladdi causes of this exception could have been identified and resolutions can be provided.\r\n\r\nAs requested, I added the entry to section ""id"": ""notification"", just below \'Cause 9002: ... (sqlite). You might consider to move the new entry down to section ""resolved"", as not too many users are affected and also possible resolutions are already provided. Instead, I\'d suggest to move up \'Cause 9002: ... (sqlite)\' to section \'common problems\', as many users are affected from this exception.\r\n\r\nIf you find the text fitting to your needs, you\'d also be able to use the already provided German translation.\r\nOtherwise, feel free to adjust everything according to your needs.\r\n\r\nAdditional fix: In the English version of the FAQ, for entry notifications: Cause 9002 (sqlite) the \'Android/Google\' tag is missing in the title. I complemented it, according to the corresponding German entry.\r\n\r\nClosing remark: \'timeout\' is written in small letters, according to the original error message. It is suggested to not use a capital letter at the beginning of the word, in order to avoid (even more) confusion, if at a later point in time another \'Cause: 9002 - Timed Out waiting for 60000 ms\' might be added to the FAQ.', 'title': ""Add entry 'Cause 9002: Something went wrong (timeout)' as requested in #998"", 'type': 'issue'}
+ {'action': 'created', 'author': 'tkowark', 'comment_id': 680020974.0, 'datetime': '2020-08-25 13:20:59+00:00', 'masked_author': 'username_1', 'text': 'Thanks a lot, @username_0 !!\r\n@MarlisFriedl could you (and/or @username_2) have a look at the new entry and provide your review?', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'OlMue', 'comment_id': 680026049.0, 'datetime': '2020-08-25 13:30:02+00:00', 'masked_author': 'username_2', 'text': 'No problem, I will have a look', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'OlMue', 'comment_id': 680040074.0, 'datetime': '2020-08-25 13:54:49+00:00', 'masked_author': 'username_2', 'text': 'Some minor corrections and additions, but overall a great contribution! I won\'t move the new section it to ""Resolved"" yet, because otherwise people might not see it.\r\nI will merge the PR as soon as the automatic checks have been completed.', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'tkowark', 'comment_id': 680045046.0, 'datetime': '2020-08-25 14:03:15+00:00', 'masked_author': 'username_1', 'text': ""The automatic checks unfortunately will not complete for external PRs, since Github Actions do not allow to run for those (security reasons...). Local check on my machine worked, though. I'll merge this using administrator privileges, though."", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'vaubaehn', 'comment_id': 680300008.0, 'datetime': '2020-08-25 22:25:57+00:00', 'masked_author': 'username_0', 'text': ""Hi @username_1 and @username_2 ,\r\n\r\nthank you very much for merging! I'm glad to contribute a little to the whole. 😊\r\n\r\nThere are just some small issues according to the additional links added by @username_2 :\r\nAs this is an Android specific error, the link to the iOS section is maybe not needed.\r\nAdditionally, the Android specific link guides to Prioritized Background Activity according to battery optimisation, not network setup. It's always good to have that activated, but in this context maybe a little bit confusing?\r\nAt last, the links in the German FAQ point to sections in the English FAQ (en instead of de).\r\n\r\nThanks again, and all the best!"", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'OlMue', 'comment_id': 680699742.0, 'datetime': '2020-08-26 07:03:48+00:00', 'masked_author': 'username_2', 'text': '@username_0 Thanks for your comments. I think you are right, so I removed the links to the FAQs again that I had added. This closes #317', 'title': None, 'type': 'comment'}]","<issue_start><issue_comment>Title: Add entry 'Cause 9002: Something went wrong (timeout)' as requested in #998
+username_0: @GPclips kindly [invited to create a PR](https://github.com/corona-warn-app/cwa-app-android/issues/998#issuecomment-678142777) to add an entry to the FAQ concerning error message 'Cause 9002: Something went wrong. timeout' as discussed in #998.
+
+Thanks to the support of @Jo-Achim and @Gladdi causes of this exception could have been identified and resolutions can be provided.
+
+As requested, I added the entry to section ""id"": ""notification"", just below 'Cause 9002: ... (sqlite). You might consider to move the new entry down to section ""resolved"", as not too many users are affected and also possible resolutions are already provided. Instead, I'd suggest to move up 'Cause 9002: ... (sqlite)' to section 'common problems', as many users are affected from this exception.
+
+If you find the text fitting to your needs, you'd also be able to use the already provided German translation.
+Otherwise, feel free to adjust everything according to your needs.
+
+Additional fix: In the English version of the FAQ, for entry notifications: Cause 9002 (sqlite) the 'Android/Google' tag is missing in the title. I complemented it, according to the corresponding German entry.
+
+Closing remark: 'timeout' is written in small letters, according to the original error message. It is suggested to not use a capital letter at the beginning of the word, in order to avoid (even more) confusion, if at a later point in time another 'Cause: 9002 - Timed Out waiting for 60000 ms' might be added to the FAQ.
+<issue_comment>username_1: Thanks a lot, @username_0 !!
+@MarlisFriedl could you (and/or @username_2) have a look at the new entry and provide your review?
+<issue_comment>username_2: No problem, I will have a look
+<issue_comment>username_2: Some minor corrections and additions, but overall a great contribution! I won't move the new section it to ""Resolved"" yet, because otherwise people might not see it.
+I will merge the PR as soon as the automatic checks have been completed.
+<issue_comment>username_1: The automatic checks unfortunately will not complete for external PRs, since Github Actions do not allow to run for those (security reasons...). Local check on my machine worked, though. I'll merge this using administrator privileges, though.
+<issue_comment>username_0: Hi @username_1 and @username_2 ,
+
+thank you very much for merging! I'm glad to contribute a little to the whole. 😊
+
+There are just some small issues according to the additional links added by @username_2 :
+As this is an Android specific error, the link to the iOS section is maybe not needed.
+Additionally, the Android specific link guides to Prioritized Background Activity according to battery optimisation, not network setup. It's always good to have that activated, but in this context maybe a little bit confusing?
+At last, the links in the German FAQ point to sections in the English FAQ (en instead of de).
+
+Thanks again, and all the best!
+<issue_comment>username_2: @username_0 Thanks for your comments. I think you are right, so I removed the links to the FAQs again that I had added. This closes #317"
+newrelic/docs-website,864216423,1948,,"[{'action': 'opened', 'author': 'jpvajda', 'comment_id': None, 'datetime': '2021-04-21 19:46:42+00:00', 'masked_author': 'username_0', 'text': ""We've had several requests to conduce A/B tests for the Docs site and this issue is to define how that process will work and setup a framework that can empower teams to do a lot of the A/B Tests themselves so DevEn can delivery on our mission to enable teams of developers to do amazing things with New Relic products."", 'title': ""Define DevEn's `A/B Testing` process & Framework"", 'type': 'issue'}
+ {'action': 'created', 'author': 'zstix', 'comment_id': 825850831.0, 'datetime': '2021-04-23 18:45:18+00:00', 'masked_author': 'username_1', 'text': 'Maybe something like this?\r\n\r\n```\r\n<Split test=""docssite_paragraph"" variant=""a"">\r\nThis is treatment A\r\n</Split>\r\n<Split test=""docssite_paragraph"" variant=""b"">\r\nThis is treatment B\r\n</Split>\r\n```', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'jpvajda', 'comment_id': 825884717.0, 'datetime': '2021-04-23 19:53:42+00:00', 'masked_author': 'username_0', 'text': 'relates to: https://github.com/newrelic/docs-website/issues/1982', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'jpvajda', 'comment_id': 834872562.0, 'datetime': '2021-05-07 23:50:07+00:00', 'masked_author': 'username_0', 'text': ""I've spun up a doc but had little time to spend on it today..."", 'title': None, 'type': 'comment'}
+ {'action': 'closed', 'author': 'jpvajda', 'comment_id': None, 'datetime': '2021-05-12 16:15:11+00:00', 'masked_author': 'username_0', 'text': '', 'title': None, 'type': 'issue'}]","<issue_start><issue_comment>Title: Define DevEn's `A/B Testing` process & Framework
+username_0: We've had several requests to conduce A/B tests for the Docs site and this issue is to define how that process will work and setup a framework that can empower teams to do a lot of the A/B Tests themselves so DevEn can delivery on our mission to enable teams of developers to do amazing things with New Relic products.
+<issue_comment>username_1: Maybe something like this?
+
+```
+<Split test=""docssite_paragraph"" variant=""a"">
+This is treatment A
+</Split>
+<Split test=""docssite_paragraph"" variant=""b"">
+This is treatment B
+</Split>
+```
+<issue_comment>username_0: relates to: https://github.com/newrelic/docs-website/issues/1982
+<issue_comment>username_0: I've spun up a doc but had little time to spend on it today...<issue_closed>"
+11ty/11ty-website,609283598,559,,"[{'action': 'opened', 'author': 'zachleat', 'comment_id': None, 'datetime': '2020-04-29 18:57:31+00:00', 'masked_author': 'username_0', 'text': 'https://github.com/11ty/eleventy-cache-assets', 'title': 'Add docs for eleventy-cache-assets to main docs', 'type': 'issue'}
+ {'action': 'created', 'author': 'gabbersepp', 'comment_id': 627831209.0, 'datetime': '2020-05-13 08:24:51+00:00', 'masked_author': 'username_1', 'text': 'To which navigation entry should those docu be added?', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'tannerdolby', 'comment_id': 729238480.0, 'datetime': '2020-11-17 21:57:39+00:00', 'masked_author': 'username_2', 'text': '@username_0 Does this issue still need to be handled? I\'d be happy to add docs for `eleventy-cache-assets` to the main docs.\r\n\r\nI\'m not entirely sure where you want the [docs](https://github.com/11ty/eleventy-cache-assets) to be placed within the website, but I was thinking:\r\n\r\n1. Add a permalink such as ""Cache Assets"" into the ""Plugins"" list in the ""Configuration"" section of the main docs. (Maybe ""Cache API Requests"" or ""Cache Requests"" would be a more suitable name)\r\n2. Add eleventy-cache-assets [README.md](https://github.com/11ty/eleventy-cache-assets#readme) content to a template for the actual page on the site.\r\n3. Access the eleventy-cache-assets docs page from the ""Plugins"" list in the main docs using `<a href=""/docs/plugins/cache-assets/language/"">Cache Assets</a>`. \r\n\r\nBelow is a screenshot after I edited the html to add a list item `<li><a href=""/docs/plugins/cache-assets/language/"">Cache Assets</a></li>` to the ""Plugins"" list (prototyping before a name for the link is settled)\r\n\r\n<img width=""239"" alt=""Screen Shot 2020-11-17 at 1 45 17 PM"" src=""https://user-images.githubusercontent.com/48612525/99454543-6a38fa80-28db-11eb-8f5a-61b9b77b219e.png"">\r\n\r\nSince the only other link to something `eleventy-cache-assets` plugin related is within [Quick Tip #009—Cache Data Requests](https://www.11ty.dev/docs/quicktips/cache-api-requests/). I thought it would be best for the `eleventy-cache-assets` docs to be within the ""Plugins"" unordered list as a permalink to the corresponding docs page. \r\n\r\nThe [Read More](https://www.11ty.dev/docs/quicktips/cache-api-requests/#read-more) subheading on the quicktips page has a link to [Read more at the eleventy-cache-assets Documentation](https://github.com/11ty/eleventy-cache-assets), this link could stay the same and go to the github repo or once the docs are added with the proper menu item permalink (ie ""Cache Assets"") the link could go to the docs page within 11ty-website instead of linking to the external Github repository.\r\n\r\nLet me know your thoughts! @username_0', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'tannerdolby', 'comment_id': 738720100.0, 'datetime': '2020-12-04 11:02:11+00:00', 'masked_author': 'username_2', 'text': '@username_0', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'tannerdolby', 'comment_id': 747263985.0, 'datetime': '2020-12-17 07:25:19+00:00', 'masked_author': 'username_2', 'text': ""I don't have the power to close this issue, but since @username_0 has added docs for this already. It's probably ready to be closed!"", 'title': None, 'type': 'comment'}
+ {'action': 'closed', 'author': 'zachleat', 'comment_id': None, 'datetime': '2020-12-17 21:53:09+00:00', 'masked_author': 'username_0', 'text': '', 'title': None, 'type': 'issue'}
+ {'action': 'created', 'author': 'zachleat', 'comment_id': 747724751.0, 'datetime': '2020-12-17 21:53:29+00:00', 'masked_author': 'username_0', 'text': 'Thanks for the ping, I thought I had closed it!', 'title': None, 'type': 'comment'}]","<issue_start><issue_comment>Title: Add docs for eleventy-cache-assets to main docs
+username_0: https://github.com/11ty/eleventy-cache-assets
+<issue_comment>username_1: To which navigation entry should those docu be added?
+<issue_comment>username_2: @username_0 Does this issue still need to be handled? I'd be happy to add docs for `eleventy-cache-assets` to the main docs.
+
+I'm not entirely sure where you want the [docs](https://github.com/11ty/eleventy-cache-assets) to be placed within the website, but I was thinking:
+
+1. Add a permalink such as ""Cache Assets"" into the ""Plugins"" list in the ""Configuration"" section of the main docs. (Maybe ""Cache API Requests"" or ""Cache Requests"" would be a more suitable name)
+2. Add eleventy-cache-assets [README.md](https://github.com/11ty/eleventy-cache-assets#readme) content to a template for the actual page on the site.
+3. Access the eleventy-cache-assets docs page from the ""Plugins"" list in the main docs using `<a href=""/docs/plugins/cache-assets/language/"">Cache Assets</a>`. 
+
+Below is a screenshot after I edited the html to add a list item `<li><a href=""/docs/plugins/cache-assets/language/"">Cache Assets</a></li>` to the ""Plugins"" list (prototyping before a name for the link is settled)
+
+<img width=""239"" alt=""Screen Shot 2020-11-17 at 1 45 17 PM"" src=""https://user-images.githubusercontent.com/48612525/99454543-6a38fa80-28db-11eb-8f5a-61b9b77b219e.png"">
+
+Since the only other link to something `eleventy-cache-assets` plugin related is within [Quick Tip #009—Cache Data Requests](https://www.11ty.dev/docs/quicktips/cache-api-requests/). I thought it would be best for the `eleventy-cache-assets` docs to be within the ""Plugins"" unordered list as a permalink to the corresponding docs page. 
+
+The [Read More](https://www.11ty.dev/docs/quicktips/cache-api-requests/#read-more) subheading on the quicktips page has a link to [Read more at the eleventy-cache-assets Documentation](https://github.com/11ty/eleventy-cache-assets), this link could stay the same and go to the github repo or once the docs are added with the proper menu item permalink (ie ""Cache Assets"") the link could go to the docs page within 11ty-website instead of linking to the external Github repository.
+
+Let me know your thoughts! @username_0
+<issue_comment>username_2: @username_0
+<issue_comment>username_2: I don't have the power to close this issue, but since @username_0 has added docs for this already. It's probably ready to be closed!<issue_closed>
+<issue_comment>username_0: Thanks for the ping, I thought I had closed it!"
+facebook/react-native-website,1031114298,2820,,"[{'action': 'opened', 'author': 'MauriceArikoglu', 'comment_id': None, 'datetime': '2021-10-20T08:18:12Z', 'masked_author': 'username_0', 'text': 'I would like to request additional documentation on the specific Build Settings required to manually link the RN libraries. I believe there are many Xcode power users among us wanting to add RN without using cocoapods if possible. Linking for third-party libraries usually follows a streamlined process, although can also derive based on the library-vending parties design decisions. Because I don’t know if manual linking is just the basic incorporation of libraries and linker settings and the documentation cleary states a „We know how but won’t tell“ situation, I would like to request this information be added on the documentation page. Maybe we can add it as a subpage or hide it within a Dropdown to keep the above linked guide accessible and easy for beginners but offer more advanced solutions for power users.\r\n\r\n## What is the problem?\r\n\r\nSolution for power users is hinted at but not stated.\r\n\r\n## How can we address it?\r\n\r\nAdd the missing documentation part for specific RN libraries to be manually linked \r\n\r\n## Why is it important?\r\n\r\nFreedom of choice what dependency managers to use or integrate!\r\n\r\n## Who needs this?\r\n\r\niOS developers of all kind (IMO E>junior should be aware of concepts like linking)\r\n\r\n## When should this happen (use version numbers if needed)?\r\n\r\nAsap would be lovely. I would do it myself, but as I am neither author of the library nor contributor here, I am afraid I would slow the process down unnecessarily (get back to me though if we can change the points above)', 'title': 'Provide additional example for manual linkage of Libraries', 'type': 'issue'}
+ {'action': 'created', 'author': 'MauriceArikoglu', 'comment_id': 947444673.0, 'datetime': '2021-10-20 08:29:46+00:00', 'masked_author': 'username_0', 'text': 'Maybe we can build on top of this existing page https://reactnative.dev/docs/linking-libraries-ios and bring it up to date (it seems deprecated) as well as add the required steps to „prevent“ the usage of cocoapods specifically when integrating with an existing app.', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'MauriceArikoglu', 'comment_id': 1016774343.0, 'datetime': '2022-01-19 19:00:40+00:00', 'masked_author': 'username_0', 'text': 'Nope, not updated yet', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'MauriceArikoglu', 'comment_id': 1016774686.0, 'datetime': '2022-01-19 19:01:06+00:00', 'masked_author': 'username_0', 'text': 'Nice to know at least the bot cares about the issues here :)', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'cortinico', 'comment_id': 1033122403.0, 'datetime': '2022-02-08 22:22:12+00:00', 'masked_author': 'username_1', 'text': ""Also here the best approach would be to start drafting a page and iterating on it. Sadly, I'm not able to help with the exact instructions here. I'm not aware of anyone using RN without cocoapods in the OSS space. If there is someone doing so, having them kicking off those kinds of pages would be great 👍"", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'MauriceArikoglu', 'comment_id': 1036199031.0, 'datetime': '2022-02-11 13:10:36+00:00', 'masked_author': 'username_0', 'text': '@username_1 Thanks for getting back on that. I am currently not working with RN on a regular basis, but made sure to write a ToDo for me, if I do so. Looking forward to writing this then.', 'title': None, 'type': 'comment'}]","<issue_start><issue_comment>Title: Provide additional example for manual linkage of Libraries
+username_0: I would like to request additional documentation on the specific Build Settings required to manually link the RN libraries. I believe there are many Xcode power users among us wanting to add RN without using cocoapods if possible. Linking for third-party libraries usually follows a streamlined process, although can also derive based on the library-vending parties design decisions. Because I don’t know if manual linking is just the basic incorporation of libraries and linker settings and the documentation cleary states a „We know how but won’t tell“ situation, I would like to request this information be added on the documentation page. Maybe we can add it as a subpage or hide it within a Dropdown to keep the above linked guide accessible and easy for beginners but offer more advanced solutions for power users.
+
+## What is the problem?
+
+Solution for power users is hinted at but not stated.
+
+## How can we address it?
+
+Add the missing documentation part for specific RN libraries to be manually linked 
+
+## Why is it important?
+
+Freedom of choice what dependency managers to use or integrate!
+
+## Who needs this?
+
+iOS developers of all kind (IMO E>junior should be aware of concepts like linking)
+
+## When should this happen (use version numbers if needed)?
+
+Asap would be lovely. I would do it myself, but as I am neither author of the library nor contributor here, I am afraid I would slow the process down unnecessarily (get back to me though if we can change the points above)
+<issue_comment>username_0: Maybe we can build on top of this existing page https://reactnative.dev/docs/linking-libraries-ios and bring it up to date (it seems deprecated) as well as add the required steps to „prevent“ the usage of cocoapods specifically when integrating with an existing app.
+<issue_comment>username_0: Nope, not updated yet
+<issue_comment>username_0: Nice to know at least the bot cares about the issues here :)
+<issue_comment>username_1: Also here the best approach would be to start drafting a page and iterating on it. Sadly, I'm not able to help with the exact instructions here. I'm not aware of anyone using RN without cocoapods in the OSS space. If there is someone doing so, having them kicking off those kinds of pages would be great 👍
+<issue_comment>username_0: @username_1 Thanks for getting back on that. I am currently not working with RN on a regular basis, but made sure to write a ToDo for me, if I do so. Looking forward to writing this then."
+babel/website,290293730,1518,"{'number': 1518.0, 'repo': 'website', 'user_login': 'babel'}","[{'action': 'opened', 'author': 'xtuc', 'comment_id': None, 'datetime': '2018-01-21T18:23:13Z', 'masked_author': 'username_0', 'text': 'This PR adds a ""Plugins"" section in the sidebar. You can search for plugins on npm and activate them.\r\n\r\nNotes:\r\n- presets are disabled\r\n- some syntax plugins are not pushed to the parser (pipeline operator for example)\r\n- for some reason the presets sidebar isn\'t updating anymore (even if it\'s updating in the state)\r\n- the API is hosted on `now` for now, we could have it under `some-api.bundle.run` if needed.\r\n\r\nNext steps:\r\n- Store the plugins list into the url\r\n- Enable presets\r\n\r\nExample:\r\n![kapture 2018-01-21 at 19 14 29](https://user-images.githubusercontent.com/1493671/35197489-1222a2d8-fee0-11e7-8b55-6c75fb59918f.gif)', 'title': 'Add community plugins', 'type': 'issue'}
+ {'action': 'created', 'author': 'SaraVieira', 'comment_id': 359268996.0, 'datetime': '2018-01-21 18:25:18+00:00', 'masked_author': 'username_1', 'text': 'The code for the GraphQL server is here: https://github.com/username_1/babel-plugins, it can be deployed anywhere you all prefer 🚀', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'Andarist', 'comment_id': 359269464.0, 'datetime': '2018-01-21 18:31:50+00:00', 'masked_author': 'username_2', 'text': 'Wow, this looks awesome!', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'xtuc', 'comment_id': 361086274.0, 'datetime': '2018-01-28 18:56:02+00:00', 'masked_author': 'username_0', 'text': ""@username_3 you mentioned keeping the `babel/plugin` prefix but it's taking so much space: \r\n![screenshot from 2018-01-28 19-54-57](https://user-images.githubusercontent.com/1493671/35485831-3f343c3e-0465-11e8-958f-58c71a005e18.png)\r\n\r\nI think we should remove them."", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'hzoo', 'comment_id': 361115176.0, 'datetime': '2018-01-29 01:14:26+00:00', 'masked_author': 'username_3', 'text': ""Don't have to do it because most plugins are `babel-plugin` but some are not is all so there isn't a way to get them unless you introduce a new syntax to allow it?"", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'xtuc', 'comment_id': 361171233.0, 'datetime': '2018-01-29 08:22:17+00:00', 'masked_author': 'username_0', 'text': 'Yes we use `babel-plugin` and `@babel/plugin` for the search on npm. Scanning the entire registry is possible but probably overkilled.\r\n\r\nWe can maybe indicate it somewhere, like:\r\n\r\n![screenshot from 2018-01-29 09-21-51](https://user-images.githubusercontent.com/1493671/35500187-e41244e2-04d5-11e8-83b4-51d6c70953b4.png)', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'xtuc', 'comment_id': 363082002.0, 'datetime': '2018-02-05 13:18:55+00:00', 'masked_author': 'username_0', 'text': ""Netlify finally managed to deploy the website, you can try it live here https://deploy-preview-1518--babel-new.netlify.com/repl.html.\r\n\r\nI switched the search to Algolia with the help of @haroenv (thanks!).\r\n\r\n@haroenv\r\nI'm wondering why my plugin `babel-plugin-transform-scala-lambda` doesn't show up when you search `scala` in the REPL because on the [yarn website it does](https://yarnpkg.com/en/packages?q=babel-plugin%20scala)."", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'Haroenv', 'comment_id': 363089992.0, 'datetime': '2018-02-05 13:50:53+00:00', 'masked_author': 'username_4', 'text': ""There's a bug still, I think the `onChange` of the checkbox and search input are switched or something. \r\n\r\n![2018-02-05 14_46_50](https://user-images.githubusercontent.com/6270048/35807674-baec5f72-0a83-11e8-9e31-697e14fd26b3.gif)\r\n\r\nOtherwise, your plugin isn't yet shown, because we didn't do the reindex to add the tag on all packages (next Friday at the latest). \r\n\r\nOne last thing, just so we don't forget, there needs to be a `<PoweredBy />` component still, you can use the one from React InstantSearch; or make your own link, as long as it says search or powered by Algolia and has a link to algolia.com"", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'SaraVieira', 'comment_id': 363207333.0, 'datetime': '2018-02-05 20:14:06+00:00', 'masked_author': 'username_1', 'text': 'Hi @username_4,\r\n\r\nI will add this tomorrow and also take a look at that :)', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'SaraVieira', 'comment_id': 363908574.0, 'datetime': '2018-02-07 20:59:35+00:00', 'masked_author': 'username_1', 'text': ""Hello !\r\n\r\nI wasn't able to do this yesterday because the internet on the train was a lie but the logo has been added , let's wait for netifly 🤞"", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'xtuc', 'comment_id': 364028436.0, 'datetime': '2018-02-08 07:45:15+00:00', 'masked_author': 'username_0', 'text': 'Thanks @username_1!\r\n\r\nWhat about something like:\r\n\r\n- ![screenshot from 2018-02-08 08-44-16](https://user-images.githubusercontent.com/1493671/35961012-4abf73ee-0cac-11e8-9949-d31b7d6a0c8f.png)\r\n- ![screenshot from 2018-02-08 08-44-01](https://user-images.githubusercontent.com/1493671/35961013-4ade3c48-0cac-11e8-8d87-5035cdfb8295.png)', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'SaraVieira', 'comment_id': 364040158.0, 'datetime': '2018-02-08 08:39:09+00:00', 'masked_author': 'username_1', 'text': 'But aligned right? 😝', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'Haroenv', 'comment_id': 364063975.0, 'datetime': '2018-02-08 10:10:23+00:00', 'masked_author': 'username_4', 'text': 'It can also be at the bottom of the results, providing that it’s not hidden behind a scrollbar', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'SaraVieira', 'comment_id': 364150479.0, 'datetime': '2018-02-08 15:38:58+00:00', 'masked_author': 'username_1', 'text': '<img width=""241"" alt=""screen shot 2018-02-08 at 15 36 14"" src=""https://user-images.githubusercontent.com/1051509/35981816-1b553f46-0ce6-11e8-97f0-5a503bc744cb.png"">\r\n\r\n\r\nI also added some padding around the checkbox :)\r\n\r\ncc @username_0 @username_4', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'Haroenv', 'comment_id': 364446165.0, 'datetime': '2018-02-09 14:20:10+00:00', 'masked_author': 'username_4', 'text': 'Bug I described earlier is still happening on Safari BTW', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'giuseppeg', 'comment_id': 366428622.0, 'datetime': '2018-02-17 09:19:37+00:00', 'masked_author': 'username_5', 'text': 'Would you be open to add keywords search too?', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'Haroenv', 'comment_id': 366442338.0, 'datetime': '2018-02-17 13:44:00+00:00', 'masked_author': 'username_4', 'text': '@guiseppeg, not sure what you mean', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'xtuc', 'comment_id': 366443171.0, 'datetime': '2018-02-17 13:58:11+00:00', 'masked_author': 'username_0', 'text': ""I'm suspecting a bug in the way we merge the old keywords with the one inferred from the name (I can add a test for that later)."", 'title': None, 'type': 'comment'}]","<issue_start><issue_comment>Title: Add community plugins
+username_0: This PR adds a ""Plugins"" section in the sidebar. You can search for plugins on npm and activate them.
+
+Notes:
+- presets are disabled
+- some syntax plugins are not pushed to the parser (pipeline operator for example)
+- for some reason the presets sidebar isn't updating anymore (even if it's updating in the state)
+- the API is hosted on `now` for now, we could have it under `some-api.bundle.run` if needed.
+
+Next steps:
+- Store the plugins list into the url
+- Enable presets
+
+Example:
+![kapture 2018-01-21 at 19 14 29](https://user-images.githubusercontent.com/1493671/35197489-1222a2d8-fee0-11e7-8b55-6c75fb59918f.gif)
+<issue_comment>username_1: The code for the GraphQL server is here: https://github.com/username_1/babel-plugins, it can be deployed anywhere you all prefer 🚀
+<issue_comment>username_2: Wow, this looks awesome!
+<issue_comment>username_0: @username_3 you mentioned keeping the `babel/plugin` prefix but it's taking so much space: 
+![screenshot from 2018-01-28 19-54-57](https://user-images.githubusercontent.com/1493671/35485831-3f343c3e-0465-11e8-958f-58c71a005e18.png)
+
+I think we should remove them.
+<issue_comment>username_3: Don't have to do it because most plugins are `babel-plugin` but some are not is all so there isn't a way to get them unless you introduce a new syntax to allow it?
+<issue_comment>username_0: Yes we use `babel-plugin` and `@babel/plugin` for the search on npm. Scanning the entire registry is possible but probably overkilled.
+
+We can maybe indicate it somewhere, like:
+
+![screenshot from 2018-01-29 09-21-51](https://user-images.githubusercontent.com/1493671/35500187-e41244e2-04d5-11e8-83b4-51d6c70953b4.png)
+<issue_comment>username_0: Netlify finally managed to deploy the website, you can try it live here https://deploy-preview-1518--babel-new.netlify.com/repl.html.
+
+I switched the search to Algolia with the help of @haroenv (thanks!).
+
+@haroenv
+I'm wondering why my plugin `babel-plugin-transform-scala-lambda` doesn't show up when you search `scala` in the REPL because on the [yarn website it does](https://yarnpkg.com/en/packages?q=babel-plugin%20scala).
+<issue_comment>username_4: There's a bug still, I think the `onChange` of the checkbox and search input are switched or something. 
+
+![2018-02-05 14_46_50](https://user-images.githubusercontent.com/6270048/35807674-baec5f72-0a83-11e8-9e31-697e14fd26b3.gif)
+
+Otherwise, your plugin isn't yet shown, because we didn't do the reindex to add the tag on all packages (next Friday at the latest). 
+
+One last thing, just so we don't forget, there needs to be a `<PoweredBy />` component still, you can use the one from React InstantSearch; or make your own link, as long as it says search or powered by Algolia and has a link to algolia.com
+<issue_comment>username_1: Hi @username_4,
+
+I will add this tomorrow and also take a look at that :)
+<issue_comment>username_1: Hello !
+
+I wasn't able to do this yesterday because the internet on the train was a lie but the logo has been added , let's wait for netifly 🤞
+<issue_comment>username_0: Thanks @username_1!
+
+What about something like:
+
+- ![screenshot from 2018-02-08 08-44-16](https://user-images.githubusercontent.com/1493671/35961012-4abf73ee-0cac-11e8-9949-d31b7d6a0c8f.png)
+- ![screenshot from 2018-02-08 08-44-01](https://user-images.githubusercontent.com/1493671/35961013-4ade3c48-0cac-11e8-8d87-5035cdfb8295.png)
+<issue_comment>username_1: But aligned right? 😝
+<issue_comment>username_4: It can also be at the bottom of the results, providing that it’s not hidden behind a scrollbar
+<issue_comment>username_1: <img width=""241"" alt=""screen shot 2018-02-08 at 15 36 14"" src=""https://user-images.githubusercontent.com/1051509/35981816-1b553f46-0ce6-11e8-97f0-5a503bc744cb.png"">
+
+
+I also added some padding around the checkbox :)
+
+cc @username_0 @username_4
+<issue_comment>username_4: Bug I described earlier is still happening on Safari BTW
+<issue_comment>username_5: Would you be open to add keywords search too?
+<issue_comment>username_4: @guiseppeg, not sure what you mean
+<issue_comment>username_0: I'm suspecting a bug in the way we merge the old keywords with the one inferred from the name (I can add a test for that later)."
+jscraftcamp/website,309113904,360,,"[{'action': 'opened', 'author': 'marcoemrich', 'comment_id': None, 'datetime': '2018-03-27T20:05:13Z', 'masked_author': 'username_0', 'text': ""## Why food?\r\n\r\nNo Food, no craftsmanship! Even the best people/coder need a full stomach - help us get some delicious energy-restorings for our guests. Of course as a sponsor you can either have a say in what to serve or you can leave it completely up to us to choose the right developers nutriment. And last year we got them all fed, so it's not as hard as it sounds :).\r\n\r\n## How does it work?\r\n\r\nLast year we asked some food companies for offers and had the sponsor confirm that amount up front. Once the food was delivered on the day the sponsor pulled out the credit card and made all attendees happy by enabling them to fill up their stomaches. And boy, they had been happier and their energy levels had been restored and they went for another half a day ... [until the party][party].\r\n\r\n[party]: https://github.com/jscraftcamp/website/issues/367"", 'title': 'Sponsor needed for lunch on Friday', 'type': 'issue'}
+ {'action': 'closed', 'author': 'wolframkriesing', 'comment_id': None, 'datetime': '2018-06-28 15:24:33+00:00', 'masked_author': 'username_1', 'text': '', 'title': None, 'type': 'issue'}
+ {'action': 'created', 'author': 'wolframkriesing', 'comment_id': 401073505.0, 'datetime': '2018-06-28 15:24:33+00:00', 'masked_author': 'username_1', 'text': 'Thanks to [TNG](https://www.tngtech.com/), Christoph Stock offered to sponsor the Friday Lunch!\r\nthanks a lot!!!!', 'title': None, 'type': 'comment'}]","<issue_start><issue_comment>Title: Sponsor needed for lunch on Friday
+username_0: ## Why food?
+
+No Food, no craftsmanship! Even the best people/coder need a full stomach - help us get some delicious energy-restorings for our guests. Of course as a sponsor you can either have a say in what to serve or you can leave it completely up to us to choose the right developers nutriment. And last year we got them all fed, so it's not as hard as it sounds :).
+
+## How does it work?
+
+Last year we asked some food companies for offers and had the sponsor confirm that amount up front. Once the food was delivered on the day the sponsor pulled out the credit card and made all attendees happy by enabling them to fill up their stomaches. And boy, they had been happier and their energy levels had been restored and they went for another half a day ... [until the party][party].
+
+[party]: https://github.com/jscraftcamp/website/issues/367<issue_closed>
+<issue_comment>username_1: Thanks to [TNG](https://www.tngtech.com/), Christoph Stock offered to sponsor the Friday Lunch!
+thanks a lot!!!!"
+COVID19Tracking/website,611045010,765,,"[{'action': 'opened', 'author': 'metasj', 'comment_id': None, 'datetime': '2020-05-01 23:34:19+00:00', 'masked_author': 'username_0', 'text': 'As a visitor or to demo the site, I generally visit ct.org and scroll or search the page to find the state I want.  I almost always want one of **US current**, **US historical**, _State_ **current**, or _State_ **historical**.  \r\n\r\n* From the Data page:  I would love a small version of the old TOC visible on the first page, w/o scrolling, both on desktop and mobile.  It would make my quick one-off uses of the site 2x-5x faster, and save scroll fatigue :)\r\n* From the main page:  I would love direct links to the same data tabs (_State by State_,\r\n_Totals for the U.S._, _Data API_) that appear once you visit the Data page.', 'title': 'Bring back TOC on the main page?', 'type': 'issue'}
+ {'action': 'created', 'author': 'kevee', 'comment_id': 622934549.0, 'datetime': '2020-05-02 10:51:44+00:00', 'masked_author': 'username_1', 'text': ""Hi, @username_0 !\n\nWe have big plans for the data page, so I'm going to add this issue to that project when it gets started next week.\n\nThis also makes me think maybe we need some kind of dashboard for power users and volunteers. As we add more context and content to guide other users, we might add more interfaces that would be helpful to the public, but less helpful to the folks who are in this data every day."", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'metasj', 'comment_id': 642999673.0, 'datetime': '2020-06-12 00:29:15+00:00', 'masked_author': 'username_0', 'text': 'Still keen on this!', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'kevee', 'comment_id': 643484828.0, 'datetime': '2020-06-12 21:11:04+00:00', 'masked_author': 'username_1', 'text': 'I think this is more in the context of the internal website tool, which will include a lot of these features.', 'title': None, 'type': 'comment'}]","<issue_start><issue_comment>Title: Bring back TOC on the main page?
+username_0: As a visitor or to demo the site, I generally visit ct.org and scroll or search the page to find the state I want.  I almost always want one of **US current**, **US historical**, _State_ **current**, or _State_ **historical**.  
+
+* From the Data page:  I would love a small version of the old TOC visible on the first page, w/o scrolling, both on desktop and mobile.  It would make my quick one-off uses of the site 2x-5x faster, and save scroll fatigue :)
+* From the main page:  I would love direct links to the same data tabs (_State by State_,
+_Totals for the U.S._, _Data API_) that appear once you visit the Data page.
+<issue_comment>username_1: Hi, @username_0 !
+
+We have big plans for the data page, so I'm going to add this issue to that project when it gets started next week.
+
+This also makes me think maybe we need some kind of dashboard for power users and volunteers. As we add more context and content to guide other users, we might add more interfaces that would be helpful to the public, but less helpful to the folks who are in this data every day.
+<issue_comment>username_0: Still keen on this!
+<issue_comment>username_1: I think this is more in the context of the internal website tool, which will include a lot of these features."
+processing/p5.js-website,575347198,577,"{'number': 577.0, 'repo': 'p5.js-website', 'user_login': 'processing'}","[{'action': 'opened', 'author': 'Shipow', 'comment_id': None, 'datetime': '2020-03-04T12:01:40Z', 'masked_author': 'username_0', 'text': ""Hello Processing team,\r\n\r\n[Someone noticed](https://twitter.com/username_1/status/1225025743698132992) that your documentation could take advantage of our DocSearch initiative.\r\nSo, we went on trying to improve the search and came up with this PR. \\o/\r\n\r\nDocSearch is crawling the website every 24h, extracting content from every page. Then this content is indexed by Algolia and exposed to the user with a searchbox and its custom dropdown.\r\n\r\nYou might have already used DocSearch on some popular documentations like Bootstrap, Vue, jQuery, React, Jest, Gitlab, Brew, Heroku, Stripe ...\r\nSo far, we are maintaining our crawler for 1500+ docs.\r\n\r\n- [DocSearch](https://docsearch.algolia.com/) is fast, it handles typos and highlighting.\r\n- Search results jump directly to the matching part of the page.\r\n- Whenever your markup changes you can [customize the configuration](https://github.com/algolia/docsearch-configs/blob/master/configs/processing.json) on DocSearch repository.\r\n- You'll also have access to a dashboard of the most queried terms, as well as those that yields no results. We found it to be a very good way of knowing how to improve our documentation.\r\n- DocSearch is and will remain FREE\r\n\r\n Changes: \r\n- load docsearch js and css from cdn\r\n- configure and init docsearch\r\n- add meta for language support\r\n- styling\r\n- clean previous search code\r\n\r\n Screenshots of the change: \r\n![image](https://user-images.githubusercontent.com/976175/75877110-3c785800-5e17-11ea-8532-7b0542500053.png)"", 'title': 'Add DocSearch', 'type': 'issue'}
+ {'action': 'created', 'author': 'bobylito', 'comment_id': 595165587.0, 'datetime': '2020-03-05 10:53:57+00:00', 'masked_author': 'username_1', 'text': ""Hey there,\r\nI'm Alex, the whistleblower for the Docsearch team. I hope you don't mind. I thought it would be a delightful improvement over the google powered search, which breaks the design and experience of looking into the documentation."", 'title': None, 'type': 'comment'}]","<issue_start><issue_comment>Title: Add DocSearch
+username_0: Hello Processing team,
+
+[Someone noticed](https://twitter.com/username_1/status/1225025743698132992) that your documentation could take advantage of our DocSearch initiative.
+So, we went on trying to improve the search and came up with this PR. \o/
+
+DocSearch is crawling the website every 24h, extracting content from every page. Then this content is indexed by Algolia and exposed to the user with a searchbox and its custom dropdown.
+
+You might have already used DocSearch on some popular documentations like Bootstrap, Vue, jQuery, React, Jest, Gitlab, Brew, Heroku, Stripe ...
+So far, we are maintaining our crawler for 1500+ docs.
+
+- [DocSearch](https://docsearch.algolia.com/) is fast, it handles typos and highlighting.
+- Search results jump directly to the matching part of the page.
+- Whenever your markup changes you can [customize the configuration](https://github.com/algolia/docsearch-configs/blob/master/configs/processing.json) on DocSearch repository.
+- You'll also have access to a dashboard of the most queried terms, as well as those that yields no results. We found it to be a very good way of knowing how to improve our documentation.
+- DocSearch is and will remain FREE
+
+ Changes: 
+- load docsearch js and css from cdn
+- configure and init docsearch
+- add meta for language support
+- styling
+- clean previous search code
+
+ Screenshots of the change: 
+![image](https://user-images.githubusercontent.com/976175/75877110-3c785800-5e17-11ea-8532-7b0542500053.png)
+<issue_comment>username_1: Hey there,
+I'm Alex, the whistleblower for the Docsearch team. I hope you don't mind. I thought it would be a delightful improvement over the google powered search, which breaks the design and experience of looking into the documentation."

@@ -1,0 +1,866 @@
+gohugoio/hugo,438348820,5911,,"[{'action': 'opened', 'author': 'bep', 'comment_id': None, 'datetime': '2019-04-29 14:36:45+00:00', 'masked_author': 'username_0', 'text': ""This has been mentioned before (I will track down and close that issue), but I'll start fresh.\r\n\r\nSo, Hugo **Themes** and **Theme Components** are very powerful constructs, but the current manual installation/dependency management leaves a lot to be desired. I have tinkered with the idea of using some of the ideas from Go to create a `hugo get` type of command that could do this stuff, but I imagined lots of work, reinventing the wheel, so to speak.\r\n\r\nToday I did some quick tests with [Go Modules](https://github.com/golang/go/wiki/Modules), and it works surprisingly well with non-Go type of modules. We would need to add some small layer of logic in Hugo to support it, but we would then get really, really good dependency management in Hugo.\r\n\r\nTo add a new dependency to a theme or a project would then look like this:\r\n\r\n1. `go get -u github.com/username_0/my-shortcodes`\r\n2. Add `github.com/username_0/my-shortcodes` to the `theme` slice in `config.toml` (and yes, @username_2, we should add an alias for that config key). Note that we of course still will support the `/themes/my-shortcodes` variant.\r\n\r\nWhen you want to update your dependencies, you do `go get -u` to get the latest minor or patch release etc. \r\n \r\nNote that there can only be one version of `my-shortcodes` in a Hugo project at a given time, which is how [Minimal Version Selection](https://github.com/golang/go/wiki/Modules#faqs--minimal-version-selection) comes into play. We need to investigate `github.com/username_0/my-shortcodes/v2` vs namespace vs names etc., but that can probably wait.\r\n\r\nNote that the above will require that you have Go (>= v1.11) installed, but we should also probably add a `hugo mod vendor` command that writes all the dependencies to a folder in the project which could be used without needing Go.\r\n\r\nShout if you think this is a terrible idea, @username_2 @username_4 @digitalcraftsman @username_1 @username_3 @RickCogley, and gang."", 'title': 'Use Go Modules for Theme Component dependency management', 'type': 'issue'}
+ {'action': 'created', 'author': 'budparr', 'comment_id': 487607985.0, 'datetime': '2019-04-29 14:43:39+00:00', 'masked_author': 'username_1', 'text': ""I *Love* this idea for getting us away from submodules. \r\n\r\nIf I understand this correctly, everything would be packaged up _before_ our site hits a deployment service/script.  It's not clear in my mind exactly: Would we be sending a binary to deploy, so instead of building with Hugo, Netlify—for instance—is building the site with `Hugo_site_somethingspecific` or whatever?"", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'kaushalmodi', 'comment_id': 487608612.0, 'datetime': '2019-04-29 14:45:09+00:00', 'masked_author': 'username_2', 'text': 'So this would need the users of themes with ""theme components"" to have go >= v1.11 installed, right?', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'regisphilibert', 'comment_id': 487610193.0, 'datetime': '2019-04-29 14:49:03+00:00', 'masked_author': 'username_3', 'text': ""Same here, worst case scenario we have special build command to run for when a dep needs to be updated/added and it's totally fine with me."", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'bep', 'comment_id': 487612604.0, 'datetime': '2019-04-29 14:54:42+00:00', 'masked_author': 'username_0', 'text': '@username_1 there is no ""binary""; the dependencies (shortcodes, themes etc.) are purely files and directories.\r\n\r\nSo, Netlify (at least their latest build image) has Go 1.12 installed, so that should not be a problem. And this is kind of analogous to JS projects needing NPM.\r\n\r\nWe can possibly improve this in the future if Go exports these commands as an API somewhat.\r\n\r\nSo for Netlify (given that it has Go 1.12 installed) you would not do anything special on the build side.\r\n\r\nRunning:\r\n\r\n```bash\r\nhugo\r\n```\r\n\r\nWill pull down any (new) dependency to the Go Module cache (which I assume is or could be easily cached between builds) and build.\r\n\r\nFor the situations where you want to create ""standalone Hugo"" distribution, you would run:\r\n\r\n```bash\r\nhugo mod vendor\r\n```\r\n\r\nThe above would write the dependencies to `/vendor` (or something) below your Hugo project, and it will build fine even on servers without Go installed.', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'budparr', 'comment_id': 487614348.0, 'datetime': '2019-04-29 14:58:54+00:00', 'masked_author': 'username_1', 'text': ""Yes, of course. I wasn't thinking straight. Makes perfect sense; I was just trying to work out deployment in my head. I like the stand alone solution as well."", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'regisphilibert', 'comment_id': 487615082.0, 'datetime': '2019-04-29 15:00:39+00:00', 'masked_author': 'username_3', 'text': 'Very exciting!', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'bep', 'comment_id': 487621774.0, 'datetime': '2019-04-29 15:17:34+00:00', 'masked_author': 'username_0', 'text': 'Yes, submodules etc. will still work. Also see the `hugo mod vendor` thing.', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'onedrawingperday', 'comment_id': 487625874.0, 'datetime': '2019-04-29 15:27:46+00:00', 'masked_author': 'username_4', 'text': 'This looks great. Particularly the planned `hugo mod vendor` command, since it will make this feature host agnostic.', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'bep', 'comment_id': 487626950.0, 'datetime': '2019-04-29 15:30:21+00:00', 'masked_author': 'username_0', 'text': 'Sure, but `go get` is already pretty host agnostic. I used GitHub in the example above, but it works for ""all of them"".', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'larzza', 'comment_id': 487627771.0, 'datetime': '2019-04-29 15:32:14+00:00', 'masked_author': 'username_5', 'text': 'If I understand this correctly, it means that this could be used to download any git repository to use as a dependency, for example Bootstrap (which I today add as a git submodule in the assets directory for sass customizing).', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'bep', 'comment_id': 487629999.0, 'datetime': '2019-04-29 15:37:49+00:00', 'masked_author': 'username_0', 'text': '@username_5 this is, in general, true, but there is a caveat: It will be added as a Hugo Theme Component (which has a fixed folder structure: layouts, static, assets ...), so anything outside those will currently have no effect. We could improve on that, but that is outside of the scope of this particular issue.', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'bep', 'comment_id': 487638217.0, 'datetime': '2019-04-29 15:59:03+00:00', 'masked_author': 'username_0', 'text': ""That said, there are some exploration left to do here -- thinking about it, I'm not totally sure how a submodule inside a dependency would work, etc."", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'bep', 'comment_id': 488119333.0, 'datetime': '2019-04-30 21:18:35+00:00', 'masked_author': 'username_0', 'text': 'Google just announced that they are hosting a proxy server for these modules which should speed things up, and it is supposed to make multi-modules easier; yet to be tested.', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'Jos512', 'comment_id': 488278788.0, 'datetime': '2019-05-01 13:14:53+00:00', 'masked_author': 'username_6', 'text': ""I'm concerned that this makes it harder for new people to use Hugo. It introduces an additional dependency (Go), which needs to be installed and updated. Plus that can generate its own error messages.\r\n\r\nEvery so often on the forum we already get people who get stuck with the well-documented [quick start](https://gohugo.io/getting-started/quick-start/). I imagine that having to install Go and run `go` commands leads to much more confusion and people giving up on Hugo."", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'bep', 'comment_id': 488288956.0, 'datetime': '2019-05-01 13:57:17+00:00', 'masked_author': 'username_0', 'text': '@username_6 what alternative would you suggest?', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'regisphilibert', 'comment_id': 488294718.0, 'datetime': '2019-05-01 14:19:22+00:00', 'masked_author': 'username_3', 'text': ""I thought you had to install `Go` to use Hugo in the first place... \r\n\r\nIf not, couldn't we wrap a default `go get` into the Hugo CLI? `hugo get -u github.com/username_0/my-shortcodes`"", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'bep', 'comment_id': 488298026.0, 'datetime': '2019-05-01 14:30:37+00:00', 'masked_author': 'username_0', 'text': ""Yes, and we will probably do that (to be able to wrap it with the Hugo stuff we need), but you will **currently** need to have Go installed. I have not looked closely into this, but it looks like the Go Modules stuff isn't available as methods/functions from the outside, so you need to interact with the binary. I do, however, suspect that this will change in the future. I think they have kept this API close to their chest until it is carved in stone.\r\n\r\nAnd no, you don't need Go installed to use Hugo. But I would say that it would feel more natural to me to install Go to get package management than having to install NPM which feels more foreign in this context."", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'regisphilibert', 'comment_id': 488300636.0, 'datetime': '2019-05-01 14:39:54+00:00', 'masked_author': 'username_3', 'text': ""I agree. It seemed no one ever complained about having to install node in order to build a website.I don't know of any framework which will install `node` + `npm` for you."", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'larzza', 'comment_id': 488312843.0, 'datetime': '2019-05-01 15:21:06+00:00', 'masked_author': 'username_5', 'text': 'It seems kind of strange (but pretty cool) to package (a part of) Go in an executable built by Go. It’s also kind of strange to have a dependency on Go from a stand-alone  executable, i.e. Hugo. \r\n\r\nIs it possible to elaborate on the usecase? Is a theme supposed to be a ”Go module”? Or just components in a theme... shortcodes, partials etc? Or is the scenario that it will be possible to mix.\r\n\r\nIf I develop a theme I guess I would like to have it as a git submodule (or just an ordinary git repo) in the themes directory in my hugo site and then add module dependencies to public available shortcodes and partials I find useful.', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'bep', 'comment_id': 488334377.0, 'datetime': '2019-05-01 16:33:30+00:00', 'masked_author': 'username_0', 'text': ""When I start a new site, I want to do add something like this:\r\n\r\n```\r\nimports:\r\n- https://github.com/username_0/mynicetheme\r\n- https://github.com/username_0/common-shortcodes\r\n- https://github.com/username_1/hugo-components/useful-partials\r\n```\r\n\r\nAnd then, when I run:\r\n\r\n```\r\nhugo\r\n```\r\n\r\nAll of the dependencies (including any transitive dependencies) is set up for me and cached as effectively as possible. Then I want easy ways to update dependencies on change and many of the other benefits that come with a proper package manager.\r\n\r\nMost of the above may be possible using Git submodules, but it isn't practical (your head will get dizzy if you start to think about transitive dependencies) -- which is why Hugo Theme Components are so criminally underused."", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'larzza', 'comment_id': 488347408.0, 'datetime': '2019-05-01 17:17:39+00:00', 'masked_author': 'username_5', 'text': 'Thanks, got it!', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'gcushen', 'comment_id': 488784406.0, 'datetime': '2019-05-02 18:39:14+00:00', 'masked_author': 'username_7', 'text': ""Can we statically link Go/Go Modules so that there's no need for users to install Go?"", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'bep', 'comment_id': 488808793.0, 'datetime': '2019-05-02 19:52:51+00:00', 'masked_author': 'username_0', 'text': '@username_7 what/how?', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'bep', 'comment_id': 489090339.0, 'datetime': '2019-05-03 13:12:51+00:00', 'masked_author': 'username_0', 'text': ""I have been doing a quick implementation today. I have some challenges left, but it fits surprisingly well into the existing theme code.\r\n\r\nSee https://github.com/username_0/my-modular-site\r\n\r\nFor a very lean site ...\r\n\r\nA positive side to this that I didn't know before is that you can have submodules in subfolders that can have its own version, which is super useful, see\r\n\r\nhttps://github.com/username_0/hugotestmods"", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'moorereason', 'comment_id': 489098077.0, 'datetime': '2019-05-03 13:37:44+00:00', 'masked_author': 'username_8', 'text': '@username_0, this is an interesting idea.\r\n\r\nI\'m not super-excited about requiring Go for theme development.  I\'m inclined to add this as a ""preview feature"" similar to who Go handled modules initially (check for HUGO056MODULE=on in env).\r\n\r\nI agree that we\'re all hoping for the day when the Go team exports the modules packages.  Can we keep the module feature in preview until they do?  I wonder how long that will be.  Perhaps we should ask Steve what the team is thinking.', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'larzza', 'comment_id': 489103156.0, 'datetime': '2019-05-03 13:53:38+00:00', 'masked_author': 'username_5', 'text': 'About multi module repos:\r\nhttps://github.com/golang/go/wiki/Modules#faqs--multi-module-repositories\r\n\r\nI note that the recommendation is **not** to use multi module repos, but maybe this is a case of a perfect fit. The possibility to tag subdirectories in git with its own separate tags was new to me.', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'bep', 'comment_id': 489109381.0, 'datetime': '2019-05-03 14:13:08+00:00', 'masked_author': 'username_0', 'text': 'Yes.', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'bep', 'comment_id': 489140436.0, 'datetime': '2019-05-03 15:42:01+00:00', 'masked_author': 'username_0', 'text': 'Just tested this with the `replace` directive for local development:\r\n\r\nhttps://github.com/username_0/my-modular-site/commit/9825c51b42ce329d119c1cdaab22ed2b2fd0832d\r\n\r\nAnd it just works with live-reload and all. In short: Everything I have thrown at it has just worked really smoothly. I will test some more during the weekend with transitive dependencies, but this is a feature I really, really want. I would have installed the complete Microsoft Office package if that was a prerequisite.\r\n\r\nAs described above, there are several ways to opt out of using this. I will listen to arguments against, but I think you need to do better than ""I don\'t want to install Go"", and ideally it would be good if you could sketch out a realistic alternative.', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'spf13', 'comment_id': 489244175.0, 'datetime': '2019-05-03 21:23:19+00:00', 'masked_author': 'username_9', 'text': ""I love this idea. It's a novel approach to an old wart. \r\n\r\nWhat I don't love is adding a new dependency for using Hugo. \r\n\r\nI'd love to see a solution where the old way still works just like it always has, but there's a new easier way that we encourage people to use. It's better in every way, but requires a new dependency."", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'spf13', 'comment_id': 489245859.0, 'datetime': '2019-05-03 21:29:40+00:00', 'masked_author': 'username_9', 'text': ""I really like the idea of Hugo wrapping the Go command. \r\n\r\nAll of the tools we are building internally are just calling the Go command directly. I think that *is* the API for modules. \r\n\r\nI think it would be a nice solution to have Hugo wrap the Go command and if it isn't present have an error that tells you how to manually install the theme and a note that if you want to have Hugo install the theme for you, install Go and link to the Go install page."", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'bep', 'comment_id': 489250129.0, 'datetime': '2019-05-03 21:47:52+00:00', 'masked_author': 'username_0', 'text': 'Yes, I studied some of the relevant tools in the `tools` package below `golang/` and all  of them integrate via `os/exec` which makes them loosely coupled. @username_9 I appreciate your input on this, and will repeat myself about what I have said earlier:\r\n\r\n* You can use Hugo happily as before with or without themes (by cloning, submodule etc. into /themes)\r\n* People using the ""module approach"" would need Go during development, but I plan to add a `hugo mod vendor` command that writes these dependencies to a `/vendor` folder which can then be used without any Go installed.\r\n\r\nAlso, I appreciate that Hugo users have vastly different requirements regarding this. For power users like @username_1 and @username_3 I imagine this to be really important, for the common blogger not so much.', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'regisphilibert', 'comment_id': 489258856.0, 'datetime': '2019-05-03 22:24:52+00:00', 'masked_author': 'username_3', 'text': '💯', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'spf13', 'comment_id': 489288933.0, 'datetime': '2019-05-04 03:12:51+00:00', 'masked_author': 'username_9', 'text': 'I think this the exact right approach. Excited to have it.', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'larzza', 'comment_id': 489306725.0, 'datetime': '2019-05-04 08:28:53+00:00', 'masked_author': 'username_5', 'text': '@username_0 What is the workflow? Commit /vendor to git so that the user without Go installed can download the Hugo project and build the site? Or distribute a zip?', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'bep', 'comment_id': 489307578.0, 'datetime': '2019-05-04 08:43:02+00:00', 'masked_author': 'username_0', 'text': 'How would I know, but the Git thing is probably most common. And I also suspect this to be more attractive for theme builders -- to make their themes as portable as possible, esp. when the themes are not changing too often. Not sure. But there are plenty of people who would want a site without dependencies, so to speak.', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'larzza', 'comment_id': 489308686.0, 'datetime': '2019-05-04 09:00:10+00:00', 'masked_author': 'username_5', 'text': 'Ok! Just wondered if i missed some magic... anyway, this will be a really nice feature!', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'bep', 'comment_id': 489334563.0, 'datetime': '2019-05-04 15:01:23+00:00', 'masked_author': 'username_0', 'text': 'I must say that, playing around with this, adding theme components / changing theme etc. while the server is running (with autodownload of any missing pieces) feels kind of magical.', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'bep', 'comment_id': 489407150.0, 'datetime': '2019-05-05 09:14:24+00:00', 'masked_author': 'username_0', 'text': '... even changing versions of components works while the server is running. I got to create some kind of video demoing this.', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'larzza', 'comment_id': 490100335.0, 'datetime': '2019-05-07 14:20:26+00:00', 'masked_author': 'username_5', 'text': '@username_0 I\'ve built your hugo-modules branch to see if I can take the feature for a test drive. I get various errors, most probably due to that I don\'t know what I\'m doing... \r\n\r\nIf there is an easy way to get the feature going (or if it isn\'t possible) I would appreciate a hint, otherwise I\'ll just keep trying...\r\n\r\nI\'ve also reviewed the code trying to get a grip of things, with the distant goal to be able to use hugo/go module with SCSS/SASS include paths. Shouldn\'t be impossible or what do you think?\r\n\r\nI\'m using config in the style of this:\r\n```bash\r\ntheme = [\r\n    #""github.com/username_0/hugotestmods/mypartials"",\r\n    ""github.com/username_0/hugotestmods/myshortcodes"",\r\n    ""github.com/username_0/hugo-fresh"",\r\n    #""github.com/jeblister/kube"",\r\n    #""github.com/username_9/hyde"",\r\n]\r\n```\r\n\r\nSome of the things I\'ve tried:\r\n```bash\r\nhugo mod get github.com/username_0/hugo-fresh\r\ncan\'t load package: package github.com/username_0/hugo-fresh: no Go files in  github.com/username_0/hugo-fresh: no Go files in <GOPATH>/src/github.com/username_0/hugo-fresh \r\n```\r\n\r\nI\'ve read somewhere that there has to be go source files in the module for Go to think it\'s a valid module, so in that sense I guess the error makes sense.\r\n\r\n```\r\n$ hugo mod get --config config.toml,dev.toml \r\npanic: runtime error: index out of range\r\n\r\ngoroutine 1 [running]:\r\ngithub.com/gohugoio/hugo/commands.newModCmd.func1(0xc000568f00, 0xc000290240, 0x0, 0x2, 0x0, 0x0)\r\n        <GOPATH>/src/github.com/username_0/hugo/commands/mod.go:49 +0x83\r\n```', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'larzza', 'comment_id': 490105376.0, 'datetime': '2019-05-07 14:32:19+00:00', 'masked_author': 'username_5', 'text': '@username_0 I got it working with https://github.com/username_0/my-modular-site.git\r\n\r\nFirst I happened to run `hugo serve` with the `--gc`-flag and got (I know this feature isn\'t ready so sorry if I\'m getting ahead of things...):\r\n\r\n```\r\nError: failed to prune cache ""assets"": remove my-modular-site/resources/_gen/assets/sass/style.sass_cf66e63debe6917c04534d6c7b66f623.content: no such file or directory\r\n```', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'larzza', 'comment_id': 490224244.0, 'datetime': '2019-05-07 19:31:07+00:00', 'masked_author': 'username_5', 'text': '- I got it working with my custom theme. One of the struggles was to get download of a  module (theme) in a **private** git repo on gitlab to work. But that has nothing to do with this feature.\r\n- Another issue was that I have an import of `themes/myhugotheme/style/theme_style.scss` from `hugo-site/assets/sass/custom_style.scss`. For now I hardcoded the path to the module location. I think this makes it even more important to make SCSS/SASS include paths to work with modules (as I talked about in a previous comment).', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'bep', 'comment_id': 490235312.0, 'datetime': '2019-05-07 20:05:16+00:00', 'masked_author': 'username_0', 'text': 'The implementation is very much work in progress.', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'larzza', 'comment_id': 490236838.0, 'datetime': '2019-05-07 20:09:49+00:00', 'masked_author': 'username_5', 'text': ""Yes, I'm aware of that."", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'bep', 'comment_id': 508944952.0, 'datetime': '2019-07-06 18:18:45+00:00', 'masked_author': 'username_0', 'text': '@username_5 @username_3 @username_1 @RickCogley  @digitalcraftsman @username_4 and gang; this branch is now back to a working state and I will wrap it up in a few days. This is a classic example where the first 90% was easy, but the final 10 ... With the introduction of the very flexible disk mounts (now including `content`) required me to take a step back and redesign parts of the filesystem handling.\r\n\r\nThe config below is from https://github.com/username_0/my-modular-site and shows the syntax.\r\n\r\nIn short, the goal is a `module` definition replaces most of the ""dir config"" in Hugo (`configDir`, `staticDir` etc.). I have created adapters to handle the old setup, but this should be much easier to grasp, esp. for bigger projects.\r\n\r\nSummary points:\r\n\r\n* Every **Hugo Component** (main project, shortcode collection etc.) can have a `module` configuration in their `config.toml` (or similar).\r\n* All of these can define a set of `mounts` (there are defaults if not sets). \r\n* A `mount` is:\r\n  * `source`: Directory path to the source. For the main project, this can be absolute.\r\n  * `target`: The mount point in the project. This must start with the `component folder`, e.g. `content/blog`.\r\n  * `lang`:  Language code, only relevant for `content` mounts and static mounts when in multihost mode.\r\n * You can also define `mounts` when you import a component; if so, any `mounts` definition in the imported component will be ignored. This can be especially useful when importing non-Hugo-projects (e.g. Bootstrap SCSS) or if you only need a small part of a theme.\r\n\r\nAll of the above can be used with components inside the old `themes` folder or as components managed (version, dependency management) by the new `hugo mod` commands -- which is a whole another cool story.\r\n\r\nThe above may look technical, but is in my head super duper cool.\r\n\r\n```toml\r\n[module]\r\n[[module.mounts]]\r\nsource=""content""\r\ntarget=""content""\r\n[[module.imports]]\r\npath=""github.com/username_0/hugotestmods/mymounts""\r\n[[module.imports.mounts]]\r\nsource=""myassets/subfolder""\r\ntarget=""assets/images""\r\n[[module.imports.mounts]]\r\nsource=""mydata/subfolder""\r\ntarget=""data/datakey""\r\n[[module.imports]]\r\npath=""github.com/username_0/hugotestmods/mypartials""\r\n[[module.imports]]\r\npath=""github.com/username_0/hugo-fresh""\r\n```', 'title': None, 'type': 'comment'}
+ {'action': 'closed', 'author': 'bep', 'comment_id': None, 'datetime': '2019-07-24 07:36:49+00:00', 'masked_author': 'username_0', 'text': '', 'title': None, 'type': 'issue'}]","<issue_start><issue_comment>Title: Use Go Modules for Theme Component dependency management
+username_0: This has been mentioned before (I will track down and close that issue), but I'll start fresh.
+
+So, Hugo **Themes** and **Theme Components** are very powerful constructs, but the current manual installation/dependency management leaves a lot to be desired. I have tinkered with the idea of using some of the ideas from Go to create a `hugo get` type of command that could do this stuff, but I imagined lots of work, reinventing the wheel, so to speak.
+
+Today I did some quick tests with [Go Modules](https://github.com/golang/go/wiki/Modules), and it works surprisingly well with non-Go type of modules. We would need to add some small layer of logic in Hugo to support it, but we would then get really, really good dependency management in Hugo.
+
+To add a new dependency to a theme or a project would then look like this:
+
+1. `go get -u github.com/username_0/my-shortcodes`
+2. Add `github.com/username_0/my-shortcodes` to the `theme` slice in `config.toml` (and yes, @username_2, we should add an alias for that config key). Note that we of course still will support the `/themes/my-shortcodes` variant.
+
+When you want to update your dependencies, you do `go get -u` to get the latest minor or patch release etc. 
+ 
+Note that there can only be one version of `my-shortcodes` in a Hugo project at a given time, which is how [Minimal Version Selection](https://github.com/golang/go/wiki/Modules#faqs--minimal-version-selection) comes into play. We need to investigate `github.com/username_0/my-shortcodes/v2` vs namespace vs names etc., but that can probably wait.
+
+Note that the above will require that you have Go (>= v1.11) installed, but we should also probably add a `hugo mod vendor` command that writes all the dependencies to a folder in the project which could be used without needing Go.
+
+Shout if you think this is a terrible idea, @username_2 @username_4 @digitalcraftsman @username_1 @username_3 @RickCogley, and gang.
+<issue_comment>username_1: I *Love* this idea for getting us away from submodules. 
+
+If I understand this correctly, everything would be packaged up _before_ our site hits a deployment service/script.  It's not clear in my mind exactly: Would we be sending a binary to deploy, so instead of building with Hugo, Netlify—for instance—is building the site with `Hugo_site_somethingspecific` or whatever?
+<issue_comment>username_2: So this would need the users of themes with ""theme components"" to have go >= v1.11 installed, right?
+<issue_comment>username_3: Same here, worst case scenario we have special build command to run for when a dep needs to be updated/added and it's totally fine with me.
+<issue_comment>username_0: @username_1 there is no ""binary""; the dependencies (shortcodes, themes etc.) are purely files and directories.
+
+So, Netlify (at least their latest build image) has Go 1.12 installed, so that should not be a problem. And this is kind of analogous to JS projects needing NPM.
+
+We can possibly improve this in the future if Go exports these commands as an API somewhat.
+
+So for Netlify (given that it has Go 1.12 installed) you would not do anything special on the build side.
+
+Running:
+
+```bash
+hugo
+```
+
+Will pull down any (new) dependency to the Go Module cache (which I assume is or could be easily cached between builds) and build.
+
+For the situations where you want to create ""standalone Hugo"" distribution, you would run:
+
+```bash
+hugo mod vendor
+```
+
+The above would write the dependencies to `/vendor` (or something) below your Hugo project, and it will build fine even on servers without Go installed.
+<issue_comment>username_1: Yes, of course. I wasn't thinking straight. Makes perfect sense; I was just trying to work out deployment in my head. I like the stand alone solution as well.
+<issue_comment>username_3: Very exciting!
+<issue_comment>username_0: Yes, submodules etc. will still work. Also see the `hugo mod vendor` thing.
+<issue_comment>username_4: This looks great. Particularly the planned `hugo mod vendor` command, since it will make this feature host agnostic.
+<issue_comment>username_0: Sure, but `go get` is already pretty host agnostic. I used GitHub in the example above, but it works for ""all of them"".
+<issue_comment>username_5: If I understand this correctly, it means that this could be used to download any git repository to use as a dependency, for example Bootstrap (which I today add as a git submodule in the assets directory for sass customizing).
+<issue_comment>username_0: @username_5 this is, in general, true, but there is a caveat: It will be added as a Hugo Theme Component (which has a fixed folder structure: layouts, static, assets ...), so anything outside those will currently have no effect. We could improve on that, but that is outside of the scope of this particular issue.
+<issue_comment>username_0: That said, there are some exploration left to do here -- thinking about it, I'm not totally sure how a submodule inside a dependency would work, etc.
+<issue_comment>username_0: Google just announced that they are hosting a proxy server for these modules which should speed things up, and it is supposed to make multi-modules easier; yet to be tested.
+<issue_comment>username_6: I'm concerned that this makes it harder for new people to use Hugo. It introduces an additional dependency (Go), which needs to be installed and updated. Plus that can generate its own error messages.
+
+Every so often on the forum we already get people who get stuck with the well-documented [quick start](https://gohugo.io/getting-started/quick-start/). I imagine that having to install Go and run `go` commands leads to much more confusion and people giving up on Hugo.
+<issue_comment>username_0: @username_6 what alternative would you suggest?
+<issue_comment>username_3: I thought you had to install `Go` to use Hugo in the first place... 
+
+If not, couldn't we wrap a default `go get` into the Hugo CLI? `hugo get -u github.com/username_0/my-shortcodes`
+<issue_comment>username_0: Yes, and we will probably do that (to be able to wrap it with the Hugo stuff we need), but you will **currently** need to have Go installed. I have not looked closely into this, but it looks like the Go Modules stuff isn't available as methods/functions from the outside, so you need to interact with the binary. I do, however, suspect that this will change in the future. I think they have kept this API close to their chest until it is carved in stone.
+
+And no, you don't need Go installed to use Hugo. But I would say that it would feel more natural to me to install Go to get package management than having to install NPM which feels more foreign in this context.
+<issue_comment>username_3: I agree. It seemed no one ever complained about having to install node in order to build a website.I don't know of any framework which will install `node` + `npm` for you.
+<issue_comment>username_5: It seems kind of strange (but pretty cool) to package (a part of) Go in an executable built by Go. It’s also kind of strange to have a dependency on Go from a stand-alone  executable, i.e. Hugo. 
+
+Is it possible to elaborate on the usecase? Is a theme supposed to be a ”Go module”? Or just components in a theme... shortcodes, partials etc? Or is the scenario that it will be possible to mix.
+
+If I develop a theme I guess I would like to have it as a git submodule (or just an ordinary git repo) in the themes directory in my hugo site and then add module dependencies to public available shortcodes and partials I find useful.
+<issue_comment>username_0: When I start a new site, I want to do add something like this:
+
+```
+imports:
+- https://github.com/username_0/mynicetheme
+- https://github.com/username_0/common-shortcodes
+- https://github.com/username_1/hugo-components/useful-partials
+```
+
+And then, when I run:
+
+```
+hugo
+```
+
+All of the dependencies (including any transitive dependencies) is set up for me and cached as effectively as possible. Then I want easy ways to update dependencies on change and many of the other benefits that come with a proper package manager.
+
+Most of the above may be possible using Git submodules, but it isn't practical (your head will get dizzy if you start to think about transitive dependencies) -- which is why Hugo Theme Components are so criminally underused.
+<issue_comment>username_5: Thanks, got it!
+<issue_comment>username_7: Can we statically link Go/Go Modules so that there's no need for users to install Go?
+<issue_comment>username_0: @username_7 what/how?
+<issue_comment>username_0: I have been doing a quick implementation today. I have some challenges left, but it fits surprisingly well into the existing theme code.
+
+See https://github.com/username_0/my-modular-site
+
+For a very lean site ...
+
+A positive side to this that I didn't know before is that you can have submodules in subfolders that can have its own version, which is super useful, see
+
+https://github.com/username_0/hugotestmods
+<issue_comment>username_8: @username_0, this is an interesting idea.
+
+I'm not super-excited about requiring Go for theme development.  I'm inclined to add this as a ""preview feature"" similar to who Go handled modules initially (check for HUGO056MODULE=on in env).
+
+I agree that we're all hoping for the day when the Go team exports the modules packages.  Can we keep the module feature in preview until they do?  I wonder how long that will be.  Perhaps we should ask Steve what the team is thinking.
+<issue_comment>username_5: About multi module repos:
+https://github.com/golang/go/wiki/Modules#faqs--multi-module-repositories
+
+I note that the recommendation is **not** to use multi module repos, but maybe this is a case of a perfect fit. The possibility to tag subdirectories in git with its own separate tags was new to me.
+<issue_comment>username_0: Yes.
+<issue_comment>username_0: Just tested this with the `replace` directive for local development:
+
+https://github.com/username_0/my-modular-site/commit/9825c51b42ce329d119c1cdaab22ed2b2fd0832d
+
+And it just works with live-reload and all. In short: Everything I have thrown at it has just worked really smoothly. I will test some more during the weekend with transitive dependencies, but this is a feature I really, really want. I would have installed the complete Microsoft Office package if that was a prerequisite.
+
+As described above, there are several ways to opt out of using this. I will listen to arguments against, but I think you need to do better than ""I don't want to install Go"", and ideally it would be good if you could sketch out a realistic alternative.
+<issue_comment>username_9: I love this idea. It's a novel approach to an old wart. 
+
+What I don't love is adding a new dependency for using Hugo. 
+
+I'd love to see a solution where the old way still works just like it always has, but there's a new easier way that we encourage people to use. It's better in every way, but requires a new dependency.
+<issue_comment>username_9: I really like the idea of Hugo wrapping the Go command. 
+
+All of the tools we are building internally are just calling the Go command directly. I think that *is* the API for modules. 
+
+I think it would be a nice solution to have Hugo wrap the Go command and if it isn't present have an error that tells you how to manually install the theme and a note that if you want to have Hugo install the theme for you, install Go and link to the Go install page.
+<issue_comment>username_0: Yes, I studied some of the relevant tools in the `tools` package below `golang/` and all  of them integrate via `os/exec` which makes them loosely coupled. @username_9 I appreciate your input on this, and will repeat myself about what I have said earlier:
+
+* You can use Hugo happily as before with or without themes (by cloning, submodule etc. into /themes)
+* People using the ""module approach"" would need Go during development, but I plan to add a `hugo mod vendor` command that writes these dependencies to a `/vendor` folder which can then be used without any Go installed.
+
+Also, I appreciate that Hugo users have vastly different requirements regarding this. For power users like @username_1 and @username_3 I imagine this to be really important, for the common blogger not so much.
+<issue_comment>username_3: 💯
+<issue_comment>username_9: I think this the exact right approach. Excited to have it.
+<issue_comment>username_5: @username_0 What is the workflow? Commit /vendor to git so that the user without Go installed can download the Hugo project and build the site? Or distribute a zip?
+<issue_comment>username_0: How would I know, but the Git thing is probably most common. And I also suspect this to be more attractive for theme builders -- to make their themes as portable as possible, esp. when the themes are not changing too often. Not sure. But there are plenty of people who would want a site without dependencies, so to speak.
+<issue_comment>username_5: Ok! Just wondered if i missed some magic... anyway, this will be a really nice feature!
+<issue_comment>username_0: I must say that, playing around with this, adding theme components / changing theme etc. while the server is running (with autodownload of any missing pieces) feels kind of magical.
+<issue_comment>username_0: ... even changing versions of components works while the server is running. I got to create some kind of video demoing this.
+<issue_comment>username_5: @username_0 I've built your hugo-modules branch to see if I can take the feature for a test drive. I get various errors, most probably due to that I don't know what I'm doing... 
+
+If there is an easy way to get the feature going (or if it isn't possible) I would appreciate a hint, otherwise I'll just keep trying...
+
+I've also reviewed the code trying to get a grip of things, with the distant goal to be able to use hugo/go module with SCSS/SASS include paths. Shouldn't be impossible or what do you think?
+
+I'm using config in the style of this:
+```bash
+theme = [
+    #""github.com/username_0/hugotestmods/mypartials"",
+    ""github.com/username_0/hugotestmods/myshortcodes"",
+    ""github.com/username_0/hugo-fresh"",
+    #""github.com/jeblister/kube"",
+    #""github.com/username_9/hyde"",
+]
+```
+
+Some of the things I've tried:
+```bash
+hugo mod get github.com/username_0/hugo-fresh
+can't load package: package github.com/username_0/hugo-fresh: no Go files in  github.com/username_0/hugo-fresh: no Go files in <GOPATH>/src/github.com/username_0/hugo-fresh 
+```
+
+I've read somewhere that there has to be go source files in the module for Go to think it's a valid module, so in that sense I guess the error makes sense.
+
+```
+$ hugo mod get --config config.toml,dev.toml 
+panic: runtime error: index out of range
+
+goroutine 1 [running]:
+github.com/gohugoio/hugo/commands.newModCmd.func1(0xc000568f00, 0xc000290240, 0x0, 0x2, 0x0, 0x0)
+        <GOPATH>/src/github.com/username_0/hugo/commands/mod.go:49 +0x83
+```
+<issue_comment>username_5: @username_0 I got it working with https://github.com/username_0/my-modular-site.git
+
+First I happened to run `hugo serve` with the `--gc`-flag and got (I know this feature isn't ready so sorry if I'm getting ahead of things...):
+
+```
+Error: failed to prune cache ""assets"": remove my-modular-site/resources/_gen/assets/sass/style.sass_cf66e63debe6917c04534d6c7b66f623.content: no such file or directory
+```
+<issue_comment>username_5: - I got it working with my custom theme. One of the struggles was to get download of a  module (theme) in a **private** git repo on gitlab to work. But that has nothing to do with this feature.
+- Another issue was that I have an import of `themes/myhugotheme/style/theme_style.scss` from `hugo-site/assets/sass/custom_style.scss`. For now I hardcoded the path to the module location. I think this makes it even more important to make SCSS/SASS include paths to work with modules (as I talked about in a previous comment).
+<issue_comment>username_0: The implementation is very much work in progress.
+<issue_comment>username_5: Yes, I'm aware of that.
+<issue_comment>username_0: @username_5 @username_3 @username_1 @RickCogley  @digitalcraftsman @username_4 and gang; this branch is now back to a working state and I will wrap it up in a few days. This is a classic example where the first 90% was easy, but the final 10 ... With the introduction of the very flexible disk mounts (now including `content`) required me to take a step back and redesign parts of the filesystem handling.
+
+The config below is from https://github.com/username_0/my-modular-site and shows the syntax.
+
+In short, the goal is a `module` definition replaces most of the ""dir config"" in Hugo (`configDir`, `staticDir` etc.). I have created adapters to handle the old setup, but this should be much easier to grasp, esp. for bigger projects.
+
+Summary points:
+
+* Every **Hugo Component** (main project, shortcode collection etc.) can have a `module` configuration in their `config.toml` (or similar).
+* All of these can define a set of `mounts` (there are defaults if not sets). 
+* A `mount` is:
+  * `source`: Directory path to the source. For the main project, this can be absolute.
+  * `target`: The mount point in the project. This must start with the `component folder`, e.g. `content/blog`.
+  * `lang`:  Language code, only relevant for `content` mounts and static mounts when in multihost mode.
+ * You can also define `mounts` when you import a component; if so, any `mounts` definition in the imported component will be ignored. This can be especially useful when importing non-Hugo-projects (e.g. Bootstrap SCSS) or if you only need a small part of a theme.
+
+All of the above can be used with components inside the old `themes` folder or as components managed (version, dependency management) by the new `hugo mod` commands -- which is a whole another cool story.
+
+The above may look technical, but is in my head super duper cool.
+
+```toml
+[module]
+[[module.mounts]]
+source=""content""
+target=""content""
+[[module.imports]]
+path=""github.com/username_0/hugotestmods/mymounts""
+[[module.imports.mounts]]
+source=""myassets/subfolder""
+target=""assets/images""
+[[module.imports.mounts]]
+source=""mydata/subfolder""
+target=""data/datakey""
+[[module.imports]]
+path=""github.com/username_0/hugotestmods/mypartials""
+[[module.imports]]
+path=""github.com/username_0/hugo-fresh""
+```<issue_closed>"
+kubernetes/website,825184249,26963,"{'number': 26963.0, 'repo': 'website', 'user_login': 'kubernetes'}","[{'action': 'opened', 'author': 'bobbypage', 'comment_id': None, 'datetime': '2021-03-09T02:19:00Z', 'masked_author': 'username_0', 'text': ""<!-- 🛈\r\n\r\n Hello!\r\n\r\n Remember to ADD A DESCRIPTION and delete this note before submitting\r\n your pull request. The description should explain what will change,\r\n and why.\r\n\r\n PLEASE title the FIRST commit appropriately, so that if you squash all\r\n your commits into one, the combined commit message makes sense.\r\n For overall help on editing and submitting pull requests, visit:\r\n  https://kubernetes.io/docs/contribute/start/#improve-existing-content\r\n\r\n Use the default base branch, “master”, if you're documenting existing\r\n features in the English localization.\r\n\r\n If you're working on a different localization (not English), see\r\n https://kubernetes.io/docs/contribute/new-content/overview/#choose-which-git-branch-to-use\r\n for advice.\r\n\r\n If you're documenting a feature that will be part of a future release, see\r\n https://kubernetes.io/docs/contribute/new-content/new-features/ for advice.\r\n\r\n-->\r\n\r\n/sig node\r\n\r\nPlaceholder PR for Graceful Node Shutdown Beta docs\r\n\r\nEnhancement Issue - https://github.com/kubernetes/enhancements/issues/2000\r\nPromotion of graceful node shutdown to beta - https://github.com/kubernetes/kubernetes/pull/99735"", 'title': '[WIP] Update graceful node shutdown docs for beta', 'type': 'issue'}
+ {'action': 'created', 'author': 'reylejano', 'comment_id': 793279376.0, 'datetime': '2021-03-09 02:24:15+00:00', 'masked_author': 'username_1', 'text': '/assign @mvortizr', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'yvespp', 'comment_id': 794147461.0, 'datetime': '2021-03-09 16:47:15+00:00', 'masked_author': 'username_2', 'text': 'Ok, if I do a `systemctl poweroff` instead of `shutdown -h now` it works.\r\nHowever ""Shut Down Guest OS"" via VMware talks to the open-vm-tools which in turn executes a `shutdown -h now`: https://github.com/vmware/open-vm-tools/blob/master/open-vm-tools/lib/system/systemLinux.c#L325\r\nI\'ll check if `shutdown -h now` can execute a different systemctl command...\r\n\r\nThis is on Ubuntu 20.04.2', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'bobbypage', 'comment_id': 794920869.0, 'datetime': '2021-03-10 05:45:50+00:00', 'masked_author': 'username_0', 'text': ""Hi @username_2 \r\n\r\nGood to hear you got it working. \r\n\r\nsystemd inhibitors don't delay the shutdown if you execute `shutdown -h now` as root [xref](https://github.com/systemd/systemd/issues/949). systemd will respect the inhibit delay if the shutdown is triggered by a power press, what systemd calls `HandlePowerKey` (which can be result of an ACPI shutdown event detected by logind from reading `/dev/input/...`). If you want to test it via cli, I also found doing a scheduled shutdown, i.e. `shutdown -h +1`, will trigger the inhibit delay."", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'bobbypage', 'comment_id': 799953227.0, 'datetime': '2021-03-16 05:08:47+00:00', 'masked_author': 'username_0', 'text': 'Updated the PR with update to the docs, this should be ready to review now.', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'reylejano', 'comment_id': 800286238.0, 'datetime': '2021-03-16 14:05:51+00:00', 'masked_author': 'username_1', 'text': '@kubernetes/sig-node-pr-reviews Can you provide a review?', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'reylejano', 'comment_id': 804435432.0, 'datetime': '2021-03-22 22:23:23+00:00', 'masked_author': 'username_1', 'text': 'Hi @username_0 , thank you for having your Doc PR ready for review, here are upcoming doc related dates for the 1.21 release:\r\n- <strike> Docs Ready for Review deadline is March 24</strike>\r\n- Docs Ready to Merge deadline is March 31', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'reylejano', 'comment_id': 804436975.0, 'datetime': '2021-03-22 22:26:38+00:00', 'masked_author': 'username_1', 'text': 'Hi @caesarxuchao @dchen1107 @SergeyKanzhelev or @karan, can you provide a technical review and a technical lgtm for this PR.\r\n\r\nThank you', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'bobbypage', 'comment_id': 805072173.0, 'datetime': '2021-03-23 17:04:35+00:00', 'masked_author': 'username_0', 'text': '/cc @mrunalp', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'sftim', 'comment_id': 805319624.0, 'datetime': '2021-03-23 22:50:51+00:00', 'masked_author': 'username_3', 'text': ""If this is ready for review, I recommend you reword that so it's clear."", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'bobbypage', 'comment_id': 806379262.0, 'datetime': '2021-03-25 05:40:10+00:00', 'masked_author': 'username_0', 'text': 'Thanks @username_3 this is ready for review, I updated the PR description and addressed your comments.', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'reylejano', 'comment_id': 806812898.0, 'datetime': '2021-03-25 14:03:49+00:00', 'masked_author': 'username_1', 'text': '/lgtm cancel', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'reylejano', 'comment_id': 806814416.0, 'datetime': '2021-03-25 14:04:45+00:00', 'masked_author': 'username_1', 'text': '@username_0 Please rebase', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'sftim', 'comment_id': 807848227.0, 'datetime': '2021-03-26 00:57:48+00:00', 'masked_author': 'username_3', 'text': 'LGTM if rebased the “obvious” way.', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'bobbypage', 'comment_id': 807852326.0, 'datetime': '2021-03-26 01:06:32+00:00', 'masked_author': 'username_0', 'text': 'Rebased, thanks for the review! PTAL again.', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'reylejano', 'comment_id': 807857534.0, 'datetime': '2021-03-26 01:18:13+00:00', 'masked_author': 'username_1', 'text': 'Hi @caesarxuchao @dchen1107 @SergeyKanzhelev @karan @mrunalp @kubernetes/sig-node-pr-reviews  , please provide a technical review (tech lgtm) for this PR by March 31 to get this into the release. Thank you!', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'sftim', 'comment_id': 807863962.0, 'datetime': '2021-03-26 01:32:08+00:00', 'masked_author': 'username_3', 'text': ""I'm happy to LGTM this. We can revert if there's been some kind of grave error here!\r\n\r\n/lgtm"", 'title': None, 'type': 'comment'}]","<issue_start><issue_comment>Title: [WIP] Update graceful node shutdown docs for beta
+username_0: <!-- 🛈
+
+ Hello!
+
+ Remember to ADD A DESCRIPTION and delete this note before submitting
+ your pull request. The description should explain what will change,
+ and why.
+
+ PLEASE title the FIRST commit appropriately, so that if you squash all
+ your commits into one, the combined commit message makes sense.
+ For overall help on editing and submitting pull requests, visit:
+  https://kubernetes.io/docs/contribute/start/#improve-existing-content
+
+ Use the default base branch, “master”, if you're documenting existing
+ features in the English localization.
+
+ If you're working on a different localization (not English), see
+ https://kubernetes.io/docs/contribute/new-content/overview/#choose-which-git-branch-to-use
+ for advice.
+
+ If you're documenting a feature that will be part of a future release, see
+ https://kubernetes.io/docs/contribute/new-content/new-features/ for advice.
+
+-->
+
+/sig node
+
+Placeholder PR for Graceful Node Shutdown Beta docs
+
+Enhancement Issue - https://github.com/kubernetes/enhancements/issues/2000
+Promotion of graceful node shutdown to beta - https://github.com/kubernetes/kubernetes/pull/99735
+<issue_comment>username_1: /assign @mvortizr
+<issue_comment>username_2: Ok, if I do a `systemctl poweroff` instead of `shutdown -h now` it works.
+However ""Shut Down Guest OS"" via VMware talks to the open-vm-tools which in turn executes a `shutdown -h now`: https://github.com/vmware/open-vm-tools/blob/master/open-vm-tools/lib/system/systemLinux.c#L325
+I'll check if `shutdown -h now` can execute a different systemctl command...
+
+This is on Ubuntu 20.04.2
+<issue_comment>username_0: Hi @username_2 
+
+Good to hear you got it working. 
+
+systemd inhibitors don't delay the shutdown if you execute `shutdown -h now` as root [xref](https://github.com/systemd/systemd/issues/949). systemd will respect the inhibit delay if the shutdown is triggered by a power press, what systemd calls `HandlePowerKey` (which can be result of an ACPI shutdown event detected by logind from reading `/dev/input/...`). If you want to test it via cli, I also found doing a scheduled shutdown, i.e. `shutdown -h +1`, will trigger the inhibit delay.
+<issue_comment>username_0: Updated the PR with update to the docs, this should be ready to review now.
+<issue_comment>username_1: @kubernetes/sig-node-pr-reviews Can you provide a review?
+<issue_comment>username_1: Hi @username_0 , thank you for having your Doc PR ready for review, here are upcoming doc related dates for the 1.21 release:
+- <strike> Docs Ready for Review deadline is March 24</strike>
+- Docs Ready to Merge deadline is March 31
+<issue_comment>username_1: Hi @caesarxuchao @dchen1107 @SergeyKanzhelev or @karan, can you provide a technical review and a technical lgtm for this PR.
+
+Thank you
+<issue_comment>username_0: /cc @mrunalp
+<issue_comment>username_3: If this is ready for review, I recommend you reword that so it's clear.
+<issue_comment>username_0: Thanks @username_3 this is ready for review, I updated the PR description and addressed your comments.
+<issue_comment>username_1: /lgtm cancel
+<issue_comment>username_1: @username_0 Please rebase
+<issue_comment>username_3: LGTM if rebased the “obvious” way.
+<issue_comment>username_0: Rebased, thanks for the review! PTAL again.
+<issue_comment>username_1: Hi @caesarxuchao @dchen1107 @SergeyKanzhelev @karan @mrunalp @kubernetes/sig-node-pr-reviews  , please provide a technical review (tech lgtm) for this PR by March 31 to get this into the release. Thank you!
+<issue_comment>username_3: I'm happy to LGTM this. We can revert if there's been some kind of grave error here!
+
+/lgtm"
+hyde/hyde,139747413,316,,"[{'action': 'opened', 'author': 'VirtuaCreative', 'comment_id': None, 'datetime': '2016-03-10 00:45:57+00:00', 'masked_author': 'username_0', 'text': ""Guys, would you have a list of themes/templates we could use? \r\n\r\nOn your list of [sites powered by Hyde](https://github.com/hyde/hyde/wiki/Hyde-Powered) you have some sites, but they are too personal and full of contents for us to develop on their top. I mean, would be better having something basic, some simple themes with minimal contents, wouldn't it?\r\n\r\nBesides that, your list is kind of out of date, there are some links giving a 404; there's one of them which is not even Hyde anymore (I'm sorry, I can remember which)\r\n\r\nThanks!"", 'title': 'Hyde themes/templates', 'type': 'issue'}
+ {'action': 'created', 'author': 'lakshmivyas', 'comment_id': 194617877.0, 'datetime': '2016-03-10 02:01:27+00:00', 'masked_author': 'username_1', 'text': '@username_0 -  Yes, that list definitely needs some going over :)  We have been talking about new themes for hyde.', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'VirtuaCreative', 'comment_id': 194618922.0, 'datetime': '2016-03-10 02:07:42+00:00', 'masked_author': 'username_0', 'text': ""Great! Let me know when you have some news!\r\n\r\nI'm setting up a list of multiple SSGs templates for [GitLab Pages](http://doc.gitlab.com/ee/pages/README.html) (not gitHUB Pages, got it?), and we can have some Hyde templates there! :) I'm setting up with your default theme but we know people like a huge variety of themes to choose! :)\r\n\r\nThanks for replying!"", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'jonafato', 'comment_id': 194653417.0, 'datetime': '2016-03-10 04:03:25+00:00', 'masked_author': 'username_2', 'text': ""I've put some thought into this recently as well. It'd be great to have a `hyde-themes` repository where users and developers can submit templates / themes. This could be similar to the ones maintained by [vim-airline](https://github.com/vim-airline/vim-airline-themes) and [oh-my-zsh](https://github.com/robbyrussell/oh-my-zsh/wiki/themes). If others are interested in this, I'm happy to get the ball rolling."", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'lakshmivyas', 'comment_id': 194659729.0, 'datetime': '2016-03-10 04:39:54+00:00', 'masked_author': 'username_1', 'text': '@username_2 - :+1:   We should also figure out if external themes load properly with `create`.', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'VirtuaCreative', 'comment_id': 194927739.0, 'datetime': '2016-03-10 16:08:50+00:00', 'masked_author': 'username_0', 'text': ""Awesome @username_2 @username_1 !!\r\n\r\nI've already created a group for [Jekyll Themes](https://gitlab.com/groups/jekyll-themes), [Middleman Themes](https://gitlab.com/groups/middleman-themes) and a generic [Themes and Templates](https://gitlab.com/groups/themes-templates). If you want I can create a group for Hyde Themes as well, as grant you access. :) But if you don't want me to do that, I'll leave the namespace for you, of course. ;)\r\n\r\nPerhaps you are asking yourselves why am I doing this. I'm writing a blog post as a guest writer for GitLab and I'll add a link for multiple SSGs templates that we tested with GitLab Pages. There are some folks at GitLab who are helping me out. We expect to have about 15 themes/templates exposed on this article. Yours is already one of them. :) We will add links to those groups too and invite people to contribute with their own themes/templates. \r\n\r\nThe default hyde template generated by `hyde create` is live on GitLab:\r\n\r\nProject: https://gitlab.com/themes-templates/hyde\r\nWebsite: https://themes-templates.gitlab.io/hyde/\r\n\r\nThe folks on GitLab forked my repo so it's on the official examples too:\r\n\r\nProject: https://gitlab.com/gitlab-examples/pages-hyde\r\nWebsite: https://gitlab-examples.gitlab.io/pages-hyde/"", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'kerstin', 'comment_id': 208045659.0, 'datetime': '2016-04-10 19:06:45+00:00', 'masked_author': 'username_3', 'text': ""Thanks @username_0 for bringing this up.\r\n\r\nI'm just having a first look at Hyde and already wish I could create a 'blank' blog that doesn't use the default layout. Reason being I don't like the default layout but don't have the time right now to go through all the files to make bigger adjustments.\r\n\r\n(Maybe there is a way to do this and I just haven't figured it out?)"", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'VirtuaCreative', 'comment_id': 208089424.0, 'datetime': '2016-04-10 23:21:53+00:00', 'masked_author': 'username_0', 'text': 'I have no idea... :/', 'title': None, 'type': 'comment'}]","<issue_start><issue_comment>Title: Hyde themes/templates
+username_0: Guys, would you have a list of themes/templates we could use? 
+
+On your list of [sites powered by Hyde](https://github.com/hyde/hyde/wiki/Hyde-Powered) you have some sites, but they are too personal and full of contents for us to develop on their top. I mean, would be better having something basic, some simple themes with minimal contents, wouldn't it?
+
+Besides that, your list is kind of out of date, there are some links giving a 404; there's one of them which is not even Hyde anymore (I'm sorry, I can remember which)
+
+Thanks!
+<issue_comment>username_1: @username_0 -  Yes, that list definitely needs some going over :)  We have been talking about new themes for hyde.
+<issue_comment>username_0: Great! Let me know when you have some news!
+
+I'm setting up a list of multiple SSGs templates for [GitLab Pages](http://doc.gitlab.com/ee/pages/README.html) (not gitHUB Pages, got it?), and we can have some Hyde templates there! :) I'm setting up with your default theme but we know people like a huge variety of themes to choose! :)
+
+Thanks for replying!
+<issue_comment>username_2: I've put some thought into this recently as well. It'd be great to have a `hyde-themes` repository where users and developers can submit templates / themes. This could be similar to the ones maintained by [vim-airline](https://github.com/vim-airline/vim-airline-themes) and [oh-my-zsh](https://github.com/robbyrussell/oh-my-zsh/wiki/themes). If others are interested in this, I'm happy to get the ball rolling.
+<issue_comment>username_1: @username_2 - :+1:   We should also figure out if external themes load properly with `create`.
+<issue_comment>username_0: Awesome @username_2 @username_1 !!
+
+I've already created a group for [Jekyll Themes](https://gitlab.com/groups/jekyll-themes), [Middleman Themes](https://gitlab.com/groups/middleman-themes) and a generic [Themes and Templates](https://gitlab.com/groups/themes-templates). If you want I can create a group for Hyde Themes as well, as grant you access. :) But if you don't want me to do that, I'll leave the namespace for you, of course. ;)
+
+Perhaps you are asking yourselves why am I doing this. I'm writing a blog post as a guest writer for GitLab and I'll add a link for multiple SSGs templates that we tested with GitLab Pages. There are some folks at GitLab who are helping me out. We expect to have about 15 themes/templates exposed on this article. Yours is already one of them. :) We will add links to those groups too and invite people to contribute with their own themes/templates. 
+
+The default hyde template generated by `hyde create` is live on GitLab:
+
+Project: https://gitlab.com/themes-templates/hyde
+Website: https://themes-templates.gitlab.io/hyde/
+
+The folks on GitLab forked my repo so it's on the official examples too:
+
+Project: https://gitlab.com/gitlab-examples/pages-hyde
+Website: https://gitlab-examples.gitlab.io/pages-hyde/
+<issue_comment>username_3: Thanks @username_0 for bringing this up.
+
+I'm just having a first look at Hyde and already wish I could create a 'blank' blog that doesn't use the default layout. Reason being I don't like the default layout but don't have the time right now to go through all the files to make bigger adjustments.
+
+(Maybe there is a way to do this and I just haven't figured it out?)
+<issue_comment>username_0: I have no idea... :/"
+fluxcd/website,975427624,470,,"[{'action': 'opened', 'author': 'dholbach', 'comment_id': None, 'datetime': '2021-08-20 09:18:54+00:00', 'masked_author': 'username_0', 'text': 'https://github.com/fluxcd/website/runs/3380347792?check_suite_focus=true failed like so\r\n\r\n```cli\r\nRun lycheeverse/lychee-action@v1.0.8\r\n/usr/bin/docker run --name c9e0362409e998569248b09d2ff999ad0dd1cf_4eaa2b --label c9e036 --workdir /github/workspace --rm -e pythonLocation -e LD_LIBRARY_PATH -e GITHUB_TOKEN -e INPUT_ARGS -e HOME -e GITHUB_JOB -e GITHUB_REF -e GITHUB_SHA -e GITHUB_REPOSITORY -e GITHUB_REPOSITORY_OWNER -e GITHUB_RUN_ID -e GITHUB_RUN_NUMBER -e GITHUB_RETENTION_DAYS -e GITHUB_ACTOR -e GITHUB_WORKFLOW -e GITHUB_HEAD_REF -e GITHUB_BASE_REF -e GITHUB_EVENT_NAME -e GITHUB_SERVER_URL -e GITHUB_API_URL -e GITHUB_GRAPHQL_URL -e GITHUB_WORKSPACE -e GITHUB_ACTION -e GITHUB_EVENT_PATH -e GITHUB_ACTION_REPOSITORY -e GITHUB_ACTION_REF -e GITHUB_PATH -e GITHUB_ENV -e RUNNER_OS -e RUNNER_TOOL_CACHE -e RUNNER_TEMP -e RUNNER_WORKSPACE -e ACTIONS_RUNTIME_URL -e ACTIONS_RUNTIME_TOKEN -e ACTIONS_CACHE_URL -e GITHUB_ACTIONS=true -e CI=true -v ""/var/run/docker.sock"":""/var/run/docker.sock"" -v ""/home/runner/work/_temp/_github_home"":""/github/home"" -v ""/home/runner/work/_temp/_github_workflow"":""/github/workflow"" -v ""/home/runner/work/_temp/_runner_file_commands"":""/github/file_commands"" -v ""/home/runner/work/website/website"":""/github/workspace"" c9e036:2409e998569248b09d2ff999ad0dd1cf --verbose --no-progress --exclude-all-private content/en/docs/get-started.md content/en/docs/installation.md\r\nstandard_init_linux.go:228: exec user process caused: no such file or directory\r\n```', 'title': 'lychee link checker fails', 'type': 'issue'}
+ {'action': 'created', 'author': 'NissesSenap', 'comment_id': 902559076.0, 'datetime': '2021-08-20 09:20:33+00:00', 'masked_author': 'username_1', 'text': 'I can take a look at it, you can assign it to me.', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'NissesSenap', 'comment_id': 902596922.0, 'datetime': '2021-08-20 10:27:51+00:00', 'masked_author': 'username_1', 'text': ""I have been looking around, I ran the commands locally and it works as intended. I created a PR just to test it out: https://github.com/username_1/website/pull/3 and it works fine.\r\nI don't have enough access, what happens if you re-trigger the job manually in https://github.com/fluxcd/website/pull/469?\r\nI looked at a few other PR:s and I see that the job works fine."", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'dholbach', 'comment_id': 902602181.0, 'datetime': '2021-08-20 10:38:12+00:00', 'masked_author': 'username_0', 'text': 'I re-ran the check once, and it failed the same way. 🤷\u200d♂️', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'NissesSenap', 'comment_id': 902609714.0, 'datetime': '2021-08-20 10:54:16+00:00', 'masked_author': 'username_1', 'text': ""I have no good idea on how to debug this, for now I would say lets ignore it and see if it happens again...\r\nWith the current information the only thing I can come up with is that for some reason that file wasn't checkout as it should have been, but at the same time github action didn't complain.\r\n\r\nIf I we had more powers over the infrastructure I would say clean out the local disk to get rid of any strange cashes of the node and run again."", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'dholbach', 'comment_id': 902719978.0, 'datetime': '2021-08-20 14:10:00+00:00', 'masked_author': 'username_0', 'text': ""Thanks for taking a close look at this @username_1 - looks like the check worked just fine in #471. Closing for now - we'll re-open if it happens again.\r\n\r\ncc @stefanprodan - apparently it was an intermittent issue."", 'title': None, 'type': 'comment'}
+ {'action': 'closed', 'author': 'dholbach', 'comment_id': None, 'datetime': '2021-08-20 14:10:00+00:00', 'masked_author': 'username_0', 'text': '', 'title': None, 'type': 'issue'}]","<issue_start><issue_comment>Title: lychee link checker fails
+username_0: https://github.com/fluxcd/website/runs/3380347792?check_suite_focus=true failed like so
+
+```cli
+Run lycheeverse/lychee-action@v1.0.8
+/usr/bin/docker run --name c9e0362409e998569248b09d2ff999ad0dd1cf_4eaa2b --label c9e036 --workdir /github/workspace --rm -e pythonLocation -e LD_LIBRARY_PATH -e GITHUB_TOKEN -e INPUT_ARGS -e HOME -e GITHUB_JOB -e GITHUB_REF -e GITHUB_SHA -e GITHUB_REPOSITORY -e GITHUB_REPOSITORY_OWNER -e GITHUB_RUN_ID -e GITHUB_RUN_NUMBER -e GITHUB_RETENTION_DAYS -e GITHUB_ACTOR -e GITHUB_WORKFLOW -e GITHUB_HEAD_REF -e GITHUB_BASE_REF -e GITHUB_EVENT_NAME -e GITHUB_SERVER_URL -e GITHUB_API_URL -e GITHUB_GRAPHQL_URL -e GITHUB_WORKSPACE -e GITHUB_ACTION -e GITHUB_EVENT_PATH -e GITHUB_ACTION_REPOSITORY -e GITHUB_ACTION_REF -e GITHUB_PATH -e GITHUB_ENV -e RUNNER_OS -e RUNNER_TOOL_CACHE -e RUNNER_TEMP -e RUNNER_WORKSPACE -e ACTIONS_RUNTIME_URL -e ACTIONS_RUNTIME_TOKEN -e ACTIONS_CACHE_URL -e GITHUB_ACTIONS=true -e CI=true -v ""/var/run/docker.sock"":""/var/run/docker.sock"" -v ""/home/runner/work/_temp/_github_home"":""/github/home"" -v ""/home/runner/work/_temp/_github_workflow"":""/github/workflow"" -v ""/home/runner/work/_temp/_runner_file_commands"":""/github/file_commands"" -v ""/home/runner/work/website/website"":""/github/workspace"" c9e036:2409e998569248b09d2ff999ad0dd1cf --verbose --no-progress --exclude-all-private content/en/docs/get-started.md content/en/docs/installation.md
+standard_init_linux.go:228: exec user process caused: no such file or directory
+```
+<issue_comment>username_1: I can take a look at it, you can assign it to me.
+<issue_comment>username_1: I have been looking around, I ran the commands locally and it works as intended. I created a PR just to test it out: https://github.com/username_1/website/pull/3 and it works fine.
+I don't have enough access, what happens if you re-trigger the job manually in https://github.com/fluxcd/website/pull/469?
+I looked at a few other PR:s and I see that the job works fine.
+<issue_comment>username_0: I re-ran the check once, and it failed the same way. 🤷‍♂️
+<issue_comment>username_1: I have no good idea on how to debug this, for now I would say lets ignore it and see if it happens again...
+With the current information the only thing I can come up with is that for some reason that file wasn't checkout as it should have been, but at the same time github action didn't complain.
+
+If I we had more powers over the infrastructure I would say clean out the local disk to get rid of any strange cashes of the node and run again.
+<issue_comment>username_0: Thanks for taking a close look at this @username_1 - looks like the check worked just fine in #471. Closing for now - we'll re-open if it happens again.
+
+cc @stefanprodan - apparently it was an intermittent issue.<issue_closed>"
+facebook/docusaurus,690869681,3389,,"[{'action': 'opened', 'author': 'novoselovaleksandr', 'comment_id': None, 'datetime': '2020-09-02 09:32:05+00:00', 'masked_author': 'username_0', 'text': '## 🐛 Bug Report\r\n\r\nI can not deploy my docusaurus site. I try:\r\n cmd /C ""set ""GIT_USER=username_0"" USE_SSH=true && yarn deploy""\r\nand i get an error:\r\n![image](https://user-images.githubusercontent.com/28715828/91964652-d9657080-ed28-11ea-82dd-82dcdc68cf06.png)\r\nThis is a part of my docusaurus.config.js\r\n![image](https://user-images.githubusercontent.com/28715828/91964763-00bc3d80-ed29-11ea-8fa0-031194b09b3b.png)\r\nwhat am I doing wrong?\r\n\r\n(Write your answer here.)\r\n\r\n## To Reproduce\r\n\r\n(Write your steps here:)\r\n\r\n1. Step 1...\r\n1. Step 2...\r\n1. Step 3...\r\n\r\n## Expected behavior\r\n\r\n<!--\r\n  How did you expect your project to behave?\r\n  It’s fine if you’re not sure your understanding is correct.\r\n  Write down what you thought would happen.\r\n-->\r\n\r\n(Write what you thought would happen.)\r\n\r\n## Actual Behavior\r\n\r\n<!--\r\n  Did something go wrong?\r\n  Is something broken, or not behaving as you expected?\r\n  Describe this section in detail, and attach screenshots if possible.\r\n  Don\'t only say ""it doesn\'t work""!\r\n-->\r\n\r\n(Write what happened. Add screenshots, if applicable.)\r\n\r\n## Your Environment\r\n\r\n<!-- Include as many relevant details about the environment you experienced the bug in -->\r\n\r\n- Docusaurus version used:\r\n- Environment name and version (e.g. Chrome 78.0.3904.108, Node.js 10.17.0):\r\n- Operating system and version (desktop or mobile):\r\n\r\n## Reproducible Demo\r\n\r\n(Paste the link to an example repo, including a `siteConfig.js`, and exact instructions to reproduce the issue.)\r\n\r\n<!--\r\n  What happens if you skip this step?\r\n\r\n  Someone will read your bug report, and maybe will be able to help you,\r\n  but it’s unlikely that it will get much attention from the team. Eventually,\r\n  the issue will likely get closed in favor of issues that have reproducible demos.\r\n\r\n  Please remember that:\r\n\r\n    * Issues without reproducible demos have a very low priority.\r\n    * The person fixing the bug would have to do that anyway. Please be respectful of their time.\r\n    * You might figure out the issues yourself as you work on extracting it.\r\n\r\n  Thanks for helping us help you!\r\n-->', 'title': 'Error: Please set the GIT_USER environment variable!', 'type': 'issue'}
+ {'action': 'created', 'author': 'slorber', 'comment_id': 685517227.0, 'datetime': '2020-09-02 09:46:12+00:00', 'masked_author': 'username_1', 'text': ""Hi,\r\n\r\nI don't know enough about windows nor have a windows computer to test this, but maybe you could try to use `echo % GIT_USER%` or something in the command to verify that the env variable is set correctly?\r\n\r\nI guess the syntax may also depend on the Windows kind of shell you use.\r\n\r\nYou'd rather ask for help to the community on discord, I'm pretty sure you'll find someone that is able to deploy from Windows here"", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'jeremyhager', 'comment_id': 686504548.0, 'datetime': '2020-09-03 13:48:17+00:00', 'masked_author': 'username_2', 'text': 'I\'ve had a similar issue before where I needed to change the quotes - so for your example you may need to do the following:\r\n\r\n`cmd /C ""set \'GIT_USER=username_0\' USE_SSH=true && yarn deploy""`  \r\nNotice the single quotes vs. double.\r\n\r\nI will say I just ran `cmd /C ""set ""GIT_USER=username_2"" && yarn deploy""` within command prompt and it seemed to work just fine. However PowerShell will treat quotes differently, which is how I am assuming this is being deployed in your environment:\r\n![image](https://user-images.githubusercontent.com/47301461/92122885-db731200-edb0-11ea-89ee-8663119822ff.png)\r\n\r\nThe differences here are that PowerShell sees the quotes in `""set ""` as the command to run, but when switching for single-quotes PowerShell now recognizes the full command. Perhaps working on a request to update the Windows documentation is in order.', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'slorber', 'comment_id': 687180401.0, 'datetime': '2020-09-04 14:28:56+00:00', 'masked_author': 'username_1', 'text': 'Thanks, can you try again with simple quotes @username_0 ?\r\n\r\nAlso, any help to improve windows doc is welcome ;)', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'arifszn', 'comment_id': 693512977.0, 'datetime': '2020-09-16 16:17:31+00:00', 'masked_author': 'username_3', 'text': ""Faced same error. Switching to window's default cmd worked."", 'title': None, 'type': 'comment'}
+ {'action': 'closed', 'author': 'lex111', 'comment_id': None, 'datetime': '2020-09-19 07:16:42+00:00', 'masked_author': 'username_4', 'text': '', 'title': None, 'type': 'issue'}
+ {'action': 'created', 'author': 'lex111', 'comment_id': 695176874.0, 'datetime': '2020-09-19 07:16:42+00:00', 'masked_author': 'username_4', 'text': 'Resolved in #3459', 'title': None, 'type': 'comment'}]","<issue_start><issue_comment>Title: Error: Please set the GIT_USER environment variable!
+username_0: ## 🐛 Bug Report
+
+I can not deploy my docusaurus site. I try:
+ cmd /C ""set ""GIT_USER=username_0"" USE_SSH=true && yarn deploy""
+and i get an error:
+![image](https://user-images.githubusercontent.com/28715828/91964652-d9657080-ed28-11ea-82dd-82dcdc68cf06.png)
+This is a part of my docusaurus.config.js
+![image](https://user-images.githubusercontent.com/28715828/91964763-00bc3d80-ed29-11ea-8fa0-031194b09b3b.png)
+what am I doing wrong?
+
+(Write your answer here.)
+
+## To Reproduce
+
+(Write your steps here:)
+
+1. Step 1...
+1. Step 2...
+1. Step 3...
+
+## Expected behavior
+
+<!--
+  How did you expect your project to behave?
+  It’s fine if you’re not sure your understanding is correct.
+  Write down what you thought would happen.
+-->
+
+(Write what you thought would happen.)
+
+## Actual Behavior
+
+<!--
+  Did something go wrong?
+  Is something broken, or not behaving as you expected?
+  Describe this section in detail, and attach screenshots if possible.
+  Don't only say ""it doesn't work""!
+-->
+
+(Write what happened. Add screenshots, if applicable.)
+
+## Your Environment
+
+<!-- Include as many relevant details about the environment you experienced the bug in -->
+
+- Docusaurus version used:
+- Environment name and version (e.g. Chrome 78.0.3904.108, Node.js 10.17.0):
+- Operating system and version (desktop or mobile):
+
+## Reproducible Demo
+
+(Paste the link to an example repo, including a `siteConfig.js`, and exact instructions to reproduce the issue.)
+
+<!--
+  What happens if you skip this step?
+
+  Someone will read your bug report, and maybe will be able to help you,
+  but it’s unlikely that it will get much attention from the team. Eventually,
+  the issue will likely get closed in favor of issues that have reproducible demos.
+
+  Please remember that:
+
+    * Issues without reproducible demos have a very low priority.
+    * The person fixing the bug would have to do that anyway. Please be respectful of their time.
+    * You might figure out the issues yourself as you work on extracting it.
+
+  Thanks for helping us help you!
+-->
+<issue_comment>username_1: Hi,
+
+I don't know enough about windows nor have a windows computer to test this, but maybe you could try to use `echo % GIT_USER%` or something in the command to verify that the env variable is set correctly?
+
+I guess the syntax may also depend on the Windows kind of shell you use.
+
+You'd rather ask for help to the community on discord, I'm pretty sure you'll find someone that is able to deploy from Windows here
+<issue_comment>username_2: I've had a similar issue before where I needed to change the quotes - so for your example you may need to do the following:
+
+`cmd /C ""set 'GIT_USER=username_0' USE_SSH=true && yarn deploy""`  
+Notice the single quotes vs. double.
+
+I will say I just ran `cmd /C ""set ""GIT_USER=username_2"" && yarn deploy""` within command prompt and it seemed to work just fine. However PowerShell will treat quotes differently, which is how I am assuming this is being deployed in your environment:
+![image](https://user-images.githubusercontent.com/47301461/92122885-db731200-edb0-11ea-89ee-8663119822ff.png)
+
+The differences here are that PowerShell sees the quotes in `""set ""` as the command to run, but when switching for single-quotes PowerShell now recognizes the full command. Perhaps working on a request to update the Windows documentation is in order.
+<issue_comment>username_1: Thanks, can you try again with simple quotes @username_0 ?
+
+Also, any help to improve windows doc is welcome ;)
+<issue_comment>username_3: Faced same error. Switching to window's default cmd worked.<issue_closed>
+<issue_comment>username_4: Resolved in #3459"
+flutter/website,1104976751,6689,,"[{'action': 'opened', 'author': 'AIMMOTH', 'comment_id': None, 'datetime': '2022-01-16 07:14:57+00:00', 'masked_author': 'username_0', 'text': 'Checking Dart SDK version...\r\nDownloading Dart SDK from Flutter engine ...\r\nExpanding downloaded archive...\r\nRemove-Item : Cannot remove item C:\\Users\\Carl\\Documents\\Programmering\\Program\\flutter\\bin\\cache\\dart-sdk-windows-x64.z\r\nip: Åtkomst till sökvägen C:\\Users\\Carl\\Documents\\Programmering\\Program\\flutter\\bin\\cache\\dart-sdk-windows-x64.zip neka\r\ns.\r\nAt C:\\Users\\Carl\\Documents\\Programmering\\Program\\flutter\\bin\\internal\\update_dart_sdk.ps1:94 char:1\r\n+ Remove-Item $dartSdkZip\r\n+ ~~~~~~~~~~~~~~~~~~~~~~~\r\n    + CategoryInfo          : PermissionDenied: (C:\\Users\\Carl\\D...windows-x64.zip:FileInfo) [Remove-Item], Unauthoriz\r\n   edAccessException\r\n    + FullyQualifiedErrorId : RemoveFileSystemItemUnAuthorizedAccess,Microsoft.PowerShell.Commands.RemoveItemCommand\r\nError: Unable to update Dart SDK. Retrying...\r\n\r\nWaiting for 1 seconds, press CTRL+C to quit ...\n\n### Expected fix\n\n_No response_\n\n### Additional context\n\nRunning with either command line or powershell, w/o admin rights. Same error', 'title': ""[PAGE ISSUE]: 'Windows install'"", 'type': 'issue'}
+ {'action': 'created', 'author': 'danagbemava-nc', 'comment_id': 1015371778.0, 'datetime': '2022-01-18 12:39:14+00:00', 'masked_author': 'username_1', 'text': 'Hi @username_0, at what point in the installation process did you run into this issue?', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'AIMMOTH', 'comment_id': 1019775956.0, 'datetime': '2022-01-24 06:57:20+00:00', 'masked_author': 'username_0', 'text': ""When I tried to change channel to master and also when I tried to change back to stable. Then I uninstalled everything, restarted, tried again to install but same error. Lowering UAC didn't matter either."", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'danagbemava-nc', 'comment_id': 1020071145.0, 'datetime': '2022-01-24 12:56:10+00:00', 'masked_author': 'username_1', 'text': 'Did you run `flutter upgrade` when you switched channels?', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'AIMMOTH', 'comment_id': 1024270099.0, 'datetime': '2022-01-28 14:21:16+00:00', 'masked_author': 'username_0', 'text': 'Hello, running Windows PowerShell \r\n`> flutter upgrade\r\nChecking Dart SDK version...\r\nDownloading Dart SDK from Flutter engine ...\r\nExpanding downloaded archive...\r\nRemove-Item : Cannot remove item C:\\Users\\...\\Documents\\Programmering\\Program\\flutter\\bin\\cache\\dart-sdk-windows-x64.zip: Åtkomst till sökvägen C:\\Users\\...\\Documents\\Programmering\\Program\\flutter\\bin\\cache\\dart-sdk-windows-x64.zip nekas.\r\nAt C:\\Users\\...\\Documents\\Programmering\\Program\\flutter\\bin\\internal\\update_dart_sdk.ps1:94 char:1\r\n+ Remove-Item $dartSdkZip\r\n+ ~~~~~~~~~~~~~~~~~~~~~~~\r\n    + CategoryInfo          : PermissionDenied: (C:\\Users\\...\\D...windows-x64.zip:FileInfo) [Remove-Item], UnauthorizedAccessException\r\n    + FullyQualifiedErrorId : RemoveFileSystemItemUnAuthorizedAccess,Microsoft.PowerShell.Commands.RemoveItemCommand\r\nError: Unable to update Dart SDK. Retrying...\r\n\r\nWaiting for 3 seconds, press CTRL+C to quit ...\r\nTerminate batch job (Y/N)? y`', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'AIMMOTH', 'comment_id': 1024271321.0, 'datetime': '2022-01-28 14:22:44+00:00', 'masked_author': 'username_0', 'text': '![bild](https://user-images.githubusercontent.com/5928807/151563170-0de41848-4cb9-4e5a-809e-eb280fd5f8e9.png)', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'danagbemava-nc', 'comment_id': 1025636836.0, 'datetime': '2022-01-31 11:23:19+00:00', 'masked_author': 'username_1', 'text': 'Hi @username_0, where is flutter installed on your system? Can you provide the path?', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'AIMMOTH', 'comment_id': 1034687566.0, 'datetime': '2022-02-10 09:27:48+00:00', 'masked_author': 'username_0', 'text': ""I've installed in my personal folder C:\\Users\\...\\Documents\\Programmering\\Program\\flutter"", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'danagbemava-nc', 'comment_id': 1034743837.0, 'datetime': '2022-02-10 10:23:01+00:00', 'masked_author': 'username_1', 'text': 'Hi @username_0, can you move it to a different directory, maybe `C:\\src\\`, and see if it makes any difference?', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'AIMMOTH', 'comment_id': 1045989036.0, 'datetime': '2022-02-19 10:45:59+00:00', 'masked_author': 'username_0', 'text': 'It seems to work.\r\n![bild](https://user-images.githubusercontent.com/5928807/154797634-92141084-d379-4a66-9ac2-4e013db991cb.png)\r\n\r\nBut I must say, the instructions was to install on your own user\r\n![bild](https://user-images.githubusercontent.com/5928807/154797610-d6226a0f-38cd-40f1-93ee-07f96865e313.png)', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'danagbemava-nc', 'comment_id': 1046894530.0, 'datetime': '2022-02-21 13:42:19+00:00', 'masked_author': 'username_1', 'text': ""Hi @username_0, it doesn't explicitly say that.  That directory is only used as an example. But I can see how it that may be misunderstood. We may need to improve the wording on that side."", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'micpap25', 'comment_id': 1084675073.0, 'datetime': '2022-03-31 14:38:34+00:00', 'masked_author': 'username_2', 'text': ""Hi @username_1, I'm planning to attempt to fix this issue; what is the root cause of the problem? That Flutter should not be installed to a user directory? Thank you"", 'title': None, 'type': 'comment'}]","<issue_start><issue_comment>Title: [PAGE ISSUE]: 'Windows install'
+username_0: Checking Dart SDK version...
+Downloading Dart SDK from Flutter engine ...
+Expanding downloaded archive...
+Remove-Item : Cannot remove item C:\Users\Carl\Documents\Programmering\Program\flutter\bin\cache\dart-sdk-windows-x64.z
+ip: Åtkomst till sökvägen C:\Users\Carl\Documents\Programmering\Program\flutter\bin\cache\dart-sdk-windows-x64.zip neka
+s.
+At C:\Users\Carl\Documents\Programmering\Program\flutter\bin\internal\update_dart_sdk.ps1:94 char:1
++ Remove-Item $dartSdkZip
++ ~~~~~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : PermissionDenied: (C:\Users\Carl\D...windows-x64.zip:FileInfo) [Remove-Item], Unauthoriz
+   edAccessException
+    + FullyQualifiedErrorId : RemoveFileSystemItemUnAuthorizedAccess,Microsoft.PowerShell.Commands.RemoveItemCommand
+Error: Unable to update Dart SDK. Retrying...
+
+Waiting for 1 seconds, press CTRL+C to quit ...
+
+### Expected fix
+
+_No response_
+
+### Additional context
+
+Running with either command line or powershell, w/o admin rights. Same error
+<issue_comment>username_1: Hi @username_0, at what point in the installation process did you run into this issue?
+<issue_comment>username_0: When I tried to change channel to master and also when I tried to change back to stable. Then I uninstalled everything, restarted, tried again to install but same error. Lowering UAC didn't matter either.
+<issue_comment>username_1: Did you run `flutter upgrade` when you switched channels?
+<issue_comment>username_0: Hello, running Windows PowerShell 
+`> flutter upgrade
+Checking Dart SDK version...
+Downloading Dart SDK from Flutter engine ...
+Expanding downloaded archive...
+Remove-Item : Cannot remove item C:\Users\...\Documents\Programmering\Program\flutter\bin\cache\dart-sdk-windows-x64.zip: Åtkomst till sökvägen C:\Users\...\Documents\Programmering\Program\flutter\bin\cache\dart-sdk-windows-x64.zip nekas.
+At C:\Users\...\Documents\Programmering\Program\flutter\bin\internal\update_dart_sdk.ps1:94 char:1
++ Remove-Item $dartSdkZip
++ ~~~~~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : PermissionDenied: (C:\Users\...\D...windows-x64.zip:FileInfo) [Remove-Item], UnauthorizedAccessException
+    + FullyQualifiedErrorId : RemoveFileSystemItemUnAuthorizedAccess,Microsoft.PowerShell.Commands.RemoveItemCommand
+Error: Unable to update Dart SDK. Retrying...
+
+Waiting for 3 seconds, press CTRL+C to quit ...
+Terminate batch job (Y/N)? y`
+<issue_comment>username_0: ![bild](https://user-images.githubusercontent.com/5928807/151563170-0de41848-4cb9-4e5a-809e-eb280fd5f8e9.png)
+<issue_comment>username_1: Hi @username_0, where is flutter installed on your system? Can you provide the path?
+<issue_comment>username_0: I've installed in my personal folder C:\Users\...\Documents\Programmering\Program\flutter
+<issue_comment>username_1: Hi @username_0, can you move it to a different directory, maybe `C:\src\`, and see if it makes any difference?
+<issue_comment>username_0: It seems to work.
+![bild](https://user-images.githubusercontent.com/5928807/154797634-92141084-d379-4a66-9ac2-4e013db991cb.png)
+
+But I must say, the instructions was to install on your own user
+![bild](https://user-images.githubusercontent.com/5928807/154797610-d6226a0f-38cd-40f1-93ee-07f96865e313.png)
+<issue_comment>username_1: Hi @username_0, it doesn't explicitly say that.  That directory is only used as an example. But I can see how it that may be misunderstood. We may need to improve the wording on that side.
+<issue_comment>username_2: Hi @username_1, I'm planning to attempt to fix this issue; what is the root cause of the problem? That Flutter should not be installed to a user directory? Thank you"
+facebook/docusaurus,493637666,1784,,"[{'action': 'opened', 'author': 'BurdenBear', 'comment_id': None, 'datetime': '2019-09-14 15:56:39+00:00', 'masked_author': 'username_0', 'text': ""## 🐛 Bug Report\r\n\r\n(A clear and concise description of what the bug is)\r\n\r\nreact-loadable module in docusaurus V2.0 failed in ie11 with exception:\r\nObject doesn't support property or method 'assign'\r\n\r\n![image](https://user-images.githubusercontent.com/5682650/64909933-4fea1680-d744-11e9-8211-8fbc2a11e22a.png)\r\n\r\n\r\n### Have you read the [Contributing Guidelines on issues](https://github.com/facebook/Docusaurus/blob/master/CONTRIBUTING.md#reporting-new-issues)?\r\n\r\nyes\r\n\r\n## To Reproduce\r\n\r\n1. create a project with docusauras\r\n2. start the project and visit the index page\r\n\r\n## Expected behavior\r\nthe index page is rendered properly\r\n![image](https://user-images.githubusercontent.com/5682650/64910121-11edf200-d746-11e9-912d-36f9c3d23481.png)\r\n\r\n\r\n## Actual Behavior\r\nthe index page was not rendered, and there is a exception report in debug console.\r\n\r\n![image](https://user-images.githubusercontent.com/5682650/64910192-3b0e8280-d746-11e9-8d1a-6a0d85fad79b.png)\r\n\r\n## Reproducible Demo\r\nonline demo:  https://www.10studio.tech\r\nwhich is power by docusaurus V2.0\r\n\r\n\r\n## Question\r\nThere are some package to provide ie compatibility such like `core-js`, but I don't know how to properly add it in docusaurus v2.0"", 'title': ""react-loadable module in v2.0, failed in ie11 with Object doesn't support property or method 'assign'"", 'type': 'issue'}
+ {'action': 'created', 'author': 'Tranced', 'comment_id': 533767924.0, 'datetime': '2019-09-21 04:56:33+00:00', 'masked_author': 'username_1', 'text': '@username_2 I was just wondering if I could take this on!', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'endiliey', 'comment_id': 533770902.0, 'datetime': '2019-09-21 05:54:14+00:00', 'masked_author': 'username_2', 'text': 'sure thing @username_1', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'andresmanelli', 'comment_id': 538337855.0, 'datetime': '2019-10-04 10:10:56+00:00', 'masked_author': 'username_3', 'text': '@username_1  @username_0 I added #1808 to try to resolve this, maybe you can take a look. Thanks!', 'title': None, 'type': 'comment'}
+ {'action': 'closed', 'author': 'endiliey', 'comment_id': None, 'datetime': '2019-10-21 04:09:18+00:00', 'masked_author': 'username_2', 'text': '', 'title': None, 'type': 'issue'}]","<issue_start><issue_comment>Title: react-loadable module in v2.0, failed in ie11 with Object doesn't support property or method 'assign'
+username_0: ## 🐛 Bug Report
+
+(A clear and concise description of what the bug is)
+
+react-loadable module in docusaurus V2.0 failed in ie11 with exception:
+Object doesn't support property or method 'assign'
+
+![image](https://user-images.githubusercontent.com/5682650/64909933-4fea1680-d744-11e9-8211-8fbc2a11e22a.png)
+
+
+### Have you read the [Contributing Guidelines on issues](https://github.com/facebook/Docusaurus/blob/master/CONTRIBUTING.md#reporting-new-issues)?
+
+yes
+
+## To Reproduce
+
+1. create a project with docusauras
+2. start the project and visit the index page
+
+## Expected behavior
+the index page is rendered properly
+![image](https://user-images.githubusercontent.com/5682650/64910121-11edf200-d746-11e9-912d-36f9c3d23481.png)
+
+
+## Actual Behavior
+the index page was not rendered, and there is a exception report in debug console.
+
+![image](https://user-images.githubusercontent.com/5682650/64910192-3b0e8280-d746-11e9-8d1a-6a0d85fad79b.png)
+
+## Reproducible Demo
+online demo:  https://www.10studio.tech
+which is power by docusaurus V2.0
+
+
+## Question
+There are some package to provide ie compatibility such like `core-js`, but I don't know how to properly add it in docusaurus v2.0
+<issue_comment>username_1: @username_2 I was just wondering if I could take this on!
+<issue_comment>username_2: sure thing @username_1
+<issue_comment>username_3: @username_1  @username_0 I added #1808 to try to resolve this, maybe you can take a look. Thanks!<issue_closed>"
+hexojs/site,291462660,643,"{'number': 643.0, 'repo': 'site', 'user_login': 'hexojs'}","[{'action': 'opened', 'author': 'huyingjie', 'comment_id': None, 'datetime': '2018-01-25T06:19:43Z', 'masked_author': 'username_0', 'text': '<!-- \r\n    Thank you for publishing your work on Hexo site!\r\n    \r\n    If you also would like to become a Hexojs org memeber, here is the opportunity. Simply transfer your repo into Hexojs org, and you will become hexojs member. You could still be the repo admin, but also gain access to hexojs other repoes. \r\n    \r\n    There are several benifits to do so:\r\n    1. Become Hexojs org member, and gain access to all hexojs repos.\r\n    2. Other Hexojs members could help to maintain issues and review PRs.\r\n    3. More wait you to discover... :)\r\n    \r\n    Please contact efpyi@example.com if interested this opputunity.\r\n-->', 'title': 'Add a new theme: A-RSnippet', 'type': 'issue'}
+ {'action': 'created', 'author': 'huyingjie', 'comment_id': 360373374.0, 'datetime': '2018-01-25 06:25:34+00:00', 'masked_author': 'username_0', 'text': 'I deleted the redundant hyphen.', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'JLHwung', 'comment_id': 360374584.0, 'datetime': '2018-01-25 06:33:23+00:00', 'masked_author': 'username_1', 'text': ""Thank you so much for your contribution. Hexo can't be rock without contributors like you."", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'huyingjie', 'comment_id': 360900081.0, 'datetime': '2018-01-26 20:47:41+00:00', 'masked_author': 'username_0', 'text': '@username_1 Thank you for your maintaining Hexo. I made the theme and took me several days. You spend much more time on this open project than me. Thank you for your effort, energy, time and dedication. Is this your opencollective page? https://opencollective.com/hexo\r\nThis is not shown on https://hexo.io/about/index.html', 'title': None, 'type': 'comment'}]","<issue_start><issue_comment>Title: Add a new theme: A-RSnippet
+username_0: <!-- 
+    Thank you for publishing your work on Hexo site!
+    
+    If you also would like to become a Hexojs org memeber, here is the opportunity. Simply transfer your repo into Hexojs org, and you will become hexojs member. You could still be the repo admin, but also gain access to hexojs other repoes. 
+    
+    There are several benifits to do so:
+    1. Become Hexojs org member, and gain access to all hexojs repos.
+    2. Other Hexojs members could help to maintain issues and review PRs.
+    3. More wait you to discover... :)
+    
+    Please contact hi@abnerchou.me if interested this opputunity.
+-->
+<issue_comment>username_0: I deleted the redundant hyphen.
+<issue_comment>username_1: Thank you so much for your contribution. Hexo can't be rock without contributors like you.
+<issue_comment>username_0: @username_1 Thank you for your maintaining Hexo. I made the theme and took me several days. You spend much more time on this open project than me. Thank you for your effort, energy, time and dedication. Is this your opencollective page? https://opencollective.com/hexo
+This is not shown on https://hexo.io/about/index.html"
+lektor/lektor-website,387494015,262,"{'number': 262.0, 'repo': 'lektor-website', 'user_login': 'lektor'}","[{'action': 'opened', 'author': 'RussellJQA', 'comment_id': None, 'datetime': '2018-12-04T21:46:57Z', 'masked_author': 'username_0', 'text': ""Hi! I added my https://username_0.site/ Website to the lektor showcase. There's no link to my lektor source code since it's not currently open-source.\r\n\r\n I really appreciate the power and flexibility of lektor.\r\n \r\n Thanks.\r\n\r\n- Russell Johnson"", 'title': 'Add https://RussellJQA.site/ Website to the lektor showcase', 'type': 'issue'}
+ {'action': 'created', 'author': 'RussellJQA', 'comment_id': 464784826.0, 'datetime': '2019-02-18 15:51:14+00:00', 'masked_author': 'username_0', 'text': ""I realized that my Website's not ready to be included in the lektor showcase."", 'title': None, 'type': 'comment'}]","<issue_start><issue_comment>Title: Add https://RussellJQA.site/ Website to the lektor showcase
+username_0: Hi! I added my https://username_0.site/ Website to the lektor showcase. There's no link to my lektor source code since it's not currently open-source.
+
+ I really appreciate the power and flexibility of lektor.
+ 
+ Thanks.
+
+- Russell Johnson
+<issue_comment>username_0: I realized that my Website's not ready to be included in the lektor showcase."
+microsoft/TypeScript-Website,520492691,120,,"[{'action': 'opened', 'author': 'orta', 'comment_id': None, 'datetime': '2019-11-09 18:09:56+00:00', 'masked_author': 'username_0', 'text': ""## Things I want for all code blocks inside website v2:\r\n\r\n- Accurate Syntax Highlighting for complex TS\r\n- Hover support for symbols\r\n- Inline reporting of errors\r\n- The ability to tell a code block to switch from TS code to _any_ arbitrary part of the tsc emit\r\n  - a JS file \r\n  - a d.ts file\r\n  - a source map\r\n- The ability to create a working imports inside a codeblock (TS/JS/DTS)\r\n- The ability to highlight lines, a line, or a range inside the line\r\n\r\n#### Sidegoal: \r\n\r\nMake this not directly tied to the website so that anyone with a Gatsby blog can re-use this for their own docs.\r\n\r\n#### Places with existing infra this can build from:\r\n\r\n- [`username_0/lsif-tsc-remark-example`](https://github.com/username_0/lsif-tsc-remark-example) - an example of using the LSIF format (static language server protocol) to extract metadata. Overall, I think it's too much to go through the entire tsc-lsif, we could probably just steal the syntax for hover tokens and diagnostics and call it enough maybe.\r\n\r\n- [`microsoft/TypeScript-New-Handbook`](https://github.com/microsoft/TypeScript-New-Handbook/blob/master/scripts/sample-compiler.ts) the handbook has a good set of existing examples for this, these could be re-formatted into Gatsby/remark plugins.\r\n\r\n- [`username_3/gatsby-remark-vscode`](https://github.com/username_3/gatsby-remark-vscode) re-using VSCode at build time to handle the syntax highlighting. \r\n\r\n- [`username_3/blog`](https://github.com/username_3/blog/tree/master/src/utils/typescript) - uses the typescript API to inline annotate embedded TypeScript ( [long form on how it works](https://blog.andrewbran.ch/overengineering-a-blog/) )\r\n\r\n/cc @username_3 @username_4"", 'title': 'TypeScript-powered Code Blocks', 'type': 'issue'}
+ {'action': 'created', 'author': 'orta', 'comment_id': 552124295.0, 'datetime': '2019-11-09 18:17:46+00:00', 'masked_author': 'username_0', 'text': 'Bikeshed: There are a bunch of ways in which embedded the complier metadata\r\n\r\n@username_3\'s JSON after language\r\n\r\n```\r\n\'\'\'ts { compiler: \'format\' }\r\nconst myThing = """"\r\n\'\'\'\r\n```\r\n\r\nand prefixed HTML comments (maybe with YML?)\r\n\r\n```\r\n<!--@\r\ntarget: ES5\r\ndownlevelIteration: true\r\nshowEmit: true\r\n-->\r\n\'\'\'ts \r\nconst str = ""Hello!"";\r\nfor (const s of str) {\r\n    console.log(s);\r\n}\r\n\'\'\'\r\n\'\'\'\r\n```\r\n\r\n@username_4\'s fourslash inspired inline comments:\r\n\r\n```\r\n\'\'\'\r\n// @target: ES5\r\n// @downlevelIteration\r\n// @showEmit\r\nconst str = ""Hello!"";\r\nfor (const s of str) {\r\n    console.log(s);\r\n}\r\n\'\'\'\r\n```\r\n\r\nMy re-use of Jekyll-style which embed yml at the top of a code block:\r\n\r\n```\r\n\'\'\'\r\n---\r\ntarget: ES5\r\ndownlevelIteration: true\r\nshowEmit: true\r\n---\r\n\r\nconst str = ""Hello!"";\r\nfor (const s of str) {\r\n    console.log(s);\r\n}\r\n\'\'\'\r\n```\r\n\r\nI feel somewhat tied between fourslash-y or yml front-matter personally.', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'orta', 'comment_id': 552124858.0, 'datetime': '2019-11-09 18:24:32+00:00', 'masked_author': 'username_0', 'text': ""One thing that Andrew's blog does is that it allows for typescript files to  to work across code samples, e.g. \r\n\r\n```\r\n\r\n<!--@\r\nname: shapes.ts\r\n-->\r\n'''ts\r\ninterface Polygon {\r\n  numberOfSides: number;\r\n  sideLengths: number[];\r\n}\r\n\r\nenum TriangleKind {\r\n  Accute = 'Accute',\r\n  Right = 'Right',\r\n  Obtuse = 'Obtuse'\r\n}\r\n\r\ninterface Triangle extends Polygon {\r\n  numberOfSides: 3;\r\n  triangleKind: TriangleKind;\r\n}\r\n\r\ninterface Quadrilateral extends Polygon {\r\n  numberOfSides: 4;\r\n  isRectangle: boolean;\r\n}\r\n'''\r\n\r\nWe have a base type `Polygon`, and two specializations that specify a number literal type for `numberOfSides`, along with some extra properties that are specific to polygons of their kind. This allows us to write a function that accepts either a `Triangle` or `Quadrilateral` and _discriminate_ between them based on the shape’s `numberOfSides`:\r\n\r\n<!--@\r\nname: shapes.ts\r\n-->\r\n'''ts\r\nfunction addShape(shape: Triangle | Quadrilateral) {\r\n  if (shape.numberOfSides === 3) {\r\n    // In here, the compiler knows that `shape` is a `Triangle`,\r\n    // so we can access triangle-specific properties.\r\n    // See for yourself: hover each occurance of “shape” and\r\n    // compare the typing info.\r\n    console.log(shape.triangleKind);\r\n  } else {\r\n    // In here, the compiler knows that `shape` is a `Quadrilateral`.\r\n    console.log(shape.isRectangle);\r\n  }\r\n}\r\n'''\r\n```\r\n\r\nWhere at build time `shape.ts` contains both the two code samples, this reduces example code duplication - but is it something this should support?"", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'robpalme', 'comment_id': 552127542.0, 'datetime': '2019-11-09 19:00:02+00:00', 'masked_author': 'username_1', 'text': 'In addition to passing compiler flags as comments, it would be great to also be able to control the tsc version.\r\n\r\nThis would help for tsc bug reporting and easing comms around tsc behaviour change over time.', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'felixfbecker', 'comment_id': 552134418.0, 'datetime': '2019-11-09 20:27:32+00:00', 'masked_author': 'username_2', 'text': 'Something that might help with getting the hover tooltip: We have tsserver exposed over WebSockets at wss://typescript.sourcegraph.com. It speaks the [Language Server Protocol](https://microsoft.github.io/language-server-protocol/), and can accept arbitrary `textDocument/didOpen` calls followed by `textDocument/hover` to get a Hover result. Without needing to clone a repo (but only sending over the snippet) I would expect this to be almost instant response.\r\n\r\nFor the UI part of this - the library that renders the hover tooltips on sourcegraph.com and in our browser extension is stand-alone and open source: https://github.com/sourcegraph/codeintellify (I always hoped one day it would be useful exactly for open source documentation snippets!)', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'orta', 'comment_id': 552962834.0, 'datetime': '2019-11-12 16:10:32+00:00', 'masked_author': 'username_0', 'text': ""What a great idea @username_2! if this were not for the TypeScript website primarily, I'd definitely be into that - we'll probably need a bunch of weird features like the above. ❤️"", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'andrewbranch', 'comment_id': 552984400.0, 'datetime': '2019-11-12 16:56:22+00:00', 'masked_author': 'username_3', 'text': 'A few random thoughts:\r\n\r\n- I think we should specify that we’re _not_ looking (at least I think we’re not looking) for _editable_ code blocks, which would required a lot of heavy things running in the browser (or as external services like @username_2) mentioned. Since these code blocks are intended to be static, all the analysis can be done at build time and written to JSON.\r\n- I’m not _super_ familiar with LSIF, but I was taking a look at examples in the specification, and it looks like hover responses come back as plain text. The TypeScript language service provides hover info as an array of classified text spans, which allows the hover tooltips to have accurate syntax highlighting in them. Is LSIF extensible/flexible enough to allow richer responses like that? I love the idea of using a standard format for this, but we would have to make sure it wouldn’t limit what we can display.\r\n- I would look at this is as a design question in three separate parts:\r\n  1. How do I consume input (raw code plus compiler options) and process it to get all the rich metadata I might want to display (syntax highlighting data, symbol info, diagnostic messages, highlight spans, etc.)?\r\n  2. How do I structure all that into a static format?\r\n  3. How do I render something rich and useful from that static format?\r\n\r\nFor (i), the answer is _mostly_ the compiler API, but there are other providers you’ll need to get data from too—syntax highlighting isn’t going to come from the compiler (I tried it once; it doesn’t give good results), and line or span highlighting is going to be some kind of separate annotation. So for (ii), even if you want to use LSIF for part of this, you’ll probably need to embed the LSIF data within a top-level data structure that also holds syntax highlighting and other auxiliary data. Then (iii) is just a fun UI-building problem.\r\n\r\nI should also mention that gatsby-remark-vscode is (appropriately) only designed to work within the Gatsby stack, and currently it only outputs HTML, essentially robbing you of the opportunity to do steps (ii) and (iii) yourself. I’m in the process of allowing users to query GraphQL for its tokenization results, which would let you compose its info with other data sources (ii) and render it all however you want (iii). But, if you’d rather work with something lower level or not gatsby-specific, but higher level than vscode-textmate, you could try [shiki](https://github.com/octref/shiki).', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'RyanCavanaugh', 'comment_id': 553004161.0, 'datetime': '2019-11-12 17:36:54+00:00', 'masked_author': 'username_4', 'text': 'Something I\'d also like is for a bot to show up on GitHub issues and show the typechecking/emit results of any code blocks in the OP, along with a short version history (e.g. ""This behavior is unchanged since version 3.1"")', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'felixfbecker', 'comment_id': 553010479.0, 'datetime': '2019-11-12 17:50:20+00:00', 'masked_author': 'username_2', 'text': '@username_0 do you mean specifying the compiler options? I think that can work like this:\r\n- have the website JS read those options and construct a tsconfig.json JSON string\r\n- call `textDocument/didOpen` with `file:///tsconfig.json` passing the content\r\n- call `textDocument/didOpen` with `file:///snippet.ts` with the content of the snippet\r\n- call `textDocument/hover` on hovers with the position to get a hover on\r\n\r\nBut if you can/want to precompute this data, that makes sense, and there would be no need to involve language servers then. `codeintellify` could still be of help here hopefully - it can handle the mouseover events and render the hover from a (statically embedded) LSP Hover result (you can completely control the rendering and styling if you want).\r\n\r\n@username_3 since I\'ve used LSIF and LSP a lot, maybe I can answer some of the questions: LSIF is probably a good bet (and is just JSON). Both LSIF and LSP use the `Hover` type, which usually contains a markdown string. That markdown string (and any code snippets inside) can then be rendered by any client markdown renderer and syntax highlighter, e.g. `marked` and `highlight.js` is what we use. That usually is good enough, as highlight.js is good at still handling these kind of ""incomplete"" code excerpts common in markdown.\r\n\r\nI\'m happy to answer any other questions or share my knowledge here if it\'s helpful - I think having hover tooltips in docs would be an amazing way to show how what makes  TypeScript great!', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'orta', 'comment_id': 553229200.0, 'datetime': '2019-11-13 04:04:21+00:00', 'masked_author': 'username_0', 'text': ""@username_2 - yeah, I want to pre-compute everything on the site, and it's not definitely not outside the realm of possibility that we'll want to run this sort of code against betas and PR builds also (like we do for the playground) - so having it all live in the build process is pretty much a must for me\r\n\r\n@username_4  @username_3  Yeah - thanks you , I think this can be split into a multi-step process then: \r\n\r\n- a library which takes a dumb fourslash-y string and returns the tsc emit, diagnostics and highlight metadata. This can be used both on the site, and in GitHub actions or bots etc. Then can be bootstrapped by [the new handbook](https://github.com/microsoft/TypeScript-New-Handbook/tree/master/scripts) but with docs & tests etc.\r\n\r\n- a remark plugin that runs the library above when it finds`'''ts` which would be JS (or ts, or whatever) \r\n\r\n- a separate remark plugin that takes TS/JS code and pulls out the spans in a way that we can then statically generate hover metadata for in some format\r\n\r\n- the syntax highlighting plugin which should probably be last in the list of remarks and be responsible for generating the HTML\r\n\r\n- the site can provide an example on how to make a JS front-end for showing the hover info\r\n\r\nEach of these move it forwards"", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'orta', 'comment_id': 559175403.0, 'datetime': '2019-11-27 17:08:18+00:00', 'masked_author': 'username_0', 'text': ""There's been quite a lot of progress on this:\r\n\r\n- [ts-twoslasher](https://github.com/microsoft/TypeScript-Website/tree/v2/packages/ts-twoslasher#typescript-twoslasher) is a lib which does the transformation and markup\r\n- [gatsby-remark-twoslasher-code-blocks](https://github.com/microsoft/TypeScript-Website/tree/v2/packages/gatsby-remark-twoslasher-code-blocks) fits in the markdown pipeline for gatsby and runs the code through \r\n- [gatsby-remark-shiki](https://github.com/microsoft/TypeScript-Website/tree/v2/packages/gatsby-remark-shiki) takes any codeblock and runs it through Shiki for syntax highlighting, but is also twoslash aware for things like highlights / errors etc\r\n\r\n[Example](https://typescript-v2-121.username_0m.now.sh/tsconfig#noImplicitThis)\r\n\r\n![Screen Shot 2019-11-27 at 12 07 55 PM](https://user-images.githubusercontent.com/49038/69744641-8f52bd00-110e-11ea-86bd-c0dd787caeac.png)"", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'orta', 'comment_id': 614839156.0, 'datetime': '2020-04-16 19:03:02+00:00', 'masked_author': 'username_0', 'text': 'This is for all intents and purposes, done', 'title': None, 'type': 'comment'}
+ {'action': 'closed', 'author': 'orta', 'comment_id': None, 'datetime': '2020-04-16 19:03:02+00:00', 'masked_author': 'username_0', 'text': '', 'title': None, 'type': 'issue'}]","<issue_start><issue_comment>Title: TypeScript-powered Code Blocks
+username_0: ## Things I want for all code blocks inside website v2:
+
+- Accurate Syntax Highlighting for complex TS
+- Hover support for symbols
+- Inline reporting of errors
+- The ability to tell a code block to switch from TS code to _any_ arbitrary part of the tsc emit
+  - a JS file 
+  - a d.ts file
+  - a source map
+- The ability to create a working imports inside a codeblock (TS/JS/DTS)
+- The ability to highlight lines, a line, or a range inside the line
+
+#### Sidegoal: 
+
+Make this not directly tied to the website so that anyone with a Gatsby blog can re-use this for their own docs.
+
+#### Places with existing infra this can build from:
+
+- [`username_0/lsif-tsc-remark-example`](https://github.com/username_0/lsif-tsc-remark-example) - an example of using the LSIF format (static language server protocol) to extract metadata. Overall, I think it's too much to go through the entire tsc-lsif, we could probably just steal the syntax for hover tokens and diagnostics and call it enough maybe.
+
+- [`microsoft/TypeScript-New-Handbook`](https://github.com/microsoft/TypeScript-New-Handbook/blob/master/scripts/sample-compiler.ts) the handbook has a good set of existing examples for this, these could be re-formatted into Gatsby/remark plugins.
+
+- [`username_3/gatsby-remark-vscode`](https://github.com/username_3/gatsby-remark-vscode) re-using VSCode at build time to handle the syntax highlighting. 
+
+- [`username_3/blog`](https://github.com/username_3/blog/tree/master/src/utils/typescript) - uses the typescript API to inline annotate embedded TypeScript ( [long form on how it works](https://blog.andrewbran.ch/overengineering-a-blog/) )
+
+/cc @username_3 @username_4
+<issue_comment>username_0: Bikeshed: There are a bunch of ways in which embedded the complier metadata
+
+@username_3's JSON after language
+
+```
+'''ts { compiler: 'format' }
+const myThing = """"
+'''
+```
+
+and prefixed HTML comments (maybe with YML?)
+
+```
+<!--@
+target: ES5
+downlevelIteration: true
+showEmit: true
+-->
+'''ts 
+const str = ""Hello!"";
+for (const s of str) {
+    console.log(s);
+}
+'''
+'''
+```
+
+@username_4's fourslash inspired inline comments:
+
+```
+'''
+// @target: ES5
+// @downlevelIteration
+// @showEmit
+const str = ""Hello!"";
+for (const s of str) {
+    console.log(s);
+}
+'''
+```
+
+My re-use of Jekyll-style which embed yml at the top of a code block:
+
+```
+'''
+---
+target: ES5
+downlevelIteration: true
+showEmit: true
+---
+
+const str = ""Hello!"";
+for (const s of str) {
+    console.log(s);
+}
+'''
+```
+
+I feel somewhat tied between fourslash-y or yml front-matter personally.
+<issue_comment>username_0: One thing that Andrew's blog does is that it allows for typescript files to  to work across code samples, e.g. 
+
+```
+
+<!--@
+name: shapes.ts
+-->
+'''ts
+interface Polygon {
+  numberOfSides: number;
+  sideLengths: number[];
+}
+
+enum TriangleKind {
+  Accute = 'Accute',
+  Right = 'Right',
+  Obtuse = 'Obtuse'
+}
+
+interface Triangle extends Polygon {
+  numberOfSides: 3;
+  triangleKind: TriangleKind;
+}
+
+interface Quadrilateral extends Polygon {
+  numberOfSides: 4;
+  isRectangle: boolean;
+}
+'''
+
+We have a base type `Polygon`, and two specializations that specify a number literal type for `numberOfSides`, along with some extra properties that are specific to polygons of their kind. This allows us to write a function that accepts either a `Triangle` or `Quadrilateral` and _discriminate_ between them based on the shape’s `numberOfSides`:
+
+<!--@
+name: shapes.ts
+-->
+'''ts
+function addShape(shape: Triangle | Quadrilateral) {
+  if (shape.numberOfSides === 3) {
+    // In here, the compiler knows that `shape` is a `Triangle`,
+    // so we can access triangle-specific properties.
+    // See for yourself: hover each occurance of “shape” and
+    // compare the typing info.
+    console.log(shape.triangleKind);
+  } else {
+    // In here, the compiler knows that `shape` is a `Quadrilateral`.
+    console.log(shape.isRectangle);
+  }
+}
+'''
+```
+
+Where at build time `shape.ts` contains both the two code samples, this reduces example code duplication - but is it something this should support?
+<issue_comment>username_1: In addition to passing compiler flags as comments, it would be great to also be able to control the tsc version.
+
+This would help for tsc bug reporting and easing comms around tsc behaviour change over time.
+<issue_comment>username_2: Something that might help with getting the hover tooltip: We have tsserver exposed over WebSockets at wss://typescript.sourcegraph.com. It speaks the [Language Server Protocol](https://microsoft.github.io/language-server-protocol/), and can accept arbitrary `textDocument/didOpen` calls followed by `textDocument/hover` to get a Hover result. Without needing to clone a repo (but only sending over the snippet) I would expect this to be almost instant response.
+
+For the UI part of this - the library that renders the hover tooltips on sourcegraph.com and in our browser extension is stand-alone and open source: https://github.com/sourcegraph/codeintellify (I always hoped one day it would be useful exactly for open source documentation snippets!)
+<issue_comment>username_0: What a great idea @username_2! if this were not for the TypeScript website primarily, I'd definitely be into that - we'll probably need a bunch of weird features like the above. ❤️
+<issue_comment>username_3: A few random thoughts:
+
+- I think we should specify that we’re _not_ looking (at least I think we’re not looking) for _editable_ code blocks, which would required a lot of heavy things running in the browser (or as external services like @username_2) mentioned. Since these code blocks are intended to be static, all the analysis can be done at build time and written to JSON.
+- I’m not _super_ familiar with LSIF, but I was taking a look at examples in the specification, and it looks like hover responses come back as plain text. The TypeScript language service provides hover info as an array of classified text spans, which allows the hover tooltips to have accurate syntax highlighting in them. Is LSIF extensible/flexible enough to allow richer responses like that? I love the idea of using a standard format for this, but we would have to make sure it wouldn’t limit what we can display.
+- I would look at this is as a design question in three separate parts:
+  1. How do I consume input (raw code plus compiler options) and process it to get all the rich metadata I might want to display (syntax highlighting data, symbol info, diagnostic messages, highlight spans, etc.)?
+  2. How do I structure all that into a static format?
+  3. How do I render something rich and useful from that static format?
+
+For (i), the answer is _mostly_ the compiler API, but there are other providers you’ll need to get data from too—syntax highlighting isn’t going to come from the compiler (I tried it once; it doesn’t give good results), and line or span highlighting is going to be some kind of separate annotation. So for (ii), even if you want to use LSIF for part of this, you’ll probably need to embed the LSIF data within a top-level data structure that also holds syntax highlighting and other auxiliary data. Then (iii) is just a fun UI-building problem.
+
+I should also mention that gatsby-remark-vscode is (appropriately) only designed to work within the Gatsby stack, and currently it only outputs HTML, essentially robbing you of the opportunity to do steps (ii) and (iii) yourself. I’m in the process of allowing users to query GraphQL for its tokenization results, which would let you compose its info with other data sources (ii) and render it all however you want (iii). But, if you’d rather work with something lower level or not gatsby-specific, but higher level than vscode-textmate, you could try [shiki](https://github.com/octref/shiki).
+<issue_comment>username_4: Something I'd also like is for a bot to show up on GitHub issues and show the typechecking/emit results of any code blocks in the OP, along with a short version history (e.g. ""This behavior is unchanged since version 3.1"")
+<issue_comment>username_2: @username_0 do you mean specifying the compiler options? I think that can work like this:
+- have the website JS read those options and construct a tsconfig.json JSON string
+- call `textDocument/didOpen` with `file:///tsconfig.json` passing the content
+- call `textDocument/didOpen` with `file:///snippet.ts` with the content of the snippet
+- call `textDocument/hover` on hovers with the position to get a hover on
+
+But if you can/want to precompute this data, that makes sense, and there would be no need to involve language servers then. `codeintellify` could still be of help here hopefully - it can handle the mouseover events and render the hover from a (statically embedded) LSP Hover result (you can completely control the rendering and styling if you want).
+
+@username_3 since I've used LSIF and LSP a lot, maybe I can answer some of the questions: LSIF is probably a good bet (and is just JSON). Both LSIF and LSP use the `Hover` type, which usually contains a markdown string. That markdown string (and any code snippets inside) can then be rendered by any client markdown renderer and syntax highlighter, e.g. `marked` and `highlight.js` is what we use. That usually is good enough, as highlight.js is good at still handling these kind of ""incomplete"" code excerpts common in markdown.
+
+I'm happy to answer any other questions or share my knowledge here if it's helpful - I think having hover tooltips in docs would be an amazing way to show how what makes  TypeScript great!
+<issue_comment>username_0: @username_2 - yeah, I want to pre-compute everything on the site, and it's not definitely not outside the realm of possibility that we'll want to run this sort of code against betas and PR builds also (like we do for the playground) - so having it all live in the build process is pretty much a must for me
+
+@username_4  @username_3  Yeah - thanks you , I think this can be split into a multi-step process then: 
+
+- a library which takes a dumb fourslash-y string and returns the tsc emit, diagnostics and highlight metadata. This can be used both on the site, and in GitHub actions or bots etc. Then can be bootstrapped by [the new handbook](https://github.com/microsoft/TypeScript-New-Handbook/tree/master/scripts) but with docs & tests etc.
+
+- a remark plugin that runs the library above when it finds`'''ts` which would be JS (or ts, or whatever) 
+
+- a separate remark plugin that takes TS/JS code and pulls out the spans in a way that we can then statically generate hover metadata for in some format
+
+- the syntax highlighting plugin which should probably be last in the list of remarks and be responsible for generating the HTML
+
+- the site can provide an example on how to make a JS front-end for showing the hover info
+
+Each of these move it forwards
+<issue_comment>username_0: There's been quite a lot of progress on this:
+
+- [ts-twoslasher](https://github.com/microsoft/TypeScript-Website/tree/v2/packages/ts-twoslasher#typescript-twoslasher) is a lib which does the transformation and markup
+- [gatsby-remark-twoslasher-code-blocks](https://github.com/microsoft/TypeScript-Website/tree/v2/packages/gatsby-remark-twoslasher-code-blocks) fits in the markdown pipeline for gatsby and runs the code through 
+- [gatsby-remark-shiki](https://github.com/microsoft/TypeScript-Website/tree/v2/packages/gatsby-remark-shiki) takes any codeblock and runs it through Shiki for syntax highlighting, but is also twoslash aware for things like highlights / errors etc
+
+[Example](https://typescript-v2-121.username_0m.now.sh/tsconfig#noImplicitThis)
+
+![Screen Shot 2019-11-27 at 12 07 55 PM](https://user-images.githubusercontent.com/49038/69744641-8f52bd00-110e-11ea-86bd-c0dd787caeac.png)
+<issue_comment>username_0: This is for all intents and purposes, done<issue_closed>"
+bevyengine/bevy-website,1098520008,263,"{'number': 263.0, 'repo': 'bevy-website', 'user_login': 'bevyengine'}","[{'action': 'opened', 'author': 'idanarye', 'comment_id': None, 'datetime': '2022-01-11T00:22:00Z', 'masked_author': 'username_0', 'text': 'The newspost said it was super-exponential, but simple analysis shows that it should only be exponential.\r\n\r\nThe number of combinations is exponential at the size of the combination, so unless visiting each combination is super-exponential - the overall complexity should also be exponential. The bulk logic of visiting each combination is done in [`QueryCombinationIter::fetch_next_aliased_unchecked`](https://github.com/bevyengine/bevy/blob/v0.6.0/crates/bevy_ecs/src/query/iter.rs#L227), which seems polynomial. Not even exponential - definitely not super-exponential.', 'title': 'Fix complexity description for iter_combinations', 'type': 'issue'}
+ {'action': 'created', 'author': 'alice-i-cecile', 'comment_id': 1009484392.0, 'datetime': '2022-01-11 00:32:13+00:00', 'masked_author': 'username_1', 'text': 'Thanks for the analysis and the fix <3', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'alice-i-cecile', 'comment_id': 1009489783.0, 'datetime': '2022-01-11 00:43:04+00:00', 'masked_author': 'username_1', 'text': 'See: https://stackoverflow.com/questions/39558086/how-to-prove-binomial-coefficient-is-asymptotic-big-theta-of-two-to-the-power-n', 'title': None, 'type': 'comment'}]","<issue_start><issue_comment>Title: Fix complexity description for iter_combinations
+username_0: The newspost said it was super-exponential, but simple analysis shows that it should only be exponential.
+
+The number of combinations is exponential at the size of the combination, so unless visiting each combination is super-exponential - the overall complexity should also be exponential. The bulk logic of visiting each combination is done in [`QueryCombinationIter::fetch_next_aliased_unchecked`](https://github.com/bevyengine/bevy/blob/v0.6.0/crates/bevy_ecs/src/query/iter.rs#L227), which seems polynomial. Not even exponential - definitely not super-exponential.
+<issue_comment>username_1: Thanks for the analysis and the fix <3
+<issue_comment>username_1: See: https://stackoverflow.com/questions/39558086/how-to-prove-binomial-coefficient-is-asymptotic-big-theta-of-two-to-the-power-n"

@@ -1,0 +1,739 @@
+gohugoio/hugo,41703383,465,,"[{'action': 'opened', 'author': 'rahul286', 'comment_id': None, 'datetime': '2014-09-02T12:25:06Z', 'masked_author': 'username_0', 'text': '@spf13 Sorry in advance if you find this too long or absurd (or both). \n\nThis requests is based heavily on personal needs. I am struggling with this problem from long time. So I decided today to post this down in as much details as possible.\n\nI came across few threads in same direction suggesting to make use of front-matters. I will explain why I think front-matters is not an optimal choice here. \n### Problem\n\nI have created a sample site to explain this problem - https://github.com/username_0/hugo-sample\n\nContent looks like:\n\n```\n$ tree content\ncontent\n├── level-one\n│\xa0\xa0 ├── level-two\n│\xa0\xa0 │\xa0\xa0 ├── level-three\n│\xa0\xa0 │\xa0\xa0 │\xa0\xa0 ├── level-four\n│\xa0\xa0 │\xa0\xa0 │\xa0\xa0 │\xa0\xa0 ├── page-4-a.md\n│\xa0\xa0 │\xa0\xa0 │\xa0\xa0 │\xa0\xa0 ├── page-4-b.md\n│\xa0\xa0 │\xa0\xa0 │\xa0\xa0 │\xa0\xa0 └── page-4-c.md\n│\xa0\xa0 │\xa0\xa0 │\xa0\xa0 ├── page-3-a.md\n│\xa0\xa0 │\xa0\xa0 │\xa0\xa0 ├── page-3-b.md\n│\xa0\xa0 │\xa0\xa0 │\xa0\xa0 └── page-3-c.md\n│\xa0\xa0 │\xa0\xa0 ├── page-2-a.md\n│\xa0\xa0 │\xa0\xa0 ├── page-2-b.md\n│\xa0\xa0 │\xa0\xa0 └── page-2-c.md\n│\xa0\xa0 ├── page-1-a.md\n│\xa0\xa0 ├── page-1-b.md\n│\xa0\xa0 └── page-1-c.md\n└── page-top.md\n\n4 directories, 13 files\n```\n\nAs you can see there many levels at which directories and content are present.\n### Expected Output\n\nWhat I am trying to have is...\n\nFor any folder, list down pages at immediate levels only OR at all levels. \n\nIf listing at all-levels, nested lists should be created. Something like list of pages shows on - http://rtcamp.com/tutorials/\n\nAs you can see for sample-site -  http://username_0.com/hugo-sample/level-one/ shows all pages but without any hierarchy.\n\nAt sub-levels nothing shows up: (bigger problem)\n1. http://username_0.com/hugo-sample/level-one/level-two/\n2. http://username_0.com/hugo-sample/level-one/level-two/level-three/\n3. http://username_0.com/hugo-sample/level-one/level-two/level-three/level-four/\n\nBut direct link to inner-page still works - http://username_0.com/hugo-sample/level-one/level-two/level-three/level-four/page-4-b/\n\nThis means directory structure is preserved. Just nested directories do not have an automatically generated index page. \n\nHugo did generate index page for top-level folder automatically as it appears - http://username_0.com/hugo-sample/level-one/ (source - https://github.com/username_0/hugo-sample/blob/gh-pages/level-one/index.html )\n### Workaround/Ideas\n\nI think hugo has few things already in-place which generated level-one index page. \n\nFew changes/enhancements will be needed so hugo can be used on sites with multi-level pages.\n- [ ] Extend index generation logic to any directory. May be `_default/list.html` template can be applied to sub-directories. \n- [ ] Provide some filter and meta-data so we can control listing itself.\n\nI think first task will be easier _(sorry if I am underestimating this, as I\'m new to golang)_ \n\nSecond task can get tricky as different sites may wish to control list pages html differently.\n1. List all pages, subpages and subdir. Like linux `tree` command at that page-level. Live example, this section on one of our site: https://rtcamp.com/tutorials/ and https://rtcamp.com/tutorials/ , https://rtcamp.com/tutorials/mail/ , https://rtcamp.com/tutorials/mail/server/ and https://rtcamp.com/tutorials/mail/server/testing/ - at each level we are only showing subtree\n2. List all pages if there are no subdirectories present. May be some sites wish to show list of ""immediate pages"" and  sub-directories only. Reason could be - there may be 1000+ pages and if we show entire tree at top-most level, it may makes top-page cluttered.\n3. In both cases above, there could be things like listing pages and sub-directories separately. Using `ul/li` v/s `ol/li` v/s something else in output html. \n\nAt code-level, hugo may extend...\n#### `.Data.Pages` Variable\n\n`{{ range .Data.Pages }}` may have few variants like:\n\n`{{ range .Data.Pages.SubPages }}` - for immediate subpages (`.Data.Pages` already have all subpages i.e. entire tree)\n\n`{{ range .Data.Pages.SubDirs }}` - for immediate subdirectories \n\n[Truncated]\n\nWe may introduce some additional [node variables](http://hugo.spf13.com/templates/variables/).\n\nFor example:\n\n `.SubPagesCount` - Number of subpages this \n `.NumLevels` - Number of subdir levels \n `.HasSubDirs` - true if current node has subdirs\n### Why I am not using fornt-matters?\n\nFinally, let me add my own explanation for not using front-matters for this.\n\nAs site grows, new levels gets added for better organization. It may be needed to move pages in bulk from one-section to another-section at no-fixed-level. So if we make use of front-matters and menus, we may need to manually update each page during such moves.\n\nWhile I like power of front-matters, I prefer to avoid it whenever possible. If tree-like structure can be achieved by conventional file-system hierarchy, it may reduce clutter in actual content. Also, for a contributor it will be easy to find write article on local filesystem.\n### Finally\n\nThanks for reading. :-)\n\nPlease correct/improve this wherever possible.', 'title': 'Multi-level sections (tree)', 'type': 'issue'}
+ {'action': 'created', 'author': 'gbmhunter', 'comment_id': 476906202.0, 'datetime': '2019-03-27 00:13:41+00:00', 'masked_author': 'username_1', 'text': ""For what it's worth, I added this functionality on my blog also. You can see the hierarchal menu structure at https://blog.mbedded.ninja/ in black on the left-hand side. The code which generated the menu is based on the directory/file structure of the content and can be found in the file https://github.com/username_1/blog/blob/master/layouts/partials/menu.html (also check out `menu_recursive.html`, which this calls)."", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'NightMachinary', 'comment_id': 841871705.0, 'datetime': '2021-05-16 20:17:13+00:00', 'masked_author': 'username_2', 'text': ""How's the state of multi-level sections in 2021?"", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'pedromorgan', 'comment_id': 841899396.0, 'datetime': '2021-05-17 00:03:16+00:00', 'masked_author': 'username_3', 'text': '`mkdocs` is easier.. Stuff the speed.. i want its to be less painful et all..\r\n\r\nHugo was good at the start.. hit a sweet spot, but now is a different beast', 'title': None, 'type': 'comment'}]","<issue_start><issue_comment>Title: Multi-level sections (tree)
+username_0: @spf13 Sorry in advance if you find this too long or absurd (or both). 
+
+This requests is based heavily on personal needs. I am struggling with this problem from long time. So I decided today to post this down in as much details as possible.
+
+I came across few threads in same direction suggesting to make use of front-matters. I will explain why I think front-matters is not an optimal choice here. 
+### Problem
+
+I have created a sample site to explain this problem - https://github.com/username_0/hugo-sample
+
+Content looks like:
+
+```
+$ tree content
+content
+├── level-one
+│   ├── level-two
+│   │   ├── level-three
+│   │   │   ├── level-four
+│   │   │   │   ├── page-4-a.md
+│   │   │   │   ├── page-4-b.md
+│   │   │   │   └── page-4-c.md
+│   │   │   ├── page-3-a.md
+│   │   │   ├── page-3-b.md
+│   │   │   └── page-3-c.md
+│   │   ├── page-2-a.md
+│   │   ├── page-2-b.md
+│   │   └── page-2-c.md
+│   ├── page-1-a.md
+│   ├── page-1-b.md
+│   └── page-1-c.md
+└── page-top.md
+
+4 directories, 13 files
+```
+
+As you can see there many levels at which directories and content are present.
+### Expected Output
+
+What I am trying to have is...
+
+For any folder, list down pages at immediate levels only OR at all levels. 
+
+If listing at all-levels, nested lists should be created. Something like list of pages shows on - http://rtcamp.com/tutorials/
+
+As you can see for sample-site -  http://username_0.com/hugo-sample/level-one/ shows all pages but without any hierarchy.
+
+At sub-levels nothing shows up: (bigger problem)
+1. http://username_0.com/hugo-sample/level-one/level-two/
+2. http://username_0.com/hugo-sample/level-one/level-two/level-three/
+3. http://username_0.com/hugo-sample/level-one/level-two/level-three/level-four/
+
+But direct link to inner-page still works - http://username_0.com/hugo-sample/level-one/level-two/level-three/level-four/page-4-b/
+
+This means directory structure is preserved. Just nested directories do not have an automatically generated index page. 
+
+Hugo did generate index page for top-level folder automatically as it appears - http://username_0.com/hugo-sample/level-one/ (source - https://github.com/username_0/hugo-sample/blob/gh-pages/level-one/index.html )
+### Workaround/Ideas
+
+I think hugo has few things already in-place which generated level-one index page. 
+
+Few changes/enhancements will be needed so hugo can be used on sites with multi-level pages.
+- [ ] Extend index generation logic to any directory. May be `_default/list.html` template can be applied to sub-directories. 
+- [ ] Provide some filter and meta-data so we can control listing itself.
+
+I think first task will be easier _(sorry if I am underestimating this, as I'm new to golang)_ 
+
+Second task can get tricky as different sites may wish to control list pages html differently.
+1. List all pages, subpages and subdir. Like linux `tree` command at that page-level. Live example, this section on one of our site: https://rtcamp.com/tutorials/ and https://rtcamp.com/tutorials/ , https://rtcamp.com/tutorials/mail/ , https://rtcamp.com/tutorials/mail/server/ and https://rtcamp.com/tutorials/mail/server/testing/ - at each level we are only showing subtree
+2. List all pages if there are no subdirectories present. May be some sites wish to show list of ""immediate pages"" and  sub-directories only. Reason could be - there may be 1000+ pages and if we show entire tree at top-most level, it may makes top-page cluttered.
+3. In both cases above, there could be things like listing pages and sub-directories separately. Using `ul/li` v/s `ol/li` v/s something else in output html. 
+
+At code-level, hugo may extend...
+#### `.Data.Pages` Variable
+
+`{{ range .Data.Pages }}` may have few variants like:
+
+`{{ range .Data.Pages.SubPages }}` - for immediate subpages (`.Data.Pages` already have all subpages i.e. entire tree)
+
+`{{ range .Data.Pages.SubDirs }}` - for immediate subdirectories 
+
+[Truncated]
+
+We may introduce some additional [node variables](http://hugo.spf13.com/templates/variables/).
+
+For example:
+
+ `.SubPagesCount` - Number of subpages this 
+ `.NumLevels` - Number of subdir levels 
+ `.HasSubDirs` - true if current node has subdirs
+### Why I am not using fornt-matters?
+
+Finally, let me add my own explanation for not using front-matters for this.
+
+As site grows, new levels gets added for better organization. It may be needed to move pages in bulk from one-section to another-section at no-fixed-level. So if we make use of front-matters and menus, we may need to manually update each page during such moves.
+
+While I like power of front-matters, I prefer to avoid it whenever possible. If tree-like structure can be achieved by conventional file-system hierarchy, it may reduce clutter in actual content. Also, for a contributor it will be easy to find write article on local filesystem.
+### Finally
+
+Thanks for reading. :-)
+
+Please correct/improve this wherever possible.
+<issue_comment>username_1: For what it's worth, I added this functionality on my blog also. You can see the hierarchal menu structure at https://blog.mbedded.ninja/ in black on the left-hand side. The code which generated the menu is based on the directory/file structure of the content and can be found in the file https://github.com/username_1/blog/blob/master/layouts/partials/menu.html (also check out `menu_recursive.html`, which this calls).
+<issue_comment>username_2: How's the state of multi-level sections in 2021?
+<issue_comment>username_3: `mkdocs` is easier.. Stuff the speed.. i want its to be less painful et all..
+
+Hugo was good at the start.. hit a sweet spot, but now is a different beast"
+DjangoGirls/djangogirls,258302286,442,,"[{'action': 'opened', 'author': 'rix0rrr', 'comment_id': None, 'datetime': '2017-09-17 13:15:31+00:00', 'masked_author': 'username_0', 'text': ""Hi all,\r\n\r\nAfter just coaching at a DjangoGirls event, and encouraging my own team to use PyCharm (as opposed to other editors like Atom), it strikes me how much easier my team had it than other other participants, especially around virtualenvs.\r\n\r\nSome examples:\r\n- It's available on all platforms, and works the same on all platforms.\r\n- They don't have to use the console window on Windows: PyCharm has a built-in terminal that looks and works a lot better.\r\n- They don't have to remember to manually activate the virtualenv: recent PyCharms automatically detect and activate the virtualenv.\r\n- Running Python scripts gave less trouble: no need to remember to hit save, no need to switch back to the terminal and hit up-enter; they can just right-click in the file and select 'Run' from the menu.\r\n- Syntax highlighting in the built-in Python REPL: makes commands easier to understand/recognize.\r\n- Automatic syntax and semantics checking inside the editor: forgetting to put quotes around a string literal immediately underlines the offending text, with a tooltip that indicates what's wrong. This is particularly useful for new programmers who haven't completely internalized what a string literal is.\r\n\r\nPyCharm is a great editor for Python code, with lots of conveniences. Wouldn't it be great to mention this as an option in the tutorial? \r\n\r\nI'd be willing to do the changes myself, if you're open to it."", 'title': 'Mention PyCharm as supported editor?', 'type': 'issue'}
+ {'action': 'created', 'author': 'aniav', 'comment_id': 330055931.0, 'datetime': '2017-09-17 15:16:04+00:00', 'masked_author': 'username_1', 'text': ""Our main goal is to give people the option to use after the workshops. PyCharm is not cheap and if they learn using it on the workshops they will end up with trial edition expired and with no good knowledge of ther editors to use, as they don't give the mentioned power ups. I am not really a fan of mentioning it or suggesting to attendees. I would rather see a list of extensions for other editors that would give them th same conveniences."", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'rix0rrr', 'comment_id': 330135518.0, 'datetime': '2017-09-18 06:09:32+00:00', 'masked_author': 'username_0', 'text': ""PyCharm's Community Edition is totally and perpetually free, so price needn't be a blocker."", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'agagata', 'comment_id': 330194732.0, 'datetime': '2017-09-18 11:38:28+00:00', 'masked_author': 'username_2', 'text': 'I agree that PyCharm is a useful tool and could be used on Django Girls workshops. Having said that, I\'m not sure we should teach attendees to do everything in PyCharm - knowing your way around ""bare"" terminal is a good skill to have.', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'aniav', 'comment_id': 330261507.0, 'datetime': '2017-09-18 15:33:06+00:00', 'masked_author': 'username_1', 'text': ""Ok so with the Community Edition this is a completely different case. I didn't know about that. I am also not a fan of introducing helpers for everything we use but I accept the scope of this issue :)"", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'aniav', 'comment_id': 330261715.0, 'datetime': '2017-09-18 15:33:48+00:00', 'masked_author': 'username_1', 'text': 'Ah, one thing - this issue is for the tutorial repository, not the djangogirls website repository.', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'rix0rrr', 'comment_id': 330266401.0, 'datetime': '2017-09-18 15:49:42+00:00', 'masked_author': 'username_0', 'text': ""Knowing your way around a terminal is definitely a good skill to have. There's a time and place to learn it though, and I'm not sure the very first day when you're going to do something you've never done before is the time to do it.\r\n\r\nI would like to remove as much friction as possible, so the participants can get a successful result (and maybe to a little more interesting parts like HTML) quicker. They can always go back and learn the details later, when and if we've succeeded in piquing their interest.\r\n\r\nSorry about the misfile, btw. I mean the tutorial."", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'thibaudcolas', 'comment_id': 341830345.0, 'datetime': '2017-11-03 21:20:54+00:00', 'masked_author': 'username_3', 'text': '', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'rix0rrr', 'comment_id': 343293045.0, 'datetime': '2017-11-09 21:12:24+00:00', 'masked_author': 'username_0', 'text': ""I will move the topic.\r\n\r\nBut for someone who's barely literate in computers to learn the command line, working directories, PATH settings, and a separate editor... not sure I agree that it's simpler."", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'rix0rrr', 'comment_id': 343296147.0, 'datetime': '2017-11-09 21:24:11+00:00', 'masked_author': 'username_0', 'text': 'Moved to [here](https://github.com/DjangoGirls/tutorial/issues/1169).', 'title': None, 'type': 'comment'}
+ {'action': 'closed', 'author': 'rix0rrr', 'comment_id': None, 'datetime': '2017-11-09 21:24:11+00:00', 'masked_author': 'username_0', 'text': '', 'title': None, 'type': 'issue'}]","<issue_start><issue_comment>Title: Mention PyCharm as supported editor?
+username_0: Hi all,
+
+After just coaching at a DjangoGirls event, and encouraging my own team to use PyCharm (as opposed to other editors like Atom), it strikes me how much easier my team had it than other other participants, especially around virtualenvs.
+
+Some examples:
+- It's available on all platforms, and works the same on all platforms.
+- They don't have to use the console window on Windows: PyCharm has a built-in terminal that looks and works a lot better.
+- They don't have to remember to manually activate the virtualenv: recent PyCharms automatically detect and activate the virtualenv.
+- Running Python scripts gave less trouble: no need to remember to hit save, no need to switch back to the terminal and hit up-enter; they can just right-click in the file and select 'Run' from the menu.
+- Syntax highlighting in the built-in Python REPL: makes commands easier to understand/recognize.
+- Automatic syntax and semantics checking inside the editor: forgetting to put quotes around a string literal immediately underlines the offending text, with a tooltip that indicates what's wrong. This is particularly useful for new programmers who haven't completely internalized what a string literal is.
+
+PyCharm is a great editor for Python code, with lots of conveniences. Wouldn't it be great to mention this as an option in the tutorial? 
+
+I'd be willing to do the changes myself, if you're open to it.
+<issue_comment>username_1: Our main goal is to give people the option to use after the workshops. PyCharm is not cheap and if they learn using it on the workshops they will end up with trial edition expired and with no good knowledge of ther editors to use, as they don't give the mentioned power ups. I am not really a fan of mentioning it or suggesting to attendees. I would rather see a list of extensions for other editors that would give them th same conveniences.
+<issue_comment>username_0: PyCharm's Community Edition is totally and perpetually free, so price needn't be a blocker.
+<issue_comment>username_2: I agree that PyCharm is a useful tool and could be used on Django Girls workshops. Having said that, I'm not sure we should teach attendees to do everything in PyCharm - knowing your way around ""bare"" terminal is a good skill to have.
+<issue_comment>username_1: Ok so with the Community Edition this is a completely different case. I didn't know about that. I am also not a fan of introducing helpers for everything we use but I accept the scope of this issue :)
+<issue_comment>username_1: Ah, one thing - this issue is for the tutorial repository, not the djangogirls website repository.
+<issue_comment>username_0: Knowing your way around a terminal is definitely a good skill to have. There's a time and place to learn it though, and I'm not sure the very first day when you're going to do something you've never done before is the time to do it.
+
+I would like to remove as much friction as possible, so the participants can get a successful result (and maybe to a little more interesting parts like HTML) quicker. They can always go back and learn the details later, when and if we've succeeded in piquing their interest.
+
+Sorry about the misfile, btw. I mean the tutorial.
+<issue_comment>username_0: I will move the topic.
+
+But for someone who's barely literate in computers to learn the command line, working directories, PATH settings, and a separate editor... not sure I agree that it's simpler.
+<issue_comment>username_0: Moved to [here](https://github.com/DjangoGirls/tutorial/issues/1169).<issue_closed>"
+kubernetes/website,566506048,19154,,"[{'action': 'opened', 'author': 'artisticcheese', 'comment_id': None, 'datetime': '2020-02-17 20:36:22+00:00', 'masked_author': 'username_0', 'text': '**This is a Bug Report**\r\n\r\n<!-- Thanks for filing an issue! Before submitting, please fill in the following information. -->\r\n<!-- See https://kubernetes.io/docs/contribute/start/ for guidance on writing an actionable issue description. -->\r\n\r\n<!--Required Information-->\r\n**Problem:**\r\nRandom static files on Kubernetes.io introduce 6s delay. Sample powershell oneliner below showcasing the issue\r\n\r\n```\r\nPS /home/gregory> 1..10 | foreach-object { measure-command {Invoke-WebRequest https://kubernetes.io/css/style.ce36324c2d8bc083b7ea1e9b3e3b1c05228556e6cc00e5a2606f9f252871c32e.css} | select Seconds}\r\nSeconds\r\n-------\r\n      6\r\n      0\r\n      6\r\n      0\r\n      0\r\n      6\r\n      6\r\n      0\r\n      6\r\n      0\r\n```\r\n**Proposed Solution:**\r\nFix website\r\n**Page to Update:**\r\nEntire website is affected\r\n\r\n<!--Optional Information (remove the comment tags around information you would like to include)-->\r\n<!--Kubernetes Version:-->\r\n\r\n<!--Additional Information:-->', 'title': 'Consistent slowness in website with static resources', 'type': 'issue'}
+ {'action': 'created', 'author': 'sftim', 'comment_id': 587168553.0, 'datetime': '2020-02-17 21:44:44+00:00', 'masked_author': 'username_1', 'text': ""That's unexpected.\r\nHere's a script to try the same thing out on a more Unixy platform\r\n```bash\r\n( seq 1 200 | while read seq; do time curl -s -I https://kubernetes.io/css/style.ce36324c2d8bc083b7ea1e9b3e3b1c05228556e6cc00e5a2606f9f252871c32e.css > /dev/null ; sleep 0.25; done ) 2>&1 | awk '/^real/ { print $2}'\r\n```\r\n```console\r\n0m6.431s\r\n0m6.388s\r\n0m0.073s\r\n0m6.399s\r\n0m6.236s\r\n0m0.070s\r\n0m0.073s\r\n0m0.074s\r\n0m0.069s\r\n0m6.240s\r\n0m0.073s\r\n0m0.073s\r\n0m0.070s\r\n0m0.073s\r\n0m0.073s\r\n0m6.320s\r\n0m0.071s\r\n0m0.073s\r\n```"", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'artisticcheese', 'comment_id': 587168718.0, 'datetime': '2020-02-17 21:45:27+00:00', 'masked_author': 'username_0', 'text': 'I run it on UNIX too, just in powershell core. Just FYI.', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'sftim', 'comment_id': 587169233.0, 'datetime': '2020-02-17 21:47:46+00:00', 'masked_author': 'username_1', 'text': 'The response headers show that the CSS isn\'t cacheable (`max-age=0`). Maybe Netlify is having a bad day and a fraction of requests are taking a while to serve - 6 second timeout somewhere perhaps?\r\n\r\n```\r\nHTTP/2 200 \r\naccept-ranges: bytes\r\ncache-control: public, max-age=0, must-revalidate\r\ncontent-length: 41494\r\ncontent-type: text/css; charset=UTF-8\r\ndate: Mon, 17 Feb 2020 21:45:39 GMT\r\netag: ""b356342c27e3849dd8281dc69ac21894-ssl""\r\nstrict-transport-security: max-age=31536000\r\nage: 0\r\nserver: Netlify\r\nx-nf-request-id: 2fa912eb-4eb8-47fc-8fa6-37e8814b4784-9939259', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'artisticcheese', 'comment_id': 587170422.0, 'datetime': '2020-02-17 21:53:14+00:00', 'masked_author': 'username_0', 'text': 'This issue has been persistent for at least couple of weeks.', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'sftim', 'comment_id': 587172278.0, 'datetime': '2020-02-17 22:01:19+00:00', 'masked_author': 'username_1', 'text': ""@username_0 do you think this sounds like a Netlify issue? I don't know how much you've already investigated."", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'artisticcheese', 'comment_id': 587172525.0, 'datetime': '2020-02-17 22:02:27+00:00', 'masked_author': 'username_0', 'text': ""I did not do any sort of investigation obviously since I don't control web servers. All I know that there is  issue ongoing for couple of weeks where random resources are being served with 6s delay and based on response headers they seemed to be coming from different servers"", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'sftim', 'comment_id': 587183729.0, 'datetime': '2020-02-17 22:56:43+00:00', 'masked_author': 'username_1', 'text': ""The Kubernetes website is served via a SaaS platform, [Netlify](https://www.netlify.com/)\r\n\r\nSo far I've made only cursory investigations."", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'zacharysarah', 'comment_id': 587297317.0, 'datetime': '2020-02-18 06:16:39+00:00', 'masked_author': 'username_2', 'text': ""That's really weird behavior. @username_1 Let's talk about this in tomorrow's weekly meeting."", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'artisticcheese', 'comment_id': 590615476.0, 'datetime': '2020-02-25 00:18:59+00:00', 'masked_author': 'username_0', 'text': ""Was anything done to fix the issue. Every single page I load takes 6 seconds to fully load as result. I understand people don't feel 6s delay in webpage is not considered loss of functionality but going quickly through documentation with tons of links between page becomes a real problem"", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'zacharysarah', 'comment_id': 590624795.0, 'datetime': '2020-02-25 00:52:36+00:00', 'masked_author': 'username_2', 'text': '@username_0 Please be patient. We have limited resources and are working as quickly as we can.', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'jimangel', 'comment_id': 591099419.0, 'datetime': '2020-02-25 22:17:45+00:00', 'masked_author': 'username_3', 'text': 'Partially related, I noticed that the `kub_video_banner_homepage.jpg` is HUGE (at `1.8MB`) and takes ~2-3 seconds to load for me. Optimizing that to hundreds of KB or less would help (not fix) the load time.\r\n\r\n![image](https://user-images.githubusercontent.com/4601051/75292227-6a431880-57e9-11ea-9113-b79f3306613f.png)', 'title': None, 'type': 'comment'}
+ {'action': 'closed', 'author': 'artisticcheese', 'comment_id': None, 'datetime': '2020-04-09 16:10:22+00:00', 'masked_author': 'username_0', 'text': '', 'title': None, 'type': 'issue'}]","<issue_start><issue_comment>Title: Consistent slowness in website with static resources
+username_0: **This is a Bug Report**
+
+<!-- Thanks for filing an issue! Before submitting, please fill in the following information. -->
+<!-- See https://kubernetes.io/docs/contribute/start/ for guidance on writing an actionable issue description. -->
+
+<!--Required Information-->
+**Problem:**
+Random static files on Kubernetes.io introduce 6s delay. Sample powershell oneliner below showcasing the issue
+
+```
+PS /home/gregory> 1..10 | foreach-object { measure-command {Invoke-WebRequest https://kubernetes.io/css/style.ce36324c2d8bc083b7ea1e9b3e3b1c05228556e6cc00e5a2606f9f252871c32e.css} | select Seconds}
+Seconds
+-------
+      6
+      0
+      6
+      0
+      0
+      6
+      6
+      0
+      6
+      0
+```
+**Proposed Solution:**
+Fix website
+**Page to Update:**
+Entire website is affected
+
+<!--Optional Information (remove the comment tags around information you would like to include)-->
+<!--Kubernetes Version:-->
+
+<!--Additional Information:-->
+<issue_comment>username_1: That's unexpected.
+Here's a script to try the same thing out on a more Unixy platform
+```bash
+( seq 1 200 | while read seq; do time curl -s -I https://kubernetes.io/css/style.ce36324c2d8bc083b7ea1e9b3e3b1c05228556e6cc00e5a2606f9f252871c32e.css > /dev/null ; sleep 0.25; done ) 2>&1 | awk '/^real/ { print $2}'
+```
+```console
+0m6.431s
+0m6.388s
+0m0.073s
+0m6.399s
+0m6.236s
+0m0.070s
+0m0.073s
+0m0.074s
+0m0.069s
+0m6.240s
+0m0.073s
+0m0.073s
+0m0.070s
+0m0.073s
+0m0.073s
+0m6.320s
+0m0.071s
+0m0.073s
+```
+<issue_comment>username_0: I run it on UNIX too, just in powershell core. Just FYI.
+<issue_comment>username_1: The response headers show that the CSS isn't cacheable (`max-age=0`). Maybe Netlify is having a bad day and a fraction of requests are taking a while to serve - 6 second timeout somewhere perhaps?
+
+```
+HTTP/2 200 
+accept-ranges: bytes
+cache-control: public, max-age=0, must-revalidate
+content-length: 41494
+content-type: text/css; charset=UTF-8
+date: Mon, 17 Feb 2020 21:45:39 GMT
+etag: ""b356342c27e3849dd8281dc69ac21894-ssl""
+strict-transport-security: max-age=31536000
+age: 0
+server: Netlify
+x-nf-request-id: 2fa912eb-4eb8-47fc-8fa6-37e8814b4784-9939259
+<issue_comment>username_0: This issue has been persistent for at least couple of weeks.
+<issue_comment>username_1: @username_0 do you think this sounds like a Netlify issue? I don't know how much you've already investigated.
+<issue_comment>username_0: I did not do any sort of investigation obviously since I don't control web servers. All I know that there is  issue ongoing for couple of weeks where random resources are being served with 6s delay and based on response headers they seemed to be coming from different servers
+<issue_comment>username_1: The Kubernetes website is served via a SaaS platform, [Netlify](https://www.netlify.com/)
+
+So far I've made only cursory investigations.
+<issue_comment>username_2: That's really weird behavior. @username_1 Let's talk about this in tomorrow's weekly meeting.
+<issue_comment>username_0: Was anything done to fix the issue. Every single page I load takes 6 seconds to fully load as result. I understand people don't feel 6s delay in webpage is not considered loss of functionality but going quickly through documentation with tons of links between page becomes a real problem
+<issue_comment>username_2: @username_0 Please be patient. We have limited resources and are working as quickly as we can.
+<issue_comment>username_3: Partially related, I noticed that the `kub_video_banner_homepage.jpg` is HUGE (at `1.8MB`) and takes ~2-3 seconds to load for me. Optimizing that to hundreds of KB or less would help (not fix) the load time.
+
+![image](https://user-images.githubusercontent.com/4601051/75292227-6a431880-57e9-11ea-9113-b79f3306613f.png)<issue_closed>"
+flutter/website,318372166,979,"{'number': 979.0, 'repo': 'website', 'user_login': 'flutter'}","[{'action': 'opened', 'author': 'rock3r', 'comment_id': None, 'datetime': '2018-04-27T11:20:53Z', 'masked_author': 'username_0', 'text': ""This PR is for the fourth section of the work to create the `flutter-for-ios.md` document. Writing by @niamh-power on Novoda's behalf, I am just a proxy.\r\n\r\nFollowing the same rough format as the `flutter-for-android.md` document, with iOS details instead.\r\n\r\nThe following sections have been created:\r\n\r\n* How do I include image assets for Flutter? What about multiple resolutions?\r\n* Where do I store strings? How do I handle localization?\r\n* What is the equivalent of Cocoapods? How do I add dependencies?\r\n\r\n⚠️ **This requires #978 to be merged first!** ⚠️"", 'title': 'Flutter for iOS — Project structure & Resources section', 'type': 'issue'}
+ {'action': 'created', 'author': 'rock3r', 'comment_id': 385896461.0, 'datetime': '2018-05-02 08:02:48+00:00', 'masked_author': 'username_0', 'text': 'Contents covered in #993, closing this. Will address further comments on that one.', 'title': None, 'type': 'comment'}]","<issue_start><issue_comment>Title: Flutter for iOS — Project structure & Resources section
+username_0: This PR is for the fourth section of the work to create the `flutter-for-ios.md` document. Writing by @niamh-power on Novoda's behalf, I am just a proxy.
+
+Following the same rough format as the `flutter-for-android.md` document, with iOS details instead.
+
+The following sections have been created:
+
+* How do I include image assets for Flutter? What about multiple resolutions?
+* Where do I store strings? How do I handle localization?
+* What is the equivalent of Cocoapods? How do I add dependencies?
+
+⚠️ **This requires #978 to be merged first!** ⚠️
+<issue_comment>username_0: Contents covered in #993, closing this. Will address further comments on that one."
+tektoncd/website,1006584176,298,"{'number': 298.0, 'repo': 'website', 'user_login': 'tektoncd'}","[{'action': 'opened', 'author': 'geriom', 'comment_id': None, 'datetime': '2021-09-24T15:29:50Z', 'masked_author': 'username_0', 'text': '# Changes\r\n\r\nIntroductory guide friendly for newcomers. The approach in this doc is to be\r\neasier to follow by providing prescriptive instructions about the tools\r\nto use. After installing the prerequisites, doing copy/paste of the code\r\nsamples should work.\r\n\r\n# Submitter Checklist\r\n\r\nThese are the criteria that every PR should meet, please check them off as you\r\nreview them:\r\n\r\n- [X] Includes [docs](https://github.com/tektoncd/community/blob/master/standards.md#principles) (if user facing)\r\n- [X] Commit messages follow [commit message best practices](https://github.com/tektoncd/community/blob/master/standards.md#commit-messages)\r\n\r\n_See [the contribution guide](https://github.com/tektoncd/website/blob/master/CONTRIBUTING.md)\r\nfor more details._', 'title': 'Crete a Quickstart to run a Tekton task with Kind', 'type': 'issue'}
+ {'action': 'created', 'author': 'jjasghar', 'comment_id': 926784528.0, 'datetime': '2021-09-24 17:01:56+00:00', 'masked_author': 'username_1', 'text': 'Taking a look today, give me a bit of time to read over this.', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'jjasghar', 'comment_id': 926931273.0, 'datetime': '2021-09-24 21:32:58+00:00', 'masked_author': 'username_1', 'text': ""My only question, is this to show off Tekton _inside_ of KiND? Otherwise I'm not seeing the advantage of this over https://tekton.dev/docs/getting-started/pipelines/"", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'bobcatfish', 'comment_id': 926933764.0, 'datetime': '2021-09-24 21:39:03+00:00', 'masked_author': 'username_2', 'text': ""@username_1 i think what's really nice about using kind is that it's very easy to setup and lets us have getting started instructions that are pretty cloud agnostic (but still tell you how to setup the cluster in the first place!)\r\n\r\nmy understanding is that this tutorial _would_ replace at least 1 (if not more - we have some duplication going on) of our existing tutorials. the one you linked to (https://tekton.dev/docs/getting-started/pipelines/) i think is meant to build on a previous task based tutorial and add pipelines? (presumably it would work on the kind cluster as well? maybe needs a few updates to flow nicely from the kind tutorial).  i think this tutorial would probably replace https://tekton.dev/docs/getting-started/ (maybe we go back to our old approach and have a tab or something for the openshift specific instructions?)"", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'geriom', 'comment_id': 928036159.0, 'datetime': '2021-09-27 16:12:44+00:00', 'masked_author': 'username_0', 'text': '@username_1 This is intended to be the very first Tekton doc for someone with no prior experience. A 5-minute task that is easy to complete so you get that ""feels good"" moment that you need to explore further. That\'s why it\'s prescriptive about Kind, it\'s an effort to guarantee the task can be completed successfully with minimal effort. The existing getting started requires some cognitive work to follow.\r\n\r\n@username_2 You are correct, my intention is to consolidate the doc in the pipelines repo (https://github.com/tektoncd/pipeline/blob/main/docs/tutorial.md), the 2 getting started docs from tekton.dev (getting-started and getting-started/pipelines), and the Katacoda tuto (https://github.com/tektoncd/website/tree/main/tutorials/katacoda/getting-started) in to a single doc that we can link from everywhere. The quickstart in his PR being the entry point and a further more in-depth doc as the natural follow-up.\r\n\r\n\r\nI\'m going to take a look at the other comments and apply the fixes later this week. Thanks for the feedback.', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'afrittoli', 'comment_id': 930086993.0, 'datetime': '2021-09-29 11:24:48+00:00', 'masked_author': 'username_3', 'text': ""Thanks @username_0 - I haven't reviewed the instructions in details yet - but I definitely support using `kind` - that's what I use for my development work and POCs anyways. We have a script for that so perhaps we could include a link to it? https://github.com/tektoncd/plumbing/blob/main/hack/tekton_in_kind.sh"", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'geriom', 'comment_id': 933776270.0, 'datetime': '2021-10-04 19:12:25+00:00', 'masked_author': 'username_0', 'text': 'I like the idea. Should I proceed and move the current content to a different file?', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'bobcatfish', 'comment_id': 936846580.0, 'datetime': '2021-10-06 18:24:24+00:00', 'masked_author': 'username_2', 'text': ""I'd remove the existing file entirely - in the end I think our docs at tekton.dev should be pretty authorative vs. kind of a grab bag of different tutorials. The tutorial will also still be in version control if someone wants to resurrect it later."", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'bobcatfish', 'comment_id': 936848799.0, 'datetime': '2021-10-06 18:25:38+00:00', 'masked_author': 'username_2', 'text': '... did not mean to hit that button', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'bobcatfish', 'comment_id': 936849372.0, 'datetime': '2021-10-06 18:25:57+00:00', 'masked_author': 'username_2', 'text': 'TOO MUCH POWER', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'afrittoli', 'comment_id': 971838818.0, 'datetime': '2021-11-17 18:19:30+00:00', 'masked_author': 'username_3', 'text': '/hold', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'afrittoli', 'comment_id': 971839132.0, 'datetime': '2021-11-17 18:19:56+00:00', 'masked_author': 'username_3', 'text': 'Waiting for the doc plan to be agreed on, then we can resume this one and get it merged', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'geriom', 'comment_id': 1034215502.0, 'datetime': '2022-02-09 21:37:32+00:00', 'masked_author': 'username_0', 'text': '@username_3 This PR is ready to be merged after a a second round of reviews.\r\n\r\nUpdates:\r\n\r\nI switched from Kind to Minikube because of the recent changes in the Docker licence. With Minikube the users can pick a different engine and are not forced to use docker to follow the instructions.\r\n\r\nI also added a second page, this is now a two-part tutorial, somewhat mirroring the content we had before:\r\n\r\n- Create a task\r\n- Create a second task and a pipeline.\r\n\r\nI also deleted the original tutorial that we had in `_index` and made it a simple landing page.', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'AlanGreene', 'comment_id': 1039047567.0, 'datetime': '2022-02-14 12:49:14+00:00', 'masked_author': 'username_4', 'text': 'Looks like this removes reference to the nightly releases. It would be good to restore that as we do want to make them more visible. Ref: https://github.com/tektoncd/website/pull/344#issuecomment-1038992697', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'geriom', 'comment_id': 1039301435.0, 'datetime': '2022-02-14 16:37:59+00:00', 'masked_author': 'username_0', 'text': ""In the spirit of the [new guidelines for tutorials](https://tekton.dev/docs/contribute/doc-con-content/), I think we should pick just one path and go with it throughout the entire doc, don't cover alternatives in the getting started. Instead, I would prefer to create an installation doc, that covers all the available installation options."", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'bobcatfish', 'comment_id': 1068467354.0, 'datetime': '2022-03-15 20:58:44+00:00', 'masked_author': 'username_2', 'text': 'that could make a lot of sense @username_3  - could get users much more quickly to the satisfaction of running something and having it work :D', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'geriom', 'comment_id': 1069161253.0, 'datetime': '2022-03-16 13:59:04+00:00', 'masked_author': 'username_0', 'text': ""Completely agree with both of you @username_2 and @username_3 . I'm going to give it some thought and share my ideas in either the WG or the mailing list."", 'title': None, 'type': 'comment'}]","<issue_start><issue_comment>Title: Crete a Quickstart to run a Tekton task with Kind
+username_0: # Changes
+
+Introductory guide friendly for newcomers. The approach in this doc is to be
+easier to follow by providing prescriptive instructions about the tools
+to use. After installing the prerequisites, doing copy/paste of the code
+samples should work.
+
+# Submitter Checklist
+
+These are the criteria that every PR should meet, please check them off as you
+review them:
+
+- [X] Includes [docs](https://github.com/tektoncd/community/blob/master/standards.md#principles) (if user facing)
+- [X] Commit messages follow [commit message best practices](https://github.com/tektoncd/community/blob/master/standards.md#commit-messages)
+
+_See [the contribution guide](https://github.com/tektoncd/website/blob/master/CONTRIBUTING.md)
+for more details._
+<issue_comment>username_1: Taking a look today, give me a bit of time to read over this.
+<issue_comment>username_1: My only question, is this to show off Tekton _inside_ of KiND? Otherwise I'm not seeing the advantage of this over https://tekton.dev/docs/getting-started/pipelines/
+<issue_comment>username_2: @username_1 i think what's really nice about using kind is that it's very easy to setup and lets us have getting started instructions that are pretty cloud agnostic (but still tell you how to setup the cluster in the first place!)
+
+my understanding is that this tutorial _would_ replace at least 1 (if not more - we have some duplication going on) of our existing tutorials. the one you linked to (https://tekton.dev/docs/getting-started/pipelines/) i think is meant to build on a previous task based tutorial and add pipelines? (presumably it would work on the kind cluster as well? maybe needs a few updates to flow nicely from the kind tutorial).  i think this tutorial would probably replace https://tekton.dev/docs/getting-started/ (maybe we go back to our old approach and have a tab or something for the openshift specific instructions?)
+<issue_comment>username_0: @username_1 This is intended to be the very first Tekton doc for someone with no prior experience. A 5-minute task that is easy to complete so you get that ""feels good"" moment that you need to explore further. That's why it's prescriptive about Kind, it's an effort to guarantee the task can be completed successfully with minimal effort. The existing getting started requires some cognitive work to follow.
+
+@username_2 You are correct, my intention is to consolidate the doc in the pipelines repo (https://github.com/tektoncd/pipeline/blob/main/docs/tutorial.md), the 2 getting started docs from tekton.dev (getting-started and getting-started/pipelines), and the Katacoda tuto (https://github.com/tektoncd/website/tree/main/tutorials/katacoda/getting-started) in to a single doc that we can link from everywhere. The quickstart in his PR being the entry point and a further more in-depth doc as the natural follow-up.
+
+
+I'm going to take a look at the other comments and apply the fixes later this week. Thanks for the feedback.
+<issue_comment>username_3: Thanks @username_0 - I haven't reviewed the instructions in details yet - but I definitely support using `kind` - that's what I use for my development work and POCs anyways. We have a script for that so perhaps we could include a link to it? https://github.com/tektoncd/plumbing/blob/main/hack/tekton_in_kind.sh
+<issue_comment>username_0: I like the idea. Should I proceed and move the current content to a different file?
+<issue_comment>username_2: I'd remove the existing file entirely - in the end I think our docs at tekton.dev should be pretty authorative vs. kind of a grab bag of different tutorials. The tutorial will also still be in version control if someone wants to resurrect it later.
+<issue_comment>username_2: ... did not mean to hit that button
+<issue_comment>username_2: TOO MUCH POWER
+<issue_comment>username_3: /hold
+<issue_comment>username_3: Waiting for the doc plan to be agreed on, then we can resume this one and get it merged
+<issue_comment>username_0: @username_3 This PR is ready to be merged after a a second round of reviews.
+
+Updates:
+
+I switched from Kind to Minikube because of the recent changes in the Docker licence. With Minikube the users can pick a different engine and are not forced to use docker to follow the instructions.
+
+I also added a second page, this is now a two-part tutorial, somewhat mirroring the content we had before:
+
+- Create a task
+- Create a second task and a pipeline.
+
+I also deleted the original tutorial that we had in `_index` and made it a simple landing page.
+<issue_comment>username_4: Looks like this removes reference to the nightly releases. It would be good to restore that as we do want to make them more visible. Ref: https://github.com/tektoncd/website/pull/344#issuecomment-1038992697
+<issue_comment>username_0: In the spirit of the [new guidelines for tutorials](https://tekton.dev/docs/contribute/doc-con-content/), I think we should pick just one path and go with it throughout the entire doc, don't cover alternatives in the getting started. Instead, I would prefer to create an installation doc, that covers all the available installation options.
+<issue_comment>username_2: that could make a lot of sense @username_3  - could get users much more quickly to the satisfaction of running something and having it work :D
+<issue_comment>username_0: Completely agree with both of you @username_2 and @username_3 . I'm going to give it some thought and share my ideas in either the WG or the mailing list."
+RSS-Bridge/rss-bridge,336717212,733,,"[{'action': 'opened', 'author': 'harsh1412', 'comment_id': None, 'datetime': '2018-06-28 17:45:20+00:00', 'masked_author': 'username_0', 'text': 'Error message: `Could not request http://9xproxy.com//?feed=atom`\r\nQuery string: `action=display&bridge=WordPress&url=http%3A%2F%2F9xproxy.com%2F&format=Atom`\r\n\r\nOther wordpress websites works great.\r\nBut the one i want is protected by cloudflare i guess.\r\nAny solution guys?', 'title': 'Wordpress Bridge failed with error 500', 'type': 'issue'}
+ {'action': 'created', 'author': 'LogMANOriginal', 'comment_id': 401555928.0, 'datetime': '2018-06-30 17:44:16+00:00', 'masked_author': 'username_1', 'text': ""Thanks for reporting!\r\n\r\nYou are right, the site is powered by Cloudflare according to https://www.isitwp.com:\r\n\r\n![image](https://user-images.githubusercontent.com/5776685/42127626-79dbef62-7c9c-11e8-9d91-d0cc43c51c43.png)\r\n\r\nHowever, opposite of what you might think, it is currently not under attack. The reason you see the error message is because the site simply doesn't provide the required feed (try accessing http://9xproxy.com/feed/atom/ or http://9xproxy.com/?feed=atom -- totally blank on my end). This means the site owner has (globally) disabled feeds.\r\n\r\nThe WordPress Bridge, however, depends on these feeds. Without them you are forced to implement a custom bridge just for your site.\r\n\r\nYou can do that yourself (see [developer section](https://github.com/RSS-Bridge/rss-bridge/wiki/For-developers) in the Wiki) or request an implementation here for anyone who is interested to work on it. In that case you'll have to describe which data exactly you would expect the bridge to collect and where to get it (examples)."", 'title': None, 'type': 'comment'}
+ {'action': 'closed', 'author': 'LogMANOriginal', 'comment_id': None, 'datetime': '2018-07-20 21:12:44+00:00', 'masked_author': 'username_1', 'text': '', 'title': None, 'type': 'issue'}]","<issue_start><issue_comment>Title: Wordpress Bridge failed with error 500
+username_0: Error message: `Could not request http://9xproxy.com//?feed=atom`
+Query string: `action=display&bridge=WordPress&url=http%3A%2F%2F9xproxy.com%2F&format=Atom`
+
+Other wordpress websites works great.
+But the one i want is protected by cloudflare i guess.
+Any solution guys?
+<issue_comment>username_1: Thanks for reporting!
+
+You are right, the site is powered by Cloudflare according to https://www.isitwp.com:
+
+![image](https://user-images.githubusercontent.com/5776685/42127626-79dbef62-7c9c-11e8-9d91-d0cc43c51c43.png)
+
+However, opposite of what you might think, it is currently not under attack. The reason you see the error message is because the site simply doesn't provide the required feed (try accessing http://9xproxy.com/feed/atom/ or http://9xproxy.com/?feed=atom -- totally blank on my end). This means the site owner has (globally) disabled feeds.
+
+The WordPress Bridge, however, depends on these feeds. Without them you are forced to implement a custom bridge just for your site.
+
+You can do that yourself (see [developer section](https://github.com/RSS-Bridge/rss-bridge/wiki/For-developers) in the Wiki) or request an implementation here for anyone who is interested to work on it. In that case you'll have to describe which data exactly you would expect the bridge to collect and where to get it (examples).<issue_closed>"
+kubernetes/website,398666264,12199,,"[{'action': 'opened', 'author': 'anhldbk', 'comment_id': None, 'datetime': '2019-01-13 15:05:27+00:00', 'masked_author': 'username_0', 'text': '<!-- Thanks for filing an issue! Before submitting, please fill in the following information. -->\r\n<!-- See https://kubernetes.io/docs/contribute/start/ for guidance on writing an actionable issue description. -->\r\n\r\n<!--Required Information-->\r\n\r\n**This is a...** \r\n<!-- choose one by changing [ ] to [x] -->\r\n- [ ] Feature Request\r\n- [x] Bug Report\r\n\r\n**Problem:**\r\n\r\nCommand to obtain `TOKEN` in section [Without kubectl proxy](https://github.com/kubernetes/website/blob/master/content/en/docs/tasks/access-application-cluster/access-cluster.md#without-kubectl-proxy) can NOT run correctly on MacOS\r\n\r\n```bash\r\n/private/tmp\r\n❯  TOKEN=$(kubectl describe secret $(kubectl get secrets | grep ^default | cut -f1 -d \' \') | grep -E \'^token\' | cut -f2 -d\':\' | tr -d "" "")\r\ngrep: com.apple.launchd.n9oVH2hqgq: Is a directory\r\ngrep: com.apple.launchd.qZnaLeM8KX: Is a directory\r\ngrep: powerlog: Is a directory\r\ngrep: silos: Is a directory\r\n\r\n/private/tmp\r\n❯ echo $TOKEN\r\nse2xy1bknelxn4y8xzxu3trosptip3q5Rv2QBxKXazyW63XOCbcTEXREx5LmjS0_IMKHGkIq8UXjOt5XVBerzmM3MkCbVDVx4Tf8c4oHPffYNKip-cZ2H5WaynxZ8CS2_iW4gIjjd_PpA02ghoozhm3m_P-JUNG1bptshUKwVxoUPuTfh3BLdG7FE3f1GA0n9La8FqJzYWvmRJSc8Wrko0kM7SwMEsahpNie6lTZNtD2tACLHJ0pC5G4OcpA7awmIZQXnnyBYBsxtHHBFGpDTYTdipSBCWDMh08bcPY039sMxEri2vuiJzpxftV5p-Q8kqBiPFEN4E5uau6HbLv3-wpd3VIFb2qSJVnBouTPREKFaOQkB0clXg\r\nkgfhvu9qnh3mr6eel97y6fq2hezzol8zWUulcWqkur5TfHxL87eWwfADPZqKXY0nHmTLe3WnwFD_1M4AfR2nQDSHL-tr8Oi9HhG-Zu0p4r2A-3zf1u8e7dGJ1E4Xz3BsTGwE8trte8vaQMi94ZSDv6gzoG6gCHANWrUpXgAMZwTWeVpUwVK2MI2ADj2uiFOx1U2Yybtv6s21or9cVKrj0PDyixQLzu8fZuWXCByXTyS7NYSIdv_WG0l6C7Xos9Hl0EesKUGoxdM7CH6RPH6V8mT85xlpkkN8Y6mpfPRZvm7WeX0wvH-n8lZLb27ci6yls1LU02VEmr2bE0bT46Drei946f5rCuJjddOrT6NWfBXxc9eixGEsxQ\r\n```\r\n\r\n**Proposed Solution:**\r\n\r\nQuoting the grep pattern will resolve this issue:\r\n\r\n```shell\r\n# `grep ^default` will be `grep ""^default""` \r\n❯  TOKEN=$(kubectl describe secret $(kubectl get secrets | grep ""^default"" | cut -f1 -d \' \') | grep -E \'^token\' | cut -f2 -d\':\' | tr -d "" "")\r\n```\r\n\r\n**Page to Update:**\r\nhttps://kubernetes.io/docs/tasks/access-application-cluster/access-cluster/', 'title': 'Access Cluster: failed to grep on MacOS', 'type': 'issue'}
+ {'action': 'closed', 'author': 'anhldbk', 'comment_id': None, 'datetime': '2019-01-14 04:03:13+00:00', 'masked_author': 'username_0', 'text': '', 'title': None, 'type': 'issue'}]","<issue_start><issue_comment>Title: Access Cluster: failed to grep on MacOS
+username_0: <!-- Thanks for filing an issue! Before submitting, please fill in the following information. -->
+<!-- See https://kubernetes.io/docs/contribute/start/ for guidance on writing an actionable issue description. -->
+
+<!--Required Information-->
+
+**This is a...** 
+<!-- choose one by changing [ ] to [x] -->
+- [ ] Feature Request
+- [x] Bug Report
+
+**Problem:**
+
+Command to obtain `TOKEN` in section [Without kubectl proxy](https://github.com/kubernetes/website/blob/master/content/en/docs/tasks/access-application-cluster/access-cluster.md#without-kubectl-proxy) can NOT run correctly on MacOS
+
+```bash
+/private/tmp
+❯  TOKEN=$(kubectl describe secret $(kubectl get secrets | grep ^default | cut -f1 -d ' ') | grep -E '^token' | cut -f2 -d':' | tr -d "" "")
+grep: com.apple.launchd.n9oVH2hqgq: Is a directory
+grep: com.apple.launchd.qZnaLeM8KX: Is a directory
+grep: powerlog: Is a directory
+grep: silos: Is a directory
+
+/private/tmp
+❯ echo $TOKEN
+eyJhbGciOiJSUzI1NiIsImtpZCI6IiJ9.eyJpc3MiOiJrdWJlcm5ldGVzL3NlcnZpY2VhY2NvdW50Iiwia3ViZXJuZXRlcy5pby9zZXJ2aWNlYWNjb3VudC9uYW1lc3BhY2UiOiJkZWZhdWx0Iiwia3ViZXJuZXRlcy5pby9zZXJ2aWNlYWNjb3VudC9zZWNyZXQubmFtZSI6ImRlZmF1bHQtdG9rZW4tMjI2djIiLCJrdWJlcm5ldGVzLmlvL3NlcnZpY2VhY2NvdW50L3NlcnZpY2UtYWNjb3VudC5uYW1lIjoiZGVmYXVsdCIsImt1YmVybmV0ZXMuaW8vc2VydmljZWFjY291bnQvc2VydmljZS1hY2NvdW50LnVpZCI6ImVjMWY0NDc2LTEyZWItMTFlOS1hYWRhLTAyNTAwMDAwMDAwMSIsInN1YiI6InN5c3RlbTpzZXJ2aWNlYWNjb3VudDpkZWZhdWx0OmRlZmF1bHQifQ.Rv2QBxKXazyW63XOCbcTEXREx5LmjS0_IMKHGkIq8UXjOt5XVBerzmM3MkCbVDVx4Tf8c4oHPffYNKip-cZ2H5WaynxZ8CS2_iW4gIjjd_PpA02ghoozhm3m_P-JUNG1bptshUKwVxoUPuTfh3BLdG7FE3f1GA0n9La8FqJzYWvmRJSc8Wrko0kM7SwMEsahpNie6lTZNtD2tACLHJ0pC5G4OcpA7awmIZQXnnyBYBsxtHHBFGpDTYTdipSBCWDMh08bcPY039sMxEri2vuiJzpxftV5p-Q8kqBiPFEN4E5uau6HbLv3-wpd3VIFb2qSJVnBouTPREKFaOQkB0clXg
+eyJhbGciOiJSUzI1NiIsImtpZCI6IiJ9.eyJpc3MiOiJrdWJlcm5ldGVzL3NlcnZpY2VhY2NvdW50Iiwia3ViZXJuZXRlcy5pby9zZXJ2aWNlYWNjb3VudC9uYW1lc3BhY2UiOiJkZWZhdWx0Iiwia3ViZXJuZXRlcy5pby9zZXJ2aWNlYWNjb3VudC9zZWNyZXQubmFtZSI6InNvbGl0YXJ5LWthbmdhcm9vLWt1YmVybmV0ZXMtZGFzaGJvYXJkLXRva2VuLTl0NmxjIiwia3ViZXJuZXRlcy5pby9zZXJ2aWNlYWNjb3VudC9zZXJ2aWNlLWFjY291bnQubmFtZSI6InNvbGl0YXJ5LWthbmdhcm9vLWt1YmVybmV0ZXMtZGFzaGJvYXJkIiwia3ViZXJuZXRlcy5pby9zZXJ2aWNlYWNjb3VudC9zZXJ2aWNlLWFjY291bnQudWlkIjoiMzUzNWQwMmUtMTc0MS0xMWU5LWFhMmUtMDI1MDAwMDAwMDAxIiwic3ViIjoic3lzdGVtOnNlcnZpY2VhY2NvdW50OmRlZmF1bHQ6c29saXRhcnkta2FuZ2Fyb28ta3ViZXJuZXRlcy1kYXNoYm9hcmQifQ.WUulcWqkur5TfHxL87eWwfADPZqKXY0nHmTLe3WnwFD_1M4AfR2nQDSHL-tr8Oi9HhG-Zu0p4r2A-3zf1u8e7dGJ1E4Xz3BsTGwE8trte8vaQMi94ZSDv6gzoG6gCHANWrUpXgAMZwTWeVpUwVK2MI2ADj2uiFOx1U2Yybtv6s21or9cVKrj0PDyixQLzu8fZuWXCByXTyS7NYSIdv_WG0l6C7Xos9Hl0EesKUGoxdM7CH6RPH6V8mT85xlpkkN8Y6mpfPRZvm7WeX0wvH-n8lZLb27ci6yls1LU02VEmr2bE0bT46Drei946f5rCuJjddOrT6NWfBXxc9eixGEsxQ
+```
+
+**Proposed Solution:**
+
+Quoting the grep pattern will resolve this issue:
+
+```shell
+# `grep ^default` will be `grep ""^default""` 
+❯  TOKEN=$(kubectl describe secret $(kubectl get secrets | grep ""^default"" | cut -f1 -d ' ') | grep -E '^token' | cut -f2 -d':' | tr -d "" "")
+```
+
+**Page to Update:**
+https://kubernetes.io/docs/tasks/access-application-cluster/access-cluster/<issue_closed>"
+facebook/docusaurus,667570288,3152,,"[{'action': 'opened', 'author': 'thesamet', 'comment_id': None, 'datetime': '2020-07-29 05:53:16+00:00', 'masked_author': 'username_0', 'text': '## 🐛 Bug Report\r\n\r\nIn v2 alpha 59, the ""Edit this page"" links for content docs are generated by joining the `editUrl` with the `path` setting. I am using a markdown preprocessor that generates files into the provided path, so I would like the edit links to point at the original files, not the generated ones.\r\n\r\n### Have you read the [Contributing Guidelines on issues](https://github.com/facebook/docusaurus/blob/master/CONTRIBUTING.md#reporting-new-issues)?\r\n\r\nY\r\n\r\n## To Reproduce\r\n\r\n(Write your steps here:)\r\n\r\nin presets:\r\n```\r\n  presets: [\r\n    [\r\n      \'@docusaurus/preset-classic\',\r\n      {\r\n        docs: {\r\n          homePageId: \'intro\',\r\n          sidebarPath: require.resolve(\'./sidebars.js\'),\r\n          editUrl: \'https://github.com/scalapb/zio-grpc/edit/master/docs\',\r\n          path: \'../zio-grpc-docs/target/mdoc\'\r\n        },\r\n```\r\n\r\n## Expected behavior\r\n\r\nThe `path` setting doesn\'t play a part in the edit url. In other words, the editUrl will look like `https://github.com/scalapb/zio-grpc/edit/master/docs/intro.md`\r\n\r\n## Actual Behavior\r\n\r\nThe generated edit url contains the path to the generated file (which is not checked in):\r\n\r\n`https://github.com/scalapb/zio-grpc/edit/master/zio-grpc-docs/target/mdoc/intro.md`\r\n\r\n## Your Environment\r\n\r\nRepository: https://github.com/scalapb/zio-grpc \r\nMarkdown generator processes files in docs into `zio-grpc-docs/target/mdoc`.\r\nTo invoke it, install sbt, and type: `sbt docs/mdoc`. Then cd to `website` and do a `yarn start`.\r\n\r\n\r\n\r\n\r\nThe docs dire', 'title': 'editUrl assumes local path is the same as repository path', 'type': 'issue'}
+ {'action': 'created', 'author': 'slorber', 'comment_id': 665678797.0, 'datetime': '2020-07-29 13:54:36+00:00', 'masked_author': 'username_1', 'text': 'Hi,\r\n\r\nThis may not be ideal but you can use the `custom_edit_url` frontmatter in the docs directly', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'thesamet', 'comment_id': 665718417.0, 'datetime': '2020-07-29 15:02:34+00:00', 'masked_author': 'username_0', 'text': 'Thanks, I have a pretty small site, so this would be a reasonable workaround for the time being.', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'slorber', 'comment_id': 665768822.0, 'datetime': '2020-07-29 16:31:01+00:00', 'masked_author': 'username_1', 'text': ""Great, let's close this for now and see if this becomes needed"", 'title': None, 'type': 'comment'}
+ {'action': 'closed', 'author': 'slorber', 'comment_id': None, 'datetime': '2020-07-29 16:31:01+00:00', 'masked_author': 'username_1', 'text': '', 'title': None, 'type': 'issue'}
+ {'action': 'created', 'author': 'thesamet', 'comment_id': 665773938.0, 'datetime': '2020-07-29 16:41:01+00:00', 'masked_author': 'username_0', 'text': 'This would be an issue for some projects in the Scala community who use [mdoc](https://scalameta.org/mdoc/docs/docusaurus.html#installation) to preprocess and typecheck their markdown before passing it to Docusaurus. This breakage started when I explored updating to Docusaurus v2. Given that mdoc with Docusaurus v1 is already being used by a number of projects (see list in the previous link), I anticipate this issue to come up again. It would be nice to have it fixed so mdoc users would have some sort of a documented solution if they wish to try Docusaurus v2.', 'title': None, 'type': 'comment'}
+ {'action': 'reopened', 'author': 'slorber', 'comment_id': None, 'datetime': '2020-07-29 17:00:55+00:00', 'masked_author': 'username_1', 'text': '## 🐛 Bug Report\r\n\r\nIn v2 alpha 59, the ""Edit this page"" links for content docs are generated by joining the `editUrl` with the `path` setting. I am using a markdown preprocessor that generates files into the provided path, so I would like the edit links to point at the original files, not the generated ones.\r\n\r\n### Have you read the [Contributing Guidelines on issues](https://github.com/facebook/docusaurus/blob/master/CONTRIBUTING.md#reporting-new-issues)?\r\n\r\nY\r\n\r\n## To Reproduce\r\n\r\n(Write your steps here:)\r\n\r\nin presets:\r\n```\r\n  presets: [\r\n    [\r\n      \'@docusaurus/preset-classic\',\r\n      {\r\n        docs: {\r\n          homePageId: \'intro\',\r\n          sidebarPath: require.resolve(\'./sidebars.js\'),\r\n          editUrl: \'https://github.com/scalapb/zio-grpc/edit/master/docs\',\r\n          path: \'../zio-grpc-docs/target/mdoc\'\r\n        },\r\n```\r\n\r\n## Expected behavior\r\n\r\nThe `path` setting doesn\'t play a part in the edit url. In other words, the editUrl will look like `https://github.com/scalapb/zio-grpc/edit/master/docs/intro.md`\r\n\r\n## Actual Behavior\r\n\r\nThe generated edit url contains the path to the generated file (which is not checked in):\r\n\r\n`https://github.com/scalapb/zio-grpc/edit/master/zio-grpc-docs/target/mdoc/intro.md`\r\n\r\n## Your Environment\r\n\r\nRepository: https://github.com/scalapb/zio-grpc \r\nMarkdown generator processes files in docs into `zio-grpc-docs/target/mdoc`.\r\nTo invoke it, install sbt, and type: `sbt docs/mdoc`. Then cd to `website` and do a `yarn start`.\r\n\r\n\r\n\r\n\r\nThe docs dire', 'title': 'editUrl assumes local path is the same as repository path', 'type': 'issue'}
+ {'action': 'created', 'author': 'slorber', 'comment_id': 665785734.0, 'datetime': '2020-07-29 17:03:28+00:00', 'masked_author': 'username_1', 'text': ""Thanks, didn't know about all this mdoc ecosystem still on v1 (reported here https://github.com/facebook/docusaurus/issues/3035).\r\n\r\nIs it the only problem you had by migrating to v2?"", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'thesamet', 'comment_id': 665829987.0, 'datetime': '2020-07-29 18:31:28+00:00', 'masked_author': 'username_0', 'text': '@username_1 Yes, the rest was just changes that are documented in the migration docs.', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'slorber', 'comment_id': 666350620.0, 'datetime': '2020-07-30 13:02:28+00:00', 'masked_author': 'username_1', 'text': 'Would it work for you if the editUrl was a function that takes the absolute doc path, and then you return the edit url?\r\n\r\nSomething like:\r\n\r\n```\r\n        docs: {\r\n          editUrl: (absoluteMDPath) => getMDEditUrl(absoluteMDPath),\r\n        },\r\n```', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'thesamet', 'comment_id': 666382023.0, 'datetime': '2020-07-30 13:59:31+00:00', 'masked_author': 'username_0', 'text': 'Getting a function would be fine, though I think it would be preferable to get the relative path to the docs directory - this way the function would get the same input in dev and on CI.', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'ifiokjr', 'comment_id': 667480556.0, 'datetime': '2020-08-01 06:15:36+00:00', 'masked_author': 'username_2', 'text': ""The way I've worked around this is to set the `editUrl` to the path of the directory in which the docusaurus website is hosted **instead of** where the docs are located. \r\n\r\nhttps://github.com/remirror/remirror/blob/c6b60307ba3cda053adedab6dc373f8bacabc181/support/website/docusaurus.config.js#L95-L97\r\n\r\nThat way the edit path is automatically set to the correct path."", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'thesamet', 'comment_id': 667760677.0, 'datetime': '2020-08-03 01:42:46+00:00', 'masked_author': 'username_0', 'text': ""@username_2 I think that the situation in remirror is different than the one described by this ticket. It appears that in remirror there's no preprocessing of the markdown by an external tool. The input markdown for Docusaurus are the same files that are being edited."", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'slorber', 'comment_id': 675520418.0, 'datetime': '2020-08-18 14:41:47+00:00', 'masked_author': 'username_1', 'text': ""We'll likely need this feature to improve the translation experience too.\r\n\r\nFeedback from v1: https://github.com/facebook/docusaurus/issues/648\r\n\r\nIf user is editing primary language, we should link to Github, otherwise we should allow user to link to his own translation system URL. We use crowdin but should be able to configure whatever system we want, so having a function is probably the best option here, to give full power to the user."", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'slorber', 'comment_id': 769311099.0, 'datetime': '2021-01-28 19:14:03+00:00', 'masked_author': 'username_1', 'text': ""FYI I'm adding support for editUrl fn (docs + blog) in PR https://github.com/facebook/docusaurus/pull/4121"", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'lex111', 'comment_id': 858623664.0, 'datetime': '2021-06-10 13:28:34+00:00', 'masked_author': 'username_3', 'text': 'Closing since it is already implemented.', 'title': None, 'type': 'comment'}
+ {'action': 'closed', 'author': 'lex111', 'comment_id': None, 'datetime': '2021-06-10 13:28:34+00:00', 'masked_author': 'username_3', 'text': '', 'title': None, 'type': 'issue'}]","<issue_start><issue_comment>Title: editUrl assumes local path is the same as repository path
+username_0: ## 🐛 Bug Report
+
+In v2 alpha 59, the ""Edit this page"" links for content docs are generated by joining the `editUrl` with the `path` setting. I am using a markdown preprocessor that generates files into the provided path, so I would like the edit links to point at the original files, not the generated ones.
+
+### Have you read the [Contributing Guidelines on issues](https://github.com/facebook/docusaurus/blob/master/CONTRIBUTING.md#reporting-new-issues)?
+
+Y
+
+## To Reproduce
+
+(Write your steps here:)
+
+in presets:
+```
+  presets: [
+    [
+      '@docusaurus/preset-classic',
+      {
+        docs: {
+          homePageId: 'intro',
+          sidebarPath: require.resolve('./sidebars.js'),
+          editUrl: 'https://github.com/scalapb/zio-grpc/edit/master/docs',
+          path: '../zio-grpc-docs/target/mdoc'
+        },
+```
+
+## Expected behavior
+
+The `path` setting doesn't play a part in the edit url. In other words, the editUrl will look like `https://github.com/scalapb/zio-grpc/edit/master/docs/intro.md`
+
+## Actual Behavior
+
+The generated edit url contains the path to the generated file (which is not checked in):
+
+`https://github.com/scalapb/zio-grpc/edit/master/zio-grpc-docs/target/mdoc/intro.md`
+
+## Your Environment
+
+Repository: https://github.com/scalapb/zio-grpc 
+Markdown generator processes files in docs into `zio-grpc-docs/target/mdoc`.
+To invoke it, install sbt, and type: `sbt docs/mdoc`. Then cd to `website` and do a `yarn start`.
+
+
+
+
+The docs dire
+<issue_comment>username_1: Hi,
+
+This may not be ideal but you can use the `custom_edit_url` frontmatter in the docs directly
+<issue_comment>username_0: Thanks, I have a pretty small site, so this would be a reasonable workaround for the time being.
+<issue_comment>username_1: Great, let's close this for now and see if this becomes needed<issue_closed>
+<issue_comment>username_0: This would be an issue for some projects in the Scala community who use [mdoc](https://scalameta.org/mdoc/docs/docusaurus.html#installation) to preprocess and typecheck their markdown before passing it to Docusaurus. This breakage started when I explored updating to Docusaurus v2. Given that mdoc with Docusaurus v1 is already being used by a number of projects (see list in the previous link), I anticipate this issue to come up again. It would be nice to have it fixed so mdoc users would have some sort of a documented solution if they wish to try Docusaurus v2.
+<issue_comment>username_1: ## 🐛 Bug Report
+
+In v2 alpha 59, the ""Edit this page"" links for content docs are generated by joining the `editUrl` with the `path` setting. I am using a markdown preprocessor that generates files into the provided path, so I would like the edit links to point at the original files, not the generated ones.
+
+### Have you read the [Contributing Guidelines on issues](https://github.com/facebook/docusaurus/blob/master/CONTRIBUTING.md#reporting-new-issues)?
+
+Y
+
+## To Reproduce
+
+(Write your steps here:)
+
+in presets:
+```
+  presets: [
+    [
+      '@docusaurus/preset-classic',
+      {
+        docs: {
+          homePageId: 'intro',
+          sidebarPath: require.resolve('./sidebars.js'),
+          editUrl: 'https://github.com/scalapb/zio-grpc/edit/master/docs',
+          path: '../zio-grpc-docs/target/mdoc'
+        },
+```
+
+## Expected behavior
+
+The `path` setting doesn't play a part in the edit url. In other words, the editUrl will look like `https://github.com/scalapb/zio-grpc/edit/master/docs/intro.md`
+
+## Actual Behavior
+
+The generated edit url contains the path to the generated file (which is not checked in):
+
+`https://github.com/scalapb/zio-grpc/edit/master/zio-grpc-docs/target/mdoc/intro.md`
+
+## Your Environment
+
+Repository: https://github.com/scalapb/zio-grpc 
+Markdown generator processes files in docs into `zio-grpc-docs/target/mdoc`.
+To invoke it, install sbt, and type: `sbt docs/mdoc`. Then cd to `website` and do a `yarn start`.
+
+
+
+
+The docs dire
+<issue_comment>username_1: Thanks, didn't know about all this mdoc ecosystem still on v1 (reported here https://github.com/facebook/docusaurus/issues/3035).
+
+Is it the only problem you had by migrating to v2?
+<issue_comment>username_0: @username_1 Yes, the rest was just changes that are documented in the migration docs.
+<issue_comment>username_1: Would it work for you if the editUrl was a function that takes the absolute doc path, and then you return the edit url?
+
+Something like:
+
+```
+        docs: {
+          editUrl: (absoluteMDPath) => getMDEditUrl(absoluteMDPath),
+        },
+```
+<issue_comment>username_0: Getting a function would be fine, though I think it would be preferable to get the relative path to the docs directory - this way the function would get the same input in dev and on CI.
+<issue_comment>username_2: The way I've worked around this is to set the `editUrl` to the path of the directory in which the docusaurus website is hosted **instead of** where the docs are located. 
+
+https://github.com/remirror/remirror/blob/c6b60307ba3cda053adedab6dc373f8bacabc181/support/website/docusaurus.config.js#L95-L97
+
+That way the edit path is automatically set to the correct path.
+<issue_comment>username_0: @username_2 I think that the situation in remirror is different than the one described by this ticket. It appears that in remirror there's no preprocessing of the markdown by an external tool. The input markdown for Docusaurus are the same files that are being edited.
+<issue_comment>username_1: We'll likely need this feature to improve the translation experience too.
+
+Feedback from v1: https://github.com/facebook/docusaurus/issues/648
+
+If user is editing primary language, we should link to Github, otherwise we should allow user to link to his own translation system URL. We use crowdin but should be able to configure whatever system we want, so having a function is probably the best option here, to give full power to the user.
+<issue_comment>username_1: FYI I'm adding support for editUrl fn (docs + blog) in PR https://github.com/facebook/docusaurus/pull/4121
+<issue_comment>username_3: Closing since it is already implemented.<issue_closed>"
+appveyor/website,119665331,105,,"[{'action': 'opened', 'author': 'atifaziz', 'comment_id': None, 'datetime': '2015-12-01 08:20:36+00:00', 'masked_author': 'username_0', 'text': 'I tried the PowerShell sample found in “[Downloading AppVeyor build artifacts (PowerShell)](http://www.appveyor.com/docs/api/samples/download-artifacts-ps)” and it failed at the last line:\r\n\r\n    Invoke-RestMethod -Method Get -Uri ""$apiUrl/buildjobs/$jobId/artifacts/$artifactFileName"" `\r\n         -OutFile $localArtifactPath -Headers $headers\r\n\r\nThe error was:\r\n\r\n    Invoke-RestMethod : SignatureDoesNotMatch\r\n    The request signature we calculated does not match the signature you provided. Check your Google secret key and signing method\r\n\r\nBear in mind that I\'m invoking a slightly modified version for downloading from behind an authenticating proxy, using the `Proxy` and `ProxyUseDefaultCredentials` parameters of the `Invoke-RestMethod` command:\r\n\r\n    Invoke-RestMethod -Method Get -Uri ""$apiUrl/buildjobs/$jobId/artifacts/$artifactFileName"" `\r\n         -OutFile $localArtifactPath -Headers $headers -Proxy $proxyUrl -ProxyUseDefaultCredentials\r\n\r\nAll other invocation of `Invoke-RestMethod` in the sample with the same `Proxy` and `ProxyUseDefaultCredentials` arguments worked fine.', 'title': 'AppVeyor build artifact download PowerShell sample fails', 'type': 'issue'}
+ {'action': 'created', 'author': 'atifaziz', 'comment_id': 160891749.0, 'datetime': '2015-12-01 08:21:18+00:00', 'masked_author': 'username_0', 'text': 'Downloading the artifact directly via its URL using cURL works just fine.', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'atifaziz', 'comment_id': 160892967.0, 'datetime': '2015-12-01 08:29:23+00:00', 'masked_author': 'username_0', 'text': 'The fix seems to be removing the `Headers` argument; it doesn\'t seem to be needed for that last GET. In other words, this worked:\r\n\r\nInvoke-RestMethod -Method Get -Uri ""$apiUrl/buildjobs/$jobId/artifacts/$artifactFileName"" `\r\n     -OutFile $localArtifactPath -Proxy $proxyUrl -ProxyUseDefaultCredentials', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'XhmikosR', 'comment_id': 271712305.0, 'datetime': '2017-01-10 22:03:10+00:00', 'masked_author': 'username_1', 'text': 'Is this still an issue?', 'title': None, 'type': 'comment'}]","<issue_start><issue_comment>Title: AppVeyor build artifact download PowerShell sample fails
+username_0: I tried the PowerShell sample found in “[Downloading AppVeyor build artifacts (PowerShell)](http://www.appveyor.com/docs/api/samples/download-artifacts-ps)” and it failed at the last line:
+
+    Invoke-RestMethod -Method Get -Uri ""$apiUrl/buildjobs/$jobId/artifacts/$artifactFileName"" `
+         -OutFile $localArtifactPath -Headers $headers
+
+The error was:
+
+    Invoke-RestMethod : SignatureDoesNotMatch
+    The request signature we calculated does not match the signature you provided. Check your Google secret key and signing method
+
+Bear in mind that I'm invoking a slightly modified version for downloading from behind an authenticating proxy, using the `Proxy` and `ProxyUseDefaultCredentials` parameters of the `Invoke-RestMethod` command:
+
+    Invoke-RestMethod -Method Get -Uri ""$apiUrl/buildjobs/$jobId/artifacts/$artifactFileName"" `
+         -OutFile $localArtifactPath -Headers $headers -Proxy $proxyUrl -ProxyUseDefaultCredentials
+
+All other invocation of `Invoke-RestMethod` in the sample with the same `Proxy` and `ProxyUseDefaultCredentials` arguments worked fine.
+<issue_comment>username_0: Downloading the artifact directly via its URL using cURL works just fine.
+<issue_comment>username_0: The fix seems to be removing the `Headers` argument; it doesn't seem to be needed for that last GET. In other words, this worked:
+
+Invoke-RestMethod -Method Get -Uri ""$apiUrl/buildjobs/$jobId/artifacts/$artifactFileName"" `
+     -OutFile $localArtifactPath -Proxy $proxyUrl -ProxyUseDefaultCredentials
+<issue_comment>username_1: Is this still an issue?"
+RSS-Bridge/rss-bridge,582436663,1492,"{'number': 1492.0, 'repo': 'rss-bridge', 'user_login': 'RSS-Bridge'}","[{'action': 'opened', 'author': 'liamka', 'comment_id': None, 'datetime': '2020-03-16T16:31:09Z', 'masked_author': 'username_0', 'text': '', 'title': '[GithubTrendingBridge] Add bridge', 'type': 'issue'}
+ {'action': 'created', 'author': 'AntoineTurmel', 'comment_id': 599750539.0, 'datetime': '2020-03-16 20:45:50+00:00', 'masked_author': 'username_1', 'text': 'nice !!', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'somini', 'comment_id': 600913753.0, 'datetime': '2020-03-18 23:51:25+00:00', 'masked_author': 'username_2', 'text': ""Thanks. Found some small issues:\r\n\r\n- The URI is invalid. It should be `https://github.com/$WHATEVER_REPO`. See the usage of `BASE_URL` on other bridges.\r\n- Error when fetching the description:\r\n\r\n```\r\nNotice: Trying to get property 'innertext' of non-object in rss-bridge/bridges/GithubTrendingBridge.php on line 49\r\n```"", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'liamka', 'comment_id': 601704059.0, 'datetime': '2020-03-20 13:35:21+00:00', 'masked_author': 'username_0', 'text': 'Fixed issues!', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'somini', 'comment_id': 602312831.0, 'datetime': '2020-03-23 01:11:34+00:00', 'masked_author': 'username_2', 'text': ""That is a metric ton of languages. I predict that this list can get stale fast. It would be acceptable to have a free-form input.\r\n\r\nI haven't tested this yet, but from a cursory review this sounds acceptable."", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'somini', 'comment_id': 603498364.0, 'datetime': '2020-03-24 20:52:03+00:00', 'masked_author': 'username_2', 'text': 'LGTM.', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'liamka', 'comment_id': 607803611.0, 'datetime': '2020-04-02 12:02:56+00:00', 'masked_author': 'username_0', 'text': '@username_2 can you add this badge in next release?', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'somini', 'comment_id': 607924013.0, 'datetime': '2020-04-02 15:41:44+00:00', 'masked_author': 'username_2', 'text': ""I'm just a regular RSS Bridge user, I don't have special powers. I just review new bridges that appear.\r\n\r\nYou want anyone from @RSS-Bridge"", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'liamka', 'comment_id': 607981281.0, 'datetime': '2020-04-02 17:21:19+00:00', 'masked_author': 'username_0', 'text': '@ArthurHoaro can you add?', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'teromene', 'comment_id': 608004779.0, 'datetime': '2020-04-02 17:47:03+00:00', 'masked_author': 'username_3', 'text': 'I will merge this ASAP', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'teromene', 'comment_id': 608284935.0, 'datetime': '2020-04-03 07:48:59+00:00', 'masked_author': 'username_3', 'text': 'Thank you for the bridge and sorry for the delay ! I am afraid that I have been extremely busy these weeks', 'title': None, 'type': 'comment'}]","<issue_start><issue_comment>Title: [GithubTrendingBridge] Add bridge
+username_0: 
+<issue_comment>username_1: nice !!
+<issue_comment>username_2: Thanks. Found some small issues:
+
+- The URI is invalid. It should be `https://github.com/$WHATEVER_REPO`. See the usage of `BASE_URL` on other bridges.
+- Error when fetching the description:
+
+```
+Notice: Trying to get property 'innertext' of non-object in rss-bridge/bridges/GithubTrendingBridge.php on line 49
+```
+<issue_comment>username_0: Fixed issues!
+<issue_comment>username_2: That is a metric ton of languages. I predict that this list can get stale fast. It would be acceptable to have a free-form input.
+
+I haven't tested this yet, but from a cursory review this sounds acceptable.
+<issue_comment>username_2: LGTM.
+<issue_comment>username_0: @username_2 can you add this badge in next release?
+<issue_comment>username_2: I'm just a regular RSS Bridge user, I don't have special powers. I just review new bridges that appear.
+
+You want anyone from @RSS-Bridge
+<issue_comment>username_0: @ArthurHoaro can you add?
+<issue_comment>username_3: I will merge this ASAP
+<issue_comment>username_3: Thank you for the bridge and sorry for the delay ! I am afraid that I have been extremely busy these weeks"
+kubernetes/website,773319049,25771,"{'number': 25771.0, 'repo': 'website', 'user_login': 'kubernetes'}","[{'action': 'opened', 'author': 'sftim', 'comment_id': None, 'datetime': '2020-12-22T23:43:42Z', 'masked_author': 'username_0', 'text': 'Use GitHub Actions to trigger a Netlify deploy for the primary branch, twice per day.\r\n\r\nThis is part of the implementation for #25759. As well as helping to automate announcements, this change will help the blog team: it will become possible to approve future-dated blog articles and have them go out automatically.\r\n\r\n\r\n/hold\r\nAs well as technical review and approval, this change requires co-ordination so that a [website admin](https://github.com/orgs/kubernetes/teams/website-admins) or other Kubernetes member with appropriate access can set `NETLIFY_BUILD_HOOK_KEY` as a secret for GitHub Actions.', 'title': 'Add automatic site deploys', 'type': 'issue'}
+ {'action': 'created', 'author': 'sftim', 'comment_id': 749839912.0, 'datetime': '2020-12-22 23:50:23+00:00', 'masked_author': 'username_0', 'text': 'I have created a Netlify webhook that we can use in conjunction with these changes; folks with the appropriate access can view its [details](https://app.netlify.com/sites/kubernetes-io-master-staging/settings/deploys#build-hooks).', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'zacharysarah', 'comment_id': 749989118.0, 'datetime': '2020-12-23 07:40:03+00:00', 'masked_author': 'username_1', 'text': '@username_0 This is my first time looking at a GitHub Action in practice. So interesting!', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'sftim', 'comment_id': 750117443.0, 'datetime': '2020-12-23 10:38:42+00:00', 'masked_author': 'username_0', 'text': ""We do a similar thing at work for our own website (we use CircleCI though); also, helping customers' teams implement or improve that kind of automation is part of my day job.\r\n\r\nFor an example of a website built periodically using Netlify and GitHub Actions specifically, see https://k8s.dev/ ([workflow definition](https://github.com/kubernetes-sigs/contributor-site/blob/e84d847ce155e683fe91ea2a5a7e2bc602ed0a04/.github/workflows/netlify-periodic-build.yml)).\r\n\r\nNetlify builds the whole site when a build is triggered; at the moment, and aside from previews, that means a merge to _master_. This PR will retain builds-on-merge and add builds-on-schedule.\r\n\r\nThis change has _no effect_ on the process for reviewing, approving and merging pull requests. We could use a different service entirely to manage the build triggers; I like this approach though because it keeps the CI/CD process together with the code it's deploying."", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'kbhawkey', 'comment_id': 750361550.0, 'datetime': '2020-12-23 15:54:46+00:00', 'masked_author': 'username_2', 'text': 'Hi @username_0. \r\nI don\'t see a problem with this (I suppose this job has been in use in the contribute site?).\r\nThough, I am still thinking about how the new job will publish **individual content** at scheduled times.\r\nSome more questions 😄 : \r\n* Does this job publish the entire site at the configured times or can you configure specific content to publish? If so, how does it happen? I\'d like to know more about it.\r\n* Does prow have a similar function?\r\n* Will certain content get ""held"" until a specific date (blog articles, announcements (add/remove)? What is the mechanism to do this?', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'sftim', 'comment_id': 750373787.0, 'datetime': '2020-12-23 16:26:48+00:00', 'masked_author': 'username_0', 'text': ""For a blog article, you set a publication date in the future. Previews include the future-dated content (because Hugo runs with different options), but live deploys to not. A subsequent build + deploy after the publication date (`publishDate`, or `date` if `publishDate` is not set) includes the content, because it's not future dated, and includes it in the served website. \r\n\r\nWe don't have any other content that's dated like that. We could do, but at the moment that's not a mechanism we use.\r\n\r\nPS I found an [article](https://www.jerriepelser.com/blog/netlify-hugo-future-previews/) on the web using front matter to control publication. It's pretty similar to how this website is set up, including the choice of Netlify for build + serve."", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'kbhawkey', 'comment_id': 750485828.0, 'datetime': '2020-12-23 21:47:03+00:00', 'masked_author': 'username_2', 'text': 'OK, I understand.\r\n/lgtm', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'tengqm', 'comment_id': 750695149.0, 'datetime': '2020-12-24 01:24:01+00:00', 'masked_author': 'username_3', 'text': ""I'm not sure I understand the the use case of this regular, automatic site deploy."", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'sftim', 'comment_id': 750828161.0, 'datetime': '2020-12-24 09:49:27+00:00', 'masked_author': 'username_0', 'text': '1. Announcements can go live or be removed, as scheduled - only once PR #25769 merges\r\n1. Blog articles can go live as scheduled\r\n1. Any future data driven content, such as release notes or a download page, can go live automatically too.', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'tengqm', 'comment_id': 750873160.0, 'datetime': '2020-12-24 12:46:41+00:00', 'masked_author': 'username_3', 'text': ""@username_0 My take is that there are two basic action triggering mechanisms in a computer system: events and timers. Time/schedule based triggering is useful only when the frequency of events is significantly lower than that of the timer periods. However, I don't see that is the case in the website deploy today. I'm afraid that all of the use cases you mentioned can be well covered by merge based deployment. Even for scheduled publishing of some contents like announcements, the shortcode (or similar logic behind it) will check what (if any) content to display. It doesn't have to be related to scheduled deployments. Is there any real use case we can think of? Something that must be published at 12:00 am UTC on some day?"", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'sftim', 'comment_id': 750875091.0, 'datetime': '2020-12-24 12:55:31+00:00', 'masked_author': 'username_0', 'text': 'We already plan blog articles to go out on specific days, which requires the blog team to be around to unhold / approve the deploys.\r\nAnnouncements are also going to be time-bound, both for when they appear and when they expire; see issue https://github.com/kubernetes/website/issues/25759.\r\n\r\nThese use cases *are* time related.', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'sftim', 'comment_id': 750876260.0, 'datetime': '2020-12-24 13:00:17+00:00', 'masked_author': 'username_0', 'text': ""A more complex mechanism is possible; for example, at each merge, calculate the next due event and schedule a job to execute just after that time. This is the kind of approach that systems use when it's important to conserve resources, eg compute time, or system battery.\r\n\r\n_However_ we don't have an integration with some existing infrastructure in which to store that adaptive schedule. I can design that (eg a Kubernetes custom resource and a control loop), but every design I can imagine looks _much_ complex than running a build twice a day regardless."", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'tengqm', 'comment_id': 750882185.0, 'datetime': '2020-12-24 13:23:23+00:00', 'masked_author': 'username_3', 'text': ""Just for some more clarification if I failed to make it clear. I'm not doubting if something is doable. Solving problems is part of an engineer's daily life. What I'm concerned is whether we really need this, not whether it is doable. There is always a line between something doable and something worth doing. If we believe such an automated build/deploy really solves some problems that are biting us, then do it. If it is not worth the effort to build and maintain such a control loop, better invest our limited bandwidth to something more useful."", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'sftim', 'comment_id': 750892987.0, 'datetime': '2020-12-24 14:08:19+00:00', 'masked_author': 'username_0', 'text': ""This automation cuts out toil for the steering committee and the blog approvers, both of which are contended resources. It's much easier to add this automation than it is to grown the blog approvers or steering committee."", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'kbhawkey', 'comment_id': 750902863.0, 'datetime': '2020-12-24 14:51:06+00:00', 'masked_author': 'username_2', 'text': '👋 👋 👋 \r\nI added a LGTM because this ""job"" configuration seems to be a common way (a similar configuration is used in another repository to do the same task) to wrap an API request to a service that builds and serves the site content.\r\nSince this just came up, I have not looked into other solutions to solve this problem.\r\n\r\nI also found this combination of ""job configuration containing API request to build and serve"" + ""announcement data files with time constraints"" + ""checks in a partial template to match dates/time constraints"" to be a roundabout way of doing this task. \r\nThe data files must be accurate and merged before the announcement partial template will have any effect, otherwise there will be no announcement or replacement section on the site pages. The content is passively ""queued"" for future publishing (merged but not published to the site).\r\n\r\nPerhaps this is a common pattern today because there are fewer available alternatives. Still, it would be helpful to call out or describe how and why this is required. I think the task needs to be adequately documented and not overused.\r\nIt is not clear why the site needs to build twice within a 24 hour period, every 24 hours (for the sake of publishing periodic blog articles and switching in/out announcements). Publishing twice (every 12 hours), 2 times per week may be enough?\r\n\r\nI assume that the addition of this task is a response to a request to have more control over the publishing of announcements, and to help automate the publishing of blog articles? The publishing of announcements requires steering committee approval; blog articles are approved by the blog sub-project team.', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'tengqm', 'comment_id': 751176669.0, 'datetime': '2020-12-25 05:36:54+00:00', 'masked_author': 'username_3', 'text': 'Such an announcement has an ""on/off"" switch. It is turned on during a specific date range, beyond which they are off. This can be handled in the same way. Does deploying the site twice a day really help?', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'sftim', 'comment_id': 751354279.0, 'datetime': '2020-12-26 13:09:23+00:00', 'masked_author': 'username_0', 'text': ""This change is _not_ about preventing blog articles from appearing before their publication date. Instead, this change is about automating the means by which they can appear _after_ that publication date. At the moment, either:\r\n- the blog is approved but publication depends on some other commit to _master_ happening. (Not recommended*; this is “action at a distance” and also unreliable - we can't guarantee that other commits will actually happen.\r\n- the blog team will /hold or pause on approval for the article, so that the actual merge happens after the due date is reached.\r\n\r\nVery similar constraints apply for announcements. If an announcement is due to go live at a particular time, there is currently _no_ guarantee of how long it might be between the announcement coming due and the website actually updating.\r\n\r\nIf we want to narrow the gap between due date for a timed update, and the actual update, we can make the trigger more frequent (up to, say, once per hour? - I'd have to check Netlify's guidance). Once this mechanism is in place, updating the frequency of automatic publishes is a minor configuration change."", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'sftim', 'comment_id': 751355896.0, 'datetime': '2020-12-26 13:30:51+00:00', 'masked_author': 'username_0', 'text': ""I'd like to move this forward - what needs to happen next?\r\n\r\nThe things I see being needed are:\r\n- ensure there are no technical concerns about implementing this change; obtain LGTM\r\n- and, in parallel, ensure that an approved person adds the Netlify secret for triggering a deploy\r\n- cancel the hold"", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'sftim', 'comment_id': 751356254.0, 'datetime': '2020-12-26 13:35:16+00:00', 'masked_author': 'username_0', 'text': ""Hmm. Maybe I haven't made clear the link between automatic deploys, and toil.\r\n\r\nIf a blog article is due to go out at (say) 12:00 UTC on the 3rd of January, and the article is time-sensitive, then currently a _person_ needs to make sure to do the approval or unhold (their choice) on the 3rd of January. This is effort. Automation will mean that the team can instead rely on a computer to do that, any day of the week and any time of the year."", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'sftim', 'comment_id': 754842318.0, 'datetime': '2021-01-05 19:16:07+00:00', 'masked_author': 'username_0', 'text': ""I'll check that this works how I expect!"", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'sftim', 'comment_id': 755252717.0, 'datetime': '2021-01-06 11:43:16+00:00', 'masked_author': 'username_0', 'text': ""Looks like this isn't working as expected. `$TOKEN` should be set to `secrets.NETLIFY_BUILD_HOOK_KEY` but I'm not sure that's happening.\r\n\r\n@irvifa maybe we can arrange to catch up synchronously about this?"", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'sftim', 'comment_id': 756274037.0, 'datetime': '2021-01-07 17:50:00+00:00', 'masked_author': 'username_0', 'text': 'Now working OK', 'title': None, 'type': 'comment'}]","<issue_start><issue_comment>Title: Add automatic site deploys
+username_0: Use GitHub Actions to trigger a Netlify deploy for the primary branch, twice per day.
+
+This is part of the implementation for #25759. As well as helping to automate announcements, this change will help the blog team: it will become possible to approve future-dated blog articles and have them go out automatically.
+
+
+/hold
+As well as technical review and approval, this change requires co-ordination so that a [website admin](https://github.com/orgs/kubernetes/teams/website-admins) or other Kubernetes member with appropriate access can set `NETLIFY_BUILD_HOOK_KEY` as a secret for GitHub Actions.
+<issue_comment>username_0: I have created a Netlify webhook that we can use in conjunction with these changes; folks with the appropriate access can view its [details](https://app.netlify.com/sites/kubernetes-io-master-staging/settings/deploys#build-hooks).
+<issue_comment>username_1: @username_0 This is my first time looking at a GitHub Action in practice. So interesting!
+<issue_comment>username_0: We do a similar thing at work for our own website (we use CircleCI though); also, helping customers' teams implement or improve that kind of automation is part of my day job.
+
+For an example of a website built periodically using Netlify and GitHub Actions specifically, see https://k8s.dev/ ([workflow definition](https://github.com/kubernetes-sigs/contributor-site/blob/e84d847ce155e683fe91ea2a5a7e2bc602ed0a04/.github/workflows/netlify-periodic-build.yml)).
+
+Netlify builds the whole site when a build is triggered; at the moment, and aside from previews, that means a merge to _master_. This PR will retain builds-on-merge and add builds-on-schedule.
+
+This change has _no effect_ on the process for reviewing, approving and merging pull requests. We could use a different service entirely to manage the build triggers; I like this approach though because it keeps the CI/CD process together with the code it's deploying.
+<issue_comment>username_2: Hi @username_0. 
+I don't see a problem with this (I suppose this job has been in use in the contribute site?).
+Though, I am still thinking about how the new job will publish **individual content** at scheduled times.
+Some more questions 😄 : 
+* Does this job publish the entire site at the configured times or can you configure specific content to publish? If so, how does it happen? I'd like to know more about it.
+* Does prow have a similar function?
+* Will certain content get ""held"" until a specific date (blog articles, announcements (add/remove)? What is the mechanism to do this?
+<issue_comment>username_0: For a blog article, you set a publication date in the future. Previews include the future-dated content (because Hugo runs with different options), but live deploys to not. A subsequent build + deploy after the publication date (`publishDate`, or `date` if `publishDate` is not set) includes the content, because it's not future dated, and includes it in the served website. 
+
+We don't have any other content that's dated like that. We could do, but at the moment that's not a mechanism we use.
+
+PS I found an [article](https://www.jerriepelser.com/blog/netlify-hugo-future-previews/) on the web using front matter to control publication. It's pretty similar to how this website is set up, including the choice of Netlify for build + serve.
+<issue_comment>username_2: OK, I understand.
+/lgtm
+<issue_comment>username_3: I'm not sure I understand the the use case of this regular, automatic site deploy.
+<issue_comment>username_0: 1. Announcements can go live or be removed, as scheduled - only once PR #25769 merges
+1. Blog articles can go live as scheduled
+1. Any future data driven content, such as release notes or a download page, can go live automatically too.
+<issue_comment>username_3: @username_0 My take is that there are two basic action triggering mechanisms in a computer system: events and timers. Time/schedule based triggering is useful only when the frequency of events is significantly lower than that of the timer periods. However, I don't see that is the case in the website deploy today. I'm afraid that all of the use cases you mentioned can be well covered by merge based deployment. Even for scheduled publishing of some contents like announcements, the shortcode (or similar logic behind it) will check what (if any) content to display. It doesn't have to be related to scheduled deployments. Is there any real use case we can think of? Something that must be published at 12:00 am UTC on some day?
+<issue_comment>username_0: We already plan blog articles to go out on specific days, which requires the blog team to be around to unhold / approve the deploys.
+Announcements are also going to be time-bound, both for when they appear and when they expire; see issue https://github.com/kubernetes/website/issues/25759.
+
+These use cases *are* time related.
+<issue_comment>username_0: A more complex mechanism is possible; for example, at each merge, calculate the next due event and schedule a job to execute just after that time. This is the kind of approach that systems use when it's important to conserve resources, eg compute time, or system battery.
+
+_However_ we don't have an integration with some existing infrastructure in which to store that adaptive schedule. I can design that (eg a Kubernetes custom resource and a control loop), but every design I can imagine looks _much_ complex than running a build twice a day regardless.
+<issue_comment>username_3: Just for some more clarification if I failed to make it clear. I'm not doubting if something is doable. Solving problems is part of an engineer's daily life. What I'm concerned is whether we really need this, not whether it is doable. There is always a line between something doable and something worth doing. If we believe such an automated build/deploy really solves some problems that are biting us, then do it. If it is not worth the effort to build and maintain such a control loop, better invest our limited bandwidth to something more useful.
+<issue_comment>username_0: This automation cuts out toil for the steering committee and the blog approvers, both of which are contended resources. It's much easier to add this automation than it is to grown the blog approvers or steering committee.
+<issue_comment>username_2: 👋 👋 👋 
+I added a LGTM because this ""job"" configuration seems to be a common way (a similar configuration is used in another repository to do the same task) to wrap an API request to a service that builds and serves the site content.
+Since this just came up, I have not looked into other solutions to solve this problem.
+
+I also found this combination of ""job configuration containing API request to build and serve"" + ""announcement data files with time constraints"" + ""checks in a partial template to match dates/time constraints"" to be a roundabout way of doing this task. 
+The data files must be accurate and merged before the announcement partial template will have any effect, otherwise there will be no announcement or replacement section on the site pages. The content is passively ""queued"" for future publishing (merged but not published to the site).
+
+Perhaps this is a common pattern today because there are fewer available alternatives. Still, it would be helpful to call out or describe how and why this is required. I think the task needs to be adequately documented and not overused.
+It is not clear why the site needs to build twice within a 24 hour period, every 24 hours (for the sake of publishing periodic blog articles and switching in/out announcements). Publishing twice (every 12 hours), 2 times per week may be enough?
+
+I assume that the addition of this task is a response to a request to have more control over the publishing of announcements, and to help automate the publishing of blog articles? The publishing of announcements requires steering committee approval; blog articles are approved by the blog sub-project team.
+<issue_comment>username_3: Such an announcement has an ""on/off"" switch. It is turned on during a specific date range, beyond which they are off. This can be handled in the same way. Does deploying the site twice a day really help?
+<issue_comment>username_0: This change is _not_ about preventing blog articles from appearing before their publication date. Instead, this change is about automating the means by which they can appear _after_ that publication date. At the moment, either:
+- the blog is approved but publication depends on some other commit to _master_ happening. (Not recommended*; this is “action at a distance” and also unreliable - we can't guarantee that other commits will actually happen.
+- the blog team will /hold or pause on approval for the article, so that the actual merge happens after the due date is reached.
+
+Very similar constraints apply for announcements. If an announcement is due to go live at a particular time, there is currently _no_ guarantee of how long it might be between the announcement coming due and the website actually updating.
+
+If we want to narrow the gap between due date for a timed update, and the actual update, we can make the trigger more frequent (up to, say, once per hour? - I'd have to check Netlify's guidance). Once this mechanism is in place, updating the frequency of automatic publishes is a minor configuration change.
+<issue_comment>username_0: I'd like to move this forward - what needs to happen next?
+
+The things I see being needed are:
+- ensure there are no technical concerns about implementing this change; obtain LGTM
+- and, in parallel, ensure that an approved person adds the Netlify secret for triggering a deploy
+- cancel the hold
+<issue_comment>username_0: Hmm. Maybe I haven't made clear the link between automatic deploys, and toil.
+
+If a blog article is due to go out at (say) 12:00 UTC on the 3rd of January, and the article is time-sensitive, then currently a _person_ needs to make sure to do the approval or unhold (their choice) on the 3rd of January. This is effort. Automation will mean that the team can instead rely on a computer to do that, any day of the week and any time of the year.
+<issue_comment>username_0: I'll check that this works how I expect!
+<issue_comment>username_0: Looks like this isn't working as expected. `$TOKEN` should be set to `secrets.NETLIFY_BUILD_HOOK_KEY` but I'm not sure that's happening.
+
+@irvifa maybe we can arrange to catch up synchronously about this?
+<issue_comment>username_0: Now working OK"
+emberjs/website,217371255,2853,"{'number': 2853.0, 'repo': 'website', 'user_login': 'emberjs'}","[{'action': 'opened', 'author': 'noweiitsmichael', 'comment_id': None, 'datetime': '2017-03-27T20:50:44Z', 'masked_author': 'username_0', 'text': 'Continues down the checklist https://github.com/emberjs/website/issues/2519 of making emberjs.com pages responsive\r\n\r\nNow:\r\n![mascots_responsive2](https://cloud.githubusercontent.com/assets/241919/24377689/0421879e-12f5-11e7-98eb-0efacc0b805d.gif)\r\n\r\nBefore:\r\n![mascots_notresponsive](https://cloud.githubusercontent.com/assets/241919/24377693/08b7f108-12f5-11e7-9abe-0f92fd971c2d.gif)', 'title': 'responsive css', 'type': 'issue'}
+ {'action': 'created', 'author': 'locks', 'comment_id': 289655419.0, 'datetime': '2017-03-28 03:51:59+00:00', 'masked_author': 'username_1', 'text': 'cc @wifelette', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'locks', 'comment_id': 302244639.0, 'datetime': '2017-05-17 22:04:28+00:00', 'masked_author': 'username_1', 'text': 'Thank you for your contribution @username_0! If you still have some energy left to contribute, reach us at `#-team-learning` on Slack so we can discuss what could be done next.', 'title': None, 'type': 'comment'}]","<issue_start><issue_comment>Title: responsive css
+username_0: Continues down the checklist https://github.com/emberjs/website/issues/2519 of making emberjs.com pages responsive
+
+Now:
+![mascots_responsive2](https://cloud.githubusercontent.com/assets/241919/24377689/0421879e-12f5-11e7-98eb-0efacc0b805d.gif)
+
+Before:
+![mascots_notresponsive](https://cloud.githubusercontent.com/assets/241919/24377693/08b7f108-12f5-11e7-9abe-0f92fd971c2d.gif)
+<issue_comment>username_1: cc @wifelette
+<issue_comment>username_1: Thank you for your contribution @username_0! If you still have some energy left to contribute, reach us at `#-team-learning` on Slack so we can discuss what could be done next."
+gitpod-io/website,466654049,222,"{'number': 222.0, 'repo': 'website', 'user_login': 'gitpod-io'}","[{'action': 'opened', 'author': 'nisarhassan12', 'comment_id': None, 'datetime': '2019-07-11T04:19:46Z', 'masked_author': 'username_0', 'text': 'Fixes #219 \r\nHere is What it looks like. @username_2 Please have a look! and tell if there is anything that can be improved : )\r\n![image](https://user-images.githubusercontent.com/46004116/61021779-62e71000-a3bc-11e9-8c33-82936295a184.png)\r\n![image](https://user-images.githubusercontent.com/46004116/61021817-8ad67380-a3bc-11e9-8088-8eb28b9ae360.png)', 'title': 'Created Github Student Developer Pack Page.', 'type': 'issue'}
+ {'action': 'created', 'author': 'ChristinFrohne', 'comment_id': 510444341.0, 'datetime': '2019-07-11 11:18:12+00:00', 'masked_author': 'username_1', 'text': 'Looks great! \r\nHere some comments: \r\n**Website:**\r\n- please have a bit less spacing between the GitHub Student Offer and the three boxes\r\n- the sentence ""it\'s great to support students changed to ""We’re happy to be able to empower student developers participating in it."" See last mockup\r\n- the lines crossing out the price should have the same width as the characters\r\n- it looks like the hand-shake-heart has a different glow than the other icons, please use for all icons the same setting as on the pricing page\r\n- have the two lines a bit higher and some more space around the banner\r\n- Is the font size in the banner the same size as ""GitHub Student offer""? It would be great if it\'s not sticking out from the margins\r\n \r\n\r\n**mobile:**\r\n- more space between the backpack and the headline\r\n- white line ""always free for open-source"" should be underneath the first box\r\n- more space between the ""gitpod docs"" button and the next headline\r\n- the footer doesn\'t look pretty but maybe that something to be adjust another time :)', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': '32leaves', 'comment_id': 510454429.0, 'datetime': '2019-07-11 11:54:08+00:00', 'masked_author': 'username_2', 'text': '![image](https://user-images.githubusercontent.com/3210701/61048804-2f6bac00-a3e3-11e9-8533-6f22e2928839.png)\r\nI have two points where the website (mock and built page) differ from the rest of Gitpod:\r\n- in Gitpod itself we call the ""Students"" plan ""Personal"" at the moment. We should call it the same way here.\r\n- Both, the ""Personal"" and ""Students Unlimited"" plan are for non-commercial use only (see screenshot)', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'ChristinFrohne', 'comment_id': 510458450.0, 'datetime': '2019-07-11 12:07:21+00:00', 'masked_author': 'username_1', 'text': 'I think it\'s confusing to change the name of ""unlimited"" into ""student unlimited"" but ""personal"" stays the same. Also, the bag-icon is used to teaser the student subscription on the pricing site, but not used again. Anyway if we want to leave it like this for now, the icons should be the same as well.', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': '32leaves', 'comment_id': 510474152.0, 'datetime': '2019-07-11 12:57:22+00:00', 'masked_author': 'username_2', 'text': ""I have to check how much effort using the icons would add. But it would make sense to harmonize it all while we're at it."", 'title': None, 'type': 'comment'}]","<issue_start><issue_comment>Title: Created Github Student Developer Pack Page.
+username_0: Fixes #219 
+Here is What it looks like. @username_2 Please have a look! and tell if there is anything that can be improved : )
+![image](https://user-images.githubusercontent.com/46004116/61021779-62e71000-a3bc-11e9-8c33-82936295a184.png)
+![image](https://user-images.githubusercontent.com/46004116/61021817-8ad67380-a3bc-11e9-8088-8eb28b9ae360.png)
+<issue_comment>username_1: Looks great! 
+Here some comments: 
+**Website:**
+- please have a bit less spacing between the GitHub Student Offer and the three boxes
+- the sentence ""it's great to support students changed to ""We’re happy to be able to empower student developers participating in it."" See last mockup
+- the lines crossing out the price should have the same width as the characters
+- it looks like the hand-shake-heart has a different glow than the other icons, please use for all icons the same setting as on the pricing page
+- have the two lines a bit higher and some more space around the banner
+- Is the font size in the banner the same size as ""GitHub Student offer""? It would be great if it's not sticking out from the margins
+ 
+
+**mobile:**
+- more space between the backpack and the headline
+- white line ""always free for open-source"" should be underneath the first box
+- more space between the ""gitpod docs"" button and the next headline
+- the footer doesn't look pretty but maybe that something to be adjust another time :)
+<issue_comment>username_2: ![image](https://user-images.githubusercontent.com/3210701/61048804-2f6bac00-a3e3-11e9-8533-6f22e2928839.png)
+I have two points where the website (mock and built page) differ from the rest of Gitpod:
+- in Gitpod itself we call the ""Students"" plan ""Personal"" at the moment. We should call it the same way here.
+- Both, the ""Personal"" and ""Students Unlimited"" plan are for non-commercial use only (see screenshot)
+<issue_comment>username_1: I think it's confusing to change the name of ""unlimited"" into ""student unlimited"" but ""personal"" stays the same. Also, the bag-icon is used to teaser the student subscription on the pricing site, but not used again. Anyway if we want to leave it like this for now, the icons should be the same as well.
+<issue_comment>username_2: I have to check how much effort using the icons would add. But it would make sense to harmonize it all while we're at it."
+hartator/wayback-machine-downloader,925696582,193,,"[{'action': 'opened', 'author': 'Kaciorski', 'comment_id': None, 'datetime': '2021-06-20 22:48:45+00:00', 'masked_author': 'username_0', 'text': 'Im trying to download site on my second disk but its doesnt work. Can someone write how it should look like for ""D:\\testsite""?', 'title': 'change download folder', 'type': 'issue'}
+ {'action': 'created', 'author': 'Auster-South-Anemoi', 'comment_id': 869238665.0, 'datetime': '2021-06-27 23:18:14+00:00', 'masked_author': 'username_1', 'text': ""I can't test Windows right now, but does the tool work from either the CDM or PowerShell?\r\nIf it does, does it work if you first navigate to that folder with the command `D:` followed by `cd testsite`, then use the command `wayback_machine_downloader http://example.com`?"", 'title': None, 'type': 'comment'}]","<issue_start><issue_comment>Title: change download folder
+username_0: Im trying to download site on my second disk but its doesnt work. Can someone write how it should look like for ""D:\testsite""?
+<issue_comment>username_1: I can't test Windows right now, but does the tool work from either the CDM or PowerShell?
+If it does, does it work if you first navigate to that folder with the command `D:` followed by `cd testsite`, then use the command `wayback_machine_downloader http://example.com`?"

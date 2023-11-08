@@ -1,0 +1,174 @@
+gohugoio/hugo,219423920,3277,"{'number': 3277.0, 'repo': 'hugo', 'user_login': 'gohugoio'}","[{'action': 'opened', 'author': 'felicianotech', 'comment_id': None, 'datetime': '2017-04-05T00:10:32Z', 'masked_author': 'username_0', 'text': ""This PR adds support for opening Hugo menu items in a new tab/window.\r\n\r\nI've seen old Issues and Discourse posts on new tab support in Hugo but they all references opening links in content/Markdown. Hugo now has a config option to tell BlackFriday to do that and it works great. This PR is specifically for Hugo menus and allowing links to open in a new tab.\r\n\r\nMany power users who surf the web know how to middle click a link to open in a new tab or to use the content menu or even control click. Not all users are power users. I've come across many website owners who don't want to lose visitors to certain external links, thus this feature comes in handy.\r\n\r\nAlso included is a small docs tweak to also mention this new menu item property.\r\n\r\nI tried to follow [CONTRIBUTING.md](https://github.com/spf13/hugo/blob/master/CONTRIBUTING.md) to the tee here though I'm not sure what would be the best way to modify the tests file to include this property."", 'title': 'Add NewTab property to Hugo menus', 'type': 'issue'}
+ {'action': 'created', 'author': 'bep', 'comment_id': 309003547.0, 'datetime': '2017-06-16 11:34:47+00:00', 'masked_author': 'username_1', 'text': 'See #3600', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'felicianotech', 'comment_id': 351465568.0, 'datetime': '2017-12-13 17:37:24+00:00', 'masked_author': 'username_0', 'text': '# Updated PR\r\n\r\n1. Rebased on `master` since this PR was *old*.\r\n2. Moved the docs portion of this PR to gohugoio/hugoDocs#273 since the docs was split into its own repo.\r\n3. Added a simple test as @username_1 requested. The test was added to the old menu_test file which explicitly says to not add anymore tests to. :disappointed: Problem is, the new test file doesn\'t have a setup for config menus, just page menus so I didn\'t know how to add it there.\r\n4. In issue #3600 it was brought up that this PR only adds the option for `target=""_blank""`. Let me explain why. The target attribute for the HTML anchor tag can have 5 different values. ""_self"" which is the default and opens in the same window/tab, ""_blank"" which opens in a new window/tab, and 3 others related to frames. As frames are deprecated in HTML 5, this 3 other possible values are also deprecated leaving just ""_self"" or ""_blank"" which lends to this feature being a boolean.', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'felicianotech', 'comment_id': 372863448.0, 'datetime': '2018-03-14 00:21:22+00:00', 'masked_author': 'username_0', 'text': 'If I rebase, we lose the test I made. Should i just close this PR at this point?', 'title': None, 'type': 'comment'}]","<issue_start><issue_comment>Title: Add NewTab property to Hugo menus
+username_0: This PR adds support for opening Hugo menu items in a new tab/window.
+
+I've seen old Issues and Discourse posts on new tab support in Hugo but they all references opening links in content/Markdown. Hugo now has a config option to tell BlackFriday to do that and it works great. This PR is specifically for Hugo menus and allowing links to open in a new tab.
+
+Many power users who surf the web know how to middle click a link to open in a new tab or to use the content menu or even control click. Not all users are power users. I've come across many website owners who don't want to lose visitors to certain external links, thus this feature comes in handy.
+
+Also included is a small docs tweak to also mention this new menu item property.
+
+I tried to follow [CONTRIBUTING.md](https://github.com/spf13/hugo/blob/master/CONTRIBUTING.md) to the tee here though I'm not sure what would be the best way to modify the tests file to include this property.
+<issue_comment>username_1: See #3600
+<issue_comment>username_0: # Updated PR
+
+1. Rebased on `master` since this PR was *old*.
+2. Moved the docs portion of this PR to gohugoio/hugoDocs#273 since the docs was split into its own repo.
+3. Added a simple test as @username_1 requested. The test was added to the old menu_test file which explicitly says to not add anymore tests to. :disappointed: Problem is, the new test file doesn't have a setup for config menus, just page menus so I didn't know how to add it there.
+4. In issue #3600 it was brought up that this PR only adds the option for `target=""_blank""`. Let me explain why. The target attribute for the HTML anchor tag can have 5 different values. ""_self"" which is the default and opens in the same window/tab, ""_blank"" which opens in a new window/tab, and 3 others related to frames. As frames are deprecated in HTML 5, this 3 other possible values are also deprecated leaving just ""_self"" or ""_blank"" which lends to this feature being a boolean.
+<issue_comment>username_0: If I rebase, we lose the test I made. Should i just close this PR at this point?"
+zaproxy/zaproxy-website,757247955,268,"{'number': 268.0, 'repo': 'zaproxy-website', 'user_login': 'zaproxy'}","[{'action': 'opened', 'author': 'ricekot', 'comment_id': None, 'datetime': '2020-12-04T16:52:30Z', 'masked_author': 'username_0', 'text': '', 'title': 'Add ZAP Developer Docs', 'type': 'issue'}
+ {'action': 'created', 'author': 'kingthorin', 'comment_id': 738918683.0, 'datetime': '2020-12-04 17:40:17+00:00', 'masked_author': 'username_1', 'text': ""Maybe it's too advanced for this content but I'll mention it anyway: This is the chained one-liner I use for updating all my repos. Doesn't matter what the default branch is because it figures that out for you (master, develop, main, whatever):\r\n```bash\r\nDEFAULT=$(git symbolic-ref --short HEAD) && git fetch -vp origin && git fetch -vp upstream && git merge upstream/$DEFAULT && git push\r\n```\r\n\r\n1. It assumes you're in the repo directory and have the default branch checked out.\r\n1. Find the default branch name.\r\n1. Fetch origin verbosely and prune branches that have been removed.\r\n1. Fetch upstream verbosely and prune branches that have been removed.\r\n1. Merge upstream into local.\r\n1. Push back to origin."", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'psiinon', 'comment_id': 738919440.0, 'datetime': '2020-12-04 17:41:35+00:00', 'masked_author': 'username_2', 'text': 'Great Docs!\r\nMight be worth mentioning the option to install the weekly add-ons.\r\nAlso mention that we will be adding more docs relating to makmning contributions in the future?', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'psiinon', 'comment_id': 738922811.0, 'datetime': '2020-12-04 17:46:43+00:00', 'masked_author': 'username_2', 'text': ""@username_1 re your power user git command - we should definitely include things like that, but maybe on a future page? I'd really like to keep this one as simple as possible so we dont frighten people off. We can add more pages with more helpful stuff for people to use one they've got ZAP running."", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'ricekot', 'comment_id': 740754335.0, 'datetime': '2020-12-08 16:47:46+00:00', 'masked_author': 'username_0', 'text': ""Please don't merge this yet, incoming changes..."", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'ricekot', 'comment_id': 740754845.0, 'datetime': '2020-12-08 16:48:29+00:00', 'masked_author': 'username_0', 'text': 'The API key needs to be disabled for `./gradlew installZapAddOn` to work.', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'ricekot', 'comment_id': 740843070.0, 'datetime': '2020-12-08 18:51:08+00:00', 'masked_author': 'username_0', 'text': 'As discussed on IRC,\r\n- replaced `installZapAddOn` with `copyZapAddOn` (hence eliminating the need for disabling the API key) and\r\n- added a couple of lines for `copyWeeklyAddOns`.', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'thc202', 'comment_id': 741637056.0, 'datetime': '2020-12-09 09:07:16+00:00', 'masked_author': 'username_3', 'text': 'Thanks!', 'title': None, 'type': 'comment'}]","<issue_start><issue_comment>Title: Add ZAP Developer Docs
+username_0: 
+<issue_comment>username_1: Maybe it's too advanced for this content but I'll mention it anyway: This is the chained one-liner I use for updating all my repos. Doesn't matter what the default branch is because it figures that out for you (master, develop, main, whatever):
+```bash
+DEFAULT=$(git symbolic-ref --short HEAD) && git fetch -vp origin && git fetch -vp upstream && git merge upstream/$DEFAULT && git push
+```
+
+1. It assumes you're in the repo directory and have the default branch checked out.
+1. Find the default branch name.
+1. Fetch origin verbosely and prune branches that have been removed.
+1. Fetch upstream verbosely and prune branches that have been removed.
+1. Merge upstream into local.
+1. Push back to origin.
+<issue_comment>username_2: Great Docs!
+Might be worth mentioning the option to install the weekly add-ons.
+Also mention that we will be adding more docs relating to makmning contributions in the future?
+<issue_comment>username_2: @username_1 re your power user git command - we should definitely include things like that, but maybe on a future page? I'd really like to keep this one as simple as possible so we dont frighten people off. We can add more pages with more helpful stuff for people to use one they've got ZAP running.
+<issue_comment>username_0: Please don't merge this yet, incoming changes...
+<issue_comment>username_0: The API key needs to be disabled for `./gradlew installZapAddOn` to work.
+<issue_comment>username_0: As discussed on IRC,
+- replaced `installZapAddOn` with `copyZapAddOn` (hence eliminating the need for disabling the API key) and
+- added a couple of lines for `copyWeeklyAddOns`.
+<issue_comment>username_3: Thanks!"
+AdoptOpenJDK/openjdk-website,405781363,400,,"[{'action': 'opened', 'author': 'Maldivia', 'comment_id': None, 'datetime': '2019-02-01 16:42:30+00:00', 'masked_author': 'username_0', 'text': ""<!--\r\nThank you for reporting an issue.\r\n\r\nPlease fill in as much of the template below as you're able.\r\n\r\nTo find out what version your browser is:\r\n\r\nhttp://www.bbc.co.uk/accessibility/guides/which_browser.shtml\r\n\r\n-->\r\n* **Browser**:\r\n\r\n<!-- Enter your issue details below this comment. -->\r\nThe Windows installation instructions found at https://adoptopenjdk.net/installation.html#x64_win-jdk contains information to use `unzip` to extract the downloaded archive.\r\nUnfortunately, a standard installation of Windows does not contain the `unzip` tool, either need to go through PowerShell (`Expand-Archive`), Windows Explorer or a 3rd party option."", 'title': 'Windows installation instruction, usage of unzip', 'type': 'issue'}
+ {'action': 'created', 'author': 'hendrikebbers', 'comment_id': 696551755.0, 'datetime': '2020-09-22 07:18:29+00:00', 'masked_author': 'username_1', 'text': '@username_0 I edited your issue description to match our template for ""good first issue"". I will later this week remove your and my comments to have this issue as clear as possible for a newcomer :)', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'hendrikebbers', 'comment_id': 696552151.0, 'datetime': '2020-09-22 07:19:28+00:00', 'masked_author': 'username_1', 'text': 'Oh, I just see that a fix was already merged ... @username_0 should we close this issue?', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'Maldivia', 'comment_id': 698603020.0, 'datetime': '2020-09-24 21:38:26+00:00', 'masked_author': 'username_0', 'text': '@username_1 Hadn\'t noticed myself that something had been done here.\r\nBut step 3 right now is a bit misleading, since the command is a powershell command and the intro text says "" use Terminal/Command Prompt "".\r\n\r\nBut I don\'t really know how many people are using these instructions anyway; I guess most people choosing to download the .zip file instead of the installer knows how to extract a .zip file.', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'hendrikebbers', 'comment_id': 711873014.0, 'datetime': '2020-10-19 08:53:48+00:00', 'masked_author': 'username_1', 'text': 'ok, so the issue will stay open and maybe somebody will provide a small fix for step 3 at hacktoberfest :)', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'Apurwa96', 'comment_id': 810867488.0, 'datetime': '2021-03-31 08:07:42+00:00', 'masked_author': 'username_2', 'text': 'Hi, I am an outreachy applicant and first time contributing to Open Source. can I work on this task?', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'smlambert', 'comment_id': 811111434.0, 'datetime': '2021-03-31 14:27:11+00:00', 'masked_author': 'username_3', 'text': 'Yes, thanks @username_2 !  If you have questions, please ask them in this issue!', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'Apurwa96', 'comment_id': 813190084.0, 'datetime': '2021-04-05 05:20:20+00:00', 'masked_author': 'username_2', 'text': 'Hi, Please review the pull request https://github.com/AdoptOpenJDK/openjdk-website/pull/966 and let me know in case of any changes. :)', 'title': None, 'type': 'comment'}
+ {'action': 'closed', 'author': 'karianna', 'comment_id': None, 'datetime': '2021-04-07 18:19:10+00:00', 'masked_author': 'username_4', 'text': '', 'title': None, 'type': 'issue'}]","<issue_start><issue_comment>Title: Windows installation instruction, usage of unzip
+username_0: <!--
+Thank you for reporting an issue.
+
+Please fill in as much of the template below as you're able.
+
+To find out what version your browser is:
+
+http://www.bbc.co.uk/accessibility/guides/which_browser.shtml
+
+-->
+* **Browser**:
+
+<!-- Enter your issue details below this comment. -->
+The Windows installation instructions found at https://adoptopenjdk.net/installation.html#x64_win-jdk contains information to use `unzip` to extract the downloaded archive.
+Unfortunately, a standard installation of Windows does not contain the `unzip` tool, either need to go through PowerShell (`Expand-Archive`), Windows Explorer or a 3rd party option.
+<issue_comment>username_1: @username_0 I edited your issue description to match our template for ""good first issue"". I will later this week remove your and my comments to have this issue as clear as possible for a newcomer :)
+<issue_comment>username_1: Oh, I just see that a fix was already merged ... @username_0 should we close this issue?
+<issue_comment>username_0: @username_1 Hadn't noticed myself that something had been done here.
+But step 3 right now is a bit misleading, since the command is a powershell command and the intro text says "" use Terminal/Command Prompt "".
+
+But I don't really know how many people are using these instructions anyway; I guess most people choosing to download the .zip file instead of the installer knows how to extract a .zip file.
+<issue_comment>username_1: ok, so the issue will stay open and maybe somebody will provide a small fix for step 3 at hacktoberfest :)
+<issue_comment>username_2: Hi, I am an outreachy applicant and first time contributing to Open Source. can I work on this task?
+<issue_comment>username_3: Yes, thanks @username_2 !  If you have questions, please ask them in this issue!
+<issue_comment>username_2: Hi, Please review the pull request https://github.com/AdoptOpenJDK/openjdk-website/pull/966 and let me know in case of any changes. :)<issue_closed>"
+newrelic/docs-website,982263968,3703,"{'number': 3703.0, 'repo': 'docs-website', 'user_login': 'newrelic'}","[{'action': 'opened', 'author': 'djaffinito', 'comment_id': None, 'datetime': '2021-08-30T00:56:47Z', 'masked_author': 'username_0', 'text': ""Updated the powershell script so that it adds the .NET Core related values as well. Also updated the names of the collapse menus so that they are unique and can be linked to.\r\n\r\n<!-- Thanks for contributing to our docs! -->\r\n\r\n<!-- For Japanese readers: \r\nもしドキュメントの日本語訳で問題を見つけた場合はPRではなくissueを提出してください。\r\n日本語訳へのPRについてはまだ取り込む準備ができていません。-->\r\n\r\n### Give us some context\r\n\r\n* What problems does this PR solve?\r\n\r\n1. The current powershell script doesn't restore all of the registry values needed. \r\n2. The 2nd and 3rd collapse menus both have the same name `registry-keys` so we can't link to a specific one.\r\n\r\n* Add any context that will help us review your changes such as testing notes,\r\n  links to related docs, screenshots, etc.\r\n* If your issue relates to an existing GitHub issue, please link to it.\r\n\r\n### Are you making a change to site code?\r\n\r\nIf you're changing site code (rather than the content of a doc), please follow\r\n[conventional commit standards](https://www.conventionalcommits.org/en/v1.0.0/)\r\nin your commit messages and pull request title."", 'title': 'Update profiler-conflicts.mdx', 'type': 'issue'}]","<issue_start><issue_comment>Title: Update profiler-conflicts.mdx
+username_0: Updated the powershell script so that it adds the .NET Core related values as well. Also updated the names of the collapse menus so that they are unique and can be linked to.
+
+<!-- Thanks for contributing to our docs! -->
+
+<!-- For Japanese readers: 
+もしドキュメントの日本語訳で問題を見つけた場合はPRではなくissueを提出してください。
+日本語訳へのPRについてはまだ取り込む準備ができていません。-->
+
+### Give us some context
+
+* What problems does this PR solve?
+
+1. The current powershell script doesn't restore all of the registry values needed. 
+2. The 2nd and 3rd collapse menus both have the same name `registry-keys` so we can't link to a specific one.
+
+* Add any context that will help us review your changes such as testing notes,
+  links to related docs, screenshots, etc.
+* If your issue relates to an existing GitHub issue, please link to it.
+
+### Are you making a change to site code?
+
+If you're changing site code (rather than the content of a doc), please follow
+[conventional commit standards](https://www.conventionalcommits.org/en/v1.0.0/)
+in your commit messages and pull request title."
+JuliaLang/www.julialang.org,604788840,729,"{'number': 729.0, 'repo': 'www.julialang.org', 'user_login': 'JuliaLang'}","[{'action': 'opened', 'author': 'logankilpatrick', 'comment_id': None, 'datetime': '2020-04-22T14:09:52Z', 'masked_author': 'username_0', 'text': 'Will eventually be linked on the home page with the code example(s).', 'title': 'Add Why Julia page', 'type': 'issue'}
+ {'action': 'created', 'author': 'ViralBShah', 'comment_id': 617812325.0, 'datetime': '2020-04-22 14:26:34+00:00', 'masked_author': 'username_1', 'text': 'This video is more of a how rather than a why. I would prefer to have good content ready before we merge this PR. Can we make it a ""draft PR"" in the meanwhile?', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'logankilpatrick', 'comment_id': 617816498.0, 'datetime': '2020-04-22 14:33:28+00:00', 'masked_author': 'username_0', 'text': 'This individual chose to not just tell but __show__ why Julia is powerful in the case of Package Dev. Converting to draft PR until we get more videos.', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'ViralBShah', 'comment_id': 617824811.0, 'datetime': '2020-04-22 14:46:51+00:00', 'masked_author': 'username_1', 'text': 'Ah yes - I see how that fits. Perhaps we just need the right text captions to set the context. I do like that it is a 4 minute video. Sorry - my intention was not to sound harsh about the contribution (revisiting my comment).', 'title': None, 'type': 'comment'}]","<issue_start><issue_comment>Title: Add Why Julia page
+username_0: Will eventually be linked on the home page with the code example(s).
+<issue_comment>username_1: This video is more of a how rather than a why. I would prefer to have good content ready before we merge this PR. Can we make it a ""draft PR"" in the meanwhile?
+<issue_comment>username_0: This individual chose to not just tell but __show__ why Julia is powerful in the case of Package Dev. Converting to draft PR until we get more videos.
+<issue_comment>username_1: Ah yes - I see how that fits. Perhaps we just need the right text captions to set the context. I do like that it is a 4 minute video. Sorry - my intention was not to sound harsh about the contribution (revisiting my comment)."
+emberjs/website,267162642,3045,,"[{'action': 'opened', 'author': 'sandstrom', 'comment_id': None, 'datetime': '2017-10-20 12:40:27+00:00', 'masked_author': 'username_0', 'text': ""Would you be open to updating the 'user showcase' with more well-known companies.\r\n\r\nThe current list:\r\n\r\n- MHE Labs => Never heard of\r\n- Yapp => Never heard of\r\n- Tilde => We're a Skylight customer so I know, but it's not a well-known company\r\n- Bustle => Never heard of\r\n\r\nInstead, I'd suggest these four:\r\n\r\n- **Netflix** (well known consumer company)\r\n- **Intercom** (example of how powerful Ember is for large SPAs)\r\n- **Zendesk** (good enterprise example)\r\n- **Heroku** (have solid reputation among developers)\r\n\r\nA few other good examples (but I'd still prefer the four above):\r\n- Kickstarter\r\n- LinkedIn\r\n- Travis CI\r\n- Square"", 'title': 'Better user showcase', 'type': 'issue'}
+ {'action': 'created', 'author': 'rtablada', 'comment_id': 338323752.0, 'datetime': '2017-10-20 21:14:07+00:00', 'masked_author': 'username_1', 'text': 'I think a general discussion of keeping the users and advertising up to date is something we should do better at.\r\n\r\nHowever, the thought of highlighting some companies over others is short sighted IMO.\r\n\r\nI think a big benefit of having a lot of different types of companies is that it shows Ember can be used in different situations.\r\n\r\n---\r\n\r\nIn terms of companies to include I think there is a discussion of who we would like to contact, but there is legal and marketing hoops to go through in order to get approval to use company assets to market ember.', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'NullVoxPopuli', 'comment_id': 338330371.0, 'datetime': '2017-10-20 21:48:48+00:00', 'masked_author': 'username_2', 'text': 'I think it depends on what you know. From the list, my most well known are (in order):\r\nTwitch, Acorns, NetFlix, Microsoft, TED, LinkedIN, testdouble, Travis CI, Yahoo, thoughtbot, Boxee,  Urbanspoon, Discourse, Square, ZenDesk, TinderBox,', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'acorncom', 'comment_id': 338331337.0, 'datetime': '2017-10-20 21:53:55+00:00', 'masked_author': 'username_3', 'text': 'From what I remember, we\'ve discussed this before.  I know we\'re potentially playing with 🔥 here (and so think we should tread cautiously), but I think there is merit in the discussion.\r\n\r\nMost scrappy startups have a ""look who else is using us!"" section (like we currently do on the website) but they deliberately cherry-pick well-known brands if at all possible.  Neither the React nor the Angular website do this, but that\'s because React and Angular are well-known as tools with mammoth companies behind them.  One of Ember\'s main pitches is that we\'ve adopted a ""coalition-led"" approach to OSS.  Given that, I think it\'s worth thinking through how to highlight well that that coalition approach has worked (and is still working) for us.\r\n\r\nPolitically, I can see this getting complicated.  But I still would like to see us consider how to improve it so that Ember isn\'t considered an also-ran in the JS world ... 😀', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'sandstrom', 'comment_id': 338393712.0, 'datetime': '2017-10-21 13:15:16+00:00', 'masked_author': 'username_0', 'text': ""@username_1 All companies I mentioned are either in the 'top four' front page list or among the [list of ember users](https://emberjs.com/ember-users/). So it's only a matter of prioritization — no need to ask any legal/marketing departments.\r\n\r\n@username_2 Agree, it depends (I'm not American, for example). I'm not very fixed on a specific set of companies, as long choose good examples.\r\n\r\nI'd say a balance between recognizable, different industries and different types of applications. So some consumer application, something B2B and tilted towards companies that developers will know about (sorry Bustle!, hehe)."", 'title': None, 'type': 'comment'}
+ {'action': 'closed', 'author': 'wifelette', 'comment_id': None, 'datetime': '2017-10-23 18:39:28+00:00', 'masked_author': 'username_4', 'text': '', 'title': None, 'type': 'issue'}
+ {'action': 'created', 'author': 'wifelette', 'comment_id': 338756506.0, 'datetime': '2017-10-23 18:39:28+00:00', 'masked_author': 'username_4', 'text': ""Heya—\r\n\r\nI'm on board for a refresh, it's time. I used to do it periodically but haven't in a while. So thanks @username_0 for bringing it back up!\r\n\r\nWe did some tidy-work on #3011, and talked about design changes in #2973. I'm still on board for the changes we theorized in #2973 but I don't think we have design resources to work on it. Also, there's no reason this should gate on that, but I wanted to make sure all the context was here :)\r\n\r\nI'll get a new PR in today to at least make some starter swaps for bigger names. But I'd love to have someone tackle a design like #2973 if someone's up for it, and am still game to get in touch with the companies for authorization if the design materializes."", 'title': None, 'type': 'comment'}]","<issue_start><issue_comment>Title: Better user showcase
+username_0: Would you be open to updating the 'user showcase' with more well-known companies.
+
+The current list:
+
+- MHE Labs => Never heard of
+- Yapp => Never heard of
+- Tilde => We're a Skylight customer so I know, but it's not a well-known company
+- Bustle => Never heard of
+
+Instead, I'd suggest these four:
+
+- **Netflix** (well known consumer company)
+- **Intercom** (example of how powerful Ember is for large SPAs)
+- **Zendesk** (good enterprise example)
+- **Heroku** (have solid reputation among developers)
+
+A few other good examples (but I'd still prefer the four above):
+- Kickstarter
+- LinkedIn
+- Travis CI
+- Square
+<issue_comment>username_1: I think a general discussion of keeping the users and advertising up to date is something we should do better at.
+
+However, the thought of highlighting some companies over others is short sighted IMO.
+
+I think a big benefit of having a lot of different types of companies is that it shows Ember can be used in different situations.
+
+---
+
+In terms of companies to include I think there is a discussion of who we would like to contact, but there is legal and marketing hoops to go through in order to get approval to use company assets to market ember.
+<issue_comment>username_2: I think it depends on what you know. From the list, my most well known are (in order):
+Twitch, Acorns, NetFlix, Microsoft, TED, LinkedIN, testdouble, Travis CI, Yahoo, thoughtbot, Boxee,  Urbanspoon, Discourse, Square, ZenDesk, TinderBox,
+<issue_comment>username_3: From what I remember, we've discussed this before.  I know we're potentially playing with 🔥 here (and so think we should tread cautiously), but I think there is merit in the discussion.
+
+Most scrappy startups have a ""look who else is using us!"" section (like we currently do on the website) but they deliberately cherry-pick well-known brands if at all possible.  Neither the React nor the Angular website do this, but that's because React and Angular are well-known as tools with mammoth companies behind them.  One of Ember's main pitches is that we've adopted a ""coalition-led"" approach to OSS.  Given that, I think it's worth thinking through how to highlight well that that coalition approach has worked (and is still working) for us.
+
+Politically, I can see this getting complicated.  But I still would like to see us consider how to improve it so that Ember isn't considered an also-ran in the JS world ... 😀
+<issue_comment>username_0: @username_1 All companies I mentioned are either in the 'top four' front page list or among the [list of ember users](https://emberjs.com/ember-users/). So it's only a matter of prioritization — no need to ask any legal/marketing departments.
+
+@username_2 Agree, it depends (I'm not American, for example). I'm not very fixed on a specific set of companies, as long choose good examples.
+
+I'd say a balance between recognizable, different industries and different types of applications. So some consumer application, something B2B and tilted towards companies that developers will know about (sorry Bustle!, hehe).<issue_closed>
+<issue_comment>username_4: Heya—
+
+I'm on board for a refresh, it's time. I used to do it periodically but haven't in a while. So thanks @username_0 for bringing it back up!
+
+We did some tidy-work on #3011, and talked about design changes in #2973. I'm still on board for the changes we theorized in #2973 but I don't think we have design resources to work on it. Also, there's no reason this should gate on that, but I wanted to make sure all the context was here :)
+
+I'll get a new PR in today to at least make some starter swaps for bigger names. But I'd love to have someone tackle a design like #2973 if someone's up for it, and am still game to get in touch with the companies for authorization if the design materializes."

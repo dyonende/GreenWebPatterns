@@ -1,0 +1,502 @@
+hartator/wayback-machine-downloader,1091917802,210,,"[{'action': 'opened', 'author': 'LostAccount', 'comment_id': None, 'datetime': '2022-01-01 23:54:49+00:00', 'masked_author': 'username_0', 'text': 'I ran this command\r\n\r\n`wayback_machine_downloader -a -d blackdiamond.co.za_IA c1 --only ""/\\.(sit|sea|img|smi|hqx|bin|pkg|cpt|dd|pdf|pit|as|dmg)$/i"" http://blackdiamond.co.za`\r\n\r\nI get a number of 404s\r\nSome examples;\r\n\r\n```\r\nhttp://blackdiamond.co.za/Monica_3.0_PB1_Helpers.sit.hqx # 404 Not Found\r\nblackdiamond.co.za_IA/Monica_3.0_PB1_Helpers.sit.hqx saved anyway.\r\nhttp://blackdiamond.co.za/Monica_3.0_PB1_Helpers.sit.hqx -> blackdiamond.co.za_IA/Monica_3.0_PB1_Helpers.sit.hqx (9/29)\r\nhttp://blackdiamond.co.za/Monica_4.0Xb2.sit.hqx # 404 Not Found\r\nblackdiamond.co.za_IA/Monica_4.0Xb2.sit.hqx saved anyway.\r\nhttp://blackdiamond.co.za/Monica_4.0Xb2.sit.hqx -> blackdiamond.co.za_IA/Monica_4.0Xb2.sit.hqx (10/29)\r\nhttp://blackdiamond.co.za/HeftyFTP_1.5.sit.hqx # 404 Not Found\r\nblackdiamond.co.za_IA/HeftyFTP_1.5.sit.hqx saved anyway.\r\nhttp://blackdiamond.co.za/HeftyFTP_1.5.sit.hqx -> blackdiamond.co.za_IA/HeftyFTP_1.5.sit.hqx (11/29)\r\nhttp://blackdiamond.co.za/HeftyFTP_1.7Xb3.sit.hqx # 404 Not Found\r\nblackdiamond.co.za_IA/HeftyFTP_1.7Xb3.sit.hqx saved anyway.\r\n```\r\n\r\nIf I go the waybackmachine website manually and enter http://blackdiamond.co.za/HeftyFTP_1.7Xb3.sit.hqx I do get a full download.\r\n\r\nI am running wayback_machine_downloader (2.3.1)', 'title': 'Files that exist are returned as 404 despite existing on web.archive.org', 'type': 'issue'}
+ {'action': 'created', 'author': 'LostAccount', 'comment_id': 1003726556.0, 'datetime': '2022-01-02 14:44:51+00:00', 'masked_author': 'username_0', 'text': 'Short update as I experiment:\r\n\r\nI tried the -s flag and everything downloads but there is one caveat.\r\n\r\nThe -a leaves me with a beautiful tree directory\r\nThe -s leaves me a tree, one directory per snapshot.\r\n\r\nNew question, **is there any way to enjoy the power `-s `gives me while still enjoying the beautifully laid out tree folder directory structure that the `-a` flag provides?**\r\n\r\n----\r\n\r\n`wayback_machine_downloader -s -d blackdiamond.co.za2_IA c1 --only ""/\\.(sit|sea|img|smi|hqx|bin|pkg|cpt|dd|pdf|pit|as|dmg)$/i"" http://blackdiamond.co.za\r\n`\r\n\r\n```\r\n30 files to download:\r\nhttp://blackdiamond.co.za:80/AppearanceKit_09.sit.hqx -> blackdiamond.co.za2_IA/20060303224423/AppearanceKit_09.sit.hqx (1/30)\r\nhttp://blackdiamond.co.za:80/Bopalong_0.9pb.sit.hqx -> blackdiamond.co.za2_IA/20060319231456/Bopalong_0.9pb.sit.hqx (2/30)\r\nhttp://blackdiamond.co.za:80/FileFone_0.9pb.sit.hqx -> blackdiamond.co.za2_IA/20060501194559/FileFone_0.9pb.sit.hqx (3/30)\r\nhttp://www.blackdiamond.co.za:80/HeftyFTP16XPB1.sit.hqx -> blackdiamond.co.za2_IA/20010604234351/HeftyFTP16XPB1.sit.hqx (4/30)\r\nhttp://blackdiamond.co.za:80/HeftyFTP_1.5.sit.hqx -> blackdiamond.co.za2_IA/20060205162637/HeftyFTP_1.5.sit.hqx (5/30)\r\nhttp://blackdiamond.co.za:80/HeftyFTP_1.7Xb3.sit.hqx -> blackdiamond.co.za2_IA/20051215031913/HeftyFTP_1.7Xb3.sit.hqx (6/30)\r\nhttp://blackdiamond.co.za/ListCompare.sit.hqx -> blackdiamond.co.za2_IA/20050722191249/ListCompare.sit.hqx (7/30)\r\nhttp://blackdiamond.co.za:80/ListCompare.sit.hqx -> blackdiamond.co.za2_IA/20060502011224/ListCompare.sit.hqx (8/30)\r\nhttp://www.blackdiamond.co.za:80/magazines/Nec%20PC-8000%20Brochure%20English%201.pdf -> blackdiamond.co.za2_IA/20150117091153/magazines/Nec PC-8000 Brochure English 1.pdf (9/30)\r\nhttp://www.blackdiamond.co.za:80/magazines/Nec%20PC-8800%20Brochure%20English%201.pdf -> blackdiamond.co.za2_IA/20150117085121/magazines/Nec PC-8800 Brochure English 1.pdf (10/30)\r\nhttp://www.blackdiamond.co.za:80/magazines/Nec%20PC-8800%20Brochure%20English%202.pdf -> blackdiamond.co.za2_IA/20150117090456/magazines/Nec PC-8800 Brochure English 2.pdf (11/30)\r\nhttp://www.blackdiamond.co.za:80/magazines/Takeru%20Press%20199310.pdf -> blackdiamond.co.za2_IA/20150117085758/magazines/Takeru Press 199310.pdf (12/30)\r\nhttp://blackdiamond.co.za/Monica2.2.sit.hqx -> blackdiamond.co.za2_IA/20050725144533/Monica2.2.sit.hqx (13/30)\r\nhttp://www.blackdiamond.co.za:80/Monica30XPB1.sit.hqx -> blackdiamond.co.za2_IA/20010523075908/Monica30XPB1.sit.hqx (14/30)\r\nhttp://blackdiamond.co.za:80/Monica30XPB1_Helpers.sit.hqx -> blackdiamond.co.za2_IA/20051215035458/Monica30XPB1_Helpers.sit.hqx (15/30)\r\nhttp://blackdiamond.co.za:80/Monica30XPB2.sit.hqx -> blackdiamond.co.za2_IA/20051215033615/Monica30XPB2.sit.hqx (16/30)\r\nhttp://blackdiamond.co.za:80/Monica_3.0_PB1.sit.hqx -> blackdiamond.co.za2_IA/20051215035102/Monica_3.0_PB1.sit.hqx (17/30)\r\nhttp://blackdiamond.co.za:80/Monica_3.0_PB1_Helpers.sit.hqx -> blackdiamond.co.za2_IA/20051215035625/Monica_3.0_PB1_Helpers.sit.hqx (18/30)\r\nhttp://blackdiamond.co.za:80/Monica_4.0Xb2.sit.hqx -> blackdiamond.co.za2_IA/20051215034257/Monica_4.0Xb2.sit.hqx (19/30)\r\nhttp://blackdiamond.co.za:80/Monica_J_PPC_2.2PB2.sit.hqx -> blackdiamond.co.za2_IA/20051228201236/Monica_J_PPC_2.2PB2.sit.hqx (20/30)\r\nhttp://blackdiamond.co.za:80/NewsFinder1.2.sit.hqx -> blackdiamond.co.za2_IA/20060320193904/NewsFinder1.2.sit.hqx (21/30)\r\nhttp://www.blackdiamond.co.za:80/Piccly_1.0.sit.hqx -> blackdiamond.co.za2_IA/20051228033802/Piccly_1.0.sit.hqx (22/30)\r\nhttp://blackdiamond.co.za/qdTextViewer_09b.sit.hqx -> blackdiamond.co.za2_IA/20050319072555/qdTextViewer_09b.sit.hqx (23/30)\r\nhttp://www.blackdiamond.co.za/ResConv_09b.sit.hqx -> blackdiamond.co.za2_IA/20061218105630/ResConv_09b.sit.hqx (24/30)\r\nhttp://blackdiamond.co.za:80/Sgt_Zondi_0.1pb.sit.hqx -> blackdiamond.co.za2_IA/20060314201843/Sgt_Zondi_0.1pb.sit.hqx (25/30)\r\nhttp://www.blackdiamond.co.za:80/SockeToome_1.0.sit.hqx -> blackdiamond.co.za2_IA/20060108120244/SockeToome_1.0.sit.hqx (26/30)\r\nhttp://blackdiamond.co.za:80/Thumbnailer.sit.hqx -> blackdiamond.co.za2_IA/20060210013327/Thumbnailer.sit.hqx (27/30)\r\nhttp://blackdiamond.co.za:80/ThumbNailer_1.0.sit.hqx -> blackdiamond.co.za2_IA/20060502011242/ThumbNailer_1.0.sit.hqx (28/30)\r\nhttp://blackdiamond.co.za/WebiToome_0.9pb.sit.hqx -> blackdiamond.co.za2_IA/20051020095317/WebiToome_0.9pb.sit.hqx (29/30)\r\nhttp://blackdiamond.co.za:80/Zig_Utilities.sit.hqx -> blackdiamond.co.za2_IA/20060502011237/Zig_Utilities.sit.hqx (30/30)\r\n\r\nDownload completed in 403.15s, saved in blackdiamond.co.za2_IA/ (30 files)\r\n\r\n```', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'LostAccount', 'comment_id': 1003732416.0, 'datetime': '2022-01-02 15:27:55+00:00', 'masked_author': 'username_0', 'text': 'ok as per[ #https://github.com/hartator/wayback-machine-downloader/issues/159#issue-575078106 # #](https://github.com/hartator/wayback-machine-downloader/issues/159)\r\n\r\nI will avoid the -s and -a flag.', 'title': None, 'type': 'comment'}
+ {'action': 'closed', 'author': 'LostAccount', 'comment_id': None, 'datetime': '2022-01-03 11:54:08+00:00', 'masked_author': 'username_0', 'text': '', 'title': None, 'type': 'issue'}]","<issue_start><issue_comment>Title: Files that exist are returned as 404 despite existing on web.archive.org
+username_0: I ran this command
+
+`wayback_machine_downloader -a -d blackdiamond.co.za_IA c1 --only ""/\.(sit|sea|img|smi|hqx|bin|pkg|cpt|dd|pdf|pit|as|dmg)$/i"" http://blackdiamond.co.za`
+
+I get a number of 404s
+Some examples;
+
+```
+http://blackdiamond.co.za/Monica_3.0_PB1_Helpers.sit.hqx # 404 Not Found
+blackdiamond.co.za_IA/Monica_3.0_PB1_Helpers.sit.hqx saved anyway.
+http://blackdiamond.co.za/Monica_3.0_PB1_Helpers.sit.hqx -> blackdiamond.co.za_IA/Monica_3.0_PB1_Helpers.sit.hqx (9/29)
+http://blackdiamond.co.za/Monica_4.0Xb2.sit.hqx # 404 Not Found
+blackdiamond.co.za_IA/Monica_4.0Xb2.sit.hqx saved anyway.
+http://blackdiamond.co.za/Monica_4.0Xb2.sit.hqx -> blackdiamond.co.za_IA/Monica_4.0Xb2.sit.hqx (10/29)
+http://blackdiamond.co.za/HeftyFTP_1.5.sit.hqx # 404 Not Found
+blackdiamond.co.za_IA/HeftyFTP_1.5.sit.hqx saved anyway.
+http://blackdiamond.co.za/HeftyFTP_1.5.sit.hqx -> blackdiamond.co.za_IA/HeftyFTP_1.5.sit.hqx (11/29)
+http://blackdiamond.co.za/HeftyFTP_1.7Xb3.sit.hqx # 404 Not Found
+blackdiamond.co.za_IA/HeftyFTP_1.7Xb3.sit.hqx saved anyway.
+```
+
+If I go the waybackmachine website manually and enter http://blackdiamond.co.za/HeftyFTP_1.7Xb3.sit.hqx I do get a full download.
+
+I am running wayback_machine_downloader (2.3.1)
+<issue_comment>username_0: Short update as I experiment:
+
+I tried the -s flag and everything downloads but there is one caveat.
+
+The -a leaves me with a beautiful tree directory
+The -s leaves me a tree, one directory per snapshot.
+
+New question, **is there any way to enjoy the power `-s `gives me while still enjoying the beautifully laid out tree folder directory structure that the `-a` flag provides?**
+
+----
+
+`wayback_machine_downloader -s -d blackdiamond.co.za2_IA c1 --only ""/\.(sit|sea|img|smi|hqx|bin|pkg|cpt|dd|pdf|pit|as|dmg)$/i"" http://blackdiamond.co.za
+`
+
+```
+30 files to download:
+http://blackdiamond.co.za:80/AppearanceKit_09.sit.hqx -> blackdiamond.co.za2_IA/20060303224423/AppearanceKit_09.sit.hqx (1/30)
+http://blackdiamond.co.za:80/Bopalong_0.9pb.sit.hqx -> blackdiamond.co.za2_IA/20060319231456/Bopalong_0.9pb.sit.hqx (2/30)
+http://blackdiamond.co.za:80/FileFone_0.9pb.sit.hqx -> blackdiamond.co.za2_IA/20060501194559/FileFone_0.9pb.sit.hqx (3/30)
+http://www.blackdiamond.co.za:80/HeftyFTP16XPB1.sit.hqx -> blackdiamond.co.za2_IA/20010604234351/HeftyFTP16XPB1.sit.hqx (4/30)
+http://blackdiamond.co.za:80/HeftyFTP_1.5.sit.hqx -> blackdiamond.co.za2_IA/20060205162637/HeftyFTP_1.5.sit.hqx (5/30)
+http://blackdiamond.co.za:80/HeftyFTP_1.7Xb3.sit.hqx -> blackdiamond.co.za2_IA/20051215031913/HeftyFTP_1.7Xb3.sit.hqx (6/30)
+http://blackdiamond.co.za/ListCompare.sit.hqx -> blackdiamond.co.za2_IA/20050722191249/ListCompare.sit.hqx (7/30)
+http://blackdiamond.co.za:80/ListCompare.sit.hqx -> blackdiamond.co.za2_IA/20060502011224/ListCompare.sit.hqx (8/30)
+http://www.blackdiamond.co.za:80/magazines/Nec%20PC-8000%20Brochure%20English%201.pdf -> blackdiamond.co.za2_IA/20150117091153/magazines/Nec PC-8000 Brochure English 1.pdf (9/30)
+http://www.blackdiamond.co.za:80/magazines/Nec%20PC-8800%20Brochure%20English%201.pdf -> blackdiamond.co.za2_IA/20150117085121/magazines/Nec PC-8800 Brochure English 1.pdf (10/30)
+http://www.blackdiamond.co.za:80/magazines/Nec%20PC-8800%20Brochure%20English%202.pdf -> blackdiamond.co.za2_IA/20150117090456/magazines/Nec PC-8800 Brochure English 2.pdf (11/30)
+http://www.blackdiamond.co.za:80/magazines/Takeru%20Press%20199310.pdf -> blackdiamond.co.za2_IA/20150117085758/magazines/Takeru Press 199310.pdf (12/30)
+http://blackdiamond.co.za/Monica2.2.sit.hqx -> blackdiamond.co.za2_IA/20050725144533/Monica2.2.sit.hqx (13/30)
+http://www.blackdiamond.co.za:80/Monica30XPB1.sit.hqx -> blackdiamond.co.za2_IA/20010523075908/Monica30XPB1.sit.hqx (14/30)
+http://blackdiamond.co.za:80/Monica30XPB1_Helpers.sit.hqx -> blackdiamond.co.za2_IA/20051215035458/Monica30XPB1_Helpers.sit.hqx (15/30)
+http://blackdiamond.co.za:80/Monica30XPB2.sit.hqx -> blackdiamond.co.za2_IA/20051215033615/Monica30XPB2.sit.hqx (16/30)
+http://blackdiamond.co.za:80/Monica_3.0_PB1.sit.hqx -> blackdiamond.co.za2_IA/20051215035102/Monica_3.0_PB1.sit.hqx (17/30)
+http://blackdiamond.co.za:80/Monica_3.0_PB1_Helpers.sit.hqx -> blackdiamond.co.za2_IA/20051215035625/Monica_3.0_PB1_Helpers.sit.hqx (18/30)
+http://blackdiamond.co.za:80/Monica_4.0Xb2.sit.hqx -> blackdiamond.co.za2_IA/20051215034257/Monica_4.0Xb2.sit.hqx (19/30)
+http://blackdiamond.co.za:80/Monica_J_PPC_2.2PB2.sit.hqx -> blackdiamond.co.za2_IA/20051228201236/Monica_J_PPC_2.2PB2.sit.hqx (20/30)
+http://blackdiamond.co.za:80/NewsFinder1.2.sit.hqx -> blackdiamond.co.za2_IA/20060320193904/NewsFinder1.2.sit.hqx (21/30)
+http://www.blackdiamond.co.za:80/Piccly_1.0.sit.hqx -> blackdiamond.co.za2_IA/20051228033802/Piccly_1.0.sit.hqx (22/30)
+http://blackdiamond.co.za/qdTextViewer_09b.sit.hqx -> blackdiamond.co.za2_IA/20050319072555/qdTextViewer_09b.sit.hqx (23/30)
+http://www.blackdiamond.co.za/ResConv_09b.sit.hqx -> blackdiamond.co.za2_IA/20061218105630/ResConv_09b.sit.hqx (24/30)
+http://blackdiamond.co.za:80/Sgt_Zondi_0.1pb.sit.hqx -> blackdiamond.co.za2_IA/20060314201843/Sgt_Zondi_0.1pb.sit.hqx (25/30)
+http://www.blackdiamond.co.za:80/SockeToome_1.0.sit.hqx -> blackdiamond.co.za2_IA/20060108120244/SockeToome_1.0.sit.hqx (26/30)
+http://blackdiamond.co.za:80/Thumbnailer.sit.hqx -> blackdiamond.co.za2_IA/20060210013327/Thumbnailer.sit.hqx (27/30)
+http://blackdiamond.co.za:80/ThumbNailer_1.0.sit.hqx -> blackdiamond.co.za2_IA/20060502011242/ThumbNailer_1.0.sit.hqx (28/30)
+http://blackdiamond.co.za/WebiToome_0.9pb.sit.hqx -> blackdiamond.co.za2_IA/20051020095317/WebiToome_0.9pb.sit.hqx (29/30)
+http://blackdiamond.co.za:80/Zig_Utilities.sit.hqx -> blackdiamond.co.za2_IA/20060502011237/Zig_Utilities.sit.hqx (30/30)
+
+Download completed in 403.15s, saved in blackdiamond.co.za2_IA/ (30 files)
+
+```
+<issue_comment>username_0: ok as per[ #https://github.com/hartator/wayback-machine-downloader/issues/159#issue-575078106 # #](https://github.com/hartator/wayback-machine-downloader/issues/159)
+
+I will avoid the -s and -a flag.<issue_closed>"
+RSS-Bridge/rss-bridge,919576420,2159,,"[{'action': 'opened', 'author': 'danemaster00', 'comment_id': None, 'datetime': '2021-06-12 14:38:46+00:00', 'masked_author': 'username_0', 'text': 'So Im a new to github / VSCode / and Cloud Hosting Services but maybe someone can help with this bug im having.\r\n\r\nSo initially I tried executing this github package by using heroku, and it worked!\r\n\r\nHowever I wanted to make a custom PHP bridge and add it to the /bridges/ directory.. but I just couldnt figure out how to edit the backend files on heroku... it seemed to only host exactly what you all have on this repository (which I cannot edit) so I gave up on heroku.\r\n\r\nSo Then I looked up vercel and it was pretty nice... but it dosent seem to support the php framework like heroku... so what I did was on vercel I installed this PHP framework addon by Juicyfx at https://github.com/juicyfx/vercel-php\r\n\r\nNow I tried to read the readme but that jargon is way over my head, so I gathered from it that aslong as I link the repository, I can deploy this new app called vercel+ php\r\n\r\nand in order to execute my php code i just have to add any php package to the /api/ directory and aslong as index.php shows up, I can deploy it.\r\n\r\nso I made my own github repository copy of rssbridge, and literally copied and pasted these files to the /api/ directory and then I deployed it.\r\n\r\nso when I go on vercel and deploy the app, it takes me to the url. then I just amended the url to have /api at the end, and its launching the rssbridge... but maybe because vercel or the juicyfx php framework is deploying it, I am getting this error\r\n\r\nRSS-Bridge does not have write permissions for /var/task/user/api/lib/../cache/!\r\n\r\ndoes anyone know how to fix it? I really love vercel and I would love to get this working on that site if someone has a workaround', 'title': 'Configuration Error RSS Bridge does not have write permission - Brand New to Coding', 'type': 'issue'}
+ {'action': 'created', 'author': 'Bockiii', 'comment_id': 861784238.0, 'datetime': '2021-06-15 19:47:06+00:00', 'masked_author': 'username_1', 'text': 'If you only want your own bridge, fork the original repo and add the bridge to the bridges folder. The deploy your repo to heroku using the button.\r\n\r\nOr: fork the repo, create a new branch ( yourbridge), add your new bridge and then create a pull request to this repo. Then your bridge can be used by everyone', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'em92', 'comment_id': 862353479.0, 'datetime': '2021-06-16 12:52:06+00:00', 'masked_author': 'username_2', 'text': 'When I played with heroku in 2016, project directory was mounted as readonly. Pretty sure same happens in vercel.\r\nThat cache directory is used to store cache as files. You can try to switch cache method to memcached. See `config.default.ini.php` for details.', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'danemaster00', 'comment_id': 863114024.0, 'datetime': '2021-06-17 10:12:10+00:00', 'masked_author': 'username_0', 'text': 'OK , after searching around I found 2 tools which just do an inspect element search and create  an RSS feed reader based on the parameters. These function extremely well as a ""catch all"" tool, which is programed by the user rather than specifically for a URL.\r\nfor reference please see \r\nfetchrss.com and reed43.com\r\n\r\nIs there a bridge does this function on a URL, where I can input the variables like we do on these bridges, but instead the variables are start and stop CSS identifiers  ?', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'Bockiii', 'comment_id': 863127352.0, 'datetime': '2021-06-17 10:33:28+00:00', 'masked_author': 'username_1', 'text': ""I feel like you're going waaaay around the bend for an easy solution. \r\n\r\n1. Fork this repo\r\n2. Create your bridge in the bridges folder\r\n3. Create a whitelist.txt in the base of the repo (where the whitelist.default.txt is)\r\n4. Add your new bridge to that whitelist\r\n5. Deploy to heroku\r\n\r\nIf you're not firm in the bridge generation: What site do you want to create an rss feed for? Maybe I'll give it a swing."", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'danemaster00', 'comment_id': 863130812.0, 'datetime': '2021-06-17 10:39:41+00:00', 'masked_author': 'username_0', 'text': 'well the reason I posted my comment on 6/17/2021 is because I would like 1 bridge that is dynamic.\r\n\r\n1 bridge that I can use no matter how many URLS I want to filter, and no matter how many stylistic revisions that site undergoes. \r\n\r\nI appreciate you giving it a swing, but if I give a URL I would be receiving a static code / algorithm for a static site. and if any changes occur, then I would have to go back and revise it :(\r\n\r\nThis is why im pretty inlove with fetchrss.com and reed43.com, because the way they structured it works with any URL that i can inspect element and filter the CSS. however Im allergic to the cost structure XD.\r\n\r\nso I was wondering if there is a way to make a catch all bridge. one with variables such as Site URL, Start CSS identifier #1, End CSS Identifier #1, and RSS output tag #1 (link / image etc).\r\n\r\nand then once these variables are filled out, it goes to the page, and searches the css and outputs the data inbetween the start and end identifers.\r\n\r\nthis was if the URL changes, or if the coding changes, all I have to do is update my URL, or update my CSS identifiers. That would be AWESOME! and then deploy on my heroku so I always how the power of it!', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'danemaster00', 'comment_id': 863131097.0, 'datetime': '2021-06-17 10:40:08+00:00', 'masked_author': 'username_0', 'text': 'well the reason I posted my comment on 6/17/2021 is because I would like 1 bridge that is dynamic.\r\n\r\n1 bridge that I can use no matter how many URLS I want to filter, and no matter how many stylistic revisions that site undergoes.\r\n\r\nI appreciate you giving it a swing, but if I give a URL I would be receiving a static code / algorithm for a static site. and if any changes occur, then I would have to go back and revise it :(\r\n\r\nThis is why im pretty inlove with fetchrss.com and reed43.com, because the way they structured it works with any URL that i can inspect element and filter the CSS. however Im allergic to the cost structure XD.\r\n\r\nso I was wondering if there is a way to make a catch all bridge. one with variables such as Site URL, Start CSS identifier #1, End CSS Identifier #1, and RSS output tag #1 (link / image etc).\r\n\r\nand then once these variables are filled out, it goes to the page, and searches the css and outputs the data inbetween the start and end identifers.\r\n\r\nthis was if the URL changes, or if the coding changes, all I have to do is update my URL, or update my CSS identifiers. That would be AWESOME! and then deploy on my heroku so I always how the power of it!', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'Bockiii', 'comment_id': 863135816.0, 'datetime': '2021-06-17 10:48:04+00:00', 'masked_author': 'username_1', 'text': ""Thats probably not going to happen. Every site, every content is different. Check the bridges in the source for how much work needs to go in to generate an rss feed for some of the sites. Almost no site can be done correctly by just setting those 3 identifiers. That's why there are dozens of custom bridges ;) That's also why fetchrss has you selecting all the things manually as well. It can't automatically assess what's the content.\r\n\r\nAlso, css may not be the identifier of that content. Could be div tags. Could be js code. Could be X. Diversity is the reason for the amount of bridges.\r\n\r\nSo, if you want a specific site, I may be able to help. If you're looking for a wonder-solution, this is not it ;)"", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'danemaster00', 'comment_id': 863139347.0, 'datetime': '2021-06-17 10:54:07+00:00', 'masked_author': 'username_0', 'text': 'ahh I see and appreciate your advice, but do you think there is a way to make a bridge where I can select things manually in the same way that they do it on fetchrss by setting a bridge that only filters the HTML / CSS elements that I input?\r\nand if a website uses js or X instead, well I can just accept that that would have to be a seperate bridge project?', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'Bockiii', 'comment_id': 863144735.0, 'datetime': '2021-06-17 11:03:28+00:00', 'masked_author': 'username_1', 'text': 'The wysiwyg editor: 100% no.\r\n\r\nAlso: You have no idea what fetchrss is filtering for. It\'s a blackbox as far as I can see, so it could be any of the above or a combination. \r\n\r\nAs for the css question. Yes... in theory thats possible probably. The problem is: You will create a ""general"" bridge that is only valid for very specific use cases. What about inline ads? Category filtering? Limitation of preview content? Image manipulation? Formatting cleanup?\r\n\r\nThere are so many things going on the in depths of each bridge for each site, you will never be able to do all that through input parameters.\r\n\r\nOkay... never say never, but I highly doubt that the ""general"" solution will be applicable to more than a few percent of all sites.', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'danemaster00', 'comment_id': 863150895.0, 'datetime': '2021-06-17 11:13:05+00:00', 'masked_author': 'username_0', 'text': 'OK however I would like to make a case for this creation, \r\n\r\nI would like to bring up a point that if this ""general css / html"" bridge was to be made"" I would rephrase the statement of ""The problem is: You will create a ""general"" bridge that is only valid for very specific use cases... applicable to more than a few percent of all sites.""\r\n\r\nbut rather that this bridge would only be valid for a ""few percentage of content"" on a large amount of sites... because many sites use CSS in a portion of there sites, where this bridge would only be applicable. \r\n\r\nalternatively If I were to keep the status quo and make a bridge for 1 website URL, the same statement could be made that this bridge only works for 1 website out of the millions out there.\r\n\r\nAnd if we go pure statistically speaking and look at the google trends of some of the URLS that these bridges were made for, and compare that to the amount of URLS that a general HTML / CSS bridge would be applicable for, I believe this new type of bridge would be strongly beneficial to the public?', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'Bockiii', 'comment_id': 863243471.0, 'datetime': '2021-06-17 13:33:34+00:00', 'masked_author': 'username_1', 'text': ""Sorry, but you have a general misunderstanding of how that kind of data is presented, processed and formatted.\r\n\r\nFor only 2 examples for news sites (relatively easy content), check how much work needs to go into cleaning the data on the CNET bridge and the Reuters bridge. How would you want to do that with a few parameters? The alternative is that the content looks vastly different from what you would want and thus, you dont use the bridge.\r\n\r\nAlso, what about nested tags? What about string building?\r\n\r\nHow would you form a query like `$values = getContents(self::URI . ($user ? '/user/' : '/r/') . $name . '.json')` (from the reddit bridge) in parameters?\r\n\r\nIt's not that simple. Thats why many many people work on many many bridges."", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'Bockiii', 'comment_id': 888496543.0, 'datetime': '2021-07-28 17:42:07+00:00', 'masked_author': 'username_1', 'text': ""@username_0 btw, I was wrong, there actually is a bridge kinda like this already in rss-bridge (that I wasn't aware of tbh :) ) . Check the Xpath bridge and see if that works for you."", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'Dylan700Manes', 'comment_id': 922155613.0, 'datetime': '2021-09-18 01:27:54+00:00', 'masked_author': 'username_3', 'text': 'apt --yes install php*.*mbstring libapache2-mod-php*.* php*.*-xml php*.*-curl;\r\n\r\nnano /etc/php/*/apache2/php.ini;\r\n;extension=mbstring\r\n;extension=simplexml\r\n;extension=curl\r\nsystemctl restart apache2\r\nchgrp -R www-data /var/www/html/rss-bridge/\r\nfind /var/www/html/rss-bridge/ -type d -exec chmod g+rx {} +\r\nfind /var/www/html/rss-bridge/ -type f -exec chmod g+r {} +\r\nchmod g+w /var/www/html/rss-bridge/;\r\n\r\nsudo chown -R www-data:www-data /var/www/html/rss-bridge;\r\nsudo find /var/www/html/rss-bridge -type f -exec setfacl -mu:www-data:rw -m o::--- {} \\;\r\n\r\nsudo find /var/www/html/rss-bridge -type d -exec setfacl -d -mu:www-data:rwx -mo::--- {} \\;\r\n\r\nsudo find /var/www/html/rss-bridge -type d -exec chmod g+x {} \\;\r\n\r\n#https://askubuntu.com/questions/767504/permissions-problems-with-var-www-html-and-my-own-home-directory-for-a-website', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'Dylan700Manes', 'comment_id': 922156555.0, 'datetime': '2021-09-18 01:34:37+00:00', 'masked_author': 'username_3', 'text': 'sudo git clone https://github.com/RSS-Bridge/rss-bridge;\r\n\r\napt --yes install php*.*mbstring libapache2-mod-php*.* php*.*-xml php*.*-curl;\r\n\r\nnano /etc/php/*/apache2/php.ini;\r\n;extension=mbstring\r\n;extension=simplexml\r\n;extension=curl\r\nsystemctl restart apache2\r\nsudo chown -R www-data:www-data /var/www/html/rss-bridge;\r\nsudo find /var/www/html/rss-bridge -type f -exec setfacl -mu:www-data:rw -m o::--- {} \\;\r\n\r\nsudo find /var/www/html/rss-bridge -type d -exec setfacl -d -mu:www-data:rwx -mo::--- {} \\;\r\n\r\nsudo find /var/www/html/rss-bridge -type d -exec chmod g+x {} \\;\r\n\r\n#https://askubuntu.com/questions/767504/permissions-problems-with-var-www-html-and-my-own-home-directory-for-a-website', 'title': None, 'type': 'comment'}
+ {'action': 'closed', 'author': 'dvikan', 'comment_id': None, 'datetime': '2022-03-26 04:07:16+00:00', 'masked_author': 'username_4', 'text': '', 'title': None, 'type': 'issue'}
+ {'action': 'created', 'author': 'dvikan', 'comment_id': 1079595115.0, 'datetime': '2022-03-26 04:07:16+00:00', 'masked_author': 'username_4', 'text': '`chmod o+w ./www/cache`', 'title': None, 'type': 'comment'}]","<issue_start><issue_comment>Title: Configuration Error RSS Bridge does not have write permission - Brand New to Coding
+username_0: So Im a new to github / VSCode / and Cloud Hosting Services but maybe someone can help with this bug im having.
+
+So initially I tried executing this github package by using heroku, and it worked!
+
+However I wanted to make a custom PHP bridge and add it to the /bridges/ directory.. but I just couldnt figure out how to edit the backend files on heroku... it seemed to only host exactly what you all have on this repository (which I cannot edit) so I gave up on heroku.
+
+So Then I looked up vercel and it was pretty nice... but it dosent seem to support the php framework like heroku... so what I did was on vercel I installed this PHP framework addon by Juicyfx at https://github.com/juicyfx/vercel-php
+
+Now I tried to read the readme but that jargon is way over my head, so I gathered from it that aslong as I link the repository, I can deploy this new app called vercel+ php
+
+and in order to execute my php code i just have to add any php package to the /api/ directory and aslong as index.php shows up, I can deploy it.
+
+so I made my own github repository copy of rssbridge, and literally copied and pasted these files to the /api/ directory and then I deployed it.
+
+so when I go on vercel and deploy the app, it takes me to the url. then I just amended the url to have /api at the end, and its launching the rssbridge... but maybe because vercel or the juicyfx php framework is deploying it, I am getting this error
+
+RSS-Bridge does not have write permissions for /var/task/user/api/lib/../cache/!
+
+does anyone know how to fix it? I really love vercel and I would love to get this working on that site if someone has a workaround
+<issue_comment>username_1: If you only want your own bridge, fork the original repo and add the bridge to the bridges folder. The deploy your repo to heroku using the button.
+
+Or: fork the repo, create a new branch ( yourbridge), add your new bridge and then create a pull request to this repo. Then your bridge can be used by everyone
+<issue_comment>username_2: When I played with heroku in 2016, project directory was mounted as readonly. Pretty sure same happens in vercel.
+That cache directory is used to store cache as files. You can try to switch cache method to memcached. See `config.default.ini.php` for details.
+<issue_comment>username_0: OK , after searching around I found 2 tools which just do an inspect element search and create  an RSS feed reader based on the parameters. These function extremely well as a ""catch all"" tool, which is programed by the user rather than specifically for a URL.
+for reference please see 
+fetchrss.com and reed43.com
+
+Is there a bridge does this function on a URL, where I can input the variables like we do on these bridges, but instead the variables are start and stop CSS identifiers  ?
+<issue_comment>username_1: I feel like you're going waaaay around the bend for an easy solution. 
+
+1. Fork this repo
+2. Create your bridge in the bridges folder
+3. Create a whitelist.txt in the base of the repo (where the whitelist.default.txt is)
+4. Add your new bridge to that whitelist
+5. Deploy to heroku
+
+If you're not firm in the bridge generation: What site do you want to create an rss feed for? Maybe I'll give it a swing.
+<issue_comment>username_0: well the reason I posted my comment on 6/17/2021 is because I would like 1 bridge that is dynamic.
+
+1 bridge that I can use no matter how many URLS I want to filter, and no matter how many stylistic revisions that site undergoes. 
+
+I appreciate you giving it a swing, but if I give a URL I would be receiving a static code / algorithm for a static site. and if any changes occur, then I would have to go back and revise it :(
+
+This is why im pretty inlove with fetchrss.com and reed43.com, because the way they structured it works with any URL that i can inspect element and filter the CSS. however Im allergic to the cost structure XD.
+
+so I was wondering if there is a way to make a catch all bridge. one with variables such as Site URL, Start CSS identifier #1, End CSS Identifier #1, and RSS output tag #1 (link / image etc).
+
+and then once these variables are filled out, it goes to the page, and searches the css and outputs the data inbetween the start and end identifers.
+
+this was if the URL changes, or if the coding changes, all I have to do is update my URL, or update my CSS identifiers. That would be AWESOME! and then deploy on my heroku so I always how the power of it!
+<issue_comment>username_0: well the reason I posted my comment on 6/17/2021 is because I would like 1 bridge that is dynamic.
+
+1 bridge that I can use no matter how many URLS I want to filter, and no matter how many stylistic revisions that site undergoes.
+
+I appreciate you giving it a swing, but if I give a URL I would be receiving a static code / algorithm for a static site. and if any changes occur, then I would have to go back and revise it :(
+
+This is why im pretty inlove with fetchrss.com and reed43.com, because the way they structured it works with any URL that i can inspect element and filter the CSS. however Im allergic to the cost structure XD.
+
+so I was wondering if there is a way to make a catch all bridge. one with variables such as Site URL, Start CSS identifier #1, End CSS Identifier #1, and RSS output tag #1 (link / image etc).
+
+and then once these variables are filled out, it goes to the page, and searches the css and outputs the data inbetween the start and end identifers.
+
+this was if the URL changes, or if the coding changes, all I have to do is update my URL, or update my CSS identifiers. That would be AWESOME! and then deploy on my heroku so I always how the power of it!
+<issue_comment>username_1: Thats probably not going to happen. Every site, every content is different. Check the bridges in the source for how much work needs to go in to generate an rss feed for some of the sites. Almost no site can be done correctly by just setting those 3 identifiers. That's why there are dozens of custom bridges ;) That's also why fetchrss has you selecting all the things manually as well. It can't automatically assess what's the content.
+
+Also, css may not be the identifier of that content. Could be div tags. Could be js code. Could be X. Diversity is the reason for the amount of bridges.
+
+So, if you want a specific site, I may be able to help. If you're looking for a wonder-solution, this is not it ;)
+<issue_comment>username_0: ahh I see and appreciate your advice, but do you think there is a way to make a bridge where I can select things manually in the same way that they do it on fetchrss by setting a bridge that only filters the HTML / CSS elements that I input?
+and if a website uses js or X instead, well I can just accept that that would have to be a seperate bridge project?
+<issue_comment>username_1: The wysiwyg editor: 100% no.
+
+Also: You have no idea what fetchrss is filtering for. It's a blackbox as far as I can see, so it could be any of the above or a combination. 
+
+As for the css question. Yes... in theory thats possible probably. The problem is: You will create a ""general"" bridge that is only valid for very specific use cases. What about inline ads? Category filtering? Limitation of preview content? Image manipulation? Formatting cleanup?
+
+There are so many things going on the in depths of each bridge for each site, you will never be able to do all that through input parameters.
+
+Okay... never say never, but I highly doubt that the ""general"" solution will be applicable to more than a few percent of all sites.
+<issue_comment>username_0: OK however I would like to make a case for this creation, 
+
+I would like to bring up a point that if this ""general css / html"" bridge was to be made"" I would rephrase the statement of ""The problem is: You will create a ""general"" bridge that is only valid for very specific use cases... applicable to more than a few percent of all sites.""
+
+but rather that this bridge would only be valid for a ""few percentage of content"" on a large amount of sites... because many sites use CSS in a portion of there sites, where this bridge would only be applicable. 
+
+alternatively If I were to keep the status quo and make a bridge for 1 website URL, the same statement could be made that this bridge only works for 1 website out of the millions out there.
+
+And if we go pure statistically speaking and look at the google trends of some of the URLS that these bridges were made for, and compare that to the amount of URLS that a general HTML / CSS bridge would be applicable for, I believe this new type of bridge would be strongly beneficial to the public?
+<issue_comment>username_1: Sorry, but you have a general misunderstanding of how that kind of data is presented, processed and formatted.
+
+For only 2 examples for news sites (relatively easy content), check how much work needs to go into cleaning the data on the CNET bridge and the Reuters bridge. How would you want to do that with a few parameters? The alternative is that the content looks vastly different from what you would want and thus, you dont use the bridge.
+
+Also, what about nested tags? What about string building?
+
+How would you form a query like `$values = getContents(self::URI . ($user ? '/user/' : '/r/') . $name . '.json')` (from the reddit bridge) in parameters?
+
+It's not that simple. Thats why many many people work on many many bridges.
+<issue_comment>username_1: @username_0 btw, I was wrong, there actually is a bridge kinda like this already in rss-bridge (that I wasn't aware of tbh :) ) . Check the Xpath bridge and see if that works for you.
+<issue_comment>username_3: apt --yes install php*.*mbstring libapache2-mod-php*.* php*.*-xml php*.*-curl;
+
+nano /etc/php/*/apache2/php.ini;
+;extension=mbstring
+;extension=simplexml
+;extension=curl
+systemctl restart apache2
+chgrp -R www-data /var/www/html/rss-bridge/
+find /var/www/html/rss-bridge/ -type d -exec chmod g+rx {} +
+find /var/www/html/rss-bridge/ -type f -exec chmod g+r {} +
+chmod g+w /var/www/html/rss-bridge/;
+
+sudo chown -R www-data:www-data /var/www/html/rss-bridge;
+sudo find /var/www/html/rss-bridge -type f -exec setfacl -mu:www-data:rw -m o::--- {} \;
+
+sudo find /var/www/html/rss-bridge -type d -exec setfacl -d -mu:www-data:rwx -mo::--- {} \;
+
+sudo find /var/www/html/rss-bridge -type d -exec chmod g+x {} \;
+
+#https://askubuntu.com/questions/767504/permissions-problems-with-var-www-html-and-my-own-home-directory-for-a-website
+<issue_comment>username_3: sudo git clone https://github.com/RSS-Bridge/rss-bridge;
+
+apt --yes install php*.*mbstring libapache2-mod-php*.* php*.*-xml php*.*-curl;
+
+nano /etc/php/*/apache2/php.ini;
+;extension=mbstring
+;extension=simplexml
+;extension=curl
+systemctl restart apache2
+sudo chown -R www-data:www-data /var/www/html/rss-bridge;
+sudo find /var/www/html/rss-bridge -type f -exec setfacl -mu:www-data:rw -m o::--- {} \;
+
+sudo find /var/www/html/rss-bridge -type d -exec setfacl -d -mu:www-data:rwx -mo::--- {} \;
+
+sudo find /var/www/html/rss-bridge -type d -exec chmod g+x {} \;
+
+#https://askubuntu.com/questions/767504/permissions-problems-with-var-www-html-and-my-own-home-directory-for-a-website<issue_closed>
+<issue_comment>username_4: `chmod o+w ./www/cache`"
+appveyor/website,583860893,713,,"[{'action': 'opened', 'author': 'HariSekhon', 'comment_id': None, 'datetime': '2020-03-18 16:41:00+00:00', 'masked_author': 'username_0', 'text': ""```\r\nPowerShell 7.0.0\r\nCopyright (c) Microsoft Corporation. All rights reserved.\r\n\r\nhttps://aka.ms/powershell\r\nType 'help' to get help.\r\n\r\nPS /pwd> Import-Module AppVeyorBYOC\r\nPS /pwd> Connect-AppVeyorToComputer -AppVeyorUrl https://ci.appveyor.com -ApiToken <token>\r\n\r\nChecking AppVeyor API access...\r\nA new AppVeyor build cloud 'caf86f4uutaoxfysmf7anj01xl6sv3ps' has been added.\r\n\r\nEnsure build worker image is available for AppVeyor projects\r\nAppVeyor build worker image 'Linux' already exists.\r\n\r\nInstalling AppVeyor Host Agent\r\nOS: Linux\r\nHost Agent is already installed\r\nConnect-AppVeyorToComputer: The term '/opt/appveyor/host-agent/appveyor' is not recognized as the name of a cmdlet, function, script file, or operable program.\r\nCheck the spelling of the name, or if a path was included, verify that the path is correct and try again.\r\n```"", 'title': ""AppVeyor BYOC Connect-AppVeyorToComputer: The term '/opt/appveyor/host-agent/appveyor' is not recognized as the name of a cmdlet, function, script file, or operable program."", 'type': 'issue'}]","<issue_start><issue_comment>Title: AppVeyor BYOC Connect-AppVeyorToComputer: The term '/opt/appveyor/host-agent/appveyor' is not recognized as the name of a cmdlet, function, script file, or operable program.
+username_0: ```
+PowerShell 7.0.0
+Copyright (c) Microsoft Corporation. All rights reserved.
+
+https://aka.ms/powershell
+Type 'help' to get help.
+
+PS /pwd> Import-Module AppVeyorBYOC
+PS /pwd> Connect-AppVeyorToComputer -AppVeyorUrl https://ci.appveyor.com -ApiToken <token>
+
+Checking AppVeyor API access...
+A new AppVeyor build cloud '996f00a7c08b' has been added.
+
+Ensure build worker image is available for AppVeyor projects
+AppVeyor build worker image 'Linux' already exists.
+
+Installing AppVeyor Host Agent
+OS: Linux
+Host Agent is already installed
+Connect-AppVeyorToComputer: The term '/opt/appveyor/host-agent/appveyor' is not recognized as the name of a cmdlet, function, script file, or operable program.
+Check the spelling of the name, or if a path was included, verify that the path is correct and try again.
+```"
+daattali/beautiful-jekyll,181865513,115,,"[{'action': 'opened', 'author': 'vietanhdev', 'comment_id': None, 'datetime': '2016-10-09 04:40:58+00:00', 'masked_author': 'username_0', 'text': ""Hello, I've found a wonderful static comment system Staticman ([https://staticman.net/](https://staticman.net/)). Can anyone add it to our Beautiful Jekyll? :D Thank you very much!"", 'title': 'Can anyone add staticman comment system?', 'type': 'issue'}
+ {'action': 'created', 'author': 'daattali', 'comment_id': 252464571.0, 'datetime': '2016-10-09 04:48:02+00:00', 'masked_author': 'username_1', 'text': ""beautful jekyll already supports a very powerful and very popular comment system called Disqus. It's extremely easy to enable it on your site and it's used by thousands and thousands of people so you can be assured it works well. I don't see why a different comment system that's fairly unknown and untested should be supported when disqus already works?"", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'vietanhdev', 'comment_id': 252464919.0, 'datetime': '2016-10-09 04:59:02+00:00', 'masked_author': 'username_0', 'text': 'But there are many people (including me) from my country - Viet Nam having problem with disqus comment system. Maybe Disqus is blocked by some ISPs? And I think it also happens on other countries.\r\n\r\nFurther more, with Staticman commenting system, we can keep all comments in Github repository instead of have them stored in Disqus server. Many people will love it.', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'daattali', 'comment_id': 252465136.0, 'datetime': '2016-10-09 05:05:47+00:00', 'masked_author': 'username_1', 'text': ""You're right, I had no idea Disqus is blocked there. Anyway, I just looked at staticman and it looks like if you want to use it, you'll just need to add it manually yourself. There isn't much to add to the template in order to support it because it has different implementations depending on your use case. So all you need to do is to follow their instructions, but I don't think it can be generalized into a theme"", 'title': None, 'type': 'comment'}
+ {'action': 'closed', 'author': 'vietanhdev', 'comment_id': None, 'datetime': '2016-10-09 05:20:15+00:00', 'masked_author': 'username_0', 'text': '', 'title': None, 'type': 'issue'}
+ {'action': 'created', 'author': 'vietanhdev', 'comment_id': 252465516.0, 'datetime': '2016-10-09 05:20:15+00:00', 'masked_author': 'username_0', 'text': 'Ok. thank you.', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'VincentTam', 'comment_id': 441270757.0, 'datetime': '2018-11-23 15:39:28+00:00', 'masked_author': 'username_2', 'text': ""@username_1 As an Octopress and Disqus user for three years (my GitHub Pages), I can provide another rationale for @username_0's request for Staticman support.  I suffered from the URL change after switching timezone.  I tried refactoring the comment paths on Disqus's online platform, but the embedded box in my old blog still display the wrong hyperlinks.\r\n\r\nMore importantly, under Disqus's model, every time a page with Disqus comments is loaded, one has to wait for Disqus's response.\r\nProvided that the blog receives comments occasionally, Staticman fits the needs of blog owners better than Disqus in terms of SEO and load speed.\r\n\r\nNonetheless, thx @username_1 for this great theme based on which Beautiful Hugo is created.\r\n\r\n@username_0 The later theme has native Staticman support, so you may consider switching to Hugo, which is powered by Go.  Golang is much faster than Ruby.  I used to wait for a minute for my old Octopress 2.0 blog with over 300 articles.  Last week, I published halogenica/beautifulhugo#222 for Staticman's nested comment support.  If you want to stick with Jekyll, you may see the theme Minimal Mistakes for implementing Staticman in a Jekyll theme (or a simpler example git.io/smdemo that I created last month)."", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'daattali', 'comment_id': 441322738.0, 'datetime': '2018-11-23 22:00:09+00:00', 'masked_author': 'username_1', 'text': '@username_2 I would be happy to accept a PR to support staticman if you,  or anyone else, would like to add it', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'VincentTam', 'comment_id': 441326539.0, 'datetime': '2018-11-23 22:46:52+00:00', 'masked_author': 'username_2', 'text': ""@username_1 I'll look into this after exams in two weeks, but I don't actually know Jekyll's template code (nor CSS), so it's possible that I end up without success like my feedback to halogenica/beautifulhugo#226.\r\n\r\nUnlike my PR for Beautiful Hugo, I'll separate this support into two PRs (one for Staticman support and another one for Markdown preview) since they involve different technologies.  For debug, there's no reason to bundle them together.\r\n\r\nFor the first proposed PR, I'll try to port the code from my recent PR.  Since I'm not a developer, I will neither go deep into Staticman's authenticated comments  (I've tested them in early September though.); nor test the lastest eduardoboucas/staticman#231. (These functionalities were great PRs by Nicholas Tsim, and @staticmanlab supports this though.)  To show Staticman's GitLab support, which is *the* goal of writing my recent PR, I'll break the form action URL into several parameters in the theme's site config file, such as Git service provider, user name, repo name, etc.\r\n\r\nFor the second one, you may drop this if you don't like.  Users will be able to switch this off in config, but I leave it on by default to reduce Markdown syntax error in comments.  I don't know if Showdown's GFM option matches Jekyll's flavor of Markdown syntax.  Showdown is just one example.  What do you think?"", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'VincentTam', 'comment_id': 441354065.0, 'datetime': '2018-11-24 09:11:34+00:00', 'masked_author': 'username_2', 'text': 'Agreed.', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'VincentTam', 'comment_id': 446942973.0, 'datetime': '2018-12-13 11:56:24+00:00', 'masked_author': 'username_2', 'text': 'Sorry @username_0 @username_1 I\'m abandoning this unless I found a way to get this to [get this work on GitLab](https://gitlab.com/username_2/beautiful-jekyll/-/jobs/134051594).  I imported this repo to GitLab, did the site config on a `gl-pages` branch and added the generated `.gitlab-ci.yml`, but I received a [runtime error](https://gitlab.com/username_2/beautiful-jekyll/-/jobs/134051594).\r\n\r\n```\r\n$ bundle exec jekyll build -d public\r\nConfiguration file: /builds/username_2/beautiful-jekyll/_config.yml\r\n            Source: /builds/username_2/beautiful-jekyll\r\n       Destination: public\r\n Incremental build: disabled. Enable with --incremental\r\n      Generating... \r\n  Conversion error: Jekyll::Converters::Scss encountered an error while converting \'assets/css/style.scss\':\r\n                    Invalid US-ASCII character ""\\xE2"" on line 5\r\njekyll 3.7.4 | Error:  Invalid US-ASCII character ""\\xE2"" on line 5\r\nERROR: Job failed: exit code 1\r\n```\r\n\r\nFrom the last few lines of the error message, it seems that this error has nothing to do with my configurations.  Given that I\'ve already built several testing GitLab Pages (including [GitLab + Staticman + Jekyll](https://vincenttam.gitlab.io/gl-jekyll)), I think I\'m abandonning this since I\'ve already shown that Staticman works with GitLab, which is open-source unlike GitHub.', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'VincentTam', 'comment_id': 508955958.0, 'datetime': '2019-07-06 21:52:34+00:00', 'masked_author': 'username_2', 'text': ""Update:\r\n\r\n1. I've already eaten my words by providing a PR.\r\n2. I've eaten my words again by creating a GitLab demo site with this theme in #510."", 'title': None, 'type': 'comment'}]","<issue_start><issue_comment>Title: Can anyone add staticman comment system?
+username_0: Hello, I've found a wonderful static comment system Staticman ([https://staticman.net/](https://staticman.net/)). Can anyone add it to our Beautiful Jekyll? :D Thank you very much!
+<issue_comment>username_1: beautful jekyll already supports a very powerful and very popular comment system called Disqus. It's extremely easy to enable it on your site and it's used by thousands and thousands of people so you can be assured it works well. I don't see why a different comment system that's fairly unknown and untested should be supported when disqus already works?
+<issue_comment>username_0: But there are many people (including me) from my country - Viet Nam having problem with disqus comment system. Maybe Disqus is blocked by some ISPs? And I think it also happens on other countries.
+
+Further more, with Staticman commenting system, we can keep all comments in Github repository instead of have them stored in Disqus server. Many people will love it.
+<issue_comment>username_1: You're right, I had no idea Disqus is blocked there. Anyway, I just looked at staticman and it looks like if you want to use it, you'll just need to add it manually yourself. There isn't much to add to the template in order to support it because it has different implementations depending on your use case. So all you need to do is to follow their instructions, but I don't think it can be generalized into a theme<issue_closed>
+<issue_comment>username_0: Ok. thank you.
+<issue_comment>username_2: @username_1 As an Octopress and Disqus user for three years (my GitHub Pages), I can provide another rationale for @username_0's request for Staticman support.  I suffered from the URL change after switching timezone.  I tried refactoring the comment paths on Disqus's online platform, but the embedded box in my old blog still display the wrong hyperlinks.
+
+More importantly, under Disqus's model, every time a page with Disqus comments is loaded, one has to wait for Disqus's response.
+Provided that the blog receives comments occasionally, Staticman fits the needs of blog owners better than Disqus in terms of SEO and load speed.
+
+Nonetheless, thx @username_1 for this great theme based on which Beautiful Hugo is created.
+
+@username_0 The later theme has native Staticman support, so you may consider switching to Hugo, which is powered by Go.  Golang is much faster than Ruby.  I used to wait for a minute for my old Octopress 2.0 blog with over 300 articles.  Last week, I published halogenica/beautifulhugo#222 for Staticman's nested comment support.  If you want to stick with Jekyll, you may see the theme Minimal Mistakes for implementing Staticman in a Jekyll theme (or a simpler example git.io/smdemo that I created last month).
+<issue_comment>username_1: @username_2 I would be happy to accept a PR to support staticman if you,  or anyone else, would like to add it
+<issue_comment>username_2: @username_1 I'll look into this after exams in two weeks, but I don't actually know Jekyll's template code (nor CSS), so it's possible that I end up without success like my feedback to halogenica/beautifulhugo#226.
+
+Unlike my PR for Beautiful Hugo, I'll separate this support into two PRs (one for Staticman support and another one for Markdown preview) since they involve different technologies.  For debug, there's no reason to bundle them together.
+
+For the first proposed PR, I'll try to port the code from my recent PR.  Since I'm not a developer, I will neither go deep into Staticman's authenticated comments  (I've tested them in early September though.); nor test the lastest eduardoboucas/staticman#231. (These functionalities were great PRs by Nicholas Tsim, and @staticmanlab supports this though.)  To show Staticman's GitLab support, which is *the* goal of writing my recent PR, I'll break the form action URL into several parameters in the theme's site config file, such as Git service provider, user name, repo name, etc.
+
+For the second one, you may drop this if you don't like.  Users will be able to switch this off in config, but I leave it on by default to reduce Markdown syntax error in comments.  I don't know if Showdown's GFM option matches Jekyll's flavor of Markdown syntax.  Showdown is just one example.  What do you think?
+<issue_comment>username_2: Agreed.
+<issue_comment>username_2: Sorry @username_0 @username_1 I'm abandoning this unless I found a way to get this to [get this work on GitLab](https://gitlab.com/username_2/beautiful-jekyll/-/jobs/134051594).  I imported this repo to GitLab, did the site config on a `gl-pages` branch and added the generated `.gitlab-ci.yml`, but I received a [runtime error](https://gitlab.com/username_2/beautiful-jekyll/-/jobs/134051594).
+
+```
+$ bundle exec jekyll build -d public
+Configuration file: /builds/username_2/beautiful-jekyll/_config.yml
+            Source: /builds/username_2/beautiful-jekyll
+       Destination: public
+ Incremental build: disabled. Enable with --incremental
+      Generating... 
+  Conversion error: Jekyll::Converters::Scss encountered an error while converting 'assets/css/style.scss':
+                    Invalid US-ASCII character ""\xE2"" on line 5
+jekyll 3.7.4 | Error:  Invalid US-ASCII character ""\xE2"" on line 5
+ERROR: Job failed: exit code 1
+```
+
+From the last few lines of the error message, it seems that this error has nothing to do with my configurations.  Given that I've already built several testing GitLab Pages (including [GitLab + Staticman + Jekyll](https://vincenttam.gitlab.io/gl-jekyll)), I think I'm abandonning this since I've already shown that Staticman works with GitLab, which is open-source unlike GitHub.
+<issue_comment>username_2: Update:
+
+1. I've already eaten my words by providing a PR.
+2. I've eaten my words again by creating a GitLab demo site with this theme in #510."
+sindresorhus/pageres,229991348,304,,"[{'action': 'opened', 'author': 'gealbin', 'comment_id': None, 'datetime': '2017-05-19 14:25:26+00:00', 'masked_author': 'username_0', 'text': ""Hi,\r\n\r\nI'm trying to get a snapshot of a webpage that contains an embedded Power BI report. The snapshot is not showing some components of the page that are shown in other browsers. After checking the warnings, I got some js errors that are not shown in Chrome, the waring are like this: \r\nWarning: ReferenceError: Can't find variable: Promise → http://[...]/powerbi.js on line 5277 \r\n\r\nIt seems to be an issue with phantomjs and ES6 (which I'm not sure if it still present in recent versions of phantomjs). I also read that can it be fixed including some libraries in the code, for example [promise-polyfill](https://github.com/taylorhakes/promise-polyfill/), but I’m not sure if that will help nor how to include that code in the 'script:' option.\r\nI’m using Nodejs v 6.10.3, phantomjs v 2.1.1 and pageres 4.5.0\r\n\r\nCan anybody help me to fix this issue? Thanks in advance!"", 'title': 'Webpage is showing ""Can\'t find variable: Promise"" waring on pageres 4.5.0 and phantomjs 2.1.1', 'type': 'issue'}
+ {'action': 'created', 'author': 'kevva', 'comment_id': 302725105.0, 'datetime': '2017-05-19 14:55:02+00:00', 'masked_author': 'username_1', 'text': ""You could just specify a path to the file containing your polyfill. E.g (assuming you're using the CLI):\r\n\r\n```\r\n$ pageres --script path/to/file.js example.com 1600x900\r\n```"", 'title': None, 'type': 'comment'}
+ {'action': 'closed', 'author': 'sindresorhus', 'comment_id': None, 'datetime': '2017-05-19 16:22:20+00:00', 'masked_author': 'username_2', 'text': '', 'title': None, 'type': 'issue'}
+ {'action': 'created', 'author': 'gealbin', 'comment_id': 302751841.0, 'datetime': '2017-05-19 16:37:20+00:00', 'masked_author': 'username_0', 'text': ""Ok, I'm using this aproach, and still the same error. The script is in the same directory. any other ideas?\r\n```javascript\r\nfunction getImage(call) {\r\n    const pageres = new Pageres({\r\n            delay: 15,\r\n            filename: fileName,\r\n            script: './promise.min.js'\r\n        })\r\n        .src(url, ['1366x768'])\r\n        .dest(__dirname)\r\n        .on('warning', function(err) {\r\n            console.log('Warning: ' + err);\r\n        })\r\n        .run()\r\n        .then(function() {\r\n            console.log('End');\r\n            call();\r\n        })\r\n```\r\nThanks for your help!"", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'SamVerschueren', 'comment_id': 302794424.0, 'datetime': '2017-05-19 19:44:21+00:00', 'masked_author': 'username_3', 'text': ""Try using `script: path.join(__dirname, 'promise.min.js')`"", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'gealbin', 'comment_id': 303100937.0, 'datetime': '2017-05-22 13:32:33+00:00', 'masked_author': 'username_0', 'text': 'Thanks again for your help. After testing different scenarios, and your suggestions, the problem seems to be how phntomjs renders the website.\r\nBTW, is there anyway to use pageres with other browser than phantomjs?', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'kevva', 'comment_id': 303143642.0, 'datetime': '2017-05-22 16:00:43+00:00', 'masked_author': 'username_1', 'text': 'We will be supporting headless Chromium in the future. See https://github.com/username_1/screenshot-stream/issues/40. For now, no.', 'title': None, 'type': 'comment'}]","<issue_start><issue_comment>Title: Webpage is showing ""Can't find variable: Promise"" waring on pageres 4.5.0 and phantomjs 2.1.1
+username_0: Hi,
+
+I'm trying to get a snapshot of a webpage that contains an embedded Power BI report. The snapshot is not showing some components of the page that are shown in other browsers. After checking the warnings, I got some js errors that are not shown in Chrome, the waring are like this: 
+Warning: ReferenceError: Can't find variable: Promise → http://[...]/powerbi.js on line 5277 
+
+It seems to be an issue with phantomjs and ES6 (which I'm not sure if it still present in recent versions of phantomjs). I also read that can it be fixed including some libraries in the code, for example [promise-polyfill](https://github.com/taylorhakes/promise-polyfill/), but I’m not sure if that will help nor how to include that code in the 'script:' option.
+I’m using Nodejs v 6.10.3, phantomjs v 2.1.1 and pageres 4.5.0
+
+Can anybody help me to fix this issue? Thanks in advance!
+<issue_comment>username_1: You could just specify a path to the file containing your polyfill. E.g (assuming you're using the CLI):
+
+```
+$ pageres --script path/to/file.js example.com 1600x900
+```<issue_closed>
+<issue_comment>username_0: Ok, I'm using this aproach, and still the same error. The script is in the same directory. any other ideas?
+```javascript
+function getImage(call) {
+    const pageres = new Pageres({
+            delay: 15,
+            filename: fileName,
+            script: './promise.min.js'
+        })
+        .src(url, ['1366x768'])
+        .dest(__dirname)
+        .on('warning', function(err) {
+            console.log('Warning: ' + err);
+        })
+        .run()
+        .then(function() {
+            console.log('End');
+            call();
+        })
+```
+Thanks for your help!
+<issue_comment>username_3: Try using `script: path.join(__dirname, 'promise.min.js')`
+<issue_comment>username_0: Thanks again for your help. After testing different scenarios, and your suggestions, the problem seems to be how phntomjs renders the website.
+BTW, is there anyway to use pageres with other browser than phantomjs?
+<issue_comment>username_1: We will be supporting headless Chromium in the future. See https://github.com/username_1/screenshot-stream/issues/40. For now, no."
+hartator/wayback-machine-downloader,562111565,158,,"[{'action': 'opened', 'author': 'ghiathkamel', 'comment_id': None, 'datetime': '2020-02-09 02:42:35+00:00', 'masked_author': 'username_0', 'text': 'can you please tell me step by step how to install it in win 10', 'title': 'can you please tell me step by step how to install it in win 10 ', 'type': 'issue'}
+ {'action': 'created', 'author': 'diVineProportion', 'comment_id': 586833743.0, 'datetime': '2020-02-17 06:12:04+00:00', 'masked_author': 'username_1', 'text': 'This is a simple process and I\'ll gladly help you out, but I don\'t think anyone will write you a step by step for this.\r\n\r\n1. have you installed ruby?\r\n_google ruby windows and use the rubyinstaller_\r\n_don\'t know which one? read the ""WHICH VERSION TO DOWNLOAD?"" section_\r\n\r\n2. do you use CMD or POWERSHELL?\r\n_if you install ruby and and installation completes, open a new terminal window and type `gem -v`_\r\n_if it doesn\'t find this you need to refresh your env vars by restarting your pc or you can temporarly refresh using `refreshenv.cmd` google it, but you probably best to just restart_\r\n\r\n3. open terminal and install wmd using the one liner provided on the main github page then scroll down and read how to use it.', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'ghiathkamel', 'comment_id': 587260750.0, 'datetime': '2020-02-18 03:25:09+00:00', 'masked_author': 'username_0', 'text': 'Thank you very much I will try it now', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'ghiathkamel', 'comment_id': 587465621.0, 'datetime': '2020-02-18 13:42:06+00:00', 'masked_author': 'username_0', 'text': 'Hello, i installed ruby 64bit , but i get this warning , what thats means , thanks\r\nhttp://drjoechampion.com/Jan%202009/Jan%2012,%202009.htm -> websites/drjoechampion.com/Jan 2009/Jan 12, 2009.htm (188/579)\r\nC:/Ruby27-x64/lib/ruby/gems/2.7.0/gems/wayback_machine_downloader-2.2.1/lib/wayback_machine_downloader.rb:271: warning: calling URI.open via Kernel#open is deprecated, call URI.open directly or use URI#open', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'catbehemoth', 'comment_id': 587496716.0, 'datetime': '2020-02-18 14:49:22+00:00', 'masked_author': 'username_2', 'text': 'same issue as username_0', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'ix21027', 'comment_id': 588316760.0, 'datetime': '2020-02-19 16:40:20+00:00', 'masked_author': 'username_3', 'text': 'Just install version under 2.7', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'ghiathkamel', 'comment_id': 589093603.0, 'datetime': '2020-02-20 15:00:28+00:00', 'masked_author': 'username_0', 'text': 'i did that, works great, thanks', 'title': None, 'type': 'comment'}]","<issue_start><issue_comment>Title: can you please tell me step by step how to install it in win 10 
+username_0: can you please tell me step by step how to install it in win 10
+<issue_comment>username_1: This is a simple process and I'll gladly help you out, but I don't think anyone will write you a step by step for this.
+
+1. have you installed ruby?
+_google ruby windows and use the rubyinstaller_
+_don't know which one? read the ""WHICH VERSION TO DOWNLOAD?"" section_
+
+2. do you use CMD or POWERSHELL?
+_if you install ruby and and installation completes, open a new terminal window and type `gem -v`_
+_if it doesn't find this you need to refresh your env vars by restarting your pc or you can temporarly refresh using `refreshenv.cmd` google it, but you probably best to just restart_
+
+3. open terminal and install wmd using the one liner provided on the main github page then scroll down and read how to use it.
+<issue_comment>username_0: Thank you very much I will try it now
+<issue_comment>username_0: Hello, i installed ruby 64bit , but i get this warning , what thats means , thanks
+http://drjoechampion.com/Jan%202009/Jan%2012,%202009.htm -> websites/drjoechampion.com/Jan 2009/Jan 12, 2009.htm (188/579)
+C:/Ruby27-x64/lib/ruby/gems/2.7.0/gems/wayback_machine_downloader-2.2.1/lib/wayback_machine_downloader.rb:271: warning: calling URI.open via Kernel#open is deprecated, call URI.open directly or use URI#open
+<issue_comment>username_2: same issue as username_0
+<issue_comment>username_3: Just install version under 2.7
+<issue_comment>username_0: i did that, works great, thanks"
+RSS-Bridge/rss-bridge,303098470,637,,"[{'action': 'opened', 'author': 'JackNUMBER', 'comment_id': None, 'datetime': '2018-03-07 13:29:47+00:00', 'masked_author': 'username_0', 'text': 'Example url: http://store.steampowered.com/wishlist/profiles/76561197985384413\r\nIssue: return non-existing empty object, return bad `oldPrice` for promo game.\r\n\r\nIn the same way of `hasPromo` we can use a boolean `isBuyable` for game without price.\r\n\r\nReturned datas: \r\n```\r\nArray[4][\r\n  {\r\n    ""uri"": ""http://store.steampowered.com/app/427520/"",\r\n    ""title"": ""Factorio"",\r\n    ""price"": 20,\r\n    ""hasPromo"": false\r\n  },\r\n  {\r\n    ""uri"": ""http://store.steampowered.com/app/658850/"",\r\n    ""title"": ""Do Not Feed the Monkeys""\r\n  },\r\n  {\r\n    ""uri"": ""http://store.steampowered.com/app/0/"",\r\n    ""title"": null\r\n  },\r\n  {\r\n    ""uri"": ""http://store.steampowered.com/app/732430/"",\r\n    ""title"": ""Superflight"",\r\n    ""promoValue"": 50,\r\n    ""oldPrice"": 0.0149,\r\n    ""newPrice"": 1.49,\r\n    ""price"": 1.49,\r\n    ""hasPromo"": true\r\n  }\r\n]\r\n```\r\n\r\nExptected datas:\r\n```\r\nArray[3][\r\n  {\r\n    ""uri"": ""http://store.steampowered.com/app/427520/"",\r\n    ""title"": ""Factorio"",\r\n    ""price"": 20,\r\n    ""hasPromo"": false\r\n  },\r\n  {\r\n    ""uri"": ""http://store.steampowered.com/app/658850/"",\r\n    ""title"": ""Do Not Feed the Monkeys""\r\n  },\r\n  {\r\n    ""uri"": ""http://store.steampowered.com/app/732430/"",\r\n    ""title"": ""Superflight"",\r\n    ""promoValue"": 50,\r\n    ""oldPrice"": 2.99,\r\n    ""newPrice"": 1.49,\r\n    ""price"": 1.49,\r\n    ""hasPromo"": true\r\n  }\r\n]\r\n```', 'title': 'Steam Bridge return wrong values', 'type': 'issue'}
+ {'action': 'closed', 'author': 'teromene', 'comment_id': None, 'datetime': '2018-03-12 09:23:05+00:00', 'masked_author': 'username_1', 'text': '', 'title': None, 'type': 'issue'}]","<issue_start><issue_comment>Title: Steam Bridge return wrong values
+username_0: Example url: http://store.steampowered.com/wishlist/profiles/76561197985384413
+Issue: return non-existing empty object, return bad `oldPrice` for promo game.
+
+In the same way of `hasPromo` we can use a boolean `isBuyable` for game without price.
+
+Returned datas: 
+```
+Array[4][
+  {
+    ""uri"": ""http://store.steampowered.com/app/427520/"",
+    ""title"": ""Factorio"",
+    ""price"": 20,
+    ""hasPromo"": false
+  },
+  {
+    ""uri"": ""http://store.steampowered.com/app/658850/"",
+    ""title"": ""Do Not Feed the Monkeys""
+  },
+  {
+    ""uri"": ""http://store.steampowered.com/app/0/"",
+    ""title"": null
+  },
+  {
+    ""uri"": ""http://store.steampowered.com/app/732430/"",
+    ""title"": ""Superflight"",
+    ""promoValue"": 50,
+    ""oldPrice"": 0.0149,
+    ""newPrice"": 1.49,
+    ""price"": 1.49,
+    ""hasPromo"": true
+  }
+]
+```
+
+Exptected datas:
+```
+Array[3][
+  {
+    ""uri"": ""http://store.steampowered.com/app/427520/"",
+    ""title"": ""Factorio"",
+    ""price"": 20,
+    ""hasPromo"": false
+  },
+  {
+    ""uri"": ""http://store.steampowered.com/app/658850/"",
+    ""title"": ""Do Not Feed the Monkeys""
+  },
+  {
+    ""uri"": ""http://store.steampowered.com/app/732430/"",
+    ""title"": ""Superflight"",
+    ""promoValue"": 50,
+    ""oldPrice"": 2.99,
+    ""newPrice"": 1.49,
+    ""price"": 1.49,
+    ""hasPromo"": true
+  }
+]
+```<issue_closed>"
+styled-components/styled-components-website,262920880,128,"{'number': 128.0, 'repo': 'styled-components-website', 'user_login': 'styled-components'}","[{'action': 'opened', 'author': 'mxstbr', 'comment_id': None, 'datetime': '2017-10-04T20:31:56Z', 'masked_author': 'username_0', 'text': ""My previous Google Analytics implementation wasn't working, only firing\non first visit. Google Tag Manager has the power to listen to history\nchanges and fire analytics events when they happen, so I've configured\nGoogle Tag manager to do exactly that.\n\nThis means our analytics setup is now working perfectly and tracking\npageviews as it should."", 'title': 'Integrate Google tag manager', 'type': 'issue'}
+ {'action': 'created', 'author': 'mxstbr', 'comment_id': 334281388.0, 'datetime': '2017-10-04 20:35:07+00:00', 'masked_author': 'username_0', 'text': ""I was following this guide for the google tag manager setup, just in case you're wondering: https://www.pmg.com/blog/tracking-single-page-web-apps-google-tag-manager-analytics/"", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'philpl', 'comment_id': 334281737.0, 'datetime': '2017-10-04 20:36:28+00:00', 'masked_author': 'username_1', 'text': 'Looks good but I really seem to know nothing about this... 😅', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'mxstbr', 'comment_id': 334281878.0, 'datetime': '2017-10-04 20:37:07+00:00', 'masked_author': 'username_0', 'text': 'Yeah I did not know what Google Tag Manager was before doing this, but if it works it works 🤷\u200d♂️', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'SaraVieira', 'comment_id': 334282446.0, 'datetime': '2017-10-04 20:39:18+00:00', 'masked_author': 'username_2', 'text': '@username_0 @username_1 I have worked with google tag manager in the past , it was painful but if you want to add any events let me know', 'title': None, 'type': 'comment'}]","<issue_start><issue_comment>Title: Integrate Google tag manager
+username_0: My previous Google Analytics implementation wasn't working, only firing
+on first visit. Google Tag Manager has the power to listen to history
+changes and fire analytics events when they happen, so I've configured
+Google Tag manager to do exactly that.
+
+This means our analytics setup is now working perfectly and tracking
+pageviews as it should.
+<issue_comment>username_0: I was following this guide for the google tag manager setup, just in case you're wondering: https://www.pmg.com/blog/tracking-single-page-web-apps-google-tag-manager-analytics/
+<issue_comment>username_1: Looks good but I really seem to know nothing about this... 😅
+<issue_comment>username_0: Yeah I did not know what Google Tag Manager was before doing this, but if it works it works 🤷‍♂️
+<issue_comment>username_2: @username_0 @username_1 I have worked with google tag manager in the past , it was painful but if you want to add any events let me know"
+department-of-veterans-affairs/vets-website,944757336,17870,"{'number': 17870.0, 'repo': 'vets-website', 'user_login': 'department-of-veterans-affairs'}","[{'action': 'opened', 'author': 'holdenhinkle', 'comment_id': None, 'datetime': '2021-07-14T20:08:19Z', 'masked_author': 'username_0', 'text': '## Description\r\nResolves ticket https://app.zenhub.com/workspaces/vsp-5cedc9cce6e3335dc5a49fc4/issues/department-of-veterans-affairs/va.gov-team/26017\r\n\r\nMoves `#kampyleButtonContainer` (the Feedback button) from the end `<body>` to the end of `<main>` so that users can tab to it much faster (they no longer have to tab through all the links in the footer to get to it).\r\n\r\nThe button and the visual placement of it is not changed in any way.', 'title': 'Move feedback button to end of <main>', 'type': 'issue'}
+ {'action': 'created', 'author': 'holdenhinkle', 'comment_id': 882859178.0, 'datetime': '2021-07-19 21:06:16+00:00', 'masked_author': 'username_0', 'text': 'Add comment:\r\n\r\n```\r\n/**\r\n * Moves #kampyleButtonContainer (the container for the Feedback button\r\n * powered by Medallia) from the end of <body> to the end of <main> so\r\n * that users can tab to it more quickly.\r\n * Before, users had to tab through all the links in the footer to get\r\n * to the button.\r\n * When the button is clicked on, #nebula_div_btn is removed from the DOM.\r\n * When the form is closed, it gets added back.\r\n * This script also adds a listener for when #nebula_div_btn is added\r\n * back and sets the focus on #kampyleButtonContainer again.\r\n */\r\n```', 'title': None, 'type': 'comment'}]","<issue_start><issue_comment>Title: Move feedback button to end of <main>
+username_0: ## Description
+Resolves ticket https://app.zenhub.com/workspaces/vsp-5cedc9cce6e3335dc5a49fc4/issues/department-of-veterans-affairs/va.gov-team/26017
+
+Moves `#kampyleButtonContainer` (the Feedback button) from the end `<body>` to the end of `<main>` so that users can tab to it much faster (they no longer have to tab through all the links in the footer to get to it).
+
+The button and the visual placement of it is not changed in any way.
+<issue_comment>username_0: Add comment:
+
+```
+/**
+ * Moves #kampyleButtonContainer (the container for the Feedback button
+ * powered by Medallia) from the end of <body> to the end of <main> so
+ * that users can tab to it more quickly.
+ * Before, users had to tab through all the links in the footer to get
+ * to the button.
+ * When the button is clicked on, #nebula_div_btn is removed from the DOM.
+ * When the form is closed, it gets added back.
+ * This script also adds a listener for when #nebula_div_btn is added
+ * back and sets the focus on #kampyleButtonContainer again.
+ */
+```"
+SeleniumHQ/seleniumhq.github.io,525179729,81,,"[{'action': 'opened', 'author': 'bradjones1', 'comment_id': None, 'datetime': '2019-11-19 18:18:23+00:00', 'masked_author': 'username_0', 'text': ""## 🚀 Feature Proposal for the site or the documentation\r\n\r\nAdd a section on the documentation/`selenium.dev` site for a brand guide/logo resources\r\n\r\n## Motivation\r\n\r\nI was looking for updated logo resources (similar to the question at https://github.com/SeleniumHQ/selenium/issues/1063) for Selenium and could not find them.\r\n\r\n## Example\r\n\r\nOther projects such as [Drupal](https://www.drupal.org/about/media-kit/logo-wordmark-guidelines) and the [Apache Software Foundation](https://www.apache.org/foundation/press/kit/#poweredby) have brand guides. Sorry if I'm just missing the one for Selenium."", 'title': 'Brand guide/logos resource page', 'type': 'issue'}
+ {'action': 'created', 'author': 'diemol', 'comment_id': 557659685.0, 'datetime': '2019-11-22 19:20:30+00:00', 'masked_author': 'username_1', 'text': ""Hey @username_0,\r\n\r\nThanks for raising this. To be honest, we didn't think about that yet, but we are working in a set of guidelines for the site and documentation and we should have something soon, based on that we can include a brand guide as well. Stay tuned please."", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'kamranayub', 'comment_id': 654941031.0, 'datetime': '2020-07-07 15:26:10+00:00', 'masked_author': 'username_2', 'text': 'Came here looking for this, for inclusion in a presentation I was hoping to find the new updated logos in SVG format 👍', 'title': None, 'type': 'comment'}]","<issue_start><issue_comment>Title: Brand guide/logos resource page
+username_0: ## 🚀 Feature Proposal for the site or the documentation
+
+Add a section on the documentation/`selenium.dev` site for a brand guide/logo resources
+
+## Motivation
+
+I was looking for updated logo resources (similar to the question at https://github.com/SeleniumHQ/selenium/issues/1063) for Selenium and could not find them.
+
+## Example
+
+Other projects such as [Drupal](https://www.drupal.org/about/media-kit/logo-wordmark-guidelines) and the [Apache Software Foundation](https://www.apache.org/foundation/press/kit/#poweredby) have brand guides. Sorry if I'm just missing the one for Selenium.
+<issue_comment>username_1: Hey @username_0,
+
+Thanks for raising this. To be honest, we didn't think about that yet, but we are working in a set of guidelines for the site and documentation and we should have something soon, based on that we can include a brand guide as well. Stay tuned please.
+<issue_comment>username_2: Came here looking for this, for inclusion in a presentation I was hoping to find the new updated logos in SVG format 👍"

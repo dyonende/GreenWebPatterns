@@ -1,0 +1,889 @@
+facebook/docusaurus,603278830,2633,,"[{'action': 'opened', 'author': 'jcomack', 'comment_id': None, 'datetime': '2020-04-20 14:23:46+00:00', 'masked_author': 'username_0', 'text': ""<!--\r\n  Consider requesting the feature on https://docusaurus-2.netlify.com/feedback/ instead.\r\n  Feature requests on v1 are more likely to be missed as we're focusing on building v2.\r\n-->\r\n\r\n## 🚀 Feature\r\n\r\nSupport assets directory for blog- and docs-specific assets (i.e. `docs/assets`), such as images, video and other media.\r\n\r\n### Have you read the [Contributing Guidelines on issues](https://github.com/facebook/docusaurus/blob/master/CONTRIBUTING.md#reporting-new-issues)?\r\n\r\nYes\r\n\r\n## Motivation\r\n\r\nThe reason for this feature request, is that this seems to be [supported in V1](https://docusaurus.io/docs/en/doc-markdown#linking-to-images-and-other-assets), but not in V2.\r\n\r\nCurrently in V2 you only have the `static` directory that is used for everything.\r\n\r\n## Pitch\r\n\r\nThis feature would be of great use for setups where there is a very distinct separation between assets that are used site-wide and assets that are tailored to only be used in the docs and blog.\r\nA good use case would be a situation where you have your 'core' Docusaurus code split from the docs, allowing for a kind of 'admin vs authors' setup where authors can update their docs, including images. Currently, an author would also have to contact the 'admin' and request them to upload the image, which isn't necessarily a productive way of writing docs.\r\n\r\n<!--\r\n  What happens if you skip this step?\r\n\r\n  Someone will read your feature proposal and maybe will be able to help you,\r\n  but it’s unlikely that it will get much attention from the team. Eventually,\r\n  the issue will likely get closed in favor of issues that have better explanations\r\n\r\n  Thanks for helping us help you!\r\n-->"", 'title': 'Feature(V2): Support assets directory for docs- and blog-specific assets', 'type': 'issue'}
+ {'action': 'created', 'author': 'slorber', 'comment_id': 702179186.0, 'datetime': '2020-10-01 14:35:42+00:00', 'masked_author': 'username_1', 'text': 'Hi,\r\n\r\nWe have added the ability to colocate images to their markdown usage file here, supporting relative image paths:\r\nhttps://v2.docusaurus.io/docs/markdown-features#images\r\n\r\nWith versioning, it also allows to have one different asset per version, which enable you to version assets alongside the docs\r\n\r\nPlease open another issue if this is not good enough, but to me it is different yet more powerful than v1 system', 'title': None, 'type': 'comment'}
+ {'action': 'closed', 'author': 'slorber', 'comment_id': None, 'datetime': '2020-10-01 14:35:45+00:00', 'masked_author': 'username_1', 'text': '', 'title': None, 'type': 'issue'}]","<issue_start><issue_comment>Title: Feature(V2): Support assets directory for docs- and blog-specific assets
+username_0: <!--
+  Consider requesting the feature on https://docusaurus-2.netlify.com/feedback/ instead.
+  Feature requests on v1 are more likely to be missed as we're focusing on building v2.
+-->
+
+## 🚀 Feature
+
+Support assets directory for blog- and docs-specific assets (i.e. `docs/assets`), such as images, video and other media.
+
+### Have you read the [Contributing Guidelines on issues](https://github.com/facebook/docusaurus/blob/master/CONTRIBUTING.md#reporting-new-issues)?
+
+Yes
+
+## Motivation
+
+The reason for this feature request, is that this seems to be [supported in V1](https://docusaurus.io/docs/en/doc-markdown#linking-to-images-and-other-assets), but not in V2.
+
+Currently in V2 you only have the `static` directory that is used for everything.
+
+## Pitch
+
+This feature would be of great use for setups where there is a very distinct separation between assets that are used site-wide and assets that are tailored to only be used in the docs and blog.
+A good use case would be a situation where you have your 'core' Docusaurus code split from the docs, allowing for a kind of 'admin vs authors' setup where authors can update their docs, including images. Currently, an author would also have to contact the 'admin' and request them to upload the image, which isn't necessarily a productive way of writing docs.
+
+<!--
+  What happens if you skip this step?
+
+  Someone will read your feature proposal and maybe will be able to help you,
+  but it’s unlikely that it will get much attention from the team. Eventually,
+  the issue will likely get closed in favor of issues that have better explanations
+
+  Thanks for helping us help you!
+-->
+<issue_comment>username_1: Hi,
+
+We have added the ability to colocate images to their markdown usage file here, supporting relative image paths:
+https://v2.docusaurus.io/docs/markdown-features#images
+
+With versioning, it also allows to have one different asset per version, which enable you to version assets alongside the docs
+
+Please open another issue if this is not good enough, but to me it is different yet more powerful than v1 system<issue_closed>"
+RSS-Bridge/rss-bridge,177599840,402,,"[{'action': 'opened', 'author': 'LogMANOriginal', 'comment_id': None, 'datetime': '2016-09-17 19:06:38+00:00', 'masked_author': 'username_0', 'text': 'There are a lot of bridges that extend basically from BooruprojectBridge or DanbooruBridge:\r\n\r\n* DollbooruBridge\r\n* GelbooruBridge\r\n* KonachanBridge\r\n* LolibooruBridge\r\n* MilbooruBridge\r\n* MspabooruBridge\r\n* Rule34Bridge\r\n* Rule34pahealBridge\r\n* SafebooruBridge\r\n* SakugabooruBridge\r\n* Shimmie2Bridge\r\n* TbibBridge\r\n* XbooruBridge\r\n* YandereBridge\r\n\r\nMost bridges overwrite some constants and don\'t add any additional functions, so maybe it is possible to do something similar to WordPressBridge where you can insert the URL and request data for any compatible site. I\'m not (yet) familiar with the site contents, but is ""booru"" something similar to WordPress which we can utilize with a more general approach?', 'title': 'BooruBridge similar to WordPressBridge?', 'type': 'issue'}
+ {'action': 'created', 'author': 'pmaziere', 'comment_id': 247798836.0, 'datetime': '2016-09-17 19:15:21+00:00', 'masked_author': 'username_1', 'text': ""don't bother, it's nasty: I burned my eyes doing the refactoring of the .\\*ooru.\\* bridges :)\r\n\r\nI really don't like the fact that a full url can be used as a parameter: to many things could go wrong if the right verifications are not done, the first of them being the RSS-bridge host used as a proxy for whatever purpose.\r\nI was rather going in the opposite direction where WordPressBridge it self should be used only for websites hosted by wordpress.com (example.wordpress.com), and use children of WordPressBridge to bridge sites powered by wordpress on any other host"", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'LogMANOriginal', 'comment_id': 247802568.0, 'datetime': '2016-09-17 19:42:54+00:00', 'masked_author': 'username_0', 'text': ':disappointed:', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'pmaziere', 'comment_id': 247805233.0, 'datetime': '2016-09-17 20:20:33+00:00', 'masked_author': 'username_1', 'text': ""Except that users may not be aware of the  undergoing CMS used by the site they want to see supported, therefore they will not go check in the WhateverBridge drop-down list.\r\n\r\nThe current way of listing bridges according to the site they are related to should be conserved.\r\n\r\nI imagine a more generic way : \r\n- Bridge 'ParentBridge' used as a base for other sites would have these sites in a directory 'bridges/Parent/'.\r\n- In this directory would be \r\n  - one special file containing an associative array which stores all the websites and their specificities, as long as these do not require to modify the content scraped by the parent bridge, such as the HTTPS status.\r\n  - any children bridges that would require more adaptation to the scraping process or to already scraped website content, such as specific content filtering for WordPressBridge children.\r\n- the bridges listing code would be modified to recursively search in these 'bridges/Parent/' subdirectories to \r\n   -  generate virtual bridges for the websites stored in the special file\r\n   -  add the children bridges to the listing\r\n\r\nConsider the above as pulled out of my head without any real strong thinking about its feasibility or bad consequences."", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'mitsukarenai', 'comment_id': 247806518.0, 'datetime': '2016-09-17 20:39:44+00:00', 'masked_author': 'username_2', 'text': ""Yes @username_1 it was actually the purpose for Xbooru, initially ^^ http://www.numerama.com/magazine/33328-des-sites-de-mangas-hentai-bloques-en-france.html Some year ago I used booru bridges in combination with Autoblogs.\r\n\r\nWhile boorus have the same principles, several CMS exist. Booruproject being a platform like Wordpress.com, there's also Danbooru, Gelbooru, and the more evolved Moebooru (used by Konachan, Yande.re,..) it's PHP fork MyImouto (Lolibooru), Shimmie (Milbooru)...\r\n\r\nTrying to pinpoint recurring elements to use in unified bridge could be tough, but could really help reducing the number of different bridges (and allowing easier addition of more supported websites)"", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'pmaziere', 'comment_id': 247807032.0, 'datetime': '2016-09-17 20:48:21+00:00', 'masked_author': 'username_1', 'text': ""that's what have been done in cd361f8fc035de8ed5561bfd1e887e1046808e04"", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'LogMANOriginal', 'comment_id': 247842342.0, 'datetime': '2016-09-18 11:28:52+00:00', 'masked_author': 'username_0', 'text': 'We can do the same by adding more information to existing bridges. Imagine something like this:\r\n\r\n```PHP\r\nclass CMSBridge extends BridgeAbstract {\r\n\t// We don\'t need this anymore (because of SITES)\r\n\t//\r\n\t// const NAME = ""CMS Bridge"";\r\n\t// const URI = ""https://cms.com"";\r\n\t// const DESCRITPION = ""A bridge to cover sites generated by CMS"";\r\n\r\n\tconst PARAMETERS = array(\r\n\t\t""u"" => array(\r\n\t\t\t""name"" => ""username"",\r\n\t\t\t""required"" => true\r\n\t\t)\r\n\t);\r\n\r\n\tconst SITES = array(\r\n\t\t""site1"" => array(\r\n\t\t\t""name"" => ""MySite"",\r\n\t\t\t""uri"" => ""https://my-site.com"",\r\n\t\t\t""description"" => ""Returns the latest news from \'MySite\'""\r\n\t\t),\r\n\t\t""site2"" => array(\r\n\t\t\t""name"" => ""Other site"",\r\n\t\t\t""uri"" => ""https://other-site.com"",\r\n\t\t\t""description"" => ""Returns the latest new from \'other-site.com\'""\r\n\t\t)\r\n\t);\r\n\r\n// And so on, and so forth...\r\n\r\n}\r\n\r\n```\r\n\r\nWe can render this into multiple cards, where each card uses the exact same PARAMETERS and collectData implementation. Of course for sites that require additional functions we can either create a new bridge or do optional stuff based on the current site.\r\n\r\nThe whitelist can then either apply to the entire CMSBridge, or just a few SITES within the bridge (like ""site1"" could be whitelisted like ""CMSBridge_site1"" or something similar.\r\n\r\n***\r\n\r\nI also imagine a more generic way of actually displaying bridges:\r\n\r\nRight now we got about 120 bridges, which are rendered into a very long page. This is a very inefficient way of doing things and in my opinion already exceeded the point of being user-unfriendly. Adding more bridges/cards will just make things worse.\r\n\r\nInstead of displaying all bridges on one page, we should rather provide a simple list of domain names (with some kind of search filter), so the user can select or search the site of their choice. Next the user can choose options and select the output format like they can do now.', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'pmaziere', 'comment_id': 247853964.0, 'datetime': '2016-09-18 15:24:17+00:00', 'masked_author': 'username_1', 'text': 'do you mean something like an alphabetic index and a search box ?', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'LogMANOriginal', 'comment_id': 247862457.0, 'datetime': '2016-09-18 17:53:28+00:00', 'masked_author': 'username_0', 'text': 'Yes, exactly.', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'pmaziere', 'comment_id': 247940433.0, 'datetime': '2016-09-19 08:50:37+00:00', 'masked_author': 'username_1', 'text': ""I agree.\r\nAs a prerequirement, here are the tasks I think should be done:\r\n\r\n- Bridge::create() should be a static method belonging to BridgeAbstract class\r\n- Refactorize Bridge and  Cache classes, and rename Bridge to BridgeList\r\n- Rename BridgeAbstract to Bridge\r\n- Methods that use current class constants would use the constants by default, but would also have the possibility to receive this data through an argument. i.e:\r\n\r\n```PHP\r\nBridge::setInputs(array $inputs, $queriedContext)\r\n```\r\nbecomes \r\n```PHP\r\nBridge::setInputs(array $inputs, $queriedContext, $parameters=static::PARAMETERS)\r\n```\r\n\r\n\r\nThen we could reorganize the class hierarchy as follows:\r\n\r\nBridge\r\n&nbsp;&nbsp;=> MultiBridge where:\r\n  - JSON handling methods are implemented\r\n  - class constants usage is overridden\r\n  - by default, display of the children bridges is forbidden, since only virtual bridges should be allowed\r\n\r\n&nbsp;&nbsp;&nbsp;&nbsp;=> FeedExpander where JSON should define a feed URI in addition to the site URI\r\n&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;=> WordPressBridge\r\n&nbsp;&nbsp;&nbsp;&nbsp;=> \\*ooru stuff\r\n\r\nas you did in your branch with the SITES constant, JSON file defines\r\n- the name of a virtual bridge as a key for each specific site data\r\n- required data: description, site URI \r\n- any other optional data that could be handled by the MultiBridge children such as feed URI for FeedExpander, which would be ignored by WordPressBridge since it builds it from the site URI.\r\n\r\nAnd the alphabetical index can be implemented and the search box  could be implemented independently from the above.\r\n\r\nI'll put the HTTPS status feature I implemented on hold since it would need to be adapted to all the above changes"", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'LogMANOriginal', 'comment_id': 248105387.0, 'datetime': '2016-09-19 19:57:03+00:00', 'masked_author': 'username_0', 'text': ""By using the interface approach it shouldn't be a problem to continue your project, since existing bridges wouldn't be touched in any destructive way. Actually I'm pretty sure we only need to change very little of the existing code and can focus on new functions entirely... probably™ :stuck_out_tongue_winking_eye:\r\n\r\n***\r\n\r\nI hope I was able to convey my idea. At the weekend I should be able to write some code examples based on the real code.\r\n\r\nOn a side note: _I think it makes sense to have TWO interfaces and actually define the const::NAME, const::URI, etc... in the interface in order to make things more specific._ (We can actually have another layer between BridgeAbstract and the bridges in order to get base classes for MultiBridge and RegularBridge and thus have more intelligent getName, getURI, etc... functions.)"", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'pmaziere', 'comment_id': 248440671.0, 'datetime': '2016-09-20 21:30:43+00:00', 'masked_author': 'username_1', 'text': 'Input validation methods are related to the bridge parameters and won\'t be used elsewhere, so I fail to see what could justify their removal from BridgeAbstract ?\r\n\r\nI may need more explanations to understand your two interface solution: I don\'t see how multiple interfaces would be more appropriate than a simple class hierarchy.  An interface defines elements that a class must implement to be considered valid. If different classes with no hierarchical relationship shares these elements, then the interface is justified, but when the classes can be represented as a hierarchy, where is the need for this interface ? \r\nNote that I consider this remark as valid for the current way of using BridgeInterface: I don""t understand its requirement compared to abstract methods directly declared in the BridgeAbstract class.\r\nAgain did I fail to see the benefits of interfaces in this case ?', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'LogMANOriginal', 'comment_id': 249256409.0, 'datetime': '2016-09-23 17:41:16+00:00', 'masked_author': 'username_0', 'text': 'Again did I fail to see the benefits of interfaces in this case ? \r\n\r\nThere are many ways to do the same thing. An interface just defines functions, where an abstract class can already implement a certain set of functions. Interfaces however clearly state how the ""contract"" between the caller and callee works, without any distraction of implementation, where abstract classes are much harder to comprehend. For our small classes this is not a very big factor, but you can see the impact for very complex interfaces.\r\n\r\n***\r\n\r\nI have pushed a new branch on my fork to show a possible interface solution: [https://github.com/username_0/rss-bridge/tree/InterfaceMultiBridge](https://github.com/username_0/rss-bridge/tree/InterfaceMultiBridge)\r\n\r\nAgain, this is far from being final, but it already does work with the three sites for WordPressBridge. All existing bridges are still working as before btw.\r\n\r\nPlease notice that HTMLUtils is very messy as I just duplicated the original code with some adjustments for MultiBridges. This can be done in a much more cleaner way by using functions.', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'pmaziere', 'comment_id': 249430113.0, 'datetime': '2016-09-25 16:09:22+00:00', 'masked_author': 'username_1', 'text': 'I agree with the clarity of interfaces over abstract classes, but in the case of the MultiBridge interface, it does not apply since the method defined in the interface will always be implemented in the same way for each bridges.\r\n\r\nAll I wrote above came as long as I read your post. I guess that I should  implement my solution, and then we could compare it to yours to see what would be the more interesting to finally use.', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'pmaziere', 'comment_id': 257991938.0, 'datetime': '2016-11-02 20:40:01+00:00', 'masked_author': 'username_1', 'text': ""In case you were still waiting for the implementation I proposed above, sorry but I can't find time to work on it for the moment"", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'LogMANOriginal', 'comment_id': 258599744.0, 'datetime': '2016-11-05 09:05:22+00:00', 'masked_author': 'username_0', 'text': ""Thanks for letting me know. This is not a high priority for me right now, but I still intend to make this work. I have thought a bit about your solution and I'll do some tests myself, though this will have to wait until my next holidays."", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'teromene', 'comment_id': 263153090.0, 'datetime': '2016-11-27 22:39:47+00:00', 'masked_author': 'username_3', 'text': ""I haven't had time to comment on this issue previously, but as I have time now, here it is :\r\n\r\nI think that implementing multi-bridge is a good idea, it could be used for bridges providing feeds from sites in different languages, but not using the same code, etc...\r\n\r\nHowever, I strongly disagree on the idea of removing wordpress bridge, and not allowing the use of custom urls.\r\n\r\nI think that removes a great functionality of rss-bridge, that is used by many (including me).\r\nAdding a list of valid wordpress bridges will take a lot of time, never be fully complete, and take a lot of maintenance time, and is basically not a valid long term solution.\r\n\r\nI do understand, however, the security reasons that motivate your idea, but rss-bridge is never using any 'dangerous' php function, such as exec, etc..., and the only time some arbitrary data are not displayed immediately, they are passed through the json_encode/json_decode function.\r\nAny security issue means that this function has failed, which means a fault in php itself.\r\n\r\nI do agree, though, that some people may not want external users to access their rss-bridge instance and fetch arbitrary feeds, which is not possible for the moment. I think we could add an optional HTTP authentication to address this issue, as it is easy to implement and supported by a great majority of feed readers."", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'LogMANOriginal', 'comment_id': 266416375.0, 'datetime': '2016-12-12 12:10:25+00:00', 'masked_author': 'username_0', 'text': ""Me too, though once multi-bridges are implemented, generic bridges can **optionally** be disabled via the whitelist. That way we get both.\r\n\r\nI'll try to get this working before 2017 arrives :sweat_smile:"", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'Frenzie', 'comment_id': 304457763.0, 'datetime': '2017-05-27 15:07:04+00:00', 'masked_author': 'username_4', 'text': 'This is slightly off-topic of course and the proposed solution about derivative bridges sounds great, but I do have one question: a WordPress bridge sounds rather… redundant?', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'LogMANOriginal', 'comment_id': 304533382.0, 'datetime': '2017-05-28 18:59:23+00:00', 'masked_author': 'username_0', 'text': ""Yes, writing bridges for sites using WordPress is very redundant (as with most CMS I guess). The only thing changing is the URL and maybe a few deviations in the HTML code due to different versions. \r\n\r\nOf course having a single bridge accepting any URL is working very well but you loose control to some extend as literally any compatible site can be fetched (including ones you maybe don't want to be associated with).\r\n\r\nI still haven't found time (and the urge) to work out a working solution and due to my final exams closing in this will have to wait for quite a bit unfortunately."", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'Frenzie', 'comment_id': 304534002.0, 'datetime': '2017-05-28 19:10:56+00:00', 'masked_author': 'username_4', 'text': 'The HTML can vary a fair bit with custom themes. I was referring more to the fact that it comes with decent RSS/Atom built in. Even if not explicitly exposed, a /feed at the end of the URL tends to do the trick (or equivalent query string). Of course you could easily kill that if you really wanted to so I guess that must be an issue? :-)', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'LogMANOriginal', 'comment_id': 304535749.0, 'datetime': '2017-05-28 19:43:47+00:00', 'masked_author': 'username_0', 'text': 'The current WordPress bridge is actually making use of the build in options, see https://github.com/RSS-Bridge/rss-bridge/blob/master/bridges/WordPressBridge.php#L70-L72\r\n\r\nIf that option is disabled nothing will show up and a custom bridge is necessary.', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'Frenzie', 'comment_id': 304536771.0, 'datetime': '2017-05-28 20:02:09+00:00', 'masked_author': 'username_4', 'text': ""I've got to say that only makes me more confused as to the purpose of this bridge. What do people use it for?"", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'LogMANOriginal', 'comment_id': 304707071.0, 'datetime': '2017-05-29 17:47:42+00:00', 'masked_author': 'username_0', 'text': ""Good question. I actually don't use it myself. It might be useful to anyone who doesn't know about the /feed option I guess. A lot of sites actually provide carefully hidden feeds with no way to reach them naturally. Being able to just paste the URL and receiving a feed is helpful. Of course now that I think about it instead of building a new feed we could just forward users to the right address without actually downloading random stuff..."", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'teromene', 'comment_id': 305968447.0, 'datetime': '2017-06-03 11:12:39+00:00', 'masked_author': 'username_3', 'text': 'Most of wordpress websites are offering truncated RSS feeds.\nUsing the bridge allows to acess the full content of the articles, instead of just the first few lines.', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'Frenzie', 'comment_id': 305972184.0, 'datetime': '2017-06-03 12:30:12+00:00', 'masked_author': 'username_4', 'text': 'Ah right, I get it. Thanks for explaining.\r\n\r\nIncidentally, is there a generic expander bridge where you just pass a feed and a CSS class to extract?', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'teromene', 'comment_id': 305974404.0, 'datetime': '2017-06-03 13:15:08+00:00', 'masked_author': 'username_3', 'text': 'I started working on this, but never pushed it to RSS-bridge.\nIf you are interested I can push it.', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'Frenzie', 'comment_id': 305982306.0, 'datetime': '2017-06-03 15:34:57+00:00', 'masked_author': 'username_4', 'text': 'Yes, definitely. There are actually two ""bridges"" I\'ve been thinking of adding, although I wasn\'t completely sure to what extent they\'d fit into this project:\r\n\r\n1. A generic expander bridge. That being said, since I switched to FreshRSS last that functionality has been built into my feedreader so it stopped being an active concern.\r\n2. A generic filter bridge. Because Arte doesn\'t have per-program feeds, for example, you\'d input the whole shebang (see https://github.com/RSS-Bridge/rss-bridge/issues/524#issuecomment-304724282) and filter on title. The initial code would be very simple. In pseudo-code:\r\n\r\n```php\r\nif ($action == \'permit\') {\r\n\tif (preg_match(""/$string/"", $item->get_title()))\r\n\t\t$display = true;\r\n}\r\nelseif ($action == \'block\') {\r\n\tif (!preg_match(""/$string/"", $item->get_title()))\r\n\t\t$display = true;\r\n}\r\n```', 'title': None, 'type': 'comment'}
+ {'action': 'closed', 'author': 'LogMANOriginal', 'comment_id': None, 'datetime': '2019-06-19 21:35:37+00:00', 'masked_author': 'username_0', 'text': '', 'title': None, 'type': 'issue'}
+ {'action': 'created', 'author': 'LogMANOriginal', 'comment_id': 503755728.0, 'datetime': '2019-06-19 21:35:37+00:00', 'masked_author': 'username_0', 'text': 'In case it is not obvious - I lost interest in this topic :smile:', 'title': None, 'type': 'comment'}]","<issue_start><issue_comment>Title: BooruBridge similar to WordPressBridge?
+username_0: There are a lot of bridges that extend basically from BooruprojectBridge or DanbooruBridge:
+
+* DollbooruBridge
+* GelbooruBridge
+* KonachanBridge
+* LolibooruBridge
+* MilbooruBridge
+* MspabooruBridge
+* Rule34Bridge
+* Rule34pahealBridge
+* SafebooruBridge
+* SakugabooruBridge
+* Shimmie2Bridge
+* TbibBridge
+* XbooruBridge
+* YandereBridge
+
+Most bridges overwrite some constants and don't add any additional functions, so maybe it is possible to do something similar to WordPressBridge where you can insert the URL and request data for any compatible site. I'm not (yet) familiar with the site contents, but is ""booru"" something similar to WordPress which we can utilize with a more general approach?
+<issue_comment>username_1: don't bother, it's nasty: I burned my eyes doing the refactoring of the .\*ooru.\* bridges :)
+
+I really don't like the fact that a full url can be used as a parameter: to many things could go wrong if the right verifications are not done, the first of them being the RSS-bridge host used as a proxy for whatever purpose.
+I was rather going in the opposite direction where WordPressBridge it self should be used only for websites hosted by wordpress.com (example.wordpress.com), and use children of WordPressBridge to bridge sites powered by wordpress on any other host
+<issue_comment>username_0: :disappointed:
+<issue_comment>username_1: Except that users may not be aware of the  undergoing CMS used by the site they want to see supported, therefore they will not go check in the WhateverBridge drop-down list.
+
+The current way of listing bridges according to the site they are related to should be conserved.
+
+I imagine a more generic way : 
+- Bridge 'ParentBridge' used as a base for other sites would have these sites in a directory 'bridges/Parent/'.
+- In this directory would be 
+  - one special file containing an associative array which stores all the websites and their specificities, as long as these do not require to modify the content scraped by the parent bridge, such as the HTTPS status.
+  - any children bridges that would require more adaptation to the scraping process or to already scraped website content, such as specific content filtering for WordPressBridge children.
+- the bridges listing code would be modified to recursively search in these 'bridges/Parent/' subdirectories to 
+   -  generate virtual bridges for the websites stored in the special file
+   -  add the children bridges to the listing
+
+Consider the above as pulled out of my head without any real strong thinking about its feasibility or bad consequences.
+<issue_comment>username_2: Yes @username_1 it was actually the purpose for Xbooru, initially ^^ http://www.numerama.com/magazine/33328-des-sites-de-mangas-hentai-bloques-en-france.html Some year ago I used booru bridges in combination with Autoblogs.
+
+While boorus have the same principles, several CMS exist. Booruproject being a platform like Wordpress.com, there's also Danbooru, Gelbooru, and the more evolved Moebooru (used by Konachan, Yande.re,..) it's PHP fork MyImouto (Lolibooru), Shimmie (Milbooru)...
+
+Trying to pinpoint recurring elements to use in unified bridge could be tough, but could really help reducing the number of different bridges (and allowing easier addition of more supported websites)
+<issue_comment>username_1: that's what have been done in cd361f8fc035de8ed5561bfd1e887e1046808e04
+<issue_comment>username_0: We can do the same by adding more information to existing bridges. Imagine something like this:
+
+```PHP
+class CMSBridge extends BridgeAbstract {
+	// We don't need this anymore (because of SITES)
+	//
+	// const NAME = ""CMS Bridge"";
+	// const URI = ""https://cms.com"";
+	// const DESCRITPION = ""A bridge to cover sites generated by CMS"";
+
+	const PARAMETERS = array(
+		""u"" => array(
+			""name"" => ""username"",
+			""required"" => true
+		)
+	);
+
+	const SITES = array(
+		""site1"" => array(
+			""name"" => ""MySite"",
+			""uri"" => ""https://my-site.com"",
+			""description"" => ""Returns the latest news from 'MySite'""
+		),
+		""site2"" => array(
+			""name"" => ""Other site"",
+			""uri"" => ""https://other-site.com"",
+			""description"" => ""Returns the latest new from 'other-site.com'""
+		)
+	);
+
+// And so on, and so forth...
+
+}
+
+```
+
+We can render this into multiple cards, where each card uses the exact same PARAMETERS and collectData implementation. Of course for sites that require additional functions we can either create a new bridge or do optional stuff based on the current site.
+
+The whitelist can then either apply to the entire CMSBridge, or just a few SITES within the bridge (like ""site1"" could be whitelisted like ""CMSBridge_site1"" or something similar.
+
+***
+
+I also imagine a more generic way of actually displaying bridges:
+
+Right now we got about 120 bridges, which are rendered into a very long page. This is a very inefficient way of doing things and in my opinion already exceeded the point of being user-unfriendly. Adding more bridges/cards will just make things worse.
+
+Instead of displaying all bridges on one page, we should rather provide a simple list of domain names (with some kind of search filter), so the user can select or search the site of their choice. Next the user can choose options and select the output format like they can do now.
+<issue_comment>username_1: do you mean something like an alphabetic index and a search box ?
+<issue_comment>username_0: Yes, exactly.
+<issue_comment>username_1: I agree.
+As a prerequirement, here are the tasks I think should be done:
+
+- Bridge::create() should be a static method belonging to BridgeAbstract class
+- Refactorize Bridge and  Cache classes, and rename Bridge to BridgeList
+- Rename BridgeAbstract to Bridge
+- Methods that use current class constants would use the constants by default, but would also have the possibility to receive this data through an argument. i.e:
+
+```PHP
+Bridge::setInputs(array $inputs, $queriedContext)
+```
+becomes 
+```PHP
+Bridge::setInputs(array $inputs, $queriedContext, $parameters=static::PARAMETERS)
+```
+
+
+Then we could reorganize the class hierarchy as follows:
+
+Bridge
+&nbsp;&nbsp;=> MultiBridge where:
+  - JSON handling methods are implemented
+  - class constants usage is overridden
+  - by default, display of the children bridges is forbidden, since only virtual bridges should be allowed
+
+&nbsp;&nbsp;&nbsp;&nbsp;=> FeedExpander where JSON should define a feed URI in addition to the site URI
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;=> WordPressBridge
+&nbsp;&nbsp;&nbsp;&nbsp;=> \*ooru stuff
+
+as you did in your branch with the SITES constant, JSON file defines
+- the name of a virtual bridge as a key for each specific site data
+- required data: description, site URI 
+- any other optional data that could be handled by the MultiBridge children such as feed URI for FeedExpander, which would be ignored by WordPressBridge since it builds it from the site URI.
+
+And the alphabetical index can be implemented and the search box  could be implemented independently from the above.
+
+I'll put the HTTPS status feature I implemented on hold since it would need to be adapted to all the above changes
+<issue_comment>username_0: By using the interface approach it shouldn't be a problem to continue your project, since existing bridges wouldn't be touched in any destructive way. Actually I'm pretty sure we only need to change very little of the existing code and can focus on new functions entirely... probably™ :stuck_out_tongue_winking_eye:
+
+***
+
+I hope I was able to convey my idea. At the weekend I should be able to write some code examples based on the real code.
+
+On a side note: _I think it makes sense to have TWO interfaces and actually define the const::NAME, const::URI, etc... in the interface in order to make things more specific._ (We can actually have another layer between BridgeAbstract and the bridges in order to get base classes for MultiBridge and RegularBridge and thus have more intelligent getName, getURI, etc... functions.)
+<issue_comment>username_1: Input validation methods are related to the bridge parameters and won't be used elsewhere, so I fail to see what could justify their removal from BridgeAbstract ?
+
+I may need more explanations to understand your two interface solution: I don't see how multiple interfaces would be more appropriate than a simple class hierarchy.  An interface defines elements that a class must implement to be considered valid. If different classes with no hierarchical relationship shares these elements, then the interface is justified, but when the classes can be represented as a hierarchy, where is the need for this interface ? 
+Note that I consider this remark as valid for the current way of using BridgeInterface: I don""t understand its requirement compared to abstract methods directly declared in the BridgeAbstract class.
+Again did I fail to see the benefits of interfaces in this case ?
+<issue_comment>username_0: Again did I fail to see the benefits of interfaces in this case ? 
+
+There are many ways to do the same thing. An interface just defines functions, where an abstract class can already implement a certain set of functions. Interfaces however clearly state how the ""contract"" between the caller and callee works, without any distraction of implementation, where abstract classes are much harder to comprehend. For our small classes this is not a very big factor, but you can see the impact for very complex interfaces.
+
+***
+
+I have pushed a new branch on my fork to show a possible interface solution: [https://github.com/username_0/rss-bridge/tree/InterfaceMultiBridge](https://github.com/username_0/rss-bridge/tree/InterfaceMultiBridge)
+
+Again, this is far from being final, but it already does work with the three sites for WordPressBridge. All existing bridges are still working as before btw.
+
+Please notice that HTMLUtils is very messy as I just duplicated the original code with some adjustments for MultiBridges. This can be done in a much more cleaner way by using functions.
+<issue_comment>username_1: I agree with the clarity of interfaces over abstract classes, but in the case of the MultiBridge interface, it does not apply since the method defined in the interface will always be implemented in the same way for each bridges.
+
+All I wrote above came as long as I read your post. I guess that I should  implement my solution, and then we could compare it to yours to see what would be the more interesting to finally use.
+<issue_comment>username_1: In case you were still waiting for the implementation I proposed above, sorry but I can't find time to work on it for the moment
+<issue_comment>username_0: Thanks for letting me know. This is not a high priority for me right now, but I still intend to make this work. I have thought a bit about your solution and I'll do some tests myself, though this will have to wait until my next holidays.
+<issue_comment>username_3: I haven't had time to comment on this issue previously, but as I have time now, here it is :
+
+I think that implementing multi-bridge is a good idea, it could be used for bridges providing feeds from sites in different languages, but not using the same code, etc...
+
+However, I strongly disagree on the idea of removing wordpress bridge, and not allowing the use of custom urls.
+
+I think that removes a great functionality of rss-bridge, that is used by many (including me).
+Adding a list of valid wordpress bridges will take a lot of time, never be fully complete, and take a lot of maintenance time, and is basically not a valid long term solution.
+
+I do understand, however, the security reasons that motivate your idea, but rss-bridge is never using any 'dangerous' php function, such as exec, etc..., and the only time some arbitrary data are not displayed immediately, they are passed through the json_encode/json_decode function.
+Any security issue means that this function has failed, which means a fault in php itself.
+
+I do agree, though, that some people may not want external users to access their rss-bridge instance and fetch arbitrary feeds, which is not possible for the moment. I think we could add an optional HTTP authentication to address this issue, as it is easy to implement and supported by a great majority of feed readers.
+<issue_comment>username_0: Me too, though once multi-bridges are implemented, generic bridges can **optionally** be disabled via the whitelist. That way we get both.
+
+I'll try to get this working before 2017 arrives :sweat_smile:
+<issue_comment>username_4: This is slightly off-topic of course and the proposed solution about derivative bridges sounds great, but I do have one question: a WordPress bridge sounds rather… redundant?
+<issue_comment>username_0: Yes, writing bridges for sites using WordPress is very redundant (as with most CMS I guess). The only thing changing is the URL and maybe a few deviations in the HTML code due to different versions. 
+
+Of course having a single bridge accepting any URL is working very well but you loose control to some extend as literally any compatible site can be fetched (including ones you maybe don't want to be associated with).
+
+I still haven't found time (and the urge) to work out a working solution and due to my final exams closing in this will have to wait for quite a bit unfortunately.
+<issue_comment>username_4: The HTML can vary a fair bit with custom themes. I was referring more to the fact that it comes with decent RSS/Atom built in. Even if not explicitly exposed, a /feed at the end of the URL tends to do the trick (or equivalent query string). Of course you could easily kill that if you really wanted to so I guess that must be an issue? :-)
+<issue_comment>username_0: The current WordPress bridge is actually making use of the build in options, see https://github.com/RSS-Bridge/rss-bridge/blob/master/bridges/WordPressBridge.php#L70-L72
+
+If that option is disabled nothing will show up and a custom bridge is necessary.
+<issue_comment>username_4: I've got to say that only makes me more confused as to the purpose of this bridge. What do people use it for?
+<issue_comment>username_0: Good question. I actually don't use it myself. It might be useful to anyone who doesn't know about the /feed option I guess. A lot of sites actually provide carefully hidden feeds with no way to reach them naturally. Being able to just paste the URL and receiving a feed is helpful. Of course now that I think about it instead of building a new feed we could just forward users to the right address without actually downloading random stuff...
+<issue_comment>username_3: Most of wordpress websites are offering truncated RSS feeds.
+Using the bridge allows to acess the full content of the articles, instead of just the first few lines.
+<issue_comment>username_4: Ah right, I get it. Thanks for explaining.
+
+Incidentally, is there a generic expander bridge where you just pass a feed and a CSS class to extract?
+<issue_comment>username_3: I started working on this, but never pushed it to RSS-bridge.
+If you are interested I can push it.
+<issue_comment>username_4: Yes, definitely. There are actually two ""bridges"" I've been thinking of adding, although I wasn't completely sure to what extent they'd fit into this project:
+
+1. A generic expander bridge. That being said, since I switched to FreshRSS last that functionality has been built into my feedreader so it stopped being an active concern.
+2. A generic filter bridge. Because Arte doesn't have per-program feeds, for example, you'd input the whole shebang (see https://github.com/RSS-Bridge/rss-bridge/issues/524#issuecomment-304724282) and filter on title. The initial code would be very simple. In pseudo-code:
+
+```php
+if ($action == 'permit') {
+	if (preg_match(""/$string/"", $item->get_title()))
+		$display = true;
+}
+elseif ($action == 'block') {
+	if (!preg_match(""/$string/"", $item->get_title()))
+		$display = true;
+}
+```<issue_closed>
+<issue_comment>username_0: In case it is not obvious - I lost interest in this topic :smile:"
+istio/istio.io,733129215,8405,,"[{'action': 'opened', 'author': 'ericvn', 'comment_id': None, 'datetime': '2020-10-30 12:22:20+00:00', 'masked_author': 'username_0', 'text': 'I note a few things in the log:\r\n\r\nnon-failing: \r\n```\r\nThis will install the Istio profile into the cluster. Proceed? (y/N) ! values.global.trustDomain is deprecated; use meshConfig.trustDomain instead\r\n```\r\n\r\nFailing:\r\n```\r\nVERIFY FAILED snip_migrate_trust_domain_without_trust_domain_aliases_4 (timeout after 120s): received: ""503"", expected: ""403""\r\n```', 'title': 'tasks/security/authorization/authz-td-migration fails with 1.8.0-alpha.2 update', 'type': 'issue'}
+ {'action': 'created', 'author': 'ericvn', 'comment_id': 719586204.0, 'datetime': '2020-10-30 14:30:24+00:00', 'masked_author': 'username_0', 'text': 'So trying the page manually, and in the second part: https://preliminary.istio.io/latest/docs/tasks/security/authorization/authz-td-migration/#migrate-trust-domain-without-trust-domain-aliases Step 3 says I should get 403\'s from both curls.  I am getting 503\'s from both.\r\n\r\nIn the next section, I also have a failure:\r\n\r\ncat <<EOF > ./td-installation.yaml\r\napiVersion: install.istio.io/v1alpha1\r\nkind: IstioOperator\r\nspec:\r\n  values:\r\n    global:\r\n      trustDomain: new-td\r\n      trustDomainAliases:\r\n        - old-td\r\nEOF\r\nistioctl install --set profile=demo -f td-installation.yaml -y\r\nError: failed to install manifests: validation errors (use --force to override):\r\nunknown field ""trustDomainAliases"" in v1alpha1.GlobalConfig', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'ericvn', 'comment_id': 719587730.0, 'datetime': '2020-10-30 14:33:02+00:00', 'masked_author': 'username_0', 'text': 'Updated yaml to be:\r\n```\r\napiVersion: install.istio.io/v1alpha1\r\nkind: IstioOperator\r\nspec:\r\n  meshConfig:\r\n    trustDomain: new-td\r\n    trustDomainAliases:\r\n      - old-td\r\n```\r\nand that installed.', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'ericvn', 'comment_id': 719639683.0, 'datetime': '2020-10-30 15:59:53+00:00', 'masked_author': 'username_0', 'text': ""Based on the tests, I conclude the prior yaml wasn't working in 1.7 either, so maybe not a compatibility issue."", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'bianpengyuan', 'comment_id': 719665134.0, 'datetime': '2020-10-30 16:44:42+00:00', 'masked_author': 'username_1', 'text': '@username_4 Assign this to you for triage. This is marked as 1.8 release blocker. Please take a look asap. thanks!', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'bianpengyuan', 'comment_id': 721903323.0, 'datetime': '2020-11-04 18:36:52+00:00', 'masked_author': 'username_1', 'text': 'Fixed by https://github.com/istio/istio.io/issues/8405? @username_2', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'howardjohn', 'comment_id': 721903865.0, 'datetime': '2020-11-04 18:38:03+00:00', 'masked_author': 'username_2', 'text': 'Should be fixed now', 'title': None, 'type': 'comment'}
+ {'action': 'closed', 'author': 'howardjohn', 'comment_id': None, 'datetime': '2020-11-04 18:38:03+00:00', 'masked_author': 'username_2', 'text': '', 'title': None, 'type': 'issue'}
+ {'action': 'reopened', 'author': 'ericvn', 'comment_id': None, 'datetime': '2020-11-10 02:44:22+00:00', 'masked_author': 'username_0', 'text': 'The tests in the second section of the page are failing. It receives a `503` instead of a `403` for both tests.\r\n\r\nFailing:\r\n```\r\nVERIFY FAILED snip_migrate_trust_domain_without_trust_domain_aliases_4 (timeout after 120s): received: ""503"", expected: ""403""\r\n```\r\n\r\nPointer to Slack discussion: https://istio.slack.com/archives/C3TEGNZ7W/p1604061921132200\r\n\r\nFor now, the two failing tests have been commented out in https://github.com/istio/istio.io/pull/8399 so the alpha.2 release can be used for other tests. They will need to be re-enabled once this is fixed.', 'title': 'tasks/security/authorization/authz-td-migration fails with 1.8.0-alpha.2 update', 'type': 'issue'}
+ {'action': 'created', 'author': 'ericvn', 'comment_id': 724414068.0, 'datetime': '2020-11-10 02:45:30+00:00', 'masked_author': 'username_0', 'text': ""Running the test case locally after adding back in the two verify's still fails. I will try and pull the alpha.3 build and try again manually against the docs."", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'incfly', 'comment_id': 724905799.0, 'datetime': '2020-11-10 19:07:38+00:00', 'masked_author': 'username_3', 'text': '/cc @username_4', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'howardjohn', 'comment_id': 724913556.0, 'datetime': '2020-11-10 19:21:56+00:00', 'masked_author': 'username_2', 'text': ""I am pretty sure its from https://github.com/istio/istio/issues/28756. Basically, istiod used to be implicitly restarted by `istioctl install`. Now it isn't. So we can either fix that issue or add `kubectl rollout restart deployment istiod -n istio-system` to the doc before restarting the sleep pods"", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'ericvn', 'comment_id': 725493343.0, 'datetime': '2020-11-11 15:37:57+00:00', 'masked_author': 'username_0', 'text': ""Adding the istiod restart in the docs/test does get the test to pass.\r\n\r\nThe question is if it is considered a regression to no longer do an automated restart of istiod during the `Istioctl install`?\r\n\r\nI understand that this particular task is not referenced often, and is not the preferred way to migrate trust domains, so maybe it's not a major issue.\r\n\r\nIt should require something in the upgrade notes that an istiod restart may be required after an `istioctl install`."", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'bianpengyuan', 'comment_id': 726257958.0, 'datetime': '2020-11-12 18:28:57+00:00', 'masked_author': 'username_1', 'text': 'Any update on this? Shall we just add a step to the doc and fix it in patch releases? @username_4', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'ericvn', 'comment_id': 726279735.0, 'datetime': '2020-11-12 19:09:00+00:00', 'masked_author': 'username_0', 'text': ""Currently, I've added the step in the docs/test to redeploy istiod after the istioctl install and things are working.\r\n\r\nAs noted in my prior remarks, I'm not sure if this an acceptable solution along with a note in the upgrade docs that istioctl install no longer causes a restart of istiod (is this statement global, or maybe it's only true if there is a change in the trust domain). If the powers that be, think that is acceptable, then we still need to upgrade note, but the docs/test work is complete."", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'yangminzhu', 'comment_id': 726286303.0, 'datetime': '2020-11-12 19:20:51+00:00', 'masked_author': 'username_4', 'text': ""I think it's fine to ask users to redeploy istiod for this specific task, thanks for the update @username_0 ! I'm not sure if the behavior change in istioctl install needs a global upgrade note (probably should?) but I think that is a separate topic."", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'ericvn', 'comment_id': 726362794.0, 'datetime': '2020-11-12 21:52:52+00:00', 'masked_author': 'username_0', 'text': ""I'll close this issue since it is fixed. Will add a comment in the upgrade note PR/issue with a pointer to this problem."", 'title': None, 'type': 'comment'}
+ {'action': 'closed', 'author': 'ericvn', 'comment_id': None, 'datetime': '2020-11-12 21:52:55+00:00', 'masked_author': 'username_0', 'text': '', 'title': None, 'type': 'issue'}
+ {'action': 'created', 'author': 'ericvn', 'comment_id': 726367181.0, 'datetime': '2020-11-12 22:03:14+00:00', 'masked_author': 'username_0', 'text': 'As an FYI, https://github.com/istio/istio/issues/28756 implies that the restart is just not happening in the case of trust domain changes, so only affects a small number of users and the docs now mention a restart is needed.', 'title': None, 'type': 'comment'}]","<issue_start><issue_comment>Title: tasks/security/authorization/authz-td-migration fails with 1.8.0-alpha.2 update
+username_0: I note a few things in the log:
+
+non-failing: 
+```
+This will install the Istio profile into the cluster. Proceed? (y/N) ! values.global.trustDomain is deprecated; use meshConfig.trustDomain instead
+```
+
+Failing:
+```
+VERIFY FAILED snip_migrate_trust_domain_without_trust_domain_aliases_4 (timeout after 120s): received: ""503"", expected: ""403""
+```
+<issue_comment>username_0: So trying the page manually, and in the second part: https://preliminary.istio.io/latest/docs/tasks/security/authorization/authz-td-migration/#migrate-trust-domain-without-trust-domain-aliases Step 3 says I should get 403's from both curls.  I am getting 503's from both.
+
+In the next section, I also have a failure:
+
+cat <<EOF > ./td-installation.yaml
+apiVersion: install.istio.io/v1alpha1
+kind: IstioOperator
+spec:
+  values:
+    global:
+      trustDomain: new-td
+      trustDomainAliases:
+        - old-td
+EOF
+istioctl install --set profile=demo -f td-installation.yaml -y
+Error: failed to install manifests: validation errors (use --force to override):
+unknown field ""trustDomainAliases"" in v1alpha1.GlobalConfig
+<issue_comment>username_0: Updated yaml to be:
+```
+apiVersion: install.istio.io/v1alpha1
+kind: IstioOperator
+spec:
+  meshConfig:
+    trustDomain: new-td
+    trustDomainAliases:
+      - old-td
+```
+and that installed.
+<issue_comment>username_0: Based on the tests, I conclude the prior yaml wasn't working in 1.7 either, so maybe not a compatibility issue.
+<issue_comment>username_1: @username_4 Assign this to you for triage. This is marked as 1.8 release blocker. Please take a look asap. thanks!
+<issue_comment>username_1: Fixed by https://github.com/istio/istio.io/issues/8405? @username_2
+<issue_comment>username_2: Should be fixed now<issue_closed>
+<issue_comment>username_0: The tests in the second section of the page are failing. It receives a `503` instead of a `403` for both tests.
+
+Failing:
+```
+VERIFY FAILED snip_migrate_trust_domain_without_trust_domain_aliases_4 (timeout after 120s): received: ""503"", expected: ""403""
+```
+
+Pointer to Slack discussion: https://istio.slack.com/archives/C3TEGNZ7W/p1604061921132200
+
+For now, the two failing tests have been commented out in https://github.com/istio/istio.io/pull/8399 so the alpha.2 release can be used for other tests. They will need to be re-enabled once this is fixed.
+<issue_comment>username_0: Running the test case locally after adding back in the two verify's still fails. I will try and pull the alpha.3 build and try again manually against the docs.
+<issue_comment>username_3: /cc @username_4
+<issue_comment>username_2: I am pretty sure its from https://github.com/istio/istio/issues/28756. Basically, istiod used to be implicitly restarted by `istioctl install`. Now it isn't. So we can either fix that issue or add `kubectl rollout restart deployment istiod -n istio-system` to the doc before restarting the sleep pods
+<issue_comment>username_0: Adding the istiod restart in the docs/test does get the test to pass.
+
+The question is if it is considered a regression to no longer do an automated restart of istiod during the `Istioctl install`?
+
+I understand that this particular task is not referenced often, and is not the preferred way to migrate trust domains, so maybe it's not a major issue.
+
+It should require something in the upgrade notes that an istiod restart may be required after an `istioctl install`.
+<issue_comment>username_1: Any update on this? Shall we just add a step to the doc and fix it in patch releases? @username_4
+<issue_comment>username_0: Currently, I've added the step in the docs/test to redeploy istiod after the istioctl install and things are working.
+
+As noted in my prior remarks, I'm not sure if this an acceptable solution along with a note in the upgrade docs that istioctl install no longer causes a restart of istiod (is this statement global, or maybe it's only true if there is a change in the trust domain). If the powers that be, think that is acceptable, then we still need to upgrade note, but the docs/test work is complete.
+<issue_comment>username_4: I think it's fine to ask users to redeploy istiod for this specific task, thanks for the update @username_0 ! I'm not sure if the behavior change in istioctl install needs a global upgrade note (probably should?) but I think that is a separate topic.
+<issue_comment>username_0: I'll close this issue since it is fixed. Will add a comment in the upgrade note PR/issue with a pointer to this problem.<issue_closed>
+<issue_comment>username_0: As an FYI, https://github.com/istio/istio/issues/28756 implies that the restart is just not happening in the case of trust domain changes, so only affects a small number of users and the docs now mention a restart is needed."
+kentcdodds/glamorous-website,254851987,277,,"[{'action': 'opened', 'author': 'luke-john', 'comment_id': None, 'datetime': '2017-09-03 04:17:41+00:00', 'masked_author': 'username_0', 'text': ""**Problem Description:**\r\n\r\nWhen searching for things on the glamorous website, the links sometimes take you to `https://glamorous.rocks/api#__next` rather than the heading on the page\r\n\r\n![glamorous-search](https://user-images.githubusercontent.com/848525/30000508-9d15599c-90a1-11e7-9b8b-896bac0bfb44.gif)\r\n\r\n**Suggested Solution:**\r\n\r\nIt looks like these titles on the pages don't actually have ids so whatever is powering the search wouldn't be able to link to the correct place.\r\n\r\n* Investigate adding ids to all titles in the documentation to allow linking\r\n* investigate what needs to happen to let the search know about those ids"", 'title': 'The search does not always take you to the expected place', 'type': 'issue'}
+ {'action': 'created', 'author': 'kentcdodds', 'comment_id': 326783589.0, 'datetime': '2017-09-03 04:19:32+00:00', 'masked_author': 'username_1', 'text': ""Yes, I'd love to fix that also! Thanks for bringing it up."", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'Powell-v2', 'comment_id': 358940969.0, 'datetime': '2018-01-19 11:32:06+00:00', 'masked_author': 'username_2', 'text': 'Hey guys, just tested and the issue persists. Is it okay if I take a shot at fixing it?', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'paulmolluzzo', 'comment_id': 358943196.0, 'datetime': '2018-01-19 11:42:33+00:00', 'masked_author': 'username_3', 'text': '@username_2 Go for it! 👍', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'Powell-v2', 'comment_id': 359423869.0, 'datetime': '2018-01-22 13:31:52+00:00', 'masked_author': 'username_2', 'text': ""As far as I understand, [`docsearch`](https://community.algolia.com/docsearch/documentation/) is used on the website. It correctly locates anchors which happen to be listed as *title* in `.md` file (they are also assigned an `#id` in DOM).\r\n\r\nThe problem is that everything else inside markdown files - `h1`'s, `h2`'s, etc. aren't links, and lack `#id`'s. While it's possible to break down long sections of texts (e.g. `pages/api/content/glamorous.md`) into several pieces, giving each one of them its own title, I'm not sure that's the most elegant solution since I suppose we'd like to keep `glamorous` function section as one piece, containing all pertaining options within.\r\n\r\nWith that being sad, could somebody explain me how *titles* in `.md` files are getting converted into links and at which point `#id`'s are being assigned to them?"", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'kentcdodds', 'comment_id': 359429032.0, 'datetime': '2018-01-22 13:52:31+00:00', 'masked_author': 'username_1', 'text': ""I'm pretty sure it's the `remark-html` plugin which we use right here: https://github.com/username_1/glamorous-website/blob/71385e1c49cbe4d34a875f5b63a772e5b35d12fa/components/interactive-markdown.js#L116\r\n\r\nPerhaps we just need to pass some options?\r\n\r\nIt could also be a problem in our next config here: https://github.com/username_1/glamorous-website/blob/71385e1c49cbe4d34a875f5b63a772e5b35d12fa/next.config.js#L8-L12\r\n\r\nI'm not certain, but hopefully that gives you an idea. Thanks @username_2!"", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'Powell-v2', 'comment_id': 359482412.0, 'datetime': '2018-01-22 16:32:08+00:00', 'masked_author': 'username_2', 'text': ""Thanks for the guidance, @username_1! I think the issue is related to `marked`: custom heading is defined, but I can't find where in the code this renderer is used. According to docs, it has to be passed as an option:\r\n\r\n```\r\nmarked('# heading', { renderer: renderer }));\r\n```\r\n\r\nLooks like setup is incomplete?"", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'kentcdodds', 'comment_id': 359540558.0, 'datetime': '2018-01-22 19:39:38+00:00', 'masked_author': 'username_1', 'text': ""Hmmm... Interesting, actually I'm curious what this is even doing:\r\n\r\nhttps://github.com/username_1/glamorous-website/blob/5932b3551fabb66433a3682f1e0cb6c8450b3b86/next.config.js#L3-L12\r\n\r\nthat `renderer` isn't actually used anywhere else in the file. I think that @username_3 set this up if I'm not mistaken. Maybe he can shed some light into what's going on 🤔"", 'title': None, 'type': 'comment'}]","<issue_start><issue_comment>Title: The search does not always take you to the expected place
+username_0: **Problem Description:**
+
+When searching for things on the glamorous website, the links sometimes take you to `https://glamorous.rocks/api#__next` rather than the heading on the page
+
+![glamorous-search](https://user-images.githubusercontent.com/848525/30000508-9d15599c-90a1-11e7-9b8b-896bac0bfb44.gif)
+
+**Suggested Solution:**
+
+It looks like these titles on the pages don't actually have ids so whatever is powering the search wouldn't be able to link to the correct place.
+
+* Investigate adding ids to all titles in the documentation to allow linking
+* investigate what needs to happen to let the search know about those ids
+<issue_comment>username_1: Yes, I'd love to fix that also! Thanks for bringing it up.
+<issue_comment>username_2: Hey guys, just tested and the issue persists. Is it okay if I take a shot at fixing it?
+<issue_comment>username_3: @username_2 Go for it! 👍
+<issue_comment>username_2: As far as I understand, [`docsearch`](https://community.algolia.com/docsearch/documentation/) is used on the website. It correctly locates anchors which happen to be listed as *title* in `.md` file (they are also assigned an `#id` in DOM).
+
+The problem is that everything else inside markdown files - `h1`'s, `h2`'s, etc. aren't links, and lack `#id`'s. While it's possible to break down long sections of texts (e.g. `pages/api/content/glamorous.md`) into several pieces, giving each one of them its own title, I'm not sure that's the most elegant solution since I suppose we'd like to keep `glamorous` function section as one piece, containing all pertaining options within.
+
+With that being sad, could somebody explain me how *titles* in `.md` files are getting converted into links and at which point `#id`'s are being assigned to them?
+<issue_comment>username_1: I'm pretty sure it's the `remark-html` plugin which we use right here: https://github.com/username_1/glamorous-website/blob/71385e1c49cbe4d34a875f5b63a772e5b35d12fa/components/interactive-markdown.js#L116
+
+Perhaps we just need to pass some options?
+
+It could also be a problem in our next config here: https://github.com/username_1/glamorous-website/blob/71385e1c49cbe4d34a875f5b63a772e5b35d12fa/next.config.js#L8-L12
+
+I'm not certain, but hopefully that gives you an idea. Thanks @username_2!
+<issue_comment>username_2: Thanks for the guidance, @username_1! I think the issue is related to `marked`: custom heading is defined, but I can't find where in the code this renderer is used. According to docs, it has to be passed as an option:
+
+```
+marked('# heading', { renderer: renderer }));
+```
+
+Looks like setup is incomplete?
+<issue_comment>username_1: Hmmm... Interesting, actually I'm curious what this is even doing:
+
+https://github.com/username_1/glamorous-website/blob/5932b3551fabb66433a3682f1e0cb6c8450b3b86/next.config.js#L3-L12
+
+that `renderer` isn't actually used anywhere else in the file. I think that @username_3 set this up if I'm not mistaken. Maybe he can shed some light into what's going on 🤔"
+kubernetes/website,544743146,18427,"{'number': 18427.0, 'repo': 'website', 'user_login': 'kubernetes'}","[{'action': 'opened', 'author': 'alkallio', 'comment_id': None, 'datetime': '2020-01-02T20:55:38Z', 'masked_author': 'username_0', 'text': 'A command that retrieves all pods that use a specific Secret.  \r\n`jq` is used to search the json output.', 'title': 'List all pods that use a specific Secret', 'type': 'issue'}
+ {'action': 'created', 'author': 'alkallio', 'comment_id': 570349615.0, 'datetime': '2020-01-02 21:07:41+00:00', 'masked_author': 'username_0', 'text': 'Signed CLA', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'sftim', 'comment_id': 570636762.0, 'datetime': '2020-01-03 17:16:07+00:00', 'masked_author': 'username_1', 'text': '/sig cli', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'alkallio', 'comment_id': 570643854.0, 'datetime': '2020-01-03 17:41:23+00:00', 'masked_author': 'username_0', 'text': 'You\'re right. I should have mentioned that the command above is only for secrets that are used to populate an environment variable. I haven\'t accounted for secrets that are mounted as volumes.  \r\nI\'ll update the description to highlight this fact.\r\n\r\nDo you think that something like ""List pods that use a specific Secret to populate an environment variable"" better captures what the command does? Happy to hear any other suggestions.  \r\n\r\nAlso thanks for raising the mounted volume case. I\'ll try to see if it\'s easy to include it in the command or if it\'s better to add another.', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'sftim', 'comment_id': 570647787.0, 'datetime': '2020-01-03 17:55:45+00:00', 'masked_author': 'username_1', 'text': ""My gut feeling is that it's going to be hard to make a concise command that does what the comment says. I also think that narrowing the comment isn't the right fix, I'm afraid.\r\n\r\nIf I'm right about there not being a concise fixed version, what could possibly work better is a blog post that lists several shell snippets and why they're useful. Bonus marks for including a PowerShell snipper for the SIG Windows people."", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'bradtopol', 'comment_id': 572251706.0, 'datetime': '2020-01-08 20:52:29+00:00', 'masked_author': 'username_2', 'text': '@username_1 @username_0 I tried this as well and had difficulty getting it to work.  It needs be more clear on how it works or how it is used. otherwise its frustrating.\r\n/assign', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'alkallio', 'comment_id': 588519574.0, 'datetime': '2020-02-19 23:03:41+00:00', 'masked_author': 'username_0', 'text': 'As discussed, closing this PR. A blog post is better suited in order to avoid potential frustration and confusion.  \r\nThank you for your feedback!', 'title': None, 'type': 'comment'}]","<issue_start><issue_comment>Title: List all pods that use a specific Secret
+username_0: A command that retrieves all pods that use a specific Secret.  
+`jq` is used to search the json output.
+<issue_comment>username_0: Signed CLA
+<issue_comment>username_1: /sig cli
+<issue_comment>username_0: You're right. I should have mentioned that the command above is only for secrets that are used to populate an environment variable. I haven't accounted for secrets that are mounted as volumes.  
+I'll update the description to highlight this fact.
+
+Do you think that something like ""List pods that use a specific Secret to populate an environment variable"" better captures what the command does? Happy to hear any other suggestions.  
+
+Also thanks for raising the mounted volume case. I'll try to see if it's easy to include it in the command or if it's better to add another.
+<issue_comment>username_1: My gut feeling is that it's going to be hard to make a concise command that does what the comment says. I also think that narrowing the comment isn't the right fix, I'm afraid.
+
+If I'm right about there not being a concise fixed version, what could possibly work better is a blog post that lists several shell snippets and why they're useful. Bonus marks for including a PowerShell snipper for the SIG Windows people.
+<issue_comment>username_2: @username_1 @username_0 I tried this as well and had difficulty getting it to work.  It needs be more clear on how it works or how it is used. otherwise its frustrating.
+/assign
+<issue_comment>username_0: As discussed, closing this PR. A blog post is better suited in order to avoid potential frustration and confusion.  
+Thank you for your feedback!"
+crimethinc/website,1177185066,2500,,"[{'action': 'opened', 'author': 'just1602', 'comment_id': None, 'datetime': '2022-03-22 18:58:18+00:00', 'masked_author': 'username_0', 'text': 'Since we have a lot of pull request coming from dependabot and a test suite we can kind of trust, we should merge dependabot PR when buld are green.\r\n\r\nWe should inspire ourselves from [this example](https://github.com/TechEmpower/FrameworkBenchmarks/blob/master/.github/workflows/build.yml#L154-L168)', 'title': 'Automerge dependabot pull requests', 'type': 'issue'}
+ {'action': 'created', 'author': 'logo4poop', 'comment_id': 1075862356.0, 'datetime': '2022-03-23 02:54:44+00:00', 'masked_author': 'username_1', 'text': 'I would argue against this from a security point of view is poor. Library developers may push something malicious. Look at leftpad and the like as an example.', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'just1602', 'comment_id': 1075866477.0, 'datetime': '2022-03-23 03:04:24+00:00', 'masked_author': 'username_0', 'text': ""Yeah, I know, I've think about that... but so far, most dev who push malicious code made a major version to ship their malicious code and this config only merge patched and minor version and we could even reduce it to patch version only.\r\n\r\nBut yeah, it's a question we should ask ourselves, but in the mean time GitHub need to find a way to make merging those PRs easier.\r\n\r\n@username_2 you were the one asking for it. Do we wanna take the risk?\r\n\r\nMaybe the other way to do this would be to pre-approve those PRs, so we could simply check the changelog / commit logs and avoid to go in the diff tab to approve the PR before having to click two more buttons to merge it."", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'logo4poop', 'comment_id': 1075871173.0, 'datetime': '2022-03-23 03:15:13+00:00', 'masked_author': 'username_1', 'text': 'I was looking to see if there was a way to simply combine all of the Dependabot PRs into one. Nothing official, but look at [this.](https://github.com/hrvey/combine-prs-workflow) It seems like a smart way to go about it.', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'just1602', 'comment_id': 1076330464.0, 'datetime': '2022-03-23 12:40:23+00:00', 'masked_author': 'username_0', 'text': ""I could check, but I don't like this idea since it make commit not atomic anymore. If there's a issue with a gem we update I want to be able to revert this update and only this one, I don't want to revert a whole day of gem update, especially since sometime there's a lot of update in one day or there are major version update that we would not want to downgrade."", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'veganstraightedge', 'comment_id': 1076862794.0, 'datetime': '2022-03-23 22:01:33+00:00', 'masked_author': 'username_2', 'text': 'I agree with @username_0 that we should not combine Dependabot PRs. We value ""make small moves"". And this would go against that.', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'veganstraightedge', 'comment_id': 1076865566.0, 'datetime': '2022-03-23 22:05:06+00:00', 'masked_author': 'username_2', 'text': ""@username_1 et al, I hear you about the potential for security risk via an upstream addition, a la `leftpad`.\r\n\r\nLet's talk that through, as an exercise.\r\n\r\n- Did `leftpad` put into their release notes / changeling that it had become malware?\r\n- Would our tests have still all passed with a bad actor like `leftpad`?\r\n\r\nThese are real questions. I'm open to being convinced either way about this (even though I'm the one who asked for this change). I have other questions, but let's start with those and see where we get.\r\n\r\nLet's keep this friendly and open and honest, and get the best result out of our shared conversation."", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'veganstraightedge', 'comment_id': 1076865873.0, 'datetime': '2022-03-23 22:05:34+00:00', 'masked_author': 'username_2', 'text': ""@username_1 et al, I hear you about the potential for security risk via an upstream addition, a la `leftpad`.\r\n\r\nLet's talk that through, as an exercise.\r\n\r\n- Did `leftpad` put into their release notes / changeling that it had become malware?\r\n- Would our tests have still all passed with a bad actor like `leftpad`?\r\n\r\nThese are real questions. I'm open to being convinced either way about this (even though I'm the one who asked for this change). I have other questions, but let's start with those and see where we get.\r\n\r\nLet's keep this friendly and open and honest, and get the best result out of our shared conversation.  \r\n\r\ncc: @username_0 @username_3"", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'astronaut-wannabe', 'comment_id': 1076882904.0, 'datetime': '2022-03-23 22:26:56+00:00', 'masked_author': 'username_3', 'text': ""This is an additional reason why relying solely on our tests to merge a dependabot PR removes a huge part of the value of dependabot. Dependabot includes a compatibility score, which allows us to leverage the CI of every other dependabot user with the same dependencies. You remove that valuable leverage by just relying on our CI\r\n\r\nin a hypothetical malicious code update the probability that our CI would fail is low (depending on the dependency and how we use it). In this hypothetical, the probability that **any** depndabot user's CI would fail is much higher than the chance our own CI alone would fail. However, this hypothetical, tail risk distracts from the fact that you are *significantly increasing the probability of merging in dependency bugs in the most common, day-to-day case*\r\n\r\nso the answer to your questions are\r\n\r\n1. yes\r\n2. The questions should really be, is our CI alone more likely to catch common gem compatibility issues vs the collective CI of every dependabot user"", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'astronaut-wannabe', 'comment_id': 1076890722.0, 'datetime': '2022-03-23 22:40:00+00:00', 'masked_author': 'username_3', 'text': 'All of *THAT* said, i do realize that as an all volunteer project, the value of automating tasks is much higher than it would be in a day-job type situation. So I am fine with this feature if that benefit feels substantial enough to everyone (especially as I have been MIA for awhile)', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'logo4poop', 'comment_id': 1076945376.0, 'datetime': '2022-03-24 00:24:30+00:00', 'masked_author': 'username_1', 'text': 'I meant colors.js, not leftpad. Leftpad simply got deleted. In both cases the answer is yes. The example was more to show that unchecked merging can be easily be corrupted and cause harm. A benefit in our situation is that the website is mainly comprised of large libraries made by established, more looked over developers. Colors.js was also by an established developer, but he at least alerted that he was going to be shutting it down.', 'title': None, 'type': 'comment'}]","<issue_start><issue_comment>Title: Automerge dependabot pull requests
+username_0: Since we have a lot of pull request coming from dependabot and a test suite we can kind of trust, we should merge dependabot PR when buld are green.
+
+We should inspire ourselves from [this example](https://github.com/TechEmpower/FrameworkBenchmarks/blob/master/.github/workflows/build.yml#L154-L168)
+<issue_comment>username_1: I would argue against this from a security point of view is poor. Library developers may push something malicious. Look at leftpad and the like as an example.
+<issue_comment>username_0: Yeah, I know, I've think about that... but so far, most dev who push malicious code made a major version to ship their malicious code and this config only merge patched and minor version and we could even reduce it to patch version only.
+
+But yeah, it's a question we should ask ourselves, but in the mean time GitHub need to find a way to make merging those PRs easier.
+
+@username_2 you were the one asking for it. Do we wanna take the risk?
+
+Maybe the other way to do this would be to pre-approve those PRs, so we could simply check the changelog / commit logs and avoid to go in the diff tab to approve the PR before having to click two more buttons to merge it.
+<issue_comment>username_1: I was looking to see if there was a way to simply combine all of the Dependabot PRs into one. Nothing official, but look at [this.](https://github.com/hrvey/combine-prs-workflow) It seems like a smart way to go about it.
+<issue_comment>username_0: I could check, but I don't like this idea since it make commit not atomic anymore. If there's a issue with a gem we update I want to be able to revert this update and only this one, I don't want to revert a whole day of gem update, especially since sometime there's a lot of update in one day or there are major version update that we would not want to downgrade.
+<issue_comment>username_2: I agree with @username_0 that we should not combine Dependabot PRs. We value ""make small moves"". And this would go against that.
+<issue_comment>username_2: @username_1 et al, I hear you about the potential for security risk via an upstream addition, a la `leftpad`.
+
+Let's talk that through, as an exercise.
+
+- Did `leftpad` put into their release notes / changeling that it had become malware?
+- Would our tests have still all passed with a bad actor like `leftpad`?
+
+These are real questions. I'm open to being convinced either way about this (even though I'm the one who asked for this change). I have other questions, but let's start with those and see where we get.
+
+Let's keep this friendly and open and honest, and get the best result out of our shared conversation.
+<issue_comment>username_2: @username_1 et al, I hear you about the potential for security risk via an upstream addition, a la `leftpad`.
+
+Let's talk that through, as an exercise.
+
+- Did `leftpad` put into their release notes / changeling that it had become malware?
+- Would our tests have still all passed with a bad actor like `leftpad`?
+
+These are real questions. I'm open to being convinced either way about this (even though I'm the one who asked for this change). I have other questions, but let's start with those and see where we get.
+
+Let's keep this friendly and open and honest, and get the best result out of our shared conversation.  
+
+cc: @username_0 @username_3
+<issue_comment>username_3: This is an additional reason why relying solely on our tests to merge a dependabot PR removes a huge part of the value of dependabot. Dependabot includes a compatibility score, which allows us to leverage the CI of every other dependabot user with the same dependencies. You remove that valuable leverage by just relying on our CI
+
+in a hypothetical malicious code update the probability that our CI would fail is low (depending on the dependency and how we use it). In this hypothetical, the probability that **any** depndabot user's CI would fail is much higher than the chance our own CI alone would fail. However, this hypothetical, tail risk distracts from the fact that you are *significantly increasing the probability of merging in dependency bugs in the most common, day-to-day case*
+
+so the answer to your questions are
+
+1. yes
+2. The questions should really be, is our CI alone more likely to catch common gem compatibility issues vs the collective CI of every dependabot user
+<issue_comment>username_3: All of *THAT* said, i do realize that as an all volunteer project, the value of automating tasks is much higher than it would be in a day-job type situation. So I am fine with this feature if that benefit feels substantial enough to everyone (especially as I have been MIA for awhile)
+<issue_comment>username_1: I meant colors.js, not leftpad. Leftpad simply got deleted. In both cases the answer is yes. The example was more to show that unchecked merging can be easily be corrupted and cause harm. A benefit in our situation is that the website is mainly comprised of large libraries made by established, more looked over developers. Colors.js was also by an established developer, but he at least alerted that he was going to be shutting it down."
+facebook/docusaurus,657605168,3067,,"[{'action': 'opened', 'author': 'prma85', 'comment_id': None, 'datetime': '2020-07-15 19:42:28+00:00', 'masked_author': 'username_0', 'text': '## 🚀 Feature\r\n\r\nWhen creating a multi-level docs page with different menus, normally we go with\r\n\r\n`sidebar.js`\r\n```js\r\n{\r\n  components_menu: [\r\n        ""components/status"",\r\n        ""components/button"",\r\n        ""components/card"",\r\n        ""components/checkbox"",\r\n        ""components/datepicker""\r\n  ],\r\n  web_dev_api_menu: [\r\n        ""web-dev-docs/api/status"",\r\n        ""web-dev-docs/api/components/alert"",\r\n        ""web-dev-docs/api/components/analytics"",\r\n        ""web-dev-docs/api/components/antd"",\r\n        ""web-dev-docs/api/components/auth""\r\n  ],\r\n}\r\n```\r\n\r\nAnd for my nav bar, I would go with\r\n`docusaurus.config.js`\r\n\r\n```js\r\nnavbar: {\r\n  links: [\r\n    {\r\n      to: ""docs/components/status"",\r\n      label: ""Components"",\r\n      position: ""left"",\r\n    },\r\n    {\r\n      to: ""docs/""web-dev-docs/api/status"",\r\n      label: ""Web-api"",\r\n      position: ""left"",\r\n    },\r\n```\r\n\r\nHowever, there is no link between the navbar and when opening a Navbar, I will get only the menus for that navbar item, and due to this, the navbar link doesn\'t keep active when switching the sidebar items.\r\n\r\n## Motivation\r\n\r\nBe able to create multi-level/layers docs site and keep the navbar menu active\r\n\r\n## Pitch\r\n\r\nNormally when creating a docs page, and it is too big or too complex (for example, a design system docs or API docs), we need to divide it by sections. As today, if we divide the docs, we don\'t have a clear indication of what is the active section.\r\n\r\nMaybe, the Navbar API could be extended to add an optional property to link the sidebar object to be active\r\nFor example:\r\n\r\n```js\r\nnavbar: {\r\n  links: [\r\n    {\r\n      to: ""docs/components/status"",\r\n      label: ""Components"",\r\n      position: ""left"",\r\n      sidebar: ""components_menu""\r\n    },\r\n```\r\n\r\nSo, when navigating on any items of the `components_menu` array, it will keep the navbar item `Components` active', 'title': '[v2] Sidebar menu also set active the Navbar menu', 'type': 'issue'}
+ {'action': 'created', 'author': 'slorber', 'comment_id': 661048094.0, 'datetime': '2020-07-20 13:43:33+00:00', 'masked_author': 'username_1', 'text': 'Hi,\r\n\r\nIf all the docs of your sidebar 1 have `/docs/components/` url prefix, and all the docs of your sidebar 2 have `docs/web-dev-docs/api/` prefix, you can highlight the navbar links by using the activeBasePath / activeBaseRegex features, that will ""activate"" the items when you navigate to them.\r\n\r\nhttps://v2.docusaurus.io/docs/theme-classic/#navbar', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'prma85', 'comment_id': 661237829.0, 'datetime': '2020-07-20 17:47:55+00:00', 'masked_author': 'username_0', 'text': 'Hey @username_1 \r\nThanks for your reply. \r\nIt works like a charm for the simple navbar item. However, if the item as sub-items (rendered as dropdown, the active class is not applied to it).\r\n\r\nNot sure if it is the desired behaviour. Maybe it is a small bug?', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'slorber', 'comment_id': 661260859.0, 'datetime': '2020-07-20 18:32:41+00:00', 'masked_author': 'username_1', 'text': 'you have to assign a path/regexp to each dropdown element.\r\n\r\nSee how it works on the docusaurus 2 website: \r\n\r\n![image](https://user-images.githubusercontent.com/749374/87972997-23233000-cac8-11ea-866c-32ae59164003.png)\r\n\r\n\r\nif we can do it, you can probably do the same :)', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'prma85', 'comment_id': 661334483.0, 'datetime': '2020-07-20 21:09:02+00:00', 'masked_author': 'username_0', 'text': 'Yep, totally agree.\r\n\r\nThis is my navbar:\r\n\r\n```js\r\nlinks: [\r\n  {\r\n    to: ""docs/foundations-and-experiences/ux-principles"",\r\n    label: ""Foundations"",\r\n    position: ""left"",\r\n    activeBasePath: ""docs/foundations-and-experiences"",\r\n  },\r\n  {\r\n    to: ""docs/language-and-design/colors"",\r\n    label: ""Design"",\r\n    position: ""left"",\r\n    activeBaseRegex: ""docs/(language-and-design|designer)"",\r\n  },\r\n  {\r\n    to: ""docs/components/status"",\r\n    label: ""Components"",\r\n    position: ""left"",\r\n    activeBasePath: ""docs/components"",\r\n  },\r\n  {\r\n    label: ""Web Dev"",\r\n    position: ""right"",\r\n    activeBaseRegex: ""docs/web-dev/(guides|api|support|fed-team)"",\r\n    items: [\r\n      {\r\n        label: ""Docs"",\r\n        to: ""docs/web-dev/guides/creating-a-new-app"",\r\n        activeBasePath: ""docs/web-dev/guides"",\r\n      },\r\n      {\r\n        label: ""Support"",\r\n        to: ""docs/web-dev/support/help"",\r\n        activeBasePath: ""docs/web-dev/(support|fed-team)"",\r\n      },\r\n      {\r\n        label: ""Storybook"",\r\n        to: ""/storybook"",\r\n        activeBasePath: ""storybook"",\r\n      },\r\n      {\r\n        label: ""API"",\r\n        to: ""docs/web-dev/api/contributing-new-features"",\r\n        activeBasePath: ""docs/web-dev/api"",\r\n      },\r\n    ],\r\n  },\r\n  {\r\n    to: ""docs/mobile-dev/mobile-dev-intro"",\r\n    label: ""Mobile Dev"",\r\n    position: ""right"",\r\n    activeBasePath: ""docs/mobile-dev"",\r\n  },\r\n],\r\n```\r\n\r\nAll the active links work for the exception of the Web-dev that is a Dropdown menu 🤔 \r\nLooking into the docusaurus navbar (https://github.com/facebook/docusaurus/blob/master/website/docusaurus.config.js) doesn\'t look too much difference in how I am creating it.\r\n\r\nBut it still doesn\'t active the navbar item, only the sub-items', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'slorber', 'comment_id': 661724183.0, 'datetime': '2020-07-21 08:48:00+00:00', 'masked_author': 'username_1', 'text': 'I\'m sorry but I\'m unable to understand what you want. Can you display screenshots, link to code or something?\r\n\r\n![image](https://user-images.githubusercontent.com/749374/88033128-3e7d5200-cb3f-11ea-8fad-5d146e1f9db3.png)\r\n\r\n\r\nHere you can see 2 items can get highlighted: Docs and 2.0-alpha.54. You\'d want something else to be highlighted?\r\n\r\nFor me, when you say ""the dropdown menu"", this is the whole ul with all the versions, it is not supposed to ""activate"", what do you expect from activating this menu\r\n\r\nCan you draw something in https://excalidraw.com/ so that I understand exactly what UI you want?', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'prma85', 'comment_id': 661949863.0, 'datetime': '2020-07-21 16:02:08+00:00', 'masked_author': 'username_0', 'text': 'Sorry for not being clear\r\nWhen I am saying dropdown menu, I mean the main item/title and not the internal list\r\n\r\n![image](https://user-images.githubusercontent.com/1236101/88077700-c6ac2900-cb38-11ea-886e-f2119f3e1852.png)\r\n\r\nThe code I sent before is for this menu.\r\nI can see the menu items inside of the dropdown being active but not the dropdown itself\r\nAlso, looking in the HTML generated, the div with the dropdown title as no active class\r\n\r\nIn my case, the menu is `Web Dev -> Docs`. Docs is highlighted, but not `Web Dev`\r\n\r\n```js\r\n  {\r\n    label: ""Web Dev"",\r\n    position: ""right"",\r\n    activeBaseRegex: ""docs/web-dev/(guides|api|support|fed-team)"",\r\n    items: [\r\n      {\r\n        label: ""Docs"",\r\n        to: ""docs/web-dev/guides/creating-a-new-app"",\r\n        activeBasePath: ""docs/web-dev/guides"",\r\n      },\r\n  }\r\n```', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'slorber', 'comment_id': 662069616.0, 'datetime': '2020-07-21 19:45:25+00:00', 'masked_author': 'username_1', 'text': 'Will have to check tomorrow but maybe it requires a to attribute on the\nparent item', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'slorber', 'comment_id': 662599431.0, 'datetime': '2020-07-22 17:58:21+00:00', 'masked_author': 'username_1', 'text': '@username_0 according to what I see in the code, `activeBasePath` is only used if you have a ""to"" in your parent element. Without it, it won\'t be a ReactRouter link, which provides us the active feature.\r\n\r\nCan\'t you add a ""to"" attribute?', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'prma85', 'comment_id': 663236068.0, 'datetime': '2020-07-23 21:14:51+00:00', 'masked_author': 'username_0', 'text': '@username_1 yes, it did the trick\r\nBut since this menu has no real link, I add the following\r\n`to: ""#"",`\r\nand it worked\r\nthanks \\o/', 'title': None, 'type': 'comment'}
+ {'action': 'closed', 'author': 'prma85', 'comment_id': None, 'datetime': '2020-07-23 21:15:06+00:00', 'masked_author': 'username_0', 'text': '', 'title': None, 'type': 'issue'}
+ {'action': 'created', 'author': 'slorber', 'comment_id': 663401106.0, 'datetime': '2020-07-24 08:09:25+00:00', 'masked_author': 'username_1', 'text': 'great\r\n\r\nyes this is probably not very convenient but at least there\'s a workaround. Does ""#"" has any unintended side-effect?', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'prma85', 'comment_id': 663404412.0, 'datetime': '2020-07-24 08:18:28+00:00', 'masked_author': 'username_0', 'text': ""I didn't notice any side-effect. Looks all good :)"", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'slorber', 'comment_id': 663762403.0, 'datetime': '2020-07-24 22:44:38+00:00', 'masked_author': 'username_1', 'text': 'Great. Tell me if alpha 59 gives you any trouble', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'prma85', 'comment_id': 664593792.0, 'datetime': '2020-07-27 19:30:39+00:00', 'masked_author': 'username_0', 'text': 'Hey @username_1, I just updated it to alpha 59 and not it generates errors on build 🤔  (works with yarn start tho)\r\n\r\n```bash\r\nTypeError: sidebar.map is not a function\r\n```\r\n\r\n![image](https://user-images.githubusercontent.com/1236101/88583196-214bf600-d00d-11ea-9235-4a9cde0cd299.png)\r\n\r\n\r\n```bash\r\n(undefined) TypeError: sidebar.map is not a function\r\n    at DocSidebar (main:125515:4742)\r\n    at d (main:128597:498)\r\n    at $a (main:128600:16)\r\n    at a.b.render (main:128605:476)\r\n    at a.b.read (main:128605:18)\r\n    at Object.renderToString (main:128615:364)\r\n    at serverEntry_render (main:202384:375)\r\n```\r\n\r\n\r\nAnd this is my sidebar.js (works fine on alpha 58)\r\n\r\n![image](https://user-images.githubusercontent.com/1236101/88583331-5a846600-d00d-11ea-9385-a1bba4cdfe2f.png)', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'slorber', 'comment_id': 664975990.0, 'datetime': '2020-07-28 11:03:28+00:00', 'masked_author': 'username_1', 'text': ""Hi,\r\n\r\nThis is surprising, unfortunately I'm not able to reproduce. \r\n\r\nI need more infos, if you can give me access to your site's code (or create a small repro) that helps. \r\n\r\nAlso I need to see the full content of the sidebar file (+ all the versioned sidebar files if available).\r\n\r\nYou can try to debug this with dichotomy: remove versions, remove docs, remove sidebar content, until your site work"", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'prma85', 'comment_id': 665139141.0, 'datetime': '2020-07-28 16:24:03+00:00', 'masked_author': 'username_0', 'text': '🤔 \r\nthe `yarn start` still works, but `yarn build` fails on building server with this error\r\n\r\nI got my sidebars.js as much simple as possible\r\n\r\n```js\r\nmodule.exports = {\r\n  docs: [\r\n    {\r\n      type: ""category"",\r\n      label: ""Design"",\r\n      items: [\r\n        ""language-and-design/colors"",\r\n        ""language-and-design/typography"",\r\n        ""language-and-design/spacing"",\r\n        ""language-and-design/empty-states"",\r\n        ""language-and-design/data-entry"",\r\n        ""language-and-design/visibility-security-and-permissions"",\r\n      ],\r\n    }\r\n  ]\r\n};\r\n```\r\n\r\nBut I am still getting the error `TypeError: sidebar.map is not a function` 🤔 \r\n\r\nRepo: https://github.com/username_0/iQ.design.system.docs', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'prma85', 'comment_id': 665141797.0, 'datetime': '2020-07-28 16:29:14+00:00', 'masked_author': 'username_0', 'text': 'I only change was updating from alpha 58 to alpha 59\r\nusing alpha 58 still works, but since my azure pipeline has a yarn upgrade to always use the lastest internal versions of some packages, it also updates the docusaurus 🤔 \r\nso, it fails on the build and deploys 😢', 'title': None, 'type': 'comment'}
+ {'action': 'reopened', 'author': 'prma85', 'comment_id': None, 'datetime': '2020-07-28 16:32:08+00:00', 'masked_author': 'username_0', 'text': '## 🚀 Feature\r\n\r\nWhen creating a multi-level docs page with different menus, normally we go with\r\n\r\n`sidebar.js`\r\n```js\r\n{\r\n  components_menu: [\r\n        ""components/status"",\r\n        ""components/button"",\r\n        ""components/card"",\r\n        ""components/checkbox"",\r\n        ""components/datepicker""\r\n  ],\r\n  web_dev_api_menu: [\r\n        ""web-dev-docs/api/status"",\r\n        ""web-dev-docs/api/components/alert"",\r\n        ""web-dev-docs/api/components/analytics"",\r\n        ""web-dev-docs/api/components/antd"",\r\n        ""web-dev-docs/api/components/auth""\r\n  ],\r\n}\r\n```\r\n\r\nAnd for my nav bar, I would go with\r\n`docusaurus.config.js`\r\n\r\n```js\r\nnavbar: {\r\n  links: [\r\n    {\r\n      to: ""docs/components/status"",\r\n      label: ""Components"",\r\n      position: ""left"",\r\n    },\r\n    {\r\n      to: ""docs/""web-dev-docs/api/status"",\r\n      label: ""Web-api"",\r\n      position: ""left"",\r\n    },\r\n```\r\n\r\nHowever, there is no link between the navbar and when opening a Navbar, I will get only the menus for that navbar item, and due to this, the navbar link doesn\'t keep active when switching the sidebar items.\r\n\r\n## Motivation\r\n\r\nBe able to create multi-level/layers docs site and keep the navbar menu active\r\n\r\n## Pitch\r\n\r\nNormally when creating a docs page, and it is too big or too complex (for example, a design system docs or API docs), we need to divide it by sections. As today, if we divide the docs, we don\'t have a clear indication of what is the active section.\r\n\r\nMaybe, the Navbar API could be extended to add an optional property to link the sidebar object to be active\r\nFor example:\r\n\r\n```js\r\nnavbar: {\r\n  links: [\r\n    {\r\n      to: ""docs/components/status"",\r\n      label: ""Components"",\r\n      position: ""left"",\r\n      sidebar: ""components_menu""\r\n    },\r\n```\r\n\r\nSo, when navigating on any items of the `components_menu` array, it will keep the navbar item `Components` active', 'title': '[v2] Sidebar menu also set active the Navbar menu', 'type': 'issue'}
+ {'action': 'created', 'author': 'slorber', 'comment_id': 665152623.0, 'datetime': '2020-07-28 16:49:45+00:00', 'masked_author': 'username_1', 'text': ""@username_0 in such case you shuld avoid using semver ranges in your package.json so that azure stick to existing versions? This is very strange to have your CI not respecting lockfile, why is that?\r\n\r\nAbout your problem, I don't have access to this repo that is private, if you send me an invite I'll look at this"", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'slorber', 'comment_id': 665183831.0, 'datetime': '2020-07-28 17:51:07+00:00', 'masked_author': 'username_1', 'text': ""Thanks, I see\r\n\r\nSorry to have to change some implementation details of that component, unfortunately, it's required to fix some issues in the docs plugin. It is likely to happen again on next versions because there are other things I'd like to fix regarding the docs plugin and the exposed theme api surface which is currently a bit blurry and likely to cause such breaking changes.\r\n\r\nAbout the links, this is probably already fixed (leading / appended by mistake) and going to be released soon, but please give me the markdown of that link to double-check"", 'title': None, 'type': 'comment'}
+ {'action': 'closed', 'author': 'slorber', 'comment_id': None, 'datetime': '2020-07-28 17:51:10+00:00', 'masked_author': 'username_1', 'text': '', 'title': None, 'type': 'issue'}
+ {'action': 'created', 'author': 'prma85', 'comment_id': 665237675.0, 'datetime': '2020-07-28 19:39:45+00:00', 'masked_author': 'username_0', 'text': ""@username_1 Thanks\r\n\r\nOn v1 I was just adding a custom script and then, when loading the page, it was looking for the edit link and doing the necessary work for adding the extra button.\r\n\r\nThis doesn't work on v2 because the page is loaded and not the content for the first time. There are some milliseconds there with waiting for a render. The alternative was using `useEffect` in the `DocPage`. I could do a setTimeout, but it wouldn't work anymore when the link is changed since I can't see any event is triggered when the route changes on the window. If there is another option I would to love to use it, like, the possibility to add a class to the edit page or extra buttons through docusaurus.config.js ;) \r\n\r\nI checked the links and looks all good.\r\nAny intention to add more power to the `onBrokenLinks`?\r\nI was looking for an option to be able to ignore some links. For example, I would like to ignore the `dev.azure.com` since these links are normally private and docusaurus will not be able to check if it is valid or not.\r\n\r\nExample:\r\nBroken links found!\r\n\r\n```\r\n- Page path = /docs/web-dev/concepts/architecture:\r\n   -> link to /(https://dev.azure.com/iqmetrix/Hub/_packaging?_a=feed&feed=iqmetrix) (resolved as: /(https://dev.azure.com/iqmetrix/Hub/_packaging)\r\n```\r\n\r\nand the MD file has the following content:\r\n\r\n```md\r\n## NPM Registry\r\n\r\n| int / rc / prod |\r\n| ---------------------- |\r\n| [iQmetrix registry]    |\r\n\r\n[iqmetrix registry]: (https://dev.azure.com/iqmetrix/Hub/_packaging?_a=feed&feed=iqmetrix)\r\n```"", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'slorber', 'comment_id': 665687568.0, 'datetime': '2020-07-29 14:10:08+00:00', 'masked_author': 'username_1', 'text': ""All links with a protocol are not checked (it is a bug that adds a weird / at the beginning and let us think it's an absolute internal link, but it will be fixed very soon)"", 'title': None, 'type': 'comment'}]","<issue_start><issue_comment>Title: [v2] Sidebar menu also set active the Navbar menu
+username_0: ## 🚀 Feature
+
+When creating a multi-level docs page with different menus, normally we go with
+
+`sidebar.js`
+```js
+{
+  components_menu: [
+        ""components/status"",
+        ""components/button"",
+        ""components/card"",
+        ""components/checkbox"",
+        ""components/datepicker""
+  ],
+  web_dev_api_menu: [
+        ""web-dev-docs/api/status"",
+        ""web-dev-docs/api/components/alert"",
+        ""web-dev-docs/api/components/analytics"",
+        ""web-dev-docs/api/components/antd"",
+        ""web-dev-docs/api/components/auth""
+  ],
+}
+```
+
+And for my nav bar, I would go with
+`docusaurus.config.js`
+
+```js
+navbar: {
+  links: [
+    {
+      to: ""docs/components/status"",
+      label: ""Components"",
+      position: ""left"",
+    },
+    {
+      to: ""docs/""web-dev-docs/api/status"",
+      label: ""Web-api"",
+      position: ""left"",
+    },
+```
+
+However, there is no link between the navbar and when opening a Navbar, I will get only the menus for that navbar item, and due to this, the navbar link doesn't keep active when switching the sidebar items.
+
+## Motivation
+
+Be able to create multi-level/layers docs site and keep the navbar menu active
+
+## Pitch
+
+Normally when creating a docs page, and it is too big or too complex (for example, a design system docs or API docs), we need to divide it by sections. As today, if we divide the docs, we don't have a clear indication of what is the active section.
+
+Maybe, the Navbar API could be extended to add an optional property to link the sidebar object to be active
+For example:
+
+```js
+navbar: {
+  links: [
+    {
+      to: ""docs/components/status"",
+      label: ""Components"",
+      position: ""left"",
+      sidebar: ""components_menu""
+    },
+```
+
+So, when navigating on any items of the `components_menu` array, it will keep the navbar item `Components` active
+<issue_comment>username_1: Hi,
+
+If all the docs of your sidebar 1 have `/docs/components/` url prefix, and all the docs of your sidebar 2 have `docs/web-dev-docs/api/` prefix, you can highlight the navbar links by using the activeBasePath / activeBaseRegex features, that will ""activate"" the items when you navigate to them.
+
+https://v2.docusaurus.io/docs/theme-classic/#navbar
+<issue_comment>username_0: Hey @username_1 
+Thanks for your reply. 
+It works like a charm for the simple navbar item. However, if the item as sub-items (rendered as dropdown, the active class is not applied to it).
+
+Not sure if it is the desired behaviour. Maybe it is a small bug?
+<issue_comment>username_1: you have to assign a path/regexp to each dropdown element.
+
+See how it works on the docusaurus 2 website: 
+
+![image](https://user-images.githubusercontent.com/749374/87972997-23233000-cac8-11ea-866c-32ae59164003.png)
+
+
+if we can do it, you can probably do the same :)
+<issue_comment>username_0: Yep, totally agree.
+
+This is my navbar:
+
+```js
+links: [
+  {
+    to: ""docs/foundations-and-experiences/ux-principles"",
+    label: ""Foundations"",
+    position: ""left"",
+    activeBasePath: ""docs/foundations-and-experiences"",
+  },
+  {
+    to: ""docs/language-and-design/colors"",
+    label: ""Design"",
+    position: ""left"",
+    activeBaseRegex: ""docs/(language-and-design|designer)"",
+  },
+  {
+    to: ""docs/components/status"",
+    label: ""Components"",
+    position: ""left"",
+    activeBasePath: ""docs/components"",
+  },
+  {
+    label: ""Web Dev"",
+    position: ""right"",
+    activeBaseRegex: ""docs/web-dev/(guides|api|support|fed-team)"",
+    items: [
+      {
+        label: ""Docs"",
+        to: ""docs/web-dev/guides/creating-a-new-app"",
+        activeBasePath: ""docs/web-dev/guides"",
+      },
+      {
+        label: ""Support"",
+        to: ""docs/web-dev/support/help"",
+        activeBasePath: ""docs/web-dev/(support|fed-team)"",
+      },
+      {
+        label: ""Storybook"",
+        to: ""/storybook"",
+        activeBasePath: ""storybook"",
+      },
+      {
+        label: ""API"",
+        to: ""docs/web-dev/api/contributing-new-features"",
+        activeBasePath: ""docs/web-dev/api"",
+      },
+    ],
+  },
+  {
+    to: ""docs/mobile-dev/mobile-dev-intro"",
+    label: ""Mobile Dev"",
+    position: ""right"",
+    activeBasePath: ""docs/mobile-dev"",
+  },
+],
+```
+
+All the active links work for the exception of the Web-dev that is a Dropdown menu 🤔 
+Looking into the docusaurus navbar (https://github.com/facebook/docusaurus/blob/master/website/docusaurus.config.js) doesn't look too much difference in how I am creating it.
+
+But it still doesn't active the navbar item, only the sub-items
+<issue_comment>username_1: I'm sorry but I'm unable to understand what you want. Can you display screenshots, link to code or something?
+
+![image](https://user-images.githubusercontent.com/749374/88033128-3e7d5200-cb3f-11ea-8fad-5d146e1f9db3.png)
+
+
+Here you can see 2 items can get highlighted: Docs and 2.0-alpha.54. You'd want something else to be highlighted?
+
+For me, when you say ""the dropdown menu"", this is the whole ul with all the versions, it is not supposed to ""activate"", what do you expect from activating this menu
+
+Can you draw something in https://excalidraw.com/ so that I understand exactly what UI you want?
+<issue_comment>username_0: Sorry for not being clear
+When I am saying dropdown menu, I mean the main item/title and not the internal list
+
+![image](https://user-images.githubusercontent.com/1236101/88077700-c6ac2900-cb38-11ea-886e-f2119f3e1852.png)
+
+The code I sent before is for this menu.
+I can see the menu items inside of the dropdown being active but not the dropdown itself
+Also, looking in the HTML generated, the div with the dropdown title as no active class
+
+In my case, the menu is `Web Dev -> Docs`. Docs is highlighted, but not `Web Dev`
+
+```js
+  {
+    label: ""Web Dev"",
+    position: ""right"",
+    activeBaseRegex: ""docs/web-dev/(guides|api|support|fed-team)"",
+    items: [
+      {
+        label: ""Docs"",
+        to: ""docs/web-dev/guides/creating-a-new-app"",
+        activeBasePath: ""docs/web-dev/guides"",
+      },
+  }
+```
+<issue_comment>username_1: Will have to check tomorrow but maybe it requires a to attribute on the
+parent item
+<issue_comment>username_1: @username_0 according to what I see in the code, `activeBasePath` is only used if you have a ""to"" in your parent element. Without it, it won't be a ReactRouter link, which provides us the active feature.
+
+Can't you add a ""to"" attribute?
+<issue_comment>username_0: @username_1 yes, it did the trick
+But since this menu has no real link, I add the following
+`to: ""#"",`
+and it worked
+thanks \o/<issue_closed>
+<issue_comment>username_1: great
+
+yes this is probably not very convenient but at least there's a workaround. Does ""#"" has any unintended side-effect?
+<issue_comment>username_0: I didn't notice any side-effect. Looks all good :)
+<issue_comment>username_1: Great. Tell me if alpha 59 gives you any trouble
+<issue_comment>username_0: Hey @username_1, I just updated it to alpha 59 and not it generates errors on build 🤔  (works with yarn start tho)
+
+```bash
+TypeError: sidebar.map is not a function
+```
+
+![image](https://user-images.githubusercontent.com/1236101/88583196-214bf600-d00d-11ea-9235-4a9cde0cd299.png)
+
+
+```bash
+(undefined) TypeError: sidebar.map is not a function
+    at DocSidebar (main:125515:4742)
+    at d (main:128597:498)
+    at $a (main:128600:16)
+    at a.b.render (main:128605:476)
+    at a.b.read (main:128605:18)
+    at Object.renderToString (main:128615:364)
+    at serverEntry_render (main:202384:375)
+```
+
+
+And this is my sidebar.js (works fine on alpha 58)
+
+![image](https://user-images.githubusercontent.com/1236101/88583331-5a846600-d00d-11ea-9385-a1bba4cdfe2f.png)
+<issue_comment>username_1: Hi,
+
+This is surprising, unfortunately I'm not able to reproduce. 
+
+I need more infos, if you can give me access to your site's code (or create a small repro) that helps. 
+
+Also I need to see the full content of the sidebar file (+ all the versioned sidebar files if available).
+
+You can try to debug this with dichotomy: remove versions, remove docs, remove sidebar content, until your site work
+<issue_comment>username_0: 🤔 
+the `yarn start` still works, but `yarn build` fails on building server with this error
+
+I got my sidebars.js as much simple as possible
+
+```js
+module.exports = {
+  docs: [
+    {
+      type: ""category"",
+      label: ""Design"",
+      items: [
+        ""language-and-design/colors"",
+        ""language-and-design/typography"",
+        ""language-and-design/spacing"",
+        ""language-and-design/empty-states"",
+        ""language-and-design/data-entry"",
+        ""language-and-design/visibility-security-and-permissions"",
+      ],
+    }
+  ]
+};
+```
+
+But I am still getting the error `TypeError: sidebar.map is not a function` 🤔 
+
+Repo: https://github.com/username_0/iQ.design.system.docs
+<issue_comment>username_0: I only change was updating from alpha 58 to alpha 59
+using alpha 58 still works, but since my azure pipeline has a yarn upgrade to always use the lastest internal versions of some packages, it also updates the docusaurus 🤔 
+so, it fails on the build and deploys 😢
+<issue_comment>username_0: ## 🚀 Feature
+
+When creating a multi-level docs page with different menus, normally we go with
+
+`sidebar.js`
+```js
+{
+  components_menu: [
+        ""components/status"",
+        ""components/button"",
+        ""components/card"",
+        ""components/checkbox"",
+        ""components/datepicker""
+  ],
+  web_dev_api_menu: [
+        ""web-dev-docs/api/status"",
+        ""web-dev-docs/api/components/alert"",
+        ""web-dev-docs/api/components/analytics"",
+        ""web-dev-docs/api/components/antd"",
+        ""web-dev-docs/api/components/auth""
+  ],
+}
+```
+
+And for my nav bar, I would go with
+`docusaurus.config.js`
+
+```js
+navbar: {
+  links: [
+    {
+      to: ""docs/components/status"",
+      label: ""Components"",
+      position: ""left"",
+    },
+    {
+      to: ""docs/""web-dev-docs/api/status"",
+      label: ""Web-api"",
+      position: ""left"",
+    },
+```
+
+However, there is no link between the navbar and when opening a Navbar, I will get only the menus for that navbar item, and due to this, the navbar link doesn't keep active when switching the sidebar items.
+
+## Motivation
+
+Be able to create multi-level/layers docs site and keep the navbar menu active
+
+## Pitch
+
+Normally when creating a docs page, and it is too big or too complex (for example, a design system docs or API docs), we need to divide it by sections. As today, if we divide the docs, we don't have a clear indication of what is the active section.
+
+Maybe, the Navbar API could be extended to add an optional property to link the sidebar object to be active
+For example:
+
+```js
+navbar: {
+  links: [
+    {
+      to: ""docs/components/status"",
+      label: ""Components"",
+      position: ""left"",
+      sidebar: ""components_menu""
+    },
+```
+
+So, when navigating on any items of the `components_menu` array, it will keep the navbar item `Components` active
+<issue_comment>username_1: @username_0 in such case you shuld avoid using semver ranges in your package.json so that azure stick to existing versions? This is very strange to have your CI not respecting lockfile, why is that?
+
+About your problem, I don't have access to this repo that is private, if you send me an invite I'll look at this
+<issue_comment>username_1: Thanks, I see
+
+Sorry to have to change some implementation details of that component, unfortunately, it's required to fix some issues in the docs plugin. It is likely to happen again on next versions because there are other things I'd like to fix regarding the docs plugin and the exposed theme api surface which is currently a bit blurry and likely to cause such breaking changes.
+
+About the links, this is probably already fixed (leading / appended by mistake) and going to be released soon, but please give me the markdown of that link to double-check<issue_closed>
+<issue_comment>username_0: @username_1 Thanks
+
+On v1 I was just adding a custom script and then, when loading the page, it was looking for the edit link and doing the necessary work for adding the extra button.
+
+This doesn't work on v2 because the page is loaded and not the content for the first time. There are some milliseconds there with waiting for a render. The alternative was using `useEffect` in the `DocPage`. I could do a setTimeout, but it wouldn't work anymore when the link is changed since I can't see any event is triggered when the route changes on the window. If there is another option I would to love to use it, like, the possibility to add a class to the edit page or extra buttons through docusaurus.config.js ;) 
+
+I checked the links and looks all good.
+Any intention to add more power to the `onBrokenLinks`?
+I was looking for an option to be able to ignore some links. For example, I would like to ignore the `dev.azure.com` since these links are normally private and docusaurus will not be able to check if it is valid or not.
+
+Example:
+Broken links found!
+
+```
+- Page path = /docs/web-dev/concepts/architecture:
+   -> link to /(https://dev.azure.com/iqmetrix/Hub/_packaging?_a=feed&feed=iqmetrix) (resolved as: /(https://dev.azure.com/iqmetrix/Hub/_packaging)
+```
+
+and the MD file has the following content:
+
+```md
+## NPM Registry
+
+| int / rc / prod |
+| ---------------------- |
+| [iQmetrix registry]    |
+
+[iqmetrix registry]: (https://dev.azure.com/iqmetrix/Hub/_packaging?_a=feed&feed=iqmetrix)
+```
+<issue_comment>username_1: All links with a protocol are not checked (it is a bug that adds a weird / at the beginning and let us think it's an absolute internal link, but it will be fixed very soon)"

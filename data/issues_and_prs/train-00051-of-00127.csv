@@ -1,0 +1,693 @@
+gohugoio/hugo,120579050,1674,,"[{'action': 'opened', 'author': 'teran-mckinney', 'comment_id': None, 'datetime': '2015-12-05T18:47:53Z', 'masked_author': 'username_0', 'text': ""[![Bountysource](https://api.bountysource.com/badge/issue?issue_id=28880925)](https://www.bountysource.com/issues/28880925-add-support-for-pre-compressed-gzip-files?utm_source=28880925&utm_medium=shield&utm_campaign=ISSUE_BADGE)\n\nMost of the discussion around this has been in #1251. It seems these should be broken up into different parts, so this is the one I care the most about.\n\nThis is a feature request to have gzip -9'ed files generated along side the finished HTML, CSS, JS, etc."", 'title': 'Add support for pre-compressed gzip files', 'type': 'issue'}
+ {'action': 'created', 'author': 'zivbk1', 'comment_id': 407872620.0, 'datetime': '2018-07-25 19:45:12+00:00', 'masked_author': 'username_1', 'text': 'I think that with Pipes in place, one of the last bits to finish the pipeline of generating a site for production would be to compress the files before pushing them to the hosting provider.  It seems that other cases like this have gone stale and closed. I am hoping that this feature request can be reopened and used to implement this capability in Hugo.', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'zivbk1', 'comment_id': 410835331.0, 'datetime': '2018-08-06 20:02:23+00:00', 'masked_author': 'username_1', 'text': '@username_2 now that you have implemented minification, can we open this issue back up to add gzip compression as a final step?', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'bep', 'comment_id': 410837124.0, 'datetime': '2018-08-06 20:08:30+00:00', 'masked_author': 'username_2', 'text': 'No.', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'mateusfccp', 'comment_id': 490520577.0, 'datetime': '2019-05-08 14:57:13+00:00', 'masked_author': 'username_3', 'text': ""It would be great to have gzip and brotli on assets compilation.\r\n\r\nAny reason why it won't be implemented? Design decisions or manpower? Maybe I could help."", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'LeonB', 'comment_id': 585150534.0, 'datetime': '2020-02-12 10:58:08+00:00', 'masked_author': 'username_4', 'text': 'It would be nice to have this feature. With my current middleman site I gzip everything before rsyncing it to the server and let apache service the *.gz files directly.', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'pierredewilde', 'comment_id': 1005427544.0, 'datetime': '2022-01-05 06:53:44+00:00', 'masked_author': 'username_5', 'text': 'I have naively tried `hugo server --minify --compress` but it does not work &#x1F914;\r\n\r\nThe idea was to catch performance issues with DevTools Lighthouse in _production-like_ mode.\r\n\r\nOf course, we can do it with `hugo --minify` and serve `/public` with another HTTP server. \r\nBut it would be nice if it was built-in within Hugo.', 'title': None, 'type': 'comment'}]","<issue_start><issue_comment>Title: Add support for pre-compressed gzip files
+username_0: [![Bountysource](https://api.bountysource.com/badge/issue?issue_id=28880925)](https://www.bountysource.com/issues/28880925-add-support-for-pre-compressed-gzip-files?utm_source=28880925&utm_medium=shield&utm_campaign=ISSUE_BADGE)
+
+Most of the discussion around this has been in #1251. It seems these should be broken up into different parts, so this is the one I care the most about.
+
+This is a feature request to have gzip -9'ed files generated along side the finished HTML, CSS, JS, etc.
+<issue_comment>username_1: I think that with Pipes in place, one of the last bits to finish the pipeline of generating a site for production would be to compress the files before pushing them to the hosting provider.  It seems that other cases like this have gone stale and closed. I am hoping that this feature request can be reopened and used to implement this capability in Hugo.
+<issue_comment>username_1: @username_2 now that you have implemented minification, can we open this issue back up to add gzip compression as a final step?
+<issue_comment>username_2: No.
+<issue_comment>username_3: It would be great to have gzip and brotli on assets compilation.
+
+Any reason why it won't be implemented? Design decisions or manpower? Maybe I could help.
+<issue_comment>username_4: It would be nice to have this feature. With my current middleman site I gzip everything before rsyncing it to the server and let apache service the *.gz files directly.
+<issue_comment>username_5: I have naively tried `hugo server --minify --compress` but it does not work &#x1F914;
+
+The idea was to catch performance issues with DevTools Lighthouse in _production-like_ mode.
+
+Of course, we can do it with `hugo --minify` and serve `/public` with another HTTP server. 
+But it would be nice if it was built-in within Hugo."
+facebook/docusaurus,886737856,4765,,"[{'action': 'opened', 'author': 'slorber', 'comment_id': None, 'datetime': '2021-05-11T10:03:56Z', 'masked_author': 'username_0', 'text': '## 💥 Proposal\r\n\r\nWith [Webpack 5 support](https://github.com/facebook/docusaurus/pull/4089), re-build times are now faster.\r\n\r\nBut we still need to improve the time for the first build which is not so good currently.\r\n\r\nSome tools to explore:\r\n- https://github.com/evanw/esbuild\r\n- https://github.com/swc-project/swc\r\n- https://github.com/alangpierce/sucrase\r\n\r\nIt will be hard to decouple Docusaurus totally from Webpack at this point. \r\n\r\nBut we should at least provide a way for users to use an alternative (non-Babel) JS loader that could be faster and good enough. Docusaurus core should be able to provide a few alternate loaders that would work by default using the theme classic, by just switching a config flag.\r\n\r\nIf successful and faster, we could make one of those alternate loader the default loader for new sites (when no custom babel config is found in the project).\r\n\r\nExisting PR by @SamChou19815 for esbuild: https://github.com/facebook/docusaurus/pull/4532', 'title': 'Reduce build time - use alternative webpack JS loaders', 'type': 'issue'}
+ {'action': 'created', 'author': 'slorber', 'comment_id': 841135926.0, 'datetime': '2021-05-14 09:42:43+00:00', 'masked_author': 'username_0', 'text': ""For anyone interested, we added the ability to customize the jsLoader here https://github.com/facebook/docusaurus/pull/4766\r\n\r\nThis gives the opportunity to replace babel by esbuild, and you can add this in your config:\r\n\r\n```js\r\n  webpack: {\r\n    jsLoader: (isServer) => ({\r\n      loader: require.resolve('esbuild-loader'),\r\n      options: {\r\n        loader: 'tsx',\r\n        format: isServer ? 'cjs' : undefined,\r\n        target: isServer ? 'node12' : 'es2017',\r\n      },\r\n    }),\r\n  },\r\n```\r\n\r\nWe don't document it yet (apart here) but may recommend it later for larger sites if it proves to be successful according to feedback from early adopters"", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'adventure-yunfei', 'comment_id': 861221797.0, 'datetime': '2021-06-15 06:41:24+00:00', 'masked_author': 'username_1', 'text': 'came from https://github.com/facebook/docusaurus/issues/4785#issuecomment-860705444.\r\n\r\nJust wondering, is this issue aiming to reduce build time for entire site generator (including md/mdx parser, or [Docs](https://docusaurus.io/docs/docs-introduction)), or just [jsx react pages](https://docusaurus.io/docs/creating-pages)?', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'slorber', 'comment_id': 861292957.0, 'datetime': '2021-06-15 08:21:21+00:00', 'masked_author': 'username_0', 'text': '@username_1 md docs are compiled to React components with MDX, and the alternative js loader like esbuild also process the output of the MDX compiler, so this applies to documentation as well', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'adventure-yunfei', 'comment_id': 861334731.0, 'datetime': '2021-06-15 09:17:25+00:00', 'masked_author': 'username_1', 'text': ""@username_0 perfect! we're also trying to use esbuild to boost build time (for application project). I'll have a try on this."", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'alphaleonis', 'comment_id': 866582567.0, 'datetime': '2021-06-23 06:59:47+00:00', 'masked_author': 'username_2', 'text': 'This gave a nice performance boost, although I think there are still more to be desired. Out of curiosity, what is actually going on that is taking so much time behind the scenes? In our case (a site with around 1,500 .md files) most of the time spent seems to be *before* and *after* the ""Compiling Client/Compiling Server"" progress bars appear and complete.\r\n\r\nI just tested to add four versions to our site, and building it.  Before using esbuild, the process took just shy of **13 hours**(!). Using esbuild it was down to just shy of 8 hours. (Still way too long to be acceptable). So while it was a big improvement, it still seems to be very slow.\r\n\r\nIn the second case, it reported:\r\n```\r\n[success] [webpackbar] Client: Compiled successfully in 1.33h\r\n[success] [webpackbar] Server: Compiled successfully in 1.36h\r\n```\r\n\r\nWhat was going on for the remaining 5 hours?   Is this normal behavior, or did we configure something incredibly wrong?', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'slorber', 'comment_id': 866721306.0, 'datetime': '2021-06-23 10:28:08+00:00', 'masked_author': 'username_0', 'text': ""It's hard to tell without measuring on your system. Your system may have not enough memory for Webpack to do its job efficiently, leading to more garbage collection or whatever."", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'alphaleonis', 'comment_id': 867062996.0, 'datetime': '2021-06-23 18:26:02+00:00', 'masked_author': 'username_2', 'text': '@username_0 Thanks for the explanation. We did try the persistent caching, and it seems to help a lot with the time spent during the ""Build server/client"" phase (which I assume is Webpack).  The machine in question had 16GB memory, and the same was specified as `max_old_space_size`.\r\n\r\nIs there any way we can do some further analysis, such as enabling some verbose logging to get some more details perhaps?  Or is this kind of the expected build time for sites of that size?  (If so I guess we will have to find another solution for versioning, such as building/deploying each version separately.', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'johnnyreilly', 'comment_id': 867110853.0, 'datetime': '2021-06-23 19:45:53+00:00', 'masked_author': 'username_3', 'text': ""This is true - but there's still a speed benefit to take advantage of. It's also pretty plug and play to make use of. See my post here:\r\n\r\nhttps://blog.logrocket.com/webpack-or-esbuild-why-not-both/"", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'slorber', 'comment_id': 867540783.0, 'datetime': '2021-06-24 10:56:13+00:00', 'masked_author': 'username_0', 'text': 'For large sites, it\'s definitively the way to go, and is something I\'d like to document/encourage more in the future.\r\nIt\'s only useful to keep multiple versions in master when you actively update them. \r\nOnce a version becomes unmaintained, you should rather move it to a branch and create a standalone immutable deployment for it, so that your build time does not increase as time passes and your version number increase.\r\n\r\nWe have made it possible to include ""after items"" in the version dropdown, so that you can include external links to older versions, and we use it on the Docusaurus site itself:\r\n\r\n![image](https://user-images.githubusercontent.com/749374/123251352-631a4080-d4eb-11eb-8316-eb7782c9ba96.png)\r\n\r\nI also want to have a ""docusaurus archive"" command to support this workflow better, giving the ability to publish a standalone version of an existing site and then remove that version.', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'adventure-yunfei', 'comment_id': 868956036.0, 'datetime': '2021-06-26 06:24:37+00:00', 'masked_author': 'username_1', 'text': 'Saddly the process costs a very large memory. \r\nMy local testing environment has 32G memory, but in CICD environment memory limit is 20G. The process is killed cause of OOM, during emitting phase. From the monitor, the memory suddenly increased from 8G to 20G+.', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'slorber', 'comment_id': 869033083.0, 'datetime': '2021-06-26 17:24:22+00:00', 'masked_author': 'username_0', 'text': 'What do you mean by the ""emitting phase""? I didn\'t take much time to investigate all this so any info can be useful.', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'adventure-yunfei', 'comment_id': 869162690.0, 'datetime': '2021-06-27 13:29:47+00:00', 'masked_author': 'username_1', 'text': 'This may not be accurate. The process memory was 7G most times. About 20 minutes later memory jumped to 20.2G while the console showing Client ""emitting"". After client build finished, the memory dropped down to 7G. (The Server was still building)', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'krillboi', 'comment_id': 870413073.0, 'datetime': '2021-06-29 08:59:23+00:00', 'masked_author': 'username_4', 'text': 'Trying to test `esbuild-loader` but running into some trouble.\r\n\r\nI have added the following to the top level of my `docusaurus.config.js` file:\r\n\r\n```\r\n  webpack: {\r\n    jsLoader: (isServer) => ({\r\n      loader: require.resolve(\'esbuild-loader\'),\r\n      options: {\r\n        loader: \'tsx\',\r\n        format: isServer ? \'cjs\' : undefined,\r\n        target: isServer ? \'node12\' : \'es2017\',\r\n      },\r\n    }),\r\n  },\r\n```\r\n\r\nI have added the following to my dependencies in `package.json`:\r\n\r\n```\r\n    ""esbuild-loader"": ""2.13.1"",\r\n```\r\n\r\nThe install of `esbuild-loader` fails. Am I missing more dependencies for this to work? Might also be a Windows problem, unsure right now.', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'krillboi', 'comment_id': 870533449.0, 'datetime': '2021-06-29 12:02:32+00:00', 'masked_author': 'username_4', 'text': ""Seems like it was one of the good ol' corporate proxy issues giving me the install troubles..\r\n\r\nI'll try and test the `esbuild-loader` to see how much faster it is for me."", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'krillboi', 'comment_id': 871340660.0, 'datetime': '2021-06-30 11:58:26+00:00', 'masked_author': 'username_4', 'text': 'I witnessed the same thing where the memory usage would suddenly spike up to take 25+ gb.', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'slorber', 'comment_id': 871422057.0, 'datetime': '2021-06-30 13:50:14+00:00', 'masked_author': 'username_0', 'text': ""Thanks for highlighting that, we'll try to figure out why it takes so much memory suddenly"", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'slorber', 'comment_id': 880705658.0, 'datetime': '2021-07-15 13:43:08+00:00', 'masked_author': 'username_0', 'text': ""Not 100% related but I expect this PR to improve perf (smaller output) and reduce build time for sites with very large sidebars: https://github.com/facebook/docusaurus/pull/5136 (can't really tell by how much though, it's site specific so please let me know if you see a significant improvement)"", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'adventure-yunfei', 'comment_id': 883184340.0, 'datetime': '2021-07-20 07:59:49+00:00', 'masked_author': 'username_1', 'text': 'Tested my application with latest dev version.\r\n- Max memory usage: 21G\r\n- Build time: 34min\r\n\r\nSeems not working for my case.', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'adventure-yunfei', 'comment_id': 908921121.0, 'datetime': '2021-08-31 05:52:34+00:00', 'masked_author': 'username_1', 'text': ""I've made another test, using plugin to override `.md` loader with noop:\r\n\r\n```js\r\n// inside docusaurus.config.js\r\n{\r\n  // ...\r\n  plugins: [\r\n    function myPlugin() {\r\n      return {\r\n        configureWebpack() {\r\n          return {\r\n            module: {\r\n              rules: [\r\n                {\r\n                  test: /\\.mdx?$/,\r\n                  include: /.*/,\r\n                  use: {\r\n                    loader: require('path').resolve(__dirname, './scripts/my-md-loader.js')\r\n                  }\r\n                }\r\n              ]\r\n            }\r\n          }\r\n        }\r\n      };\r\n    }\r\n  ],\r\n}\r\n```\r\n\r\n```js\r\n// scripts/my-md-loader.js\r\nmodule.exports = function myPlugin() {\r\n    const callback = this.async();\r\n    return callback && callback(null, 'empty...');\r\n};\r\n```\r\n\r\nAnd then run doc builder again.\r\n\r\n- build time: 17min\r\n- max memory: 20+G\r\n\r\nSo I'm afraid it's the code of page wrapper (e.g. top bar, side navigation, ...) that causes the max memory usage. Switching mdx-loader to another one may won't help."", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'slorber', 'comment_id': 908987010.0, 'datetime': '2021-08-31 07:49:30+00:00', 'masked_author': 'username_0', 'text': 'Proving a memory issue is not the mdx-loader does not mean it\'s the ""page wrapper"". There is much more involved than the React server-side rendering here.\r\n\r\nI suspect there are optimizations that can be done in this webpack plugin\'s fork we use: https://github.com/username_0/static-site-generator-webpack-plugin/blob/master/index.js\r\n\r\nGatsby used it initially and replaced it with some task queueing system.', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'adventure-yunfei', 'comment_id': 910164698.0, 'datetime': '2021-09-01 10:49:54+00:00', 'masked_author': 'username_1', 'text': 'That\'s true. By saying ""page wrapper"" I mean any other code outside the md page content itself. Just trying to provide more perf information to help identify the problem.\r\n\r\nMore info:\r\n\r\n- `max_old_space_size` was set as 4096.\r\n- memory was monitored by windows perf monitor, with following result:\r\n  ![image](https://user-images.githubusercontent.com/12392344/131658750-a8a60180-371d-42e2-948a-ba49c67bdaa5.png)\r\n- the console stuck here for a long time:\r\n  ![image](https://user-images.githubusercontent.com/12392344/131657932-53cdb5ef-a38b-4a1e-a11b-80c5703d8436.png)', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'hjiog', 'comment_id': 964017471.0, 'datetime': '2021-11-09 10:30:12+00:00', 'masked_author': 'username_5', 'text': 'When the number of documents is large,run yarn start is still slow，do you have a plan to support vite?', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'Josh-Cena', 'comment_id': 964021014.0, 'datetime': '2021-11-09 10:34:55+00:00', 'masked_author': 'username_6', 'text': 'The bundler is a bit hard to swap out. Next.js afaik is going through the same struggle, but basically the entire core infra is coupled with Webpack, so the most we can do is using different JS loaders (esbuild vs Babel) rather than letting you use an entirely different bundler. If you have the energy... you can try forking Docusaurus and re-implementing core with Vite.', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'slorber', 'comment_id': 964367235.0, 'datetime': '2021-11-09 17:23:09+00:00', 'masked_author': 'username_0', 'text': ""There is some interest in making Docusaurus bundler & framework-agnostic in the future through an adapter layer but it's likely to be complex to implement in practice, and our current plugin ecosystem is also relying to Webpack so it would be a disruptive breaking change for the community."", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'Josh-Cena', 'comment_id': 964630060.0, 'datetime': '2021-11-09 23:14:21+00:00', 'masked_author': 'username_6', 'text': ""Makes me wonder if it's possible to swap out Webpack in our core entirely🚎 As Docusaurus 3.0, rebuilt with Vite/Parcel/..."", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'armano2', 'comment_id': 974790150.0, 'datetime': '2021-11-21 10:24:45+00:00', 'masked_author': 'username_7', 'text': '@username_0 i did some big refactoring, small optimization and removed bunch of dependencies oo `static-site-generator-webpack-plugin` - https://github.com/username_0/static-site-generator-webpack-plugin/pull/2\r\n\r\ni trimmed down package but there is still bunch of improvements to be done there\r\n\r\n-------------------------------------\r\n\r\nwe should generally avoid using as this is ""extremely"" slow\r\n```\r\nconst webpackStatsJson = webpackStats.toJson({ all: false, assets: true }, true);\r\n```', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'adventure-yunfei', 'comment_id': 985380181.0, 'datetime': '2021-12-03 09:54:30+00:00', 'masked_author': 'username_1', 'text': '**I\'ve found and fixed the large maximum memory issue in https://github.com/username_0/static-site-generator-webpack-plugin/pull/3.**\r\n\r\n## Investigation\r\n\r\nAfter investigation, the max memory happened during static-site-generator-webpack-plugin, rendering for every page path. So I took a look at static-site-generator-webpack-plugin code, and found two problems:\r\n\r\n1. **memory/gc issue**. All pages are rendered during the same time (see [code](https://github.com/username_0/static-site-generator-webpack-plugin/blob/de03472bbb93aca73d2dc1dc7ecc812b8b5f3605/index.js#L64)). The render is async, and its allocated resource cannot be freed util the render promise finished. Thus **in the worst case, the maximum allocated memory should be sum of resources for rendering every page**, that is O(M*N) memory which M for page count and N for allocated memory size for rendering one page. That\'s not necessary.\r\n2. **duplicate rendering**. After rendering one page, it\'ll crawl relative paths and continue render that relative path/page (see [code](https://github.com/username_0/static-site-generator-webpack-plugin/blob/de03472bbb93aca73d2dc1dc7ecc812b8b5f3605/index.js#L102)). That may lead to many duplicate page renderings.\r\n\r\nTo fix them:\r\n\r\n- Using a promise queue, to render only partial pages in the same time, wait util finished, and then continue render next partial pages. Then we have maximum O(S*N) memory, which S for queue size, and N for allocated memory size for rendering one page.\r\n- Record rendered pages, and skip rendering if duplicate.\r\n\r\n## Check the optimization result below\r\n\r\n#### Before optimization\r\n\r\n- output logs (with some custom injections):\r\n  ```ts\r\n  [en] Creating an optimized production build...\r\n  Fri Dec 03 2021 10:58:31 GMT+0800 (GMT+08:00): start compiling.\r\n  i Compiling Client\r\n  i Compiling Server\r\n  Fri Dec 03 2021 11:07:15 GMT+0800 (GMT+08:00) start StaticSiteGeneratorWebpackPlugin. paths count: 7722\r\n  Fri Dec 03 2021 11:07:19 GMT+0800 (GMT+08:00) after evaluate source. source size: 64794924\r\n  Fri Dec 03 2021 11:21:24 GMT+0800 (GMT+08:00) renderPaths finished\r\n  √ Client: Compiled successfully in 23.66m\r\n  √ Server: Compiled successfully in 23.70m\r\n  Fri Dec 03 2021 11:22:56 GMT+0800 (GMT+08:00): compile finished.\r\n  Fri Dec 03 2021 11:22:56 GMT+0800 (GMT+08:00): start post build, plugins:\r\n      docusaurus-plugin-content-docs, docusaurus-plugin-content-blog,\r\n      docusaurus-plugin-content-pages, docusaurus-plugin-sitemap,\r\n      docusaurus-theme-classic, docusaurus-bootstrap-plugin, docusaurus-mdx-fallback-plugin\r\n  Fri Dec 03 2021 11:22:56 GMT+0800 (GMT+08:00): post build finished\r\n  Fri Dec 03 2021 11:22:56 GMT+0800 (GMT+08:00): start handleBrokenLinks\r\n  info Docusaurus found broken links!\r\n  ...\r\n  Fri Dec 03 2021 11:31:20 GMT+0800 (GMT+08:00): handleBrokenLinks finished\r\n  Success! Generated static files in ""build"".\r\n  ```\r\n- memory records:\r\n   ![before](https://user-images.githubusercontent.com/12392344/144550677-bcdd8d41-15fe-43e3-a88e-38012b998442.PNG)\r\n\r\nThe maximum allocated memory is **21+G**, increased quickly during static-site-generator-webpack-plugin `renderPaths`, and then dropped down quickly (from 11:07 to 11:21).\r\n\r\n#### After optimization\r\n\r\n- output logs:\r\n  ```ts\r\n  [en] Creating an optimized production build...\r\n  Fri Dec 03 2021 16:15:06 GMT+0800 (GMT+08:00): start compiling.\r\n  i Compiling Client\r\n  i Compiling Server\r\n  Fri Dec 03 2021 16:25:00 GMT+0800 (GMT+08:00) start StaticSiteGeneratorWebpackPlugin. paths count: 7722\r\n  Fri Dec 03 2021 16:25:04 GMT+0800 (GMT+08:00) after evaluate source. source size: 64794924\r\n  Fri Dec 03 2021 16:40:11 GMT+0800 (GMT+08:00) renderPaths finished\r\n  √ Client: Compiled successfully in 25.70m\r\n  √ Server: Compiled successfully in 25.83m\r\n  Fri Dec 03 2021 16:42:00 GMT+0800 (GMT+08:00): compile finished.\r\n  Fri Dec 03 2021 16:42:00 GMT+0800 (GMT+08:00): start post build, plugins: docusaurus-plugin-content-docs, docusaurus-plugin-content-blog, docusaurus-plugin-content-pages, docusaurus-plugin-sitemap, docusaurus-theme-classic, docusaurus-bootstrap-plugin, docusaurus-mdx-fallback-plugin\r\n  Fri Dec 03 2021 16:42:00 GMT+0800 (GMT+08:00): post build finished\r\n  Fri Dec 03 2021 16:42:00 GMT+0800 (GMT+08:00): start handleBrokenLinks\r\n  info Docusaurus found broken links!\r\n  ...\r\n  Fri Dec 03 2021 16:50:52 GMT+0800 (GMT+08:00): handleBrokenLinks finished\r\n  Success! Generated static files in ""build"".\r\n  ```\r\n- memory records:\r\n  ![after](https://user-images.githubusercontent.com/12392344/144573981-35411bfe-d994-44ea-bbdd-0e3be4c874d5.PNG)\r\n\r\nThe maximum allocated memory is **7.1G** during static-site-generator-webpack-plugin `renderPaths` (from 16:25 to 16:40), without large memory allocated. (and maximum **8.2G** for the whole build, happens during docusaurus core `handleBrokenLinks`)).\r\n\r\nThe maximum memory decreased, while the build time remained the same.\r\n\r\n## Further information\r\n\r\n1. Build time summary, total 35min:\r\n    - webpack compile: 27min\r\n      - static-site-generator-webpack-plugin `renderPaths`: 15min\r\n    - handleBrokenLinks: 8min\r\n2. The render page function is defined in docusaurus core [`serverEntry.ts`](https://github.com/facebook/docusaurus/blob/95f911efefc96f78e1f2137ff65e7a2edda5cb62/packages/docusaurus/src/client/serverEntry.js#L42).  After checking the code:\r\n    - I guess the large memory allocating comes from [minifier](https://github.com/facebook/docusaurus/blob/95f911efefc96f78e1f2137ff65e7a2edda5cb62/packages/docusaurus/src/client/serverEntry.js#L135). I\'ve seen minifier consuming large memory before.\r\n    - manifest is read & parsed multiple times (see [code](https://github.com/facebook/docusaurus/blob/95f911efefc96f78e1f2137ff65e7a2edda5cb62/packages/docusaurus/src/client/serverEntry.js#L109)). We can optimize it to only read once. \r\n3. In my case only large memory allocating issue is validated (@username_4 please help to validate in your case). There\'s no relative path in my case, so perf result for ""avoid duplicate page rendering"" is not validated.  @username_2 you may test it in your case. From your description I suspect your non-linear build time increasing is caused by this code.', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'RDIL', 'comment_id': 988175258.0, 'datetime': '2021-12-07 18:38:40+00:00', 'masked_author': 'username_8', 'text': ""Tip: one of the best ways to reduce build time and memory is to use esbuild-loader instead of babel-loader.  See the website in this repo's config for the setup and use."", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'slorber', 'comment_id': 989742768.0, 'datetime': '2021-12-09 10:58:32+00:00', 'masked_author': 'username_0', 'text': ""Thanks for working on this, will read all that more carefully and review PRs soon.\r\n\r\nFYI afaik Gatsby also moved to a queuing system a while ago and that was something I wanted to explore. It's worth comparing our code to theirs.\r\n\r\n---\r\n\r\nSomething I discovered recently: JS can communicate more seamlessly with Rust thanks to napi_rs with some shared memory, while it's more complicated in Go.\r\nhttps://twitter.com/sebastienlorber/status/1460624240579915785\r\nhttps://twitter.com/sebastienlorber/status/1468522862990536709\r\n\r\nIt's really worth trying to use SWC instead of esbuild with the Babel loader for that reason. \r\nI believe it may be faster than esbuild when used as a loader, while esbuild may be faster when you go all-in and stop using Webpack/loaders.\r\nNext.js has great results with SWC.\r\nhttps://nextjs.org/blog/next-12#faster-builds-and-fast-refresh-with-rust-compiler"", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'Josh-Cena', 'comment_id': 989798497.0, 'datetime': '2021-12-09 12:15:49+00:00', 'masked_author': 'username_6', 'text': ""@username_0 I have a question that I'm unable to figure out: if our site is using esbuild, why is there still a Babel message in the command line saying that the changelog has exceeded 500KB?"", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'RDIL', 'comment_id': 989813974.0, 'datetime': '2021-12-09 12:38:01+00:00', 'masked_author': 'username_8', 'text': 'Personally, after using SWC and ESBuild for a while, I honestly prefer ESBuild.  SWC is not documented nearly as much, and ESBuild has very frequent releases fixing bugs and adding features.  ESBuild has a nicer DX IMO.', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'alexander-akait', 'comment_id': 990985984.0, 'datetime': '2021-12-10 13:44:33+00:00', 'masked_author': 'username_9', 'text': 'swc and webpack are planned smoothly integration so if you want to avoid big changes/refactor/unpredictable bugs, prefer to use swc - https://github.com/swc-project/swc/tree/main/crates/swc_webpack_ast, also swc has better perf in some cases, but they both are fast.\r\n\r\nswc is parser/codegen/visitor/bundler/transpiler/etc stuff, it is more just bundler, these are slightly different things, so if in the future you want deeper native integration, especial based on rust, I recommend to use swc', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'RDIL', 'comment_id': 991006387.0, 'datetime': '2021-12-10 14:12:26+00:00', 'masked_author': 'username_8', 'text': ""ESBuild and swc's performance difference should be very tiny, given how, especially compared to JS tools, they are both much faster.  I don't really think its worth comparing the 2 for performance, since both are clearly very fast.\r\n\r\nIf one provides a better experience than the other, is it really worth benchmarking them on a base of like half a second?"", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'alexander-akait', 'comment_id': 991009299.0, 'datetime': '2021-12-10 14:16:10+00:00', 'masked_author': 'username_9', 'text': 'I am more about - `swc` provides more things out of box, so if you need custom plugin/transformer/code generator for js/css/and more things, I strongly recommend to use `swc`, bundling is not only one things in build pipeline', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'slorber', 'comment_id': 991211231.0, 'datetime': '2021-12-10 18:47:12+00:00', 'masked_author': 'username_0', 'text': ""😅 good question, maybe it's related to the translation extraction? But afaik it's not run when starting the dev server... weird"", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'Josh-Cena', 'comment_id': 991889715.0, 'datetime': '2021-12-12 12:28:56+00:00', 'masked_author': 'username_6', 'text': 'A quick guess is that MDX v1 uses Babel under the hood to do the transformation: https://github.com/mdx-js/mdx/blob/master/packages/mdx/mdx-hast-to-jsx.js#L1\r\n\r\nIt seems MDX v2 has removed this dependency', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'yangshun', 'comment_id': 1015021984.0, 'datetime': '2022-01-18 02:43:39+00:00', 'masked_author': 'username_10', 'text': ""I've been using Next.js a fair bit this year and honestly if I could turn back time, I think @endiliey and I shouldn't have built our own site generator in Docusaurus v2 and we should have used Next.js instead. Admittedly, it was a mix of not-invented-here syndrome and wanting to learn how to build a site generator from scratch.\r\n\r\nAt this point, Next.js is a clear winner in the SSG race and Gatsby is more or less out. Vercel is doing so well with their latest funding rounds and star hires, I think it's safe to bet on Next.js.\r\n\r\nDocusaurus v2 is split into 3 layers: our homegrown (1) SSG infra, (2) plugins, (3) UI/themes. If I were to build Docusaurus v3, I would make it such that Docusaurus 3 is more like [Nextra](https://github.com/shuding/nextra/), swap out (1) with Next.js and retain (2) and (3). Docusaurus 3 would provide all the documentation-related features. I felt that Docusaurus 2 had to play catch up a lot and implement lots of non-documentation-specific features that were required by websites when Next.js already did all these. We could have saved lots of time by riding on the shoulders of giants.\r\n\r\nWith Next.js' current popularity and trajectory, I think it's only a matter of time before someone builds a fully-fledged docs theme on top of Next.js that does everything that Docusaurus does, but probably better because their SSG infra is much more optimized by virtue of being on Next.js. IMO many users would also like to have the SSR features Next.js provides so that they can build auth have better integration with their core product."", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'Josh-Cena', 'comment_id': 1015024073.0, 'datetime': '2022-01-18 02:49:43+00:00', 'masked_author': 'username_6', 'text': 'I still like the idea of having ""dependency independence"". Apart from Webpack / React router / other low-level infra, we aren\'t coupled to any dependency. It means we can describe our architecture as an integral thing without saying ""the peripheral is Docusaurus, but the core, well, is Next.js and it\'s a black box"". Working on Docusaurus frankly made me a lot more familiar with how SSG works😄', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'slorber', 'comment_id': 1016398417.0, 'datetime': '2022-01-19 11:59:31+00:00', 'masked_author': 'username_0', 'text': ""@username_10 @username_6 we seem to all agree on this\r\n\r\nThat was also my opinion on day one, but also think that having our own SSG wasn't totally useless: it permitted us to iterate faster without being blocked by limits of an existing dependency and gave us time to evaluate better Gatsby vs Next.js vs others.\r\n\r\nWe discussed this with @zpao and @JoelMarcey a few months ago and we agreed that Docusaurus should rather migrate to Next.js.\r\n\r\nOr become framework-agnostic. This might be more complicated to document well, and harder to implement, but could allow using other solutions like Remix or Gatsby.\r\n\r\nAnd building on top of Next.js also incentives Vercel to invest in Docusaurus 🤷\u200d♂️ eventually we could join forces with Nextra"", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'Josh-Cena', 'comment_id': 1016403435.0, 'datetime': '2022-01-19 12:06:05+00:00', 'masked_author': 'username_6', 'text': 'One thing I regret about migrating to Next.js is we will be forever tied to Webpack because from my observation the Webpack 5 migration for them was more painful than for us. Webpack ultimately is not comparable in terms of performance to, say, esbuild... 🤔', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'alexander-akait', 'comment_id': 1016406276.0, 'datetime': '2022-01-19 12:09:55+00:00', 'masked_author': 'username_9', 'text': 'Next.js start to migrate on swc (rust), and replace webpack more and more, so you should not afraid it', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'slorber', 'comment_id': 1016407302.0, 'datetime': '2022-01-19 12:11:23+00:00', 'masked_author': 'username_0', 'text': ""I agree that we want something fast but I believe it's also the goal of Next.js 😅 \r\n\r\nTheir Webpack 5 migration is likely more complex because of the higher diversity of sites needing to migrate, compared to our low diversity: most doc sites are not customized that much and plugins don't always tweak Webpack settings.\r\n\r\nAlso, there's value in keeping at least some things in Webpack for now: our plugin ecosystem can remain retro-compatible"", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'Josh-Cena', 'comment_id': 1016431560.0, 'datetime': '2022-01-19 12:44:58+00:00', 'masked_author': 'username_6', 'text': ""Yeah, in the short term migrating to Next.js is surely going to yield lots of benefits. I'm never actually used it purely as an SSG but more as a React framework, but if we can figure out how to make them interoperate it will be very nice!"", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'yangshun', 'comment_id': 1016449198.0, 'datetime': '2022-01-19 13:08:19+00:00', 'masked_author': 'username_10', 'text': ""The thing is, with Next.js' backing, they will just use the fastest that's out there and we can benefit from it by building on top of Next.js. I believe Sebastien is also saying the same. Hopefully we can go with Next.js in the next version (or even better if can be framework agnostic)!"", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'gabrielcsapo', 'comment_id': 1016776601.0, 'datetime': '2022-01-19 19:03:27+00:00', 'masked_author': 'username_11', 'text': ""As an outsider we looked at all the options and docusaurus was the best when it came to level of investment and clean and clear plugin and theming architecture. I think competition in this space is much needed and I think having nextra and docusaurus is great for pushing the envelope. \r\n\r\nI think the alternatives to webpack aren't somewhere stable enough to really compare apples to apples, I think by the next major version I think the landscape is going to look very different or maybe webpack migrates to rust and no one needs to do any major rearchitecting at all."", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'Josh-Cena', 'comment_id': 1034923550.0, 'datetime': '2022-02-10 13:29:29+00:00', 'masked_author': 'username_6', 'text': 'Allowing alternative JS loaders may hinder the provision of useful OOTB JS syntax extensions. For example, @username_0 mentioned somewhere that we may explore making `<Translate>` a zero-runtime API through Babel transformations. I also talked to him about solving #4530 through a runtime transformation of `\'@theme-original/*\'` to the actual path of ""next component in the theme component stack"", instead of using static Webpack aliases. I would definitely want to use SWC/esbuild, but in any case, it would mean writing the transform plugin with a different set of APIs, maybe even a different language. That makes it not scalable. If we have to insert an extra loader that uses Babel, then we are back in square one and perf will be compromised.', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'RDIL', 'comment_id': 1034931190.0, 'datetime': '2022-02-10 13:37:04+00:00', 'masked_author': 'username_8', 'text': 'Perf is arguably already compromised by using Babel in the first place.', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'RDIL', 'comment_id': 1034970481.0, 'datetime': '2022-02-10 14:14:11+00:00', 'masked_author': 'username_8', 'text': 'I think we should drop Babel personally.\r\n\r\nPros:\r\n- Better perf + memory usage\r\n- Smaller dependency tree, causing potentially faster install times\r\n\r\nCons:\r\n- Transforms may need to be ported to Rust, not 100% sure on that one though.\r\n- Would need to upgrade to MDX 2?', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'slorber', 'comment_id': 1035030621.0, 'datetime': '2022-02-10 15:07:40+00:00', 'masked_author': 'username_0', 'text': ""Afaik NAPI-RS has low overhead to call RS from JS but not the opposite. That's also probably why Vercel (recently hired NAPI-RS creator) is porting popular Babel plugins to Rust"", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'Josh-Cena', 'comment_id': 1035035508.0, 'datetime': '2022-02-10 15:11:59+00:00', 'masked_author': 'username_6', 'text': ""Yeah, that's the idea. The extractor is only run in development so it's fine to be in Babel, but for build-time transformations (if we ever implement that) we'd rather use Rust."", 'title': None, 'type': 'comment'}]","<issue_start><issue_comment>Title: Reduce build time - use alternative webpack JS loaders
+username_0: ## 💥 Proposal
+
+With [Webpack 5 support](https://github.com/facebook/docusaurus/pull/4089), re-build times are now faster.
+
+But we still need to improve the time for the first build which is not so good currently.
+
+Some tools to explore:
+- https://github.com/evanw/esbuild
+- https://github.com/swc-project/swc
+- https://github.com/alangpierce/sucrase
+
+It will be hard to decouple Docusaurus totally from Webpack at this point. 
+
+But we should at least provide a way for users to use an alternative (non-Babel) JS loader that could be faster and good enough. Docusaurus core should be able to provide a few alternate loaders that would work by default using the theme classic, by just switching a config flag.
+
+If successful and faster, we could make one of those alternate loader the default loader for new sites (when no custom babel config is found in the project).
+
+Existing PR by @SamChou19815 for esbuild: https://github.com/facebook/docusaurus/pull/4532
+<issue_comment>username_0: For anyone interested, we added the ability to customize the jsLoader here https://github.com/facebook/docusaurus/pull/4766
+
+This gives the opportunity to replace babel by esbuild, and you can add this in your config:
+
+```js
+  webpack: {
+    jsLoader: (isServer) => ({
+      loader: require.resolve('esbuild-loader'),
+      options: {
+        loader: 'tsx',
+        format: isServer ? 'cjs' : undefined,
+        target: isServer ? 'node12' : 'es2017',
+      },
+    }),
+  },
+```
+
+We don't document it yet (apart here) but may recommend it later for larger sites if it proves to be successful according to feedback from early adopters
+<issue_comment>username_1: came from https://github.com/facebook/docusaurus/issues/4785#issuecomment-860705444.
+
+Just wondering, is this issue aiming to reduce build time for entire site generator (including md/mdx parser, or [Docs](https://docusaurus.io/docs/docs-introduction)), or just [jsx react pages](https://docusaurus.io/docs/creating-pages)?
+<issue_comment>username_0: @username_1 md docs are compiled to React components with MDX, and the alternative js loader like esbuild also process the output of the MDX compiler, so this applies to documentation as well
+<issue_comment>username_1: @username_0 perfect! we're also trying to use esbuild to boost build time (for application project). I'll have a try on this.
+<issue_comment>username_2: This gave a nice performance boost, although I think there are still more to be desired. Out of curiosity, what is actually going on that is taking so much time behind the scenes? In our case (a site with around 1,500 .md files) most of the time spent seems to be *before* and *after* the ""Compiling Client/Compiling Server"" progress bars appear and complete.
+
+I just tested to add four versions to our site, and building it.  Before using esbuild, the process took just shy of **13 hours**(!). Using esbuild it was down to just shy of 8 hours. (Still way too long to be acceptable). So while it was a big improvement, it still seems to be very slow.
+
+In the second case, it reported:
+```
+[success] [webpackbar] Client: Compiled successfully in 1.33h
+[success] [webpackbar] Server: Compiled successfully in 1.36h
+```
+
+What was going on for the remaining 5 hours?   Is this normal behavior, or did we configure something incredibly wrong?
+<issue_comment>username_0: It's hard to tell without measuring on your system. Your system may have not enough memory for Webpack to do its job efficiently, leading to more garbage collection or whatever.
+<issue_comment>username_2: @username_0 Thanks for the explanation. We did try the persistent caching, and it seems to help a lot with the time spent during the ""Build server/client"" phase (which I assume is Webpack).  The machine in question had 16GB memory, and the same was specified as `max_old_space_size`.
+
+Is there any way we can do some further analysis, such as enabling some verbose logging to get some more details perhaps?  Or is this kind of the expected build time for sites of that size?  (If so I guess we will have to find another solution for versioning, such as building/deploying each version separately.
+<issue_comment>username_3: This is true - but there's still a speed benefit to take advantage of. It's also pretty plug and play to make use of. See my post here:
+
+https://blog.logrocket.com/webpack-or-esbuild-why-not-both/
+<issue_comment>username_0: For large sites, it's definitively the way to go, and is something I'd like to document/encourage more in the future.
+It's only useful to keep multiple versions in master when you actively update them. 
+Once a version becomes unmaintained, you should rather move it to a branch and create a standalone immutable deployment for it, so that your build time does not increase as time passes and your version number increase.
+
+We have made it possible to include ""after items"" in the version dropdown, so that you can include external links to older versions, and we use it on the Docusaurus site itself:
+
+![image](https://user-images.githubusercontent.com/749374/123251352-631a4080-d4eb-11eb-8316-eb7782c9ba96.png)
+
+I also want to have a ""docusaurus archive"" command to support this workflow better, giving the ability to publish a standalone version of an existing site and then remove that version.
+<issue_comment>username_1: Saddly the process costs a very large memory. 
+My local testing environment has 32G memory, but in CICD environment memory limit is 20G. The process is killed cause of OOM, during emitting phase. From the monitor, the memory suddenly increased from 8G to 20G+.
+<issue_comment>username_0: What do you mean by the ""emitting phase""? I didn't take much time to investigate all this so any info can be useful.
+<issue_comment>username_1: This may not be accurate. The process memory was 7G most times. About 20 minutes later memory jumped to 20.2G while the console showing Client ""emitting"". After client build finished, the memory dropped down to 7G. (The Server was still building)
+<issue_comment>username_4: Trying to test `esbuild-loader` but running into some trouble.
+
+I have added the following to the top level of my `docusaurus.config.js` file:
+
+```
+  webpack: {
+    jsLoader: (isServer) => ({
+      loader: require.resolve('esbuild-loader'),
+      options: {
+        loader: 'tsx',
+        format: isServer ? 'cjs' : undefined,
+        target: isServer ? 'node12' : 'es2017',
+      },
+    }),
+  },
+```
+
+I have added the following to my dependencies in `package.json`:
+
+```
+    ""esbuild-loader"": ""2.13.1"",
+```
+
+The install of `esbuild-loader` fails. Am I missing more dependencies for this to work? Might also be a Windows problem, unsure right now.
+<issue_comment>username_4: Seems like it was one of the good ol' corporate proxy issues giving me the install troubles..
+
+I'll try and test the `esbuild-loader` to see how much faster it is for me.
+<issue_comment>username_4: I witnessed the same thing where the memory usage would suddenly spike up to take 25+ gb.
+<issue_comment>username_0: Thanks for highlighting that, we'll try to figure out why it takes so much memory suddenly
+<issue_comment>username_0: Not 100% related but I expect this PR to improve perf (smaller output) and reduce build time for sites with very large sidebars: https://github.com/facebook/docusaurus/pull/5136 (can't really tell by how much though, it's site specific so please let me know if you see a significant improvement)
+<issue_comment>username_1: Tested my application with latest dev version.
+- Max memory usage: 21G
+- Build time: 34min
+
+Seems not working for my case.
+<issue_comment>username_1: I've made another test, using plugin to override `.md` loader with noop:
+
+```js
+// inside docusaurus.config.js
+{
+  // ...
+  plugins: [
+    function myPlugin() {
+      return {
+        configureWebpack() {
+          return {
+            module: {
+              rules: [
+                {
+                  test: /\.mdx?$/,
+                  include: /.*/,
+                  use: {
+                    loader: require('path').resolve(__dirname, './scripts/my-md-loader.js')
+                  }
+                }
+              ]
+            }
+          }
+        }
+      };
+    }
+  ],
+}
+```
+
+```js
+// scripts/my-md-loader.js
+module.exports = function myPlugin() {
+    const callback = this.async();
+    return callback && callback(null, 'empty...');
+};
+```
+
+And then run doc builder again.
+
+- build time: 17min
+- max memory: 20+G
+
+So I'm afraid it's the code of page wrapper (e.g. top bar, side navigation, ...) that causes the max memory usage. Switching mdx-loader to another one may won't help.
+<issue_comment>username_0: Proving a memory issue is not the mdx-loader does not mean it's the ""page wrapper"". There is much more involved than the React server-side rendering here.
+
+I suspect there are optimizations that can be done in this webpack plugin's fork we use: https://github.com/username_0/static-site-generator-webpack-plugin/blob/master/index.js
+
+Gatsby used it initially and replaced it with some task queueing system.
+<issue_comment>username_1: That's true. By saying ""page wrapper"" I mean any other code outside the md page content itself. Just trying to provide more perf information to help identify the problem.
+
+More info:
+
+- `max_old_space_size` was set as 4096.
+- memory was monitored by windows perf monitor, with following result:
+  ![image](https://user-images.githubusercontent.com/12392344/131658750-a8a60180-371d-42e2-948a-ba49c67bdaa5.png)
+- the console stuck here for a long time:
+  ![image](https://user-images.githubusercontent.com/12392344/131657932-53cdb5ef-a38b-4a1e-a11b-80c5703d8436.png)
+<issue_comment>username_5: When the number of documents is large,run yarn start is still slow，do you have a plan to support vite?
+<issue_comment>username_6: The bundler is a bit hard to swap out. Next.js afaik is going through the same struggle, but basically the entire core infra is coupled with Webpack, so the most we can do is using different JS loaders (esbuild vs Babel) rather than letting you use an entirely different bundler. If you have the energy... you can try forking Docusaurus and re-implementing core with Vite.
+<issue_comment>username_0: There is some interest in making Docusaurus bundler & framework-agnostic in the future through an adapter layer but it's likely to be complex to implement in practice, and our current plugin ecosystem is also relying to Webpack so it would be a disruptive breaking change for the community.
+<issue_comment>username_6: Makes me wonder if it's possible to swap out Webpack in our core entirely🚎 As Docusaurus 3.0, rebuilt with Vite/Parcel/...
+<issue_comment>username_7: @username_0 i did some big refactoring, small optimization and removed bunch of dependencies oo `static-site-generator-webpack-plugin` - https://github.com/username_0/static-site-generator-webpack-plugin/pull/2
+
+i trimmed down package but there is still bunch of improvements to be done there
+
+-------------------------------------
+
+we should generally avoid using as this is ""extremely"" slow
+```
+const webpackStatsJson = webpackStats.toJson({ all: false, assets: true }, true);
+```
+<issue_comment>username_1: **I've found and fixed the large maximum memory issue in https://github.com/username_0/static-site-generator-webpack-plugin/pull/3.**
+
+## Investigation
+
+After investigation, the max memory happened during static-site-generator-webpack-plugin, rendering for every page path. So I took a look at static-site-generator-webpack-plugin code, and found two problems:
+
+1. **memory/gc issue**. All pages are rendered during the same time (see [code](https://github.com/username_0/static-site-generator-webpack-plugin/blob/de03472bbb93aca73d2dc1dc7ecc812b8b5f3605/index.js#L64)). The render is async, and its allocated resource cannot be freed util the render promise finished. Thus **in the worst case, the maximum allocated memory should be sum of resources for rendering every page**, that is O(M*N) memory which M for page count and N for allocated memory size for rendering one page. That's not necessary.
+2. **duplicate rendering**. After rendering one page, it'll crawl relative paths and continue render that relative path/page (see [code](https://github.com/username_0/static-site-generator-webpack-plugin/blob/de03472bbb93aca73d2dc1dc7ecc812b8b5f3605/index.js#L102)). That may lead to many duplicate page renderings.
+
+To fix them:
+
+- Using a promise queue, to render only partial pages in the same time, wait util finished, and then continue render next partial pages. Then we have maximum O(S*N) memory, which S for queue size, and N for allocated memory size for rendering one page.
+- Record rendered pages, and skip rendering if duplicate.
+
+## Check the optimization result below
+
+#### Before optimization
+
+- output logs (with some custom injections):
+  ```ts
+  [en] Creating an optimized production build...
+  Fri Dec 03 2021 10:58:31 GMT+0800 (GMT+08:00): start compiling.
+  i Compiling Client
+  i Compiling Server
+  Fri Dec 03 2021 11:07:15 GMT+0800 (GMT+08:00) start StaticSiteGeneratorWebpackPlugin. paths count: 7722
+  Fri Dec 03 2021 11:07:19 GMT+0800 (GMT+08:00) after evaluate source. source size: 64794924
+  Fri Dec 03 2021 11:21:24 GMT+0800 (GMT+08:00) renderPaths finished
+  √ Client: Compiled successfully in 23.66m
+  √ Server: Compiled successfully in 23.70m
+  Fri Dec 03 2021 11:22:56 GMT+0800 (GMT+08:00): compile finished.
+  Fri Dec 03 2021 11:22:56 GMT+0800 (GMT+08:00): start post build, plugins:
+      docusaurus-plugin-content-docs, docusaurus-plugin-content-blog,
+      docusaurus-plugin-content-pages, docusaurus-plugin-sitemap,
+      docusaurus-theme-classic, docusaurus-bootstrap-plugin, docusaurus-mdx-fallback-plugin
+  Fri Dec 03 2021 11:22:56 GMT+0800 (GMT+08:00): post build finished
+  Fri Dec 03 2021 11:22:56 GMT+0800 (GMT+08:00): start handleBrokenLinks
+  info Docusaurus found broken links!
+  ...
+  Fri Dec 03 2021 11:31:20 GMT+0800 (GMT+08:00): handleBrokenLinks finished
+  Success! Generated static files in ""build"".
+  ```
+- memory records:
+   ![before](https://user-images.githubusercontent.com/12392344/144550677-bcdd8d41-15fe-43e3-a88e-38012b998442.PNG)
+
+The maximum allocated memory is **21+G**, increased quickly during static-site-generator-webpack-plugin `renderPaths`, and then dropped down quickly (from 11:07 to 11:21).
+
+#### After optimization
+
+- output logs:
+  ```ts
+  [en] Creating an optimized production build...
+  Fri Dec 03 2021 16:15:06 GMT+0800 (GMT+08:00): start compiling.
+  i Compiling Client
+  i Compiling Server
+  Fri Dec 03 2021 16:25:00 GMT+0800 (GMT+08:00) start StaticSiteGeneratorWebpackPlugin. paths count: 7722
+  Fri Dec 03 2021 16:25:04 GMT+0800 (GMT+08:00) after evaluate source. source size: 64794924
+  Fri Dec 03 2021 16:40:11 GMT+0800 (GMT+08:00) renderPaths finished
+  √ Client: Compiled successfully in 25.70m
+  √ Server: Compiled successfully in 25.83m
+  Fri Dec 03 2021 16:42:00 GMT+0800 (GMT+08:00): compile finished.
+  Fri Dec 03 2021 16:42:00 GMT+0800 (GMT+08:00): start post build, plugins: docusaurus-plugin-content-docs, docusaurus-plugin-content-blog, docusaurus-plugin-content-pages, docusaurus-plugin-sitemap, docusaurus-theme-classic, docusaurus-bootstrap-plugin, docusaurus-mdx-fallback-plugin
+  Fri Dec 03 2021 16:42:00 GMT+0800 (GMT+08:00): post build finished
+  Fri Dec 03 2021 16:42:00 GMT+0800 (GMT+08:00): start handleBrokenLinks
+  info Docusaurus found broken links!
+  ...
+  Fri Dec 03 2021 16:50:52 GMT+0800 (GMT+08:00): handleBrokenLinks finished
+  Success! Generated static files in ""build"".
+  ```
+- memory records:
+  ![after](https://user-images.githubusercontent.com/12392344/144573981-35411bfe-d994-44ea-bbdd-0e3be4c874d5.PNG)
+
+The maximum allocated memory is **7.1G** during static-site-generator-webpack-plugin `renderPaths` (from 16:25 to 16:40), without large memory allocated. (and maximum **8.2G** for the whole build, happens during docusaurus core `handleBrokenLinks`)).
+
+The maximum memory decreased, while the build time remained the same.
+
+## Further information
+
+1. Build time summary, total 35min:
+    - webpack compile: 27min
+      - static-site-generator-webpack-plugin `renderPaths`: 15min
+    - handleBrokenLinks: 8min
+2. The render page function is defined in docusaurus core [`serverEntry.ts`](https://github.com/facebook/docusaurus/blob/95f911efefc96f78e1f2137ff65e7a2edda5cb62/packages/docusaurus/src/client/serverEntry.js#L42).  After checking the code:
+    - I guess the large memory allocating comes from [minifier](https://github.com/facebook/docusaurus/blob/95f911efefc96f78e1f2137ff65e7a2edda5cb62/packages/docusaurus/src/client/serverEntry.js#L135). I've seen minifier consuming large memory before.
+    - manifest is read & parsed multiple times (see [code](https://github.com/facebook/docusaurus/blob/95f911efefc96f78e1f2137ff65e7a2edda5cb62/packages/docusaurus/src/client/serverEntry.js#L109)). We can optimize it to only read once. 
+3. In my case only large memory allocating issue is validated (@username_4 please help to validate in your case). There's no relative path in my case, so perf result for ""avoid duplicate page rendering"" is not validated.  @username_2 you may test it in your case. From your description I suspect your non-linear build time increasing is caused by this code.
+<issue_comment>username_8: Tip: one of the best ways to reduce build time and memory is to use esbuild-loader instead of babel-loader.  See the website in this repo's config for the setup and use.
+<issue_comment>username_0: Thanks for working on this, will read all that more carefully and review PRs soon.
+
+FYI afaik Gatsby also moved to a queuing system a while ago and that was something I wanted to explore. It's worth comparing our code to theirs.
+
+---
+
+Something I discovered recently: JS can communicate more seamlessly with Rust thanks to napi_rs with some shared memory, while it's more complicated in Go.
+https://twitter.com/sebastienlorber/status/1460624240579915785
+https://twitter.com/sebastienlorber/status/1468522862990536709
+
+It's really worth trying to use SWC instead of esbuild with the Babel loader for that reason. 
+I believe it may be faster than esbuild when used as a loader, while esbuild may be faster when you go all-in and stop using Webpack/loaders.
+Next.js has great results with SWC.
+https://nextjs.org/blog/next-12#faster-builds-and-fast-refresh-with-rust-compiler
+<issue_comment>username_6: @username_0 I have a question that I'm unable to figure out: if our site is using esbuild, why is there still a Babel message in the command line saying that the changelog has exceeded 500KB?
+<issue_comment>username_8: Personally, after using SWC and ESBuild for a while, I honestly prefer ESBuild.  SWC is not documented nearly as much, and ESBuild has very frequent releases fixing bugs and adding features.  ESBuild has a nicer DX IMO.
+<issue_comment>username_9: swc and webpack are planned smoothly integration so if you want to avoid big changes/refactor/unpredictable bugs, prefer to use swc - https://github.com/swc-project/swc/tree/main/crates/swc_webpack_ast, also swc has better perf in some cases, but they both are fast.
+
+swc is parser/codegen/visitor/bundler/transpiler/etc stuff, it is more just bundler, these are slightly different things, so if in the future you want deeper native integration, especial based on rust, I recommend to use swc
+<issue_comment>username_8: ESBuild and swc's performance difference should be very tiny, given how, especially compared to JS tools, they are both much faster.  I don't really think its worth comparing the 2 for performance, since both are clearly very fast.
+
+If one provides a better experience than the other, is it really worth benchmarking them on a base of like half a second?
+<issue_comment>username_9: I am more about - `swc` provides more things out of box, so if you need custom plugin/transformer/code generator for js/css/and more things, I strongly recommend to use `swc`, bundling is not only one things in build pipeline
+<issue_comment>username_0: 😅 good question, maybe it's related to the translation extraction? But afaik it's not run when starting the dev server... weird
+<issue_comment>username_6: A quick guess is that MDX v1 uses Babel under the hood to do the transformation: https://github.com/mdx-js/mdx/blob/master/packages/mdx/mdx-hast-to-jsx.js#L1
+
+It seems MDX v2 has removed this dependency
+<issue_comment>username_10: I've been using Next.js a fair bit this year and honestly if I could turn back time, I think @endiliey and I shouldn't have built our own site generator in Docusaurus v2 and we should have used Next.js instead. Admittedly, it was a mix of not-invented-here syndrome and wanting to learn how to build a site generator from scratch.
+
+At this point, Next.js is a clear winner in the SSG race and Gatsby is more or less out. Vercel is doing so well with their latest funding rounds and star hires, I think it's safe to bet on Next.js.
+
+Docusaurus v2 is split into 3 layers: our homegrown (1) SSG infra, (2) plugins, (3) UI/themes. If I were to build Docusaurus v3, I would make it such that Docusaurus 3 is more like [Nextra](https://github.com/shuding/nextra/), swap out (1) with Next.js and retain (2) and (3). Docusaurus 3 would provide all the documentation-related features. I felt that Docusaurus 2 had to play catch up a lot and implement lots of non-documentation-specific features that were required by websites when Next.js already did all these. We could have saved lots of time by riding on the shoulders of giants.
+
+With Next.js' current popularity and trajectory, I think it's only a matter of time before someone builds a fully-fledged docs theme on top of Next.js that does everything that Docusaurus does, but probably better because their SSG infra is much more optimized by virtue of being on Next.js. IMO many users would also like to have the SSR features Next.js provides so that they can build auth have better integration with their core product.
+<issue_comment>username_6: I still like the idea of having ""dependency independence"". Apart from Webpack / React router / other low-level infra, we aren't coupled to any dependency. It means we can describe our architecture as an integral thing without saying ""the peripheral is Docusaurus, but the core, well, is Next.js and it's a black box"". Working on Docusaurus frankly made me a lot more familiar with how SSG works😄
+<issue_comment>username_0: @username_10 @username_6 we seem to all agree on this
+
+That was also my opinion on day one, but also think that having our own SSG wasn't totally useless: it permitted us to iterate faster without being blocked by limits of an existing dependency and gave us time to evaluate better Gatsby vs Next.js vs others.
+
+We discussed this with @zpao and @JoelMarcey a few months ago and we agreed that Docusaurus should rather migrate to Next.js.
+
+Or become framework-agnostic. This might be more complicated to document well, and harder to implement, but could allow using other solutions like Remix or Gatsby.
+
+And building on top of Next.js also incentives Vercel to invest in Docusaurus 🤷‍♂️ eventually we could join forces with Nextra
+<issue_comment>username_6: One thing I regret about migrating to Next.js is we will be forever tied to Webpack because from my observation the Webpack 5 migration for them was more painful than for us. Webpack ultimately is not comparable in terms of performance to, say, esbuild... 🤔
+<issue_comment>username_9: Next.js start to migrate on swc (rust), and replace webpack more and more, so you should not afraid it
+<issue_comment>username_0: I agree that we want something fast but I believe it's also the goal of Next.js 😅 
+
+Their Webpack 5 migration is likely more complex because of the higher diversity of sites needing to migrate, compared to our low diversity: most doc sites are not customized that much and plugins don't always tweak Webpack settings.
+
+Also, there's value in keeping at least some things in Webpack for now: our plugin ecosystem can remain retro-compatible
+<issue_comment>username_6: Yeah, in the short term migrating to Next.js is surely going to yield lots of benefits. I'm never actually used it purely as an SSG but more as a React framework, but if we can figure out how to make them interoperate it will be very nice!
+<issue_comment>username_10: The thing is, with Next.js' backing, they will just use the fastest that's out there and we can benefit from it by building on top of Next.js. I believe Sebastien is also saying the same. Hopefully we can go with Next.js in the next version (or even better if can be framework agnostic)!
+<issue_comment>username_11: As an outsider we looked at all the options and docusaurus was the best when it came to level of investment and clean and clear plugin and theming architecture. I think competition in this space is much needed and I think having nextra and docusaurus is great for pushing the envelope. 
+
+I think the alternatives to webpack aren't somewhere stable enough to really compare apples to apples, I think by the next major version I think the landscape is going to look very different or maybe webpack migrates to rust and no one needs to do any major rearchitecting at all.
+<issue_comment>username_6: Allowing alternative JS loaders may hinder the provision of useful OOTB JS syntax extensions. For example, @username_0 mentioned somewhere that we may explore making `<Translate>` a zero-runtime API through Babel transformations. I also talked to him about solving #4530 through a runtime transformation of `'@theme-original/*'` to the actual path of ""next component in the theme component stack"", instead of using static Webpack aliases. I would definitely want to use SWC/esbuild, but in any case, it would mean writing the transform plugin with a different set of APIs, maybe even a different language. That makes it not scalable. If we have to insert an extra loader that uses Babel, then we are back in square one and perf will be compromised.
+<issue_comment>username_8: Perf is arguably already compromised by using Babel in the first place.
+<issue_comment>username_8: I think we should drop Babel personally.
+
+Pros:
+- Better perf + memory usage
+- Smaller dependency tree, causing potentially faster install times
+
+Cons:
+- Transforms may need to be ported to Rust, not 100% sure on that one though.
+- Would need to upgrade to MDX 2?
+<issue_comment>username_0: Afaik NAPI-RS has low overhead to call RS from JS but not the opposite. That's also probably why Vercel (recently hired NAPI-RS creator) is porting popular Babel plugins to Rust
+<issue_comment>username_6: Yeah, that's the idea. The extractor is only run in development so it's fine to be in Babel, but for build-time transformations (if we ever implement that) we'd rather use Rust."
+flutter/website,318954693,993,"{'number': 993.0, 'repo': 'website', 'user_login': 'flutter'}","[{'action': 'opened', 'author': 'rock3r', 'comment_id': None, 'datetime': '2018-04-30T16:36:43Z', 'masked_author': 'username_0', 'text': ""This PR contains all the work from #965 #977 #978 #979 #980 #981 #982 #984 #985 #986 #987 — we want one big PR to review @niamhpower's work. She's still the main author of the contents, and has signed the CLA, but something is wrong and won't really work with the bot, so I am acting as a proxy here.\r\n\r\nI have addressed some of the comments on #979 and me and Niamh will bring on with the rest of the comments which aren't applicable to the Android page too (which is the blueprint for the iOS one). We'll bring on the further changes to both the Android and iOS pages in future PRs as agreed with @mjohnsullivan."", 'title': 'Flutter for iOS — Page contents (squashed)', 'type': 'issue'}
+ {'action': 'created', 'author': 'rock3r', 'comment_id': 389178597.0, 'datetime': '2018-05-15 14:03:31+00:00', 'masked_author': 'username_0', 'text': 'Most comments should be addressed, here and in the other squashed PRs. This should be ok for at least an initial merge, and we can pick it up again later if anything else is needed.', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'Sfshaza', 'comment_id': 390783549.0, 'datetime': '2018-05-21 21:09:01+00:00', 'masked_author': 'username_1', 'text': 'Much better! Any other minor copyedits can be handled later. LGTM', 'title': None, 'type': 'comment'}]","<issue_start><issue_comment>Title: Flutter for iOS — Page contents (squashed)
+username_0: This PR contains all the work from #965 #977 #978 #979 #980 #981 #982 #984 #985 #986 #987 — we want one big PR to review @niamhpower's work. She's still the main author of the contents, and has signed the CLA, but something is wrong and won't really work with the bot, so I am acting as a proxy here.
+
+I have addressed some of the comments on #979 and me and Niamh will bring on with the rest of the comments which aren't applicable to the Android page too (which is the blueprint for the iOS one). We'll bring on the further changes to both the Android and iOS pages in future PRs as agreed with @mjohnsullivan.
+<issue_comment>username_0: Most comments should be addressed, here and in the other squashed PRs. This should be ok for at least an initial merge, and we can pick it up again later if anything else is needed.
+<issue_comment>username_1: Much better! Any other minor copyedits can be handled later. LGTM"
+ethereum/ethereum-org-website,1002914060,3970,,"[{'action': 'opened', 'author': 'adam-bro', 'comment_id': None, 'datetime': '2021-09-21 17:24:21+00:00', 'masked_author': 'username_0', 'text': ""**Is your wallet security tested? Please explain security measures i.e. security audit, internal security team or some other method.**\r\n1. Check that each permission is required for App functions and does not violate the privacy policies of the App store and Google play.\r\n2. For wallet mnemonics, transaction passwords, etc., stored in the Android application KeyStore, and iOS application KeyChain.\r\n3. The interface uses the https protocol, using API Key authentication mechanism, data signature, adding time stamp, current limiting mechanism, blacklist mechanism to ensure data security, mainly through Charles tools to assist in checking.\r\n4. Use third-party security testing platforms, such as Tencent Mobile Security Lab (https://m.qq.com/security_lab/scans_online.jsp).\r\n\r\n**When did your wallet go live to users?**\r\nNov 25, 2020.\r\n\r\n**Does your wallet have an active development team?**\r\nYes, we have nine people working on the wallet, 7 engineers and 2 designers.\r\n\r\n**Is your wallet open-source?**\r\nNo, it is closed sourced.\r\n\r\n**Is your wallet globally accessible?**\r\nOur wallet is globally accessible and available on both iOS and Android. There are no geographic limitations or KYC requirements to use the wallet. \r\n\r\n**Is your wallet custodial, non-custodial, or a hardware wallet?**\r\nThe Loopring Wallet is a non-custodial mobile smart contract wallet.\r\n\r\n<!-- Do users have access to their public and/or private keys? If your company/project were to disappear, would users still be able to access their funds? -->\r\nThere is no private key. Loopring Smart Wallet is a smart contract wallet and uses social recovery and guardians which replaces seed phrases. If our company were to disappear, users can always just interact with the smart wallet contract directly. There's no direct dependencies to Loopring. The wallet is 100% non-custodial.\r\n\r\n**Please describe the measures taken to ensure the wallet's security and provide documentation wherever possible**\r\nThe Loopring Wallet smart contracts work in terms of guardians, locks, limits, and security in general. The Loopring Wallet is not a 'normal' Ethereum address (not an EOA), it is a smart contract. As such, it is much more flexible, and it has rules and logic baked in, which makes it much more user-friendly, secure, and extensible in the future. Security is at the core of Loopring Wallet design decisions. You can read more here - https://loopring.io/#/legal/walletdesign\r\n\r\n**Does the wallet have fiat on-ramps?**\r\nWe do not have fiat on-ramps in the wallet yet. We are expected to go live with this feature in Q1 2022.\r\n\r\n**Does the wallet allow users to explore dapps?**\r\nYes there's a dapp browser page on the wallet. Users are able to interact with UniSwap, SushiSwap, Aave, Balancer, PoolTogether, Compound and more. \r\n\r\n**Does the wallet have integrated defi/financial tools?**\r\nYes Smart Wallet users can do gas-free layer-2 swaps, trades, transfers and provide liquidity via AMM.\r\n\r\n<!-- Can users borrow/earn/lend assets directly from a screen in the wallet?  -->\r\nSoon users will be able to lend and borrow from L1 dapps directly on L2 with our upcoming Ethport feature. \r\n\r\n**Can a user withdraw to their card?**\r\nNo\r\n\r\n**Does the wallet offer limits protection?**\r\nYes, users are able to add a daily limit quota. \r\n\r\n**Does the wallet allow high-volume purchases?**\r\nYes.\r\n\r\n**Does the wallet have an integrated token swap?**\r\nYes, our Layer-2 AMM is integrated into the Smart Wallet allowing users to token swap, gas-free\r\n\r\n**Is the wallet a multi-signature wallet?**\r\nThe Smart Wallet is an advanced multisig, where you can choose people, institutions, and hardware that you trust as the guardians of your wallets but the signer is just you. Users need multiple signers for bigger actions, like recovering a wallet, or sending a tx that is above a previous limit you set.\r\n\r\n**Wallet title**\r\nLoopring Wallet\r\n\r\n**Wallet description**\r\nThe first ever Ethereum smart contract wallet with zkRollup-based trading, transfers, and AMM. Gas-free, secure, and simple. DEXes, DeFi, and payments powered by Loopring Layer-2 allows you to avoid gas fees and network congestion, and deploy assets to earn and invest.\r\n\r\n**Wallet logo**\r\n![1024](https://user-images.githubusercontent.com/84410897/134215180-b4938237-8d4c-4813-a1b5-577e063c30fd.png)\r\n\r\n**Background colour for brand logo**\r\nDarkest blue background: 1E44FF, Dark Blue Background: 2451FF, Darkish blue background: 2C61FF, Blue background: 316AFF, lightish blue background: 3570FF, light blue background: 3B7FFF, lightest blue background: 4897FF\r\n\r\n**URL**\r\nhttps://loopring.io"", 'title': 'Add Loopring Wallet to wallet section', 'type': 'issue'}
+ {'action': 'created', 'author': 'minimalsm', 'comment_id': 926579428.0, 'datetime': '2021-09-24 12:16:50+00:00', 'masked_author': 'username_1', 'text': '@username_0 this looks good to me :-) will queue it up to get added to the site.', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'adam-bro', 'comment_id': 934515552.0, 'datetime': '2021-10-05 15:30:15+00:00', 'masked_author': 'username_0', 'text': 'Thank you @username_1 !', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'adam-bro', 'comment_id': 975866262.0, 'datetime': '2021-11-22 19:53:01+00:00', 'masked_author': 'username_0', 'text': '@username_1 do you know when the Loopring Wallet will be added to the wallet section?', 'title': None, 'type': 'comment'}
+ {'action': 'closed', 'author': 'minimalsm', 'comment_id': None, 'datetime': '2022-01-24 15:19:18+00:00', 'masked_author': 'username_1', 'text': '', 'title': None, 'type': 'issue'}
+ {'action': 'created', 'author': 'adam-bro', 'comment_id': 1022397951.0, 'datetime': '2022-01-26 16:59:39+00:00', 'masked_author': 'username_0', 'text': ""Hi username_1 can you please tick off 'buy ETH with card'\r\n\r\nUsers can now onramp from FIAT to ETH straight to Loopring L2 without having to pay for gas-fees. This has been the easiest and cheapest way for our users to onboard funds onto Loopring. RAMP and Banxa are our FIAT providers\r\n\r\n![1IMG_5663](https://user-images.githubusercontent.com/84410897/151210021-2f67ea06-6122-4bab-b4f3-3a376ded84d8.jpeg)\r\n\r\nThanks username_1!"", 'title': None, 'type': 'comment'}]","<issue_start><issue_comment>Title: Add Loopring Wallet to wallet section
+username_0: **Is your wallet security tested? Please explain security measures i.e. security audit, internal security team or some other method.**
+1. Check that each permission is required for App functions and does not violate the privacy policies of the App store and Google play.
+2. For wallet mnemonics, transaction passwords, etc., stored in the Android application KeyStore, and iOS application KeyChain.
+3. The interface uses the https protocol, using API Key authentication mechanism, data signature, adding time stamp, current limiting mechanism, blacklist mechanism to ensure data security, mainly through Charles tools to assist in checking.
+4. Use third-party security testing platforms, such as Tencent Mobile Security Lab (https://m.qq.com/security_lab/scans_online.jsp).
+
+**When did your wallet go live to users?**
+Nov 25, 2020.
+
+**Does your wallet have an active development team?**
+Yes, we have nine people working on the wallet, 7 engineers and 2 designers.
+
+**Is your wallet open-source?**
+No, it is closed sourced.
+
+**Is your wallet globally accessible?**
+Our wallet is globally accessible and available on both iOS and Android. There are no geographic limitations or KYC requirements to use the wallet. 
+
+**Is your wallet custodial, non-custodial, or a hardware wallet?**
+The Loopring Wallet is a non-custodial mobile smart contract wallet.
+
+<!-- Do users have access to their public and/or private keys? If your company/project were to disappear, would users still be able to access their funds? -->
+There is no private key. Loopring Smart Wallet is a smart contract wallet and uses social recovery and guardians which replaces seed phrases. If our company were to disappear, users can always just interact with the smart wallet contract directly. There's no direct dependencies to Loopring. The wallet is 100% non-custodial.
+
+**Please describe the measures taken to ensure the wallet's security and provide documentation wherever possible**
+The Loopring Wallet smart contracts work in terms of guardians, locks, limits, and security in general. The Loopring Wallet is not a 'normal' Ethereum address (not an EOA), it is a smart contract. As such, it is much more flexible, and it has rules and logic baked in, which makes it much more user-friendly, secure, and extensible in the future. Security is at the core of Loopring Wallet design decisions. You can read more here - https://loopring.io/#/legal/walletdesign
+
+**Does the wallet have fiat on-ramps?**
+We do not have fiat on-ramps in the wallet yet. We are expected to go live with this feature in Q1 2022.
+
+**Does the wallet allow users to explore dapps?**
+Yes there's a dapp browser page on the wallet. Users are able to interact with UniSwap, SushiSwap, Aave, Balancer, PoolTogether, Compound and more. 
+
+**Does the wallet have integrated defi/financial tools?**
+Yes Smart Wallet users can do gas-free layer-2 swaps, trades, transfers and provide liquidity via AMM.
+
+<!-- Can users borrow/earn/lend assets directly from a screen in the wallet?  -->
+Soon users will be able to lend and borrow from L1 dapps directly on L2 with our upcoming Ethport feature. 
+
+**Can a user withdraw to their card?**
+No
+
+**Does the wallet offer limits protection?**
+Yes, users are able to add a daily limit quota. 
+
+**Does the wallet allow high-volume purchases?**
+Yes.
+
+**Does the wallet have an integrated token swap?**
+Yes, our Layer-2 AMM is integrated into the Smart Wallet allowing users to token swap, gas-free
+
+**Is the wallet a multi-signature wallet?**
+The Smart Wallet is an advanced multisig, where you can choose people, institutions, and hardware that you trust as the guardians of your wallets but the signer is just you. Users need multiple signers for bigger actions, like recovering a wallet, or sending a tx that is above a previous limit you set.
+
+**Wallet title**
+Loopring Wallet
+
+**Wallet description**
+The first ever Ethereum smart contract wallet with zkRollup-based trading, transfers, and AMM. Gas-free, secure, and simple. DEXes, DeFi, and payments powered by Loopring Layer-2 allows you to avoid gas fees and network congestion, and deploy assets to earn and invest.
+
+**Wallet logo**
+![1024](https://user-images.githubusercontent.com/84410897/134215180-b4938237-8d4c-4813-a1b5-577e063c30fd.png)
+
+**Background colour for brand logo**
+Darkest blue background: 1E44FF, Dark Blue Background: 2451FF, Darkish blue background: 2C61FF, Blue background: 316AFF, lightish blue background: 3570FF, light blue background: 3B7FFF, lightest blue background: 4897FF
+
+**URL**
+https://loopring.io
+<issue_comment>username_1: @username_0 this looks good to me :-) will queue it up to get added to the site.
+<issue_comment>username_0: Thank you @username_1 !
+<issue_comment>username_0: @username_1 do you know when the Loopring Wallet will be added to the wallet section?<issue_closed>
+<issue_comment>username_0: Hi username_1 can you please tick off 'buy ETH with card'
+
+Users can now onramp from FIAT to ETH straight to Loopring L2 without having to pay for gas-fees. This has been the easiest and cheapest way for our users to onboard funds onto Loopring. RAMP and Banxa are our FIAT providers
+
+![1IMG_5663](https://user-images.githubusercontent.com/84410897/151210021-2f67ea06-6122-4bab-b4f3-3a376ded84d8.jpeg)
+
+Thanks username_1!"
+nodejs/nodejs.org,386966404,1923,,"[{'action': 'opened', 'author': 'june07', 'comment_id': None, 'datetime': '2018-12-03 19:21:37+00:00', 'masked_author': 'username_0', 'text': 'As no response has been received to https://github.com/nodejs/nodejs.org/issues/1908 since nearly a week, I am opening this issue.\r\n\r\n@username_6 Would be great to get some feedback on this.\r\n\r\nFor the record, I\'ve compared NiM\'s Chrome web store page with that of 10 different companies, all of whom have items in Google\'s Chrome web store, FOUR (EBay, Paypal, Walmart, and LinkedIn, of whom are among ""10 Global Companies Using Node.js in Production"" according to Google. And none of which I would think the Node.js community would have a problem ""recommend""ing if that is what it means to add a link on the https://nodejs.org/en/docs/guides/debugging-getting-started/ page.\r\n\r\nI have compiled current pictures of all 10 companies’ chrome web store pages, as well as the privacy policy pages for each of the 5 which actually have them referenced, and uploaded them to Google photos (see link below). As far as the other 5, there are a number of valid reasons why they may not have privacy policy links, just as NiM did not, but I don’t want to digress.\r\n\r\nhttps://photos.app.goo.gl/y4TN5dT1JeNbED2KA\r\n\r\nI can say with strong conviction that data collected by NiM is minuscule by every measure when compared to that collected by these larger companies. Further, no data has ever been used for ill purposes and will not ever deviate from that found in our new privacy policy (link again: https://app.termly.io/document/privacy-policy/04164179-f943-4e87-ac8b-5afd0367dc6c#infocollect) And again, @ea167’s statement that “this requirement was added recently.” is simply NOT the case as can be determined by reading the GitHub project history.\r\nTHIS is where/when the extra permissions were added on Feb 9, 2017, close to 2 years ago. As the removal was partly predicated on that statement, I bring it up again.\r\n\r\nI do regret not having a privacy policy in place sooner. To my defense, unlike these larger organizations, I don’t really have spare man/woman power to go around. That said, the focus for me has been on trying to make NiM great for the betterment of like-minded Node.js developers. I should point out that I make zero monetary gain from NiM, and it is a side project for me.\r\n\r\nSo, if they weren’t before, I believe that all of the bases are now covered. I would like to get the Chrome web store link for NiM back and would be more than happy to submit a PR for such.\r\n\r\nPlease advise...\r\n\r\n-Respectfully to all', 'title': 'Re-enstate link to NiM in debug documentation.', 'type': 'issue'}
+ {'action': 'created', 'author': 'june07', 'comment_id': 446040971.0, 'datetime': '2018-12-11 01:42:04+00:00', 'masked_author': 'username_0', 'text': 'Thank you again, Myles, for nudging this.', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'mcollina', 'comment_id': 446649406.0, 'datetime': '2018-12-12 16:24:43+00:00', 'masked_author': 'username_1', 'text': ""I'm fine in having that link in."", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'june07', 'comment_id': 446653710.0, 'datetime': '2018-12-12 16:36:16+00:00', 'masked_author': 'username_0', 'text': 'Not sure my messages were going thru on https://www.youtube.com/c/nodejs+foundation/live.  I will submit a PR for the change.', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'ChALkeR', 'comment_id': 446655499.0, 'datetime': '2018-12-12 16:41:04+00:00', 'masked_author': 'username_2', 'text': 'I would prefer not recommending _any_ browser extensions, for security reasons.', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'gabrielschulhof', 'comment_id': 448322228.0, 'datetime': '2018-12-18 18:31:00+00:00', 'masked_author': 'username_3', 'text': 'Perhaps we should keep it generic and mention that the Chrome Web store provides additional tools that help with debugging. We can even add a link with a keyword search that would bring up NiM, but would also bring up other extensions that satisfy the keywords. Nevertheless, if NiM were the first of many such helpers and would be closely associated with the keywords it would, at least for the beginning, be the first search result. We can then maybe tune the keywords to keep a sufficient distance between making a specific recommendation while allowing other tools to show up as they are being developed, and being too generic.', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'ChALkeR', 'comment_id': 448617726.0, 'datetime': '2018-12-19 14:37:50+00:00', 'masked_author': 'username_2', 'text': ""@username_3 that seems ok to me, but imo we shouldn't _actively_ promote the usage of browser extensions for this task. A note that those exist (without explicitly calling people to install those, and without linking to any specific one) would be fine in my opinion."", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'june07', 'comment_id': 448636647.0, 'datetime': '2018-12-19 15:32:10+00:00', 'masked_author': 'username_0', 'text': 'I sort of get the hand waving and wide eyes about ""browser extensions"" and ""security reasons"" by some but in all fairness, as developers, I think we are held to a slightly higher level of sophistication as it relates to understanding how to stay safe.  Using that same safety paradigm, should we pull all references to any Inspector Clients from the debugging-getting-started page?!  After all, we are all aware of the NPM ""security"" issues of late, and I am safe to say that a full-on executable has much more ability to wreak havoc on a system vs a Javascript sandboxed web application.  NiM wasn\'t even listed as a primary option but rather a sub-option to Chrome DevTools, a very suitable place for it.  Of course, we shouldn\'t remove listings to other Inspector Clients.  If anything, more should be added if they are deemed as helpful as NiM has proven to be (see the rating/feedback).  Many have asked or commented on the fact that they wished they had found NiM sooner!\r\n\r\nThis conversation seems to be diverging from the initial issue (privacy policy).  The issue was resolved over two weeks ago.  And now it would be great to reinstate the URL.', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'june07', 'comment_id': 448762125.0, 'datetime': '2018-12-19 22:11:07+00:00', 'masked_author': 'username_0', 'text': '@nodejs/tsc has delegated the issue back to the web working group.  Apparently that was the wrong place to surface this issue.  Can someone from that group chime in please.  @username_6', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'mhdawson', 'comment_id': 448768812.0, 'datetime': '2018-12-19 22:37:41+00:00', 'masked_author': 'username_4', 'text': 'This was discussed in the TSC meeting this week: Consensus was that it is not the time to escalate to TSC and let website team lead the discussion, reach a discussion.', 'title': None, 'type': 'comment'}
+ {'action': 'closed', 'author': 'mhdawson', 'comment_id': None, 'datetime': '2018-12-19 22:37:41+00:00', 'masked_author': 'username_4', 'text': '', 'title': None, 'type': 'issue'}
+ {'action': 'reopened', 'author': 'MylesBorins', 'comment_id': None, 'datetime': '2018-12-19 22:41:01+00:00', 'masked_author': 'username_5', 'text': 'As no response has been received to https://github.com/nodejs/nodejs.org/issues/1908 since nearly a week, I am opening this issue.\r\n\r\n@username_6 Would be great to get some feedback on this.\r\n\r\nFor the record, I\'ve compared NiM\'s Chrome web store page with that of 10 different companies, all of whom have items in Google\'s Chrome web store, FOUR (EBay, Paypal, Walmart, and LinkedIn, of whom are among ""10 Global Companies Using Node.js in Production"" according to Google. And none of which I would think the Node.js community would have a problem ""recommend""ing if that is what it means to add a link on the https://nodejs.org/en/docs/guides/debugging-getting-started/ page.\r\n\r\nI have compiled current pictures of all 10 companies’ chrome web store pages, as well as the privacy policy pages for each of the 5 which actually have them referenced, and uploaded them to Google photos (see link below). As far as the other 5, there are a number of valid reasons why they may not have privacy policy links, just as NiM did not, but I don’t want to digress.\r\n\r\nhttps://photos.app.goo.gl/y4TN5dT1JeNbED2KA\r\n\r\nI can say with strong conviction that data collected by NiM is minuscule by every measure when compared to that collected by these larger companies. Further, no data has ever been used for ill purposes and will not ever deviate from that found in our new privacy policy (link again: https://app.termly.io/document/privacy-policy/04164179-f943-4e87-ac8b-5afd0367dc6c#infocollect) And again, @ea167’s statement that “this requirement was added recently.” is simply NOT the case as can be determined by reading the GitHub project history.\r\nTHIS is where/when the extra permissions were added on Feb 9, 2017, close to 2 years ago. As the removal was partly predicated on that statement, I bring it up again.\r\n\r\nI do regret not having a privacy policy in place sooner. To my defense, unlike these larger organizations, I don’t really have spare man/woman power to go around. That said, the focus for me has been on trying to make NiM great for the betterment of like-minded Node.js developers. I should point out that I make zero monetary gain from NiM, and it is a side project for me.\r\n\r\nSo, if they weren’t before, I believe that all of the bases are now covered. I would like to get the Chrome web store link for NiM back and would be more than happy to submit a PR for such.\r\n\r\nPlease advise...\r\n\r\n-Respectfully to all\r\n\r\nhttps://chrome.google.com/webstore/detail/nodejs-v8-inspector-manag/gnhhdgbaldcilmgcpfddgdbkhjohddkj', 'title': 'Re-enstate link to NiM in debug documentation.', 'type': 'issue'}
+ {'action': 'created', 'author': 'MylesBorins', 'comment_id': 448769666.0, 'datetime': '2018-12-19 22:41:01+00:00', 'masked_author': 'username_5', 'text': ""Reopening as I don't think that this issue needs to be closed"", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'ChALkeR', 'comment_id': 448827659.0, 'datetime': '2018-12-20 01:42:52+00:00', 'masked_author': 'username_2', 'text': 'Yes, I believe that closing it was probably accidential.', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'fhemberger', 'comment_id': 450562769.0, 'datetime': '2018-12-30 14:02:39+00:00', 'masked_author': 'username_6', 'text': '(First of all sorry for the delay in my answer. It was Christmas time after all and I\'ve been busy like the rest of you, I guess.)\r\n\r\nI\'m still strongly opposed to add this extension back to the list of recommendations in its current form.\r\n\r\nFor the record again, **the email address of the user** (taken from the Google account used to install the extension on Chrome) **is sent every second to Google Analytics.**\r\n\r\nThere is no need to collect personal data for the extension to work, and this can be considered a violation of the GDPR.\r\n\r\nTo sum up the arguments you brought up against this so far:\r\n\r\n* ""We added a visible link to our privacy policy, which the user accepts with downloading and using out extension."" – That\'s a good thing, although the privacy policy mixes use of your website and the app. And it doesn\'t inform the user about the email collection.\r\n\r\n* ""We want to collect the data to maybe contact the users in the future"" – as @oncletom [already stated before](https://github.com/nodejs/nodejs.org/issues/1908#issuecomment-442070908), GDPR is about being given consent by the user. So if you want to collect data not required for using this extension, it has to be explicitly opt-in.\r\n\r\n  If you just wanted to have statistical data about the daily usage of your extension, there\'d be other options (like using a hash which can\'t be used to personally identify the user).\r\n\r\n* ""Other companies are doing things much worse."" – sorry, but I won\'t even discuss this statement.\r\n\r\nNow, if those changes are made I\'d be willing to reconsider my position. On the other hand, we\'re already discussing more broadly in #1963, #1964 and #1965 what kind of third party content should be collected on the Node.js website at all (also making sure that it doesn\'t mean this content is promoted/endorsed by the Node.js Foundation in any way).\r\n\r\n/cc\'ig @Trott (who rose two of the issues mentioned above) and @amiller-gh (as this is also relevant for @nodejs/website-redesign).', 'title': None, 'type': 'comment'}
+ {'action': 'closed', 'author': 'june07', 'comment_id': None, 'datetime': '2018-12-31 07:45:29+00:00', 'masked_author': 'username_0', 'text': '', 'title': None, 'type': 'issue'}
+ {'action': 'created', 'author': 'june07', 'comment_id': 450616947.0, 'datetime': '2018-12-31 07:45:29+00:00', 'masked_author': 'username_0', 'text': ""So in the name of (... Greyskull?!), I've removed the emails from Google Analytics.  My initial thought was to encrypt the data but ultimately the extra work isn't worth it to me.  I don't profit from this and honestly, it's just not worth it to spend any more of my time on it.\r\n\r\nPlease see the PR I merged into my own code base.  AS WELL, I've pushed an updated version to the Chrome Web Store that tracks the change.\r\n\r\nThat should kill all the friendly birds with just one stone!  Cheers."", 'title': None, 'type': 'comment'}
+ {'action': 'reopened', 'author': 'june07', 'comment_id': None, 'datetime': '2018-12-31 07:45:34+00:00', 'masked_author': 'username_0', 'text': 'As no response has been received to https://github.com/nodejs/nodejs.org/issues/1908 since nearly a week, I am opening this issue.\r\n\r\n@username_6 Would be great to get some feedback on this.\r\n\r\nFor the record, I\'ve compared NiM\'s Chrome web store page with that of 10 different companies, all of whom have items in Google\'s Chrome web store, FOUR (EBay, Paypal, Walmart, and LinkedIn, of whom are among ""10 Global Companies Using Node.js in Production"" according to Google. And none of which I would think the Node.js community would have a problem ""recommend""ing if that is what it means to add a link on the https://nodejs.org/en/docs/guides/debugging-getting-started/ page.\r\n\r\nI have compiled current pictures of all 10 companies’ chrome web store pages, as well as the privacy policy pages for each of the 5 which actually have them referenced, and uploaded them to Google photos (see link below). As far as the other 5, there are a number of valid reasons why they may not have privacy policy links, just as NiM did not, but I don’t want to digress.\r\n\r\nhttps://photos.app.goo.gl/y4TN5dT1JeNbED2KA\r\n\r\nI can say with strong conviction that data collected by NiM is minuscule by every measure when compared to that collected by these larger companies. Further, no data has ever been used for ill purposes and will not ever deviate from that found in our new privacy policy (link again: https://app.termly.io/document/privacy-policy/04164179-f943-4e87-ac8b-5afd0367dc6c#infocollect) And again, @ea167’s statement that “this requirement was added recently.” is simply NOT the case as can be determined by reading the GitHub project history.\r\nTHIS is where/when the extra permissions were added on Feb 9, 2017, close to 2 years ago. As the removal was partly predicated on that statement, I bring it up again.\r\n\r\nI do regret not having a privacy policy in place sooner. To my defense, unlike these larger organizations, I don’t really have spare man/woman power to go around. That said, the focus for me has been on trying to make NiM great for the betterment of like-minded Node.js developers. I should point out that I make zero monetary gain from NiM, and it is a side project for me.\r\n\r\nSo, if they weren’t before, I believe that all of the bases are now covered. I would like to get the Chrome web store link for NiM back and would be more than happy to submit a PR for such.\r\n\r\nPlease advise...\r\n\r\n-Respectfully to all\r\n\r\nhttps://chrome.google.com/webstore/detail/nodejs-v8-inspector-manag/gnhhdgbaldcilmgcpfddgdbkhjohddkj', 'title': 'Reinstate link to NiM in debug documentation.', 'type': 'issue'}
+ {'action': 'created', 'author': 'fhemberger', 'comment_id': 463514063.0, 'datetime': '2019-02-14 06:56:26+00:00', 'masked_author': 'username_6', 'text': 'Waiting for the PR to land, closing this.', 'title': None, 'type': 'comment'}
+ {'action': 'closed', 'author': 'fhemberger', 'comment_id': None, 'datetime': '2019-02-14 06:56:26+00:00', 'masked_author': 'username_6', 'text': '', 'title': None, 'type': 'issue'}
+ {'action': 'created', 'author': 'eyedean', 'comment_id': 501209247.0, 'datetime': '2019-06-12 10:12:22+00:00', 'masked_author': 'username_7', 'text': 'Well, it seems like the ""Sending Email to Google Analytics"" which was removed in December apparently, [is back](https://github.com/username_0/NiM/commit/c7678cd2746c06dfb4d18c9c41a56ad14c1b9310#diff-f9b12bd72f40c9b8ed144484f0f12a5fR143) as of 29 days ago and it\'s currently in master: https://github.com/username_0/NiM/blob/master/background.js#L151\r\n\r\nWe should probably edit the docs and mention that this is still happening and it\'s a recurring issue that apparently comes back!\r\n\r\n@username_6 shall we reopen this issue?  (I just discovered this problem in https://github.com/nodejs/node/issues/28185 a few hours ago on my own, and @joyeecheung guided me to here.)\r\n\r\nPS. A friendly note to the author of the plugin:  Your great work is much appreciated.  But as I suggested in my own ticket, maybe replacing the email address with a randomly generated UUID, stored in the client-side for your tracking consistency, can make everyone feel better. :)', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'fhemberger', 'comment_id': 501213243.0, 'datetime': '2019-06-12 10:24:52+00:00', 'masked_author': 'username_6', 'text': ""Thanks for reopening, let's discuss matters over there."", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'june07', 'comment_id': 501334700.0, 'datetime': '2019-06-12 15:47:20+00:00', 'masked_author': 'username_0', 'text': ""Please note that encryption was added per the GDPR requirement of google\nand was accepted as a solution to the complaint way back when this issue\narose the first time.  No changes have been made specific/surrounding this\nissue since then.  Please note that.  This is in no way some attempt to\nsneak anything past anyone.\n\nI'm still going thru the code but I saw this and wanted to address it asap."", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'june07', 'comment_id': 501358296.0, 'datetime': '2019-06-12 16:43:20+00:00', 'masked_author': 'username_0', 'text': ""Again, just as last time someone raised a concern about this code issue, it\nis/was nothing NEW.  And with the help of those on the node teams,\nincluding even bringing this to a TSC meeting, I thought I took every\napplicable action/step to make things compliant.  The extensive GitHub\nhistory shows every action I've taken including adding notices, encryption,\nand removing things.  The steps I took back then were validated when after\nMUCH time (and I can only assume --inspect ion of the code changes) NiM was\nreinstated.\n\nI think I said it before, but there are no nefarious things going on.  I\nreally hope the solution this time is not simply chopping the head off and\ninstead if there is still a VALID issue, that it be addressed and I am\nwilling to make MORE changes to move in the direction of the greatest good.\n\nIf the solutions that were good enough back then are no longer good enough,\nor there is some problem with the encryption scheme I implemented... please\nlet me know.\n\nOn Wed, Jun 12, 2019 at 8:47 AM 667 <anpch@example.com> wrote:\n\n> Please note that encryption was added per the GDPR requirement of google\n> and was accepted as a solution to the complaint way back when this issue\n> arose the first time.  No changes have been made specific/surrounding this\n> issue since then.  Please note that.  This is in no way some attempt to\n> sneak anything past anyone.\n>\n> I'm still going thru the code but I saw this and wanted to address it asap.\n>\n>"", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'eyedean', 'comment_id': 501378392.0, 'datetime': '2019-06-12 17:33:31+00:00', 'masked_author': 'username_7', 'text': ""Let's centralize our conversation in https://github.com/nodejs/nodejs.org/issues/1908.  Thanks."", 'title': None, 'type': 'comment'}]","<issue_start><issue_comment>Title: Re-enstate link to NiM in debug documentation.
+username_0: As no response has been received to https://github.com/nodejs/nodejs.org/issues/1908 since nearly a week, I am opening this issue.
+
+@username_6 Would be great to get some feedback on this.
+
+For the record, I've compared NiM's Chrome web store page with that of 10 different companies, all of whom have items in Google's Chrome web store, FOUR (EBay, Paypal, Walmart, and LinkedIn, of whom are among ""10 Global Companies Using Node.js in Production"" according to Google. And none of which I would think the Node.js community would have a problem ""recommend""ing if that is what it means to add a link on the https://nodejs.org/en/docs/guides/debugging-getting-started/ page.
+
+I have compiled current pictures of all 10 companies’ chrome web store pages, as well as the privacy policy pages for each of the 5 which actually have them referenced, and uploaded them to Google photos (see link below). As far as the other 5, there are a number of valid reasons why they may not have privacy policy links, just as NiM did not, but I don’t want to digress.
+
+https://photos.app.goo.gl/y4TN5dT1JeNbED2KA
+
+I can say with strong conviction that data collected by NiM is minuscule by every measure when compared to that collected by these larger companies. Further, no data has ever been used for ill purposes and will not ever deviate from that found in our new privacy policy (link again: https://app.termly.io/document/privacy-policy/04164179-f943-4e87-ac8b-5afd0367dc6c#infocollect) And again, @ea167’s statement that “this requirement was added recently.” is simply NOT the case as can be determined by reading the GitHub project history.
+THIS is where/when the extra permissions were added on Feb 9, 2017, close to 2 years ago. As the removal was partly predicated on that statement, I bring it up again.
+
+I do regret not having a privacy policy in place sooner. To my defense, unlike these larger organizations, I don’t really have spare man/woman power to go around. That said, the focus for me has been on trying to make NiM great for the betterment of like-minded Node.js developers. I should point out that I make zero monetary gain from NiM, and it is a side project for me.
+
+So, if they weren’t before, I believe that all of the bases are now covered. I would like to get the Chrome web store link for NiM back and would be more than happy to submit a PR for such.
+
+Please advise...
+
+-Respectfully to all
+<issue_comment>username_0: Thank you again, Myles, for nudging this.
+<issue_comment>username_1: I'm fine in having that link in.
+<issue_comment>username_0: Not sure my messages were going thru on https://www.youtube.com/c/nodejs+foundation/live.  I will submit a PR for the change.
+<issue_comment>username_2: I would prefer not recommending _any_ browser extensions, for security reasons.
+<issue_comment>username_3: Perhaps we should keep it generic and mention that the Chrome Web store provides additional tools that help with debugging. We can even add a link with a keyword search that would bring up NiM, but would also bring up other extensions that satisfy the keywords. Nevertheless, if NiM were the first of many such helpers and would be closely associated with the keywords it would, at least for the beginning, be the first search result. We can then maybe tune the keywords to keep a sufficient distance between making a specific recommendation while allowing other tools to show up as they are being developed, and being too generic.
+<issue_comment>username_2: @username_3 that seems ok to me, but imo we shouldn't _actively_ promote the usage of browser extensions for this task. A note that those exist (without explicitly calling people to install those, and without linking to any specific one) would be fine in my opinion.
+<issue_comment>username_0: I sort of get the hand waving and wide eyes about ""browser extensions"" and ""security reasons"" by some but in all fairness, as developers, I think we are held to a slightly higher level of sophistication as it relates to understanding how to stay safe.  Using that same safety paradigm, should we pull all references to any Inspector Clients from the debugging-getting-started page?!  After all, we are all aware of the NPM ""security"" issues of late, and I am safe to say that a full-on executable has much more ability to wreak havoc on a system vs a Javascript sandboxed web application.  NiM wasn't even listed as a primary option but rather a sub-option to Chrome DevTools, a very suitable place for it.  Of course, we shouldn't remove listings to other Inspector Clients.  If anything, more should be added if they are deemed as helpful as NiM has proven to be (see the rating/feedback).  Many have asked or commented on the fact that they wished they had found NiM sooner!
+
+This conversation seems to be diverging from the initial issue (privacy policy).  The issue was resolved over two weeks ago.  And now it would be great to reinstate the URL.
+<issue_comment>username_0: @nodejs/tsc has delegated the issue back to the web working group.  Apparently that was the wrong place to surface this issue.  Can someone from that group chime in please.  @username_6
+<issue_comment>username_4: This was discussed in the TSC meeting this week: Consensus was that it is not the time to escalate to TSC and let website team lead the discussion, reach a discussion.<issue_closed>
+<issue_comment>username_5: As no response has been received to https://github.com/nodejs/nodejs.org/issues/1908 since nearly a week, I am opening this issue.
+
+@username_6 Would be great to get some feedback on this.
+
+For the record, I've compared NiM's Chrome web store page with that of 10 different companies, all of whom have items in Google's Chrome web store, FOUR (EBay, Paypal, Walmart, and LinkedIn, of whom are among ""10 Global Companies Using Node.js in Production"" according to Google. And none of which I would think the Node.js community would have a problem ""recommend""ing if that is what it means to add a link on the https://nodejs.org/en/docs/guides/debugging-getting-started/ page.
+
+I have compiled current pictures of all 10 companies’ chrome web store pages, as well as the privacy policy pages for each of the 5 which actually have them referenced, and uploaded them to Google photos (see link below). As far as the other 5, there are a number of valid reasons why they may not have privacy policy links, just as NiM did not, but I don’t want to digress.
+
+https://photos.app.goo.gl/y4TN5dT1JeNbED2KA
+
+I can say with strong conviction that data collected by NiM is minuscule by every measure when compared to that collected by these larger companies. Further, no data has ever been used for ill purposes and will not ever deviate from that found in our new privacy policy (link again: https://app.termly.io/document/privacy-policy/04164179-f943-4e87-ac8b-5afd0367dc6c#infocollect) And again, @ea167’s statement that “this requirement was added recently.” is simply NOT the case as can be determined by reading the GitHub project history.
+THIS is where/when the extra permissions were added on Feb 9, 2017, close to 2 years ago. As the removal was partly predicated on that statement, I bring it up again.
+
+I do regret not having a privacy policy in place sooner. To my defense, unlike these larger organizations, I don’t really have spare man/woman power to go around. That said, the focus for me has been on trying to make NiM great for the betterment of like-minded Node.js developers. I should point out that I make zero monetary gain from NiM, and it is a side project for me.
+
+So, if they weren’t before, I believe that all of the bases are now covered. I would like to get the Chrome web store link for NiM back and would be more than happy to submit a PR for such.
+
+Please advise...
+
+-Respectfully to all
+
+https://chrome.google.com/webstore/detail/nodejs-v8-inspector-manag/gnhhdgbaldcilmgcpfddgdbkhjohddkj
+<issue_comment>username_5: Reopening as I don't think that this issue needs to be closed
+<issue_comment>username_2: Yes, I believe that closing it was probably accidential.
+<issue_comment>username_6: (First of all sorry for the delay in my answer. It was Christmas time after all and I've been busy like the rest of you, I guess.)
+
+I'm still strongly opposed to add this extension back to the list of recommendations in its current form.
+
+For the record again, **the email address of the user** (taken from the Google account used to install the extension on Chrome) **is sent every second to Google Analytics.**
+
+There is no need to collect personal data for the extension to work, and this can be considered a violation of the GDPR.
+
+To sum up the arguments you brought up against this so far:
+
+* ""We added a visible link to our privacy policy, which the user accepts with downloading and using out extension."" – That's a good thing, although the privacy policy mixes use of your website and the app. And it doesn't inform the user about the email collection.
+
+* ""We want to collect the data to maybe contact the users in the future"" – as @oncletom [already stated before](https://github.com/nodejs/nodejs.org/issues/1908#issuecomment-442070908), GDPR is about being given consent by the user. So if you want to collect data not required for using this extension, it has to be explicitly opt-in.
+
+  If you just wanted to have statistical data about the daily usage of your extension, there'd be other options (like using a hash which can't be used to personally identify the user).
+
+* ""Other companies are doing things much worse."" – sorry, but I won't even discuss this statement.
+
+Now, if those changes are made I'd be willing to reconsider my position. On the other hand, we're already discussing more broadly in #1963, #1964 and #1965 what kind of third party content should be collected on the Node.js website at all (also making sure that it doesn't mean this content is promoted/endorsed by the Node.js Foundation in any way).
+
+/cc'ig @Trott (who rose two of the issues mentioned above) and @amiller-gh (as this is also relevant for @nodejs/website-redesign).<issue_closed>
+<issue_comment>username_0: So in the name of (... Greyskull?!), I've removed the emails from Google Analytics.  My initial thought was to encrypt the data but ultimately the extra work isn't worth it to me.  I don't profit from this and honestly, it's just not worth it to spend any more of my time on it.
+
+Please see the PR I merged into my own code base.  AS WELL, I've pushed an updated version to the Chrome Web Store that tracks the change.
+
+That should kill all the friendly birds with just one stone!  Cheers.
+<issue_comment>username_0: As no response has been received to https://github.com/nodejs/nodejs.org/issues/1908 since nearly a week, I am opening this issue.
+
+@username_6 Would be great to get some feedback on this.
+
+For the record, I've compared NiM's Chrome web store page with that of 10 different companies, all of whom have items in Google's Chrome web store, FOUR (EBay, Paypal, Walmart, and LinkedIn, of whom are among ""10 Global Companies Using Node.js in Production"" according to Google. And none of which I would think the Node.js community would have a problem ""recommend""ing if that is what it means to add a link on the https://nodejs.org/en/docs/guides/debugging-getting-started/ page.
+
+I have compiled current pictures of all 10 companies’ chrome web store pages, as well as the privacy policy pages for each of the 5 which actually have them referenced, and uploaded them to Google photos (see link below). As far as the other 5, there are a number of valid reasons why they may not have privacy policy links, just as NiM did not, but I don’t want to digress.
+
+https://photos.app.goo.gl/y4TN5dT1JeNbED2KA
+
+I can say with strong conviction that data collected by NiM is minuscule by every measure when compared to that collected by these larger companies. Further, no data has ever been used for ill purposes and will not ever deviate from that found in our new privacy policy (link again: https://app.termly.io/document/privacy-policy/04164179-f943-4e87-ac8b-5afd0367dc6c#infocollect) And again, @ea167’s statement that “this requirement was added recently.” is simply NOT the case as can be determined by reading the GitHub project history.
+THIS is where/when the extra permissions were added on Feb 9, 2017, close to 2 years ago. As the removal was partly predicated on that statement, I bring it up again.
+
+I do regret not having a privacy policy in place sooner. To my defense, unlike these larger organizations, I don’t really have spare man/woman power to go around. That said, the focus for me has been on trying to make NiM great for the betterment of like-minded Node.js developers. I should point out that I make zero monetary gain from NiM, and it is a side project for me.
+
+So, if they weren’t before, I believe that all of the bases are now covered. I would like to get the Chrome web store link for NiM back and would be more than happy to submit a PR for such.
+
+Please advise...
+
+-Respectfully to all
+
+https://chrome.google.com/webstore/detail/nodejs-v8-inspector-manag/gnhhdgbaldcilmgcpfddgdbkhjohddkj
+<issue_comment>username_6: Waiting for the PR to land, closing this.<issue_closed>
+<issue_comment>username_7: Well, it seems like the ""Sending Email to Google Analytics"" which was removed in December apparently, [is back](https://github.com/username_0/NiM/commit/c7678cd2746c06dfb4d18c9c41a56ad14c1b9310#diff-f9b12bd72f40c9b8ed144484f0f12a5fR143) as of 29 days ago and it's currently in master: https://github.com/username_0/NiM/blob/master/background.js#L151
+
+We should probably edit the docs and mention that this is still happening and it's a recurring issue that apparently comes back!
+
+@username_6 shall we reopen this issue?  (I just discovered this problem in https://github.com/nodejs/node/issues/28185 a few hours ago on my own, and @joyeecheung guided me to here.)
+
+PS. A friendly note to the author of the plugin:  Your great work is much appreciated.  But as I suggested in my own ticket, maybe replacing the email address with a randomly generated UUID, stored in the client-side for your tracking consistency, can make everyone feel better. :)
+<issue_comment>username_6: Thanks for reopening, let's discuss matters over there.
+<issue_comment>username_0: Please note that encryption was added per the GDPR requirement of google
+and was accepted as a solution to the complaint way back when this issue
+arose the first time.  No changes have been made specific/surrounding this
+issue since then.  Please note that.  This is in no way some attempt to
+sneak anything past anyone.
+
+I'm still going thru the code but I saw this and wanted to address it asap.
+<issue_comment>username_0: Again, just as last time someone raised a concern about this code issue, it
+is/was nothing NEW.  And with the help of those on the node teams,
+including even bringing this to a TSC meeting, I thought I took every
+applicable action/step to make things compliant.  The extensive GitHub
+history shows every action I've taken including adding notices, encryption,
+and removing things.  The steps I took back then were validated when after
+MUCH time (and I can only assume --inspect ion of the code changes) NiM was
+reinstated.
+
+I think I said it before, but there are no nefarious things going on.  I
+really hope the solution this time is not simply chopping the head off and
+instead if there is still a VALID issue, that it be addressed and I am
+willing to make MORE changes to move in the direction of the greatest good.
+
+If the solutions that were good enough back then are no longer good enough,
+or there is some problem with the encryption scheme I implemented... please
+let me know.
+
+On Wed, Jun 12, 2019 at 8:47 AM 667 <667@onezerohosting.com> wrote:
+
+> Please note that encryption was added per the GDPR requirement of google
+> and was accepted as a solution to the complaint way back when this issue
+> arose the first time.  No changes have been made specific/surrounding this
+> issue since then.  Please note that.  This is in no way some attempt to
+> sneak anything past anyone.
+>
+> I'm still going thru the code but I saw this and wanted to address it asap.
+>
+>
+<issue_comment>username_7: Let's centralize our conversation in https://github.com/nodejs/nodejs.org/issues/1908.  Thanks."
+ethereum/ethereum-org-website,494663366,229,,"[{'action': 'opened', 'author': 'samajammin', 'comment_id': None, 'datetime': '2019-09-17 14:34:46+00:00', 'masked_author': 'username_0', 'text': 'Volunteers needed to complete this translation!\r\nhttps://crowdin.com/project/ethereumfoundation/es-EM#', 'title': 'Site Translation: Spanish', 'type': 'issue'}
+ {'action': 'created', 'author': 'faraggi', 'comment_id': 536413747.0, 'datetime': '2019-09-30 06:00:43+00:00', 'masked_author': 'username_1', 'text': ""@username_0  I'm new to crowdin.com and crowd translations, so I might be wrong, but I believe the translation linked above is at 100%.\r\n\r\nWhats missing for this to go live?"", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'samajammin', 'comment_id': 536669319.0, 'datetime': '2019-09-30 17:39:49+00:00', 'masked_author': 'username_0', 'text': ""@username_1 thanks for pointing this out! You're correct, it does appear to be complete on CrowdIn. I'll double-check with the translation team on this. We've been using a professional service to audit the volunteer's translation so we may be waiting on them. If not, I'll get this going ASAP!"", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'faraggi', 'comment_id': 536944142.0, 'datetime': '2019-10-01 09:08:20+00:00', 'masked_author': 'username_1', 'text': ""Let me know if there's anything I can do.\r\nI specifically noticed none (?) of the current translations have the new landing pages in them, like enterprise or python."", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'samajammin', 'comment_id': 537111109.0, 'datetime': '2019-10-01 16:13:25+00:00', 'masked_author': 'username_0', 'text': ""@username_1 that would be awesome! Let me get in touch with the folks leading our translation effort. The initial push has been to get the core landing pages translated for [these languages](https://crowdin.com/project/ethereumfoundation), with the understanding that other languages will lag behind the other English content for the time being. We're in the midst of hashing out a maintenance process for keeping translations up to date.\r\n\r\nQuestion for you - if you're interested in translating Spanish content for the site, what platform would you prefer? CrowdIn? Github? Something else? I've noticed other communities (like [Vue](https://github.com/vuejs) & [React](https://github.com/reactjs)) manage translations via Github project forks. I haven't dug in too much yet but I like the concept of distributing the workload & empowering volunteer maintainers with repo ownership."", 'title': None, 'type': 'comment'}
+ {'action': 'closed', 'author': 'samajammin', 'comment_id': None, 'datetime': '2019-10-06 12:49:41+00:00', 'masked_author': 'username_0', 'text': '', 'title': None, 'type': 'issue'}]","<issue_start><issue_comment>Title: Site Translation: Spanish
+username_0: Volunteers needed to complete this translation!
+https://crowdin.com/project/ethereumfoundation/es-EM#
+<issue_comment>username_1: @username_0  I'm new to crowdin.com and crowd translations, so I might be wrong, but I believe the translation linked above is at 100%.
+
+Whats missing for this to go live?
+<issue_comment>username_0: @username_1 thanks for pointing this out! You're correct, it does appear to be complete on CrowdIn. I'll double-check with the translation team on this. We've been using a professional service to audit the volunteer's translation so we may be waiting on them. If not, I'll get this going ASAP!
+<issue_comment>username_1: Let me know if there's anything I can do.
+I specifically noticed none (?) of the current translations have the new landing pages in them, like enterprise or python.
+<issue_comment>username_0: @username_1 that would be awesome! Let me get in touch with the folks leading our translation effort. The initial push has been to get the core landing pages translated for [these languages](https://crowdin.com/project/ethereumfoundation), with the understanding that other languages will lag behind the other English content for the time being. We're in the midst of hashing out a maintenance process for keeping translations up to date.
+
+Question for you - if you're interested in translating Spanish content for the site, what platform would you prefer? CrowdIn? Github? Something else? I've noticed other communities (like [Vue](https://github.com/vuejs) & [React](https://github.com/reactjs)) manage translations via Github project forks. I haven't dug in too much yet but I like the concept of distributing the workload & empowering volunteer maintainers with repo ownership.<issue_closed>"

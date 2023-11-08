@@ -1,0 +1,375 @@
+appveyor/website,119666892,106,"{'number': 106.0, 'repo': 'website', 'user_login': 'appveyor'}","[{'action': 'opened', 'author': 'atifaziz', 'comment_id': None, 'datetime': '2015-12-01T08:32:45Z', 'masked_author': 'username_0', 'text': '', 'title': 'Fixes #105', 'type': 'issue'}
+ {'action': 'created', 'author': 'FeodorFitsner', 'comment_id': 161049718.0, 'datetime': '2015-12-01 18:05:13+00:00', 'masked_author': 'username_1', 'text': ""`Headers` are not needed for public project, so it's just for this particular case. I think it would be better adding note about that (or extend example) rather than removing this parameter."", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'atifaziz', 'comment_id': 162811208.0, 'datetime': '2015-12-08 08:22:36+00:00', 'masked_author': 'username_0', 'text': '@username_1 I see. You seem to know what you\'re doing then and I guess was trying to be over-helpful. :wink: \r\n\r\nI ended up turning your sample into a PowerShell function called `Get-AppVeyorArtifacts` for my eventual use but which is generally reusable:\r\n\r\n```ps1\r\nfunction Get-AppVeyorArtifacts\r\n{\r\n    [CmdletBinding(SupportsShouldProcess = $true, ConfirmImpact = \'Low\')]\r\n    param(\r\n        [parameter(Mandatory = $true)]\r\n        [string]$Account,\r\n        [parameter(Mandatory = $true)]\r\n        [string]$Project,\r\n        [parameter(Mandatory = $true)]\r\n        [string]$Token,\r\n        [string]$DownloadDirectory,\r\n        [switch]$Flat,\r\n        [string]$Proxy,\r\n        [switch]$ProxyUseDefaultCredentials)\r\n\r\n    $apiUrl = \'https://ci.appveyor.com/api\'\r\n\r\n    $headers = @{\r\n        \'Authorization\' = ""Bearer $token""\r\n        \'Content-type\' = \'application/json\'\r\n    }\r\n\r\n    # Prepare proxy args to splat to Invoke-RestMethod\r\n\r\n    $proxyArgs = @{}\r\n    if (-not [string]::IsNullOrEmpty($proxy)) {\r\n        $proxyArgs.Add(\'Proxy\', $proxy)    \r\n    }        \r\n    if ($proxyUseDefaultCredentials.IsPresent) {\r\n        $proxyArgs.Add(\'ProxyUseDefaultCredentials\', $proxyUseDefaultCredentials)\r\n    }\r\n\r\n    $downloadDirectory = @($downloadDirectory, \'.\')[[string]::IsNullOrEmpty($downloadDirectory)]\r\n    $errorActionPreference = \'Stop\'\r\n\r\n    $projectObject = Invoke-RestMethod -Method Get -Uri ""$apiUrl/projects/$account/$project"" `\r\n                                       -Headers $headers @proxyArgs\r\n\r\n    $jobId = $projectObject.build.jobs[0].jobId # assume build has a single job\r\n\r\n    $artifacts = Invoke-RestMethod -Method Get -Uri ""$apiUrl/buildjobs/$jobId/artifacts"" `\r\n                                   -Headers $headers @proxyArgs\r\n    $artifacts `\r\n    | ? { $psCmdlet.ShouldProcess($_.fileName) } `\r\n    | % {\r\n\r\n        $type = $_.type\r\n\r\n        $localArtifactPath = $_.fileName -split \'/\' | % { [Uri]::UnescapeDataString($_) }\r\n        if ($flat.IsPresent) {\r\n            $localArtifactPath = ($localArtifactPath | select -Last 1)\r\n        } else {\r\n            $localArtifactPath = $localArtifactPath -join [IO.Path]::DirectorySeparatorChar\r\n        }\r\n        $localArtifactPath = Join-Path $downloadDirectory $localArtifactPath\r\n\r\n        $artifactUrl = ""$apiUrl/buildjobs/$jobId/artifacts/$($_.fileName)""\r\n        Write-Verbose ""Downloading $artifactUrl to $localArtifactPath""\r\n            \r\n        Invoke-RestMethod -Method Get -Uri $artifactUrl -OutFile $localArtifactPath @proxyArgs\r\n\r\n        New-Object PSObject -Property @{\r\n            \'Source\' = $artifactUrl\r\n            \'Type\'   = $type\r\n            \'Target\' = $localArtifactPath \r\n        }\r\n    }\r\n}\r\n```\r\n\r\nA sample usage would be:\r\n\r\n```ps1\r\nGet-AppVeyorArtifacts ACCOUNT PROJECT -Token TOKEN -Flat `\r\n    -DownloadDirectory $env:Temp `\r\n    -Proxy http://proxy.example.com:8080/ -ProxyUseDefaultCredentials \r\n```\r\n\r\nHowever, I\'m guessing this is probably too complex (incidental, not accidental) for what you want in your docs so I\'m happy to close this PR if that\'s the case. You did talk about *extending the example* so just sharing it here & letting you decide what you want to do with it.', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'FeodorFitsner', 'comment_id': 162979137.0, 'datetime': '2015-12-08 18:51:41+00:00', 'masked_author': 'username_1', 'text': 'I\'ve published your example as ""advanced"" so this PR may be closed: http://www.appveyor.com/docs/api/samples/download-artifacts-advanced-ps\r\n\r\nThank you!', 'title': None, 'type': 'comment'}]","<issue_start><issue_comment>Title: Fixes #105
+username_0: 
+<issue_comment>username_1: `Headers` are not needed for public project, so it's just for this particular case. I think it would be better adding note about that (or extend example) rather than removing this parameter.
+<issue_comment>username_0: @username_1 I see. You seem to know what you're doing then and I guess was trying to be over-helpful. :wink: 
+
+I ended up turning your sample into a PowerShell function called `Get-AppVeyorArtifacts` for my eventual use but which is generally reusable:
+
+```ps1
+function Get-AppVeyorArtifacts
+{
+    [CmdletBinding(SupportsShouldProcess = $true, ConfirmImpact = 'Low')]
+    param(
+        [parameter(Mandatory = $true)]
+        [string]$Account,
+        [parameter(Mandatory = $true)]
+        [string]$Project,
+        [parameter(Mandatory = $true)]
+        [string]$Token,
+        [string]$DownloadDirectory,
+        [switch]$Flat,
+        [string]$Proxy,
+        [switch]$ProxyUseDefaultCredentials)
+
+    $apiUrl = 'https://ci.appveyor.com/api'
+
+    $headers = @{
+        'Authorization' = ""Bearer $token""
+        'Content-type' = 'application/json'
+    }
+
+    # Prepare proxy args to splat to Invoke-RestMethod
+
+    $proxyArgs = @{}
+    if (-not [string]::IsNullOrEmpty($proxy)) {
+        $proxyArgs.Add('Proxy', $proxy)    
+    }        
+    if ($proxyUseDefaultCredentials.IsPresent) {
+        $proxyArgs.Add('ProxyUseDefaultCredentials', $proxyUseDefaultCredentials)
+    }
+
+    $downloadDirectory = @($downloadDirectory, '.')[[string]::IsNullOrEmpty($downloadDirectory)]
+    $errorActionPreference = 'Stop'
+
+    $projectObject = Invoke-RestMethod -Method Get -Uri ""$apiUrl/projects/$account/$project"" `
+                                       -Headers $headers @proxyArgs
+
+    $jobId = $projectObject.build.jobs[0].jobId # assume build has a single job
+
+    $artifacts = Invoke-RestMethod -Method Get -Uri ""$apiUrl/buildjobs/$jobId/artifacts"" `
+                                   -Headers $headers @proxyArgs
+    $artifacts `
+    | ? { $psCmdlet.ShouldProcess($_.fileName) } `
+    | % {
+
+        $type = $_.type
+
+        $localArtifactPath = $_.fileName -split '/' | % { [Uri]::UnescapeDataString($_) }
+        if ($flat.IsPresent) {
+            $localArtifactPath = ($localArtifactPath | select -Last 1)
+        } else {
+            $localArtifactPath = $localArtifactPath -join [IO.Path]::DirectorySeparatorChar
+        }
+        $localArtifactPath = Join-Path $downloadDirectory $localArtifactPath
+
+        $artifactUrl = ""$apiUrl/buildjobs/$jobId/artifacts/$($_.fileName)""
+        Write-Verbose ""Downloading $artifactUrl to $localArtifactPath""
+            
+        Invoke-RestMethod -Method Get -Uri $artifactUrl -OutFile $localArtifactPath @proxyArgs
+
+        New-Object PSObject -Property @{
+            'Source' = $artifactUrl
+            'Type'   = $type
+            'Target' = $localArtifactPath 
+        }
+    }
+}
+```
+
+A sample usage would be:
+
+```ps1
+Get-AppVeyorArtifacts ACCOUNT PROJECT -Token TOKEN -Flat `
+    -DownloadDirectory $env:Temp `
+    -Proxy http://proxy.example.com:8080/ -ProxyUseDefaultCredentials 
+```
+
+However, I'm guessing this is probably too complex (incidental, not accidental) for what you want in your docs so I'm happy to close this PR if that's the case. You did talk about *extending the example* so just sharing it here & letting you decide what you want to do with it.
+<issue_comment>username_1: I've published your example as ""advanced"" so this PR may be closed: http://www.appveyor.com/docs/api/samples/download-artifacts-advanced-ps
+
+Thank you!"
+department-of-veterans-affairs/vets-website,526869829,11173,"{'number': 11173.0, 'repo': 'vets-website', 'user_login': 'department-of-veterans-affairs'}","[{'action': 'opened', 'author': 'ncksllvn', 'comment_id': None, 'datetime': '2019-11-21T22:10:15Z', 'masked_author': 'username_0', 'text': ""## Description\r\nThis pull request implements the foundation of the widget on the new `Find VA forms` page. This work will be a widget on that page. Everything from the URL to the design is prone to change.\r\n\r\nThis PR:\r\n- Sets up the static-page widget code\r\n- Adds the basic UI look and feel\r\n- Sets up Redux w/the query and query change behavior\r\n\r\nThis PR does not integrate at all with the API. That will be done later. This doesn't need to be done behind feature flag, because it isn't an app and nothing references it.\r\n\r\nTicket - https://github.com/department-of-veterans-affairs/va.gov-team/issues/3605\r\n\r\n## Testing done \r\nAdded unit tests for reducers, actions, components, and containers\r\n\r\nTo run this:\r\n1. You need the Drupal page data. Right now it exists as a draft only in Drupal prod, so you can't pull it. As a workaround, maually add this [data](https://app.zenhub.com/files/133843125/e7361fa8-a6d2-4878-96e4-fc92be49d8ff/download) into your `vets-website/.cache/localhost/drupal/pages.json`.\r\n1. Start the site - `npm run watch:static`\r\n1. Navigate to `http://localhost:3001/find-va-forms/`\r\n\r\n## Screenshots\r\n\r\nThis PR contains everything in the gray box, as well as the blue boxes under the `Top tasks for frequently downloaded VA forms` section.\r\n\r\n![image](https://user-images.githubusercontent.com/1915775/69464289-e7bf3e80-0d4b-11ea-9165-9aa5535b1e42.png)\r\n\r\n\r\n## Acceptance criteria\r\n- [x] Widgets renders and doesn't look too bad\r\n\r\n## Definition of done\r\n- [x] Events are logged appropriately\r\n- [x] Documentation has been updated, if applicable\r\n- [ ] A link has been provided to the Pre-Launch Checklist\r\n- [x] A link has been provided to the originating GitHub issue (or connected to it via ZenHub)\r\n- [ ] A link has been provided to the VSA-QA Test Plan ticket \\[use the VSA-QA Test Plan Issue Template to create the ticket within va.gov-team repo].\r\n- [ ] A link has been provided to the VSA-QA Test-Request ticket \\[issue-template coming soon].\r\n- [x] No sensitive information (i.e. PII/credentials/internal URLs/etc.) is captured in logging, hardcoded, or specs"", 'title': '[Find VA Forms] New widget scaffolding', 'type': 'issue'}
+ {'action': 'created', 'author': 'ncksllvn', 'comment_id': 558209821.0, 'datetime': '2019-11-25 15:37:05+00:00', 'masked_author': 'username_0', 'text': ""@Mottie You're correct! That component may end up being migrated to the design system though so it may be used in other ways, so I added the support now just in case"", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'ncksllvn', 'comment_id': 558704805.0, 'datetime': '2019-11-26 16:18:51+00:00', 'masked_author': 'username_0', 'text': '@department-of-veterans-affairs/frontend-review-group could I have a review on this soon? 🙂', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'ncksllvn', 'comment_id': 558758256.0, 'datetime': '2019-11-26 18:25:13+00:00', 'masked_author': 'username_0', 'text': ""Thanks @bkjohnson!  I did, yeah. It's just a placeholder for now. It being empty is a testament to how powerful our design system's utility classes are though 🙂 CC @jaredcunha-usds"", 'title': None, 'type': 'comment'}]","<issue_start><issue_comment>Title: [Find VA Forms] New widget scaffolding
+username_0: ## Description
+This pull request implements the foundation of the widget on the new `Find VA forms` page. This work will be a widget on that page. Everything from the URL to the design is prone to change.
+
+This PR:
+- Sets up the static-page widget code
+- Adds the basic UI look and feel
+- Sets up Redux w/the query and query change behavior
+
+This PR does not integrate at all with the API. That will be done later. This doesn't need to be done behind feature flag, because it isn't an app and nothing references it.
+
+Ticket - https://github.com/department-of-veterans-affairs/va.gov-team/issues/3605
+
+## Testing done 
+Added unit tests for reducers, actions, components, and containers
+
+To run this:
+1. You need the Drupal page data. Right now it exists as a draft only in Drupal prod, so you can't pull it. As a workaround, maually add this [data](https://app.zenhub.com/files/133843125/e7361fa8-a6d2-4878-96e4-fc92be49d8ff/download) into your `vets-website/.cache/localhost/drupal/pages.json`.
+1. Start the site - `npm run watch:static`
+1. Navigate to `http://localhost:3001/find-va-forms/`
+
+## Screenshots
+
+This PR contains everything in the gray box, as well as the blue boxes under the `Top tasks for frequently downloaded VA forms` section.
+
+![image](https://user-images.githubusercontent.com/1915775/69464289-e7bf3e80-0d4b-11ea-9165-9aa5535b1e42.png)
+
+
+## Acceptance criteria
+- [x] Widgets renders and doesn't look too bad
+
+## Definition of done
+- [x] Events are logged appropriately
+- [x] Documentation has been updated, if applicable
+- [ ] A link has been provided to the Pre-Launch Checklist
+- [x] A link has been provided to the originating GitHub issue (or connected to it via ZenHub)
+- [ ] A link has been provided to the VSA-QA Test Plan ticket \[use the VSA-QA Test Plan Issue Template to create the ticket within va.gov-team repo].
+- [ ] A link has been provided to the VSA-QA Test-Request ticket \[issue-template coming soon].
+- [x] No sensitive information (i.e. PII/credentials/internal URLs/etc.) is captured in logging, hardcoded, or specs
+<issue_comment>username_0: @Mottie You're correct! That component may end up being migrated to the design system though so it may be used in other ways, so I added the support now just in case
+<issue_comment>username_0: @department-of-veterans-affairs/frontend-review-group could I have a review on this soon? 🙂
+<issue_comment>username_0: Thanks @bkjohnson!  I did, yeah. It's just a placeholder for now. It being empty is a testament to how powerful our design system's utility classes are though 🙂 CC @jaredcunha-usds"
+cake-build/website,183201532,181,"{'number': 181.0, 'repo': 'website', 'user_login': 'cake-build'}","[{'action': 'opened', 'author': 'xclayl', 'comment_id': None, 'datetime': '2016-10-15T10:16:22Z', 'masked_author': 'username_0', 'text': 'This PR adds a page to the docs to describe some PowerShell pitfalls and the PowerShell environment that the docs expect.', 'title': 'Added a page describing the expected powershell security settings', 'type': 'issue'}
+ {'action': 'created', 'author': 'devlead', 'comment_id': 255389916.0, 'datetime': '2016-10-21 14:20:19+00:00', 'masked_author': 'username_1', 'text': '@username_0 your changes have now been merged and will be avail with next publish of the site, thanks for contributing 👍', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'xclayl', 'comment_id': 255408915.0, 'datetime': '2016-10-21 15:30:54+00:00', 'masked_author': 'username_0', 'text': 'Thanks @username_1', 'title': None, 'type': 'comment'}]","<issue_start><issue_comment>Title: Added a page describing the expected powershell security settings
+username_0: This PR adds a page to the docs to describe some PowerShell pitfalls and the PowerShell environment that the docs expect.
+<issue_comment>username_1: @username_0 your changes have now been merged and will be avail with next publish of the site, thanks for contributing 👍
+<issue_comment>username_0: Thanks @username_1"
+devopsdays/devopsdays-web,490824843,8216,"{'number': 8216.0, 'repo': 'devopsdays-web', 'user_login': 'devopsdays'}","[{'action': 'opened', 'author': 'RomanoRoth', 'comment_id': None, 'datetime': '2019-09-08T23:49:54Z', 'masked_author': 'username_0', 'text': '*Please title your pull request in this format: The event name and year in the title of the PR, along with a description of what is being changed, i.e., `[CHI-2019] Add Bluth Company as a sponsor`*', 'title': '[ZRH-2020] Add new Event DevOpsDays Zürich 2020', 'type': 'issue'}
+ {'action': 'created', 'author': 'mattstratton', 'comment_id': 529264992.0, 'datetime': '2019-09-09 00:53:22+00:00', 'masked_author': 'username_1', 'text': 'HI @username_0 \t!\r\n\r\nPlease send an email to `info@devopsdays.org` with the names and email addresses of the folks who are on your organizing committee. Please also update the `data/events/2020-zurich.yml` in this PR with those names under the `team_members` section.\r\n\r\nI will propose the change myself for this one - but we have collapsed email aliases to make things easier. The email address for the event will be `zurich@devopsdays.org`', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'bridgetkromhout', 'comment_id': 529300319.0, 'datetime': '2019-09-09 05:00:36+00:00', 'masked_author': 'username_2', 'text': ""Hi, @username_0! We will close this PR if you aren't able to add your list of organizers. If you are ready, please edit your config file to have your organizer info, like this: https://github.com/devopsdays/devopsdays-web/blob/master/data/events/2019-zurich.yml#L38-L158"", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'RomanoRoth', 'comment_id': 529304526.0, 'datetime': '2019-09-09 05:24:15+00:00', 'masked_author': 'username_0', 'text': '@username_2  here we go:\r\n- name: ""Martin Thalmann""\r\n\xa0 \xa0 twitter: ""martin_thalmann""\r\n\xa0 \xa0 employer: ""Swisscom AG""\r\n\xa0 \xa0 bio: ""I’m a passionate DevOps Enthusiast who strongly believes in the power of this movement. I’m currently helping a Swiss telco operator in adapting DevOps principles in a large enterprise. Beside that I’m co-organizer of the [DevOps Enthusiast Meetup in Zurich](https://www.meetup.com/DevOps-Meetup-Zurich/). I do have a background as a Software Engineer and experience in several Line- and Project-Management positions.""\r\n\xa0 \xa0 github: """"\r\n\xa0 \xa0 facebook: """"\r\n\xa0 \xa0 linkedin: ""https://www.linkedin.com/in/martinthalmann/""\r\n\xa0 \xa0 website: """"\r\n\xa0 \xa0 image: ""martin-thalmann.jpg""\r\n\xa0 - name: ""Dirk Lehmann""\r\n\xa0 \xa0 bio: ""<p>Dirk is a DevOps evangelist and Continuous Delivery expert at SAP.</p><p>Since 2001 Dirk worked in various roles at SAP including Development and Operations.</br>Together with his former team \\""TwoGo by SAP\\"" he established the first Continuous Delivery implementation at SAP, delivering value daily to their customers.</p><p>In his current role, Dirk is a Cloud Quality Coach at SAP with focus on Continuous Delivery and DevOps practices.</p><p>Dirk is a frequent speaker at international conferences on DevOps and Continuous Delivery.</p>""\r\n\xa0 \xa0 twitter: ""doergn""\r\n\xa0 \xa0 linkedin: ""https://www.linkedin.com/in/dirk-lehmann-7712bb125/""\r\n\xa0 \xa0 image: ""dirk-lehmann.jpg""\r\n\xa0 - name: ""Nadine Biedermann""\r\n\xa0 \xa0 bio: ""<p>Metaphorically, Nadine can conquer the world with her clever quips and her charme. Literally, Nadine\'s wit and her creativity will enhance your Marketing and Social Media experience of the DevOpsDays 2019.</p>""\r\n\xa0 \xa0 linkedin: ""https://www.linkedin.com/in/nadine-biedermann-46436516b""\r\n\xa0 \xa0 image: ""nadine-biedermann.jpg""\r\n\xa0 - name: ""Romano Roth""\r\n\xa0 \xa0 bio: ""<p>I\'m an experienced software consultant and DevOps enthusiast working at Zühlke. My passion lies in radically transforming monolithic waterfall IT organizations into scalable agile teams doing DevOps.</p>""\r\n\xa0 \xa0 image: ""romano-roth.jpg""\r\n\xa0 \xa0 employer: ""Zühlke""\r\n\xa0 \xa0 twitter: ""username_0""\r\n\xa0 \xa0 linkedin: ""https://www.linkedin.com/in/romanoroth/""\r\n\xa0 - name: Carsten Plum\r\n\xa0 \xa0 bio: ""<p>I am passionate about everything agile and human centered. Having started my career in an old school waterfall environment more than 20 years ago as a software engineer and project manager, I am now happy to enable teams and large organisations to establish agile methods and DevOps. I specifically like the combination (and challenges) of technical and cultural aspects.</p>""\r\n\xa0 \xa0 Website: https://www.xing.com/profile/Carsten_Plum2/\r\n\xa0 \xa0 image: ""carsten-plum.jpg""\r\n\xa0 - name: ""Selina Reist""\r\n\xa0 \xa0 employer: ""Federal Office of Information Technology""\r\n\xa0 \xa0 bio: ""<p>I am an enthusiast for everything visual:photography, movies and animations, pictograms, infofraphics, visual design, graphical recordings, UX-Design. I also like to combine these skills in crossfunctional teams to enable app development, transformation processes and last but not least communicate and teach DevOps practices in large federal organizations</p>""\r\n\xa0 \xa0 image: ""selina-reist.jpg""\r\n\xa0 - name: Lorena Dütsch\r\n\xa0 \xa0 bio: ""<p>TBD</p>""\r\n\xa0 \xa0 Website: \r\n\xa0 \xa0 image: ""lorena-dutsch.jpg""\r\n\xa0 - name: ""Tobias Weinmann""\r\n\xa0 \xa0 bio: ""Having worked as a developer, systems engineer and team lead in IT operations, the ideas and concepts behind DevOps are very close to my heart. As I am passionate about coding since my teenage years, I am fascinated by concepts like Infrastructure as Code, Social Coding, and cloud native technologies trying to get hands-on whenever possible. I enjoy lateral thinking and my basic premise is that \\""we cannot solve our problems with the same thinking we used when we created them\\"" (Albert Einstein). In my current role I dedicate all my energy to introducing and spreading DevOps principles and practices in the broader organization.""\r\n\xa0 \xa0 linkedin: ""https://www.linkedin.com/in/tobias-weinmann""\r\n\xa0 \xa0 twitter: ""Wankinobi75""\r\n\xa0 \xa0 github: ""tweinmann""\r\n\xa0 \xa0 image: ""tobias-weinmann.jpg""\r\n\xa0 - name: ""Noëmi Kruesi""\r\n\xa0 \xa0 twitter: """"\r\n\xa0 \xa0 employer: ""Swisscom AG""\r\n\xa0 \xa0 bio: ""<p>It is a well-known fact that girls just wanna have fun. It is also known that companies that incorporate DevOps get more done. How do these two facts relate, you ask?</p>\r\n<p>Meet Noëmi Krüsi, a girl who gets stuff done. Her strengths and talents lie in design and administration. As a creative allrounder she will be assisting with the design and social media of the DevOpsDays 2018.</p>""\r\n\xa0 \xa0 github: """"\r\n\xa0 \xa0 facebook: """"\r\n\xa0 \xa0 linkedin: ""https://www.linkedin.com/in/noëmi-krüsi-992436127/""\r\n\xa0 \xa0 website: """"\r\n\xa0 \xa0 image: ""noemi-krusi.jpg""\r\n- name: ""Matías E. Fernández""\r\n\xa0 \xa0 twitter: ""matiasfrndz""\r\n\xa0 \xa0 employer: ""Swisscom AG""\r\n\xa0 \xa0 bio: ""DevOps evangelist, Kanban practitioner, Lean Startup advocate, Linux and OSS afficionado.<p>\r\nKeen learner and challenger of the status quo.<p>\r\nEnabling organisations to achieve outstanding and sustainable results that exceed customers’ expectations is his passion.""\r\n\xa0 \xa0 github: ""matiasfrndz""\r\n\xa0 \xa0 facebook: """"\r\n\xa0 \xa0 linkedin: ""https://www.linkedin.com/in/matiasfrndz/""\r\n\xa0 \xa0 website: ""https://matiasfrndz.ch/""\r\n\xa0 \xa0 image: ""matias-e-fernandez.jpg""\r\n- name: ""Tobias Brunner""\r\n\xa0 \xa0 twitter: ""tobruzh""\r\n\xa0 \xa0 employer: ""VSHN AG""\r\n\xa0 \xa0 bio: ""Tobias (aka tobru) is a DevOps Engineer and Partner at VSHN and one of the founding members of VSHN. He loves Open Source and everything about state-of-the-art technologies like Docker, Kubernetes and OpenShift. In his day job he is responsible for the Container Platform team at VSHN, works on the next big thing and brings APPUiO - The Swiss Container Platform - to the next level.""\r\n\xa0 \xa0 github: ""tobru""\r\n\xa0 \xa0 facebook: """"\r\n\xa0 \xa0 linkedin: ""https://www.linkedin.com/in/tobru/""\r\n\xa0 \xa0 website: ""https://tobru.ch/""\r\n\xa0 \xa0 image: ""tobias-brunner.jpg""\r\n\xa0- name: ""Julia Faust""\r\n\xa0 \xa0 bio: ""<p>Julia loves to communicate and to bring people and solutions together. As a Financial Controller for the IT development department of a Swiss Telco, she accompanies the transformation into an agile setup from the beginning.</p><p>DevOps principles such as \\""build it, run it\\"", autonomy of the team, as well as short and reasonable planning processes motivate her a lot. Julia is thrilled by discussing the basic ideas and causes of agility and to inspire others.</p>""\r\n\xa0 \xa0 image: ""julia-faust.jpg""\r\n\xa0 - name: ""Vittorio Boccone""\r\n\xa0 \xa0 twitter: ""drbokko""\r\n\xa0 \xa0 employer: ""Dectris Ltd.""\r\n\xa0 \xa0 bio: ""Vittorio grew up in the a world where hardware and software are in perfect equilibrium. At 8 he started customizing and modifying anything with an engine or a CPU. Curious about the nature of things he later became a detector and accelerator physicist. After 13 years at CERN, he\'s now often seen at Dectris happily developing Dectris X-ray detectors. He\'s comfortable with any lab equipment, programming language or particle accelerator.""\r\n\xa0 \xa0 github: ""https://github.com/drbokko""\r\n\xa0 \xa0 facebook: """"\r\n\xa0 \xa0 linkedin: ""https://www.linkedin.com/in/vittorio-boccone-1998a94/""\r\n\xa0 \xa0 website: """"\r\n\xa0 \xa0 image: ""vittorio-boccone.jpg""', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'RomanoRoth', 'comment_id': 529325118.0, 'datetime': '2019-09-09 06:54:04+00:00', 'masked_author': 'username_0', 'text': ""@username_2 I've checked in the changes for the team in the yaml"", 'title': None, 'type': 'comment'}]","<issue_start><issue_comment>Title: [ZRH-2020] Add new Event DevOpsDays Zürich 2020
+username_0: *Please title your pull request in this format: The event name and year in the title of the PR, along with a description of what is being changed, i.e., `[CHI-2019] Add Bluth Company as a sponsor`*
+<issue_comment>username_1: HI @username_0 	!
+
+Please send an email to `info@devopsdays.org` with the names and email addresses of the folks who are on your organizing committee. Please also update the `data/events/2020-zurich.yml` in this PR with those names under the `team_members` section.
+
+I will propose the change myself for this one - but we have collapsed email aliases to make things easier. The email address for the event will be `zurich@devopsdays.org`
+<issue_comment>username_2: Hi, @username_0! We will close this PR if you aren't able to add your list of organizers. If you are ready, please edit your config file to have your organizer info, like this: https://github.com/devopsdays/devopsdays-web/blob/master/data/events/2019-zurich.yml#L38-L158
+<issue_comment>username_0: @username_2  here we go:
+- name: ""Martin Thalmann""
+    twitter: ""martin_thalmann""
+    employer: ""Swisscom AG""
+    bio: ""I’m a passionate DevOps Enthusiast who strongly believes in the power of this movement. I’m currently helping a Swiss telco operator in adapting DevOps principles in a large enterprise. Beside that I’m co-organizer of the [DevOps Enthusiast Meetup in Zurich](https://www.meetup.com/DevOps-Meetup-Zurich/). I do have a background as a Software Engineer and experience in several Line- and Project-Management positions.""
+    github: """"
+    facebook: """"
+    linkedin: ""https://www.linkedin.com/in/martinthalmann/""
+    website: """"
+    image: ""martin-thalmann.jpg""
+  - name: ""Dirk Lehmann""
+    bio: ""<p>Dirk is a DevOps evangelist and Continuous Delivery expert at SAP.</p><p>Since 2001 Dirk worked in various roles at SAP including Development and Operations.</br>Together with his former team \""TwoGo by SAP\"" he established the first Continuous Delivery implementation at SAP, delivering value daily to their customers.</p><p>In his current role, Dirk is a Cloud Quality Coach at SAP with focus on Continuous Delivery and DevOps practices.</p><p>Dirk is a frequent speaker at international conferences on DevOps and Continuous Delivery.</p>""
+    twitter: ""doergn""
+    linkedin: ""https://www.linkedin.com/in/dirk-lehmann-7712bb125/""
+    image: ""dirk-lehmann.jpg""
+  - name: ""Nadine Biedermann""
+    bio: ""<p>Metaphorically, Nadine can conquer the world with her clever quips and her charme. Literally, Nadine's wit and her creativity will enhance your Marketing and Social Media experience of the DevOpsDays 2019.</p>""
+    linkedin: ""https://www.linkedin.com/in/nadine-biedermann-46436516b""
+    image: ""nadine-biedermann.jpg""
+  - name: ""Romano Roth""
+    bio: ""<p>I'm an experienced software consultant and DevOps enthusiast working at Zühlke. My passion lies in radically transforming monolithic waterfall IT organizations into scalable agile teams doing DevOps.</p>""
+    image: ""romano-roth.jpg""
+    employer: ""Zühlke""
+    twitter: ""username_0""
+    linkedin: ""https://www.linkedin.com/in/romanoroth/""
+  - name: Carsten Plum
+    bio: ""<p>I am passionate about everything agile and human centered. Having started my career in an old school waterfall environment more than 20 years ago as a software engineer and project manager, I am now happy to enable teams and large organisations to establish agile methods and DevOps. I specifically like the combination (and challenges) of technical and cultural aspects.</p>""
+    Website: https://www.xing.com/profile/Carsten_Plum2/
+    image: ""carsten-plum.jpg""
+  - name: ""Selina Reist""
+    employer: ""Federal Office of Information Technology""
+    bio: ""<p>I am an enthusiast for everything visual:photography, movies and animations, pictograms, infofraphics, visual design, graphical recordings, UX-Design. I also like to combine these skills in crossfunctional teams to enable app development, transformation processes and last but not least communicate and teach DevOps practices in large federal organizations</p>""
+    image: ""selina-reist.jpg""
+  - name: Lorena Dütsch
+    bio: ""<p>TBD</p>""
+    Website: 
+    image: ""lorena-dutsch.jpg""
+  - name: ""Tobias Weinmann""
+    bio: ""Having worked as a developer, systems engineer and team lead in IT operations, the ideas and concepts behind DevOps are very close to my heart. As I am passionate about coding since my teenage years, I am fascinated by concepts like Infrastructure as Code, Social Coding, and cloud native technologies trying to get hands-on whenever possible. I enjoy lateral thinking and my basic premise is that \""we cannot solve our problems with the same thinking we used when we created them\"" (Albert Einstein). In my current role I dedicate all my energy to introducing and spreading DevOps principles and practices in the broader organization.""
+    linkedin: ""https://www.linkedin.com/in/tobias-weinmann""
+    twitter: ""Wankinobi75""
+    github: ""tweinmann""
+    image: ""tobias-weinmann.jpg""
+  - name: ""Noëmi Kruesi""
+    twitter: """"
+    employer: ""Swisscom AG""
+    bio: ""<p>It is a well-known fact that girls just wanna have fun. It is also known that companies that incorporate DevOps get more done. How do these two facts relate, you ask?</p>
+<p>Meet Noëmi Krüsi, a girl who gets stuff done. Her strengths and talents lie in design and administration. As a creative allrounder she will be assisting with the design and social media of the DevOpsDays 2018.</p>""
+    github: """"
+    facebook: """"
+    linkedin: ""https://www.linkedin.com/in/noëmi-krüsi-992436127/""
+    website: """"
+    image: ""noemi-krusi.jpg""
+- name: ""Matías E. Fernández""
+    twitter: ""matiasfrndz""
+    employer: ""Swisscom AG""
+    bio: ""DevOps evangelist, Kanban practitioner, Lean Startup advocate, Linux and OSS afficionado.<p>
+Keen learner and challenger of the status quo.<p>
+Enabling organisations to achieve outstanding and sustainable results that exceed customers’ expectations is his passion.""
+    github: ""matiasfrndz""
+    facebook: """"
+    linkedin: ""https://www.linkedin.com/in/matiasfrndz/""
+    website: ""https://matiasfrndz.ch/""
+    image: ""matias-e-fernandez.jpg""
+- name: ""Tobias Brunner""
+    twitter: ""tobruzh""
+    employer: ""VSHN AG""
+    bio: ""Tobias (aka tobru) is a DevOps Engineer and Partner at VSHN and one of the founding members of VSHN. He loves Open Source and everything about state-of-the-art technologies like Docker, Kubernetes and OpenShift. In his day job he is responsible for the Container Platform team at VSHN, works on the next big thing and brings APPUiO - The Swiss Container Platform - to the next level.""
+    github: ""tobru""
+    facebook: """"
+    linkedin: ""https://www.linkedin.com/in/tobru/""
+    website: ""https://tobru.ch/""
+    image: ""tobias-brunner.jpg""
+ - name: ""Julia Faust""
+    bio: ""<p>Julia loves to communicate and to bring people and solutions together. As a Financial Controller for the IT development department of a Swiss Telco, she accompanies the transformation into an agile setup from the beginning.</p><p>DevOps principles such as \""build it, run it\"", autonomy of the team, as well as short and reasonable planning processes motivate her a lot. Julia is thrilled by discussing the basic ideas and causes of agility and to inspire others.</p>""
+    image: ""julia-faust.jpg""
+  - name: ""Vittorio Boccone""
+    twitter: ""drbokko""
+    employer: ""Dectris Ltd.""
+    bio: ""Vittorio grew up in the a world where hardware and software are in perfect equilibrium. At 8 he started customizing and modifying anything with an engine or a CPU. Curious about the nature of things he later became a detector and accelerator physicist. After 13 years at CERN, he's now often seen at Dectris happily developing Dectris X-ray detectors. He's comfortable with any lab equipment, programming language or particle accelerator.""
+    github: ""https://github.com/drbokko""
+    facebook: """"
+    linkedin: ""https://www.linkedin.com/in/vittorio-boccone-1998a94/""
+    website: """"
+    image: ""vittorio-boccone.jpg""
+<issue_comment>username_0: @username_2 I've checked in the changes for the team in the yaml"
+RSS-Bridge/rss-bridge,1175357488,2519,,"[{'action': 'opened', 'author': 'Bockiii', 'comment_id': None, 'datetime': '2022-03-21T13:04:55Z', 'masked_author': 'username_0', 'text': ""Greetings,\r\n\r\nI would like to suggest to add more team members to the rss-bridge team.\r\n\r\nThere are currently 5 members: @ArthurHoaro @mitsukarenai @teromene @LogMANOriginal and @username_3 \r\n\r\nIndependent of previous achievements and additions (and some of those team members have written most of the application) to rss-bridge, the only currently active team member is @username_3. Since 01-01-2021, only teromene (1 commit) and mitsu (2 commits, same topic) have worked on rss-bridge at all, with arthur and logman having 0 commits.\r\n\r\nIn order to keep the software up to date and in a good state, I strongly suggest to add more members to take the load off of em's shoulders. \r\n\r\nLooking at the [list of contributors who added things to rss-bridge since the beginning of 2021](https://github.com/RSS-Bridge/rss-bridge/graphs/contributors?from=2021-01-01&to=2022-03-21&type=c), this is the top 10 list:\r\n\r\n1. @username_3 \r\n2. @VerifiedJoseph \r\n3. @username_0 \r\n4. @username_5 \r\n5. @username_1 \r\n6. @csisoap \r\n7. @username_6 \r\n8. @theScrabi \r\n9. @username_4 \r\n10. @somini \r\n\r\nI would suggest to give these people the opportunity to join the team (of course only if they want to :) ) to keep the project alive and well.\r\n\r\nThoughts from everyone involved (team members or contributors) please"", 'title': 'New team members', 'type': 'issue'}
+ {'action': 'created', 'author': 'ORelio', 'comment_id': 1074482250.0, 'datetime': '2022-03-21 22:25:57+00:00', 'masked_author': 'username_1', 'text': ""I'd love to help, but at the moment I can't even cope with the flow of issues on my own repositories 😕"", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'Bockiii', 'comment_id': 1074528366.0, 'datetime': '2022-03-21 23:39:21+00:00', 'masked_author': 'username_0', 'text': 'All good, this is purely as ""these should be given the opportunity to join"", nothing more :) If you dont want to, its totally fine :)\r\n\r\nAlso, this is a suggestion, doesnt mean the team is going to agree :D', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'f0086', 'comment_id': 1074833536.0, 'datetime': '2022-03-22 07:39:48+00:00', 'masked_author': 'username_2', 'text': ""I've tried to make a dent in the right direction to modernize the codebase (mostly in form of comments, code reviews and architecture suggestions), but failed on the lack of motivation on the core team. I eventually gave up. Even contacting one of the team members was a challenge. So, if you need a helping hand, I am all in."", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'Bockiii', 'comment_id': 1074860023.0, 'datetime': '2022-03-22 08:12:39+00:00', 'masked_author': 'username_0', 'text': 'I just think that, when people moved on to other things, the process of ""handing over to others"" didnt happen as well as it could. So if we can get a few more people who are active in the community to be able to drive the process forward, it would also motivate people like you again to contribute :)\r\n\r\nBtw: I know that the Top10 thing is scewed because it only validates commits that are done, not PRs in progress. Just from my own open PRs, there are about 100 changed files in #2296 and 4000 added loc in #2494 . And even that number is scewed because its content that was present already and is just moved.\r\n\r\nSo the list isnt perfect, but I want to start somewhere.', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'em92', 'comment_id': 1074890739.0, 'datetime': '2022-03-22 08:47:53+00:00', 'masked_author': 'username_3', 'text': '@username_6 and @username_0, I plan to add you to maintainers. Before that I want to discuss in meet.jit.si some things about maintaining rss-bridge. Discussion will be recorded and pasted here.\r\n\r\nDo you have time to discuss Today 23:59 UTC+5?\r\n\r\nLink to discussion will be posted here or in official irc channel', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'Bockiii', 'comment_id': 1075087334.0, 'datetime': '2022-03-22 11:58:50+00:00', 'masked_author': 'username_0', 'text': 'Hi,\r\n\r\nMidnight UTC+5 is 8pm in my and username_6s timezone. So it would work for me.\r\n\r\nBefore we do this though, what about the other people on the list?', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'em92', 'comment_id': 1075144872.0, 'datetime': '2022-03-22 12:58:06+00:00', 'masked_author': 'username_3', 'text': 'You both seem to be more active than or others.', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'yamanq', 'comment_id': 1075181951.0, 'datetime': '2022-03-22 13:29:52+00:00', 'masked_author': 'username_4', 'text': 'I think this is a great idea. I would love to become a maintainer, but I only have limited time to contribute at the moment. In any case, I would definitely be happy to help in reviving old PRs and helping maintainers with the project.', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'sysadminstory', 'comment_id': 1075443745.0, 'datetime': '2022-03-22 17:50:55+00:00', 'masked_author': 'username_5', 'text': ""To be honest, I'm not sure that I will be able to help with the PR, I may lack knowledge about the project structure.\r\nI may help to sort bugs if it's needed ?"", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'Bockiii', 'comment_id': 1075470737.0, 'datetime': '2022-03-22 18:17:35+00:00', 'masked_author': 'username_0', 'text': 'so @username_6 : date in 45 minutes? @username_3 link?', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'dvikan', 'comment_id': 1075481326.0, 'datetime': '2022-03-22 18:27:49+00:00', 'masked_author': 'username_6', 'text': ""I'm available at 7PM UTC which is in 30 mins."", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'em92', 'comment_id': 1075518592.0, 'datetime': '2022-03-22 18:58:08+00:00', 'masked_author': 'username_3', 'text': 'https://meet.jit.si/PostWarProspectsBetrayTenderly', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'em92', 'comment_id': 1075525131.0, 'datetime': '2022-03-22 19:05:21+00:00', 'masked_author': 'username_3', 'text': 'https://gist.github.com/username_3/d4e1a9ec27d4eb16e6e287272aacc652', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'Bockiii', 'comment_id': 1075554274.0, 'datetime': '2022-03-22 19:35:21+00:00', 'masked_author': 'username_0', 'text': ""Alright, @username_6 and me are now also officially team members. Thanks to @username_3 for the intro.\r\n\r\nWe will of course call on everyone to keep improving this app. So with 200% more active-man-power, we'll see where we can go."", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'em92', 'comment_id': 1075563655.0, 'datetime': '2022-03-22 19:42:28+00:00', 'masked_author': 'username_3', 'text': 'https://feed.eugenemolotov.ru/var/2022-03-23.mp4', 'title': None, 'type': 'comment'}]","<issue_start><issue_comment>Title: New team members
+username_0: Greetings,
+
+I would like to suggest to add more team members to the rss-bridge team.
+
+There are currently 5 members: @ArthurHoaro @mitsukarenai @teromene @LogMANOriginal and @username_3 
+
+Independent of previous achievements and additions (and some of those team members have written most of the application) to rss-bridge, the only currently active team member is @username_3. Since 01-01-2021, only teromene (1 commit) and mitsu (2 commits, same topic) have worked on rss-bridge at all, with arthur and logman having 0 commits.
+
+In order to keep the software up to date and in a good state, I strongly suggest to add more members to take the load off of em's shoulders. 
+
+Looking at the [list of contributors who added things to rss-bridge since the beginning of 2021](https://github.com/RSS-Bridge/rss-bridge/graphs/contributors?from=2021-01-01&to=2022-03-21&type=c), this is the top 10 list:
+
+1. @username_3 
+2. @VerifiedJoseph 
+3. @username_0 
+4. @username_5 
+5. @username_1 
+6. @csisoap 
+7. @username_6 
+8. @theScrabi 
+9. @username_4 
+10. @somini 
+
+I would suggest to give these people the opportunity to join the team (of course only if they want to :) ) to keep the project alive and well.
+
+Thoughts from everyone involved (team members or contributors) please
+<issue_comment>username_1: I'd love to help, but at the moment I can't even cope with the flow of issues on my own repositories 😕
+<issue_comment>username_0: All good, this is purely as ""these should be given the opportunity to join"", nothing more :) If you dont want to, its totally fine :)
+
+Also, this is a suggestion, doesnt mean the team is going to agree :D
+<issue_comment>username_2: I've tried to make a dent in the right direction to modernize the codebase (mostly in form of comments, code reviews and architecture suggestions), but failed on the lack of motivation on the core team. I eventually gave up. Even contacting one of the team members was a challenge. So, if you need a helping hand, I am all in.
+<issue_comment>username_0: I just think that, when people moved on to other things, the process of ""handing over to others"" didnt happen as well as it could. So if we can get a few more people who are active in the community to be able to drive the process forward, it would also motivate people like you again to contribute :)
+
+Btw: I know that the Top10 thing is scewed because it only validates commits that are done, not PRs in progress. Just from my own open PRs, there are about 100 changed files in #2296 and 4000 added loc in #2494 . And even that number is scewed because its content that was present already and is just moved.
+
+So the list isnt perfect, but I want to start somewhere.
+<issue_comment>username_3: @username_6 and @username_0, I plan to add you to maintainers. Before that I want to discuss in meet.jit.si some things about maintaining rss-bridge. Discussion will be recorded and pasted here.
+
+Do you have time to discuss Today 23:59 UTC+5?
+
+Link to discussion will be posted here or in official irc channel
+<issue_comment>username_0: Hi,
+
+Midnight UTC+5 is 8pm in my and username_6s timezone. So it would work for me.
+
+Before we do this though, what about the other people on the list?
+<issue_comment>username_3: You both seem to be more active than or others.
+<issue_comment>username_4: I think this is a great idea. I would love to become a maintainer, but I only have limited time to contribute at the moment. In any case, I would definitely be happy to help in reviving old PRs and helping maintainers with the project.
+<issue_comment>username_5: To be honest, I'm not sure that I will be able to help with the PR, I may lack knowledge about the project structure.
+I may help to sort bugs if it's needed ?
+<issue_comment>username_0: so @username_6 : date in 45 minutes? @username_3 link?
+<issue_comment>username_6: I'm available at 7PM UTC which is in 30 mins.
+<issue_comment>username_3: https://meet.jit.si/PostWarProspectsBetrayTenderly
+<issue_comment>username_3: https://gist.github.com/username_3/d4e1a9ec27d4eb16e6e287272aacc652
+<issue_comment>username_0: Alright, @username_6 and me are now also officially team members. Thanks to @username_3 for the intro.
+
+We will of course call on everyone to keep improving this app. So with 200% more active-man-power, we'll see where we can go.
+<issue_comment>username_3: https://feed.eugenemolotov.ru/var/2022-03-23.mp4"
+gohugoio/hugo,479409265,6195,"{'number': 6195.0, 'repo': 'hugo', 'user_login': 'gohugoio'}","[{'action': 'opened', 'author': 'bep', 'comment_id': None, 'datetime': '2019-08-11T20:44:09Z', 'masked_author': 'username_0', 'text': '', 'title': 'WIP: tests: Convert from testify to quicktest', 'type': 'issue'}
+ {'action': 'created', 'author': 'bep', 'comment_id': 520344702.0, 'datetime': '2019-08-12 08:51:10+00:00', 'masked_author': 'username_0', 'text': ""Here is a Perl-compatible list of regexps, if someone out there is about to do the same one day:\r\n\r\n```bash\r\ns/assert := require.New\\(t\\)/c := qt.New(t)/g;\r\ns/assert\\.Equal\\(t, (.*?), (.*)\\)/c.Assert(\\2, qt.Equals, \\1)/g;\r\ns/assert\\.Equal\\((.*?), (.*)\\)/c.Assert(\\2, qt.Equals, \\1)/g;\r\ns/assert\\.NotEqual\\((.*?), (.*)\\)/c.Assert(\\2, qt.Not(qt.Equals), \\1)/g;\r\ns/require\\.Equal\\(t, (.*?), (.*)\\)/c.Assert(\\2, qt.Equals, \\1)/g;\r\ns/assert\\.NoError\\((.*),?\\)/c.Assert(\\1, qt.IsNil)/g;\r\ns/assert\\.Error\\((.*),?\\)/c.Assert(\\1, qt.Not(qt.IsNil))/g;\r\ns/require\\.NoError\\(t, (.*)\\)/c.Assert(\\1, qt.IsNil)/g;\r\ns/require\\.NoError\\(b, (.*)\\)/c.Assert(\\1, qt.IsNil)/g;\r\ns/require\\.NoError\\(th, (.*)\\)/th.Assert(\\1, qt.IsNil)/g;\r\ns/require\\.NotEmpty\\(t, (.*)\\)/c.Assert(\\1, qt.Not(qt.HasLen), 0)/g;\r\ns/require\\.NotEmpty\\(b, (.*)\\)/c.Assert(\\1, qt.Not(qt.HasLen), 0)/g;\r\ns/require\\.Empty\\(t, (.*)\\)/c.Assert(\\1, qt.HasLen, 0)/g;\r\ns/require\\.Error\\(t, (.*)\\)/c.Assert(\\1, qt.Not(qt.IsNil))/g;\r\ns/require\\.NotNil\\(t, (.*)\\)/c.Assert(\\1, qt.Not(qt.IsNil))/g;\r\ns/require\\.NotNil\\(b, (.*)\\)/c.Assert(\\1, qt.Not(qt.IsNil))/g;\r\ns/require\\.Nil\\(t, (.*)\\)/c.Assert(\\1, qt.IsNil)/g;\r\ns/assert\\.NotNil\\((.*)\\)/c.Assert(\\1, qt.Not(qt.IsNil))/g;\r\ns/assert\\.Nil\\((.*)\\)/c.Assert(\\1, qt.IsNil)/g;\r\ns/assert\\.True\\((.*)\\)/c.Assert(\\1, qt.Equals, true)/g;\r\ns/require\\.True\\(t, (.*)\\)/c.Assert(\\1, qt.Equals, true)/g;\r\ns/require\\.True\\(th, (.*)\\)/th.Assert(\\1, qt.Equals, true)/g;\r\ns/require\\.False\\(t, (.*)\\)/c.Assert(\\1, qt.Equals, false)/g;\r\ns/require\\.False\\(th, (.*)\\)/th.Assert(\\1, qt.Equals, false)/g;\r\ns/assert\\.False\\((.*)\\)/c.Assert(\\1, qt.Equals, false)/g;\r\ns/assert\\.Contains\\((.*?), (.*)\\)/c.Assert(\\1, qt.Contains, \\2)/g;\r\ns/require\\.Contains\\(t, (.*?), (.*)\\)/c.Assert(\\1, qt.Contains, \\2)/g;\r\ns/assert\\.Len\\((.*?), (.*)\\)/c.Assert(len(\\1), qt.Equals, \\2)/g;\r\ns/require\\.Len\\(t, (.*?), (.*)\\)/c.Assert(len(\\1), qt.Equals, \\2)/g;\r\n```\r\n\r\nIt's not perfect and I have omitted the replacements for imports in the above, but it's ccertainly faster than doing everything by hand ..."", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'rogpeppe', 'comment_id': 520421586.0, 'datetime': '2019-08-12 13:19:59+00:00', 'masked_author': 'username_1', 'text': ""@username_0 \r\nA couple of thoughts about those conversions:\r\n\r\n1. You could use `gofmt -r` to do the conversions, which would cope better with all expressions:\r\n\r\n    gofmt -w -r 'assert.Equal(t, a, b) -> c.Assert(b, qt.Equals, a)'\r\n\r\n2. The equivalent of `assert.Equal` is actually `qt.DeepEquals`, because `assert.Equal` uses `reflect.DeepEqual` under the hood.\r\n\r\n3. You might want to convert `assert.X` to `c.Check` not `c.Assert` because the testify `assert` package does not call `t.Fatal` on failure. The counterpart of `c.Assert` is the [require package](https://godoc.org/github.com/stretchr/testify/require).\r\n\r\n4. You can use `qt.HasLen` rather than `len` - that way you get nicer failure messages that show the actual content."", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'bep', 'comment_id': 520443781.0, 'datetime': '2019-08-12 14:17:45+00:00', 'masked_author': 'username_0', 'text': 'Thanks. Not sure why I keep forgetting about the powers of `gofmt -w- r` ...', 'title': None, 'type': 'comment'}]","<issue_start><issue_comment>Title: WIP: tests: Convert from testify to quicktest
+username_0: 
+<issue_comment>username_0: Here is a Perl-compatible list of regexps, if someone out there is about to do the same one day:
+
+```bash
+s/assert := require.New\(t\)/c := qt.New(t)/g;
+s/assert\.Equal\(t, (.*?), (.*)\)/c.Assert(\2, qt.Equals, \1)/g;
+s/assert\.Equal\((.*?), (.*)\)/c.Assert(\2, qt.Equals, \1)/g;
+s/assert\.NotEqual\((.*?), (.*)\)/c.Assert(\2, qt.Not(qt.Equals), \1)/g;
+s/require\.Equal\(t, (.*?), (.*)\)/c.Assert(\2, qt.Equals, \1)/g;
+s/assert\.NoError\((.*),?\)/c.Assert(\1, qt.IsNil)/g;
+s/assert\.Error\((.*),?\)/c.Assert(\1, qt.Not(qt.IsNil))/g;
+s/require\.NoError\(t, (.*)\)/c.Assert(\1, qt.IsNil)/g;
+s/require\.NoError\(b, (.*)\)/c.Assert(\1, qt.IsNil)/g;
+s/require\.NoError\(th, (.*)\)/th.Assert(\1, qt.IsNil)/g;
+s/require\.NotEmpty\(t, (.*)\)/c.Assert(\1, qt.Not(qt.HasLen), 0)/g;
+s/require\.NotEmpty\(b, (.*)\)/c.Assert(\1, qt.Not(qt.HasLen), 0)/g;
+s/require\.Empty\(t, (.*)\)/c.Assert(\1, qt.HasLen, 0)/g;
+s/require\.Error\(t, (.*)\)/c.Assert(\1, qt.Not(qt.IsNil))/g;
+s/require\.NotNil\(t, (.*)\)/c.Assert(\1, qt.Not(qt.IsNil))/g;
+s/require\.NotNil\(b, (.*)\)/c.Assert(\1, qt.Not(qt.IsNil))/g;
+s/require\.Nil\(t, (.*)\)/c.Assert(\1, qt.IsNil)/g;
+s/assert\.NotNil\((.*)\)/c.Assert(\1, qt.Not(qt.IsNil))/g;
+s/assert\.Nil\((.*)\)/c.Assert(\1, qt.IsNil)/g;
+s/assert\.True\((.*)\)/c.Assert(\1, qt.Equals, true)/g;
+s/require\.True\(t, (.*)\)/c.Assert(\1, qt.Equals, true)/g;
+s/require\.True\(th, (.*)\)/th.Assert(\1, qt.Equals, true)/g;
+s/require\.False\(t, (.*)\)/c.Assert(\1, qt.Equals, false)/g;
+s/require\.False\(th, (.*)\)/th.Assert(\1, qt.Equals, false)/g;
+s/assert\.False\((.*)\)/c.Assert(\1, qt.Equals, false)/g;
+s/assert\.Contains\((.*?), (.*)\)/c.Assert(\1, qt.Contains, \2)/g;
+s/require\.Contains\(t, (.*?), (.*)\)/c.Assert(\1, qt.Contains, \2)/g;
+s/assert\.Len\((.*?), (.*)\)/c.Assert(len(\1), qt.Equals, \2)/g;
+s/require\.Len\(t, (.*?), (.*)\)/c.Assert(len(\1), qt.Equals, \2)/g;
+```
+
+It's not perfect and I have omitted the replacements for imports in the above, but it's ccertainly faster than doing everything by hand ...
+<issue_comment>username_1: @username_0 
+A couple of thoughts about those conversions:
+
+1. You could use `gofmt -r` to do the conversions, which would cope better with all expressions:
+
+    gofmt -w -r 'assert.Equal(t, a, b) -> c.Assert(b, qt.Equals, a)'
+
+2. The equivalent of `assert.Equal` is actually `qt.DeepEquals`, because `assert.Equal` uses `reflect.DeepEqual` under the hood.
+
+3. You might want to convert `assert.X` to `c.Check` not `c.Assert` because the testify `assert` package does not call `t.Fatal` on failure. The counterpart of `c.Assert` is the [require package](https://godoc.org/github.com/stretchr/testify/require).
+
+4. You can use `qt.HasLen` rather than `len` - that way you get nicer failure messages that show the actual content.
+<issue_comment>username_0: Thanks. Not sure why I keep forgetting about the powers of `gofmt -w- r` ..."
+vitessio/website,1078350651,909,"{'number': 909.0, 'repo': 'website', 'user_login': 'vitessio'}","[{'action': 'opened', 'author': 'GuptaManan100', 'comment_id': None, 'datetime': '2021-12-13T10:26:22Z', 'masked_author': 'username_0', 'text': 'This PR adds the blog `Rails that scales - Powered by Vitess`', 'title': 'Blog- rails that scales - powered by vitess', 'type': 'issue'}
+ {'action': 'created', 'author': 'GuptaManan100', 'comment_id': 992319568.0, 'datetime': '2021-12-13 10:26:47+00:00', 'masked_author': 'username_0', 'text': 'To be merged on 17th Dec 2021', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'GuptaManan100', 'comment_id': 994551064.0, 'datetime': '2021-12-15 09:11:56+00:00', 'masked_author': 'username_0', 'text': 'Changing the release date to be 16 Dec, so that it is published before the monthly meeting call and we can add it there', 'title': None, 'type': 'comment'}]","<issue_start><issue_comment>Title: Blog- rails that scales - powered by vitess
+username_0: This PR adds the blog `Rails that scales - Powered by Vitess`
+<issue_comment>username_0: To be merged on 17th Dec 2021
+<issue_comment>username_0: Changing the release date to be 16 Dec, so that it is published before the monthly meeting call and we can add it there"

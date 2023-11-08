@@ -1,0 +1,228 @@
+dlang/dlang.org,416411195,2595,"{'number': 2595.0, 'repo': 'dlang.org', 'user_login': 'dlang'}","[{'action': 'opened', 'author': 'MartinNowak', 'comment_id': None, 'datetime': '2019-03-02T16:03:20Z', 'masked_author': 'username_0', 'text': '', 'title': ""Merge remote-tracking branch 'upstream/stable' into merge_stable"", 'type': 'issue'}
+ {'action': 'created', 'author': 'MartinNowak', 'comment_id': 468941371.0, 'datetime': '2019-03-02 17:30:50+00:00', 'masked_author': 'username_0', 'text': ""We could do sth. about the slow doc CI at some point. Over an hour waittime and it didn't even start.\r\nThough the tool @username_1 has build is really good, and I'd prefer to keep it. So maybe he has an idea how to reduce latency and build time."", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'CyberShadow', 'comment_id': 468947927.0, 'datetime': '2019-03-02 18:40:16+00:00', 'masked_author': 'username_1', 'text': ""@username_0 I'll have a look. FYI, currently everything is temporarily running on my PC at home due to the issues with the server provider."", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'CyberShadow', 'comment_id': 468948591.0, 'datetime': '2019-03-02 18:47:43+00:00', 'masked_author': 'username_1', 'text': ""The problem is the ever-growing build time. What once took 5 minutes, now takes [almost half an hour](http://dtest.dlang.io/results/e835c564a315398d88f5801dcab47ffc487f5d1f/ef6b73bb2f1896f8c0b97290664794d893c3a603/build.log). It looks like there is something broken with the makefile dependencies - the `test` target causes all the documentation to be built all over again. @username_2 I think you'd be the best person to have a look if you have time. \r\n\r\nIf we can't improve build time, then parallelizing builds is the way forward. Currently DAutoTest does one build at a time, which causes long queues in busy periods. If BuildKite has a reasonable way to grab large artifacts with very many files, that would be one way to go, to avoid relying too much on the available computing power of the server DAutoTest is running on."", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'wilzbach', 'comment_id': 468952550.0, 'datetime': '2019-03-02 19:34:22+00:00', 'masked_author': 'username_2', 'text': 'I will try to have a look over the next weeks, but yeah the the build setup grew excessively :/', 'title': None, 'type': 'comment'}]","<issue_start><issue_comment>Title: Merge remote-tracking branch 'upstream/stable' into merge_stable
+username_0: 
+<issue_comment>username_0: We could do sth. about the slow doc CI at some point. Over an hour waittime and it didn't even start.
+Though the tool @username_1 has build is really good, and I'd prefer to keep it. So maybe he has an idea how to reduce latency and build time.
+<issue_comment>username_1: @username_0 I'll have a look. FYI, currently everything is temporarily running on my PC at home due to the issues with the server provider.
+<issue_comment>username_1: The problem is the ever-growing build time. What once took 5 minutes, now takes [almost half an hour](http://dtest.dlang.io/results/e835c564a315398d88f5801dcab47ffc487f5d1f/ef6b73bb2f1896f8c0b97290664794d893c3a603/build.log). It looks like there is something broken with the makefile dependencies - the `test` target causes all the documentation to be built all over again. @username_2 I think you'd be the best person to have a look if you have time. 
+
+If we can't improve build time, then parallelizing builds is the way forward. Currently DAutoTest does one build at a time, which causes long queues in busy periods. If BuildKite has a reasonable way to grab large artifacts with very many files, that would be one way to go, to avoid relying too much on the available computing power of the server DAutoTest is running on.
+<issue_comment>username_2: I will try to have a look over the next weeks, but yeah the the build setup grew excessively :/"
+newrelic/docs-website,1061467025,5016,"{'number': 5016.0, 'repo': 'docs-website', 'user_login': 'newrelic'}","[{'action': 'opened', 'author': 'dhwest14', 'comment_id': None, 'datetime': '2021-11-23T16:11:04Z', 'masked_author': 'username_0', 'text': 'Changed line 31 misspelled word ""scrapping"" and changed to ""scraping"".\r\n\r\n<!-- Thanks for contributing to our docs! -->\r\n\r\n<!-- For Japanese readers: \r\nもしドキュメントの日本語訳で問題を見つけた場合はPRではなくissueを提出してください。\r\n日本語訳へのPRについてはまだ取り込む準備ができていません。-->\r\n\r\nPlease follow [conventional commit standards](https://www.conventionalcommits.org/en/v1.0.0/)\r\nin your commit messages and pull request title.\r\n\r\n## Give us some context\r\n\r\n* What problems does this PR solve?\r\n* Add any context that will help us review your changes such as testing notes,\r\n  links to related docs, screenshots, etc.\r\n* If your issue relates to an existing GitHub issue, please link to it.', 'title': 'Update powerdns-monitoring-integration.mdx', 'type': 'issue'}]","<issue_start><issue_comment>Title: Update powerdns-monitoring-integration.mdx
+username_0: Changed line 31 misspelled word ""scrapping"" and changed to ""scraping"".
+
+<!-- Thanks for contributing to our docs! -->
+
+<!-- For Japanese readers: 
+もしドキュメントの日本語訳で問題を見つけた場合はPRではなくissueを提出してください。
+日本語訳へのPRについてはまだ取り込む準備ができていません。-->
+
+Please follow [conventional commit standards](https://www.conventionalcommits.org/en/v1.0.0/)
+in your commit messages and pull request title.
+
+## Give us some context
+
+* What problems does this PR solve?
+* Add any context that will help us review your changes such as testing notes,
+  links to related docs, screenshots, etc.
+* If your issue relates to an existing GitHub issue, please link to it."
+halogenica/beautifulhugo,421259305,253,"{'number': 253.0, 'repo': 'beautifulhugo', 'user_login': 'halogenica'}","[{'action': 'opened', 'author': 'pyrox777', 'comment_id': None, 'datetime': '2019-03-14T21:46:49Z', 'masked_author': 'username_0', 'text': 'Just spotted it and felt like I should contribute back.\r\n\r\nThanks for that neat theme!', 'title': 'Small typo fix', 'type': 'issue'}
+ {'action': 'created', 'author': 'VincentTam', 'comment_id': 490540783.0, 'datetime': '2019-05-08 15:47:01+00:00', 'masked_author': 'username_1', 'text': 'Danke !\r\n\r\nHi, this is the author of #231 & #232.  I suggest using a more descriptive title like the linked PRs so that it will get more attention.\r\n\r\n@username_2 This is a fix for Staticman\'s German UI text error introduced at db564553.  I\'ve tested it on my own tweaked branch of this theme, and there\'s _no_ merge conflict, so it\'s ready to be merged.\r\n\r\n[TL;DR]\r\n\r\n```diff\r\ncommit ff5081804497ae366e1d0fb7d7b303e001a05c20\r\nAuthor: username_0 <ychag@example.com>\r\nDate:   Thu Mar 14 22:42:13 2019 +0100\r\n\r\n    Small typo fix\r\n\r\ndiff --git a/i18n/de.yaml b/i18n/de.yaml\r\nindex d2774cf..1fbdd13 100644\r\n--- a/i18n/de.yaml\r\n+++ b/i18n/de.yaml\r\n@@ -57,7 +57,7 @@\r\n - id: useMarkdown\r\n   translation: ""Sie können Markdown-Syntax verwenden""\r\n - id: yourName\r\n-  translation: ""Irh Name""\r\n+  translation: ""Ihr Name""\r\n - id: yourEmail\r\n   translation: ""Ihre Emailadresse""\r\n - id: yourWebsite\r\n```\r\n\r\nDespite the recent change of the YAML file for Staticman\'s German translation in #269, it\'s lucky that there\'s _no_ merge conflict because the line position for our PR\'s differs by >20.\r\n\r\n```diff\r\ncommit 37d73ff83284a07df70e53cc44cabe0c0ab8e747\r\nAuthor: Vincent Tam <envkt@example.com>\r\nDate:   Thu Apr 25 11:09:47 2019 +0200\r\n\r\n    Fix #261\r\n\r\ndiff --git a/i18n/de.yaml b/i18n/de.yaml\r\nindex d2774cf..be3a79a 100644\r\n--- a/i18n/de.yaml\r\n+++ b/i18n/de.yaml\r\n@@ -33,7 +33,7 @@\r\n \r\n # Footer\r\n - id: poweredBy # Accepts HTML\r\n-  translation: \'<a href=""http://gohugo.io"">Hugo v{{ .Hugo.Version }}</a> powered &nbsp;&bull;&n\r\nbsp; Theme by <a href=""http://deanattali.com/beautiful-jekyll/"">Beautiful Jekyll</a> adapted to \r\n<a href=""https://github.com/username_2/beautifulhugo"">Beautiful Hugo</a>\'\r\n+  translation: \'<a href=""http://gohugo.io"">Hugo v{{ .Site.Hugo.Version }}</a> powered &nbsp;&bu\r\nll;&nbsp; Theme by <a href=""http://deanattali.com/beautiful-jekyll/"">Beautiful Jekyll</a> adapte\r\nd to <a href=""https://github.com/username_2/beautifulhugo"">Beautiful Hugo</a>\'\r\n \r\n # Navigation\r\n - id: toggleNavigation\r\n```', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'pyrox777', 'comment_id': 491013314.0, 'datetime': '2019-05-09 18:22:38+00:00', 'masked_author': 'username_0', 'text': ""Hi @username_1, thank you for the feedback. I really appreciate it! The title is changed as you suggested to clarify what it's actually about.\r\n\r\nAnd thank you again for the research you have done. With your additions this issue is way more useful than before.\r\n\r\nI should have taken more care when creating this issue but was a little tired and forgot about it afterwards."", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'halogenica', 'comment_id': 533775750.0, 'datetime': '2019-09-21 07:24:37+00:00', 'masked_author': 'username_2', 'text': 'Thank you very much!', 'title': None, 'type': 'comment'}]","<issue_start><issue_comment>Title: Small typo fix
+username_0: Just spotted it and felt like I should contribute back.
+
+Thanks for that neat theme!
+<issue_comment>username_1: Danke !
+
+Hi, this is the author of #231 & #232.  I suggest using a more descriptive title like the linked PRs so that it will get more attention.
+
+@username_2 This is a fix for Staticman's German UI text error introduced at db564553.  I've tested it on my own tweaked branch of this theme, and there's _no_ merge conflict, so it's ready to be merged.
+
+[TL;DR]
+
+```diff
+commit ff5081804497ae366e1d0fb7d7b303e001a05c20
+Author: username_0 <username_0@users.noreply.github.com>
+Date:   Thu Mar 14 22:42:13 2019 +0100
+
+    Small typo fix
+
+diff --git a/i18n/de.yaml b/i18n/de.yaml
+index d2774cf..1fbdd13 100644
+--- a/i18n/de.yaml
++++ b/i18n/de.yaml
+@@ -57,7 +57,7 @@
+ - id: useMarkdown
+   translation: ""Sie können Markdown-Syntax verwenden""
+ - id: yourName
+-  translation: ""Irh Name""
++  translation: ""Ihr Name""
+ - id: yourEmail
+   translation: ""Ihre Emailadresse""
+ - id: yourWebsite
+```
+
+Despite the recent change of the YAML file for Staticman's German translation in #269, it's lucky that there's _no_ merge conflict because the line position for our PR's differs by >20.
+
+```diff
+commit 37d73ff83284a07df70e53cc44cabe0c0ab8e747
+Author: Vincent Tam <****@live.hk>
+Date:   Thu Apr 25 11:09:47 2019 +0200
+
+    Fix #261
+
+diff --git a/i18n/de.yaml b/i18n/de.yaml
+index d2774cf..be3a79a 100644
+--- a/i18n/de.yaml
++++ b/i18n/de.yaml
+@@ -33,7 +33,7 @@
+ 
+ # Footer
+ - id: poweredBy # Accepts HTML
+-  translation: '<a href=""http://gohugo.io"">Hugo v{{ .Hugo.Version }}</a> powered &nbsp;&bull;&n
+bsp; Theme by <a href=""http://deanattali.com/beautiful-jekyll/"">Beautiful Jekyll</a> adapted to 
+<a href=""https://github.com/username_2/beautifulhugo"">Beautiful Hugo</a>'
++  translation: '<a href=""http://gohugo.io"">Hugo v{{ .Site.Hugo.Version }}</a> powered &nbsp;&bu
+ll;&nbsp; Theme by <a href=""http://deanattali.com/beautiful-jekyll/"">Beautiful Jekyll</a> adapte
+d to <a href=""https://github.com/username_2/beautifulhugo"">Beautiful Hugo</a>'
+ 
+ # Navigation
+ - id: toggleNavigation
+```
+<issue_comment>username_0: Hi @username_1, thank you for the feedback. I really appreciate it! The title is changed as you suggested to clarify what it's actually about.
+
+And thank you again for the research you have done. With your additions this issue is way more useful than before.
+
+I should have taken more care when creating this issue but was a little tired and forgot about it afterwards.
+<issue_comment>username_2: Thank you very much!"
+opensearch-project/project-website,1038857255,429,,"[{'action': 'opened', 'author': 'chloe-zh', 'comment_id': None, 'datetime': '2021-10-28T18:58:54Z', 'masked_author': 'username_0', 'text': ""**Is your feature request related to a problem? Please describe.**\r\nNA\r\n\r\n**Describe the solution you'd like**\r\nWe would like to release the OpenSearch JDBC and ODBC drivers for the OpenSearch users to connect their clusters with the BI tools like PowerBI, Tableau etc., the release will be compatible with both OpenSearch and legacy ODFE clusters.\r\n\r\n**Describe alternatives you've considered**\r\nJust like the ODFE releases https://opendistro.github.io/for-elasticsearch/downloads.html#all, we would like to release it to the OpenSearch artifact storage, and publish the link in the OpenSearch download page: https://opensearch.org/downloads.html\r\n\r\n**Additional context**\r\nJDBC and ODBC release issue: https://github.com/opensearch-project/opensearch-build/issues/794"", 'title': 'Publish the JDBC and ODBC driver artifacts in OpenSearch download page', 'type': 'issue'}
+ {'action': 'created', 'author': 'stockholmux', 'comment_id': 989055600.0, 'datetime': '2021-12-08 18:14:56+00:00', 'masked_author': 'username_1', 'text': '@username_0 Can you provide an update on this?', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'chloe-zh', 'comment_id': 991520685.0, 'datetime': '2021-12-11 07:56:37+00:00', 'masked_author': 'username_0', 'text': '@anirudha', 'title': None, 'type': 'comment'}
+ {'action': 'closed', 'author': 'stockholmux', 'comment_id': None, 'datetime': '2022-01-31 17:32:32+00:00', 'masked_author': 'username_1', 'text': '', 'title': None, 'type': 'issue'}
+ {'action': 'created', 'author': 'stockholmux', 'comment_id': 1026031219.0, 'datetime': '2022-01-31 17:32:32+00:00', 'masked_author': 'username_1', 'text': 'Closed by #635', 'title': None, 'type': 'comment'}]","<issue_start><issue_comment>Title: Publish the JDBC and ODBC driver artifacts in OpenSearch download page
+username_0: **Is your feature request related to a problem? Please describe.**
+NA
+
+**Describe the solution you'd like**
+We would like to release the OpenSearch JDBC and ODBC drivers for the OpenSearch users to connect their clusters with the BI tools like PowerBI, Tableau etc., the release will be compatible with both OpenSearch and legacy ODFE clusters.
+
+**Describe alternatives you've considered**
+Just like the ODFE releases https://opendistro.github.io/for-elasticsearch/downloads.html#all, we would like to release it to the OpenSearch artifact storage, and publish the link in the OpenSearch download page: https://opensearch.org/downloads.html
+
+**Additional context**
+JDBC and ODBC release issue: https://github.com/opensearch-project/opensearch-build/issues/794
+<issue_comment>username_1: @username_0 Can you provide an update on this?
+<issue_comment>username_0: @anirudha<issue_closed>
+<issue_comment>username_1: Closed by #635"
+facebook/docusaurus,533689489,2091,,"[{'action': 'opened', 'author': 'ataft', 'comment_id': None, 'datetime': '2019-12-06 01:19:06+00:00', 'masked_author': 'username_0', 'text': ""<!--\r\n  Consider requesting the feature on https://docusaurus-2.netlify.com/feedback/ instead.\r\n  Feature requests on v1 are more likely to be missed as we're focusing on building v2.\r\n-->\r\n\r\n## 🚀 Feature\r\n\r\nI created a plugin (https://github.com/username_0/plugin-image-zoom) for zooming in on images when you click them, using the `medium-zoom` module. \r\n\r\nI'm afraid that I did this incorrectly and was hoping for someone to either fix it or guide me in the right direction. My goal is to call the MediumZoom module after page loads. I found an undocumented Lifecycle API function called `onRouteUpdate` and used that to make it work.\r\n\r\nHere's what the current plugin looks like:\r\n![zoom](https://user-images.githubusercontent.com/11670864/70287241-0b8a7780-1783-11ea-86c6-1ca529ea7445.gif)\r\n\r\nI made a comment a couple weeks ago in https://docusaurus-2.netlify.com/feedback/p/allow-large-image-preview-on-click too...\r\n\r\n## Have you read the [Contributing Guidelines on issues](https://github.com/facebook/docusaurus/blob/master/CONTRIBUTING.md#reporting-new-issues)?\r\n\r\nYes\r\n\r\n## Motivation\r\n\r\nImage zooming is a critical part of documentation\r\n\r\n## Pitch\r\n\r\nImage zooming is one of the most important features of online documentation. Nearly every product has this feature, for good reason."", 'title': 'Image Zoom on Click', 'type': 'issue'}
+ {'action': 'created', 'author': 'endiliey', 'comment_id': 562818757.0, 'datetime': '2019-12-07 06:10:52+00:00', 'masked_author': 'username_1', 'text': ""Hmm there's many way to do this. And some approach might be more efficient but requires more steps.\r\n\r\nYour approach looks quite OK. Another approach is to build a remark plugin that replaces all image with an image component that has medium-zoom attached to it. Another way is to replace the Image component replaced by MDX & add medium-zoom to it, and many many other ways.\r\n\r\nI feel this scope is too open-ended and it should be left as plugin. Docusaurus (undermanpowered as it is) 2 is still in alpha so we want to focus more on the general use case. I personally am not too in favor of this feature though, it just add extra few kBs on client bundle"", 'title': None, 'type': 'comment'}
+ {'action': 'closed', 'author': 'endiliey', 'comment_id': None, 'datetime': '2019-12-07 06:10:52+00:00', 'masked_author': 'username_1', 'text': '', 'title': None, 'type': 'issue'}]","<issue_start><issue_comment>Title: Image Zoom on Click
+username_0: <!--
+  Consider requesting the feature on https://docusaurus-2.netlify.com/feedback/ instead.
+  Feature requests on v1 are more likely to be missed as we're focusing on building v2.
+-->
+
+## 🚀 Feature
+
+I created a plugin (https://github.com/username_0/plugin-image-zoom) for zooming in on images when you click them, using the `medium-zoom` module. 
+
+I'm afraid that I did this incorrectly and was hoping for someone to either fix it or guide me in the right direction. My goal is to call the MediumZoom module after page loads. I found an undocumented Lifecycle API function called `onRouteUpdate` and used that to make it work.
+
+Here's what the current plugin looks like:
+![zoom](https://user-images.githubusercontent.com/11670864/70287241-0b8a7780-1783-11ea-86c6-1ca529ea7445.gif)
+
+I made a comment a couple weeks ago in https://docusaurus-2.netlify.com/feedback/p/allow-large-image-preview-on-click too...
+
+## Have you read the [Contributing Guidelines on issues](https://github.com/facebook/docusaurus/blob/master/CONTRIBUTING.md#reporting-new-issues)?
+
+Yes
+
+## Motivation
+
+Image zooming is a critical part of documentation
+
+## Pitch
+
+Image zooming is one of the most important features of online documentation. Nearly every product has this feature, for good reason.
+<issue_comment>username_1: Hmm there's many way to do this. And some approach might be more efficient but requires more steps.
+
+Your approach looks quite OK. Another approach is to build a remark plugin that replaces all image with an image component that has medium-zoom attached to it. Another way is to replace the Image component replaced by MDX & add medium-zoom to it, and many many other ways.
+
+I feel this scope is too open-ended and it should be left as plugin. Docusaurus (undermanpowered as it is) 2 is still in alpha so we want to focus more on the general use case. I personally am not too in favor of this feature though, it just add extra few kBs on client bundle<issue_closed>"
+nodejs/nodejs.org,140807144,577,,"[{'action': 'opened', 'author': 'peterjosvai', 'comment_id': None, 'datetime': '2016-03-14 21:49:10+00:00', 'masked_author': 'username_0', 'text': 'okay, I suppose, the concept is something like:  most used OSs (Win and Mac) are on top of the list because most people use it :) \r\n\r\nbut if it was that, it\'d make no logical sense....\r\nIt\'d only be logical if one user wanted to download the Windows-version most of the times -- in this case, it\'d be a help for the users, cause their most used version would be there...\r\n\r\nbut this is not the case, obviously...\r\neverybody wants one version (at a time, at least)\r\nand most people will download a given version only like a few times during a whole year...\r\nso putting the “most used” OS first does not help anyone... \r\n\r\nand even if users were downloading node.js frequently, like on a daily basis...\r\nwhat problem would WIN users have if the had to look for ""W"" to find Win -- and it wouldn\'t be #1 on the list ? :) \r\n\r\nmy guess: it\'d be no problem for a Win user ... :) \r\n\r\nSo, all in all, what exactly does this listing ""convention"" serve? \r\nbesides unawares promoting the hegemony of Microsoft and Apple by unawares accepting the order of OSs the way it is propagated everywhere...\r\nSure, I understand the commercial companies – but free software developers.. no\r\n\r\nokay, just one last argument:\r\nimagine someone who\'s new to linux... or is thinking about switching to Linux..\r\nshe or he goes to websites and sees listing of OSs in this “order” -- the more powerful ones first...\r\nwhat will be the impression of this person?\r\nwhat perception will she or he have of Linux – my guess: “it\'s not that much supported"" ?\r\n\r\n:: suggestion:\r\nBrowsers compete, OSs compete, databases compete – and the BIG ONES have huge advantages – including taking profit even as we speak... Why not to give some advantage to the open source, non-corporate projects, like treating them as equal in rank with the BIG ONES ? :) \r\n\r\nAll I\'m suggesting is the rethinking of this policy of putting the BIG ones first...\r\nthe BIG OSs first and Linux only after them...\r\nLet Linux be found at “L” and Mac at “M” and so on... \r\n\r\nLinux deserves this fair treatment – doesn\'t it? :) \r\n\r\n\r\n\r\n![node-website](https://cloud.githubusercontent.com/assets/13543101/13761082/ceb06cfc-ea36-11e5-8da8-6bca35c32da6.jpg)', 'title': 'in the OSs list why is Linux no. 3?', 'type': 'issue'}
+ {'action': 'created', 'author': 'TheAlphaNerd', 'comment_id': 196541405.0, 'datetime': '2016-03-14 22:04:09+00:00', 'masked_author': 'username_1', 'text': ""Hey @username_0 thanks for posting.\r\n\r\nOne thing that is worth paying attention to on that list is that the `double click installers` are included first. Specifically the `.msi` and the `.pkg`.  There is currently no double click installer for the linux platform, and likely never will be.\r\n\r\nIf we start with the premise that individuals newer to learning development are more likely be on Windows or Mac (in that order) it may be easy to conclude that having the links to the installers at the top of the page would help them more than hurt those on the linux platform\r\n\r\nIf you look at the [statistic](https://nodejs.org/metrics/summaries/os.png) you will see that Linux is by FAR the largest consumer of our downloads, with more than double the downloads of \r\n\r\nPersonally I'm -1 on the change as I believe it would negatively effect new developers"", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'rvagg', 'comment_id': 196549783.0, 'datetime': '2016-03-14 22:35:08+00:00', 'masked_author': 'username_2', 'text': ""Without digging in to details, I bet that if you trim the Linux download stats to include only those using a browser, the numbers would be a tiny fraction of the total.\r\n\r\nIt's the installers that matter most here, particularly for Windows where they don't have easier ways to download Node (OSX has Brew and can also use `curl|tar`). So I'm with @username_1 on not touching this, although we are looking at simplifying the initial download table by removing the _secondary_ platforms to another table: https://github.com/nodejs/nodejs.org/pull/564"", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'mikeal', 'comment_id': 196630342.0, 'datetime': '2016-03-15 03:06:53+00:00', 'masked_author': 'username_3', 'text': 'Here\'s the website stats.\r\n\r\n<img width=""401"" alt=""screen shot 2016-03-14 at 8 06 12 pm"" src=""https://cloud.githubusercontent.com/assets/579/13766576/499161ea-ea20-11e5-9fc1-c3f7a3c423f7.png"">', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'peterjosvai', 'comment_id': 197235699.0, 'datetime': '2016-03-16 09:55:57+00:00', 'masked_author': 'username_0', 'text': '', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'benjamingr', 'comment_id': 197238286.0, 'datetime': '2016-03-16 10:01:31+00:00', 'masked_author': 'username_4', 'text': ""I vote we keep the current behavior with Windows on top. \r\nLinux users would likely not install it from the website anyway (I don't)."", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'peterjosvai', 'comment_id': 197245494.0, 'datetime': '2016-03-16 10:12:22+00:00', 'masked_author': 'username_0', 'text': '', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'peterjosvai', 'comment_id': 197524722.0, 'datetime': '2016-03-16 20:08:47+00:00', 'masked_author': 'username_0', 'text': '', 'title': None, 'type': 'comment'}
+ {'action': 'closed', 'author': 'phillipj', 'comment_id': None, 'datetime': '2016-03-24 19:01:49+00:00', 'masked_author': 'username_5', 'text': '', 'title': None, 'type': 'issue'}
+ {'action': 'created', 'author': 'phillipj', 'comment_id': 200972390.0, 'datetime': '2016-03-24 19:01:49+00:00', 'masked_author': 'username_5', 'text': 'Closing this for now as all votes has been in favor of keeping it as is.', 'title': None, 'type': 'comment'}]","<issue_start><issue_comment>Title: in the OSs list why is Linux no. 3?
+username_0: okay, I suppose, the concept is something like:  most used OSs (Win and Mac) are on top of the list because most people use it :) 
+
+but if it was that, it'd make no logical sense....
+It'd only be logical if one user wanted to download the Windows-version most of the times -- in this case, it'd be a help for the users, cause their most used version would be there...
+
+but this is not the case, obviously...
+everybody wants one version (at a time, at least)
+and most people will download a given version only like a few times during a whole year...
+so putting the “most used” OS first does not help anyone... 
+
+and even if users were downloading node.js frequently, like on a daily basis...
+what problem would WIN users have if the had to look for ""W"" to find Win -- and it wouldn't be #1 on the list ? :) 
+
+my guess: it'd be no problem for a Win user ... :) 
+
+So, all in all, what exactly does this listing ""convention"" serve? 
+besides unawares promoting the hegemony of Microsoft and Apple by unawares accepting the order of OSs the way it is propagated everywhere...
+Sure, I understand the commercial companies – but free software developers.. no
+
+okay, just one last argument:
+imagine someone who's new to linux... or is thinking about switching to Linux..
+she or he goes to websites and sees listing of OSs in this “order” -- the more powerful ones first...
+what will be the impression of this person?
+what perception will she or he have of Linux – my guess: “it's not that much supported"" ?
+
+:: suggestion:
+Browsers compete, OSs compete, databases compete – and the BIG ONES have huge advantages – including taking profit even as we speak... Why not to give some advantage to the open source, non-corporate projects, like treating them as equal in rank with the BIG ONES ? :) 
+
+All I'm suggesting is the rethinking of this policy of putting the BIG ones first...
+the BIG OSs first and Linux only after them...
+Let Linux be found at “L” and Mac at “M” and so on... 
+
+Linux deserves this fair treatment – doesn't it? :) 
+
+
+
+![node-website](https://cloud.githubusercontent.com/assets/13543101/13761082/ceb06cfc-ea36-11e5-8da8-6bca35c32da6.jpg)
+<issue_comment>username_1: Hey @username_0 thanks for posting.
+
+One thing that is worth paying attention to on that list is that the `double click installers` are included first. Specifically the `.msi` and the `.pkg`.  There is currently no double click installer for the linux platform, and likely never will be.
+
+If we start with the premise that individuals newer to learning development are more likely be on Windows or Mac (in that order) it may be easy to conclude that having the links to the installers at the top of the page would help them more than hurt those on the linux platform
+
+If you look at the [statistic](https://nodejs.org/metrics/summaries/os.png) you will see that Linux is by FAR the largest consumer of our downloads, with more than double the downloads of 
+
+Personally I'm -1 on the change as I believe it would negatively effect new developers
+<issue_comment>username_2: Without digging in to details, I bet that if you trim the Linux download stats to include only those using a browser, the numbers would be a tiny fraction of the total.
+
+It's the installers that matter most here, particularly for Windows where they don't have easier ways to download Node (OSX has Brew and can also use `curl|tar`). So I'm with @username_1 on not touching this, although we are looking at simplifying the initial download table by removing the _secondary_ platforms to another table: https://github.com/nodejs/nodejs.org/pull/564
+<issue_comment>username_3: Here's the website stats.
+
+<img width=""401"" alt=""screen shot 2016-03-14 at 8 06 12 pm"" src=""https://cloud.githubusercontent.com/assets/579/13766576/499161ea-ea20-11e5-9fc1-c3f7a3c423f7.png"">
+<issue_comment>username_4: I vote we keep the current behavior with Windows on top. 
+Linux users would likely not install it from the website anyway (I don't).<issue_closed>
+<issue_comment>username_5: Closing this for now as all votes has been in favor of keeping it as is."
+pallets/flask-website,195815873,42,"{'number': 42.0, 'repo': 'flask-website', 'user_login': 'pallets'}","[{'action': 'opened', 'author': 'akira-dev', 'comment_id': None, 'datetime': '2016-12-15T14:15:05Z', 'masked_author': 'username_0', 'text': 'Flask-REST-JSONAPI is an implementation of jsonapi reference http://jsonapi.org around flask and marshmallow. It combines a strong specification about client server interactions (jsonapi reference) and a powerfull library that helps you to quickly create rest api with hudge flexibility. You can use any data provider like SQLAlchemy or MongoDB (already available) or create your own data layer without to make pull request.', 'title': 'Add Flask-REST-JSONAPI to extensions', 'type': 'issue'}
+ {'action': 'created', 'author': 'akira-dev', 'comment_id': 288662245.0, 'datetime': '2017-03-23 09:26:34+00:00', 'masked_author': 'username_0', 'text': 'There are problems about my library ? There is no comment or update about my PR since 15 Dec 2016 ?', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'davidism', 'comment_id': 288761455.0, 'datetime': '2017-03-23 15:43:30+00:00', 'masked_author': 'username_1', 'text': ""I fixed some minor issues and linked to the specification. I don't control when the website is built, so even though this is merged it may not show up for some time. Thank you for the contribution!"", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'akira-dev', 'comment_id': 290030279.0, 'datetime': '2017-03-29 09:09:49+00:00', 'masked_author': 'username_0', 'text': 'What do I have to do to be approved as a flask extension ?', 'title': None, 'type': 'comment'}]","<issue_start><issue_comment>Title: Add Flask-REST-JSONAPI to extensions
+username_0: Flask-REST-JSONAPI is an implementation of jsonapi reference http://jsonapi.org around flask and marshmallow. It combines a strong specification about client server interactions (jsonapi reference) and a powerfull library that helps you to quickly create rest api with hudge flexibility. You can use any data provider like SQLAlchemy or MongoDB (already available) or create your own data layer without to make pull request.
+<issue_comment>username_0: There are problems about my library ? There is no comment or update about my PR since 15 Dec 2016 ?
+<issue_comment>username_1: I fixed some minor issues and linked to the specification. I don't control when the website is built, so even though this is merged it may not show up for some time. Thank you for the contribution!
+<issue_comment>username_0: What do I have to do to be approved as a flask extension ?"

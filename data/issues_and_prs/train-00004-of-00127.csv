@@ -1,0 +1,573 @@
+gohugoio/hugo,222343663,3360,,"[{'action': 'opened', 'author': 'bep', 'comment_id': None, 'datetime': '2017-04-18T08:45:29Z', 'masked_author': 'username_0', 'text': 'See http://stackoverflow.com/questions/43149074/jekyll-or-hugo-theme-with-multilanguage-support\r\n\r\nHugo has already a good story for multiple languages, but it could fairly easily be made even more powerful by allowing template overrides per site/language.\r\n\r\nDoing large portions of localisation via i18n files can be cumbersome, so to be able to create language-specific layout files/partials/shortcodes would be great.\r\n\r\nA simple sample would be:\r\n\r\n```\r\nlayouts\r\n├── _default\r\n│\xa0\xa0 ├── baseof.html\r\n│\xa0\xa0 ├── list.html\r\n│\xa0\xa0 └── single.html\r\n├── _fr\r\n│\xa0\xa0 ├── _default\r\n│\xa0\xa0 │\xa0\xa0 └── list.html\r\n│\xa0\xa0 └── index.html\r\n└── index.html\r\n```\r\n\r\nIn the imaginary site above we have a base template set that is used for all sites/languages, but then we override some of the templates for the French language (`fr`). This would also work for themes.\r\n\r\nI have prefixed the language with ""_"" to avoid (hopefully) any section collisions.', 'title': 'Support layouts per site/language', 'type': 'issue'}
+ {'action': 'created', 'author': 'ngsctt', 'comment_id': 312420390.0, 'datetime': '2017-07-01 08:59:12+00:00', 'masked_author': 'username_1', 'text': ""I've been wishing for exactly this as I've been reworking my site into Hugo. It'd be especially helpful for laying pages out according to different typographic conventions (I'm doing English/Japanese, and CVs are very different across the two).\r\n\r\nI thought though, that the simpler way might be to use something like:\r\n```\r\nlayouts\r\n├── _default\r\n│   ├── baseof.html\r\n│   ├── list.html\r\n│   ├── list.ja.html\r\n│   └── single.html\r\n│   └── single.ja.html\r\n└── index.html\r\n└── index.ja.html\r\n```\r\nUsing `filename.ja.html` or `filename-ja.html`, etc. That way, the translations sit side-by-side with each other in the same folder, it matches the translated content system, and presumably you could just double the template search paths (eg. from https://gohugo.io/templates/content/#single-page), like so:\r\n\r\n- /layouts/`TYPE`/`LAYOUT`.`LANG`.html\r\n- /layouts/`TYPE`/`LAYOUT`.html\r\n- /layouts/`SECTION`/`LAYOUT`.`LANG`.html\r\n- /layouts/`SECTION`/`LAYOUT`.html\r\n- /layouts/`TYPE`/single.`LANG`.html\r\n- /layouts/`TYPE`/single.html\r\n- /layouts/`SECTION`/single.`LANG`.html\r\n- /layouts/`SECTION`/single.html\r\n- /layouts/_default/single.`LANG`.html\r\n- /layouts/_default/single.html\r\n- /themes/`THEME`/layouts/`TYPE`/`LAYOUT`.`LANG`.html\r\n- /themes/`THEME`/layouts/`TYPE`/`LAYOUT`.html\r\n- /themes/`THEME`/layouts/`SECTION`/`LAYOUT`.`LANG`.html\r\n- /themes/`THEME`/layouts/`SECTION`/`LAYOUT`.html\r\n- /themes/`THEME`/layouts/`TYPE`/single.`LANG`.html\r\n- /themes/`THEME`/layouts/`TYPE`/single.html\r\n- /themes/`THEME`/layouts/`SECTION`/single.`LANG`.html\r\n- /themes/`THEME`/layouts/`SECTION`/single.html\r\n- /themes/`THEME`/layouts/_default/single.`LANG`.html\r\n- /themes/`THEME`/layouts/_default/single.html\r\n\r\nAdditionally, this shouldn't really disrupt any pre-existing sites, and be relatively easy to add in I think."", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'bep', 'comment_id': 312443679.0, 'datetime': '2017-07-01 17:05:12+00:00', 'masked_author': 'username_0', 'text': '@username_1 I agree, that is much simpler than what I suggested.', 'title': None, 'type': 'comment'}
+ {'action': 'closed', 'author': 'bep', 'comment_id': None, 'datetime': '2017-07-04 07:12:46+00:00', 'masked_author': 'username_0', 'text': '', 'title': None, 'type': 'issue'}]","<issue_start><issue_comment>Title: Support layouts per site/language
+username_0: See http://stackoverflow.com/questions/43149074/jekyll-or-hugo-theme-with-multilanguage-support
+
+Hugo has already a good story for multiple languages, but it could fairly easily be made even more powerful by allowing template overrides per site/language.
+
+Doing large portions of localisation via i18n files can be cumbersome, so to be able to create language-specific layout files/partials/shortcodes would be great.
+
+A simple sample would be:
+
+```
+layouts
+├── _default
+│   ├── baseof.html
+│   ├── list.html
+│   └── single.html
+├── _fr
+│   ├── _default
+│   │   └── list.html
+│   └── index.html
+└── index.html
+```
+
+In the imaginary site above we have a base template set that is used for all sites/languages, but then we override some of the templates for the French language (`fr`). This would also work for themes.
+
+I have prefixed the language with ""_"" to avoid (hopefully) any section collisions.
+<issue_comment>username_1: I've been wishing for exactly this as I've been reworking my site into Hugo. It'd be especially helpful for laying pages out according to different typographic conventions (I'm doing English/Japanese, and CVs are very different across the two).
+
+I thought though, that the simpler way might be to use something like:
+```
+layouts
+├── _default
+│   ├── baseof.html
+│   ├── list.html
+│   ├── list.ja.html
+│   └── single.html
+│   └── single.ja.html
+└── index.html
+└── index.ja.html
+```
+Using `filename.ja.html` or `filename-ja.html`, etc. That way, the translations sit side-by-side with each other in the same folder, it matches the translated content system, and presumably you could just double the template search paths (eg. from https://gohugo.io/templates/content/#single-page), like so:
+
+- /layouts/`TYPE`/`LAYOUT`.`LANG`.html
+- /layouts/`TYPE`/`LAYOUT`.html
+- /layouts/`SECTION`/`LAYOUT`.`LANG`.html
+- /layouts/`SECTION`/`LAYOUT`.html
+- /layouts/`TYPE`/single.`LANG`.html
+- /layouts/`TYPE`/single.html
+- /layouts/`SECTION`/single.`LANG`.html
+- /layouts/`SECTION`/single.html
+- /layouts/_default/single.`LANG`.html
+- /layouts/_default/single.html
+- /themes/`THEME`/layouts/`TYPE`/`LAYOUT`.`LANG`.html
+- /themes/`THEME`/layouts/`TYPE`/`LAYOUT`.html
+- /themes/`THEME`/layouts/`SECTION`/`LAYOUT`.`LANG`.html
+- /themes/`THEME`/layouts/`SECTION`/`LAYOUT`.html
+- /themes/`THEME`/layouts/`TYPE`/single.`LANG`.html
+- /themes/`THEME`/layouts/`TYPE`/single.html
+- /themes/`THEME`/layouts/`SECTION`/single.`LANG`.html
+- /themes/`THEME`/layouts/`SECTION`/single.html
+- /themes/`THEME`/layouts/_default/single.`LANG`.html
+- /themes/`THEME`/layouts/_default/single.html
+
+Additionally, this shouldn't really disrupt any pre-existing sites, and be relatively easy to add in I think.
+<issue_comment>username_0: @username_1 I agree, that is much simpler than what I suggested.<issue_closed>"
+elixir-lang/elixir-lang.github.com,453972152,1275,"{'number': 1275.0, 'repo': 'elixir-lang.github.com', 'user_login': 'elixir-lang'}","[{'action': 'opened', 'author': 'mfrasca', 'comment_id': None, 'datetime': '2019-06-10T02:26:20Z', 'masked_author': 'username_0', 'text': ""I don't think this cheat sheet makes things so much clearer:\r\n- it has hardly any structure (like it would be if all client->return-value-from-client->callback->return-value-from-callback would all be organized as in the clearly structured initialization block), \r\n- graphic elements drawn on top of the text make it less readable, \r\n- I think it has flaws (not mentioning the return value from `handle_call`, explaining `*`, why return value tuples have different sizes) \r\n\r\n**and**\r\n- it has one major problem: the license does not allow correcting it."", 'title': 'removing link to proprietary cheat sheet', 'type': 'issue'}
+ {'action': 'created', 'author': 'josevalim', 'comment_id': 500351063.0, 'datetime': '2019-06-10 09:23:08+00:00', 'masked_author': 'username_1', 'text': 'It is a cheat sheet, it is meant to be succinct and not provide much information. In any case, the cheat sheet does not have to make sense for everyone, but i believe in many cases it likely helps, so I would keep it around. :) Thanks!', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'mfrasca', 'comment_id': 500400141.0, 'datetime': '2019-06-10 12:33:49+00:00', 'masked_author': 'username_0', 'text': ""as said: the main problem with this cheat sheet is not the content, it's the **license**.\r\nI'll see if I manage to produce something about both `Agent` and `GenServer`, and it will be CC:BY-SA.\r\nso we can talk about it constructively."", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'whatyouhide', 'comment_id': 500408214.0, 'datetime': '2019-06-10 13:03:12+00:00', 'masked_author': 'username_2', 'text': ""I'm fairly sure @username_3 is pretty open to letting us use this :)"", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'mfrasca', 'comment_id': 500409551.0, 'datetime': '2019-06-10 13:07:16+00:00', 'masked_author': 'username_0', 'text': ""right, I did not ask him to change the license.  I'll do so before I start something from scratch.  as it stands, no derivative work is allowed, no commercial use either."", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'mfrasca', 'comment_id': 500410985.0, 'datetime': '2019-06-10 13:11:35+00:00', 'masked_author': 'username_0', 'text': 'https://github.com/username_3/elixir-cheatsheets/issues/2', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'mfrasca', 'comment_id': 500592285.0, 'datetime': '2019-06-10 20:58:52+00:00', 'masked_author': 'username_0', 'text': 'oops, too quick in deleting the branch, how do I add to this now …', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'benjamintanweihao', 'comment_id': 500660350.0, 'datetime': '2019-06-11 02:19:50+00:00', 'masked_author': 'username_3', 'text': ""@username_2 @username_0 Ohai! I'm totally OK with changing the license and providing the source. Please give me a day or two. ❤️"", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'mfrasca', 'comment_id': 500665091.0, 'datetime': '2019-06-11 02:43:02+00:00', 'masked_author': 'username_0', 'text': ""hi Author @username_3 ! I've been studying your cheat sheet and I thought I would use it for teaching myself some latex+tikz (it was on my todo list).  result is sort of the same as what you had shared, but more numerical and somewhat lighter (pdf is ~50k, instead of 350k).  if you want to have a look?  #1276.  I'm fine with whatever works, and you bet I prepare my coffee from emacs."", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'benjamintanweihao', 'comment_id': 500666107.0, 'datetime': '2019-06-11 02:48:03+00:00', 'masked_author': 'username_3', 'text': ""I'm happy to look at the final PDF. I prepared the cheatsheet in something less sophisticated.: MS Powerpoint."", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'mfrasca', 'comment_id': 500668443.0, 'datetime': '2019-06-11 03:00:23+00:00', 'masked_author': 'username_0', 'text': ""that's nice.  I put both the tex and the pdf in the #1276, have a look, I have several questions.  keep in mind 2 weeks ago I had not yet heard of elixir.  and I had never given much thought to erlang, mostly because of the weird syntax.  I had studied miranda/haskell but never used it in real life."", 'title': None, 'type': 'comment'}]","<issue_start><issue_comment>Title: removing link to proprietary cheat sheet
+username_0: I don't think this cheat sheet makes things so much clearer:
+- it has hardly any structure (like it would be if all client->return-value-from-client->callback->return-value-from-callback would all be organized as in the clearly structured initialization block), 
+- graphic elements drawn on top of the text make it less readable, 
+- I think it has flaws (not mentioning the return value from `handle_call`, explaining `*`, why return value tuples have different sizes) 
+
+**and**
+- it has one major problem: the license does not allow correcting it.
+<issue_comment>username_1: It is a cheat sheet, it is meant to be succinct and not provide much information. In any case, the cheat sheet does not have to make sense for everyone, but i believe in many cases it likely helps, so I would keep it around. :) Thanks!
+<issue_comment>username_0: as said: the main problem with this cheat sheet is not the content, it's the **license**.
+I'll see if I manage to produce something about both `Agent` and `GenServer`, and it will be CC:BY-SA.
+so we can talk about it constructively.
+<issue_comment>username_2: I'm fairly sure @username_3 is pretty open to letting us use this :)
+<issue_comment>username_0: right, I did not ask him to change the license.  I'll do so before I start something from scratch.  as it stands, no derivative work is allowed, no commercial use either.
+<issue_comment>username_0: https://github.com/username_3/elixir-cheatsheets/issues/2
+<issue_comment>username_0: oops, too quick in deleting the branch, how do I add to this now …
+<issue_comment>username_3: @username_2 @username_0 Ohai! I'm totally OK with changing the license and providing the source. Please give me a day or two. ❤️
+<issue_comment>username_0: hi Author @username_3 ! I've been studying your cheat sheet and I thought I would use it for teaching myself some latex+tikz (it was on my todo list).  result is sort of the same as what you had shared, but more numerical and somewhat lighter (pdf is ~50k, instead of 350k).  if you want to have a look?  #1276.  I'm fine with whatever works, and you bet I prepare my coffee from emacs.
+<issue_comment>username_3: I'm happy to look at the final PDF. I prepared the cheatsheet in something less sophisticated.: MS Powerpoint.
+<issue_comment>username_0: that's nice.  I put both the tex and the pdf in the #1276, have a look, I have several questions.  keep in mind 2 weeks ago I had not yet heard of elixir.  and I had never given much thought to erlang, mostly because of the weird syntax.  I had studied miranda/haskell but never used it in real life."
+babel/website,322413176,1656,"{'number': 1656.0, 'repo': 'website', 'user_login': 'babel'}","[{'action': 'opened', 'author': 'existentialism', 'comment_id': None, 'datetime': '2018-05-11T19:45:36Z', 'masked_author': 'username_0', 'text': '![mm](https://user-images.githubusercontent.com/56288/39943795-c8c6dc3a-5529-11e8-961f-64bf37f98e7a.gif)\r\n\r\nAnother PR extracted from the smooshpack branch. \r\n\r\nTODO:\r\n- [ ] Remove added plugin\r\n- [ ] Filter added plugins from algolia results\r\n- [ ] Cleanup once https://github.com/babel/website/pull/1652 lands', 'title': 'Redesign REPL add plugin modal', 'type': 'issue'}
+ {'action': 'created', 'author': 'hzoo', 'comment_id': 388467597.0, 'datetime': '2018-05-11 19:47:07+00:00', 'masked_author': 'username_1', 'text': 'Deploy preview for *babel-new* ready!\n\nBuilt with commit 985e3999b8e7efc848585608f4b241290b7b55b9\n\nhttps://deploy-preview-1656--babel-new.netlify.com', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'existentialism', 'comment_id': 394566634.0, 'datetime': '2018-06-05 03:06:09+00:00', 'masked_author': 'username_0', 'text': ""@username_1 should be good to go, going to punt on todo item 2 (filtering), as I couldn't get filtering on `name` to work right. will just look at it later :)"", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'xtuc', 'comment_id': 394592742.0, 'datetime': '2018-06-05 06:08:35+00:00', 'masked_author': 'username_2', 'text': 'cc @username_3 just in case', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'existentialism', 'comment_id': 394709104.0, 'datetime': '2018-06-05 13:29:27+00:00', 'masked_author': 'username_0', 'text': '@username_3 thanks! I fixed the alignment of ""search by"", and it\'s actually already using the `<PoweredBy/>`!\r\n\r\nWhile I have you, I was trying to filter already added plugins from the search results but couldn\'t get it to work (tried various combinations of adding `AND NOT name:<name>`, and using various `facet`-related things). Any ideas?', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'Haroenv', 'comment_id': 394724168.0, 'datetime': '2018-06-05 14:11:52+00:00', 'masked_author': 'username_3', 'text': ""ah that's because `name` was not an attribute you can facet, but `objectID` is, can you try `AND NOT objectID:<name>`. The objectID is the same as the name"", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'existentialism', 'comment_id': 394725777.0, 'datetime': '2018-06-05 14:15:45+00:00', 'masked_author': 'username_0', 'text': '@username_3 🙏 💯 thanks!', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'Haroenv', 'comment_id': 394735152.0, 'datetime': '2018-06-05 14:40:39+00:00', 'masked_author': 'username_3', 'text': 'did that work as expected @username_0 ?', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'existentialism', 'comment_id': 394735602.0, 'datetime': '2018-06-05 14:41:51+00:00', 'masked_author': 'username_0', 'text': '@username_3 yep! just pushed an update, netlify should update in a sec. thanks again!', 'title': None, 'type': 'comment'}]","<issue_start><issue_comment>Title: Redesign REPL add plugin modal
+username_0: ![mm](https://user-images.githubusercontent.com/56288/39943795-c8c6dc3a-5529-11e8-961f-64bf37f98e7a.gif)
+
+Another PR extracted from the smooshpack branch. 
+
+TODO:
+- [ ] Remove added plugin
+- [ ] Filter added plugins from algolia results
+- [ ] Cleanup once https://github.com/babel/website/pull/1652 lands
+<issue_comment>username_1: Deploy preview for *babel-new* ready!
+
+Built with commit 985e3999b8e7efc848585608f4b241290b7b55b9
+
+https://deploy-preview-1656--babel-new.netlify.com
+<issue_comment>username_0: @username_1 should be good to go, going to punt on todo item 2 (filtering), as I couldn't get filtering on `name` to work right. will just look at it later :)
+<issue_comment>username_2: cc @username_3 just in case
+<issue_comment>username_0: @username_3 thanks! I fixed the alignment of ""search by"", and it's actually already using the `<PoweredBy/>`!
+
+While I have you, I was trying to filter already added plugins from the search results but couldn't get it to work (tried various combinations of adding `AND NOT name:<name>`, and using various `facet`-related things). Any ideas?
+<issue_comment>username_3: ah that's because `name` was not an attribute you can facet, but `objectID` is, can you try `AND NOT objectID:<name>`. The objectID is the same as the name
+<issue_comment>username_0: @username_3 🙏 💯 thanks!
+<issue_comment>username_3: did that work as expected @username_0 ?
+<issue_comment>username_0: @username_3 yep! just pushed an update, netlify should update in a sec. thanks again!"
+corona-warn-app/cwa-website,770672652,712,,"[{'action': 'opened', 'author': 'MikeMcC399', 'comment_id': None, 'datetime': '2020-12-18 07:52:18+00:00', 'masked_author': 'username_0', 'text': '## Where to find the issue\r\nhttps://www.coronawarn.app/en/faq/#encounter_count_19\r\nhttps://www.coronawarn.app/de/faq/#encounter_count_19\r\nhttps://www.coronawarn.app/en/faq/#encounter_19_calc\r\nhttps://www.coronawarn.app/de/faq/#encounter_19_calc\r\n\r\n## Describe the issue\r\nSome new FAQ articles explain risk calculations referring to dB levels. There is no display of dB levels in the CWA so these figures have no meaning to the majority of app users. I imagine also that most reader will not know that dB is a logarithmic scale.\r\n\r\n## Suggested change\r\nAdd explanatory distance levels to the dB levels referring to in the FAQs.\r\nAccording to https://github.com/corona-warn-app/cwa-documentation/blob/master/cwa-risk-assessment.md ""each dB value is associated with a particular distance"".\r\n\r\nAttenuation | Distance\r\n--- | ---\r\n55 dB | 1.5m\r\n63 dB | 3m\r\n73 dB | 8m', 'title': 'Add equivalent distances to dB levels in FAQs', 'type': 'issue'}
+ {'action': 'created', 'author': 'dsarkar', 'comment_id': 748591663.0, 'datetime': '2020-12-20 10:53:43+00:00', 'masked_author': 'username_1', 'text': 'OK, sounds good to me. Will be included.', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'vaggelisdouros', 'comment_id': 748689311.0, 'datetime': '2020-12-20 23:46:01+00:00', 'masked_author': 'username_2', 'text': '2 questions from my side:\r\n\r\na) can you provide the formula that translates the bluetooth signal attenuation (measured in dB) into distance (measured in meters)? In multiple cases, it is mentioned that a 73 dB attenuation corresponds to a distance of 8 meters, whereas 55 dB are translated into 1.5 meters, but i have not found the formula used or at least a reference to a paper/textbook.\r\n\r\nb) In the updated diagram for risk calculation with enf v2, it is unclear to me how the time where the signal attenuation is between 63 dB and 73 dB is taken into account. Unless there is a typo, It seems that this signal is considered harmless and does not take part in the calculation of the weighted exposure time (even with a 0.5 coefficient), therefore i do not really understand whether the threshold is set to 73 db or 63 dB https://github.com/corona-warn-app/cwa-documentation/blob/master/images/risk_calculation/risk_calculation_enf_v2_overview.pdf', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'MikeMcC399', 'comment_id': 748867893.0, 'datetime': '2020-12-21 09:21:29+00:00', 'masked_author': 'username_0', 'text': '@username_2 \r\nThese are good questions. I suggest you submit them as two separate questions through [documentation question](https://github.com/corona-warn-app/cwa-documentation/issues/new?labels=question&template=03_questions.md).\r\n\r\nNote that Google states in https://developers.google.com/android/exposure-notifications/ble-attenuation-overview#distance-proxy:\r\n\r\n**Attenuations as distance proxy**\r\n""Attenuation is a very noisy proxy of distance. A very low attenuation indicates a very high probability of a short distance, but a high attenuation can be caused by many phenomena and is not always indicative of a long distance.""\r\n\r\nYou may also find some interesting background reading in https://developers.google.com/android/exposure-notifications/ble-attenuation-overview concerning the calibration procedure for Bluetooth Low Energy (BLE).', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'dsarkar', 'comment_id': 756913374.0, 'datetime': '2021-01-08 18:07:26+00:00', 'masked_author': 'username_1', 'text': 'Suggestion: Add an explanatory note at the end of both FAQs.\r\n\r\nEN:\r\n\r\n""\r\n---\r\n\r\n**Explanatory note:**\r\n**Attenuation (dB) versus distance (m)** \r\n\r\nAccording to https://github.com/corona-warn-app/cwa-documentation/blob/master/cwa-risk-assessment.md ""each dB value is associated with a particular distance:\r\n\r\nAttenuation (dB) | Distance (m)\r\n--- | ---\r\n55  | 1.5 \r\n63  | 3 \r\n73  | 8 \r\n\r\n""', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'dsarkar', 'comment_id': 756913679.0, 'datetime': '2021-01-08 18:08:08+00:00', 'masked_author': 'username_1', 'text': 'And just for the fun of it:\r\n\r\n![image](https://user-images.githubusercontent.com/1409741/104049170-ca199680-51e4-11eb-83ab-83bb31702c89.png)', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'MikeMcC399', 'comment_id': 756943430.0, 'datetime': '2021-01-08 19:10:44+00:00', 'masked_author': 'username_0', 'text': 'The text would be more readable to add the equivalents in-line. For instance in https://github.com/corona-warn-app/cwa-documentation/blob/master/cwa-risk-assessment.md there is an example of how it is expressed:\r\n\r\n""All encounters for a diagnosis key that lasted less than 10 minutes in total (regardless of how close the smartphones came during that time) or during which the smartphones were more than 8 meters (>73 dB attenuation) apart on average (regardless of how long the encounter lasted) are discarded as negligible risk.""\r\n\r\nSo, for instance in https://www.coronawarn.app/en/faq/#encounter_count_19\r\n\r\n""The signal attenuation must have been below 73dB for at least 10 minutes within the 30-minute window"" might become\r\n""The signal attenuation must have been below 73dB (equivalent to a distance of less than 8 meters) for at least 10 minutes within the 30-minute window""', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'Ein-Tim', 'comment_id': 761694271.0, 'datetime': '2021-01-16 23:03:20+00:00', 'masked_author': 'username_3', 'text': 'If you add this, please write a disclaimer like this: https://github.com/corona-warn-app/cwa-documentation/blob/master/cwa-risk-assessment.md#L49', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'heinezen', 'comment_id': 769177377.0, 'datetime': '2021-01-28 15:47:35+00:00', 'masked_author': 'username_4', 'text': 'I think it is better to wait for the doc updates before we add these numbers to the FAQ. The dB levels are not exactly equivalent to distances. There are **ranges** of dB levels associated with distances based on empiric research. We have to consider this before we write anything in the FAQ.\r\n\r\nThe upcoming documentation updates should address this better, so we hopefully can use a condensed version of the explanations made there.\r\n\r\n----\r\nCorona-Warn-App Open Source Team', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'MikeMcC399', 'comment_id': 796636491.0, 'datetime': '2021-03-11 10:30:55+00:00', 'masked_author': 'username_0', 'text': 'Unfortunately there is still no updated [cwa-risk-assessment.md](https://github.com/corona-warn-app/cwa-documentation/blob/master/cwa-risk-assessment.md) published - see https://github.com/corona-warn-app/cwa-documentation/issues/453, where the publication schedule is continually delayed.\r\n\r\nThe meaning of dB levels in the [FAQs](https://www.coronawarn.app/en/faq/) is still mostly unexplained and non-technical readers will have difficulty interpreting the information.', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'dsarkar', 'comment_id': 796763949.0, 'datetime': '2021-03-11 14:10:51+00:00', 'masked_author': 'username_1', 'text': ""@username_4 @username_0 I think we can go ahead and implement @username_0's suggestion? In parenthesis approximate distances (or ranges). So far, this parameter has not been changed in the risk calculation (time has been).  Overall it will help the reader to understand better how it is done. (The non-technical inclined reader will think of music/volume/speakers if at all). So let's do it. Again, we can always specify more details later."", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'heinezen', 'comment_id': 796773045.0, 'datetime': '2021-03-11 14:23:47+00:00', 'masked_author': 'username_4', 'text': '', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'MikeMcC399', 'comment_id': 796880254.0, 'datetime': '2021-03-11 16:49:00+00:00', 'masked_author': 'username_0', 'text': '@username_4 / @username_1 \r\n\r\nThe explanation should be published to the FAQs. So far, the answer has only been posted to GitHub, not to the FAQs.', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'MikeMcC399', 'comment_id': 815592370.0, 'datetime': '2021-04-08 09:06:56+00:00', 'masked_author': 'username_0', 'text': 'https://www.coronawarn.app/en/faq/#encounter_19_calc\r\nhttps://www.coronawarn.app/de/faq/#encounter_19_calc\r\nare in the process of being revised through https://github.com/corona-warn-app/cwa-website/pull/1050', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'MikeMcC399', 'comment_id': 904700132.0, 'datetime': '2021-08-24 14:37:09+00:00', 'masked_author': 'username_0', 'text': '63-73 is far away\r\n55-63 is mid-range\r\n<55 is very close', 'title': None, 'type': 'comment'}
+ {'action': 'closed', 'author': 'MikeMcC399', 'comment_id': None, 'datetime': '2022-02-07 16:44:11+00:00', 'masked_author': 'username_0', 'text': '', 'title': None, 'type': 'issue'}]","<issue_start><issue_comment>Title: Add equivalent distances to dB levels in FAQs
+username_0: ## Where to find the issue
+https://www.coronawarn.app/en/faq/#encounter_count_19
+https://www.coronawarn.app/de/faq/#encounter_count_19
+https://www.coronawarn.app/en/faq/#encounter_19_calc
+https://www.coronawarn.app/de/faq/#encounter_19_calc
+
+## Describe the issue
+Some new FAQ articles explain risk calculations referring to dB levels. There is no display of dB levels in the CWA so these figures have no meaning to the majority of app users. I imagine also that most reader will not know that dB is a logarithmic scale.
+
+## Suggested change
+Add explanatory distance levels to the dB levels referring to in the FAQs.
+According to https://github.com/corona-warn-app/cwa-documentation/blob/master/cwa-risk-assessment.md ""each dB value is associated with a particular distance"".
+
+Attenuation | Distance
+--- | ---
+55 dB | 1.5m
+63 dB | 3m
+73 dB | 8m
+<issue_comment>username_1: OK, sounds good to me. Will be included.
+<issue_comment>username_2: 2 questions from my side:
+
+a) can you provide the formula that translates the bluetooth signal attenuation (measured in dB) into distance (measured in meters)? In multiple cases, it is mentioned that a 73 dB attenuation corresponds to a distance of 8 meters, whereas 55 dB are translated into 1.5 meters, but i have not found the formula used or at least a reference to a paper/textbook.
+
+b) In the updated diagram for risk calculation with enf v2, it is unclear to me how the time where the signal attenuation is between 63 dB and 73 dB is taken into account. Unless there is a typo, It seems that this signal is considered harmless and does not take part in the calculation of the weighted exposure time (even with a 0.5 coefficient), therefore i do not really understand whether the threshold is set to 73 db or 63 dB https://github.com/corona-warn-app/cwa-documentation/blob/master/images/risk_calculation/risk_calculation_enf_v2_overview.pdf
+<issue_comment>username_0: @username_2 
+These are good questions. I suggest you submit them as two separate questions through [documentation question](https://github.com/corona-warn-app/cwa-documentation/issues/new?labels=question&template=03_questions.md).
+
+Note that Google states in https://developers.google.com/android/exposure-notifications/ble-attenuation-overview#distance-proxy:
+
+**Attenuations as distance proxy**
+""Attenuation is a very noisy proxy of distance. A very low attenuation indicates a very high probability of a short distance, but a high attenuation can be caused by many phenomena and is not always indicative of a long distance.""
+
+You may also find some interesting background reading in https://developers.google.com/android/exposure-notifications/ble-attenuation-overview concerning the calibration procedure for Bluetooth Low Energy (BLE).
+<issue_comment>username_1: Suggestion: Add an explanatory note at the end of both FAQs.
+
+EN:
+
+""
+---
+
+**Explanatory note:**
+**Attenuation (dB) versus distance (m)** 
+
+According to https://github.com/corona-warn-app/cwa-documentation/blob/master/cwa-risk-assessment.md ""each dB value is associated with a particular distance:
+
+Attenuation (dB) | Distance (m)
+--- | ---
+55  | 1.5 
+63  | 3 
+73  | 8 
+
+""
+<issue_comment>username_1: And just for the fun of it:
+
+![image](https://user-images.githubusercontent.com/1409741/104049170-ca199680-51e4-11eb-83ab-83bb31702c89.png)
+<issue_comment>username_0: The text would be more readable to add the equivalents in-line. For instance in https://github.com/corona-warn-app/cwa-documentation/blob/master/cwa-risk-assessment.md there is an example of how it is expressed:
+
+""All encounters for a diagnosis key that lasted less than 10 minutes in total (regardless of how close the smartphones came during that time) or during which the smartphones were more than 8 meters (>73 dB attenuation) apart on average (regardless of how long the encounter lasted) are discarded as negligible risk.""
+
+So, for instance in https://www.coronawarn.app/en/faq/#encounter_count_19
+
+""The signal attenuation must have been below 73dB for at least 10 minutes within the 30-minute window"" might become
+""The signal attenuation must have been below 73dB (equivalent to a distance of less than 8 meters) for at least 10 minutes within the 30-minute window""
+<issue_comment>username_3: If you add this, please write a disclaimer like this: https://github.com/corona-warn-app/cwa-documentation/blob/master/cwa-risk-assessment.md#L49
+<issue_comment>username_4: I think it is better to wait for the doc updates before we add these numbers to the FAQ. The dB levels are not exactly equivalent to distances. There are **ranges** of dB levels associated with distances based on empiric research. We have to consider this before we write anything in the FAQ.
+
+The upcoming documentation updates should address this better, so we hopefully can use a condensed version of the explanations made there.
+
+----
+Corona-Warn-App Open Source Team
+<issue_comment>username_0: Unfortunately there is still no updated [cwa-risk-assessment.md](https://github.com/corona-warn-app/cwa-documentation/blob/master/cwa-risk-assessment.md) published - see https://github.com/corona-warn-app/cwa-documentation/issues/453, where the publication schedule is continually delayed.
+
+The meaning of dB levels in the [FAQs](https://www.coronawarn.app/en/faq/) is still mostly unexplained and non-technical readers will have difficulty interpreting the information.
+<issue_comment>username_1: @username_4 @username_0 I think we can go ahead and implement @username_0's suggestion? In parenthesis approximate distances (or ranges). So far, this parameter has not been changed in the risk calculation (time has been).  Overall it will help the reader to understand better how it is done. (The non-technical inclined reader will think of music/volume/speakers if at all). So let's do it. Again, we can always specify more details later.
+<issue_comment>username_0: @username_4 / @username_1 
+
+The explanation should be published to the FAQs. So far, the answer has only been posted to GitHub, not to the FAQs.
+<issue_comment>username_0: https://www.coronawarn.app/en/faq/#encounter_19_calc
+https://www.coronawarn.app/de/faq/#encounter_19_calc
+are in the process of being revised through https://github.com/corona-warn-app/cwa-website/pull/1050
+<issue_comment>username_0: 63-73 is far away
+55-63 is mid-range
+<55 is very close<issue_closed>"
+newrelic/docs-website,1032179082,4433,"{'number': 4433.0, 'repo': 'docs-website', 'user_login': 'newrelic'}","[{'action': 'opened', 'author': 'alvarocabanas', 'comment_id': None, 'datetime': '2021-10-21T07:58:43Z', 'masked_author': 'username_0', 'text': '## Give us some context\r\nWhat problems does this PR solve?\r\nCreating documentation for a nre integration\r\n\r\nAdd any context that will help us review your changes such as testing notes,\r\nlinks to related docs, screenshots, etc.\r\n\r\nIf your issue relates to an existing GitHub issue, please link to it.\r\nCreate documentation newrelic-coreint#144\r\n\r\n## Are you making a change to site code?\r\nno', 'title': 'PowerDNS docs', 'type': 'issue'}
+ {'action': 'created', 'author': 'urbiz-nr', 'comment_id': 948381254.0, 'datetime': '2021-10-21 08:30:13+00:00', 'masked_author': 'username_1', 'text': 'Subs #3180.', 'title': None, 'type': 'comment'}]","<issue_start><issue_comment>Title: PowerDNS docs
+username_0: ## Give us some context
+What problems does this PR solve?
+Creating documentation for a nre integration
+
+Add any context that will help us review your changes such as testing notes,
+links to related docs, screenshots, etc.
+
+If your issue relates to an existing GitHub issue, please link to it.
+Create documentation newrelic-coreint#144
+
+## Are you making a change to site code?
+no
+<issue_comment>username_1: Subs #3180."
+google/web-starter-kit,54935215,601,,"[{'action': 'opened', 'author': 'Uriahs9', 'comment_id': None, 'datetime': '2015-01-20 20:30:05+00:00', 'masked_author': 'username_0', 'text': 'I noticed that in the style location for the index.html it had ""main.css""...so the page was not being rendered because there is no main.css so in the code i changed it to ""main.scss"" and it showed up fine... but i noticed that there is alot of inconsistences...\r\n\r\nthe ""style guide"" points to ""styles/components.css"" this path is incomplete... i changed it to ""styles/components/components.scss"" but still...there are no styles on the style guide page...\r\n\r\nWhat am i missing here?', 'title': 'Css not being rendered', 'type': 'issue'}
+ {'action': 'created', 'author': 'kevva', 'comment_id': 70727282.0, 'datetime': '2015-01-20 20:31:57+00:00', 'masked_author': 'username_1', 'text': 'You need to build it first. https://github.com/google/web-starter-kit/blob/master/docs/commands.md.', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'Uriahs9', 'comment_id': 70729808.0, 'datetime': '2015-01-20 20:46:55+00:00', 'masked_author': 'username_0', 'text': 'Thanks for the quick reply... i saw the install.md but i just jumped in and started editing code :3 question... so after i have finished my project and i use gulp to ""build"" the project...how do i go about uploading it to a host? are there any special steps? will that built project be ""upload ready"" ?\r\n\r\nThanks.', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'kevva', 'comment_id': 70730324.0, 'datetime': '2015-01-20 20:49:52+00:00', 'masked_author': 'username_1', 'text': ""Yup, just upload what's in the `dist` directory."", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'Uriahs9', 'comment_id': 70734241.0, 'datetime': '2015-01-20 21:11:27+00:00', 'masked_author': 'username_0', 'text': 'Ok i will try it out and return to report here within the coming hours. Please do not close this thread as yet.', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'Uriahs9', 'comment_id': 70777143.0, 'datetime': '2015-01-21 03:03:38+00:00', 'masked_author': 'username_0', 'text': ""Hit my toe on the wall...can't continue because of sass... i have installed both Scout and Mixture but terminal doesn't give sass version...\r\n![sass](https://cloud.githubusercontent.com/assets/10324144/5830545/5caf2d88-a0f8-11e4-8467-5105c4874b0a.PNG)"", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'Uriahs9', 'comment_id': 70781035.0, 'datetime': '2015-01-21 03:59:00+00:00', 'masked_author': 'username_0', 'text': ""Ok fixed this by going to a lower version of the ruby installer...apparently the lastest versions of the installer does not have all the gem packages...\r\n\r\nBut, just when i thought i was done i ran into a problem with 'npm install' \r\n![npm](https://cloud.githubusercontent.com/assets/10324144/5831017/ecbb1bba-a0ff-11e4-9f0e-b351c14da77e.PNG)\r\n\r\n\r\nI have uploaded the log to google drive if anyone can help crack down what its saying: https://drive.google.com/file/d/0B2JHimBsITS6NTNTcUxOQTVhZW8/view?usp=sharing"", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'Uriahs9', 'comment_id': 70784402.0, 'datetime': '2015-01-21 04:53:59+00:00', 'masked_author': 'username_0', 'text': 'Ok i took some time and i went over the instructions for this boilplate. For 1 i was using the install.md for instructions when i should have been using: https://developers.google.com/web/fundamentals/getting-started/web-starter-kit/setting-up#install-these-one-time-dependencies\r\n\r\n\r\nbut i have installed everything needed but still having problems... why are there no videos for these things? iv never had so much trouble ""getting started""! \r\n\r\nI navigated to the folder of the webstarter kit (i renamed it to ""web"") and run npm install in that directory...it was going fine until this:\r\n\r\n![npm error](https://cloud.githubusercontent.com/assets/10324144/5831348/810059aa-a107-11e4-8525-bc57d21e0cb6.PNG)\r\n\r\ni proceeded and ran npm install gulp -g ...it seem to have installed but when i type ""gulp serve"" it sends back this: \r\n![gulp](https://cloud.githubusercontent.com/assets/10324144/5831368/d6b2b550-a107-11e4-82a5-7b17cde23ee3.PNG)\r\n\r\nI am totally lost at the moment... all i wanted was a boilerplate with responsiveness but this is proving to be a totally different challenge...', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'brucebentley', 'comment_id': 70785804.0, 'datetime': '2015-01-21 05:14:52+00:00', 'masked_author': 'username_2', 'text': 'Try deleting the node_modules folder completely, and then run `npm install` again. It looks like not all of the project dependencies have been installed properly.', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'Uriahs9', 'comment_id': 70787178.0, 'datetime': '2015-01-21 05:37:02+00:00', 'masked_author': 'username_0', 'text': 'Where exactly do i delete it from? I have a node_modules folder in the following places:\r\n\r\nC:\\Program Files\\nodejs\\node_modules\r\nC:\\Program Files\\nodejs\\node_modules\\npm\\node_modules\r\n\r\nI also have one in the folder with the starter kit (which i renamed web for convenience):\r\n\r\nC:\\Users\\Uriahs\\Desktop\\web\\node_modules\r\n\r\nForgive me for being a total novice in npm and node.js', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'brucebentley', 'comment_id': 70787480.0, 'datetime': '2015-01-21 05:41:33+00:00', 'masked_author': 'username_2', 'text': 'From the project folder on your desktop. Delete node_modules from `\\web`', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'Uriahs9', 'comment_id': 70839072.0, 'datetime': '2015-01-21 13:46:44+00:00', 'masked_author': 'username_0', 'text': 'Ok i examined the cmd properly and the error code says that it basically needs at least nmp 2.1.5 to work where as i have v 1.4.28... so i went about and installed v 2.2.0 of npm.\r\n\r\nI went through the instructions of upgrading NPM on windows... but i run into a problem\r\n\r\nLink to article: https://github.com/npm/npm/wiki/Troubleshooting#upgrading-on-windows\r\n\r\n**NOTE** I used option 1, then i copied the npmrc into the C:\\Users\\uriahs\\AppData\\Roaming\\npm\\node_modules\\npm path as instructed... but im not sure if i have the environment variables set up correctly because when i type npm -v cmd tells me ""node"" is not a recognized command...\r\n\r\nI think i have my environment variable all messed up...please advise. Please also help with the correct syntax for adding the environment varible.\r\n\r\nTHANK YOU', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'Uriahs9', 'comment_id': 70840170.0, 'datetime': '2015-01-21 13:54:05+00:00', 'masked_author': 'username_0', 'text': 'Update... i deleted the variables i made (made one in user variables and another in system variables) and now im getting this: \r\n![npm not recognized](https://cloud.githubusercontent.com/assets/10324144/5837176/2c4a28fe-a153-11e4-8d60-6a32ea90b806.PNG)\r\n\r\n\r\nIll say it again this is the most difficult ""getting started"" i have ever seen...takes so much just to get a boilerplate..', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'brucebentley', 'comment_id': 70853115.0, 'datetime': '2015-01-21 15:07:11+00:00', 'masked_author': 'username_2', 'text': ""* `npm cache clean`\r\n* ` npm update -g`\r\n\r\nSee if this helps you out. I totally understand your frustrations, getting NodeJS up & running on my work supplied Windows desktop was a little more tricky than getting it up and running on my personal MacBook (thanks to Homebrew).\r\n\r\n---\r\n\r\nHere's a coupe of links that definitely helped me get started, although alot of the information is repetitive, you can kinda/sorta mix & match to get you up and running:\r\n\r\n1. [Installing Node.js on Windows - _Six Revisions_](http://sixrevisions.com/web-development/installing-node-windows/)\r\n2. [Getting started in developing Node.js in Windows - _ALTIFY:SOFTWARE_](http://www.altifysoftware.com/developing-node-js-in-windows/)\r\n3. [Installing node.js on Windows - _Vikram Kumar_](http://kumarvikram.com/installing-node-js-windows/)\r\n4. [Installing Node.js on Windows 8 - _Gareth JM Saunders_](http://blog.garethjmsaunders.co.uk/2013/10/24/installing-node-js-on-windows-8/)\r\n5. [Node.js On Windows 8.1 - _Tyler Butler_](http://www.tylerbutler.com/2014/08/node-js-on-windows-8-1/)\r\n\r\nAlso, I would recomment using a different command prompt ([Console2](http://sourceforge.net/projects/console/) or [ConsoleZ](https://github.com/cbucher/console/wiki/Downloads) more specifically) on Windows. These will allow you to specify additional parameters & make things **A TON** easier, especially starting out."", 'title': None, 'type': 'comment'}
+ {'action': 'closed', 'author': 'sindresorhus', 'comment_id': None, 'datetime': '2015-01-21 15:21:05+00:00', 'masked_author': 'username_3', 'text': '', 'title': None, 'type': 'issue'}
+ {'action': 'created', 'author': 'sindresorhus', 'comment_id': 70855812.0, 'datetime': '2015-01-21 15:21:05+00:00', 'masked_author': 'username_3', 'text': 'I would recommend http://bliker.github.io/cmder/', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'brucebentley', 'comment_id': 70858097.0, 'datetime': '2015-01-21 15:32:53+00:00', 'masked_author': 'username_2', 'text': 'Thanks @username_3 I completely forgot to add that! I literally just installed this a couple days ago too...', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'Uriahs9', 'comment_id': 70861272.0, 'datetime': '2015-01-21 15:49:31+00:00', 'masked_author': 'username_0', 'text': ""Why did he close the thread if i haven't confirmed the problem rectified :3 I haven't tried out what you posted i was thinking of completely uninstalling node.js using revouninstaller and starting from the top using what you posted..."", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'brucebentley', 'comment_id': 70861985.0, 'datetime': '2015-01-21 15:53:02+00:00', 'masked_author': 'username_2', 'text': 'Did you have any luck?', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'Uriahs9', 'comment_id': 70868604.0, 'datetime': '2015-01-21 16:26:14+00:00', 'masked_author': 'username_0', 'text': ""I am currently at work right now. So i can't try out everything till i get home but i have always been having issues with this new world of npm and node.js... i couldn't get started with steroids (appgyver) because of it and now i cant get started with web starter kit because of this also....\r\n\r\n\r\nI will uninstall node.js when i go home and manually delete any left overs (npm incase it doesnt take it with it...since i used node.js to install npm)... \r\n\r\nI will give you guys an update in the couple hours but i dont think the thread should have been closed because it relates to web-starter-kit and i haven't even been able to get to that step because google assumes you have everything set up right already. Thanks for your continued help @username_2 I work in IT and currently my cmd cant ping...ipconfig...etc no idea why...\r\n\r\nMy final work envionment will be on MAC so i will still have to do these on my mac once i get it (hope its easier) but i will also be programming in VS on windows which is why i need to get this sorted don't want to get left behind."", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'brucebentley', 'comment_id': 70870491.0, 'datetime': '2015-01-21 16:34:48+00:00', 'masked_author': 'username_2', 'text': '@username_0 In regards to your CMD not being able to issue ping or ipconfig statements, it sounds like you might have removed something essential from your User Variables PATH or System Variables PATH.\r\n\r\nMake sure you still have these in there (for the System Variables):\r\n* `C:\\WINDOWS\\system32;`\r\n* `C:\\WINDOWS;`\r\n* `C:\\WINDOWS\\System32\\Wbem;`\r\n* `C:\\WINDOWS\\System32\\WindowsPowerShell\\v1.0\\;`', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'Uriahs9', 'comment_id': 70969030.0, 'datetime': '2015-01-22 04:12:53+00:00', 'masked_author': 'username_0', 'text': '@username_2 i have reinstalled everything and have ruby, sass, npm, node at their latest stable version... i have created a new thread so others could contribute since the mod closed this one prematurely. It would be better if more people could help.\r\n\r\nhttps://github.com/google/web-starter-kit/issues/604', 'title': None, 'type': 'comment'}]","<issue_start><issue_comment>Title: Css not being rendered
+username_0: I noticed that in the style location for the index.html it had ""main.css""...so the page was not being rendered because there is no main.css so in the code i changed it to ""main.scss"" and it showed up fine... but i noticed that there is alot of inconsistences...
+
+the ""style guide"" points to ""styles/components.css"" this path is incomplete... i changed it to ""styles/components/components.scss"" but still...there are no styles on the style guide page...
+
+What am i missing here?
+<issue_comment>username_1: You need to build it first. https://github.com/google/web-starter-kit/blob/master/docs/commands.md.
+<issue_comment>username_0: Thanks for the quick reply... i saw the install.md but i just jumped in and started editing code :3 question... so after i have finished my project and i use gulp to ""build"" the project...how do i go about uploading it to a host? are there any special steps? will that built project be ""upload ready"" ?
+
+Thanks.
+<issue_comment>username_1: Yup, just upload what's in the `dist` directory.
+<issue_comment>username_0: Ok i will try it out and return to report here within the coming hours. Please do not close this thread as yet.
+<issue_comment>username_0: Hit my toe on the wall...can't continue because of sass... i have installed both Scout and Mixture but terminal doesn't give sass version...
+![sass](https://cloud.githubusercontent.com/assets/10324144/5830545/5caf2d88-a0f8-11e4-8467-5105c4874b0a.PNG)
+<issue_comment>username_0: Ok fixed this by going to a lower version of the ruby installer...apparently the lastest versions of the installer does not have all the gem packages...
+
+But, just when i thought i was done i ran into a problem with 'npm install' 
+![npm](https://cloud.githubusercontent.com/assets/10324144/5831017/ecbb1bba-a0ff-11e4-9f0e-b351c14da77e.PNG)
+
+
+I have uploaded the log to google drive if anyone can help crack down what its saying: https://drive.google.com/file/d/0B2JHimBsITS6NTNTcUxOQTVhZW8/view?usp=sharing
+<issue_comment>username_0: Ok i took some time and i went over the instructions for this boilplate. For 1 i was using the install.md for instructions when i should have been using: https://developers.google.com/web/fundamentals/getting-started/web-starter-kit/setting-up#install-these-one-time-dependencies
+
+
+but i have installed everything needed but still having problems... why are there no videos for these things? iv never had so much trouble ""getting started""! 
+
+I navigated to the folder of the webstarter kit (i renamed it to ""web"") and run npm install in that directory...it was going fine until this:
+
+![npm error](https://cloud.githubusercontent.com/assets/10324144/5831348/810059aa-a107-11e4-8525-bc57d21e0cb6.PNG)
+
+i proceeded and ran npm install gulp -g ...it seem to have installed but when i type ""gulp serve"" it sends back this: 
+![gulp](https://cloud.githubusercontent.com/assets/10324144/5831368/d6b2b550-a107-11e4-82a5-7b17cde23ee3.PNG)
+
+I am totally lost at the moment... all i wanted was a boilerplate with responsiveness but this is proving to be a totally different challenge...
+<issue_comment>username_2: Try deleting the node_modules folder completely, and then run `npm install` again. It looks like not all of the project dependencies have been installed properly.
+<issue_comment>username_0: Where exactly do i delete it from? I have a node_modules folder in the following places:
+
+C:\Program Files\nodejs\node_modules
+C:\Program Files\nodejs\node_modules\npm\node_modules
+
+I also have one in the folder with the starter kit (which i renamed web for convenience):
+
+C:\Users\Uriahs\Desktop\web\node_modules
+
+Forgive me for being a total novice in npm and node.js
+<issue_comment>username_2: From the project folder on your desktop. Delete node_modules from `\web`
+<issue_comment>username_0: Ok i examined the cmd properly and the error code says that it basically needs at least nmp 2.1.5 to work where as i have v 1.4.28... so i went about and installed v 2.2.0 of npm.
+
+I went through the instructions of upgrading NPM on windows... but i run into a problem
+
+Link to article: https://github.com/npm/npm/wiki/Troubleshooting#upgrading-on-windows
+
+**NOTE** I used option 1, then i copied the npmrc into the C:\Users\uriahs\AppData\Roaming\npm\node_modules\npm path as instructed... but im not sure if i have the environment variables set up correctly because when i type npm -v cmd tells me ""node"" is not a recognized command...
+
+I think i have my environment variable all messed up...please advise. Please also help with the correct syntax for adding the environment varible.
+
+THANK YOU
+<issue_comment>username_0: Update... i deleted the variables i made (made one in user variables and another in system variables) and now im getting this: 
+![npm not recognized](https://cloud.githubusercontent.com/assets/10324144/5837176/2c4a28fe-a153-11e4-8d60-6a32ea90b806.PNG)
+
+
+Ill say it again this is the most difficult ""getting started"" i have ever seen...takes so much just to get a boilerplate..
+<issue_comment>username_2: * `npm cache clean`
+* ` npm update -g`
+
+See if this helps you out. I totally understand your frustrations, getting NodeJS up & running on my work supplied Windows desktop was a little more tricky than getting it up and running on my personal MacBook (thanks to Homebrew).
+
+---
+
+Here's a coupe of links that definitely helped me get started, although alot of the information is repetitive, you can kinda/sorta mix & match to get you up and running:
+
+1. [Installing Node.js on Windows - _Six Revisions_](http://sixrevisions.com/web-development/installing-node-windows/)
+2. [Getting started in developing Node.js in Windows - _ALTIFY:SOFTWARE_](http://www.altifysoftware.com/developing-node-js-in-windows/)
+3. [Installing node.js on Windows - _Vikram Kumar_](http://kumarvikram.com/installing-node-js-windows/)
+4. [Installing Node.js on Windows 8 - _Gareth JM Saunders_](http://blog.garethjmsaunders.co.uk/2013/10/24/installing-node-js-on-windows-8/)
+5. [Node.js On Windows 8.1 - _Tyler Butler_](http://www.tylerbutler.com/2014/08/node-js-on-windows-8-1/)
+
+Also, I would recomment using a different command prompt ([Console2](http://sourceforge.net/projects/console/) or [ConsoleZ](https://github.com/cbucher/console/wiki/Downloads) more specifically) on Windows. These will allow you to specify additional parameters & make things **A TON** easier, especially starting out.<issue_closed>
+<issue_comment>username_3: I would recommend http://bliker.github.io/cmder/
+<issue_comment>username_2: Thanks @username_3 I completely forgot to add that! I literally just installed this a couple days ago too...
+<issue_comment>username_0: Why did he close the thread if i haven't confirmed the problem rectified :3 I haven't tried out what you posted i was thinking of completely uninstalling node.js using revouninstaller and starting from the top using what you posted...
+<issue_comment>username_2: Did you have any luck?
+<issue_comment>username_0: I am currently at work right now. So i can't try out everything till i get home but i have always been having issues with this new world of npm and node.js... i couldn't get started with steroids (appgyver) because of it and now i cant get started with web starter kit because of this also....
+
+
+I will uninstall node.js when i go home and manually delete any left overs (npm incase it doesnt take it with it...since i used node.js to install npm)... 
+
+I will give you guys an update in the couple hours but i dont think the thread should have been closed because it relates to web-starter-kit and i haven't even been able to get to that step because google assumes you have everything set up right already. Thanks for your continued help @username_2 I work in IT and currently my cmd cant ping...ipconfig...etc no idea why...
+
+My final work envionment will be on MAC so i will still have to do these on my mac once i get it (hope its easier) but i will also be programming in VS on windows which is why i need to get this sorted don't want to get left behind.
+<issue_comment>username_2: @username_0 In regards to your CMD not being able to issue ping or ipconfig statements, it sounds like you might have removed something essential from your User Variables PATH or System Variables PATH.
+
+Make sure you still have these in there (for the System Variables):
+* `C:\WINDOWS\system32;`
+* `C:\WINDOWS;`
+* `C:\WINDOWS\System32\Wbem;`
+* `C:\WINDOWS\System32\WindowsPowerShell\v1.0\;`
+<issue_comment>username_0: @username_2 i have reinstalled everything and have ruby, sass, npm, node at their latest stable version... i have created a new thread so others could contribute since the mod closed this one prematurely. It would be better if more people could help.
+
+https://github.com/google/web-starter-kit/issues/604"
+facebook/docusaurus,774970440,3955,,"[{'action': 'opened', 'author': 'wibed', 'comment_id': None, 'datetime': '2020-12-27 03:47:12+00:00', 'masked_author': 'username_0', 'text': '## 📚 Documentation\r\n\r\nthere are infima variables, which are neither documented, nor in the global css file, \r\n\r\nexample:\r\n--ifm-font-color-base\r\ndefines the font color in relation to the theme.\r\n\r\n\r\n### Have you read the [Contributing Guidelines on issues](https://github.com/facebook/docusaurus/blob/master/CONTRIBUTING.md#reporting-new-issues)?\r\n\r\nyes', 'title': 'is there a collection of infima css variables used throughout the project?', 'type': 'issue'}
+ {'action': 'created', 'author': 'wibed', 'comment_id': 751424409.0, 'datetime': '2020-12-27 04:20:56+00:00', 'masked_author': 'username_0', 'text': ""maybe my shell powers are underwhelming\r\n\r\n`find ./docusaurus -type f -exec grep -o '\\-\\-ifm\\(\\-[a-z]*\\)*' {} \\; | sort -u`\r\n\r\nbut I found 50 unique variables so far.\r\nsome of those are chopped up, others are not complete. I am not able to tell the difference so I won't try\r\n\r\n--ifm-\r\n--ifm-background-color\r\n--ifm-background-surface-color\r\n--ifm-button-background-color\r\n--ifm-code-font-size\r\n--ifm-color-black\r\n--ifm-color-content\r\n--ifm-color-content-inverse\r\n--ifm-color-content-secondary\r\n--ifm-color-emphasis-\r\n--ifm-color-feedback-background\r\n--ifm-color-primary\r\n--ifm-color-primary-dark\r\n--ifm-color-primary-darker\r\n--ifm-color-primary-darkest\r\n--ifm-color-primary-light\r\n--ifm-color-primary-lighter\r\n--ifm-color-primary-lightest\r\n--ifm-color-secondary\r\n--ifm-color-secondary-darkest\r\n--ifm-color-secondary-lighter\r\n--ifm-color-white\r\n--ifm-container-width\r\n--ifm-font-base-color\r\n--ifm-font-base-color-inverse\r\n--ifm-font-color-base\r\n--ifm-font-color-base-inverse\r\n--ifm-font-color-secondary\r\n--ifm-font-family-base\r\n--ifm-font-family-monospace\r\n--ifm-font-size-base\r\n--ifm-font-weight-bold\r\n--ifm-footer-background-color\r\n--ifm-global-border-width\r\n--ifm-global-radius\r\n--ifm-global-spacing\r\n--ifm-h\r\n--ifm-leading\r\n--ifm-leading-desktop\r\n--ifm-navbar-height\r\n--ifm-navbar-padding-horizontal\r\n--ifm-pre-line-height\r\n--ifm-pre-padding\r\n--ifm-spacing-horizontal\r\n--ifm-tabs-color-active\r\n--ifm-toc-border-color\r\n--ifm-toc-link-color\r\n--ifm-transition-fast\r\n--ifm-transition-timing-default\r\n--ifm-z-index-fixed"", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'wibed', 'comment_id': 751424812.0, 'datetime': '2020-12-27 04:28:25+00:00', 'masked_author': 'username_0', 'text': 'most confusing are these entries:\r\n\r\n```\r\n--ifm-font-base-color\r\n--ifm-font-base-color-inverse\r\n--ifm-font-color-base\r\n--ifm-font-color-base-inverse\r\n```\r\n\r\nwhich seem to describe the same thing but differently', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'wibed', 'comment_id': 751426089.0, 'datetime': '2020-12-27 04:50:26+00:00', 'masked_author': 'username_0', 'text': ""updating the command to include numbers\r\n\r\n`find ./docusaurus -type f -exec grep -o '\\-\\-ifm\\(\\-[a-z0-9]*\\)*' {} \\; | sort -u`\r\n\r\n--ifm-\r\n--ifm-background-color\r\n--ifm-background-surface-color\r\n--ifm-button-background-color\r\n--ifm-code-font-size\r\n--ifm-color-black\r\n--ifm-color-content\r\n--ifm-color-content-inverse\r\n--ifm-color-content-secondary\r\n--ifm-color-emphasis-100\r\n--ifm-color-emphasis-200\r\n--ifm-color-emphasis-400\r\n--ifm-color-emphasis-600\r\n--ifm-color-emphasis-900\r\n--ifm-color-feedback-background\r\n--ifm-color-primary\r\n--ifm-color-primary-dark\r\n--ifm-color-primary-darker\r\n--ifm-color-primary-darkest\r\n--ifm-color-primary-light\r\n--ifm-color-primary-lighter\r\n--ifm-color-primary-lightest\r\n--ifm-color-secondary\r\n--ifm-color-secondary-darkest\r\n--ifm-color-secondary-lighter\r\n--ifm-color-white\r\n--ifm-container-width\r\n--ifm-font-base-color\r\n--ifm-font-base-color-inverse\r\n--ifm-font-color-base\r\n--ifm-font-color-base-inverse\r\n--ifm-font-color-secondary\r\n--ifm-font-family-base\r\n--ifm-font-family-monospace\r\n--ifm-font-size-base\r\n--ifm-font-weight-bold\r\n--ifm-footer-background-color\r\n--ifm-global-border-width\r\n--ifm-global-radius\r\n--ifm-global-spacing\r\n--ifm-h2-font-size\r\n--ifm-h3-font-size\r\n--ifm-leading\r\n--ifm-leading-desktop\r\n--ifm-navbar-height\r\n--ifm-navbar-padding-horizontal\r\n--ifm-pre-line-height\r\n--ifm-pre-padding\r\n--ifm-spacing-horizontal\r\n--ifm-tabs-color-active\r\n--ifm-toc-border-color\r\n--ifm-toc-link-color\r\n--ifm-transition-fast\r\n--ifm-transition-timing-default\r\n--ifm-z-index-fixed"", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'slorber', 'comment_id': 752721585.0, 'datetime': '2020-12-30 18:47:57+00:00', 'masked_author': 'username_1', 'text': ""Hi @username_0 \r\n\r\nWe should definitively improve our Infima docs. \r\nUnfortunately, I'm not really able to answer all these questions right now, but maybe another contributor would.\r\n\r\nCan you please open an issue on Infima repo, as it's now open-sourced?\r\n\r\nhttps://github.com/facebookincubator/infima"", 'title': None, 'type': 'comment'}
+ {'action': 'closed', 'author': 'slorber', 'comment_id': None, 'datetime': '2020-12-30 18:47:57+00:00', 'masked_author': 'username_1', 'text': '', 'title': None, 'type': 'issue'}
+ {'action': 'created', 'author': 'wibed', 'comment_id': 753295778.0, 'datetime': '2021-01-01 10:01:34+00:00', 'masked_author': 'username_0', 'text': 'aware about the close relationships between infima and Docusaurus, I deem the poor documentation on infimas side a\r\nwhole different story. \r\n\r\nthis issue was meant to gather knowledge about all the variables used not the ones available.', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'paulrberg', 'comment_id': 991789642.0, 'datetime': '2021-12-11 21:29:33+00:00', 'masked_author': 'username_2', 'text': ""I don't think the list of colors in @username_0's message from above is up-to-date anymore. There are other variables now, such as `ifm-link-color`, which are not there.\r\n\r\nBeside looking at the source code, is there another way to find out all the overridable colors in Infima?"", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'Josh-Cena', 'comment_id': 991812643.0, 'datetime': '2021-12-12 00:48:59+00:00', 'masked_author': 'username_3', 'text': ""@username_2 for now you can only look at source code or through browser DevTools. In fact I don't even think a lot of the non-global colors are stable."", 'title': None, 'type': 'comment'}]","<issue_start><issue_comment>Title: is there a collection of infima css variables used throughout the project?
+username_0: ## 📚 Documentation
+
+there are infima variables, which are neither documented, nor in the global css file, 
+
+example:
+--ifm-font-color-base
+defines the font color in relation to the theme.
+
+
+### Have you read the [Contributing Guidelines on issues](https://github.com/facebook/docusaurus/blob/master/CONTRIBUTING.md#reporting-new-issues)?
+
+yes
+<issue_comment>username_0: maybe my shell powers are underwhelming
+
+`find ./docusaurus -type f -exec grep -o '\-\-ifm\(\-[a-z]*\)*' {} \; | sort -u`
+
+but I found 50 unique variables so far.
+some of those are chopped up, others are not complete. I am not able to tell the difference so I won't try
+
+--ifm-
+--ifm-background-color
+--ifm-background-surface-color
+--ifm-button-background-color
+--ifm-code-font-size
+--ifm-color-black
+--ifm-color-content
+--ifm-color-content-inverse
+--ifm-color-content-secondary
+--ifm-color-emphasis-
+--ifm-color-feedback-background
+--ifm-color-primary
+--ifm-color-primary-dark
+--ifm-color-primary-darker
+--ifm-color-primary-darkest
+--ifm-color-primary-light
+--ifm-color-primary-lighter
+--ifm-color-primary-lightest
+--ifm-color-secondary
+--ifm-color-secondary-darkest
+--ifm-color-secondary-lighter
+--ifm-color-white
+--ifm-container-width
+--ifm-font-base-color
+--ifm-font-base-color-inverse
+--ifm-font-color-base
+--ifm-font-color-base-inverse
+--ifm-font-color-secondary
+--ifm-font-family-base
+--ifm-font-family-monospace
+--ifm-font-size-base
+--ifm-font-weight-bold
+--ifm-footer-background-color
+--ifm-global-border-width
+--ifm-global-radius
+--ifm-global-spacing
+--ifm-h
+--ifm-leading
+--ifm-leading-desktop
+--ifm-navbar-height
+--ifm-navbar-padding-horizontal
+--ifm-pre-line-height
+--ifm-pre-padding
+--ifm-spacing-horizontal
+--ifm-tabs-color-active
+--ifm-toc-border-color
+--ifm-toc-link-color
+--ifm-transition-fast
+--ifm-transition-timing-default
+--ifm-z-index-fixed
+<issue_comment>username_0: most confusing are these entries:
+
+```
+--ifm-font-base-color
+--ifm-font-base-color-inverse
+--ifm-font-color-base
+--ifm-font-color-base-inverse
+```
+
+which seem to describe the same thing but differently
+<issue_comment>username_0: updating the command to include numbers
+
+`find ./docusaurus -type f -exec grep -o '\-\-ifm\(\-[a-z0-9]*\)*' {} \; | sort -u`
+
+--ifm-
+--ifm-background-color
+--ifm-background-surface-color
+--ifm-button-background-color
+--ifm-code-font-size
+--ifm-color-black
+--ifm-color-content
+--ifm-color-content-inverse
+--ifm-color-content-secondary
+--ifm-color-emphasis-100
+--ifm-color-emphasis-200
+--ifm-color-emphasis-400
+--ifm-color-emphasis-600
+--ifm-color-emphasis-900
+--ifm-color-feedback-background
+--ifm-color-primary
+--ifm-color-primary-dark
+--ifm-color-primary-darker
+--ifm-color-primary-darkest
+--ifm-color-primary-light
+--ifm-color-primary-lighter
+--ifm-color-primary-lightest
+--ifm-color-secondary
+--ifm-color-secondary-darkest
+--ifm-color-secondary-lighter
+--ifm-color-white
+--ifm-container-width
+--ifm-font-base-color
+--ifm-font-base-color-inverse
+--ifm-font-color-base
+--ifm-font-color-base-inverse
+--ifm-font-color-secondary
+--ifm-font-family-base
+--ifm-font-family-monospace
+--ifm-font-size-base
+--ifm-font-weight-bold
+--ifm-footer-background-color
+--ifm-global-border-width
+--ifm-global-radius
+--ifm-global-spacing
+--ifm-h2-font-size
+--ifm-h3-font-size
+--ifm-leading
+--ifm-leading-desktop
+--ifm-navbar-height
+--ifm-navbar-padding-horizontal
+--ifm-pre-line-height
+--ifm-pre-padding
+--ifm-spacing-horizontal
+--ifm-tabs-color-active
+--ifm-toc-border-color
+--ifm-toc-link-color
+--ifm-transition-fast
+--ifm-transition-timing-default
+--ifm-z-index-fixed
+<issue_comment>username_1: Hi @username_0 
+
+We should definitively improve our Infima docs. 
+Unfortunately, I'm not really able to answer all these questions right now, but maybe another contributor would.
+
+Can you please open an issue on Infima repo, as it's now open-sourced?
+
+https://github.com/facebookincubator/infima<issue_closed>
+<issue_comment>username_0: aware about the close relationships between infima and Docusaurus, I deem the poor documentation on infimas side a
+whole different story. 
+
+this issue was meant to gather knowledge about all the variables used not the ones available.
+<issue_comment>username_2: I don't think the list of colors in @username_0's message from above is up-to-date anymore. There are other variables now, such as `ifm-link-color`, which are not there.
+
+Beside looking at the source code, is there another way to find out all the overridable colors in Infima?
+<issue_comment>username_3: @username_2 for now you can only look at source code or through browser DevTools. In fact I don't even think a lot of the non-global colors are stable."
+oVirt/ovirt-site,709105830,2349,"{'number': 2349.0, 'repo': 'ovirt-site', 'user_login': 'oVirt'}","[{'action': 'opened', 'author': 'mz-pdm', 'comment_id': None, 'datetime': '2020-09-25T16:52:47Z', 'masked_author': 'username_0', 'text': 'Changes proposed in this pull request:\r\n\r\n- Escape Bugzilla link.\r\n\r\n- Add warning about usage on POWER.\r\n\r\n- Add a screenshot.\r\n\r\nI confirm that this pull request was submitted according to the [contribution guidelines](https://github.com/oVirt/ovirt-site/blob/master/CONTRIBUTING.md): @username_0 \r\n\r\nThis pull request needs review by: @ahadas', 'title': 'Update NVDIMM feature page', 'type': 'issue'}
+ {'action': 'created', 'author': 'sandrobonazzola', 'comment_id': 699861964.0, 'datetime': '2020-09-28 08:28:54+00:00', 'masked_author': 'username_1', 'text': 'Waiting for @ahadas approval for merging', 'title': None, 'type': 'comment'}]","<issue_start><issue_comment>Title: Update NVDIMM feature page
+username_0: Changes proposed in this pull request:
+
+- Escape Bugzilla link.
+
+- Add warning about usage on POWER.
+
+- Add a screenshot.
+
+I confirm that this pull request was submitted according to the [contribution guidelines](https://github.com/oVirt/ovirt-site/blob/master/CONTRIBUTING.md): @username_0 
+
+This pull request needs review by: @ahadas
+<issue_comment>username_1: Waiting for @ahadas approval for merging"
+davidebbo/AzureWebsitesSamples,259907389,8,,"[{'action': 'opened', 'author': 'dfinke', 'comment_id': None, 'datetime': '2017-09-22 18:59:56+00:00', 'masked_author': 'username_0', 'text': '```\r\nPS C:\\> gcm Get-AzureRmContext\r\n\r\nCommandType     Name                                               Version    Source\r\n-----------     ----                                               -------    ------\r\nCmdlet          Get-AzureRmContext                                 3.2.1      AzureRM.profile\r\n```\r\n\r\nhttps://github.com/username_1/AzureWebsitesSamples/blob/master/PowerShell/HelperFunctions.ps1#L315 fails\r\n```\r\n$Subscription = (Get-AzureRmContext).Subscription.SubscriptionId\r\n```\r\n\r\nThis works for my version of the cmdlets\r\n```\r\n$Subscription = (Get-AzureRmContext).Subscription.Id\r\n```', 'title': 'GetTriggeredWebJobHistory error', 'type': 'issue'}
+ {'action': 'created', 'author': 'davidebbo', 'comment_id': 331588051.0, 'datetime': '2017-09-23 00:22:37+00:00', 'masked_author': 'username_1', 'text': ""Strange, both SubscriptionId and Id work for me on a slightly newer version:\r\n\r\n```\r\nPS C:\\Users\\davidebb> gcm Get-AzureRmContext\r\n\r\nCommandType     Name                                               Version    Source                                                                                                          \r\n-----------     ----                                               -------    ------                                                                                                          \r\nCmdlet          Get-AzureRmContext                                 3.3.1      AzureRM.Pro\r\n```\r\n\r\nI'm not sure why yours says `AzureRM.profile` and mine `AzureRM.Pro`."", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'dfinke', 'comment_id': 331608629.0, 'datetime': '2017-09-23 03:58:16+00:00', 'masked_author': 'username_0', 'text': 'Thanks. Will look into it on my side.', 'title': None, 'type': 'comment'}
+ {'action': 'closed', 'author': 'dfinke', 'comment_id': None, 'datetime': '2017-10-18 13:19:07+00:00', 'masked_author': 'username_0', 'text': '', 'title': None, 'type': 'issue'}]","<issue_start><issue_comment>Title: GetTriggeredWebJobHistory error
+username_0: ```
+PS C:\> gcm Get-AzureRmContext
+
+CommandType     Name                                               Version    Source
+-----------     ----                                               -------    ------
+Cmdlet          Get-AzureRmContext                                 3.2.1      AzureRM.profile
+```
+
+https://github.com/username_1/AzureWebsitesSamples/blob/master/PowerShell/HelperFunctions.ps1#L315 fails
+```
+$Subscription = (Get-AzureRmContext).Subscription.SubscriptionId
+```
+
+This works for my version of the cmdlets
+```
+$Subscription = (Get-AzureRmContext).Subscription.Id
+```
+<issue_comment>username_1: Strange, both SubscriptionId and Id work for me on a slightly newer version:
+
+```
+PS C:\Users\davidebb> gcm Get-AzureRmContext
+
+CommandType     Name                                               Version    Source                                                                                                          
+-----------     ----                                               -------    ------                                                                                                          
+Cmdlet          Get-AzureRmContext                                 3.3.1      AzureRM.Pro
+```
+
+I'm not sure why yours says `AzureRM.profile` and mine `AzureRM.Pro`.
+<issue_comment>username_0: Thanks. Will look into it on my side.<issue_closed>"

@@ -1,0 +1,689 @@
+quarkusio/quarkusio.github.io,429890111,163,,"[{'action': 'opened', 'author': 'jamesfalkner', 'comment_id': None, 'datetime': '2019-04-05 18:51:28+00:00', 'masked_author': 'username_0', 'text': 'At https://quarkus.io/guides/hibernate-orm-panache-guide there is a snippet for streams:\r\n\r\n```\r\nList<String> namesButEmmanuels = Person.streamAll()\r\n    .map(p -> p.name.toLowerCase() )\r\n    .filter( n -> ! ""emmanuel"".equals(n) )\r\n    .collect(Collectors.toList());\r\n```\r\n\r\nBut it doesn\'t work due to no type information for the stream. It needs to be\r\n\r\n```\r\nList<String> namesButEmmanuels = Person.<Person>streamAll()\r\n    .map(p -> p.name.toLowerCase() )\r\n    .filter( n -> ! ""emmanuel"".equals(n) )\r\n    .collect(Collectors.toList());\r\n```\r\n\r\nThanks to @username_1 for the help!', 'title': 'Panache streams example not quite right', 'type': 'issue'}
+ {'action': 'created', 'author': 'dmlloyd', 'comment_id': 480385830.0, 'datetime': '2019-04-05 18:55:05+00:00', 'masked_author': 'username_1', 'text': 'It might also depend on the JDK as different Java versions have different powers of inference.', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'gsmet', 'comment_id': 483174431.0, 'datetime': '2019-04-15 09:18:00+00:00', 'masked_author': 'username_2', 'text': ""@username_3 have you seen this one? If it's true then there might be something to fix in Panache itself? It looks like something for which we shouldn't need the `<Person>` addition."", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'FroMage', 'comment_id': 483182309.0, 'datetime': '2019-04-15 09:40:59+00:00', 'masked_author': 'username_3', 'text': ""No, we can't fix it due to how type inference works. `Stream<Person> s = Person.sreamAll()` works, and you would think that for the same reason (left-hand-side inference) this ought to work: `Person.sreamAll().map((Person p) -> p.name.toLowerCase())` but no, because the argument to `map` is not used to infer the type of `Person.streamAll()`.\r\n\r\nThere's only so much magic we can do to trick Java's type inference limitations. We should fix the guide."", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'FroMage', 'comment_id': 483183455.0, 'datetime': '2019-04-15 09:44:28+00:00', 'masked_author': 'username_3', 'text': ""WDYT of https://github.com/quarkusio/quarkus/pull/2077 ? I think it's nicer than `Person.<Person>.streamAll()`."", 'title': None, 'type': 'comment'}
+ {'action': 'closed', 'author': 'gsmet', 'comment_id': None, 'datetime': '2019-04-15 09:51:01+00:00', 'masked_author': 'username_2', 'text': '', 'title': None, 'type': 'issue'}]","<issue_start><issue_comment>Title: Panache streams example not quite right
+username_0: At https://quarkus.io/guides/hibernate-orm-panache-guide there is a snippet for streams:
+
+```
+List<String> namesButEmmanuels = Person.streamAll()
+    .map(p -> p.name.toLowerCase() )
+    .filter( n -> ! ""emmanuel"".equals(n) )
+    .collect(Collectors.toList());
+```
+
+But it doesn't work due to no type information for the stream. It needs to be
+
+```
+List<String> namesButEmmanuels = Person.<Person>streamAll()
+    .map(p -> p.name.toLowerCase() )
+    .filter( n -> ! ""emmanuel"".equals(n) )
+    .collect(Collectors.toList());
+```
+
+Thanks to @username_1 for the help!
+<issue_comment>username_1: It might also depend on the JDK as different Java versions have different powers of inference.
+<issue_comment>username_2: @username_3 have you seen this one? If it's true then there might be something to fix in Panache itself? It looks like something for which we shouldn't need the `<Person>` addition.
+<issue_comment>username_3: No, we can't fix it due to how type inference works. `Stream<Person> s = Person.sreamAll()` works, and you would think that for the same reason (left-hand-side inference) this ought to work: `Person.sreamAll().map((Person p) -> p.name.toLowerCase())` but no, because the argument to `map` is not used to infer the type of `Person.streamAll()`.
+
+There's only so much magic we can do to trick Java's type inference limitations. We should fix the guide.
+<issue_comment>username_3: WDYT of https://github.com/quarkusio/quarkus/pull/2077 ? I think it's nicer than `Person.<Person>.streamAll()`.<issue_closed>"
+datenanfragen/website,1022004388,755,,"[{'action': 'opened', 'author': 'c0d3x27', 'comment_id': None, 'datetime': '2021-10-10T14:49:20Z', 'masked_author': 'username_0', 'text': ""Hi\r\n\r\nSince I already had one of my pull burned which translated to spam for hacktoberfest, I will just let you guys know about this vulnerability here and hope this can count for it. Your website is vulnerable to redirect \r\n\r\nPOC\r\n@evil.com # ADD this to any of your 6 websites\r\n\r\n\r\nAddress this vulnerability by escaping `.` appropriately: `regex = /((www|beta)\\.)?example\\.com/`\r\n\r\nThis string, which is used as a regular `cy.url().should('match', new RegExp(`${site}/blog/.+`));`, has an unescaped '`.`' before 'datarequests.org', so it might match more hosts than expected. \r\n\r\nThe unescaped `. `allows for any character before datarequests.org, effectively allowing the redirect to go to an attacker-controlled domain such as wwwPdatarequests.org"", 'title': ' Vulnerable Code', 'type': 'issue'}
+ {'action': 'created', 'author': 'mal-tee', 'comment_id': 939509883.0, 'datetime': '2021-10-10 16:16:18+00:00', 'masked_author': 'username_1', 'text': 'Please also refrain from making spam PRs for HTF.', 'title': None, 'type': 'comment'}
+ {'action': 'closed', 'author': 'mal-tee', 'comment_id': None, 'datetime': '2021-10-10 16:16:19+00:00', 'masked_author': 'username_1', 'text': '', 'title': None, 'type': 'issue'}
+ {'action': 'created', 'author': 'c0d3x27', 'comment_id': 939528730.0, 'datetime': '2021-10-10 18:18:13+00:00', 'masked_author': 'username_0', 'text': '+ It isn\'t. At least not in respect to your example and to our knowledge.\r\nby adding the @ and whatever domain it will redirect\r\n\r\n+ Btw.: Our tests are never shipped to users.\r\nI didn\'t know this. in fact, I do pen test for what it matters, I saw your website and just wanted to test it for vulns.\r\n\r\n+ Please validate your findings before making claims.\r\nThe moment the redirect was made from your website to another website by just adding an extra URL string was the validation I needed.\r\n\r\n+ Please also refrain from making spam PRs for HTF\r\nthis is why I opened this issue, to not may spam.\r\n\r\nPS: Here is the thing.. Open Source is not really my thing, I\'m new to this. My field is Bug Bounty but After learning about HTF, I wanted to give it a try and see how it goes. After reading some of the closed PRs and now reading these comments I\'m getting the impression that something is not right.\r\n\r\n***What do I mean?***\r\nwell, I feel that since we are not the faction in power, we are ""forced"" to try or give extra just to get a sticker or t-shirt. The only real reward we will get off these gadgets is just to say ""I did it"", nothing more. I(as many others) could easily be using my time to try to hack a web app and get pay for it. Instead, I\'m here, trying to make my contribution to get this sticker. \r\n\r\nSo, Even if you think this was an inapplicable issue a simple ""Hey man, Thank you for your report, but this doesn\'t apply to us because of ......."" would have made me feel appreciated.\r\n\r\nAs a matter of fact, I saw this issue #695 and started doing it but in Italian, then if the person designated to that issue didn\'t get the job done in time, I was also going to start doing that one too. But After seeing the attitude you guys have I don\'t even know if I could keep working on this, because Imagine me manually translating a whole website just to get my PR rejected. HTF is not forever, you guys can always need some help from the people that feel comfortable working with you guys, remember that.', 'title': None, 'type': 'comment'}]","<issue_start><issue_comment>Title:  Vulnerable Code
+username_0: Hi
+
+Since I already had one of my pull burned which translated to spam for hacktoberfest, I will just let you guys know about this vulnerability here and hope this can count for it. Your website is vulnerable to redirect 
+
+POC
+@evil.com # ADD this to any of your 6 websites
+
+
+Address this vulnerability by escaping `.` appropriately: `regex = /((www|beta)\.)?example\.com/`
+
+This string, which is used as a regular `cy.url().should('match', new RegExp(`${site}/blog/.+`));`, has an unescaped '`.`' before 'datarequests.org', so it might match more hosts than expected. 
+
+The unescaped `. `allows for any character before datarequests.org, effectively allowing the redirect to go to an attacker-controlled domain such as wwwPdatarequests.org
+<issue_comment>username_1: Please also refrain from making spam PRs for HTF.<issue_closed>
+<issue_comment>username_0: + It isn't. At least not in respect to your example and to our knowledge.
+by adding the @ and whatever domain it will redirect
+
++ Btw.: Our tests are never shipped to users.
+I didn't know this. in fact, I do pen test for what it matters, I saw your website and just wanted to test it for vulns.
+
++ Please validate your findings before making claims.
+The moment the redirect was made from your website to another website by just adding an extra URL string was the validation I needed.
+
++ Please also refrain from making spam PRs for HTF
+this is why I opened this issue, to not may spam.
+
+PS: Here is the thing.. Open Source is not really my thing, I'm new to this. My field is Bug Bounty but After learning about HTF, I wanted to give it a try and see how it goes. After reading some of the closed PRs and now reading these comments I'm getting the impression that something is not right.
+
+***What do I mean?***
+well, I feel that since we are not the faction in power, we are ""forced"" to try or give extra just to get a sticker or t-shirt. The only real reward we will get off these gadgets is just to say ""I did it"", nothing more. I(as many others) could easily be using my time to try to hack a web app and get pay for it. Instead, I'm here, trying to make my contribution to get this sticker. 
+
+So, Even if you think this was an inapplicable issue a simple ""Hey man, Thank you for your report, but this doesn't apply to us because of ......."" would have made me feel appreciated.
+
+As a matter of fact, I saw this issue #695 and started doing it but in Italian, then if the person designated to that issue didn't get the job done in time, I was also going to start doing that one too. But After seeing the attitude you guys have I don't even know if I could keep working on this, because Imagine me manually translating a whole website just to get my PR rejected. HTF is not forever, you guys can always need some help from the people that feel comfortable working with you guys, remember that."
+ethereum/ethereum-org-website,1148437284,5487,"{'number': 5487.0, 'repo': 'ethereum-org-website', 'user_login': 'ethereum'}","[{'action': 'opened', 'author': 'corwintines', 'comment_id': None, 'datetime': '2022-02-23T18:27:09Z', 'masked_author': 'username_0', 'text': '***\r\n### :zap: Changes\r\n- Georgian: New language, homepage (#5479) @wackerow\r\n- Intl batch update: Homepage content (#5480) @wackerow\r\n- add rocketpool description to pool staking services [Fixes #4891] (#5349) @MiConnell\r\n- Add warning to not commit env files (#5363) @Dentrax\r\n- fix: Use correct terminology to refer to the EVM state (#5348) @Sabnock01\r\n- Update Alchemy link in NFT tutorial (#5370) @btandowsky\r\n- add supermajority to glossary (#5394) @jmcook1186\r\n- add ""fork-choice algorithm"" to glossary (#5395) @jmcook1186\r\n- add lmd-ghost to glossary (#5396) @jmcook1186\r\n- add ""checkpoint"" to glossary (#5397) @jmcook1186\r\n- Add Kaleido to Nodes as a Service list (#5429) @nickgaski\r\n- Resolving text errors (Chinese dapps page) (#5465) @dohooo\r\n- Solidity is not ""heavily inspired by JavaScript"" (#5470) @Arachnid\r\n- Fix typo in hello-world-smart-contract tutorial (#5415) @asashour\r\n- Add li.finance article to further readings for bridges (#5460) @username_0\r\n- add link to energy consumption page ""further reading"" (#5386) @jmcook1186\r\n- Update index.md (#5463) @rojotek\r\n- Add link to Crowdin guide to translators guide and TP page (#5377) @lukassim\r\n- Fix typo in ERC-20 Contract Walk-Through (#5456) @said026\r\n- Adding and updating more rust resources (#5398) @kelcheone\r\n- Update index.md (#5401) @carboni-rob\r\n- Add tab handler action for submenus in main menu [Fixes #5412] (#5414) @vluna\r\n- News website BR (#5434) @mateusnds\r\n- Fixes tutorial content filtering by tag [Fixes #5444] (#5445) @chelorope\r\n- Add checksum to deposit contract address (#5449) @jtraglia\r\n- Advise readers of Rinkeby faucet unreliability (#5403) @parkedtruck\r\n\r\n## :globe_with_meridians: Translations\r\n\r\n- Update oracle title to spanish (#5391) @frxncismor\r\n- Update Spanish Python developer doc  (#5368) @ismaventuras\r\n- Fix wrong translation (Chinese Ethereum stack developer doc) (#5416) @wuzekang\r\n- Fix typo (Spanish intro to Ethereum developer docs) (#5404) @telmomoya\r\n- Fix typo (Github -> GitHub) in Chinese developer docs (#5468) @eltociear\r\n\r\n## :package: Dependencies\r\n\r\n- v3.12.1 (#5446) @username_0\r\n***\r\n### :unicorn: Contributors\r\nThank you @Arachnid, @Dentrax, @MiConnell, @Sabnock01, @asashour, @btandowsky, @carboni-rob, @chelorope, @username_0, @dohooo, @eltociear, @frxncismor, @ismaventuras, @jmcook1186, @jtraglia, @kelcheone, @lukassim, @mateusnds, @minimalsm, @nickgaski, @parkedtruck, @rojotek, @said026, @telmomoya, @vluna, @wackerow and @wuzekang for the contributions! :trophy:\r\n***', 'title': 'Deploy v3.13.0', 'type': 'issue'}]","<issue_start><issue_comment>Title: Deploy v3.13.0
+username_0: ***
+### :zap: Changes
+- Georgian: New language, homepage (#5479) @wackerow
+- Intl batch update: Homepage content (#5480) @wackerow
+- add rocketpool description to pool staking services [Fixes #4891] (#5349) @MiConnell
+- Add warning to not commit env files (#5363) @Dentrax
+- fix: Use correct terminology to refer to the EVM state (#5348) @Sabnock01
+- Update Alchemy link in NFT tutorial (#5370) @btandowsky
+- add supermajority to glossary (#5394) @jmcook1186
+- add ""fork-choice algorithm"" to glossary (#5395) @jmcook1186
+- add lmd-ghost to glossary (#5396) @jmcook1186
+- add ""checkpoint"" to glossary (#5397) @jmcook1186
+- Add Kaleido to Nodes as a Service list (#5429) @nickgaski
+- Resolving text errors (Chinese dapps page) (#5465) @dohooo
+- Solidity is not ""heavily inspired by JavaScript"" (#5470) @Arachnid
+- Fix typo in hello-world-smart-contract tutorial (#5415) @asashour
+- Add li.finance article to further readings for bridges (#5460) @username_0
+- add link to energy consumption page ""further reading"" (#5386) @jmcook1186
+- Update index.md (#5463) @rojotek
+- Add link to Crowdin guide to translators guide and TP page (#5377) @lukassim
+- Fix typo in ERC-20 Contract Walk-Through (#5456) @said026
+- Adding and updating more rust resources (#5398) @kelcheone
+- Update index.md (#5401) @carboni-rob
+- Add tab handler action for submenus in main menu [Fixes #5412] (#5414) @vluna
+- News website BR (#5434) @mateusnds
+- Fixes tutorial content filtering by tag [Fixes #5444] (#5445) @chelorope
+- Add checksum to deposit contract address (#5449) @jtraglia
+- Advise readers of Rinkeby faucet unreliability (#5403) @parkedtruck
+
+## :globe_with_meridians: Translations
+
+- Update oracle title to spanish (#5391) @frxncismor
+- Update Spanish Python developer doc  (#5368) @ismaventuras
+- Fix wrong translation (Chinese Ethereum stack developer doc) (#5416) @wuzekang
+- Fix typo (Spanish intro to Ethereum developer docs) (#5404) @telmomoya
+- Fix typo (Github -> GitHub) in Chinese developer docs (#5468) @eltociear
+
+## :package: Dependencies
+
+- v3.12.1 (#5446) @username_0
+***
+### :unicorn: Contributors
+Thank you @Arachnid, @Dentrax, @MiConnell, @Sabnock01, @asashour, @btandowsky, @carboni-rob, @chelorope, @username_0, @dohooo, @eltociear, @frxncismor, @ismaventuras, @jmcook1186, @jtraglia, @kelcheone, @lukassim, @mateusnds, @minimalsm, @nickgaski, @parkedtruck, @rojotek, @said026, @telmomoya, @vluna, @wackerow and @wuzekang for the contributions! :trophy:
+***"
+newrelic/docs-website,1041665427,4650,"{'number': 4650.0, 'repo': 'docs-website', 'user_login': 'newrelic'}","[{'action': 'opened', 'author': 'daynaslord', 'comment_id': None, 'datetime': '2021-11-01T21:36:51Z', 'masked_author': 'username_0', 'text': '<!-- Thanks for contributing to our docs! -->\r\n\r\n<!-- For Japanese readers: \r\nもしドキュメントの日本語訳で問題を見つけた場合はPRではなくissueを提出してください。\r\n日本語訳へのPRについてはまだ取り込む準備ができていません。-->\r\n\r\nPlease follow [conventional commit standards](https://www.conventionalcommits.org/en/v1.0.0/)\r\nin your commit messages and pull request title.\r\n\r\n## Give us some context\r\n\r\n* What problems does this PR solve?\r\n* Add any context that will help us review your changes such as testing notes,\r\n  links to related docs, screenshots, etc.\r\n* If your issue relates to an existing GitHub issue, please link to it.', 'title': 'Whats-New-11-2-PowerDNS-Integration', 'type': 'issue'}]","<issue_start><issue_comment>Title: Whats-New-11-2-PowerDNS-Integration
+username_0: <!-- Thanks for contributing to our docs! -->
+
+<!-- For Japanese readers: 
+もしドキュメントの日本語訳で問題を見つけた場合はPRではなくissueを提出してください。
+日本語訳へのPRについてはまだ取り込む準備ができていません。-->
+
+Please follow [conventional commit standards](https://www.conventionalcommits.org/en/v1.0.0/)
+in your commit messages and pull request title.
+
+## Give us some context
+
+* What problems does this PR solve?
+* Add any context that will help us review your changes such as testing notes,
+  links to related docs, screenshots, etc.
+* If your issue relates to an existing GitHub issue, please link to it."
+facebook/docusaurus,575232134,2354,,"[{'action': 'opened', 'author': 'doup', 'comment_id': None, 'datetime': '2020-03-04 08:50:38+00:00', 'masked_author': 'username_0', 'text': ""<!--\r\n  Consider requesting the feature on https://docusaurus-2.netlify.com/feedback/ instead.\r\n  Feature requests on v1 are more likely to be missed as we're focusing on building v2.\r\n-->\r\n\r\n## 🚀 Feature\r\n\r\nAdd a new property on the `@docusaurus/plugin-content-docs` `SidebarItemCategory` to set the default state as opened. This should affect only to that one category, no all the categories on the docs.\r\n\r\n## Have you read the [Contributing Guidelines on issues](https://github.com/facebook/docusaurus/blob/master/CONTRIBUTING.md#reporting-new-issues)?\r\n\r\nYes.\r\n\r\n## Motivation\r\n\r\nImprove UX.\r\n\r\n## Pitch\r\n\r\nImagine docs with just two root elements:\r\n\r\n- Introduction\r\n- Reference v\r\n\r\nWhere `Reference` is a category with few other documents inside. This would allow to have this `Reference` category open by default which would be easier for the user to navigate/explore."", 'title': '[v2] Option to toggle docs category open by default', 'type': 'issue'}
+ {'action': 'created', 'author': 'amimas', 'comment_id': 600405093.0, 'datetime': '2020-03-18 03:23:32+00:00', 'masked_author': 'username_1', 'text': ""Not sure if this really improves ux.\r\n\r\nIf I'm a new user to the site and by default the references section is open, I'd probably find it confusing because I need to know the introduction docs first before getting into other details.\r\n\r\nThe scenario mentioned in the original post is probably an example but it feels more like content organization issue rather than needing a feature from the ssg tool.\r\n\r\nDocusaurus also lets you create multiple sidebars that contains different navigation. That could also be an option depending the actual use case."", 'title': None, 'type': 'comment'}
+ {'action': 'closed', 'author': 'doup', 'comment_id': None, 'datetime': '2020-03-18 07:06:46+00:00', 'masked_author': 'username_0', 'text': '', 'title': None, 'type': 'issue'}
+ {'action': 'created', 'author': 'yangshun', 'comment_id': 600460412.0, 'datetime': '2020-03-18 07:11:03+00:00', 'masked_author': 'username_2', 'text': ""I would keep this. I think this option is feasible. It doesn't add much\ncomplexity in terms of Engineering and gives people more flexibility\nwithout causing confusion."", 'title': None, 'type': 'comment'}
+ {'action': 'reopened', 'author': 'yangshun', 'comment_id': None, 'datetime': '2020-03-18 09:17:55+00:00', 'masked_author': 'username_2', 'text': ""<!--\r\n  Consider requesting the feature on https://docusaurus-2.netlify.com/feedback/ instead.\r\n  Feature requests on v1 are more likely to be missed as we're focusing on building v2.\r\n-->\r\n\r\n## 🚀 Feature\r\n\r\nAdd a new property on the `@docusaurus/plugin-content-docs` `SidebarItemCategory` to set the default state as opened. This should affect only to that one category, no all the categories on the docs.\r\n\r\n## Have you read the [Contributing Guidelines on issues](https://github.com/facebook/docusaurus/blob/master/CONTRIBUTING.md#reporting-new-issues)?\r\n\r\nYes.\r\n\r\n## Motivation\r\n\r\nImprove UX.\r\n\r\n## Pitch\r\n\r\nImagine docs with just two root elements:\r\n\r\n- Introduction\r\n- Reference v\r\n\r\nWhere `Reference` is a category with few other documents inside. This would allow to have this `Reference` category open by default which would be easier for the user to navigate/explore."", 'title': '[v2] Option to toggle docs category open by default', 'type': 'issue'}
+ {'action': 'created', 'author': 'jsjoeio', 'comment_id': 611792052.0, 'datetime': '2020-04-09 22:54:02+00:00', 'masked_author': 'username_3', 'text': '### WIP Approach\r\n\r\nThese are some rough notes on how I\'m thinking of approaching this.  Note: they are more meant for me so you can ignore them if you\'re watching this issue. \r\n- creating a test site using the suggested Categories: ""Introduction"", ""Reference""\r\n- see if swizzling the `DocSidebarItem` is a an approach we can take and then go from there. \r\n\r\n### Notes\r\n\r\nHard to tell exactly where the code related to categories being open or not lives, but here\'s the trail I\'m following. The actual component is `DocSidebarItem`. There is a piece of state that controls the state of whether or not the item is open or closed and that is this:\r\n```javascript\r\n  const [collapsed, setCollapsed] = useState(item.collapsed)\r\n```\r\nNow the hard part is walking up the tree to figure out where `item.collapsed` is being set. \r\n\r\nRandom thought: why even be able to toggle them?? Shouldn\'t they always be open? Not sure. \r\n\r\nRandom thought: what is ""swizzling"" components?\r\n\r\nOkay I got it. Maybe I could swizzle the component `DocSidebarItem`, figure out how to make it open by default, and then use that to modify the actual code to implement this feature? Might be a good approach. \r\n\r\n### Resources\r\n\r\nHere are the relevant files:\r\n- `packages/docusaurus-theme-classic/src/theme/DocSidebar/index.js`\r\n- `packages/docusaurus-plugin-content-docs/src/types.ts`', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'jsjoeio', 'comment_id': 613120171.0, 'datetime': '2020-04-13 22:04:30+00:00', 'masked_author': 'username_3', 'text': ""I was able to swizzle `DocSidebar` and make the category open by default. \r\n\r\n![2020-04-13 14 56 00](https://user-images.githubusercontent.com/3806031/79164941-f956c080-7d96-11ea-96a4-f71223f62306.gif)\r\n\r\nNext is how to implement this?\r\n\r\n### Suggested approach: \r\n\r\nModify the [Sidebar object](https://v2.docusaurus.io/docs/docs/#sidebar-object). Currently, it looks like this:\r\n```typescript\r\nexport interface SidebarItemCategory {\r\n  type: 'category';\r\n  label: string;\r\n  items: SidebarItem[];\r\n}\r\n\r\nexport interface SidebarItemCategoryRaw {\r\n  type: 'category';\r\n  label: string;\r\n  items: SidebarItemRaw[];\r\n}\r\n```\r\n\r\nNew proposed interfaces:\r\n```diff\r\nexport interface SidebarItemCategory {\r\n  type: 'category';\r\n  label: string;\r\n  items: SidebarItem[];\r\n+  collapsed: boolean;\r\n}\r\n\r\nexport interface SidebarItemCategoryRaw {\r\n  type: 'category';\r\n  label: string;\r\n  items: SidebarItemRaw[];\r\n+  collapsed: boolean;\r\n}\r\n```\r\n\r\nThis will allow a user to create a `sidebars.js` that lets them specify if a category may be open like so:\r\n```javascript\r\nmodule.exports = {\r\n  someSidebar: [\r\n    {\r\n      type: 'category',\r\n      label: 'Introduction',\r\n      items: ['doc1', 'doc2', 'doc3'],\r\n    },\r\n    {\r\n      type: 'category',\r\n      label: 'Reference',\r\n      items: ['mdx'],\r\n      collapsed: false,\r\n    },\r\n  ],\r\n};\r\n\r\n```"", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'jsjoeio', 'comment_id': 613120881.0, 'datetime': '2020-04-13 22:06:25+00:00', 'masked_author': 'username_3', 'text': '## Todos\r\n\r\n- [ ] add failing test to `packages/docusaurus-plugin-content-docs/src/__tests__/sidebars.test.ts`\r\n- [ ] update interfaces in `packages/docusaurus-plugin-content-docs/src/types.ts`\r\n- [ ] run tests \r\n- [ ] test change locally by creating a new site\r\n- [ ] open PR', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'jsjoeio', 'comment_id': 613134226.0, 'datetime': '2020-04-13 22:47:54+00:00', 'masked_author': 'username_3', 'text': 'Failing test added:\r\n<img width=""1144"" alt=""image"" src=""https://user-images.githubusercontent.com/3806031/79168038-c6fc9180-7d9d-11ea-8350-8961d0d98345.png"">\r\n\r\nBut updating the interfaces did not work as expected...Hmm', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'jsjoeio', 'comment_id': 613137974.0, 'datetime': '2020-04-13 23:00:57+00:00', 'masked_author': 'username_3', 'text': 'Ah, I had to update a view functions:\r\n- `assertIsCategory` \r\n- `normalizeCategoryShorthand` \r\n\r\nSnapshot written ✅', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'jsjoeio', 'comment_id': 613139252.0, 'datetime': '2020-04-13 23:05:10+00:00', 'masked_author': 'username_3', 'text': 'Additional suggestion: we should link to the `local-third-party-project-testing.md` in the `CONTRIBUTING.md`', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'jsjoeio', 'comment_id': 613142095.0, 'datetime': '2020-04-13 23:15:26+00:00', 'masked_author': 'username_3', 'text': 'TIL: you can publish learna to verdaccio like so\r\n\r\n```shell\r\nyarn lerna publish --registry http://localhost:4873\r\n```', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'jsjoeio', 'comment_id': 613148183.0, 'datetime': '2020-04-13 23:36:37+00:00', 'masked_author': 'username_3', 'text': 'Wow...I forgot that before `npx` we just installed everything globally 😂 I was like ""how do I do this if I can change the registry for npx...""\r\n\r\nhttps://github.com/zkat/npx/issues/133#issuecomment-345027555', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'jsjoeio', 'comment_id': 613149068.0, 'datetime': '2020-04-13 23:40:01+00:00', 'masked_author': 'username_3', 'text': 'Okay this needs to be documented somewhere:\r\n\r\n## Testing your changes locally\r\n\r\n1. Set up verdaccio\r\n2. run `yarn lerna publish --registry http://localhost:4873`\r\n\r\nIf you need to test something like a new docusaurus site, \r\n\r\n1. install `@docusaurus/init` globally with\r\n```shell\r\nnpm i -g @docusaurus/init --registry http://localhost:4873\r\n```\r\nThis will install from your verdaccio registry\r\n2. create a new site with it \r\n```shell\r\n@docusaurus/init init my-website classic\r\n```', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'jsjoeio', 'comment_id': 613151600.0, 'datetime': '2020-04-13 23:50:11+00:00', 'masked_author': 'username_3', 'text': ""Hmm...now I'm not sure if this is actually the right way to test things locally. Talking out loud here...\r\n\r\nI made changes to `@@docusaurus/plugin-content-docs`. This package is used in other packages including `@docusaurus/theme-classic`.\r\n\r\nWhat I should do is create a new docusaurus site that uses the `@docusaurus/theme-classic` from my verdaccio registry. Does that mean that I can do this?\r\n\r\n1. `npx @docusaurus/init@next init my-website classic`\r\n2. `cd my-website`\r\n3. `npm install @docusaurus/theme-classic --registry http://localhost:4873`\r\n\r\nI think that would work because I would be installing the theme-classic from my local registry?"", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'jsjoeio', 'comment_id': 613709377.0, 'datetime': '2020-04-14 22:19:00+00:00', 'masked_author': 'username_3', 'text': ""To be honest, I'm not sure if that worked...I created a new website with `npx` then tried installing the local package. Nothing broke, but also confused. I'm not sure if using the `collapsed` property would have resulted in an error without my changes.\r\n\r\nI'm worried that somehow when I run `npx` it's using my local verdaccio registry."", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'jsjoeio', 'comment_id': 613712365.0, 'datetime': '2020-04-14 22:28:53+00:00', 'masked_author': 'username_3', 'text': 'Suggestion, the swizzle section of the docs should have an example:\r\n\r\n```shell\r\nyarn swizzle @docusaurus/theme-classic DocSidebar\r\n```', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'jsjoeio', 'comment_id': 613715058.0, 'datetime': '2020-04-14 22:37:22+00:00', 'masked_author': 'username_3', 'text': 'Okay I think I\'m getting somewhere...I set up a new site, swizzled the `DocSidebar` and updated the `sidebars.js` to use the new property `collapsed`\r\n\r\n```js\r\nmodule.exports = {\r\n  someSidebar: {\r\n    ""Test"": [\r\n      {\r\n        ""type"": ""category"",\r\n        ""label"": ""Introduction"",\r\n        ""items"": [""doc1""],\r\n        ""collapsed"": false\r\n      }\r\n    ],\r\n    ""Reference"": [\r\n      {\r\n        ""type"": ""category"",\r\n        ""label"": ""Powering MDX"",\r\n        ""items"": [""doc2""],\r\n        ""collapsed"": false\r\n      }\r\n    ]\r\n}\r\n}\r\n```\r\n\r\nAnd I\'m getting the error:\r\n```shell\r\nError: Unknown sidebar item keys: collapsed. Item: {""type"":""category"",""label"":""Introduction"",""items"":[""doc1""],""collapsed"":false}\r\n    at assertItem (/Users/jprevite/dev/testing/my-website-swizzled/node_modules/@docusaurus/plugin-content-docs/lib/sidebars.js:34:15)\r\n```\r\n\r\nThis is good! Now, if I try what I tried above (using my local package), and restart, the error should go away. \r\n\r\n## Update\r\n\r\nLooks like it did! The functionality isn\'t fully working, but at least we know the logic related to adding that new key worked!\r\n\r\n<img width=""911"" alt=""image"" src=""https://user-images.githubusercontent.com/3806031/79280664-c3ccd880-7e65-11ea-9860-730544707832.png"">', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'jsjoeio', 'comment_id': 613718185.0, 'datetime': '2020-04-14 22:47:11+00:00', 'masked_author': 'username_3', 'text': ""Continuing to test with my changes...one thing I'm noticing is that the `collapsed` property is being overwritten somewhere so my changes aren't working as expected. Let's dive deeper and find out why."", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'jsjoeio', 'comment_id': 613721762.0, 'datetime': '2020-04-14 22:58:49+00:00', 'masked_author': 'username_3', 'text': '## Follow the trail \r\n\r\n### <DocSidebarItem />\r\n\r\nThis is where the component is actually rendered. `collapsed` should be `false` when I set it to `false` in the `sidebars.js` but it\'s not. Let\'s move up a level to the parent - `<DocSidebar />`\r\n\r\n### <DocSidebar />\r\n\r\nHere, we receive `props.docsSidebars.someSidebar` (someSidebar is what I called my sidebar in `sidebars.js`) and the property `collapsed` is `true` when it should be `false`. Let\'s move up a level to the parent - `<DocPage />` (I don\'t have this yet so I\'m going to swizzle it).\r\n\r\n### <DocPage />\r\n\r\nHere, we receive `props.docsMetadata.docsSidebars.someSidebar` and the property `collapsed` is `true` when it should be`false`. Let\'s move up a level to the parent - ???\r\n\r\nI\'m not seeing a parent...\r\n<img width=""452"" alt=""image"" src=""https://user-images.githubusercontent.com/3806031/79281951-be24c200-7e68-11ea-87b8-2575300b7351.png"">\r\n\r\nWhere the heck is my `sidebar.js` values being changed?! Time to continue digging...', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'jsjoeio', 'comment_id': 613724955.0, 'datetime': '2020-04-14 23:09:44+00:00', 'masked_author': 'username_3', 'text': ""Ah-HA! I think it is here that it is happening:\r\n\r\n```js\r\nfunction normalizeCategoryShorthand(\r\n  sidebar: SidebarCategoryShorthandRaw,\r\n): SidebarItemCategoryRaw[] {\r\n  return Object.entries(sidebar).map(([label, items]) => ({\r\n    type: 'category',\r\n    collapsed: true,\r\n    label,\r\n    items,\r\n  }));\r\n}\r\n```\r\n\r\nThis means `collapsed` will always be `true` - oops!"", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'jsjoeio', 'comment_id': 613735414.0, 'datetime': '2020-04-14 23:45:37+00:00', 'masked_author': 'username_3', 'text': 'I think I was misunderstanding how it worked. I added another test and it looks like `loadSidebars` is working as expected:\r\n\r\n<img width=""357"" alt=""image"" src=""https://user-images.githubusercontent.com/3806031/79284390-5c1b8b00-7e6f-11ea-8186-2ed56e26ed77.png"">', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'jsjoeio', 'comment_id': 613736058.0, 'datetime': '2020-04-14 23:48:05+00:00', 'masked_author': 'username_3', 'text': 'Ah! I think I was looking in the wrong place. `<DocSidebarItem />` renders the individual item, not the category. \r\n\r\n<img width=""668"" alt=""image"" src=""https://user-images.githubusercontent.com/3806031/79284507-b4528d00-7e6f-11ea-8110-e29d7802bb04.png"">', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'jsjoeio', 'comment_id': 613737199.0, 'datetime': '2020-04-14 23:52:15+00:00', 'masked_author': 'username_3', 'text': ""Hmm...I think I'm looking in the wrong place. \r\n\r\nThe `collapsed` property does not correspond to the actual state value. the property does not change (which makes sense).\r\n\r\n![2020-04-14 16 50 33](https://user-images.githubusercontent.com/3806031/79284645-21feb900-7e70-11ea-9152-8fe393647941.gif)\r\n\r\nHowever, the property should be determined by the `sidebars.js` file which is currently not the case."", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'jsjoeio', 'comment_id': 613737834.0, 'datetime': '2020-04-14 23:54:31+00:00', 'masked_author': 'username_3', 'text': 'Okay next step is to figure out how to pass down the correct value from the `sidebars.js` because once we get that, it should work as expected.', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'jsjoeio', 'comment_id': 614259284.0, 'datetime': '2020-04-15 20:19:00+00:00', 'masked_author': 'username_3', 'text': ""WOW! \r\n\r\nThe issue was right in front of my face.\r\n\r\n```js\r\nfunction mutateSidebarCollapsingState(item, path) {\r\n// ...logic\r\n  item.collapsed = !anyChildItemsActive\r\n}\r\n```\r\nI'll need to find a workaround in this `packages/docusaurus-theme-classic/src/theme/DocSidebar/index.js`"", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'jsjoeio', 'comment_id': 614262060.0, 'datetime': '2020-04-15 20:25:16+00:00', 'masked_author': 'username_3', 'text': ""We want to automatically expand the categories which contains the current page\r\n\r\nThat means when we load the page, expand the categories on the current page. \r\n\r\nCool!\r\n\r\nI always find it helpful to use concrete examples. Let's do that to understand what we should implement.\r\n\r\n## Example 1\r\n\r\nI have a site. I have a collapsible sidebar. Here is what I want:\r\n- if a page is loaded, and that category is collapsible and it's the current page, expand that sidebar item (currently implemented)\r\n- if i put in my `sidebars.js` file that I want another category `collapsed: false` then it should always be open by default (regardless if it's the current page or not)\r\n\r\nSo what does that look like in pseudologic\r\n```js\r\n// if (isChildItem for curentPage, or the category.collapsed is false) {\r\n// expand\r\n}\r\n```"", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'jsjoeio', 'comment_id': 614279349.0, 'datetime': '2020-04-15 21:04:44+00:00', 'masked_author': 'username_3', 'text': 'Let\'s try this out.\r\n\r\n## Context\r\n```js\r\n// sidebars.js \r\nmodule.exports = {\r\n  someSidebar: \r\n     [\r\n      {\r\n        ""type"": ""category"",\r\n        ""label"": ""Introduction"",\r\n        ""items"": [""doc1""],\r\n        ""collapsed"": true\r\n      },\r\n      {\r\n        ""type"": ""category"",\r\n        ""label"": ""Powering MDX"",\r\n        ""items"": [""doc2""],\r\n        ""collapsed"": false\r\n      }\r\n    ]\r\n}\r\n```\r\n\r\n""Powering MDX"" should not be collapsed because it\'s set to `false` in `sidebars.js`\r\n\r\n## Before\r\n\r\nThis is what happens before I made any changes. (note: I load the page, ""Powering MDX"" is collapsed). \r\n\r\n![2020-04-15 13 27 25](https://user-images.githubusercontent.com/3806031/79388145-b07f4300-7f21-11ea-96a2-395410a3725f.gif)\r\n\r\n## After\r\n\r\nI made the change and now it loads and is expanded (not collapsed) like I want! \r\n\r\n![2020-04-15 14 02 17](https://user-images.githubusercontent.com/3806031/79388175-bd9c3200-7f21-11ea-9e85-24dcb85d8896.gif)\r\n\r\nAnd, if I\'m on the ""Powering MDX"", it should be expanded (because it\'s the current page), which still works as expected.\r\n\r\n![2020-04-15 14 02 53](https://user-images.githubusercontent.com/3806031/79388270-e45a6880-7f21-11ea-972c-58a3ead8c210.gif)\r\n\r\n\r\nNotice how ""Introduction"" is not expanded by default because `collapsed` is set to `true` in `sidebars.js`\r\n\r\n### Code changes\r\n\r\n```diff\r\nfunction mutateSidebarCollapsingState(item, path) {\r\n+ // only modify item.collapsed if there are child items active and the category collapsed is set to true\r\n+      // eslint-disable-next-line no-param-reassign\r\n+      if (anyChildItemsActive && item.collapsed) {\r\n+        item.collapsed = !anyChildItemsActive;\r\n+      }\r\n}\r\n```\r\n\r\n## Next steps\r\n\r\n- [ ] Make the changes in actual package (instead of swizzled component)\r\n- [ ] publish to verdaccio\r\n- [ ] verify changes work as expected', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'jsjoeio', 'comment_id': 614283087.0, 'datetime': '2020-04-15 21:13:16+00:00', 'masked_author': 'username_3', 'text': '```shell\r\nyarn lerna publish --registry http://localhost:4873\r\n```\r\n\r\nNOTE: this pushes a new git tag 😅 Which is not desired, you can disable with the flag `--no-git-tag-version`\r\n\r\nhttps://github.com/lerna/lerna/tree/master/commands/version#--no-git-tag-version', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'jsjoeio', 'comment_id': 614293322.0, 'datetime': '2020-04-15 21:38:21+00:00', 'masked_author': 'username_3', 'text': ""Now, I am unsure if this works as expected...\r\n\r\n1. `npx @docusaurus/init@next init my-website classic`\r\n2. `cd my-website`\r\n3. `npm install @docusaurus/preset-classic --registry http://localhost:4873`\r\n\r\nI mean it worked to test changes to a plugin `docusaurus-plugin-content-docs` but I don't know if it's working to test changes to `docusaurus-theme-classic` womp womp womp..."", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'jsjoeio', 'comment_id': 614305696.0, 'datetime': '2020-04-15 22:11:32+00:00', 'masked_author': 'username_3', 'text': 'I tried this:\r\n```shell\r\nnpm_config_registry=http://localhost:4873/ npx @docusaurus/init@next init doc-plz-work classic\r\n```\r\n\r\nand then \r\n```shell\r\nnpm install @docusaurus/preset-classic --registry http://localhost:4873\r\n```\r\n\r\nBut didn\'t have any luck...I think the issue is with verdaccio. the packages are showing up correctly on verdaccio\r\n<img width=""1321"" alt=""image"" src=""https://user-images.githubusercontent.com/3806031/79393933-2cca5400-7f2b-11ea-9228-104b1374b9bc.png"">\r\n\r\nHowever, when I install it, it looks like it\'s installing from the npm registry (at least the versions make it seem so)\r\n<img width=""426"" alt=""image"" src=""https://user-images.githubusercontent.com/3806031/79393970-4075ba80-7f2b-11ea-9992-6fed46bec126.png"">\r\n\r\n## Todo \r\n- figure out how to correctly install form verdaccio', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'jsjoeio', 'comment_id': 614311861.0, 'datetime': '2020-04-15 22:29:39+00:00', 'masked_author': 'username_3', 'text': ""Going a different route:\r\n```shell\r\nnpm set registry http://localhost:4873/\r\n```\r\n\r\nLet's see if this works"", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'jsjoeio', 'comment_id': 614313193.0, 'datetime': '2020-04-15 22:33:47+00:00', 'masked_author': 'username_3', 'text': 'Hmm...this is super ugly but it got the right versions:\r\n```shell\r\n# set the registry to verdaccio\r\nnpm set registry http://localhost:4873/\r\n# install @docusaurus/init globally\r\nnpm i -g @docusaurus/init\r\n# run the binary from the location directly\r\n/Users/jprevite/.nvm/versions/node/v10.15.1/lib/node_modules/@docusaurus/init/bin/index.js init test-joe\r\n```', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'jsjoeio', 'comment_id': 614313848.0, 'datetime': '2020-04-15 22:35:54+00:00', 'masked_author': 'username_3', 'text': 'Hallelujah!!! IT WORKED!!! (notice how ""Powering MDX"" is not collapsed!!!!)\r\n\r\n<img width=""1792"" alt=""image"" src=""https://user-images.githubusercontent.com/3806031/79395544-b7608280-7f2e-11ea-9e69-7ada8ccfc883.png"">', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'jsjoeio', 'comment_id': 614314211.0, 'datetime': '2020-04-15 22:37:08+00:00', 'masked_author': 'username_3', 'text': 'Last thing to do is to update the documentation! 🎉 Then I can open a PR', 'title': None, 'type': 'comment'}
+ {'action': 'closed', 'author': 'yangshun', 'comment_id': None, 'datetime': '2020-04-22 12:31:12+00:00', 'masked_author': 'username_2', 'text': '', 'title': None, 'type': 'issue'}
+ {'action': 'reopened', 'author': 'jsjoeio', 'comment_id': None, 'datetime': '2020-04-23 23:41:00+00:00', 'masked_author': 'username_3', 'text': ""<!--\r\n  Consider requesting the feature on https://docusaurus-2.netlify.com/feedback/ instead.\r\n  Feature requests on v1 are more likely to be missed as we're focusing on building v2.\r\n-->\r\n\r\n## 🚀 Feature\r\n\r\nAdd a new property on the `@docusaurus/plugin-content-docs` `SidebarItemCategory` to set the default state as opened. This should affect only to that one category, no all the categories on the docs.\r\n\r\n## Have you read the [Contributing Guidelines on issues](https://github.com/facebook/docusaurus/blob/master/CONTRIBUTING.md#reporting-new-issues)?\r\n\r\nYes.\r\n\r\n## Motivation\r\n\r\nImprove UX.\r\n\r\n## Pitch\r\n\r\nImagine docs with just two root elements:\r\n\r\n- Introduction\r\n- Reference v\r\n\r\nWhere `Reference` is a category with few other documents inside. This would allow to have this `Reference` category open by default which would be easier for the user to navigate/explore."", 'title': '[v2] Option to toggle docs category open by default', 'type': 'issue'}
+ {'action': 'created', 'author': 'jsjoeio', 'comment_id': 618726008.0, 'datetime': '2020-04-23 23:42:33+00:00', 'masked_author': 'username_3', 'text': '@username_4 seems like we should discuss what went wrong in the implementation and what new approach we should take moving forward', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'lex111', 'comment_id': 619272093.0, 'datetime': '2020-04-24 22:57:07+00:00', 'masked_author': 'username_4', 'text': '@username_3 in short, this line of code does not need to be changed. I would add an additional condition under which item must be expanded.\r\n\r\nhttps://github.com/facebook/docusaurus/blob/510bec65325dcada1c14627910087d29749b16d5/packages/docusaurus-theme-classic/src/theme/DocSidebar/index.js#L109\r\n\r\nPlease see the docs https://v2.docusaurus.io/docs/next/docs#collapsible-categories\r\n\r\nI recommend checking the changes directly on the v2 website, rather than creating a new one.\r\n\r\nOther than that, you don’t need to use Verdaccio for such changes at all, it only takes more effort from you.\r\nThe workflow is described here https://github.com/facebook/docusaurus/blob/master/admin/testing-changes-on-Docusaurus-itself.md#testing\r\nIt is very simple.', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'jsjoeio', 'comment_id': 619283083.0, 'datetime': '2020-04-24 23:47:05+00:00', 'masked_author': 'username_3', 'text': ""Ah, didn't think of that. I'll give that a try!\r\n\r\nI'll see if I can work on this next week and submit a new PR."", 'title': None, 'type': 'comment'}
+ {'action': 'closed', 'author': 'yangshun', 'comment_id': None, 'datetime': '2020-05-28 05:17:20+00:00', 'masked_author': 'username_2', 'text': '', 'title': None, 'type': 'issue'}]","<issue_start><issue_comment>Title: [v2] Option to toggle docs category open by default
+username_0: <!--
+  Consider requesting the feature on https://docusaurus-2.netlify.com/feedback/ instead.
+  Feature requests on v1 are more likely to be missed as we're focusing on building v2.
+-->
+
+## 🚀 Feature
+
+Add a new property on the `@docusaurus/plugin-content-docs` `SidebarItemCategory` to set the default state as opened. This should affect only to that one category, no all the categories on the docs.
+
+## Have you read the [Contributing Guidelines on issues](https://github.com/facebook/docusaurus/blob/master/CONTRIBUTING.md#reporting-new-issues)?
+
+Yes.
+
+## Motivation
+
+Improve UX.
+
+## Pitch
+
+Imagine docs with just two root elements:
+
+- Introduction
+- Reference v
+
+Where `Reference` is a category with few other documents inside. This would allow to have this `Reference` category open by default which would be easier for the user to navigate/explore.
+<issue_comment>username_1: Not sure if this really improves ux.
+
+If I'm a new user to the site and by default the references section is open, I'd probably find it confusing because I need to know the introduction docs first before getting into other details.
+
+The scenario mentioned in the original post is probably an example but it feels more like content organization issue rather than needing a feature from the ssg tool.
+
+Docusaurus also lets you create multiple sidebars that contains different navigation. That could also be an option depending the actual use case.<issue_closed>
+<issue_comment>username_2: I would keep this. I think this option is feasible. It doesn't add much
+complexity in terms of Engineering and gives people more flexibility
+without causing confusion.
+<issue_comment>username_2: <!--
+  Consider requesting the feature on https://docusaurus-2.netlify.com/feedback/ instead.
+  Feature requests on v1 are more likely to be missed as we're focusing on building v2.
+-->
+
+## 🚀 Feature
+
+Add a new property on the `@docusaurus/plugin-content-docs` `SidebarItemCategory` to set the default state as opened. This should affect only to that one category, no all the categories on the docs.
+
+## Have you read the [Contributing Guidelines on issues](https://github.com/facebook/docusaurus/blob/master/CONTRIBUTING.md#reporting-new-issues)?
+
+Yes.
+
+## Motivation
+
+Improve UX.
+
+## Pitch
+
+Imagine docs with just two root elements:
+
+- Introduction
+- Reference v
+
+Where `Reference` is a category with few other documents inside. This would allow to have this `Reference` category open by default which would be easier for the user to navigate/explore.
+<issue_comment>username_3: ### WIP Approach
+
+These are some rough notes on how I'm thinking of approaching this.  Note: they are more meant for me so you can ignore them if you're watching this issue. 
+- creating a test site using the suggested Categories: ""Introduction"", ""Reference""
+- see if swizzling the `DocSidebarItem` is a an approach we can take and then go from there. 
+
+### Notes
+
+Hard to tell exactly where the code related to categories being open or not lives, but here's the trail I'm following. The actual component is `DocSidebarItem`. There is a piece of state that controls the state of whether or not the item is open or closed and that is this:
+```javascript
+  const [collapsed, setCollapsed] = useState(item.collapsed)
+```
+Now the hard part is walking up the tree to figure out where `item.collapsed` is being set. 
+
+Random thought: why even be able to toggle them?? Shouldn't they always be open? Not sure. 
+
+Random thought: what is ""swizzling"" components?
+
+Okay I got it. Maybe I could swizzle the component `DocSidebarItem`, figure out how to make it open by default, and then use that to modify the actual code to implement this feature? Might be a good approach. 
+
+### Resources
+
+Here are the relevant files:
+- `packages/docusaurus-theme-classic/src/theme/DocSidebar/index.js`
+- `packages/docusaurus-plugin-content-docs/src/types.ts`
+<issue_comment>username_3: I was able to swizzle `DocSidebar` and make the category open by default. 
+
+![2020-04-13 14 56 00](https://user-images.githubusercontent.com/3806031/79164941-f956c080-7d96-11ea-96a4-f71223f62306.gif)
+
+Next is how to implement this?
+
+### Suggested approach: 
+
+Modify the [Sidebar object](https://v2.docusaurus.io/docs/docs/#sidebar-object). Currently, it looks like this:
+```typescript
+export interface SidebarItemCategory {
+  type: 'category';
+  label: string;
+  items: SidebarItem[];
+}
+
+export interface SidebarItemCategoryRaw {
+  type: 'category';
+  label: string;
+  items: SidebarItemRaw[];
+}
+```
+
+New proposed interfaces:
+```diff
+export interface SidebarItemCategory {
+  type: 'category';
+  label: string;
+  items: SidebarItem[];
++  collapsed: boolean;
+}
+
+export interface SidebarItemCategoryRaw {
+  type: 'category';
+  label: string;
+  items: SidebarItemRaw[];
++  collapsed: boolean;
+}
+```
+
+This will allow a user to create a `sidebars.js` that lets them specify if a category may be open like so:
+```javascript
+module.exports = {
+  someSidebar: [
+    {
+      type: 'category',
+      label: 'Introduction',
+      items: ['doc1', 'doc2', 'doc3'],
+    },
+    {
+      type: 'category',
+      label: 'Reference',
+      items: ['mdx'],
+      collapsed: false,
+    },
+  ],
+};
+
+```
+<issue_comment>username_3: ## Todos
+
+- [ ] add failing test to `packages/docusaurus-plugin-content-docs/src/__tests__/sidebars.test.ts`
+- [ ] update interfaces in `packages/docusaurus-plugin-content-docs/src/types.ts`
+- [ ] run tests 
+- [ ] test change locally by creating a new site
+- [ ] open PR
+<issue_comment>username_3: Failing test added:
+<img width=""1144"" alt=""image"" src=""https://user-images.githubusercontent.com/3806031/79168038-c6fc9180-7d9d-11ea-8350-8961d0d98345.png"">
+
+But updating the interfaces did not work as expected...Hmm
+<issue_comment>username_3: Ah, I had to update a view functions:
+- `assertIsCategory` 
+- `normalizeCategoryShorthand` 
+
+Snapshot written ✅
+<issue_comment>username_3: Additional suggestion: we should link to the `local-third-party-project-testing.md` in the `CONTRIBUTING.md`
+<issue_comment>username_3: TIL: you can publish learna to verdaccio like so
+
+```shell
+yarn lerna publish --registry http://localhost:4873
+```
+<issue_comment>username_3: Wow...I forgot that before `npx` we just installed everything globally 😂 I was like ""how do I do this if I can change the registry for npx...""
+
+https://github.com/zkat/npx/issues/133#issuecomment-345027555
+<issue_comment>username_3: Okay this needs to be documented somewhere:
+
+## Testing your changes locally
+
+1. Set up verdaccio
+2. run `yarn lerna publish --registry http://localhost:4873`
+
+If you need to test something like a new docusaurus site, 
+
+1. install `@docusaurus/init` globally with
+```shell
+npm i -g @docusaurus/init --registry http://localhost:4873
+```
+This will install from your verdaccio registry
+2. create a new site with it 
+```shell
+@docusaurus/init init my-website classic
+```
+<issue_comment>username_3: Hmm...now I'm not sure if this is actually the right way to test things locally. Talking out loud here...
+
+I made changes to `@@docusaurus/plugin-content-docs`. This package is used in other packages including `@docusaurus/theme-classic`.
+
+What I should do is create a new docusaurus site that uses the `@docusaurus/theme-classic` from my verdaccio registry. Does that mean that I can do this?
+
+1. `npx @docusaurus/init@next init my-website classic`
+2. `cd my-website`
+3. `npm install @docusaurus/theme-classic --registry http://localhost:4873`
+
+I think that would work because I would be installing the theme-classic from my local registry?
+<issue_comment>username_3: To be honest, I'm not sure if that worked...I created a new website with `npx` then tried installing the local package. Nothing broke, but also confused. I'm not sure if using the `collapsed` property would have resulted in an error without my changes.
+
+I'm worried that somehow when I run `npx` it's using my local verdaccio registry.
+<issue_comment>username_3: Suggestion, the swizzle section of the docs should have an example:
+
+```shell
+yarn swizzle @docusaurus/theme-classic DocSidebar
+```
+<issue_comment>username_3: Okay I think I'm getting somewhere...I set up a new site, swizzled the `DocSidebar` and updated the `sidebars.js` to use the new property `collapsed`
+
+```js
+module.exports = {
+  someSidebar: {
+    ""Test"": [
+      {
+        ""type"": ""category"",
+        ""label"": ""Introduction"",
+        ""items"": [""doc1""],
+        ""collapsed"": false
+      }
+    ],
+    ""Reference"": [
+      {
+        ""type"": ""category"",
+        ""label"": ""Powering MDX"",
+        ""items"": [""doc2""],
+        ""collapsed"": false
+      }
+    ]
+}
+}
+```
+
+And I'm getting the error:
+```shell
+Error: Unknown sidebar item keys: collapsed. Item: {""type"":""category"",""label"":""Introduction"",""items"":[""doc1""],""collapsed"":false}
+    at assertItem (/Users/jprevite/dev/testing/my-website-swizzled/node_modules/@docusaurus/plugin-content-docs/lib/sidebars.js:34:15)
+```
+
+This is good! Now, if I try what I tried above (using my local package), and restart, the error should go away. 
+
+## Update
+
+Looks like it did! The functionality isn't fully working, but at least we know the logic related to adding that new key worked!
+
+<img width=""911"" alt=""image"" src=""https://user-images.githubusercontent.com/3806031/79280664-c3ccd880-7e65-11ea-9860-730544707832.png"">
+<issue_comment>username_3: Continuing to test with my changes...one thing I'm noticing is that the `collapsed` property is being overwritten somewhere so my changes aren't working as expected. Let's dive deeper and find out why.
+<issue_comment>username_3: ## Follow the trail 
+
+### <DocSidebarItem />
+
+This is where the component is actually rendered. `collapsed` should be `false` when I set it to `false` in the `sidebars.js` but it's not. Let's move up a level to the parent - `<DocSidebar />`
+
+### <DocSidebar />
+
+Here, we receive `props.docsSidebars.someSidebar` (someSidebar is what I called my sidebar in `sidebars.js`) and the property `collapsed` is `true` when it should be `false`. Let's move up a level to the parent - `<DocPage />` (I don't have this yet so I'm going to swizzle it).
+
+### <DocPage />
+
+Here, we receive `props.docsMetadata.docsSidebars.someSidebar` and the property `collapsed` is `true` when it should be`false`. Let's move up a level to the parent - ???
+
+I'm not seeing a parent...
+<img width=""452"" alt=""image"" src=""https://user-images.githubusercontent.com/3806031/79281951-be24c200-7e68-11ea-87b8-2575300b7351.png"">
+
+Where the heck is my `sidebar.js` values being changed?! Time to continue digging...
+<issue_comment>username_3: Ah-HA! I think it is here that it is happening:
+
+```js
+function normalizeCategoryShorthand(
+  sidebar: SidebarCategoryShorthandRaw,
+): SidebarItemCategoryRaw[] {
+  return Object.entries(sidebar).map(([label, items]) => ({
+    type: 'category',
+    collapsed: true,
+    label,
+    items,
+  }));
+}
+```
+
+This means `collapsed` will always be `true` - oops!
+<issue_comment>username_3: I think I was misunderstanding how it worked. I added another test and it looks like `loadSidebars` is working as expected:
+
+<img width=""357"" alt=""image"" src=""https://user-images.githubusercontent.com/3806031/79284390-5c1b8b00-7e6f-11ea-8186-2ed56e26ed77.png"">
+<issue_comment>username_3: Ah! I think I was looking in the wrong place. `<DocSidebarItem />` renders the individual item, not the category. 
+
+<img width=""668"" alt=""image"" src=""https://user-images.githubusercontent.com/3806031/79284507-b4528d00-7e6f-11ea-8110-e29d7802bb04.png"">
+<issue_comment>username_3: Hmm...I think I'm looking in the wrong place. 
+
+The `collapsed` property does not correspond to the actual state value. the property does not change (which makes sense).
+
+![2020-04-14 16 50 33](https://user-images.githubusercontent.com/3806031/79284645-21feb900-7e70-11ea-9152-8fe393647941.gif)
+
+However, the property should be determined by the `sidebars.js` file which is currently not the case.
+<issue_comment>username_3: Okay next step is to figure out how to pass down the correct value from the `sidebars.js` because once we get that, it should work as expected.
+<issue_comment>username_3: WOW! 
+
+The issue was right in front of my face.
+
+```js
+function mutateSidebarCollapsingState(item, path) {
+// ...logic
+  item.collapsed = !anyChildItemsActive
+}
+```
+I'll need to find a workaround in this `packages/docusaurus-theme-classic/src/theme/DocSidebar/index.js`
+<issue_comment>username_3: We want to automatically expand the categories which contains the current page
+
+That means when we load the page, expand the categories on the current page. 
+
+Cool!
+
+I always find it helpful to use concrete examples. Let's do that to understand what we should implement.
+
+## Example 1
+
+I have a site. I have a collapsible sidebar. Here is what I want:
+- if a page is loaded, and that category is collapsible and it's the current page, expand that sidebar item (currently implemented)
+- if i put in my `sidebars.js` file that I want another category `collapsed: false` then it should always be open by default (regardless if it's the current page or not)
+
+So what does that look like in pseudologic
+```js
+// if (isChildItem for curentPage, or the category.collapsed is false) {
+// expand
+}
+```
+<issue_comment>username_3: Let's try this out.
+
+## Context
+```js
+// sidebars.js 
+module.exports = {
+  someSidebar: 
+     [
+      {
+        ""type"": ""category"",
+        ""label"": ""Introduction"",
+        ""items"": [""doc1""],
+        ""collapsed"": true
+      },
+      {
+        ""type"": ""category"",
+        ""label"": ""Powering MDX"",
+        ""items"": [""doc2""],
+        ""collapsed"": false
+      }
+    ]
+}
+```
+
+""Powering MDX"" should not be collapsed because it's set to `false` in `sidebars.js`
+
+## Before
+
+This is what happens before I made any changes. (note: I load the page, ""Powering MDX"" is collapsed). 
+
+![2020-04-15 13 27 25](https://user-images.githubusercontent.com/3806031/79388145-b07f4300-7f21-11ea-96a2-395410a3725f.gif)
+
+## After
+
+I made the change and now it loads and is expanded (not collapsed) like I want! 
+
+![2020-04-15 14 02 17](https://user-images.githubusercontent.com/3806031/79388175-bd9c3200-7f21-11ea-9e85-24dcb85d8896.gif)
+
+And, if I'm on the ""Powering MDX"", it should be expanded (because it's the current page), which still works as expected.
+
+![2020-04-15 14 02 53](https://user-images.githubusercontent.com/3806031/79388270-e45a6880-7f21-11ea-972c-58a3ead8c210.gif)
+
+
+Notice how ""Introduction"" is not expanded by default because `collapsed` is set to `true` in `sidebars.js`
+
+### Code changes
+
+```diff
+function mutateSidebarCollapsingState(item, path) {
++ // only modify item.collapsed if there are child items active and the category collapsed is set to true
++      // eslint-disable-next-line no-param-reassign
++      if (anyChildItemsActive && item.collapsed) {
++        item.collapsed = !anyChildItemsActive;
++      }
+}
+```
+
+## Next steps
+
+- [ ] Make the changes in actual package (instead of swizzled component)
+- [ ] publish to verdaccio
+- [ ] verify changes work as expected
+<issue_comment>username_3: ```shell
+yarn lerna publish --registry http://localhost:4873
+```
+
+NOTE: this pushes a new git tag 😅 Which is not desired, you can disable with the flag `--no-git-tag-version`
+
+https://github.com/lerna/lerna/tree/master/commands/version#--no-git-tag-version
+<issue_comment>username_3: Now, I am unsure if this works as expected...
+
+1. `npx @docusaurus/init@next init my-website classic`
+2. `cd my-website`
+3. `npm install @docusaurus/preset-classic --registry http://localhost:4873`
+
+I mean it worked to test changes to a plugin `docusaurus-plugin-content-docs` but I don't know if it's working to test changes to `docusaurus-theme-classic` womp womp womp...
+<issue_comment>username_3: I tried this:
+```shell
+npm_config_registry=http://localhost:4873/ npx @docusaurus/init@next init doc-plz-work classic
+```
+
+and then 
+```shell
+npm install @docusaurus/preset-classic --registry http://localhost:4873
+```
+
+But didn't have any luck...I think the issue is with verdaccio. the packages are showing up correctly on verdaccio
+<img width=""1321"" alt=""image"" src=""https://user-images.githubusercontent.com/3806031/79393933-2cca5400-7f2b-11ea-9228-104b1374b9bc.png"">
+
+However, when I install it, it looks like it's installing from the npm registry (at least the versions make it seem so)
+<img width=""426"" alt=""image"" src=""https://user-images.githubusercontent.com/3806031/79393970-4075ba80-7f2b-11ea-9992-6fed46bec126.png"">
+
+## Todo 
+- figure out how to correctly install form verdaccio
+<issue_comment>username_3: Going a different route:
+```shell
+npm set registry http://localhost:4873/
+```
+
+Let's see if this works
+<issue_comment>username_3: Hmm...this is super ugly but it got the right versions:
+```shell
+# set the registry to verdaccio
+npm set registry http://localhost:4873/
+# install @docusaurus/init globally
+npm i -g @docusaurus/init
+# run the binary from the location directly
+/Users/jprevite/.nvm/versions/node/v10.15.1/lib/node_modules/@docusaurus/init/bin/index.js init test-joe
+```
+<issue_comment>username_3: Hallelujah!!! IT WORKED!!! (notice how ""Powering MDX"" is not collapsed!!!!)
+
+<img width=""1792"" alt=""image"" src=""https://user-images.githubusercontent.com/3806031/79395544-b7608280-7f2e-11ea-9e69-7ada8ccfc883.png"">
+<issue_comment>username_3: Last thing to do is to update the documentation! 🎉 Then I can open a PR<issue_closed>
+<issue_comment>username_3: <!--
+  Consider requesting the feature on https://docusaurus-2.netlify.com/feedback/ instead.
+  Feature requests on v1 are more likely to be missed as we're focusing on building v2.
+-->
+
+## 🚀 Feature
+
+Add a new property on the `@docusaurus/plugin-content-docs` `SidebarItemCategory` to set the default state as opened. This should affect only to that one category, no all the categories on the docs.
+
+## Have you read the [Contributing Guidelines on issues](https://github.com/facebook/docusaurus/blob/master/CONTRIBUTING.md#reporting-new-issues)?
+
+Yes.
+
+## Motivation
+
+Improve UX.
+
+## Pitch
+
+Imagine docs with just two root elements:
+
+- Introduction
+- Reference v
+
+Where `Reference` is a category with few other documents inside. This would allow to have this `Reference` category open by default which would be easier for the user to navigate/explore.
+<issue_comment>username_3: @username_4 seems like we should discuss what went wrong in the implementation and what new approach we should take moving forward
+<issue_comment>username_4: @username_3 in short, this line of code does not need to be changed. I would add an additional condition under which item must be expanded.
+
+https://github.com/facebook/docusaurus/blob/510bec65325dcada1c14627910087d29749b16d5/packages/docusaurus-theme-classic/src/theme/DocSidebar/index.js#L109
+
+Please see the docs https://v2.docusaurus.io/docs/next/docs#collapsible-categories
+
+I recommend checking the changes directly on the v2 website, rather than creating a new one.
+
+Other than that, you don’t need to use Verdaccio for such changes at all, it only takes more effort from you.
+The workflow is described here https://github.com/facebook/docusaurus/blob/master/admin/testing-changes-on-Docusaurus-itself.md#testing
+It is very simple.
+<issue_comment>username_3: Ah, didn't think of that. I'll give that a try!
+
+I'll see if I can work on this next week and submit a new PR.<issue_closed>"
+apache/guacamole-website,1059305574,96,"{'number': 96.0, 'repo': 'guacamole-website', 'user_login': 'apache'}","[{'action': 'opened', 'author': 'radove', 'comment_id': None, 'datetime': '2021-11-21T06:43:05Z', 'masked_author': 'username_0', 'text': 'I would like to add Dove IO as a commercial support resource for the Apache Guacamole project.  \r\n\r\nDove IO is a software engineering and security consulting firm in which has extensive knowledge of implementation and customization of Apache Guacamole. The company believes strongly in open source software and is willing to help other users with deploying Apache Guacamole and ensuring that Apache Guacamole is implemented with a security focused architecture. The company has recently leveraged Apache Guacamole to enable select engineers to remotely access energy field analyzer (Private APN, Cloud Connected IoT Devices) worldwide.\r\n\r\nThanks, Ronnie', 'title': 'Adding Dove IO as Commercial Support', 'type': 'issue'}
+ {'action': 'created', 'author': 'radove', 'comment_id': 981256399.0, 'datetime': '2021-11-29 03:22:53+00:00', 'masked_author': 'username_0', 'text': '@mike-jumper Thanks for the feedback. I made changes based on your feedback.  I reduced the size of the logo to 144px, reduced the description a bit, and added a URL to our guacamole information page.  We will continue to evolve the information page as we go forward.  Let me know if any other feedback.', 'title': None, 'type': 'comment'}]","<issue_start><issue_comment>Title: Adding Dove IO as Commercial Support
+username_0: I would like to add Dove IO as a commercial support resource for the Apache Guacamole project.  
+
+Dove IO is a software engineering and security consulting firm in which has extensive knowledge of implementation and customization of Apache Guacamole. The company believes strongly in open source software and is willing to help other users with deploying Apache Guacamole and ensuring that Apache Guacamole is implemented with a security focused architecture. The company has recently leveraged Apache Guacamole to enable select engineers to remotely access energy field analyzer (Private APN, Cloud Connected IoT Devices) worldwide.
+
+Thanks, Ronnie
+<issue_comment>username_0: @mike-jumper Thanks for the feedback. I made changes based on your feedback.  I reduced the size of the logo to 144px, reduced the description a bit, and added a URL to our guacamole information page.  We will continue to evolve the information page as we go forward.  Let me know if any other feedback."
+bitcoin-dot-org/Bitcoin.org,1052873263,3780,,"[{'action': 'opened', 'author': 'GSX22', 'comment_id': None, 'datetime': '2021-11-14 07:45:07+00:00', 'masked_author': 'username_0', 'text': '![87D58E2A-F589-46C7-9B0C-2A614FA34F9D](https://user-images.githubusercontent.com/94203348/141671292-d8e7a40d-0585-483c-897b-d637648c9c29.jpeg)\r\n![A7DD6EC1-9F92-4F1B-8D82-50CB50026BBB](https://user-images.githubusercontent.com/94203348/141671297-bbe65ef3-410b-4137-afd1-496b6b6de908.jpeg)\r\n![251B348A-5F78-417A-90BA-91AD7015DE57](https://user-images.githubusercontent.com/94203348/141671298-5a7bfb8b-4036-4fc2-acfa-301769a34f9d.jpeg)\r\n![C5924CB8-71AA-43FB-A134-098601CEEAEB](https://user-images.githubusercontent.com/94203348/141671299-7a20594a-6841-45f1-bbc1-702339eb80b0.jpeg)\r\n\r\nCurrently working on the physical sneaker. The idea is to build a system for a sneaker that connects  sneaker, phone, and a crypto wallet- that works for the Bitcoin net work by converting steps into currency and rewarding the user with coins. Step mining secures the the location, the actions, and products owned by the user. Step mining also supports trading of goods of the user. The application that connects the wallet with the sneaker will provide games and challenges for the user to keep accumulating steps. After certain amount of steps, the user is able to UNLOCK their avatar. Through challenges and games user grows their avatar. Once your avatar is fully grown the application rewards your with an amount of Bitcoin. Every step the user takes should have a time stamp. \r\nThe sneaker will be bough only in Bitcoin and upgrades of the application will be only bought through Bitcoin. Owned goods or items will be bought and sold and traded only with Bitcoin. Every action the user makes the application time stamps it. Then it allows user to convert step into step mining coins. Once your avatar is fully grown you can continue to step mine for other users and get rewarded a certain amount of coins. Only 21 million sneakers will be made and sold. If one sneaker is faulty your able to buy the sneaker system again and the original system is installed in that sneaker to work with your avatar. Once your avatar is certified meaning it’s fully grown it can start buying or trading other products that have other crypto currencies value. \r\n\r\n\r\nThere’s more to it… I figure that if NFT represent a transaction of one of a kind. An action can also represent a one of a kind transaction.By stepping we can begin to physically work for the system. \r\n\r\nCan anyone help me make this into a reality ??? I can build the sneaker but we need the system.', 'title': 'Bitcoin Powers step Mining Outsole sneaker ', 'type': 'issue'}]","<issue_start><issue_comment>Title: Bitcoin Powers step Mining Outsole sneaker 
+username_0: ![87D58E2A-F589-46C7-9B0C-2A614FA34F9D](https://user-images.githubusercontent.com/94203348/141671292-d8e7a40d-0585-483c-897b-d637648c9c29.jpeg)
+![A7DD6EC1-9F92-4F1B-8D82-50CB50026BBB](https://user-images.githubusercontent.com/94203348/141671297-bbe65ef3-410b-4137-afd1-496b6b6de908.jpeg)
+![251B348A-5F78-417A-90BA-91AD7015DE57](https://user-images.githubusercontent.com/94203348/141671298-5a7bfb8b-4036-4fc2-acfa-301769a34f9d.jpeg)
+![C5924CB8-71AA-43FB-A134-098601CEEAEB](https://user-images.githubusercontent.com/94203348/141671299-7a20594a-6841-45f1-bbc1-702339eb80b0.jpeg)
+
+Currently working on the physical sneaker. The idea is to build a system for a sneaker that connects  sneaker, phone, and a crypto wallet- that works for the Bitcoin net work by converting steps into currency and rewarding the user with coins. Step mining secures the the location, the actions, and products owned by the user. Step mining also supports trading of goods of the user. The application that connects the wallet with the sneaker will provide games and challenges for the user to keep accumulating steps. After certain amount of steps, the user is able to UNLOCK their avatar. Through challenges and games user grows their avatar. Once your avatar is fully grown the application rewards your with an amount of Bitcoin. Every step the user takes should have a time stamp. 
+The sneaker will be bough only in Bitcoin and upgrades of the application will be only bought through Bitcoin. Owned goods or items will be bought and sold and traded only with Bitcoin. Every action the user makes the application time stamps it. Then it allows user to convert step into step mining coins. Once your avatar is fully grown you can continue to step mine for other users and get rewarded a certain amount of coins. Only 21 million sneakers will be made and sold. If one sneaker is faulty your able to buy the sneaker system again and the original system is installed in that sneaker to work with your avatar. Once your avatar is certified meaning it’s fully grown it can start buying or trading other products that have other crypto currencies value. 
+
+
+There’s more to it… I figure that if NFT represent a transaction of one of a kind. An action can also represent a one of a kind transaction.By stepping we can begin to physically work for the system. 
+
+Can anyone help me make this into a reality ??? I can build the sneaker but we need the system."
+withastro/docs,1186833278,284,"{'number': 284.0, 'repo': 'docs', 'user_login': 'withastro'}","[{'action': 'opened', 'author': 'FredKSchott', 'comment_id': None, 'datetime': '2022-03-30T18:29:58Z', 'masked_author': 'username_0', 'text': 'This is an idea that I\'ve been kicking around and mentioned to some core maintainers, but I wanted to see what the change would look like on our docs site.\r\n\r\nThe reasoning: ""Integrations"" is both a mouthful (4 syllables) and a pretty meaningless word. It\'s not bad, but could it be better? ""Extensions"" came out of the idea of bring more meaning to the word: You add an extension because you want to ""extend"" Astro with some new feature, power, etc. Seeing this change on the docs site, and I think it\'s better.\r\n\r\nOne downside / reason not to make the change: Obviously it will cost us in thrash, even if we make this change in a backwards-compatible way. One bright-side is that we are about to do a config object refactor, so our users will already be updating their config file one more time before v1.0.0-beta.', 'title': 'WIP: Rename integrations to extensions', 'type': 'issue'}
+ {'action': 'created', 'author': 'sarah11918', 'comment_id': 1083539842.0, 'datetime': '2022-03-30 19:26:45+00:00', 'masked_author': 'username_1', 'text': 'I\'m probably going to be in the minority here, but I actually do prefer ""integrations""! Maybe not for any good reasons, maybe even for the wrong ones! I just like it.  :)\r\n\r\nI don\'t feel strongly enough to disapprove of this, but I actually think integration is a simpler word than extension, despite the extra syllable. The pronunciation is simpler, the verb form more closely matches the noun. (And, this is totally just a me thing, but this word in particular always makes me second-guess myself -tion or -sion. You just happened to pick a word I hate spelling!) It feels more ""universally international"" just as a straight up word. (Putting the meanings aside.)\r\n\r\nAs for semantics, I guess integration makes me think of a more overall, total unit whereas extensions make me think add-on. So, yes, these add-ons extend Astro. But also, they integrate into the whole. So I don\'t think either one *doesn\'t* work. Integration is more about incorporating and absorbing into the whole, and extending does give that ""tacking on"" or ""reaching out"" image. It\'s ""inclusion"" vs ""addition.""\r\n\r\nCertainly, if you were going to change, I agree with doing it now! And, there are benefits to picking a word that makes you happy.  :)', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'FredKSchott', 'comment_id': 1084811686.0, 'datetime': '2022-03-31 16:22:29+00:00', 'masked_author': 'username_0', 'text': ""Update: I think it's too close to release to make this change, people are already writing blog posts and recording videos. \r\n\r\nI still do like extensions more, so I think we'll have one last chance to change this when we release the v1.0 release candidate. I'll resubmit this for that, with plenty of time to message.\r\n\r\nThanks @username_1 for your feedback!"", 'title': None, 'type': 'comment'}]","<issue_start><issue_comment>Title: WIP: Rename integrations to extensions
+username_0: This is an idea that I've been kicking around and mentioned to some core maintainers, but I wanted to see what the change would look like on our docs site.
+
+The reasoning: ""Integrations"" is both a mouthful (4 syllables) and a pretty meaningless word. It's not bad, but could it be better? ""Extensions"" came out of the idea of bring more meaning to the word: You add an extension because you want to ""extend"" Astro with some new feature, power, etc. Seeing this change on the docs site, and I think it's better.
+
+One downside / reason not to make the change: Obviously it will cost us in thrash, even if we make this change in a backwards-compatible way. One bright-side is that we are about to do a config object refactor, so our users will already be updating their config file one more time before v1.0.0-beta.
+<issue_comment>username_1: I'm probably going to be in the minority here, but I actually do prefer ""integrations""! Maybe not for any good reasons, maybe even for the wrong ones! I just like it.  :)
+
+I don't feel strongly enough to disapprove of this, but I actually think integration is a simpler word than extension, despite the extra syllable. The pronunciation is simpler, the verb form more closely matches the noun. (And, this is totally just a me thing, but this word in particular always makes me second-guess myself -tion or -sion. You just happened to pick a word I hate spelling!) It feels more ""universally international"" just as a straight up word. (Putting the meanings aside.)
+
+As for semantics, I guess integration makes me think of a more overall, total unit whereas extensions make me think add-on. So, yes, these add-ons extend Astro. But also, they integrate into the whole. So I don't think either one *doesn't* work. Integration is more about incorporating and absorbing into the whole, and extending does give that ""tacking on"" or ""reaching out"" image. It's ""inclusion"" vs ""addition.""
+
+Certainly, if you were going to change, I agree with doing it now! And, there are benefits to picking a word that makes you happy.  :)
+<issue_comment>username_0: Update: I think it's too close to release to make this change, people are already writing blog posts and recording videos. 
+
+I still do like extensions more, so I think we'll have one last chance to change this when we release the v1.0 release candidate. I'll resubmit this for that, with plenty of time to message.
+
+Thanks @username_1 for your feedback!"

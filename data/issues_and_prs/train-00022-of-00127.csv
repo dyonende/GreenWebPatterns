@@ -1,0 +1,600 @@
+fastify/website,255073493,20,"{'number': 20.0, 'repo': 'website', 'user_login': 'fastify'}","[{'action': 'opened', 'author': 'lmammino', 'comment_id': None, 'datetime': '2017-09-04T15:33:54Z', 'masked_author': 'username_0', 'text': 'This is a first attempt at supporting /docs/latest.\r\n\r\nAlthough I think this works for now it might make more sense to develop a slightly more complex (but powerful) feature: version aliases.\r\n\r\nThis would allow me to avoid to show in the dropdown menu `Vx.x.x` and then `latest` (as a separate version) and instead show a single entry named `Vx.x.x (latest)`.\r\n\r\nLet me know if this is good enough for now or if you have other ideas on how to handle the aliasing.\r\n\r\nCloses #17', 'title': 'Added support for /docs/latest', 'type': 'issue'}
+ {'action': 'created', 'author': 'mcollina', 'comment_id': 328985529.0, 'datetime': '2017-09-12 21:10:51+00:00', 'masked_author': 'username_1', 'text': ""What's the status on this?"", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'lmammino', 'comment_id': 329536138.0, 'datetime': '2017-09-14 16:26:32+00:00', 'masked_author': 'username_0', 'text': 'I did a number of changes and I think this is now ready to be merged.\r\n\r\nLatest version is never shown in versions lists, but it can be used as an alias in the urls.\r\n\r\nAlso when accessing the latest version (as `/docs/latest`) every dropdown now displays the correct latest release tag as selected.\r\n\r\n@allevo, @username_1, please double check if this looks like the expected behaviour to you before I proceed with the merge.', 'title': None, 'type': 'comment'}]","<issue_start><issue_comment>Title: Added support for /docs/latest
+username_0: This is a first attempt at supporting /docs/latest.
+
+Although I think this works for now it might make more sense to develop a slightly more complex (but powerful) feature: version aliases.
+
+This would allow me to avoid to show in the dropdown menu `Vx.x.x` and then `latest` (as a separate version) and instead show a single entry named `Vx.x.x (latest)`.
+
+Let me know if this is good enough for now or if you have other ideas on how to handle the aliasing.
+
+Closes #17
+<issue_comment>username_1: What's the status on this?
+<issue_comment>username_0: I did a number of changes and I think this is now ready to be merged.
+
+Latest version is never shown in versions lists, but it can be used as an alias in the urls.
+
+Also when accessing the latest version (as `/docs/latest`) every dropdown now displays the correct latest release tag as selected.
+
+@allevo, @username_1, please double check if this looks like the expected behaviour to you before I proceed with the merge."
+kubernetes/website,376788524,10816,,"[{'action': 'opened', 'author': 'vladimir-shmidt', 'comment_id': None, 'datetime': '2018-11-02T12:22:13Z', 'masked_author': 'username_0', 'text': '<!-- Thanks for filing an issue! Before submitting, please fill in the following information. -->\r\n<!-- See https://kubernetes.io/docs/contribute/start/ for guidance on writing an actionable issue description. -->\r\n\r\n<!--Required Information-->\r\n\r\n**Documentation error for powershell script of kubectl installation**\r\n<!-- choose one by changing [ ] to [x] -->\r\n- [ ] Feature Request\r\n- [x] Bug Report\r\n\r\n**Problem:**\r\nPowerShell script for windows does not work. An exception occurred once trying to download kebuctl.\r\n\r\n**Proposed Solution:**\r\nupdate script with download link from\r\n`$downloadlink = ""($req.Links | where href -Match ""kubectl.exe"").href""`\r\nto ""https://storage.googleapis.com/kubernetes-release/release/v1.12.0/bin/windows/amd64/kubectl.exe"" or set this text as a link on the page.\r\n\r\n**Page to Update:**\r\nhttps://kubernetes.io/docs/tasks/tools/install-kubectl/\r\n\r\n<!--Optional Information (remove the comment tags around information you would like to include)-->\r\n<!--Kubernetes Version:-->\r\n1.12\r\n<!--Additional Information:-->\r\nStack trace from powershell window\r\n\r\nPS D:\\> & install-kubectl.ps1 -DownloadLOcation $HOME/.kube\r\n==>Getting download link from  https://kubernetes.io/docs/tasks/tools/install-kubectl/\r\nInvoke-WebRequest : The request was aborted: Could not create SSL/TLS secure channel.\r\nAt C:\\Users\\vladimir.shmidt\\Documents\\WindowsPowerShell\\Scripts\\install-kubectl.ps1:31 char:8\r\n+ $req = Invoke-WebRequest -UseBasicParsing -Uri $uri\r\n+        ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\r\n    + CategoryInfo          : InvalidOperation: (System.Net.HttpWebRequest:HttpWebRequest) [Invoke-WebRequest], WebExc\r\n   eption\r\n    + FullyQualifiedErrorId : WebCmdletWebResponseException,Microsoft.PowerShell.Commands.InvokeWebRequestCommand\r\n\r\n==>analyzing Downloadlink\r\n==>starting Download from  using Bitstransfer\r\nStart-BitsTransfer : Cannot validate argument on parameter \'Source\'. The argument is null or empty. Provide an argument\r\n that is not null or empty, and then try the command again.\r\nAt C:\\Users\\vladimir.shmidt\\Documents\\WindowsPowerShell\\Scripts\\install-kubectl.ps1:43 char:20\r\n+ Start-BitsTransfer $downloadlink -DisplayName ""Getting KubeCTL from $ ...\r\n+                    ~~~~~~~~~~~~~\r\n    + CategoryInfo          : InvalidData: (:) [Start-BitsTransfer], ParameterBindingValidationException\r\n    + FullyQualifiedErrorId : ParameterArgumentValidationError,Microsoft.BackgroundIntelligentTransfer.Management.NewB\r\n   itsTransferCommand\r\n\r\nUnblock-File : Cannot find path \'C:\\Users\\vladimir.shmidt\\.kube\\kubectl.exe\' because it does not exist.\r\nAt C:\\Users\\vladimir.shmidt\\Documents\\WindowsPowerShell\\Scripts\\install-kubectl.ps1:45 char:1\r\n+ Unblock-File $Downloadfile\r\n+ ~~~~~~~~~~~~~~~~~~~~~~~~~~\r\n    + CategoryInfo          : ObjectNotFound: (C:\\Users\\vladim...ube\\kubectl.exe:String) [Unblock-File], ItemNotFoundE\r\n   xception\r\n    + FullyQualifiedErrorId : FileNotFound,Microsoft.PowerShell.Commands.UnblockFileCommand\r\n\r\n==>starting \'C:\\Users\\vladimir.shmidt\\.kube\\kubectl.exe version\'\r\n. : The term \'C:\\Users\\vladimir.shmidt\\.kube\\kubectl.exe\' is not recognized as the name of a cmdlet, function, script f\r\nile, or operable program. Check the spelling of the name, or if a path was included, verify that the path is correct an\r\nd try again.\r\nAt C:\\Users\\vladimir.shmidt\\Documents\\WindowsPowerShell\\Scripts\\install-kubectl.ps1:47 char:2\r\n+ .$Downloadfile version\r\n+  ~~~~~~~~~~~~~\r\n    + CategoryInfo          : ObjectNotFound: (C:\\Users\\vladim...ube\\kubectl.exe:String) [], CommandNotFoundException\r\n    + FullyQualifiedErrorId : CommandNotFoundException\r\n\r\n\r\nYou can now start kubectl from C:\\Users\\vladimir.shmidt\\.kube\\kubectl.exe\r\ncopy your remote kubernetes cluster information to C:\\Users\\vladimir.shmidt\\.kube/config', 'title': 'Issue with k8s.io/docs/tasks/tools/install-kubectl/', 'type': 'issue'}
+ {'action': 'created', 'author': 'jalanubha', 'comment_id': 447741924.0, 'datetime': '2018-12-17 06:58:37+00:00', 'masked_author': 'username_1', 'text': 'Facing exactly the same issue', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'tengqm', 'comment_id': 447744312.0, 'datetime': '2018-12-17 07:10:38+00:00', 'masked_author': 'username_2', 'text': 'Sounds like the install-kubectl.ps1 script from PSGallery is broken. Not sure how are we supposed to fix it. Should we remove the ""Install with Powershell from PSGallery"" section all together? We already have the curl way to download and install kubectl.exe on Windows (see later in that page).', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'vladimir-shmidt', 'comment_id': 447745817.0, 'datetime': '2018-12-17 07:18:07+00:00', 'masked_author': 'username_0', 'text': 'install-kubectl.ps1 is trying to crawl docs page and find a link with cube installer but somebody removed it from the page so script is broken now', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'petenys', 'comment_id': 451312707.0, 'datetime': '2019-01-03 23:36:57+00:00', 'masked_author': 'username_3', 'text': 'C:\\[Net.ServicePointManager]::SecurityProtocol = [Net.SecurityProtocolType]::Tls12\r\n\r\nthen install', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'it-praktyk', 'comment_id': 454973747.0, 'datetime': '2019-01-16 22:47:24+00:00', 'masked_author': 'username_4', 'text': ""@username_5, do you publish somewhere the source of the 'install-kubectl.ps1' script?\r\n\r\nI can prepare the PR to resolve that."", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'it-praktyk', 'comment_id': 454974333.0, 'datetime': '2019-01-16 22:49:38+00:00', 'masked_author': 'username_4', 'text': 'The related issues\r\n- #9877 \r\n- #10780', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'bottkars', 'comment_id': 456209946.0, 'datetime': '2019-01-21 22:01:58+00:00', 'masked_author': 'username_5', 'text': 'Will Update the Gallery Version\r\n\r\nVon meinem iPhone gesendet', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'bottkars', 'comment_id': 456436153.0, 'datetime': '2019-01-22 15:15:38+00:00', 'masked_author': 'username_5', 'text': 'new version 1.7 of installer is published to Gallery. can be closed for now', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'barry-schneider', 'comment_id': 456440868.0, 'datetime': '2019-01-22 15:27:39+00:00', 'masked_author': 'username_6', 'text': '@username_5 I think you might have uploaded the 1.6 code to the gallery for 1.7. The header still references 1.6 and the code looks exactly the same: \r\nhttps://www.powershellgallery.com/packages/install-kubectl/1.7/Content/install-kubectl.ps1\r\n<#PSScriptInfo \r\n.VERSION 1.6 \r\n.GUID 32a11a36-f91c-4241-a11f-af0cf3e90f38 \r\n.AUTHOR upchh@example.com', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'bottkars', 'comment_id': 456462365.0, 'datetime': '2019-01-22 16:22:17+00:00', 'masked_author': 'username_5', 'text': 'don´t trust that one.\r\n\r\nplease do ""install-script install-kubectl -MinimumVersion 1.7 -force -verbose“\r\n\r\nthe script should be installed in $HOME/Documents/WindowsPowerShell/Scripts/install-kubectl.ps1\r\n\r\nIf so, do\r\n\r\nise -f  $HOME/Documents/WindowsPowerShell/Scripts/install-kubectl.ps1\r\n\r\nYou will see it should be 1.7\r\n\r\nPublish-Script does not allow to upload same version twice :-)', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'it-praktyk', 'comment_id': 456774966.0, 'datetime': '2019-01-23 11:56:11+00:00', 'masked_author': 'username_4', 'text': ""I've tested it, works correctly on W2K8 R2 and PowerShell 3.0.\r\n\r\nIMHO, the issue can be closed now."", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'bottkars', 'comment_id': 456809728.0, 'datetime': '2019-01-23 13:56:01+00:00', 'masked_author': 'username_5', 'text': 'thanks for verifying Wojciech !', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'Aprilmei', 'comment_id': 458533879.0, 'datetime': '2019-01-29 13:10:47+00:00', 'masked_author': 'username_7', 'text': 'Version 1.7 is Still not working for windows 10.', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'barry-schneider', 'comment_id': 458554381.0, 'datetime': '2019-01-29 14:13:32+00:00', 'masked_author': 'username_6', 'text': '@username_7 Could you please provide more information. what is the error message? code and screenshot would be helpful.', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'Aprilmei', 'comment_id': 461796460.0, 'datetime': '2019-02-08 13:05:10+00:00', 'masked_author': 'username_7', 'text': 'Powershell version \r\nName: ConsoleHost\r\nVersion          : 5.1.17134.407', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'Aprilmei', 'comment_id': 461823123.0, 'datetime': '2019-02-08 14:38:38+00:00', 'masked_author': 'username_7', 'text': 'Thanks. After I installed docker, the issue fixed. Not sure why.', 'title': None, 'type': 'comment'}
+ {'action': 'closed', 'author': 'vladimir-shmidt', 'comment_id': None, 'datetime': '2019-05-12 15:20:01+00:00', 'masked_author': 'username_0', 'text': '', 'title': None, 'type': 'issue'}]","<issue_start><issue_comment>Title: Issue with k8s.io/docs/tasks/tools/install-kubectl/
+username_0: <!-- Thanks for filing an issue! Before submitting, please fill in the following information. -->
+<!-- See https://kubernetes.io/docs/contribute/start/ for guidance on writing an actionable issue description. -->
+
+<!--Required Information-->
+
+**Documentation error for powershell script of kubectl installation**
+<!-- choose one by changing [ ] to [x] -->
+- [ ] Feature Request
+- [x] Bug Report
+
+**Problem:**
+PowerShell script for windows does not work. An exception occurred once trying to download kebuctl.
+
+**Proposed Solution:**
+update script with download link from
+`$downloadlink = ""($req.Links | where href -Match ""kubectl.exe"").href""`
+to ""https://storage.googleapis.com/kubernetes-release/release/v1.12.0/bin/windows/amd64/kubectl.exe"" or set this text as a link on the page.
+
+**Page to Update:**
+https://kubernetes.io/docs/tasks/tools/install-kubectl/
+
+<!--Optional Information (remove the comment tags around information you would like to include)-->
+<!--Kubernetes Version:-->
+1.12
+<!--Additional Information:-->
+Stack trace from powershell window
+
+PS D:\> & install-kubectl.ps1 -DownloadLOcation $HOME/.kube
+==>Getting download link from  https://kubernetes.io/docs/tasks/tools/install-kubectl/
+Invoke-WebRequest : The request was aborted: Could not create SSL/TLS secure channel.
+At C:\Users\vladimir.shmidt\Documents\WindowsPowerShell\Scripts\install-kubectl.ps1:31 char:8
++ $req = Invoke-WebRequest -UseBasicParsing -Uri $uri
++        ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : InvalidOperation: (System.Net.HttpWebRequest:HttpWebRequest) [Invoke-WebRequest], WebExc
+   eption
+    + FullyQualifiedErrorId : WebCmdletWebResponseException,Microsoft.PowerShell.Commands.InvokeWebRequestCommand
+
+==>analyzing Downloadlink
+==>starting Download from  using Bitstransfer
+Start-BitsTransfer : Cannot validate argument on parameter 'Source'. The argument is null or empty. Provide an argument
+ that is not null or empty, and then try the command again.
+At C:\Users\vladimir.shmidt\Documents\WindowsPowerShell\Scripts\install-kubectl.ps1:43 char:20
++ Start-BitsTransfer $downloadlink -DisplayName ""Getting KubeCTL from $ ...
++                    ~~~~~~~~~~~~~
+    + CategoryInfo          : InvalidData: (:) [Start-BitsTransfer], ParameterBindingValidationException
+    + FullyQualifiedErrorId : ParameterArgumentValidationError,Microsoft.BackgroundIntelligentTransfer.Management.NewB
+   itsTransferCommand
+
+Unblock-File : Cannot find path 'C:\Users\vladimir.shmidt\.kube\kubectl.exe' because it does not exist.
+At C:\Users\vladimir.shmidt\Documents\WindowsPowerShell\Scripts\install-kubectl.ps1:45 char:1
++ Unblock-File $Downloadfile
++ ~~~~~~~~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : ObjectNotFound: (C:\Users\vladim...ube\kubectl.exe:String) [Unblock-File], ItemNotFoundE
+   xception
+    + FullyQualifiedErrorId : FileNotFound,Microsoft.PowerShell.Commands.UnblockFileCommand
+
+==>starting 'C:\Users\vladimir.shmidt\.kube\kubectl.exe version'
+. : The term 'C:\Users\vladimir.shmidt\.kube\kubectl.exe' is not recognized as the name of a cmdlet, function, script f
+ile, or operable program. Check the spelling of the name, or if a path was included, verify that the path is correct an
+d try again.
+At C:\Users\vladimir.shmidt\Documents\WindowsPowerShell\Scripts\install-kubectl.ps1:47 char:2
++ .$Downloadfile version
++  ~~~~~~~~~~~~~
+    + CategoryInfo          : ObjectNotFound: (C:\Users\vladim...ube\kubectl.exe:String) [], CommandNotFoundException
+    + FullyQualifiedErrorId : CommandNotFoundException
+
+
+You can now start kubectl from C:\Users\vladimir.shmidt\.kube\kubectl.exe
+copy your remote kubernetes cluster information to C:\Users\vladimir.shmidt\.kube/config
+<issue_comment>username_1: Facing exactly the same issue
+<issue_comment>username_2: Sounds like the install-kubectl.ps1 script from PSGallery is broken. Not sure how are we supposed to fix it. Should we remove the ""Install with Powershell from PSGallery"" section all together? We already have the curl way to download and install kubectl.exe on Windows (see later in that page).
+<issue_comment>username_0: install-kubectl.ps1 is trying to crawl docs page and find a link with cube installer but somebody removed it from the page so script is broken now
+<issue_comment>username_3: C:\[Net.ServicePointManager]::SecurityProtocol = [Net.SecurityProtocolType]::Tls12
+
+then install
+<issue_comment>username_4: @username_5, do you publish somewhere the source of the 'install-kubectl.ps1' script?
+
+I can prepare the PR to resolve that.
+<issue_comment>username_4: The related issues
+- #9877 
+- #10780
+<issue_comment>username_5: Will Update the Gallery Version
+
+Von meinem iPhone gesendet
+<issue_comment>username_5: new version 1.7 of installer is published to Gallery. can be closed for now
+<issue_comment>username_6: @username_5 I think you might have uploaded the 1.6 code to the gallery for 1.7. The header still references 1.6 and the code looks exactly the same: 
+https://www.powershellgallery.com/packages/install-kubectl/1.7/Content/install-kubectl.ps1
+<#PSScriptInfo 
+.VERSION 1.6 
+.GUID 32a11a36-f91c-4241-a11f-af0cf3e90f38 
+.AUTHOR Karsten.Bott@labbuildr.com
+<issue_comment>username_5: don´t trust that one.
+
+please do ""install-script install-kubectl -MinimumVersion 1.7 -force -verbose“
+
+the script should be installed in $HOME/Documents/WindowsPowerShell/Scripts/install-kubectl.ps1
+
+If so, do
+
+ise -f  $HOME/Documents/WindowsPowerShell/Scripts/install-kubectl.ps1
+
+You will see it should be 1.7
+
+Publish-Script does not allow to upload same version twice :-)
+<issue_comment>username_4: I've tested it, works correctly on W2K8 R2 and PowerShell 3.0.
+
+IMHO, the issue can be closed now.
+<issue_comment>username_5: thanks for verifying Wojciech !
+<issue_comment>username_7: Version 1.7 is Still not working for windows 10.
+<issue_comment>username_6: @username_7 Could you please provide more information. what is the error message? code and screenshot would be helpful.
+<issue_comment>username_7: Powershell version 
+Name: ConsoleHost
+Version          : 5.1.17134.407
+<issue_comment>username_7: Thanks. After I installed docker, the issue fixed. Not sure why.<issue_closed>"
+BookStackApp/website,712897404,80,"{'number': 80.0, 'repo': 'website', 'user_login': 'BookStackApp'}","[{'action': 'opened', 'author': 'Prerna-eng', 'comment_id': None, 'datetime': '2020-10-01T14:27:36Z', 'masked_author': 'username_0', 'text': '', 'title': 'Improve doc', 'type': 'issue'}
+ {'action': 'created', 'author': 'unnown', 'comment_id': 702189674.0, 'datetime': '2020-10-01 14:51:26+00:00', 'masked_author': 'username_1', 'text': ""Please mark as invalid and spam, this is an obvious attempt to get a free t-shirt by 'contributing'(hacktoberfest)\r\nThis will also ban the user for trying to abuse the system by doing marginal effort"", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'ssddanbrown', 'comment_id': 702263394.0, 'datetime': '2020-10-01 16:48:19+00:00', 'masked_author': 'username_2', 'text': 'The power of a free t-shirt eh?', 'title': None, 'type': 'comment'}]","<issue_start><issue_comment>Title: Improve doc
+username_0: 
+<issue_comment>username_1: Please mark as invalid and spam, this is an obvious attempt to get a free t-shirt by 'contributing'(hacktoberfest)
+This will also ban the user for trying to abuse the system by doing marginal effort
+<issue_comment>username_2: The power of a free t-shirt eh?"
+dart-lang/site-www,559548569,2254,,"[{'action': 'opened', 'author': 'rahul-bavaliya', 'comment_id': None, 'datetime': '2020-02-04 07:59:55+00:00', 'masked_author': 'username_0', 'text': 'Page URL: https://dart.dev/tools/pub/troubleshoot\r\nPage source: https://github.com/dart-lang/site-www/tree/master/src/tools/pub/troubleshoot.md\r\n\r\nFound a typo? You can fix it yourself by going to the page source and clicking the pencil icon. Or finish creating this issue.\r\n\r\nDescription of issue: Using below command I set proxy and provide credential for proxy. But unable to run flutter doctor from it.\r\n**set https_proxy=username:password@hostname:port**\r\n\r\nHere I provide the console log for further information.\r\nConsole log : \r\nDownloading the Dart SDK using the BITS service failed, retrying with WebRequest...\r\nInvoke-WebRequest :\r\nAccess Denied (authentication_failed)\r\nYour credentials could not be authenticated: ""Credentials are missing."". You will not be permitted access until your credentials can be verified.\r\nThis is typically caused by an incorrect username and/or password, but could also be caused by network problems.\r\nAt D:\\RAHUL_1647164\\flutter_dev\\flutter_windows_v1.12.13+hotfix.7-stable\\flutter\\bin\\internal\\update_dart_sdk.ps1:68 char:5\r\n+     Invoke-WebRequest -Uri $dartSdkUrl -OutFile $dartSdkZip\r\n+     ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\r\n    + CategoryInfo          : InvalidOperation: (System.Net.HttpWebRequest:HttpWebRequest) [Invoke-WebRequest], WebException\r\n    + FullyQualifiedErrorId : WebCmdletWebResponseException,Microsoft.PowerShell.Commands.InvokeWebRequestCommand\r\nError: Unable to update Dart SDK. Retrying...', 'title': ""'Troubleshooting pub' page issue"", 'type': 'issue'}
+ {'action': 'created', 'author': 'kwalrath', 'comment_id': 582483809.0, 'datetime': '2020-02-05 16:12:28+00:00', 'masked_author': 'username_1', 'text': ""@username_2 can you figure out what's wrong here? I'm not sure whether this is a pub issue, a flutter issue, or a misunderstanding, but I'd like to update the troubleshooting page if that might help."", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'jonasfj', 'comment_id': 582804192.0, 'datetime': '2020-02-06 09:06:19+00:00', 'masked_author': 'username_2', 'text': ""@username_0, I think this is a flutter issue, probably the `flutter doctor` command runs a powershell script that doesn't handle the proxy config.. Maybe configuring system proxy will help, I don't know windows well enough.. Or maybe you need to quote the environment variable when you set it..\r\n\r\nI suggest filing a bug on https://github.com/flutter/flutter/issues/\r\n\r\nquick note: for future reference please use [code fences](https://help.github.com/en/github/writing-on-github/creating-and-highlighting-code-blocks) for pasting terminal output :)"", 'title': None, 'type': 'comment'}
+ {'action': 'closed', 'author': 'jonasfj', 'comment_id': None, 'datetime': '2020-02-06 09:06:20+00:00', 'masked_author': 'username_2', 'text': '', 'title': None, 'type': 'issue'}
+ {'action': 'created', 'author': 'kwalrath', 'comment_id': 583138705.0, 'datetime': '2020-02-06 22:18:27+00:00', 'masked_author': 'username_1', 'text': ""@username_0 could you refer to this issue when you open the Flutter issue? Thank you!\r\n\r\n(Oh, and I've added the code fences. :) )"", 'title': None, 'type': 'comment'}]","<issue_start><issue_comment>Title: 'Troubleshooting pub' page issue
+username_0: Page URL: https://dart.dev/tools/pub/troubleshoot
+Page source: https://github.com/dart-lang/site-www/tree/master/src/tools/pub/troubleshoot.md
+
+Found a typo? You can fix it yourself by going to the page source and clicking the pencil icon. Or finish creating this issue.
+
+Description of issue: Using below command I set proxy and provide credential for proxy. But unable to run flutter doctor from it.
+**set https_proxy=username:password@hostname:port**
+
+Here I provide the console log for further information.
+Console log : 
+Downloading the Dart SDK using the BITS service failed, retrying with WebRequest...
+Invoke-WebRequest :
+Access Denied (authentication_failed)
+Your credentials could not be authenticated: ""Credentials are missing."". You will not be permitted access until your credentials can be verified.
+This is typically caused by an incorrect username and/or password, but could also be caused by network problems.
+At D:\RAHUL_1647164\flutter_dev\flutter_windows_v1.12.13+hotfix.7-stable\flutter\bin\internal\update_dart_sdk.ps1:68 char:5
++     Invoke-WebRequest -Uri $dartSdkUrl -OutFile $dartSdkZip
++     ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : InvalidOperation: (System.Net.HttpWebRequest:HttpWebRequest) [Invoke-WebRequest], WebException
+    + FullyQualifiedErrorId : WebCmdletWebResponseException,Microsoft.PowerShell.Commands.InvokeWebRequestCommand
+Error: Unable to update Dart SDK. Retrying...
+<issue_comment>username_1: @username_2 can you figure out what's wrong here? I'm not sure whether this is a pub issue, a flutter issue, or a misunderstanding, but I'd like to update the troubleshooting page if that might help.
+<issue_comment>username_2: @username_0, I think this is a flutter issue, probably the `flutter doctor` command runs a powershell script that doesn't handle the proxy config.. Maybe configuring system proxy will help, I don't know windows well enough.. Or maybe you need to quote the environment variable when you set it..
+
+I suggest filing a bug on https://github.com/flutter/flutter/issues/
+
+quick note: for future reference please use [code fences](https://help.github.com/en/github/writing-on-github/creating-and-highlighting-code-blocks) for pasting terminal output :)<issue_closed>
+<issue_comment>username_1: @username_0 could you refer to this issue when you open the Flutter issue? Thank you!
+
+(Oh, and I've added the code fences. :) )"
+ethereum/ethereum-org-website,1024530858,4215,,"[{'action': 'opened', 'author': 'samajammin', 'comment_id': None, 'datetime': '2021-10-12T22:35:58Z', 'masked_author': 'username_0', 'text': '*To make our work more accessible and to foster more community collaboration, our team publishes an overview of our quarterly roadmap goals. See last quarter\'s roadmap here: #3446.*\r\n\r\n**Greetings fellow Ethereans!**\r\n\r\nHappy Hacktoberfest! [Our vision with ethereum.org](https://ethereum.org/en/about/) continues to be to create the best portal for Ethereum\'s growing community, and to serve as the front door to Ethereum for millions of new visitors each month. Here\'s a look at our major Q4 initiatives to advance this vision.\r\n\r\n##  🚀 Enable a CLR.fund quadratic funding round on layer 2\r\n\r\nAs [mentioned in our Q3 closing update](https://github.com/ethereum/ethereum-org-website/issues/3446#issuecomment-937394528), we didn\'t achieve our goal to launch a funding round on mainnet. Our primary goal this quarter is to enable one. We plan to get [this project](https://github.com/ethereum/clrfund) across the finish line by merging our changes upstream into the [CLR.fund repo](https://github.com/clrfund/monorepo) and to help enable a community to launch a funding round on Arbitrum One leveraging the features we\'ve contributed.\r\n\r\nWhile not directly related to ethereum.org, we\'re hoping this effort will increase the cultural momentum around ecosystem funding for public goods as well as demonstrate, popularize and diversify CLRs as a use case for communities across the ecosystem.\r\n\r\nFollow along with progress at [our GitHub repo](https://github.com/ethereum/clrfund) and [play around with a deployed application here](https://eth2clrfund.netlify.app/#/) - we\'ll keep running test rounds on RinkArby as we approach mainnet readiness! Join the [CLR.fund community Discord server](https://discord.gg/sy7kN97Mqv) to get involved.\r\n\r\n## 🔀 Rebrand ""Eth2""\r\n\r\nThe highly anticipated network upgrade known as ""[the merge](https://ethereum.org/en/eth2/merge/)"" is approaching. Once that upgrade takes place, there will no longer be two distinct Ethereum networks or concepts of ""Eth1"" and ""Eth2"" - there will just be the Ethereum network we all know in love.\r\n\r\nIn preparation for this event, we need to revamp our [Eth2 resources](https://ethereum.org/en/eth2/) in order to explain this evolution, reduce confusion and prevent FUD within the community. This quarter we\'ll reorganize these resources and update the terminology on these pages to best reflect the reality of these Ethereum network upgrades. This may involve restructuring the [Eth2 bug bounty program](https://ethereum.org/en/eth2/get-involved/bug-bounty/) and [ways to get involved](https://ethereum.org/en/eth2/get-involved/) by consolidating them into more general Ethereum resources.\r\n\r\n## 🥩 Make staking easier\r\n\r\nRunning a node and participating as a validator is a critical component of getting involved as an Ethereum community member. We want to continue to make this process as simple and easy as possible for anyone to set up.\r\n\r\nWe\'ll add content resources and update user flows (both on [ethereum.org](https://ethereum.org/en/) and [launchpad.ethereum.org](https://launchpad.ethereum.org/en/)) to improve the UX for anyone interested in staking, including walkthroughs on how to first set up a staking node on a risk-free testnet.\r\n\r\n## 🎓 Revamp the Learn page\r\n\r\nThere is a lot to learn in the Ethereum ecosystem. Currently ethereum.org provides an ever-growing list of disconnected pages that users must piece together independently. Our long-lived [""Learn"" page](https://ethereum.org/en/learn/) provides a scattered list of topics without much rhyme or reason behind the sequence or importance of these topics.\r\n\r\nWe\'ll redesign this page and the ""Learn"" site navigation to improve our content hierarchy for users and create more structured pathways to learning Ethereum that folks can navigate based on their areas of interest and current level of knowledge.\r\n\r\n## 🔍 Improve site search\r\n\r\nWe receive tens of thousands of site search queries each month on ethereum.org and we want to provide the best results to make your experience exploring Ethereum as great as it can be! This feature continues to increase in importance as we add more and more content on the site.\r\n\r\nAt the moment our search functionality isn\'t working as well as we\'d like - specifically regarding [how we index our content](https://github.com/ethereum/ethereum-org-website/issues/2764) and [how we rank content in search results](https://github.com/ethereum/ethereum-org-website/issues/3842) - so we\'ll address these issues to improve the search experience for everyone.\r\n\r\n## 🏅 Acknowledge our translators\r\n\r\nIt\'s now been over 2 years since we launched our [Translation Program initiative](https://ethereum.org/en/contributing/translation-program/) in 2019. Since inception, over 2,000 community members have contributed, translating a total of 2.8 million words! ethereum.org is now [available in 37 different languages](https://ethereum.org/en/languages/).\r\n\r\nWe plan to invest more to acknowledge this incredible community of volunteers from across the globe. We\'ll build out a Translation Leaderboard, a Translator Certification Plan and additional content to recognize our amazing contributors.\r\n\r\n## ⚙️ Automate our Translation Program\r\n\r\nOur [latest blog post](https://blog.ethereum.org/2021/10/04/translation-program-update/) details updates we\'ve made to the Translation Program and the expanding scope of this initiative. This quarter we\'ll focus on technical improvements to support our latest content release and to streamline our workflows (e.g. via Crowdin <> GitHub API integrations).\r\n\r\n[Learn how to get involved with Translation Program](https://ethereum.org/en/contributing/translation-program/).\r\n\r\n## 🍻 Host community calls\r\n\r\nEthereum.org has become the entryway into Ethereum largely thanks to [thousands of contributors](https://ethereum.org/en/contributing/#contributors). This quarter we plan to more actively engage with our contributors by re-igniting our monthly community call initiative!\r\n\r\nWe believe hosting an open call for our community will help to provide context and support about the project, answer any questions you have, and allow folks from the community to weigh in on our product decisions and roadmap.\r\n\r\n[Join our Discord](https://discord.gg/CetY6Y4) to receive notifications about upcoming community calls. We\'ll also announce them on [our Twitter](https://twitter.com/ethdotorg).\r\n\r\n## 📲 Increase accessibility\r\n\r\nContinuing to improve our website accessibility is key to achieving our vision for our global community. Inline with [our design principles](https://ethereum.org/en/contributing/design-principles/), we\'re investing in making our site universally accessible.\r\n\r\nThis quarter we\'ll take steps to audit ethereum.org and implement improvements to enhance the experience, e.g. for screen readers and for keyboard navigation.\r\n\r\nHave specific suggestions? We\'d love to hear from you - please [create an issue](https://github.com/ethereum/ethereum-org-website/issues/new/choose).\r\n\r\n## 🦄 Revamp the Community page\r\n\r\nEthereum has the largest and most engaged community in the blockchain space. The [current community page of ethereum.org](https://ethereum.org/en/community/) does not accurately represent our community and is failing visitors who want to get involved but don\'t know where to start.\r\n\r\nWe\'ll rethink the information architecture and redesign this page to better enable people to find their place in this vibrant ecosystem.\r\n\r\n## 💰 Refine the Wallet pages\r\n\r\nWallets are an integral part to Ethereum onboarding and network participation. It\'s no surprise that a huge amount of traffic goes to [our wallets pages](https://ethereum.org/en/wallets/) (>10% of total pageviews).\r\n\r\nSince we\'ve built these pages, we\'ve receive a ton of helpful feedback. Among the most prominent is that we present an overwhelming number of choices that makes picking a wallet exhausting for new users. This quarter we\'ll improve our curation of wallets, add new feature filters to help users compare wallets, and add a few ""editors choice"" to reduce decision fatigue for visitors.\r\n\r\n## 👩\u200d🎨 Hire a Product Designer\r\n\r\nOur team is growing! We\'re in search of a Product Designer to help create slick, fun and functional web products visited by tens of millions of diverse Ethereum users each year. You\'ll collaborate with product, engineering, operations & research teammates to shape the design and features of our products. You\'ll empower the next generation of Ethereum users and builders to change our world for the better.\r\n\r\nStay tuned for our official job listing. Eager to get in touch? Hop into [our Discord](https://discord.gg/CetY6Y4) & share your portfolio!\r\n\r\n## 🎨 Redesign the Ecosystem Support Program (ESP) website\r\n\r\nThe [ESP initiative](https://esp.ethereum.foundation/en/) within the Ethereum Foundation (formerly known as the Grants Program) continues to be a critical source of funding and support for projects within the Ethereum ecosystem. Our team will help to give this website a facelift, revamp the flow of the website to make the process of applying for support clearer and more accessible, as well as improve awareness and accessibility to this valuable initiative.\r\n\r\n## How does that sound?\r\n\r\nWe always appreciate feedback on our roadmap! Our guiding principles are based on delivering the most value in the shortest time, so if there\'s something you think we should work on, please let us know! We welcome ideas and PRs from anyone in the community.\r\n\r\nWant to deliver feedback in person? Our team will be in Lisbon for [LisCon](https://liscon.org/) and [ETHLisbon](https://www.ethlisbon.org/) - [hit us up at @ethdotorg on Twitter](https://twitter.com/ethdotorg) if you\'re around - we\'d love to connect with our contributors!\r\n\r\n[Learn more about contributing](https://ethereum.org/en/contributing/).', 'title': 'Q4 2021 ethereum.org product roadmap', 'type': 'issue'}
+ {'action': 'created', 'author': 'comradekingu', 'comment_id': 950430770.0, 'datetime': '2021-10-25 00:35:44+00:00', 'masked_author': 'username_1', 'text': 'Can you instead move away from Crowdin? It has egregious terms, and it is not decentralized in any way.\r\nMonero is on a Weblate instance, but they wont let anyone in before making a lot of suggestions.\r\nThe familiarity of ones own language is fairly important in conveying confidence in what is otherwise very new to people.', 'title': None, 'type': 'comment'}
+ {'action': 'closed', 'author': 'samajammin', 'comment_id': None, 'datetime': '2022-01-08 04:12:38+00:00', 'masked_author': 'username_0', 'text': '', 'title': None, 'type': 'issue'}
+ {'action': 'created', 'author': 'samajammin', 'comment_id': 1007882026.0, 'datetime': '2022-01-08 04:12:38+00:00', 'masked_author': 'username_0', 'text': 'Happy new year fellow Ethereans! Closing this out with a progress update on each of our Q4 initiatives.\r\n\r\n## 🚀 Enable a CLR.fund quadratic funding round on layer 2\r\n\r\nAfter over 6 months of contributing to clr.fund\'s quadratic funding stack, we\'ve [merged our changes](https://github.com/clrfund/monorepo/pull/388) to the [upstream repo](https://github.com/clrfund/monorepo), which added L2 network support as well as variety of enhancements to the web app. We also ran a successful test round on Arbitrum One - you can [view the transactions here](https://arbiscan.io/txs?a=0x076eFbc33c19c570EC7727929c0e2C60A3b7bCa2&p=1). \r\n\r\n[clr.fund](http://clr.fund) plans to deploy a funding round on Arbitrum One geared towards the staking ecosystem later this month & the EF is excited to offer matching funds to the round. Keep your eyes out for an announcement - we hope you participate!\r\n\r\nThank you to the [clr.fund](http://clr.fund) team, the [MACI](https://github.com/appliedzkp/maci) team & clr.fund\'s community of contributors who continue to push innovations in the ZKP & quadratic funding space. \r\n\r\n## 🔀 Rebrand ""Eth2""\r\n\r\nThe “Eth2” rebrand is a large undertaking that involves many stakeholders within the community & ultimately requires much more than mere content updates on ethereum.org. To push this forward, we [created a proposal](https://www.notion.so/Scope-work-for-the-Great-Eth2-Renaming-7d57a700c6ef492e8d031494c605ae46), gathered input from the community & aligned on an approach for this transition but didn’t end up shipping any updates on this initiative.\r\n\r\nWe kicked off work on the content changes (https://github.com/ethereum/ethereum-org-website/pull/4915). With the merge approaching, we’ve committed to shipping these updates by the end of January, so stay tuned!\r\n\r\n## 🥩 Make staking easier\r\n\r\nThis ended up being a much meatier epic than we originally anticipated. Staking is a complex topic & once we dug into the existing UX, we realized we were missing some foundational content, such as a simple guide on how to run a node.\r\n\r\nWe dedicated the bulk of our time on this initiative to a ""run a node"" page. We researched options, drafted content, collected community feedback & kicked off an implementation (https://github.com/ethereum/ethereum-org-website/pull/5008) which we expect to ship in Q1.\r\n\r\nImproving staking UX is still a top priority & will be a major focus for our team this year, so stay tuned on our plans here.\r\n\r\n## 🎓 Revamp the Learn page\r\n\r\nWe decided to hold off on this initiative until we hire a Product Designer - see below for a progress update on that. In the meantime, we published new content for this section of the website:\r\n- [Introduction to smart contracts](https://ethereum.org/en/smart-contracts/)\r\n- [Ethereum security & scams](https://ethereum.org/en/security/)\r\n- [Introduction to Ethereum governance](https://ethereum.org/en/governance/)\r\n\r\n## 🔍 Improve site search\r\n\r\nWe updated our site search configuration (#4220) to remove duplicate search results & improve rankings of search results. A community member also added a nice keyboard shortcut feature (https://github.com/ethereum/ethereum-org-website/pull/4031) - thanks @SNikhill 😄\r\n\r\n[Learn more about how our site search is configured](https://github.com/ethereum/ethereum-org-website/blob/dev/docs/SITE_SEARCH.md).\r\n\r\n## 🏅 Acknowledge our translators\r\n\r\nWe launched our [contributor acknowledgements page](https://ethereum.org/en/contributing/translation-program/acknowledgements/)! \r\n\r\nThis page includes a translation leaderboard, full list of our >2,500 contributors, & information for translators to claim rewards, including POAPs & translation certificates. We’re grateful for the contributions from our translation community & hope this helps recognize their massive positive impact on the Ethereum community. \r\n\r\nIn 2021 our community contributors translated >2.9 millions words. Those efforts led to our translated content on [ethereum.org](http://ethereum.org) collectively receiving >4.2 million pageviews in 2021 (+430% growth from 2020)!\r\n\r\n## ⚙️ Automate our Translation Program\r\n\r\nWe added technical improvements to our codebase (https://github.com/ethereum/ethereum-org-website/pull/4441) in order to support the [recent release](https://blog.ethereum.org/2021/10/04/translation-program-update/) of new content for translation & overhaul of our content management.\r\n\r\nWe also explored integrations between Crowdin & GitHub to automate the syncing of source files from GitHub to Crowdin & uploading of translated files from Crowdin to GitHub. After some initial research using a test project, it became clear that due to the scope of content on the website & the limited control the integration allows, we must first address some of the issues we’re currently encountering when uploading files to Crowdin & GitHub. We’ll be addressing these issues individually with each batch of translated content we add to the site. Once they’re resolved, we plan to move forward with the integration.\r\n\r\n## 🍻 Host community calls\r\n\r\nWe ran two community calls with over 230 attendees between them. These calls provide us with a space to share what we’re working on, collect feedback & answer question from the community, as well as highlight community contributions to acknowledge volunteers for their work.\r\n\r\nIf you missed them you can checkout our [December](https://www.youtube.com/watch?v=_rAqApQqP5Y) & [November](https://www.youtube.com/watch?v=hbL1hziYMYM) community calls on [the Ethereum Foundation YouTube](https://www.youtube.com/channel/UCNOfzGXD_C9YMYmnefmPH0g).\r\n\r\nWe also launched two “office hours” initiatives: \r\n\r\n1. [ethereum.org](http://ethereum.org/)\xa0code & content\r\n2. [ethereum.org](http://ethereum.org) translations\r\n\r\nWe consider these calls to be a huge success, with over 50 attendees in each, increasing community ownership & feedback for our product. We plan to continue these on a monthly basis in 2022.\r\n\r\n[Join our Discord](https://discord.gg/CetY6Y4) to receive notifications about upcoming community calls & office hours. We\'ll also announce them on [our Twitter](https://twitter.com/ethdotorg).\r\n\r\n## 📲 Increase accessibility\r\n\r\nWhile we had some productive brainstorming & planning sessions around how we can improve website accessibility, we unfortunately didn’t ship any improvements to the site outside of miscellaneous bug fixes & UI/UX improvements. We’re hoping to tackle an accessibility audit in Q1 2022.\r\n\r\nDo you have any specific suggestions? Would you like to contribute to this? We\'d love to hear from you - please [create an issue](https://github.com/ethereum/ethereum-org-website/issues/new/choose).\r\n\r\n## 🦄 Revamp the Community page\r\n\r\nWe completely restructured our Ethereum community content & redesigned a new community hub with the overall goal of empowering users to participate in the Ethereum ecosystem more easily.\r\n\r\nWe shipped five new pages:\r\n- [The community hub](https://ethereum.org/en/community/)\xa0is designed to help navigate people to the correct place to meet their community goals.\r\n- [Online communities](https://ethereum.org/en/community/online/)\xa0organizes forums, chatrooms & other online resources that people can join to find their tribe.\r\n- [Events](https://ethereum.org/en/community/events/)\xa0consolidates Ethereum events & meetups into one easy to find, canonical location.\r\n[Truncated]\n\r\nWe continue to progress with candidate interviews & expect to extend a job offer by the end of the month, so stay tuned for an announcement around this. We’re beyond excited to bring a full-time designer onboard to accelerate our product development.\r\n\r\n## 🎨 Redesign the Ecosystem Support Program (ESP) website\r\n\r\nExciting progress on this front - we hired a web developer (hi @nhsz) to build out this website redesign. Nico is working with ESP’s designer & operations team to bring their vision to reality & has been progressing on an implementation. \r\n\r\nWe’re aiming to launch this new website by the end of this month! [Follow along with our progress](https://github.com/ethereum/esp-website/tree/esp-redesign).\r\n\r\n## ⚡️ Gatsby v4\r\n\r\nBonus points! We didn’t intend to invest time into this but when [Gatsby released v4](https://www.gatsbyjs.com/gatsby-4/) in October, we decided to upgrade our codebase (#4324). Gatsby v4 is full of new features but perhaps most notable is the fast build times, particularly in tandem with Gatsby Cloud. We decided to test it out & have been pleased with the results: we’ve seen average build times drop from ~66 minutes to ~7 minutes! We’re looking forward to the productivity boost for our team & our community contributors!\r\n\r\n## Onward & upward\r\n\r\nThank you again to all of [our contributors](https://ethereum.org/en/contributing/#contributors) who helped make this all possible ✨ ❤️ ✨\r\n\r\nAs always, you can follow along with specific changes on our releases page: [https://github.com/ethereum/ethereum-org-website/releases](https://github.com/ethereum/ethereum-org-website/releases)\r\n\r\nStay tuned for our 2022 Q1 product roadmap, which we\'ll publish early next week!', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'samajammin', 'comment_id': 1012527211.0, 'datetime': '2022-01-13 21:24:43+00:00', 'masked_author': 'username_0', 'text': 'Updates on our Q4 KPIs:\r\n\r\n- Translation Program\r\n    - ✅ 4000 project members in Crowdin - 4192 members\r\n    - ❌ Support 5 new languages on the website - We had 5 new languages translated but not live on the site. [Malay](https://ethereum.org/ms/) (#4747) & [Swahili](https://ethereum.org/sw/) (#4836) are live on the site, there’s a PR up to add Marathi (#4952), while Serbian and Thai were still in review.\r\n    - ✅ Publish 5 fully translated languages ([Chinese Simplified](https://ethereum.org/zh/), [Chinese Traditional](https://ethereum.org/zh-tw/), [Indonesian](https://ethereum.org/id/), [Italian](https://ethereum.org/it/) & [Brazilian Portuguese](https://ethereum.org/pt-br/))\r\n    - ❌ Achieve new record month with >500k community-translated words - so close, best month was October with 498,739 translated words!\r\n- Community growth\r\n    - ✅ 15% increase in total GitHub contributors (+22%, with 587 contributors)\r\n    - ✅ Distribute 135 POAPs (209 distributed)\r\n    - ✅ Enable GitHub contributors to ship 7 meaningful features\r\n        - Zen mode (#4131) by @Hakeemmidan\r\n        - Shortcut to focus search (#4031) by @SNikhill \r\n        - Add Ethereum energy consumption page (#3650) by @jmcook1186\r\n        - Fix reading time for Chinese/Japanese (#4302) by @SNikhill \r\n        - Add deprecated software page (#4256) by @jpitts & @bleesherman\r\n        - Community hub designs (#4521) by @Scott1UP\r\n    - ❌ Hit 23K Twitter Followers by end of Q4 - 22.6K followers\r\n    - Discord\r\n        - ✅ Add 2 guides (@LuLuDiscord & @muddlebee)\r\n        - ✅ +25% (>650) messages sent per week (4-week average) - 1047 messages\r\n        - ✅ +10%  (>75) communicators per week  (4-week average) - 126 communcations', 'title': None, 'type': 'comment'}]","<issue_start><issue_comment>Title: Q4 2021 ethereum.org product roadmap
+username_0: *To make our work more accessible and to foster more community collaboration, our team publishes an overview of our quarterly roadmap goals. See last quarter's roadmap here: #3446.*
+
+**Greetings fellow Ethereans!**
+
+Happy Hacktoberfest! [Our vision with ethereum.org](https://ethereum.org/en/about/) continues to be to create the best portal for Ethereum's growing community, and to serve as the front door to Ethereum for millions of new visitors each month. Here's a look at our major Q4 initiatives to advance this vision.
+
+##  🚀 Enable a CLR.fund quadratic funding round on layer 2
+
+As [mentioned in our Q3 closing update](https://github.com/ethereum/ethereum-org-website/issues/3446#issuecomment-937394528), we didn't achieve our goal to launch a funding round on mainnet. Our primary goal this quarter is to enable one. We plan to get [this project](https://github.com/ethereum/clrfund) across the finish line by merging our changes upstream into the [CLR.fund repo](https://github.com/clrfund/monorepo) and to help enable a community to launch a funding round on Arbitrum One leveraging the features we've contributed.
+
+While not directly related to ethereum.org, we're hoping this effort will increase the cultural momentum around ecosystem funding for public goods as well as demonstrate, popularize and diversify CLRs as a use case for communities across the ecosystem.
+
+Follow along with progress at [our GitHub repo](https://github.com/ethereum/clrfund) and [play around with a deployed application here](https://eth2clrfund.netlify.app/#/) - we'll keep running test rounds on RinkArby as we approach mainnet readiness! Join the [CLR.fund community Discord server](https://discord.gg/sy7kN97Mqv) to get involved.
+
+## 🔀 Rebrand ""Eth2""
+
+The highly anticipated network upgrade known as ""[the merge](https://ethereum.org/en/eth2/merge/)"" is approaching. Once that upgrade takes place, there will no longer be two distinct Ethereum networks or concepts of ""Eth1"" and ""Eth2"" - there will just be the Ethereum network we all know in love.
+
+In preparation for this event, we need to revamp our [Eth2 resources](https://ethereum.org/en/eth2/) in order to explain this evolution, reduce confusion and prevent FUD within the community. This quarter we'll reorganize these resources and update the terminology on these pages to best reflect the reality of these Ethereum network upgrades. This may involve restructuring the [Eth2 bug bounty program](https://ethereum.org/en/eth2/get-involved/bug-bounty/) and [ways to get involved](https://ethereum.org/en/eth2/get-involved/) by consolidating them into more general Ethereum resources.
+
+## 🥩 Make staking easier
+
+Running a node and participating as a validator is a critical component of getting involved as an Ethereum community member. We want to continue to make this process as simple and easy as possible for anyone to set up.
+
+We'll add content resources and update user flows (both on [ethereum.org](https://ethereum.org/en/) and [launchpad.ethereum.org](https://launchpad.ethereum.org/en/)) to improve the UX for anyone interested in staking, including walkthroughs on how to first set up a staking node on a risk-free testnet.
+
+## 🎓 Revamp the Learn page
+
+There is a lot to learn in the Ethereum ecosystem. Currently ethereum.org provides an ever-growing list of disconnected pages that users must piece together independently. Our long-lived [""Learn"" page](https://ethereum.org/en/learn/) provides a scattered list of topics without much rhyme or reason behind the sequence or importance of these topics.
+
+We'll redesign this page and the ""Learn"" site navigation to improve our content hierarchy for users and create more structured pathways to learning Ethereum that folks can navigate based on their areas of interest and current level of knowledge.
+
+## 🔍 Improve site search
+
+We receive tens of thousands of site search queries each month on ethereum.org and we want to provide the best results to make your experience exploring Ethereum as great as it can be! This feature continues to increase in importance as we add more and more content on the site.
+
+At the moment our search functionality isn't working as well as we'd like - specifically regarding [how we index our content](https://github.com/ethereum/ethereum-org-website/issues/2764) and [how we rank content in search results](https://github.com/ethereum/ethereum-org-website/issues/3842) - so we'll address these issues to improve the search experience for everyone.
+
+## 🏅 Acknowledge our translators
+
+It's now been over 2 years since we launched our [Translation Program initiative](https://ethereum.org/en/contributing/translation-program/) in 2019. Since inception, over 2,000 community members have contributed, translating a total of 2.8 million words! ethereum.org is now [available in 37 different languages](https://ethereum.org/en/languages/).
+
+We plan to invest more to acknowledge this incredible community of volunteers from across the globe. We'll build out a Translation Leaderboard, a Translator Certification Plan and additional content to recognize our amazing contributors.
+
+## ⚙️ Automate our Translation Program
+
+Our [latest blog post](https://blog.ethereum.org/2021/10/04/translation-program-update/) details updates we've made to the Translation Program and the expanding scope of this initiative. This quarter we'll focus on technical improvements to support our latest content release and to streamline our workflows (e.g. via Crowdin <> GitHub API integrations).
+
+[Learn how to get involved with Translation Program](https://ethereum.org/en/contributing/translation-program/).
+
+## 🍻 Host community calls
+
+Ethereum.org has become the entryway into Ethereum largely thanks to [thousands of contributors](https://ethereum.org/en/contributing/#contributors). This quarter we plan to more actively engage with our contributors by re-igniting our monthly community call initiative!
+
+We believe hosting an open call for our community will help to provide context and support about the project, answer any questions you have, and allow folks from the community to weigh in on our product decisions and roadmap.
+
+[Join our Discord](https://discord.gg/CetY6Y4) to receive notifications about upcoming community calls. We'll also announce them on [our Twitter](https://twitter.com/ethdotorg).
+
+## 📲 Increase accessibility
+
+Continuing to improve our website accessibility is key to achieving our vision for our global community. Inline with [our design principles](https://ethereum.org/en/contributing/design-principles/), we're investing in making our site universally accessible.
+
+This quarter we'll take steps to audit ethereum.org and implement improvements to enhance the experience, e.g. for screen readers and for keyboard navigation.
+
+Have specific suggestions? We'd love to hear from you - please [create an issue](https://github.com/ethereum/ethereum-org-website/issues/new/choose).
+
+## 🦄 Revamp the Community page
+
+Ethereum has the largest and most engaged community in the blockchain space. The [current community page of ethereum.org](https://ethereum.org/en/community/) does not accurately represent our community and is failing visitors who want to get involved but don't know where to start.
+
+We'll rethink the information architecture and redesign this page to better enable people to find their place in this vibrant ecosystem.
+
+## 💰 Refine the Wallet pages
+
+Wallets are an integral part to Ethereum onboarding and network participation. It's no surprise that a huge amount of traffic goes to [our wallets pages](https://ethereum.org/en/wallets/) (>10% of total pageviews).
+
+Since we've built these pages, we've receive a ton of helpful feedback. Among the most prominent is that we present an overwhelming number of choices that makes picking a wallet exhausting for new users. This quarter we'll improve our curation of wallets, add new feature filters to help users compare wallets, and add a few ""editors choice"" to reduce decision fatigue for visitors.
+
+## 👩‍🎨 Hire a Product Designer
+
+Our team is growing! We're in search of a Product Designer to help create slick, fun and functional web products visited by tens of millions of diverse Ethereum users each year. You'll collaborate with product, engineering, operations & research teammates to shape the design and features of our products. You'll empower the next generation of Ethereum users and builders to change our world for the better.
+
+Stay tuned for our official job listing. Eager to get in touch? Hop into [our Discord](https://discord.gg/CetY6Y4) & share your portfolio!
+
+## 🎨 Redesign the Ecosystem Support Program (ESP) website
+
+The [ESP initiative](https://esp.ethereum.foundation/en/) within the Ethereum Foundation (formerly known as the Grants Program) continues to be a critical source of funding and support for projects within the Ethereum ecosystem. Our team will help to give this website a facelift, revamp the flow of the website to make the process of applying for support clearer and more accessible, as well as improve awareness and accessibility to this valuable initiative.
+
+## How does that sound?
+
+We always appreciate feedback on our roadmap! Our guiding principles are based on delivering the most value in the shortest time, so if there's something you think we should work on, please let us know! We welcome ideas and PRs from anyone in the community.
+
+Want to deliver feedback in person? Our team will be in Lisbon for [LisCon](https://liscon.org/) and [ETHLisbon](https://www.ethlisbon.org/) - [hit us up at @ethdotorg on Twitter](https://twitter.com/ethdotorg) if you're around - we'd love to connect with our contributors!
+
+[Learn more about contributing](https://ethereum.org/en/contributing/).
+<issue_comment>username_1: Can you instead move away from Crowdin? It has egregious terms, and it is not decentralized in any way.
+Monero is on a Weblate instance, but they wont let anyone in before making a lot of suggestions.
+The familiarity of ones own language is fairly important in conveying confidence in what is otherwise very new to people.<issue_closed>
+<issue_comment>username_0: Happy new year fellow Ethereans! Closing this out with a progress update on each of our Q4 initiatives.
+
+## 🚀 Enable a CLR.fund quadratic funding round on layer 2
+
+After over 6 months of contributing to clr.fund's quadratic funding stack, we've [merged our changes](https://github.com/clrfund/monorepo/pull/388) to the [upstream repo](https://github.com/clrfund/monorepo), which added L2 network support as well as variety of enhancements to the web app. We also ran a successful test round on Arbitrum One - you can [view the transactions here](https://arbiscan.io/txs?a=0x076eFbc33c19c570EC7727929c0e2C60A3b7bCa2&p=1). 
+
+[clr.fund](http://clr.fund) plans to deploy a funding round on Arbitrum One geared towards the staking ecosystem later this month & the EF is excited to offer matching funds to the round. Keep your eyes out for an announcement - we hope you participate!
+
+Thank you to the [clr.fund](http://clr.fund) team, the [MACI](https://github.com/appliedzkp/maci) team & clr.fund's community of contributors who continue to push innovations in the ZKP & quadratic funding space. 
+
+## 🔀 Rebrand ""Eth2""
+
+The “Eth2” rebrand is a large undertaking that involves many stakeholders within the community & ultimately requires much more than mere content updates on ethereum.org. To push this forward, we [created a proposal](https://www.notion.so/Scope-work-for-the-Great-Eth2-Renaming-7d57a700c6ef492e8d031494c605ae46), gathered input from the community & aligned on an approach for this transition but didn’t end up shipping any updates on this initiative.
+
+We kicked off work on the content changes (https://github.com/ethereum/ethereum-org-website/pull/4915). With the merge approaching, we’ve committed to shipping these updates by the end of January, so stay tuned!
+
+## 🥩 Make staking easier
+
+This ended up being a much meatier epic than we originally anticipated. Staking is a complex topic & once we dug into the existing UX, we realized we were missing some foundational content, such as a simple guide on how to run a node.
+
+We dedicated the bulk of our time on this initiative to a ""run a node"" page. We researched options, drafted content, collected community feedback & kicked off an implementation (https://github.com/ethereum/ethereum-org-website/pull/5008) which we expect to ship in Q1.
+
+Improving staking UX is still a top priority & will be a major focus for our team this year, so stay tuned on our plans here.
+
+## 🎓 Revamp the Learn page
+
+We decided to hold off on this initiative until we hire a Product Designer - see below for a progress update on that. In the meantime, we published new content for this section of the website:
+- [Introduction to smart contracts](https://ethereum.org/en/smart-contracts/)
+- [Ethereum security & scams](https://ethereum.org/en/security/)
+- [Introduction to Ethereum governance](https://ethereum.org/en/governance/)
+
+## 🔍 Improve site search
+
+We updated our site search configuration (#4220) to remove duplicate search results & improve rankings of search results. A community member also added a nice keyboard shortcut feature (https://github.com/ethereum/ethereum-org-website/pull/4031) - thanks @SNikhill 😄
+
+[Learn more about how our site search is configured](https://github.com/ethereum/ethereum-org-website/blob/dev/docs/SITE_SEARCH.md).
+
+## 🏅 Acknowledge our translators
+
+We launched our [contributor acknowledgements page](https://ethereum.org/en/contributing/translation-program/acknowledgements/)! 
+
+This page includes a translation leaderboard, full list of our >2,500 contributors, & information for translators to claim rewards, including POAPs & translation certificates. We’re grateful for the contributions from our translation community & hope this helps recognize their massive positive impact on the Ethereum community. 
+
+In 2021 our community contributors translated >2.9 millions words. Those efforts led to our translated content on [ethereum.org](http://ethereum.org) collectively receiving >4.2 million pageviews in 2021 (+430% growth from 2020)!
+
+## ⚙️ Automate our Translation Program
+
+We added technical improvements to our codebase (https://github.com/ethereum/ethereum-org-website/pull/4441) in order to support the [recent release](https://blog.ethereum.org/2021/10/04/translation-program-update/) of new content for translation & overhaul of our content management.
+
+We also explored integrations between Crowdin & GitHub to automate the syncing of source files from GitHub to Crowdin & uploading of translated files from Crowdin to GitHub. After some initial research using a test project, it became clear that due to the scope of content on the website & the limited control the integration allows, we must first address some of the issues we’re currently encountering when uploading files to Crowdin & GitHub. We’ll be addressing these issues individually with each batch of translated content we add to the site. Once they’re resolved, we plan to move forward with the integration.
+
+## 🍻 Host community calls
+
+We ran two community calls with over 230 attendees between them. These calls provide us with a space to share what we’re working on, collect feedback & answer question from the community, as well as highlight community contributions to acknowledge volunteers for their work.
+
+If you missed them you can checkout our [December](https://www.youtube.com/watch?v=_rAqApQqP5Y) & [November](https://www.youtube.com/watch?v=hbL1hziYMYM) community calls on [the Ethereum Foundation YouTube](https://www.youtube.com/channel/UCNOfzGXD_C9YMYmnefmPH0g).
+
+We also launched two “office hours” initiatives: 
+
+1. [ethereum.org](http://ethereum.org/) code & content
+2. [ethereum.org](http://ethereum.org) translations
+
+We consider these calls to be a huge success, with over 50 attendees in each, increasing community ownership & feedback for our product. We plan to continue these on a monthly basis in 2022.
+
+[Join our Discord](https://discord.gg/CetY6Y4) to receive notifications about upcoming community calls & office hours. We'll also announce them on [our Twitter](https://twitter.com/ethdotorg).
+
+## 📲 Increase accessibility
+
+While we had some productive brainstorming & planning sessions around how we can improve website accessibility, we unfortunately didn’t ship any improvements to the site outside of miscellaneous bug fixes & UI/UX improvements. We’re hoping to tackle an accessibility audit in Q1 2022.
+
+Do you have any specific suggestions? Would you like to contribute to this? We'd love to hear from you - please [create an issue](https://github.com/ethereum/ethereum-org-website/issues/new/choose).
+
+## 🦄 Revamp the Community page
+
+We completely restructured our Ethereum community content & redesigned a new community hub with the overall goal of empowering users to participate in the Ethereum ecosystem more easily.
+
+We shipped five new pages:
+- [The community hub](https://ethereum.org/en/community/) is designed to help navigate people to the correct place to meet their community goals.
+- [Online communities](https://ethereum.org/en/community/online/) organizes forums, chatrooms & other online resources that people can join to find their tribe.
+- [Events](https://ethereum.org/en/community/events/) consolidates Ethereum events & meetups into one easy to find, canonical location.
+[Truncated]
+
+We continue to progress with candidate interviews & expect to extend a job offer by the end of the month, so stay tuned for an announcement around this. We’re beyond excited to bring a full-time designer onboard to accelerate our product development.
+
+## 🎨 Redesign the Ecosystem Support Program (ESP) website
+
+Exciting progress on this front - we hired a web developer (hi @nhsz) to build out this website redesign. Nico is working with ESP’s designer & operations team to bring their vision to reality & has been progressing on an implementation. 
+
+We’re aiming to launch this new website by the end of this month! [Follow along with our progress](https://github.com/ethereum/esp-website/tree/esp-redesign).
+
+## ⚡️ Gatsby v4
+
+Bonus points! We didn’t intend to invest time into this but when [Gatsby released v4](https://www.gatsbyjs.com/gatsby-4/) in October, we decided to upgrade our codebase (#4324). Gatsby v4 is full of new features but perhaps most notable is the fast build times, particularly in tandem with Gatsby Cloud. We decided to test it out & have been pleased with the results: we’ve seen average build times drop from ~66 minutes to ~7 minutes! We’re looking forward to the productivity boost for our team & our community contributors!
+
+## Onward & upward
+
+Thank you again to all of [our contributors](https://ethereum.org/en/contributing/#contributors) who helped make this all possible ✨ ❤️ ✨
+
+As always, you can follow along with specific changes on our releases page: [https://github.com/ethereum/ethereum-org-website/releases](https://github.com/ethereum/ethereum-org-website/releases)
+
+Stay tuned for our 2022 Q1 product roadmap, which we'll publish early next week!
+<issue_comment>username_0: Updates on our Q4 KPIs:
+
+- Translation Program
+    - ✅ 4000 project members in Crowdin - 4192 members
+    - ❌ Support 5 new languages on the website - We had 5 new languages translated but not live on the site. [Malay](https://ethereum.org/ms/) (#4747) & [Swahili](https://ethereum.org/sw/) (#4836) are live on the site, there’s a PR up to add Marathi (#4952), while Serbian and Thai were still in review.
+    - ✅ Publish 5 fully translated languages ([Chinese Simplified](https://ethereum.org/zh/), [Chinese Traditional](https://ethereum.org/zh-tw/), [Indonesian](https://ethereum.org/id/), [Italian](https://ethereum.org/it/) & [Brazilian Portuguese](https://ethereum.org/pt-br/))
+    - ❌ Achieve new record month with >500k community-translated words - so close, best month was October with 498,739 translated words!
+- Community growth
+    - ✅ 15% increase in total GitHub contributors (+22%, with 587 contributors)
+    - ✅ Distribute 135 POAPs (209 distributed)
+    - ✅ Enable GitHub contributors to ship 7 meaningful features
+        - Zen mode (#4131) by @Hakeemmidan
+        - Shortcut to focus search (#4031) by @SNikhill 
+        - Add Ethereum energy consumption page (#3650) by @jmcook1186
+        - Fix reading time for Chinese/Japanese (#4302) by @SNikhill 
+        - Add deprecated software page (#4256) by @jpitts & @bleesherman
+        - Community hub designs (#4521) by @Scott1UP
+    - ❌ Hit 23K Twitter Followers by end of Q4 - 22.6K followers
+    - Discord
+        - ✅ Add 2 guides (@LuLuDiscord & @muddlebee)
+        - ✅ +25% (>650) messages sent per week (4-week average) - 1047 messages
+        - ✅ +10%  (>75) communicators per week  (4-week average) - 126 communcations"
+ooni/ooni.org,689221516,598,,"[{'action': 'opened', 'author': 'hellais', 'comment_id': None, 'datetime': '2020-08-31 13:46:54+00:00', 'masked_author': 'username_0', 'text': 'OONI got a grant from internews for 7k to work on recording and leading a series of webinars on internet measurement.\n\nThis epic is to track the work we should do for it.', 'title': 'Internews Internet Measurement training', 'type': 'issue'}
+ {'action': 'created', 'author': 'hellais', 'comment_id': 686985472.0, 'datetime': '2020-09-04 08:00:12+00:00', 'masked_author': 'username_0', 'text': 'Internews requests us today that we use the powerpoint software to record the sessions. As I do not have this software installed on my machine and we had already agreed we would be using our paid streamyard platform for the recording.\n\nMy ask to them is what does powerpoint do that we cannot do using our platform. That way we can maybe do some changes to our streamyard template in order to better fit with the vision they had for the project.\n\nI am putting this project on hold until further clarifications.\n\nThe deadline of the end of next week might have to be adjust as a result of these changes in the requirements.', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'hellais', 'comment_id': 688090765.0, 'datetime': '2020-09-07 07:14:02+00:00', 'masked_author': 'username_0', 'text': 'As an update internews requested I review the existing videos to ""align them stylistically"". As a result of these updated requirements I am going to have to de-prioritise and move this over to the next sprint.', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'bassosimone', 'comment_id': 691947168.0, 'datetime': '2020-09-14 09:50:26+00:00', 'masked_author': 'username_1', 'text': '(@username_2 AFAICT this should be in Sprint 22, so perhaps we should assign it to the sprint and move to Sprint Backlog?)', 'title': None, 'type': 'comment'}
+ {'action': 'closed', 'author': 'agrabeli', 'comment_id': None, 'datetime': '2020-09-17 12:36:10+00:00', 'masked_author': 'username_2', 'text': '', 'title': None, 'type': 'issue'}
+ {'action': 'created', 'author': 'agrabeli', 'comment_id': 694201136.0, 'datetime': '2020-09-17 12:36:10+00:00', 'masked_author': 'username_2', 'text': 'I have completed this all.', 'title': None, 'type': 'comment'}]","<issue_start><issue_comment>Title: Internews Internet Measurement training
+username_0: OONI got a grant from internews for 7k to work on recording and leading a series of webinars on internet measurement.
+
+This epic is to track the work we should do for it.
+<issue_comment>username_0: Internews requests us today that we use the powerpoint software to record the sessions. As I do not have this software installed on my machine and we had already agreed we would be using our paid streamyard platform for the recording.
+
+My ask to them is what does powerpoint do that we cannot do using our platform. That way we can maybe do some changes to our streamyard template in order to better fit with the vision they had for the project.
+
+I am putting this project on hold until further clarifications.
+
+The deadline of the end of next week might have to be adjust as a result of these changes in the requirements.
+<issue_comment>username_0: As an update internews requested I review the existing videos to ""align them stylistically"". As a result of these updated requirements I am going to have to de-prioritise and move this over to the next sprint.
+<issue_comment>username_1: (@username_2 AFAICT this should be in Sprint 22, so perhaps we should assign it to the sprint and move to Sprint Backlog?)<issue_closed>
+<issue_comment>username_2: I have completed this all."
+ember-learn/ember-website,426083564,289,,"[{'action': 'opened', 'author': 'mansona', 'comment_id': None, 'datetime': '2019-03-27 17:10:35+00:00', 'masked_author': 'username_0', 'text': 'Currently when you go to `/` on this app it automatically redirects you to `/release/` but if we have the power to update links we should link directly to release 💪', 'title': 'Update links from emberjs.com to `/release/` to avoid extra redirect', 'type': 'issue'}
+ {'action': 'created', 'author': 'jenweber', 'comment_id': 477260209.0, 'datetime': '2019-03-27 17:11:31+00:00', 'masked_author': 'username_1', 'text': 'https://github.com/ember-learn/ember-website/pull/290', 'title': None, 'type': 'comment'}
+ {'action': 'closed', 'author': 'locks', 'comment_id': None, 'datetime': '2019-03-28 15:09:19+00:00', 'masked_author': 'username_2', 'text': '', 'title': None, 'type': 'issue'}
+ {'action': 'reopened', 'author': 'locks', 'comment_id': None, 'datetime': '2019-03-28 15:09:59+00:00', 'masked_author': 'username_2', 'text': 'Currently when you go to `/` on this app it automatically redirects you to `/release/` but if we have the power to update links we should link directly to release 💪', 'title': 'Update links from emberjs.com to `/release/` to avoid extra redirect', 'type': 'issue'}
+ {'action': 'created', 'author': 'locks', 'comment_id': 477637147.0, 'datetime': '2019-03-28 15:10:20+00:00', 'masked_author': 'username_2', 'text': 'Sorry, I didn\'t notice there was a ""closes x"" in the commit itself, I only saw the updated PR description.', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'mansona', 'comment_id': 551288283.0, 'datetime': '2019-11-07 22:06:54+00:00', 'masked_author': 'username_0', 'text': 'this is probably still an issue 👍', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'locks', 'comment_id': 596031010.0, 'datetime': '2020-03-07 01:49:02+00:00', 'masked_author': 'username_2', 'text': 'Still relevant.', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'locks', 'comment_id': 596031103.0, 'datetime': '2020-03-07 01:49:42+00:00', 'masked_author': 'username_2', 'text': '@vinodhrajamuralidharan can you look into this one?', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'alexeykostevich', 'comment_id': 610509246.0, 'datetime': '2020-04-07 17:07:46+00:00', 'masked_author': 'username_3', 'text': '@vinodhrajamuralidharan has fixed all the links in the [ember-learn/ember-website](https://github.com/ember-learn/ember-website) repository within https://github.com/ember-learn/ember-website/pull/618.\r\n\r\nTo close this ticket, we also need to update links in the website header, which are defined in different repositories. Since the Ember website consists of many parts, there are many places where these URLs are mentioned.\r\n\r\nHere is what I found:\r\n1. [ember-styleguide](https://github.com/ember-learn/ember-styleguide/blob/f03492c4adc171daabea12d1d694f46ee1b47529/addon/constants/links.js#L5) repository defines links for the [Ember](https://emberjs.com), [Ember Guides](https://guides.emberjs.com) and [Ember CLI Guides](https://cli.emberjs.com) headers.\r\n2. [ember-api-docs](https://github.com/ember-learn/ember-api-docs/blob/8e9acefee89b6ad02bd25c6829495719a9b1bac8/app/controllers/application.js#L10) repository defines links for the [Ember API Reference](https://api.emberjs.com) header.\r\n3. [ember-blog](https://github.com/ember-learn/ember-blog/blob/6ba802ed0e575d57ca6774fba3059d9a4a1822dc/source/_header.html.erb#L18) repository defines links for the [Ember Blog](https://blog.emberjs.com/) header.\r\n\r\nIf I understand correctly, all the websites will be eventually updated to use [ember-styleguide](https://github.com/ember-learn/ember-styleguide), so it makes sense to fix URLs only there and let the fix propagate eventually to all other places.\r\n\r\n@username_0 please, let me know if you have any concerns with updating links in [ember-styleguide](https://github.com/ember-learn/ember-blog/blob/6ba802ed0e575d57ca6774fba3059d9a4a1822dc/source/_header.html.erb#L18-L20)? It might  be not the best place to apply routing optimizations (to remove the redirect) but definitely the simplest.\r\n\r\nAlternatives will be:\r\n1. Configure routing to make https://guides.emberjs.com and https://api.emberjs.com as the default routes for the latest release (probably, the best option if there are no technical challenges with this).\r\n2. Keep everything as is and close the issue.\r\n3. Add the `/release/` path to URLs on the application side (probably, the worst option).', 'title': None, 'type': 'comment'}]","<issue_start><issue_comment>Title: Update links from emberjs.com to `/release/` to avoid extra redirect
+username_0: Currently when you go to `/` on this app it automatically redirects you to `/release/` but if we have the power to update links we should link directly to release 💪
+<issue_comment>username_1: https://github.com/ember-learn/ember-website/pull/290<issue_closed>
+<issue_comment>username_2: Currently when you go to `/` on this app it automatically redirects you to `/release/` but if we have the power to update links we should link directly to release 💪
+<issue_comment>username_2: Sorry, I didn't notice there was a ""closes x"" in the commit itself, I only saw the updated PR description.
+<issue_comment>username_0: this is probably still an issue 👍
+<issue_comment>username_2: Still relevant.
+<issue_comment>username_2: @vinodhrajamuralidharan can you look into this one?
+<issue_comment>username_3: @vinodhrajamuralidharan has fixed all the links in the [ember-learn/ember-website](https://github.com/ember-learn/ember-website) repository within https://github.com/ember-learn/ember-website/pull/618.
+
+To close this ticket, we also need to update links in the website header, which are defined in different repositories. Since the Ember website consists of many parts, there are many places where these URLs are mentioned.
+
+Here is what I found:
+1. [ember-styleguide](https://github.com/ember-learn/ember-styleguide/blob/f03492c4adc171daabea12d1d694f46ee1b47529/addon/constants/links.js#L5) repository defines links for the [Ember](https://emberjs.com), [Ember Guides](https://guides.emberjs.com) and [Ember CLI Guides](https://cli.emberjs.com) headers.
+2. [ember-api-docs](https://github.com/ember-learn/ember-api-docs/blob/8e9acefee89b6ad02bd25c6829495719a9b1bac8/app/controllers/application.js#L10) repository defines links for the [Ember API Reference](https://api.emberjs.com) header.
+3. [ember-blog](https://github.com/ember-learn/ember-blog/blob/6ba802ed0e575d57ca6774fba3059d9a4a1822dc/source/_header.html.erb#L18) repository defines links for the [Ember Blog](https://blog.emberjs.com/) header.
+
+If I understand correctly, all the websites will be eventually updated to use [ember-styleguide](https://github.com/ember-learn/ember-styleguide), so it makes sense to fix URLs only there and let the fix propagate eventually to all other places.
+
+@username_0 please, let me know if you have any concerns with updating links in [ember-styleguide](https://github.com/ember-learn/ember-blog/blob/6ba802ed0e575d57ca6774fba3059d9a4a1822dc/source/_header.html.erb#L18-L20)? It might  be not the best place to apply routing optimizations (to remove the redirect) but definitely the simplest.
+
+Alternatives will be:
+1. Configure routing to make https://guides.emberjs.com and https://api.emberjs.com as the default routes for the latest release (probably, the best option if there are no technical challenges with this).
+2. Keep everything as is and close the issue.
+3. Add the `/release/` path to URLs on the application side (probably, the worst option)."
+facebook/docusaurus,1023408662,5692,,"[{'action': 'opened', 'author': 'Josh-Cena', 'comment_id': None, 'datetime': '2021-10-12T06:15:12Z', 'masked_author': 'username_0', 'text': '<!--\r\n  IMPORTANT:\r\n  - We expect you to submit a feature request including a real design (API / UI...), not just a basic idea\r\n  - The design does not have to be perfect, we\'ll discuss it and fix it if needed\r\n  - For a more ""casual"" feature requests, consider using Canny instead: https://docusaurus.io/feature-requests\r\n-->\r\n\r\n## 🚀 Feature\r\n\r\nLet\'s be less opinionated and let users decide on the sorting logic.\r\n\r\n### Have you read the [Contributing Guidelines on issues](https://github.com/facebook/docusaurus/blob/main/CONTRIBUTING.md#reporting-new-issues)?\r\n\r\nYes\r\n\r\n### Has this been requested on [Canny](https://docusaurus.io/feature-requests)?\r\n\r\nRequested on Discord\r\n\r\n## Motivation\r\n\r\nSorting by descending time works in almost all cases, but we shouldn\'t assume that all users use the blog for time-based information. E.g., sort by alphabetical order? Sort by tags?\r\n\r\n## API Design\r\n\r\nA new `comparePosts` plugin option, which accepts a function that is passed to the sorting algorithm:\r\n\r\nhttps://github.com/facebook/docusaurus/blob/b40e45943ec1a8d52d0f524983d38d9ba23ec6bc/packages/docusaurus-plugin-content-blog/src/blogUtils.ts#L345-L347\r\n\r\nAnd yes, it will receive the entire blog post, with all of its metadata and content.\r\n\r\n<!--\r\n  Please explain in an exhaustive way what are the config/plugin options and their respective effects.\r\n  For visual elements, please send us some screenshots/mockups of what it should look like. You can use https://excalidraw.com to create simple mockups.\r\n-->\r\n\r\n<!--\r\n  What happens if you skip this step? This issue will be automatically closed.\r\n  Your feature request is just an idea for now, please use Canny for that: https://docusaurus.io/feature-requests\r\n-->\r\n\r\n## Have you tried building it?\r\n\r\nNo; should be trivial\r\n\r\n<!--\r\n  Docusaurus 2 has a plugin system and theming support.\r\n  Quite often, this gives you the opportunity to build the feature you need by yourself.\r\n\r\n  We expect you to put your own work in this feature, particularly if it is not requested by a lot of users.\r\n  If we see it in action on your own site, it is easier to understand its value, and how it should work.\r\n\r\n  If you can\'t build it yourself for technical reasons, please explain why.\r\n  We are willing to help you, and eventually providing new APIs to make it possible.\r\n-->', 'title': 'Blog posts page: custom sorting logic', 'type': 'issue'}
+ {'action': 'created', 'author': 'slorber', 'comment_id': 941101125.0, 'datetime': '2021-10-12 15:07:08+00:00', 'masked_author': 'username_1', 'text': ""I'd like to create a plugin for myself to create a digital garden / second brain / Zettelkasken / Obsidian / Roam Research / whatever you name it for interconnected thoughts and public note-taking.\r\n\r\nI'm not sure it makes sense to try to adapt the blog plugin to this use-case, maybe a new separate plugin could be a better idea?"", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'certainlyNotHeisenberg', 'comment_id': 968058575.0, 'datetime': '2021-11-13 12:10:46+00:00', 'masked_author': 'username_2', 'text': ""I can add my vote here. I've been trying to find a way to do this because I'm using the blog part of the site as a personal portfolio. The sidebar list is especially useful for that purpose (though I wish it were more fully featured / adjustable like the docs one) except that I can't sort by anything. \r\n\r\nI'd like to be able to do alphabetical, and I'd _love_ love to let people filter by tags.  I've tried swizzling the <Tag> and similar components to do something like this but honestly it's too hacky."", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'slorber', 'comment_id': 970552603.0, 'datetime': '2021-11-16 18:29:24+00:00', 'masked_author': 'username_1', 'text': ""@username_2 about displaying the tags in sidebar, check this issue: https://github.com/facebook/docusaurus/issues/5461\r\n\r\nIt's not clear to me what you want to use the blog with an alphabetical order. Why not use docs or regular pages for your portfolio?"", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'certainlyNotHeisenberg', 'comment_id': 970659709.0, 'datetime': '2021-11-16 20:38:49+00:00', 'masked_author': 'username_2', 'text': ""Thanks @username_1. Alphabetical order was just an example\xa0— really I just mean, like the others said, that it'd be nice to have more natural control over the ordering. \r\n\r\nI considered using docs or pages, and I think those could work fine. There are just slight feature differences between them, so I tried to pick the best fit that wouldn't require lots of swizzling (which the documentation pretty strongly warns against doing) and the blog option seemed the best"", 'title': None, 'type': 'comment'}
+ {'action': 'closed', 'author': 'Josh-Cena', 'comment_id': None, 'datetime': '2021-12-04 12:54:05+00:00', 'masked_author': 'username_0', 'text': '', 'title': None, 'type': 'issue'}
+ {'action': 'created', 'author': 'factoidforrest', 'comment_id': 996298494.0, 'datetime': '2021-12-17 00:18:04+00:00', 'masked_author': 'username_3', 'text': 'If you could put a `position: 3` tag in the frontmatter of a blog post, that would solve our need for this.', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'slorber', 'comment_id': 996642278.0, 'datetime': '2021-12-17 11:15:52+00:00', 'masked_author': 'username_1', 'text': '@username_3 can you explain the use-case for this? What concrete problem are you trying to solve?', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'cerkiewny', 'comment_id': 996655410.0, 'datetime': '2021-12-17 11:36:44+00:00', 'masked_author': 'username_4', 'text': 'Also if you could explain how it would work with combination with sorting? Would that override the sorting and shuffle something in always at position 3? Would you need to specify order of all items in that case? Do you want to just make sure that some items are first in the order? @username_3', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'factoidforrest', 'comment_id': 997129653.0, 'datetime': '2021-12-18 02:44:07+00:00', 'masked_author': 'username_3', 'text': ""@username_1 Well, we sometimes produce multiple blog posts per day, and it would be nice to individually control their position.  \r\n\r\nOr sometimes we have something REALLY important and we want to stick it to the top.  We recently did the blog post about log4shell which is why this is coming up.  https://www.lunasec.io/docs/blog/log4j-zero-day/\r\n\r\n@username_4 I think that's all open to debate, but if you want to see a project with inspiring document sorting (that works with docusaurus), you can check out typedoc https://typedoc.org/guides/options/#sort  \r\n\r\nFor the manual position override, the way I would write the code is:\r\n1. Sort by date, which is the lowest priority and default sort\r\n2. Take the output of 1 and sort by position if present, honoring the above order otherwise.\r\n\r\nThat way people can manually move things around when they need to, but still keep the default behavior most of the time."", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'slorber', 'comment_id': 997974843.0, 'datetime': '2021-12-20 14:29:45+00:00', 'masked_author': 'username_1', 'text': 'Would you use `position: 3` for such a post?\r\n\r\nIMHO what we are looking for here is rather a way to ""pin"" a blog post at the top (similar to GitHub issues somehow).\r\n\r\nIt\'s also a common pattern among bloggers to have featured posts, and drive more attention to specific articles:\r\n- https://leerob.io/\r\n- https://www.joshwcomeau.com/\r\n- https://blog.maximeheckel.com/\r\n\r\nWe could allow a plugin option to feature a list of posts, put them at the top, and maybe also add them to the blog sidebar to make them accessible from all blog pages.\r\n\r\nUsing `featured: true` frontmatter can also be nice, but not sure how to ensure an order in this case though\r\n\r\n---\r\n\r\nUsing something like `position: number` is quite ambiguous, particularly when not all items have an explicit position, and we can\'t prevent users to use the same position twice. + when adding a new blog post, do you really want to edit and offset all previously defined positions 😅 \r\n\r\nIf this position is only applied inside a single day, it would be a quite unintuitive option, and using an hour in frontmatter can be enough.', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'homotechsual', 'comment_id': 1035717191.0, 'datetime': '2022-02-11 01:55:31+00:00', 'masked_author': 'username_5', 'text': 'So I\'ve hit a need for this where we have multiple posts on the same day which aren\'t ordering correctly. There are a few options that would help - allow the date sorting to support date/time. Or allow weight.\r\n\r\nI\'m aware position has been discussed - weight in my eyes is different. Position is ""absolute"" whereas weight nudges within the existing sort criteria - lighter items float, heavier ones sink. So two posts with the same dates - their final order would be determined by their weight.\r\n\r\nI can also see real benefit in `featured` as a boolean prop.', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'Josh-Cena', 'comment_id': 1035723538.0, 'datetime': '2022-02-11 01:58:36+00:00', 'masked_author': 'username_0', 'text': ""@username_5 `featured` is certainly useful, you can submit a casual feature request for that so it's on our tracker. About ordering posts on the same day, little known is that the front matter date is more powerful than filename date, because the former supports datetime syntax. In fact, our [changelog](https://docusaurus.io/changelog) uses it to order multiple versions published on the same day:\r\n\r\n```yml\r\n---\r\ndate: 2019-06-07T20:00\r\n---\r\n```"", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'homotechsual', 'comment_id': 1035726945.0, 'datetime': '2022-02-11 02:00:09+00:00', 'masked_author': 'username_5', 'text': ""This is beautiful information, I'll raise a PR for the API docs to make it clearer that this handles datetime :-) thanks!\r\n\r\nAs for featured - I'll get an FR in for that!"", 'title': None, 'type': 'comment'}]","<issue_start><issue_comment>Title: Blog posts page: custom sorting logic
+username_0: <!--
+  IMPORTANT:
+  - We expect you to submit a feature request including a real design (API / UI...), not just a basic idea
+  - The design does not have to be perfect, we'll discuss it and fix it if needed
+  - For a more ""casual"" feature requests, consider using Canny instead: https://docusaurus.io/feature-requests
+-->
+
+## 🚀 Feature
+
+Let's be less opinionated and let users decide on the sorting logic.
+
+### Have you read the [Contributing Guidelines on issues](https://github.com/facebook/docusaurus/blob/main/CONTRIBUTING.md#reporting-new-issues)?
+
+Yes
+
+### Has this been requested on [Canny](https://docusaurus.io/feature-requests)?
+
+Requested on Discord
+
+## Motivation
+
+Sorting by descending time works in almost all cases, but we shouldn't assume that all users use the blog for time-based information. E.g., sort by alphabetical order? Sort by tags?
+
+## API Design
+
+A new `comparePosts` plugin option, which accepts a function that is passed to the sorting algorithm:
+
+https://github.com/facebook/docusaurus/blob/b40e45943ec1a8d52d0f524983d38d9ba23ec6bc/packages/docusaurus-plugin-content-blog/src/blogUtils.ts#L345-L347
+
+And yes, it will receive the entire blog post, with all of its metadata and content.
+
+<!--
+  Please explain in an exhaustive way what are the config/plugin options and their respective effects.
+  For visual elements, please send us some screenshots/mockups of what it should look like. You can use https://excalidraw.com to create simple mockups.
+-->
+
+<!--
+  What happens if you skip this step? This issue will be automatically closed.
+  Your feature request is just an idea for now, please use Canny for that: https://docusaurus.io/feature-requests
+-->
+
+## Have you tried building it?
+
+No; should be trivial
+
+<!--
+  Docusaurus 2 has a plugin system and theming support.
+  Quite often, this gives you the opportunity to build the feature you need by yourself.
+
+  We expect you to put your own work in this feature, particularly if it is not requested by a lot of users.
+  If we see it in action on your own site, it is easier to understand its value, and how it should work.
+
+  If you can't build it yourself for technical reasons, please explain why.
+  We are willing to help you, and eventually providing new APIs to make it possible.
+-->
+<issue_comment>username_1: I'd like to create a plugin for myself to create a digital garden / second brain / Zettelkasken / Obsidian / Roam Research / whatever you name it for interconnected thoughts and public note-taking.
+
+I'm not sure it makes sense to try to adapt the blog plugin to this use-case, maybe a new separate plugin could be a better idea?
+<issue_comment>username_2: I can add my vote here. I've been trying to find a way to do this because I'm using the blog part of the site as a personal portfolio. The sidebar list is especially useful for that purpose (though I wish it were more fully featured / adjustable like the docs one) except that I can't sort by anything. 
+
+I'd like to be able to do alphabetical, and I'd _love_ love to let people filter by tags.  I've tried swizzling the <Tag> and similar components to do something like this but honestly it's too hacky.
+<issue_comment>username_1: @username_2 about displaying the tags in sidebar, check this issue: https://github.com/facebook/docusaurus/issues/5461
+
+It's not clear to me what you want to use the blog with an alphabetical order. Why not use docs or regular pages for your portfolio?
+<issue_comment>username_2: Thanks @username_1. Alphabetical order was just an example — really I just mean, like the others said, that it'd be nice to have more natural control over the ordering. 
+
+I considered using docs or pages, and I think those could work fine. There are just slight feature differences between them, so I tried to pick the best fit that wouldn't require lots of swizzling (which the documentation pretty strongly warns against doing) and the blog option seemed the best<issue_closed>
+<issue_comment>username_3: If you could put a `position: 3` tag in the frontmatter of a blog post, that would solve our need for this.
+<issue_comment>username_1: @username_3 can you explain the use-case for this? What concrete problem are you trying to solve?
+<issue_comment>username_4: Also if you could explain how it would work with combination with sorting? Would that override the sorting and shuffle something in always at position 3? Would you need to specify order of all items in that case? Do you want to just make sure that some items are first in the order? @username_3
+<issue_comment>username_3: @username_1 Well, we sometimes produce multiple blog posts per day, and it would be nice to individually control their position.  
+
+Or sometimes we have something REALLY important and we want to stick it to the top.  We recently did the blog post about log4shell which is why this is coming up.  https://www.lunasec.io/docs/blog/log4j-zero-day/
+
+@username_4 I think that's all open to debate, but if you want to see a project with inspiring document sorting (that works with docusaurus), you can check out typedoc https://typedoc.org/guides/options/#sort  
+
+For the manual position override, the way I would write the code is:
+1. Sort by date, which is the lowest priority and default sort
+2. Take the output of 1 and sort by position if present, honoring the above order otherwise.
+
+That way people can manually move things around when they need to, but still keep the default behavior most of the time.
+<issue_comment>username_1: Would you use `position: 3` for such a post?
+
+IMHO what we are looking for here is rather a way to ""pin"" a blog post at the top (similar to GitHub issues somehow).
+
+It's also a common pattern among bloggers to have featured posts, and drive more attention to specific articles:
+- https://leerob.io/
+- https://www.joshwcomeau.com/
+- https://blog.maximeheckel.com/
+
+We could allow a plugin option to feature a list of posts, put them at the top, and maybe also add them to the blog sidebar to make them accessible from all blog pages.
+
+Using `featured: true` frontmatter can also be nice, but not sure how to ensure an order in this case though
+
+---
+
+Using something like `position: number` is quite ambiguous, particularly when not all items have an explicit position, and we can't prevent users to use the same position twice. + when adding a new blog post, do you really want to edit and offset all previously defined positions 😅 
+
+If this position is only applied inside a single day, it would be a quite unintuitive option, and using an hour in frontmatter can be enough.
+<issue_comment>username_5: So I've hit a need for this where we have multiple posts on the same day which aren't ordering correctly. There are a few options that would help - allow the date sorting to support date/time. Or allow weight.
+
+I'm aware position has been discussed - weight in my eyes is different. Position is ""absolute"" whereas weight nudges within the existing sort criteria - lighter items float, heavier ones sink. So two posts with the same dates - their final order would be determined by their weight.
+
+I can also see real benefit in `featured` as a boolean prop.
+<issue_comment>username_0: @username_5 `featured` is certainly useful, you can submit a casual feature request for that so it's on our tracker. About ordering posts on the same day, little known is that the front matter date is more powerful than filename date, because the former supports datetime syntax. In fact, our [changelog](https://docusaurus.io/changelog) uses it to order multiple versions published on the same day:
+
+```yml
+---
+date: 2019-06-07T20:00
+---
+```
+<issue_comment>username_5: This is beautiful information, I'll raise a PR for the API docs to make it clearer that this handles datetime :-) thanks!
+
+As for featured - I'll get an FR in for that!"

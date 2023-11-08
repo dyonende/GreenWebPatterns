@@ -1,0 +1,523 @@
+gohugoio/hugo,772801849,8086,,"[{'action': 'opened', 'author': 'bep', 'comment_id': None, 'datetime': '2020-12-22 09:43:43+00:00', 'masked_author': 'username_0', 'text': '* This is in ref to #8077.\r\n* This also related to `resources.PostProcess`\r\n\r\nThere are certain things we would want to do in Hugo but cannot because it\'s either 1) Very expensive (build time) to do or 2) Impossible (ref. `resources.PostProcess` and CSS purging which needs the build to complete before it can do its job).\r\n\r\nNote that I\'m not saying that would be easy to implement, I just say that it would be cool/useful.\r\n\r\nWhat I\'m suggesting would be a way to deffer template processing until after the build, somehow storing away the `dot` context passed to it, e.g.:\r\n\r\n```html\r\nSome regular template blocks:\r\n{{ range .Pages }}{{ .Title }}{{ end }}\r\n\r\n{{ defer (dict ""page"" . ""someotherParam"" ""foo"") }}\r\n{{ range .page.BackLinks }}\r\n{{ .Title }}\r\n{{ end }}\r\n{{ end }}\r\n```\r\n\r\nThe `BackLinks` above is just an example of a thing that we cannot effectively calculate upfront.\r\n\r\n/cc @username_1 and gang.', 'title': 'Add deferred template blocks', 'type': 'issue'}
+ {'action': 'created', 'author': 'regisphilibert', 'comment_id': 749725985.0, 'datetime': '2020-12-22 19:14:19+00:00', 'masked_author': 'username_1', 'text': ""This seems promising but to this day I fail to find any other use case than Backlinks, except maybe info about the build on the `site` level. (Build time etc...)\r\n\r\nIn any case, there should be a system for singling out methods available only inside `defer` blocks. Maybe `.Page.Defer.Backlinks`, `.Site.Defer.Build.Duration` ? \r\n\r\nWhile the word defer works great in a template context, it does not work so great as a page method, I'm just using it as an example."", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'bep', 'comment_id': 749766180.0, 'datetime': '2020-12-22 20:42:47+00:00', 'masked_author': 'username_0', 'text': 'What you propose above is a variant of `resources.PostProcess` -- which is useful, but relatively complex behind the scenes, and with some shortcomings. This is, as one example, not possible:\r\n\r\n```\r\n{{ $css := $css | resources.PostProcess }}\r\n{{ $upper := $css.Title | upper }}\r\n```\r\n\r\nNot the greatest example. But the `defer` keyword solves the above in a much cleaner and powerful way. If we implement `defer` I will probably eventually deprecate/remove `resources.PostProcess`.\r\n\r\nThe more I think about this, the more I like it.', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'regisphilibert', 'comment_id': 749770602.0, 'datetime': '2020-12-22 20:52:49+00:00', 'masked_author': 'username_1', 'text': ""I see! Then I can see more present benefits and can't wait for the future ones!"", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'bep', 'comment_id': 750412682.0, 'datetime': '2020-12-23 18:04:30+00:00', 'masked_author': 'username_0', 'text': 'Thinking a little about this, we cannot ""invent new syntax"" (because of code formatters etc.), so what I now think makes most sense is to use the `with´ keyword, e.g.:\r\n```\r\n{{ with defer (dict ""page"" . ""someotherParam"" ""foo"") }}\r\n{{ range .page.BackLinks }}\r\n{{ .Title }}\r\n{{ end }}\r\n{{ end }}\r\n```\r\n\r\nWhere `defer` wold be a template func that just echoes what it gets -- but that happens after the build.', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'swamidass', 'comment_id': 958177986.0, 'datetime': '2021-11-02 21:23:38+00:00', 'masked_author': 'username_2', 'text': 'I like this. It would be great to have.', 'title': None, 'type': 'comment'}]","<issue_start><issue_comment>Title: Add deferred template blocks
+username_0: * This is in ref to #8077.
+* This also related to `resources.PostProcess`
+
+There are certain things we would want to do in Hugo but cannot because it's either 1) Very expensive (build time) to do or 2) Impossible (ref. `resources.PostProcess` and CSS purging which needs the build to complete before it can do its job).
+
+Note that I'm not saying that would be easy to implement, I just say that it would be cool/useful.
+
+What I'm suggesting would be a way to deffer template processing until after the build, somehow storing away the `dot` context passed to it, e.g.:
+
+```html
+Some regular template blocks:
+{{ range .Pages }}{{ .Title }}{{ end }}
+
+{{ defer (dict ""page"" . ""someotherParam"" ""foo"") }}
+{{ range .page.BackLinks }}
+{{ .Title }}
+{{ end }}
+{{ end }}
+```
+
+The `BackLinks` above is just an example of a thing that we cannot effectively calculate upfront.
+
+/cc @username_1 and gang.
+<issue_comment>username_1: This seems promising but to this day I fail to find any other use case than Backlinks, except maybe info about the build on the `site` level. (Build time etc...)
+
+In any case, there should be a system for singling out methods available only inside `defer` blocks. Maybe `.Page.Defer.Backlinks`, `.Site.Defer.Build.Duration` ? 
+
+While the word defer works great in a template context, it does not work so great as a page method, I'm just using it as an example.
+<issue_comment>username_0: What you propose above is a variant of `resources.PostProcess` -- which is useful, but relatively complex behind the scenes, and with some shortcomings. This is, as one example, not possible:
+
+```
+{{ $css := $css | resources.PostProcess }}
+{{ $upper := $css.Title | upper }}
+```
+
+Not the greatest example. But the `defer` keyword solves the above in a much cleaner and powerful way. If we implement `defer` I will probably eventually deprecate/remove `resources.PostProcess`.
+
+The more I think about this, the more I like it.
+<issue_comment>username_1: I see! Then I can see more present benefits and can't wait for the future ones!
+<issue_comment>username_0: Thinking a little about this, we cannot ""invent new syntax"" (because of code formatters etc.), so what I now think makes most sense is to use the `with´ keyword, e.g.:
+```
+{{ with defer (dict ""page"" . ""someotherParam"" ""foo"") }}
+{{ range .page.BackLinks }}
+{{ .Title }}
+{{ end }}
+{{ end }}
+```
+
+Where `defer` wold be a template func that just echoes what it gets -- but that happens after the build.
+<issue_comment>username_2: I like this. It would be great to have."
+crystal-lang/crystal-website,1143812203,274,"{'number': 274.0, 'repo': 'crystal-website', 'user_login': 'crystal-lang'}","[{'action': 'opened', 'author': 'ftarulla', 'comment_id': None, 'datetime': '2022-02-18T21:44:56Z', 'masked_author': 'username_0', 'text': '# In this PR\r\n## Pixel Hunt\r\nI think playing LucasArts old adventure games granted me a pixel-hunt kind of power 🕹🤓 and I found `2px` white space at the top of the site. Here they are in Chrome:\r\n<img width=""459"" alt=""Screen Shot 2022-02-17 at 19 15 06"" src=""https://user-images.githubusercontent.com/1175827/154761329-468c47ca-8ff2-4a95-badd-9fb8593da685.png"">\r\nand in Firefox:\r\n<img width=""341"" alt=""Screen Shot 2022-02-18 at 17 59 30"" src=""https://user-images.githubusercontent.com/1175827/154761448-92b66943-e337-49e8-bbc1-a505ce2cd62a.png"">\r\n\r\nIt was a very tricky solution: replaced `top: -94px;` with `top: -96px;` \r\n\r\nAnd now in Chrome:\r\n<img width=""447"" alt=""Screen Shot 2022-02-17 at 19 15 24"" src=""https://user-images.githubusercontent.com/1175827/154761824-d2eab861-2c57-4320-9112-3852b3a5dad8.png"">\r\n\r\nand in Firefox:\r\n<img width=""701"" alt=""Screen Shot 2022-02-18 at 18 13 04"" src=""https://user-images.githubusercontent.com/1175827/154761910-84da74e0-cec8-47b1-8b56-f06b61d9438e.png"">\r\n\r\nA work of art! 👨\u200d🎨🎨\r\n\r\n## More air\r\nThe next fix is only for Chrome (and not Firefox) \r\nThe Problem? When resizing the browser window to the size where the 🍔 menu is shown, we can see that the `footer` changes its layout. This new footer\'s layout in Chrome does not have any space at the bottom.\r\n\r\nHere is the layout using a wide view:\r\n<img width=""1239"" alt=""Screen Shot 2022-02-18 at 18 21 12"" src=""https://user-images.githubusercontent.com/1175827/154762883-0426b938-b151-4dab-8e88-0c2a3bfa719e.png"">\r\n\r\nBut then, when resizing the browser (or visiting the site in your phone)\r\nIn Chrome\r\n<img width=""601"" alt=""Screen Shot 2022-02-17 at 19 27 35"" src=""https://user-images.githubusercontent.com/1175827/154763189-a2d619d2-5193-4f0b-886a-8b7fe1a7638b.png"">\r\nIn Firefox\r\n<img width=""768"" alt=""Screen Shot 2022-02-18 at 18 25 26"" src=""https://user-images.githubusercontent.com/1175827/154763354-5e87da76-9514-4dc6-bcbc-cb3d083ccd0b.png"">\r\n\r\n**After the fix**, now we have more air in Chrome:\r\nChrome\r\n<img width=""642"" alt=""Screen Shot 2022-02-18 at 18 32 38"" src=""https://user-images.githubusercontent.com/1175827/154764160-53f186ff-9881-4214-bbe2-944b5e147ee1.png"">\r\nFirefox\r\n<img width=""724"" alt=""Screen Shot 2022-02-18 at 18 43 44"" src=""https://user-images.githubusercontent.com/1175827/154765293-9b20f8f6-1e94-4264-b353-8f0878ba4400.png"">\r\n\r\nAnd that\'s all for this PR!', 'title': 'Fix top space and fix no-bottom-space on Chrome', 'type': 'issue'}]","<issue_start><issue_comment>Title: Fix top space and fix no-bottom-space on Chrome
+username_0: # In this PR
+## Pixel Hunt
+I think playing LucasArts old adventure games granted me a pixel-hunt kind of power 🕹🤓 and I found `2px` white space at the top of the site. Here they are in Chrome:
+<img width=""459"" alt=""Screen Shot 2022-02-17 at 19 15 06"" src=""https://user-images.githubusercontent.com/1175827/154761329-468c47ca-8ff2-4a95-badd-9fb8593da685.png"">
+and in Firefox:
+<img width=""341"" alt=""Screen Shot 2022-02-18 at 17 59 30"" src=""https://user-images.githubusercontent.com/1175827/154761448-92b66943-e337-49e8-bbc1-a505ce2cd62a.png"">
+
+It was a very tricky solution: replaced `top: -94px;` with `top: -96px;` 
+
+And now in Chrome:
+<img width=""447"" alt=""Screen Shot 2022-02-17 at 19 15 24"" src=""https://user-images.githubusercontent.com/1175827/154761824-d2eab861-2c57-4320-9112-3852b3a5dad8.png"">
+
+and in Firefox:
+<img width=""701"" alt=""Screen Shot 2022-02-18 at 18 13 04"" src=""https://user-images.githubusercontent.com/1175827/154761910-84da74e0-cec8-47b1-8b56-f06b61d9438e.png"">
+
+A work of art! 👨‍🎨🎨
+
+## More air
+The next fix is only for Chrome (and not Firefox) 
+The Problem? When resizing the browser window to the size where the 🍔 menu is shown, we can see that the `footer` changes its layout. This new footer's layout in Chrome does not have any space at the bottom.
+
+Here is the layout using a wide view:
+<img width=""1239"" alt=""Screen Shot 2022-02-18 at 18 21 12"" src=""https://user-images.githubusercontent.com/1175827/154762883-0426b938-b151-4dab-8e88-0c2a3bfa719e.png"">
+
+But then, when resizing the browser (or visiting the site in your phone)
+In Chrome
+<img width=""601"" alt=""Screen Shot 2022-02-17 at 19 27 35"" src=""https://user-images.githubusercontent.com/1175827/154763189-a2d619d2-5193-4f0b-886a-8b7fe1a7638b.png"">
+In Firefox
+<img width=""768"" alt=""Screen Shot 2022-02-18 at 18 25 26"" src=""https://user-images.githubusercontent.com/1175827/154763354-5e87da76-9514-4dc6-bcbc-cb3d083ccd0b.png"">
+
+**After the fix**, now we have more air in Chrome:
+Chrome
+<img width=""642"" alt=""Screen Shot 2022-02-18 at 18 32 38"" src=""https://user-images.githubusercontent.com/1175827/154764160-53f186ff-9881-4214-bbe2-944b5e147ee1.png"">
+Firefox
+<img width=""724"" alt=""Screen Shot 2022-02-18 at 18 43 44"" src=""https://user-images.githubusercontent.com/1175827/154765293-9b20f8f6-1e94-4264-b353-8f0878ba4400.png"">
+
+And that's all for this PR!"
+kubernetes/website,462005840,15186,,"[{'action': 'opened', 'author': 'lukos', 'comment_id': None, 'datetime': '2019-06-28 12:14:32+00:00', 'masked_author': 'username_0', 'text': ""**This is an Improvement Request**\r\n**Problem:**\r\nIf following along with the tutorial in Powershell, the call to curl to the replicated pods does not hit different IP addresses consistently so it appears that you are only hitting a single node. If you wait and then try again, it will usually hit a different replica. This might cause the learner to think they've got something wrong.\r\n\r\nThis is caused by KeepAlive on the network connection being on by default so the call to curl for Powershell (which is a synonym of Invoke-WebRequest) should include -DisableKeepAlive\r\n\r\n**Proposed Solution:**\r\nEither a general page for notes on using Powershell to follow along or a side note in the article that if using curl in powershell, add -DisableKeepAlive option.\r\n\r\n**Page to Update:**\r\nIssue with k8s.io/docs/tutorials/kubernetes-basics/scale/scale-interactive/"", 'title': 'Issue with k8s.io/docs/tutorials/kubernetes-basics/scale/scale-interactive/', 'type': 'issue'}
+ {'action': 'created', 'author': 'sftim', 'comment_id': 506823613.0, 'datetime': '2019-06-28 17:54:38+00:00', 'masked_author': 'username_1', 'text': '/language en\r\n/sig windows\r\n/kind feature\r\n\r\nThanks for the feedback @username_0', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'sftim', 'comment_id': 530157995.0, 'datetime': '2019-09-10 23:25:34+00:00', 'masked_author': 'username_1', 'text': '/priority backlog', 'title': None, 'type': 'comment'}]","<issue_start><issue_comment>Title: Issue with k8s.io/docs/tutorials/kubernetes-basics/scale/scale-interactive/
+username_0: **This is an Improvement Request**
+**Problem:**
+If following along with the tutorial in Powershell, the call to curl to the replicated pods does not hit different IP addresses consistently so it appears that you are only hitting a single node. If you wait and then try again, it will usually hit a different replica. This might cause the learner to think they've got something wrong.
+
+This is caused by KeepAlive on the network connection being on by default so the call to curl for Powershell (which is a synonym of Invoke-WebRequest) should include -DisableKeepAlive
+
+**Proposed Solution:**
+Either a general page for notes on using Powershell to follow along or a side note in the article that if using curl in powershell, add -DisableKeepAlive option.
+
+**Page to Update:**
+Issue with k8s.io/docs/tutorials/kubernetes-basics/scale/scale-interactive/
+<issue_comment>username_1: /language en
+/sig windows
+/kind feature
+
+Thanks for the feedback @username_0
+<issue_comment>username_1: /priority backlog"
+conda-forge/conda-forge.github.io,158548470,163,,"[{'action': 'opened', 'author': 'AbdealiJK', 'comment_id': None, 'datetime': '2016-06-05 10:41:16+00:00', 'masked_author': 'username_0', 'text': '_From @username_0 on May 24, 2016 9:21_\n\nIt would be nice to have 32bit builds in Linux. Right now, only linux-64 is there https://conda.anaconda.org/conda-forge\r\n\r\nThis way linux-32 packages would also be created when submitting to conda ?\r\n\n\n_Copied from original issue: conda-forge/conda-smithy#183_', 'title': 'linux-32 builds ', 'type': 'issue'}
+ {'action': 'created', 'author': 'AbdealiJK', 'comment_id': 223805768.0, 'datetime': '2016-06-05 10:41:17+00:00', 'masked_author': 'username_0', 'text': ""_From @pelson on June 1, 2016 8:26_\n\nHi @username_0. Thanks for submitting this issue. Whilst the changes would involve conda-smithy, we would normally discuss this in the [conda-forge/conda-forge.github.io](https://github.com/conda-forge/conda-forge.github.io/) repo. Interestingly we haven't discussed 32bit linux builds there yet, but it did come up in one of the feedstocks at: https://github.com/conda-forge/eofs-feedstock/issues/1\r\n\r\nAs I said in that issue, I have been a bit surprised about the lack of demand for linux-32 builds. There are clearly some people who want it, but it isn't clear that the effort needed to implement it outweighs the benefits.\r\n\r\nTechnically, I'm pretty comfortable that linux-32 builds are completely achievable with CI (circle + docker gives you a lot of power).\r\n\r\nPerhaps you can bring this up as an issue on https://github.com/conda-forge/conda-forge.github.io/ and if interested join us for a future conda-forge developer hangout (there is one this Friday, but I'm aware the agenda is already quite full, so maybe the one after).\r\n\r\nCheers,"", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'AbdealiJK', 'comment_id': 223805767.0, 'datetime': '2016-06-05 10:41:17+00:00', 'masked_author': 'username_0', 'text': ""Apparently travis doesn't support 32bit nor has a plan in the near future to do so - https://github.com/travis-ci/travis-ci/issues/5770\r\nSo I guess it can be done by cross compiling (Installing a 32bit conda), or using a 32bit docker image"", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'AbdealiJK', 'comment_id': 223805773.0, 'datetime': '2016-06-05 10:41:19+00:00', 'masked_author': 'username_0', 'text': ""_From @rgommers on June 5, 2016 10:23_\n\nI did, but there's not a lot of demand so I agree with @pelson that the effort/benefit tradeoff here isn't clear. The main reason I'm using it is to catch issues not found on TravisCI for Numpy and Scipy."", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'AbdealiJK', 'comment_id': 223805770.0, 'datetime': '2016-06-05 10:41:19+00:00', 'masked_author': 'username_0', 'text': '_From @username_5 on June 4, 2016 6:9_\n\nI know @rgommers mentioned some interest in this as well at one point.', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'patricksnape', 'comment_id': 223806004.0, 'datetime': '2016-06-05 10:43:06+00:00', 'masked_author': 'username_1', 'text': 'Surely if we wanted 32-bit builds we would use a 32-bit docker container on circleci?', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'AbdealiJK', 'comment_id': 223806050.0, 'datetime': '2016-06-05 10:43:32+00:00', 'masked_author': 'username_0', 'text': ""I mainly wanted linux-32 because I happen to be using a laptop with 32bit, and can't install conda-forge packages easily because of that.\r\nI agree with @rgommers that there's probably very low demand for linux-32, and if its not easy to setup, it should be avoided.\r\n\r\n@pelson Sorry about creating the issue in the wrong place ^^ Moved it now."", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'msarahan', 'comment_id': 223814184.0, 'datetime': '2016-06-05 13:51:20+00:00', 'masked_author': 'username_2', 'text': ""We have 32-bit builds in the Continuum docker container (https://hub.docker.com/r/continuumio/conda_builder_linux/).  This is done with gcc that is built to compile both 32-bit and 64-bit code.\r\n\r\nIt's not 100% working.  Things look many places for whether to build 32-bit or 64-bit, and we have not isolated all of them.  It does work for many cases, though.\r\n\r\nIt might be simpler to just have a separate docker image for 32-bit, as manylinux does."", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'frol', 'comment_id': 227740588.0, 'datetime': '2016-06-22 13:19:25+00:00', 'masked_author': 'username_3', 'text': 'At Salford Systems, we have been building conda packages for x32 and x64 Linux using separate Docker containers (namely, `toopher/centos-i386:centos6`, and `centos:6`) on x64 host system for over a year with no issues at all. Today, even though I have contributed our packages to conda-forge, we still have to build those feedstocks ourselves only because of the lacking linux-32 support.', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'ocefpaf', 'comment_id': 227742300.0, 'datetime': '2016-06-22 13:25:36+00:00', 'masked_author': 'username_4', 'text': ""@username_3 the demand for Linux-32 is low mostly b/c people don't report it here. I see a continuous increase of Linux-32 downloads in the old IOOS channel that worries me. (Although part of those downloads were explained to me last month and were due to a docker image that people were passing around.)\r\n\r\nI would love to see conda-forge building those, but we are lacking CIs (and man) power.\r\n\r\nRight now we use `CircleCI` for the Linux builds and Circle does not support a build matrix, correct?\r\n\r\nWe could use another docker image and an add an extra item to the `Travis-CI` matrix, but `Travis-CI` is already showing signs that it won't scale to our current needs.\r\n\r\nSo before we do that we need to think how we can get more CI power/speed."", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'frol', 'comment_id': 227745698.0, 'datetime': '2016-06-22 13:37:27+00:00', 'masked_author': 'username_3', 'text': '@username_4 I do understand that x32 platform requires extra resources and has lower importance. I would love to see building x32 packages only when CIs are not busy with other platforms. ARM platform is just another similar use-case.\r\n\r\nAs to the CIs power, it makes a lot of sense to me to pay more attention to the performance of the preparation scripts and conda itself.', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'jakirkham', 'comment_id': 227748036.0, 'datetime': '2016-06-22 13:45:35+00:00', 'masked_author': 'username_5', 'text': ""Correct. There are some builds that already are at the limit of CircleCI's build time. Adding 32-bit support is currently not practical. These include pretty basic things like `scipy`, which will block progress on most other things."", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'ocefpaf', 'comment_id': 227749103.0, 'datetime': '2016-06-22 13:49:14+00:00', 'masked_author': 'username_4', 'text': ""I don't think that is a blocker as `scipy` itself is a new recipe in conda-forge and there is always the default channel `scipy`. If we think like that we'll never do it.\r\n\r\nMy point in https://github.com/conda-forge/conda-forge.github.io/issues/163#issuecomment-227742300 is just to bring awareness that, with more CI and man power, we can (and IMO we should) do it."", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'jakirkham', 'comment_id': 227754879.0, 'datetime': '2016-06-22 14:07:59+00:00', 'masked_author': 'username_5', 'text': ""It was merely one easy example. The point is we are extended or overextended in terms of resources in some cases. If we had more resource, of course, it would be possible to consider this.\r\n\r\nPersonally, I still don't understand the use case for 32-bit. Could someone please explain to me when this is helpful? Is it only for legacy machines or is there some other particular use case that I'm unaware of? I admit ignorance here; so, if there is a useful case please simply explain it. If it is former, I think like some others things (e.g. OSes) we have decided that there is some minimum level system that we can support practically. Currently 32-bit is in the same boat IMHO."", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'jakirkham', 'comment_id': 227757512.0, 'datetime': '2016-06-22 14:15:42+00:00', 'masked_author': 'username_5', 'text': ""I should clarify that my confusion is about the purpose of 32-bit Linux. I'm a bit more aware of the situation (though maybe not as intimately familiar as others) on Windows. Also, as we don't support an old enough OS on Mac, we have already accepted that 32-bit support doesn't exist there."", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'msarahan', 'comment_id': 227759749.0, 'datetime': '2016-06-22 14:22:28+00:00', 'masked_author': 'username_2', 'text': 'This is a very good point.  Conda and conda build could really use some optimization love.  Just importing conda on Windows takes 2.5 *seconds* on my computer, as measured with ```time python -c ""import conda""```.  Conda build\'s test suite currently takes about 2000 seconds to complete on my Win 10 VM.\r\n\r\nWe\'ll get there, but we\'re very tied up with other capabilities that we think are more important than speed: namespaces on the conda side, and build customization and python API on the conda-build side.\r\n\r\nIf anyone has ideas to speed up either conda or conda-build, I\'d be very excited to discuss them.', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'brian-rose', 'comment_id': 293960943.0, 'datetime': '2017-04-13 17:00:52+00:00', 'masked_author': 'username_6', 'text': ""Hi all, just found this discussion about linux-32 builds on conda-forge. \r\nApparently there *is* demand for a linux-32 build of the [climlab package](https://github.com/conda-forge/climlab-feedstock), because I just heard from one of my student-users trying to install on Xubuntu 14.04.5 (a 32-bit linux distribution).\r\n\r\nI will probably tell this particular user to try to build directly from source, but I just wanted to add my +1 for linux-32 builds.\r\n\r\nTo @username_5, the use case here is a student coming in with their own laptop and wanting to participate in a course that uses climlab. I expect it's a fairly uncommon case. The vast majority of my users are on Mac or Windows. Of those who are on Linux, I really don't know how widespread is 32-bit."", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'goanpeca', 'comment_id': 307649421.0, 'datetime': '2017-06-11 19:02:17+00:00', 'masked_author': 'username_7', 'text': '@username_5 why not use parallel builds (on circle ci) so that the setup phase selects the right docker and then the run commands will ran in parallel on the respective docker image?', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'jakirkham', 'comment_id': 307654423.0, 'datetime': '2017-06-11 20:25:08+00:00', 'masked_author': 'username_5', 'text': ""We looked into that for just getting parallel builds going for Python and NumPy versions with CircleCI some time back. However this is not exactly trivial as there is no way to setup a matrix like one does with Travis CI and CircleCI. Even once one splits up a parallel build to use a matrix, the CircleCI GUI is not great at clarifying what a build is parameterized with. We can probably hack in some environment variable echoing step, just it will be a little ugly to use. Not to say it wouldn't be worth the effort, just no one has had time to pursue this. If you have cycles to spend on that effort, this would be a really great contribution for the community.\r\n\r\nThat said, I'd be of the opinion that any matrix build like feature on CircleCI would be better spent splitting out existing builds that are going over the time limits and already require ugly hacks (e.g. `scipy`, `scikit-learn`, `vtk`, etc.). Once we have done that, we can certainly reevaluate 32-bit Linux builds. However I expect doubling the wait time, which will have increased due to parallel builds saturating the queue and our 4 available workers, will be somewhat controversial. There might be ways to mitigate that by making matrix builds optional or making use of noarch Python builds for instance.\r\n\r\nWould add that even 32-bit Windows builds see dramatically less usage compared to 64-bit Windows builds. In fact, I venture to guess that a substantial amount of the traffic for Windows 32-bit builds is simply a consequence of downstream dependencies on conda-forge and not actual use. Would imagine it is a matter of time before the discussion is raised that we should drop 32-bit Windows builds to speed up the AppVeyor queue."", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'goanpeca', 'comment_id': 307655085.0, 'datetime': '2017-06-11 20:36:17+00:00', 'masked_author': 'username_7', 'text': '@username_5 I guess I meant something along these lines:\r\n\r\n```yaml\r\nmachine:\r\n  environment:\r\n    # Docker images\r\n    DOCKER_IMAGES: ""condaforge/linux-anvil condaforge/linux-anvil-32""\r\n\r\ngeneral:\r\n  branches:\r\n    ignore:\r\n      # We only want to build pull requests for testing. If something is merged,\r\n      # then we are prepping for release and there is no need to build it again.\r\n      - master\r\n\r\ncheckout:\r\n  post:\r\n    - ./scripts/fast_finish_ci_pr_build.sh\r\n    - ./scripts/checkout_merge_commit.sh\r\n\r\nmachine:\r\n  services:\r\n    - docker\r\n\r\ndependencies:\r\n  # Note, we used to use the naive caching of docker images, but found that it was quicker\r\n  # just to pull each time. #rollondockercaching\r\n  override:\r\n    - export DOCKER_IMAGES=($DOCKER_IMAGES) &&\r\n      export DOCKER_IMAGE=${DOCKER_IMAGES[$CIRCLE_NODE_INDEX]} && \r\n      echo -e ""DOCKER IMAGE USED = $DOCKERIMAGE"" &&\r\n      ""docker pull $DOCKER_IMAGE"";\r\n\r\ntest:\r\n  override:\r\n    - ./scripts/run_docker_build.sh\r\n```', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'jakirkham', 'comment_id': 307691898.0, 'datetime': '2017-06-12 05:17:38+00:00', 'masked_author': 'username_5', 'text': ""Right something like that could work if we enable just 2 concurrent builds. Though there would be a (minor) change to `scripts/run_docker_build.sh` as well. We would also want to echo info about which image is used somewhere. Plus we need an API to enable parallelism so that `conda-smithy` can do this to existing and new projects. I don't recall their being one provided by CircleCI last time I looked, but there may be an undocumented way to do this.\r\n\r\nThen there is the issue of creating and maintaining the 32-bit Docker image. Certainly doable, but it does raise a question regarding upgrading the devtoolset compiler, which has come up before due to interest in C++14 support. ( https://github.com/conda-forge/docker-images/pull/22 ) ( https://github.com/conda-forge/docker-images/pull/23 ) IIRC devtoolset-2 was the last version to have 32-bit and 64-bit support. The devtoolset-3 and devtoolset-4 compilers were 64-bit only, again IIRC. This raises more questions when things like CentOS 6 and devtoolset-2 reach their EOL.\r\n\r\nThere is a bit of a resource issue with CircleCI though. After all CircleCI only gives 4 concurrent builds. In general these slots would be really handy for long running builds, which already have kludgy workarounds that are burdensome for maintainers. More often than not these are very popular packages in conda-forge (e.g. VTK, OpenCV). If we use 1 of our concurrent builds for 32-bit Linux, it blocks us from using them for say 3 Python versions (as this would require 6 concurrent builds with 32-bit Linux) or requires that we get these 2 other builds somehow (asking nicely and/or paying). We could do 2 NumPy versions, but that doesn't solve some cases like `vtk`.\r\n\r\nIt might be ok if we used a different CI provider for the 32-bit builds and we accept that the compiler used by 32-bit may differ from the one for 64-bit in time. Though it does make it feel like we are working pretty hard to support legacy systems that is falling out of use. Might be worth the effort if some use cases came to the forefront that were not going to just disappear."", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'jakirkham', 'comment_id': 584007950.0, 'datetime': '2020-02-10 08:25:55+00:00', 'masked_author': 'username_5', 'text': 'It seems this issue has gone stale. Closing it out.', 'title': None, 'type': 'comment'}
+ {'action': 'closed', 'author': 'jakirkham', 'comment_id': None, 'datetime': '2020-02-10 08:25:56+00:00', 'masked_author': 'username_5', 'text': '', 'title': None, 'type': 'issue'}]","<issue_start><issue_comment>Title: linux-32 builds 
+username_0: _From @username_0 on May 24, 2016 9:21_
+
+It would be nice to have 32bit builds in Linux. Right now, only linux-64 is there https://conda.anaconda.org/conda-forge
+
+This way linux-32 packages would also be created when submitting to conda ?
+
+
+_Copied from original issue: conda-forge/conda-smithy#183_
+<issue_comment>username_0: _From @pelson on June 1, 2016 8:26_
+
+Hi @username_0. Thanks for submitting this issue. Whilst the changes would involve conda-smithy, we would normally discuss this in the [conda-forge/conda-forge.github.io](https://github.com/conda-forge/conda-forge.github.io/) repo. Interestingly we haven't discussed 32bit linux builds there yet, but it did come up in one of the feedstocks at: https://github.com/conda-forge/eofs-feedstock/issues/1
+
+As I said in that issue, I have been a bit surprised about the lack of demand for linux-32 builds. There are clearly some people who want it, but it isn't clear that the effort needed to implement it outweighs the benefits.
+
+Technically, I'm pretty comfortable that linux-32 builds are completely achievable with CI (circle + docker gives you a lot of power).
+
+Perhaps you can bring this up as an issue on https://github.com/conda-forge/conda-forge.github.io/ and if interested join us for a future conda-forge developer hangout (there is one this Friday, but I'm aware the agenda is already quite full, so maybe the one after).
+
+Cheers,
+<issue_comment>username_0: Apparently travis doesn't support 32bit nor has a plan in the near future to do so - https://github.com/travis-ci/travis-ci/issues/5770
+So I guess it can be done by cross compiling (Installing a 32bit conda), or using a 32bit docker image
+<issue_comment>username_0: _From @rgommers on June 5, 2016 10:23_
+
+I did, but there's not a lot of demand so I agree with @pelson that the effort/benefit tradeoff here isn't clear. The main reason I'm using it is to catch issues not found on TravisCI for Numpy and Scipy.
+<issue_comment>username_0: _From @username_5 on June 4, 2016 6:9_
+
+I know @rgommers mentioned some interest in this as well at one point.
+<issue_comment>username_1: Surely if we wanted 32-bit builds we would use a 32-bit docker container on circleci?
+<issue_comment>username_0: I mainly wanted linux-32 because I happen to be using a laptop with 32bit, and can't install conda-forge packages easily because of that.
+I agree with @rgommers that there's probably very low demand for linux-32, and if its not easy to setup, it should be avoided.
+
+@pelson Sorry about creating the issue in the wrong place ^^ Moved it now.
+<issue_comment>username_2: We have 32-bit builds in the Continuum docker container (https://hub.docker.com/r/continuumio/conda_builder_linux/).  This is done with gcc that is built to compile both 32-bit and 64-bit code.
+
+It's not 100% working.  Things look many places for whether to build 32-bit or 64-bit, and we have not isolated all of them.  It does work for many cases, though.
+
+It might be simpler to just have a separate docker image for 32-bit, as manylinux does.
+<issue_comment>username_3: At Salford Systems, we have been building conda packages for x32 and x64 Linux using separate Docker containers (namely, `toopher/centos-i386:centos6`, and `centos:6`) on x64 host system for over a year with no issues at all. Today, even though I have contributed our packages to conda-forge, we still have to build those feedstocks ourselves only because of the lacking linux-32 support.
+<issue_comment>username_4: @username_3 the demand for Linux-32 is low mostly b/c people don't report it here. I see a continuous increase of Linux-32 downloads in the old IOOS channel that worries me. (Although part of those downloads were explained to me last month and were due to a docker image that people were passing around.)
+
+I would love to see conda-forge building those, but we are lacking CIs (and man) power.
+
+Right now we use `CircleCI` for the Linux builds and Circle does not support a build matrix, correct?
+
+We could use another docker image and an add an extra item to the `Travis-CI` matrix, but `Travis-CI` is already showing signs that it won't scale to our current needs.
+
+So before we do that we need to think how we can get more CI power/speed.
+<issue_comment>username_3: @username_4 I do understand that x32 platform requires extra resources and has lower importance. I would love to see building x32 packages only when CIs are not busy with other platforms. ARM platform is just another similar use-case.
+
+As to the CIs power, it makes a lot of sense to me to pay more attention to the performance of the preparation scripts and conda itself.
+<issue_comment>username_5: Correct. There are some builds that already are at the limit of CircleCI's build time. Adding 32-bit support is currently not practical. These include pretty basic things like `scipy`, which will block progress on most other things.
+<issue_comment>username_4: I don't think that is a blocker as `scipy` itself is a new recipe in conda-forge and there is always the default channel `scipy`. If we think like that we'll never do it.
+
+My point in https://github.com/conda-forge/conda-forge.github.io/issues/163#issuecomment-227742300 is just to bring awareness that, with more CI and man power, we can (and IMO we should) do it.
+<issue_comment>username_5: It was merely one easy example. The point is we are extended or overextended in terms of resources in some cases. If we had more resource, of course, it would be possible to consider this.
+
+Personally, I still don't understand the use case for 32-bit. Could someone please explain to me when this is helpful? Is it only for legacy machines or is there some other particular use case that I'm unaware of? I admit ignorance here; so, if there is a useful case please simply explain it. If it is former, I think like some others things (e.g. OSes) we have decided that there is some minimum level system that we can support practically. Currently 32-bit is in the same boat IMHO.
+<issue_comment>username_5: I should clarify that my confusion is about the purpose of 32-bit Linux. I'm a bit more aware of the situation (though maybe not as intimately familiar as others) on Windows. Also, as we don't support an old enough OS on Mac, we have already accepted that 32-bit support doesn't exist there.
+<issue_comment>username_2: This is a very good point.  Conda and conda build could really use some optimization love.  Just importing conda on Windows takes 2.5 *seconds* on my computer, as measured with ```time python -c ""import conda""```.  Conda build's test suite currently takes about 2000 seconds to complete on my Win 10 VM.
+
+We'll get there, but we're very tied up with other capabilities that we think are more important than speed: namespaces on the conda side, and build customization and python API on the conda-build side.
+
+If anyone has ideas to speed up either conda or conda-build, I'd be very excited to discuss them.
+<issue_comment>username_6: Hi all, just found this discussion about linux-32 builds on conda-forge. 
+Apparently there *is* demand for a linux-32 build of the [climlab package](https://github.com/conda-forge/climlab-feedstock), because I just heard from one of my student-users trying to install on Xubuntu 14.04.5 (a 32-bit linux distribution).
+
+I will probably tell this particular user to try to build directly from source, but I just wanted to add my +1 for linux-32 builds.
+
+To @username_5, the use case here is a student coming in with their own laptop and wanting to participate in a course that uses climlab. I expect it's a fairly uncommon case. The vast majority of my users are on Mac or Windows. Of those who are on Linux, I really don't know how widespread is 32-bit.
+<issue_comment>username_7: @username_5 why not use parallel builds (on circle ci) so that the setup phase selects the right docker and then the run commands will ran in parallel on the respective docker image?
+<issue_comment>username_5: We looked into that for just getting parallel builds going for Python and NumPy versions with CircleCI some time back. However this is not exactly trivial as there is no way to setup a matrix like one does with Travis CI and CircleCI. Even once one splits up a parallel build to use a matrix, the CircleCI GUI is not great at clarifying what a build is parameterized with. We can probably hack in some environment variable echoing step, just it will be a little ugly to use. Not to say it wouldn't be worth the effort, just no one has had time to pursue this. If you have cycles to spend on that effort, this would be a really great contribution for the community.
+
+That said, I'd be of the opinion that any matrix build like feature on CircleCI would be better spent splitting out existing builds that are going over the time limits and already require ugly hacks (e.g. `scipy`, `scikit-learn`, `vtk`, etc.). Once we have done that, we can certainly reevaluate 32-bit Linux builds. However I expect doubling the wait time, which will have increased due to parallel builds saturating the queue and our 4 available workers, will be somewhat controversial. There might be ways to mitigate that by making matrix builds optional or making use of noarch Python builds for instance.
+
+Would add that even 32-bit Windows builds see dramatically less usage compared to 64-bit Windows builds. In fact, I venture to guess that a substantial amount of the traffic for Windows 32-bit builds is simply a consequence of downstream dependencies on conda-forge and not actual use. Would imagine it is a matter of time before the discussion is raised that we should drop 32-bit Windows builds to speed up the AppVeyor queue.
+<issue_comment>username_7: @username_5 I guess I meant something along these lines:
+
+```yaml
+machine:
+  environment:
+    # Docker images
+    DOCKER_IMAGES: ""condaforge/linux-anvil condaforge/linux-anvil-32""
+
+general:
+  branches:
+    ignore:
+      # We only want to build pull requests for testing. If something is merged,
+      # then we are prepping for release and there is no need to build it again.
+      - master
+
+checkout:
+  post:
+    - ./scripts/fast_finish_ci_pr_build.sh
+    - ./scripts/checkout_merge_commit.sh
+
+machine:
+  services:
+    - docker
+
+dependencies:
+  # Note, we used to use the naive caching of docker images, but found that it was quicker
+  # just to pull each time. #rollondockercaching
+  override:
+    - export DOCKER_IMAGES=($DOCKER_IMAGES) &&
+      export DOCKER_IMAGE=${DOCKER_IMAGES[$CIRCLE_NODE_INDEX]} && 
+      echo -e ""DOCKER IMAGE USED = $DOCKERIMAGE"" &&
+      ""docker pull $DOCKER_IMAGE"";
+
+test:
+  override:
+    - ./scripts/run_docker_build.sh
+```
+<issue_comment>username_5: Right something like that could work if we enable just 2 concurrent builds. Though there would be a (minor) change to `scripts/run_docker_build.sh` as well. We would also want to echo info about which image is used somewhere. Plus we need an API to enable parallelism so that `conda-smithy` can do this to existing and new projects. I don't recall their being one provided by CircleCI last time I looked, but there may be an undocumented way to do this.
+
+Then there is the issue of creating and maintaining the 32-bit Docker image. Certainly doable, but it does raise a question regarding upgrading the devtoolset compiler, which has come up before due to interest in C++14 support. ( https://github.com/conda-forge/docker-images/pull/22 ) ( https://github.com/conda-forge/docker-images/pull/23 ) IIRC devtoolset-2 was the last version to have 32-bit and 64-bit support. The devtoolset-3 and devtoolset-4 compilers were 64-bit only, again IIRC. This raises more questions when things like CentOS 6 and devtoolset-2 reach their EOL.
+
+There is a bit of a resource issue with CircleCI though. After all CircleCI only gives 4 concurrent builds. In general these slots would be really handy for long running builds, which already have kludgy workarounds that are burdensome for maintainers. More often than not these are very popular packages in conda-forge (e.g. VTK, OpenCV). If we use 1 of our concurrent builds for 32-bit Linux, it blocks us from using them for say 3 Python versions (as this would require 6 concurrent builds with 32-bit Linux) or requires that we get these 2 other builds somehow (asking nicely and/or paying). We could do 2 NumPy versions, but that doesn't solve some cases like `vtk`.
+
+It might be ok if we used a different CI provider for the 32-bit builds and we accept that the compiler used by 32-bit may differ from the one for 64-bit in time. Though it does make it feel like we are working pretty hard to support legacy systems that is falling out of use. Might be worth the effort if some use cases came to the forefront that were not going to just disappear.
+<issue_comment>username_5: It seems this issue has gone stale. Closing it out.<issue_closed>"
+gohugoio/hugo,290480061,4311,,"[{'action': 'opened', 'author': 'bep', 'comment_id': None, 'datetime': '2018-01-22 14:17:09+00:00', 'masked_author': 'username_0', 'text': 'We have a fairly solid page bundle story now, with metadata support and powerful glob matching. There are probably some improvements to be had here as well (linking resources outside of the bundle, metadata outside of front matter), but that will have to wait.\r\n\r\nThere are, however, popping up questions about ""how to reuse images?"" and similar, and people are creating more or less elegant hacks. We have similar requests for reuse of content files (many obvious use cases here, see #3612). \r\n\r\nWe should give people a good solution for this sooner rather than later. This is a low hanging fruit: Bit win for little effort.\r\n\r\nI suggest that we establish support for `headless bundles` for the `index` bundle type.\r\n\r\nSo:\r\n\r\n```toml\r\nheadless = true\r\n```\r\n\r\nIn front matter means that \r\n\r\n* It will have no `Permalink` and no rendered HTML in /public\r\n* It will not be part of `.Site.RegularPages` etc.\r\n\r\nBut you can get it by:\r\n\r\n* `.Site.GetPage ...`\r\n\r\nThoughts?', 'title': 'Add headless page bundles', 'type': 'issue'}
+ {'action': 'created', 'author': 'RealOrangeOne', 'comment_id': 359442463.0, 'datetime': '2018-01-22 14:40:55+00:00', 'masked_author': 'username_1', 'text': ""As a _quick and somewhat dirty_ fix, this makes sense. However long term i'm not sure it's ideal, or especially useful. Assuming in the longer-term that the `Resource` stuff is available to static files under `static/`, then this becomes fairly useless. \r\n\r\nOn the other hand, if this is maintained after that implementation, it's possible it becomes a killer feature for someone in a situation I've not considered.\r\n\r\nAssuming it's not too much work, and doesn't end up breaking flow in weird ways in other places, I'd say go for it!"", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'bep', 'comment_id': 359443168.0, 'datetime': '2018-01-22 14:43:20+00:00', 'masked_author': 'username_0', 'text': 'That will not happen. Static is _static_, i.e. plain copy.\r\n\r\nThis is neither meant as ""quick or dirty"". You really need no explain a little what you mean by that?', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'budparr', 'comment_id': 359445137.0, 'datetime': '2018-01-22 14:49:41+00:00', 'masked_author': 'username_2', 'text': 'Only `.Site.GetPage`, which would mean to me I could not loop through a section of content while having that section headless (my original request). Is that right?', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'RealOrangeOne', 'comment_id': 359445560.0, 'datetime': '2018-01-22 14:50:56+00:00', 'masked_author': 'username_1', 'text': ""Damn, i'm clearly seeing things!\r\n\r\nI had assumed this was a _quick_ fix, however if `Resource` isnt coming to `static/` (which now I think about the design philosophy of Hugo, makes sense), this feels really nice! eg. adding a section simply called `images`, and storing all resources in there to be shared around pages feels really nice, and matches the directory structure of most sites anyway (having resources like images under a separate path)"", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'bep', 'comment_id': 359461045.0, 'datetime': '2018-01-22 15:37:33+00:00', 'masked_author': 'username_0', 'text': 'I\'m talking headless bundles (i.e. the `index.md`), so there isn\'t a section to loop. So it is not a replica of your issue, but should solve the use case: Reusable content pages.\r\n\r\nImagine this in the home page template:\r\n\r\n```\r\n{{ $headless := .Site.GetPage ""page"" ""someh-headless-page"" }}\r\n{{ $reusablePages := $headless.Match ""sidebar-content*"" }} \r\n{{ range $reusablePages }}\r\n{{ .Title }}\r\n{{ end }}\r\n```\r\n\r\n@username_1 Hugo is good at transforming content to websites. Content lives in `/content` (and to some extent in /data and /i18n), but not in /static. We could certainly add static assets helper (fingerprinting, SASS, image compression, HTML minification -- but we should get some plugin support first), but it doesn\'t fit into the ""content data model"" in my head. The way we\'re doing it now with bundles means we have pretty good control of ""what\'s changed"" and can improve on the partial rebuild area (with some significant effort).', 'title': None, 'type': 'comment'}
+ {'action': 'closed', 'author': 'bep', 'comment_id': None, 'datetime': '2018-01-24 08:00:23+00:00', 'masked_author': 'username_0', 'text': '', 'title': None, 'type': 'issue'}]","<issue_start><issue_comment>Title: Add headless page bundles
+username_0: We have a fairly solid page bundle story now, with metadata support and powerful glob matching. There are probably some improvements to be had here as well (linking resources outside of the bundle, metadata outside of front matter), but that will have to wait.
+
+There are, however, popping up questions about ""how to reuse images?"" and similar, and people are creating more or less elegant hacks. We have similar requests for reuse of content files (many obvious use cases here, see #3612). 
+
+We should give people a good solution for this sooner rather than later. This is a low hanging fruit: Bit win for little effort.
+
+I suggest that we establish support for `headless bundles` for the `index` bundle type.
+
+So:
+
+```toml
+headless = true
+```
+
+In front matter means that 
+
+* It will have no `Permalink` and no rendered HTML in /public
+* It will not be part of `.Site.RegularPages` etc.
+
+But you can get it by:
+
+* `.Site.GetPage ...`
+
+Thoughts?
+<issue_comment>username_1: As a _quick and somewhat dirty_ fix, this makes sense. However long term i'm not sure it's ideal, or especially useful. Assuming in the longer-term that the `Resource` stuff is available to static files under `static/`, then this becomes fairly useless. 
+
+On the other hand, if this is maintained after that implementation, it's possible it becomes a killer feature for someone in a situation I've not considered.
+
+Assuming it's not too much work, and doesn't end up breaking flow in weird ways in other places, I'd say go for it!
+<issue_comment>username_0: That will not happen. Static is _static_, i.e. plain copy.
+
+This is neither meant as ""quick or dirty"". You really need no explain a little what you mean by that?
+<issue_comment>username_2: Only `.Site.GetPage`, which would mean to me I could not loop through a section of content while having that section headless (my original request). Is that right?
+<issue_comment>username_1: Damn, i'm clearly seeing things!
+
+I had assumed this was a _quick_ fix, however if `Resource` isnt coming to `static/` (which now I think about the design philosophy of Hugo, makes sense), this feels really nice! eg. adding a section simply called `images`, and storing all resources in there to be shared around pages feels really nice, and matches the directory structure of most sites anyway (having resources like images under a separate path)
+<issue_comment>username_0: I'm talking headless bundles (i.e. the `index.md`), so there isn't a section to loop. So it is not a replica of your issue, but should solve the use case: Reusable content pages.
+
+Imagine this in the home page template:
+
+```
+{{ $headless := .Site.GetPage ""page"" ""someh-headless-page"" }}
+{{ $reusablePages := $headless.Match ""sidebar-content*"" }} 
+{{ range $reusablePages }}
+{{ .Title }}
+{{ end }}
+```
+
+@username_1 Hugo is good at transforming content to websites. Content lives in `/content` (and to some extent in /data and /i18n), but not in /static. We could certainly add static assets helper (fingerprinting, SASS, image compression, HTML minification -- but we should get some plugin support first), but it doesn't fit into the ""content data model"" in my head. The way we're doing it now with bundles means we have pretty good control of ""what's changed"" and can improve on the partial rebuild area (with some significant effort).<issue_closed>"
+website-scraper/node-website-scraper,562787239,389,,"[{'action': 'opened', 'author': 'Bathlamos', 'comment_id': None, 'datetime': '2020-02-10 19:49:14+00:00', 'masked_author': 'username_0', 'text': '### Configuration\r\n**version:** 4.2.0\r\n\r\n**options:**\r\n```js\r\nconst options = {\r\n    urls: [ { url: \'https://www.sec.gov/Archives/edgar/data/1039001/000114420419013207/tv510821_ncsr.htm\' } ],\r\n    directory: \'~/Desktop/temp-folder\',\r\n    requestConcurrency: 10,\r\n}\r\n```\r\n\r\n### Description\r\n\r\n**Expected behavior:** The webpage along with images, CSS and JS is downloaded into the provided folder.\r\n\r\n**Actual behavior:** The library hangs (see debug information below). The page in question is very large, and it seems like Cheerio is taking a lot of CPU power for a yet to be identified reason.\r\n\r\n### Additional Information\r\n\r\nHere\'s a log of a minimal program to reproduce the issue\r\n\r\n```\r\nimport scrape from \'website-scraper\'\r\n\r\nconst options = {\r\n    urls: [ { url: \'https://www.sec.gov/Archives/edgar/data/1039001/000114420419013207/tv510821_ncsr.htm\' } ],\r\n    directory: \'~/Desktop/temp-folder\',\r\n    requestConcurrency: 10,\r\n}\r\nscrape(options)\r\n```\r\n\r\n```\r\nnode --max-old-space-size=8192 ./src/download-n-csr.js\r\n\\(node:27154) ExperimentalWarning: The ESM module loader is experimental.\r\n  website-scraper:info init with options {\r\n  defaultFilename: \'index.html\',\r\n  prettifyUrls: false,\r\n  sources: [\r\n    { selector: \'style\' },\r\n    { selector: \'[style]\', attr: \'style\' },\r\n    { selector: \'img\', attr: \'src\' },\r\n    { selector: \'img\', attr: \'srcset\' },\r\n    { selector: \'input\', attr: \'src\' },\r\n    { selector: \'object\', attr: \'data\' },\r\n    { selector: \'embed\', attr: \'src\' },\r\n    { selector: \'param[name=""movie""]\', attr: \'value\' },\r\n    { selector: \'script\', attr: \'src\' },\r\n    { selector: \'link[rel=""stylesheet""]\', attr: \'href\' },\r\n    { selector: \'link[rel*=""icon""]\', attr: \'href\' },\r\n    { selector: \'svg *[xlink\\\\:href]\', attr: \'xlink:href\' },\r\n    { selector: \'svg *[href]\', attr: \'href\' },\r\n    { selector: \'picture source\', attr: \'srcset\' },\r\n    { selector: \'meta[property=""og\\\\:image""]\', attr: \'content\' },\r\n    { selector: \'meta[property=""og\\\\:image\\\\:url""]\', attr: \'content\' },\r\n    {\r\n      selector: \'meta[property=""og\\\\:image\\\\:secure_url""]\',\r\n      attr: \'content\'\r\n    },\r\n    { selector: \'meta[property=""og\\\\:audio""]\', attr: \'content\' },\r\n    { selector: \'meta[property=""og\\\\:audio\\\\:url""]\', attr: \'content\' },\r\n    {\r\n      selector: \'meta[property=""og\\\\:audio\\\\:secure_url""]\',\r\n      attr: \'content\'\r\n    },\r\n    { selector: \'meta[property=""og\\\\:video""]\', attr: \'content\' },\r\n    { selector: \'meta[property=""og\\\\:video\\\\:url""]\', attr: \'content\' },\r\n    {\r\n      selector: \'meta[property=""og\\\\:video\\\\:secure_url""]\',\r\n      attr: \'content\'\r\n    },\r\n    { selector: \'video\', attr: \'src\' },\r\n    { selector: \'video source\', attr: \'src\' },\r\n    { selector: \'video track\', attr: \'src\' },\r\n    { selector: \'audio\', attr: \'src\' },\r\n    { selector: \'audio source\', attr: \'src\' },\r\n    { selector: \'audio track\', attr: \'src\' },\r\n    { selector: \'frame\', attr: \'src\' },\r\n    { selector: \'iframe\', attr: \'src\' }\r\n[Truncated]\n  plugins: []\r\n} +0ms\r\n  website-scraper:debug [plugin] apply default plugin SaveResourceToFileSystemPlugin for action saveResource +0ms\r\n  website-scraper:debug add action beforeStart +1ms\r\n  website-scraper:debug add action saveResource +0ms\r\n  website-scraper:debug add action error +0ms\r\n  website-scraper:debug [plugin] apply default plugin GenerateFilenameByTypePlugin for action generateFilename +0ms\r\n  website-scraper:debug add action beforeStart +0ms\r\n  website-scraper:debug add action generateFilename +0ms\r\n  website-scraper:debug [plugin] apply default plugin GetRelativePathReferencePlugin for action getReference +0ms\r\n  website-scraper:debug add action getReference +0ms\r\n  website-scraper:debug run 2 actions beforeStart +9ms\r\n  website-scraper:debug run 0 actions beforeRequest +3ms\r\n  website-scraper:debug [request] sending request for url https://www.sec.gov/Archives/edgar/data/1039001/000114420419013207/tv510821_ncsr.htm, referer null +1ms\r\n  website-scraper:debug [request] received response for https://www.sec.gov/Archives/edgar/data/1039001/000114420419013207/tv510821_ncsr.htm, statusCode 200 +2s\r\n  website-scraper:debug run 1 actions generateFilename +2ms\r\n  website-scraper:debug add loaded resource { url: ""https://www.sec.gov/Archives/edgar/data/1039001/000114420419013207/tv510821_ncsr.htm"", filename: ""index.html"", depth: 0 } +1ms\r\n  website-scraper:debug using html handler for { url: ""https://www.sec.gov/Archives/edgar/data/1039001/000114420419013207/tv510821_ncsr.htm"", filename: ""index.html"", depth: 0 } +1ms\r\n```\r\n(nothing further happens after this)', 'title': 'Scraper hangs on this page', 'type': 'issue'}
+ {'action': 'created', 'author': 's0ph1e', 'comment_id': 586400662.0, 'datetime': '2020-02-14 17:58:39+00:00', 'masked_author': 'username_1', 'text': 'Hi @username_0 \r\nThank you for reporting issue. \r\nThis page is really large (~37Mb) and looks like cheerio hangs trying to parse it. \r\nUnfortunately I can do nothing with it', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'aivus', 'comment_id': 586555232.0, 'datetime': '2020-02-15 05:14:07+00:00', 'masked_author': 'username_2', 'text': ""I believe it should be addressed to https://github.com/cheeriojs/cheerio if it's reproduced on pure cheerio"", 'title': None, 'type': 'comment'}]","<issue_start><issue_comment>Title: Scraper hangs on this page
+username_0: ### Configuration
+**version:** 4.2.0
+
+**options:**
+```js
+const options = {
+    urls: [ { url: 'https://www.sec.gov/Archives/edgar/data/1039001/000114420419013207/tv510821_ncsr.htm' } ],
+    directory: '~/Desktop/temp-folder',
+    requestConcurrency: 10,
+}
+```
+
+### Description
+
+**Expected behavior:** The webpage along with images, CSS and JS is downloaded into the provided folder.
+
+**Actual behavior:** The library hangs (see debug information below). The page in question is very large, and it seems like Cheerio is taking a lot of CPU power for a yet to be identified reason.
+
+### Additional Information
+
+Here's a log of a minimal program to reproduce the issue
+
+```
+import scrape from 'website-scraper'
+
+const options = {
+    urls: [ { url: 'https://www.sec.gov/Archives/edgar/data/1039001/000114420419013207/tv510821_ncsr.htm' } ],
+    directory: '~/Desktop/temp-folder',
+    requestConcurrency: 10,
+}
+scrape(options)
+```
+
+```
+node --max-old-space-size=8192 ./src/download-n-csr.js
+\(node:27154) ExperimentalWarning: The ESM module loader is experimental.
+  website-scraper:info init with options {
+  defaultFilename: 'index.html',
+  prettifyUrls: false,
+  sources: [
+    { selector: 'style' },
+    { selector: '[style]', attr: 'style' },
+    { selector: 'img', attr: 'src' },
+    { selector: 'img', attr: 'srcset' },
+    { selector: 'input', attr: 'src' },
+    { selector: 'object', attr: 'data' },
+    { selector: 'embed', attr: 'src' },
+    { selector: 'param[name=""movie""]', attr: 'value' },
+    { selector: 'script', attr: 'src' },
+    { selector: 'link[rel=""stylesheet""]', attr: 'href' },
+    { selector: 'link[rel*=""icon""]', attr: 'href' },
+    { selector: 'svg *[xlink\\:href]', attr: 'xlink:href' },
+    { selector: 'svg *[href]', attr: 'href' },
+    { selector: 'picture source', attr: 'srcset' },
+    { selector: 'meta[property=""og\\:image""]', attr: 'content' },
+    { selector: 'meta[property=""og\\:image\\:url""]', attr: 'content' },
+    {
+      selector: 'meta[property=""og\\:image\\:secure_url""]',
+      attr: 'content'
+    },
+    { selector: 'meta[property=""og\\:audio""]', attr: 'content' },
+    { selector: 'meta[property=""og\\:audio\\:url""]', attr: 'content' },
+    {
+      selector: 'meta[property=""og\\:audio\\:secure_url""]',
+      attr: 'content'
+    },
+    { selector: 'meta[property=""og\\:video""]', attr: 'content' },
+    { selector: 'meta[property=""og\\:video\\:url""]', attr: 'content' },
+    {
+      selector: 'meta[property=""og\\:video\\:secure_url""]',
+      attr: 'content'
+    },
+    { selector: 'video', attr: 'src' },
+    { selector: 'video source', attr: 'src' },
+    { selector: 'video track', attr: 'src' },
+    { selector: 'audio', attr: 'src' },
+    { selector: 'audio source', attr: 'src' },
+    { selector: 'audio track', attr: 'src' },
+    { selector: 'frame', attr: 'src' },
+    { selector: 'iframe', attr: 'src' }
+[Truncated]
+  plugins: []
+} +0ms
+  website-scraper:debug [plugin] apply default plugin SaveResourceToFileSystemPlugin for action saveResource +0ms
+  website-scraper:debug add action beforeStart +1ms
+  website-scraper:debug add action saveResource +0ms
+  website-scraper:debug add action error +0ms
+  website-scraper:debug [plugin] apply default plugin GenerateFilenameByTypePlugin for action generateFilename +0ms
+  website-scraper:debug add action beforeStart +0ms
+  website-scraper:debug add action generateFilename +0ms
+  website-scraper:debug [plugin] apply default plugin GetRelativePathReferencePlugin for action getReference +0ms
+  website-scraper:debug add action getReference +0ms
+  website-scraper:debug run 2 actions beforeStart +9ms
+  website-scraper:debug run 0 actions beforeRequest +3ms
+  website-scraper:debug [request] sending request for url https://www.sec.gov/Archives/edgar/data/1039001/000114420419013207/tv510821_ncsr.htm, referer null +1ms
+  website-scraper:debug [request] received response for https://www.sec.gov/Archives/edgar/data/1039001/000114420419013207/tv510821_ncsr.htm, statusCode 200 +2s
+  website-scraper:debug run 1 actions generateFilename +2ms
+  website-scraper:debug add loaded resource { url: ""https://www.sec.gov/Archives/edgar/data/1039001/000114420419013207/tv510821_ncsr.htm"", filename: ""index.html"", depth: 0 } +1ms
+  website-scraper:debug using html handler for { url: ""https://www.sec.gov/Archives/edgar/data/1039001/000114420419013207/tv510821_ncsr.htm"", filename: ""index.html"", depth: 0 } +1ms
+```
+(nothing further happens after this)
+<issue_comment>username_1: Hi @username_0 
+Thank you for reporting issue. 
+This page is really large (~37Mb) and looks like cheerio hangs trying to parse it. 
+Unfortunately I can do nothing with it
+<issue_comment>username_2: I believe it should be addressed to https://github.com/cheeriojs/cheerio if it's reproduced on pure cheerio"
+pallets/flask-website,374711798,74,"{'number': 74.0, 'repo': 'flask-website', 'user_login': 'pallets'}","[{'action': 'opened', 'author': 'greyli', 'comment_id': None, 'datetime': '2018-10-28T03:04:50Z', 'masked_author': 'username_0', 'text': '* Remove dead projects and link\r\n* Fix typo\r\n\r\nClose #73', 'title': 'Improve powered-by list', 'type': 'issue'}
+ {'action': 'created', 'author': 'miguelgrinberg', 'comment_id': 453860298.0, 'datetime': '2019-01-13 19:54:40+00:00', 'masked_author': 'username_1', 'text': 'This issue will be automatically closed due to being inactive for more than six months. Please reopen if you need more assistance.', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'miguelgrinberg', 'comment_id': 453861337.0, 'datetime': '2019-01-13 20:08:17+00:00', 'masked_author': 'username_1', 'text': 'Sorry for the issue noise... was doing some batch clean up on my own issues and a few Flask ones slipped.', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'davidism', 'comment_id': 510537916.0, 'datetime': '2019-07-11 15:36:49+00:00', 'masked_author': 'username_2', 'text': 'I think #75 took care of these, and the site is no longer up anyway.', 'title': None, 'type': 'comment'}]","<issue_start><issue_comment>Title: Improve powered-by list
+username_0: * Remove dead projects and link
+* Fix typo
+
+Close #73
+<issue_comment>username_1: This issue will be automatically closed due to being inactive for more than six months. Please reopen if you need more assistance.
+<issue_comment>username_1: Sorry for the issue noise... was doing some batch clean up on my own issues and a few Flask ones slipped.
+<issue_comment>username_2: I think #75 took care of these, and the site is no longer up anyway."
+carbon-design-system/carbon-website,798625066,2115,,"[{'action': 'opened', 'author': 'KenACollins', 'comment_id': None, 'datetime': '2021-02-01 19:01:01+00:00', 'masked_author': 'username_0', 'text': '## Cannot Install carbon-website with Yarn on Windows 10\r\n\r\nHi, I have spent 12 hours so far on the `yarn install` step trying to install carbon-website on my Windows 10 machine and it has just been one roadblock after another. I resolve an issue only to be faced with another. Because there are so many package dependencies, it looks to me that things have changed since you last built the project on Windows 10, and I would like you to start fresh on a new Windows machine and see if you have any success.\r\n\r\n### Yarn 2 Issues\r\nFor starters, you depend heavily on Yarn even though npm is the standard tool. Okay, fine but did you know that Yarn 2 is the current version and is nothing like Yarn 1? Workaround tips on Stack Overflow like how to turn off the SSL check for local certificates...\r\n\r\n`yarn config set ""strict-ssl"" false -g`\r\n\r\n...do not work with Yarn 2. I had to relent and install Yarn 1.22.5.\r\n\r\nAnother issue I ran into with Yarn is that it times out during installation, then blames the user with the following error:\r\n\r\n`info There appears to be trouble with your network connection. Retrying…`\r\n\r\nThe fix is to change the `yarn install` command cited in your README.md file to be:\r\n\r\n`yarn install --network-timeout 100000`\r\n\r\n### Gatsby Issues\r\nDuring the `yarn install` step, it failed for lack of Python 2.7 which had something to do with `node-gyp`. I don\'t like the idea of installing an old version of Python, but I had no choice, the error message I got cited Python 2 code:\r\n\r\n`gyp ERR! stack Error: Command failed: C:\\Python\\Python39\\python.EXE -c import sys; print ""%s.%s.%s"" % sys.version_info[:3];`\r\n\r\nAn online search led me to issue this command which can only be issued from a Windows PowerShell prompt launched as Administrator:\r\n\r\n`npm install --global windows-build-tools`\r\n\r\nI also got errors about `gatsby-plugin-sharp` not being installed. There does not appear to be any clear way to resolve this.\r\n\r\n### Missing Images\r\nThere are missing images in the code base that cause errors when pngquant is executed on them.\r\n\r\n### pngquant Issues\r\nThe latest errors I am getting center on pngquant:\r\n\r\n```\r\n !! unable to get local issuer certificate\r\n !! pngquant pre-build test failed\r\n  i compiling from source\r\n  × Error: pngquant failed to build, make sure that libpng-dev is installed\r\n    at C:\\Git Repositories\\personal\\carbon-website\\node_modules\\bin-build\\node_modules\\execa\\index.js:231:11\r\n    at runMicrotasks (<anonymous>)\r\n    at processTicksAndRejections (internal/process/task_queues.js:93:5)\r\n    at async Promise.all (index 0)\r\n```\r\n\r\nThe error message includes an issue with a local certificate and unfortunately the earlier yarn command to ignore this is not working here, even after I tried issuing the following:\r\n\r\n`set NODE_TLS_REJECT_UNAUTHORIZED=0`\r\n\r\nThe error also suggests installing `libpng-dev`. Yarn does not maintain a catalog of packages, to my knowledge, but when I check npmjs.com and search on `libpng-dev` I learn there is no such package. How I am supposed to install it is a mystery.\r\n\r\nI tried all of the following commands with no success:\r\n\r\n```\r\nyarn add pngquant -W\r\nyarn add pngquant-bin -W\r\nnpm install imagemin-pngquant@5.0.1 --save\r\n```\r\n\r\nI added this to my resolutions section of package.json but no success:\r\n\r\n```\r\n""resolutions"": {\r\n    ""image-webpack-loader/imagemin-pngquant"": ""5.0.1""\r\n}\r\n```\r\n\r\n### Bottom Line\r\nEvery person\'s experience is bound to be different but the bottom line is that I strongly feel that no one at IBM has tried to install the carbon-website repo from scratch on a Windows 10 machine recently. A person like myself should not be facing so many roadblocks with no success after 12 hours of effort.', 'title': 'Cannot Install carbon-website with Yarn on Windows 10 After 12 Hours Time Spent', 'type': 'issue'}]","<issue_start><issue_comment>Title: Cannot Install carbon-website with Yarn on Windows 10 After 12 Hours Time Spent
+username_0: ## Cannot Install carbon-website with Yarn on Windows 10
+
+Hi, I have spent 12 hours so far on the `yarn install` step trying to install carbon-website on my Windows 10 machine and it has just been one roadblock after another. I resolve an issue only to be faced with another. Because there are so many package dependencies, it looks to me that things have changed since you last built the project on Windows 10, and I would like you to start fresh on a new Windows machine and see if you have any success.
+
+### Yarn 2 Issues
+For starters, you depend heavily on Yarn even though npm is the standard tool. Okay, fine but did you know that Yarn 2 is the current version and is nothing like Yarn 1? Workaround tips on Stack Overflow like how to turn off the SSL check for local certificates...
+
+`yarn config set ""strict-ssl"" false -g`
+
+...do not work with Yarn 2. I had to relent and install Yarn 1.22.5.
+
+Another issue I ran into with Yarn is that it times out during installation, then blames the user with the following error:
+
+`info There appears to be trouble with your network connection. Retrying…`
+
+The fix is to change the `yarn install` command cited in your README.md file to be:
+
+`yarn install --network-timeout 100000`
+
+### Gatsby Issues
+During the `yarn install` step, it failed for lack of Python 2.7 which had something to do with `node-gyp`. I don't like the idea of installing an old version of Python, but I had no choice, the error message I got cited Python 2 code:
+
+`gyp ERR! stack Error: Command failed: C:\Python\Python39\python.EXE -c import sys; print ""%s.%s.%s"" % sys.version_info[:3];`
+
+An online search led me to issue this command which can only be issued from a Windows PowerShell prompt launched as Administrator:
+
+`npm install --global windows-build-tools`
+
+I also got errors about `gatsby-plugin-sharp` not being installed. There does not appear to be any clear way to resolve this.
+
+### Missing Images
+There are missing images in the code base that cause errors when pngquant is executed on them.
+
+### pngquant Issues
+The latest errors I am getting center on pngquant:
+
+```
+ !! unable to get local issuer certificate
+ !! pngquant pre-build test failed
+  i compiling from source
+  × Error: pngquant failed to build, make sure that libpng-dev is installed
+    at C:\Git Repositories\personal\carbon-website\node_modules\bin-build\node_modules\execa\index.js:231:11
+    at runMicrotasks (<anonymous>)
+    at processTicksAndRejections (internal/process/task_queues.js:93:5)
+    at async Promise.all (index 0)
+```
+
+The error message includes an issue with a local certificate and unfortunately the earlier yarn command to ignore this is not working here, even after I tried issuing the following:
+
+`set NODE_TLS_REJECT_UNAUTHORIZED=0`
+
+The error also suggests installing `libpng-dev`. Yarn does not maintain a catalog of packages, to my knowledge, but when I check npmjs.com and search on `libpng-dev` I learn there is no such package. How I am supposed to install it is a mystery.
+
+I tried all of the following commands with no success:
+
+```
+yarn add pngquant -W
+yarn add pngquant-bin -W
+npm install imagemin-pngquant@5.0.1 --save
+```
+
+I added this to my resolutions section of package.json but no success:
+
+```
+""resolutions"": {
+    ""image-webpack-loader/imagemin-pngquant"": ""5.0.1""
+}
+```
+
+### Bottom Line
+Every person's experience is bound to be different but the bottom line is that I strongly feel that no one at IBM has tried to install the carbon-website repo from scratch on a Windows 10 machine recently. A person like myself should not be facing so many roadblocks with no success after 12 hours of effort."
+ethereum/ethereum-org-website,696176644,1421,"{'number': 1421.0, 'repo': 'ethereum-org-website', 'user_login': 'ethereum'}","[{'action': 'opened', 'author': 'designheretic', 'comment_id': None, 'datetime': '2020-09-08T21:04:44Z', 'masked_author': 'username_0', 'text': ""## Description\r\n\r\n[Rivet](https://rivet.cloud) offers a backend API that supports Ethereum mainnet, the Goerli, Rinkeby, and Ropsten testnets, and Ethereum Classic's mainnet. The service includes 500k free requests/month and pay-as-you-go service at a flat rate of $1/100,000 requests after that. It will also soon allow developers to purchase request capacity with ETH and DAI.\r\n\r\nThis PR adds [Rivet](https://rivet.cloud) to the **Backend APIs** section of the [Developer Resources page](https://ethereum.org/en/developers/), along with links to Rivet's [Documentation](https://rivet.cloud/docs/) and the [Github repository for the open source code that powers Rivet](https://github.com/openrelayxyz/ethercattle-deployment).\r\n\r\n## Related Issue\r\n\r\nThe related issue can be found here: [Issue #1419](https://github.com/ethereum/ethereum-org-website/issues/1419)."", 'title': 'Add Rivet to Developer Resources under Backend APIs [Fixes #1419]', 'type': 'issue'}
+ {'action': 'created', 'author': 'samajammin', 'comment_id': 689235701.0, 'datetime': '2020-09-09 01:07:07+00:00', 'masked_author': 'username_1', 'text': 'Hey @CPSTL could you please review when able? Thanks!', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'samajammin', 'comment_id': 705804029.0, 'datetime': '2020-10-08 20:25:27+00:00', 'masked_author': 'username_1', 'text': ""Hey @username_0 - I resolved the merge conflicts in #1597. I'm going to close out this PR in favor of #1597.\r\n\r\nThanks again for your contribution!"", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'samajammin', 'comment_id': 705804278.0, 'datetime': '2020-10-08 20:25:56+00:00', 'masked_author': 'username_1', 'text': '@all-contributors please add @username_0 for content.', 'title': None, 'type': 'comment'}]","<issue_start><issue_comment>Title: Add Rivet to Developer Resources under Backend APIs [Fixes #1419]
+username_0: ## Description
+
+[Rivet](https://rivet.cloud) offers a backend API that supports Ethereum mainnet, the Goerli, Rinkeby, and Ropsten testnets, and Ethereum Classic's mainnet. The service includes 500k free requests/month and pay-as-you-go service at a flat rate of $1/100,000 requests after that. It will also soon allow developers to purchase request capacity with ETH and DAI.
+
+This PR adds [Rivet](https://rivet.cloud) to the **Backend APIs** section of the [Developer Resources page](https://ethereum.org/en/developers/), along with links to Rivet's [Documentation](https://rivet.cloud/docs/) and the [Github repository for the open source code that powers Rivet](https://github.com/openrelayxyz/ethercattle-deployment).
+
+## Related Issue
+
+The related issue can be found here: [Issue #1419](https://github.com/ethereum/ethereum-org-website/issues/1419).
+<issue_comment>username_1: Hey @CPSTL could you please review when able? Thanks!
+<issue_comment>username_1: Hey @username_0 - I resolved the merge conflicts in #1597. I'm going to close out this PR in favor of #1597.
+
+Thanks again for your contribution!
+<issue_comment>username_1: @all-contributors please add @username_0 for content."

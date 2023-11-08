@@ -1,0 +1,278 @@
+DjangoGirls/djangogirls,934620942,593,,"[{'action': 'opened', 'author': 'amakarudze', 'comment_id': None, 'datetime': '2021-07-01 09:21:18+00:00', 'masked_author': 'username_0', 'text': 'When an organizer tries to apply to organise an event, they get a server error. The traceback shows there are multiple events with the same slug as shown below:\r\n\r\n```\r\nInternal Server Error: /medellin/\r\nTraceback (most recent call last):\r\n  File ""/home/djangogirls2/.virtualenvs/djangogirls.com/lib/python3.5/site-packages/django/core/handlers/exception.py"", line 35, in inner\r\n    response = get_response(request)\r\n  File ""/home/djangogirls2/.virtualenvs/djangogirls.com/lib/python3.5/site-packages/django/core/handlers/base.py"", line 128, in _get_response\r\n    response = self.process_exception_by_middleware(e, request)\r\n  File ""/home/djangogirls2/.virtualenvs/djangogirls.com/lib/python3.5/site-packages/django/core/handlers/base.py"", line 126, in _get_response\r\n    response = wrapped_callback(request, *callback_args, **callback_kwargs)\r\n  File ""/home/djangogirls2/djangogirls.com/core/views.py"", line 52, in event\r\n    event = get_object_or_404(Event, page_url=city.lower())\r\n  File ""/home/djangogirls2/.virtualenvs/djangogirls.com/lib/python3.5/site-packages/django/shortcuts.py"", line 87, in get_object_or_404\r\n    return queryset.get(*args, **kwargs)\r\n  File ""/home/djangogirls2/.virtualenvs/djangogirls.com/lib/python3.5/site-packages/django/db/models/query.py"", line 407, in get\r\n    (self.model._meta.object_name, num)\r\ncore.models.MultipleObjectsReturned: get() returned more than one Event -- it returned 2!\r\n```', 'title': ""'core.models.MultipleObjectsReturned: get() returned more than one Event -- it returned 2!' is causing server error on website"", 'type': 'issue'}
+ {'action': 'created', 'author': 'marksweb', 'comment_id': 894777920.0, 'datetime': '2021-08-08 10:45:11+00:00', 'masked_author': 'username_1', 'text': ""@username_0 I can see you've assigned this, but would you like contributions? I could take a look at ensuring unique slugs are chosen for new objects & potentially a data migration to fix existing duplicates."", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'amakarudze', 'comment_id': 894778649.0, 'datetime': '2021-08-08 10:51:10+00:00', 'masked_author': 'username_0', 'text': 'Yes @username_1. Let me unassign myself. We have been short of contributors lately but we are really looking for more contributors. Thank you. Assigning you now and removing myself and Carlton. Thanks again.', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'marksweb', 'comment_id': 894778854.0, 'datetime': '2021-08-08 10:53:00+00:00', 'masked_author': 'username_1', 'text': 'Thanks @username_0\n\nHappy to help out where I can 👍', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'carltongibson', 'comment_id': 894781822.0, 'datetime': '2021-08-08 11:15:56+00:00', 'masked_author': 'username_2', 'text': ""Super thanks @username_1! \n\nI didn't have the bandwidth to dig in yet but, it used to be that the uniqueness was enforced, adding a `-2` say. Reviewing why/when that was removed would probably pay dividends...\n\nReach out if you want input!"", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'marksweb', 'comment_id': 894829624.0, 'datetime': '2021-08-08 17:31:41+00:00', 'masked_author': 'username_1', 'text': ""Ok, so the events are powered by the `city` fields on the URL;\r\n\r\n```\r\nurl(r'^(?P<city>[\\w\\d/]+)/$', views.event, name='event'),\r\n```\r\n\r\nBut `city` is just a simple field...\r\n```\r\ncity = models.CharField(max_length=200)\r\n```\r\n\r\nI can't see an override of the save to ensure a unique value. \r\n\r\nSo I'd suggest adding a new field, `slug`, because having multiple events in a city seems fair, but adding things like `-2` to a city isn't really valid for that data.\r\n\r\nThen the URL can be powered by the slug and I think that makes more sense.\r\n\r\nThis would likely require 3 migrations, first to add the `slug` field, second is a data migration to set that value from the current `city` field and ensure it's unique. Finally a migration to ensure `slug` is a required field.\r\n\r\nHow does that sound? @username_2 @username_0"", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'carltongibson', 'comment_id': 894835631.0, 'datetime': '2021-08-08 18:20:49+00:00', 'masked_author': 'username_2', 'text': '@username_1 Sounds plausible, yes. \r\n\r\nOne thought I’d had was to somehow add a date component to the URL to make it unique. At the first application stage, there wouldn’t be a date, so `proposed` maybe, but once settled there would only ever be one event in Barcelona in May 2022, say. Not sure about whether that’s a good approach—it was just at the ideas phase—but what do you think, as an alternative to adding an additional DB field?', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'marksweb', 'comment_id': 894873621.0, 'datetime': '2021-08-08 23:33:30+00:00', 'masked_author': 'username_1', 'text': '@username_2 yeah that sounds wise to just use the data that already exists. Although without also adding a unique together between city & date, you still can\'t guarantee a single object so would need to rely on form validation here.\r\n\r\nCould potentially do something with 2 URL paths, one with year/month another with year/month/day and where 2 events exist in a city in 1 month, they then use the day also. For the most part you\'d only see the first, but just in case, you\'d be able to cope with extra events.\r\n\r\nI\'ve almost got the project running. So I\'ll run through things & try to avoid database changes.\r\n\r\nJust having some grief with `gulp-stylus`. Seems to need something extra installing...\r\n\r\n```\r\n% gulp watch\r\n/Users/mwalker/Sites/djangogirls/node_modules/accord/lib/adapter_base.js:105\r\n        throw new Error(""\'tried to require: "" + this.supportedEngines + ""\'.\\nNone found. Make sure one has been installed!"");\r\n        ^\r\n\r\nError: \'tried to require: stylus\'.\r\nNone found. Make sure one has been installed!\r\n```', 'title': None, 'type': 'comment'}
+ {'action': 'closed', 'author': 'amakarudze', 'comment_id': None, 'datetime': '2021-08-10 20:19:04+00:00', 'masked_author': 'username_0', 'text': '', 'title': None, 'type': 'issue'}]","<issue_start><issue_comment>Title: 'core.models.MultipleObjectsReturned: get() returned more than one Event -- it returned 2!' is causing server error on website
+username_0: When an organizer tries to apply to organise an event, they get a server error. The traceback shows there are multiple events with the same slug as shown below:
+
+```
+Internal Server Error: /medellin/
+Traceback (most recent call last):
+  File ""/home/djangogirls2/.virtualenvs/djangogirls.com/lib/python3.5/site-packages/django/core/handlers/exception.py"", line 35, in inner
+    response = get_response(request)
+  File ""/home/djangogirls2/.virtualenvs/djangogirls.com/lib/python3.5/site-packages/django/core/handlers/base.py"", line 128, in _get_response
+    response = self.process_exception_by_middleware(e, request)
+  File ""/home/djangogirls2/.virtualenvs/djangogirls.com/lib/python3.5/site-packages/django/core/handlers/base.py"", line 126, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File ""/home/djangogirls2/djangogirls.com/core/views.py"", line 52, in event
+    event = get_object_or_404(Event, page_url=city.lower())
+  File ""/home/djangogirls2/.virtualenvs/djangogirls.com/lib/python3.5/site-packages/django/shortcuts.py"", line 87, in get_object_or_404
+    return queryset.get(*args, **kwargs)
+  File ""/home/djangogirls2/.virtualenvs/djangogirls.com/lib/python3.5/site-packages/django/db/models/query.py"", line 407, in get
+    (self.model._meta.object_name, num)
+core.models.MultipleObjectsReturned: get() returned more than one Event -- it returned 2!
+```
+<issue_comment>username_1: @username_0 I can see you've assigned this, but would you like contributions? I could take a look at ensuring unique slugs are chosen for new objects & potentially a data migration to fix existing duplicates.
+<issue_comment>username_0: Yes @username_1. Let me unassign myself. We have been short of contributors lately but we are really looking for more contributors. Thank you. Assigning you now and removing myself and Carlton. Thanks again.
+<issue_comment>username_1: Thanks @username_0
+
+Happy to help out where I can 👍
+<issue_comment>username_2: Super thanks @username_1! 
+
+I didn't have the bandwidth to dig in yet but, it used to be that the uniqueness was enforced, adding a `-2` say. Reviewing why/when that was removed would probably pay dividends...
+
+Reach out if you want input!
+<issue_comment>username_1: Ok, so the events are powered by the `city` fields on the URL;
+
+```
+url(r'^(?P<city>[\w\d/]+)/$', views.event, name='event'),
+```
+
+But `city` is just a simple field...
+```
+city = models.CharField(max_length=200)
+```
+
+I can't see an override of the save to ensure a unique value. 
+
+So I'd suggest adding a new field, `slug`, because having multiple events in a city seems fair, but adding things like `-2` to a city isn't really valid for that data.
+
+Then the URL can be powered by the slug and I think that makes more sense.
+
+This would likely require 3 migrations, first to add the `slug` field, second is a data migration to set that value from the current `city` field and ensure it's unique. Finally a migration to ensure `slug` is a required field.
+
+How does that sound? @username_2 @username_0
+<issue_comment>username_2: @username_1 Sounds plausible, yes. 
+
+One thought I’d had was to somehow add a date component to the URL to make it unique. At the first application stage, there wouldn’t be a date, so `proposed` maybe, but once settled there would only ever be one event in Barcelona in May 2022, say. Not sure about whether that’s a good approach—it was just at the ideas phase—but what do you think, as an alternative to adding an additional DB field?
+<issue_comment>username_1: @username_2 yeah that sounds wise to just use the data that already exists. Although without also adding a unique together between city & date, you still can't guarantee a single object so would need to rely on form validation here.
+
+Could potentially do something with 2 URL paths, one with year/month another with year/month/day and where 2 events exist in a city in 1 month, they then use the day also. For the most part you'd only see the first, but just in case, you'd be able to cope with extra events.
+
+I've almost got the project running. So I'll run through things & try to avoid database changes.
+
+Just having some grief with `gulp-stylus`. Seems to need something extra installing...
+
+```
+% gulp watch
+/Users/mwalker/Sites/djangogirls/node_modules/accord/lib/adapter_base.js:105
+        throw new Error(""'tried to require: "" + this.supportedEngines + ""'.\nNone found. Make sure one has been installed!"");
+        ^
+
+Error: 'tried to require: stylus'.
+None found. Make sure one has been installed!
+```<issue_closed>"
+google/web-starter-kit,38100899,296,,"[{'action': 'opened', 'author': 'addyosmani', 'comment_id': None, 'datetime': '2014-07-17T16:27:27Z', 'masked_author': 'username_0', 'text': ""To give developers targeting older browsers and simple sites a path to using [Material Design](http://google.com/design/spec), we're going to implement an official light-weight version using just JavaScript and CSS.\r\n\r\nThese will strive to be simple enough that anyone can easily customise them. For evergreen browsers, we recommend just using Polymer directly where possible.\r\n\r\n**This is a preliminary list we hope to ship:**\r\n\r\n* Button ([spec](http://www.google.com/design/spec/components/buttons.html#))\r\n* Radio button\r\n* Input ([spec](http://www.google.com/design/spec/components/text-fields.html))\r\n* Toolbar\r\n* Card ([spec](http://www.google.com/design/spec/components/cards.html))\r\n* Progress bar\r\n* Slider ([spec](http://www.google.com/design/spec/components/sliders.html))\r\n* Icon button\r\n* Fab\r\n* Shadow\r\n* Toggle\r\n* Toolbar\r\n* Menu button ([spec](http://www.google.com/design/spec/components/menus.html))\r\n\r\n**Who is working on what?**\r\n\r\n| Element          | Author          | Prototype   |\r\n| ------------- | ------------- | ------------- |\r\n| Button          | @username_0      | http://codepen.io/username_0/pen/Cjlaz |\r\n| Input fields           | @mattcooper      | http://codepen.io/mattcooper/pen/jmIua |\r\n| Radio button          | @Itrulia       | http://jsfiddle.net/itrulia/25pj2/ |\r\n| Icon button   | Unassigned      | |\r\n| Checkbox          | @jasonmayes        | http://codepen.io/jasonmayes/pen/wxtFr |\r\n| Shadow & Cards           | @username_0       | http://codepen.io/username_0/pen/zimes |\r\n| Toggle button | @mattcooper  | http://codepen.io/mattcooper/pen/npEyu |\r\n| Progress        | @marcacohen      | |\r\n| Slider        | @devnook      | https://github.com/google/web-starter-kit/pull/334 |\r\n| FAB button           | @wibblymat | http://codepen.io/wibblymat/pen/mnGsu |\r\n| Menu button    | @nicolasgarnier | |\r\n| Theming | @devnook  | In progress |\r\n| Toast | @wibblymat   | http://codepen.io/wibblymat/pen/avAjq |\r\n| Layout (site) | @username_0  | https://github.com/google/web-starter-kit/issues/295 |\r\n| Layout (app) | @username_0  | unassigned | [Look](http://www.polymer-project.org/components/paper-elements/demo.html)\r\n**Technical details:**\r\n\r\n* Components need to support all of the browsers listed in our matrix\r\n* Components should be written using CSS and vanilla JS (no jQuery or additional libraries)\r\n* If we're sticking with Sass, must be written with Sass or CSS and we'll tweak as necessary.\r\n* Maintain fidelity with the Polymer paper elements as closely as possible.\r\n* Attempt to style native HTML elements over wrapping where possible (to preserve accessibility)\r\n\r\n**Web Starter Kit extras**\r\n\r\n* [Material layout](https://github.com/google/web-starter-kit/issues/295)\r\n* [Bring in the new Roboto](https://github.com/google/web-starter-kit/issues/294)\r\n* [Style guide > Icons](https://github.com/google/web-starter-kit/issues/293)\r\n* [Theming support](https://github.com/google/web-starter-kit/issues/292)\r\n* Refresh style guide to Material Design\r\n\r\n**Notes**\r\n\r\n* All elements will go through a UX review from the Material Design team before getting shipped as part of Web Starter Kit to make sure we're not messing up :)\r\n* The Polymer paper elements are going to be undergoing an accessibility review in the coming months. We'll keep a close eye on this and integrate any learnings that apply to our element set.\r\n\r\nInspiration:\r\n\r\n![](http://i.imgur.com/N3uoYYD.png)\r\n\r\n![](http://i.imgur.com/jbU9UnP.png)\r\n\r\nI'll work with Google's MD team to try getting a review process in place for anything we create here."", 'title': 'Material Design > Components', 'type': 'issue'}
+ {'action': 'closed', 'author': 'addyosmani', 'comment_id': None, 'datetime': '2015-01-05 15:58:30+00:00', 'masked_author': 'username_0', 'text': '', 'title': None, 'type': 'issue'}
+ {'action': 'created', 'author': 'addyosmani', 'comment_id': 68727975.0, 'datetime': '2015-01-05 15:58:30+00:00', 'masked_author': 'username_0', 'text': ""The list of components the team are happy to proceed with for the 0.6.0 release have been sufficiently evolved that we'll be moving any further components to the next milestone. We're going to continue work on polish and hope to have a release out in the next month or two."", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'ragingwind', 'comment_id': 68799638.0, 'datetime': '2015-01-05 23:14:46+00:00', 'masked_author': 'username_1', 'text': ':+1:', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'mkarthck', 'comment_id': 109234638.0, 'datetime': '2015-06-05 09:51:37+00:00', 'masked_author': 'username_2', 'text': '@username_0 When are you going to open source the material design lite code.', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'addyosmani', 'comment_id': 109343240.0, 'datetime': '2015-06-05 16:07:46+00:00', 'masked_author': 'username_0', 'text': ""End of June. It'll be in a new repository of its own with a new site."", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'mkarthck', 'comment_id': 109395952.0, 'datetime': '2015-06-05 18:50:28+00:00', 'masked_author': 'username_2', 'text': 'Thank you. Is the base design of elements in material-design-lite same as\nthe one shared in the codepen above??\n\nThanks\nKarthik', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'Garbee', 'comment_id': 109405534.0, 'datetime': '2015-06-05 19:12:13+00:00', 'masked_author': 'username_3', 'text': ""In MDL all the designs are based only on the specification itself and from discussions with the MD team for how things should be done that aren't clearly specified."", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'remicastaing', 'comment_id': 109429072.0, 'datetime': '2015-06-05 20:19:44+00:00', 'masked_author': 'username_4', 'text': 'What will be the dependencies of MDL?', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'Garbee', 'comment_id': 109430724.0, 'datetime': '2015-06-05 20:27:15+00:00', 'masked_author': 'username_3', 'text': ""The output is pure CSS and JS. Beyond that, I don't believe we are announcing anything in the source-editing side since we are still working out some details in that workflow.\r\n\r\nRest assured, MDL is launching very soon and you can get all your questions answered. Until then, we need to focus on finishing it up and not talking about things that may change."", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'remicastaing', 'comment_id': 109435110.0, 'datetime': '2015-06-05 20:49:53+00:00', 'masked_author': 'username_4', 'text': 'Thanks for the answer and good luck. I will stay tuned.', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'amcdnl', 'comment_id': 111286607.0, 'datetime': '2015-06-11 21:53:13+00:00', 'masked_author': 'username_5', 'text': '@username_0 is there a prelim repo out there for the new kit?', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'mkarthck', 'comment_id': 117909572.0, 'datetime': '2015-07-02 05:22:39+00:00', 'masked_author': 'username_2', 'text': 'HI Guys,\r\n   When are you going to release the version? It was supposed to be in the last week..\r\n\r\nthanks\r\nKarthik', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'McOussKing', 'comment_id': 133003297.0, 'datetime': '2015-08-20 13:11:34+00:00', 'masked_author': 'username_6', 'text': 'Hello @username_0 \r\ncan i help in this project :+1:  ?', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'addyosmani', 'comment_id': 133054016.0, 'datetime': '2015-08-20 15:36:02+00:00', 'masked_author': 'username_0', 'text': ""Help with replying to project bug reports and issues is always welcome :sparkles: \r\n\r\nNew version: check out master. We currently have the new Material version in there, powered by http://getmdl.io We're also working on ES6 support at the moment so lots of new stuff. I'd suggest testing what's in this repo. We're aiming to get out a new release in the coming weeks once everything has been battle tested."", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'McOussKing', 'comment_id': 133105678.0, 'datetime': '2015-08-20 18:16:28+00:00', 'masked_author': 'username_6', 'text': ""Thank you\r\ni like MDL but the class are bit different that's why people choose Bootstrap because it's more clear and practical for Developers, Here a simple comparison :\r\n\r\nhttp://demo.tutorialzine.com/2015/07/comparing-bootstrap-with-mdl/?grid\r\nMDL is better in result but Bootstrap source code is more clear"", 'title': None, 'type': 'comment'}]","<issue_start><issue_comment>Title: Material Design > Components
+username_0: To give developers targeting older browsers and simple sites a path to using [Material Design](http://google.com/design/spec), we're going to implement an official light-weight version using just JavaScript and CSS.
+
+These will strive to be simple enough that anyone can easily customise them. For evergreen browsers, we recommend just using Polymer directly where possible.
+
+**This is a preliminary list we hope to ship:**
+
+* Button ([spec](http://www.google.com/design/spec/components/buttons.html#))
+* Radio button
+* Input ([spec](http://www.google.com/design/spec/components/text-fields.html))
+* Toolbar
+* Card ([spec](http://www.google.com/design/spec/components/cards.html))
+* Progress bar
+* Slider ([spec](http://www.google.com/design/spec/components/sliders.html))
+* Icon button
+* Fab
+* Shadow
+* Toggle
+* Toolbar
+* Menu button ([spec](http://www.google.com/design/spec/components/menus.html))
+
+**Who is working on what?**
+
+| Element          | Author          | Prototype   |
+| ------------- | ------------- | ------------- |
+| Button          | @username_0      | http://codepen.io/username_0/pen/Cjlaz |
+| Input fields           | @mattcooper      | http://codepen.io/mattcooper/pen/jmIua |
+| Radio button          | @Itrulia       | http://jsfiddle.net/itrulia/25pj2/ |
+| Icon button   | Unassigned      | |
+| Checkbox          | @jasonmayes        | http://codepen.io/jasonmayes/pen/wxtFr |
+| Shadow & Cards           | @username_0       | http://codepen.io/username_0/pen/zimes |
+| Toggle button | @mattcooper  | http://codepen.io/mattcooper/pen/npEyu |
+| Progress        | @marcacohen      | |
+| Slider        | @devnook      | https://github.com/google/web-starter-kit/pull/334 |
+| FAB button           | @wibblymat | http://codepen.io/wibblymat/pen/mnGsu |
+| Menu button    | @nicolasgarnier | |
+| Theming | @devnook  | In progress |
+| Toast | @wibblymat   | http://codepen.io/wibblymat/pen/avAjq |
+| Layout (site) | @username_0  | https://github.com/google/web-starter-kit/issues/295 |
+| Layout (app) | @username_0  | unassigned | [Look](http://www.polymer-project.org/components/paper-elements/demo.html)
+**Technical details:**
+
+* Components need to support all of the browsers listed in our matrix
+* Components should be written using CSS and vanilla JS (no jQuery or additional libraries)
+* If we're sticking with Sass, must be written with Sass or CSS and we'll tweak as necessary.
+* Maintain fidelity with the Polymer paper elements as closely as possible.
+* Attempt to style native HTML elements over wrapping where possible (to preserve accessibility)
+
+**Web Starter Kit extras**
+
+* [Material layout](https://github.com/google/web-starter-kit/issues/295)
+* [Bring in the new Roboto](https://github.com/google/web-starter-kit/issues/294)
+* [Style guide > Icons](https://github.com/google/web-starter-kit/issues/293)
+* [Theming support](https://github.com/google/web-starter-kit/issues/292)
+* Refresh style guide to Material Design
+
+**Notes**
+
+* All elements will go through a UX review from the Material Design team before getting shipped as part of Web Starter Kit to make sure we're not messing up :)
+* The Polymer paper elements are going to be undergoing an accessibility review in the coming months. We'll keep a close eye on this and integrate any learnings that apply to our element set.
+
+Inspiration:
+
+![](http://i.imgur.com/N3uoYYD.png)
+
+![](http://i.imgur.com/jbU9UnP.png)
+
+I'll work with Google's MD team to try getting a review process in place for anything we create here.<issue_closed>
+<issue_comment>username_0: The list of components the team are happy to proceed with for the 0.6.0 release have been sufficiently evolved that we'll be moving any further components to the next milestone. We're going to continue work on polish and hope to have a release out in the next month or two.
+<issue_comment>username_1: :+1:
+<issue_comment>username_2: @username_0 When are you going to open source the material design lite code.
+<issue_comment>username_0: End of June. It'll be in a new repository of its own with a new site.
+<issue_comment>username_2: Thank you. Is the base design of elements in material-design-lite same as
+the one shared in the codepen above??
+
+Thanks
+Karthik
+<issue_comment>username_3: In MDL all the designs are based only on the specification itself and from discussions with the MD team for how things should be done that aren't clearly specified.
+<issue_comment>username_4: What will be the dependencies of MDL?
+<issue_comment>username_3: The output is pure CSS and JS. Beyond that, I don't believe we are announcing anything in the source-editing side since we are still working out some details in that workflow.
+
+Rest assured, MDL is launching very soon and you can get all your questions answered. Until then, we need to focus on finishing it up and not talking about things that may change.
+<issue_comment>username_4: Thanks for the answer and good luck. I will stay tuned.
+<issue_comment>username_5: @username_0 is there a prelim repo out there for the new kit?
+<issue_comment>username_2: HI Guys,
+   When are you going to release the version? It was supposed to be in the last week..
+
+thanks
+Karthik
+<issue_comment>username_6: Hello @username_0 
+can i help in this project :+1:  ?
+<issue_comment>username_0: Help with replying to project bug reports and issues is always welcome :sparkles: 
+
+New version: check out master. We currently have the new Material version in there, powered by http://getmdl.io We're also working on ES6 support at the moment so lots of new stuff. I'd suggest testing what's in this repo. We're aiming to get out a new release in the coming weeks once everything has been battle tested.
+<issue_comment>username_6: Thank you
+i like MDL but the class are bit different that's why people choose Bootstrap because it's more clear and practical for Developers, Here a simple comparison :
+
+http://demo.tutorialzine.com/2015/07/comparing-bootstrap-with-mdl/?grid
+MDL is better in result but Bootstrap source code is more clear"
+KiCad/kicad-website,366706763,342,,"[{'action': 'opened', 'author': 'antoniovazquezblanco', 'comment_id': None, 'datetime': '2018-10-04 09:46:24+00:00', 'masked_author': 'username_0', 'text': ""There has been a long ongoing discussion about electrical pin types in particular cases. A clear example is I2C clock lines as they can be defined as multiple types depending on the criteria used.\r\n\r\nI don't know if we can come up with a rule to cover all the possible cases. For that reason I think that those particular cases that we don't agree on, a decission must be taken and documented for the sake of consitency.\r\n\r\nAn example and I think the longest discussion about I2C clock pin types I have found:\r\nhttps://github.com/KiCad/kicad-symbols/pull/350"", 'title': 'KLC: S4.4: Clarify electrical pin type for I2C busses', 'type': 'issue'}
+ {'action': 'created', 'author': 'poeschlr', 'comment_id': 426960322.0, 'datetime': '2018-10-04 10:05:02+00:00', 'masked_author': 'username_1', 'text': ""I don't want to get the KLC to that level of hand-holding to be honest. We might want to add a bit more specialized wording but if we list what type some pins with a particular functionality should have then we will end up with a very long list in after a while.\r\n\r\n---\r\n\r\nMaybe something like this should be specific enough and still generic:\r\n- Choose the electrical type of a pin in such a manner as that it is as specific as possible while not giving any false positives no matter how the pin is used. (In accordance with the intended use-cases given in the datasheet)\r\n- Take a look at other similar parts to get an idea how this was handled in the past.\r\n- Because of KiCad limitations this means that especially for multi purpose pins a use-case specific pin type is left for the user to make. (Will require a project specific symbol)\r\n\r\nWe can in addition link to further documentation:\r\n- Section of the official EESchema documentation (12.8.4) http://docs.kicad-pcb.org/5.0.0/en/eeschema.html#pin-creation-and-editing\r\n- FAQ entry on the user forum: https://forum.kicad.info/t/electrical-type-of-schematic-symbol-pins/9439"", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'poeschlr', 'comment_id': 426961337.0, 'datetime': '2018-10-04 10:08:17+00:00', 'masked_author': 'username_1', 'text': 'Has nothing to do with electrical type. (Should maybe be moved to S4.1)', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'poeschlr', 'comment_id': 426983846.0, 'datetime': '2018-10-04 11:27:40+00:00', 'masked_author': 'username_1', 'text': 'I really like the general idea behind it but i fear it might be a bit naive to think that simply adding more and more checks will improve the overall quality of the lib. I really see the danger of getting to a stage where travis basically throws more false positives than useful results. (Even the current pin type checks are more often than not simply wrong. Without context the pin name it self is simply not enough to make a decision.)', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'poeschlr', 'comment_id': 426986726.0, 'datetime': '2018-10-04 11:39:21+00:00', 'masked_author': 'username_1', 'text': 'For further guidance we could also give an ordering of pin type ""specialization"" (or restrictiveness)\r\n\r\nHere my interpretation of the order from most general to most specialized:\r\n- Unspecified (Not allowed in the official library)\r\n- passive\r\n- bi directional\r\n- input, output\r\n- tri-state, open collector, open emitter (specialization of output)\r\n- power output\r\n- power input (If common for power output and power input side then input takes precedence)\r\n- not connected', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'evanshultz', 'comment_id': 427177332.0, 'datetime': '2018-10-04 21:34:27+00:00', 'masked_author': 'username_2', 'text': 'I think that\'s a generally good way to abstract pin types instead of listing pin types bus-by-bus or case-by-case, but there are a few thoughts:\r\n1. Of the two philosophies about pin type mentioned above, signal/information flow versus ERC, the user doesn\'t see the pin types when building a schematic. Only the ERC engine will consider pin types that can affect the user, so why isn\'t making ERC as helpful as possible the primary objective in picked type?\r\n1. Analog and digital (or logic) pins may be best considered with unique lists. Some pin types would only really apply to logic pins while other pin types would have a different meaning in the two domains.\r\n1. This doesn\'t resolve the item I brought up, which is that making an I2C slave device\'s SCL pin Input type is the best way for the ERC engine to help the user. Yes, there are various perspectives that have merit. In the list above, Open Collector would be more specific than Input type and this is likely to be the best choice in most cases but not with an I2C slave device.\r\n1. Some pins are power and can go both ways. For example, the VREF pin on a MCU\'s ADC can often be connected to an internal reference or accept an external one. Which pin would be used then? Power Input would be the most specific in the list above but there are cases where the internal reference can source a bit of current so then the user will need a Power Flag on the net. Some users would select Bidirectional in that case but I think that\'s unhelpful since that pin won\'t be connected to other pins which could cause contention according to the ERC engine.\r\n1. Passive is quite low (actually towards the top, but you know what I mean) on the list but it\'s a good choice for decoupling pins which can\'t source current and other ""analog"" pins. In that case, the pin could be driven by a digital gate or drive a signal to a digital gate but won\'t cause false negatives. This is another point in favor of segregating ""digital""/logic pins from other types when considering pin type.\r\n\r\nI\'d like to contribute an idea instead of only complain and play devil\'s advocate, but I don\'t have any better suggestions right now.', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'poeschlr', 'comment_id': 447285568.0, 'datetime': '2018-12-14 10:36:53+00:00', 'masked_author': 'username_1', 'text': 'Regarding your points:\r\n\r\n1: I thought my description made it clear that i try to find simple rules to make ERC as useful as possible (with generic symbols)\r\n\r\n2: Yes the priority list should probably be more like a tree. (Is however hard to show with text only. So this will need a graphic)\r\n\r\n3: It would actually. (at least my intended interpretation of the algorithm) The algorithm would stop at input as it is the most specialized that does not give a false positive. (It would go over bi directional as input still fulfills all requirements.)\r\n\r\n4: From my priority list: power input (If common for power output and power input side then input takes precedence) -> meaning if a pin can be both then it is to be defined as the worst case. In this case power input. (Generic symbols that encompass all possible usecases have limitations. More useful definitions require usecase or project specific symbols. These are however the responsibility of the user)\r\n\r\n5: Another problem of having a linear representation. I think a more detailed tree view (or even forest view) would solve that.', 'title': None, 'type': 'comment'}]","<issue_start><issue_comment>Title: KLC: S4.4: Clarify electrical pin type for I2C busses
+username_0: There has been a long ongoing discussion about electrical pin types in particular cases. A clear example is I2C clock lines as they can be defined as multiple types depending on the criteria used.
+
+I don't know if we can come up with a rule to cover all the possible cases. For that reason I think that those particular cases that we don't agree on, a decission must be taken and documented for the sake of consitency.
+
+An example and I think the longest discussion about I2C clock pin types I have found:
+https://github.com/KiCad/kicad-symbols/pull/350
+<issue_comment>username_1: I don't want to get the KLC to that level of hand-holding to be honest. We might want to add a bit more specialized wording but if we list what type some pins with a particular functionality should have then we will end up with a very long list in after a while.
+
+---
+
+Maybe something like this should be specific enough and still generic:
+- Choose the electrical type of a pin in such a manner as that it is as specific as possible while not giving any false positives no matter how the pin is used. (In accordance with the intended use-cases given in the datasheet)
+- Take a look at other similar parts to get an idea how this was handled in the past.
+- Because of KiCad limitations this means that especially for multi purpose pins a use-case specific pin type is left for the user to make. (Will require a project specific symbol)
+
+We can in addition link to further documentation:
+- Section of the official EESchema documentation (12.8.4) http://docs.kicad-pcb.org/5.0.0/en/eeschema.html#pin-creation-and-editing
+- FAQ entry on the user forum: https://forum.kicad.info/t/electrical-type-of-schematic-symbol-pins/9439
+<issue_comment>username_1: Has nothing to do with electrical type. (Should maybe be moved to S4.1)
+<issue_comment>username_1: I really like the general idea behind it but i fear it might be a bit naive to think that simply adding more and more checks will improve the overall quality of the lib. I really see the danger of getting to a stage where travis basically throws more false positives than useful results. (Even the current pin type checks are more often than not simply wrong. Without context the pin name it self is simply not enough to make a decision.)
+<issue_comment>username_1: For further guidance we could also give an ordering of pin type ""specialization"" (or restrictiveness)
+
+Here my interpretation of the order from most general to most specialized:
+- Unspecified (Not allowed in the official library)
+- passive
+- bi directional
+- input, output
+- tri-state, open collector, open emitter (specialization of output)
+- power output
+- power input (If common for power output and power input side then input takes precedence)
+- not connected
+<issue_comment>username_2: I think that's a generally good way to abstract pin types instead of listing pin types bus-by-bus or case-by-case, but there are a few thoughts:
+1. Of the two philosophies about pin type mentioned above, signal/information flow versus ERC, the user doesn't see the pin types when building a schematic. Only the ERC engine will consider pin types that can affect the user, so why isn't making ERC as helpful as possible the primary objective in picked type?
+1. Analog and digital (or logic) pins may be best considered with unique lists. Some pin types would only really apply to logic pins while other pin types would have a different meaning in the two domains.
+1. This doesn't resolve the item I brought up, which is that making an I2C slave device's SCL pin Input type is the best way for the ERC engine to help the user. Yes, there are various perspectives that have merit. In the list above, Open Collector would be more specific than Input type and this is likely to be the best choice in most cases but not with an I2C slave device.
+1. Some pins are power and can go both ways. For example, the VREF pin on a MCU's ADC can often be connected to an internal reference or accept an external one. Which pin would be used then? Power Input would be the most specific in the list above but there are cases where the internal reference can source a bit of current so then the user will need a Power Flag on the net. Some users would select Bidirectional in that case but I think that's unhelpful since that pin won't be connected to other pins which could cause contention according to the ERC engine.
+1. Passive is quite low (actually towards the top, but you know what I mean) on the list but it's a good choice for decoupling pins which can't source current and other ""analog"" pins. In that case, the pin could be driven by a digital gate or drive a signal to a digital gate but won't cause false negatives. This is another point in favor of segregating ""digital""/logic pins from other types when considering pin type.
+
+I'd like to contribute an idea instead of only complain and play devil's advocate, but I don't have any better suggestions right now.
+<issue_comment>username_1: Regarding your points:
+
+1: I thought my description made it clear that i try to find simple rules to make ERC as useful as possible (with generic symbols)
+
+2: Yes the priority list should probably be more like a tree. (Is however hard to show with text only. So this will need a graphic)
+
+3: It would actually. (at least my intended interpretation of the algorithm) The algorithm would stop at input as it is the most specialized that does not give a false positive. (It would go over bi directional as input still fulfills all requirements.)
+
+4: From my priority list: power input (If common for power output and power input side then input takes precedence) -> meaning if a pin can be both then it is to be defined as the worst case. In this case power input. (Generic symbols that encompass all possible usecases have limitations. More useful definitions require usecase or project specific symbols. These are however the responsibility of the user)
+
+5: Another problem of having a linear representation. I think a more detailed tree view (or even forest view) would solve that."
+ooni/ooni.org,727923406,638,,"[{'action': 'opened', 'author': 'hellais', 'comment_id': None, 'datetime': '2020-10-23 05:25:12+00:00', 'masked_author': 'username_0', 'text': 'This is about integrating the following points into our roadmap and migrating issues from the OTF grant into the DRL one.\r\n\r\nThese are the 3 objectives and the activities part of them:\r\n\r\nObjective 1: Expand the breadth and granularity of coverage of global censorship events\r\n1.1 Expand censorship measurement methodologies through the creation of new OONI Probe tests\r\n1.2 Improve OONI Probe mobile and desktop apps\r\n1.3 Add support to OONI Probe Android app for daily collection of measurements from stable vantage points\r\n1.4 Improve OONI backend infrastructure\r\n\r\nObjective 2: Promote rapid response to emergent global censorship events\r\n2.1 Create a real-time incident response dashboard\r\n2.2 Improve Probe Orchestration system to dynamically schedule and orchestrate OONI Probe tests\r\n2.3 Create a browser-based web censorship measurement tool\r\n2.4 Improve upon OONI Explorer\r\n2.5 Create a smart URL list system\r\n\r\nObjective 3: Empower community participation in censorship measurement research\r\n3.1 Create platform to enable community contributions to test lists\r\n3.2 Create resources to support community engagement activities\r\n3.3 Facilitate censorship measurement workshops', 'title': 'Create new row in our board from activities of new grant', 'type': 'issue'}
+ {'action': 'created', 'author': 'hellais', 'comment_id': 715321939.0, 'datetime': '2020-10-23 12:52:19+00:00', 'masked_author': 'username_0', 'text': 'Unassigning myself and assigning @agrabeli to validate that everything is OK and if so close the issue.', 'title': None, 'type': 'comment'}
+ {'action': 'closed', 'author': 'hellais', 'comment_id': None, 'datetime': '2020-10-29 07:09:05+00:00', 'masked_author': 'username_0', 'text': '', 'title': None, 'type': 'issue'}
+ {'action': 'created', 'author': 'hellais', 'comment_id': 718408263.0, 'datetime': '2020-10-29 07:09:05+00:00', 'masked_author': 'username_0', 'text': 'I have dropped the funder/otf label from all the issues that now belong in funder/drl20 and moved the issues inside of the relevant epic.\n\nI think we can consider this done.', 'title': None, 'type': 'comment'}]","<issue_start><issue_comment>Title: Create new row in our board from activities of new grant
+username_0: This is about integrating the following points into our roadmap and migrating issues from the OTF grant into the DRL one.
+
+These are the 3 objectives and the activities part of them:
+
+Objective 1: Expand the breadth and granularity of coverage of global censorship events
+1.1 Expand censorship measurement methodologies through the creation of new OONI Probe tests
+1.2 Improve OONI Probe mobile and desktop apps
+1.3 Add support to OONI Probe Android app for daily collection of measurements from stable vantage points
+1.4 Improve OONI backend infrastructure
+
+Objective 2: Promote rapid response to emergent global censorship events
+2.1 Create a real-time incident response dashboard
+2.2 Improve Probe Orchestration system to dynamically schedule and orchestrate OONI Probe tests
+2.3 Create a browser-based web censorship measurement tool
+2.4 Improve upon OONI Explorer
+2.5 Create a smart URL list system
+
+Objective 3: Empower community participation in censorship measurement research
+3.1 Create platform to enable community contributions to test lists
+3.2 Create resources to support community engagement activities
+3.3 Facilitate censorship measurement workshops
+<issue_comment>username_0: Unassigning myself and assigning @agrabeli to validate that everything is OK and if so close the issue.<issue_closed>
+<issue_comment>username_0: I have dropped the funder/otf label from all the issues that now belong in funder/drl20 and moved the issues inside of the relevant epic.
+
+I think we can consider this done."

@@ -1,0 +1,991 @@
+stevenschobert/instafeed.js,553279636,640,,"[{'action': 'opened', 'author': 'benjamin-hull', 'comment_id': None, 'datetime': '2020-01-22 03:04:43+00:00', 'masked_author': 'username_0', 'text': ""## ⚠️ If you have problems getting instafeed.js to work, or it has stopped working on your site, please do not open an issue.\r\n\r\nThe legacy API is in the process of being retired, which **will cause instafeed.js to stop working on March 2nd, 2020**. Instagram is no longer issuing access tokens for the legacy API, so you will not be able to start using instafeed.js even before this date.\r\n\r\nFor more information, please see the project [README](https://github.com/username_8/instafeed.js/blob/master/README.md) and issue #345\r\n\r\nWe are currently looking into ways to make instafeed.js work with Instagram's new API, but we don't know if or when that might be available. To keep up to date with that discussion, please see issue #635."", 'title': 'Important! Instafeed will stop working March 2, 2020.', 'type': 'issue'}
+ {'action': 'created', 'author': 'paolovador', 'comment_id': 590242613.0, 'datetime': '2020-02-24 09:55:47+00:00', 'masked_author': 'username_1', 'text': 'FYI [there\'s a new update](https://developers.facebook.com/blog/post/2020/01/14/instagram-basic-display-api-long-lived-access-tokens-available/)\r\n\r\n""February 20, 2020 Update: To provide you with more time to make changes, we will now be shutting down the Instagram Legacy API Platform on March 31, 2020 instead of March 2, 2020 as originally communicated.""\r\n\r\nYou can change the dates on your issues and Readme', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'jhvanderschee', 'comment_id': 590744994.0, 'datetime': '2020-02-25 08:28:40+00:00', 'masked_author': 'username_2', 'text': 'I have created/found a dead simple alternative way to show your latest instagram pics on your website. See: https://jekyllcodex.org/without-plugin/instagram/', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'ryangjchandler', 'comment_id': 591029873.0, 'datetime': '2020-02-25 19:35:57+00:00', 'masked_author': 'username_3', 'text': ""Having to use Zapier seems a bit overkill. I'm currently working on a JavaScript library that will provide a JavaScript feed without the legacy API, or any API token for that fact. It will be dependency free and super lightweight."", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'jhvanderschee', 'comment_id': 594887781.0, 'datetime': '2020-03-04 22:14:17+00:00', 'masked_author': 'username_2', 'text': 'Although I agree with you about the overkill, I want to stress that:\r\n\r\n1. My solution works\r\n1. My solution uses just 11 lines of code and 3 lines of CSS\r\n1. My solution will not be blocked by Instagram, due to unintended use\r\n\r\nI am very curious what you have in store for us.', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'ryangjchandler', 'comment_id': 594906839.0, 'datetime': '2020-03-04 22:44:29+00:00', 'masked_author': 'username_3', 'text': 'Gave up on my library, found this one instead: https://github.com/username_4/InstagramFeed\r\n\r\nAlready using on a client site, works quite well & maintenance seems pretty active.', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'jhvanderschee', 'comment_id': 594913416.0, 'datetime': '2020-03-04 22:55:12+00:00', 'masked_author': 'username_2', 'text': ""I like it. My only concern: Do you think that scraping the Instagram page is reliable? One altered CORS header and the solution is 'no more'."", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'jsanahuja', 'comment_id': 595918785.0, 'datetime': '2020-03-06 19:16:01+00:00', 'masked_author': 'username_4', 'text': 'Thank you :)', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'jhvanderschee', 'comment_id': 596079946.0, 'datetime': '2020-03-07 11:47:48+00:00', 'masked_author': 'username_2', 'text': 'Great! I love it! Thank you for your answers.', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'mader80', 'comment_id': 601725704.0, 'datetime': '2020-03-20 14:21:42+00:00', 'masked_author': 'username_5', 'text': 'Hey guys. I tried using https://github.com/username_4/InstagramFeed. Getting the following error when trying to use it:\r\n\r\nVM140 InstagramFeed.js:218 Uncaught TypeError: Cannot set property \'innerHTML\' of null\r\n    at Object.display (VM140 InstagramFeed.js:218)\r\n    at VM140 InstagramFeed.js:226\r\n    at XMLHttpRequest.xhr.onload (VM140 InstagramFeed.js:96)\r\n\r\nHere\'s my implementation:\r\n\r\n\t<script src=""js/InstagramFeed.js""></script>\r\n\t<script>\r\n\t    (function(){\r\n\t        new InstagramFeed({\r\n\t            \'username\': \'screentek\',\r\n\t            \'container\': document.getElementById(""instagram-feed""),\r\n\t            \'display_profile\': true,\r\n\t            \'display_biography\': true,\r\n\t            \'display_gallery\': true,\r\n\t            \'callback\': null,\r\n\t            \'styling\': true,\r\n\t            \'items\': 8,\r\n\t            \'items_per_row\': 4,\r\n\t            \'margin\': 1 \r\n\t        });\r\n\t    })();\r\n\t</script>\r\n\r\nAnd of course the div:\r\n<div id=""instagram-feed""></div>\r\n\r\n\r\nDid you guys run into this? Seems like the InstagramFeed.js just doesn\'t work or has issues...', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'jhvanderschee', 'comment_id': 601733076.0, 'datetime': '2020-03-20 14:36:30+00:00', 'masked_author': 'username_2', 'text': 'Your object is empty... \r\n\r\n```\r\n<div id=""instagram-feed""></div>\r\n<script src=""js/InstagramFeed.js""></script>\r\n<script>\r\n    (function(){\r\n        new InstagramFeed({\r\n            \'username\': \'screentek\',\r\n            \'container\': document.getElementById(""instagram-feed""),\r\n            \'display_profile\': true,\r\n            \'display_biography\': true,\r\n            \'display_gallery\': true,\r\n            \'callback\': null,\r\n            \'styling\': true,\r\n            \'items\': 8,\r\n            \'items_per_row\': 4,\r\n            \'margin\': 1 \r\n        });\r\n    })();\r\n</script>\r\n```', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'mader80', 'comment_id': 601734732.0, 'datetime': '2020-03-20 14:40:01+00:00', 'masked_author': 'username_5', 'text': ""You are right! Well technically I did not forget it, but I put the script above the div. Now I've got the div above the script and it works. Thanks!!!"", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'benjamin-hull', 'comment_id': 605806861.0, 'datetime': '2020-03-30 06:25:25+00:00', 'masked_author': 'username_0', 'text': ""Head-up folks: A new version of instafeed.js powered by the new Basic Display API is incoming. Please see https://github.com/username_8/instafeed.js/issues/643 for details as they're available - and thank you very much for your patience!"", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'benjamin-hull', 'comment_id': 605807429.0, 'datetime': '2020-03-30 06:27:02+00:00', 'masked_author': 'username_0', 'text': ""A further note: I'm going to clean up some of the comments here that relate to implementation questions on other libraries. Hope that doesn't cause any inconvenience - thank you."", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'Luke-SF', 'comment_id': 606402923.0, 'datetime': '2020-03-31 05:08:34+00:00', 'masked_author': 'username_6', 'text': 'I see that this is no longer on the front page. Is that because this was postponed another 90 days? https://www.instagram.com/developer/', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'benjamin-hull', 'comment_id': 606404219.0, 'datetime': '2020-03-31 05:13:20+00:00', 'masked_author': 'username_0', 'text': ""@username_6 It's not because of that, no - only because I didn't realize this had happened until you posted the link. We did ask them to consider a further extension though - so that's great news!\r\n\r\nThe reason I unpinned this issue is because instafeed v2 is available (though in its very early stages), and that uses the Basic Display API. If you're ready, you can start looking at the migration guide in the project wiki to upgrade to the new version."", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'darcemac', 'comment_id': 619302349.0, 'datetime': '2020-04-25 01:59:22+00:00', 'masked_author': 'username_7', 'text': '', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'darcemac', 'comment_id': 619302494.0, 'datetime': '2020-04-25 02:00:37+00:00', 'masked_author': 'username_7', 'text': 'Great alternative solution. Is it possible to limit how many items get displayed?', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'benjamin-hull', 'comment_id': 619939736.0, 'datetime': '2020-04-27 12:02:22+00:00', 'masked_author': 'username_0', 'text': ""Hi @username_7 - you're probably better off asking questions about @username_2's solution on their blog, rather than here. I'll probably clean up these comments in a couple of days just to keep things tiday.\r\n\r\nThanks!"", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'jhvanderschee', 'comment_id': 619961014.0, 'datetime': '2020-04-27 12:41:32+00:00', 'masked_author': 'username_2', 'text': '@username_7 Yes that is possible. You will find the code on JekyllCodex.org.', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'jhvanderschee', 'comment_id': 663542284.0, 'datetime': '2020-07-24 13:36:41+00:00', 'masked_author': 'username_2', 'text': 'Sadly Instagram seems to have killed my alternative solutions by constantly changing the URL through a URL signature that expires. Zapier no more...', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'stevenschobert', 'comment_id': 851608844.0, 'datetime': '2021-05-31 17:29:11+00:00', 'masked_author': 'username_8', 'text': 'Closing out this issue since v2 is officially released: https://github.com/username_8/instafeed.js/issues/643#issuecomment-851607996\r\n\r\nPlease open up new issues going forward!', 'title': None, 'type': 'comment'}
+ {'action': 'closed', 'author': 'stevenschobert', 'comment_id': None, 'datetime': '2021-05-31 17:29:12+00:00', 'masked_author': 'username_8', 'text': '', 'title': None, 'type': 'issue'}]","<issue_start><issue_comment>Title: Important! Instafeed will stop working March 2, 2020.
+username_0: ## ⚠️ If you have problems getting instafeed.js to work, or it has stopped working on your site, please do not open an issue.
+
+The legacy API is in the process of being retired, which **will cause instafeed.js to stop working on March 2nd, 2020**. Instagram is no longer issuing access tokens for the legacy API, so you will not be able to start using instafeed.js even before this date.
+
+For more information, please see the project [README](https://github.com/username_8/instafeed.js/blob/master/README.md) and issue #345
+
+We are currently looking into ways to make instafeed.js work with Instagram's new API, but we don't know if or when that might be available. To keep up to date with that discussion, please see issue #635.
+<issue_comment>username_1: FYI [there's a new update](https://developers.facebook.com/blog/post/2020/01/14/instagram-basic-display-api-long-lived-access-tokens-available/)
+
+""February 20, 2020 Update: To provide you with more time to make changes, we will now be shutting down the Instagram Legacy API Platform on March 31, 2020 instead of March 2, 2020 as originally communicated.""
+
+You can change the dates on your issues and Readme
+<issue_comment>username_2: I have created/found a dead simple alternative way to show your latest instagram pics on your website. See: https://jekyllcodex.org/without-plugin/instagram/
+<issue_comment>username_3: Having to use Zapier seems a bit overkill. I'm currently working on a JavaScript library that will provide a JavaScript feed without the legacy API, or any API token for that fact. It will be dependency free and super lightweight.
+<issue_comment>username_2: Although I agree with you about the overkill, I want to stress that:
+
+1. My solution works
+1. My solution uses just 11 lines of code and 3 lines of CSS
+1. My solution will not be blocked by Instagram, due to unintended use
+
+I am very curious what you have in store for us.
+<issue_comment>username_3: Gave up on my library, found this one instead: https://github.com/username_4/InstagramFeed
+
+Already using on a client site, works quite well & maintenance seems pretty active.
+<issue_comment>username_2: I like it. My only concern: Do you think that scraping the Instagram page is reliable? One altered CORS header and the solution is 'no more'.
+<issue_comment>username_4: Thank you :)
+<issue_comment>username_2: Great! I love it! Thank you for your answers.
+<issue_comment>username_5: Hey guys. I tried using https://github.com/username_4/InstagramFeed. Getting the following error when trying to use it:
+
+VM140 InstagramFeed.js:218 Uncaught TypeError: Cannot set property 'innerHTML' of null
+    at Object.display (VM140 InstagramFeed.js:218)
+    at VM140 InstagramFeed.js:226
+    at XMLHttpRequest.xhr.onload (VM140 InstagramFeed.js:96)
+
+Here's my implementation:
+
+	<script src=""js/InstagramFeed.js""></script>
+	<script>
+	    (function(){
+	        new InstagramFeed({
+	            'username': 'screentek',
+	            'container': document.getElementById(""instagram-feed""),
+	            'display_profile': true,
+	            'display_biography': true,
+	            'display_gallery': true,
+	            'callback': null,
+	            'styling': true,
+	            'items': 8,
+	            'items_per_row': 4,
+	            'margin': 1 
+	        });
+	    })();
+	</script>
+
+And of course the div:
+<div id=""instagram-feed""></div>
+
+
+Did you guys run into this? Seems like the InstagramFeed.js just doesn't work or has issues...
+<issue_comment>username_2: Your object is empty... 
+
+```
+<div id=""instagram-feed""></div>
+<script src=""js/InstagramFeed.js""></script>
+<script>
+    (function(){
+        new InstagramFeed({
+            'username': 'screentek',
+            'container': document.getElementById(""instagram-feed""),
+            'display_profile': true,
+            'display_biography': true,
+            'display_gallery': true,
+            'callback': null,
+            'styling': true,
+            'items': 8,
+            'items_per_row': 4,
+            'margin': 1 
+        });
+    })();
+</script>
+```
+<issue_comment>username_5: You are right! Well technically I did not forget it, but I put the script above the div. Now I've got the div above the script and it works. Thanks!!!
+<issue_comment>username_0: Head-up folks: A new version of instafeed.js powered by the new Basic Display API is incoming. Please see https://github.com/username_8/instafeed.js/issues/643 for details as they're available - and thank you very much for your patience!
+<issue_comment>username_0: A further note: I'm going to clean up some of the comments here that relate to implementation questions on other libraries. Hope that doesn't cause any inconvenience - thank you.
+<issue_comment>username_6: I see that this is no longer on the front page. Is that because this was postponed another 90 days? https://www.instagram.com/developer/
+<issue_comment>username_0: @username_6 It's not because of that, no - only because I didn't realize this had happened until you posted the link. We did ask them to consider a further extension though - so that's great news!
+
+The reason I unpinned this issue is because instafeed v2 is available (though in its very early stages), and that uses the Basic Display API. If you're ready, you can start looking at the migration guide in the project wiki to upgrade to the new version.
+<issue_comment>username_7: Great alternative solution. Is it possible to limit how many items get displayed?
+<issue_comment>username_0: Hi @username_7 - you're probably better off asking questions about @username_2's solution on their blog, rather than here. I'll probably clean up these comments in a couple of days just to keep things tiday.
+
+Thanks!
+<issue_comment>username_2: @username_7 Yes that is possible. You will find the code on JekyllCodex.org.
+<issue_comment>username_2: Sadly Instagram seems to have killed my alternative solutions by constantly changing the URL through a URL signature that expires. Zapier no more...
+<issue_comment>username_8: Closing out this issue since v2 is officially released: https://github.com/username_8/instafeed.js/issues/643#issuecomment-851607996
+
+Please open up new issues going forward!<issue_closed>"
+newrelic/developer-website,1045251903,1858,,"[{'action': 'opened', 'author': 'zstix', 'comment_id': None, 'datetime': '2021-11-04 22:02:18+00:00', 'masked_author': 'username_0', 'text': ""## Description\r\nAt the moment, there is not currently a way to sort quickstarts on the landing page. The `nr1Catalog` namespace in NerdGraph provides the option to sort search results in a few different ways. Once we have swapped the codebase over to using API calls to power the search & filtering, we should also create the ability to sort.\r\n\r\nAt the moment, we don't have UI designed for this new sort functionality. We use to have an alphabetical sort set up and we may be able to leverage that code.\r\n\r\n_**NOTE**_: while it's possible to sort by popularity via install counts, we can not currently query for the install count itself. Therefore, we should not plan on displaying that information (yet).\r\n\r\n_**NOTE**_: at the moment, sorting is one-directional only (no ascending / descending toggle).\r\n\r\n#### NerdGraph\r\nHere's the relevant snippet for the NerdGraph query that we would use to handle this:\r\n\r\n```graphql\r\n{\r\n  actor {\r\n    nr1Catalog {\r\n      search(sortBy: POPULARITY) {\r\n        results {\r\n          ... on Nr1CatalogQuickstart {\r\n            id\r\n            metadata {\r\n              displayName\r\n            }\r\n          }\r\n        }\r\n      }\r\n    }\r\n  }\r\n}\r\n\r\n```\r\n\r\n## Acceptance Criteria\r\n* [ ] https://github.com/newrelic/developer-website/issues/1853 (landing page via SSR)\r\n* [ ] https://github.com/newrelic/developer-website/issues/1855 (search and filter via SSR)\r\n* [ ] Create a dropdown for sorting quickstarts\r\n* [ ] Sort by relevance\r\n* [ ] Sort by name\r\n* [ ] Sort by popularity\r\n* [ ] Add tests for sorting"", 'title': '[Public Catalog] Add the ability to sort quickstarts by relevance, name, and popularity', 'type': 'issue'}
+ {'action': 'created', 'author': 'zstix', 'comment_id': 972369104.0, 'datetime': '2021-11-18 00:26:04+00:00', 'masked_author': 'username_0', 'text': ""It's worth noting that `actor.nr1Catalog.search` will return _all_ items in the catalog. If we rely on interface fields (e.g. `... on Nr1CatalogQuickstart`) then we can get what we need, but we will also get a lot of search results that are empty (because they're _not_ quickstarts). This would make it hard for us to get a specific number of `quickstarts`.\r\n\r\nAfter speaking with the Developer Experience team, we're going to look into our options for solving this. Some possible paths we discussed include:\r\n* Adding a `filter` option to `search` that allows us to specify the _type_ (e.g. quickstart vs. nerdpack)\r\n* Adding `sort` and `filter` options to the `quickstarts` namespace\r\n\r\nThis ticket isn't _blocked_ by this, but we should probably have a plan in place before we start engineering work."", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'aswanson-nr', 'comment_id': 985889614.0, 'datetime': '2021-12-03 22:39:02+00:00', 'masked_author': 'username_1', 'text': ""Here's a [link](https://source.datanerd.us/nr1-dev-experience/marketplace/blob/master/common/hooks/useFacets.ts) to how the internal catalog handles the category/component counts using graphql facets. We will want to replicate some of this logic to handle searching/filtering"", 'title': None, 'type': 'comment'}
+ {'action': 'closed', 'author': 'zstix', 'comment_id': None, 'datetime': '2021-12-21 17:43:49+00:00', 'masked_author': 'username_0', 'text': '', 'title': None, 'type': 'issue'}
+ {'action': 'created', 'author': 'zstix', 'comment_id': 998973646.0, 'datetime': '2021-12-21 17:43:49+00:00', 'masked_author': 'username_0', 'text': 'Closing this out. We made a new ticket for writing the tests.', 'title': None, 'type': 'comment'}]","<issue_start><issue_comment>Title: [Public Catalog] Add the ability to sort quickstarts by relevance, name, and popularity
+username_0: ## Description
+At the moment, there is not currently a way to sort quickstarts on the landing page. The `nr1Catalog` namespace in NerdGraph provides the option to sort search results in a few different ways. Once we have swapped the codebase over to using API calls to power the search & filtering, we should also create the ability to sort.
+
+At the moment, we don't have UI designed for this new sort functionality. We use to have an alphabetical sort set up and we may be able to leverage that code.
+
+_**NOTE**_: while it's possible to sort by popularity via install counts, we can not currently query for the install count itself. Therefore, we should not plan on displaying that information (yet).
+
+_**NOTE**_: at the moment, sorting is one-directional only (no ascending / descending toggle).
+
+#### NerdGraph
+Here's the relevant snippet for the NerdGraph query that we would use to handle this:
+
+```graphql
+{
+  actor {
+    nr1Catalog {
+      search(sortBy: POPULARITY) {
+        results {
+          ... on Nr1CatalogQuickstart {
+            id
+            metadata {
+              displayName
+            }
+          }
+        }
+      }
+    }
+  }
+}
+
+```
+
+## Acceptance Criteria
+* [ ] https://github.com/newrelic/developer-website/issues/1853 (landing page via SSR)
+* [ ] https://github.com/newrelic/developer-website/issues/1855 (search and filter via SSR)
+* [ ] Create a dropdown for sorting quickstarts
+* [ ] Sort by relevance
+* [ ] Sort by name
+* [ ] Sort by popularity
+* [ ] Add tests for sorting
+<issue_comment>username_0: It's worth noting that `actor.nr1Catalog.search` will return _all_ items in the catalog. If we rely on interface fields (e.g. `... on Nr1CatalogQuickstart`) then we can get what we need, but we will also get a lot of search results that are empty (because they're _not_ quickstarts). This would make it hard for us to get a specific number of `quickstarts`.
+
+After speaking with the Developer Experience team, we're going to look into our options for solving this. Some possible paths we discussed include:
+* Adding a `filter` option to `search` that allows us to specify the _type_ (e.g. quickstart vs. nerdpack)
+* Adding `sort` and `filter` options to the `quickstarts` namespace
+
+This ticket isn't _blocked_ by this, but we should probably have a plan in place before we start engineering work.
+<issue_comment>username_1: Here's a [link](https://source.datanerd.us/nr1-dev-experience/marketplace/blob/master/common/hooks/useFacets.ts) to how the internal catalog handles the category/component counts using graphql facets. We will want to replicate some of this logic to handle searching/filtering<issue_closed>
+<issue_comment>username_0: Closing this out. We made a new ticket for writing the tests."
+frictionlessdata/website,598571756,73,,"[{'action': 'opened', 'author': 'kleanthisk10', 'comment_id': None, 'datetime': '2020-04-12 21:09:50+00:00', 'masked_author': 'username_0', 'text': 'Hello! \r\n\r\nI have been involved with the implementation of data package and table schema libraries for R language, on behalf of okfn greece, but not listed as tool fund partner here: https://frictionlessdata.io/team/#tool-fund-partners\r\n\r\nRelated announcements:\r\n- https://frictionlessdata.io/blog/2017/10/27/open-knowledge-greece/\r\n- https://blog.okfn.org/2017/07/03/frictionless-data-introducing-our-tool-fund-grantees/', 'title': 'Not listed as tool fund partner', 'type': 'issue'}
+ {'action': 'created', 'author': 'lauragift21', 'comment_id': 612869407.0, 'datetime': '2020-04-13 11:56:21+00:00', 'masked_author': 'username_1', 'text': 'Hi @username_0. we apologize as we might have missed yours while updating the website. Happy to help fix that. Can you share your location, profile image, and projects?', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'rufuspollock', 'comment_id': 612909998.0, 'datetime': '2020-04-13 13:59:01+00:00', 'masked_author': 'username_2', 'text': '@username_1 we could even show @username_0 the file to edit so he can do a PR - that way he is empowered and others in future can ""self-serve"" too 😄', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'lauragift21', 'comment_id': 612993736.0, 'datetime': '2020-04-13 17:11:01+00:00', 'masked_author': 'username_1', 'text': 'Sure! @username_2 \r\n\r\n@username_0 You can add your details to this file and send in a PR. https://github.com/frictionlessdata/website/blob/master/site/team/index.md', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'kleanthisk10', 'comment_id': 613409727.0, 'datetime': '2020-04-14 12:19:34+00:00', 'masked_author': 'username_0', 'text': 'Is there any sorting rule (e.g. by name, language, year, etc)?', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'lauragift21', 'comment_id': 614537250.0, 'datetime': '2020-04-16 09:42:13+00:00', 'masked_author': 'username_1', 'text': ""@username_0 Right now I don't think there is one. But in the future, it'll most likely be sorted by year."", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'lauragift21', 'comment_id': 615133404.0, 'datetime': '2020-04-17 09:04:33+00:00', 'masked_author': 'username_1', 'text': ""This is now resolved. I'll be closing this issue."", 'title': None, 'type': 'comment'}
+ {'action': 'closed', 'author': 'lauragift21', 'comment_id': None, 'datetime': '2020-04-17 09:04:34+00:00', 'masked_author': 'username_1', 'text': '', 'title': None, 'type': 'issue'}]","<issue_start><issue_comment>Title: Not listed as tool fund partner
+username_0: Hello! 
+
+I have been involved with the implementation of data package and table schema libraries for R language, on behalf of okfn greece, but not listed as tool fund partner here: https://frictionlessdata.io/team/#tool-fund-partners
+
+Related announcements:
+- https://frictionlessdata.io/blog/2017/10/27/open-knowledge-greece/
+- https://blog.okfn.org/2017/07/03/frictionless-data-introducing-our-tool-fund-grantees/
+<issue_comment>username_1: Hi @username_0. we apologize as we might have missed yours while updating the website. Happy to help fix that. Can you share your location, profile image, and projects?
+<issue_comment>username_2: @username_1 we could even show @username_0 the file to edit so he can do a PR - that way he is empowered and others in future can ""self-serve"" too 😄
+<issue_comment>username_1: Sure! @username_2 
+
+@username_0 You can add your details to this file and send in a PR. https://github.com/frictionlessdata/website/blob/master/site/team/index.md
+<issue_comment>username_0: Is there any sorting rule (e.g. by name, language, year, etc)?
+<issue_comment>username_1: @username_0 Right now I don't think there is one. But in the future, it'll most likely be sorted by year.
+<issue_comment>username_1: This is now resolved. I'll be closing this issue.<issue_closed>"
+carbon-design-system/carbon-website,1154383994,2758,,"[{'action': 'opened', 'author': 'pswiekibm', 'comment_id': None, 'datetime': '2022-02-28 17:54:29+00:00', 'masked_author': 'username_0', 'text': '### Summary\r\n\r\nIt would be very useful to have a quick download/copy option for other file formats of the icons.  Many times, we are using the icons in PowerPoints or other documents where SVG is not the easiest to work with and we just need a quick way to copy/paste from Carbon\'s website into another application/document.  This is a ""development"" request to the current website.\r\n\r\n### Justification\r\n\r\nThis is an extremely helpful feature that would save both development, and particularly non-development, team members a lot of time and hassle.  Most of us non-developers (and non-designers) are not super familiar with using SVG\'s in applications, but more importantly it\'s a giant time saver to be able to quickly copy/paste a PNG (for example) than having to find an icon, download it, open up an editor, save the SVG as another format for PPT, then bringing it into PPT.\r\n\r\n### Desired UX and success metrics\r\n\r\nThe biggest benefits are higher use of Carbon icons in other areas such as documents and presentations, consistency with the IBM brand/Carbon across all documents, and saving a large amount of time for the practitioner.\r\n\r\n### Must-have functionality\r\n\r\nAbility to quickly download/copy a transparent background version of an icon in a universally accepted format other than SVG (PNG for example). (ideally, both light and dark variants...maybe a gradient color one, too!)\r\n\r\n### Specific timeline issues / requests\r\n\r\nNo specific timeline, but when available this would be great for the other IBMers using Carbon!\r\n\r\n### Available extra resources\r\n\r\nFont Awesome does a great job with Light/Dark as well as displaying options and different download file types.\r\nhttps://fontawesome.com/v5/icons/flag?style=solid&s=solid', 'title': 'Add Option to Download/Copy Other Formats of Icons', 'type': 'issue'}
+ {'action': 'created', 'author': 'tay1orjones', 'comment_id': 1074065472.0, 'datetime': '2022-03-21 15:48:19+00:00', 'masked_author': 'username_1', 'text': ""@username_0 It looks like the newest version of powerpoint [supports insertion of SVG's](https://artofpresentations.com/import-svg-file-in-powerpoint/#:~:text=To%20import%20an%20SVG%20file%20into%20PowerPoint%20all%20you%20need,it%20anywhere%20on%20your%20presentation). It also might be worthwhile to look at a browser extension to facilitate the use case of saving the svgs as .png, [here's an example for chrome](https://chrome.google.com/webstore/detail/save-svg-as-png/dihlbjcdgfoehmhbklciidmolbmabkki?hl=en#:~:text=Navigate%20to%20an%20.,choose%20Save%20SVG%20as%20PNG.)"", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'pswiekibm', 'comment_id': 1074071063.0, 'datetime': '2022-03-21 15:53:13+00:00', 'masked_author': 'username_0', 'text': '@username_1 Thanks.  This is indeed an option, but for most consultants at IBM that are using the icons, this is a very difficult and tedious task to go through.  Often, we are trying to browse the icon library for a keyword (""cloud"", for example) in order to quickly drop an icon in.  Not being able to quickly copy the latest icons out of the website where we can search makes this not easy.  Browsing through a long list of SVG\'s (assuming you even have them downloaded) is also equally tough.  Most folks at IBM that use these in PPT are not design professionals and are services/consulting professionals that do not use SVG\'s and related applications.  I hope this helps with context.  If you have time, send me a Slack and I can walk you through the use case more.', 'title': None, 'type': 'comment'}]","<issue_start><issue_comment>Title: Add Option to Download/Copy Other Formats of Icons
+username_0: ### Summary
+
+It would be very useful to have a quick download/copy option for other file formats of the icons.  Many times, we are using the icons in PowerPoints or other documents where SVG is not the easiest to work with and we just need a quick way to copy/paste from Carbon's website into another application/document.  This is a ""development"" request to the current website.
+
+### Justification
+
+This is an extremely helpful feature that would save both development, and particularly non-development, team members a lot of time and hassle.  Most of us non-developers (and non-designers) are not super familiar with using SVG's in applications, but more importantly it's a giant time saver to be able to quickly copy/paste a PNG (for example) than having to find an icon, download it, open up an editor, save the SVG as another format for PPT, then bringing it into PPT.
+
+### Desired UX and success metrics
+
+The biggest benefits are higher use of Carbon icons in other areas such as documents and presentations, consistency with the IBM brand/Carbon across all documents, and saving a large amount of time for the practitioner.
+
+### Must-have functionality
+
+Ability to quickly download/copy a transparent background version of an icon in a universally accepted format other than SVG (PNG for example). (ideally, both light and dark variants...maybe a gradient color one, too!)
+
+### Specific timeline issues / requests
+
+No specific timeline, but when available this would be great for the other IBMers using Carbon!
+
+### Available extra resources
+
+Font Awesome does a great job with Light/Dark as well as displaying options and different download file types.
+https://fontawesome.com/v5/icons/flag?style=solid&s=solid
+<issue_comment>username_1: @username_0 It looks like the newest version of powerpoint [supports insertion of SVG's](https://artofpresentations.com/import-svg-file-in-powerpoint/#:~:text=To%20import%20an%20SVG%20file%20into%20PowerPoint%20all%20you%20need,it%20anywhere%20on%20your%20presentation). It also might be worthwhile to look at a browser extension to facilitate the use case of saving the svgs as .png, [here's an example for chrome](https://chrome.google.com/webstore/detail/save-svg-as-png/dihlbjcdgfoehmhbklciidmolbmabkki?hl=en#:~:text=Navigate%20to%20an%20.,choose%20Save%20SVG%20as%20PNG.)
+<issue_comment>username_0: @username_1 Thanks.  This is indeed an option, but for most consultants at IBM that are using the icons, this is a very difficult and tedious task to go through.  Often, we are trying to browse the icon library for a keyword (""cloud"", for example) in order to quickly drop an icon in.  Not being able to quickly copy the latest icons out of the website where we can search makes this not easy.  Browsing through a long list of SVG's (assuming you even have them downloaded) is also equally tough.  Most folks at IBM that use these in PPT are not design professionals and are services/consulting professionals that do not use SVG's and related applications.  I hope this helps with context.  If you have time, send me a Slack and I can walk you through the use case more."
+jaspervdj/hakyll,12077544,121,,"[{'action': 'opened', 'author': 'nagisa', 'comment_id': None, 'datetime': '2013-03-15T19:21:46Z', 'masked_author': 'username_0', 'text': 'Dependency tracking might be broken (this could be my fault too) as `./site build` always rebuilds all `tags/*` pages and post-lists (entries.html, feed.atom) regardless of content being changed or not.\r\n\r\nWhole code available at https://github.com/simukis/kazlauskas.me\r\n\r\n```\r\n$ ./site build -v # The output is always the same\r\nInitialising...\r\n  Creating store...\r\n  Creating provider...\r\n  Running rules...\r\nChecking for out-of-date items\r\n  [DEBUG] tags/Internet.html is out-of-date because a pattern changed\r\n  [DEBUG] tags/Meta.html is out-of-date because a pattern changed\r\n  [DEBUG] tags/Natural Sciences.html is out-of-date because a pattern changed\r\n  [DEBUG] tags/Python.html is out-of-date because a pattern changed\r\n  [DEBUG] tags/UX.html is out-of-date because a pattern changed\r\n  [DEBUG] tags/Web Dev.html is out-of-date because a pattern changed\r\n  [DEBUG] tags/Internet.html (atom) is out-of-date because a pattern changed\r\n  [DEBUG] tags/Meta.html (atom) is out-of-date because a pattern changed\r\n  [DEBUG] tags/Natural Sciences.html (atom) is out-of-date because a pattern changed\r\n  [DEBUG] tags/Python.html (atom) is out-of-date because a pattern changed\r\n  [DEBUG] tags/UX.html (atom) is out-of-date because a pattern changed\r\n  [DEBUG] tags/Web Dev.html (atom) is out-of-date because a pattern changed\r\n  [DEBUG] entries/a-case-against-tabs.md is out-of-date because tags/UX.html is out-of-date\r\n  [DEBUG] entries/arranging-ducks.md is out-of-date because tags/Python.html is out-of-date\r\n  [DEBUG] entries/comments-are-welcome-by-mail.md is out-of-date because tags/Meta.html is out-of-date\r\n  [DEBUG] entries/hyphenation-hints-and-justification.md is out-of-date because tags/Web Dev.html is out-of-date\r\n  [DEBUG] entries/renewable-energy-is-not-renewable.md is out-of-date because tags/Natural Sciences.html is out-of-date\r\n  [DEBUG] entries/you-have-no-right.md is out-of-date because tags/Internet.html is out-of-date\r\n  [DEBUG] feed.atom is out-of-date because entries/you-have-no-right.md is out-of-date\r\n  [DEBUG] pages/index.md is out-of-date because entries/a-case-against-tabs.md is out-of-date\r\n  [DEBUG] tags/Internet.html is out-of-date because tags/Internet.html is out-of-date\r\n  [DEBUG] tags/Meta.html is out-of-date because tags/Meta.html is out-of-date\r\n  [DEBUG] tags/Natural Sciences.html is out-of-date because tags/Natural Sciences.html is out-of-date\r\n  [DEBUG] tags/Python.html is out-of-date because tags/Python.html is out-of-date\r\n  [DEBUG] tags/UX.html is out-of-date because tags/UX.html is out-of-date\r\n  [DEBUG] tags/Web Dev.html is out-of-date because tags/Web Dev.html is out-of-date\r\n  [DEBUG] tags/Internet.html (atom) is out-of-date because entries/you-have-no-right.md is out-of-date\r\n  [DEBUG] tags/Meta.html (atom) is out-of-date because entries/comments-are-welcome-by-mail.md is out-of-date\r\n  [DEBUG] tags/Natural Sciences.html (atom) is out-of-date because entries/renewable-energy-is-not-renewable.md is out-of-date\r\n  [DEBUG] tags/Python.html (atom) is out-of-date because entries/arranging-ducks.md is out-of-date\r\n  [DEBUG] tags/UX.html (atom) is out-of-date because entries/hyphenation-hints-and-justification.md is out-of-date\r\n  [DEBUG] tags/Web Dev.html (atom) is out-of-date because entries/hyphenation-hints-and-justification.md is out-of-date\r\n  [DEBUG] entries.html is out-of-date because entries/arranging-ducks.md is out-of-date\r\nCompiling\r\n  [DEBUG] Processing entries.html\r\n  [DEBUG] Require entries/a-case-against-tabs.md: chasing\r\n  [DEBUG] Processing entries/a-case-against-tabs.md\r\n  [DEBUG] Require templates/entry.html: OK\r\n  [DEBUG] Processing entries/a-case-against-tabs.md\r\n  [DEBUG] Require templates/base.html: OK\r\n  [DEBUG] Processing entries/a-case-against-tabs.md\r\n  cached  entries/a-case-against-tabs.md\r\n  [DEBUG] Routed to _site/entries/a-case-against-tabs.html\r\n  [DEBUG] Processing entries.html\r\n  [DEBUG] Require entries/a-case-against-tabs.md: OK\r\n  [DEBUG] Processing entries.html\r\n  [DEBUG] Require entries/arranging-ducks.md: chasing\r\n  [DEBUG] Processing entries/arranging-ducks.md\r\n  [DEBUG] Require templates/entry.html: OK\r\n  [DEBUG] Processing entries/arranging-ducks.md\r\n  [DEBUG] Require templates/base.html: OK\r\n  [DEBUG] Processing entries/arranging-ducks.md\r\n  cached  entries/arranging-ducks.md\r\n  [DEBUG] Routed to _site/entries/arranging-ducks.html\r\n  [DEBUG] Processing entries.html\r\n  [DEBUG] Require entries/arranging-ducks.md: OK\r\n  [DEBUG] Processing entries.html\r\n  [DEBUG] Require entries/comments-are-welcome-by-mail.md: chasing\r\n  [DEBUG] Processing entries/comments-are-welcome-by-mail.md\r\n  [DEBUG] Require templates/entry.html: OK\r\n  [DEBUG] Processing entries/comments-are-welcome-by-mail.md\r\n  [DEBUG] Require templates/base.html: OK\r\n  [DEBUG] Processing entries/comments-are-welcome-by-mail.md\r\n  cached  entries/comments-are-welcome-by-mail.md\r\n  [DEBUG] Routed to _site/entries/comments-are-welcome-by-mail.html\r\n  [DEBUG] Processing entries.html\r\n  [DEBUG] Require entries/comments-are-welcome-by-mail.md: OK\r\n  [DEBUG] Processing entries.html\r\n  [DEBUG] Require entries/hyphenation-hints-and-justification.md: chasing\r\n[Truncated]\n  [DEBUG] Processing tags/Python.html (atom)\r\n  [DEBUG] Require entries/arranging-ducks.md (for-atom): OK\r\n  [DEBUG] Processing tags/Python.html (atom)\r\n  updated tags/Python.html (atom)\r\n  [DEBUG] Routed to _site/tags/Python.atom\r\n  [DEBUG] Processing tags/UX.html (atom)\r\n  [DEBUG] Require entries/a-case-against-tabs.md (for-atom): OK\r\n  [DEBUG] Processing tags/UX.html (atom)\r\n  [DEBUG] Require entries/hyphenation-hints-and-justification.md (for-atom): OK\r\n  [DEBUG] Processing tags/UX.html (atom)\r\n  updated tags/UX.html (atom)\r\n  [DEBUG] Routed to _site/tags/UX.atom\r\n  [DEBUG] Processing tags/Web Dev.html (atom)\r\n  [DEBUG] Require entries/hyphenation-hints-and-justification.md (for-atom): OK\r\n  [DEBUG] Processing tags/Web Dev.html (atom)\r\n  updated tags/Web Dev.html (atom)\r\n  [DEBUG] Routed to _site/tags/Web Dev.atom\r\nSuccess\r\n  [DEBUG] Removing tmp directory...\r\n```', 'title': 'Dependency tracking might be broken', 'type': 'issue'}
+ {'action': 'created', 'author': 'rasendubi', 'comment_id': 180839598.0, 'datetime': '2016-02-06 19:05:47+00:00', 'masked_author': 'username_1', 'text': ""@username_2, I've built both https://github.com/simukis/kazlauskas.me and my blog that uses tags and can confirm there are no unnecessary rebuilds. I believe, the issue can be closed now."", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'nagisa', 'comment_id': 180839901.0, 'datetime': '2016-02-06 19:11:38+00:00', 'masked_author': 'username_0', 'text': 'My site does not use the tags the way it used to do, so I can’t say building my site now confirms the issue being fixed. If you really want to confirm it fixed, you probably should consider trying to reproduce using something similar to [what I had in 2013](https://github.com/simukis/kazlauskas.me/blob/63b2bfa3825bd43fbe1a8da1e6fc028e495d843e/site.hs) with a hakyll that does not contain the 8f53440 and the one that contains the commit.', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'rasendubi', 'comment_id': 180848557.0, 'datetime': '2016-02-06 20:12:31+00:00', 'masked_author': 'username_1', 'text': 'Tested against https://github.com/username_0/kazlauskas.me/tree/63b2bfa3825bd43fbe1a8da1e6fc028e495d843e. It does rebuild tags every time, but doesn\'t rebuild posts. The output now is next.\r\n```\r\n$ ./site build\r\nInitialising...\r\n  Creating store...\r\n  Creating provider...\r\n  Running rules...\r\nChecking for out-of-date items\r\nCompiling\r\n  updated tags/Meta.html\r\n  updated tags/Natural Sciences.html\r\n  updated tags/Python.html\r\n  updated tags/UX.html\r\n  updated tags/Web Dev.html\r\n  updated tags/Meta.html (atom)\r\n  updated tags/Natural Sciences.html (atom)\r\n  updated tags/Python.html (atom)\r\n  updated tags/UX.html (atom)\r\n  updated tags/Web Dev.html (atom)\r\nSuccess\r\n```\r\n```\r\n$ ./site build -v\r\nInitialising...\r\n  Creating store...\r\n  Creating provider...\r\n  Running rules...\r\nChecking for out-of-date items\r\n  [DEBUG] tags/Meta.html is out-of-date because a pattern changed\r\n  [DEBUG] tags/Natural Sciences.html is out-of-date because a pattern changed\r\n  [DEBUG] tags/Python.html is out-of-date because a pattern changed\r\n  [DEBUG] tags/UX.html is out-of-date because a pattern changed\r\n  [DEBUG] tags/Web Dev.html is out-of-date because a pattern changed\r\n  [DEBUG] tags/Meta.html (atom) is out-of-date because a pattern changed\r\n  [DEBUG] tags/Natural Sciences.html (atom) is out-of-date because a pattern changed\r\n  [DEBUG] tags/Python.html (atom) is out-of-date because a pattern changed\r\n  [DEBUG] tags/UX.html (atom) is out-of-date because a pattern changed\r\n  [DEBUG] tags/Web Dev.html (atom) is out-of-date because a pattern changed\r\nCompiling\r\n  [DEBUG] Processing tags/Meta.html\r\n  [DEBUG] Hakyll.Core.Compiler.Internal: Adding dependency: PatternDependency (Glob [Literal ""entries/"",Capture,Literal """",Literal """"]) (fromList [entries/a-case-against-tabs.md,entries/arranging-ducks.md,entries/comments-are-welcome-by-mail.md,entries/hyphenation-hints-and-justification.md,entries/renewable-energy-is-not-renewable.md])\r\n  [DEBUG] Hakyll.Core.Compiler.Internal: Adding dependency: PatternDependency (List (fromList [entries/comments-are-welcome-by-mail.md])) (fromList [entries/comments-are-welcome-by-mail.md])\r\n  [DEBUG] Hakyll.Core.Compiler.Internal: Adding dependency: IdentifierDependency entries/comments-are-welcome-by-mail.md\r\n  [DEBUG] Require entries/comments-are-welcome-by-mail.md (snapshot _final): OK\r\n  [DEBUG] Processing tags/Meta.html\r\n  [DEBUG] Hakyll.Core.Compiler.Internal: Adding dependency: IdentifierDependency entries/comments-are-welcome-by-mail.md\r\n  [DEBUG] Hakyll.Core.Compiler.Internal: Adding dependency: IdentifierDependency templates/entry-item.html\r\n  [DEBUG] Require templates/entry-item.html (snapshot _final): OK\r\n  [DEBUG] Processing tags/Meta.html\r\n  [DEBUG] Hakyll.Core.Compiler.Internal: Adding dependency: IdentifierDependency entries/comments-are-welcome-by-mail.md\r\n  [DEBUG] Hakyll.Core.Compiler.Internal: Adding dependency: IdentifierDependency entries/comments-are-welcome-by-mail.md\r\n  [DEBUG] Hakyll.Core.Compiler.Internal: Adding dependency: IdentifierDependency entries/comments-are-welcome-by-mail.md\r\n  [DEBUG] Hakyll.Core.Compiler.Internal: Adding dependency: IdentifierDependency templates/entries.html\r\n  [DEBUG] Require templates/entries.html (snapshot _final): OK\r\n  [DEBUG] Processing tags/Meta.html\r\n  [DEBUG] Hakyll.Core.Compiler.Internal: Adding dependency: IdentifierDependency templates/base.html\r\n  [DEBUG] Require templates/base.html (snapshot _final): OK\r\n  [DEBUG] Processing tags/Meta.html\r\n  updated tags/Meta.html\r\n  [DEBUG] Routed to _site/tags/Meta.html\r\n  [DEBUG] Processing tags/Natural Sciences.html\r\n  [DEBUG] Hakyll.Core.Compiler.Internal: Adding dependency: PatternDependency (Glob [Literal ""entries/"",Capture,Literal """",Literal """"]) (fromList [entries/a-case-against-tabs.md,entries/arranging-ducks.md,entries/comments-are-welcome-by-mail.md,entries/hyphenation-hints-and-justification.md,entries/renewable-energy-is-not-renewable.md])\r\n  [DEBUG] Hakyll.Core.Compiler.Internal: Adding dependency: PatternDependency (List (fromList [entries/renewable-energy-is-not-renewable.md])) (fromList [entries/renewable-energy-is-not-renewable.md])\r\n  [DEBUG] Hakyll.Core.Compiler.Internal: Adding dependency: IdentifierDependency entries/renewable-energy-is-not-renewable.md\r\n  [DEBUG] Require entries/renewable-energy-is-not-renewable.md (snapshot _final): OK\r\n  [DEBUG] Processing tags/Natural Sciences.html\r\n  [DEBUG] Hakyll.Core.Compiler.Internal: Adding dependency: IdentifierDependency entries/renewable-energy-is-not-renewable.md\r\n  [DEBUG] Hakyll.Core.Compiler.Internal: Adding dependency: IdentifierDependency templates/entry-item.html\r\n  [DEBUG] Require templates/entry-item.html (snapshot _final): OK\r\n  [DEBUG] Processing tags/Natural Sciences.html\r\n  [DEBUG] Hakyll.Core.Compiler.Internal: Adding dependency: IdentifierDependency entries/renewable-energy-is-not-renewable.md\r\n  [DEBUG] Hakyll.Core.Compiler.Internal: Adding dependency: IdentifierDependency entries/renewable-energy-is-not-renewable.md\r\n  [DEBUG] Hakyll.Core.Compiler.Internal: Adding dependency: IdentifierDependency entries/renewable-energy-is-not-renewable.md\r\n  [DEBUG] Hakyll.Core.Compiler.Internal: Adding dependency: IdentifierDependency templates/entries.html\r\n  [DEBUG] Require templates/entries.html (snapshot _final): OK\r\n  [DEBUG] Processing tags/Natural Sciences.html\r\n  [DEBUG] Hakyll.Core.Compiler.Internal: Adding dependency: IdentifierDependency templates/base.html\r\n  [DEBUG] Require templates/base.html (snapshot _final): OK\r\n  [DEBUG] Processing tags/Natural Sciences.html\r\n  updated tags/Natural Sciences.html\r\n[Truncated]\n  [DEBUG] Require entries/hyphenation-hints-and-justification.md (for-atom) (snapshot _final): OK\r\n  [DEBUG] Processing tags/Web Dev.html (atom)\r\n  [DEBUG] Hakyll.Core.Compiler.Internal: Adding dependency: IdentifierDependency entries/hyphenation-hints-and-justification.md (for-atom)\r\n  [DEBUG] Hakyll.Core.Compiler.Internal: Adding dependency: IdentifierDependency entries/hyphenation-hints-and-justification.md\r\n  [DEBUG] Hakyll.Core.Compiler.Internal: Adding dependency: IdentifierDependency entries/hyphenation-hints-and-justification.md\r\n  [DEBUG] Hakyll.Core.Compiler.Internal: Alternative failed: Missing field $root$ in context for item entries/hyphenation-hints-and-justification.md\r\n  [DEBUG] Hakyll.Core.Compiler.Internal: Alternative failed: Missing field $root$ in context for item entries/hyphenation-hints-and-justification.md\r\n  [DEBUG] Hakyll.Core.Compiler.Internal: Adding dependency: IdentifierDependency entries/hyphenation-hints-and-justification.md\r\n  [DEBUG] Hakyll.Core.Compiler.Internal: Adding dependency: IdentifierDependency entries/hyphenation-hints-and-justification.md\r\n  [DEBUG] Hakyll.Core.Compiler.Internal: Alternative failed: Missing field $root$ in context for item entries/hyphenation-hints-and-justification.md\r\n  [DEBUG] Hakyll.Core.Compiler.Internal: Alternative failed: Missing field $root$ in context for item entries/hyphenation-hints-and-justification.md\r\n  [DEBUG] Hakyll.Core.Compiler.Internal: Adding dependency: IdentifierDependency entries/hyphenation-hints-and-justification.md\r\n  [DEBUG] Hakyll.Core.Compiler.Internal: Adding dependency: IdentifierDependency entries/hyphenation-hints-and-justification.md\r\n  [DEBUG] Hakyll.Core.Compiler.Internal: Adding dependency: IdentifierDependency entries/hyphenation-hints-and-justification.md\r\n  [DEBUG] Hakyll.Core.Compiler.Internal: Adding dependency: IdentifierDependency entries/hyphenation-hints-and-justification.md\r\n  updated tags/Web Dev.html (atom)\r\n  [DEBUG] Routed to _site/tags/Web Dev.atom\r\nSuccess\r\n  [DEBUG] Removing tmp directory...\r\n```', 'title': None, 'type': 'comment'}
+ {'action': 'closed', 'author': 'jaspervdj', 'comment_id': None, 'datetime': '2016-03-29 15:47:39+00:00', 'masked_author': 'username_2', 'text': '', 'title': None, 'type': 'issue'}
+ {'action': 'created', 'author': 'jaspervdj', 'comment_id': 202968911.0, 'datetime': '2016-03-29 15:47:39+00:00', 'masked_author': 'username_2', 'text': 'Closing this for now.', 'title': None, 'type': 'comment'}]","<issue_start><issue_comment>Title: Dependency tracking might be broken
+username_0: Dependency tracking might be broken (this could be my fault too) as `./site build` always rebuilds all `tags/*` pages and post-lists (entries.html, feed.atom) regardless of content being changed or not.
+
+Whole code available at https://github.com/simukis/kazlauskas.me
+
+```
+$ ./site build -v # The output is always the same
+Initialising...
+  Creating store...
+  Creating provider...
+  Running rules...
+Checking for out-of-date items
+  [DEBUG] tags/Internet.html is out-of-date because a pattern changed
+  [DEBUG] tags/Meta.html is out-of-date because a pattern changed
+  [DEBUG] tags/Natural Sciences.html is out-of-date because a pattern changed
+  [DEBUG] tags/Python.html is out-of-date because a pattern changed
+  [DEBUG] tags/UX.html is out-of-date because a pattern changed
+  [DEBUG] tags/Web Dev.html is out-of-date because a pattern changed
+  [DEBUG] tags/Internet.html (atom) is out-of-date because a pattern changed
+  [DEBUG] tags/Meta.html (atom) is out-of-date because a pattern changed
+  [DEBUG] tags/Natural Sciences.html (atom) is out-of-date because a pattern changed
+  [DEBUG] tags/Python.html (atom) is out-of-date because a pattern changed
+  [DEBUG] tags/UX.html (atom) is out-of-date because a pattern changed
+  [DEBUG] tags/Web Dev.html (atom) is out-of-date because a pattern changed
+  [DEBUG] entries/a-case-against-tabs.md is out-of-date because tags/UX.html is out-of-date
+  [DEBUG] entries/arranging-ducks.md is out-of-date because tags/Python.html is out-of-date
+  [DEBUG] entries/comments-are-welcome-by-mail.md is out-of-date because tags/Meta.html is out-of-date
+  [DEBUG] entries/hyphenation-hints-and-justification.md is out-of-date because tags/Web Dev.html is out-of-date
+  [DEBUG] entries/renewable-energy-is-not-renewable.md is out-of-date because tags/Natural Sciences.html is out-of-date
+  [DEBUG] entries/you-have-no-right.md is out-of-date because tags/Internet.html is out-of-date
+  [DEBUG] feed.atom is out-of-date because entries/you-have-no-right.md is out-of-date
+  [DEBUG] pages/index.md is out-of-date because entries/a-case-against-tabs.md is out-of-date
+  [DEBUG] tags/Internet.html is out-of-date because tags/Internet.html is out-of-date
+  [DEBUG] tags/Meta.html is out-of-date because tags/Meta.html is out-of-date
+  [DEBUG] tags/Natural Sciences.html is out-of-date because tags/Natural Sciences.html is out-of-date
+  [DEBUG] tags/Python.html is out-of-date because tags/Python.html is out-of-date
+  [DEBUG] tags/UX.html is out-of-date because tags/UX.html is out-of-date
+  [DEBUG] tags/Web Dev.html is out-of-date because tags/Web Dev.html is out-of-date
+  [DEBUG] tags/Internet.html (atom) is out-of-date because entries/you-have-no-right.md is out-of-date
+  [DEBUG] tags/Meta.html (atom) is out-of-date because entries/comments-are-welcome-by-mail.md is out-of-date
+  [DEBUG] tags/Natural Sciences.html (atom) is out-of-date because entries/renewable-energy-is-not-renewable.md is out-of-date
+  [DEBUG] tags/Python.html (atom) is out-of-date because entries/arranging-ducks.md is out-of-date
+  [DEBUG] tags/UX.html (atom) is out-of-date because entries/hyphenation-hints-and-justification.md is out-of-date
+  [DEBUG] tags/Web Dev.html (atom) is out-of-date because entries/hyphenation-hints-and-justification.md is out-of-date
+  [DEBUG] entries.html is out-of-date because entries/arranging-ducks.md is out-of-date
+Compiling
+  [DEBUG] Processing entries.html
+  [DEBUG] Require entries/a-case-against-tabs.md: chasing
+  [DEBUG] Processing entries/a-case-against-tabs.md
+  [DEBUG] Require templates/entry.html: OK
+  [DEBUG] Processing entries/a-case-against-tabs.md
+  [DEBUG] Require templates/base.html: OK
+  [DEBUG] Processing entries/a-case-against-tabs.md
+  cached  entries/a-case-against-tabs.md
+  [DEBUG] Routed to _site/entries/a-case-against-tabs.html
+  [DEBUG] Processing entries.html
+  [DEBUG] Require entries/a-case-against-tabs.md: OK
+  [DEBUG] Processing entries.html
+  [DEBUG] Require entries/arranging-ducks.md: chasing
+  [DEBUG] Processing entries/arranging-ducks.md
+  [DEBUG] Require templates/entry.html: OK
+  [DEBUG] Processing entries/arranging-ducks.md
+  [DEBUG] Require templates/base.html: OK
+  [DEBUG] Processing entries/arranging-ducks.md
+  cached  entries/arranging-ducks.md
+  [DEBUG] Routed to _site/entries/arranging-ducks.html
+  [DEBUG] Processing entries.html
+  [DEBUG] Require entries/arranging-ducks.md: OK
+  [DEBUG] Processing entries.html
+  [DEBUG] Require entries/comments-are-welcome-by-mail.md: chasing
+  [DEBUG] Processing entries/comments-are-welcome-by-mail.md
+  [DEBUG] Require templates/entry.html: OK
+  [DEBUG] Processing entries/comments-are-welcome-by-mail.md
+  [DEBUG] Require templates/base.html: OK
+  [DEBUG] Processing entries/comments-are-welcome-by-mail.md
+  cached  entries/comments-are-welcome-by-mail.md
+  [DEBUG] Routed to _site/entries/comments-are-welcome-by-mail.html
+  [DEBUG] Processing entries.html
+  [DEBUG] Require entries/comments-are-welcome-by-mail.md: OK
+  [DEBUG] Processing entries.html
+  [DEBUG] Require entries/hyphenation-hints-and-justification.md: chasing
+[Truncated]
+  [DEBUG] Processing tags/Python.html (atom)
+  [DEBUG] Require entries/arranging-ducks.md (for-atom): OK
+  [DEBUG] Processing tags/Python.html (atom)
+  updated tags/Python.html (atom)
+  [DEBUG] Routed to _site/tags/Python.atom
+  [DEBUG] Processing tags/UX.html (atom)
+  [DEBUG] Require entries/a-case-against-tabs.md (for-atom): OK
+  [DEBUG] Processing tags/UX.html (atom)
+  [DEBUG] Require entries/hyphenation-hints-and-justification.md (for-atom): OK
+  [DEBUG] Processing tags/UX.html (atom)
+  updated tags/UX.html (atom)
+  [DEBUG] Routed to _site/tags/UX.atom
+  [DEBUG] Processing tags/Web Dev.html (atom)
+  [DEBUG] Require entries/hyphenation-hints-and-justification.md (for-atom): OK
+  [DEBUG] Processing tags/Web Dev.html (atom)
+  updated tags/Web Dev.html (atom)
+  [DEBUG] Routed to _site/tags/Web Dev.atom
+Success
+  [DEBUG] Removing tmp directory...
+```
+<issue_comment>username_1: @username_2, I've built both https://github.com/simukis/kazlauskas.me and my blog that uses tags and can confirm there are no unnecessary rebuilds. I believe, the issue can be closed now.
+<issue_comment>username_0: My site does not use the tags the way it used to do, so I can’t say building my site now confirms the issue being fixed. If you really want to confirm it fixed, you probably should consider trying to reproduce using something similar to [what I had in 2013](https://github.com/simukis/kazlauskas.me/blob/63b2bfa3825bd43fbe1a8da1e6fc028e495d843e/site.hs) with a hakyll that does not contain the 8f53440 and the one that contains the commit.
+<issue_comment>username_1: Tested against https://github.com/username_0/kazlauskas.me/tree/63b2bfa3825bd43fbe1a8da1e6fc028e495d843e. It does rebuild tags every time, but doesn't rebuild posts. The output now is next.
+```
+$ ./site build
+Initialising...
+  Creating store...
+  Creating provider...
+  Running rules...
+Checking for out-of-date items
+Compiling
+  updated tags/Meta.html
+  updated tags/Natural Sciences.html
+  updated tags/Python.html
+  updated tags/UX.html
+  updated tags/Web Dev.html
+  updated tags/Meta.html (atom)
+  updated tags/Natural Sciences.html (atom)
+  updated tags/Python.html (atom)
+  updated tags/UX.html (atom)
+  updated tags/Web Dev.html (atom)
+Success
+```
+```
+$ ./site build -v
+Initialising...
+  Creating store...
+  Creating provider...
+  Running rules...
+Checking for out-of-date items
+  [DEBUG] tags/Meta.html is out-of-date because a pattern changed
+  [DEBUG] tags/Natural Sciences.html is out-of-date because a pattern changed
+  [DEBUG] tags/Python.html is out-of-date because a pattern changed
+  [DEBUG] tags/UX.html is out-of-date because a pattern changed
+  [DEBUG] tags/Web Dev.html is out-of-date because a pattern changed
+  [DEBUG] tags/Meta.html (atom) is out-of-date because a pattern changed
+  [DEBUG] tags/Natural Sciences.html (atom) is out-of-date because a pattern changed
+  [DEBUG] tags/Python.html (atom) is out-of-date because a pattern changed
+  [DEBUG] tags/UX.html (atom) is out-of-date because a pattern changed
+  [DEBUG] tags/Web Dev.html (atom) is out-of-date because a pattern changed
+Compiling
+  [DEBUG] Processing tags/Meta.html
+  [DEBUG] Hakyll.Core.Compiler.Internal: Adding dependency: PatternDependency (Glob [Literal ""entries/"",Capture,Literal """",Literal """"]) (fromList [entries/a-case-against-tabs.md,entries/arranging-ducks.md,entries/comments-are-welcome-by-mail.md,entries/hyphenation-hints-and-justification.md,entries/renewable-energy-is-not-renewable.md])
+  [DEBUG] Hakyll.Core.Compiler.Internal: Adding dependency: PatternDependency (List (fromList [entries/comments-are-welcome-by-mail.md])) (fromList [entries/comments-are-welcome-by-mail.md])
+  [DEBUG] Hakyll.Core.Compiler.Internal: Adding dependency: IdentifierDependency entries/comments-are-welcome-by-mail.md
+  [DEBUG] Require entries/comments-are-welcome-by-mail.md (snapshot _final): OK
+  [DEBUG] Processing tags/Meta.html
+  [DEBUG] Hakyll.Core.Compiler.Internal: Adding dependency: IdentifierDependency entries/comments-are-welcome-by-mail.md
+  [DEBUG] Hakyll.Core.Compiler.Internal: Adding dependency: IdentifierDependency templates/entry-item.html
+  [DEBUG] Require templates/entry-item.html (snapshot _final): OK
+  [DEBUG] Processing tags/Meta.html
+  [DEBUG] Hakyll.Core.Compiler.Internal: Adding dependency: IdentifierDependency entries/comments-are-welcome-by-mail.md
+  [DEBUG] Hakyll.Core.Compiler.Internal: Adding dependency: IdentifierDependency entries/comments-are-welcome-by-mail.md
+  [DEBUG] Hakyll.Core.Compiler.Internal: Adding dependency: IdentifierDependency entries/comments-are-welcome-by-mail.md
+  [DEBUG] Hakyll.Core.Compiler.Internal: Adding dependency: IdentifierDependency templates/entries.html
+  [DEBUG] Require templates/entries.html (snapshot _final): OK
+  [DEBUG] Processing tags/Meta.html
+  [DEBUG] Hakyll.Core.Compiler.Internal: Adding dependency: IdentifierDependency templates/base.html
+  [DEBUG] Require templates/base.html (snapshot _final): OK
+  [DEBUG] Processing tags/Meta.html
+  updated tags/Meta.html
+  [DEBUG] Routed to _site/tags/Meta.html
+  [DEBUG] Processing tags/Natural Sciences.html
+  [DEBUG] Hakyll.Core.Compiler.Internal: Adding dependency: PatternDependency (Glob [Literal ""entries/"",Capture,Literal """",Literal """"]) (fromList [entries/a-case-against-tabs.md,entries/arranging-ducks.md,entries/comments-are-welcome-by-mail.md,entries/hyphenation-hints-and-justification.md,entries/renewable-energy-is-not-renewable.md])
+  [DEBUG] Hakyll.Core.Compiler.Internal: Adding dependency: PatternDependency (List (fromList [entries/renewable-energy-is-not-renewable.md])) (fromList [entries/renewable-energy-is-not-renewable.md])
+  [DEBUG] Hakyll.Core.Compiler.Internal: Adding dependency: IdentifierDependency entries/renewable-energy-is-not-renewable.md
+  [DEBUG] Require entries/renewable-energy-is-not-renewable.md (snapshot _final): OK
+  [DEBUG] Processing tags/Natural Sciences.html
+  [DEBUG] Hakyll.Core.Compiler.Internal: Adding dependency: IdentifierDependency entries/renewable-energy-is-not-renewable.md
+  [DEBUG] Hakyll.Core.Compiler.Internal: Adding dependency: IdentifierDependency templates/entry-item.html
+  [DEBUG] Require templates/entry-item.html (snapshot _final): OK
+  [DEBUG] Processing tags/Natural Sciences.html
+  [DEBUG] Hakyll.Core.Compiler.Internal: Adding dependency: IdentifierDependency entries/renewable-energy-is-not-renewable.md
+  [DEBUG] Hakyll.Core.Compiler.Internal: Adding dependency: IdentifierDependency entries/renewable-energy-is-not-renewable.md
+  [DEBUG] Hakyll.Core.Compiler.Internal: Adding dependency: IdentifierDependency entries/renewable-energy-is-not-renewable.md
+  [DEBUG] Hakyll.Core.Compiler.Internal: Adding dependency: IdentifierDependency templates/entries.html
+  [DEBUG] Require templates/entries.html (snapshot _final): OK
+  [DEBUG] Processing tags/Natural Sciences.html
+  [DEBUG] Hakyll.Core.Compiler.Internal: Adding dependency: IdentifierDependency templates/base.html
+  [DEBUG] Require templates/base.html (snapshot _final): OK
+  [DEBUG] Processing tags/Natural Sciences.html
+  updated tags/Natural Sciences.html
+[Truncated]
+  [DEBUG] Require entries/hyphenation-hints-and-justification.md (for-atom) (snapshot _final): OK
+  [DEBUG] Processing tags/Web Dev.html (atom)
+  [DEBUG] Hakyll.Core.Compiler.Internal: Adding dependency: IdentifierDependency entries/hyphenation-hints-and-justification.md (for-atom)
+  [DEBUG] Hakyll.Core.Compiler.Internal: Adding dependency: IdentifierDependency entries/hyphenation-hints-and-justification.md
+  [DEBUG] Hakyll.Core.Compiler.Internal: Adding dependency: IdentifierDependency entries/hyphenation-hints-and-justification.md
+  [DEBUG] Hakyll.Core.Compiler.Internal: Alternative failed: Missing field $root$ in context for item entries/hyphenation-hints-and-justification.md
+  [DEBUG] Hakyll.Core.Compiler.Internal: Alternative failed: Missing field $root$ in context for item entries/hyphenation-hints-and-justification.md
+  [DEBUG] Hakyll.Core.Compiler.Internal: Adding dependency: IdentifierDependency entries/hyphenation-hints-and-justification.md
+  [DEBUG] Hakyll.Core.Compiler.Internal: Adding dependency: IdentifierDependency entries/hyphenation-hints-and-justification.md
+  [DEBUG] Hakyll.Core.Compiler.Internal: Alternative failed: Missing field $root$ in context for item entries/hyphenation-hints-and-justification.md
+  [DEBUG] Hakyll.Core.Compiler.Internal: Alternative failed: Missing field $root$ in context for item entries/hyphenation-hints-and-justification.md
+  [DEBUG] Hakyll.Core.Compiler.Internal: Adding dependency: IdentifierDependency entries/hyphenation-hints-and-justification.md
+  [DEBUG] Hakyll.Core.Compiler.Internal: Adding dependency: IdentifierDependency entries/hyphenation-hints-and-justification.md
+  [DEBUG] Hakyll.Core.Compiler.Internal: Adding dependency: IdentifierDependency entries/hyphenation-hints-and-justification.md
+  [DEBUG] Hakyll.Core.Compiler.Internal: Adding dependency: IdentifierDependency entries/hyphenation-hints-and-justification.md
+  updated tags/Web Dev.html (atom)
+  [DEBUG] Routed to _site/tags/Web Dev.atom
+Success
+  [DEBUG] Removing tmp directory...
+```<issue_closed>
+<issue_comment>username_2: Closing this for now."
+eduardoboucas/staticman,448970165,294,,"[{'action': 'opened', 'author': 'felixdb', 'comment_id': None, 'datetime': '2019-05-27 19:19:36+00:00', 'masked_author': 'username_0', 'text': 'Hello! I\'ve been reading most of the issues because I couldn\'t connect my repository with the v2 endpoint. Figured out it was maybe already overloaded or didn\'t accept new user\'s request anymore. \r\n\r\nSo I found out the about the new Staticman app on Github, connected it to my repo, and set everything for a post request to ""https://dev.staticman.net/v3/entry/github/username_0/inbeat-website/master/comments"", but keep getting a 503 from Heroku. I also tried ""https://dev.staticman.net/v3/entry/github/username_0/inbeat-website/master"" and tried to post vit Postman.\r\n\r\nYou can see my repo [here](https://github.com/username_0/inbeat-website) and my settings [here](https://github.com/username_0/inbeat-website/blob/master/staticman.yml). Anything I\'m doing wrong? You can also test [here](https://www.inbeat.co/articles/ultimate-guide-youtuber-outreach/), the form is hidden with CSS but you should find it easily with inspect tool and unhide it.\r\n\r\nThanks for helping out, this project is awesome and I\'ve been looking forward to try it :)', 'title': 'Setting up the v3 endpoint (503 error)', 'type': 'issue'}
+ {'action': 'created', 'author': 'isaacdgoodman', 'comment_id': 496336439.0, 'datetime': '2019-05-28 01:52:27+00:00', 'masked_author': 'username_1', 'text': ""I'm having the same issue. I noticed that [another site who has a currently working Staticman configuration](https://github.com/dancwilliams/networkhobo) is using the endpoint https://api.staticman.net/v3/... rather than https://dev.staticman.net/v3/...\r\nHowever, I tried changing my own endpoint and it didn't work. We seem to have similar configurations, so the problem is probably somewhere else. I'll keep looking..."", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'deadlydog', 'comment_id': 502465919.0, 'datetime': '2019-06-16 16:20:45+00:00', 'masked_author': 'username_2', 'text': ""Yeah, I'm just adding staticman into [my jekyll blog](https://github.com/username_2/username_2.github.io) and am having the same experience. Wasn't able to get it to work with v2, so trying v3 and just getting back the 500 `success: false` error message."", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'gayanW', 'comment_id': 503077431.0, 'datetime': '2019-06-18 12:13:46+00:00', 'masked_author': 'username_3', 'text': 'I changed my endpoint URL and then it successfully creates a PR containing staticman data.\r\n\r\nhttps://**api**.staticman.net/v3/entry/github/gayanw/[blog](https://github.com/username_3/blog)/master/**comments**', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'boratanrikulu', 'comment_id': 503318258.0, 'datetime': '2019-06-18 21:26:11+00:00', 'masked_author': 'username_4', 'text': ""I have same issue. I've tired both of https://api.staticman.net/v3 and https://dev.staticman.net/v3. And still, I got 500 error."", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'sachin10101998', 'comment_id': 507475579.0, 'datetime': '2019-07-02 00:49:07+00:00', 'masked_author': 'username_5', 'text': '@username_3 , the static comments on your site (for example this blog post (https://www.linuxdeveloper.space/install-windows-after-linux) are not working anymore.', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'VincentTam', 'comment_id': 507623744.0, 'datetime': '2019-07-02 10:50:07+00:00', 'masked_author': 'username_6', 'text': ""@username_3 Switching to the official development instance is contrary to what the project owner suggests in https://github.com/eduardoboucas/staticman/issues/278#issuecomment-475170669.  Anyways, I suggest using alternative instance (i.e. anything but official) to avoid unexpectation service disruption due to unnotified updates in the official instance.\r\n\r\nHere's a [hosting guide](https://www.datascienceblog.net/post/other/staticman_comments/) on Data Science Blog.  You may also refer to some successful examples running Staticman v3 like\r\n\r\n1. [zcrc.me](//zcrc.me): a dev blog on GitLab\r\n2. [my demo pages on Framagit](//https://framagit.org/staticman-gitlab-pages)\r\n3. [my blog](//lstu.fr/3s) using GitLab Pages\r\n\r\nP.S. Having recommended an alternative instance, I have to mention that I maintain @staticmanlab, a public GitLab instance which you're free to use."", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'sachin10101998', 'comment_id': 507768021.0, 'datetime': '2019-07-02 17:16:00+00:00', 'masked_author': 'username_5', 'text': '@username_6 You mentioned that @staticmanlab is a Gitlab instance, will it cause troubles if used with a Github repo?', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'VincentTam', 'comment_id': 507788178.0, 'datetime': '2019-07-02 18:12:56+00:00', 'masked_author': 'username_6', 'text': ""It's the contrarary: it provides freedom for users, espeicall those suffering from the official instances' API limits, to choose between GitHub & GitLab.\r\n\r\nFor some GitHub Pages served by @staticmanlab, you may click on the bot's user page and consult its activities.  You may also see the [homologous GitLab user profile](//gitlab.com/staticmanlab).\r\n\r\nP.S. Due to a [Framagit user's unsuccessful trial](https://framagit.org/Bridouz/hugo-theme-huginn/commit/e03609e893b44e26bf0a28677ef7b5d688f37a49) to add Staticman support, I've created another instance served by [@staticmanlab1](//framagit.org/staticmanlab1)."", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'sachin10101998', 'comment_id': 507863507.0, 'datetime': '2019-07-02 22:10:12+00:00', 'masked_author': 'username_5', 'text': '@username_6 You have made lots of changes in your staticman instance compared to the original one. Should I clone your instance and try to host it on Heroku and see if it works?', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'VincentTam', 'comment_id': 507869304.0, 'datetime': '2019-07-02 22:34:25+00:00', 'masked_author': 'username_6', 'text': '@username_5 From the user profile of @staticmanlab, you can see that my instance works.  My `deploy` branch holds the code for Heroku deployment, so you might try.  The reason for such a huge difference is PR 231.', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'deadlydog', 'comment_id': 517584828.0, 'datetime': '2019-08-02 07:12:20+00:00', 'masked_author': 'username_2', 'text': 'Hey @username_6 [I forked](https://github.com/username_2/staticman) and deployed [your `deploy` branch](https://github.com/username_6/staticman) to Heroku by following [these instructions](https://www.datascienceblog.net/post/other/staticman_comments/), but when trying to post messages to it I just get a 500 response code with a json body of `""success"": false`. Is that branch broken now? Do you know if there\'s some way I can have it return more error info?\r\n\r\nThe Heroku logs only show this:\r\n```\r\n2019-08-02T06:54:01.792329+00:00 heroku[router]: at=info method=POST path=""/v3/entry/github/username_2/username_2.github.io/master/comments?fields%5Bmessage%5D=Testing+comments&fields%5Bname%5D=Dan&fields%5Bemail%5D=username_2%40hotmail.com&fields%5Burl%5D=&options%5Bslug%5D=powershell-log-levels-included-in-tfs-2017-and-vsts-build-and-release-logs&fields%5Bhidden%5D="" host=dansblog-staticman.herokuapp.com request_id=8b3e4f93-3a6c-46b0-a477-2ad6abb99aa2 fwd=""192.168.127.12"" dyno=web.1 connect=1ms service=329ms status=500 bytes=353 protocol=https\r\n```\r\n\r\nAnd this is the response I get in PostMan.\r\n![image](https://user-images.githubusercontent.com/1187140/62350973-8f74e000-b4c1-11e9-810c-1c6403977df9.png)\r\n\r\nShould I maybe try using a different branch?\r\n\r\nI\'ve been trying to get staticman to work for 2 months now, and it\'s very frustrating. Jumping from GitHub issue to issue trying to piece together various bits of info is very time consuming. I feel it would be worth updating the official documentation with instructions about the new recommended practice (deploying your own instance instead of using the shared public one), and which branches are stable and should be used.\r\n\r\nI appreciate any insight you can give into this issue. Thanks!', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'VincentTam', 'comment_id': 517617378.0, 'datetime': '2019-08-02 08:48:09+00:00', 'masked_author': 'username_6', 'text': 'Give me :+1: or :heart: if you appreciate it.  :loud_sound: Sharing Staticman guides and helping future users in return are even better.', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'deadlydog', 'comment_id': 518037840.0, 'datetime': '2019-08-04 21:30:16+00:00', 'masked_author': 'username_2', 'text': ""Thanks so much for the detailed reply @username_6 and the Issues/PRs on my personal blog :) I had not seen [your blog with staticman errors](https://vincenttam.gitlab.io/post/2018-12-25-staticman-repo-setup-errors/), and it looks like it does have something to do with the Recaptcha settings. I still have not been able to completely figure it out; if I disable Recaptcha complete then comments work, but when enabled (using an encrypted site key and v2, or v3) it still fails. I don't understand why when I use the exact same request from PostMan to my personal staticman instance that it succeeds when I have my blog settings set to not use Recaptcha, but fails when it is set to use Recaptcha. That is a setting set in my blog GitHub repo (jekyll site), not my heroku staticman instance, so I find it weird that a client setting affects the server response. That is, my PostMan request is the exact same all the time, and is making a request to my staticman instance, so why does my blog GitHub setting affect the response returned by the staticman instance?. Or does my staticman instance somehow check that setting in my GitHub repo before opening the PR against it?\r\n\r\nThanks again for all your help! At the very least you've helped me get comments working without Recaptcha enabled, and made some good suggestions in your PRs 👍"", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'VincentTam', 'comment_id': 518039512.0, 'datetime': '2019-08-04 21:56:01+00:00', 'masked_author': 'username_6', 'text': 'You may consult my demos on Framagit to get reCAPTCHA works, especially Minimal Mistakes:\r\nhttps://staticman-gitlab-pages.frama.io/minimal-mistakes-demo/post%20formats/post-image-caption/.', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'deadlydog', 'comment_id': 520120724.0, 'datetime': '2019-08-10 05:48:41+00:00', 'masked_author': 'username_2', 'text': ""Thank you for the reply again @username_6 . Consulting that demo and it's source code helped me get everything working. Essentially I had 2 problems that were preventing me from getting ReCaptcha working:\r\n\r\n1. I had to duplicate the `reCaptcha` `siteKey` and `secret` fields from my `staticman.yml` into my `_config.yml`. This is because the minimal mistakes theme I'm using looks for them using `site.reCaptcha.siteKey` and `site.reCaptcha.secret`, which looks in the `_config.yml` and not the `staticman.yml`. Doing this got the ReCaptcha control actually showing up in my comment forms.\r\n2. Even though I'm using my own hosted instance of staticman, I had naively still used the public instance (as [per the docs](https://staticman.net/docs/encryption)) to encrypt my ReCaptcha secret. This led to my instance of staticman not knowing how to decrypt the secret properly. Once I changed to encrypt the value using my instance of staticman, then the decryption worked properly and everything worked. It took a bit of console line debugging to figure out this was the problem, but eventually found the error message that was getting eaten, instead of being returned back in the web response. Yay!\r\n\r\nThanks so much for your help. I'm going to spend a bit of time to see if I can edit the code to have it return back the actual error message in the web response to make troubleshooting these issues easier for others in the future. Thanks so much for your help!"", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'VincentTam', 'comment_id': 520121100.0, 'datetime': '2019-08-10 05:56:20+00:00', 'masked_author': 'username_6', 'text': '░░░░░░░░░░░░░░░░░░░░░░░▄▄\t░░░░░░░░░░░░░░░░░░░░░░█░░█\t░░░░░░░░░░░░░░░░░░░░░░█░░█\t░░░░░░░░░░░░░░░░░░░░░█░░░█\t░░░░░░░░░░░░░░░░░░░░█░░░░█\t░░░░░░░░░░░███████▄▄█░░░░░██████▄░░░░░░░░░░░▓▓▓▓▓▓█░░░░░░░░░░░░░░█░░░░░░░░░░░▓▓▓▓▓▓█░░░░░░░░░░░░░░█░░░░░░░░░░░▓▓▓▓▓▓█░░░░░░░░░░░░░░█░░░░░░░░░░░▓▓▓▓▓▓█░░░░░░░░░░░░░░█░░░░░░░░░░░▓▓▓▓▓▓█░░░░░░░░░░░░░░█░░░░░░░░░░░▓▓▓▓▓▓█████░░░░░░░░░█\t░░░░░░░░░░░██████▀░░░░▀▀██████▀\t◈☻◈☻◈☻◈☻◈☻◈☻◈☻◈☻◈☻◈☻◈☻◈☻◈\xa0░█░░░█░█░▄▀░█▀▀░░░░▀█▀░█░█░█░▄▀▀░░█░░░█░█▀░░░█▀░░▄▄░░█░░█▀█░█░░▀▄░░█▄▄░█░█░▀▄░█▄▄░░░░░█░░█░█░█░▄▄▀░◈☻◈☻◈☻◈☻◈☻◈☻◈☻◈☻◈☻◈☻◈☻◈☻◈\r\n--', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'alexwaibel', 'comment_id': 551367747.0, 'datetime': '2019-11-08 03:21:54+00:00', 'masked_author': 'username_7', 'text': 'Duplicate of #317', 'title': None, 'type': 'comment'}
+ {'action': 'closed', 'author': 'alexwaibel', 'comment_id': None, 'datetime': '2019-11-08 03:21:55+00:00', 'masked_author': 'username_7', 'text': '', 'title': None, 'type': 'issue'}]","<issue_start><issue_comment>Title: Setting up the v3 endpoint (503 error)
+username_0: Hello! I've been reading most of the issues because I couldn't connect my repository with the v2 endpoint. Figured out it was maybe already overloaded or didn't accept new user's request anymore. 
+
+So I found out the about the new Staticman app on Github, connected it to my repo, and set everything for a post request to ""https://dev.staticman.net/v3/entry/github/username_0/inbeat-website/master/comments"", but keep getting a 503 from Heroku. I also tried ""https://dev.staticman.net/v3/entry/github/username_0/inbeat-website/master"" and tried to post vit Postman.
+
+You can see my repo [here](https://github.com/username_0/inbeat-website) and my settings [here](https://github.com/username_0/inbeat-website/blob/master/staticman.yml). Anything I'm doing wrong? You can also test [here](https://www.inbeat.co/articles/ultimate-guide-youtuber-outreach/), the form is hidden with CSS but you should find it easily with inspect tool and unhide it.
+
+Thanks for helping out, this project is awesome and I've been looking forward to try it :)
+<issue_comment>username_1: I'm having the same issue. I noticed that [another site who has a currently working Staticman configuration](https://github.com/dancwilliams/networkhobo) is using the endpoint https://api.staticman.net/v3/... rather than https://dev.staticman.net/v3/...
+However, I tried changing my own endpoint and it didn't work. We seem to have similar configurations, so the problem is probably somewhere else. I'll keep looking...
+<issue_comment>username_2: Yeah, I'm just adding staticman into [my jekyll blog](https://github.com/username_2/username_2.github.io) and am having the same experience. Wasn't able to get it to work with v2, so trying v3 and just getting back the 500 `success: false` error message.
+<issue_comment>username_3: I changed my endpoint URL and then it successfully creates a PR containing staticman data.
+
+https://**api**.staticman.net/v3/entry/github/gayanw/[blog](https://github.com/username_3/blog)/master/**comments**
+<issue_comment>username_4: I have same issue. I've tired both of https://api.staticman.net/v3 and https://dev.staticman.net/v3. And still, I got 500 error.
+<issue_comment>username_5: @username_3 , the static comments on your site (for example this blog post (https://www.linuxdeveloper.space/install-windows-after-linux) are not working anymore.
+<issue_comment>username_6: @username_3 Switching to the official development instance is contrary to what the project owner suggests in https://github.com/eduardoboucas/staticman/issues/278#issuecomment-475170669.  Anyways, I suggest using alternative instance (i.e. anything but official) to avoid unexpectation service disruption due to unnotified updates in the official instance.
+
+Here's a [hosting guide](https://www.datascienceblog.net/post/other/staticman_comments/) on Data Science Blog.  You may also refer to some successful examples running Staticman v3 like
+
+1. [zcrc.me](//zcrc.me): a dev blog on GitLab
+2. [my demo pages on Framagit](//https://framagit.org/staticman-gitlab-pages)
+3. [my blog](//lstu.fr/3s) using GitLab Pages
+
+P.S. Having recommended an alternative instance, I have to mention that I maintain @staticmanlab, a public GitLab instance which you're free to use.
+<issue_comment>username_5: @username_6 You mentioned that @staticmanlab is a Gitlab instance, will it cause troubles if used with a Github repo?
+<issue_comment>username_6: It's the contrarary: it provides freedom for users, espeicall those suffering from the official instances' API limits, to choose between GitHub & GitLab.
+
+For some GitHub Pages served by @staticmanlab, you may click on the bot's user page and consult its activities.  You may also see the [homologous GitLab user profile](//gitlab.com/staticmanlab).
+
+P.S. Due to a [Framagit user's unsuccessful trial](https://framagit.org/Bridouz/hugo-theme-huginn/commit/e03609e893b44e26bf0a28677ef7b5d688f37a49) to add Staticman support, I've created another instance served by [@staticmanlab1](//framagit.org/staticmanlab1).
+<issue_comment>username_5: @username_6 You have made lots of changes in your staticman instance compared to the original one. Should I clone your instance and try to host it on Heroku and see if it works?
+<issue_comment>username_6: @username_5 From the user profile of @staticmanlab, you can see that my instance works.  My `deploy` branch holds the code for Heroku deployment, so you might try.  The reason for such a huge difference is PR 231.
+<issue_comment>username_2: Hey @username_6 [I forked](https://github.com/username_2/staticman) and deployed [your `deploy` branch](https://github.com/username_6/staticman) to Heroku by following [these instructions](https://www.datascienceblog.net/post/other/staticman_comments/), but when trying to post messages to it I just get a 500 response code with a json body of `""success"": false`. Is that branch broken now? Do you know if there's some way I can have it return more error info?
+
+The Heroku logs only show this:
+```
+2019-08-02T06:54:01.792329+00:00 heroku[router]: at=info method=POST path=""/v3/entry/github/username_2/username_2.github.io/master/comments?fields%5Bmessage%5D=Testing+comments&fields%5Bname%5D=Dan&fields%5Bemail%5D=username_2%40hotmail.com&fields%5Burl%5D=&options%5Bslug%5D=powershell-log-levels-included-in-tfs-2017-and-vsts-build-and-release-logs&fields%5Bhidden%5D="" host=dansblog-staticman.herokuapp.com request_id=8b3e4f93-3a6c-46b0-a477-2ad6abb99aa2 fwd=""71.17.152.95"" dyno=web.1 connect=1ms service=329ms status=500 bytes=353 protocol=https
+```
+
+And this is the response I get in PostMan.
+![image](https://user-images.githubusercontent.com/1187140/62350973-8f74e000-b4c1-11e9-810c-1c6403977df9.png)
+
+Should I maybe try using a different branch?
+
+I've been trying to get staticman to work for 2 months now, and it's very frustrating. Jumping from GitHub issue to issue trying to piece together various bits of info is very time consuming. I feel it would be worth updating the official documentation with instructions about the new recommended practice (deploying your own instance instead of using the shared public one), and which branches are stable and should be used.
+
+I appreciate any insight you can give into this issue. Thanks!
+<issue_comment>username_6: Give me :+1: or :heart: if you appreciate it.  :loud_sound: Sharing Staticman guides and helping future users in return are even better.
+<issue_comment>username_2: Thanks so much for the detailed reply @username_6 and the Issues/PRs on my personal blog :) I had not seen [your blog with staticman errors](https://vincenttam.gitlab.io/post/2018-12-25-staticman-repo-setup-errors/), and it looks like it does have something to do with the Recaptcha settings. I still have not been able to completely figure it out; if I disable Recaptcha complete then comments work, but when enabled (using an encrypted site key and v2, or v3) it still fails. I don't understand why when I use the exact same request from PostMan to my personal staticman instance that it succeeds when I have my blog settings set to not use Recaptcha, but fails when it is set to use Recaptcha. That is a setting set in my blog GitHub repo (jekyll site), not my heroku staticman instance, so I find it weird that a client setting affects the server response. That is, my PostMan request is the exact same all the time, and is making a request to my staticman instance, so why does my blog GitHub setting affect the response returned by the staticman instance?. Or does my staticman instance somehow check that setting in my GitHub repo before opening the PR against it?
+
+Thanks again for all your help! At the very least you've helped me get comments working without Recaptcha enabled, and made some good suggestions in your PRs 👍
+<issue_comment>username_6: You may consult my demos on Framagit to get reCAPTCHA works, especially Minimal Mistakes:
+https://staticman-gitlab-pages.frama.io/minimal-mistakes-demo/post%20formats/post-image-caption/.
+<issue_comment>username_2: Thank you for the reply again @username_6 . Consulting that demo and it's source code helped me get everything working. Essentially I had 2 problems that were preventing me from getting ReCaptcha working:
+
+1. I had to duplicate the `reCaptcha` `siteKey` and `secret` fields from my `staticman.yml` into my `_config.yml`. This is because the minimal mistakes theme I'm using looks for them using `site.reCaptcha.siteKey` and `site.reCaptcha.secret`, which looks in the `_config.yml` and not the `staticman.yml`. Doing this got the ReCaptcha control actually showing up in my comment forms.
+2. Even though I'm using my own hosted instance of staticman, I had naively still used the public instance (as [per the docs](https://staticman.net/docs/encryption)) to encrypt my ReCaptcha secret. This led to my instance of staticman not knowing how to decrypt the secret properly. Once I changed to encrypt the value using my instance of staticman, then the decryption worked properly and everything worked. It took a bit of console line debugging to figure out this was the problem, but eventually found the error message that was getting eaten, instead of being returned back in the web response. Yay!
+
+Thanks so much for your help. I'm going to spend a bit of time to see if I can edit the code to have it return back the actual error message in the web response to make troubleshooting these issues easier for others in the future. Thanks so much for your help!
+<issue_comment>username_6: ░░░░░░░░░░░░░░░░░░░░░░░▄▄	░░░░░░░░░░░░░░░░░░░░░░█░░█	░░░░░░░░░░░░░░░░░░░░░░█░░█	░░░░░░░░░░░░░░░░░░░░░█░░░█	░░░░░░░░░░░░░░░░░░░░█░░░░█	░░░░░░░░░░░███████▄▄█░░░░░██████▄░░░░░░░░░░░▓▓▓▓▓▓█░░░░░░░░░░░░░░█░░░░░░░░░░░▓▓▓▓▓▓█░░░░░░░░░░░░░░█░░░░░░░░░░░▓▓▓▓▓▓█░░░░░░░░░░░░░░█░░░░░░░░░░░▓▓▓▓▓▓█░░░░░░░░░░░░░░█░░░░░░░░░░░▓▓▓▓▓▓█░░░░░░░░░░░░░░█░░░░░░░░░░░▓▓▓▓▓▓█████░░░░░░░░░█	░░░░░░░░░░░██████▀░░░░▀▀██████▀	◈☻◈☻◈☻◈☻◈☻◈☻◈☻◈☻◈☻◈☻◈☻◈☻◈ ░█░░░█░█░▄▀░█▀▀░░░░▀█▀░█░█░█░▄▀▀░░█░░░█░█▀░░░█▀░░▄▄░░█░░█▀█░█░░▀▄░░█▄▄░█░█░▀▄░█▄▄░░░░░█░░█░█░█░▄▄▀░◈☻◈☻◈☻◈☻◈☻◈☻◈☻◈☻◈☻◈☻◈☻◈☻◈
+--
+<issue_comment>username_7: Duplicate of #317<issue_closed>"
+department-of-veterans-affairs/vets-website,617730832,12665,"{'number': 12665.0, 'repo': 'vets-website', 'user_login': 'department-of-veterans-affairs'}","[{'action': 'opened', 'author': 'mr0sari0', 'comment_id': None, 'datetime': '2020-05-13T20:24:07Z', 'masked_author': 'username_0', 'text': '## Description\r\nThis PR focused on adding the prescribed date of the battery.\r\n\r\n## Testing done\r\n\r\n\r\n## Screenshots\r\n![screenshot-localhost_3001-2020 05 13-16_23_23](https://user-images.githubusercontent.com/12755283/81861348-1a493780-9536-11ea-9319-5645b7ade3c1.png)\r\n\r\n\r\n## Acceptance criteria\r\n- [ ] Each battery display should show a prescribed date\r\n\r\n## Definition of done\r\n- [ ] Events are logged appropriately\r\n- [ ] Documentation has been updated, if applicable\r\n- [ ] A link has been provided to the originating GitHub issue (or connected to it via ZenHub)\r\n- [ ] No sensitive information (i.e. PII/credentials/internal URLs/etc.) is captured in logging, hardcoded, or specs', 'title': 'MDOT: Batteries Page- Add Prescribed Date', 'type': 'issue'}
+ {'action': 'created', 'author': 'bradl3yC', 'comment_id': 628602460.0, 'datetime': '2020-05-14 12:31:35+00:00', 'masked_author': 'username_1', 'text': 'Dates should be formatted like: `April 5, 2020`', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'mr0sari0', 'comment_id': 628654435.0, 'datetime': '2020-05-14 13:57:48+00:00', 'masked_author': 'username_0', 'text': 'I think the design had prescribed dates in the MM/DD/YYYY format.', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'bradl3yC', 'comment_id': 628677498.0, 'datetime': '2020-05-14 14:36:11+00:00', 'masked_author': 'username_1', 'text': 'Yes but this is coming directly from 508 review.', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'mr0sari0', 'comment_id': 628689842.0, 'datetime': '2020-05-14 14:56:09+00:00', 'masked_author': 'username_0', 'text': 'Ok just pushed an update.', 'title': None, 'type': 'comment'}]","<issue_start><issue_comment>Title: MDOT: Batteries Page- Add Prescribed Date
+username_0: ## Description
+This PR focused on adding the prescribed date of the battery.
+
+## Testing done
+
+
+## Screenshots
+![screenshot-localhost_3001-2020 05 13-16_23_23](https://user-images.githubusercontent.com/12755283/81861348-1a493780-9536-11ea-9319-5645b7ade3c1.png)
+
+
+## Acceptance criteria
+- [ ] Each battery display should show a prescribed date
+
+## Definition of done
+- [ ] Events are logged appropriately
+- [ ] Documentation has been updated, if applicable
+- [ ] A link has been provided to the originating GitHub issue (or connected to it via ZenHub)
+- [ ] No sensitive information (i.e. PII/credentials/internal URLs/etc.) is captured in logging, hardcoded, or specs
+<issue_comment>username_1: Dates should be formatted like: `April 5, 2020`
+<issue_comment>username_0: I think the design had prescribed dates in the MM/DD/YYYY format.
+<issue_comment>username_1: Yes but this is coming directly from 508 review.
+<issue_comment>username_0: Ok just pushed an update."
+istio/istio.io,615068254,7248,"{'number': 7248.0, 'repo': 'istio.io', 'user_login': 'istio'}","[{'action': 'opened', 'author': 'sdake', 'comment_id': None, 'datetime': '2020-05-09T02:07:49Z', 'masked_author': 'username_0', 'text': '', 'title': 'Add instructions on installing Istio for vms', 'type': 'issue'}
+ {'action': 'created', 'author': 'sdake', 'comment_id': 626319798.0, 'datetime': '2020-05-10 12:21:48+00:00', 'masked_author': 'username_0', 'text': ""@elysdir\r\n\r\nJed,\r\n\r\nAfter witnessing your awesome review of https://github.com/istio/istio.io/pull/7208, I'd like to ask for help on this document.\r\n\r\nThis document is a restructure of two existing pages worth of content into one. The goal here is to lay rail for @username_5 to merge this work into the ongoing rework of multicluster post Istio 1.6. As this documentation is platform-neutral, I would like to see this documentation merge for 1.6. See https://github.com/istio/istio.io/issues/7168 for more context.\r\n\r\nAs is, it may be a little difficult to read. The material I had to work with wasn't in much better shape, and at least it has been de-platformed.\r\n\r\nI would appreciate your pro editing applied to this document prior to the branching of the 1.6 documentation.\r\n\r\nCheers\r\n-steve"", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'sdake', 'comment_id': 626321998.0, 'datetime': '2020-05-10 12:38:17+00:00', 'masked_author': 'username_0', 'text': ""@username_1 @costinm I'd appreciate your reviews if you have the time to make them. If not, we will ship without your review :)\r\n\r\nCheers\r\n-steve"", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'sdake', 'comment_id': 626322415.0, 'datetime': '2020-05-10 12:41:49+00:00', 'masked_author': 'username_0', 'text': 'The rendered document https://deploy-preview-7248--preliminary-istio.netlify.app/docs/setup/install/multicluster/virtual-machine/. This should go up a level in the directory structure.', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'irisdingbj', 'comment_id': 626446136.0, 'datetime': '2020-05-11 03:06:52+00:00', 'masked_author': 'username_1', 'text': '@username_0 Thanks a lot for taking care of this! I saw you have merged the two docs (single network and multi network) into one.  In this case, we might want to mention a little bit in the doc. Also I think we should  remain the following sections as well like `Send requests from VM workloads to Kubernetes services`, `Running services on the added VM` and `Cleanup`. what do you think?', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'irisdingbj', 'comment_id': 626448699.0, 'datetime': '2020-05-11 03:19:34+00:00', 'masked_author': 'username_1', 'text': '@username_0 Thanks a lot for taking care of this! I saw you have merged the two docs (single network and multi network) into one.  In this case, we might want to mention a little bit in the doc. Also suggest we remain the following sections about `Send requests from VM workloads to Kubernetes services`, `Running services on the added VM` and `Cleanup` what do you think?', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'sdake', 'comment_id': 626463170.0, 'datetime': '2020-05-11 04:30:31+00:00', 'masked_author': 'username_0', 'text': '@username_1 I have left the original single and multi network virtual machine documents alone. The next step here, after testing whether this works with gateways (which it hopefully should), is to simply delete the install sections from the examples and reference this singular installation document.\r\n\r\nCheers,\r\n-steve', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'howardjohn', 'comment_id': 626789698.0, 'datetime': '2020-05-11 15:53:05+00:00', 'masked_author': 'username_2', 'text': 'Overall the content LGTM though', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'sdake', 'comment_id': 627027608.0, 'datetime': '2020-05-11 23:57:31+00:00', 'masked_author': 'username_0', 'text': '@username_2 PTAL. Thanks :)', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'sdake', 'comment_id': 627027703.0, 'datetime': '2020-05-11 23:57:48+00:00', 'masked_author': 'username_0', 'text': '@username_1 PTAL.', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'sdake', 'comment_id': 627027861.0, 'datetime': '2020-05-11 23:58:22+00:00', 'masked_author': 'username_0', 'text': '@jacob-delgado PTAL.', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'sdake', 'comment_id': 627027945.0, 'datetime': '2020-05-11 23:58:43+00:00', 'masked_author': 'username_0', 'text': 'Rendering here: https://deploy-preview-7248--preliminary-istio.netlify.app/docs/setup/install/multicluster/virtual-machine/', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'irisdingbj', 'comment_id': 627972832.0, 'datetime': '2020-05-13 13:09:36+00:00', 'masked_author': 'username_1', 'text': '@username_0 LGTM Thanks!', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'irisdingbj', 'comment_id': 628384046.0, 'datetime': '2020-05-14 04:47:28+00:00', 'masked_author': 'username_1', 'text': '@rusername_6 Thanks for the comments. Take a look at our multi-cluster set up guide, eg: https://istio.io/docs/setup/install/multicluster/shared/ we also use the certs from samples. put the doc here does not mean it is `production` ready approach. We just want to tell user the possible way to support VM as how to manage certs is really serious in enterprise and user can tweak this themself.\r\n\r\nSo I think we can keep the vm docs in current `install` location to align with multi-cluster ones.', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'sdake', 'comment_id': 628534531.0, 'datetime': '2020-05-14 10:08:29+00:00', 'masked_author': 'username_0', 'text': ""For future time-travelers.\r\n\r\nAn overflow discussion from an Environments WG meeting took place independently of this PR. Sadly this [PR was reviewed and deemed unsuitable](https://github.com/istio/istio.io/pull/7248#pullrequestreview-411207740) after this PR was linked in the #overflow-environments slack channel in the below thread:\r\n```\r\nJacob Delgado (Aspen Mesh)  11:00 AM\r\nThe plan to revert https://github.com/istio/istio/pull/23734 based on https://github.com/istio/istio/pull/23126. @SecurityInsanity can you please post the revert and I will approve it. Today is the code freeze and we intend to try and get an rc0 for 1.6.0 today. Including @Brian Avery\r\n#23734 [release-1.6] initial sidecar-bootstrap command\r\n<https://github.com/istio/istio|istio/istio>istio/istio | May 11th | Added by GitHub\r\n#23126 initial sidecar-bootstrap command\r\n<https://github.com/istio/istio|istio/istio>istio/istio | Apr 21st | Added by GitHub\r\n\r\nEd Snible (IBM)  11:01 AM\r\nwas added to #overflow-environments by Jacob Delgado (Aspen Mesh). Also, Shriram Rajagopalan (Tetrate) joined.\r\n\r\nShriram Rajagopalan (Tetrate)  11:07 AM\r\nwhy is it being reverted?\r\n11:08\r\nits experimental isn’t it? at the very least, it simplifies our docs and makes it look better..\r\n\r\nSteve Dake  11:12 AM\r\njeesh we just spent 8 peoples worth. of time for 4 hours and 2 peoples. worth of time for 40 hours  making the docs understandable. I don’t mind experimental work in the code base, but we definately agreed not to document such experimental code as the main approach.\r\n11:16\r\nwe aren’t changing the docs at this point. I am on the fence about a revert. The. problem with not reverting - and experimenting in master instead with istioctl against a 1.6 version of istio, is that it becomes a permanent fixture of our api if it is marked. as experimental. This wasn’t. approved for 1.6, and hasn’t gone through enough review. We did agree it makes sense to keep in the repo for master, just not 1.6.\r\n11:17\r\nI think last minute surrprises to the UX are not good. As a WG lead, I am not supportive of a backport for a feature 2 or 3 days prior to freeze.\r\n\r\nShriram Rajagopalan (Tetrate)  11:26 AM\r\ncan you point me to the docs for VMs please?\r\n\r\nSteve Dake  11:29 AM\r\ni can.\r\n\r\nShriram Rajagopalan (Tetrate)  11:29 AM\r\nthe 2-3 days is valid but it was because of the intensive bike shedding on the PR which actually exposed a whole bunch of flaws in our UX for VMs. The idea behind experimental is that it is “experimental” - not a stable supported one. To get feedback. And whta I see being documented is actually equally “experimental”, i.e. it is essentially telling people to use the cluster’s root CA or intermediate CA to mint VM certificates rather than going through citadel. The command is actually helping us mask this thing by exposing some common interface for end users and changing the mechanism underneath.\r\n\r\nSteve Dake  11:30 AM\r\nhttps://github.com/istio/istio.io/pull/7257 is one PR\r\n\r\nusername_0username_0\r\n#7257 Virtual machine integration\r\nWe have a story coming together for virtual machine integration.\r\nLabels\r\ncla: yes, size/XS\r\nComments\r\n1\r\n<https://github.com/istio/istio.io|istio/istio.io>istio/istio.io | May 11th | Added by GitHub\r\n\r\nShriram Rajagopalan (Tetrate)  11:31 AM\r\nthats not the doc. its just the feature status (which is a separate discussion).\r\n\r\nSteve Dake  11:31 AM\r\nhttps://deploy-preview-7248--preliminary-istio.netlify.app/docs/setup/install/multicluster/virtual-machine/\r\n\r\nIstioIstio\r\nInstalling Istio for virtual machine connectivity\r\nInstall an Istio mesh such that a virtual machine can connect to it and configure the virtual machine.\r\n11:31\r\ni know, I was linking both pieces of work…\r\n11:32\r\nThe docs PR is rednered above. the actual pr is https://github.com/istio/istio.io/pull/7248\r\n\r\nusername_0username_0\r\n#7248 Add instructions on installing Istio for vms\r\nFixes: #7168\r\nLabels\r\ncla: yes, community/testing days, size/L\r\nComments\r\n13\r\n<https://github.com/istio/istio.io|istio/istio.io>istio/istio.io | May 8th | Added by GitHub\r\n\r\nShriram Rajagopalan (Tetrate)  11:34 AM\r\nand fwiw, all the things you documented are also about to change :slightly_smiling_face:. seems the agreement has been to use the service account token for bootstrapping VMs and not to recommend to end users that they should be using root CA certs or intermediate CA certs (to use your own argument, it sticks and then becomes widely known that istio recommends end users to use root CA certs to bootstrap the vms)\r\n11:34\r\ncc @username_9\r\n\r\nSven Mawson  11:34 AM\r\nwas added to #overflow-environments by Shriram Rajagopalan (Tetrate). Also, Rigs Caballero joined.\r\n\r\nSteve Dake  11:43 AM\r\n@username_6 I am out of energy to argue. Time for bed. Please take it up with @shweta singh\r\n[Truncated]\nThat's all I'm saying. :smile:\r\n:+1:\r\n1\r\n\r\n\r\nSteve Dake  4:04 PM\r\n@username_6 - just so we are crystal clear. I disagree with your assessment in this review: https://github.com/istio/istio.io/pull/7248#pullrequestreview-411207740.\r\n\r\nSven Mawson  5:52 PM\r\nGiven that keeping in examples in 1.6 is not a regression, my preference is keep it in there until we do the update to use a token instead. I don't think that will take us long but we need to validate it. Then we can move it over to install and make it more official.\r\n\r\nRigs Caballero  7:59 PM\r\nJust to clarify, the content in the Install section is not any more or less official than the content in the Examples section. At least, not according to our established content types: https://istio.io/about/contribute/add-content/#content-types\r\nIstioIstio\r\nAdd New Documentation\r\nDetails how to contribute new documentation to Istio.\r\n\r\nSteve Dake  7:59 PM\r\n@username_6 I want to be clear on the review for the feature that kicked off this discussion. You had indicated the addition of the PR that exposed UX flaws that then morphed into a debate about inclusion or not of this PR.  I had complained that a feature was added in the last 3 days. You had said this feature was heavily bikeshed in the review. Can you clarify was this feature ever approved in the roadmap for 1.6.\r\n```"", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'sdake', 'comment_id': 628567592.0, 'datetime': '2020-05-14 11:19:55+00:00', 'masked_author': 'username_0', 'text': 'After 140 review comments, it is quite clear this work is needed, and the eight or so reviewers feel deeply that this work must be absolutely perfect. I believe all review criteria have been met for any documentation change, given our content guidelines. Additionally, this guide is **accurate**, **vendor-neutral**, and **secure by default**.\r\n\r\nThe point of debate now is not why or when this guide should be published but where. @username_9 in the [slack thread](https://github.com/istio/istio.io/pull/7248#issuecomment-628534531) indicated there is a consensus about the use of `token` so this work should be published in `examples`. Unfortunately, there is not a consensus for the usage of `token`. I left a message for @username_1 via slack after the slack thread had concluded to scope the token work, so the authors of this work would have a thorough understanding of the level of commitment of the token work to understand the reasonableness of the request. @username_1 has indicated to me there are wildly diverging ideas about the usage of `token` and in particular, one of the projects working group leads does not agree that `token` should be used at all, or if so, how. Therefore, the request to document unknown work, that does not have consensus, in a patch release, that hs not been committed to any roadmap, is *unreasonable*.\r\n\r\nThis guide improves the state of the art from other guide offerings in istio.io documentation in the [install content](https://istio.io/about/contribute/add-content/#content-types), which simply use certs well known all over the world as they are distributed in Istio\'s `sample/certs` directory contained in the [istio tarball](https://github.com/istio/istio/releases/tag/1.6.0-rc.0).in the 131 releases that have been distributed by the Istio organization.\r\n\r\nThe fact that the bar has been raised, **YET AGAIN**, for security concerns is not lost on the authors. Most of the work of this PR was obtaining the agreement and consensus of using certificates for this work, in the first place, which is now in question. From a [Security WG lead]( https://github.com/istio/istio/pull/23704#issuecomment-626957819) `This is great work. Thank you Iris :)""`and from a [Networking WG lead](https://github.com/istio/istio/pull/23704#pullrequestreview-409330225) `Excellent work ! Added few comments - but it\'s great you are making this change.`. It is difficult to reason from these reviews comments that certificates are not a viable path forward, and the alternative token approach is the immediately correct answer.\r\n\r\nThe reasonable way to proceed is to merge this PR, `AS-IS`, so the authors may finish one piece of work before beginning the next.\r\n\r\nTherefore, given the above facts and objective perspective, I request one of the Documentation WG maintainers to approve this work `AS-IS`, or make reasonable requests for change that maintain the spirit the [install content guidelines](https://istio.io/about/contribute/add-content/#content-types).\r\n\r\nCheers,\r\n-steve', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'linsun', 'comment_id': 628639213.0, 'datetime': '2020-05-14 13:34:59+00:00', 'masked_author': 'username_3', 'text': ""**I think there is no doubt this work is valuable.**  It is a good step towards the longer term secure approach to bootstrap the VM.  The debate is if the document is appropriate to be under the install section of multicluster or if it should be continued to be under samples.\r\n\r\nMy vote is to be continued to be under samples, given the following concerns:\r\n\r\n-To me, It is confusing to be under multi clusters install as you can use VMs with single cluster.  I don't think having this doc helps users who are interested in multicluster install.\r\n\r\n- Many folks have expressed concerns with having access to root CA cert (or intermediate CA cert) to bootstrap vm.  This is to be replaced with a more secure approach.   @username_1 you raised the issue of us having root CA (or intermediate CA) certs in multicluster install today, but that is different because it is mesh admin who set up the multicluster install.  We don't expect a mesh admin to bootstrap a vm.  It should be a service owner or deployer who runs his/her service on VM.  Hope this helps you understand people's concern."", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'frankbu', 'comment_id': 628656067.0, 'datetime': '2020-05-14 14:00:21+00:00', 'masked_author': 'username_4', 'text': ""Just move the doc back to Examples (for now) and I'll approve it."", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'sdake', 'comment_id': 628700424.0, 'datetime': '2020-05-14 15:12:52+00:00', 'masked_author': 'username_0', 'text': 'In your review, you have changed the debate from tokens, which don\'t exist, are not in the plan for Istio 1.6, and may not be in the plan for Istio 1.7 and are not deliverable in 1-2 weeks as was discussed in slack as a timeframe for delivering this unscoped work. The concern about moving to tokens is unwarranted until there is actually some token work to move forward to. As you have not brought up tokens in your argument, I will consider this a point not worth discussing as it is a strawman argument...\r\n\r\nAs you have changed the nature of the debate of this PR, I will address each individually:\r\n\r\n1. Concern with access to root CA\r\n\r\nYes, this is a concern. It should be fairly obvious that access to root CAs is not ideal. The istio.io website lacks any content on correctly managing root CAs. I think content belongs in the concepts section to cover this topic. Do you intend to create a dependency on this work for a concepts document?\r\n\r\n2. Multicluster install has access to root CA\r\n\r\nThis is a valid point, but only insofar as a (bad) precedent has been set that distributing certificates that are well known across the internet is a good practice for Istio to do. That bad precedent has been corrected in this work for virtual machine integration!\r\n\r\n3. Who is ""we"" in `""we"" don\'t expect a mesh admin to bootstrap a VM?`Who do you represent when you use the word we?\r\n\r\nMY position, representing Environments WG as a lead and maintainer is that mesh admins would bootstrap a virtual machine.\r\n\r\nCheers\r\n-steve', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'frankbu', 'comment_id': 628723600.0, 'datetime': '2020-05-14 15:49:51+00:00', 'masked_author': 'username_4', 'text': '@username_0 This VM install doc falls into a category of a doc that you are proposing to upgrade from example to official install instruction. Previously VM install was in the category of ""here\'s a way to do it"", but now you are proposing to change it to ""here is THE WAY to do it"" and there seems to be one reviewer (@rusername_6) that feels that there are reasons why we shouldn\'t be upgrading it yet. Without unanimous dev sign-off, I (and other doc maintainers) would request @username_6, or some other TOC member, to approve it before we merge the PR. Alternatively, you can leave it in examples for 1.6 and revisit in 1.7.', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'rcaballeromx', 'comment_id': 628736772.0, 'datetime': '2020-05-14 16:12:17+00:00', 'masked_author': 'username_5', 'text': 'It seems to me that there are two issues with not publishing this content now and under `Install`:\r\n\r\n1. One goal of this effort was to ensure our VM content followed the our documentation contribution guidance on [content types](https://istio.io/about/contribute/add-content/#content-types). That guidance states that Setup content: ""Focus on the installation steps needed to complete an Istio deployment."" That puts this content under the Setup content category making `Install` the most suitable place for it IMO. The content types guidance was discussed and approved at the Docs WG and the TOC. \r\n\r\n@username_4 As an Istio Docs maintainer, I would be ok with you approving the content and merging it where it is now based on that guidance. I\'ll probably follow up with a PR of my own with some minor copy-edits.\r\n\r\n2. The folks involved in this effort followed our processes throughout. The work was added to the 1.6 roadmap, discussed with WGs in a timely fashion, and has been thoroughly reviewed. Those processes allow us to work together respectfully and valuing all perspectives. I would urge everyone to consider: What message are we sending to our contributors that follow our processes when their efforts are derailed last minute because of a feature that\'s not working at the moment, that was not part of the release planning, and that was not discussed until very late with the pertinent WGs? \r\n\r\nIMO, we can always publish this content now on `Install` to meet our content types criteria and iterate further later. After the token feature is agreed upon and developed, we can update the content for it to use the new feature.', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'shriram', 'comment_id': 628739418.0, 'datetime': '2020-05-14 16:17:07+00:00', 'masked_author': 'username_6', 'text': ""@username_4 please don't @ me: I'm not the person you're looking for. Thanks."", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'frankbu', 'comment_id': 628749237.0, 'datetime': '2020-05-14 16:33:58+00:00', 'masked_author': 'username_4', 'text': 'Sorry @username_6, that was a typo. Notice my comment referred to Shriram twice, the first one was correct, but the second one was missing the leading ""r"" :(', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'frankbu', 'comment_id': 628756757.0, 'datetime': '2020-05-14 16:47:35+00:00', 'masked_author': 'username_4', 'text': ""@rusername_6 PTAL at these:\r\n\r\nhttps://github.com/istio/istio.io/pull/7248#issuecomment-628723600\r\nhttps://github.com/istio/istio.io/pull/7248#issuecomment-628736772\r\n\r\n@username_5 The other part of the doc process is that we require dev approval if the change requires technical review. This PR doesn't have that sign-off yet."", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'rcaballeromx', 'comment_id': 628784336.0, 'datetime': '2020-05-14 17:37:35+00:00', 'masked_author': 'username_5', 'text': '@username_8 The doc with the instructions to plug in an existing CA are here: https://istio.io/docs/tasks/security/plugin-ca-cert/', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'rshriram', 'comment_id': 628887986.0, 'datetime': '2020-05-14 21:09:24+00:00', 'masked_author': 'username_7', 'text': 'How about a middle ground: Like the sidecar-bootstrap command, we can have a banner on top of the install page proposed in this PR that this is a `proof-of-concept` setup and not meant for production use, and that several aspects of this flow is bound to change in subsequent releases. Simply stating experimental or demo is vague. Explicit wording like above conveys to the user that we have the doc in its current place (install) for completeness of flow/structure but that this is bound to change [and not to be used as the canonical reference]. If we have this warning clearly on top of the page, then I think its okay to have the currently documented setup  be under the install section.', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'nmittler', 'comment_id': 628907047.0, 'datetime': '2020-05-14 21:55:37+00:00', 'masked_author': 'username_8', 'text': 'Generally agree ... I think we\'re converging here. I see 2 main points:\r\n\r\n1. We should warn about installations which are proof-of-concept. \r\n2. We should warn about installations that may change in future releases.\r\n\r\nFor 1, if you\'re referring to the cert provisioning scheme (i.e. self-signed root and pushing around intermediate CAs in the cacerts secret) then all of our installation docs would effectively be proof-of-concept by that definition. \r\n\r\nAre we absolutely certain nobody is running with this sort of configuration in production? If not, then I think ""proof-of-concept"" might be a little strong. Perhaps just indicating in the banner that production use cases will likely use an external CA for various reasons, and just leave it at that ... effectively what Steve has at the top now.\r\n\r\nFor 2, would stating the feature level help here? For example, multicluster is an Alpha-level feature. The banner can indicate this along with the user expectations for a feature of that level.\r\n\r\nFor these sorts of banners, we should probably standardize on a common set that are imported from docs like these. Otherwise, there will likely be a lot of variance and possibly conflicting information from page to page. FYI @username_4 \r\n\r\nLooping in a few other, since this is really a TOC discussion, rather than applying to this specific doc...\r\n\r\n@louiscryan @username_9 @costinm @username_2 @rusername_6 WDYT?', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'smawson', 'comment_id': 628960625.0, 'datetime': '2020-05-15 00:47:31+00:00', 'masked_author': 'username_9', 'text': ""I think this PR has stalled a bit for a number of reasons:\r\n\r\n1. It requires the person bootstrapping the VM to access the root keys for the CA (root or intermediate). This should not be required for a namespace admin to add a VM to their namespace. This is different than self-signing.\r\n\r\n2. It is for some reason being added to multicluster install, and has nothing to do with multicluster.\r\n\r\nSo the pushback from at least 2 TOC members is that this should stay in examples until we can fix both of those, and we should try to fix them in 1.6 timeframe but not at release.\r\n\r\nI'd like us to move aggressively to fix #1 and use a token instead, this is purely documentation and validation, no istio code required, since that approach already works. But we need someone to work on it (testing it out and then updating the doc)."", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'nmittler', 'comment_id': 628961958.0, 'datetime': '2020-05-15 00:53:14+00:00', 'masked_author': 'username_8', 'text': 'Ah ok, I had misunderstood the push-back ... thanks for clarifying.  I agree with everything @username_9 said :).\r\n\r\n@username_0 can we just move this back to examples for now?', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'sdake', 'comment_id': 628978783.0, 'datetime': '2020-05-15 01:51:32+00:00', 'masked_author': 'username_0', 'text': '@username_9 Please be honest with everyone participating in this review. This PR has stalled for political reasons, and not technical reasons. There is no good reason to block this work for work that could take a month or more to sort out. A token approach may or may not work. I have seen no PR or documentation to supplant this documentation. The Istio community does not set a good precedent by bowing to political pressure on a PR that is technically correct and accurate.\r\n\r\nI think it is clear there is significant frustration on the part of anyone writing documentation or reviewing documentation - that their work will be damaged by political pressure in the final days of a release, as expressed in this [review](https://github.com/istio/istio.io/pull/7248#issuecomment-628736772) and the hilarity of this [review](https://github.com/istio/istio.io/pull/7248#issuecomment-628907047). This is not a new problem for Istio, it is a festering wound.\r\n\r\nI will address point #2 you have raised, as I have already described in [an earlier comment](https://github.com/istio/istio.io/pull/7248#issuecomment-628700424).\r\n\r\n@username_4 you have offered a voice of reason in this review. I am hopeful this will merge with my next commit. If someone wishes rework to make this document use tokens, I can do that. I am not doing that prior to the 1.6 release. I am not moving the target of this review content to the examples directory because these are installation instructions, not examples.\r\n\r\nCheers,\r\n-steve', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'sdake', 'comment_id': 629185174.0, 'datetime': '2020-05-15 11:33:04+00:00', 'masked_author': 'username_0', 'text': 'I have personally verified these instructions. I am an SME in this area. This document is neutral, accurate, and correct.\r\n\r\n@username_1, an SME in this area, has also personally verified these instructions. Reference:\r\n<img width=""692"" alt=""Screen Shot 2020-05-15 at 4 24 01 AM"" src=""https://user-images.githubusercontent.com/755849/82045548-20d5cd00-9664-11ea-8ef1-f916ba584bef.png"">\r\n\r\nI would kindly ask one of the TOC membership to approve this document to meet @username_4 \'s requirement that a technical document without unanimous technical consent be approved by at least one TOC member:\r\n\r\n@username_10 \r\n@duderino\r\n@username_3 \r\n@louiscryan \r\n@rusername_6 \r\n@username_9 \r\n\r\nCheers,\r\n-steve', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'dcberg', 'comment_id': 629363065.0, 'datetime': '2020-05-15 16:43:44+00:00', 'masked_author': 'username_10', 'text': 'Regarding comments from https://github.com/istio/istio.io/pull/7248#issuecomment-628960625\r\n\r\nFor (1) we should add the same text that exists for the instructions in the ""[Replicated control planes](https://istio.io/docs/setup/install/multicluster/gateways/)"" section that warns about the use of the sample keys.\r\n\r\n`The root and intermediate certificate from the samples directory are widely distributed and known. Do not use these certificates in production as your clusters would then be open to security vulnerabilities and compromise.`\r\n\r\nLooks like @username_0 is making adjustments for item (2).', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'sdake', 'comment_id': 629369619.0, 'datetime': '2020-05-15 16:55:39+00:00', 'masked_author': 'username_0', 'text': ""@username_10 I have addressed the comment with the security vulnerabilities by the use of the makefile. We don't use widely known certs in the virtual machine integration. Instead we generate them per virtual machine.\r\n\r\nI have added this text instead to handle that review change:\r\n```\r\n {{< warning >}}\r\n This guide relies heavily on the\r\n[stable plugin ca certificate](/docs/tasks/security/cert-management/plugin-ca-cert/) feature. Istio\r\ndoes not offer an industry standard recommendation for certificate management. Please consult your\r\ninformation security team when using any plugin certificate.  The determination of your company\r\npolicies for certificate management is the choice of your company.\r\n {{< /warning >}}\r\n```"", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'sdake', 'comment_id': 629370842.0, 'datetime': '2020-05-15 16:58:06+00:00', 'masked_author': 'username_0', 'text': '@username_6 I have added a banner to the website. The banner contains the text:\r\n```\r\nThis workflow is tested and validated. The Istio authors feel this workflow is suitable for experimentation but not production. Like all alpha features, this workflow is subject to change.\r\n```\r\n\r\nRendering here: https://deploy-preview-7248--preliminary-istio.netlify.app/docs/setup/install/multicluster/virtual-machine/\r\n\r\nCheers,\r\n-steve', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'linsun', 'comment_id': 629421769.0, 'datetime': '2020-05-15 18:51:03+00:00', 'masked_author': 'username_3', 'text': 'Thank you @username_0 for adding an experimental banner, this LGTM as well.\r\n\r\nOne ask - can we not make the doc the first under our install section?  I would like it to be below multicluster from your https://deploy-preview-7248--preliminary-istio.netlify.app/docs/setup/install/virtual-machine/', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'ericvn', 'comment_id': 629454811.0, 'datetime': '2020-05-15 20:01:14+00:00', 'masked_author': 'username_11', 'text': ""I am not sure why anyone things the banner is a good idea. It shows up on every single page, including if someone goes to istio.io (in this case preliminary.istio.io) for the first time. Nad how do any of those pages understand (this workflow...)?\r\n\r\nIf the banner only showed up for the one page, I think it's fine, but if you start at the top of the pages, and click around, by the time you hit the actual VM installation page, it's gone."", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'sdake', 'comment_id': 629483061.0, 'datetime': '2020-05-15 21:04:32+00:00', 'masked_author': 'username_0', 'text': ""Eric,\r\n\r\nI misunderstood the instruction on the banner. I didn't verify the rest of the website wasn't impacted. A banner across our whole website clearly won't do.\r\n\r\nI'll look into the banner and see if I can find or implement a per-page alternative."", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'sdake', 'comment_id': 629488179.0, 'datetime': '2020-05-15 21:12:55+00:00', 'masked_author': 'username_0', 'text': 'Thanks, @username_3 @username_11 had suggested a change and I applied it to the PR independently (in case I need to make further changes).\r\n\r\nCheers\r\n-steve', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'sdake', 'comment_id': 629553862.0, 'datetime': '2020-05-15 23:59:34+00:00', 'masked_author': 'username_0', 'text': 'rebase was for netlify build failure.', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'sdake', 'comment_id': 630328711.0, 'datetime': '2020-05-18 17:29:10+00:00', 'masked_author': 'username_0', 'text': ""@username_4 PTAL - I think the problems are addressed, John (SME) has given an approval a few times, but can't atm as he is out of office. I think the TOC is aligned that this work makes sense, and from a tech writing perspective everything looks good.\r\n\r\nGuantlet has been run :)\r\n\r\nCheers\r\n-steve"", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'sdake', 'comment_id': 630410643.0, 'datetime': '2020-05-18 20:12:53+00:00', 'masked_author': 'username_0', 'text': 'This could make sense as a follow-on, and some thing i had actually wished to tackle after 1.6 ships. The docs have enough warnings and info blocks from experts that the alpha nature of the code is obvious. I can expand on the warnings if you like.\r\n\r\nCheers,\r\n-steve', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'smawson', 'comment_id': 630444630.0, 'datetime': '2020-05-18 21:27:40+00:00', 'masked_author': 'username_9', 'text': '@myidpt Oliver can we fix the Makefile to allow it to support generating multiple VM certificates? Or can you verify it supports that already? Otherwise as currently specified you basically have to reinstall Istio when you want to generate a VM cert, and you can only generate a single VM cert, obviously not what we want.', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'irisdingbj', 'comment_id': 630503629.0, 'datetime': '2020-05-19 00:24:53+00:00', 'masked_author': 'username_1', 'text': '@username_9 Yes, this is one of the following up item I will address later as requested in https://github.com/istio/istio/pull/23704.', 'title': None, 'type': 'comment'}]","<issue_start><issue_comment>Title: Add instructions on installing Istio for vms
+username_0: 
+<issue_comment>username_0: @elysdir
+
+Jed,
+
+After witnessing your awesome review of https://github.com/istio/istio.io/pull/7208, I'd like to ask for help on this document.
+
+This document is a restructure of two existing pages worth of content into one. The goal here is to lay rail for @username_5 to merge this work into the ongoing rework of multicluster post Istio 1.6. As this documentation is platform-neutral, I would like to see this documentation merge for 1.6. See https://github.com/istio/istio.io/issues/7168 for more context.
+
+As is, it may be a little difficult to read. The material I had to work with wasn't in much better shape, and at least it has been de-platformed.
+
+I would appreciate your pro editing applied to this document prior to the branching of the 1.6 documentation.
+
+Cheers
+-steve
+<issue_comment>username_0: @username_1 @costinm I'd appreciate your reviews if you have the time to make them. If not, we will ship without your review :)
+
+Cheers
+-steve
+<issue_comment>username_0: The rendered document https://deploy-preview-7248--preliminary-istio.netlify.app/docs/setup/install/multicluster/virtual-machine/. This should go up a level in the directory structure.
+<issue_comment>username_1: @username_0 Thanks a lot for taking care of this! I saw you have merged the two docs (single network and multi network) into one.  In this case, we might want to mention a little bit in the doc. Also I think we should  remain the following sections as well like `Send requests from VM workloads to Kubernetes services`, `Running services on the added VM` and `Cleanup`. what do you think?
+<issue_comment>username_1: @username_0 Thanks a lot for taking care of this! I saw you have merged the two docs (single network and multi network) into one.  In this case, we might want to mention a little bit in the doc. Also suggest we remain the following sections about `Send requests from VM workloads to Kubernetes services`, `Running services on the added VM` and `Cleanup` what do you think?
+<issue_comment>username_0: @username_1 I have left the original single and multi network virtual machine documents alone. The next step here, after testing whether this works with gateways (which it hopefully should), is to simply delete the install sections from the examples and reference this singular installation document.
+
+Cheers,
+-steve
+<issue_comment>username_2: Overall the content LGTM though
+<issue_comment>username_0: @username_2 PTAL. Thanks :)
+<issue_comment>username_0: @username_1 PTAL.
+<issue_comment>username_0: @jacob-delgado PTAL.
+<issue_comment>username_0: Rendering here: https://deploy-preview-7248--preliminary-istio.netlify.app/docs/setup/install/multicluster/virtual-machine/
+<issue_comment>username_1: @username_0 LGTM Thanks!
+<issue_comment>username_1: @rusername_6 Thanks for the comments. Take a look at our multi-cluster set up guide, eg: https://istio.io/docs/setup/install/multicluster/shared/ we also use the certs from samples. put the doc here does not mean it is `production` ready approach. We just want to tell user the possible way to support VM as how to manage certs is really serious in enterprise and user can tweak this themself.
+
+So I think we can keep the vm docs in current `install` location to align with multi-cluster ones.
+<issue_comment>username_0: For future time-travelers.
+
+An overflow discussion from an Environments WG meeting took place independently of this PR. Sadly this [PR was reviewed and deemed unsuitable](https://github.com/istio/istio.io/pull/7248#pullrequestreview-411207740) after this PR was linked in the #overflow-environments slack channel in the below thread:
+```
+Jacob Delgado (Aspen Mesh)  11:00 AM
+The plan to revert https://github.com/istio/istio/pull/23734 based on https://github.com/istio/istio/pull/23126. @SecurityInsanity can you please post the revert and I will approve it. Today is the code freeze and we intend to try and get an rc0 for 1.6.0 today. Including @Brian Avery
+#23734 [release-1.6] initial sidecar-bootstrap command
+<https://github.com/istio/istio|istio/istio>istio/istio | May 11th | Added by GitHub
+#23126 initial sidecar-bootstrap command
+<https://github.com/istio/istio|istio/istio>istio/istio | Apr 21st | Added by GitHub
+
+Ed Snible (IBM)  11:01 AM
+was added to #overflow-environments by Jacob Delgado (Aspen Mesh). Also, Shriram Rajagopalan (Tetrate) joined.
+
+Shriram Rajagopalan (Tetrate)  11:07 AM
+why is it being reverted?
+11:08
+its experimental isn’t it? at the very least, it simplifies our docs and makes it look better..
+
+Steve Dake  11:12 AM
+jeesh we just spent 8 peoples worth. of time for 4 hours and 2 peoples. worth of time for 40 hours  making the docs understandable. I don’t mind experimental work in the code base, but we definately agreed not to document such experimental code as the main approach.
+11:16
+we aren’t changing the docs at this point. I am on the fence about a revert. The. problem with not reverting - and experimenting in master instead with istioctl against a 1.6 version of istio, is that it becomes a permanent fixture of our api if it is marked. as experimental. This wasn’t. approved for 1.6, and hasn’t gone through enough review. We did agree it makes sense to keep in the repo for master, just not 1.6.
+11:17
+I think last minute surrprises to the UX are not good. As a WG lead, I am not supportive of a backport for a feature 2 or 3 days prior to freeze.
+
+Shriram Rajagopalan (Tetrate)  11:26 AM
+can you point me to the docs for VMs please?
+
+Steve Dake  11:29 AM
+i can.
+
+Shriram Rajagopalan (Tetrate)  11:29 AM
+the 2-3 days is valid but it was because of the intensive bike shedding on the PR which actually exposed a whole bunch of flaws in our UX for VMs. The idea behind experimental is that it is “experimental” - not a stable supported one. To get feedback. And whta I see being documented is actually equally “experimental”, i.e. it is essentially telling people to use the cluster’s root CA or intermediate CA to mint VM certificates rather than going through citadel. The command is actually helping us mask this thing by exposing some common interface for end users and changing the mechanism underneath.
+
+Steve Dake  11:30 AM
+https://github.com/istio/istio.io/pull/7257 is one PR
+
+username_0username_0
+#7257 Virtual machine integration
+We have a story coming together for virtual machine integration.
+Labels
+cla: yes, size/XS
+Comments
+1
+<https://github.com/istio/istio.io|istio/istio.io>istio/istio.io | May 11th | Added by GitHub
+
+Shriram Rajagopalan (Tetrate)  11:31 AM
+thats not the doc. its just the feature status (which is a separate discussion).
+
+Steve Dake  11:31 AM
+https://deploy-preview-7248--preliminary-istio.netlify.app/docs/setup/install/multicluster/virtual-machine/
+
+IstioIstio
+Installing Istio for virtual machine connectivity
+Install an Istio mesh such that a virtual machine can connect to it and configure the virtual machine.
+11:31
+i know, I was linking both pieces of work…
+11:32
+The docs PR is rednered above. the actual pr is https://github.com/istio/istio.io/pull/7248
+
+username_0username_0
+#7248 Add instructions on installing Istio for vms
+Fixes: #7168
+Labels
+cla: yes, community/testing days, size/L
+Comments
+13
+<https://github.com/istio/istio.io|istio/istio.io>istio/istio.io | May 8th | Added by GitHub
+
+Shriram Rajagopalan (Tetrate)  11:34 AM
+and fwiw, all the things you documented are also about to change :slightly_smiling_face:. seems the agreement has been to use the service account token for bootstrapping VMs and not to recommend to end users that they should be using root CA certs or intermediate CA certs (to use your own argument, it sticks and then becomes widely known that istio recommends end users to use root CA certs to bootstrap the vms)
+11:34
+cc @username_9
+
+Sven Mawson  11:34 AM
+was added to #overflow-environments by Shriram Rajagopalan (Tetrate). Also, Rigs Caballero joined.
+
+Steve Dake  11:43 AM
+@username_6 I am out of energy to argue. Time for bed. Please take it up with @shweta singh
+[Truncated]
+That's all I'm saying. :smile:
+:+1:
+1
+
+
+Steve Dake  4:04 PM
+@username_6 - just so we are crystal clear. I disagree with your assessment in this review: https://github.com/istio/istio.io/pull/7248#pullrequestreview-411207740.
+
+Sven Mawson  5:52 PM
+Given that keeping in examples in 1.6 is not a regression, my preference is keep it in there until we do the update to use a token instead. I don't think that will take us long but we need to validate it. Then we can move it over to install and make it more official.
+
+Rigs Caballero  7:59 PM
+Just to clarify, the content in the Install section is not any more or less official than the content in the Examples section. At least, not according to our established content types: https://istio.io/about/contribute/add-content/#content-types
+IstioIstio
+Add New Documentation
+Details how to contribute new documentation to Istio.
+
+Steve Dake  7:59 PM
+@username_6 I want to be clear on the review for the feature that kicked off this discussion. You had indicated the addition of the PR that exposed UX flaws that then morphed into a debate about inclusion or not of this PR.  I had complained that a feature was added in the last 3 days. You had said this feature was heavily bikeshed in the review. Can you clarify was this feature ever approved in the roadmap for 1.6.
+```
+<issue_comment>username_0: After 140 review comments, it is quite clear this work is needed, and the eight or so reviewers feel deeply that this work must be absolutely perfect. I believe all review criteria have been met for any documentation change, given our content guidelines. Additionally, this guide is **accurate**, **vendor-neutral**, and **secure by default**.
+
+The point of debate now is not why or when this guide should be published but where. @username_9 in the [slack thread](https://github.com/istio/istio.io/pull/7248#issuecomment-628534531) indicated there is a consensus about the use of `token` so this work should be published in `examples`. Unfortunately, there is not a consensus for the usage of `token`. I left a message for @username_1 via slack after the slack thread had concluded to scope the token work, so the authors of this work would have a thorough understanding of the level of commitment of the token work to understand the reasonableness of the request. @username_1 has indicated to me there are wildly diverging ideas about the usage of `token` and in particular, one of the projects working group leads does not agree that `token` should be used at all, or if so, how. Therefore, the request to document unknown work, that does not have consensus, in a patch release, that hs not been committed to any roadmap, is *unreasonable*.
+
+This guide improves the state of the art from other guide offerings in istio.io documentation in the [install content](https://istio.io/about/contribute/add-content/#content-types), which simply use certs well known all over the world as they are distributed in Istio's `sample/certs` directory contained in the [istio tarball](https://github.com/istio/istio/releases/tag/1.6.0-rc.0).in the 131 releases that have been distributed by the Istio organization.
+
+The fact that the bar has been raised, **YET AGAIN**, for security concerns is not lost on the authors. Most of the work of this PR was obtaining the agreement and consensus of using certificates for this work, in the first place, which is now in question. From a [Security WG lead]( https://github.com/istio/istio/pull/23704#issuecomment-626957819) `This is great work. Thank you Iris :)""`and from a [Networking WG lead](https://github.com/istio/istio/pull/23704#pullrequestreview-409330225) `Excellent work ! Added few comments - but it's great you are making this change.`. It is difficult to reason from these reviews comments that certificates are not a viable path forward, and the alternative token approach is the immediately correct answer.
+
+The reasonable way to proceed is to merge this PR, `AS-IS`, so the authors may finish one piece of work before beginning the next.
+
+Therefore, given the above facts and objective perspective, I request one of the Documentation WG maintainers to approve this work `AS-IS`, or make reasonable requests for change that maintain the spirit the [install content guidelines](https://istio.io/about/contribute/add-content/#content-types).
+
+Cheers,
+-steve
+<issue_comment>username_3: **I think there is no doubt this work is valuable.**  It is a good step towards the longer term secure approach to bootstrap the VM.  The debate is if the document is appropriate to be under the install section of multicluster or if it should be continued to be under samples.
+
+My vote is to be continued to be under samples, given the following concerns:
+
+-To me, It is confusing to be under multi clusters install as you can use VMs with single cluster.  I don't think having this doc helps users who are interested in multicluster install.
+
+- Many folks have expressed concerns with having access to root CA cert (or intermediate CA cert) to bootstrap vm.  This is to be replaced with a more secure approach.   @username_1 you raised the issue of us having root CA (or intermediate CA) certs in multicluster install today, but that is different because it is mesh admin who set up the multicluster install.  We don't expect a mesh admin to bootstrap a vm.  It should be a service owner or deployer who runs his/her service on VM.  Hope this helps you understand people's concern.
+<issue_comment>username_4: Just move the doc back to Examples (for now) and I'll approve it.
+<issue_comment>username_0: In your review, you have changed the debate from tokens, which don't exist, are not in the plan for Istio 1.6, and may not be in the plan for Istio 1.7 and are not deliverable in 1-2 weeks as was discussed in slack as a timeframe for delivering this unscoped work. The concern about moving to tokens is unwarranted until there is actually some token work to move forward to. As you have not brought up tokens in your argument, I will consider this a point not worth discussing as it is a strawman argument...
+
+As you have changed the nature of the debate of this PR, I will address each individually:
+
+1. Concern with access to root CA
+
+Yes, this is a concern. It should be fairly obvious that access to root CAs is not ideal. The istio.io website lacks any content on correctly managing root CAs. I think content belongs in the concepts section to cover this topic. Do you intend to create a dependency on this work for a concepts document?
+
+2. Multicluster install has access to root CA
+
+This is a valid point, but only insofar as a (bad) precedent has been set that distributing certificates that are well known across the internet is a good practice for Istio to do. That bad precedent has been corrected in this work for virtual machine integration!
+
+3. Who is ""we"" in `""we"" don't expect a mesh admin to bootstrap a VM?`Who do you represent when you use the word we?
+
+MY position, representing Environments WG as a lead and maintainer is that mesh admins would bootstrap a virtual machine.
+
+Cheers
+-steve
+<issue_comment>username_4: @username_0 This VM install doc falls into a category of a doc that you are proposing to upgrade from example to official install instruction. Previously VM install was in the category of ""here's a way to do it"", but now you are proposing to change it to ""here is THE WAY to do it"" and there seems to be one reviewer (@rusername_6) that feels that there are reasons why we shouldn't be upgrading it yet. Without unanimous dev sign-off, I (and other doc maintainers) would request @username_6, or some other TOC member, to approve it before we merge the PR. Alternatively, you can leave it in examples for 1.6 and revisit in 1.7.
+<issue_comment>username_5: It seems to me that there are two issues with not publishing this content now and under `Install`:
+
+1. One goal of this effort was to ensure our VM content followed the our documentation contribution guidance on [content types](https://istio.io/about/contribute/add-content/#content-types). That guidance states that Setup content: ""Focus on the installation steps needed to complete an Istio deployment."" That puts this content under the Setup content category making `Install` the most suitable place for it IMO. The content types guidance was discussed and approved at the Docs WG and the TOC. 
+
+@username_4 As an Istio Docs maintainer, I would be ok with you approving the content and merging it where it is now based on that guidance. I'll probably follow up with a PR of my own with some minor copy-edits.
+
+2. The folks involved in this effort followed our processes throughout. The work was added to the 1.6 roadmap, discussed with WGs in a timely fashion, and has been thoroughly reviewed. Those processes allow us to work together respectfully and valuing all perspectives. I would urge everyone to consider: What message are we sending to our contributors that follow our processes when their efforts are derailed last minute because of a feature that's not working at the moment, that was not part of the release planning, and that was not discussed until very late with the pertinent WGs? 
+
+IMO, we can always publish this content now on `Install` to meet our content types criteria and iterate further later. After the token feature is agreed upon and developed, we can update the content for it to use the new feature.
+<issue_comment>username_6: @username_4 please don't @ me: I'm not the person you're looking for. Thanks.
+<issue_comment>username_4: Sorry @username_6, that was a typo. Notice my comment referred to Shriram twice, the first one was correct, but the second one was missing the leading ""r"" :(
+<issue_comment>username_4: @rusername_6 PTAL at these:
+
+https://github.com/istio/istio.io/pull/7248#issuecomment-628723600
+https://github.com/istio/istio.io/pull/7248#issuecomment-628736772
+
+@username_5 The other part of the doc process is that we require dev approval if the change requires technical review. This PR doesn't have that sign-off yet.
+<issue_comment>username_5: @username_8 The doc with the instructions to plug in an existing CA are here: https://istio.io/docs/tasks/security/plugin-ca-cert/
+<issue_comment>username_7: How about a middle ground: Like the sidecar-bootstrap command, we can have a banner on top of the install page proposed in this PR that this is a `proof-of-concept` setup and not meant for production use, and that several aspects of this flow is bound to change in subsequent releases. Simply stating experimental or demo is vague. Explicit wording like above conveys to the user that we have the doc in its current place (install) for completeness of flow/structure but that this is bound to change [and not to be used as the canonical reference]. If we have this warning clearly on top of the page, then I think its okay to have the currently documented setup  be under the install section.
+<issue_comment>username_8: Generally agree ... I think we're converging here. I see 2 main points:
+
+1. We should warn about installations which are proof-of-concept. 
+2. We should warn about installations that may change in future releases.
+
+For 1, if you're referring to the cert provisioning scheme (i.e. self-signed root and pushing around intermediate CAs in the cacerts secret) then all of our installation docs would effectively be proof-of-concept by that definition. 
+
+Are we absolutely certain nobody is running with this sort of configuration in production? If not, then I think ""proof-of-concept"" might be a little strong. Perhaps just indicating in the banner that production use cases will likely use an external CA for various reasons, and just leave it at that ... effectively what Steve has at the top now.
+
+For 2, would stating the feature level help here? For example, multicluster is an Alpha-level feature. The banner can indicate this along with the user expectations for a feature of that level.
+
+For these sorts of banners, we should probably standardize on a common set that are imported from docs like these. Otherwise, there will likely be a lot of variance and possibly conflicting information from page to page. FYI @username_4 
+
+Looping in a few other, since this is really a TOC discussion, rather than applying to this specific doc...
+
+@louiscryan @username_9 @costinm @username_2 @rusername_6 WDYT?
+<issue_comment>username_9: I think this PR has stalled a bit for a number of reasons:
+
+1. It requires the person bootstrapping the VM to access the root keys for the CA (root or intermediate). This should not be required for a namespace admin to add a VM to their namespace. This is different than self-signing.
+
+2. It is for some reason being added to multicluster install, and has nothing to do with multicluster.
+
+So the pushback from at least 2 TOC members is that this should stay in examples until we can fix both of those, and we should try to fix them in 1.6 timeframe but not at release.
+
+I'd like us to move aggressively to fix #1 and use a token instead, this is purely documentation and validation, no istio code required, since that approach already works. But we need someone to work on it (testing it out and then updating the doc).
+<issue_comment>username_8: Ah ok, I had misunderstood the push-back ... thanks for clarifying.  I agree with everything @username_9 said :).
+
+@username_0 can we just move this back to examples for now?
+<issue_comment>username_0: @username_9 Please be honest with everyone participating in this review. This PR has stalled for political reasons, and not technical reasons. There is no good reason to block this work for work that could take a month or more to sort out. A token approach may or may not work. I have seen no PR or documentation to supplant this documentation. The Istio community does not set a good precedent by bowing to political pressure on a PR that is technically correct and accurate.
+
+I think it is clear there is significant frustration on the part of anyone writing documentation or reviewing documentation - that their work will be damaged by political pressure in the final days of a release, as expressed in this [review](https://github.com/istio/istio.io/pull/7248#issuecomment-628736772) and the hilarity of this [review](https://github.com/istio/istio.io/pull/7248#issuecomment-628907047). This is not a new problem for Istio, it is a festering wound.
+
+I will address point #2 you have raised, as I have already described in [an earlier comment](https://github.com/istio/istio.io/pull/7248#issuecomment-628700424).
+
+@username_4 you have offered a voice of reason in this review. I am hopeful this will merge with my next commit. If someone wishes rework to make this document use tokens, I can do that. I am not doing that prior to the 1.6 release. I am not moving the target of this review content to the examples directory because these are installation instructions, not examples.
+
+Cheers,
+-steve
+<issue_comment>username_0: I have personally verified these instructions. I am an SME in this area. This document is neutral, accurate, and correct.
+
+@username_1, an SME in this area, has also personally verified these instructions. Reference:
+<img width=""692"" alt=""Screen Shot 2020-05-15 at 4 24 01 AM"" src=""https://user-images.githubusercontent.com/755849/82045548-20d5cd00-9664-11ea-8ef1-f916ba584bef.png"">
+
+I would kindly ask one of the TOC membership to approve this document to meet @username_4 's requirement that a technical document without unanimous technical consent be approved by at least one TOC member:
+
+@username_10 
+@duderino
+@username_3 
+@louiscryan 
+@rusername_6 
+@username_9 
+
+Cheers,
+-steve
+<issue_comment>username_10: Regarding comments from https://github.com/istio/istio.io/pull/7248#issuecomment-628960625
+
+For (1) we should add the same text that exists for the instructions in the ""[Replicated control planes](https://istio.io/docs/setup/install/multicluster/gateways/)"" section that warns about the use of the sample keys.
+
+`The root and intermediate certificate from the samples directory are widely distributed and known. Do not use these certificates in production as your clusters would then be open to security vulnerabilities and compromise.`
+
+Looks like @username_0 is making adjustments for item (2).
+<issue_comment>username_0: @username_10 I have addressed the comment with the security vulnerabilities by the use of the makefile. We don't use widely known certs in the virtual machine integration. Instead we generate them per virtual machine.
+
+I have added this text instead to handle that review change:
+```
+ {{< warning >}}
+ This guide relies heavily on the
+[stable plugin ca certificate](/docs/tasks/security/cert-management/plugin-ca-cert/) feature. Istio
+does not offer an industry standard recommendation for certificate management. Please consult your
+information security team when using any plugin certificate.  The determination of your company
+policies for certificate management is the choice of your company.
+ {{< /warning >}}
+```
+<issue_comment>username_0: @username_6 I have added a banner to the website. The banner contains the text:
+```
+This workflow is tested and validated. The Istio authors feel this workflow is suitable for experimentation but not production. Like all alpha features, this workflow is subject to change.
+```
+
+Rendering here: https://deploy-preview-7248--preliminary-istio.netlify.app/docs/setup/install/multicluster/virtual-machine/
+
+Cheers,
+-steve
+<issue_comment>username_3: Thank you @username_0 for adding an experimental banner, this LGTM as well.
+
+One ask - can we not make the doc the first under our install section?  I would like it to be below multicluster from your https://deploy-preview-7248--preliminary-istio.netlify.app/docs/setup/install/virtual-machine/
+<issue_comment>username_11: I am not sure why anyone things the banner is a good idea. It shows up on every single page, including if someone goes to istio.io (in this case preliminary.istio.io) for the first time. Nad how do any of those pages understand (this workflow...)?
+
+If the banner only showed up for the one page, I think it's fine, but if you start at the top of the pages, and click around, by the time you hit the actual VM installation page, it's gone.
+<issue_comment>username_0: Eric,
+
+I misunderstood the instruction on the banner. I didn't verify the rest of the website wasn't impacted. A banner across our whole website clearly won't do.
+
+I'll look into the banner and see if I can find or implement a per-page alternative.
+<issue_comment>username_0: Thanks, @username_3 @username_11 had suggested a change and I applied it to the PR independently (in case I need to make further changes).
+
+Cheers
+-steve
+<issue_comment>username_0: rebase was for netlify build failure.
+<issue_comment>username_0: @username_4 PTAL - I think the problems are addressed, John (SME) has given an approval a few times, but can't atm as he is out of office. I think the TOC is aligned that this work makes sense, and from a tech writing perspective everything looks good.
+
+Guantlet has been run :)
+
+Cheers
+-steve
+<issue_comment>username_0: This could make sense as a follow-on, and some thing i had actually wished to tackle after 1.6 ships. The docs have enough warnings and info blocks from experts that the alpha nature of the code is obvious. I can expand on the warnings if you like.
+
+Cheers,
+-steve
+<issue_comment>username_9: @myidpt Oliver can we fix the Makefile to allow it to support generating multiple VM certificates? Or can you verify it supports that already? Otherwise as currently specified you basically have to reinstall Istio when you want to generate a VM cert, and you can only generate a single VM cert, obviously not what we want.
+<issue_comment>username_1: @username_9 Yes, this is one of the following up item I will address later as requested in https://github.com/istio/istio/pull/23704."
+department-of-veterans-affairs/vets-website,286389029,7056,"{'number': 7056.0, 'repo': 'vets-website', 'user_login': 'department-of-veterans-affairs'}","[{'action': 'opened', 'author': 'U-DON', 'comment_id': None, 'datetime': '2018-01-05T19:57:39Z', 'masked_author': 'username_0', 'text': '', 'title': 'Construct ""Available Services"" section in profile based on services list from API', 'type': 'issue'}
+ {'action': 'created', 'author': 'U-DON', 'comment_id': 355664302.0, 'datetime': '2018-01-05 21:00:57+00:00', 'masked_author': 'username_0', 'text': ""Previously, we would display all of those services in that list as long as the user was LOA3, but it is possible to have an LOA3 user who does not have one of those services. The screenshot demonstrates the case where an LOA3 user (user+264) does not have access to VIC according to the `services` list.\r\n\r\nWith that being the case, I wonder if it's still accurate messaging to say that you need to verify your account to access a service that is unavailable to you even as an LOA3 user."", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'bshyong', 'comment_id': 355665366.0, 'datetime': '2018-01-05 21:06:04+00:00', 'masked_author': 'username_1', 'text': ""@username_0 regarding the messaging, we should bring that up so that it can be changed. It will be frustrating for users who Verify their account but still don't have access, resulting in more help desk tickets or calls."", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'saneshark', 'comment_id': 355689505.0, 'datetime': '2018-01-05 23:05:03+00:00', 'masked_author': 'username_2', 'text': '@username_4 @username_3 I wonder if either of you have any thoughts on how we could more effectively communicate what services ""may or may not"" be available after identity proofing. Without identity proofing, it\'s impossibly to convey to the user definitively what services will be available. I think there is some room to improve the language here.', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'DanielleSoCompany', 'comment_id': 355692731.0, 'datetime': '2018-01-05 23:25:16+00:00', 'masked_author': 'username_3', 'text': '@username_2 that makes sense. Running out now, but will think on it a bit and post something for consideration on Monday. thanks!', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'DanielleSoCompany', 'comment_id': 355952628.0, 'datetime': '2018-01-08 12:21:42+00:00', 'masked_author': 'username_3', 'text': '@username_2 @username_4 Does this work? \r\n\r\n**When you verify your identity, you may have access to more services. These may include:**\r\n\r\nAn alternate might be: **Verify your identity to access more services you may be eligible for, like:**\r\n\r\nHappy to tweak more based on feedback. Thanks!\r\n\r\nAlso, Patrick had mentioned including notes re: eligibility for the different services. Do we need language around that? If yes, can you let me know the specific services that need notes? Thanks.', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'melwoodard', 'comment_id': 355996438.0, 'datetime': '2018-01-08 15:23:49+00:00', 'masked_author': 'username_4', 'text': ""Thanks Danielle! I like your second option. I'm inclined to hold on surfacing eligibility info for now and keep this page as simple as we can. Our energy would be better spent on a deeper dive on a profile revamp, which is hopefully not so far away."", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'U-DON', 'comment_id': 356151764.0, 'datetime': '2018-01-09 01:34:01+00:00', 'masked_author': 'username_0', 'text': 'Updated copy.\r\n\r\n<img width=""657"" alt=""screen shot 2018-01-08 at 8 33 06 pm"" src=""https://user-images.githubusercontent.com/1067024/34700867-27400eb2-f4b3-11e7-8cef-92ef63bd66d9.png"">', 'title': None, 'type': 'comment'}]","<issue_start><issue_comment>Title: Construct ""Available Services"" section in profile based on services list from API
+username_0: 
+<issue_comment>username_0: Previously, we would display all of those services in that list as long as the user was LOA3, but it is possible to have an LOA3 user who does not have one of those services. The screenshot demonstrates the case where an LOA3 user (user+264) does not have access to VIC according to the `services` list.
+
+With that being the case, I wonder if it's still accurate messaging to say that you need to verify your account to access a service that is unavailable to you even as an LOA3 user.
+<issue_comment>username_1: @username_0 regarding the messaging, we should bring that up so that it can be changed. It will be frustrating for users who Verify their account but still don't have access, resulting in more help desk tickets or calls.
+<issue_comment>username_2: @username_4 @username_3 I wonder if either of you have any thoughts on how we could more effectively communicate what services ""may or may not"" be available after identity proofing. Without identity proofing, it's impossibly to convey to the user definitively what services will be available. I think there is some room to improve the language here.
+<issue_comment>username_3: @username_2 that makes sense. Running out now, but will think on it a bit and post something for consideration on Monday. thanks!
+<issue_comment>username_3: @username_2 @username_4 Does this work? 
+
+**When you verify your identity, you may have access to more services. These may include:**
+
+An alternate might be: **Verify your identity to access more services you may be eligible for, like:**
+
+Happy to tweak more based on feedback. Thanks!
+
+Also, Patrick had mentioned including notes re: eligibility for the different services. Do we need language around that? If yes, can you let me know the specific services that need notes? Thanks.
+<issue_comment>username_4: Thanks Danielle! I like your second option. I'm inclined to hold on surfacing eligibility info for now and keep this page as simple as we can. Our energy would be better spent on a deeper dive on a profile revamp, which is hopefully not so far away.
+<issue_comment>username_0: Updated copy.
+
+<img width=""657"" alt=""screen shot 2018-01-08 at 8 33 06 pm"" src=""https://user-images.githubusercontent.com/1067024/34700867-27400eb2-f4b3-11e7-8cef-92ef63bd66d9.png"">"
+corona-warn-app/cwa-website,717440085,435,,"[{'action': 'opened', 'author': 'heinezen', 'comment_id': None, 'datetime': '2020-10-08 15:18:12+00:00', 'masked_author': 'username_0', 'text': ""Apple's power saving mode disables background activity in the app: https://support.apple.com/de-de/HT205234\r\n\r\nWe already have a similar FAQ  Entry for Android power saving modes (https://www.coronawarn.app/de/faq/#no_risk_update). A similar issue for Apple does make sense, since background updates are critical for the functionality of the App.\r\n\r\n## Workarounds\r\n\r\nAs far as I know, there are no workarounds available. The user must disable power saving mode.\r\n\r\n## Suggested changes\r\n\r\n1. Inform users about the problems with Apple's power saving mode\r\n2. Deliver instructions on how to disable power saving mode"", 'title': '[iOS] Add FAQ entry: Power Saving Mode disables background updates', 'type': 'issue'}
+ {'action': 'created', 'author': 'Ein-Tim', 'comment_id': 705653275.0, 'datetime': '2020-10-08 15:38:21+00:00', 'masked_author': 'username_1', 'text': ""@username_0 \nAre you sure that also Background Updates from CWA are blocked.\nI unfortunately can't remember wehre but somewhere in the iOS Repo I read that the Background Updates are still continued, even in Power Saving Mode. Maybe you'll first clarify this with the other Devs/Apple?"", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'heinezen', 'comment_id': 705675121.0, 'datetime': '2020-10-08 16:14:25+00:00', 'masked_author': 'username_0', 'text': ""@username_1 \r\nThis issue is made mainly for discussion on how we clarify it and to not forget about it :)\r\nI've edited the issue to reflect that we are still discussing it. Some AppStore reports suggest that power saving settings are a problem and the information from Apple's side is really not that clear. I think you are refering to https://github.com/corona-warn-app/cwa-app-ios/issues/650 (?).\r\n\r\n----\r\nCorona-Warn-App Open Source Team"", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'Ein-Tim', 'comment_id': 705693458.0, 'datetime': '2020-10-08 16:47:21+00:00', 'masked_author': 'username_1', 'text': 'Perfect, thanks for your quick response. \n\nIf you want I could do a test:\nI can go into Power Saving mode on my second phone, an iPhone 6s which I never use and which always has good internet & a full battery. \n\nThat would be definitely only one part of the testing which has to be done to clarify this, but it could be a hint \n\nSo lemme know if this is welcome by you (-:', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'heinezen', 'comment_id': 705699189.0, 'datetime': '2020-10-08 16:58:10+00:00', 'masked_author': 'username_0', 'text': 'Of course! More information is always better. Thanks for contributing!', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'Ein-Tim', 'comment_id': 707188827.0, 'datetime': '2020-10-12 15:27:42+00:00', 'masked_author': 'username_1', 'text': ""@username_0 \r\nOkay, left my phone (iPhone 6s) in Power Saving mode for the last 4 days and yep, CWA always done an check in the background.\r\nSo theoretically  the Background Task is running and (how I've seen) Fallback Strategies are also working.\r\n\r\nBut please note:\r\nThis Test was on a phone which had between 100 and 30%, had always good Internet and wasn't used for other things. \r\nThe most users will turn Power Saving Mode on when they have low battery (>20%) and I personally think that iOS will reduce Background Tasks more and more if the Battery gets emptier and emptier.\r\n\r\nSo I think a FAQ entry would be good, but I'm still thinking how to formulate it."", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'heinezen', 'comment_id': 707709529.0, 'datetime': '2020-10-13 12:37:14+00:00', 'masked_author': 'username_0', 'text': ""@username_1 \r\n\r\nThanks so much for testing this. Looks like background activity is not affected by default then, at least in your case. However, that begs the question why some users still reported it as an issue. Maybe there are other issues at play for them.\r\n\r\nI've also looked around a bit more and there's no official clarification from Apple that I can find. So the only conformation that it works is https://github.com/corona-warn-app/cwa-app-ios/issues/650#issuecomment-644878582. https://support.apple.com/de-de/HT205234 is very broad and not very informative from a CWA point of view. \r\n\r\nWe'll have to talk to the devs so they can maybe get a reconfirmation from Apple. From the feedback we get, we can hopefully draft something more informative.\r\n\r\n----\r\nCorona-Warn-App Open Source Team"", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'svengabr', 'comment_id': 716574405.0, 'datetime': '2020-10-26 14:15:01+00:00', 'masked_author': 'username_2', 'text': '@username_0 is there still the need in writing or updating any FAQ entry? If not, you could consider closing this issue.', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'heinezen', 'comment_id': 717163880.0, 'datetime': '2020-10-27 11:03:55+00:00', 'masked_author': 'username_0', 'text': '@username_2 I am currently waiting for more information from SAP on this.\r\n\r\nShould not be closed until we get a clarification from their side.', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'heinezen', 'comment_id': 723649997.0, 'datetime': '2020-11-08 18:47:35+00:00', 'masked_author': 'username_0', 'text': 'We finally got feedback from the testing labs and will start drafting an FAQ entry soon.', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'heinezen', 'comment_id': 724738718.0, 'datetime': '2020-11-10 14:31:39+00:00', 'masked_author': 'username_0', 'text': 'Addressed in #552', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'Ein-Tim', 'comment_id': 724740756.0, 'datetime': '2020-11-10 14:34:56+00:00', 'masked_author': 'username_1', 'text': 'Perfect, looks good to me 👍', 'title': None, 'type': 'comment'}
+ {'action': 'closed', 'author': 'heinezen', 'comment_id': None, 'datetime': '2020-11-22 17:12:30+00:00', 'masked_author': 'username_0', 'text': '', 'title': None, 'type': 'issue'}]","<issue_start><issue_comment>Title: [iOS] Add FAQ entry: Power Saving Mode disables background updates
+username_0: Apple's power saving mode disables background activity in the app: https://support.apple.com/de-de/HT205234
+
+We already have a similar FAQ  Entry for Android power saving modes (https://www.coronawarn.app/de/faq/#no_risk_update). A similar issue for Apple does make sense, since background updates are critical for the functionality of the App.
+
+## Workarounds
+
+As far as I know, there are no workarounds available. The user must disable power saving mode.
+
+## Suggested changes
+
+1. Inform users about the problems with Apple's power saving mode
+2. Deliver instructions on how to disable power saving mode
+<issue_comment>username_1: @username_0 
+Are you sure that also Background Updates from CWA are blocked.
+I unfortunately can't remember wehre but somewhere in the iOS Repo I read that the Background Updates are still continued, even in Power Saving Mode. Maybe you'll first clarify this with the other Devs/Apple?
+<issue_comment>username_0: @username_1 
+This issue is made mainly for discussion on how we clarify it and to not forget about it :)
+I've edited the issue to reflect that we are still discussing it. Some AppStore reports suggest that power saving settings are a problem and the information from Apple's side is really not that clear. I think you are refering to https://github.com/corona-warn-app/cwa-app-ios/issues/650 (?).
+
+----
+Corona-Warn-App Open Source Team
+<issue_comment>username_1: Perfect, thanks for your quick response. 
+
+If you want I could do a test:
+I can go into Power Saving mode on my second phone, an iPhone 6s which I never use and which always has good internet & a full battery. 
+
+That would be definitely only one part of the testing which has to be done to clarify this, but it could be a hint 
+
+So lemme know if this is welcome by you (-:
+<issue_comment>username_0: Of course! More information is always better. Thanks for contributing!
+<issue_comment>username_1: @username_0 
+Okay, left my phone (iPhone 6s) in Power Saving mode for the last 4 days and yep, CWA always done an check in the background.
+So theoretically  the Background Task is running and (how I've seen) Fallback Strategies are also working.
+
+But please note:
+This Test was on a phone which had between 100 and 30%, had always good Internet and wasn't used for other things. 
+The most users will turn Power Saving Mode on when they have low battery (>20%) and I personally think that iOS will reduce Background Tasks more and more if the Battery gets emptier and emptier.
+
+So I think a FAQ entry would be good, but I'm still thinking how to formulate it.
+<issue_comment>username_0: @username_1 
+
+Thanks so much for testing this. Looks like background activity is not affected by default then, at least in your case. However, that begs the question why some users still reported it as an issue. Maybe there are other issues at play for them.
+
+I've also looked around a bit more and there's no official clarification from Apple that I can find. So the only conformation that it works is https://github.com/corona-warn-app/cwa-app-ios/issues/650#issuecomment-644878582. https://support.apple.com/de-de/HT205234 is very broad and not very informative from a CWA point of view. 
+
+We'll have to talk to the devs so they can maybe get a reconfirmation from Apple. From the feedback we get, we can hopefully draft something more informative.
+
+----
+Corona-Warn-App Open Source Team
+<issue_comment>username_2: @username_0 is there still the need in writing or updating any FAQ entry? If not, you could consider closing this issue.
+<issue_comment>username_0: @username_2 I am currently waiting for more information from SAP on this.
+
+Should not be closed until we get a clarification from their side.
+<issue_comment>username_0: We finally got feedback from the testing labs and will start drafting an FAQ entry soon.
+<issue_comment>username_0: Addressed in #552
+<issue_comment>username_1: Perfect, looks good to me 👍<issue_closed>"

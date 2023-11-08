@@ -1,0 +1,261 @@
+frida/frida-website,260074859,101,,"[{'action': 'opened', 'author': 'asgerfv', 'comment_id': None, 'datetime': '2017-09-24 10:41:58+00:00', 'masked_author': 'username_0', 'text': 'Hello,\r\n\r\nI\'ve just tried Frida for the first time, but have some issues:\r\n\r\n1. I\'m on MacOS 10.12.6 using Python 2.7.10 and a x86 Android Emulator. I installed Frida using pip, as described in https://www.frida.re/docs/installation/\r\n2. From there the Python binding seem to work, but I have no frida-ps, frida-trace, or any frida* anywhere. I therefore downloaded the releases of those from https://build.frida.re/frida/mac/bin/\r\nThose seem to be for Python 3 (which I then installed), but didn\'t work. This was due to the ""sitepackage"" being referenced. So I changed this. Now I could use ""frida-ps -U"", and correctly receive the process list.\r\n3. So there were a bit of issues just getting started, which would be great to have fixed some how :)\r\n4. From there I really wanted to get to work with Frida, and tried frida-trace (again after modifying the release script accordingly), but every Andoid App I try just crash right away: ""Chrome keeps stopping"":\r\n\r\n$ frida-trace -U -i open com.android.chrome\r\nFailed to attach: timed out while waiting for session to establish\r\n\r\nadb logcat | grep chrome\r\n=>\r\n\r\n09-24 12:35:52.047  1597  5972 W ActivityManager: Ignoring remove of inactive process: ProcessRecord{8bacea7 0:com.android.chrome/u0a49}\r\n09-24 12:35:53.112  1597  1608 I ActivityManager: START u0 {act=android.intent.action.MAIN cat=[android.intent.category.LAUNCHER] flg=0x10200000 cmp=com.android.chrome/com.google.android.apps.chrome.Main bnds=[849,568][1056,846]} from uid 10022\r\n09-24 12:35:53.135  1597  1735 I ActivityManager: Start proc 6043:com.android.chrome/u0a49 for activity com.android.chrome/com.google.android.apps.chrome.Main\r\n09-24 12:35:53.732  1597  1852 W ActivityManager: Unable to start service Intent { act=com.google.firebase.INSTANCE_ID_EVENT pkg=com.android.chrome (has extras) } U=0: not found\r\n09-24 12:35:53.760  6043  6043 I FA      :   adb shell setprop debug.firebase.analytics.app com.android.chrome\r\n09-24 12:35:54.003  1597  2309 I ActivityManager: START u0 {act=android.intent.action.MAIN cat=[android.intent.category.LAUNCHER] flg=0x14002000 cmp=com.android.chrome/org.chromium.chrome.browser.ChromeTabbedActivity bnds=[849,568][1056,846] (has extras)} from uid 10049\r\n09-24 12:35:54.652  6043  6064 W cr_ChildProcLauncher: Create a new ChildConnectionAllocator with package name = com.android.chrome, inSandbox = true\r\n09-24 12:35:54.698  1597  1608 I ActivityManager: Start proc 6071:com.android.chrome:sandboxed_process0/u0i6 for webview_service com.android.chrome/org.chromium.content.app.SandboxedProcessService0\r\n09-24 12:35:54.997  1597  1621 I ActivityManager: Displayed com.android.chrome/org.chromium.chrome.browser.ChromeTabbedActivity: +915ms (total +1s864ms)\r\n09-24 12:35:55.210  1597  1854 I ActivityManager: Start proc 6112:com.android.chrome:privileged_process0/u0a49 for service com.android.chrome/org.chromium.content.app.PrivilegedProcessService0\r\n09-24 12:35:58.003  2359  4244 I Icing   : IndexChimeraService.getServiceInterface callingPackage=com.android.chrome componentName=null serviceId=36\r\n09-24 12:35:58.094  6043  6167 E cr_Icing: Failed to clear legacy corpus. Status Code: 8 Message: No CorpusConfig for history of com.android.chrome\r\n09-24 12:36:05.081  6043  6176 F libc    : Fatal signal 31 (SIGSYS), code 1 in tid 6176 (.android.chrome)\r\n09-24 12:36:05.089  6178  6176 F libc    : Fatal signal 31 (SIGSYS), code 1 in tid 6178 (.android.chrome)\r\n09-24 12:36:05.111  6184  6184 F DEBUG   : pid: 6178, tid: 6178, name: .android.chrome  >>> com.android.chrome <<<\r\n09-24 12:36:05.164  6185  6185 F DEBUG   : pid: 6043, tid: 6176, name: .android.chrome  >>> com.android.chrome <<<\r\n09-24 12:36:05.673  1597  6195 W ActivityManager:   Force finishing activity com.android.chrome/org.chromium.chrome.browser.ChromeTabbedActivity\r\n09-24 12:36:05.685  1597  1613 I ActivityManager: Showing crash dialog for package com.android.chrome u0\r\n09-24 12:36:06.177  1597  1612 W ActivityManager: Activity pause timeout for ActivityRecord{59c825 u0 com.android.chrome/org.chromium.chrome.browser.ChromeTabbedActivity t32 f}\r\n09-24 12:36:17.003  1597  1612 W ActivityManager: Activity destroy timeout for ActivityRecord{59c825 u0 com.android.chrome/org.chromium.chrome.browser.ChromeTabbedActivity t32 f}\r\n\r\n\r\nAnd looking at the SIGSYS31:\r\n\r\n09-24 12:37:45.458  6354  6372 D EGL_emulation: eglMakeCurrent: 0x9fa7ccc0: ver 2 0 (tinfo 0x9f4a4860)\r\n09-24 12:37:45.807  6287  6305 I FA      : Tag Manager is not found and thus will not be used\r\n09-24 12:37:47.164  1597  1611 E memtrack: Couldn\'t load memtrack module\r\n09-24 12:37:47.164  1597  1611 W android.os.Debug: failed to get memory consumption info: -1\r\n09-24 12:37:47.176  1597  1611 E memtrack: Couldn\'t load memtrack module\r\n09-24 12:37:47.176  1597  1611 W android.os.Debug: failed to get memory consumption info: -1\r\n09-24 12:37:47.185  1597  1611 E memtrack: Couldn\'t load memtrack module\r\n09-24 12:37:47.185  1597  1611 W android.os.Debug: failed to get memory consumption info: -1\r\n09-24 12:37:53.125  2217  3547 I ClearcutLoggerApiImpl: disconnect managed GoogleApiClient\r\n09-24 12:37:53.614  1597  1611 E memtrack: Couldn\'t load memtrack module\r\n09-24 12:37:53.614  1597  1611 W android.os.Debug: failed to get memory consumption info: -1\r\n09-24 12:37:53.620  1597  1615 E BatteryStatsService: modem info is invalid: ModemActivityInfo{ mTimestamp=0 mSleepTimeMs=0 mIdleTimeMs=0 mTxTimeMs[]=[0, 0, 0, 0, 0] mRxTimeMs=0 mEnergyUsed=0}\r\n09-24 12:37:54.607  2162  6413 I EventLogSendingHelper: Sending log events.\r\n09-24 12:37:56.912  6287  6416 F libc    : Fatal signal 31 (SIGSYS), code 1 in tid 6416 (.android.chrome)\r\n09-24 12:37:56.919  6420  6416 F libc    : Fatal signal 31 (SIGSYS), code 1 in tid 6420 (.android.chrome)\r\n09-24 12:37:56.930  6425  6425 W crash_dump32: failed to attach to thread 6287: Operation not permitted\r\n09-24 12:37:56.939  6425  6425 I crash_dump32: obtaining output fd from tombstoned\r\n09-24 12:37:56.939  1494  1494 I /system/bin/tombstoned: received crash request for pid 6287\r\n09-24 12:37:56.940  6425  6425 I crash_dump32: performing dump of process 6287 (target tid = 6416)\r\n09-24 12:37:56.941  6425  6425 F DEBUG   : *** *** *** *** *** *** *** *** *** *** *** *** *** *** *** ***\r\n09-24 12:37:56.941  6425  6425 F DEBUG   : Build fingerprint: \'google/sdk_gphone_x86/generic_x86:8.0.0/OSR1.170901.008/4328566:userdebug/dev-keys\'\r\n09-24 12:37:56.941  6425  6425 F DEBUG   : Revision: \'0\'\r\n09-24 12:37:56.941  6425  6425 F DEBUG   : ABI: \'x86\'\r\n09-24 12:37:56.941  6425  6425 F DEBUG   : pid: 6287, tid: 6416, name: .android.chrome  >>> com.android.chrome <<<\r\n09-24 12:37:56.941  6425  6425 F DEBUG   : signal 31 (SIGSYS), code 1 (SYS_SECCOMP), fault addr --------\r\n09-24 12:37:56.941  6425  6425 F DEBUG   : Cause: seccomp prevented call to disallowed x86 system call 7\r\n09-24 12:37:56.942  6425  6425 F DEBUG   :     eax 00000007  ebx 00001914  ecx a41879fc  edx 40000000\r\n09-24 12:37:56.942  6425  6425 F DEBUG   :     esi 00001914  edi a41879fc\r\n09-24 12:37:56.942  6425  6425 F DEBUG   :     xcs 00000073  xds 0000007b  xes 0000007b  xfs 0000003b  xss 0000007b\r\n09-24 12:37:56.942  6425  6425 F DEBUG   :     eip 9824cb4e  ebp a4278000  esp a41879dc  flags 00200282\r\n09-24 12:37:56.943  6425  6425 F DEBUG   : \r\n09-24 12:37:56.943  6425  6425 F DEBUG   : backtrace:\r\n09-24 12:37:56.943  6425  6425 F DEBUG   :     #00 pc 03848b4e  /system/app/Chrome/Chrome.apk (offset 0x1053000)\r\n09-24 12:37:56.943  6425  6425 F DEBUG   :     #01 pc 00000003  <unknown>\r\n09-24 12:37:56.948  6426  6426 I crash_dump32: obtaining output fd from tombstoned\r\n09-24 12:37:56.948  1494  1494 I /system/bin/tombstoned: received crash request for pid 6420\r\n09-24 12:37:56.948  1494  1494 I /system/bin/tombstoned: enqueueing crash request for pid 6420\r\n09-24 12:37:57.358  1494  1494 E /system/bin/tombstoned: Tombstone written to: /data/tombstones//tombstone_05\r\n09-24 12:37:57.358  6426  6426 I crash_dump32: performing dump of process 6420 (target tid = 6420)\r\n09-24 12:37:57.358  6426  6426 F DEBUG   : *** *** *** *** *** *** *** *** *** *** *** *** *** *** *** ***\r\n09-24 12:37:57.358  6426  6426 F DEBUG   : Build fingerprint: \'google/sdk_gphone_x86/generic_x86:8.0.0/OSR1.170901.008/4328566:userdebug/dev-keys\'\r\n09-24 12:37:57.358  6426  6426 F DEBUG   : Revision: \'0\'\r\n09-24 12:37:57.358  6426  6426 F DEBUG   : ABI: \'x86\'\r\n09-24 12:37:57.358  6426  6426 F DEBUG   : pid: 6420, tid: 6420, name: .android.chrome  >>> com.android.chrome <<<\r\n09-24 12:37:57.359  6426  6426 F DEBUG   : signal 31 (SIGSYS), code 1 (SYS_SECCOMP), fault addr --------\r\n09-24 12:37:57.359  6426  6426 F DEBUG   : Cause: seccomp prevented call to disallowed x86 system call 7\r\n09-24 12:37:57.359  6426  6426 F DEBUG   :     eax 00000007  ebx 0000188f  ecx 00000000  edx 40000000\r\n09-24 12:37:57.359  6426  6426 F DEBUG   :     esi a427bd58  edi 00000000\r\n09-24 12:37:57.359  6426  6426 F DEBUG   :     xcs 00000073  xds 0000007b  xes 0000007b  xfs 0000003b  xss 0000007b\r\n09-24 12:37:57.359  6426  6426 F DEBUG   :     eip 982506d2  ebp 0000188f  esp a427bbfc  flags 00200246\r\n09-24 12:37:57.359  6426  6426 F DEBUG   : \r\n09-24 12:37:57.359  6426  6426 F DEBUG   : backtrace:\r\n09-24 12:37:57.359  6426  6426 F DEBUG   :     #00 pc 0384c6d2  /system/app/Chrome/Chrome.apk (offset 0x1053000)\r\n\r\n\r\nSince I have trouble just getting the basic stuff to work, then I suspect something obvious. But perhaps someone could help point me in the right direction?\r\n\r\nThanks,\r\nAsger', 'title': 'Frida crashes app upon attachment on Android', 'type': 'issue'}
+ {'action': 'created', 'author': 'soffensive', 'comment_id': 383382322.0, 'datetime': '2018-04-22 13:39:01+00:00', 'masked_author': 'username_1', 'text': 'Although this issue is quite old, I just leave my experience here for the record. I also tried to hook functions of an Android app running in an Android emulator, and it failed for the same reason as described above.\r\n\r\nMake sure you use the correct frida-server binary matching the architecture of your Android emulator device. In my case, I mistakenly used the binary **frida-server-10.7.7-android-x86** on my x86_64 Android emulator.\r\n\r\nUsing **frida-server-10.7.7-android-x86_64** fixed the problem and everything is working now as expected.', 'title': None, 'type': 'comment'}
+ {'action': 'closed', 'author': 'oleavr', 'comment_id': None, 'datetime': '2018-10-16 18:46:19+00:00', 'masked_author': 'username_2', 'text': '', 'title': None, 'type': 'issue'}
+ {'action': 'created', 'author': 'oleavr', 'comment_id': 430353450.0, 'datetime': '2018-10-16 18:46:48+00:00', 'masked_author': 'username_2', 'text': 'If this is still an issue, please reopen in frida-core with details on how to reproduce it.', 'title': None, 'type': 'comment'}]","<issue_start><issue_comment>Title: Frida crashes app upon attachment on Android
+username_0: Hello,
+
+I've just tried Frida for the first time, but have some issues:
+
+1. I'm on MacOS 10.12.6 using Python 2.7.10 and a x86 Android Emulator. I installed Frida using pip, as described in https://www.frida.re/docs/installation/
+2. From there the Python binding seem to work, but I have no frida-ps, frida-trace, or any frida* anywhere. I therefore downloaded the releases of those from https://build.frida.re/frida/mac/bin/
+Those seem to be for Python 3 (which I then installed), but didn't work. This was due to the ""sitepackage"" being referenced. So I changed this. Now I could use ""frida-ps -U"", and correctly receive the process list.
+3. So there were a bit of issues just getting started, which would be great to have fixed some how :)
+4. From there I really wanted to get to work with Frida, and tried frida-trace (again after modifying the release script accordingly), but every Andoid App I try just crash right away: ""Chrome keeps stopping"":
+
+$ frida-trace -U -i open com.android.chrome
+Failed to attach: timed out while waiting for session to establish
+
+adb logcat | grep chrome
+=>
+
+09-24 12:35:52.047  1597  5972 W ActivityManager: Ignoring remove of inactive process: ProcessRecord{8bacea7 0:com.android.chrome/u0a49}
+09-24 12:35:53.112  1597  1608 I ActivityManager: START u0 {act=android.intent.action.MAIN cat=[android.intent.category.LAUNCHER] flg=0x10200000 cmp=com.android.chrome/com.google.android.apps.chrome.Main bnds=[849,568][1056,846]} from uid 10022
+09-24 12:35:53.135  1597  1735 I ActivityManager: Start proc 6043:com.android.chrome/u0a49 for activity com.android.chrome/com.google.android.apps.chrome.Main
+09-24 12:35:53.732  1597  1852 W ActivityManager: Unable to start service Intent { act=com.google.firebase.INSTANCE_ID_EVENT pkg=com.android.chrome (has extras) } U=0: not found
+09-24 12:35:53.760  6043  6043 I FA      :   adb shell setprop debug.firebase.analytics.app com.android.chrome
+09-24 12:35:54.003  1597  2309 I ActivityManager: START u0 {act=android.intent.action.MAIN cat=[android.intent.category.LAUNCHER] flg=0x14002000 cmp=com.android.chrome/org.chromium.chrome.browser.ChromeTabbedActivity bnds=[849,568][1056,846] (has extras)} from uid 10049
+09-24 12:35:54.652  6043  6064 W cr_ChildProcLauncher: Create a new ChildConnectionAllocator with package name = com.android.chrome, inSandbox = true
+09-24 12:35:54.698  1597  1608 I ActivityManager: Start proc 6071:com.android.chrome:sandboxed_process0/u0i6 for webview_service com.android.chrome/org.chromium.content.app.SandboxedProcessService0
+09-24 12:35:54.997  1597  1621 I ActivityManager: Displayed com.android.chrome/org.chromium.chrome.browser.ChromeTabbedActivity: +915ms (total +1s864ms)
+09-24 12:35:55.210  1597  1854 I ActivityManager: Start proc 6112:com.android.chrome:privileged_process0/u0a49 for service com.android.chrome/org.chromium.content.app.PrivilegedProcessService0
+09-24 12:35:58.003  2359  4244 I Icing   : IndexChimeraService.getServiceInterface callingPackage=com.android.chrome componentName=null serviceId=36
+09-24 12:35:58.094  6043  6167 E cr_Icing: Failed to clear legacy corpus. Status Code: 8 Message: No CorpusConfig for history of com.android.chrome
+09-24 12:36:05.081  6043  6176 F libc    : Fatal signal 31 (SIGSYS), code 1 in tid 6176 (.android.chrome)
+09-24 12:36:05.089  6178  6176 F libc    : Fatal signal 31 (SIGSYS), code 1 in tid 6178 (.android.chrome)
+09-24 12:36:05.111  6184  6184 F DEBUG   : pid: 6178, tid: 6178, name: .android.chrome  >>> com.android.chrome <<<
+09-24 12:36:05.164  6185  6185 F DEBUG   : pid: 6043, tid: 6176, name: .android.chrome  >>> com.android.chrome <<<
+09-24 12:36:05.673  1597  6195 W ActivityManager:   Force finishing activity com.android.chrome/org.chromium.chrome.browser.ChromeTabbedActivity
+09-24 12:36:05.685  1597  1613 I ActivityManager: Showing crash dialog for package com.android.chrome u0
+09-24 12:36:06.177  1597  1612 W ActivityManager: Activity pause timeout for ActivityRecord{59c825 u0 com.android.chrome/org.chromium.chrome.browser.ChromeTabbedActivity t32 f}
+09-24 12:36:17.003  1597  1612 W ActivityManager: Activity destroy timeout for ActivityRecord{59c825 u0 com.android.chrome/org.chromium.chrome.browser.ChromeTabbedActivity t32 f}
+
+
+And looking at the SIGSYS31:
+
+09-24 12:37:45.458  6354  6372 D EGL_emulation: eglMakeCurrent: 0x9fa7ccc0: ver 2 0 (tinfo 0x9f4a4860)
+09-24 12:37:45.807  6287  6305 I FA      : Tag Manager is not found and thus will not be used
+09-24 12:37:47.164  1597  1611 E memtrack: Couldn't load memtrack module
+09-24 12:37:47.164  1597  1611 W android.os.Debug: failed to get memory consumption info: -1
+09-24 12:37:47.176  1597  1611 E memtrack: Couldn't load memtrack module
+09-24 12:37:47.176  1597  1611 W android.os.Debug: failed to get memory consumption info: -1
+09-24 12:37:47.185  1597  1611 E memtrack: Couldn't load memtrack module
+09-24 12:37:47.185  1597  1611 W android.os.Debug: failed to get memory consumption info: -1
+09-24 12:37:53.125  2217  3547 I ClearcutLoggerApiImpl: disconnect managed GoogleApiClient
+09-24 12:37:53.614  1597  1611 E memtrack: Couldn't load memtrack module
+09-24 12:37:53.614  1597  1611 W android.os.Debug: failed to get memory consumption info: -1
+09-24 12:37:53.620  1597  1615 E BatteryStatsService: modem info is invalid: ModemActivityInfo{ mTimestamp=0 mSleepTimeMs=0 mIdleTimeMs=0 mTxTimeMs[]=[0, 0, 0, 0, 0] mRxTimeMs=0 mEnergyUsed=0}
+09-24 12:37:54.607  2162  6413 I EventLogSendingHelper: Sending log events.
+09-24 12:37:56.912  6287  6416 F libc    : Fatal signal 31 (SIGSYS), code 1 in tid 6416 (.android.chrome)
+09-24 12:37:56.919  6420  6416 F libc    : Fatal signal 31 (SIGSYS), code 1 in tid 6420 (.android.chrome)
+09-24 12:37:56.930  6425  6425 W crash_dump32: failed to attach to thread 6287: Operation not permitted
+09-24 12:37:56.939  6425  6425 I crash_dump32: obtaining output fd from tombstoned
+09-24 12:37:56.939  1494  1494 I /system/bin/tombstoned: received crash request for pid 6287
+09-24 12:37:56.940  6425  6425 I crash_dump32: performing dump of process 6287 (target tid = 6416)
+09-24 12:37:56.941  6425  6425 F DEBUG   : *** *** *** *** *** *** *** *** *** *** *** *** *** *** *** ***
+09-24 12:37:56.941  6425  6425 F DEBUG   : Build fingerprint: 'google/sdk_gphone_x86/generic_x86:8.0.0/OSR1.170901.008/4328566:userdebug/dev-keys'
+09-24 12:37:56.941  6425  6425 F DEBUG   : Revision: '0'
+09-24 12:37:56.941  6425  6425 F DEBUG   : ABI: 'x86'
+09-24 12:37:56.941  6425  6425 F DEBUG   : pid: 6287, tid: 6416, name: .android.chrome  >>> com.android.chrome <<<
+09-24 12:37:56.941  6425  6425 F DEBUG   : signal 31 (SIGSYS), code 1 (SYS_SECCOMP), fault addr --------
+09-24 12:37:56.941  6425  6425 F DEBUG   : Cause: seccomp prevented call to disallowed x86 system call 7
+09-24 12:37:56.942  6425  6425 F DEBUG   :     eax 00000007  ebx 00001914  ecx a41879fc  edx 40000000
+09-24 12:37:56.942  6425  6425 F DEBUG   :     esi 00001914  edi a41879fc
+09-24 12:37:56.942  6425  6425 F DEBUG   :     xcs 00000073  xds 0000007b  xes 0000007b  xfs 0000003b  xss 0000007b
+09-24 12:37:56.942  6425  6425 F DEBUG   :     eip 9824cb4e  ebp a4278000  esp a41879dc  flags 00200282
+09-24 12:37:56.943  6425  6425 F DEBUG   : 
+09-24 12:37:56.943  6425  6425 F DEBUG   : backtrace:
+09-24 12:37:56.943  6425  6425 F DEBUG   :     #00 pc 03848b4e  /system/app/Chrome/Chrome.apk (offset 0x1053000)
+09-24 12:37:56.943  6425  6425 F DEBUG   :     #01 pc 00000003  <unknown>
+09-24 12:37:56.948  6426  6426 I crash_dump32: obtaining output fd from tombstoned
+09-24 12:37:56.948  1494  1494 I /system/bin/tombstoned: received crash request for pid 6420
+09-24 12:37:56.948  1494  1494 I /system/bin/tombstoned: enqueueing crash request for pid 6420
+09-24 12:37:57.358  1494  1494 E /system/bin/tombstoned: Tombstone written to: /data/tombstones//tombstone_05
+09-24 12:37:57.358  6426  6426 I crash_dump32: performing dump of process 6420 (target tid = 6420)
+09-24 12:37:57.358  6426  6426 F DEBUG   : *** *** *** *** *** *** *** *** *** *** *** *** *** *** *** ***
+09-24 12:37:57.358  6426  6426 F DEBUG   : Build fingerprint: 'google/sdk_gphone_x86/generic_x86:8.0.0/OSR1.170901.008/4328566:userdebug/dev-keys'
+09-24 12:37:57.358  6426  6426 F DEBUG   : Revision: '0'
+09-24 12:37:57.358  6426  6426 F DEBUG   : ABI: 'x86'
+09-24 12:37:57.358  6426  6426 F DEBUG   : pid: 6420, tid: 6420, name: .android.chrome  >>> com.android.chrome <<<
+09-24 12:37:57.359  6426  6426 F DEBUG   : signal 31 (SIGSYS), code 1 (SYS_SECCOMP), fault addr --------
+09-24 12:37:57.359  6426  6426 F DEBUG   : Cause: seccomp prevented call to disallowed x86 system call 7
+09-24 12:37:57.359  6426  6426 F DEBUG   :     eax 00000007  ebx 0000188f  ecx 00000000  edx 40000000
+09-24 12:37:57.359  6426  6426 F DEBUG   :     esi a427bd58  edi 00000000
+09-24 12:37:57.359  6426  6426 F DEBUG   :     xcs 00000073  xds 0000007b  xes 0000007b  xfs 0000003b  xss 0000007b
+09-24 12:37:57.359  6426  6426 F DEBUG   :     eip 982506d2  ebp 0000188f  esp a427bbfc  flags 00200246
+09-24 12:37:57.359  6426  6426 F DEBUG   : 
+09-24 12:37:57.359  6426  6426 F DEBUG   : backtrace:
+09-24 12:37:57.359  6426  6426 F DEBUG   :     #00 pc 0384c6d2  /system/app/Chrome/Chrome.apk (offset 0x1053000)
+
+
+Since I have trouble just getting the basic stuff to work, then I suspect something obvious. But perhaps someone could help point me in the right direction?
+
+Thanks,
+Asger
+<issue_comment>username_1: Although this issue is quite old, I just leave my experience here for the record. I also tried to hook functions of an Android app running in an Android emulator, and it failed for the same reason as described above.
+
+Make sure you use the correct frida-server binary matching the architecture of your Android emulator device. In my case, I mistakenly used the binary **frida-server-10.7.7-android-x86** on my x86_64 Android emulator.
+
+Using **frida-server-10.7.7-android-x86_64** fixed the problem and everything is working now as expected.<issue_closed>
+<issue_comment>username_2: If this is still an issue, please reopen in frida-core with details on how to reproduce it."
+kubernetes/website,372067829,10682,,"[{'action': 'opened', 'author': 'zacharysarah', 'comment_id': None, 'datetime': '2018-10-19 18:29:11+00:00', 'masked_author': 'username_0', 'text': '## This is a...\r\n\r\n- [x] Feature Request\r\n- [ ] Bug Report\r\n\r\n## Problem\r\n\r\nLocalization guidelines ask localization (l10n) team admins to [open production branches](https://kubernetes.io/docs/contribute/localization/#branching-strategy) directly against k/website, but in order to do that, team admins need repo write permissions for k/website.\r\n\r\n## Proposed solution\r\n\r\nCreate a [team](https://github.com/kubernetes/website/settings/collaboration) for l10n team admins that gives write permissions to k/website.\r\n\r\nTeam admins to include | L10n project\r\n---|---\r\n@cstoku | Japanese\r\n@gochist | Korean\r\n@markthink | Chinese\r\n\r\n**Note**: Open a separate PR to add @markthink to the following teams in `OWNERS_ALIASES`:\r\n\r\n- sig-docs-zh-owners\r\n- sig-docs-zh-reviews\r\n\r\n### Caution\r\n\r\nTeam admins must be mindful that with write power comes write responsibility: closely monitor the health of any long-running branches you create, and ensure that PRs opened directly against k/website fix problems instead of creating them.', 'title': 'L10n team admins need write permissions to k/website', 'type': 'issue'}
+ {'action': 'created', 'author': 'zacharysarah', 'comment_id': 431457649.0, 'datetime': '2018-10-19 18:35:05+00:00', 'masked_author': 'username_0', 'text': ""@markthink It looks like you still need to [join the Kubernetes org](https://github.com/kubernetes/community/blob/master/community-membership.md#member). I'm happy to be one of your sponsors. Perhaps @username_1 could be another?"", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'idealhack', 'comment_id': 431540206.0, 'datetime': '2018-10-20 02:04:47+00:00', 'masked_author': 'username_1', 'text': 'Sure, I can do that.', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'zacharysarah', 'comment_id': 432446437.0, 'datetime': '2018-10-23 22:35:37+00:00', 'masked_author': 'username_0', 'text': 'This is complete, with the exception of @markthink in #10683.', 'title': None, 'type': 'comment'}]","<issue_start><issue_comment>Title: L10n team admins need write permissions to k/website
+username_0: ## This is a...
+
+- [x] Feature Request
+- [ ] Bug Report
+
+## Problem
+
+Localization guidelines ask localization (l10n) team admins to [open production branches](https://kubernetes.io/docs/contribute/localization/#branching-strategy) directly against k/website, but in order to do that, team admins need repo write permissions for k/website.
+
+## Proposed solution
+
+Create a [team](https://github.com/kubernetes/website/settings/collaboration) for l10n team admins that gives write permissions to k/website.
+
+Team admins to include | L10n project
+---|---
+@cstoku | Japanese
+@gochist | Korean
+@markthink | Chinese
+
+**Note**: Open a separate PR to add @markthink to the following teams in `OWNERS_ALIASES`:
+
+- sig-docs-zh-owners
+- sig-docs-zh-reviews
+
+### Caution
+
+Team admins must be mindful that with write power comes write responsibility: closely monitor the health of any long-running branches you create, and ensure that PRs opened directly against k/website fix problems instead of creating them.
+<issue_comment>username_0: @markthink It looks like you still need to [join the Kubernetes org](https://github.com/kubernetes/community/blob/master/community-membership.md#member). I'm happy to be one of your sponsors. Perhaps @username_1 could be another?
+<issue_comment>username_1: Sure, I can do that.
+<issue_comment>username_0: This is complete, with the exception of @markthink in #10683."
+conda-forge/conda-forge.github.io,688094587,1146,,"[{'action': 'opened', 'author': 'ericdill', 'comment_id': None, 'datetime': '2020-08-28 13:57:09+00:00', 'masked_author': 'username_0', 'text': ""it's rather painful to keep track of all of the ways in which the conda-forge community stays in touch. It'd be nice to enumerate them somewhere in our docs. The ones that I know of:\r\n\r\n* conda-forge-core google group\r\n* gitter.im for:\r\n  * [core](https://gitter.im/conda-forge/core)\r\n  * [public](https://gitter.im/conda-forge/conda-forge.github.io)\r\n  * [power pc](https://gitter.im/conda-forge-ppc64le/Lobby)\r\n* keybase\r\n\r\nconda-tools stuff, kinda related\r\n* conda google group\r\n* conda slack org\r\n\r\nWhat am I missing?"", 'title': 'Add links to all our various chat rooms', 'type': 'issue'}
+ {'action': 'created', 'author': 'croth1', 'comment_id': 682598336.0, 'datetime': '2020-08-28 14:12:19+00:00', 'masked_author': 'username_1', 'text': 'It might be also worth thinking about adding an additional chat item to the navigation bar at conda-forge.org. I think chat is a very low-barrier medium for people to reach out to the community and it may not serve us well if users need to dig into the documentation to find that information.', 'title': None, 'type': 'comment'}
+ {'action': 'closed', 'author': 'ericdill', 'comment_id': None, 'datetime': '2020-08-30 17:43:30+00:00', 'masked_author': 'username_0', 'text': '', 'title': None, 'type': 'issue'}]","<issue_start><issue_comment>Title: Add links to all our various chat rooms
+username_0: it's rather painful to keep track of all of the ways in which the conda-forge community stays in touch. It'd be nice to enumerate them somewhere in our docs. The ones that I know of:
+
+* conda-forge-core google group
+* gitter.im for:
+  * [core](https://gitter.im/conda-forge/core)
+  * [public](https://gitter.im/conda-forge/conda-forge.github.io)
+  * [power pc](https://gitter.im/conda-forge-ppc64le/Lobby)
+* keybase
+
+conda-tools stuff, kinda related
+* conda google group
+* conda slack org
+
+What am I missing?
+<issue_comment>username_1: It might be also worth thinking about adding an additional chat item to the navigation bar at conda-forge.org. I think chat is a very low-barrier medium for people to reach out to the community and it may not serve us well if users need to dig into the documentation to find that information.<issue_closed>"
+corona-warn-app/cwa-website,710155281,399,"{'number': 399.0, 'repo': 'cwa-website', 'user_login': 'corona-warn-app'}","[{'action': 'opened', 'author': 'vaubaehn', 'comment_id': None, 'datetime': '2020-09-28T10:45:53Z', 'masked_author': 'username_0', 'text': 'This pull request adds Information to the FAQ according notes for Huawei/Honor device owners (additional settings for battery management) and information regarding instant app crash after starting Corona-Warn-App.\r\nFurthermore, some additional links to the new sections are provided.\r\n\r\nAll enhancements and changes are in line with issue #370 .\r\n\r\nDespite suggested in #370 , all changes are coming in this single PR.\r\n\r\nFeel free to edit/change according to your needs.\r\n\r\nThank you in behalf of all concerned users!', 'title': 'FAQ - Add sections Notes on Huawei/Honor Devices & Corona-Warn-App is closed immediately after starting', 'type': 'issue'}
+ {'action': 'created', 'author': 'mtb77', 'comment_id': 699993188.0, 'datetime': '2020-09-28 13:04:46+00:00', 'masked_author': 'username_1', 'text': 'Hi @username_0 - to be as quick as possible I am not sending you a review comment on your PR in your repository but will introduce a new PR based on your fork. Thanks for your hard work!', 'title': None, 'type': 'comment'}]","<issue_start><issue_comment>Title: FAQ - Add sections Notes on Huawei/Honor Devices & Corona-Warn-App is closed immediately after starting
+username_0: This pull request adds Information to the FAQ according notes for Huawei/Honor device owners (additional settings for battery management) and information regarding instant app crash after starting Corona-Warn-App.
+Furthermore, some additional links to the new sections are provided.
+
+All enhancements and changes are in line with issue #370 .
+
+Despite suggested in #370 , all changes are coming in this single PR.
+
+Feel free to edit/change according to your needs.
+
+Thank you in behalf of all concerned users!
+<issue_comment>username_1: Hi @username_0 - to be as quick as possible I am not sending you a review comment on your PR in your repository but will introduce a new PR based on your fork. Thanks for your hard work!"
+jscraftcamp/website,236717418,234,"{'number': 234.0, 'repo': 'website', 'user_login': 'jscraftcamp'}","[{'action': 'opened', 'author': 'yogan', 'comment_id': None, 'datetime': '2017-06-18T12:06:58Z', 'masked_author': 'username_0', 'text': ""I would like to register for JS CraftCamp.    \r\n- [x] My Pull Request contains a json file `$firstname_$lastname.json` or `$nickname.json`    \r\n- [x] The json file follows the template at https://github.com/jscraftcamp/website/blob/master/participants/_template.json and contains the mandatory fields `name`, `tags`, `when`, `what_is_my_connection_to_javascript` and `what_can_i_contribute`    \r\n- [x] If I can't attend, I will either send another Pull Request removing my json file or an E-Mail with the subject 'UNREGISTER' to anpch@example.com"", 'title': 'add Frank Blendinger to participants', 'type': 'issue'}
+ {'action': 'created', 'author': 'davelosert', 'comment_id': 309278818.0, 'datetime': '2017-06-18 13:48:49+00:00', 'masked_author': 'username_1', 'text': ""@username_0 : Thanks for your registration.\r\n\r\nI'd be happy to attend a *VIM* Session. Using it myself since a few months and what can I say? I love it! \r\nwould be great to hear your experiences and get some tips! I am looking forward on talking with you about it on JSCC17!"", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'yogan', 'comment_id': 309377898.0, 'datetime': '2017-06-19 08:49:00+00:00', 'masked_author': 'username_0', 'text': ""@username_1 Sure, I love talking about Vim. Do you have any special topics you're interested in? Vim is so powerful, and nobody knows everything. I can give a session on the basics (movements, modes, buffers, search/replace, etc.), or more advanced topics like registers, macros, and plugins. When I know what is of most interest, I can prepare accordingly."", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'davelosert', 'comment_id': 309517737.0, 'datetime': '2017-06-19 17:57:47+00:00', 'masked_author': 'username_1', 'text': ""@username_0 : I'd say that also depends on the interest of other participants. Going with basics is for sure not a bad idea as I know a lot of people don't really like vim. I'd even visit a more advanced session as well :)\r\n\r\nSo imho, I'd say prepare the basics and lets improvise together if the interest arises! :smile:"", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'yogan', 'comment_id': 309578257.0, 'datetime': '2017-06-19 21:25:26+00:00', 'masked_author': 'username_0', 'text': '@username_1 That sound good, thanks for the input.', 'title': None, 'type': 'comment'}]","<issue_start><issue_comment>Title: add Frank Blendinger to participants
+username_0: I would like to register for JS CraftCamp.    
+- [x] My Pull Request contains a json file `$firstname_$lastname.json` or `$nickname.json`    
+- [x] The json file follows the template at https://github.com/jscraftcamp/website/blob/master/participants/_template.json and contains the mandatory fields `name`, `tags`, `when`, `what_is_my_connection_to_javascript` and `what_can_i_contribute`    
+- [x] If I can't attend, I will either send another Pull Request removing my json file or an E-Mail with the subject 'UNREGISTER' to team@jscraftcamp.org
+<issue_comment>username_1: @username_0 : Thanks for your registration.
+
+I'd be happy to attend a *VIM* Session. Using it myself since a few months and what can I say? I love it! 
+would be great to hear your experiences and get some tips! I am looking forward on talking with you about it on JSCC17!
+<issue_comment>username_0: @username_1 Sure, I love talking about Vim. Do you have any special topics you're interested in? Vim is so powerful, and nobody knows everything. I can give a session on the basics (movements, modes, buffers, search/replace, etc.), or more advanced topics like registers, macros, and plugins. When I know what is of most interest, I can prepare accordingly.
+<issue_comment>username_1: @username_0 : I'd say that also depends on the interest of other participants. Going with basics is for sure not a bad idea as I know a lot of people don't really like vim. I'd even visit a more advanced session as well :)
+
+So imho, I'd say prepare the basics and lets improvise together if the interest arises! :smile:
+<issue_comment>username_0: @username_1 That sound good, thanks for the input."
+okfn/website,533553201,428,"{'number': 428.0, 'repo': 'website', 'user_login': 'okfn'}","[{'action': 'opened', 'author': 'breck7', 'comment_id': None, 'datetime': '2019-12-05T19:37:08Z', 'masked_author': 'username_0', 'text': 'In order to better support the mission of ""A World Where Knowledge Creates Power For The Many, Not The Few"", I propose this commit, and the broader idea of changing all occurrences of the terms ""Intellectual Property"" to ""Intellectual Monopoly"".\r\n\r\nThe truth is Intellectual Monopoly laws are Intellectual Monopoly laws. Whether or not they are good or bad we can debate, but first we need to stop using dishonest terms promoted by the Few.', 'title': 'Change IP Policy to IM policy.', 'type': 'issue'}
+ {'action': 'created', 'author': 'gitiafsaneh4', 'comment_id': 826314631.0, 'datetime': '2021-04-25 12:15:17+00:00', 'masked_author': 'username_1', 'text': '@username_1', 'title': None, 'type': 'comment'}]","<issue_start><issue_comment>Title: Change IP Policy to IM policy.
+username_0: In order to better support the mission of ""A World Where Knowledge Creates Power For The Many, Not The Few"", I propose this commit, and the broader idea of changing all occurrences of the terms ""Intellectual Property"" to ""Intellectual Monopoly"".
+
+The truth is Intellectual Monopoly laws are Intellectual Monopoly laws. Whether or not they are good or bad we can debate, but first we need to stop using dishonest terms promoted by the Few.
+<issue_comment>username_1: @username_1"
+nodejs/nodejs.org,542853229,2864,"{'number': 2864.0, 'repo': 'nodejs.org', 'user_login': 'nodejs'}","[{'action': 'opened', 'author': 'sxa555', 'comment_id': None, 'datetime': '2019-12-27T12:03:46Z', 'masked_author': 'username_0', 'text': 'I was perusing the node.js website and in order to verify that the Linux on Power download was little-endian and not big-endian (unlike AIX it can be either) I had to hover over the download link to check the filename. This change will make it more visible on the download site. With this PR I am assuming that changing `Power` to `Power LE` as an architecture name will be ok across languages and not need further translation. Someone else can challenge that assumption if desired ;-)', 'title': ""Clarify that 'Linux on Power' is Little Endian"", 'type': 'issue'}
+ {'action': 'created', 'author': 'sxa555', 'comment_id': 569913108.0, 'datetime': '2019-12-31 11:21:45+00:00', 'masked_author': 'username_0', 'text': '@username_2 Yeah I remember us doing BE originally and I suspect the pages were just never updated ... Seemed a bit overdue ;-)', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'sxa555', 'comment_id': 570177973.0, 'datetime': '2020-01-02 11:09:17+00:00', 'masked_author': 'username_0', 'text': '@username_1 Should this have gone live by now?', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'Trott', 'comment_id': 570324108.0, 'datetime': '2020-01-02 19:56:47+00:00', 'masked_author': 'username_1', 'text': ""I would have thought so, but yeah, I'm not seeing it. Maybe this file only gets regenerated when there's a release or something like that?"", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'nschonni', 'comment_id': 570371948.0, 'datetime': '2020-01-02 22:09:52+00:00', 'masked_author': 'username_2', 'text': 'Think the last one failed on installing fibers (WARNING, large link ~200MB) https://nodejs.org/github-webhook.log', 'title': None, 'type': 'comment'}]","<issue_start><issue_comment>Title: Clarify that 'Linux on Power' is Little Endian
+username_0: I was perusing the node.js website and in order to verify that the Linux on Power download was little-endian and not big-endian (unlike AIX it can be either) I had to hover over the download link to check the filename. This change will make it more visible on the download site. With this PR I am assuming that changing `Power` to `Power LE` as an architecture name will be ok across languages and not need further translation. Someone else can challenge that assumption if desired ;-)
+<issue_comment>username_0: @username_2 Yeah I remember us doing BE originally and I suspect the pages were just never updated ... Seemed a bit overdue ;-)
+<issue_comment>username_0: @username_1 Should this have gone live by now?
+<issue_comment>username_1: I would have thought so, but yeah, I'm not seeing it. Maybe this file only gets regenerated when there's a release or something like that?
+<issue_comment>username_2: Think the last one failed on installing fibers (WARNING, large link ~200MB) https://nodejs.org/github-webhook.log"
+istio/istio.io,424570350,3837,,"[{'action': 'opened', 'author': 'hobbytp', 'comment_id': None, 'datetime': '2019-03-24 03:22:42+00:00', 'masked_author': 'username_0', 'text': 'In this web, the command is as below, but it is incorrect to use "" ` "" to use your_vm_driver_choice, because it will cause the minikube start failed in windows powershell, I think it will also failed in other platform. So I recommend to use "" instead of ` for this command.\r\nminikube start --memory=8192 --cpus=4 --kubernetes-version=v1.13.0 \\\r\n    --vm-driver=`your_vm_driver_choice`', 'title': 'Issue with docs/setup/kubernetes/prepare/platform-setup/minikube/index.md', 'type': 'issue'}
+ {'action': 'created', 'author': 'sdake', 'comment_id': 478042861.0, 'datetime': '2019-03-29 15:34:28+00:00', 'masked_author': 'username_1', 'text': 'https://github.com/istio/istio.io/pull/3891', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'frankbu', 'comment_id': 478630500.0, 'datetime': '2019-04-01 15:37:09+00:00', 'masked_author': 'username_2', 'text': 'Fixed by #3891', 'title': None, 'type': 'comment'}
+ {'action': 'closed', 'author': 'frankbu', 'comment_id': None, 'datetime': '2019-04-01 15:37:09+00:00', 'masked_author': 'username_2', 'text': '', 'title': None, 'type': 'issue'}]","<issue_start><issue_comment>Title: Issue with docs/setup/kubernetes/prepare/platform-setup/minikube/index.md
+username_0: In this web, the command is as below, but it is incorrect to use "" ` "" to use your_vm_driver_choice, because it will cause the minikube start failed in windows powershell, I think it will also failed in other platform. So I recommend to use "" instead of ` for this command.
+minikube start --memory=8192 --cpus=4 --kubernetes-version=v1.13.0 \
+    --vm-driver=`your_vm_driver_choice`
+<issue_comment>username_1: https://github.com/istio/istio.io/pull/3891
+<issue_comment>username_2: Fixed by #3891<issue_closed>"
+quarkusio/quarkusio.github.io,1165752167,1360,,"[{'action': 'opened', 'author': 'jclingan', 'comment_id': None, 'datetime': '2022-03-10 21:37:51+00:00', 'masked_author': 'username_0', 'text': '```\r\n- id: DevelopingandDebuggingKubernetesOperatorsinJava-2022-03-10\r\n  type: article \r\n  title: ""Developing and Debugging Kubernetes Operators in Java""\r\n  date: ""2022-03-1""\r\n  author: ""Niklas Heidloff""\r\n  note: ""Kubernetes operators are incredibly powerful to deploy applications and automate day 2 operations. While most operators are implemented in Go, there is also a Quarkus extension for Java developers. The article describes to create your first simple operator.""\r\n  url: ""http://heidloff.net/article/developing-debugging-kubernetes-operators-java/""\r\n  urldate: ""2022-03-10""\r\n\r\n```', 'title': 'Add Developing and Debugging Kubernetes Operators in Java to Publications', 'type': 'issue'}]","<issue_start><issue_comment>Title: Add Developing and Debugging Kubernetes Operators in Java to Publications
+username_0: ```
+- id: DevelopingandDebuggingKubernetesOperatorsinJava-2022-03-10
+  type: article 
+  title: ""Developing and Debugging Kubernetes Operators in Java""
+  date: ""2022-03-1""
+  author: ""Niklas Heidloff""
+  note: ""Kubernetes operators are incredibly powerful to deploy applications and automate day 2 operations. While most operators are implemented in Go, there is also a Quarkus extension for Java developers. The article describes to create your first simple operator.""
+  url: ""http://heidloff.net/article/developing-debugging-kubernetes-operators-java/""
+  urldate: ""2022-03-10""
+
+```"
+corona-warn-app/cwa-website,824356656,956,,"[{'action': 'opened', 'author': 'dsarkar', 'comment_id': None, 'datetime': '2021-03-08 09:14:27+00:00', 'masked_author': 'username_0', 'text': '<!--\r\nThanks for reporting an issue on the website 🙌 ❤️\r\n\r\nBefore opening a new issue, please make sure that we do not have any duplicates already open. You can ensure this by searching the issue list for this repository. If there is a duplicate, please close your issue and add a comment to the existing issue instead.\r\n-->\r\n\r\n## Where to find the issue\r\n<!-- Be as specific as possible by naming the URL path, page, and ideally paragraph. -->\r\n\r\nhttps://www.coronawarn.app/de/faq/#no_risk_update\r\nhttps://www.coronawarn.app/en/faq/#no_risk_update\r\n\r\n\r\n## Describe the issue\r\n<!-- Please let us know what exactly is the issue with that part of the website -->\r\n\r\nUsers experience issues with background updates that are device-specific but not related to the CWA itself. \r\nIt should clearly be expressed that this is an issue of the device and not the app\r\n\r\n## Suggested change\r\n<!-- If you have ideas on how to fix this issue, please note them here, or consider creating a Pull Request -->\r\n\r\nadd as the first paragraph\r\n\r\n\r\nDE\r\nDieses Problem liegt normalerweise daran, dass einige Geräte-Anbieter eigene Batteriesparfunktionen implementieren, anstatt auf die bereits integrierten Funktionen zuzugreifen, die von Google in seinem Android-Betriebssystem bereitgestellt sind. Apps, wie die Corona-Warn-App, deren Sinn es ist, im Hintergrund Aufgaben zu erledigen, können auf solchen Geräten daran gehindert werden. D.h., dass eine nicht-funktionierende Hintergrundaktualisierung nicht auf die App selbst zurückzuführen ist, sondern auf spezifische Besonderheiten von einigen Geräten. Im Folgenden haben wir einige Maßnahmen zusammengestellt, das Problem zu beheben.\r\n\r\nEN\r\nThis problem is usually because some device manufacturers implement their own battery-saving functions instead of accessing the already built-in features provided by Google in its own Android operating system. Apps, such as the Corona-Warn-App, which should cope with tasks in the background, can be prevented from doing so on such devices.  This means that a non-functional background update is not due to the app itself, but to specific features of some devices. Below we have put together some measures to mitigate the problem.', 'title': 'FAQ - add additional paragraph - background updates', 'type': 'issue'}
+ {'action': 'closed', 'author': 'dsarkar', 'comment_id': None, 'datetime': '2021-03-15 09:38:55+00:00', 'masked_author': 'username_0', 'text': '', 'title': None, 'type': 'issue'}]","<issue_start><issue_comment>Title: FAQ - add additional paragraph - background updates
+username_0: <!--
+Thanks for reporting an issue on the website 🙌 ❤️
+
+Before opening a new issue, please make sure that we do not have any duplicates already open. You can ensure this by searching the issue list for this repository. If there is a duplicate, please close your issue and add a comment to the existing issue instead.
+-->
+
+## Where to find the issue
+<!-- Be as specific as possible by naming the URL path, page, and ideally paragraph. -->
+
+https://www.coronawarn.app/de/faq/#no_risk_update
+https://www.coronawarn.app/en/faq/#no_risk_update
+
+
+## Describe the issue
+<!-- Please let us know what exactly is the issue with that part of the website -->
+
+Users experience issues with background updates that are device-specific but not related to the CWA itself. 
+It should clearly be expressed that this is an issue of the device and not the app
+
+## Suggested change
+<!-- If you have ideas on how to fix this issue, please note them here, or consider creating a Pull Request -->
+
+add as the first paragraph
+
+
+DE
+Dieses Problem liegt normalerweise daran, dass einige Geräte-Anbieter eigene Batteriesparfunktionen implementieren, anstatt auf die bereits integrierten Funktionen zuzugreifen, die von Google in seinem Android-Betriebssystem bereitgestellt sind. Apps, wie die Corona-Warn-App, deren Sinn es ist, im Hintergrund Aufgaben zu erledigen, können auf solchen Geräten daran gehindert werden. D.h., dass eine nicht-funktionierende Hintergrundaktualisierung nicht auf die App selbst zurückzuführen ist, sondern auf spezifische Besonderheiten von einigen Geräten. Im Folgenden haben wir einige Maßnahmen zusammengestellt, das Problem zu beheben.
+
+EN
+This problem is usually because some device manufacturers implement their own battery-saving functions instead of accessing the already built-in features provided by Google in its own Android operating system. Apps, such as the Corona-Warn-App, which should cope with tasks in the background, can be prevented from doing so on such devices.  This means that a non-functional background update is not due to the app itself, but to specific features of some devices. Below we have put together some measures to mitigate the problem.<issue_closed>"

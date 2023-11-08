@@ -1,0 +1,686 @@
+gohugoio/hugo,465659554,6081,,"[{'action': 'opened', 'author': 'divinerites', 'comment_id': None, 'datetime': '2019-07-09 09:02:17+00:00', 'masked_author': 'username_0', 'text': 'Hello,\r\n\r\nMy `{{ .TableOfContents\xa0}}` works flawlessly. But when I decided to **add some icon on my headers**, the markdown parsing produced a funny result with `hahahugoshortcode` text 😸 :\r\n\r\nfrom source markdown :\r\n\r\n```md\r\n## {{< icon name=""fa-battery-1"" >}} My title with icon \r\n\r\nmy text 1\r\n\r\n### My title without icon\r\n\r\nmy text 2\r\n```\r\n\r\nproduce this HTML\r\n\r\n```html\r\n<nav id=""TableOfContents"">\r\n<ul>\r\n<li>\r\n<ul>\r\n<li><a href=""#hahahugoshortcode-s0-hbhb-my-title-with-icon"">HAHAHUGOSHORTCODE-s0-HBHB My title with icon</a>\r\n<ul>\r\n<li><a href=""#my-title-without-icon"">My title without icon</a></li>\r\n</ul></li>\r\n\r\n\r\n```', 'title': '.TableOfContents parsing problem if {{< icon >}} on ## level headers', 'type': 'issue'}
+ {'action': 'created', 'author': 'divinerites', 'comment_id': 509559307.0, 'datetime': '2019-07-09 09:07:40+00:00', 'masked_author': 'username_0', 'text': ""Ah ... may be this is already known, I finally found a reference on this [Bep's post](https://discourse.gohugo.io/t/hugo-0-40-help-test-it/11655) ..."", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'plinss', 'comment_id': 554601922.0, 'datetime': '2019-11-16 04:04:19+00:00', 'masked_author': 'username_1', 'text': 'I found the fix for this, use the `{{% %}}` syntax for the shortcodes. e.g. \r\n```\r\n## {{% icon name=""fa-battery-1"" %}} My title with icon \r\n```\r\nThat will cause the shortcodes to be rendered before being passed to the markdown processor (which generates the .TableOfContent variable)', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'subhashb', 'comment_id': 577938291.0, 'datetime': '2020-01-24 00:15:47+00:00', 'masked_author': 'username_2', 'text': ""@username_1's solution works well for icons. But using true shortcodes with separate <style> sections still generates this text in ToC."", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'bep', 'comment_id': 633147234.0, 'datetime': '2020-05-23 22:12:37+00:00', 'masked_author': 'username_3', 'text': 'You want to use the `{{%` delimiter in titles.', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'rodrigoalcarazdelaosa', 'comment_id': 644350838.0, 'datetime': '2020-06-15 20:05:39+00:00', 'masked_author': 'username_4', 'text': ""Is this confirmed to work with Hugo 0.72.0? I'm testing it and the icon shows in the first line of the body of the text, not in the title."", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'rodrigoalcarazdelaosa', 'comment_id': 649408303.0, 'datetime': '2020-06-25 09:08:51+00:00', 'masked_author': 'username_4', 'text': 'This is still happening for me with Hugo 0.73.0.', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'rodrigoalcarazdelaosa', 'comment_id': 663959705.0, 'datetime': '2020-07-26 08:44:08+00:00', 'masked_author': 'username_4', 'text': 'Also happening with Hugo 0.74.3', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'bep', 'comment_id': 663995255.0, 'datetime': '2020-07-26 14:30:58+00:00', 'masked_author': 'username_3', 'text': 'Note that any fix for this issue would be to issue some kind of warning/error instead of the haha... placeholder. The proper tix is what I say above. If you see some other issues related to this, that is something different.', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'rodrigoalcarazdelaosa', 'comment_id': 664002033.0, 'datetime': '2020-07-26 15:27:08+00:00', 'masked_author': 'username_4', 'text': 'I\'m using the [Academic theme](https://sourcethemes.com/academic/), which implements [this shortcode](https://github.com/gcushen/hugo-academic/blob/master/layouts/shortcodes/icon.html) to render icons. I copy the code below:\r\n```\r\n{{- if (.Get ""name"") -}}\r\n  {{- $icon := .Get ""name"" -}}\r\n  {{- $pack := or (.Get ""pack"") ""fas"" -}}\r\n  {{- $pack_prefix := $pack -}}\r\n  {{- if in (slice ""fab"" ""fas"" ""far"" ""fal"") $pack -}}\r\n    {{- $pack_prefix = ""fa"" -}}\r\n  {{- end -}}\r\n  {{- $padding_right := (.Get ""padding_right"") | default 1 -}}{{/* Defaulting to 1 prevents no spacing when minimizing HTML. */}}\r\n  <i class=""{{ $pack }} {{ $pack_prefix }}-{{ $icon }} {{with (.Get ""padding_left"")}}pl-{{.}}{{end}} {{with $padding_right}}pr-{{.}}{{end}} {{if ne (.Get ""fixed_width"") ""false""}}fa-fw{{end}}""></i>\r\n{{- end -}}\r\n```\r\nIf I use the shortcode with this syntax `{{< >}}` I see the icon on the header but the _HAHAHUGOSHORTCODE_ text on the ToC, like this:\r\n![image](https://user-images.githubusercontent.com/9049533/88482908-99aaac80-cf64-11ea-922b-0ebc8cb8bd48.png)\r\n\r\nIf I use the `{{% %}}` syntax then the icon is rendered on the next line below the header, like this:\r\n![image](https://user-images.githubusercontent.com/9049533/88482920-a29b7e00-cf64-11ea-8c84-93288ba8d8e0.png)\r\n\r\nI reported this issue on `hugo-academic` and [was referred](https://github.com/gcushen/hugo-academic/issues/1746#issuecomment-644342807) here, but the solution posted here doesn\'t work for me. I\'m also mentioning @gcushen (creator of the [Academic theme]([Academic theme](https://sourcethemes.com/academic/))) just in case.\r\n\r\nThanks for your time!', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'rodrigoalcarazdelaosa', 'comment_id': 751272499.0, 'datetime': '2020-12-25 17:09:17+00:00', 'masked_author': 'username_4', 'text': ""Just wanted to remind this. The proposed solution doesn't work for me as the icon is not rendered on the heading but on the next line below. Maybe it's not a Hugo issue but a Wowchemy issue (related to the above `icon` shortcode). It'd be great if @gcushen could confirm it. Thanks in advance!"", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'rodrigoalcarazdelaosa', 'comment_id': 754655753.0, 'datetime': '2021-01-05 14:04:56+00:00', 'masked_author': 'username_4', 'text': 'For anyone curious I got around this by directly including the icons without using any shortcode, just using the `<i class=""fab fa-linux""></i>` syntax (in the case of [Font Awesome](https://fontawesome.com) icons).', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'ncw', 'comment_id': 875787079.0, 'datetime': '2021-07-07 17:22:29+00:00', 'masked_author': 'username_5', 'text': 'I\'ve come across this problem too.\r\n\r\nI\'ll just note that the `{{% %}}` syntax doesn\'t work if you have `renderer.unsafe = false` and neither does the plain `<i class=""fab fa-linux""></i>` solution for the same reason.\r\n\r\nIt would be nice to fix the table of contents renderer so ignores shortcodes.', 'title': None, 'type': 'comment'}]","<issue_start><issue_comment>Title: .TableOfContents parsing problem if {{< icon >}} on ## level headers
+username_0: Hello,
+
+My `{{ .TableOfContents }}` works flawlessly. But when I decided to **add some icon on my headers**, the markdown parsing produced a funny result with `hahahugoshortcode` text 😸 :
+
+from source markdown :
+
+```md
+## {{< icon name=""fa-battery-1"" >}} My title with icon 
+
+my text 1
+
+### My title without icon
+
+my text 2
+```
+
+produce this HTML
+
+```html
+<nav id=""TableOfContents"">
+<ul>
+<li>
+<ul>
+<li><a href=""#hahahugoshortcode-s0-hbhb-my-title-with-icon"">HAHAHUGOSHORTCODE-s0-HBHB My title with icon</a>
+<ul>
+<li><a href=""#my-title-without-icon"">My title without icon</a></li>
+</ul></li>
+
+
+```
+<issue_comment>username_0: Ah ... may be this is already known, I finally found a reference on this [Bep's post](https://discourse.gohugo.io/t/hugo-0-40-help-test-it/11655) ...
+<issue_comment>username_1: I found the fix for this, use the `{{% %}}` syntax for the shortcodes. e.g. 
+```
+## {{% icon name=""fa-battery-1"" %}} My title with icon 
+```
+That will cause the shortcodes to be rendered before being passed to the markdown processor (which generates the .TableOfContent variable)
+<issue_comment>username_2: @username_1's solution works well for icons. But using true shortcodes with separate <style> sections still generates this text in ToC.
+<issue_comment>username_3: You want to use the `{{%` delimiter in titles.
+<issue_comment>username_4: Is this confirmed to work with Hugo 0.72.0? I'm testing it and the icon shows in the first line of the body of the text, not in the title.
+<issue_comment>username_4: This is still happening for me with Hugo 0.73.0.
+<issue_comment>username_4: Also happening with Hugo 0.74.3
+<issue_comment>username_3: Note that any fix for this issue would be to issue some kind of warning/error instead of the haha... placeholder. The proper tix is what I say above. If you see some other issues related to this, that is something different.
+<issue_comment>username_4: I'm using the [Academic theme](https://sourcethemes.com/academic/), which implements [this shortcode](https://github.com/gcushen/hugo-academic/blob/master/layouts/shortcodes/icon.html) to render icons. I copy the code below:
+```
+{{- if (.Get ""name"") -}}
+  {{- $icon := .Get ""name"" -}}
+  {{- $pack := or (.Get ""pack"") ""fas"" -}}
+  {{- $pack_prefix := $pack -}}
+  {{- if in (slice ""fab"" ""fas"" ""far"" ""fal"") $pack -}}
+    {{- $pack_prefix = ""fa"" -}}
+  {{- end -}}
+  {{- $padding_right := (.Get ""padding_right"") | default 1 -}}{{/* Defaulting to 1 prevents no spacing when minimizing HTML. */}}
+  <i class=""{{ $pack }} {{ $pack_prefix }}-{{ $icon }} {{with (.Get ""padding_left"")}}pl-{{.}}{{end}} {{with $padding_right}}pr-{{.}}{{end}} {{if ne (.Get ""fixed_width"") ""false""}}fa-fw{{end}}""></i>
+{{- end -}}
+```
+If I use the shortcode with this syntax `{{< >}}` I see the icon on the header but the _HAHAHUGOSHORTCODE_ text on the ToC, like this:
+![image](https://user-images.githubusercontent.com/9049533/88482908-99aaac80-cf64-11ea-922b-0ebc8cb8bd48.png)
+
+If I use the `{{% %}}` syntax then the icon is rendered on the next line below the header, like this:
+![image](https://user-images.githubusercontent.com/9049533/88482920-a29b7e00-cf64-11ea-8c84-93288ba8d8e0.png)
+
+I reported this issue on `hugo-academic` and [was referred](https://github.com/gcushen/hugo-academic/issues/1746#issuecomment-644342807) here, but the solution posted here doesn't work for me. I'm also mentioning @gcushen (creator of the [Academic theme]([Academic theme](https://sourcethemes.com/academic/))) just in case.
+
+Thanks for your time!
+<issue_comment>username_4: Just wanted to remind this. The proposed solution doesn't work for me as the icon is not rendered on the heading but on the next line below. Maybe it's not a Hugo issue but a Wowchemy issue (related to the above `icon` shortcode). It'd be great if @gcushen could confirm it. Thanks in advance!
+<issue_comment>username_4: For anyone curious I got around this by directly including the icons without using any shortcode, just using the `<i class=""fab fa-linux""></i>` syntax (in the case of [Font Awesome](https://fontawesome.com) icons).
+<issue_comment>username_5: I've come across this problem too.
+
+I'll just note that the `{{% %}}` syntax doesn't work if you have `renderer.unsafe = false` and neither does the plain `<i class=""fab fa-linux""></i>` solution for the same reason.
+
+It would be nice to fix the table of contents renderer so ignores shortcodes."
+newrelic/developer-website,737357413,935,,"[{'action': 'opened', 'author': 'paperclypse', 'comment_id': None, 'datetime': '2020-11-06 00:14:05+00:00', 'masked_author': 'username_0', 'text': ""### Summary\r\n\r\n(I'm adding this request on Paul Frazier's behalf.)\r\n\r\nThis is related to https://newrelic.atlassian.net/browse/DOC-6173, as well as https://developer.newrelic.com/automate-workflows/5-mins-tag-resources.\r\n\r\nSpecifically, Paul Frazier thinks it would be a good idea to have a tutorial doc on how to  use APM agent tags and then query, alert, and dashboard on those tags. This could either be one new doc or more than one.\r\n\r\nWe've already got some pretty good documentation on tagging on our Docs site, but Paul would like a more guided tutorial on this.\r\n\r\n### What type of documentation change are you suggesting?\r\n\r\nThis would be more of a how to, educational guide. \r\n\r\n### Motivation\r\n\r\nI think there's a concern that people aren't really getting the full benefit out of tags in New Relic One. This would help raise awareness and help people take advantage of the power of tagging.\r\n\r\n### Writing the documentation\r\n\r\nPlease reach out to Paul Frazier for additional information on this."", 'title': 'This is a request for new documentation on how to query, alert, and dashboard APM agent tags', 'type': 'issue'}]","<issue_start><issue_comment>Title: This is a request for new documentation on how to query, alert, and dashboard APM agent tags
+username_0: ### Summary
+
+(I'm adding this request on Paul Frazier's behalf.)
+
+This is related to https://newrelic.atlassian.net/browse/DOC-6173, as well as https://developer.newrelic.com/automate-workflows/5-mins-tag-resources.
+
+Specifically, Paul Frazier thinks it would be a good idea to have a tutorial doc on how to  use APM agent tags and then query, alert, and dashboard on those tags. This could either be one new doc or more than one.
+
+We've already got some pretty good documentation on tagging on our Docs site, but Paul would like a more guided tutorial on this.
+
+### What type of documentation change are you suggesting?
+
+This would be more of a how to, educational guide. 
+
+### Motivation
+
+I think there's a concern that people aren't really getting the full benefit out of tags in New Relic One. This would help raise awareness and help people take advantage of the power of tagging.
+
+### Writing the documentation
+
+Please reach out to Paul Frazier for additional information on this."
+facebook/docusaurus,909431715,4887,"{'number': 4887.0, 'repo': 'docusaurus', 'user_login': 'facebook'}","[{'action': 'opened', 'author': 'l0u1sg', 'comment_id': None, 'datetime': '2021-06-02T12:09:08Z', 'masked_author': 'username_0', 'text': '<!--\r\nThank you for sending the PR! We appreciate you spending the time to work on these changes.\r\n\r\nHelp us understand your motivation by explaining why you decided to make this change.\r\n\r\nYou can learn more about contributing to Docusaurus here: https://github.com/facebook/docusaurus/blob/master/CONTRIBUTING.md\r\n\r\nHappy contributing!\r\n\r\n-->\r\n\r\n## Motivation\r\n\r\nI am the IT manager of a Discord server that helps young people who feel bad about themselves, so I thought it was important to show that Docusaurus is a very powerful tool that can be used to make a lot of websites, and to make documentation, for example on bullying\r\n\r\n### Have you read the [Contributing Guidelines on pull requests](https://github.com/facebook/docusaurus/blob/master/CONTRIBUTING.md#pull-requests)?\r\n\r\nyes\r\n\r\n## Test Plan\r\n\r\nI built the project on my computer and all my modifications worked well.', 'title': 'Add Aide Jeune website to Docusaurus site showcase', 'type': 'issue'}
+ {'action': 'created', 'author': 'l0u1sg', 'comment_id': 852974348.0, 'datetime': '2021-06-02 12:11:19+00:00', 'masked_author': 'username_0', 'text': 'I have just signed up :)', 'title': None, 'type': 'comment'}]","<issue_start><issue_comment>Title: Add Aide Jeune website to Docusaurus site showcase
+username_0: <!--
+Thank you for sending the PR! We appreciate you spending the time to work on these changes.
+
+Help us understand your motivation by explaining why you decided to make this change.
+
+You can learn more about contributing to Docusaurus here: https://github.com/facebook/docusaurus/blob/master/CONTRIBUTING.md
+
+Happy contributing!
+
+-->
+
+## Motivation
+
+I am the IT manager of a Discord server that helps young people who feel bad about themselves, so I thought it was important to show that Docusaurus is a very powerful tool that can be used to make a lot of websites, and to make documentation, for example on bullying
+
+### Have you read the [Contributing Guidelines on pull requests](https://github.com/facebook/docusaurus/blob/master/CONTRIBUTING.md#pull-requests)?
+
+yes
+
+## Test Plan
+
+I built the project on my computer and all my modifications worked well.
+<issue_comment>username_0: I have just signed up :)"
+nodejs/nodejs.org,135642704,528,"{'number': 528.0, 'repo': 'nodejs.org', 'user_login': 'nodejs'}","[{'action': 'opened', 'author': 'rvagg', 'comment_id': None, 'datetime': '2016-02-23T05:51:57Z', 'masked_author': 'username_0', 'text': '/cc @nodejs/build \r\n\r\nmatches what I did @ http://nodejs.org/en/blog/release/v5.7.0/\r\n\r\n@username_3 I called it ""Linux PPC LE 64-bit Binary"" there, and in this PR, is that an idiomatic way to refer to it?', 'title': 'release posts: add ppc64le & link to tar.xz for Linux & SunOS', 'type': 'issue'}
+ {'action': 'created', 'author': 'TheAlphaNerd', 'comment_id': 187556483.0, 'datetime': '2016-02-23 06:09:58+00:00', 'masked_author': 'username_1', 'text': 'LGTM. Curious as to why the switch from `.gz.` got `.xz`', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'rvagg', 'comment_id': 187560625.0, 'datetime': '2016-02-23 06:16:45+00:00', 'masked_author': 'username_0', 'text': '`.xz` is much tiny, many wow, compare sizes @ https://nodejs.org/download/release/v5.7.0/, xz compression is available on every modern Linux distro now and you can even use `tar -J` to uncompress them. Still a hassle to do it on OSX hence leaving the darwin binaries and source tarball .gz by default.', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'ghostbar', 'comment_id': 187570164.0, 'datetime': '2016-02-23 06:42:45+00:00', 'masked_author': 'username_2', 'text': 'Why the source code is on `.tar.gz` yet? For OSX people as well? (That would make sense, just confirming)', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'mhdawson', 'comment_id': 187732262.0, 'datetime': '2016-02-23 15:04:26+00:00', 'masked_author': 'username_3', 'text': '""Linux PPC LE 64-bit Binary"" sounds ok to me but I\'ll double check with our power team', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'mhdawson', 'comment_id': 187798536.0, 'datetime': '2016-02-23 17:20:41+00:00', 'masked_author': 'username_3', 'text': 'Feeback from power team is that """"Linux PPC LE 64-bit Binary"" is fine', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'rvagg', 'comment_id': 188033101.0, 'datetime': '2016-02-24 02:53:50+00:00', 'masked_author': 'username_0', 'text': 'great, OTY @nodejs/website', 'title': None, 'type': 'comment'}]","<issue_start><issue_comment>Title: release posts: add ppc64le & link to tar.xz for Linux & SunOS
+username_0: /cc @nodejs/build 
+
+matches what I did @ http://nodejs.org/en/blog/release/v5.7.0/
+
+@username_3 I called it ""Linux PPC LE 64-bit Binary"" there, and in this PR, is that an idiomatic way to refer to it?
+<issue_comment>username_1: LGTM. Curious as to why the switch from `.gz.` got `.xz`
+<issue_comment>username_0: `.xz` is much tiny, many wow, compare sizes @ https://nodejs.org/download/release/v5.7.0/, xz compression is available on every modern Linux distro now and you can even use `tar -J` to uncompress them. Still a hassle to do it on OSX hence leaving the darwin binaries and source tarball .gz by default.
+<issue_comment>username_2: Why the source code is on `.tar.gz` yet? For OSX people as well? (That would make sense, just confirming)
+<issue_comment>username_3: ""Linux PPC LE 64-bit Binary"" sounds ok to me but I'll double check with our power team
+<issue_comment>username_3: Feeback from power team is that """"Linux PPC LE 64-bit Binary"" is fine
+<issue_comment>username_0: great, OTY @nodejs/website"
+dlang/dlang.org,338851864,2410,"{'number': 2410.0, 'repo': 'dlang.org', 'user_login': 'dlang'}","[{'action': 'opened', 'author': 'FeepingCreature', 'comment_id': None, 'datetime': '2018-07-06T08:33:44Z', 'masked_author': 'username_0', 'text': 'Specify that the struct invariant may be violated when the destructor is called, because the struct may be in its T.init state.\r\nThis is necessary since there is no way to avoid destroying a struct variable.\r\nSee also Issue #19065, PR #19037.\r\nNote that `moveEmplace` already implicitly assumes that this is the case!', 'title': 'Specify that the struct invariant may be violated when the destructor is called', 'type': 'issue'}
+ {'action': 'created', 'author': 'FeepingCreature', 'comment_id': 403040267.0, 'datetime': '2018-07-06 13:50:38+00:00', 'masked_author': 'username_0', 'text': ""The deeper reasoning behind this is that since we allow `t = T.init` in @safe code, this is equivalent to me to admitting that struct variables may at any time either be an initialized struct value or `T.init`. Since struct destructors are called on variables regardless of whether they're properly initialized or not, struct destructors must be able to handle both `T.init` and `T(...)`."", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'dukc', 'comment_id': 404444038.0, 'datetime': '2018-07-12 09:05:56+00:00', 'masked_author': 'username_1', 'text': ""I think this sould be done EVEN if there wasn't the case with `.init` values: The last public call checks the same value anyway. thus a check on destructor is waste of computational power."", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'FeepingCreature', 'comment_id': 439690735.0, 'datetime': '2018-11-18 12:54:22+00:00', 'masked_author': 'username_0', 'text': 'Are you sure this commit is still correct! The diff looks weird.', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'thewilsonator', 'comment_id': 439690935.0, 'datetime': '2018-11-18 12:57:39+00:00', 'masked_author': 'username_2', 'text': 'It looks fine to me. Done. Ideally the compiler should insert a unittest to make sure that the destructor hanles the case in `(T.init).~this()`.', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'FeepingCreature', 'comment_id': 439691019.0, 'datetime': '2018-11-18 12:58:47+00:00', 'masked_author': 'username_0', 'text': 'To copypaste the reasoning from the `Nullable` debate: the problem is that this code becomes impossible:\r\n\r\n    struct S {\r\n      Object o;\r\n      invariant (o !is null);\r\n      @disable this();\r\n    }', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'thewilsonator', 'comment_id': 506223162.0, 'datetime': '2019-06-27 07:13:54+00:00', 'masked_author': 'username_2', 'text': '... so ah, 3 days later ...', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'thewilsonator', 'comment_id': 506223398.0, 'datetime': '2019-06-27 07:14:39+00:00', 'masked_author': 'username_2', 'text': 'Should this be merged or closed?', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'FeepingCreature', 'comment_id': 506302234.0, 'datetime': '2019-06-27 11:08:16+00:00', 'masked_author': 'username_0', 'text': 'Yeah, this can be removed. The change in question was never implemented, and the `union` hack has proven a viable - if exceedingly dirty - workaround.', 'title': None, 'type': 'comment'}]","<issue_start><issue_comment>Title: Specify that the struct invariant may be violated when the destructor is called
+username_0: Specify that the struct invariant may be violated when the destructor is called, because the struct may be in its T.init state.
+This is necessary since there is no way to avoid destroying a struct variable.
+See also Issue #19065, PR #19037.
+Note that `moveEmplace` already implicitly assumes that this is the case!
+<issue_comment>username_0: The deeper reasoning behind this is that since we allow `t = T.init` in @safe code, this is equivalent to me to admitting that struct variables may at any time either be an initialized struct value or `T.init`. Since struct destructors are called on variables regardless of whether they're properly initialized or not, struct destructors must be able to handle both `T.init` and `T(...)`.
+<issue_comment>username_1: I think this sould be done EVEN if there wasn't the case with `.init` values: The last public call checks the same value anyway. thus a check on destructor is waste of computational power.
+<issue_comment>username_0: Are you sure this commit is still correct! The diff looks weird.
+<issue_comment>username_2: It looks fine to me. Done. Ideally the compiler should insert a unittest to make sure that the destructor hanles the case in `(T.init).~this()`.
+<issue_comment>username_0: To copypaste the reasoning from the `Nullable` debate: the problem is that this code becomes impossible:
+
+    struct S {
+      Object o;
+      invariant (o !is null);
+      @disable this();
+    }
+<issue_comment>username_2: ... so ah, 3 days later ...
+<issue_comment>username_2: Should this be merged or closed?
+<issue_comment>username_0: Yeah, this can be removed. The change in question was never implemented, and the `union` hack has proven a viable - if exceedingly dirty - workaround."
+carbon-design-system/carbon-website,935847872,2435,,"[{'action': 'opened', 'author': 'jeanservaas', 'comment_id': None, 'datetime': '2021-07-02 14:59:40+00:00', 'masked_author': 'username_0', 'text': ""### Grid issues:\r\nAlso, the the status icon and status shape tables are not on grid, to the spec that was given. And they're not consistently off grid either. \r\n\r\n**See misalignment:**\r\n\r\n![image](https://user-images.githubusercontent.com/43144260/123987918-95b5b480-d995-11eb-96cf-4b4e624686d6.png)\r\n\r\n**Table specs:** (See complete table specs at breakpoints here)\r\nhttps://github.com/carbon-design-system/carbon-website/issues/2199\r\n\r\nTo do:\r\n\r\n- @vpicone we need to align the tables to the specs that were in the other issue; I didn't catch these discrepancies in my review"", 'title': '[pattern] status indicator grid issues', 'type': 'issue'}
+ {'action': 'created', 'author': 'mjabbink', 'comment_id': 882662383.0, 'datetime': '2021-07-19 15:55:51+00:00', 'masked_author': 'username_1', 'text': 'Let’s not forget about this grid, alignment fix. This should be addressed in the next sprint.', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'mjabbink', 'comment_id': 888579637.0, 'datetime': '2021-07-28 19:55:21+00:00', 'masked_author': 'username_1', 'text': ""@username_2 @joshblack Please make sure this is added to this sprint. This one can't slip through the cracks."", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'alisonjoseph', 'comment_id': 889402496.0, 'datetime': '2021-07-29 19:30:07+00:00', 'masked_author': 'username_2', 'text': ""@username_1 @username_0 I'll get @vpicone to chime in here also, but from my understanding this is using the Structured List component from Carbon which is _not_ grid-aware. It would likely require a complete re-write of that component or a new one to be able to figure out a way to get this on-grid. That being said, I see the issue especially where the different tables don't align to each other, and wonder if there's something we could do to make it a little better until we have time to prioritize a new component?"", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'mjabbink', 'comment_id': 892797274.0, 'datetime': '2021-08-04 16:25:00+00:00', 'masked_author': 'username_1', 'text': '@username_2 @vpicone If the first two columns of icons are the same shouldn\'t those at least be the same in each structuralist? maybe as a first fix, those icons columns could be the same which would make a difference.\r\n\r\nanother issue\r\n@username_2 @username_0 @vpicone — I discovered in mobile the dark theme column is not visible or turned off. Should that be a separate issue or keep it here?\r\n\r\n<img width=""392"" alt=""Screen Shot 2021-08-04 at 11 21 52 AM"" src=""https://user-images.githubusercontent.com/32881239/128217790-057ef037-63ff-405d-a03d-ad54ee7fdae7.png"">', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'mjabbink', 'comment_id': 897217495.0, 'datetime': '2021-08-11 23:05:34+00:00', 'masked_author': 'username_1', 'text': '@username_2 @joshblack @aagonzales Please include this in the next sprint.', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'mjabbink', 'comment_id': 967639695.0, 'datetime': '2021-11-12 21:56:50+00:00', 'masked_author': 'username_1', 'text': '@username_2 @sstrubberg — Please resolve this issue and prioritize. \r\n@username_0 Please raise these types of issues before 4 months go by.', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'jeanservaas', 'comment_id': 969053299.0, 'datetime': '2021-11-15 15:57:42+00:00', 'masked_author': 'username_0', 'text': ""@username_2 @sstrubberg @username_1 \r\n\r\nWhen this issue was prioritized and assigned to Vince. I assumed it would be treated like other custom tables/display components on the site (like on the type specs page, the icons page etc.) Not that we would just pull in a non-grid aware Carbon component like structured list. \r\n\r\nThat's why I took the time to spec it's grid behavior at every breakpoint. Any time a designer does a comprehensive spec like  this—that's the intent. If it's not possible to achieve the redline, we need to raise a flag. It's never OK for something to look like this on our site and after years of beating the drum about grid alignment... all of our devs and designers need to be able to spot stuff like this and have each others backs in reviews. \r\n\r\nThere was so much back and forth on the status indicator pattern just to get it up... it took far far longer than any of us anticipated, the research... the writing... the countless reviews and revisions, that I missed this grid misalignment in my final review... that's on me. But once that ship sailed, there was no picking it up again. \r\n\r\nThe truth is that the designers are used to our issues getting dropped/deprioritized on this team. With v11 lasting, what, nearly two years now... @username_1 what power do we have to prioritize an issue like this when our devs say it will push our major release further out?"", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'mjabbink', 'comment_id': 969104349.0, 'datetime': '2021-11-15 16:49:58+00:00', 'masked_author': 'username_1', 'text': 'I’ll put this simply. The spec above needs to be implemented. The gird alignment is quintessential to the system and it’s doable. It was doable 4 years ago when it was defined as such. It was doable even before that decision was made. If rebuilding is what it means well then rebuild it. We need to do this. It is a priority because it’s foundational. So much so, if some items from v11 need to be removed or delayed then so be it.', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'jeanservaas', 'comment_id': 969138680.0, 'datetime': '2021-11-15 17:25:28+00:00', 'masked_author': 'username_0', 'text': 'Here are full red lines for the status indicator table component:\r\n\r\n## Sketch file\r\n\r\n[042721_CarbonPatterns_IconTable 2.sketch.zip](https://github.com/carbon-design-system/carbon-website/files/7540501/042721_CarbonPatterns_IconTable.2.sketch.zip)', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'jnm2377', 'comment_id': 969204189.0, 'datetime': '2021-11-15 18:39:21+00:00', 'masked_author': 'username_3', 'text': 'I disagree with this. This issue is just not a priority right now. It can and should be addressed, but it doesn\'t make sense for this to take priority over v11 things. v11 breaking changes are to bring quality of life updates to design and devs. Updated tokens, more accessible components, faster build times. While this grid misalignment may be a bug, it shouldn\'t take precedence over other things that will improve how our users build with Carbon. \r\n\r\nMy other issue with this statement is that as far as I\'m aware, devs have [communicated](https://github.com/carbon-design-system/gatsby-theme-carbon/issues/682) before that we don\'t have grid alignment for any tables or table like components. It\'s not a new thing. We\'ve said it before.\r\n\r\nLastly, ""if rebuilding is what it means, then rebuild it"" is not as easy as it sounds. We\'re refactoring a lot of components for better a11y in v11 and we\'re not even done with them bc it\'s not simple. And if we\'re talking refactoring components, then a11y 100% takes precedence over grid misalignment issues.', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'mjabbink', 'comment_id': 969285099.0, 'datetime': '2021-11-15 20:18:32+00:00', 'masked_author': 'username_1', 'text': '@username_3 Thanks for explaining some more details and I’m aware the dev team is still very busy and focused on v11. Nonetheless it’s  is helpful to know and further details of the efforts. \r\n\r\nA few things to clarify and happy to discuss further with the team. \r\n\r\n— The grid alignment is one of the ways how you deliver improved experiences to users. It’s fundamental to how things get designed and layered out in UI. Software and UI is primarily typography, information design, which includes the components and patterns. Grids and alignments are the means to organize information better and easier for users to navigate and interact with.  **It’s a priority for many reasons and at one point can no longer keep being deprioritized.**\r\n\r\n— Dropping brand support means the 2 developers go away. The reason we added those folks the team is because the Brand team pays to have them do brand focused work der the Carbon teams’s management. That is why they support the brand team. If that DOU is removed we loose that headcount (2 developers). We have been lucky to have those two additional team members because we’ve also integrated them into solving Carbon issues as well. The Carbon team has also benefited from the relationship. I requested the DOU and worked this out with Robin a few years back.\r\n\r\n— I did say all v11 comes to a stop. I’m suggesting a tradeoff of something so the custom component in Gatsby (outlined above) can be created. The custom component is one of those things the dedicated brand developers could tackle. That would be two full-time developers every week. There would be no affect on the v11 System team at all since those two people should have ever been factored in as available resources for v11.\r\n\r\n As far as recall I have not mentioned refactoring Carbon components above in this thread?', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'jnm2377', 'comment_id': 969376979.0, 'datetime': '2021-11-15 22:20:56+00:00', 'masked_author': 'username_3', 'text': 'You mentioned ""rebuilding"" which I assumed was in response to Alison\'s [comment](https://github.com/carbon-design-system/carbon-website/issues/2435#issuecomment-889402496) _""It would likely require a complete re-write of that component or a new one to be able to figure out a way to get this on-grid.""_\r\n\r\nMaking our table components align to the grid would be an enhancement/refactor.', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'mjabbink', 'comment_id': 969553385.0, 'datetime': '2021-11-16 00:53:19+00:00', 'masked_author': 'username_1', 'text': 'I’m suggesting that work be done by AUX squad — that team that is already dedicated to the brand team (IDL, Gatsby). As I mentioned above, they should not be resourced for v11 work. AUX can do the refactoring work and it should not be hindering the v11 work at all. \r\n\r\nI’m not sure how this will play out yet but the Carbon for IBM.com team is coming over to the DPO. They will maintain their work to support the dotcom users and mission but since they have moved the needle from creation to now more support and maintenance they will likely be able to also contribute to the core Carbon team efforts. This will be a lot of what Alison, Scott, Jeff Chew, and Linda will have to explore.', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'mjabbink', 'comment_id': 969558057.0, 'datetime': '2021-11-16 00:57:03+00:00', 'masked_author': 'username_1', 'text': 'I forgot to mention we hope to backfill Vince’s position/role. However, there is even a chance we may not be able to do that but believe me we will be fighting to keep that headcount.\r\n\r\nWe should take this to a Webex or Slack thread. I’m happy to get on a call with Alison and chat through this more with the team.', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'alisonjoseph', 'comment_id': 969814459.0, 'datetime': '2021-11-16 03:35:36+00:00', 'masked_author': 'username_2', 'text': 'As a FYI the ""aux"" squad hasn\'t existed for a while now. We\'ve been operating with Vince handling larger Brand issues/initiatives and the then other issues have been spread across the dev team for the two devs worth. With Vince leaving, Ale is taking the lead on Brand for now. Although this specific issue is a Carbon issue, not Brand, so not really relevant here anyway. Just wanted to comment since it was brought up above.\n\nJosefina did a good job highlighting our lack of dev resources, we aren\'t forgetting about issues like these, it just isn\'t higher priority than everything else we have in our backlog. If this was a simple fix, it would have already been done. \n\nLet\'s continue this on a call or slack if needed Mike.', 'title': None, 'type': 'comment'}]","<issue_start><issue_comment>Title: [pattern] status indicator grid issues
+username_0: ### Grid issues:
+Also, the the status icon and status shape tables are not on grid, to the spec that was given. And they're not consistently off grid either. 
+
+**See misalignment:**
+
+![image](https://user-images.githubusercontent.com/43144260/123987918-95b5b480-d995-11eb-96cf-4b4e624686d6.png)
+
+**Table specs:** (See complete table specs at breakpoints here)
+https://github.com/carbon-design-system/carbon-website/issues/2199
+
+To do:
+
+- @vpicone we need to align the tables to the specs that were in the other issue; I didn't catch these discrepancies in my review
+<issue_comment>username_1: Let’s not forget about this grid, alignment fix. This should be addressed in the next sprint.
+<issue_comment>username_1: @username_2 @joshblack Please make sure this is added to this sprint. This one can't slip through the cracks.
+<issue_comment>username_2: @username_1 @username_0 I'll get @vpicone to chime in here also, but from my understanding this is using the Structured List component from Carbon which is _not_ grid-aware. It would likely require a complete re-write of that component or a new one to be able to figure out a way to get this on-grid. That being said, I see the issue especially where the different tables don't align to each other, and wonder if there's something we could do to make it a little better until we have time to prioritize a new component?
+<issue_comment>username_1: @username_2 @vpicone If the first two columns of icons are the same shouldn't those at least be the same in each structuralist? maybe as a first fix, those icons columns could be the same which would make a difference.
+
+another issue
+@username_2 @username_0 @vpicone — I discovered in mobile the dark theme column is not visible or turned off. Should that be a separate issue or keep it here?
+
+<img width=""392"" alt=""Screen Shot 2021-08-04 at 11 21 52 AM"" src=""https://user-images.githubusercontent.com/32881239/128217790-057ef037-63ff-405d-a03d-ad54ee7fdae7.png"">
+<issue_comment>username_1: @username_2 @joshblack @aagonzales Please include this in the next sprint.
+<issue_comment>username_1: @username_2 @sstrubberg — Please resolve this issue and prioritize. 
+@username_0 Please raise these types of issues before 4 months go by.
+<issue_comment>username_0: @username_2 @sstrubberg @username_1 
+
+When this issue was prioritized and assigned to Vince. I assumed it would be treated like other custom tables/display components on the site (like on the type specs page, the icons page etc.) Not that we would just pull in a non-grid aware Carbon component like structured list. 
+
+That's why I took the time to spec it's grid behavior at every breakpoint. Any time a designer does a comprehensive spec like  this—that's the intent. If it's not possible to achieve the redline, we need to raise a flag. It's never OK for something to look like this on our site and after years of beating the drum about grid alignment... all of our devs and designers need to be able to spot stuff like this and have each others backs in reviews. 
+
+There was so much back and forth on the status indicator pattern just to get it up... it took far far longer than any of us anticipated, the research... the writing... the countless reviews and revisions, that I missed this grid misalignment in my final review... that's on me. But once that ship sailed, there was no picking it up again. 
+
+The truth is that the designers are used to our issues getting dropped/deprioritized on this team. With v11 lasting, what, nearly two years now... @username_1 what power do we have to prioritize an issue like this when our devs say it will push our major release further out?
+<issue_comment>username_1: I’ll put this simply. The spec above needs to be implemented. The gird alignment is quintessential to the system and it’s doable. It was doable 4 years ago when it was defined as such. It was doable even before that decision was made. If rebuilding is what it means well then rebuild it. We need to do this. It is a priority because it’s foundational. So much so, if some items from v11 need to be removed or delayed then so be it.
+<issue_comment>username_0: Here are full red lines for the status indicator table component:
+
+## Sketch file
+
+[042721_CarbonPatterns_IconTable 2.sketch.zip](https://github.com/carbon-design-system/carbon-website/files/7540501/042721_CarbonPatterns_IconTable.2.sketch.zip)
+<issue_comment>username_3: I disagree with this. This issue is just not a priority right now. It can and should be addressed, but it doesn't make sense for this to take priority over v11 things. v11 breaking changes are to bring quality of life updates to design and devs. Updated tokens, more accessible components, faster build times. While this grid misalignment may be a bug, it shouldn't take precedence over other things that will improve how our users build with Carbon. 
+
+My other issue with this statement is that as far as I'm aware, devs have [communicated](https://github.com/carbon-design-system/gatsby-theme-carbon/issues/682) before that we don't have grid alignment for any tables or table like components. It's not a new thing. We've said it before.
+
+Lastly, ""if rebuilding is what it means, then rebuild it"" is not as easy as it sounds. We're refactoring a lot of components for better a11y in v11 and we're not even done with them bc it's not simple. And if we're talking refactoring components, then a11y 100% takes precedence over grid misalignment issues.
+<issue_comment>username_1: @username_3 Thanks for explaining some more details and I’m aware the dev team is still very busy and focused on v11. Nonetheless it’s  is helpful to know and further details of the efforts. 
+
+A few things to clarify and happy to discuss further with the team. 
+
+— The grid alignment is one of the ways how you deliver improved experiences to users. It’s fundamental to how things get designed and layered out in UI. Software and UI is primarily typography, information design, which includes the components and patterns. Grids and alignments are the means to organize information better and easier for users to navigate and interact with.  **It’s a priority for many reasons and at one point can no longer keep being deprioritized.**
+
+— Dropping brand support means the 2 developers go away. The reason we added those folks the team is because the Brand team pays to have them do brand focused work der the Carbon teams’s management. That is why they support the brand team. If that DOU is removed we loose that headcount (2 developers). We have been lucky to have those two additional team members because we’ve also integrated them into solving Carbon issues as well. The Carbon team has also benefited from the relationship. I requested the DOU and worked this out with Robin a few years back.
+
+— I did say all v11 comes to a stop. I’m suggesting a tradeoff of something so the custom component in Gatsby (outlined above) can be created. The custom component is one of those things the dedicated brand developers could tackle. That would be two full-time developers every week. There would be no affect on the v11 System team at all since those two people should have ever been factored in as available resources for v11.
+
+ As far as recall I have not mentioned refactoring Carbon components above in this thread?
+<issue_comment>username_3: You mentioned ""rebuilding"" which I assumed was in response to Alison's [comment](https://github.com/carbon-design-system/carbon-website/issues/2435#issuecomment-889402496) _""It would likely require a complete re-write of that component or a new one to be able to figure out a way to get this on-grid.""_
+
+Making our table components align to the grid would be an enhancement/refactor.
+<issue_comment>username_1: I’m suggesting that work be done by AUX squad — that team that is already dedicated to the brand team (IDL, Gatsby). As I mentioned above, they should not be resourced for v11 work. AUX can do the refactoring work and it should not be hindering the v11 work at all. 
+
+I’m not sure how this will play out yet but the Carbon for IBM.com team is coming over to the DPO. They will maintain their work to support the dotcom users and mission but since they have moved the needle from creation to now more support and maintenance they will likely be able to also contribute to the core Carbon team efforts. This will be a lot of what Alison, Scott, Jeff Chew, and Linda will have to explore.
+<issue_comment>username_1: I forgot to mention we hope to backfill Vince’s position/role. However, there is even a chance we may not be able to do that but believe me we will be fighting to keep that headcount.
+
+We should take this to a Webex or Slack thread. I’m happy to get on a call with Alison and chat through this more with the team.
+<issue_comment>username_2: As a FYI the ""aux"" squad hasn't existed for a while now. We've been operating with Vince handling larger Brand issues/initiatives and the then other issues have been spread across the dev team for the two devs worth. With Vince leaving, Ale is taking the lead on Brand for now. Although this specific issue is a Carbon issue, not Brand, so not really relevant here anyway. Just wanted to comment since it was brought up above.
+
+Josefina did a good job highlighting our lack of dev resources, we aren't forgetting about issues like these, it just isn't higher priority than everything else we have in our backlog. If this was a simple fix, it would have already been done. 
+
+Let's continue this on a call or slack if needed Mike."
+adobe/aem-core-wcm-components,474262279,676,,"[{'action': 'opened', 'author': 'HitmanInWis', 'comment_id': None, 'datetime': '2019-07-29 21:20:45+00:00', 'masked_author': 'username_0', 'text': 'Please correct me if I\'m wrong and missing out on some inherent security features of AEM or the Forms Container itself - in fact, I hope I\'m dead wrong on this all, because I want to believe this is not a ""smoke and mirrors"" product that we are promising clients but then have to re-implement with custom development for any of them that want to use it.\r\n\r\nThe Forms Container seems to be a pretty huge security risk waiting to happen for any site that authors use it on.\r\n\r\nFor starters, content saved from the forms is fully readable to anonymous traffic to the URL\r\n- At best this is ""security by obscurity""\r\n-- In cases where `.1.json` or `.xml` are enabled (they shouldn\'t be in prod, but I\'ve seen it on non-Bounteous projects) this content can easily be fetched by starting from the known `/content/usergenerated/*` path and drilling down.\r\n- At worst an author chooses a predictable URL that can be guessed OR\r\n- At worst an internal user (either malicious or after being let go by a company) leaks the information to the internet or even keeps for their own purposes\r\n\r\nEven if the `/content/usergenerated` path is secured by the dispatcher (which it isn\'t by standard configs documented by Adobe), the Forms Container does nothing to validate that the author has chosen a path under that URL, so even protecting via the dispatcher is no guarantee.  That said, the OOTB AEM permissions do seem to prevent saving of form data to an unexpected place by limiting the permissions of the service user saving the data, but relying on that as the only line of defense and allowing authors to try to put form data in disallowed locations is an incomplete implementation.\r\n\r\nOn top of this all, authorable forms give authors a loaded gun to shoot themselves in the foot with in terms of PII data and regulations like GDPR.  I know there\'s no fool-proof way to programmatically prevent authors from saving private content unknowingly and illegally in AEM, but giving them a Form component in WCM Core that says absolutely nothing about it can only give the impression to authors that whatever they want to do with it must be okay.  This is especially true when Adobe makes claims such as the system being GDPR compliant, because one false move by an unknowing junior author is going to subvert that claim.  At the very least it feels like the component should:\r\n- Have some documentation around it regarding the high risk of untrained authors storing inappropriate data paired with the ease in which it can be done.\r\n- Restrict form components to a special role that indicates ""power user"" or even something along the lines of ""data-privacy-manager"".\r\n- Adding warnings to the authoring dialog to remind authors of the security implications of what they choose to save\r\n- Add warning to the Form Container configured to ""Store"" mode when rendered in Edit mode to remind the author (since they wont be opening the container dialog to add a new field)\r\n\r\nI\'ve not even yet checked the other form modes (e.g. Email) to see if they temporally save their data in AEM, creating even further PII/GDPR concerns.\r\n\r\nWant to get some thoughts on this all from others in the community.  Again, really hoping I\'m just overlooking something and making a bigger deal of this than I really am, because if not I think the form components should be removed until the issues are addressed.', 'title': 'Forms Container - Security Holes', 'type': 'issue'}
+ {'action': 'created', 'author': 'stefanseifert', 'comment_id': 516761407.0, 'datetime': '2019-07-31 08:57:37+00:00', 'masked_author': 'username_1', 'text': 'what you are referencing to is the old ""foundation forms backend"" implementation, a relic of the old foundation components from the days of geometrixx. the core components currently only provide a new set of HTML components that send or store the data using this old backend. there are plans to replace it (see #56, but i\'m not sure how high it is on the priority list).\r\n\r\nthis old forms backend provides other ways than storing the data in the repository, and i agree that storing the data in the publish instance is a very bad idea and should not be used at all. it\'s up to the developer who sets it up in which way the data is processed. sending the data per mail may be better when you have full control over the mail server an can ensure it\'s not sent anywhere unencrypted.\r\n\r\nbtw, imho a better place for high-level discussions like this is the [mailing list](https://github.com/adobe/aem-core-wcm-components#mailing-list).', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'HitmanInWis', 'comment_id': 516838597.0, 'datetime': '2019-07-31 13:01:27+00:00', 'masked_author': 'username_0', 'text': 'Interesting - didnt know about the mailing list - maybe I will put this out to there.\r\n\r\nI understand that the Forms implementation here is simply pointing back to an old backend, but I dont think that absolves the library from responsibility.  The component should not be labeled ""production-ready"" if it *requires* significant development (none of which is noted) to avoid security vulnerabilities.  I\'ll go so far as to say it\'s borderline unethical to promote that WCM Core has Forms support in its current state.\r\n\r\nIdeally something like #56 would be fixed in the core AEM platform. Until then, I still feel that something should be done with the WCM Core implementation, else people are going to unknowingly be adding this vulnerability to their platform.', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'gabrielwalt', 'comment_id': 517230802.0, 'datetime': '2019-08-01 10:45:03+00:00', 'masked_author': 'username_2', 'text': ""Hi @username_0,\r\n\r\nI think that we'll need to deprecate the storage handler that stores it it `/content/usergenerated`, because this is not recommended anymore. And on the other hand, we'll have to document how to implement a POST handler that sends the data to the customer's marketing automation or CRM tool.\r\n\r\nBest,\r\nGabriel"", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'HitmanInWis', 'comment_id': 517286911.0, 'datetime': '2019-08-01 13:25:32+00:00', 'masked_author': 'username_0', 'text': 'Thank you @username_2 for your quick response.  I agree with the plan forward.', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'JasonUSC', 'comment_id': 517757162.0, 'datetime': '2019-08-02 16:06:20+00:00', 'masked_author': 'username_3', 'text': 'Maybe the documentation could show how to implement a POST handler that sends the data to Adobe Campaign as an example? ;-)', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'vladbailescu', 'comment_id': 550987672.0, 'datetime': '2019-11-07 09:03:34+00:00', 'masked_author': 'username_4', 'text': ""A proper fix would require adding a new POST option for the form content and providing some support/scaffolding for implementing a POST handler. Most probably, we will need a new version of the Form Container. I'll mark this issue to be tackled when we decide to rework the form components."", 'title': None, 'type': 'comment'}
+ {'action': 'closed', 'author': 'bpauli', 'comment_id': None, 'datetime': '2021-01-25 08:42:51+00:00', 'masked_author': 'username_5', 'text': '', 'title': None, 'type': 'issue'}
+ {'action': 'created', 'author': 'bpauli', 'comment_id': 766651763.0, 'datetime': '2021-01-25 08:42:51+00:00', 'masked_author': 'username_5', 'text': 'Handler to post form data to remote endpoint was implemented in https://github.com/adobe/aem-core-wcm-components/issues/1154. Please create follow up issue if needed.', 'title': None, 'type': 'comment'}]","<issue_start><issue_comment>Title: Forms Container - Security Holes
+username_0: Please correct me if I'm wrong and missing out on some inherent security features of AEM or the Forms Container itself - in fact, I hope I'm dead wrong on this all, because I want to believe this is not a ""smoke and mirrors"" product that we are promising clients but then have to re-implement with custom development for any of them that want to use it.
+
+The Forms Container seems to be a pretty huge security risk waiting to happen for any site that authors use it on.
+
+For starters, content saved from the forms is fully readable to anonymous traffic to the URL
+- At best this is ""security by obscurity""
+-- In cases where `.1.json` or `.xml` are enabled (they shouldn't be in prod, but I've seen it on non-Bounteous projects) this content can easily be fetched by starting from the known `/content/usergenerated/*` path and drilling down.
+- At worst an author chooses a predictable URL that can be guessed OR
+- At worst an internal user (either malicious or after being let go by a company) leaks the information to the internet or even keeps for their own purposes
+
+Even if the `/content/usergenerated` path is secured by the dispatcher (which it isn't by standard configs documented by Adobe), the Forms Container does nothing to validate that the author has chosen a path under that URL, so even protecting via the dispatcher is no guarantee.  That said, the OOTB AEM permissions do seem to prevent saving of form data to an unexpected place by limiting the permissions of the service user saving the data, but relying on that as the only line of defense and allowing authors to try to put form data in disallowed locations is an incomplete implementation.
+
+On top of this all, authorable forms give authors a loaded gun to shoot themselves in the foot with in terms of PII data and regulations like GDPR.  I know there's no fool-proof way to programmatically prevent authors from saving private content unknowingly and illegally in AEM, but giving them a Form component in WCM Core that says absolutely nothing about it can only give the impression to authors that whatever they want to do with it must be okay.  This is especially true when Adobe makes claims such as the system being GDPR compliant, because one false move by an unknowing junior author is going to subvert that claim.  At the very least it feels like the component should:
+- Have some documentation around it regarding the high risk of untrained authors storing inappropriate data paired with the ease in which it can be done.
+- Restrict form components to a special role that indicates ""power user"" or even something along the lines of ""data-privacy-manager"".
+- Adding warnings to the authoring dialog to remind authors of the security implications of what they choose to save
+- Add warning to the Form Container configured to ""Store"" mode when rendered in Edit mode to remind the author (since they wont be opening the container dialog to add a new field)
+
+I've not even yet checked the other form modes (e.g. Email) to see if they temporally save their data in AEM, creating even further PII/GDPR concerns.
+
+Want to get some thoughts on this all from others in the community.  Again, really hoping I'm just overlooking something and making a bigger deal of this than I really am, because if not I think the form components should be removed until the issues are addressed.
+<issue_comment>username_1: what you are referencing to is the old ""foundation forms backend"" implementation, a relic of the old foundation components from the days of geometrixx. the core components currently only provide a new set of HTML components that send or store the data using this old backend. there are plans to replace it (see #56, but i'm not sure how high it is on the priority list).
+
+this old forms backend provides other ways than storing the data in the repository, and i agree that storing the data in the publish instance is a very bad idea and should not be used at all. it's up to the developer who sets it up in which way the data is processed. sending the data per mail may be better when you have full control over the mail server an can ensure it's not sent anywhere unencrypted.
+
+btw, imho a better place for high-level discussions like this is the [mailing list](https://github.com/adobe/aem-core-wcm-components#mailing-list).
+<issue_comment>username_0: Interesting - didnt know about the mailing list - maybe I will put this out to there.
+
+I understand that the Forms implementation here is simply pointing back to an old backend, but I dont think that absolves the library from responsibility.  The component should not be labeled ""production-ready"" if it *requires* significant development (none of which is noted) to avoid security vulnerabilities.  I'll go so far as to say it's borderline unethical to promote that WCM Core has Forms support in its current state.
+
+Ideally something like #56 would be fixed in the core AEM platform. Until then, I still feel that something should be done with the WCM Core implementation, else people are going to unknowingly be adding this vulnerability to their platform.
+<issue_comment>username_2: Hi @username_0,
+
+I think that we'll need to deprecate the storage handler that stores it it `/content/usergenerated`, because this is not recommended anymore. And on the other hand, we'll have to document how to implement a POST handler that sends the data to the customer's marketing automation or CRM tool.
+
+Best,
+Gabriel
+<issue_comment>username_0: Thank you @username_2 for your quick response.  I agree with the plan forward.
+<issue_comment>username_3: Maybe the documentation could show how to implement a POST handler that sends the data to Adobe Campaign as an example? ;-)
+<issue_comment>username_4: A proper fix would require adding a new POST option for the form content and providing some support/scaffolding for implementing a POST handler. Most probably, we will need a new version of the Form Container. I'll mark this issue to be tackled when we decide to rework the form components.<issue_closed>
+<issue_comment>username_5: Handler to post form data to remote endpoint was implemented in https://github.com/adobe/aem-core-wcm-components/issues/1154. Please create follow up issue if needed."
+crimethinc/website,283709168,585,"{'number': 585.0, 'repo': 'website', 'user_login': 'crimethinc'}","[{'action': 'opened', 'author': 'astronaut-wannabe', 'comment_id': None, 'datetime': '2017-12-20T22:04:21Z', 'masked_author': 'username_0', 'text': 'As I was working on #582 I noticed the korean version has a lot of localized images.\r\n\r\nI pulled out the image block as a partial so that:\r\n\r\n1) I could easily override `base_url` for local development\r\n2) resolve the slight variations among the sections\r\n\r\n\r\nI noticed that some of the sections (listed below) are missing various `xyz-size@2x` images\r\n\r\nShould I create these missing variations, or should a do something like this:\r\n<img width=""873"" alt=""screen shot 2017-12-20 at 7 02 42 pm"" src=""https://user-images.githubusercontent.com/13190980/34230860-77628e56-e5b8-11e7-83a8-aa683c37f226.png"">\r\n\r\n## missing images\r\n<details>\r\n<summary>checklist of missing images</summary>\r\n\r\n### power\r\n- [ ] https:ychag@example.com\r\n- [ ] https:nnheo@example.com\r\n- [ ] https:envkt@example.com\r\n### relationships\r\n- [ ] https:upchh@example.com\r\n- [ ] https:kenaa@example.com\r\n- [ ] https:anpch@example.com\r\n### liberation\r\n- [ ] https:ychag@example.com\r\n- [ ] https:kenaa@example.com\r\n- [ ] https:anpch@example.com\r\n### revolt\r\n- [ ] https:envkt@example.com\r\n- [ ] https:anpch@example.com\r\n### control\r\n- [ ] https:kenaa@example.com\r\n- [ ] https:nnheo@example.com\r\n- [ ] https:efpyi@example.com\r\n### representation\r\n- [ ] https:ychag@example.com\r\n- [ ] https:nnheo@example.com\r\n- [ ] https:ychag@example.com\r\n### leaders\r\n- [ ] https:kenaa@example.com\r\n- [ ] https:anpch@example.com\r\n- [ ] https:anpch@example.com     \r\n### lastcrime\r\n- [ ] https:efpyi@example.com\r\n- [ ] https:dycjh@example.com\r\n- [ ] https:upchh@example.com\r\n</details>', 'title': '[TCE] pull images into a view partial', 'type': 'issue'}
+ {'action': 'created', 'author': 'veganstraightedge', 'comment_id': 353210195.0, 'datetime': '2017-12-20 23:12:47+00:00', 'masked_author': 'username_1', 'text': 'I think I like adding the `@2x` versions better.', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'astronaut-wannabe', 'comment_id': 353210621.0, 'datetime': '2017-12-20 23:15:13+00:00', 'masked_author': 'username_0', 'text': '@username_1 here are `tablet@2x` and `small@2x` I used `large.jpg` to generate them.\r\n\r\nNot sure how to generate the `@2x` version though\r\n\r\n[done.zip](https://github.com/crimethinc/website/files/1577324/done.zip)', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'astronaut-wannabe', 'comment_id': 353226309.0, 'datetime': '2017-12-21 00:54:20+00:00', 'masked_author': 'username_0', 'text': '@username_1  \r\n\r\nthe base_url for TCE images is `cloudfront.crimethinc.com/tce/images/""` (no `/assets`)\r\n\r\nso don\'t merge until we resolve that discrepancy', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'veganstraightedge', 'comment_id': 353226452.0, 'datetime': '2017-12-21 00:55:27+00:00', 'masked_author': 'username_1', 'text': 'Oh sorry. I was conflating with this issue when I put the new images in `/assets`.\r\n\r\nhttps://github.com/crimethinc/website/issues/584', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'veganstraightedge', 'comment_id': 353226568.0, 'datetime': '2017-12-21 00:56:11+00:00', 'masked_author': 'username_1', 'text': ""I'll put the images in `cloudfront.crimethinc.com/tce/images` (no `/assets`) for now too."", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'veganstraightedge', 'comment_id': 353226979.0, 'datetime': '2017-12-21 00:59:07+00:00', 'masked_author': 'username_1', 'text': 'Added.', 'title': None, 'type': 'comment'}]","<issue_start><issue_comment>Title: [TCE] pull images into a view partial
+username_0: As I was working on #582 I noticed the korean version has a lot of localized images.
+
+I pulled out the image block as a partial so that:
+
+1) I could easily override `base_url` for local development
+2) resolve the slight variations among the sections
+
+
+I noticed that some of the sections (listed below) are missing various `xyz-size@2x` images
+
+Should I create these missing variations, or should a do something like this:
+<img width=""873"" alt=""screen shot 2017-12-20 at 7 02 42 pm"" src=""https://user-images.githubusercontent.com/13190980/34230860-77628e56-e5b8-11e7-83a8-aa683c37f226.png"">
+
+## missing images
+<details>
+<summary>checklist of missing images</summary>
+
+### power
+- [ ] https://cloudfront.crimethinc.com/tce/images/power-tablet@2x.jpg
+- [ ] https://cloudfront.crimethinc.com/tce/images/power-small@2x.jpg
+- [ ] https://cloudfront.crimethinc.com/tce/images/power-large@2x.jpg
+### relationships
+- [ ] https://cloudfront.crimethinc.com/tce/images/relationships-tablet@2x.jpg
+- [ ] https://cloudfront.crimethinc.com/tce/images/relationships-small@2x.jpg
+- [ ] https://cloudfront.crimethinc.com/tce/images/relationships-large@2x.jpg
+### liberation
+- [ ] https://cloudfront.crimethinc.com/tce/images/liberation-tablet@2x.jpg
+- [ ] https://cloudfront.crimethinc.com/tce/images/liberation-small@2x.jpg
+- [ ] https://cloudfront.crimethinc.com/tce/images/liberation-large@2x.jpg
+### revolt
+- [ ] https://cloudfront.crimethinc.com/tce/images/revolt-tablet@2x.jpg
+- [ ] https://cloudfront.crimethinc.com/tce/images/revolt-small@2x.jpg
+### control
+- [ ] https://cloudfront.crimethinc.com/tce/images/control-tablet@2x.jpg
+- [ ] https://cloudfront.crimethinc.com/tce/images/control-large@2x.jpg
+- [ ] https://cloudfront.crimethinc.com/tce/images/control-small@2x.jpg
+### representation
+- [ ] https://cloudfront.crimethinc.com/tce/images/representation-tablet@2x.jpg
+- [ ] https://cloudfront.crimethinc.com/tce/images/representation-small@2x.jpg
+- [ ] https://cloudfront.crimethinc.com/tce/images/representation-large@2x.jpg
+### leaders
+- [ ] https://cloudfront.crimethinc.com/tce/images/leaders-tablet@2x.jpg
+- [ ] https://cloudfront.crimethinc.com/tce/images/leaders-small@2x.jpg
+- [ ] https://cloudfront.crimethinc.com/tce/images/leaders-large@2x.jpg     
+### lastcrime
+- [ ] https://cloudfront.crimethinc.com/tce/images/lastcrime-tablet@2x.jpg
+- [ ] https://cloudfront.crimethinc.com/tce/images/lastcrime-small@2x.jpg
+- [ ] https://cloudfront.crimethinc.com/tce/images/lastcrime-large@2x.jpg
+</details>
+<issue_comment>username_1: I think I like adding the `@2x` versions better.
+<issue_comment>username_0: @username_1 here are `tablet@2x` and `small@2x` I used `large.jpg` to generate them.
+
+Not sure how to generate the `@2x` version though
+
+[done.zip](https://github.com/crimethinc/website/files/1577324/done.zip)
+<issue_comment>username_0: @username_1  
+
+the base_url for TCE images is `cloudfront.crimethinc.com/tce/images/""` (no `/assets`)
+
+so don't merge until we resolve that discrepancy
+<issue_comment>username_1: Oh sorry. I was conflating with this issue when I put the new images in `/assets`.
+
+https://github.com/crimethinc/website/issues/584
+<issue_comment>username_1: I'll put the images in `cloudfront.crimethinc.com/tce/images` (no `/assets`) for now too.
+<issue_comment>username_1: Added."
+getnikola/nikola,974085765,3571,,"[{'action': 'opened', 'author': 'nickvence', 'comment_id': None, 'datetime': '2021-08-18 21:55:34+00:00', 'masked_author': 'username_0', 'text': '### Environment\r\n\r\n**Python Version:** 3.9.6\r\n\r\n**Nikola Version:** 8.1.3\r\n\r\n**Operating System:**  macOS 10.14.6\r\n\r\n### Description:\r\nAfter breaking ghp-import and unsuccessfully trying to reinstall it, I reinstalled an updated version of nikola 8.1.3.\r\n\r\nSince then I have two (possibly related) bugs.\r\n\r\n* Editing and saving an rst file isn\'t enough for `nikola build` to do its job.  Now I must first run `nikola clean` then `nikola build`.\r\n* The sidebar directive stopped working. After installing `nikola plugin -i sidebar` and rebuilding, I get the following error.\r\n\r\nThank you for your help, I am really at a loss on what to do.\r\n\r\n❯ nikola build\r\nScanning posts........done!\r\n.  render_sidebar:output/sidebar-en.inc\r\nTaskError - taskid:render_sidebar:output/sidebar-en.inc\r\nPythonAction Error\r\nTraceback (most recent call last):\r\n  File ""/Users/nvence/virtualenvs/nikola/lib/python3.9/site-packages/doit/action.py"", line 437, in execute\r\n    returned_value = self.py_callable(*self.args, **kwargs)\r\n  File ""/Users/nvence/virtualenvs/nikola/lib/python3.9/site-packages/nikola/nikola.py"", line 1472, in render_template\r\n    data = self.template_system.render_template(\r\n  File ""/Users/nvence/virtualenvs/nikola/lib/python3.9/site-packages/nikola/plugins/template/mako.py"", line 113, in render_template\r\n    data = template.render_unicode(**context)\r\n  File ""/Users/nvence/virtualenvs/nikola/lib/python3.9/site-packages/mako/template.py"", line 478, in render_unicode\r\n    return runtime._render(\r\n  File ""/Users/nvence/virtualenvs/nikola/lib/python3.9/site-packages/mako/runtime.py"", line 878, in _render\r\n    _render_context(\r\n  File ""/Users/nvence/virtualenvs/nikola/lib/python3.9/site-packages/mako/runtime.py"", line 920, in _render_context\r\n    _exec_template(inherit, lclcontext, args=args, kwargs=kwargs)\r\n  File ""/Users/nvence/virtualenvs/nikola/lib/python3.9/site-packages/mako/runtime.py"", line 947, in _exec_template\r\n    callable_(context, *args, **kwargs)\r\n  File ""/Users/nvence/site/cache/.mako.tmp/sidebar.tmpl.py"", line 40, in render_body\r\n    __M_writer(str( helper.list_posts(global_posts) ))\r\n  File ""/Users/nvence/site/cache/.mako.tmp/sidebar-helper.tmpl.py"", line 37, in render_list_posts\r\n    __M_writer(str( messages(""Recent Posts"", lang) ))\r\n  File ""/Users/nvence/virtualenvs/nikola/lib/python3.9/site-packages/nikola/utils.py"", line 216, in __call__\r\n    return self[lang][key]\r\nKeyError: \'Recent Posts\'\r\n\r\n########################################\r\nrender_sidebar:output/sidebar-en.inc <stdout>:', 'title': 'Post-Upgrade bugs', 'type': 'issue'}
+ {'action': 'created', 'author': 'Kwpolska', 'comment_id': 902057338.0, 'datetime': '2021-08-19 16:28:44+00:00', 'masked_author': 'username_1', 'text': 'Regarding the `nikola build` issue — it sounds really strange. Can you try the following sequence of commands?\r\n\r\n```\r\nnikola build\r\nnikola dumpdb > one.log\r\nvim whatever.rst  # (or use your favorite editor to edit the file in a visible way)\r\nnikola build\r\nnikola dumpdb > two.log\r\n```\r\n\r\nIf you can still reproduce (i.e. the change is not reflected after the second `nikola build`), please attach `one.log` and `two.log` produced by these commands.\r\n\r\nRegarding `sidebar` — please consult the plugin’s README file. You need to make some changes to the `messages` files in your site to make this plugin work.', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'Kwpolska', 'comment_id': 907838482.0, 'datetime': '2021-08-29 17:54:22+00:00', 'masked_author': 'username_1', 'text': ""There are two things visible in this log:\r\n\r\n1. `sidebar` locale misconfiguration — please fix this first (edit your messages file to include the messages expected [by the sidebar plugin](https://plugins.getnikola.com/v7/sidebar/)\r\n2. dumpdb not working with your specific database type\r\n\r\nAs an alternative, after fixing the `sidebar` issue, I'd suggest the following way of getting the database between runs:\r\n\r\n```\r\nrm .doit.db\r\nnikola build --backend=json\r\ncp .doit.db one.json\r\nvim whatever.rst  # (or use your favorite editor to edit the file in a visible way)\r\nnikola build --backend=json\r\nmv .doit.db two.json\r\n```"", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'nickvence', 'comment_id': 912652893.0, 'datetime': '2021-09-03 16:10:56+00:00', 'masked_author': 'username_0', 'text': 'Chris,\nI really appreciate your time, I’ve been interviewing for a new job and I feel bad for not having had the energy to get back to you sooner.\n\n1.  TL;DNR    I uninstalled the sidebar plugin and turned my sidebar-directive into a note-directive to get things working again.\n\nUpon upgrading to nikola 8.1.3 (from 8.1.2) installing it in a virtual environment, my sidebar-directives (.. sidebar::) stopped working.\nI thought the sidebar-directive was like a float version of the note-directive.\nIn my debugging efforts I installed the sidebar plugin (I don’t remember doing this under 8.1.2), but only spawned a new complex stream of errors.  After some sleuthing, I decided that the sidebar-directive was different from the sidebar-plugin (an HTML-sidebar having a table-of-contents-like structure).  I temporarily renamed sidebar directives as notes for debugging.\n\n2. FYI .doit.db was named .doit.db.db\nAfter removing it, the website now builds.\nHere is the results of \nnikola build —backend=json\ncp .doit.db one.json\n\n\nvim posts/comparing-distributions.rst\nnikola build —backend=json\n\n\n\nGood news: nothing is broken\nBad news: .. sidebar:: doesn’t render on the side\n\nI’m hoping for the functionality of the Magic Links sidebar on\nhttps://getnikola.com/handbook.html  or\nhttps://username_0.github.io/posts/comparing-distributions.html\n\nThanks,\nNick', 'title': None, 'type': 'comment'}]","<issue_start><issue_comment>Title: Post-Upgrade bugs
+username_0: ### Environment
+
+**Python Version:** 3.9.6
+
+**Nikola Version:** 8.1.3
+
+**Operating System:**  macOS 10.14.6
+
+### Description:
+After breaking ghp-import and unsuccessfully trying to reinstall it, I reinstalled an updated version of nikola 8.1.3.
+
+Since then I have two (possibly related) bugs.
+
+* Editing and saving an rst file isn't enough for `nikola build` to do its job.  Now I must first run `nikola clean` then `nikola build`.
+* The sidebar directive stopped working. After installing `nikola plugin -i sidebar` and rebuilding, I get the following error.
+
+Thank you for your help, I am really at a loss on what to do.
+
+❯ nikola build
+Scanning posts........done!
+.  render_sidebar:output/sidebar-en.inc
+TaskError - taskid:render_sidebar:output/sidebar-en.inc
+PythonAction Error
+Traceback (most recent call last):
+  File ""/Users/nvence/virtualenvs/nikola/lib/python3.9/site-packages/doit/action.py"", line 437, in execute
+    returned_value = self.py_callable(*self.args, **kwargs)
+  File ""/Users/nvence/virtualenvs/nikola/lib/python3.9/site-packages/nikola/nikola.py"", line 1472, in render_template
+    data = self.template_system.render_template(
+  File ""/Users/nvence/virtualenvs/nikola/lib/python3.9/site-packages/nikola/plugins/template/mako.py"", line 113, in render_template
+    data = template.render_unicode(**context)
+  File ""/Users/nvence/virtualenvs/nikola/lib/python3.9/site-packages/mako/template.py"", line 478, in render_unicode
+    return runtime._render(
+  File ""/Users/nvence/virtualenvs/nikola/lib/python3.9/site-packages/mako/runtime.py"", line 878, in _render
+    _render_context(
+  File ""/Users/nvence/virtualenvs/nikola/lib/python3.9/site-packages/mako/runtime.py"", line 920, in _render_context
+    _exec_template(inherit, lclcontext, args=args, kwargs=kwargs)
+  File ""/Users/nvence/virtualenvs/nikola/lib/python3.9/site-packages/mako/runtime.py"", line 947, in _exec_template
+    callable_(context, *args, **kwargs)
+  File ""/Users/nvence/site/cache/.mako.tmp/sidebar.tmpl.py"", line 40, in render_body
+    __M_writer(str( helper.list_posts(global_posts) ))
+  File ""/Users/nvence/site/cache/.mako.tmp/sidebar-helper.tmpl.py"", line 37, in render_list_posts
+    __M_writer(str( messages(""Recent Posts"", lang) ))
+  File ""/Users/nvence/virtualenvs/nikola/lib/python3.9/site-packages/nikola/utils.py"", line 216, in __call__
+    return self[lang][key]
+KeyError: 'Recent Posts'
+
+########################################
+render_sidebar:output/sidebar-en.inc <stdout>:
+<issue_comment>username_1: Regarding the `nikola build` issue — it sounds really strange. Can you try the following sequence of commands?
+
+```
+nikola build
+nikola dumpdb > one.log
+vim whatever.rst  # (or use your favorite editor to edit the file in a visible way)
+nikola build
+nikola dumpdb > two.log
+```
+
+If you can still reproduce (i.e. the change is not reflected after the second `nikola build`), please attach `one.log` and `two.log` produced by these commands.
+
+Regarding `sidebar` — please consult the plugin’s README file. You need to make some changes to the `messages` files in your site to make this plugin work.
+<issue_comment>username_1: There are two things visible in this log:
+
+1. `sidebar` locale misconfiguration — please fix this first (edit your messages file to include the messages expected [by the sidebar plugin](https://plugins.getnikola.com/v7/sidebar/)
+2. dumpdb not working with your specific database type
+
+As an alternative, after fixing the `sidebar` issue, I'd suggest the following way of getting the database between runs:
+
+```
+rm .doit.db
+nikola build --backend=json
+cp .doit.db one.json
+vim whatever.rst  # (or use your favorite editor to edit the file in a visible way)
+nikola build --backend=json
+mv .doit.db two.json
+```
+<issue_comment>username_0: Chris,
+I really appreciate your time, I’ve been interviewing for a new job and I feel bad for not having had the energy to get back to you sooner.
+
+1.  TL;DNR    I uninstalled the sidebar plugin and turned my sidebar-directive into a note-directive to get things working again.
+
+Upon upgrading to nikola 8.1.3 (from 8.1.2) installing it in a virtual environment, my sidebar-directives (.. sidebar::) stopped working.
+I thought the sidebar-directive was like a float version of the note-directive.
+In my debugging efforts I installed the sidebar plugin (I don’t remember doing this under 8.1.2), but only spawned a new complex stream of errors.  After some sleuthing, I decided that the sidebar-directive was different from the sidebar-plugin (an HTML-sidebar having a table-of-contents-like structure).  I temporarily renamed sidebar directives as notes for debugging.
+
+2. FYI .doit.db was named .doit.db.db
+After removing it, the website now builds.
+Here is the results of 
+nikola build —backend=json
+cp .doit.db one.json
+
+
+vim posts/comparing-distributions.rst
+nikola build —backend=json
+
+
+
+Good news: nothing is broken
+Bad news: .. sidebar:: doesn’t render on the side
+
+I’m hoping for the functionality of the Magic Links sidebar on
+https://getnikola.com/handbook.html  or
+https://username_0.github.io/posts/comparing-distributions.html
+
+Thanks,
+Nick"
+carbon-design-system/carbon-website,626806820,1232,,"[{'action': 'opened', 'author': 'elycheea', 'comment_id': None, 'datetime': '2020-05-28 20:52:19+00:00', 'masked_author': 'username_0', 'text': 'Analyst and I were using Firefox and Chrome respectively and were both able to reproduce the issue.\r\n\r\nChrome 83.0.4103.61.\r\n\r\n## Steps to reproduce the issue\r\n\r\n1. Access Carbon design system [pictograms](https://www.carbondesignsystem.com/guidelines/pictograms/library)\r\n2. Download the pictogram (Video was one of the pictograms in question but issue seems to affect all pictograms we’ve tried) using **Download SVG** button.\r\n3. Open SVG in browser, Powerpoint, or Sketch.\r\n4. SVG appears without a set/default stroke color.\r\n\r\n## Additional information\r\nSeems like this should have been addressed https://github.com/carbon-design-system/carbon/issues/6107 and https://github.com/carbon-design-system/carbon/pull/6109, but we’re seeing this issue again today.', 'title': 'SVG pictograms downloaded from the Carbon website are missing stroke/fill.', 'type': 'issue'}
+ {'action': 'closed', 'author': 'mjabbink', 'comment_id': None, 'datetime': '2021-08-30 15:12:37+00:00', 'masked_author': 'username_1', 'text': '', 'title': None, 'type': 'issue'}
+ {'action': 'created', 'author': 'mjabbink', 'comment_id': 908426636.0, 'datetime': '2021-08-30 15:12:37+00:00', 'masked_author': 'username_1', 'text': 'This should be resolved.', 'title': None, 'type': 'comment'}]","<issue_start><issue_comment>Title: SVG pictograms downloaded from the Carbon website are missing stroke/fill.
+username_0: Analyst and I were using Firefox and Chrome respectively and were both able to reproduce the issue.
+
+Chrome 83.0.4103.61.
+
+## Steps to reproduce the issue
+
+1. Access Carbon design system [pictograms](https://www.carbondesignsystem.com/guidelines/pictograms/library)
+2. Download the pictogram (Video was one of the pictograms in question but issue seems to affect all pictograms we’ve tried) using **Download SVG** button.
+3. Open SVG in browser, Powerpoint, or Sketch.
+4. SVG appears without a set/default stroke color.
+
+## Additional information
+Seems like this should have been addressed https://github.com/carbon-design-system/carbon/issues/6107 and https://github.com/carbon-design-system/carbon/pull/6109, but we’re seeing this issue again today.<issue_closed>
+<issue_comment>username_1: This should be resolved."
+microweber/microweber,184241990,373,,"[{'action': 'opened', 'author': 'shchukax', 'comment_id': None, 'datetime': '2016-10-20 14:15:43+00:00', 'masked_author': 'username_0', 'text': 'Currently, the only way to specify an image for the logo module is to upload one.  There should be an option to select from already uploaded images or specify an external URL.', 'title': 'Logo module config should allow selecting existing uploaded image', 'type': 'issue'}
+ {'action': 'created', 'author': 'Xarcell', 'comment_id': 259188963.0, 'datetime': '2016-11-08 16:40:57+00:00', 'masked_author': 'username_1', 'text': 'Where do you see this module? I do not see it.', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'shchukax', 'comment_id': 259189360.0, 'datetime': '2016-11-08 16:42:21+00:00', 'masked_author': 'username_0', 'text': 'Just go to ""add module"" (top left in live edit mode) and search for ""logo""', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'Xarcell', 'comment_id': 259195564.0, 'datetime': '2016-11-08 17:03:29+00:00', 'masked_author': 'username_1', 'text': 'Ahhh, you mean in edit mode. Ok, thanks.', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'shchukax', 'comment_id': 268517150.0, 'datetime': '2016-12-21 12:59:40+00:00', 'masked_author': 'username_0', 'text': '@username_2 I have code ready for this feature, however I developed it based on 1.0.7.  I wanted to create a pull request based on 1.0.8, but I can\'t 1.0.8 to run - I get the ""whoops something went wrong"" error and the error log contains the following:\r\n\r\n    [Wed Dec 21 08:28:38 2016] [error] [client 5.148.17.52] PHP Fatal error:  Class \'Illuminate\\\\Routing\\\\ControllerServiceProvider\' not found in /var/www/cms/vendor/laravel/framework/src/Illuminate/Foundation/ProviderRepository.php on line 146\r\n    [Wed Dec 21 08:28:41 2016] [error] [client 5.148.17.52] PHP Fatal error:  Class \'Illuminate\\\\Routing\\\\ControllerServiceProvider\' not found in /var/www/cms/vendor/laravel/framework/src/Illuminate/Foundation/ProviderRepository.php on line 146', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'peter-mw', 'comment_id': 268543270.0, 'datetime': '2016-12-21 14:59:59+00:00', 'masked_author': 'username_2', 'text': 'hi @username_0 \r\n\r\nCan you replace the `config/app.php` or comment out [this line](https://github.com/microweber/microweber/blob/6557b3dbef2fd9d38581a6fedf43da4af574d45d/config/app.php#L128)\r\n\r\nAlso you need to add this file `config/auth.php` from 1.0.8 \r\n\r\nlet me know if it works', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'shchukax', 'comment_id': 268546686.0, 'datetime': '2016-12-21 15:12:58+00:00', 'masked_author': 'username_0', 'text': ""Hi @username_2  Thanks for the reply.  I started by cloning the 1.0.8 branch.  I now commented out this line:\r\n\r\n    'Illuminate\\Routing\\ControllerServiceProvider',\r\n\r\nin `config\\app.php`.  I do have `config\\auth.php` in place, as well.  Now I get the following error in the laravel log:\r\n\r\n````\r\n[2016-12-21 15:08:23] production.ERROR: exception 'InvalidArgumentException' with message 'Auth guard [] is not defined.' in /var/www/cms/vendor/laravel/framework/src/Illuminate/Auth/AuthManager.php:86\r\nStack trace:\r\n#0 /var/www/cms/vendor/laravel/framework/src/Illuminate/Auth/AuthManager.php(70): Illuminate\\Auth\\AuthManager->resolve(NULL)\r\n#1 /var/www/cms/vendor/laravel/framework/src/Illuminate/Auth/AuthManager.php(294): Illuminate\\Auth\\AuthManager->guard()\r\n#2 /var/www/cms/vendor/laravel/framework/src/Illuminate/Support/Facades/Facade.php(237): Illuminate\\Auth\\AuthManager->__call('check', Array)\r\n#3 /var/www/cms/vendor/laravel/framework/src/Illuminate/Support/Facades/Facade.php(237): Illuminate\\Auth\\AuthManager->check()\r\n#4 /var/www/cms/src/Microweber/Providers/UserManager.php(253): Illuminate\\Support\\Facades\\Facade::__callStatic('check', Array)\r\n#5 /var/www/cms/src/Microweber/Providers/UserManager.php(253): Illuminate\\Support\\Facades\\Auth::check()\r\n#6 /var/www/cms/src/Microweber/functions/user.php(173): Microweber\\Providers\\UserManager->is_logged()\r\n#7 /var/www/cms/src/Microweber/Controllers/DefaultController.php(243): is_logged()\r\n#8 [internal function]: Microweber\\Controllers\\DefaultController->api('is_logged')\r\n#9 /var/www/cms/vendor/laravel/framework/src/Illuminate/Routing/Controller.php(55): call_user_func_array(Array, Array)\r\n#10 /var/www/cms/vendor/laravel/framework/src/Illuminate/Routing/ControllerDispatcher.php(44): Illuminate\\Routing\\Controller->callAction('api', Array)\r\n#11 /var/www/cms/vendor/laravel/framework/src/Illuminate/Routing/Route.php(190): Illuminate\\Routing\\ControllerDispatcher->dispatch(Object(Illuminate\\Routing\\Route), Object(Microweber\\Controllers\\DefaultController), 'api')\r\n#12 /var/www/cms/vendor/laravel/framework/src/Illuminate/Routing/Route.php(144): Illuminate\\Routing\\Route->runController()\r\n#13 /var/www/cms/vendor/laravel/framework/src/Illuminate/Routing/Router.php(653): Illuminate\\Routing\\Route->run(Object(Illuminate\\Http\\Request))\r\n#14 /var/www/cms/vendor/laravel/framework/src/Illuminate/Routing/Pipeline.php(53): Illuminate\\Routing\\Router->Illuminate\\Routing\\{closure}(Object(Illuminate\\Http\\Request))\r\n#15 /var/www/cms/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(104): Illuminate\\Routing\\Pipeline->Illuminate\\Routing\\{closure}(Object(Illuminate\\Http\\Request))\r\n#16 /var/www/cms/vendor/laravel/framework/src/Illuminate/Routing/Router.php(655): Illuminate\\Pipeline\\Pipeline->then(Object(Closure))\r\n#17 /var/www/cms/vendor/laravel/framework/src/Illuminate/Routing/Router.php(629): Illuminate\\Routing\\Router->runRouteWithinStack(Object(Illuminate\\Routing\\Route), Object(Illuminate\\Http\\Request))\r\n#18 /var/www/cms/vendor/laravel/framework/src/Illuminate/Routing/Router.php(607): Illuminate\\Routing\\Router->dispatchToRoute(Object(Illuminate\\Http\\Request))\r\n#19 /var/www/cms/vendor/laravel/framework/src/Illuminate/Foundation/Http/Kernel.php(268): Illuminate\\Routing\\Router->dispatch(Object(Illuminate\\Http\\Request))\r\n#20 /var/www/cms/vendor/laravel/framework/src/Illuminate/Routing/Pipeline.php(53): Illuminate\\Foundation\\Http\\Kernel->Illuminate\\Foundation\\Http\\{closure}(Object(Illuminate\\Http\\Request))\r\n#21 /var/www/cms/vendor/laravel/framework/src/Illuminate/View/Middleware/ShareErrorsFromSession.php(49): Illuminate\\Routing\\Pipeline->Illuminate\\Routing\\{closure}(Object(Illuminate\\Http\\Request))\r\n#22 /var/www/cms/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(137): Illuminate\\View\\Middleware\\ShareErrorsFromSession->handle(Object(Illuminate\\Http\\Request), Object(Closure))\r\n#23 /var/www/cms/vendor/laravel/framework/src/Illuminate/Routing/Pipeline.php(33): Illuminate\\Pipeline\\Pipeline->Illuminate\\Pipeline\\{closure}(Object(Illuminate\\Http\\Request))\r\n#24 /var/www/cms/vendor/laravel/framework/src/Illuminate/Session/Middleware/StartSession.php(64): Illuminate\\Routing\\Pipeline->Illuminate\\Routing\\{closure}(Object(Illuminate\\Http\\Request))\r\n#25 /var/www/cms/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(137): Illuminate\\Session\\Middleware\\StartSession->handle(Object(Illuminate\\Http\\Request), Object(Closure))\r\n#26 /var/www/cms/vendor/laravel/framework/src/Illuminate/Routing/Pipeline.php(33): Illuminate\\Pipeline\\Pipeline->Illuminate\\Pipeline\\{closure}(Object(Illuminate\\Http\\Request))\r\n#27 /var/www/cms/vendor/laravel/framework/src/Illuminate/Cookie/Middleware/AddQueuedCookiesToResponse.php(37): Illuminate\\Routing\\Pipeline->Illuminate\\Routing\\{closure}(Object(Illuminate\\Http\\Request))\r\n#28 /var/www/cms/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(137): Illuminate\\Cookie\\Middleware\\AddQueuedCookiesToResponse->handle(Object(Illuminate\\Http\\Request), Object(Closure))\r\n#29 /var/www/cms/vendor/laravel/framework/src/Illuminate/Routing/Pipeline.php(33): Illuminate\\Pipeline\\Pipeline->Illuminate\\Pipeline\\{closure}(Object(Illuminate\\Http\\Request))\r\n#30 /var/www/cms/vendor/laravel/framework/src/Illuminate/Foundation/Http/Middleware/CheckForMaintenanceMode.php(46): Illuminate\\Routing\\Pipeline->Illuminate\\Routing\\{closure}(Object(Illuminate\\Http\\Request))\r\n#31 /var/www/cms/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(137): Illuminate\\Foundation\\Http\\Middleware\\CheckForMaintenanceMode->handle(Object(Illuminate\\Http\\Request), Object(Closure))\r\n#32 /var/www/cms/vendor/laravel/framework/src/Illuminate/Routing/Pipeline.php(33): Illuminate\\Pipeline\\Pipeline->Illuminate\\Pipeline\\{closure}(Object(Illuminate\\Http\\Request))\r\n#33 /var/www/cms/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(104): Illuminate\\Routing\\Pipeline->Illuminate\\Routing\\{closure}(Object(Illuminate\\Http\\Request))\r\n#34 /var/www/cms/vendor/laravel/framework/src/Illuminate/Foundation/Http/Kernel.php(150): Illuminate\\Pipeline\\Pipeline->then(Object(Closure))\r\n#35 /var/www/cms/vendor/laravel/framework/src/Illuminate/Foundation/Http/Kernel.php(117): Illuminate\\Foundation\\Http\\Kernel->sendRequestThroughRouter(Object(Illuminate\\Http\\Request))\r\n#36 /var/www/cms/index.php(72): Illuminate\\Foundation\\Http\\Kernel->handle(Object(Illuminate\\Http\\Request))\r\n#37 {main}  \r\n````"", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'peter-mw', 'comment_id': 268549407.0, 'datetime': '2016-12-21 15:24:15+00:00', 'masked_author': 'username_2', 'text': 'hi, can you do a fresh clone of the 1.0.8 branch and after that `composer install` and it should run\r\n\r\nthen copy your module over the logo module', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'peter-mw', 'comment_id': 268556602.0, 'datetime': '2016-12-21 15:49:32+00:00', 'masked_author': 'username_2', 'text': ""can you  set  `'debug' => true,`\r\n\r\nin https://github.com/microweber/microweber/blob/1.0.8/config/app.php#L16 \r\n\r\nand paste the error"", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'shchukax', 'comment_id': 268557220.0, 'datetime': '2016-12-21 15:51:49+00:00', 'masked_author': 'username_0', 'text': 'Here\'s what I get:\r\n\r\n````\r\n1/1 ErrorException in default.php line 17: Undefined variable: ratings\r\n\r\nin default.php line 17\r\nat HandleExceptions->handleError(\'8\', \'Undefined variable: ratings\', \'/var/www/mednav.org/test/web/cms-1.0.8/userfiles/modules/rating/templates/default.php\', \'17\', array(\'this\' => object(View), \'v\' => \'/var/www/mednav.org/test/web/cms-1.0.8/userfiles/modules/logo/index.php\', \'config\' => array(\'path\' => \'/var/www/mednav.org/test/web/cms-1.0.8/userfiles/modules/logo/\', \'mp\' => \'/var/www/mednav.org/test/web/cms-1.0.8/userfiles/modules/logo/\', \'path_to_module\' => \'/var/www/mednav.org/test/web/cms-1.0.8/userfiles/modules/logo/\', \'the_module\' => \'logo\', \'module\' => \'logo\', \'module_name\' => \'.\', \'module_name_url_safe\' => \'logo\', \'url\' => \'https://test.mednav.org/cms/\', \'url_base\' => \'https://test.mednav.org/cms/\', \'url_main\' => \'https://test.mednav.org/cms/\', \'module_api\' => \'https://test.mednav.org/cms/api/logo\', \'module_view\' => \'https://test.mednav.org/cms/module/logo\', \'ns\' => \'logo\', \'module_class\' => \'module-logo\', \'url_to_module\' => \'https://test.mednav.org/cms/userfiles/modules/logo/\'), \'app\' => object(Application), \'params\' => array(\'data-class\' => \'module module module-logo\', \'class\' => \'module module module-logo\', \'mw-title\' => \'Logo\', \'data-mw-title\' => \'Logo\', \'type\' => \'logo\', \'data-type\' => \'logo\', \'data-id\' => \'logo-20161221083405\', \'id\' => \'logo-20161221083405\', \'module\' => \'logo\', \'parent-module\' => \'logo\', \'parent-module-id\' => \'logo-20161221083405\'), \'logotype\' => \'image\', \'logoimage\' => \'https://test.mednav.org/cms/userfiles/media/test-mednav-org/uploaded/mednav_web_03_1.png\', \'text\' => false, \'font_family\' => null, \'font_size\' => \'30\', \'default\' => \'\', \'font_family_safe\' => \'inherit\', \'template\' => \'default\')) in default.php line 17\r\nat include(\'/var/www/mednav.org/test/web/cms-1.0.8/userfiles/modules/rating/templates/default.php\') in index.php line 57\r\nat include(\'/var/www/mednav.org/test/web/cms-1.0.8/userfiles/modules/logo/index.php\') in View.php line 71\r\nat View->__toString() in Parser.php line 1481\r\nat Parser->load(\'logo\', array(\'class\' => \'module module module-logo\', \'data-mw-title\' => \'Logo\', \'data-type\' => \'logo\', \'id\' => \'logo-20161221083405\')) in Parser.php line 448\r\nat Parser->process(\'<!DOCTYPE HTML> <html prefix=""og: http://ogp.me/ns#""> <head> <title>{content_meta_title}</title> <meta http-equiv=""Content-Type"" content=""text/html; charset=UTF-8"" /> <meta http-equiv=""X-UA-Compatible"" content=""IE=edge"" /> <meta property=""og:title"" content=""{content_meta_title}"" /> <meta name=""keywords"" content=""{content_meta_keywords}"" /> <meta name=""description"" content=""{content_meta_description}"" /> <meta property=""og:type"" content=""{og_type}"" /> <meta property=""og:url"" content=""{content_url}"" /> <meta property=""og:image"" content=""{content_image}"" /> <meta property=""og:description"" content=""{og_description}"" /> <meta property=""og:site_name"" content=""{og_site_name}"" /> <link rel=""alternate"" type=""application/rss+xml"" title=""{og_site_name}"" href=""https://test.mednav.org/cms/rss"" /> <link href=\'//fonts.googleapis.com/css?family=Lato:400,300,700\' rel=\'stylesheet\' type=\'text/css\'> <link href=\'//fonts.googleapis.com/css?family=Roboto+Slab:400,300&subset=latin,cyrillic,cyrillic-ext,greek,latin-ext\' rel=\'stylesheet\' type=\'text/css\'> <link href=\'//fonts.googleapis.com/css?family=Open+Sans:400,300italic&subset=latin,cyrillic,greek,latin-ext\' rel=\'stylesheet\' type=\'text/css\'> <script type=""text/javascript""> mw.lib.require(""bootstrap3""); mw.require(mw.settings.template_url + ""js/functions.js""); </script> <link rel=""stylesheet"" href=""https://test.mednav.org/cms/userfiles/templates/liteness/css/style.css"" type=""text/css"" /> <link rel=""stylesheet"" id=""colorscss"" href=""https://test.mednav.org/cms/userfiles/templates/liteness/css/colors/default.css"" type=""text/css"" /> <style id=""customcolorscss"" type=""text/css"">#header, #footer{background-color:#564A8F} {color:#564A8F} body{background-color:#D1F056} #mwnoop{color:#D1F056} .box-container, #main-menu{background-color:#F5F5F5} #mwnoop{color:#F5F5F5} .contact-form-template-dream .cft-submit, .contact-form-template-dark .cft-submit,.contact-form-template-dream .cft-submit:hover, .contact-form-template-dark .cft-submit:hover,.contact-form-template-dream .cft-submit:focus, .contact-form-template-dark .cft-submit:focus,.pagination > a.active, .mw-search-autocomplete .module-posts-template-search > ul > li.active,.btn-default, .btn-action, .product-price-holder .btn, .btn-action-default,.btn-default:hover, .btn-action:hover, .product-price-holder .btn:hover, .btn-action-default:hover,.btn-default:focus, .btn-action:focus, .product-price-holder .btn:focus, .btn-action-default:focus,.module-navigation-default li:hover > a, .module-navigation-default li a.active, .module-navigation-default li a.active:hover,.module-navigation-default a.active:active, .module-navigation-default a.active:focus,.module-navigation-default li:hover a, .module-navigation-default li a:hover, .module-navigation-default li a:focus,.module-navigation-default li:hover a.active, .module-navigation-default a.active,.module-navigation-default a.active:hover,.module-navigation-default a.active:active,.module-navigation-default a.active:focus,#header .pagination > a.active, #footer .pagination > a.active, .pagination > .active > a, .pagination > .active > span,.pages-nav-default li a:hover, .pages-nav-default li a:focus,.pagination > .active > a:hover, .pagination > .active > span:hover, .pagination > .active > a:focus, .pagination > .active > span:focus{background-color:#6D6DD1} .cart-small-checkout-link, .cart-small, .cart-small-checkout-link:hover, .cart-small-checkout-link:focus, .cart-small-checkout-link:active, .box-container a, #main-menu a, .sidebar a, .sidebar-box .nav li a{color:#6D6DD1} .box-container {padding: 20px; }.box-container .box-container{ padding: 0; } </style> <style id=""custom_bg"" type=""text/css""></style> <style type=""text/css""> .module-navigation-default li a.active, #header .module-navigation-default li a.active, .module-navigation-default li a:hover, .module-navigation-default li:hover a, #header .module-navigation-default li a:hover, #header .module-navigation-default li:hover a, .module-navigation-default li a:focus, #header .module-navigation-default li a:focus{ color: white; } </style></head> <body class="" ""> <div id=""main-container""> <div id=""header""> <div class=""container edit"" field=""liteness-header"" rel=""global""> <div class=""row""> <div class=""col-md-9""> <h1 class=""edit element"" id=""logo"" field=""logo-top"" rel=""global""> <a href=""https://test.mednav.org/cms/""> <span>Liteness</span> <small>Define your own Space</small> </a> </h1> </div> <div class=""col-md-3""> <div class=""header-cart""><module type=""shop/cart"" template=""small""></div> </div> </div> </div> <div id=""main-menu""> <div class=""container""> <div class=""row""> <div class=""col-md-9""><module type=""menu"" /></div> <div class=""col-md-3"" id=""header-search""><module type=""search"" template=""autocomplete"" /></div> </div> </div> </div> </div> <div id=""content-holder""> <section id=""content""> <div class=""box-container""> <div class=""container edit"" field=""content"" rel=""content""> <p class=""element"">Type your text here</p> </div> </div> </section> <div id=""footer""> <div class=""container""> <div class=""mw-ui-row""> <div class=""mw-ui-col"" id=""copyright""> <div class=""edit"" field=""footer-left"" rel=""global""> <p class=""element"">Copyright &copy; All rights reserved</p> </div> </div> <div class=""mw-ui-col"" id=""footer-menu""> <div class=""edit"" field=""footer-right"" rel=""global""> <module type=""menu"" name=""footer_menu"" template=""small""> </div> </div> <div class=""mw-ui-col"" id=""powered""> <div><span class=""mw-powered-by""><a href=""https://microweber.com/"" title=""Create free Website &amp; Online Shop"">Create Website</a> with <a href=""https://microweber.com"" target=""_blank"" title=""Microweber CMS"">Microweber</a></span></div> </div> </div> </div> </div> </div> </div> </body></html>\', false) in DefaultController.php line 1697\r\nat DefaultController->frontend() in DefaultController.php line 64\r\nat DefaultController->index()\r\nat call_user_func_array(array(object(DefaultController), \'index\'), array()) in Controller.php line 55\r\nat Controller->callAction(\'index\', array()) in ControllerDispatcher.php line 44\r\nat ControllerDispatcher->dispatch(object(Route), object(DefaultController), \'index\') in Route.php line 190\r\nat Route->runController() in Route.php line 144\r\nat Route->run(object(Request)) in Router.php line 642\r\nat Router->Illuminate\\Routing\\{closure}(object(Request)) in Pipeline.php line 53\r\nat Pipeline->Illuminate\\Routing\\{closure}(object(Request)) in Pipeline.php line 104\r\nat Pipeline->then(object(Closure)) in Router.php line 644\r\nat Router->runRouteWithinStack(object(Route), object(Request)) in Router.php line 618\r\nat Router->dispatchToRoute(object(Request)) in Router.php line 596\r\nat Router->dispatch(object(Request)) in Kernel.php line 268\r\nat Kernel->Illuminate\\Foundation\\Http\\{closure}(object(Request)) in Pipeline.php line 53\r\nat Pipeline->Illuminate\\Routing\\{closure}(object(Request)) in ShareErrorsFromSession.php line 49\r\nat ShareErrorsFromSession->handle(object(Request), object(Closure)) in Pipeline.php line 137\r\nat Pipeline->Illuminate\\Pipeline\\{closure}(object(Request)) in Pipeline.php line 33\r\nat Pipeline->Illuminate\\Routing\\{closure}(object(Request)) in StartSession.php line 64\r\nat StartSession->handle(object(Request), object(Closure)) in Pipeline.php line 137\r\nat Pipeline->Illuminate\\Pipeline\\{closure}(object(Request)) in Pipeline.php line 33\r\nat Pipeline->Illuminate\\Routing\\{closure}(object(Request)) in AddQueuedCookiesToResponse.php line 37\r\nat AddQueuedCookiesToResponse->handle(object(Request), object(Closure)) in Pipeline.php line 137\r\nat Pipeline->Illuminate\\Pipeline\\{closure}(object(Request)) in Pipeline.php line 33\r\nat Pipeline->Illuminate\\Routing\\{closure}(object(Request)) in CheckForMaintenanceMode.php line 46\r\nat CheckForMaintenanceMode->handle(object(Request), object(Closure)) in Pipeline.php line 137\r\nat Pipeline->Illuminate\\Pipeline\\{closure}(object(Request)) in Pipeline.php line 33\r\nat Pipeline->Illuminate\\Routing\\{closure}(object(Request)) in Pipeline.php line 104\r\nat Pipeline->then(object(Closure)) in Kernel.php line 150\r\nat Kernel->sendRequestThroughRouter(object(Request)) in Kernel.php line 117\r\nat Kernel->handle(object(Request)) in index.php line 72\r\n````', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'peter-mw', 'comment_id': 268558528.0, 'datetime': '2016-12-21 15:56:56+00:00', 'masked_author': 'username_2', 'text': 'opps, sorry its from the module i added yesterday, i just pushed a fix  038c1018061ddcb58eeaa151712718c4f31551c8\r\n\r\ncan you pull and try again', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'shchukax', 'comment_id': 268564818.0, 'datetime': '2016-12-21 16:21:02+00:00', 'masked_author': 'username_0', 'text': 'Thanks, it runs now.  Unfortunately, I can\'t edit a page - when I click on ""edit"" link, nothing happens.  I can go into live edit mode, but some functionality doesn\'t work any more.\r\n\r\nLogo module as is does not work at all - when I try to add it to a page, nothing happens.  If I replace it with my modified one from 1.0.7, then it work, but it then looses the changes introduced in 1.0.8.\r\n\r\nThe only file I changed in the logo module has not changed from 1.0.7, therefore I submitted a pull request with 1.0.8 as it was at the time of my pull and containing that file.  I can\'t quite test whether these changes will work correctly on 1.0.8 though.', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'peter-mw', 'comment_id': 268568367.0, 'datetime': '2016-12-21 16:33:30+00:00', 'masked_author': 'username_2', 'text': 'oops i forgot to mention  you will need make `compile_assets` to `false` in `config/microewer.php` in order to load the new JS', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'shchukax', 'comment_id': 268575891.0, 'datetime': '2016-12-21 16:59:56+00:00', 'masked_author': 'username_0', 'text': ""That didn't help :(  Same results - logo not showing and clicking 'edit' on a page does nothing.  Checking further, I see a 500 error in the console:\r\n\r\nPOST to `/modules` resulting in 500 error (called from apijs.js) - but I don't see any errors in the server error log.  Here's the stack trace of the javascript call:\r\n\r\n````\r\napijs:6 POST https://test.mednav.org/cms/module/ 500 (Internal Server Error)\r\nsend\t@\tapijs:6\r\najax\t@\tapijs:6\r\njQuery.ajax\t@\tapijs:200\r\nr.(anonymous function)\t@\tapijs:6\r\nmw._\t@\tapijs:1012\r\nmw.load_module\t@\tapijs:805\r\nmw_set_edit_posts\t@\tview:content:746\r\n(anonymous function)\t@\tview:content:672\r\nhashParam\t@\tapijs:6897\r\nhashParamEventInit\t@\tapijs:6920\r\n(anonymous function)\t@\tapijs:7089\r\ndispatch\t@\tapijs:5\r\nq.handle\t@\tapijs:5\r\n````"", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'peter-mw', 'comment_id': 268578040.0, 'datetime': '2016-12-21 17:07:57+00:00', 'masked_author': 'username_2', 'text': 'really strange, \r\n\r\ncan you try to make new install on new db', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'shchukax', 'comment_id': 268578203.0, 'datetime': '2016-12-21 17:08:40+00:00', 'masked_author': 'username_0', 'text': 'Ok, will do tomorrow and let you know.', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'shchukax', 'comment_id': 268641452.0, 'datetime': '2016-12-21 21:13:52+00:00', 'masked_author': 'username_0', 'text': '@username_2 Just tried with a clean clone of 1.0.8 and a clean empty database - same result.  Logo module cannot be added to a page. A spinner is shown for a second - then disappears.  Nothing in the logs or in the browser console.', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'peter-mw', 'comment_id': 268777617.0, 'datetime': '2016-12-22 11:06:43+00:00', 'masked_author': 'username_2', 'text': 'hi @username_0 \r\n\r\ni merged your commit\r\n\r\nits working now \r\n\r\n![image](https://cloud.githubusercontent.com/assets/5698247/21423769/767ea680-c847-11e6-8c7c-a7ab11e59dd4.png)', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'shchukax', 'comment_id': 268777737.0, 'datetime': '2016-12-22 11:07:25+00:00', 'masked_author': 'username_0', 'text': 'Great stuff! Glad to help.', 'title': None, 'type': 'comment'}]","<issue_start><issue_comment>Title: Logo module config should allow selecting existing uploaded image
+username_0: Currently, the only way to specify an image for the logo module is to upload one.  There should be an option to select from already uploaded images or specify an external URL.
+<issue_comment>username_1: Where do you see this module? I do not see it.
+<issue_comment>username_0: Just go to ""add module"" (top left in live edit mode) and search for ""logo""
+<issue_comment>username_1: Ahhh, you mean in edit mode. Ok, thanks.
+<issue_comment>username_0: @username_2 I have code ready for this feature, however I developed it based on 1.0.7.  I wanted to create a pull request based on 1.0.8, but I can't 1.0.8 to run - I get the ""whoops something went wrong"" error and the error log contains the following:
+
+    [Wed Dec 21 08:28:38 2016] [error] [client 5.148.17.52] PHP Fatal error:  Class 'Illuminate\\Routing\\ControllerServiceProvider' not found in /var/www/cms/vendor/laravel/framework/src/Illuminate/Foundation/ProviderRepository.php on line 146
+    [Wed Dec 21 08:28:41 2016] [error] [client 5.148.17.52] PHP Fatal error:  Class 'Illuminate\\Routing\\ControllerServiceProvider' not found in /var/www/cms/vendor/laravel/framework/src/Illuminate/Foundation/ProviderRepository.php on line 146
+<issue_comment>username_2: hi @username_0 
+
+Can you replace the `config/app.php` or comment out [this line](https://github.com/microweber/microweber/blob/6557b3dbef2fd9d38581a6fedf43da4af574d45d/config/app.php#L128)
+
+Also you need to add this file `config/auth.php` from 1.0.8 
+
+let me know if it works
+<issue_comment>username_0: Hi @username_2  Thanks for the reply.  I started by cloning the 1.0.8 branch.  I now commented out this line:
+
+    'Illuminate\Routing\ControllerServiceProvider',
+
+in `config\app.php`.  I do have `config\auth.php` in place, as well.  Now I get the following error in the laravel log:
+
+````
+[2016-12-21 15:08:23] production.ERROR: exception 'InvalidArgumentException' with message 'Auth guard [] is not defined.' in /var/www/cms/vendor/laravel/framework/src/Illuminate/Auth/AuthManager.php:86
+Stack trace:
+#0 /var/www/cms/vendor/laravel/framework/src/Illuminate/Auth/AuthManager.php(70): Illuminate\Auth\AuthManager->resolve(NULL)
+#1 /var/www/cms/vendor/laravel/framework/src/Illuminate/Auth/AuthManager.php(294): Illuminate\Auth\AuthManager->guard()
+#2 /var/www/cms/vendor/laravel/framework/src/Illuminate/Support/Facades/Facade.php(237): Illuminate\Auth\AuthManager->__call('check', Array)
+#3 /var/www/cms/vendor/laravel/framework/src/Illuminate/Support/Facades/Facade.php(237): Illuminate\Auth\AuthManager->check()
+#4 /var/www/cms/src/Microweber/Providers/UserManager.php(253): Illuminate\Support\Facades\Facade::__callStatic('check', Array)
+#5 /var/www/cms/src/Microweber/Providers/UserManager.php(253): Illuminate\Support\Facades\Auth::check()
+#6 /var/www/cms/src/Microweber/functions/user.php(173): Microweber\Providers\UserManager->is_logged()
+#7 /var/www/cms/src/Microweber/Controllers/DefaultController.php(243): is_logged()
+#8 [internal function]: Microweber\Controllers\DefaultController->api('is_logged')
+#9 /var/www/cms/vendor/laravel/framework/src/Illuminate/Routing/Controller.php(55): call_user_func_array(Array, Array)
+#10 /var/www/cms/vendor/laravel/framework/src/Illuminate/Routing/ControllerDispatcher.php(44): Illuminate\Routing\Controller->callAction('api', Array)
+#11 /var/www/cms/vendor/laravel/framework/src/Illuminate/Routing/Route.php(190): Illuminate\Routing\ControllerDispatcher->dispatch(Object(Illuminate\Routing\Route), Object(Microweber\Controllers\DefaultController), 'api')
+#12 /var/www/cms/vendor/laravel/framework/src/Illuminate/Routing/Route.php(144): Illuminate\Routing\Route->runController()
+#13 /var/www/cms/vendor/laravel/framework/src/Illuminate/Routing/Router.php(653): Illuminate\Routing\Route->run(Object(Illuminate\Http\Request))
+#14 /var/www/cms/vendor/laravel/framework/src/Illuminate/Routing/Pipeline.php(53): Illuminate\Routing\Router->Illuminate\Routing\{closure}(Object(Illuminate\Http\Request))
+#15 /var/www/cms/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(104): Illuminate\Routing\Pipeline->Illuminate\Routing\{closure}(Object(Illuminate\Http\Request))
+#16 /var/www/cms/vendor/laravel/framework/src/Illuminate/Routing/Router.php(655): Illuminate\Pipeline\Pipeline->then(Object(Closure))
+#17 /var/www/cms/vendor/laravel/framework/src/Illuminate/Routing/Router.php(629): Illuminate\Routing\Router->runRouteWithinStack(Object(Illuminate\Routing\Route), Object(Illuminate\Http\Request))
+#18 /var/www/cms/vendor/laravel/framework/src/Illuminate/Routing/Router.php(607): Illuminate\Routing\Router->dispatchToRoute(Object(Illuminate\Http\Request))
+#19 /var/www/cms/vendor/laravel/framework/src/Illuminate/Foundation/Http/Kernel.php(268): Illuminate\Routing\Router->dispatch(Object(Illuminate\Http\Request))
+#20 /var/www/cms/vendor/laravel/framework/src/Illuminate/Routing/Pipeline.php(53): Illuminate\Foundation\Http\Kernel->Illuminate\Foundation\Http\{closure}(Object(Illuminate\Http\Request))
+#21 /var/www/cms/vendor/laravel/framework/src/Illuminate/View/Middleware/ShareErrorsFromSession.php(49): Illuminate\Routing\Pipeline->Illuminate\Routing\{closure}(Object(Illuminate\Http\Request))
+#22 /var/www/cms/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(137): Illuminate\View\Middleware\ShareErrorsFromSession->handle(Object(Illuminate\Http\Request), Object(Closure))
+#23 /var/www/cms/vendor/laravel/framework/src/Illuminate/Routing/Pipeline.php(33): Illuminate\Pipeline\Pipeline->Illuminate\Pipeline\{closure}(Object(Illuminate\Http\Request))
+#24 /var/www/cms/vendor/laravel/framework/src/Illuminate/Session/Middleware/StartSession.php(64): Illuminate\Routing\Pipeline->Illuminate\Routing\{closure}(Object(Illuminate\Http\Request))
+#25 /var/www/cms/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(137): Illuminate\Session\Middleware\StartSession->handle(Object(Illuminate\Http\Request), Object(Closure))
+#26 /var/www/cms/vendor/laravel/framework/src/Illuminate/Routing/Pipeline.php(33): Illuminate\Pipeline\Pipeline->Illuminate\Pipeline\{closure}(Object(Illuminate\Http\Request))
+#27 /var/www/cms/vendor/laravel/framework/src/Illuminate/Cookie/Middleware/AddQueuedCookiesToResponse.php(37): Illuminate\Routing\Pipeline->Illuminate\Routing\{closure}(Object(Illuminate\Http\Request))
+#28 /var/www/cms/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(137): Illuminate\Cookie\Middleware\AddQueuedCookiesToResponse->handle(Object(Illuminate\Http\Request), Object(Closure))
+#29 /var/www/cms/vendor/laravel/framework/src/Illuminate/Routing/Pipeline.php(33): Illuminate\Pipeline\Pipeline->Illuminate\Pipeline\{closure}(Object(Illuminate\Http\Request))
+#30 /var/www/cms/vendor/laravel/framework/src/Illuminate/Foundation/Http/Middleware/CheckForMaintenanceMode.php(46): Illuminate\Routing\Pipeline->Illuminate\Routing\{closure}(Object(Illuminate\Http\Request))
+#31 /var/www/cms/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(137): Illuminate\Foundation\Http\Middleware\CheckForMaintenanceMode->handle(Object(Illuminate\Http\Request), Object(Closure))
+#32 /var/www/cms/vendor/laravel/framework/src/Illuminate/Routing/Pipeline.php(33): Illuminate\Pipeline\Pipeline->Illuminate\Pipeline\{closure}(Object(Illuminate\Http\Request))
+#33 /var/www/cms/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(104): Illuminate\Routing\Pipeline->Illuminate\Routing\{closure}(Object(Illuminate\Http\Request))
+#34 /var/www/cms/vendor/laravel/framework/src/Illuminate/Foundation/Http/Kernel.php(150): Illuminate\Pipeline\Pipeline->then(Object(Closure))
+#35 /var/www/cms/vendor/laravel/framework/src/Illuminate/Foundation/Http/Kernel.php(117): Illuminate\Foundation\Http\Kernel->sendRequestThroughRouter(Object(Illuminate\Http\Request))
+#36 /var/www/cms/index.php(72): Illuminate\Foundation\Http\Kernel->handle(Object(Illuminate\Http\Request))
+#37 {main}  
+````
+<issue_comment>username_2: hi, can you do a fresh clone of the 1.0.8 branch and after that `composer install` and it should run
+
+then copy your module over the logo module
+<issue_comment>username_2: can you  set  `'debug' => true,`
+
+in https://github.com/microweber/microweber/blob/1.0.8/config/app.php#L16 
+
+and paste the error
+<issue_comment>username_0: Here's what I get:
+
+````
+1/1 ErrorException in default.php line 17: Undefined variable: ratings
+
+in default.php line 17
+at HandleExceptions->handleError('8', 'Undefined variable: ratings', '/var/www/mednav.org/test/web/cms-1.0.8/userfiles/modules/rating/templates/default.php', '17', array('this' => object(View), 'v' => '/var/www/mednav.org/test/web/cms-1.0.8/userfiles/modules/logo/index.php', 'config' => array('path' => '/var/www/mednav.org/test/web/cms-1.0.8/userfiles/modules/logo/', 'mp' => '/var/www/mednav.org/test/web/cms-1.0.8/userfiles/modules/logo/', 'path_to_module' => '/var/www/mednav.org/test/web/cms-1.0.8/userfiles/modules/logo/', 'the_module' => 'logo', 'module' => 'logo', 'module_name' => '.', 'module_name_url_safe' => 'logo', 'url' => 'https://test.mednav.org/cms/', 'url_base' => 'https://test.mednav.org/cms/', 'url_main' => 'https://test.mednav.org/cms/', 'module_api' => 'https://test.mednav.org/cms/api/logo', 'module_view' => 'https://test.mednav.org/cms/module/logo', 'ns' => 'logo', 'module_class' => 'module-logo', 'url_to_module' => 'https://test.mednav.org/cms/userfiles/modules/logo/'), 'app' => object(Application), 'params' => array('data-class' => 'module module module-logo', 'class' => 'module module module-logo', 'mw-title' => 'Logo', 'data-mw-title' => 'Logo', 'type' => 'logo', 'data-type' => 'logo', 'data-id' => 'logo-20161221083405', 'id' => 'logo-20161221083405', 'module' => 'logo', 'parent-module' => 'logo', 'parent-module-id' => 'logo-20161221083405'), 'logotype' => 'image', 'logoimage' => 'https://test.mednav.org/cms/userfiles/media/test-mednav-org/uploaded/mednav_web_03_1.png', 'text' => false, 'font_family' => null, 'font_size' => '30', 'default' => '', 'font_family_safe' => 'inherit', 'template' => 'default')) in default.php line 17
+at include('/var/www/mednav.org/test/web/cms-1.0.8/userfiles/modules/rating/templates/default.php') in index.php line 57
+at include('/var/www/mednav.org/test/web/cms-1.0.8/userfiles/modules/logo/index.php') in View.php line 71
+at View->__toString() in Parser.php line 1481
+at Parser->load('logo', array('class' => 'module module module-logo', 'data-mw-title' => 'Logo', 'data-type' => 'logo', 'id' => 'logo-20161221083405')) in Parser.php line 448
+at Parser->process('<!DOCTYPE HTML> <html prefix=""og: http://ogp.me/ns#""> <head> <title>{content_meta_title}</title> <meta http-equiv=""Content-Type"" content=""text/html; charset=UTF-8"" /> <meta http-equiv=""X-UA-Compatible"" content=""IE=edge"" /> <meta property=""og:title"" content=""{content_meta_title}"" /> <meta name=""keywords"" content=""{content_meta_keywords}"" /> <meta name=""description"" content=""{content_meta_description}"" /> <meta property=""og:type"" content=""{og_type}"" /> <meta property=""og:url"" content=""{content_url}"" /> <meta property=""og:image"" content=""{content_image}"" /> <meta property=""og:description"" content=""{og_description}"" /> <meta property=""og:site_name"" content=""{og_site_name}"" /> <link rel=""alternate"" type=""application/rss+xml"" title=""{og_site_name}"" href=""https://test.mednav.org/cms/rss"" /> <link href='//fonts.googleapis.com/css?family=Lato:400,300,700' rel='stylesheet' type='text/css'> <link href='//fonts.googleapis.com/css?family=Roboto+Slab:400,300&subset=latin,cyrillic,cyrillic-ext,greek,latin-ext' rel='stylesheet' type='text/css'> <link href='//fonts.googleapis.com/css?family=Open+Sans:400,300italic&subset=latin,cyrillic,greek,latin-ext' rel='stylesheet' type='text/css'> <script type=""text/javascript""> mw.lib.require(""bootstrap3""); mw.require(mw.settings.template_url + ""js/functions.js""); </script> <link rel=""stylesheet"" href=""https://test.mednav.org/cms/userfiles/templates/liteness/css/style.css"" type=""text/css"" /> <link rel=""stylesheet"" id=""colorscss"" href=""https://test.mednav.org/cms/userfiles/templates/liteness/css/colors/default.css"" type=""text/css"" /> <style id=""customcolorscss"" type=""text/css"">#header, #footer{background-color:#564A8F} {color:#564A8F} body{background-color:#D1F056} #mwnoop{color:#D1F056} .box-container, #main-menu{background-color:#F5F5F5} #mwnoop{color:#F5F5F5} .contact-form-template-dream .cft-submit, .contact-form-template-dark .cft-submit,.contact-form-template-dream .cft-submit:hover, .contact-form-template-dark .cft-submit:hover,.contact-form-template-dream .cft-submit:focus, .contact-form-template-dark .cft-submit:focus,.pagination > a.active, .mw-search-autocomplete .module-posts-template-search > ul > li.active,.btn-default, .btn-action, .product-price-holder .btn, .btn-action-default,.btn-default:hover, .btn-action:hover, .product-price-holder .btn:hover, .btn-action-default:hover,.btn-default:focus, .btn-action:focus, .product-price-holder .btn:focus, .btn-action-default:focus,.module-navigation-default li:hover > a, .module-navigation-default li a.active, .module-navigation-default li a.active:hover,.module-navigation-default a.active:active, .module-navigation-default a.active:focus,.module-navigation-default li:hover a, .module-navigation-default li a:hover, .module-navigation-default li a:focus,.module-navigation-default li:hover a.active, .module-navigation-default a.active,.module-navigation-default a.active:hover,.module-navigation-default a.active:active,.module-navigation-default a.active:focus,#header .pagination > a.active, #footer .pagination > a.active, .pagination > .active > a, .pagination > .active > span,.pages-nav-default li a:hover, .pages-nav-default li a:focus,.pagination > .active > a:hover, .pagination > .active > span:hover, .pagination > .active > a:focus, .pagination > .active > span:focus{background-color:#6D6DD1} .cart-small-checkout-link, .cart-small, .cart-small-checkout-link:hover, .cart-small-checkout-link:focus, .cart-small-checkout-link:active, .box-container a, #main-menu a, .sidebar a, .sidebar-box .nav li a{color:#6D6DD1} .box-container {padding: 20px; }.box-container .box-container{ padding: 0; } </style> <style id=""custom_bg"" type=""text/css""></style> <style type=""text/css""> .module-navigation-default li a.active, #header .module-navigation-default li a.active, .module-navigation-default li a:hover, .module-navigation-default li:hover a, #header .module-navigation-default li a:hover, #header .module-navigation-default li:hover a, .module-navigation-default li a:focus, #header .module-navigation-default li a:focus{ color: white; } </style></head> <body class="" ""> <div id=""main-container""> <div id=""header""> <div class=""container edit"" field=""liteness-header"" rel=""global""> <div class=""row""> <div class=""col-md-9""> <h1 class=""edit element"" id=""logo"" field=""logo-top"" rel=""global""> <a href=""https://test.mednav.org/cms/""> <span>Liteness</span> <small>Define your own Space</small> </a> </h1> </div> <div class=""col-md-3""> <div class=""header-cart""><module type=""shop/cart"" template=""small""></div> </div> </div> </div> <div id=""main-menu""> <div class=""container""> <div class=""row""> <div class=""col-md-9""><module type=""menu"" /></div> <div class=""col-md-3"" id=""header-search""><module type=""search"" template=""autocomplete"" /></div> </div> </div> </div> </div> <div id=""content-holder""> <section id=""content""> <div class=""box-container""> <div class=""container edit"" field=""content"" rel=""content""> <p class=""element"">Type your text here</p> </div> </div> </section> <div id=""footer""> <div class=""container""> <div class=""mw-ui-row""> <div class=""mw-ui-col"" id=""copyright""> <div class=""edit"" field=""footer-left"" rel=""global""> <p class=""element"">Copyright &copy; All rights reserved</p> </div> </div> <div class=""mw-ui-col"" id=""footer-menu""> <div class=""edit"" field=""footer-right"" rel=""global""> <module type=""menu"" name=""footer_menu"" template=""small""> </div> </div> <div class=""mw-ui-col"" id=""powered""> <div><span class=""mw-powered-by""><a href=""https://microweber.com/"" title=""Create free Website &amp; Online Shop"">Create Website</a> with <a href=""https://microweber.com"" target=""_blank"" title=""Microweber CMS"">Microweber</a></span></div> </div> </div> </div> </div> </div> </div> </body></html>', false) in DefaultController.php line 1697
+at DefaultController->frontend() in DefaultController.php line 64
+at DefaultController->index()
+at call_user_func_array(array(object(DefaultController), 'index'), array()) in Controller.php line 55
+at Controller->callAction('index', array()) in ControllerDispatcher.php line 44
+at ControllerDispatcher->dispatch(object(Route), object(DefaultController), 'index') in Route.php line 190
+at Route->runController() in Route.php line 144
+at Route->run(object(Request)) in Router.php line 642
+at Router->Illuminate\Routing\{closure}(object(Request)) in Pipeline.php line 53
+at Pipeline->Illuminate\Routing\{closure}(object(Request)) in Pipeline.php line 104
+at Pipeline->then(object(Closure)) in Router.php line 644
+at Router->runRouteWithinStack(object(Route), object(Request)) in Router.php line 618
+at Router->dispatchToRoute(object(Request)) in Router.php line 596
+at Router->dispatch(object(Request)) in Kernel.php line 268
+at Kernel->Illuminate\Foundation\Http\{closure}(object(Request)) in Pipeline.php line 53
+at Pipeline->Illuminate\Routing\{closure}(object(Request)) in ShareErrorsFromSession.php line 49
+at ShareErrorsFromSession->handle(object(Request), object(Closure)) in Pipeline.php line 137
+at Pipeline->Illuminate\Pipeline\{closure}(object(Request)) in Pipeline.php line 33
+at Pipeline->Illuminate\Routing\{closure}(object(Request)) in StartSession.php line 64
+at StartSession->handle(object(Request), object(Closure)) in Pipeline.php line 137
+at Pipeline->Illuminate\Pipeline\{closure}(object(Request)) in Pipeline.php line 33
+at Pipeline->Illuminate\Routing\{closure}(object(Request)) in AddQueuedCookiesToResponse.php line 37
+at AddQueuedCookiesToResponse->handle(object(Request), object(Closure)) in Pipeline.php line 137
+at Pipeline->Illuminate\Pipeline\{closure}(object(Request)) in Pipeline.php line 33
+at Pipeline->Illuminate\Routing\{closure}(object(Request)) in CheckForMaintenanceMode.php line 46
+at CheckForMaintenanceMode->handle(object(Request), object(Closure)) in Pipeline.php line 137
+at Pipeline->Illuminate\Pipeline\{closure}(object(Request)) in Pipeline.php line 33
+at Pipeline->Illuminate\Routing\{closure}(object(Request)) in Pipeline.php line 104
+at Pipeline->then(object(Closure)) in Kernel.php line 150
+at Kernel->sendRequestThroughRouter(object(Request)) in Kernel.php line 117
+at Kernel->handle(object(Request)) in index.php line 72
+````
+<issue_comment>username_2: opps, sorry its from the module i added yesterday, i just pushed a fix  038c1018061ddcb58eeaa151712718c4f31551c8
+
+can you pull and try again
+<issue_comment>username_0: Thanks, it runs now.  Unfortunately, I can't edit a page - when I click on ""edit"" link, nothing happens.  I can go into live edit mode, but some functionality doesn't work any more.
+
+Logo module as is does not work at all - when I try to add it to a page, nothing happens.  If I replace it with my modified one from 1.0.7, then it work, but it then looses the changes introduced in 1.0.8.
+
+The only file I changed in the logo module has not changed from 1.0.7, therefore I submitted a pull request with 1.0.8 as it was at the time of my pull and containing that file.  I can't quite test whether these changes will work correctly on 1.0.8 though.
+<issue_comment>username_2: oops i forgot to mention  you will need make `compile_assets` to `false` in `config/microewer.php` in order to load the new JS
+<issue_comment>username_0: That didn't help :(  Same results - logo not showing and clicking 'edit' on a page does nothing.  Checking further, I see a 500 error in the console:
+
+POST to `/modules` resulting in 500 error (called from apijs.js) - but I don't see any errors in the server error log.  Here's the stack trace of the javascript call:
+
+````
+apijs:6 POST https://test.mednav.org/cms/module/ 500 (Internal Server Error)
+send	@	apijs:6
+ajax	@	apijs:6
+jQuery.ajax	@	apijs:200
+r.(anonymous function)	@	apijs:6
+mw._	@	apijs:1012
+mw.load_module	@	apijs:805
+mw_set_edit_posts	@	view:content:746
+(anonymous function)	@	view:content:672
+hashParam	@	apijs:6897
+hashParamEventInit	@	apijs:6920
+(anonymous function)	@	apijs:7089
+dispatch	@	apijs:5
+q.handle	@	apijs:5
+````
+<issue_comment>username_2: really strange, 
+
+can you try to make new install on new db
+<issue_comment>username_0: Ok, will do tomorrow and let you know.
+<issue_comment>username_0: @username_2 Just tried with a clean clone of 1.0.8 and a clean empty database - same result.  Logo module cannot be added to a page. A spinner is shown for a second - then disappears.  Nothing in the logs or in the browser console.
+<issue_comment>username_2: hi @username_0 
+
+i merged your commit
+
+its working now 
+
+![image](https://cloud.githubusercontent.com/assets/5698247/21423769/767ea680-c847-11e6-8c7c-a7ab11e59dd4.png)
+<issue_comment>username_0: Great stuff! Glad to help."

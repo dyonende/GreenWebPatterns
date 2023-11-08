@@ -1,0 +1,269 @@
+vitessio/website,792319577,680,,"[{'action': 'opened', 'author': 'sougou', 'comment_id': None, 'datetime': '2021-01-22 21:31:33+00:00', 'masked_author': 'username_0', 'text': 'From @jmoldow:\r\n\r\nCan you also discuss the relationship between backups and the recommended max/min/avg/median shard sizes?\r\n\r\nCould you possibly also discuss the pros/cons between manually maintaining your keyspace id partitionings, vs. doing an even power-of-2 partitioning? And the kind of scenarios where the former would be required (region sharding, poorly-chosen sharding key with hotspots, etc.)', 'title': 'vschema user guide doc request', 'type': 'issue'}
+ {'action': 'created', 'author': 'hallaroo', 'comment_id': 989036339.0, 'datetime': '2021-12-08 17:49:06+00:00', 'masked_author': 'username_1', 'text': 'This was mostly addressed by adding: https://vitess.io/docs/user-guides/vschema-guide/\r\n\r\nA short note about shard sizes and backups is going to be added to the rule of thumb section here: https://github.com/vitessio/website/pull/897', 'title': None, 'type': 'comment'}
+ {'action': 'closed', 'author': 'hallaroo', 'comment_id': None, 'datetime': '2021-12-08 17:49:06+00:00', 'masked_author': 'username_1', 'text': '', 'title': None, 'type': 'issue'}]","<issue_start><issue_comment>Title: vschema user guide doc request
+username_0: From @jmoldow:
+
+Can you also discuss the relationship between backups and the recommended max/min/avg/median shard sizes?
+
+Could you possibly also discuss the pros/cons between manually maintaining your keyspace id partitionings, vs. doing an even power-of-2 partitioning? And the kind of scenarios where the former would be required (region sharding, poorly-chosen sharding key with hotspots, etc.)
+<issue_comment>username_1: This was mostly addressed by adding: https://vitess.io/docs/user-guides/vschema-guide/
+
+A short note about shard sizes and backups is going to be added to the rule of thumb section here: https://github.com/vitessio/website/pull/897<issue_closed>"
+kubernetes/website,987285424,29610,"{'number': 29610.0, 'repo': 'website', 'user_login': 'kubernetes'}","[{'action': 'opened', 'author': 'zikhan', 'comment_id': None, 'datetime': '2021-09-03T00:35:52Z', 'masked_author': 'username_0', 'text': ""* Update Windows docs to use Powershell instead of zsh\r\n\r\nReflect changes made in kubernetes/kubernetes#103758 & kubernetes/kubernetes#92989\r\n\r\nI'm not well versed in fish, so I'll leave that part for someone else to get an easy contribution in."", 'title': 'Update docs to reflect newly support shells with autocompletions', 'type': 'issue'}
+ {'action': 'created', 'author': 'geoffcline', 'comment_id': 913960425.0, 'datetime': '2021-09-07 03:18:44+00:00', 'masked_author': 'username_1', 'text': 'adding a /lgtm despite my membership still pending', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'PI-Victor', 'comment_id': 916022754.0, 'datetime': '2021-09-09 11:59:29+00:00', 'masked_author': 'username_2', 'text': '/hold\r\nis this really supposed to be open against dev-1.23?\r\n/cc @jlbutler', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'geoffcline', 'comment_id': 916219449.0, 'datetime': '2021-09-09 15:46:40+00:00', 'masked_author': 'username_1', 'text': 'I appreciated @username_0 s comment that the existing instructions are quite outdated. How about we wrap the new instructions with some sort of version flag?', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'eddiezane', 'comment_id': 916346519.0, 'datetime': '2021-09-09 18:42:58+00:00', 'masked_author': 'username_3', 'text': ""I'm not sure about the branch logistics but powershell and fish won't ship until 1.23 so shouldn't be live before then."", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'PI-Victor', 'comment_id': 916413255.0, 'datetime': '2021-09-09 20:27:17+00:00', 'masked_author': 'username_2', 'text': ""that answers my question, thank you!\n\n/milestone 1.23\n\nthe hold can be lifted by a reviewer from docs release whenever it's done"", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'zikhan', 'comment_id': 917048560.0, 'datetime': '2021-09-10 16:43:47+00:00', 'masked_author': 'username_0', 'text': ""I've made the changes you've proposed."", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'geoffcline', 'comment_id': 917219757.0, 'datetime': '2021-09-10 21:21:34+00:00', 'masked_author': 'username_1', 'text': 'I have verified the instructions work on Windows Server 2019 and kubectl built from k/k/main', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'geoffcline', 'comment_id': 917219979.0, 'datetime': '2021-09-10 21:21:56+00:00', 'masked_author': 'username_1', 'text': 'I have verified the instructions work on Windows Server 2019 and kubectl built from k/k/main\r\n\r\n/lgtm', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'tengqm', 'comment_id': 917516316.0, 'datetime': '2021-09-12 00:59:09+00:00', 'masked_author': 'username_4', 'text': '/label tide/merge-method-squash', 'title': None, 'type': 'comment'}]","<issue_start><issue_comment>Title: Update docs to reflect newly support shells with autocompletions
+username_0: * Update Windows docs to use Powershell instead of zsh
+
+Reflect changes made in kubernetes/kubernetes#103758 & kubernetes/kubernetes#92989
+
+I'm not well versed in fish, so I'll leave that part for someone else to get an easy contribution in.
+<issue_comment>username_1: adding a /lgtm despite my membership still pending
+<issue_comment>username_2: /hold
+is this really supposed to be open against dev-1.23?
+/cc @jlbutler
+<issue_comment>username_1: I appreciated @username_0 s comment that the existing instructions are quite outdated. How about we wrap the new instructions with some sort of version flag?
+<issue_comment>username_3: I'm not sure about the branch logistics but powershell and fish won't ship until 1.23 so shouldn't be live before then.
+<issue_comment>username_2: that answers my question, thank you!
+
+/milestone 1.23
+
+the hold can be lifted by a reviewer from docs release whenever it's done
+<issue_comment>username_0: I've made the changes you've proposed.
+<issue_comment>username_1: I have verified the instructions work on Windows Server 2019 and kubectl built from k/k/main
+<issue_comment>username_1: I have verified the instructions work on Windows Server 2019 and kubectl built from k/k/main
+
+/lgtm
+<issue_comment>username_4: /label tide/merge-method-squash"
+RSS-Bridge/rss-bridge,642350811,1618,,"[{'action': 'opened', 'author': 'csisoap', 'comment_id': None, 'datetime': '2020-06-20 10:22:39+00:00', 'masked_author': 'username_0', 'text': '# Bridge request\r\n\r\n<!--\r\nThis is a bridge request. Start by adding a descriptive title (i.e. `Bridge request for GitHub`). Use the ""Preview"" button to see a preview of your request. Make sure your request is complete before submitting!\r\n\r\nNotice: This comment is only visible to you while you work on your request. Please do not remove any of the lines in the template (you may add your own outside the ""<!--"" and ""- ->"" lines!)\r\n-->\r\n\r\n## General information\r\n\r\n<!--\r\nPlease describe what you expect from the bridge. Whenever possible provide sample links and screenshots (you can just paste them here) to express your expectations and help others understand your request. If possible, mark relevant areas in your screenshot. Use the following questions for reference:\r\n-->\r\nI\'ve just realized Reuters has shut their feeds down. Lots of good news come from them and I don\'t want to miss it and it\'s so sad to see they no longer use RSS. I contacted Reuters to concern about RSS feed and i don\'t know when they will response to my concern. So yeah, i want to create a bridge but i don\'t know much about PHP. I got their API right here: \r\n\r\n`https://wireapi.reuters.com/v7/feed/url/{url to each categories}`\r\nEx: `https://wireapi.reuters.com/v7/feed/url/www.reuters.com/theWire` <-- for \'The Wire\' categories\r\n`https://wireapi.reuters.com/v7/feed/url/www.reuters.com/news/technology`  <-- for \'Technology\' categories\r\n\r\nSometimes they got their API updated, there\'s a Twitter post about this API on 2019 when it on v3. I\'ve recently tried and got error `502 Bad Gateway`. \r\n\r\nP/s: Sorry for my bad English.\r\n\r\n- _Host URI for the bridge_ (i.e. `https://github.com`): https://www.reuters.com/\r\n\r\n- Which information would you like to see?\r\nFeeds based on the categories on their page:\r\n\'The Wire\',\r\n\'Top News\',\r\n\'Technology News\',\r\n\'World News\',...\r\n\r\n\r\n- How should the information be displayed/formatted?\r\n\r\n\r\n\r\n- Which of the following parameters do you expect?\r\n\r\n  - [X] Title\r\n  - [X] URI (link to the original article)\r\n  - [ ] Author\r\n  - [X] Timestamp\r\n  - [X] Content (the content of the article)\r\n  - [X] Enclosures (pictures, videos, etc...)\r\n  - [X] Categories (categories, tags, etc...)\r\n\r\n## Options\r\n\r\n<!--Select options from the list below. Add your own option if one is missing:-->\r\n\r\n- [ ] Limit number of returned items\r\n  - _Default limit_: 5\r\n- [X] Load full articles\r\n  - _Cache articles_ (articles are stored in a local cache on first request): yes\r\n  - _Cache timeout_ (max = 24 hours): 24 hours\r\n- [X] Balance requests (RSS-Bridge uses cached versions to reduce bandwith usage)\r\n  - _Timeout_ (default = 5 minutes, max = 24 hours): 5 minutes\r\n\r\n<!--Be aware that some options might not be available for your specific request due to technical limitations!-->\r\n\r\n<!--\r\n## Additional notes\r\n\r\nKeep in mind that opening a request does not guarantee the bridge being implemented! That depends entirely on the interest and time of others to make the bridge for you.\r\n\r\nYou can also implement your own bridge (with support of the community if needed). Find more information in the [RSS-Bridge Wiki](https://github.com/RSS-Bridge/rss-bridge/wiki/For-developers) developer section.\r\n-->', 'title': 'Bridge request for Reuters', 'type': 'issue'}
+ {'action': 'created', 'author': 'virtadpt', 'comment_id': 647036491.0, 'datetime': '2020-06-20 19:28:18+00:00', 'masked_author': 'username_1', 'text': 'Please - I got burned by this, too.', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'csisoap', 'comment_id': 647358364.0, 'datetime': '2020-06-22 08:09:39+00:00', 'masked_author': 'username_0', 'text': '**UPDATE:** There\'re some sections in Reuters page can\'t using API to get data which is Health, Energy and Environment. You can try other sections to see if it work.\r\n\r\nSome more API link:\r\nhttps://wireapi.reuters.com/v7/feed/rapp/us/tabbar/feeds/home/rightnow <-- ""Right Now""\r\nhttps://wireapi.reuters.com/v7/feed/rapp/us/tabbar/feeds/home/topnews <-- ""Top News""\r\nhttps://wireapi.reuters.com/v7/feed/rapp/us/tabbar/feeds/china <-- ""China""\r\nhttps://wireapi.reuters.com/v7/feed/rcom/us/home/videomodule <-- ""Video""\r\nCredit: [https://github.com/BrandonEmmerich/china-news/wiki](url)\r\n\r\nThis API also has another version like v8, just change v7 into v8 and everything still work fine.\r\n\r\nI hopes somebody will make it into RSS feed.', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'csisoap', 'comment_id': 647439339.0, 'datetime': '2020-06-22 10:48:06+00:00', 'masked_author': 'username_0', 'text': ""It's official. \r\n![Screenshot_20200622-174454](https://user-images.githubusercontent.com/33269526/85279325-747fd580-b4b0-11ea-854e-2e7f9869cc32.png)"", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'csisoap', 'comment_id': 651091515.0, 'datetime': '2020-06-29 12:38:42+00:00', 'masked_author': 'username_0', 'text': 'Some more API:\r\nhttp://wireapi.reuters.com/v8/feed/rapp/us/tabbar/feeds/tech\r\nhttp://wireapi.reuters.com/v8/feed/rapp/us/tabbar/feeds/wire\r\nhttp://wireapi.reuters.com/v8/feed/rapp/us/tabbar/feeds/health\r\nhttp://wireapi.reuters.com/v8/feed/rapp/us/tabbar/feeds/business\r\nhttp://wireapi.reuters.com/v8/feed/rapp/us/tabbar/feeds/world\r\nhttp://wireapi.reuters.com/v8/feed/rapp/us/tabbar/feeds/politics\r\nhttp://wireapi.reuters.com/v8/feed/rapp/us/tabbar/feeds/science\r\nhttp://wireapi.reuters.com/v8/feed/rapp/us/tabbar/feeds/markets', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'csisoap', 'comment_id': 652782721.0, 'datetime': '2020-07-02 05:02:01+00:00', 'masked_author': 'username_0', 'text': 'Pic of the Day: https://wireapi.reuters.com/v8/feed/rapp/us/tabbar/feeds/pictures', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'hollowleviathan', 'comment_id': 654385683.0, 'datetime': '2020-07-06 18:05:08+00:00', 'masked_author': 'username_2', 'text': 'https://wireapi.reuters.com/v8/feed/rapp/us/tabbar/feeds/us <-- ""USA news""', 'title': None, 'type': 'comment'}
+ {'action': 'closed', 'author': 'csisoap', 'comment_id': None, 'datetime': '2020-09-22 02:56:48+00:00', 'masked_author': 'username_0', 'text': '', 'title': None, 'type': 'issue'}
+ {'action': 'created', 'author': 'csisoap', 'comment_id': 696482993.0, 'datetime': '2020-09-22 02:56:48+00:00', 'masked_author': 'username_0', 'text': ""There're a bridge supported at #1653 .\r\nClosing this now."", 'title': None, 'type': 'comment'}]","<issue_start><issue_comment>Title: Bridge request for Reuters
+username_0: # Bridge request
+
+<!--
+This is a bridge request. Start by adding a descriptive title (i.e. `Bridge request for GitHub`). Use the ""Preview"" button to see a preview of your request. Make sure your request is complete before submitting!
+
+Notice: This comment is only visible to you while you work on your request. Please do not remove any of the lines in the template (you may add your own outside the ""<!--"" and ""- ->"" lines!)
+-->
+
+## General information
+
+<!--
+Please describe what you expect from the bridge. Whenever possible provide sample links and screenshots (you can just paste them here) to express your expectations and help others understand your request. If possible, mark relevant areas in your screenshot. Use the following questions for reference:
+-->
+I've just realized Reuters has shut their feeds down. Lots of good news come from them and I don't want to miss it and it's so sad to see they no longer use RSS. I contacted Reuters to concern about RSS feed and i don't know when they will response to my concern. So yeah, i want to create a bridge but i don't know much about PHP. I got their API right here: 
+
+`https://wireapi.reuters.com/v7/feed/url/{url to each categories}`
+Ex: `https://wireapi.reuters.com/v7/feed/url/www.reuters.com/theWire` <-- for 'The Wire' categories
+`https://wireapi.reuters.com/v7/feed/url/www.reuters.com/news/technology`  <-- for 'Technology' categories
+
+Sometimes they got their API updated, there's a Twitter post about this API on 2019 when it on v3. I've recently tried and got error `502 Bad Gateway`. 
+
+P/s: Sorry for my bad English.
+
+- _Host URI for the bridge_ (i.e. `https://github.com`): https://www.reuters.com/
+
+- Which information would you like to see?
+Feeds based on the categories on their page:
+'The Wire',
+'Top News',
+'Technology News',
+'World News',...
+
+
+- How should the information be displayed/formatted?
+
+
+
+- Which of the following parameters do you expect?
+
+  - [X] Title
+  - [X] URI (link to the original article)
+  - [ ] Author
+  - [X] Timestamp
+  - [X] Content (the content of the article)
+  - [X] Enclosures (pictures, videos, etc...)
+  - [X] Categories (categories, tags, etc...)
+
+## Options
+
+<!--Select options from the list below. Add your own option if one is missing:-->
+
+- [ ] Limit number of returned items
+  - _Default limit_: 5
+- [X] Load full articles
+  - _Cache articles_ (articles are stored in a local cache on first request): yes
+  - _Cache timeout_ (max = 24 hours): 24 hours
+- [X] Balance requests (RSS-Bridge uses cached versions to reduce bandwith usage)
+  - _Timeout_ (default = 5 minutes, max = 24 hours): 5 minutes
+
+<!--Be aware that some options might not be available for your specific request due to technical limitations!-->
+
+<!--
+## Additional notes
+
+Keep in mind that opening a request does not guarantee the bridge being implemented! That depends entirely on the interest and time of others to make the bridge for you.
+
+You can also implement your own bridge (with support of the community if needed). Find more information in the [RSS-Bridge Wiki](https://github.com/RSS-Bridge/rss-bridge/wiki/For-developers) developer section.
+-->
+<issue_comment>username_1: Please - I got burned by this, too.
+<issue_comment>username_0: **UPDATE:** There're some sections in Reuters page can't using API to get data which is Health, Energy and Environment. You can try other sections to see if it work.
+
+Some more API link:
+https://wireapi.reuters.com/v7/feed/rapp/us/tabbar/feeds/home/rightnow <-- ""Right Now""
+https://wireapi.reuters.com/v7/feed/rapp/us/tabbar/feeds/home/topnews <-- ""Top News""
+https://wireapi.reuters.com/v7/feed/rapp/us/tabbar/feeds/china <-- ""China""
+https://wireapi.reuters.com/v7/feed/rcom/us/home/videomodule <-- ""Video""
+Credit: [https://github.com/BrandonEmmerich/china-news/wiki](url)
+
+This API also has another version like v8, just change v7 into v8 and everything still work fine.
+
+I hopes somebody will make it into RSS feed.
+<issue_comment>username_0: It's official. 
+![Screenshot_20200622-174454](https://user-images.githubusercontent.com/33269526/85279325-747fd580-b4b0-11ea-854e-2e7f9869cc32.png)
+<issue_comment>username_0: Some more API:
+http://wireapi.reuters.com/v8/feed/rapp/us/tabbar/feeds/tech
+http://wireapi.reuters.com/v8/feed/rapp/us/tabbar/feeds/wire
+http://wireapi.reuters.com/v8/feed/rapp/us/tabbar/feeds/health
+http://wireapi.reuters.com/v8/feed/rapp/us/tabbar/feeds/business
+http://wireapi.reuters.com/v8/feed/rapp/us/tabbar/feeds/world
+http://wireapi.reuters.com/v8/feed/rapp/us/tabbar/feeds/politics
+http://wireapi.reuters.com/v8/feed/rapp/us/tabbar/feeds/science
+http://wireapi.reuters.com/v8/feed/rapp/us/tabbar/feeds/markets
+<issue_comment>username_0: Pic of the Day: https://wireapi.reuters.com/v8/feed/rapp/us/tabbar/feeds/pictures
+<issue_comment>username_2: https://wireapi.reuters.com/v8/feed/rapp/us/tabbar/feeds/us <-- ""USA news""<issue_closed>
+<issue_comment>username_0: There're a bridge supported at #1653 .
+Closing this now."
+AdoptOpenJDK/openjdk-website,509936419,592,,"[{'action': 'opened', 'author': 'patric42', 'comment_id': None, 'datetime': '2019-10-21 12:40:53+00:00', 'masked_author': 'username_0', 'text': ""The current 8u232 release's deb version is\r\n\r\n1.8.0-232-b09-2\r\n\r\ninstead of\r\n\r\n8u232-b09.openj9-0.17.0-1\r\n\r\nThat way, debian users won't be able to update, as the new version is treated as old.\r\n\r\nThanks!"", 'title': 'Debian Packages in Repo have wrong version for 8u232', 'type': 'issue'}
+ {'action': 'created', 'author': 'aahlenst', 'comment_id': 544522266.0, 'datetime': '2019-10-21 13:46:28+00:00', 'masked_author': 'username_1', 'text': 'Yikes. Affects Deb & RPM packages, HotSpot and OpenJ9.', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'jerboaa', 'comment_id': 544546226.0, 'datetime': '2019-10-21 14:40:28+00:00', 'masked_author': 'username_2', 'text': '@karianna This seems a openjdk-build issue. Would you have the powers to move it there?', 'title': None, 'type': 'comment'}]","<issue_start><issue_comment>Title: Debian Packages in Repo have wrong version for 8u232
+username_0: The current 8u232 release's deb version is
+
+1.8.0-232-b09-2
+
+instead of
+
+8u232-b09.openj9-0.17.0-1
+
+That way, debian users won't be able to update, as the new version is treated as old.
+
+Thanks!
+<issue_comment>username_1: Yikes. Affects Deb & RPM packages, HotSpot and OpenJ9.
+<issue_comment>username_2: @karianna This seems a openjdk-build issue. Would you have the powers to move it there?"
+ethereum/ethereum-org-website,874034614,2962,,"[{'action': 'opened', 'author': '1inchcrew', 'comment_id': None, 'datetime': '2021-05-02 20:19:15+00:00', 'masked_author': 'username_0', 'text': '1inch Foundation would like to apply to list the 1inch Mobile Wallet on https://ethereum.org/en/wallets/\r\n\r\nThe 1inch Labs has released the 1inch Wallet for iOS, which includes the web version’s features and innovative mobile wallet functionality. \r\n\r\nFive major key features that make up the 1inch Wallet:\r\n\r\nThe best Defi aggregator: Just like the 1inch desktop dApp, the 1inch Wallet offers you access to the most liquidity and the best token swap rates across various DEXes.\r\n\r\nTop-level security: All transactions are protected as the wallet parses all data, showing what is happening in a user-friendly manner. Secure Enclave technology enabled by default.\r\n\r\nMost liquidity: Users get access to substantial liquidity for swaps across dozens of connected sources. Currently, 50+ sources are available on Ethereum and 20+ on BSC.\r\n\r\nPrivate key and seed phrase scanning: You can easily import wallets by scanning a private key string or seed phrase with a phone camera directly in the app. The feature is powered by AI.\r\n\r\nPush notifications: You can approve transactions on your devices, including Apple Watch, without having to log into the 1inch Wallet every time.\r\n\r\nLink to the wallet: https://apps.apple.com/us/app/1inch-defi-wallet/id1546049391', 'title': '1inch Wallet for IOS listing request ', 'type': 'issue'}
+ {'action': 'created', 'author': 'ryancreatescopy', 'comment_id': 831250389.0, 'datetime': '2021-05-03 13:11:56+00:00', 'masked_author': 'username_1', 'text': 'Hi @username_0 we have a format for suggesting a wallet: [here](https://github.com/ethereum/ethereum-org-website/issues/new?assignees=&labels=Type%3A+Feature%2C+Type%3A+Content&template=suggest_wallet.md&title=)  Please provide all required information in this format, thanks!', 'title': None, 'type': 'comment'}
+ {'action': 'closed', 'author': 'ryancreatescopy', 'comment_id': None, 'datetime': '2021-05-28 12:29:18+00:00', 'masked_author': 'username_1', 'text': '', 'title': None, 'type': 'issue'}
+ {'action': 'created', 'author': 'ryancreatescopy', 'comment_id': 850384082.0, 'datetime': '2021-05-28 12:29:18+00:00', 'masked_author': 'username_1', 'text': 'Closing due to inactivity. Feel free to reopen with requested info.', 'title': None, 'type': 'comment'}]","<issue_start><issue_comment>Title: 1inch Wallet for IOS listing request 
+username_0: 1inch Foundation would like to apply to list the 1inch Mobile Wallet on https://ethereum.org/en/wallets/
+
+The 1inch Labs has released the 1inch Wallet for iOS, which includes the web version’s features and innovative mobile wallet functionality. 
+
+Five major key features that make up the 1inch Wallet:
+
+The best Defi aggregator: Just like the 1inch desktop dApp, the 1inch Wallet offers you access to the most liquidity and the best token swap rates across various DEXes.
+
+Top-level security: All transactions are protected as the wallet parses all data, showing what is happening in a user-friendly manner. Secure Enclave technology enabled by default.
+
+Most liquidity: Users get access to substantial liquidity for swaps across dozens of connected sources. Currently, 50+ sources are available on Ethereum and 20+ on BSC.
+
+Private key and seed phrase scanning: You can easily import wallets by scanning a private key string or seed phrase with a phone camera directly in the app. The feature is powered by AI.
+
+Push notifications: You can approve transactions on your devices, including Apple Watch, without having to log into the 1inch Wallet every time.
+
+Link to the wallet: https://apps.apple.com/us/app/1inch-defi-wallet/id1546049391
+<issue_comment>username_1: Hi @username_0 we have a format for suggesting a wallet: [here](https://github.com/ethereum/ethereum-org-website/issues/new?assignees=&labels=Type%3A+Feature%2C+Type%3A+Content&template=suggest_wallet.md&title=)  Please provide all required information in this format, thanks!<issue_closed>
+<issue_comment>username_1: Closing due to inactivity. Feel free to reopen with requested info."
+kubernetes/website,471083197,15500,,"[{'action': 'opened', 'author': 'pratsub', 'comment_id': None, 'datetime': '2019-07-22 13:03:12+00:00', 'masked_author': 'username_0', 'text': 'Hi\r\nI am new to Kuberentes world. Trying to install and run kubernetes but failed to make the master node up..\r\ngetting below error.\r\n\r\n[root@k8s-master docker]# kubeadm init\r\nW0722 18:23:46.966427    3074 version.go:98] could not fetch a Kubernetes version from the internet: unable to get URL ""https://dl.k8s.io/release/stable-1.txt"": Get https://dl.k8s.io/release/stable-1.txt: proxyconnect tcp: EOF\r\nW0722 18:23:46.966491    3074 version.go:99] falling back to the local client version: v1.15.1\r\n[init] Using Kubernetes version: v1.15.1\r\n[preflight] Running pre-flight checks\r\n        [WARNING HTTPProxy]: Connection to ""https://172.17.139.133"" uses proxy ""https://mhpprxy.majesco.com:8080"". If that is not intended, adjust your proxy settings\r\n        [WARNING Service-Kubelet]: kubelet service is not enabled, please run \'systemctl enable kubelet.service\'\r\n[preflight] Pulling images required for setting up a Kubernetes cluster\r\n[preflight] This might take a minute or two, depending on the speed of your internet connection\r\n[preflight] You can also perform this action in beforehand using \'kubeadm config images pull\'\r\n[kubelet-start] Writing kubelet environment file with flags to file ""/var/lib/kubelet/kubeadm-flags.env""\r\n[kubelet-start] Writing kubelet configuration to file ""/var/lib/kubelet/config.yaml""\r\n[kubelet-start] Activating the kubelet service\r\n[certs] Using certificateDir folder ""/etc/kubernetes/pki""\r\n[certs] Generating ""etcd/ca"" certificate and key\r\n[certs] Generating ""etcd/healthcheck-client"" certificate and key\r\n[certs] Generating ""apiserver-etcd-client"" certificate and key\r\n[certs] Generating ""etcd/server"" certificate and key\r\n[certs] etcd/server serving cert is signed for DNS names [k8s-master localhost] and IPs [172.17.139.133 127.0.0.1 ::1]\r\n[certs] Generating ""etcd/peer"" certificate and key\r\n[certs] etcd/peer serving cert is signed for DNS names [k8s-master localhost] and IPs [172.17.139.133 127.0.0.1 ::1]\r\n[certs] Generating ""ca"" certificate and key\r\n[certs] Generating ""apiserver"" certificate and key\r\n[certs] apiserver serving cert is signed for DNS names [k8s-master kubernetes kubernetes.default kubernetes.default.svc kubernetes.default.svc.cluster.local] and IPs [10.96.0.1 172.17.139.133]\r\n[certs] Generating ""apiserver-kubelet-client"" certificate and key\r\n[certs] Generating ""front-proxy-ca"" certificate and key\r\n[certs] Generating ""front-proxy-client"" certificate and key\r\n[certs] Generating ""sa"" key and public key\r\n[kubeconfig] Using kubeconfig folder ""/etc/kubernetes""\r\n[kubeconfig] Writing ""admin.conf"" kubeconfig file\r\n[kubeconfig] Writing ""kubelet.conf"" kubeconfig file\r\n[kubeconfig] Writing ""controller-manager.conf"" kubeconfig file\r\n[kubeconfig] Writing ""scheduler.conf"" kubeconfig file\r\n[control-plane] Using manifest folder ""/etc/kubernetes/manifests""\r\n[control-plane] Creating static Pod manifest for ""kube-apiserver""\r\n[control-plane] Creating static Pod manifest for ""kube-controller-manager""\r\n[control-plane] Creating static Pod manifest for ""kube-scheduler""\r\n[etcd] Creating static Pod manifest for local etcd in ""/etc/kubernetes/manifests""\r\n[wait-control-plane] Waiting for the kubelet to boot up the control plane as static Pods from directory ""/etc/kubernetes/manifests"". This can take up to 4m0s\r\n[kubelet-check] Initial timeout of 40s passed.\r\n\r\nUnfortunately, an error has occurred:\r\n        timed out waiting for the condition\r\n\r\nThis error is likely caused by:\r\n        - The kubelet is not running\r\n        - The kubelet is unhealthy due to a misconfiguration of the node in some way (required cgroups disabled)\r\n\r\nIf you are on a systemd-powered system, you can try to troubleshoot the error with the following commands:\r\n        - \'systemctl status kubelet\'\r\n        - \'journalctl -xeu kubelet\'\r\n\r\nAdditionally, a control plane component may have crashed or exited when started by the container runtime.\r\nTo troubleshoot, list all containers using your preferred container runtimes CLI, e.g. docker.\r\nHere is one example how you may list all Kubernetes containers running in docker:\r\n        - \'docker ps -a | grep kube | grep -v pause\'\r\n        Once you have found the failing container, you can inspect its logs with:\r\n        - \'docker logs CONTAINERID\'\r\nerror execution phase wait-control-plane: couldn\'t initialize a Kubernetes cluster\r\n\r\nCan someone please help??', 'title': 'Issue with Waiting for the kubelet to boot up the control plane as static Pods from directory ""/etc/kubernetes/manifests"". This can take up to 4m0s [kubelet-check] Initial timeout of 40s passed.', 'type': 'issue'}
+ {'action': 'created', 'author': 'neolit123', 'comment_id': 514192956.0, 'datetime': '2019-07-23 12:42:25+00:00', 'masked_author': 'username_1', 'text': 'did you install the kubelet package that is in the kubeadm installation guide?', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'neolit123', 'comment_id': 514193013.0, 'datetime': '2019-07-23 12:42:35+00:00', 'masked_author': 'username_1', 'text': '/close', 'title': None, 'type': 'comment'}]","<issue_start><issue_comment>Title: Issue with Waiting for the kubelet to boot up the control plane as static Pods from directory ""/etc/kubernetes/manifests"". This can take up to 4m0s [kubelet-check] Initial timeout of 40s passed.
+username_0: Hi
+I am new to Kuberentes world. Trying to install and run kubernetes but failed to make the master node up..
+getting below error.
+
+[root@k8s-master docker]# kubeadm init
+W0722 18:23:46.966427    3074 version.go:98] could not fetch a Kubernetes version from the internet: unable to get URL ""https://dl.k8s.io/release/stable-1.txt"": Get https://dl.k8s.io/release/stable-1.txt: proxyconnect tcp: EOF
+W0722 18:23:46.966491    3074 version.go:99] falling back to the local client version: v1.15.1
+[init] Using Kubernetes version: v1.15.1
+[preflight] Running pre-flight checks
+        [WARNING HTTPProxy]: Connection to ""https://172.17.139.133"" uses proxy ""https://mhpprxy.majesco.com:8080"". If that is not intended, adjust your proxy settings
+        [WARNING Service-Kubelet]: kubelet service is not enabled, please run 'systemctl enable kubelet.service'
+[preflight] Pulling images required for setting up a Kubernetes cluster
+[preflight] This might take a minute or two, depending on the speed of your internet connection
+[preflight] You can also perform this action in beforehand using 'kubeadm config images pull'
+[kubelet-start] Writing kubelet environment file with flags to file ""/var/lib/kubelet/kubeadm-flags.env""
+[kubelet-start] Writing kubelet configuration to file ""/var/lib/kubelet/config.yaml""
+[kubelet-start] Activating the kubelet service
+[certs] Using certificateDir folder ""/etc/kubernetes/pki""
+[certs] Generating ""etcd/ca"" certificate and key
+[certs] Generating ""etcd/healthcheck-client"" certificate and key
+[certs] Generating ""apiserver-etcd-client"" certificate and key
+[certs] Generating ""etcd/server"" certificate and key
+[certs] etcd/server serving cert is signed for DNS names [k8s-master localhost] and IPs [172.17.139.133 127.0.0.1 ::1]
+[certs] Generating ""etcd/peer"" certificate and key
+[certs] etcd/peer serving cert is signed for DNS names [k8s-master localhost] and IPs [172.17.139.133 127.0.0.1 ::1]
+[certs] Generating ""ca"" certificate and key
+[certs] Generating ""apiserver"" certificate and key
+[certs] apiserver serving cert is signed for DNS names [k8s-master kubernetes kubernetes.default kubernetes.default.svc kubernetes.default.svc.cluster.local] and IPs [10.96.0.1 172.17.139.133]
+[certs] Generating ""apiserver-kubelet-client"" certificate and key
+[certs] Generating ""front-proxy-ca"" certificate and key
+[certs] Generating ""front-proxy-client"" certificate and key
+[certs] Generating ""sa"" key and public key
+[kubeconfig] Using kubeconfig folder ""/etc/kubernetes""
+[kubeconfig] Writing ""admin.conf"" kubeconfig file
+[kubeconfig] Writing ""kubelet.conf"" kubeconfig file
+[kubeconfig] Writing ""controller-manager.conf"" kubeconfig file
+[kubeconfig] Writing ""scheduler.conf"" kubeconfig file
+[control-plane] Using manifest folder ""/etc/kubernetes/manifests""
+[control-plane] Creating static Pod manifest for ""kube-apiserver""
+[control-plane] Creating static Pod manifest for ""kube-controller-manager""
+[control-plane] Creating static Pod manifest for ""kube-scheduler""
+[etcd] Creating static Pod manifest for local etcd in ""/etc/kubernetes/manifests""
+[wait-control-plane] Waiting for the kubelet to boot up the control plane as static Pods from directory ""/etc/kubernetes/manifests"". This can take up to 4m0s
+[kubelet-check] Initial timeout of 40s passed.
+
+Unfortunately, an error has occurred:
+        timed out waiting for the condition
+
+This error is likely caused by:
+        - The kubelet is not running
+        - The kubelet is unhealthy due to a misconfiguration of the node in some way (required cgroups disabled)
+
+If you are on a systemd-powered system, you can try to troubleshoot the error with the following commands:
+        - 'systemctl status kubelet'
+        - 'journalctl -xeu kubelet'
+
+Additionally, a control plane component may have crashed or exited when started by the container runtime.
+To troubleshoot, list all containers using your preferred container runtimes CLI, e.g. docker.
+Here is one example how you may list all Kubernetes containers running in docker:
+        - 'docker ps -a | grep kube | grep -v pause'
+        Once you have found the failing container, you can inspect its logs with:
+        - 'docker logs CONTAINERID'
+error execution phase wait-control-plane: couldn't initialize a Kubernetes cluster
+
+Can someone please help??
+<issue_comment>username_1: did you install the kubelet package that is in the kubeadm installation guide?
+<issue_comment>username_1: /close"
+kubernetes/website,589233900,19896,"{'number': 19896.0, 'repo': 'website', 'user_login': 'kubernetes'}","[{'action': 'opened', 'author': 'kbhawkey', 'comment_id': None, 'datetime': '2020-03-27T15:59:14Z', 'masked_author': 'username_0', 'text': '- Clean up entries in `static/_redirects` related to Netlify redirect bug fix.\r\n- For further information see issue #19737 .\r\n- Comments, reviews, questions, updates very welcome.\r\n- Did not make any extra cleanup.', 'title': 'update static _redirects, release-1.15', 'type': 'issue'}
+ {'action': 'created', 'author': 'kbhawkey', 'comment_id': 607188289.0, 'datetime': '2020-04-01 11:15:57+00:00', 'masked_author': 'username_0', 'text': '/assign @sftim', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'onlydole', 'comment_id': 608517407.0, 'datetime': '2020-04-03 15:49:37+00:00', 'masked_author': 'username_1', 'text': 'This is approved! We might need your GH powers, @username_0 :smile:', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'kbhawkey', 'comment_id': 608519150.0, 'datetime': '2020-04-03 15:52:58+00:00', 'masked_author': 'username_0', 'text': 'I am not sure if I can, but with permission will try.\r\n/approve', 'title': None, 'type': 'comment'}]","<issue_start><issue_comment>Title: update static _redirects, release-1.15
+username_0: - Clean up entries in `static/_redirects` related to Netlify redirect bug fix.
+- For further information see issue #19737 .
+- Comments, reviews, questions, updates very welcome.
+- Did not make any extra cleanup.
+<issue_comment>username_0: /assign @sftim
+<issue_comment>username_1: This is approved! We might need your GH powers, @username_0 :smile:
+<issue_comment>username_0: I am not sure if I can, but with permission will try.
+/approve"

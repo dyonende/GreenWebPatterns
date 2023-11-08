@@ -1,0 +1,723 @@
+gohugoio/hugo,299976750,4446,,"[{'action': 'opened', 'author': 'bep', 'comment_id': None, 'datetime': '2018-02-24 22:05:36+00:00', 'masked_author': 'username_0', 'text': 'This is related to #4381 -- but is something I have been thinking about lately. We will eventually get some plugins/hooks that people can exploit, but the current ""lazy processing resource"" model an easy model to understand, and it scales well.\r\n\r\nI have been thinking about this in terms of ""what would be the minimal set that would protect me against having to to any `npm install` on my Hugo projects, i.e. fully native. The more I\'m thinking about it, the more stupid it gets that I still do this for fairly plain tasks. So I intend to get this done fairly quick.\r\n\r\nI will mentally limit myself to **5 tasks** here. The NPM registry is enormous, so there will be use cases that does not fit with Hugo alone.\r\n\r\nMy 5 is:\r\n\r\n* SASS to CSS (SASS is the natural only choice, for tech reasons. And Bootstrap 4 is SASS)\r\n* Asset files concatenation (simple bundling of CSS, JS) (we would probably need some kind of assets directory for this)\r\n* Minify (MIME type aware minification of JS, CSS)\r\n* Digest (integrity hash)\r\n* Fingerprint (hash into the permalink, .e.g `main-88d4266fd4e6338d13b845fcf289579d209c897823b9217da3e161936f031589.css`).\r\n\r\n**Without going into details in the above, could this match your workflow?**', 'title': 'Add a base set of resource filters/processors', 'type': 'issue'}
+ {'action': 'created', 'author': 'kaushalmodi', 'comment_id': 368264611.0, 'datetime': '2018-02-24 22:16:16+00:00', 'masked_author': 'username_1', 'text': ""I don't care much about SASS (as I don't know it), but the other 4 are great."", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'trys', 'comment_id': 368265493.0, 'datetime': '2018-02-24 22:31:05+00:00', 'masked_author': 'username_2', 'text': 'They all sound perfect to me! It would be great if the hash could be optional. Also, would there need to be a manifest file (maybe a data template) that linked `main-88d4266fd.css` to `main.css` to keep the template files clean?', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'bep', 'comment_id': 368265698.0, 'datetime': '2018-02-24 22:35:36+00:00', 'masked_author': 'username_0', 'text': '@username_2 I think you will be happy after reading #4381', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'kaushalmodi', 'comment_id': 368265820.0, 'datetime': '2018-02-24 22:37:34+00:00', 'masked_author': 'username_1', 'text': ""I agree, that's why I had voted on the 5 point option earlier (that first vote was mine) :D"", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'trys', 'comment_id': 368266165.0, 'datetime': '2018-02-24 22:43:31+00:00', 'masked_author': 'username_2', 'text': '@username_0 that looks like all sorts of awesome!', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'RealOrangeOne', 'comment_id': 368266961.0, 'datetime': '2018-02-24 22:57:52+00:00', 'masked_author': 'username_3', 'text': ""Simple concatenation works fine for CSS, but for JS, it's a little more complicated, if you want to do it properly. \r\n\r\nAn ideal great feature would be to rather than concatenate, bundle the files. Much like http://browserify.org/ does, you give it a single entrypoint, and it spits out a single file, and uses the calls to `require()` to pull in external files as required. I can't see a very large market for concatenating JS files, but I can see a *huge* market for bundling!\r\n\r\n(Not exactly sure if this is what you meant in the bullet point, just thought i'd share in case)"", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'bep', 'comment_id': 368267170.0, 'datetime': '2018-02-24 23:02:02+00:00', 'masked_author': 'username_0', 'text': 'I meant simply concatenating the files. I.e. what ""cat file1 >> file2"" does. Unless there is some great ""Go bundling library"" I can hook into, I\'m not spending 100 hours digging into this problem.', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'bep', 'comment_id': 368267402.0, 'datetime': '2018-02-24 23:05:15+00:00', 'masked_author': 'username_0', 'text': 'And I think you are overthinking the problem. The ""cat file1 >> file2""  is more or less what the Ruby  ""bundler"" in the contestant does. I have  implemented that in Go somewhere.', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'jloh', 'comment_id': 368267586.0, 'datetime': '2018-02-24 23:08:58+00:00', 'masked_author': 'username_4', 'text': 'Is the digest going to be for local files only or remote as well?', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'bep', 'comment_id': 368267952.0, 'datetime': '2018-02-24 23:15:14+00:00', 'masked_author': 'username_0', 'text': 'Local (at least in its first iteration: We have a `Resource` interface -- and they are **currently** local only, but that can change.', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'crgeary', 'comment_id': 368269144.0, 'datetime': '2018-02-24 23:37:19+00:00', 'masked_author': 'username_5', 'text': ""I don't suppose there is any chance for [autoprefixer](https://github.com/postcss/autoprefixer) support with the SASS/CSS features? I could then remove almost all of the Node/Gulp I currently have in the [indigotree/atlas](https://github.com/indigotree/atlas) boilerplate."", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'bep', 'comment_id': 368269422.0, 'datetime': '2018-02-24 23:43:02+00:00', 'masked_author': 'username_0', 'text': 'If `libsass` supports it, sure.', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'thewebmastercom', 'comment_id': 368270025.0, 'datetime': '2018-02-24 23:56:16+00:00', 'masked_author': 'username_6', 'text': ""Looking at the Source for Foundation, I don't think it will work (too complicated build process), so doubt it would be able to replace my current workflow there (at least not without a lot of work that would make Foundation difficult to update)..\r\n\r\nHowever, looking at the Bootstrap 4 source, the SASS \\ JS looks very simple to compile \\ combine. Would certainly make me consider using Bootstrap as my framework of choice in the future if Hugo did all the work."", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'bep', 'comment_id': 368270652.0, 'datetime': '2018-02-25 00:06:42+00:00', 'masked_author': 'username_0', 'text': 'A general comment is that the above should solve _real use cases_. Certainly not all, but I imaging having a prototypen Boostrap 4 site up and running as a proof of concept before pushing this to the world.', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'RickCogley', 'comment_id': 368274371.0, 'datetime': '2018-02-25 01:15:02+00:00', 'masked_author': 'username_7', 'text': 'Plus one for autoprefixer. I am currently using postcss/cssnext which is pretty flexible, but, npm can be fiddly (so many libraries... SO many, I feel like I\'m using perl). I\'ve heard that some teams insist on linting css or js in a certain way, so although I was going to mention that, you can do it in-editor. Doing it in pre-processing _would_ make it possible to achieve some quality control for a team, though. \r\n\r\nMy wish in this area is related to making a separate css bundle for each language in a multi-language site. Different languages often need different webfonts, so I\'d like to be able to get this feature to bundle say ""main.css"" with ""en.css"" for the English side, or, ""main.css"" with ""ja.css"" for the Japanese side, so that I can use different webfonts stacks per language by calling say `bundle.en.min.css` or `bundle.ja.min.css` in my `<head>`.\r\n\r\nOn a current project, I\'m using: \r\n\r\n~~~~~\r\n:lang(ja) {\r\n  font-family: \'jp font 1\', \'jp font 2\', serif;\r\n}\r\n:lang(en) {\r\n  font-family: \'en font 1\', \'en font 2\', serif;\r\n}\r\n~~~~~\r\n\r\n... in a single css file, but I found I cannot override these classes (say, for styling an English string inside a Japanese text block) using normal classes like `.en-serif`, having to use a `lang=""en""` instead. So I\'d rather avoid `lang` and just use generic classes like `body-serif` or `display-sans`, changing the meaning of those with a per-language css that gets bundled with the main.', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'pkollitsch', 'comment_id': 368277934.0, 'datetime': '2018-02-25 02:36:16+00:00', 'masked_author': 'username_8', 'text': '@username_7 you can do that by having separate root files for your SASS compilation where you have the same base styles and then per language separate detail files included. In your theme then you add something like theme-{{ $.languagecode }}.css in the header. What I mean is libsass should cover this.', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'rdwatters', 'comment_id': 368279340.0, 'datetime': '2018-02-25 03:10:09+00:00', 'masked_author': 'username_9', 'text': 'My personal workflow? Yes, this sounds great. The consideration of Bootstrap also makes sense in terms of being the most popular FE framework.  \r\n\r\nHowever, I’d defer to other frontend devs, many of whom seem to use module loaders/bundlers (viz. Webpack) for just about everything, even outside the context of creating apps. \r\n\r\nNice-to-Have: some sort of uglify on top of minify for JS—just in consideration of file size—although I have no idea if there are Go implementations, so take that request as you will :smile:', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'budparr', 'comment_id': 368281820.0, 'datetime': '2018-02-25 04:14:47+00:00', 'masked_author': 'username_10', 'text': ""While I personally wouldn't need this (huge fan of Webpack's super powers), I like the idea generally because of the simplicity of, as you say, no NPM modules. Definitely a good idea for small sites. \r\n\r\nIn addition to what the others have said (auto-prefixer is important),  I find tools like PurgeCSS or PurifyCSS—which remove unused CSS—pretty valuable. _I did a quick check of Awesome Go and didn't see any packages for that sort, but maybe there's something out there._"", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'Lego2012', 'comment_id': 368287582.0, 'datetime': '2018-02-25 06:40:14+00:00', 'masked_author': 'username_11', 'text': 'SCSS. Bootstrap 4 is SCSS (not Sass)', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'vsopvsop', 'comment_id': 368289631.0, 'datetime': '2018-02-25 07:31:57+00:00', 'masked_author': 'username_12', 'text': 'Difference between .sass and .scss\r\nhttps://responsivedesign.is/articles/difference-between-sass-and-scss/', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'bep', 'comment_id': 368297482.0, 'datetime': '2018-02-25 10:08:00+00:00', 'masked_author': 'username_0', 'text': '@username_10 I suspect you slightly underestimate this. I agree that this setup falls short in more advanced JS setups, but for the typical Hugo sites (lots of content, documentation sites, blogs), this should scale very well.\r\n\r\nThe ""one binary"" thing is what attracts many with Hugo, and if I were the ""director of technical documentation"" and was about to create this big new documentation site for my product, I would be willing to give in to quite a few sacrifices to get my site into the 5 bullet points above.', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'Lego2012', 'comment_id': 368298021.0, 'datetime': '2018-02-25 10:17:46+00:00', 'masked_author': 'username_11', 'text': ""@username_0 I made the remark from a front end developers view. And from there it's not a question of naming. Working with SCSS compared to Sass is a quite big difference.\r\n\r\nFrom a technical perspective (libsass) you're absolutely right of course."", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'bep', 'comment_id': 368299175.0, 'datetime': '2018-02-25 10:40:07+00:00', 'masked_author': 'username_0', 'text': 'And I was the security director of that same company, I would also love to avoid letting NPM lose inside my network.', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'gour', 'comment_id': 368306687.0, 'datetime': '2018-02-25 12:48:39+00:00', 'masked_author': 'username_13', 'text': ""If it's not too hard, I'd like to see support for Less (e.g. [UIkit](https://getuikit.com/) framework) as well."", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'bep', 'comment_id': 368307164.0, 'datetime': '2018-02-25 12:55:32+00:00', 'masked_author': 'username_0', 'text': ""There is no native (Go or C) Less compiler available, I'm afraid."", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'bep', 'comment_id': 368307726.0, 'datetime': '2018-02-25 13:04:25+00:00', 'masked_author': 'username_0', 'text': 'Also see https://github.com/gohugoio/hugo/issues/4449', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'budparr', 'comment_id': 368314565.0, 'datetime': '2018-02-25 14:39:25+00:00', 'masked_author': 'username_10', 'text': '@username_0 It undoubtedly scales. I was referring to the flexibility you can get with other tools. Happy to go into that more, but I doubt it would add to the conversation here. Overall I think this is a great feature for many people, as I mentioned.', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'regisphilibert', 'comment_id': 368357169.0, 'datetime': '2018-02-25 23:52:59+00:00', 'masked_author': 'username_14', 'text': 'I suppose this will work with LiveReload as well? Usually, we watch for every sass file, so that one of the filed imported into ""main.scss"" is saved, the reprocessed ""main.scss"". I think this is the way to go.\r\nSame goes with JS concatenation.\r\n\r\nI personally can\'t find any use case where this behaviour could be challenged, but if someone does, he/she should speak up ;)', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'bep', 'comment_id': 368425335.0, 'datetime': '2018-02-26 08:32:08+00:00', 'masked_author': 'username_0', 'text': 'Yes, that is a must. There will be some challenges implementing this in a _good way_, but it should be possible.', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'jbrodriguez', 'comment_id': 368813473.0, 'datetime': '2018-02-27 09:53:47+00:00', 'masked_author': 'username_15', 'text': ""Minification of html would be awesome too. It helps with overall size.\r\n\r\nlibsass doesn't 'autoprefix', but it's certainly needed, for browser compatibility."", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'DirtyF', 'comment_id': 368930330.0, 'datetime': '2018-02-27 16:06:59+00:00', 'masked_author': 'username_16', 'text': 'As I rely on Netlify for assets optimization, I only need Sass compilation. \r\n\r\n![](https://user-images.githubusercontent.com/103008/36682558-b0bd7542-1b1b-11e8-88c0-0f5c3eebc47f.png)\r\n\r\nWhat would be nice to benefit from functions that could extract critical CSS for instance. Right now you need to use `npm` tools for that.', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'bep', 'comment_id': 368933045.0, 'datetime': '2018-02-27 16:14:36+00:00', 'masked_author': 'username_0', 'text': 'Maybe not in the strict definition of ""auto"", but there are plenty of good SASS vendor prefix examples via mixins out there. There are benefits in keeping some manual control.', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'rdwatters', 'comment_id': 369353554.0, 'datetime': '2018-02-28 19:25:26+00:00', 'masked_author': 'username_9', 'text': ""@username_15 @username_6 \r\n\r\nhttps://www.bourbon.io/docs/latest/#prefixer\r\n\r\nI'm excited for this feature. Thanks much @username_0"", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'client9', 'comment_id': 370070252.0, 'datetime': '2018-03-02 22:24:16+00:00', 'masked_author': 'username_17', 'text': ""Turns out I was working on exactly this problem.  See  https://github.com/username_17/csstool  It's all golang.  Scans my blog and cuts out un-needed CSS in under 200ms.\r\n\r\n```\r\ncurl -s https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css | \\\r\n    csscut -html 'public/**/*.html' > static/bootstrap-csscut.min.css\r\n```\r\n\r\nI cut off 90% of the file size from bootstrap.min.css (compressed or not) on a small blog site. \r\n\r\nNot sure if this fits in with this ticket @username_0 , and so my apologizes if this is ticket pollution/spam.  Happy to adjust this to whatever workflow if needed.  I'll be working on packaging and a lot of testing in the meantime.\r\n\r\nFeedback most welcome at https://github.com/username_17/csstool/issue\r\n\r\nAnd thanks @username_0 for working on this feature!"", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'regisphilibert', 'comment_id': 372735164.0, 'datetime': '2018-03-13 16:46:39+00:00', 'masked_author': 'username_14', 'text': ""I don't think this is urgent, but later on **Babel** may sound like a good addition. Being able to use modern javascript syntaxes has a great (at time critical) appeal and may be one of the most important reasons your project may need a build tool.\r\n\r\nBeside being able to Babel your JS files and @username_0's 5 , I really can't find of any other critical need for a build tool."", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'RickCogley', 'comment_id': 375838132.0, 'datetime': '2018-03-24 01:52:25+00:00', 'masked_author': 'username_7', 'text': 'Been thinking about this, and wondering what about source maps for better debugging of minified js and css assets?', 'title': None, 'type': 'comment'}
+ {'action': 'closed', 'author': 'bep', 'comment_id': None, 'datetime': '2018-07-21 15:30:44+00:00', 'masked_author': 'username_0', 'text': '', 'title': None, 'type': 'issue'}
+ {'action': 'created', 'author': 'mpourismaiel', 'comment_id': 410244839.0, 'datetime': '2018-08-03 12:55:45+00:00', 'masked_author': 'username_18', 'text': ""Adding support for babel in the pipelines would be fantastic. Babel is configurable through `.babelrc`. Although I don't think it's possible to run babel without installing it's JS dependencies."", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'Hanzei', 'comment_id': 410347976.0, 'datetime': '2018-08-03 19:05:57+00:00', 'masked_author': 'username_19', 'text': '@username_18 Would you mind opening a new issue for this feature request?', 'title': None, 'type': 'comment'}]","<issue_start><issue_comment>Title: Add a base set of resource filters/processors
+username_0: This is related to #4381 -- but is something I have been thinking about lately. We will eventually get some plugins/hooks that people can exploit, but the current ""lazy processing resource"" model an easy model to understand, and it scales well.
+
+I have been thinking about this in terms of ""what would be the minimal set that would protect me against having to to any `npm install` on my Hugo projects, i.e. fully native. The more I'm thinking about it, the more stupid it gets that I still do this for fairly plain tasks. So I intend to get this done fairly quick.
+
+I will mentally limit myself to **5 tasks** here. The NPM registry is enormous, so there will be use cases that does not fit with Hugo alone.
+
+My 5 is:
+
+* SASS to CSS (SASS is the natural only choice, for tech reasons. And Bootstrap 4 is SASS)
+* Asset files concatenation (simple bundling of CSS, JS) (we would probably need some kind of assets directory for this)
+* Minify (MIME type aware minification of JS, CSS)
+* Digest (integrity hash)
+* Fingerprint (hash into the permalink, .e.g `main-88d4266fd4e6338d13b845fcf289579d209c897823b9217da3e161936f031589.css`).
+
+**Without going into details in the above, could this match your workflow?**
+<issue_comment>username_1: I don't care much about SASS (as I don't know it), but the other 4 are great.
+<issue_comment>username_2: They all sound perfect to me! It would be great if the hash could be optional. Also, would there need to be a manifest file (maybe a data template) that linked `main-88d4266fd.css` to `main.css` to keep the template files clean?
+<issue_comment>username_0: @username_2 I think you will be happy after reading #4381
+<issue_comment>username_1: I agree, that's why I had voted on the 5 point option earlier (that first vote was mine) :D
+<issue_comment>username_2: @username_0 that looks like all sorts of awesome!
+<issue_comment>username_3: Simple concatenation works fine for CSS, but for JS, it's a little more complicated, if you want to do it properly. 
+
+An ideal great feature would be to rather than concatenate, bundle the files. Much like http://browserify.org/ does, you give it a single entrypoint, and it spits out a single file, and uses the calls to `require()` to pull in external files as required. I can't see a very large market for concatenating JS files, but I can see a *huge* market for bundling!
+
+(Not exactly sure if this is what you meant in the bullet point, just thought i'd share in case)
+<issue_comment>username_0: I meant simply concatenating the files. I.e. what ""cat file1 >> file2"" does. Unless there is some great ""Go bundling library"" I can hook into, I'm not spending 100 hours digging into this problem.
+<issue_comment>username_0: And I think you are overthinking the problem. The ""cat file1 >> file2""  is more or less what the Ruby  ""bundler"" in the contestant does. I have  implemented that in Go somewhere.
+<issue_comment>username_4: Is the digest going to be for local files only or remote as well?
+<issue_comment>username_0: Local (at least in its first iteration: We have a `Resource` interface -- and they are **currently** local only, but that can change.
+<issue_comment>username_5: I don't suppose there is any chance for [autoprefixer](https://github.com/postcss/autoprefixer) support with the SASS/CSS features? I could then remove almost all of the Node/Gulp I currently have in the [indigotree/atlas](https://github.com/indigotree/atlas) boilerplate.
+<issue_comment>username_0: If `libsass` supports it, sure.
+<issue_comment>username_6: Looking at the Source for Foundation, I don't think it will work (too complicated build process), so doubt it would be able to replace my current workflow there (at least not without a lot of work that would make Foundation difficult to update)..
+
+However, looking at the Bootstrap 4 source, the SASS \ JS looks very simple to compile \ combine. Would certainly make me consider using Bootstrap as my framework of choice in the future if Hugo did all the work.
+<issue_comment>username_0: A general comment is that the above should solve _real use cases_. Certainly not all, but I imaging having a prototypen Boostrap 4 site up and running as a proof of concept before pushing this to the world.
+<issue_comment>username_7: Plus one for autoprefixer. I am currently using postcss/cssnext which is pretty flexible, but, npm can be fiddly (so many libraries... SO many, I feel like I'm using perl). I've heard that some teams insist on linting css or js in a certain way, so although I was going to mention that, you can do it in-editor. Doing it in pre-processing _would_ make it possible to achieve some quality control for a team, though. 
+
+My wish in this area is related to making a separate css bundle for each language in a multi-language site. Different languages often need different webfonts, so I'd like to be able to get this feature to bundle say ""main.css"" with ""en.css"" for the English side, or, ""main.css"" with ""ja.css"" for the Japanese side, so that I can use different webfonts stacks per language by calling say `bundle.en.min.css` or `bundle.ja.min.css` in my `<head>`.
+
+On a current project, I'm using: 
+
+~~~~~
+:lang(ja) {
+  font-family: 'jp font 1', 'jp font 2', serif;
+}
+:lang(en) {
+  font-family: 'en font 1', 'en font 2', serif;
+}
+~~~~~
+
+... in a single css file, but I found I cannot override these classes (say, for styling an English string inside a Japanese text block) using normal classes like `.en-serif`, having to use a `lang=""en""` instead. So I'd rather avoid `lang` and just use generic classes like `body-serif` or `display-sans`, changing the meaning of those with a per-language css that gets bundled with the main.
+<issue_comment>username_8: @username_7 you can do that by having separate root files for your SASS compilation where you have the same base styles and then per language separate detail files included. In your theme then you add something like theme-{{ $.languagecode }}.css in the header. What I mean is libsass should cover this.
+<issue_comment>username_9: My personal workflow? Yes, this sounds great. The consideration of Bootstrap also makes sense in terms of being the most popular FE framework.  
+
+However, I’d defer to other frontend devs, many of whom seem to use module loaders/bundlers (viz. Webpack) for just about everything, even outside the context of creating apps. 
+
+Nice-to-Have: some sort of uglify on top of minify for JS—just in consideration of file size—although I have no idea if there are Go implementations, so take that request as you will :smile:
+<issue_comment>username_10: While I personally wouldn't need this (huge fan of Webpack's super powers), I like the idea generally because of the simplicity of, as you say, no NPM modules. Definitely a good idea for small sites. 
+
+In addition to what the others have said (auto-prefixer is important),  I find tools like PurgeCSS or PurifyCSS—which remove unused CSS—pretty valuable. _I did a quick check of Awesome Go and didn't see any packages for that sort, but maybe there's something out there._
+<issue_comment>username_11: SCSS. Bootstrap 4 is SCSS (not Sass)
+<issue_comment>username_12: Difference between .sass and .scss
+https://responsivedesign.is/articles/difference-between-sass-and-scss/
+<issue_comment>username_0: @username_10 I suspect you slightly underestimate this. I agree that this setup falls short in more advanced JS setups, but for the typical Hugo sites (lots of content, documentation sites, blogs), this should scale very well.
+
+The ""one binary"" thing is what attracts many with Hugo, and if I were the ""director of technical documentation"" and was about to create this big new documentation site for my product, I would be willing to give in to quite a few sacrifices to get my site into the 5 bullet points above.
+<issue_comment>username_11: @username_0 I made the remark from a front end developers view. And from there it's not a question of naming. Working with SCSS compared to Sass is a quite big difference.
+
+From a technical perspective (libsass) you're absolutely right of course.
+<issue_comment>username_0: And I was the security director of that same company, I would also love to avoid letting NPM lose inside my network.
+<issue_comment>username_13: If it's not too hard, I'd like to see support for Less (e.g. [UIkit](https://getuikit.com/) framework) as well.
+<issue_comment>username_0: There is no native (Go or C) Less compiler available, I'm afraid.
+<issue_comment>username_0: Also see https://github.com/gohugoio/hugo/issues/4449
+<issue_comment>username_10: @username_0 It undoubtedly scales. I was referring to the flexibility you can get with other tools. Happy to go into that more, but I doubt it would add to the conversation here. Overall I think this is a great feature for many people, as I mentioned.
+<issue_comment>username_14: I suppose this will work with LiveReload as well? Usually, we watch for every sass file, so that one of the filed imported into ""main.scss"" is saved, the reprocessed ""main.scss"". I think this is the way to go.
+Same goes with JS concatenation.
+
+I personally can't find any use case where this behaviour could be challenged, but if someone does, he/she should speak up ;)
+<issue_comment>username_0: Yes, that is a must. There will be some challenges implementing this in a _good way_, but it should be possible.
+<issue_comment>username_15: Minification of html would be awesome too. It helps with overall size.
+
+libsass doesn't 'autoprefix', but it's certainly needed, for browser compatibility.
+<issue_comment>username_16: As I rely on Netlify for assets optimization, I only need Sass compilation. 
+
+![](https://user-images.githubusercontent.com/103008/36682558-b0bd7542-1b1b-11e8-88c0-0f5c3eebc47f.png)
+
+What would be nice to benefit from functions that could extract critical CSS for instance. Right now you need to use `npm` tools for that.
+<issue_comment>username_0: Maybe not in the strict definition of ""auto"", but there are plenty of good SASS vendor prefix examples via mixins out there. There are benefits in keeping some manual control.
+<issue_comment>username_9: @username_15 @username_6 
+
+https://www.bourbon.io/docs/latest/#prefixer
+
+I'm excited for this feature. Thanks much @username_0
+<issue_comment>username_17: Turns out I was working on exactly this problem.  See  https://github.com/username_17/csstool  It's all golang.  Scans my blog and cuts out un-needed CSS in under 200ms.
+
+```
+curl -s https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css | \
+    csscut -html 'public/**/*.html' > static/bootstrap-csscut.min.css
+```
+
+I cut off 90% of the file size from bootstrap.min.css (compressed or not) on a small blog site. 
+
+Not sure if this fits in with this ticket @username_0 , and so my apologizes if this is ticket pollution/spam.  Happy to adjust this to whatever workflow if needed.  I'll be working on packaging and a lot of testing in the meantime.
+
+Feedback most welcome at https://github.com/username_17/csstool/issue
+
+And thanks @username_0 for working on this feature!
+<issue_comment>username_14: I don't think this is urgent, but later on **Babel** may sound like a good addition. Being able to use modern javascript syntaxes has a great (at time critical) appeal and may be one of the most important reasons your project may need a build tool.
+
+Beside being able to Babel your JS files and @username_0's 5 , I really can't find of any other critical need for a build tool.
+<issue_comment>username_7: Been thinking about this, and wondering what about source maps for better debugging of minified js and css assets?<issue_closed>
+<issue_comment>username_18: Adding support for babel in the pipelines would be fantastic. Babel is configurable through `.babelrc`. Although I don't think it's possible to run babel without installing it's JS dependencies.
+<issue_comment>username_19: @username_18 Would you mind opening a new issue for this feature request?"
+flutter/website,368132742,1413,,"[{'action': 'opened', 'author': 'chalin', 'comment_id': None, 'datetime': '2018-10-09 10:01:01+00:00', 'masked_author': 'username_0', 'text': ""In particular note the 400 status codes.\r\n\r\nRelated: #1412 \r\n\r\n```nocode\r\nhttp://localhost:4002/development/ui/widgets/widgetindex\r\n- (35:2) <link> => https://flutter-io-staging-1.firebaseapp.com/development/ui/widgets/widget (HTTP 404)\r\n\r\nhttp://localhost:4002/get-started/flutter-for/android-devs\r\n- (1355:0) 'StackOve..' => https://stackoverflow.com/questions/46241071/create-signature-area-%0Afor-mobile-app-in-dart-flutter (HTTP 400)\r\n\r\nhttp://localhost:4002/get-started/flutter-for/ios-devs\r\n- (1337:0) 'StackOve..' => https://stackoverflow.com/questions/46241071/create-signature-area-%0Afor-mobile-app-in-dart-flutter (HTTP 400)\r\n- (2160:0) 'AppLifec..' => https://docs.flutter.io/flutter/dart-ui%0A/AppLifecycleState-class.html (connection failed)\r\n\r\nhttp://localhost:4002/get-started/flutter-for/react-native-devs\r\n- (2120:0) 'TextStyle' => https://docs.flutter.io/flutter/dart-ui/TextStyle-class.html (connection failed)\r\n- (2282:0) 'BuildCon..' => https://docs.flutter.io/flutter/widgets/BuildContext-class.html (connection failed)\r\n- (2775:0) 'context' => https://docs.flutter.io/flutter/widgets/BuildContext-class.html (connection failed)\r\n\r\nhttp://localhost:4002/get-started/flutter-for/web-devs\r\n- (1015:0) 'BoxConst..' => https://docs.flutter.io/flutter/rendering/BoxConstraints-class.html (connection failed)\r\n- (1391:0) 'BorderRa..' => https://docs.flutter.io/flutter/painting/BorderRadius-class.html (connection failed)\r\n- (1453:0) 'BoxShadow' => https://docs.flutter.io/flutter/painting/BoxShadow-class.html (connection failed)\r\n\r\nhttp://localhost:4002/get-started/flutter-for/xamarin-forms-devs\r\n- (1519:0) 'StackOve..' => https://stackoverflow.com/questions/46241071/create-signature-area-%0Afor-mobile-app-in-dart-flutter (HTTP 400)\r\n\r\nhttp://localhost:4002/get-started/install/windows\r\n- (862:0) 'PowerShe..' => https://docs.microsoft.com/en-us/powershell/scripting/_installing-windows-powershell#upgrading-existing-windows-powershell (HTTP 404)\r\n- (862:0) 'PowerShe..' => https://docs.microsoft.com/en-us/powershell/scripting/_installing-windows-powershell#upgrading-existing-windows-powershell (HTTP 404)\r\n```\r\n\r\n@filiph, also notice the connection failures, these may be related to https://github.com/dart-lang/site-www/issues/1107.\r\n\r\ncc @Sfshaza"", 'title': '[dash] Fix broken external links', 'type': 'issue'}
+ {'action': 'created', 'author': 'chalin', 'comment_id': 431486826.0, 'datetime': '2018-10-19 20:18:24+00:00', 'masked_author': 'username_0', 'text': ""It probably still is true. We don't have external link checking enabled for dash yet."", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'sfshaza2', 'comment_id': 434073824.0, 'datetime': '2018-10-29 20:48:20+00:00', 'masked_author': 'username_1', 'text': 'Changing to P0.', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'chalin', 'comment_id': 439498456.0, 'datetime': '2018-11-16 19:20:05+00:00', 'masked_author': 'username_0', 'text': 'All fixed!', 'title': None, 'type': 'comment'}
+ {'action': 'closed', 'author': 'chalin', 'comment_id': None, 'datetime': '2018-11-16 19:20:05+00:00', 'masked_author': 'username_0', 'text': '', 'title': None, 'type': 'issue'}]","<issue_start><issue_comment>Title: [dash] Fix broken external links
+username_0: In particular note the 400 status codes.
+
+Related: #1412 
+
+```nocode
+http://localhost:4002/development/ui/widgets/widgetindex
+- (35:2) <link> => https://flutter-io-staging-1.firebaseapp.com/development/ui/widgets/widget (HTTP 404)
+
+http://localhost:4002/get-started/flutter-for/android-devs
+- (1355:0) 'StackOve..' => https://stackoverflow.com/questions/46241071/create-signature-area-%0Afor-mobile-app-in-dart-flutter (HTTP 400)
+
+http://localhost:4002/get-started/flutter-for/ios-devs
+- (1337:0) 'StackOve..' => https://stackoverflow.com/questions/46241071/create-signature-area-%0Afor-mobile-app-in-dart-flutter (HTTP 400)
+- (2160:0) 'AppLifec..' => https://docs.flutter.io/flutter/dart-ui%0A/AppLifecycleState-class.html (connection failed)
+
+http://localhost:4002/get-started/flutter-for/react-native-devs
+- (2120:0) 'TextStyle' => https://docs.flutter.io/flutter/dart-ui/TextStyle-class.html (connection failed)
+- (2282:0) 'BuildCon..' => https://docs.flutter.io/flutter/widgets/BuildContext-class.html (connection failed)
+- (2775:0) 'context' => https://docs.flutter.io/flutter/widgets/BuildContext-class.html (connection failed)
+
+http://localhost:4002/get-started/flutter-for/web-devs
+- (1015:0) 'BoxConst..' => https://docs.flutter.io/flutter/rendering/BoxConstraints-class.html (connection failed)
+- (1391:0) 'BorderRa..' => https://docs.flutter.io/flutter/painting/BorderRadius-class.html (connection failed)
+- (1453:0) 'BoxShadow' => https://docs.flutter.io/flutter/painting/BoxShadow-class.html (connection failed)
+
+http://localhost:4002/get-started/flutter-for/xamarin-forms-devs
+- (1519:0) 'StackOve..' => https://stackoverflow.com/questions/46241071/create-signature-area-%0Afor-mobile-app-in-dart-flutter (HTTP 400)
+
+http://localhost:4002/get-started/install/windows
+- (862:0) 'PowerShe..' => https://docs.microsoft.com/en-us/powershell/scripting/_installing-windows-powershell#upgrading-existing-windows-powershell (HTTP 404)
+- (862:0) 'PowerShe..' => https://docs.microsoft.com/en-us/powershell/scripting/_installing-windows-powershell#upgrading-existing-windows-powershell (HTTP 404)
+```
+
+@filiph, also notice the connection failures, these may be related to https://github.com/dart-lang/site-www/issues/1107.
+
+cc @Sfshaza
+<issue_comment>username_0: It probably still is true. We don't have external link checking enabled for dash yet.
+<issue_comment>username_1: Changing to P0.
+<issue_comment>username_0: All fixed!<issue_closed>"
+gohugoio/hugo,186416402,2655,,"[{'action': 'opened', 'author': 'bep', 'comment_id': None, 'datetime': '2016-10-31T22:31:10Z', 'masked_author': 'username_0', 'text': 'It should be very little to ask to either add a ""Powered by Hugo"" or not disabling the meta generator tag for Hugo (added in 0.16) -- I suspect some of these aren\'t Hugo sites at all.\r\n\r\nThese are the current sites with no ""hugo"" (case insensitive) in their source:\r\n\r\n```\r\nhttp://gophercon.com/\r\nhttp://chimeraarts.org/\r\nhttp://ifup.org/\r\nhttp://heyitsalex.net/\r\nhttp://it.hackmeeting.org/\r\nhttp://philosophy.ucsb.edu/\r\nhttp://arianv.com/\r\nhttp://kangkona.github.io/\r\nhttp://osmlab.github.io/learnoverpass/\r\nhttp://www.arqueart.com/\r\nhttp://www.greenitglobe.com/\r\nhttp://www.humboldtux.net/\r\nhttp://www.javaunion.com/\r\nhttp://webstudylist.com/\r\n```', 'title': 'Remove Site Showcases with no mention of Hugo', 'type': 'issue'}]","<issue_start><issue_comment>Title: Remove Site Showcases with no mention of Hugo
+username_0: It should be very little to ask to either add a ""Powered by Hugo"" or not disabling the meta generator tag for Hugo (added in 0.16) -- I suspect some of these aren't Hugo sites at all.
+
+These are the current sites with no ""hugo"" (case insensitive) in their source:
+
+```
+http://gophercon.com/
+http://chimeraarts.org/
+http://ifup.org/
+http://heyitsalex.net/
+http://it.hackmeeting.org/
+http://philosophy.ucsb.edu/
+http://arianv.com/
+http://kangkona.github.io/
+http://osmlab.github.io/learnoverpass/
+http://www.arqueart.com/
+http://www.greenitglobe.com/
+http://www.humboldtux.net/
+http://www.javaunion.com/
+http://webstudylist.com/
+```"
+google/web-starter-kit,256676476,953,,"[{'action': 'opened', 'author': 'manavm1990', 'comment_id': None, 'datetime': '2017-09-11 11:56:49+00:00', 'masked_author': 'username_0', 'text': 'Output from \'gulp\' (\'gulp serve\' is _usually ok_):\r\napp/scripts/main.js\r\n  76:7  error  Parsing error: Unexpected token )\r\n\r\n✖ 1 problem (1 error, 0 warnings)\r\n\r\n[06:53:12] \'lint\' errored after 641 ms\r\n[06:53:12] ESLintError in plugin \'gulp-eslint\'\r\nMessage:\r\n    Failed with 1 error\r\n[06:53:12] \'default\' errored after 1.57 s\r\n[06:53:12] ESLintError in plugin \'run-sequence(lint)\'\r\nMessage:\r\n    Failed with 1 error\r\n\r\nThe \'culprit\' code (just using ES6 notation to invoke jQuery \'document ready):\r\n// Your custom JavaScript goes here\r\n  `$(() => {`\r\n\r\nFull code in main.js is:\r\n`/*!\r\n *\r\n *  Web Starter Kit\r\n *  Copyright 2015 Google Inc. All rights reserved.\r\n *\r\n *  Licensed under the Apache License, Version 2.0 (the ""License"");\r\n *  you may not use this file except in compliance with the License.\r\n *  You may obtain a copy of the License at\r\n *\r\n *    https://www.apache.org/licenses/LICENSE-2.0\r\n *\r\n *  Unless required by applicable law or agreed to in writing, software\r\n *  distributed under the License is distributed on an ""AS IS"" BASIS,\r\n *  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.\r\n *  See the License for the specific language governing permissions and\r\n *  limitations under the License\r\n *\r\n */\r\n/* eslint-env browser, jquery */\r\n(function() {\r\n  \'use strict\';\r\n\r\n  // Check to make sure service workers are supported in the current browser,\r\n  // and that the current page is accessed from a secure origin. Using a\r\n  // service worker from an insecure origin will trigger JS console errors. See\r\n  // http://www.chromium.org/Home/chromium-security/prefer-secure-origins-for-powerful-new-features\r\n  var isLocalhost = Boolean(window.location.hostname === \'localhost\' ||\r\n    // [::1] is the IPv6 localhost address.\r\n    window.location.hostname === \'[::1]\' ||\r\n    // 127.0.0.1/8 is considered localhost for IPv4.\r\n    window.location.hostname.match(\r\n      /^127(?:\\.(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)){3}$/)\r\n  );\r\n\r\n  if (\'serviceWorker\' in navigator &&\r\n    (window.location.protocol === \'https:\' || isLocalhost)) {\r\n    navigator.serviceWorker.register(\'service-worker.js\').\r\n      then(function(registration) {\r\n        // updatefound is fired if service-worker.js changes.\r\n        registration.onupdatefound = function() {\r\n          // updatefound is also fired the very first time the SW is installed,\r\n          // and there\'s no need to prompt for a reload at that point.\r\n          // So check here to see if the page is already controlled,\r\n          // i.e. whether there\'s an existing service worker.\r\n          if (navigator.serviceWorker.controller) {\r\n            // The updatefound event implies that registration.installing is set:\r\n            // https://slightlyoff.github.io/ServiceWorker/spec/service_worker/index.html#service-worker-container-updatefound-event\r\n            var installingWorker = registration.installing;\r\n\r\n            installingWorker.onstatechange = function() {\r\n              switch (installingWorker.state) {\r\n                case \'installed\':\r\n                  // At this point, the old content will have been purged and the\r\n                  // fresh content will have been added to the cache.\r\n                  // It\'s the perfect time to display a ""New content is\r\n                  // available; please refresh."" message in the page\'s interface.\r\n                  break;\r\n\r\n                case \'redundant\':\r\n                  throw new Error(\'The installing \' +\r\n[Truncated]\n      let $winHeight = $(window).height();\r\n      // Gives us top coordinate of window.\r\n\r\n      for (let el of $(\'[data-animate]\')) {\r\n        let elY = el.getBoundingClientRect().top;\r\n        // Get the vertical position of \'element.\'\r\n\r\n        $classNameArray = $(el).data(\'animate\').split(\' \');\r\n        // Pull class names out of data attribute.\r\n\r\n        for (let className of $classNameArray) {\r\n          if (elY <= $winHeight && !$(el).hasClass(className)) {\r\n            $(el).addClass(className);\r\n          }\r\n        }\r\n      };\r\n    });\r\n  });\r\n})();\r\n`', 'title': ""'gulp serve' Works, 'gulp' Crashes!"", 'type': 'issue'}
+ {'action': 'created', 'author': 'manavm1990', 'comment_id': 328507351.0, 'datetime': '2017-09-11 11:58:46+00:00', 'masked_author': 'username_0', 'text': 'BTW, here is .babelrc (feel like this is somehow related):\r\n\r\n`{\r\n  ""presets"": [""es2015""],\r\n  ""retainLines"": true\r\n}\r\n`', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'manavm1990', 'comment_id': 328513171.0, 'datetime': '2017-09-11 12:26:09+00:00', 'masked_author': 'username_0', 'text': ""I'm pretty sure it's throwing that error on 'lint.' Is it not liking ES6 code for some reason???"", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'Garbee', 'comment_id': 328521026.0, 'datetime': '2017-09-11 12:58:18+00:00', 'masked_author': 'username_1', 'text': ""Can you please clarify the problem? WSK does not ship with jQuery so `The 'culprit' code (just using ES6 notation to invoke jQuery 'document ready):` doesn't make any sense to me.\r\n\r\nIt looks as if you have modified the code provided by the repository which would be the cause of the problem. And custom code modifications aren't something we can support, you'd be better off asking for general support on StackOverflow."", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'manavm1990', 'comment_id': 328523111.0, 'datetime': '2017-09-11 13:06:37+00:00', 'masked_author': 'username_0', 'text': ""I might try StackOverflow next - or maybe just need to stop using jQuery, I guess! It's a bit of crutch for me!\r\n\r\nNow, the only changes I made from the repo are:\r\n/ eslint-env browser, jquery */\r\n\r\nEverything else, is added underneath comment that says 'your custom code goes here' (or whatever)...\r\n\r\nSee, the code works without 'linting,' but obviously, I want to make sure it's production ready, so I prefer to have it work with lint."", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'manavm1990', 'comment_id': 328524101.0, 'datetime': '2017-09-11 13:10:23+00:00', 'masked_author': 'username_0', 'text': ""BTW, this jquery code works just fine:\r\n\r\n`// Your custom JavaScript goes here\r\n  $(document).ready(function() {\r\n    $('#btn-menu, .fade-screen, #btn-menu-close').on('click touchstart',\r\n        function(e) {\r\n          $('.nav--traditional, .fade-screen').toggleClass('is_visible');\r\n          e.preventDefault();\r\n        });\r\n\r\n    $('.slider-container__button--collapse').on('click touchstart',\r\n        function(e) {\r\n          'use strict';\r\n          $('.slider-container__text').toggleClass('is_hidden');\r\n          e.preventDefault();\r\n        });\r\n\r\n    $(window).scroll(function() {\r\n      var $y1 = $(window).height();\r\n      // Gives us top coordinate of window.\r\n\r\n      $('[data-scroll]').each(function() {\r\n        var $this = $(this);\r\n        // Just a convenience var assignment.\r\n\r\n        var thisY = this.getBoundingClientRect().top;\r\n        // Get the vertical position of 'element.'\r\n\r\n        var classNameArray = $this.data('scroll').split(' ');\r\n\r\n        jQuery.each(classNameArray, function(i, val) {\r\n          if (thisY <= $y1 && !$this.hasClass(val)) {\r\n            $this.addClass(val);\r\n          }\r\n        });\r\n      });\r\n    });\r\n  });`\r\n\r\nIt's only breaking on 'gulp' lint when I switch things over to es6 syntax: `$(() => {})`"", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'manavm1990', 'comment_id': 328533071.0, 'datetime': '2017-09-11 13:43:36+00:00', 'masked_author': 'username_0', 'text': ""Ok, on that note, for testing purposes, I removed all the code, just copied/pasted main.js from repo (so no jquery), and I just have this:\r\n\r\n```\r\nlet spit = document.querySelector('#btn-menu, .fade-screen, #btn-menu-close');\r\n  console.log(spit);\r\n```\r\n\r\nNow, I see this:\r\n\r\ngulp lint\r\n[08:41:40] Requiring external module babel-register\r\n[08:41:41] Using gulpfile ~/Sites/moco-ema/gulpfile.babel.js\r\n[08:41:41] Starting 'lint'...\r\n[08:41:41]\r\napp/scripts/main.js\r\n  75:4  error  Parsing error: The keyword 'let' is reserved\r\n\r\n✖ 1 problem (1 error, 0 warnings)\r\n\r\n[08:41:41] 'lint' errored after 330 ms\r\n[08:41:41] ESLintError in plugin 'gulp-eslint'\r\nMessage:\r\n    Failed with 1 error"", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'Garbee', 'comment_id': 328537959.0, 'datetime': '2017-09-11 14:00:03+00:00', 'masked_author': 'username_1', 'text': 'Search for the error from eslint on your favorite search engine. There are loads of existing articles and discussions around that and how to address it.', 'title': None, 'type': 'comment'}
+ {'action': 'closed', 'author': 'manavm1990', 'comment_id': None, 'datetime': '2017-09-11 14:05:18+00:00', 'masked_author': 'username_0', 'text': '', 'title': None, 'type': 'issue'}]","<issue_start><issue_comment>Title: 'gulp serve' Works, 'gulp' Crashes!
+username_0: Output from 'gulp' ('gulp serve' is _usually ok_):
+app/scripts/main.js
+  76:7  error  Parsing error: Unexpected token )
+
+✖ 1 problem (1 error, 0 warnings)
+
+[06:53:12] 'lint' errored after 641 ms
+[06:53:12] ESLintError in plugin 'gulp-eslint'
+Message:
+    Failed with 1 error
+[06:53:12] 'default' errored after 1.57 s
+[06:53:12] ESLintError in plugin 'run-sequence(lint)'
+Message:
+    Failed with 1 error
+
+The 'culprit' code (just using ES6 notation to invoke jQuery 'document ready):
+// Your custom JavaScript goes here
+  `$(() => {`
+
+Full code in main.js is:
+`/*!
+ *
+ *  Web Starter Kit
+ *  Copyright 2015 Google Inc. All rights reserved.
+ *
+ *  Licensed under the Apache License, Version 2.0 (the ""License"");
+ *  you may not use this file except in compliance with the License.
+ *  You may obtain a copy of the License at
+ *
+ *    https://www.apache.org/licenses/LICENSE-2.0
+ *
+ *  Unless required by applicable law or agreed to in writing, software
+ *  distributed under the License is distributed on an ""AS IS"" BASIS,
+ *  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ *  See the License for the specific language governing permissions and
+ *  limitations under the License
+ *
+ */
+/* eslint-env browser, jquery */
+(function() {
+  'use strict';
+
+  // Check to make sure service workers are supported in the current browser,
+  // and that the current page is accessed from a secure origin. Using a
+  // service worker from an insecure origin will trigger JS console errors. See
+  // http://www.chromium.org/Home/chromium-security/prefer-secure-origins-for-powerful-new-features
+  var isLocalhost = Boolean(window.location.hostname === 'localhost' ||
+    // [::1] is the IPv6 localhost address.
+    window.location.hostname === '[::1]' ||
+    // 127.0.0.1/8 is considered localhost for IPv4.
+    window.location.hostname.match(
+      /^127(?:\.(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)){3}$/)
+  );
+
+  if ('serviceWorker' in navigator &&
+    (window.location.protocol === 'https:' || isLocalhost)) {
+    navigator.serviceWorker.register('service-worker.js').
+      then(function(registration) {
+        // updatefound is fired if service-worker.js changes.
+        registration.onupdatefound = function() {
+          // updatefound is also fired the very first time the SW is installed,
+          // and there's no need to prompt for a reload at that point.
+          // So check here to see if the page is already controlled,
+          // i.e. whether there's an existing service worker.
+          if (navigator.serviceWorker.controller) {
+            // The updatefound event implies that registration.installing is set:
+            // https://slightlyoff.github.io/ServiceWorker/spec/service_worker/index.html#service-worker-container-updatefound-event
+            var installingWorker = registration.installing;
+
+            installingWorker.onstatechange = function() {
+              switch (installingWorker.state) {
+                case 'installed':
+                  // At this point, the old content will have been purged and the
+                  // fresh content will have been added to the cache.
+                  // It's the perfect time to display a ""New content is
+                  // available; please refresh."" message in the page's interface.
+                  break;
+
+                case 'redundant':
+                  throw new Error('The installing ' +
+[Truncated]
+      let $winHeight = $(window).height();
+      // Gives us top coordinate of window.
+
+      for (let el of $('[data-animate]')) {
+        let elY = el.getBoundingClientRect().top;
+        // Get the vertical position of 'element.'
+
+        $classNameArray = $(el).data('animate').split(' ');
+        // Pull class names out of data attribute.
+
+        for (let className of $classNameArray) {
+          if (elY <= $winHeight && !$(el).hasClass(className)) {
+            $(el).addClass(className);
+          }
+        }
+      };
+    });
+  });
+})();
+`
+<issue_comment>username_0: BTW, here is .babelrc (feel like this is somehow related):
+
+`{
+  ""presets"": [""es2015""],
+  ""retainLines"": true
+}
+`
+<issue_comment>username_0: I'm pretty sure it's throwing that error on 'lint.' Is it not liking ES6 code for some reason???
+<issue_comment>username_1: Can you please clarify the problem? WSK does not ship with jQuery so `The 'culprit' code (just using ES6 notation to invoke jQuery 'document ready):` doesn't make any sense to me.
+
+It looks as if you have modified the code provided by the repository which would be the cause of the problem. And custom code modifications aren't something we can support, you'd be better off asking for general support on StackOverflow.
+<issue_comment>username_0: I might try StackOverflow next - or maybe just need to stop using jQuery, I guess! It's a bit of crutch for me!
+
+Now, the only changes I made from the repo are:
+/ eslint-env browser, jquery */
+
+Everything else, is added underneath comment that says 'your custom code goes here' (or whatever)...
+
+See, the code works without 'linting,' but obviously, I want to make sure it's production ready, so I prefer to have it work with lint.
+<issue_comment>username_0: BTW, this jquery code works just fine:
+
+`// Your custom JavaScript goes here
+  $(document).ready(function() {
+    $('#btn-menu, .fade-screen, #btn-menu-close').on('click touchstart',
+        function(e) {
+          $('.nav--traditional, .fade-screen').toggleClass('is_visible');
+          e.preventDefault();
+        });
+
+    $('.slider-container__button--collapse').on('click touchstart',
+        function(e) {
+          'use strict';
+          $('.slider-container__text').toggleClass('is_hidden');
+          e.preventDefault();
+        });
+
+    $(window).scroll(function() {
+      var $y1 = $(window).height();
+      // Gives us top coordinate of window.
+
+      $('[data-scroll]').each(function() {
+        var $this = $(this);
+        // Just a convenience var assignment.
+
+        var thisY = this.getBoundingClientRect().top;
+        // Get the vertical position of 'element.'
+
+        var classNameArray = $this.data('scroll').split(' ');
+
+        jQuery.each(classNameArray, function(i, val) {
+          if (thisY <= $y1 && !$this.hasClass(val)) {
+            $this.addClass(val);
+          }
+        });
+      });
+    });
+  });`
+
+It's only breaking on 'gulp' lint when I switch things over to es6 syntax: `$(() => {})`
+<issue_comment>username_0: Ok, on that note, for testing purposes, I removed all the code, just copied/pasted main.js from repo (so no jquery), and I just have this:
+
+```
+let spit = document.querySelector('#btn-menu, .fade-screen, #btn-menu-close');
+  console.log(spit);
+```
+
+Now, I see this:
+
+gulp lint
+[08:41:40] Requiring external module babel-register
+[08:41:41] Using gulpfile ~/Sites/moco-ema/gulpfile.babel.js
+[08:41:41] Starting 'lint'...
+[08:41:41]
+app/scripts/main.js
+  75:4  error  Parsing error: The keyword 'let' is reserved
+
+✖ 1 problem (1 error, 0 warnings)
+
+[08:41:41] 'lint' errored after 330 ms
+[08:41:41] ESLintError in plugin 'gulp-eslint'
+Message:
+    Failed with 1 error
+<issue_comment>username_1: Search for the error from eslint on your favorite search engine. There are loads of existing articles and discussions around that and how to address it.<issue_closed>"
+facebook/docusaurus,1073846075,6067,,"[{'action': 'opened', 'author': 'fsmaia', 'comment_id': None, 'datetime': '2021-12-07 23:41:41+00:00', 'masked_author': 'username_0', 'text': ""### Have you read the Contributing Guidelines on issues?\n\n- [X] I have read the [Contributing Guidelines on issues](https://github.com/facebook/docusaurus/blob/main/CONTRIBUTING.md#reporting-new-issues).\n\n### Description\n\nCurrently, when a plugin/theme uses `addRoute` to register dynamic routes, these routes cannot be used in the sidebar. Besides, when accessing them directly, they have no wrapping layout (header/sidebar).\r\n\r\nAs we have an `autogenerated` sidebar item type, we could have a specific type to list all the sub-routes of a base route.\n\n### Has this been requested on Canny?\n\nhttps://docusaurus.io/feature-requests/p/allow-routes-generated-by-addroute-to-be-listed-in-the-plugin-content-docs-sideb\n\n### Motivation\n\nFor plugin developers, using `addRoute` is way more powerful than performing an `fs.createFileSync` with a raw template, due to the following reasons:\r\n* A React `component` may be used instead of a raw component generator\r\n* This React `component` may be a part of the theme, and also be swizzled or overridden\r\n* There is no need to manage generated files/folders\r\n\r\nThis resource would be extremely useful for producing API Reference, such as documenting all the React components in a project, or all the TS typings, in a extensible scalable way.\n\n### API design\n\nAdd a new `type` to [SidebarItemConfig](https://github.com/facebook/docusaurus/blob/main/packages/docusaurus-plugin-content-docs/src/sidebars/types.ts#L85) to list all the sub-routes within a route:\r\n\r\n```ts\r\nexport type SidebarItemRoutes = SidebarItemBase & {\r\n  type: 'routes';\r\n  label: string;\r\n  baseRoute: string;\r\n};\r\n```\r\n\r\nReal-life example:\r\n\r\nA custom plugin generating dynamic routes (simplified version):\r\n```ts\r\nasync contentLoaded({ content, actions }): Promise<void> {\r\n  components.forEach(async component => {\r\n    const componentData = await createData(`${component}.json`, JSON.stringify(component));\r\n\r\n    addRoute({\r\n      path: `/docs/react/${component.displayName}`,\r\n      component: '@theme/ReactComponent',\r\n       modules: {\r\n         data: componentData,\r\n       },\r\n    });\r\n  });\r\n});\r\n```\r\n\r\nA Docusaurus configuration:\r\n```ts\r\npresets: [\r\n  [\r\n    '@docusaurus/preset-classic',\r\n    /** @type {import('@docusaurus/preset-classic').Options} */\r\n    {\r\n      docs: {\r\n        sidebarPath: require.resolve('./sidebars.js'),\r\n      }\r\n    }\r\n  ]\r\n],\r\nplugins: [\r\n  [\r\n    'my-plugin',\r\n      {\r\n        src: ['../src/components/**'],\r\n        tsconfig: '../tsconfig.json',\r\n      },\r\n  ],\r\n],\r\n```\r\n\r\nAnd finally, a docusaurus sidebar configuration:\r\n```ts\r\nmodule.exports = {\r\n  sidebar: [\r\n    {\r\n      type: 'routes',\r\n      label: 'React components',\r\n      baseRoute: '/docs/react'\r\n    },\r\n];\r\n```\r\n\n\n### Have you tried building it?\n\nAs this affects `docusaurus-plugin-content-docs`, I'm afraid it can't be customized outside it.\r\n\r\nAlso it seems that `content-docs` has its own way to determine if a route should be wrapped by the layout or not.\n\n### Self-service\n\n- [X] I'd be willing to contribute this feature to Docusaurus myself."", 'title': 'Allow routes generated by addRoute to be listed in the plugin-content-docs sidebar', 'type': 'issue'}
+ {'action': 'created', 'author': 'Josh-Cena', 'comment_id': 988388976.0, 'datetime': '2021-12-08 00:50:43+00:00', 'masked_author': 'username_1', 'text': ""As a general rule, plugins work in isolation: isolation of data, isolation of routes (they shouldn't shadow/overlap with each other). I believe you should enhance the docs plugin instead if you find that you need to reuse a lot of the layout and data."", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'fsmaia', 'comment_id': 988394570.0, 'datetime': '2021-12-08 01:00:52+00:00', 'masked_author': 'username_0', 'text': ""Do you mean that the `docusaurus-plugin-content-docs` should still unaware of the routes, just physical files?\r\n\r\nAnd then the consumer plugin should find a way to register the sidebar entries, and also add `sidebar: 'sidebar'` to the `routes` manifest? Is it possible?"", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'Josh-Cena', 'comment_id': 988395638.0, 'datetime': '2021-12-08 01:02:53+00:00', 'masked_author': 'username_1', 'text': ""Yes, the docs plugin shouldn't know about anything outside the routes it generated by itself.\r\n\r\nTypically, we assume that each plugin renders its data without touching other plugins' data. So if you find yourself needing to generate extra data for the docs page to consume, you should enhance the plugin instead."", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'fsmaia', 'comment_id': 988405598.0, 'datetime': '2021-12-08 01:21:46+00:00', 'masked_author': 'username_0', 'text': ""Ok, big thanks for the clarification! I read the issue carefully and ran the project locally. But I still can't figure out how to inject the `sidebar` prop to the generated routes file. Could you help me?\r\n\r\nAnyway, we can close the issue."", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'Josh-Cena', 'comment_id': 988408277.0, 'datetime': '2021-12-08 01:26:24+00:00', 'masked_author': 'username_1', 'text': 'The sidebars data are loaded in the `loadContent` lifecycle, so if you managed to load all the data that you need, then you just need to add an extra `addRoute` call in the `contentLoaded` lifecycle. Have you checked the source code? The docs plugin is quite convoluted especially due to supporting versioning', 'title': None, 'type': 'comment'}
+ {'action': 'closed', 'author': 'Josh-Cena', 'comment_id': None, 'datetime': '2021-12-08 01:26:24+00:00', 'masked_author': 'username_1', 'text': '', 'title': None, 'type': 'issue'}
+ {'action': 'created', 'author': 'slorber', 'comment_id': 988982711.0, 'datetime': '2021-12-08 16:44:07+00:00', 'masked_author': 'username_2', 'text': ""The sidebar is a concept of the docs plugin. Even though the blog plugin also displays a sidebar, it's a totally different implementation. \r\n\r\nIf you implement your own plugin with a sidebar, you have 2 choices:\r\n- Create your own sidebar: a JSON tree that you can pass as a prop/data to your own UI. Eventually, you could re-use some existing theme components but be aware we may refactor them a bit.\r\n- Use or extend the docs plugin so that you have exactly the same UX as regular docs\r\n\r\nYou can leverage the docs plugin in 2 ways:\r\n- Have a build step, generate md files in `website/docs` folder at build time\r\n- Extend the docs plugin (quite hacky atm, see https://github.com/facebook/docusaurus/issues/4138#issuecomment-771042127) so that you can add/modify content of each docs version at your will (this may be complex)\r\n\r\nWe don't have a good public API for plugin extension so for now the best is to either implement your own UI or generate docs at build time.\r\n\r\nExample: https://github.com/tgreyuk/typedoc-plugin-markdown/tree/master/packages/docusaurus-plugin-typedoc"", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'fsmaia', 'comment_id': 989009377.0, 'datetime': '2021-12-08 17:15:15+00:00', 'masked_author': 'username_0', 'text': ""Thanks! After deep-diving into the code, this issue, and plugins, I realized these two choices.\r\n\r\nJust for curiosity, my actual contribution/ambition is to render docs for all the React components within a project:\r\nhttps://github.com/atomicpages/docusaurus-plugin-react-docgen-typescript/pull/7\r\n\r\nAfter all, it seems to me it's right to have a sidebar for each docgen tool (OpenAPI, Typedoc, react-docgen, etc), so I lost some interest in injecting routes into the sidebar.\r\n\r\nLast, but not least, I still think that the docs plugin should be route-based instead of file-based, but I'm sure there are several implications, such as it would break the complete isolation perspective."", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'slorber', 'comment_id': 989037226.0, 'datetime': '2021-12-08 17:50:14+00:00', 'masked_author': 'username_2', 'text': ""Not sure what you mean here. For now routes are only generated using the files of the docs folder, but in the future we'd like to provide an API so that you could fetch docs and sync with a CMS, the files wouldn't necessarily need to exist on disc as long as the CMS is able to provide md string and eventually some frontmatter"", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'fsmaia', 'comment_id': 989060220.0, 'datetime': '2021-12-08 18:21:16+00:00', 'masked_author': 'username_0', 'text': ""Actually, all the routes registered by `addRoute` will be present in the routes.js file, not just the docs one.\r\n\r\nAs of a common web application, every route is a candidate to be listed in the sidebar.\r\n\r\nHowever, if we think that the sidebar is exclusive to the docs plugin, then it doesn't make sense to list routes"", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'slorber', 'comment_id': 989104695.0, 'datetime': '2021-12-08 18:59:01+00:00', 'masked_author': 'username_2', 'text': ""I don't believe it's true. If you look at CMS-built site there's generally some kind of item category so that pages are tagged and appear in a menu, but nothing is automatic and has to be implemented."", 'title': None, 'type': 'comment'}]","<issue_start><issue_comment>Title: Allow routes generated by addRoute to be listed in the plugin-content-docs sidebar
+username_0: ### Have you read the Contributing Guidelines on issues?
+
+- [X] I have read the [Contributing Guidelines on issues](https://github.com/facebook/docusaurus/blob/main/CONTRIBUTING.md#reporting-new-issues).
+
+### Description
+
+Currently, when a plugin/theme uses `addRoute` to register dynamic routes, these routes cannot be used in the sidebar. Besides, when accessing them directly, they have no wrapping layout (header/sidebar).
+
+As we have an `autogenerated` sidebar item type, we could have a specific type to list all the sub-routes of a base route.
+
+### Has this been requested on Canny?
+
+https://docusaurus.io/feature-requests/p/allow-routes-generated-by-addroute-to-be-listed-in-the-plugin-content-docs-sideb
+
+### Motivation
+
+For plugin developers, using `addRoute` is way more powerful than performing an `fs.createFileSync` with a raw template, due to the following reasons:
+* A React `component` may be used instead of a raw component generator
+* This React `component` may be a part of the theme, and also be swizzled or overridden
+* There is no need to manage generated files/folders
+
+This resource would be extremely useful for producing API Reference, such as documenting all the React components in a project, or all the TS typings, in a extensible scalable way.
+
+### API design
+
+Add a new `type` to [SidebarItemConfig](https://github.com/facebook/docusaurus/blob/main/packages/docusaurus-plugin-content-docs/src/sidebars/types.ts#L85) to list all the sub-routes within a route:
+
+```ts
+export type SidebarItemRoutes = SidebarItemBase & {
+  type: 'routes';
+  label: string;
+  baseRoute: string;
+};
+```
+
+Real-life example:
+
+A custom plugin generating dynamic routes (simplified version):
+```ts
+async contentLoaded({ content, actions }): Promise<void> {
+  components.forEach(async component => {
+    const componentData = await createData(`${component}.json`, JSON.stringify(component));
+
+    addRoute({
+      path: `/docs/react/${component.displayName}`,
+      component: '@theme/ReactComponent',
+       modules: {
+         data: componentData,
+       },
+    });
+  });
+});
+```
+
+A Docusaurus configuration:
+```ts
+presets: [
+  [
+    '@docusaurus/preset-classic',
+    /** @type {import('@docusaurus/preset-classic').Options} */
+    {
+      docs: {
+        sidebarPath: require.resolve('./sidebars.js'),
+      }
+    }
+  ]
+],
+plugins: [
+  [
+    'my-plugin',
+      {
+        src: ['../src/components/**'],
+        tsconfig: '../tsconfig.json',
+      },
+  ],
+],
+```
+
+And finally, a docusaurus sidebar configuration:
+```ts
+module.exports = {
+  sidebar: [
+    {
+      type: 'routes',
+      label: 'React components',
+      baseRoute: '/docs/react'
+    },
+];
+```
+
+
+### Have you tried building it?
+
+As this affects `docusaurus-plugin-content-docs`, I'm afraid it can't be customized outside it.
+
+Also it seems that `content-docs` has its own way to determine if a route should be wrapped by the layout or not.
+
+### Self-service
+
+- [X] I'd be willing to contribute this feature to Docusaurus myself.
+<issue_comment>username_1: As a general rule, plugins work in isolation: isolation of data, isolation of routes (they shouldn't shadow/overlap with each other). I believe you should enhance the docs plugin instead if you find that you need to reuse a lot of the layout and data.
+<issue_comment>username_0: Do you mean that the `docusaurus-plugin-content-docs` should still unaware of the routes, just physical files?
+
+And then the consumer plugin should find a way to register the sidebar entries, and also add `sidebar: 'sidebar'` to the `routes` manifest? Is it possible?
+<issue_comment>username_1: Yes, the docs plugin shouldn't know about anything outside the routes it generated by itself.
+
+Typically, we assume that each plugin renders its data without touching other plugins' data. So if you find yourself needing to generate extra data for the docs page to consume, you should enhance the plugin instead.
+<issue_comment>username_0: Ok, big thanks for the clarification! I read the issue carefully and ran the project locally. But I still can't figure out how to inject the `sidebar` prop to the generated routes file. Could you help me?
+
+Anyway, we can close the issue.
+<issue_comment>username_1: The sidebars data are loaded in the `loadContent` lifecycle, so if you managed to load all the data that you need, then you just need to add an extra `addRoute` call in the `contentLoaded` lifecycle. Have you checked the source code? The docs plugin is quite convoluted especially due to supporting versioning<issue_closed>
+<issue_comment>username_2: The sidebar is a concept of the docs plugin. Even though the blog plugin also displays a sidebar, it's a totally different implementation. 
+
+If you implement your own plugin with a sidebar, you have 2 choices:
+- Create your own sidebar: a JSON tree that you can pass as a prop/data to your own UI. Eventually, you could re-use some existing theme components but be aware we may refactor them a bit.
+- Use or extend the docs plugin so that you have exactly the same UX as regular docs
+
+You can leverage the docs plugin in 2 ways:
+- Have a build step, generate md files in `website/docs` folder at build time
+- Extend the docs plugin (quite hacky atm, see https://github.com/facebook/docusaurus/issues/4138#issuecomment-771042127) so that you can add/modify content of each docs version at your will (this may be complex)
+
+We don't have a good public API for plugin extension so for now the best is to either implement your own UI or generate docs at build time.
+
+Example: https://github.com/tgreyuk/typedoc-plugin-markdown/tree/master/packages/docusaurus-plugin-typedoc
+<issue_comment>username_0: Thanks! After deep-diving into the code, this issue, and plugins, I realized these two choices.
+
+Just for curiosity, my actual contribution/ambition is to render docs for all the React components within a project:
+https://github.com/atomicpages/docusaurus-plugin-react-docgen-typescript/pull/7
+
+After all, it seems to me it's right to have a sidebar for each docgen tool (OpenAPI, Typedoc, react-docgen, etc), so I lost some interest in injecting routes into the sidebar.
+
+Last, but not least, I still think that the docs plugin should be route-based instead of file-based, but I'm sure there are several implications, such as it would break the complete isolation perspective.
+<issue_comment>username_2: Not sure what you mean here. For now routes are only generated using the files of the docs folder, but in the future we'd like to provide an API so that you could fetch docs and sync with a CMS, the files wouldn't necessarily need to exist on disc as long as the CMS is able to provide md string and eventually some frontmatter
+<issue_comment>username_0: Actually, all the routes registered by `addRoute` will be present in the routes.js file, not just the docs one.
+
+As of a common web application, every route is a candidate to be listed in the sidebar.
+
+However, if we think that the sidebar is exclusive to the docs plugin, then it doesn't make sense to list routes
+<issue_comment>username_2: I don't believe it's true. If you look at CMS-built site there's generally some kind of item category so that pages are tagged and appear in a menu, but nothing is automatic and has to be implemented."
+GDQuest/website,861754044,264,,"[{'action': 'opened', 'author': 'henriiquecampos', 'comment_id': None, 'datetime': '2021-04-19 19:24:03+00:00', 'masked_author': 'username_0', 'text': ""<!-- For support questions, please head over to our Discord server: https://discord.gg/CHYVgar. This repository's issues are for feature requests and bug reports. -->\r\n\r\n**I'm submitting a...**\r\n\r\n- [x] Bug report.\r\n- [ ] Feature request.\r\n\r\n## Bug report ##\r\n\r\n**What is the current behavior?**\r\n\r\nMost images on https://www.gdquest.com/docs/guidelines/style-guides/game-art/ are broken\r\n\r\n**What is the expected behavior?**\r\n\r\nImages should load properly.\r\n\r\n**Tell us the steps to reproduce the bug, and if possible share a minimal demo of the problem.**"", 'title': 'Fix Game Art style guide broken images', 'type': 'issue'}
+ {'action': 'created', 'author': 'chepecarlos', 'comment_id': 898658596.0, 'datetime': '2021-08-13 18:56:09+00:00', 'masked_author': 'username_1', 'text': 'Same in https://www.gdquest.com/docs/power-sequencer/', 'title': None, 'type': 'comment'}]","<issue_start><issue_comment>Title: Fix Game Art style guide broken images
+username_0: <!-- For support questions, please head over to our Discord server: https://discord.gg/CHYVgar. This repository's issues are for feature requests and bug reports. -->
+
+**I'm submitting a...**
+
+- [x] Bug report.
+- [ ] Feature request.
+
+## Bug report ##
+
+**What is the current behavior?**
+
+Most images on https://www.gdquest.com/docs/guidelines/style-guides/game-art/ are broken
+
+**What is the expected behavior?**
+
+Images should load properly.
+
+**Tell us the steps to reproduce the bug, and if possible share a minimal demo of the problem.**
+<issue_comment>username_1: Same in https://www.gdquest.com/docs/power-sequencer/"
+gohugoio/hugo,481242376,6225,,"[{'action': 'opened', 'author': 'julian-klode', 'comment_id': None, 'datetime': '2019-08-15 16:56:42+00:00', 'masked_author': 'username_0', 'text': 'I haven\'t built my blog in a while, but I\'m getting a ton of failures now and can\'t proceed:\r\n\r\nBuilding sites … WARN 2019/08/15 18:53:59 Unsupported symlink found in ""/home/jak/Projects/Stable/blog.jak-linux.org/themes/ernest/static/webfonts/fa-brands-400.ttf"", skipping.\r\nWARN 2019/08/15 18:53:59 Unsupported symlink found in ""/home/jak/Projects/Stable/blog.jak-linux.org/themes/ernest/static/webfonts/fa-brands-400.svg"", skipping.\r\nWARN 2019/08/15 18:53:59 Unsupported symlink found in ""/home/jak/Projects/Stable/blog.jak-linux.org/themes/ernest/static/webfonts/fa-brands-400.woff"", skipping.\r\nWARN 2019/08/15 18:53:59 Unsupported symlink found in ""/home/jak/Projects/Stable/blog.jak-linux.org/themes/ernest/static/webfonts/fa-brands-400.woff2"", skipping.\r\nWARN 2019/08/15 18:53:59 Unsupported symlink found in ""/home/jak/Projects/Stable/blog.jak-linux.org/themes/ernest/static/webfonts/fa-regular-400.eot"", skipping.\r\nWARN 2019/08/15 18:53:59 Unsupported symlink found in ""/home/jak/Projects/Stable/blog.jak-linux.org/themes/ernest/static/webfonts/fa-regular-400.svg"", skipping.\r\nWARN 2019/08/15 18:53:59 Unsupported symlink found in ""/home/jak/Projects/Stable/blog.jak-linux.org/themes/ernest/static/webfonts/fa-regular-400.ttf"", skipping.\r\nWARN 2019/08/15 18:53:59 Unsupported symlink found in ""/home/jak/Projects/Stable/blog.jak-linux.org/themes/ernest/static/webfonts/fa-regular-400.woff"", skipping.\r\nWARN 2019/08/15 18:53:59 Unsupported symlink found in ""/home/jak/Projects/Stable/blog.jak-linux.org/themes/ernest/static/webfonts/fa-regular-400.woff2"", skipping.\r\nWARN 2019/08/15 18:53:59 Unsupported symlink found in ""/home/jak/Projects/Stable/blog.jak-linux.org/themes/ernest/static/webfonts/fa-solid-900.eot"", skipping.\r\nWARN 2019/08/15 18:53:59 Unsupported symlink found in ""/home/jak/Projects/Stable/blog.jak-linux.org/themes/ernest/static/webfonts/fa-solid-900.svg"", skipping.\r\nWARN 2019/08/15 18:53:59 Unsupported symlink found in ""/home/jak/Projects/Stable/blog.jak-linux.org/themes/ernest/static/webfonts/fa-solid-900.ttf"", skipping.\r\nWARN 2019/08/15 18:53:59 Unsupported symlink found in ""/home/jak/Projects/Stable/blog.jak-linux.org/themes/ernest/static/webfonts/fa-solid-900.woff"", skipping.\r\nWARN 2019/08/15 18:53:59 Unsupported symlink found in ""/home/jak/Projects/Stable/blog.jak-linux.org/themes/ernest/static/webfonts/fa-solid-900.woff2"", skipping.\r\nWARN 2019/08/15 18:53:59 Unsupported symlink found in ""/home/jak/Projects/Stable/blog.jak-linux.org/themes/ernest/static/webfonts/fa-brands-400.eot"", skipping.\r\nERROR 2019/08/15 18:53:59 Failed to read Git log: fatal: unknown error occured while reading the configuration files\r\nERROR 2019/08/15 18:53:59 render of ""page"" failed: execute of template failed: template: _default/single.html:13:3: executing ""_default/single.html"" at <partial ""mastodon"" .>: error calling partial: ""/home/jak/Projects/Stable/blog.jak-linux.org/themes/ernest/layouts/partials/mastodon\r\n.html:23:23"": execute of template failed: template: partials/mastodon.html:23:23: executing ""partials/mastodon.html"" at <resources.Get>: error calling Get: symlinks not allowed in this filesystem\r\nERROR 2019/08/15 18:53:59 render of ""page"" failed: execute of template failed: template: _default/single.html:13:3: executing ""_default/single.html"" at <partial ""mastodon"" .>: error calling partial: ""/home/jak/Projects/Stable/blog.jak-linux.org/themes/ernest/layouts/partials/mastodon\r\n.html:23:23"": execute of template failed: template: partials/mastodon.html:23:23: executing ""partials/mastodon.html"" at <resources.Get>: error calling Get: symlinks not allowed in this filesystem\r\nERROR 2019/08/15 18:53:59 render of ""page"" failed: execute of template failed: template: _default/single.html:13:3: executing ""_default/single.html"" at <partial ""mastodon"" .>: error calling partial: ""/home/jak/Projects/Stable/blog.jak-linux.org/themes/ernest/layouts/partials/mastodon\r\n.html:23:23"": execute of template failed: template: partials/mastodon.html:23:23: executing ""partials/mastodon.html"" at <resources.Get>: error calling Get: symlinks not allowed in this filesystem\r\nERROR 2019/08/15 18:53:59 render of ""page"" failed: execute of template failed: template: _default/single.html:13:3: executing ""_default/single.html"" at <partial ""mastodon"" .>: error calling partial: ""/home/jak/Projects/Stable/blog.jak-linux.org/themes/ernest/layouts/partials/mastodon\r\n.html:23:23"": execute of template failed: template: partials/mastodon.html:23:23: executing ""partials/mastodon.html"" at <resources.Get>: error calling Get: symlinks not allowed in this filesystem\r\nTotal in 89 ms\r\nError: Error building site: failed to render pages: render of ""page"" failed: execute of template failed: template: _default/single.html:13:3: executing ""_default/single.html"" at <partial ""mastodon"" .>: error calling partial: ""/home/jak/Projects/Stable/blog.jak-linux.org/themes/ernest\r\n/layouts/partials/mastodon.html:23:23"": execute of template failed: template: partials/mastodon.html:23:23: executing ""partials/mastodon.html"" at <resources.Get>: error calling Get: symlinks not allowed in this filesystem\r\n\r\nThis used to work perfectly fine back in Jun 13.', 'title': 'Unsupported symlink found', 'type': 'issue'}
+ {'action': 'created', 'author': 'julian-klode', 'comment_id': 521715912.0, 'datetime': '2019-08-15 16:58:13+00:00', 'masked_author': 'username_0', 'text': ""It's https://github.com/username_0/blog.jak-linux.org, the theme is included as a submodule https://github.com/username_0/ernest/tree/20d409d466cd1a150b6affdf2c6d3c6bead96a76 and it contains various symlinks in static/webfonts (to link to the fonts gotten via npm).\r\n\r\nThese symlinks were resolved and then the real file put into the output as intended."", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'bep', 'comment_id': 521719185.0, 'datetime': '2019-08-15 17:08:11+00:00', 'masked_author': 'username_1', 'text': 'We stopped supported symlinks from themes in a recent release. Mostly for security reasons, but we also added a powerful directory mount support that should be possible to replace those symlinks in a more portable and easier to reason about manner.\r\n\r\nYou may want to ask further questions on https://discourse.gohugo.io/', 'title': None, 'type': 'comment'}
+ {'action': 'closed', 'author': 'bep', 'comment_id': None, 'datetime': '2019-08-15 17:08:11+00:00', 'masked_author': 'username_1', 'text': '', 'title': None, 'type': 'issue'}
+ {'action': 'created', 'author': 'ysqi', 'comment_id': 529118877.0, 'datetime': '2019-09-07 15:41:20+00:00', 'masked_author': 'username_2', 'text': ""@username_1 why don't give option, sometimes We known what we are doing."", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'Kernald', 'comment_id': 541641532.0, 'datetime': '2019-10-14 12:13:42+00:00', 'masked_author': 'username_3', 'text': 'This breaks the integration with some build systems that are relying on symlinks to sandbox the inputs (i.e. Bazel). This is not great :-(', 'title': None, 'type': 'comment'}]","<issue_start><issue_comment>Title: Unsupported symlink found
+username_0: I haven't built my blog in a while, but I'm getting a ton of failures now and can't proceed:
+
+Building sites … WARN 2019/08/15 18:53:59 Unsupported symlink found in ""/home/jak/Projects/Stable/blog.jak-linux.org/themes/ernest/static/webfonts/fa-brands-400.ttf"", skipping.
+WARN 2019/08/15 18:53:59 Unsupported symlink found in ""/home/jak/Projects/Stable/blog.jak-linux.org/themes/ernest/static/webfonts/fa-brands-400.svg"", skipping.
+WARN 2019/08/15 18:53:59 Unsupported symlink found in ""/home/jak/Projects/Stable/blog.jak-linux.org/themes/ernest/static/webfonts/fa-brands-400.woff"", skipping.
+WARN 2019/08/15 18:53:59 Unsupported symlink found in ""/home/jak/Projects/Stable/blog.jak-linux.org/themes/ernest/static/webfonts/fa-brands-400.woff2"", skipping.
+WARN 2019/08/15 18:53:59 Unsupported symlink found in ""/home/jak/Projects/Stable/blog.jak-linux.org/themes/ernest/static/webfonts/fa-regular-400.eot"", skipping.
+WARN 2019/08/15 18:53:59 Unsupported symlink found in ""/home/jak/Projects/Stable/blog.jak-linux.org/themes/ernest/static/webfonts/fa-regular-400.svg"", skipping.
+WARN 2019/08/15 18:53:59 Unsupported symlink found in ""/home/jak/Projects/Stable/blog.jak-linux.org/themes/ernest/static/webfonts/fa-regular-400.ttf"", skipping.
+WARN 2019/08/15 18:53:59 Unsupported symlink found in ""/home/jak/Projects/Stable/blog.jak-linux.org/themes/ernest/static/webfonts/fa-regular-400.woff"", skipping.
+WARN 2019/08/15 18:53:59 Unsupported symlink found in ""/home/jak/Projects/Stable/blog.jak-linux.org/themes/ernest/static/webfonts/fa-regular-400.woff2"", skipping.
+WARN 2019/08/15 18:53:59 Unsupported symlink found in ""/home/jak/Projects/Stable/blog.jak-linux.org/themes/ernest/static/webfonts/fa-solid-900.eot"", skipping.
+WARN 2019/08/15 18:53:59 Unsupported symlink found in ""/home/jak/Projects/Stable/blog.jak-linux.org/themes/ernest/static/webfonts/fa-solid-900.svg"", skipping.
+WARN 2019/08/15 18:53:59 Unsupported symlink found in ""/home/jak/Projects/Stable/blog.jak-linux.org/themes/ernest/static/webfonts/fa-solid-900.ttf"", skipping.
+WARN 2019/08/15 18:53:59 Unsupported symlink found in ""/home/jak/Projects/Stable/blog.jak-linux.org/themes/ernest/static/webfonts/fa-solid-900.woff"", skipping.
+WARN 2019/08/15 18:53:59 Unsupported symlink found in ""/home/jak/Projects/Stable/blog.jak-linux.org/themes/ernest/static/webfonts/fa-solid-900.woff2"", skipping.
+WARN 2019/08/15 18:53:59 Unsupported symlink found in ""/home/jak/Projects/Stable/blog.jak-linux.org/themes/ernest/static/webfonts/fa-brands-400.eot"", skipping.
+ERROR 2019/08/15 18:53:59 Failed to read Git log: fatal: unknown error occured while reading the configuration files
+ERROR 2019/08/15 18:53:59 render of ""page"" failed: execute of template failed: template: _default/single.html:13:3: executing ""_default/single.html"" at <partial ""mastodon"" .>: error calling partial: ""/home/jak/Projects/Stable/blog.jak-linux.org/themes/ernest/layouts/partials/mastodon
+.html:23:23"": execute of template failed: template: partials/mastodon.html:23:23: executing ""partials/mastodon.html"" at <resources.Get>: error calling Get: symlinks not allowed in this filesystem
+ERROR 2019/08/15 18:53:59 render of ""page"" failed: execute of template failed: template: _default/single.html:13:3: executing ""_default/single.html"" at <partial ""mastodon"" .>: error calling partial: ""/home/jak/Projects/Stable/blog.jak-linux.org/themes/ernest/layouts/partials/mastodon
+.html:23:23"": execute of template failed: template: partials/mastodon.html:23:23: executing ""partials/mastodon.html"" at <resources.Get>: error calling Get: symlinks not allowed in this filesystem
+ERROR 2019/08/15 18:53:59 render of ""page"" failed: execute of template failed: template: _default/single.html:13:3: executing ""_default/single.html"" at <partial ""mastodon"" .>: error calling partial: ""/home/jak/Projects/Stable/blog.jak-linux.org/themes/ernest/layouts/partials/mastodon
+.html:23:23"": execute of template failed: template: partials/mastodon.html:23:23: executing ""partials/mastodon.html"" at <resources.Get>: error calling Get: symlinks not allowed in this filesystem
+ERROR 2019/08/15 18:53:59 render of ""page"" failed: execute of template failed: template: _default/single.html:13:3: executing ""_default/single.html"" at <partial ""mastodon"" .>: error calling partial: ""/home/jak/Projects/Stable/blog.jak-linux.org/themes/ernest/layouts/partials/mastodon
+.html:23:23"": execute of template failed: template: partials/mastodon.html:23:23: executing ""partials/mastodon.html"" at <resources.Get>: error calling Get: symlinks not allowed in this filesystem
+Total in 89 ms
+Error: Error building site: failed to render pages: render of ""page"" failed: execute of template failed: template: _default/single.html:13:3: executing ""_default/single.html"" at <partial ""mastodon"" .>: error calling partial: ""/home/jak/Projects/Stable/blog.jak-linux.org/themes/ernest
+/layouts/partials/mastodon.html:23:23"": execute of template failed: template: partials/mastodon.html:23:23: executing ""partials/mastodon.html"" at <resources.Get>: error calling Get: symlinks not allowed in this filesystem
+
+This used to work perfectly fine back in Jun 13.
+<issue_comment>username_0: It's https://github.com/username_0/blog.jak-linux.org, the theme is included as a submodule https://github.com/username_0/ernest/tree/20d409d466cd1a150b6affdf2c6d3c6bead96a76 and it contains various symlinks in static/webfonts (to link to the fonts gotten via npm).
+
+These symlinks were resolved and then the real file put into the output as intended.
+<issue_comment>username_1: We stopped supported symlinks from themes in a recent release. Mostly for security reasons, but we also added a powerful directory mount support that should be possible to replace those symlinks in a more portable and easier to reason about manner.
+
+You may want to ask further questions on https://discourse.gohugo.io/<issue_closed>
+<issue_comment>username_2: @username_1 why don't give option, sometimes We known what we are doing.
+<issue_comment>username_3: This breaks the integration with some build systems that are relying on symlinks to sandbox the inputs (i.e. Bazel). This is not great :-("
+usegalaxy-eu/website,545312097,357,,"[{'action': 'opened', 'author': 'bgruening', 'comment_id': None, 'datetime': '2020-01-04 17:52:18+00:00', 'masked_author': 'username_0', 'text': '* we introduced the general webhook concept a few years back into galaxy\r\n* this has enabled custom modifications to Galaxy UI without changing Galaxy source code and make maintenance of those changes easier. It is a plugin concept for Galaxy UI.\r\n* this is what is powering the much loved XKCD or PhD comics for example - but this was just the first step ...\r\n* Today we are proud to introduce you an extension that helps our ecology community to train their machine learning model to classify bees into male and female\r\n* technical details how this works, what will be done with the data, how does it help, why is it good to help ... --> motivation\r\n* small paragraph about ""how to create new plugins of this kind"" ...\r\n* Adding some example images', 'title': 'Introduce the concept of Gamification on the bees example', 'type': 'issue'}
+ {'action': 'created', 'author': 'yvanlebras', 'comment_id': 570815288.0, 'datetime': '2020-01-04 20:04:31+00:00', 'masked_author': 'username_1', 'text': 'Wouhahou! Nice. MAybe I would propose ""to annotate existing datasets classifying hoverflies into male and female so this information can be used in further data treatment for example to train future machine learning models"" instead of ""to train their machine learning model to classify bees into male and female""\r\n\r\nI have to write something for the motivation part and come back to you', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'bgruening', 'comment_id': 570820030.0, 'datetime': '2020-01-04 21:06:30+00:00', 'masked_author': 'username_0', 'text': 'My list above was just ideas that could be in such an announcement. If you have time to generate a first pass, awesome.', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'bgruening', 'comment_id': 570821123.0, 'datetime': '2020-01-04 21:23:17+00:00', 'masked_author': 'username_0', 'text': 'This link should also be included I guess :) \r\nhttps://usegalaxy.eu/gapars-experiment/', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'beatrizserrano', 'comment_id': 570827913.0, 'datetime': '2020-01-04 23:12:01+00:00', 'masked_author': 'username_2', 'text': 'I have some minor suggestions:\r\n\r\n* Is the submit button really needed? Only picking the option could be enough to submit automatically.\r\n* I would replace ""Cannot See"" by ""Not sure"" because sometimes one can see but can\'t decide.\r\n* Mark the borders of the 5 options or perhaps just align the labels: at first I thought that there were only 3 options, I ignored completely ""Likely male"" and ""Likely female"". Not even sure if the ""Likely"" options are needed either, I hardly ever use them.\r\n\r\nIt\'s quite cool, thanks :)', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'yvanlebras', 'comment_id': 570830479.0, 'datetime': '2020-01-04 23:55:49+00:00', 'masked_author': 'username_1', 'text': 'Thank you ! Here is a first draft for a EU news https://github.com/galaxyecology/communication/blob/master/2020-01-galaxyeu-news/index.md', 'title': None, 'type': 'comment'}
+ {'action': 'closed', 'author': 'bgruening', 'comment_id': None, 'datetime': '2020-01-07 11:09:38+00:00', 'masked_author': 'username_0', 'text': '', 'title': None, 'type': 'issue'}]","<issue_start><issue_comment>Title: Introduce the concept of Gamification on the bees example
+username_0: * we introduced the general webhook concept a few years back into galaxy
+* this has enabled custom modifications to Galaxy UI without changing Galaxy source code and make maintenance of those changes easier. It is a plugin concept for Galaxy UI.
+* this is what is powering the much loved XKCD or PhD comics for example - but this was just the first step ...
+* Today we are proud to introduce you an extension that helps our ecology community to train their machine learning model to classify bees into male and female
+* technical details how this works, what will be done with the data, how does it help, why is it good to help ... --> motivation
+* small paragraph about ""how to create new plugins of this kind"" ...
+* Adding some example images
+<issue_comment>username_1: Wouhahou! Nice. MAybe I would propose ""to annotate existing datasets classifying hoverflies into male and female so this information can be used in further data treatment for example to train future machine learning models"" instead of ""to train their machine learning model to classify bees into male and female""
+
+I have to write something for the motivation part and come back to you
+<issue_comment>username_0: My list above was just ideas that could be in such an announcement. If you have time to generate a first pass, awesome.
+<issue_comment>username_0: This link should also be included I guess :) 
+https://usegalaxy.eu/gapars-experiment/
+<issue_comment>username_2: I have some minor suggestions:
+
+* Is the submit button really needed? Only picking the option could be enough to submit automatically.
+* I would replace ""Cannot See"" by ""Not sure"" because sometimes one can see but can't decide.
+* Mark the borders of the 5 options or perhaps just align the labels: at first I thought that there were only 3 options, I ignored completely ""Likely male"" and ""Likely female"". Not even sure if the ""Likely"" options are needed either, I hardly ever use them.
+
+It's quite cool, thanks :)
+<issue_comment>username_1: Thank you ! Here is a first draft for a EU news https://github.com/galaxyecology/communication/blob/master/2020-01-galaxyeu-news/index.md<issue_closed>"
+appveyor/website,125537108,114,,"[{'action': 'opened', 'author': 'joelself', 'comment_id': None, 'datetime': '2016-01-08 03:49:47+00:00', 'masked_author': 'username_0', 'text': 'The page Pushing to remote Git repository from a build: https://github.com/appveyor/website/blob/master/NJekyll/site/docs/how-to/git-push.md doesn\'t work. At the end of the build I get\r\n```shell\r\ngit config --global credential.helper store\r\nAdd-Content ""$env:USERPROFILE\\.git-credentials"" ""https://$($env:access_token):x-oauth-basic@github.com`n""\r\ngit config --global user.email ""lyhxr@example.com""\r\ngit config --global user.name ""First Last""\r\ngit commit ...\r\nfatal: Not a git repository (or any of the parent directories): .git\r\nCommand exited with code 128\r\n```', 'title': ""Pushing to remote Git repository from a build doesn't work"", 'type': 'issue'}
+ {'action': 'created', 'author': 'FeodorFitsner', 'comment_id': 169925250.0, 'datetime': '2016-01-08 07:57:09+00:00', 'masked_author': 'username_1', 'text': 'Could you please drop your appveyor.yml (with sensitive data removed)?', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'joelself', 'comment_id': 170011185.0, 'datetime': '2016-01-08 14:01:43+00:00', 'masked_author': 'username_0', 'text': '1. That\'s only a tiny snippet of an appveyor.yml (one that I got from your help page)\r\n2. It\'s from a public github project so it\'s all public and readily viewable anyways\r\n3. I did scrub the ""sensitive"" (public) data. My name isn\'t actually ""First Last"" and my email is not ""ychag@example.com""\r\n\r\nThe other than the fake name and email the rest is straight from the help doc.\r\n\r\nAlso I figured out how to fix it, though I don\'t know if it\'s the the really correct way to do it:\r\n\r\n```PowerShell\r\nenvironment:\r\n  access_token:\r\n    secure: cUFRT/gTMFUL6JvjnVcEZ89q3W2k7YQRtqfQhjlsZ6oigK3cyurRIl3QZBRl4Vgc\r\non_success:\r\n  - git config --global credential.helper store\r\n  - git config --global push.default matching\r\n  - ps: Add-Content ""$env:USERPROFILE\\.git-credentials"" ""https://$($env:access_token):x-oauth-basic@github.com`n""\r\n  - git config --global user.email ""envkt@example.com""\r\n  - git config --global user.name ""Not My Name""\r\n  - git add -A *.zip *.dll\r\n  - git commit -m ""Adding newly built binaries for release[ci skip]""\r\n  - git push origin\r\n```\r\nAnd yes the name, email and access_token are fake.', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'joelself', 'comment_id': 170045881.0, 'datetime': '2016-01-08 16:21:32+00:00', 'masked_author': 'username_0', 'text': ""Ok, I actually checked the repository and the files are all still a month old. It looks like it's succeeding, but where is it pushing to? Do I need to specify a custom checkout command and then in on_success add my repository as a remote and specifically push to the repository I added?"", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'FeodorFitsner', 'comment_id': 170138916.0, 'datetime': '2016-01-08 21:55:40+00:00', 'masked_author': 'username_1', 'text': 'Try calling `git status` after `git add` command to see what was added.', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'FeodorFitsner', 'comment_id': 170139115.0, 'datetime': '2016-01-08 21:56:33+00:00', 'masked_author': 'username_1', 'text': ""I'm just wondering why would you need pushing produced DLLs and executables back to repository?"", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'joelself', 'comment_id': 170139551.0, 'datetime': '2016-01-08 21:58:45+00:00', 'masked_author': 'username_0', 'text': ""That's where I was storing releases so people don't have to download and\nbuild the project from sources."", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'FeodorFitsner', 'comment_id': 170140161.0, 'datetime': '2016-01-08 22:01:51+00:00', 'masked_author': 'username_1', 'text': 'Why not pushing them to repository Releases then: http://www.appveyor.com/docs/deployment/github? This is a ""standard"" way of distributing releases.', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'joelself', 'comment_id': 170140887.0, 'datetime': '2016-01-08 22:05:19+00:00', 'masked_author': 'username_0', 'text': ""Yeah that's what I do now."", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'XhmikosR', 'comment_id': 276960169.0, 'datetime': '2017-02-02 13:43:25+00:00', 'masked_author': 'username_2', 'text': ""@username_1: can we close this since it's not related to the website?"", 'title': None, 'type': 'comment'}
+ {'action': 'closed', 'author': 'FeodorFitsner', 'comment_id': None, 'datetime': '2017-02-02 18:33:32+00:00', 'masked_author': 'username_1', 'text': '', 'title': None, 'type': 'issue'}]","<issue_start><issue_comment>Title: Pushing to remote Git repository from a build doesn't work
+username_0: The page Pushing to remote Git repository from a build: https://github.com/appveyor/website/blob/master/NJekyll/site/docs/how-to/git-push.md doesn't work. At the end of the build I get
+```shell
+git config --global credential.helper store
+Add-Content ""$env:USERPROFILE\.git-credentials"" ""https://$($env:access_token):x-oauth-basic@github.com`n""
+git config --global user.email ""name@emailprovider.com""
+git config --global user.name ""First Last""
+git commit ...
+fatal: Not a git repository (or any of the parent directories): .git
+Command exited with code 128
+```
+<issue_comment>username_1: Could you please drop your appveyor.yml (with sensitive data removed)?
+<issue_comment>username_0: 1. That's only a tiny snippet of an appveyor.yml (one that I got from your help page)
+2. It's from a public github project so it's all public and readily viewable anyways
+3. I did scrub the ""sensitive"" (public) data. My name isn't actually ""First Last"" and my email is not ""name@emailprovider.com""
+
+The other than the fake name and email the rest is straight from the help doc.
+
+Also I figured out how to fix it, though I don't know if it's the the really correct way to do it:
+
+```PowerShell
+environment:
+  access_token:
+    secure: cUFRT/gTMFUL6JvjnVcEZ89q3W2k7YQRtqfQhjlsZ6oigK3cyurRIl3QZBRl4Vgc
+on_success:
+  - git config --global credential.helper store
+  - git config --global push.default matching
+  - ps: Add-Content ""$env:USERPROFILE\.git-credentials"" ""https://$($env:access_token):x-oauth-basic@github.com`n""
+  - git config --global user.email ""notareal@emailprovider.com""
+  - git config --global user.name ""Not My Name""
+  - git add -A *.zip *.dll
+  - git commit -m ""Adding newly built binaries for release[ci skip]""
+  - git push origin
+```
+And yes the name, email and access_token are fake.
+<issue_comment>username_0: Ok, I actually checked the repository and the files are all still a month old. It looks like it's succeeding, but where is it pushing to? Do I need to specify a custom checkout command and then in on_success add my repository as a remote and specifically push to the repository I added?
+<issue_comment>username_1: Try calling `git status` after `git add` command to see what was added.
+<issue_comment>username_1: I'm just wondering why would you need pushing produced DLLs and executables back to repository?
+<issue_comment>username_0: That's where I was storing releases so people don't have to download and
+build the project from sources.
+<issue_comment>username_1: Why not pushing them to repository Releases then: http://www.appveyor.com/docs/deployment/github? This is a ""standard"" way of distributing releases.
+<issue_comment>username_0: Yeah that's what I do now.
+<issue_comment>username_2: @username_1: can we close this since it's not related to the website?<issue_closed>"
+daattali/beautiful-jekyll,311830324,341,"{'number': 341.0, 'repo': 'beautiful-jekyll', 'user_login': 'daattali'}","[{'action': 'opened', 'author': 'atmosmaciel', 'comment_id': None, 'datetime': '2018-04-06T02:34:06Z', 'masked_author': 'username_0', 'text': ""I've added a simple scroll button to the top, inside the framework to improve user navigation on articles and other pages."", 'title': 'adding scroll to top in structure', 'type': 'issue'}
+ {'action': 'created', 'author': 'daattali', 'comment_id': 379133067.0, 'datetime': '2018-04-06 02:43:17+00:00', 'masked_author': 'username_1', 'text': ""Thanks for the PR, I appreciate it. Before adding any feature to beautiful jekyll I make sure it's extremely robust and works on different environments. I have very strict standards for accepting new features because this theme is used by so many people unfortunately.\r\n\r\nI tested this feature on your website briefly and noted it has some UI/UX issues: When I'm on mobile, after clicking on it once the arrow gets stuck at the up position. On my desktop if I make the window narrow and scroll all the way down, the up button is not clickable anymore. This should be a customizable feature that should have a setting in the config file. The arrow isn't centered vertically. After clicking on the arrow, while the page is scrolling up, the background of the circle flickers.\r\n\r\nIf you can address all these issues and make sure the UX with this button is excellent then I'll be happy to accept the PR!"", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'atmosmaciel', 'comment_id': 379235588.0, 'datetime': '2018-04-06 12:16:18+00:00', 'masked_author': 'username_0', 'text': ""Hi! Thanks for the feedback, the animations were purposeful, but really recognize that they are not usable from UX's point of view. I apologize for not having done all the necessary tests and will make the correct corrections of this feature as soon as possible. Thanks again for your patience and observations."", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'atmosmaciel', 'comment_id': 379518218.0, 'datetime': '2018-04-08 03:57:46+00:00', 'masked_author': 'username_0', 'text': 'The code writing got bigger, but I think the adjustments were better applied now. When the user is rolling the page the arrow will fade to lose focus and only when triggered will focus again. The configuration option in ```_config.yml``` has also been added to make this setting optional. The functionality now is also responsive.', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'daattali', 'comment_id': 625076111.0, 'datetime': '2020-05-07 07:17:12+00:00', 'masked_author': 'username_1', 'text': ""@atmosmps I really appreciate your PR. I try to be very mindful of feature creep in order not to bloat the codebase too much, and this seems like it's adding a lot of code to maintain for a relatively small feature. If there was an elegant solution that was very lightweight I would consider it, but I prefer not to add this much code. I do appreciate your energy here"", 'title': None, 'type': 'comment'}]","<issue_start><issue_comment>Title: adding scroll to top in structure
+username_0: I've added a simple scroll button to the top, inside the framework to improve user navigation on articles and other pages.
+<issue_comment>username_1: Thanks for the PR, I appreciate it. Before adding any feature to beautiful jekyll I make sure it's extremely robust and works on different environments. I have very strict standards for accepting new features because this theme is used by so many people unfortunately.
+
+I tested this feature on your website briefly and noted it has some UI/UX issues: When I'm on mobile, after clicking on it once the arrow gets stuck at the up position. On my desktop if I make the window narrow and scroll all the way down, the up button is not clickable anymore. This should be a customizable feature that should have a setting in the config file. The arrow isn't centered vertically. After clicking on the arrow, while the page is scrolling up, the background of the circle flickers.
+
+If you can address all these issues and make sure the UX with this button is excellent then I'll be happy to accept the PR!
+<issue_comment>username_0: Hi! Thanks for the feedback, the animations were purposeful, but really recognize that they are not usable from UX's point of view. I apologize for not having done all the necessary tests and will make the correct corrections of this feature as soon as possible. Thanks again for your patience and observations.
+<issue_comment>username_0: The code writing got bigger, but I think the adjustments were better applied now. When the user is rolling the page the arrow will fade to lose focus and only when triggered will focus again. The configuration option in ```_config.yml``` has also been added to make this setting optional. The functionality now is also responsive.
+<issue_comment>username_1: @atmosmps I really appreciate your PR. I try to be very mindful of feature creep in order not to bloat the codebase too much, and this seems like it's adding a lot of code to maintain for a relatively small feature. If there was an elegant solution that was very lightweight I would consider it, but I prefer not to add this much code. I do appreciate your energy here"

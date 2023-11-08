@@ -1,0 +1,386 @@
+kubernetes/website,477145287,15686,,"[{'action': 'opened', 'author': 'dkumbhar', 'comment_id': None, 'datetime': '2019-08-06 03:05:42+00:00', 'masked_author': 'username_0', 'text': '**This is a Bug Report**\r\nUnable to start minikube on Windows 10\r\n\r\n<!--Required Information-->\r\n**Problem:**\r\nminikube start     * minikube v1.2.0 on windows (amd64)\r\n* Creating virtualbox VM (CPUs=2, Memory=2048MB, Disk=20000MB) ...\r\nE0805 21:45:37.280907   22032 start.go:559] StartHost: create: precreate: VBoxManage not found. Make sure VirtualBox is installed and VBoxManage is in the path\r\n\r\nX Unable to start VM\r\n* Error:         [VBOX_NOT_FOUND] create: precreate: VBoxManage not found. Make sure VirtualBox is installed and VBoxManage is in the path\r\n* Advice:        Install VirtualBox, ensure that VBoxManage is executable and in path, or select an alternative value for --vm-driver\r\n* Documentation: https://www.virtualbox.org/wiki/Downloads\r\n* Related issues:\r\n  - https://github.com/kubernetes/minikube/issues/3784\r\n  - https://github.com/kubernetes/minikube/issues/3776\r\n\r\n* If the above advice does not help, please let us know:\r\n  - https://github.com/kubernetes/minikube/issues/new\r\nPS C:\\Program Files\\Git\\mingw64\\bin> minikube start --vm-driver=VirtualBox                                              * minikube v1.2.0 on windows (amd64)\r\n* Creating VirtualBox VM (CPUs=2, Memory=2048MB, Disk=20000MB) ...\r\n* unsupported driver: VirtualBox\r\n\r\n**Proposed Solution:**\r\nGo to ""Hyper-V Manager"" in Windows. (Search from TaskBar)\r\nOnce in Hyper-V Manager go to ""Virtual Switch Manager"" on right panel\r\nSelect ""New Virtual Network switch""\r\nSelect ""External"" for Network Type\r\nSelect Create Virtual Switch (name the switch ""Primary Virtual Switch"")\r\nClick Apply the OK\r\n\r\nAfter that open Powershell as admin (I got error with cmd) and run command:\r\n\r\nminikube start --vm-driver hyperv --hyperv-virtual-switch ""Primary Virtual Switch""\r\n\r\nAfter that you just run: minikube start\r\n\r\nTo check that all is in order run:\r\nminikube status\r\nminikube ip\r\n\r\nMain Reference: https://medium.com/@JockDaRock/minikube-on-windows-10-with-hyper-v-6ef0f4dc158c\r\n\r\n**Page to Update:**\r\nhttps://kubernetes.io/docs/tasks/tools/install-minikube/\r\n\r\n<!--Optional Information (remove the comment tags around information you would like to include)-->\r\n<!--Kubernetes Version:-->\r\nv1.2.0\r\n<!--Additional Information:-->\r\nUpdate the Document to help windows 10 users install minikube correctly', 'title': 'Issue with k8s.io/docs/tasks/tools/install-minikube/', 'type': 'issue'}
+ {'action': 'created', 'author': 'juandiegopalomino', 'comment_id': 518513237.0, 'datetime': '2019-08-06 05:51:02+00:00', 'masked_author': 'username_1', 'text': '/sig windows', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'juandiegopalomino', 'comment_id': 518513571.0, 'datetime': '2019-08-06 05:52:11+00:00', 'masked_author': 'username_1', 'text': '/triage support', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'RA489', 'comment_id': 518517509.0, 'datetime': '2019-08-06 06:05:46+00:00', 'masked_author': 'username_2', 'text': '/assign @username_2', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'RA489', 'comment_id': 518522518.0, 'datetime': '2019-08-06 06:24:14+00:00', 'masked_author': 'username_2', 'text': '@username_0 IIUC are trying to install minikube with hyperv as vm-driver without virtualbox right?', 'title': None, 'type': 'comment'}]","<issue_start><issue_comment>Title: Issue with k8s.io/docs/tasks/tools/install-minikube/
+username_0: **This is a Bug Report**
+Unable to start minikube on Windows 10
+
+<!--Required Information-->
+**Problem:**
+minikube start     * minikube v1.2.0 on windows (amd64)
+* Creating virtualbox VM (CPUs=2, Memory=2048MB, Disk=20000MB) ...
+E0805 21:45:37.280907   22032 start.go:559] StartHost: create: precreate: VBoxManage not found. Make sure VirtualBox is installed and VBoxManage is in the path
+
+X Unable to start VM
+* Error:         [VBOX_NOT_FOUND] create: precreate: VBoxManage not found. Make sure VirtualBox is installed and VBoxManage is in the path
+* Advice:        Install VirtualBox, ensure that VBoxManage is executable and in path, or select an alternative value for --vm-driver
+* Documentation: https://www.virtualbox.org/wiki/Downloads
+* Related issues:
+  - https://github.com/kubernetes/minikube/issues/3784
+  - https://github.com/kubernetes/minikube/issues/3776
+
+* If the above advice does not help, please let us know:
+  - https://github.com/kubernetes/minikube/issues/new
+PS C:\Program Files\Git\mingw64\bin> minikube start --vm-driver=VirtualBox                                              * minikube v1.2.0 on windows (amd64)
+* Creating VirtualBox VM (CPUs=2, Memory=2048MB, Disk=20000MB) ...
+* unsupported driver: VirtualBox
+
+**Proposed Solution:**
+Go to ""Hyper-V Manager"" in Windows. (Search from TaskBar)
+Once in Hyper-V Manager go to ""Virtual Switch Manager"" on right panel
+Select ""New Virtual Network switch""
+Select ""External"" for Network Type
+Select Create Virtual Switch (name the switch ""Primary Virtual Switch"")
+Click Apply the OK
+
+After that open Powershell as admin (I got error with cmd) and run command:
+
+minikube start --vm-driver hyperv --hyperv-virtual-switch ""Primary Virtual Switch""
+
+After that you just run: minikube start
+
+To check that all is in order run:
+minikube status
+minikube ip
+
+Main Reference: https://medium.com/@JockDaRock/minikube-on-windows-10-with-hyper-v-6ef0f4dc158c
+
+**Page to Update:**
+https://kubernetes.io/docs/tasks/tools/install-minikube/
+
+<!--Optional Information (remove the comment tags around information you would like to include)-->
+<!--Kubernetes Version:-->
+v1.2.0
+<!--Additional Information:-->
+Update the Document to help windows 10 users install minikube correctly
+<issue_comment>username_1: /sig windows
+<issue_comment>username_1: /triage support
+<issue_comment>username_2: /assign @username_2
+<issue_comment>username_2: @username_0 IIUC are trying to install minikube with hyperv as vm-driver without virtualbox right?"
+eduardoboucas/staticman,248432625,130,,"[{'action': 'opened', 'author': 'SidVal', 'comment_id': None, 'datetime': '2017-08-07 14:40:03+00:00', 'masked_author': 'username_0', 'text': ""Hello, can someone tell me what's `GITHUB_READING_FILE`'s error about?"", 'title': 'GITHUB_READING_FILE', 'type': 'issue'}
+ {'action': 'created', 'author': 'Shywim', 'comment_id': 320989453.0, 'datetime': '2017-08-08 15:20:50+00:00', 'masked_author': 'username_1', 'text': ""It means that staticman can't get infos from your repository or read the staticman file. I bangged my head against the wall for a whole afternoon with this error, only to find out that I named my staticman file `staticman.yaml` instead of `staticman.yml`...\r\n\r\nSo check if the repository name you give to staticman is correct and that your staticman is properly named in your repository root."", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'radekkozak', 'comment_id': 325103315.0, 'datetime': '2017-08-26 08:39:13+00:00', 'masked_author': 'username_2', 'text': ""Think i'm stumbled on same weird error as @username_0 . Definitely have properly named `staticman.yml` config file. Not sure what this can mean. Looking at the code doesn't say much really \r\n\r\nhttps://github.com/username_5/staticman/blob/018166e23b31d41f6ea2139db53e11bbd0c6ff56/lib/GitHub.js#L72\r\n\r\nRepository name i gave staticman is definitely correct.\r\n\r\nMy repo is private as i'm trying to configure commenting system with staticman. Does it make any difference ? @username_5 \r\n\r\nDoes staticman works with private repos ? Anynone else had this error and worked it out ?"", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'radekkozak', 'comment_id': 325108656.0, 'datetime': '2017-08-26 09:42:41+00:00', 'masked_author': 'username_2', 'text': 'Ok somehow i got this working, still not sure what was wrong though. Nothing changed whatsoever in my files. This error seems little erratical...', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'mdxprograms', 'comment_id': 326116057.0, 'datetime': '2017-08-30 20:53:05+00:00', 'masked_author': 'username_3', 'text': ""I'm getting the same issue.\r\nNow I'm also getting `MISSING_CONFIG_FIELDS` but they are in my staticman.yml file"", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'SidVal', 'comment_id': 326283836.0, 'datetime': '2017-08-31 12:43:37+00:00', 'masked_author': 'username_0', 'text': ""@username_3, tell us your url's repo to check :+1:"", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'mdxprograms', 'comment_id': 327347025.0, 'datetime': '2017-09-06 01:21:17+00:00', 'masked_author': 'username_3', 'text': ""It turned out that I wasn't adding the right data endpoint. For example: `username_3/myrepo/articles`\r\n\r\nI was leaving off the `articles` portion."", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'luciano-fiandesio', 'comment_id': 331488669.0, 'datetime': '2017-09-22 16:01:58+00:00', 'masked_author': 'username_4', 'text': 'Hello, same issue here.\r\n\r\nThis is the url I\'m trying to hit: https://api.staticman.net/v2/entry/username_4/fiandes.io/master/comments\r\n\r\n    fields[message] = demo\r\n    fields[email] = upchh@example.com\r\n    fields[name] = John Doe\r\n    options[slug] = test-123\r\n\r\nThis is the result:\r\n\r\n```\r\nHTTP/1.1 500 Internal Server Error\r\nDate: Fri, 22 Sep 2017 15:58:13 GMT\r\nContent-Type: application/json; charset=utf-8\r\nContent-Length: 51\r\nConnection: close\r\nX-Powered-By: Express\r\nAccess-Control-Allow-Origin: *\r\nAccess-Control-Allow-Headers: Origin, X-Requested-With, Content-Type, Accept\r\nEtag: W/""33-i4+RJ7x588v8656SUbVUL0OJ1k4""\r\nVia: 1.1 vegur\r\nServer: cloudflare-nginx\r\nCF-RAY: 3a2676e358f42d7d-TXL\r\n\r\n{""success"":false,""errorCode"":""GITHUB_READING_FILE""}\r\n```\r\nAnything else I can try to debug the problem?', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'eduardoboucas', 'comment_id': 331618640.0, 'datetime': '2017-09-23 08:04:25+00:00', 'masked_author': 'username_5', 'text': ""@username_4 You're trying to use the `v2` endpoint, which requires a `staticman.yml` config file, and yet you're still using a `_config.yml` file for Staticman config. Check [here](https://github.com/username_5/staticman/blob/master/staticman.sample.yml) for a sample config file compatible with `v2` endpoints."", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'luciano-fiandesio', 'comment_id': 331618974.0, 'datetime': '2017-09-23 08:10:59+00:00', 'masked_author': 'username_4', 'text': '@username_5 no, I\'m not. I\'m using a `staticman.yml` file. \r\n\r\n```\r\ncomments:\r\n  allowedFields          : [\'name\', \'email\', \'replying_to\', \'url\', origin\', \'slug\', \'message\']\r\n#  requiredFields         : [\'name\', \'email\', \'origin\', \'slug\', \'message\']\r\n  requiredFields         : [\'name\', \'email\', \'message\']\r\n  allowedOrigins         : [""localhost"", ""fiandes.io"", ""www.fiandes.io"", ""lucianofiandesio.com"", ""www.lucianofiandesio.com""]\r\n  branch                 : ""master""\r\n  commitMessage          : ""New comment. QUICK, go LOOK!""\r\n  filename               : comment-{@timestamp}\r\n  name                   : ""Fiandes . io""\r\n  format                 : ""yaml""\r\n  moderation             : true\r\n  path                   : ""_data/comments/{options.slug}"" # ""_data/comments/{options.slug}"" (default)\r\n  # with Mailgun, which you can get for free at http://mailgun.com.\r\n  # https://mademistakes.com/articles/improving-jekyll-static-comments/\r\n  notifications:\r\n    enabled: false\r\n    #fromAddress: ""Thank You <nnheo@example.com>""\r\n    # To encrypt those, you can use the following endpoint: https://api.staticman.net/v2/encrypt/{TEXT TO BE ENCRYPTED}\r\n    # Mailgun API key (encrypted)\r\n    #apiKey: ""9q3vfhm7l33rus21toc8fndupq76itje""\r\n    # Mailgun domain (encrypted)\r\n    #domain: ""kgfhvu9qnh3mr6eel97y6fq2hezzol8z""\r\n  transforms:\r\n    email                : ""md5""\r\n  reCaptcha:\r\n    enabled: false\r\n  #  siteKey: ""kgfhvu9qnh3mr6eel97y6fq2hezzol8z""\r\n  #  secret: ""949d1u22cbffbrarjh182eig55721odj""\r\n  generatedFields:\r\n    date:\r\n      type               : ""date""\r\n      options:\r\n        format           : ""timestamp-seconds"" # ""iso8601"" (default), ""timestamp-seconds"", ""timestamp-milliseconds""\r\n```', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'eduardoboucas', 'comment_id': 331619091.0, 'datetime': '2017-09-23 08:13:38+00:00', 'masked_author': 'username_5', 'text': ""@username_4 I don't see that file in your repo, though (https://github.com/username_4/fiandes.io), and so won't Staticman."", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'luciano-fiandesio', 'comment_id': 331619239.0, 'datetime': '2017-09-23 08:16:34+00:00', 'masked_author': 'username_4', 'text': ""@username_5 the file is in a branch that is not committed yet, I'm testing from my local machine. The `master` branch doesn't have comments enabled.\r\nI'm looking at your code, and it would be great if you could log the actual error:\r\n\r\nhttps://github.com/username_5/staticman/blob/018166e23b31d41f6ea2139db53e11bbd0c6ff56/lib/GitHub.js#L72\r\n\r\nIf I have time later, I'll send you a push request."", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'eduardoboucas', 'comment_id': 331619319.0, 'datetime': '2017-09-23 08:18:01+00:00', 'masked_author': 'username_5', 'text': ""If the file is in your local machine, Staticman won't be able to read it. It looks at your repo in whatever branch you tell it to (in your case, `master`)."", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'Bira-oliverio', 'comment_id': 337627649.0, 'datetime': '2017-10-18 15:21:15+00:00', 'masked_author': 'username_6', 'text': 'Same issue here, I already checked the staticman.yml file and all configurations of the Minimal Mistakes theme and the error persists. My repository is https://github.com/username_6/bira.xyz', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'Wqrld', 'comment_id': 375899928.0, 'datetime': '2018-03-24 15:46:04+00:00', 'masked_author': 'username_7', 'text': 'same problem, \r\nstaticman.yml: https://hastebin.com/azicototav.bash\r\ni have a comments folder in my _data folder in my project root', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'gkappler', 'comment_id': 618960702.0, 'datetime': '2020-04-24 11:40:23+00:00', 'masked_author': 'username_8', 'text': 'I am using github pages in a docs folder. So staticman.yml is in the docs folder too.  Can I configure staticman on heroku to use the `docs` folder?', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'SidVal', 'comment_id': 619403260.0, 'datetime': '2020-04-25 16:15:15+00:00', 'masked_author': 'username_0', 'text': 'I think you should open this issue such a new it.', 'title': None, 'type': 'comment'}]","<issue_start><issue_comment>Title: GITHUB_READING_FILE
+username_0: Hello, can someone tell me what's `GITHUB_READING_FILE`'s error about?
+<issue_comment>username_1: It means that staticman can't get infos from your repository or read the staticman file. I bangged my head against the wall for a whole afternoon with this error, only to find out that I named my staticman file `staticman.yaml` instead of `staticman.yml`...
+
+So check if the repository name you give to staticman is correct and that your staticman is properly named in your repository root.
+<issue_comment>username_2: Think i'm stumbled on same weird error as @username_0 . Definitely have properly named `staticman.yml` config file. Not sure what this can mean. Looking at the code doesn't say much really 
+
+https://github.com/username_5/staticman/blob/018166e23b31d41f6ea2139db53e11bbd0c6ff56/lib/GitHub.js#L72
+
+Repository name i gave staticman is definitely correct.
+
+My repo is private as i'm trying to configure commenting system with staticman. Does it make any difference ? @username_5 
+
+Does staticman works with private repos ? Anynone else had this error and worked it out ?
+<issue_comment>username_2: Ok somehow i got this working, still not sure what was wrong though. Nothing changed whatsoever in my files. This error seems little erratical...
+<issue_comment>username_3: I'm getting the same issue.
+Now I'm also getting `MISSING_CONFIG_FIELDS` but they are in my staticman.yml file
+<issue_comment>username_0: @username_3, tell us your url's repo to check :+1:
+<issue_comment>username_3: It turned out that I wasn't adding the right data endpoint. For example: `username_3/myrepo/articles`
+
+I was leaving off the `articles` portion.
+<issue_comment>username_4: Hello, same issue here.
+
+This is the url I'm trying to hit: https://api.staticman.net/v2/entry/username_4/fiandes.io/master/comments
+
+    fields[message] = demo
+    fields[email] = test@gmail.com
+    fields[name] = John Doe
+    options[slug] = test-123
+
+This is the result:
+
+```
+HTTP/1.1 500 Internal Server Error
+Date: Fri, 22 Sep 2017 15:58:13 GMT
+Content-Type: application/json; charset=utf-8
+Content-Length: 51
+Connection: close
+X-Powered-By: Express
+Access-Control-Allow-Origin: *
+Access-Control-Allow-Headers: Origin, X-Requested-With, Content-Type, Accept
+Etag: W/""33-i4+RJ7x588v8656SUbVUL0OJ1k4""
+Via: 1.1 vegur
+Server: cloudflare-nginx
+CF-RAY: 3a2676e358f42d7d-TXL
+
+{""success"":false,""errorCode"":""GITHUB_READING_FILE""}
+```
+Anything else I can try to debug the problem?
+<issue_comment>username_5: @username_4 You're trying to use the `v2` endpoint, which requires a `staticman.yml` config file, and yet you're still using a `_config.yml` file for Staticman config. Check [here](https://github.com/username_5/staticman/blob/master/staticman.sample.yml) for a sample config file compatible with `v2` endpoints.
+<issue_comment>username_4: @username_5 no, I'm not. I'm using a `staticman.yml` file. 
+
+```
+comments:
+  allowedFields          : ['name', 'email', 'replying_to', 'url', origin', 'slug', 'message']
+#  requiredFields         : ['name', 'email', 'origin', 'slug', 'message']
+  requiredFields         : ['name', 'email', 'message']
+  allowedOrigins         : [""localhost"", ""fiandes.io"", ""www.fiandes.io"", ""lucianofiandesio.com"", ""www.lucianofiandesio.com""]
+  branch                 : ""master""
+  commitMessage          : ""New comment. QUICK, go LOOK!""
+  filename               : comment-{@timestamp}
+  name                   : ""Fiandes . io""
+  format                 : ""yaml""
+  moderation             : true
+  path                   : ""_data/comments/{options.slug}"" # ""_data/comments/{options.slug}"" (default)
+  # with Mailgun, which you can get for free at http://mailgun.com.
+  # https://mademistakes.com/articles/improving-jekyll-static-comments/
+  notifications:
+    enabled: false
+    #fromAddress: ""Thank You <no-reply@fiandes.io>""
+    # To encrypt those, you can use the following endpoint: https://api.staticman.net/v2/encrypt/{TEXT TO BE ENCRYPTED}
+    # Mailgun API key (encrypted)
+    #apiKey: ""co8CkQak02QXbz8qXRwGouCJ5Rxr50pmMjpNaEFgfOgrvi3vqWoPsi9tjTl/9VIG6j3FD6WbsLeevZLf6dRazdUED0/FR8kpi7METcef+cYuIcxu7Df2rnUGpyAIEGqRBNhJeMo+KS4kNqxup4vCWDnJyoM3QyUqTjv4qZdMVLM=""
+    # Mailgun domain (encrypted)
+    #domain: ""Ssoke2LtfZ62Sy3TFmStaOLcvFUzLAiUeHm+UxTuSSvPu/1b/Cgf3F2l1xopzWpBgAK4lRa7C+BMLXNEmYAH5aKQibe8TXt9yf3b9a5GUcKkh3kjcpODZvMMAAtaKf6D5POrPwcGi4lfXWFyGSuN1op5KSjYi4gAGJ0SONLJnY0=""
+  transforms:
+    email                : ""md5""
+  reCaptcha:
+    enabled: false
+  #  siteKey: ""6Lfj9ysUAAAAAOWg3kjG9nsoDgJpZBo7PhxAMh1c""
+  #  secret: ""jlq9b/ZJ74mENEygF6jhYrTs/YUQVZoeMKl9giynbSXBmU5spAj1ETwwzaMOzsRqLukAEvAku5v5Af7O++2n2NGeSLQNOixSJfqCDrNMk3Ob6A4aRN11CQT5qFRlJxyVGmia8tZzqEyd1mrbZpd+AVsIh2sC5jhdrx+zgogCLkk=""
+  generatedFields:
+    date:
+      type               : ""date""
+      options:
+        format           : ""timestamp-seconds"" # ""iso8601"" (default), ""timestamp-seconds"", ""timestamp-milliseconds""
+```
+<issue_comment>username_5: @username_4 I don't see that file in your repo, though (https://github.com/username_4/fiandes.io), and so won't Staticman.
+<issue_comment>username_4: @username_5 the file is in a branch that is not committed yet, I'm testing from my local machine. The `master` branch doesn't have comments enabled.
+I'm looking at your code, and it would be great if you could log the actual error:
+
+https://github.com/username_5/staticman/blob/018166e23b31d41f6ea2139db53e11bbd0c6ff56/lib/GitHub.js#L72
+
+If I have time later, I'll send you a push request.
+<issue_comment>username_5: If the file is in your local machine, Staticman won't be able to read it. It looks at your repo in whatever branch you tell it to (in your case, `master`).
+<issue_comment>username_6: Same issue here, I already checked the staticman.yml file and all configurations of the Minimal Mistakes theme and the error persists. My repository is https://github.com/username_6/bira.xyz
+<issue_comment>username_7: same problem, 
+staticman.yml: https://hastebin.com/azicototav.bash
+i have a comments folder in my _data folder in my project root
+<issue_comment>username_8: I am using github pages in a docs folder. So staticman.yml is in the docs folder too.  Can I configure staticman on heroku to use the `docs` folder?
+<issue_comment>username_0: I think you should open this issue such a new it."
+OperationCode/front-end,643390202,1138,"{'number': 1138.0, 'repo': 'front-end', 'user_login': 'OperationCode'}","[{'action': 'opened', 'author': 'markchernov', 'comment_id': None, 'datetime': '2020-06-22T22:07:22Z', 'masked_author': 'username_0', 'text': ""# Description of changes\r\n<!-- What does this PR change and why -->\r\nAdds Powered By Algolia note.\r\n# Issue Resolved\r\n<!-- Keeping the format 'Fixes #{ISSUE_NUMBER}' will automatically close the issue when this PR is merged -->\r\nFixes #1136\r\n\r\n## Screenshots/GIFs\r\n<!-- Please provide a view into the feature/bugfix if possible-->\r\n![Screenshot from 2020-06-22 18-05-30](https://user-images.githubusercontent.com/16090885/85339923-17395380-b4b3-11ea-9517-793039c9f295.png)"", 'title': 'add powered by algolia note', 'type': 'issue'}
+ {'action': 'created', 'author': 'kylemh', 'comment_id': 647794309.0, 'datetime': '2020-06-22 22:10:01+00:00', 'masked_author': 'username_1', 'text': '🤖 **This is a bot** 🤖<br /><br />🎉 Deployed Storybook preview! 🎉<br /><br />Click the link at the bottom of this comment to see it live.\n\nBuilt with commit 254bce1643d066e0794caf3a618b314d672a1dd6\n\nhttps://deploy-preview-1138--operation-code-storybook.netlify.app', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'kylemh', 'comment_id': 647801930.0, 'datetime': '2020-06-22 22:31:57+00:00', 'masked_author': 'username_1', 'text': '@username_0 Can you ensure that the far right of the search bar aligns with the far-right of the text content?', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'kylemh', 'comment_id': 647804862.0, 'datetime': '2020-06-22 22:41:28+00:00', 'masked_author': 'username_1', 'text': '#### 📝Changed routes:\n\n\n| [**/resources/\\[page\\]**](https://operation-code-git-powered-by-algolia.operation-code.now.sh/resources/[page]) | [**/styles/resources.module**](https://operation-code-git-powered-by-algolia.operation-code.now.sh/styles/resources.module) |\n|:-:|:-:|\n|<a href=""https://operation-code-git-powered-by-algolia.operation-code.now.sh/resources/[page]""><img src=""https://images.weserv.nl?url=https://s.microlink.io/Qxmv6kEV5BHKhj4kT7f_n5LfS3w_.png&w=600"" alt=""Screenshot of /resources/[page]"" width=""300""></a><br /><sup><a href=""https://images.weserv.nl?url=https://s.microlink.io/_6gYEKAl7o76ssO_vCmToFnt7iU_.png"">(view full size)</a> |<a href=""https://operation-code-git-powered-by-algolia.operation-code.now.sh/styles/resources.module""><img src=""https://images.weserv.nl?url=https://s.microlink.io/vp98bv_Fw5Tg4o1fdQwVqco7gWc_.png&w=600"" alt=""Screenshot of /styles/resources.module"" width=""300""></a><br /><sup><a href=""https://images.weserv.nl?url=https://s.microlink.io/cBjGGJarKcxAfqk46PQIrPWJC8I_.png"">(view full size)</a> |\n\n\n\n\n\n\n\nCommit 2a5d15e06cf9abb2ca05bbd86e109daf65aa9799 (https://operation-code-git-powered-by-algolia.operation-code.now.sh).', 'title': None, 'type': 'comment'}]","<issue_start><issue_comment>Title: add powered by algolia note
+username_0: # Description of changes
+<!-- What does this PR change and why -->
+Adds Powered By Algolia note.
+# Issue Resolved
+<!-- Keeping the format 'Fixes #{ISSUE_NUMBER}' will automatically close the issue when this PR is merged -->
+Fixes #1136
+
+## Screenshots/GIFs
+<!-- Please provide a view into the feature/bugfix if possible-->
+![Screenshot from 2020-06-22 18-05-30](https://user-images.githubusercontent.com/16090885/85339923-17395380-b4b3-11ea-9517-793039c9f295.png)
+<issue_comment>username_1: 🤖 **This is a bot** 🤖<br /><br />🎉 Deployed Storybook preview! 🎉<br /><br />Click the link at the bottom of this comment to see it live.
+
+Built with commit 254bce1643d066e0794caf3a618b314d672a1dd6
+
+https://deploy-preview-1138--operation-code-storybook.netlify.app
+<issue_comment>username_1: @username_0 Can you ensure that the far right of the search bar aligns with the far-right of the text content?
+<issue_comment>username_1: #### 📝Changed routes:
+
+
+| [**/resources/\[page\]**](https://operation-code-git-powered-by-algolia.operation-code.now.sh/resources/[page]) | [**/styles/resources.module**](https://operation-code-git-powered-by-algolia.operation-code.now.sh/styles/resources.module) |
+|:-:|:-:|
+|<a href=""https://operation-code-git-powered-by-algolia.operation-code.now.sh/resources/[page]""><img src=""https://images.weserv.nl?url=https://s.microlink.io/Qxmv6kEV5BHKhj4kT7f_n5LfS3w_.png&w=600"" alt=""Screenshot of /resources/[page]"" width=""300""></a><br /><sup><a href=""https://images.weserv.nl?url=https://s.microlink.io/_6gYEKAl7o76ssO_vCmToFnt7iU_.png"">(view full size)</a> |<a href=""https://operation-code-git-powered-by-algolia.operation-code.now.sh/styles/resources.module""><img src=""https://images.weserv.nl?url=https://s.microlink.io/vp98bv_Fw5Tg4o1fdQwVqco7gWc_.png&w=600"" alt=""Screenshot of /styles/resources.module"" width=""300""></a><br /><sup><a href=""https://images.weserv.nl?url=https://s.microlink.io/cBjGGJarKcxAfqk46PQIrPWJC8I_.png"">(view full size)</a> |
+
+
+
+
+
+
+
+Commit 2a5d15e06cf9abb2ca05bbd86e109daf65aa9799 (https://operation-code-git-powered-by-algolia.operation-code.now.sh)."
+processing/p5.js-website,955783730,1066,,"[{'action': 'opened', 'author': 'dybber', 'comment_id': None, 'datetime': '2021-07-29 12:21:25+00:00', 'masked_author': 'username_0', 'text': '**Actual Behaviour**\r\n\r\nWhen typing in my username and password and pressing ""Log In"" on https://editor.p5js.org/login, I\'m not redirected to a new page. Instead the ""Log In"" button is disabled, so I can\'t push it a second time, and nothing else happens. \r\n\r\nI have included logs from JS console below together with a screenshot.\r\n\r\n **Expected Behaviour**\r\n\r\nExpecting that I\'m getting logged in and redirected to the editor.\r\n\r\n **Steps to reproduce it**\r\n\r\n- Open either Firefox (v. 89.0) or Safari (13.0.1)\r\n- Open https://editor.p5js.org/login\r\n- Enter your username and password\r\n- Click with the mouse on ""Log In""\r\n\r\n **Screenshots of the issue**\r\n\r\nScreenshot attached, and error messages from JS console included below.\r\n\r\n![Screenshot 2021-07-29 at 14 13 58](https://user-images.githubusercontent.com/55204/127490793-98f0b978-a1c2-4273-b1e2-19f799d76484.png)\r\n\r\n\r\n```\r\nXHRGEThttps://editor.p5js.org/editor/session\r\n[HTTP/3 404 Not Found 302ms]\r\n\r\n\t\r\nGET\r\n\thttps://editor.p5js.org/editor/session\r\nStatus404\r\nNot Found\r\nVersionHTTP/3\r\nTransferred882 B (36 B size)\r\nReferrer Policystrict-origin-when-cross-origin\r\n\r\n    \t\r\n    access-control-allow-credentials\r\n    \ttrue\r\n    alt-svc\r\n    \th3-27="":443""; ma=86400, h3-28="":443""; ma=86400, h3-29="":443""; ma=86400, h3="":443""; ma=86400\r\n    cf-cache-status\r\n    \tDYNAMIC\r\n    cf-ray\r\n    \t67663f2e0959735f-CPH\r\n    content-length\r\n    \t36\r\n    content-type\r\n    \tapplication/json; charset=utf-8\r\n    date\r\n    \tThu, 29 Jul 2021 12:10:55 GMT\r\n    etag\r\n    \tW/""caf86f4uutaoxfysmf7anj01xl6sv3ps""\r\n    expect-ct\r\n    \tmax-age=604800, report-uri=""https://report-uri.cloudflare.com/cdn-cgi/beacon/expect-ct""\r\n    nel\r\n    \t{""report_to"":""cf-nel"",""max_age"":604800}\r\n    report-to\r\n    \t{""endpoints"":[{""url"":""https:\\/\\/a.nel.cloudflare.com\\/report\\/v3?s=WZEN6%2BOn9MiL9TtxnJENWnjewWDWdpXw3Lthf3sd6NwaADkMZL3XgKlrGc6BwH6ZtbYECqmsvba%2BZ%2FRPGtQjb1fHG3eZ2ADKeGAY1ObfzBMquTyNh1fP2sSNGfFAQLdKwdQ%3D""}],""group"":""cf-nel"",""max_age"":604800}\r\n    server\r\n    \tcloudflare\r\n    vary\r\n    \tOrigin\r\n    via\r\n    \t1.1 google\r\n    x-powered-by\r\n    \tExpress\r\n    \t\r\n    Accept\r\n    \tapplication/json, text/plain, */*\r\n    Accept-Encoding\r\n    \tgzip, deflate, br\r\n    Accept-Language\r\n    \tda,en-US;q=0.7,en;q=0.3\r\n    Alt-Used\r\n    \teditor.p5js.org\r\n    Cache-Control\r\n    \tmax-age=0\r\n    Connection\r\n[Truncated]\n    \tapplication/json;charset=utf-8\r\n    Cookie\r\n    \tsessionId=s%3AkuIfHn5p7eFJ2c3bI7jy6aj6XZwbYDhI.nfUd2ZVB1s1buxQLgoU%2ByVlIQxsjAfVtv%2F6WlhrJJHc\r\n    Host\r\n    \teditor.p5js.org\r\n    Origin\r\n    \thttps://editor.p5js.org\r\n    Referer\r\n    \thttps://editor.p5js.org/login\r\n    Sec-GPC\r\n    \t1\r\n    TE\r\n    \tTrailers\r\n    User-Agent\r\n    \tMozilla/5.0 (Macintosh; Intel Mac OS X 10.14; rv:89.0) Gecko/20100101 Firefox/89.0\r\n```\r\n\r\n **Would you like to work on the issue?**\r\n\r\nNo, I\'m not able to, I\'m sorry.', 'title': ""Can't login to editor.p5js.org"", 'type': 'issue'}
+ {'action': 'created', 'author': 'dybber', 'comment_id': 889072214.0, 'datetime': '2021-07-29 12:23:09+00:00', 'masked_author': 'username_0', 'text': 'Same errors on Safari:\r\n![Screenshot 2021-07-29 at 14 22 51](https://user-images.githubusercontent.com/55204/127491069-9ddb326b-d876-4638-973a-2cca80624901.png)', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'limzykenneth', 'comment_id': 889150300.0, 'datetime': '2021-07-29 13:36:12+00:00', 'masked_author': 'username_1', 'text': 'This is the repo for p5js.org while the code for the editor is maintained in a different repo so you might want to file it [there](https://github.com/processing/p5.js-web-editor/issues) instead. Thanks.', 'title': None, 'type': 'comment'}
+ {'action': 'closed', 'author': 'dybber', 'comment_id': None, 'datetime': '2021-07-30 07:56:43+00:00', 'masked_author': 'username_0', 'text': '', 'title': None, 'type': 'issue'}
+ {'action': 'created', 'author': 'dybber', 'comment_id': 889708658.0, 'datetime': '2021-07-30 07:56:43+00:00', 'masked_author': 'username_0', 'text': 'Okay, I have created a new issue over there and will close this one.', 'title': None, 'type': 'comment'}]","<issue_start><issue_comment>Title: Can't login to editor.p5js.org
+username_0: **Actual Behaviour**
+
+When typing in my username and password and pressing ""Log In"" on https://editor.p5js.org/login, I'm not redirected to a new page. Instead the ""Log In"" button is disabled, so I can't push it a second time, and nothing else happens. 
+
+I have included logs from JS console below together with a screenshot.
+
+ **Expected Behaviour**
+
+Expecting that I'm getting logged in and redirected to the editor.
+
+ **Steps to reproduce it**
+
+- Open either Firefox (v. 89.0) or Safari (13.0.1)
+- Open https://editor.p5js.org/login
+- Enter your username and password
+- Click with the mouse on ""Log In""
+
+ **Screenshots of the issue**
+
+Screenshot attached, and error messages from JS console included below.
+
+![Screenshot 2021-07-29 at 14 13 58](https://user-images.githubusercontent.com/55204/127490793-98f0b978-a1c2-4273-b1e2-19f799d76484.png)
+
+
+```
+XHRGEThttps://editor.p5js.org/editor/session
+[HTTP/3 404 Not Found 302ms]
+
+	
+GET
+	https://editor.p5js.org/editor/session
+Status404
+Not Found
+VersionHTTP/3
+Transferred882 B (36 B size)
+Referrer Policystrict-origin-when-cross-origin
+
+    	
+    access-control-allow-credentials
+    	true
+    alt-svc
+    	h3-27="":443""; ma=86400, h3-28="":443""; ma=86400, h3-29="":443""; ma=86400, h3="":443""; ma=86400
+    cf-cache-status
+    	DYNAMIC
+    cf-ray
+    	67663f2e0959735f-CPH
+    content-length
+    	36
+    content-type
+    	application/json; charset=utf-8
+    date
+    	Thu, 29 Jul 2021 12:10:55 GMT
+    etag
+    	W/""24-wRuFiqDiWqJZxk2aPimqOrIMcUA""
+    expect-ct
+    	max-age=604800, report-uri=""https://report-uri.cloudflare.com/cdn-cgi/beacon/expect-ct""
+    nel
+    	{""report_to"":""cf-nel"",""max_age"":604800}
+    report-to
+    	{""endpoints"":[{""url"":""https:\/\/a.nel.cloudflare.com\/report\/v3?s=WZEN6%2BOn9MiL9TtxnJENWnjewWDWdpXw3Lthf3sd6NwaADkMZL3XgKlrGc6BwH6ZtbYECqmsvba%2BZ%2FRPGtQjb1fHG3eZ2ADKeGAY1ObfzBMquTyNh1fP2sSNGfFAQLdKwdQ%3D""}],""group"":""cf-nel"",""max_age"":604800}
+    server
+    	cloudflare
+    vary
+    	Origin
+    via
+    	1.1 google
+    x-powered-by
+    	Express
+    	
+    Accept
+    	application/json, text/plain, */*
+    Accept-Encoding
+    	gzip, deflate, br
+    Accept-Language
+    	da,en-US;q=0.7,en;q=0.3
+    Alt-Used
+    	editor.p5js.org
+    Cache-Control
+    	max-age=0
+    Connection
+[Truncated]
+    	application/json;charset=utf-8
+    Cookie
+    	sessionId=s%3AkuIfHn5p7eFJ2c3bI7jy6aj6XZwbYDhI.nfUd2ZVB1s1buxQLgoU%2ByVlIQxsjAfVtv%2F6WlhrJJHc
+    Host
+    	editor.p5js.org
+    Origin
+    	https://editor.p5js.org
+    Referer
+    	https://editor.p5js.org/login
+    Sec-GPC
+    	1
+    TE
+    	Trailers
+    User-Agent
+    	Mozilla/5.0 (Macintosh; Intel Mac OS X 10.14; rv:89.0) Gecko/20100101 Firefox/89.0
+```
+
+ **Would you like to work on the issue?**
+
+No, I'm not able to, I'm sorry.
+<issue_comment>username_0: Same errors on Safari:
+![Screenshot 2021-07-29 at 14 22 51](https://user-images.githubusercontent.com/55204/127491069-9ddb326b-d876-4638-973a-2cca80624901.png)
+<issue_comment>username_1: This is the repo for p5js.org while the code for the editor is maintained in a different repo so you might want to file it [there](https://github.com/processing/p5.js-web-editor/issues) instead. Thanks.<issue_closed>
+<issue_comment>username_0: Okay, I have created a new issue over there and will close this one."
+gohugoio/hugo,214055423,3180,"{'number': 3180.0, 'repo': 'hugo', 'user_login': 'gohugoio'}","[{'action': 'opened', 'author': 'chaseadamsio', 'comment_id': None, 'datetime': '2017-03-14T12:23:22Z', 'masked_author': 'username_0', 'text': 'Goorgeous was a good first run at the basic use cases for Org mode but there are two major problems with trying to keep a go parser (similar to asciidoc and rst):\r\n\r\n1. Org mode itself is a moving target, varying from major versions and adding new functionality which would mean constantly trying to stay up to date with it\'s features for power users.\r\n2. Different users are different versions of Org mode (9 was recently released and it has many difference from 8), which means trying to make everyone happy for their org version.\r\n\r\nThis PR leverages emacs as a subprocess the same way rst and asciidoc are used with one exception:\r\n\r\n- `org-mode` uses its ""frontmatter"" to make decisions about how to render content, so rather than reading the frontmatter out and leaving the ""content"", the entire file\'s contents are left intact and a peek function gets the frontmatter to be passed along to the org parser.\r\n\r\nhttps://github.com/username_0/goorgeous/issues/32#issuecomment-286092742\r\n\r\n# Advantages\r\n\r\n- Now users can use the Emacs Org version they feel comfortable with and can know that what they experience in Emacs for org-html-as-html is going to be what they get in Hugo.\r\n\r\n# Disadvantages\r\n\r\n- A new dependency on Emacs is introduced, which means the CI environment (or whatever environment is used to render and publish)\r\n\r\n## Solution\r\n\r\n- Docker with Emacs v 25 and diff. major versions of org-mode.\r\n\r\nRollup of changes:\r\n\r\n- use Emacs as the org interpreter\r\n- move org headers parsing from username_0/goorgeous to spf13/hugo\r\n- remove goorgeous as dependency altogether\r\n\r\ncc\'ing the following users who\'ve opened issues in goorgeous to give any feedback or concerns they have. @strow @yssource @priyadarshan @jackbaty @kaushalmodi \r\n\r\n@strow\'s workflow is to have `*.org` files in his `content` directory which means Hugo will overwrite his handrolled files. In the case that users want to ignore using Emacs org mode in Hugo, do we want to add a config option to [ignore invocation as suggested here](https://github.com/username_0/goorgeous/issues/32#issuecomment-285964518)? My gut reaction is to [suggest the workflow I recommended here](https://github.com/username_0/goorgeous/issues/32#issuecomment-286031146), but if we want to have an option to ignore rendering org files, I\'m happy to add that.  \r\n\r\n# Todo\r\n\r\n- Update docs to reflect that Emacs is a requirement where rst docs exists.', 'title': '[WIP] org: use Emacs as org mode interpreter', 'type': 'issue'}]","<issue_start><issue_comment>Title: [WIP] org: use Emacs as org mode interpreter
+username_0: Goorgeous was a good first run at the basic use cases for Org mode but there are two major problems with trying to keep a go parser (similar to asciidoc and rst):
+
+1. Org mode itself is a moving target, varying from major versions and adding new functionality which would mean constantly trying to stay up to date with it's features for power users.
+2. Different users are different versions of Org mode (9 was recently released and it has many difference from 8), which means trying to make everyone happy for their org version.
+
+This PR leverages emacs as a subprocess the same way rst and asciidoc are used with one exception:
+
+- `org-mode` uses its ""frontmatter"" to make decisions about how to render content, so rather than reading the frontmatter out and leaving the ""content"", the entire file's contents are left intact and a peek function gets the frontmatter to be passed along to the org parser.
+
+https://github.com/username_0/goorgeous/issues/32#issuecomment-286092742
+
+# Advantages
+
+- Now users can use the Emacs Org version they feel comfortable with and can know that what they experience in Emacs for org-html-as-html is going to be what they get in Hugo.
+
+# Disadvantages
+
+- A new dependency on Emacs is introduced, which means the CI environment (or whatever environment is used to render and publish)
+
+## Solution
+
+- Docker with Emacs v 25 and diff. major versions of org-mode.
+
+Rollup of changes:
+
+- use Emacs as the org interpreter
+- move org headers parsing from username_0/goorgeous to spf13/hugo
+- remove goorgeous as dependency altogether
+
+cc'ing the following users who've opened issues in goorgeous to give any feedback or concerns they have. @strow @yssource @priyadarshan @jackbaty @kaushalmodi 
+
+@strow's workflow is to have `*.org` files in his `content` directory which means Hugo will overwrite his handrolled files. In the case that users want to ignore using Emacs org mode in Hugo, do we want to add a config option to [ignore invocation as suggested here](https://github.com/username_0/goorgeous/issues/32#issuecomment-285964518)? My gut reaction is to [suggest the workflow I recommended here](https://github.com/username_0/goorgeous/issues/32#issuecomment-286031146), but if we want to have an option to ignore rendering org files, I'm happy to add that.  
+
+# Todo
+
+- Update docs to reflect that Emacs is a requirement where rst docs exists."
+kubernetes/website,356642636,10182,"{'number': 10182.0, 'repo': 'website', 'user_login': 'kubernetes'}","[{'action': 'opened', 'author': 'bobs-bits', 'comment_id': None, 'datetime': '2018-09-04T03:42:41Z', 'masked_author': 'username_0', 'text': 'added powershell equivalent for  eval $(minikube docker-env), and added some text to help a beginner understand in more concrete terms the difference between the local docker registry, and the one in minikube (might only be an issue for newbs, but I am a newb :) and limited to powershell :().', 'title': 'Update hello-minikube.md', 'type': 'issue'}
+ {'action': 'created', 'author': 'bobs-bits', 'comment_id': 425675960.0, 'datetime': '2018-09-29 21:13:57+00:00', 'masked_author': 'username_0', 'text': 'I signed the CLA.  would it be better to cancel this PR (b/c its been a while) and issue a fresh one?', 'title': None, 'type': 'comment'}]","<issue_start><issue_comment>Title: Update hello-minikube.md
+username_0: added powershell equivalent for  eval $(minikube docker-env), and added some text to help a beginner understand in more concrete terms the difference between the local docker registry, and the one in minikube (might only be an issue for newbs, but I am a newb :) and limited to powershell :().
+<issue_comment>username_0: I signed the CLA.  would it be better to cancel this PR (b/c its been a while) and issue a fresh one?"
+department-of-veterans-affairs/vets-website,471750873,10459,"{'number': 10459.0, 'repo': 'vets-website', 'user_login': 'department-of-veterans-affairs'}","[{'action': 'opened', 'author': 'rianfowler', 'comment_id': None, 'datetime': '2019-07-23T15:02:06Z', 'masked_author': 'username_0', 'text': '## Description\r\nThis introduces layer between our toggles and toggle clients. The intent of this is to create an integration point for our feature toggle client.\r\n\r\n## Testing done\r\n- verified the `<Toggle />` locally on preneed form and GIBCT \r\n\r\n## Screenshots\r\n\r\n\r\n## Acceptance criteria\r\n- [ ]\r\n\r\n## Definition of done\r\n- [ ] Events are logged appropriately\r\n- [ ] Documentation has been updated, if applicable\r\n- [ ] A link has been provided to the originating GitHub issue (or connected to it via ZenHub)\r\n- [ ] No sensitive information (i.e. PII/credentials/internal URLs/etc.) is captured in logging, hardcoded, or specs', 'title': '570 feature toggle adapters', 'type': 'issue'}
+ {'action': 'created', 'author': 'ncksllvn', 'comment_id': 514717110.0, 'datetime': '2019-07-24 17:04:15+00:00', 'masked_author': 'username_1', 'text': ""This is really cool. I really like seeing our feature flags approach formalized and how we're using the new React functionality. I have a couple concerns/potential paths for iterating on this -\r\n\r\n1. I'm not sure if this component is already adapted to handle this, but Jeff and I tried to start a pattern first with the CMS work to use a unique name for a feature flag toggle that [describes the feature itself](https://github.com/department-of-veterans-affairs/vets-website/blob/master/src/site/utilities/featureFlags.js) instead of doing a direct check on the environment. This way, the feature flag can still be driven off of the environment, but it can also be driven from localStorage, a cookie, a query param, a combination or otherwise, and that's all been abstracted into just that single constant named by feature. I tried doing something like this for the profile with the [direct deposit feature flag](https://github.com/department-of-veterans-affairs/vets-website/blob/master/src/applications/personalization/profile360/featureFlags.js).\r\n\r\n2. Eventually, I think there will need to be a utility toggle function so that the toggle value can be accessed outside of a React component but still be centralized to the same toggle source. I suggest this because during WBC, I created some components that would render based on Vets.gov and VA.gov, powered by a feature flag. These ended up hardly being used, and folks much preferred the flexibility of a quick utility function and there were cases where it was necessary."", 'title': None, 'type': 'comment'}]","<issue_start><issue_comment>Title: 570 feature toggle adapters
+username_0: ## Description
+This introduces layer between our toggles and toggle clients. The intent of this is to create an integration point for our feature toggle client.
+
+## Testing done
+- verified the `<Toggle />` locally on preneed form and GIBCT 
+
+## Screenshots
+
+
+## Acceptance criteria
+- [ ]
+
+## Definition of done
+- [ ] Events are logged appropriately
+- [ ] Documentation has been updated, if applicable
+- [ ] A link has been provided to the originating GitHub issue (or connected to it via ZenHub)
+- [ ] No sensitive information (i.e. PII/credentials/internal URLs/etc.) is captured in logging, hardcoded, or specs
+<issue_comment>username_1: This is really cool. I really like seeing our feature flags approach formalized and how we're using the new React functionality. I have a couple concerns/potential paths for iterating on this -
+
+1. I'm not sure if this component is already adapted to handle this, but Jeff and I tried to start a pattern first with the CMS work to use a unique name for a feature flag toggle that [describes the feature itself](https://github.com/department-of-veterans-affairs/vets-website/blob/master/src/site/utilities/featureFlags.js) instead of doing a direct check on the environment. This way, the feature flag can still be driven off of the environment, but it can also be driven from localStorage, a cookie, a query param, a combination or otherwise, and that's all been abstracted into just that single constant named by feature. I tried doing something like this for the profile with the [direct deposit feature flag](https://github.com/department-of-veterans-affairs/vets-website/blob/master/src/applications/personalization/profile360/featureFlags.js).
+
+2. Eventually, I think there will need to be a utility toggle function so that the toggle value can be accessed outside of a React component but still be centralized to the same toggle source. I suggest this because during WBC, I created some components that would render based on Vets.gov and VA.gov, powered by a feature flag. These ended up hardly being used, and folks much preferred the flexibility of a quick utility function and there were cases where it was necessary."

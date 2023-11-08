@@ -1,0 +1,698 @@
+nodejs/nodejs.org,382905940,1908,,"[{'action': 'opened', 'author': 'ea167', 'comment_id': None, 'datetime': '2018-11-21 00:35:27+00:00', 'masked_author': 'username_0', 'text': 'Hello wonderful NodeJS Team,\r\n\r\nOn the page https://nodejs.org/en/docs/guides/debugging-getting-started/#chrome-devtools-55 \r\nyou recommend the Chrome extension ""NiM"".\r\n\r\nPlease note that this extension requires to share our email addresses to use the extension (as well as the permission ""Read and change all your data on the websites you visit""). This requirement was added recently.\r\n\r\nI doubt this is GDPR compliant, and the author does not provide a clear justification of why they require such a private information.\r\n\r\nIMHO NodeJS should not recommend extensions with such practices.', 'title': 'Privacy issue with recommended Chrome extension', 'type': 'issue'}
+ {'action': 'created', 'author': 'fhemberger', 'comment_id': 440922619.0, 'datetime': '2018-11-22 06:05:42+00:00', 'masked_author': 'username_1', 'text': ""Hi Eric,\r\n\r\nthanks for pointing this out. Indeed, the user's email address is sent back **every second** to Google Analytics:\r\nhttps://github.com/username_2/NiM/blob/421d83ae7c5e06ae573a39a3ced0616390c7da8e/background.js#L112-L113"", 'title': None, 'type': 'comment'}
+ {'action': 'closed', 'author': 'fhemberger', 'comment_id': None, 'datetime': '2018-11-22 07:42:11+00:00', 'masked_author': 'username_1', 'text': '', 'title': None, 'type': 'issue'}
+ {'action': 'created', 'author': 'june07', 'comment_id': 442068846.0, 'datetime': '2018-11-27 14:02:58+00:00', 'masked_author': 'username_2', 'text': 'As the author of NiM I would like to provide some feedback.\r\n\r\n@username_0 ""This requirement was added recently"" is not actually true.  Please see my blog post written approximately a year ago about this: http://username_2.com/foff/.\r\n\r\nAlong with being highly rated at the Chrome Web Store, NiM has had the support of many in the Node.js community, including Paul Irish of the Chrome DevTools team https://twitter.com/username_2t/status/861664828909264896, and Wes Bos https://twitter.com/wesbos/status/839871332280057857, among others.\r\n\r\nAs far as data (email addresses) being sent to Google Analytics, I\'m unsure of how that is illegal?!  And I would love to be pointed in the right direction so as to change anything that in fact needs to be changed to conform to any compliance issues.\r\n\r\nI\'ve written NiM out of my love for the Node.js language/community and continue to dedicate my time to the project.  MUCH more positive feedback has been received compared to negative and I would very much like the link to NiM be re-enstated such that other Node.js developers can also benefit from using NiM as so many others have.\r\n\r\n-Respectfully', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'oncletom', 'comment_id': 442070908.0, 'datetime': '2018-11-27 14:09:19+00:00', 'masked_author': 'username_3', 'text': '[GDPR](https://en.wikipedia.org/wiki/General_Data_Protection_Regulation) is about providing a **choice of consent** about data collection.\r\n\r\nCollecting a data without asking a user its permission breaks this statement.\r\n\r\nOne way to make it compliant would be to provide a user option (unchecked by default) and to let the user opt in, with a clear indication of what is the information used for (to be sold, to be processed, to send e-mails, etc.).', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'june07', 'comment_id': 442564020.0, 'datetime': '2018-11-28 18:58:52+00:00', 'masked_author': 'username_2', 'text': '@username_1 Would be great to get some feedback on this.\r\n\r\nFor the record, I\'ve compared NiM\'s Chrome web store page with that of 10 different companies, all of whom have items in Google\'s Chrome web store, FOUR (EBay, Paypal, Walmart, and LinkedIn, of whom are among ""10 Global Companies Using Node.js in Production"" according to Google.  And none of which I would think the Node.js community would have a problem ""recommend""ing if that is what it means to add a link on the https://nodejs.org/en/docs/guides/debugging-getting-started/ page.\r\n\r\nI have compiled current pictures of all 10 companies’ chrome web store pages, as well as the privacy policy pages for each of the 5 which actually have them referenced, and uploaded them to Google photos (see link below).  As far as the other 5, there are a number of valid reasons why they may not have privacy policy links, just as NiM did not, but I don’t want to digress.\r\n\r\nhttps://photos.app.goo.gl/y4TN5dT1JeNbED2KA\r\n\r\nI can say with strong conviction that data collected by NiM is minuscule by every measure when compared to that collected by these larger companies.  Further, no data has ever been used for ill purposes and will not ever deviate from that found in our new privacy policy (link again: https://app.termly.io/document/privacy-policy/04164179-f943-4e87-ac8b-5afd0367dc6c#infocollect)  And again, @username_0’s statement that “this requirement was added recently.” is simply NOT the case as can be determined by reading the GitHub project history. \r\n [THIS](https://github.com/username_2/NiM/commit/4889f3bf9c29055ab3587fcec60460e2ae1e1908#diff-4b1eb3dc48c4e16d49db5b42298fe654) is where/when the extra permissions were added on Feb 9, 2017, close to 2 years ago.  As the removal was partly predicated on that statement, I bring it up again. \r\n\r\nI do regret not having a privacy policy in place sooner.  To my defense, unlike these larger organizations, I don’t really have spare man/woman power to go around.  That said, the focus for me has been on trying to make NiM great  for the betterment of like-minded Node.js developers.  I should point out that I make zero monetary gain from NiM, and it is a side project for me.\r\n\r\nSo, if they weren’t before, I believe that all of the bases are now covered.  I would like to get the Chrome web store link for NiM back and would be more than happy to submit a PR for such.\r\n\r\nPlease advise...\r\n\r\n-Respectfully to all', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'eyedean', 'comment_id': 501209612.0, 'datetime': '2019-06-12 10:13:35+00:00', 'masked_author': 'username_4', 'text': ""I guess it wouldn't hurt to mention here too that this issue is back -- see https://github.com/nodejs/nodejs.org/issues/1923#issuecomment-501209247.\r\n\r\nShall we reopen this issue?"", 'title': None, 'type': 'comment'}
+ {'action': 'reopened', 'author': 'ChALkeR', 'comment_id': None, 'datetime': '2019-06-12 10:17:01+00:00', 'masked_author': 'username_5', 'text': 'Hello wonderful NodeJS Team,\r\n\r\nOn the page https://nodejs.org/en/docs/guides/debugging-getting-started/#chrome-devtools-55 \r\nyou recommend the Chrome extension ""NiM"".\r\n\r\nPlease note that this extension requires to share our email addresses to use the extension (as well as the permission ""Read and change all your data on the websites you visit""). This requirement was added recently.\r\n\r\nI doubt this is GDPR compliant, and the author does not provide a clear justification of why they require such a private information.\r\n\r\nIMHO NodeJS should not recommend extensions with such practices.', 'title': 'Privacy issue with recommended Chrome extension', 'type': 'issue'}
+ {'action': 'created', 'author': 'ChALkeR', 'comment_id': 501210797.0, 'datetime': '2019-06-12 10:17:10+00:00', 'masked_author': 'username_5', 'text': '@username_1 thoughts?', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'fhemberger', 'comment_id': 501216662.0, 'datetime': '2019-06-12 10:36:04+00:00', 'masked_author': 'username_1', 'text': ""Honestly I'm a bit disappointed this issue is back. I thought we came to an understanding here, @username_2. And it can't be the job of the website team to continuously check for violations of privacy regulations of third-party tools listed on the website, as this could be interpreted as endorsement of those tools.\r\n\r\nIn this case I'm in favor of removing this extension _permanently_ from the nodejs.org website. Thoughts, @nodejs/website?"", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'june07', 'comment_id': 501328367.0, 'datetime': '2019-06-12 15:33:37+00:00', 'masked_author': 'username_2', 'text': 'Frederic/All,\n\nNo changes have been made surrounding this issue as it was resolved way\nback then.  If you look at the code you will see that no changes to any of\nthose parts of the code have been changed and nor would they.', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'sam-github', 'comment_id': 501344228.0, 'datetime': '2019-06-12 16:09:55+00:00', 'masked_author': 'username_6', 'text': '""Know your email address""\r\n\r\nThis is a fairly vague statement, it doesn\'t say what is done with the email address to understand the user base.\r\n\r\nWith such a delicate issue as removing an extension from our docs, I think the history should be more clear so a fair decision can be made. As-is, its too dispersed across multiple threads. Questions I\'m left with:\r\n- ""I thought we came to an understanding here"" - I don\'t see a sign of any coming to an understanding in this thread\r\n- GDPR violation: its not clear to me that it does violate GDPR\r\n- The chrome extension seems to be clear in at least that it requests permission to know the user\'s email address, though I didn\'t see where it was written what it does with that address', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'june07', 'comment_id': 501364510.0, 'datetime': '2019-06-12 16:58:18+00:00', 'masked_author': 'username_2', 'text': ""My thoughts further being validated when NiM was finally reinstated.\r\n\r\n- It was my understanding that any GDPR violations were fixed (back then) by the above.  And again, nothing new has been added to the code to violate GDPR.\r\n- I agree.  And by design I think that Google has it's own fail-safe checks in place to ensure compliance to GDPR.  By the simple fact that we are talking about a Chrome Extension, that in of itself guarantees some things.  Notices are made at the Chrome store.  You get a nice popup when you install the extension."", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'sam-github', 'comment_id': 501389611.0, 'datetime': '2019-06-12 18:03:33+00:00', 'masked_author': 'username_6', 'text': 'I don\'t believe that is the case. Google has checks to ensure the user knows that the extension has access to the user\'s email address, since personal data is known by the extension, it is up to the extension to manage (or not) the data in compliance with any particular law. Its also not clear to me that compliance with GDPR is a requirement to be mentioned in the nodejs docs.\r\n\r\nA clear statement (both here and in the extension description) about what is done with the email address would help. As I said, there is no such statement in this thread or in the description on the chrome extension page.\r\n\r\nAlso, there are suggestions in this thread that NiM has changed its handling of the email. In fact, that is the reason this has come up again. @username_1, could you provide some references here that demonstrate the ""violations of privacy regulations"" that you believe are occurring?', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'eyedean', 'comment_id': 501392622.0, 'datetime': '2019-06-12 18:12:07+00:00', 'masked_author': 'username_4', 'text': 'Thanks for your response, Will, and quick turnaround, Node team.\r\n\r\nAs an independent developer who does not live in the EU, it\'s less about GDPR and the lawful aspect of it to me.  It\'s more about the real ""privacy"" and ""why"" does it need my email address, and not a UUID (which is in fact [provided by Google Analytics](https://developers.google.com/analytics/devguides/collection/analyticsjs/cookies-user-id) by default), to be sent to the author\'s personal servers in an encrypted manner.  Also the length that the author has gone to justify GDPR compliance and setting up the encryption and all makes me believe it\'s actually the user\'s ""email"" that is needed.  \r\n\r\nI assume by now and after 3 years of running, the author must have an extensive and valuable list of *the email addresses probably millions of active Node.js developers in the world.*  It\'s interesting that Node team doesn\'t have that and cannot have any *""business interests""* the way it\'s described in the [extensions\'s ToS](https://app.termly.io/document/privacy-policy/04164179-f943-4e87-ac8b-5afd0367dc6c#infouse). \r\n\r\nI can even go further and say that with this script requesting access to all the tabs it [already has access](https://github.com/username_2/NiM/blob/master/background.js#L240) to any tab the user has open on their browser, including the source code of whomever runs this extension, making it very easily possible to spoof any sensitive material like `AWS_KEY: ""...""` and sending it to the personal server of the author.  I am not saying it\'s the intent at all.  I am just saying it\'s only one click away and it will take months for Node team to discover that and stop ""promoting"" that.  (PS. It\'s interesting that the [first line of the ToS pointed](https://app.termly.io/document/privacy-policy/04164179-f943-4e87-ac8b-5afd0367dc6c#infocollect) out by the author already says they collect password and payment stuffs! ;D)\r\n\r\nI am sorry but the code is currently actively [sending unnecessary personal stuffs, like user\'s email address to the personal server of the author at https://analytics.username_2.com](https://github.com/username_2/NiM/blob/master/background.js#L1079) and we have seen the deleted code coming back at the author\'s discretion.  \r\n\r\n~ ~ ~\r\n\r\nThe point I am making is the extension is very helpful and very dangerous.  While I respect all the hard work of the author, I believe Node users deserve to at least clearly (not in the details of ToS) know that their email address and other personal information is going to be shared with the author who is not affiliated with the Node team.  Just knowing that is what I wish happens, at least.', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'cjihrig', 'comment_id': 501401314.0, 'datetime': '2019-06-12 18:34:23+00:00', 'masked_author': 'username_7', 'text': ""Alternative tool that collects no information at all (because I don't care), but may not be as pretty (because it just launches dev tools): https://github.com/username_7/node-v8-inspector"", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'june07', 'comment_id': 501420560.0, 'datetime': '2019-06-12 19:22:14+00:00', 'masked_author': 'username_2', 'text': '@username_4 \r\n\r\nOf course.  I made looking into it a priority first thing this morning.\r\n\r\nI understand your concerns and if you read through the history of this you\'ll find I address some of them.  To be clear, we are talking about issues that were discussed months ago both in this forum as well as via several TSC meetings.  But...\r\n\r\nI think it\'s a bit unfair to go down the laundry list of possible attack vectors with NiM as the focus, when those things are in no way unique to NiM but shared by many tools.  The [documentation page](https://nodejs.org/en/docs/guides/debugging-getting-started/) already has a section ""Security Implications""... maybe some additional information can be there about?!\r\n\r\n- Further should Visual Studio Code be removed because of the possible extension high jacking tactics that can be done there?  I wrote a [VSCode extension that can integrate with Chrome DevTools](https://blog.username_2.com/nodedebugvscodedevtools/) and unlike the browser environment, VSCode extensions run full Node.js and don\'t operate within the constraints of the browser sandbox.\r\n- I\'m not a Gitpod user but it seems like a server side tool which clearly requires user info to register ![Capture1](https://user-images.githubusercontent.com/11353590/59378827-1a2f2f00-8d0a-11e9-8338-c71b33489fc9.JPG)  It has a paid solution, ""business interests"" clearly.\r\n- )\r\n\r\nIt may be a bit naive to think that the ""Node team themselves don\'t have such a valuable list and/or any ""business interests"""" as the signup form for [NodeSchool ](https://nodeschool.io/oakland/) demonstrates\r\n![image](https://user-images.githubusercontent.com/11353590/59377761-befc3d00-8d07-11e9-892b-e3cf8c75a265.png)  The fact is that every piece of technology is a ""business"" and it really boils down to the intentions of those behind those businesses and trust.  And I can say that with NiM, that is me, and I\'ve tried and will continue trying to do well by the trust that users give me by using NiM.\r\n\r\nTo stay focused on the issue of GDPR compliance, it\'s my understanding that no faults exist in that regard.  I\'d be more than happy to add even more notices where appropriate and deemed required.  \r\n\r\nAlready in place:\r\n\r\n- Chrome forces you to opt in before installing the extension.\r\n- The code is open source\r\n- I\'ve even writing blogs about this issue which are open for anyone to read\r\n\r\n@username_1 have things changed with regard to how this is going to be treated moving forward?', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'srl295', 'comment_id': 501423734.0, 'datetime': '2019-06-12 19:31:57+00:00', 'masked_author': 'username_8', 'text': ""Website folks: just a suggestion, would it make sense to put a disclaimer on the supported tools list? Something along the lines of, 'please evaluate the security implications and privacy policies of any such tools you install'. The Security section already discusses the general security implications of debugging tools."", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'eyedean', 'comment_id': 501427573.0, 'datetime': '2019-06-12 19:43:55+00:00', 'masked_author': 'username_4', 'text': '@username_8 That would just help to reduce the liabilities of Node, in case of a catastrophe.\r\n\r\nThe perception that people have around Open Source tools (Node.js included) is either it\'s free ([as in freedom](https://en.wikipedia.org/wiki/Gratis_versus_libre)) and backed by self-interest/reputation-building/sponsors/donators, or their business model is very obvious to the users. (e.g. selling enterprise support, education, dual licensing, etc.)\r\n\r\nFor none of the packages I install via `npm -i`, I expect them to make money out of me in a non-trivial non-obvious manner, hidden in their ToS.  Such chrome extensions fall into the same mental category to me.\r\n\r\nAll being said, whatever Node team decides, I respect.  I just wouldn\'t feel great if I need to tell any fellow Node developer, who trusts Node docs, that ""*Hey, BTW, that chrome extensions is taking your email address and other stuffs and sends them to someone\'s personal server for their own **business interests**.*""  And they would be literally shocked, I bet!\r\n\r\nThanks.', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'srl295', 'comment_id': 501431172.0, 'datetime': '2019-06-12 19:54:22+00:00', 'masked_author': 'username_8', 'text': ""@username_4 if it makes someone pause and look at the fine print, that could be good. I hear what you're saying, however, node can't continuously privacy audit the contents of all linked sites, so I think the expectation has to be set correctly."", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'ChALkeR', 'comment_id': 501459458.0, 'datetime': '2019-06-12 21:19:32+00:00', 'masked_author': 'username_5', 'text': 'As previously stated, I would just avoid recommending _any_ browser extensions whatsoever.', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'june07', 'comment_id': 501563883.0, 'datetime': '2019-06-13 06:14:54+00:00', 'masked_author': 'username_2', 'text': 'I\'ve added a huge notice to the GitHub page and to the extension\'s web store page to help facilitate people not being ""shocked"" as @username_4 so eloquently put it, although I disagree with that statement in its entirety.  Further I think it takes away from the project when the facilities in place were sufficient both from a common sense standpoint and from a legal one and from what was established previously when this issue arose.  If that wasn\'t the case, I doubt @username_1 and his team would have reinstated NiM?!\r\n\r\nI would beg anyone to just look at the reviews of NiM and the utility of the tool before casting stones.  It\'s grown from ~30k to ~35k users since it was removed from Node\'s site late last year and increased in it\'s rating to 4.49 out of 5.  The Node community has shown more favor to NiM than not.  No one is forced to use it.  That entire doc page is about choice.\r\n\r\nI don\'t think demonizing browser extensions is not the right course of action.\r\n\r\nFurther I think that if one simply looked at the facts, we wouldn\'t be having this discussion yet again.  I\'ll say again, no changes affecting GDPR compliance have been made since NiM was reinstated nor would/will they be.  A quick review of the history https://github.com/username_2/nim shows as much.  All I\'ve done is add features to NiM, and to be honest analytics is on the low end of priorities, along with being something I\'m growing fearful of even touching anymore because of this backlash.\r\n\r\nWe are beating a dead horse at this point.  But I DO CARE and I\'m trying to convey that fact to all involved.  I feel that NiM fills a void that needed/needs filling, and it does it well.  Further, it adds a lot above and beyond what is built in to debugging with Chrome or Chromium browser alone, as has been validated by the Chrome team themselves and NiM users.\r\n\r\nUnless some new/unknown GDPR compliance issue is being made, can we please put this to rest (and preferably not by shooting NiM in the head).  I think the nodejs team should stand behind the decision they made when they reinstated NiM in the first place.  A lot of work went into both making the needed changes, AND in adding i18n to the node documentation.\r\n\r\nSweet dreams to all.  It\'s 11:14 here in the Bay Area and the heat is finally gone.  I hope I didn\'t offend anyone.  And I wish everyone the best.', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'bdharrington7', 'comment_id': 501777067.0, 'datetime': '2019-06-13 16:28:37+00:00', 'masked_author': 'username_9', 'text': 'Forgive my lack of knowledge around publishing chrome extensions, but as an aside, why is recording the email addresses of your users needed?\r\n\r\nIf I were in your shoes I might consider it a liability. Given that data breaches are pretty much a daily occurrence now, not only do devs need to be good at developing software, but extra care needs to be taken to avoid opening security holes, whether your day to day includes security-related tasks or not.', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'sam-github', 'comment_id': 501780683.0, 'datetime': '2019-06-13 16:38:17+00:00', 'masked_author': 'username_6', 'text': ""You argue at length that this policy is reasonable and that most users of NiM are aware of it, and OK with it. That may be true, but I don't think its in the node project's interest to try to evaluate whether that is true or not.\r\n\r\nPeople are welcome to find and use NiM if they wish, its not necessary to the node debug experience, and its not necessary for our debug guide to link to it. I think we should do as @username_5 suggests."", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'WaleedAshraf', 'comment_id': 501803724.0, 'datetime': '2019-06-13 17:32:29+00:00', 'masked_author': 'username_10', 'text': ""I'd also go @username_5 suggestion."", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'Trott', 'comment_id': 501809726.0, 'datetime': '2019-06-13 17:47:16+00:00', 'masked_author': 'username_11', 'text': 'I think it sends a mixed message to ask those questions if you agree with @username_5. @username_5\'s suggestion (which I also agree with FWIW) is to remove browser extensions from the list no matter what they are. Asking all those questions implies that if they are addressed, then listing it is OK. That\'s not @username_5\'s suggestion. If we\'re not going to list browser extensions no matter what, then those questions are irrelevant and, more importantly, potentially frustrating to anyone who wants it listed, almost like the goalposts are being moved. \r\n\r\nPerson A: ""OK, it switched to a UUID. Let\'s list it!""  \r\nPerson B: ""Sorry, we\'re still not listing it because it\'s a browser extension."" \r\nPerson A:  (╯°□°)╯︵ ┻━┻', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'WaleedAshraf', 'comment_id': 501896986.0, 'datetime': '2019-06-13 22:09:52+00:00', 'masked_author': 'username_10', 'text': '@username_11 you are right. I have made it confusing. Updated my comment.', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'june07', 'comment_id': 501985976.0, 'datetime': '2019-06-14 06:29:23+00:00', 'masked_author': 'username_2', 'text': '@username_11 it does feel like a moving goal post.\r\n\r\nAnd I don\'t agree with the idea of exclusion based on the fact of being a Chrome extension.\r\n\r\nAgain demonizing Chrome Extensions specifically I don\'t quite follow.  Speaking directly to this aversion to development with Chrome extension tools, these are a few that I\'m sure more than a few have found to be useful:\r\n\r\n- [Postman Interceptor](https://chrome.google.com/webstore/detail/angularjs-batarang/ighdmehidhipcmcojjgiloacoafjmpfk\r\n)\r\n- [AngularJS Batarang](https://chrome.google.com/webstore/detail/react-developer-tools/fmkadmapgofadopljbjfkapdkoienihi/internal?hl=en)\r\n- [React Developer Tools](https://chrome.google.com/webstore/detail/postman-interceptor/aicmkgpgakddgnaphhhpliifpcfhicfo?hl=en)\r\n- [Vue.js devtools](https://chrome.google.com/webstore/detail/vuejs-devtools/nhdogjmejiglipccpnnnanhbledajbpd)\r\n\r\n?!\r\n\r\nI\'m not ignorant to the power of extensions and thus the possible abuse scenarios, but again, with great power comes great responsibility.  The entire NPM ecosystem is powerful, and some would say dangerous, and as such we all respect that power and yet put it to good use.\r\n\r\nI\'m still waiting for @username_1 to chime in to give some direction because he is who I largely interacted when this ticket was opened Nov 20, 2018.  I think he would agree that I was patient during the process, I made numerous changes all at the request of others, and [the PR to reinstate NiM](https://github.com/nodejs/nodejs.org/pull/1938) wasn\'t merged until [Feb 19th, 2019](https://github.com/nodejs/nodejs.org/pull/1938#issuecomment-465432685).\r\n\r\nMy own analytics server (why it\'s ""suspicious""... I\'m still at odds with?!  Because it\'s my own domain and not a ""name brand"" one?) wasn\'t even one of the issues raised at the time, but I was sure to be thorough and do the work to ensure GDPR compliance was satisfied by including encryption code for any PII found in the NiM source.  Initially I thought adding encryption code might take too much time, but ultimately found it to be pretty straight forward.  This is all recorded in the Git history.  Changes to PII handling/notices/etc were stable and untouched long before Feb 19.\r\n\r\nSimilarly to when this issue was first opened, inaccurate/incomplete information is being disseminated about NiM and certainly with regard to the timeline.\r\n\r\nfirst @username_0 ""This requirement was added recently"", which was not the case (see the history).\r\nsecond @username_4 admittedly being ""new to the community"" opening [https://github.com/nodejs/node/issues/28184](https://github.com/nodejs/node/issues/28184), and [NiM Chrome Extension is collecting user\'s email address #28185](https://github.com/nodejs/node/issues/28185), even with the aforementioned changes in place and using phrases such as\r\n\r\n- ""look suspicious"",\r\n- ""probably a great portion of the users are not aware"" (which is not true because what user overlooks or misunderstands this?!:\r\n![Capture3](https://user-images.githubusercontent.com/11353590/59486175-5313f480-8e2d-11e9-8332-ff3056020ce0.JPG)...\r\nAND I\'ve struggled with this from [pretty early on](https://blog.username_2.com/foff/))\r\n- ""I wouldn\'t trust this extension"" (which is fair because it\'s his OPINION, and honestly I don\'t trust ANY code I didn\'t write or at least read, but I feel that in the context it\'s being used, it\'s unfair and maybe self serving)\r\n\r\nAgain, no changes have been made surrounding privacy issues since Feb 19, when it was clear enough at the time to all involved (including but not limited to @username_1 @username_5) that the PR was merged and the issue put to rest.  Nothing was/is hidden.  Nothing is a mystery or covert or ""suspicious"".  Problem was solved.  Everyone was happy.\r\n\r\nOne thing that has been bothering me is how quick certain individuals are ready to just blanket remove a resource from the documentation, at the occasional complaint from a few.  I thought the Node.js community was concerned with inclusion and diversity, technical innovation, and contributions from a BROAD selection of contributors, and actively promote inclusive conduct.  Let\'s keep that in mind as they are not my words but the words and ideals of the Node.js Foundation.\r\n\r\nMaybe lets start asking what we can add to the [Debugging Guide](https://nodejs.org/en/docs/guides/debugging-getting-started/) vs exclude.\r\n\r\nAnd now, [I bid you peace](https://simple.wikipedia.org/wiki/The_Frugal_Gourmet).  The Warriors lost, but that\'s okay cause they\'re leaving Oakland anyway.  Life moves on.', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'Trott', 'comment_id': 501988617.0, 'datetime': '2019-06-14 06:40:37+00:00', 'masked_author': 'username_11', 'text': 'For what it\'s worth, I just think we should avoid listing products/projects at all because it leads to exactly these sorts of problems. Some people think Project X doesn\'t meet whatever threshold is required in their mind, but other people think it\'s unfair to exclude Project X when Project Y is included. Additionally, there\'s the whole issue of ordering--whatever gets listed first will generate more interest than subsequent items. And there\'s the whole ""recommendation is not endorsement, but everyone thinks it is"" problem. Oh, and the potential we-have-to-update-the-list-all-the-time-as-things-come-and-go (but we don\'t update the guides much).\r\n\r\nIn general, I\'d much prefer we link to someone else\'s curated ""awesome"" list and let them deal with these issues. Yeah, from time to time, we\'ll have to update the link to a new ""awesome"" list when the old one grows stale and unmaintained. But that\'s relatively easy.\r\n\r\nAll this is my opinion only, though, and as you have no doubt noticed, opinions vary on this. I also have the (unpopular, I think) opinion that most or all of the guides should be removed from the website. Those are more suited to blog posts hosted elsewhere. People will find them via search engines, and we don\'t have to deal with keeping them up to date (which we are spotty-at-best at). By having lots of unmaintained content, we damage the site\'s credibility. But again, a lot of people do not share my view on this and believe the guides to be of significant value as well as appropriate for the website.', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'Trott', 'comment_id': 501989323.0, 'datetime': '2019-06-14 06:43:34+00:00', 'masked_author': 'username_11', 'text': 'To wit: https://github.com/sindresorhus/awesome-nodejs#debugging--profiling\r\n\r\nIt is heavily tilted towards modules, but the doc does say it lists ""modules and resources"", so I imagine a Chrome extension would not be unwelcome.', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'eyedean', 'comment_id': 502021611.0, 'datetime': '2019-06-14 08:35:05+00:00', 'masked_author': 'username_4', 'text': 'This is the `manifest.json` of all the 4 chrome extensions that you mentioned, where all the required permissions are listed:\r\n\r\n- angularjs-batarang: [manifest.json](https://github.com/spalger/angularjs-batarang/blob/master/manifest.json)\r\n- postmanInterceptor: [manifest.json](https://github.com/gnuhub/PostmanInterceptor/blob/master/extension/manifest.json)\r\n- react-devtools: [manifest.json](https://github.com/facebook/react-devtools/blob/master/shells/chrome/manifest.json)\r\n- vue-devtools: [manifest.json](https://github.com/vuejs/vue-devtools/blob/dev/shells/chrome/manifest.json)\r\n\r\nCan you please show us **where, in any of these, user\'s identity (email address) is a requested permission?**\r\n\r\nNone of these extensions are having ""business interests"" by collecting the emails of their users.  I bet there are many recruiters and marketing firms that can pay a lot for such a list of all the active  developers (to the minute, with their exact working hours, usage time, and what they are doing!) on a technology like Node.js in any company\'s email address (e.g. `<developerName>@{linkedin,twitter,uber,you-name-it}.com`)\r\n\r\nWhat bothers me the most here is, instead of hearing ""*Hey, this is my business model, and unlike all the other Chrome Extensions and NPM package, I\'d like to make money this way,*"" the effort is put on distracting people with words like ""new to community"", ""diversity and inclusion"", ""innovation"", and so on.\r\n\r\nAs I mentioned in my first post, you can remove <email address> (and clearly tell why did you need the email address as many people asked, instead of UUID) and I would become the biggest advocate of this Chrome Extension.  Until then, I\'d encourage you to stay focused on the matter, rather than personally judging and targeting the other members of the community!', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'ChALkeR', 'comment_id': 502040985.0, 'datetime': '2019-06-14 09:32:14+00:00', 'masked_author': 'username_5', 'text': '_Sigh. Ok, long post incoming._\r\n\r\nThat\'s not the only problem with the extensions.\r\n\r\nBrowser is the most trusted sandbox for the overwhelming majority of users -- they trust that when they click on a random link from a funny cat video, the advertisement on the linked site won\'t steal their banking details from the adjacent tab.\r\n\r\nNow, each new extension erodes that trust. Even if the extension itself is not malicious and even if we trust that the developer won\'t make it malicious in the future (and the developer won\'t get hacked and won\'t translate the ownership to some business that would install spyware). Because new extensions increase the attack area.\r\n\r\nThat means that in a browser, the users should are protected not only from outright malicious extensions -- that\'s not the greatest problem. Extensions install is rare and follows trust to specific extensions, so no extension should normally be both popular enough to affect a significant number of users and be malicious at the same time (exceptions [happen](https://www.theregister.co.uk/2018/07/05/browsers_pull_stylish_but_invasive_browser_extension/)).\r\n\r\n**Website visits are frequent.** User doesn\'t know what each website you visit does, and user doesn\'t even care in most cases -- and the reason why users have the privilege of not bothering with that is exactly because of the browser being the greatest sandbox, and it _guarantees_ the visit to be safe, unless the user does something stupid (like download and install a binary -- but they get warnings while doing that). So, we should always assume that some websites are malicious, there is no way around that.\r\n\r\nNow, there is a long history of not only malicious, but also vulnerable extensions:\r\n * [Evernote Chrome extension vulnerability allowed attackers to steal 4.6M users\' data](https://www.techrepublic.com/article/evernote-chrome-extension-vulnerability-allowed-attackers-to-steal-4-7m-users-data/)\r\n * [Adblock Plus Filters Can Be Exploited to Run Malicious Code](https://www.bleepingcomputer.com/news/security/adblock-plus-filters-can-be-exploited-to-run-malicious-code/)\r\n* [Abusing Firefox Extensions](https://www.defcon.org/images/defcon-17/dc-17-presentations/defcon-17-roberto_liverani-nick_freeman-abusing_firefox.pdf) -- a lot of those. E.g. Skype allowed automatic arbitrary number of calls to arbitrary phone numbers and skypenames, from any page.\r\n* [Severe vulnerabilities uncovered in popular password managers](https://www.zdnet.com/article/critical-vulnerabilities-uncovered-in-popular-password-managers/).\r\n* [LastPass remote code execution in trusted context](https://bugs.chromium.org/p/project-zero/issues/detail?id=1225)\r\n* [Hola](http://adios-hola.org/) -- a stand-alone one, it\'s not just an extension per se, and it\'s hard to say that that was not a design decision, but it had (or potentially still has) RCE.\r\n\r\nExtensions might be vulnerable in a way that allows malicious websites that the user visits to affect the extension that the user installed and attack it, abusing the privileges granted to the extension and extracting its data. Even if the extension is not ""malicious"" and the author is trusted by millions.\r\n\r\nWe don\'t have the power or time to review the extensions for being not only trusted to do nothing bad by themselves (which is also a question sometimes), but also for their security.', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'tniessen', 'comment_id': 502061089.0, 'datetime': '2019-06-14 10:40:04+00:00', 'masked_author': 'username_12', 'text': ""I am fine with either not recommending any or putting up a disclaimer.\r\n\r\nRegarding GDPR: From my perspective as an EU citizen (IANAL), the GDPR is covered by federal laws and if an extension violates the GDPR, the author can be sued, no matter whether they are EU citizens themselves or not. And even if they don't violate the GDPR, they still have to adhere to laws with difficult and cumbersome consequences (e.g., Article 15 and Article 17 of the GDPR) which might not be worth the marginal gain from obtaining user data. In this particular case, if email addresses are stored even after a user uninstalls the extension, that might violate Article 89 of the GDPR. Anyway, that is ultimately not our problem, so I am fine with either not recommending any extensions or adding a disclaimer."", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'sam-github', 'comment_id': 502221144.0, 'datetime': '2019-06-14 18:43:17+00:00', 'masked_author': 'username_6', 'text': 'PR: https://github.com/nodejs/nodejs.org/pull/2259', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'sam-github', 'comment_id': 502222275.0, 'datetime': '2019-06-14 18:46:59+00:00', 'masked_author': 'username_6', 'text': ""I can't comment on the popularity of the guides, maybe the website group has access logs? I personally look for the debugging guide every time I forget how to run the debugger!"", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'june07', 'comment_id': 502769974.0, 'datetime': '2019-06-17 17:08:06+00:00', 'masked_author': 'username_2', 'text': '@username_11 I would tend to agree with you, if [this PR](https://github.com/nodejs/nodejs.org/pull/2259) is merged.\r\n\r\nThe rules (""goalpost"") SHOULD be the same for every organization and in that vein, let us remove every link to Inspector Clients including:\r\n\r\n- Chrome DevTools ([Google](https://policies.google.com/privacy))\r\n- Visual Studio Code ([Microsoft](https://privacy.microsoft.com/en-US/privacystatement))\r\n- Visual Studio ([Microsoft](https://privacy.microsoft.com/en-US/privacystatement))\r\n- JetBrains WebStorm ([Jetbrains](https://www.jetbrains.com/company/privacy.html))\r\n- [Gitpod](https://www.gitpod.io/privacy)', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'ChALkeR', 'comment_id': 502786250.0, 'datetime': '2019-06-17 17:54:05+00:00', 'masked_author': 'username_5', 'text': '@username_2 The first four don\'t seem to be chrome extensions? The threat model is very different for those.\r\n\r\nThe last one is something that I am not familiar with. Does that directly promote installation of browser extensions? If yes, I am all for removing that too.\r\n\r\nNow, ""Don\'t be a browser extension"" is not sufficient to get into the list, obviously, even if we agree on not allowing browser extensions"". The question whether some of the other external links should be removed for other reasons is interesting, and I do not have an opinion on that at the moment.', 'title': None, 'type': 'comment'}
+ {'action': 'closed', 'author': 'sam-github', 'comment_id': None, 'datetime': '2019-06-18 16:00:01+00:00', 'masked_author': 'username_6', 'text': '', 'title': None, 'type': 'issue'}
+ {'action': 'reopened', 'author': 'tniessen', 'comment_id': None, 'datetime': '2019-06-18 16:13:09+00:00', 'masked_author': 'username_12', 'text': 'Hello wonderful NodeJS Team,\r\n\r\nOn the page https://nodejs.org/en/docs/guides/debugging-getting-started/#chrome-devtools-55 \r\nyou recommend the Chrome extension ""NiM"".\r\n\r\nPlease note that this extension requires to share our email addresses to use the extension (as well as the permission ""Read and change all your data on the websites you visit""). This requirement was added recently.\r\n\r\nI doubt this is GDPR compliant, and the author does not provide a clear justification of why they require such a private information.\r\n\r\nIMHO NodeJS should not recommend extensions with such practices.', 'title': 'Privacy issue with recommended Chrome extension', 'type': 'issue'}
+ {'action': 'closed', 'author': 'tniessen', 'comment_id': None, 'datetime': '2019-06-18 16:13:13+00:00', 'masked_author': 'username_12', 'text': '', 'title': None, 'type': 'issue'}]","<issue_start><issue_comment>Title: Privacy issue with recommended Chrome extension
+username_0: Hello wonderful NodeJS Team,
+
+On the page https://nodejs.org/en/docs/guides/debugging-getting-started/#chrome-devtools-55 
+you recommend the Chrome extension ""NiM"".
+
+Please note that this extension requires to share our email addresses to use the extension (as well as the permission ""Read and change all your data on the websites you visit""). This requirement was added recently.
+
+I doubt this is GDPR compliant, and the author does not provide a clear justification of why they require such a private information.
+
+IMHO NodeJS should not recommend extensions with such practices.
+<issue_comment>username_1: Hi Eric,
+
+thanks for pointing this out. Indeed, the user's email address is sent back **every second** to Google Analytics:
+https://github.com/username_2/NiM/blob/421d83ae7c5e06ae573a39a3ced0616390c7da8e/background.js#L112-L113<issue_closed>
+<issue_comment>username_2: As the author of NiM I would like to provide some feedback.
+
+@username_0 ""This requirement was added recently"" is not actually true.  Please see my blog post written approximately a year ago about this: http://username_2.com/foff/.
+
+Along with being highly rated at the Chrome Web Store, NiM has had the support of many in the Node.js community, including Paul Irish of the Chrome DevTools team https://twitter.com/username_2t/status/861664828909264896, and Wes Bos https://twitter.com/wesbos/status/839871332280057857, among others.
+
+As far as data (email addresses) being sent to Google Analytics, I'm unsure of how that is illegal?!  And I would love to be pointed in the right direction so as to change anything that in fact needs to be changed to conform to any compliance issues.
+
+I've written NiM out of my love for the Node.js language/community and continue to dedicate my time to the project.  MUCH more positive feedback has been received compared to negative and I would very much like the link to NiM be re-enstated such that other Node.js developers can also benefit from using NiM as so many others have.
+
+-Respectfully
+<issue_comment>username_3: [GDPR](https://en.wikipedia.org/wiki/General_Data_Protection_Regulation) is about providing a **choice of consent** about data collection.
+
+Collecting a data without asking a user its permission breaks this statement.
+
+One way to make it compliant would be to provide a user option (unchecked by default) and to let the user opt in, with a clear indication of what is the information used for (to be sold, to be processed, to send e-mails, etc.).
+<issue_comment>username_2: @username_1 Would be great to get some feedback on this.
+
+For the record, I've compared NiM's Chrome web store page with that of 10 different companies, all of whom have items in Google's Chrome web store, FOUR (EBay, Paypal, Walmart, and LinkedIn, of whom are among ""10 Global Companies Using Node.js in Production"" according to Google.  And none of which I would think the Node.js community would have a problem ""recommend""ing if that is what it means to add a link on the https://nodejs.org/en/docs/guides/debugging-getting-started/ page.
+
+I have compiled current pictures of all 10 companies’ chrome web store pages, as well as the privacy policy pages for each of the 5 which actually have them referenced, and uploaded them to Google photos (see link below).  As far as the other 5, there are a number of valid reasons why they may not have privacy policy links, just as NiM did not, but I don’t want to digress.
+
+https://photos.app.goo.gl/y4TN5dT1JeNbED2KA
+
+I can say with strong conviction that data collected by NiM is minuscule by every measure when compared to that collected by these larger companies.  Further, no data has ever been used for ill purposes and will not ever deviate from that found in our new privacy policy (link again: https://app.termly.io/document/privacy-policy/04164179-f943-4e87-ac8b-5afd0367dc6c#infocollect)  And again, @username_0’s statement that “this requirement was added recently.” is simply NOT the case as can be determined by reading the GitHub project history. 
+ [THIS](https://github.com/username_2/NiM/commit/4889f3bf9c29055ab3587fcec60460e2ae1e1908#diff-4b1eb3dc48c4e16d49db5b42298fe654) is where/when the extra permissions were added on Feb 9, 2017, close to 2 years ago.  As the removal was partly predicated on that statement, I bring it up again. 
+
+I do regret not having a privacy policy in place sooner.  To my defense, unlike these larger organizations, I don’t really have spare man/woman power to go around.  That said, the focus for me has been on trying to make NiM great  for the betterment of like-minded Node.js developers.  I should point out that I make zero monetary gain from NiM, and it is a side project for me.
+
+So, if they weren’t before, I believe that all of the bases are now covered.  I would like to get the Chrome web store link for NiM back and would be more than happy to submit a PR for such.
+
+Please advise...
+
+-Respectfully to all
+<issue_comment>username_4: I guess it wouldn't hurt to mention here too that this issue is back -- see https://github.com/nodejs/nodejs.org/issues/1923#issuecomment-501209247.
+
+Shall we reopen this issue?
+<issue_comment>username_5: Hello wonderful NodeJS Team,
+
+On the page https://nodejs.org/en/docs/guides/debugging-getting-started/#chrome-devtools-55 
+you recommend the Chrome extension ""NiM"".
+
+Please note that this extension requires to share our email addresses to use the extension (as well as the permission ""Read and change all your data on the websites you visit""). This requirement was added recently.
+
+I doubt this is GDPR compliant, and the author does not provide a clear justification of why they require such a private information.
+
+IMHO NodeJS should not recommend extensions with such practices.
+<issue_comment>username_5: @username_1 thoughts?
+<issue_comment>username_1: Honestly I'm a bit disappointed this issue is back. I thought we came to an understanding here, @username_2. And it can't be the job of the website team to continuously check for violations of privacy regulations of third-party tools listed on the website, as this could be interpreted as endorsement of those tools.
+
+In this case I'm in favor of removing this extension _permanently_ from the nodejs.org website. Thoughts, @nodejs/website?
+<issue_comment>username_2: Frederic/All,
+
+No changes have been made surrounding this issue as it was resolved way
+back then.  If you look at the code you will see that no changes to any of
+those parts of the code have been changed and nor would they.
+<issue_comment>username_6: ""Know your email address""
+
+This is a fairly vague statement, it doesn't say what is done with the email address to understand the user base.
+
+With such a delicate issue as removing an extension from our docs, I think the history should be more clear so a fair decision can be made. As-is, its too dispersed across multiple threads. Questions I'm left with:
+- ""I thought we came to an understanding here"" - I don't see a sign of any coming to an understanding in this thread
+- GDPR violation: its not clear to me that it does violate GDPR
+- The chrome extension seems to be clear in at least that it requests permission to know the user's email address, though I didn't see where it was written what it does with that address
+<issue_comment>username_2: My thoughts further being validated when NiM was finally reinstated.
+
+- It was my understanding that any GDPR violations were fixed (back then) by the above.  And again, nothing new has been added to the code to violate GDPR.
+- I agree.  And by design I think that Google has it's own fail-safe checks in place to ensure compliance to GDPR.  By the simple fact that we are talking about a Chrome Extension, that in of itself guarantees some things.  Notices are made at the Chrome store.  You get a nice popup when you install the extension.
+<issue_comment>username_6: I don't believe that is the case. Google has checks to ensure the user knows that the extension has access to the user's email address, since personal data is known by the extension, it is up to the extension to manage (or not) the data in compliance with any particular law. Its also not clear to me that compliance with GDPR is a requirement to be mentioned in the nodejs docs.
+
+A clear statement (both here and in the extension description) about what is done with the email address would help. As I said, there is no such statement in this thread or in the description on the chrome extension page.
+
+Also, there are suggestions in this thread that NiM has changed its handling of the email. In fact, that is the reason this has come up again. @username_1, could you provide some references here that demonstrate the ""violations of privacy regulations"" that you believe are occurring?
+<issue_comment>username_4: Thanks for your response, Will, and quick turnaround, Node team.
+
+As an independent developer who does not live in the EU, it's less about GDPR and the lawful aspect of it to me.  It's more about the real ""privacy"" and ""why"" does it need my email address, and not a UUID (which is in fact [provided by Google Analytics](https://developers.google.com/analytics/devguides/collection/analyticsjs/cookies-user-id) by default), to be sent to the author's personal servers in an encrypted manner.  Also the length that the author has gone to justify GDPR compliance and setting up the encryption and all makes me believe it's actually the user's ""email"" that is needed.  
+
+I assume by now and after 3 years of running, the author must have an extensive and valuable list of *the email addresses probably millions of active Node.js developers in the world.*  It's interesting that Node team doesn't have that and cannot have any *""business interests""* the way it's described in the [extensions's ToS](https://app.termly.io/document/privacy-policy/04164179-f943-4e87-ac8b-5afd0367dc6c#infouse). 
+
+I can even go further and say that with this script requesting access to all the tabs it [already has access](https://github.com/username_2/NiM/blob/master/background.js#L240) to any tab the user has open on their browser, including the source code of whomever runs this extension, making it very easily possible to spoof any sensitive material like `AWS_KEY: ""...""` and sending it to the personal server of the author.  I am not saying it's the intent at all.  I am just saying it's only one click away and it will take months for Node team to discover that and stop ""promoting"" that.  (PS. It's interesting that the [first line of the ToS pointed](https://app.termly.io/document/privacy-policy/04164179-f943-4e87-ac8b-5afd0367dc6c#infocollect) out by the author already says they collect password and payment stuffs! ;D)
+
+I am sorry but the code is currently actively [sending unnecessary personal stuffs, like user's email address to the personal server of the author at https://analytics.username_2.com](https://github.com/username_2/NiM/blob/master/background.js#L1079) and we have seen the deleted code coming back at the author's discretion.  
+
+~ ~ ~
+
+The point I am making is the extension is very helpful and very dangerous.  While I respect all the hard work of the author, I believe Node users deserve to at least clearly (not in the details of ToS) know that their email address and other personal information is going to be shared with the author who is not affiliated with the Node team.  Just knowing that is what I wish happens, at least.
+<issue_comment>username_7: Alternative tool that collects no information at all (because I don't care), but may not be as pretty (because it just launches dev tools): https://github.com/username_7/node-v8-inspector
+<issue_comment>username_2: @username_4 
+
+Of course.  I made looking into it a priority first thing this morning.
+
+I understand your concerns and if you read through the history of this you'll find I address some of them.  To be clear, we are talking about issues that were discussed months ago both in this forum as well as via several TSC meetings.  But...
+
+I think it's a bit unfair to go down the laundry list of possible attack vectors with NiM as the focus, when those things are in no way unique to NiM but shared by many tools.  The [documentation page](https://nodejs.org/en/docs/guides/debugging-getting-started/) already has a section ""Security Implications""... maybe some additional information can be there about?!
+
+- Further should Visual Studio Code be removed because of the possible extension high jacking tactics that can be done there?  I wrote a [VSCode extension that can integrate with Chrome DevTools](https://blog.username_2.com/nodedebugvscodedevtools/) and unlike the browser environment, VSCode extensions run full Node.js and don't operate within the constraints of the browser sandbox.
+- I'm not a Gitpod user but it seems like a server side tool which clearly requires user info to register ![Capture1](https://user-images.githubusercontent.com/11353590/59378827-1a2f2f00-8d0a-11e9-8338-c71b33489fc9.JPG)  It has a paid solution, ""business interests"" clearly.
+- )
+
+It may be a bit naive to think that the ""Node team themselves don't have such a valuable list and/or any ""business interests"""" as the signup form for [NodeSchool ](https://nodeschool.io/oakland/) demonstrates
+![image](https://user-images.githubusercontent.com/11353590/59377761-befc3d00-8d07-11e9-892b-e3cf8c75a265.png)  The fact is that every piece of technology is a ""business"" and it really boils down to the intentions of those behind those businesses and trust.  And I can say that with NiM, that is me, and I've tried and will continue trying to do well by the trust that users give me by using NiM.
+
+To stay focused on the issue of GDPR compliance, it's my understanding that no faults exist in that regard.  I'd be more than happy to add even more notices where appropriate and deemed required.  
+
+Already in place:
+
+- Chrome forces you to opt in before installing the extension.
+- The code is open source
+- I've even writing blogs about this issue which are open for anyone to read
+
+@username_1 have things changed with regard to how this is going to be treated moving forward?
+<issue_comment>username_8: Website folks: just a suggestion, would it make sense to put a disclaimer on the supported tools list? Something along the lines of, 'please evaluate the security implications and privacy policies of any such tools you install'. The Security section already discusses the general security implications of debugging tools.
+<issue_comment>username_4: @username_8 That would just help to reduce the liabilities of Node, in case of a catastrophe.
+
+The perception that people have around Open Source tools (Node.js included) is either it's free ([as in freedom](https://en.wikipedia.org/wiki/Gratis_versus_libre)) and backed by self-interest/reputation-building/sponsors/donators, or their business model is very obvious to the users. (e.g. selling enterprise support, education, dual licensing, etc.)
+
+For none of the packages I install via `npm -i`, I expect them to make money out of me in a non-trivial non-obvious manner, hidden in their ToS.  Such chrome extensions fall into the same mental category to me.
+
+All being said, whatever Node team decides, I respect.  I just wouldn't feel great if I need to tell any fellow Node developer, who trusts Node docs, that ""*Hey, BTW, that chrome extensions is taking your email address and other stuffs and sends them to someone's personal server for their own **business interests**.*""  And they would be literally shocked, I bet!
+
+Thanks.
+<issue_comment>username_8: @username_4 if it makes someone pause and look at the fine print, that could be good. I hear what you're saying, however, node can't continuously privacy audit the contents of all linked sites, so I think the expectation has to be set correctly.
+<issue_comment>username_5: As previously stated, I would just avoid recommending _any_ browser extensions whatsoever.
+<issue_comment>username_2: I've added a huge notice to the GitHub page and to the extension's web store page to help facilitate people not being ""shocked"" as @username_4 so eloquently put it, although I disagree with that statement in its entirety.  Further I think it takes away from the project when the facilities in place were sufficient both from a common sense standpoint and from a legal one and from what was established previously when this issue arose.  If that wasn't the case, I doubt @username_1 and his team would have reinstated NiM?!
+
+I would beg anyone to just look at the reviews of NiM and the utility of the tool before casting stones.  It's grown from ~30k to ~35k users since it was removed from Node's site late last year and increased in it's rating to 4.49 out of 5.  The Node community has shown more favor to NiM than not.  No one is forced to use it.  That entire doc page is about choice.
+
+I don't think demonizing browser extensions is not the right course of action.
+
+Further I think that if one simply looked at the facts, we wouldn't be having this discussion yet again.  I'll say again, no changes affecting GDPR compliance have been made since NiM was reinstated nor would/will they be.  A quick review of the history https://github.com/username_2/nim shows as much.  All I've done is add features to NiM, and to be honest analytics is on the low end of priorities, along with being something I'm growing fearful of even touching anymore because of this backlash.
+
+We are beating a dead horse at this point.  But I DO CARE and I'm trying to convey that fact to all involved.  I feel that NiM fills a void that needed/needs filling, and it does it well.  Further, it adds a lot above and beyond what is built in to debugging with Chrome or Chromium browser alone, as has been validated by the Chrome team themselves and NiM users.
+
+Unless some new/unknown GDPR compliance issue is being made, can we please put this to rest (and preferably not by shooting NiM in the head).  I think the nodejs team should stand behind the decision they made when they reinstated NiM in the first place.  A lot of work went into both making the needed changes, AND in adding i18n to the node documentation.
+
+Sweet dreams to all.  It's 11:14 here in the Bay Area and the heat is finally gone.  I hope I didn't offend anyone.  And I wish everyone the best.
+<issue_comment>username_9: Forgive my lack of knowledge around publishing chrome extensions, but as an aside, why is recording the email addresses of your users needed?
+
+If I were in your shoes I might consider it a liability. Given that data breaches are pretty much a daily occurrence now, not only do devs need to be good at developing software, but extra care needs to be taken to avoid opening security holes, whether your day to day includes security-related tasks or not.
+<issue_comment>username_6: You argue at length that this policy is reasonable and that most users of NiM are aware of it, and OK with it. That may be true, but I don't think its in the node project's interest to try to evaluate whether that is true or not.
+
+People are welcome to find and use NiM if they wish, its not necessary to the node debug experience, and its not necessary for our debug guide to link to it. I think we should do as @username_5 suggests.
+<issue_comment>username_10: I'd also go @username_5 suggestion.
+<issue_comment>username_11: I think it sends a mixed message to ask those questions if you agree with @username_5. @username_5's suggestion (which I also agree with FWIW) is to remove browser extensions from the list no matter what they are. Asking all those questions implies that if they are addressed, then listing it is OK. That's not @username_5's suggestion. If we're not going to list browser extensions no matter what, then those questions are irrelevant and, more importantly, potentially frustrating to anyone who wants it listed, almost like the goalposts are being moved. 
+
+Person A: ""OK, it switched to a UUID. Let's list it!""  
+Person B: ""Sorry, we're still not listing it because it's a browser extension."" 
+Person A:  (╯°□°)╯︵ ┻━┻
+<issue_comment>username_10: @username_11 you are right. I have made it confusing. Updated my comment.
+<issue_comment>username_2: @username_11 it does feel like a moving goal post.
+
+And I don't agree with the idea of exclusion based on the fact of being a Chrome extension.
+
+Again demonizing Chrome Extensions specifically I don't quite follow.  Speaking directly to this aversion to development with Chrome extension tools, these are a few that I'm sure more than a few have found to be useful:
+
+- [Postman Interceptor](https://chrome.google.com/webstore/detail/angularjs-batarang/ighdmehidhipcmcojjgiloacoafjmpfk
+)
+- [AngularJS Batarang](https://chrome.google.com/webstore/detail/react-developer-tools/fmkadmapgofadopljbjfkapdkoienihi/internal?hl=en)
+- [React Developer Tools](https://chrome.google.com/webstore/detail/postman-interceptor/aicmkgpgakddgnaphhhpliifpcfhicfo?hl=en)
+- [Vue.js devtools](https://chrome.google.com/webstore/detail/vuejs-devtools/nhdogjmejiglipccpnnnanhbledajbpd)
+
+?!
+
+I'm not ignorant to the power of extensions and thus the possible abuse scenarios, but again, with great power comes great responsibility.  The entire NPM ecosystem is powerful, and some would say dangerous, and as such we all respect that power and yet put it to good use.
+
+I'm still waiting for @username_1 to chime in to give some direction because he is who I largely interacted when this ticket was opened Nov 20, 2018.  I think he would agree that I was patient during the process, I made numerous changes all at the request of others, and [the PR to reinstate NiM](https://github.com/nodejs/nodejs.org/pull/1938) wasn't merged until [Feb 19th, 2019](https://github.com/nodejs/nodejs.org/pull/1938#issuecomment-465432685).
+
+My own analytics server (why it's ""suspicious""... I'm still at odds with?!  Because it's my own domain and not a ""name brand"" one?) wasn't even one of the issues raised at the time, but I was sure to be thorough and do the work to ensure GDPR compliance was satisfied by including encryption code for any PII found in the NiM source.  Initially I thought adding encryption code might take too much time, but ultimately found it to be pretty straight forward.  This is all recorded in the Git history.  Changes to PII handling/notices/etc were stable and untouched long before Feb 19.
+
+Similarly to when this issue was first opened, inaccurate/incomplete information is being disseminated about NiM and certainly with regard to the timeline.
+
+first @username_0 ""This requirement was added recently"", which was not the case (see the history).
+second @username_4 admittedly being ""new to the community"" opening [https://github.com/nodejs/node/issues/28184](https://github.com/nodejs/node/issues/28184), and [NiM Chrome Extension is collecting user's email address #28185](https://github.com/nodejs/node/issues/28185), even with the aforementioned changes in place and using phrases such as
+
+- ""look suspicious"",
+- ""probably a great portion of the users are not aware"" (which is not true because what user overlooks or misunderstands this?!:
+![Capture3](https://user-images.githubusercontent.com/11353590/59486175-5313f480-8e2d-11e9-8332-ff3056020ce0.JPG)...
+AND I've struggled with this from [pretty early on](https://blog.username_2.com/foff/))
+- ""I wouldn't trust this extension"" (which is fair because it's his OPINION, and honestly I don't trust ANY code I didn't write or at least read, but I feel that in the context it's being used, it's unfair and maybe self serving)
+
+Again, no changes have been made surrounding privacy issues since Feb 19, when it was clear enough at the time to all involved (including but not limited to @username_1 @username_5) that the PR was merged and the issue put to rest.  Nothing was/is hidden.  Nothing is a mystery or covert or ""suspicious"".  Problem was solved.  Everyone was happy.
+
+One thing that has been bothering me is how quick certain individuals are ready to just blanket remove a resource from the documentation, at the occasional complaint from a few.  I thought the Node.js community was concerned with inclusion and diversity, technical innovation, and contributions from a BROAD selection of contributors, and actively promote inclusive conduct.  Let's keep that in mind as they are not my words but the words and ideals of the Node.js Foundation.
+
+Maybe lets start asking what we can add to the [Debugging Guide](https://nodejs.org/en/docs/guides/debugging-getting-started/) vs exclude.
+
+And now, [I bid you peace](https://simple.wikipedia.org/wiki/The_Frugal_Gourmet).  The Warriors lost, but that's okay cause they're leaving Oakland anyway.  Life moves on.
+<issue_comment>username_11: For what it's worth, I just think we should avoid listing products/projects at all because it leads to exactly these sorts of problems. Some people think Project X doesn't meet whatever threshold is required in their mind, but other people think it's unfair to exclude Project X when Project Y is included. Additionally, there's the whole issue of ordering--whatever gets listed first will generate more interest than subsequent items. And there's the whole ""recommendation is not endorsement, but everyone thinks it is"" problem. Oh, and the potential we-have-to-update-the-list-all-the-time-as-things-come-and-go (but we don't update the guides much).
+
+In general, I'd much prefer we link to someone else's curated ""awesome"" list and let them deal with these issues. Yeah, from time to time, we'll have to update the link to a new ""awesome"" list when the old one grows stale and unmaintained. But that's relatively easy.
+
+All this is my opinion only, though, and as you have no doubt noticed, opinions vary on this. I also have the (unpopular, I think) opinion that most or all of the guides should be removed from the website. Those are more suited to blog posts hosted elsewhere. People will find them via search engines, and we don't have to deal with keeping them up to date (which we are spotty-at-best at). By having lots of unmaintained content, we damage the site's credibility. But again, a lot of people do not share my view on this and believe the guides to be of significant value as well as appropriate for the website.
+<issue_comment>username_11: To wit: https://github.com/sindresorhus/awesome-nodejs#debugging--profiling
+
+It is heavily tilted towards modules, but the doc does say it lists ""modules and resources"", so I imagine a Chrome extension would not be unwelcome.
+<issue_comment>username_4: This is the `manifest.json` of all the 4 chrome extensions that you mentioned, where all the required permissions are listed:
+
+- angularjs-batarang: [manifest.json](https://github.com/spalger/angularjs-batarang/blob/master/manifest.json)
+- postmanInterceptor: [manifest.json](https://github.com/gnuhub/PostmanInterceptor/blob/master/extension/manifest.json)
+- react-devtools: [manifest.json](https://github.com/facebook/react-devtools/blob/master/shells/chrome/manifest.json)
+- vue-devtools: [manifest.json](https://github.com/vuejs/vue-devtools/blob/dev/shells/chrome/manifest.json)
+
+Can you please show us **where, in any of these, user's identity (email address) is a requested permission?**
+
+None of these extensions are having ""business interests"" by collecting the emails of their users.  I bet there are many recruiters and marketing firms that can pay a lot for such a list of all the active  developers (to the minute, with their exact working hours, usage time, and what they are doing!) on a technology like Node.js in any company's email address (e.g. `<developerName>@{linkedin,twitter,uber,you-name-it}.com`)
+
+What bothers me the most here is, instead of hearing ""*Hey, this is my business model, and unlike all the other Chrome Extensions and NPM package, I'd like to make money this way,*"" the effort is put on distracting people with words like ""new to community"", ""diversity and inclusion"", ""innovation"", and so on.
+
+As I mentioned in my first post, you can remove <email address> (and clearly tell why did you need the email address as many people asked, instead of UUID) and I would become the biggest advocate of this Chrome Extension.  Until then, I'd encourage you to stay focused on the matter, rather than personally judging and targeting the other members of the community!
+<issue_comment>username_5: _Sigh. Ok, long post incoming._
+
+That's not the only problem with the extensions.
+
+Browser is the most trusted sandbox for the overwhelming majority of users -- they trust that when they click on a random link from a funny cat video, the advertisement on the linked site won't steal their banking details from the adjacent tab.
+
+Now, each new extension erodes that trust. Even if the extension itself is not malicious and even if we trust that the developer won't make it malicious in the future (and the developer won't get hacked and won't translate the ownership to some business that would install spyware). Because new extensions increase the attack area.
+
+That means that in a browser, the users should are protected not only from outright malicious extensions -- that's not the greatest problem. Extensions install is rare and follows trust to specific extensions, so no extension should normally be both popular enough to affect a significant number of users and be malicious at the same time (exceptions [happen](https://www.theregister.co.uk/2018/07/05/browsers_pull_stylish_but_invasive_browser_extension/)).
+
+**Website visits are frequent.** User doesn't know what each website you visit does, and user doesn't even care in most cases -- and the reason why users have the privilege of not bothering with that is exactly because of the browser being the greatest sandbox, and it _guarantees_ the visit to be safe, unless the user does something stupid (like download and install a binary -- but they get warnings while doing that). So, we should always assume that some websites are malicious, there is no way around that.
+
+Now, there is a long history of not only malicious, but also vulnerable extensions:
+ * [Evernote Chrome extension vulnerability allowed attackers to steal 4.6M users' data](https://www.techrepublic.com/article/evernote-chrome-extension-vulnerability-allowed-attackers-to-steal-4-7m-users-data/)
+ * [Adblock Plus Filters Can Be Exploited to Run Malicious Code](https://www.bleepingcomputer.com/news/security/adblock-plus-filters-can-be-exploited-to-run-malicious-code/)
+* [Abusing Firefox Extensions](https://www.defcon.org/images/defcon-17/dc-17-presentations/defcon-17-roberto_liverani-nick_freeman-abusing_firefox.pdf) -- a lot of those. E.g. Skype allowed automatic arbitrary number of calls to arbitrary phone numbers and skypenames, from any page.
+* [Severe vulnerabilities uncovered in popular password managers](https://www.zdnet.com/article/critical-vulnerabilities-uncovered-in-popular-password-managers/).
+* [LastPass remote code execution in trusted context](https://bugs.chromium.org/p/project-zero/issues/detail?id=1225)
+* [Hola](http://adios-hola.org/) -- a stand-alone one, it's not just an extension per se, and it's hard to say that that was not a design decision, but it had (or potentially still has) RCE.
+
+Extensions might be vulnerable in a way that allows malicious websites that the user visits to affect the extension that the user installed and attack it, abusing the privileges granted to the extension and extracting its data. Even if the extension is not ""malicious"" and the author is trusted by millions.
+
+We don't have the power or time to review the extensions for being not only trusted to do nothing bad by themselves (which is also a question sometimes), but also for their security.
+<issue_comment>username_12: I am fine with either not recommending any or putting up a disclaimer.
+
+Regarding GDPR: From my perspective as an EU citizen (IANAL), the GDPR is covered by federal laws and if an extension violates the GDPR, the author can be sued, no matter whether they are EU citizens themselves or not. And even if they don't violate the GDPR, they still have to adhere to laws with difficult and cumbersome consequences (e.g., Article 15 and Article 17 of the GDPR) which might not be worth the marginal gain from obtaining user data. In this particular case, if email addresses are stored even after a user uninstalls the extension, that might violate Article 89 of the GDPR. Anyway, that is ultimately not our problem, so I am fine with either not recommending any extensions or adding a disclaimer.
+<issue_comment>username_6: PR: https://github.com/nodejs/nodejs.org/pull/2259
+<issue_comment>username_6: I can't comment on the popularity of the guides, maybe the website group has access logs? I personally look for the debugging guide every time I forget how to run the debugger!
+<issue_comment>username_2: @username_11 I would tend to agree with you, if [this PR](https://github.com/nodejs/nodejs.org/pull/2259) is merged.
+
+The rules (""goalpost"") SHOULD be the same for every organization and in that vein, let us remove every link to Inspector Clients including:
+
+- Chrome DevTools ([Google](https://policies.google.com/privacy))
+- Visual Studio Code ([Microsoft](https://privacy.microsoft.com/en-US/privacystatement))
+- Visual Studio ([Microsoft](https://privacy.microsoft.com/en-US/privacystatement))
+- JetBrains WebStorm ([Jetbrains](https://www.jetbrains.com/company/privacy.html))
+- [Gitpod](https://www.gitpod.io/privacy)
+<issue_comment>username_5: @username_2 The first four don't seem to be chrome extensions? The threat model is very different for those.
+
+The last one is something that I am not familiar with. Does that directly promote installation of browser extensions? If yes, I am all for removing that too.
+
+Now, ""Don't be a browser extension"" is not sufficient to get into the list, obviously, even if we agree on not allowing browser extensions"". The question whether some of the other external links should be removed for other reasons is interesting, and I do not have an opinion on that at the moment.<issue_closed>
+<issue_comment>username_12: Hello wonderful NodeJS Team,
+
+On the page https://nodejs.org/en/docs/guides/debugging-getting-started/#chrome-devtools-55 
+you recommend the Chrome extension ""NiM"".
+
+Please note that this extension requires to share our email addresses to use the extension (as well as the permission ""Read and change all your data on the websites you visit""). This requirement was added recently.
+
+I doubt this is GDPR compliant, and the author does not provide a clear justification of why they require such a private information.
+
+IMHO NodeJS should not recommend extensions with such practices.<issue_closed>"
+linkerd/website,583850170,690,"{'number': 690.0, 'repo': 'website', 'user_login': 'linkerd'}","[{'action': 'opened', 'author': 'zaharidichev', 'comment_id': None, 'datetime': '2020-03-18T16:24:08Z', 'masked_author': 'username_0', 'text': 'Feel free to give feedback wrt to CLI tools and overall workflow. A lot of the stuff described here is not yet merged (but all works...)', 'title': 'Add mutliclsuter support tutorial', 'type': 'issue'}
+ {'action': 'created', 'author': 'grampelberg', 'comment_id': 600898511.0, 'datetime': '2020-03-18 22:53:57+00:00', 'masked_author': 'username_1', 'text': ""@cpretzer would you mind giving it a try end to end now. @username_0 might have some suggestions on how to get all the pieces in a single place to test out. I'm particularly interested in the bits that are confusing and/or don't flow immediately. If you're running a command that isn't in the doc, we need to update it =)"", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'zaharidichev', 'comment_id': 601158320.0, 'datetime': '2020-03-19 12:46:28+00:00', 'masked_author': 'username_0', 'text': '@cpretzer, @username_1  if you want to test this, you can use this branch: https://github.com/linkerd/linkerd2/tree/zd/multicluster-e2e-testing. It has everything that is described here. I have also published e version of the proxy that has the needed parts: `gcr.io/linkerd-io/proxy:multi`\r\n\r\nLet me know how it goes :)', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'guyromb', 'comment_id': 606172171.0, 'datetime': '2020-03-30 18:40:45+00:00', 'masked_author': 'username_2', 'text': 'This is really awesome progress.\r\nThe power of Linkerd is in its simplicity. If we are able to provide a sustainable gateway solution (e.g. similarly to Istio / Envoy) yet keep it simple stupid it will be a great advantage.', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'grampelberg', 'comment_id': 614325388.0, 'datetime': '2020-04-15 23:13:53+00:00', 'masked_author': 'username_1', 'text': ""@username_0 give this gateway config a try. I've:\r\n\r\n1. Removed all the `resolv.conf` stuff (super cool!) and just send it to loopback (note, not 127.0.0.1 as that'll skip the proxy).\r\n1. Use the tcp stream stuff instead of http and proxy_pass.\r\n1. Put everything in its own namespace for easy cleanup.\r\n1. Add injection because I'm lazy.\r\n1. Fix the nginx tag to the latest major version.\r\n\r\n```\r\napiVersion: v1\r\nkind: Namespace\r\nmetadata:\r\n  name: linkerd-gateway\r\n---\r\napiVersion: v1\r\nkind: ConfigMap\r\nmetadata:\r\n  name: nginx-configuration\r\n  namespace: linkerd-gateway\r\ndata:\r\n  nginx.conf: |-\r\n    events {\r\n    }\r\n    stream {\r\n      server {\r\n          listen     80;\r\n          proxy_pass 127.1.1.1:80;\r\n      }\r\n    }\r\n---\r\napiVersion: apps/v1\r\nkind: Deployment\r\nmetadata:\r\n  name: linkerd-gateway\r\n  namespace: linkerd-gateway\r\n  labels:\r\n    app: linkerd-gateway\r\nspec:\r\n  replicas: 1\r\n  selector:\r\n    matchLabels:\r\n      app: linkerd-gateway\r\n  template:\r\n    metadata:\r\n      annotations:\r\n        linkerd.io/inject: enabled\r\n      labels:\r\n        app: linkerd-gateway\r\n    spec:\r\n      volumes:\r\n      - name: config\r\n        configMap:\r\n          name: nginx-configuration\r\n      containers:\r\n      - name: nginx\r\n        image: nginx:1.17\r\n        ports:\r\n        - name: http\r\n          containerPort: 80\r\n        volumeMounts:\r\n        - name: config\r\n          mountPath: /etc/nginx\r\n---\r\napiVersion: v1\r\nkind: Service\r\nmetadata:\r\n  name: linkerd-gateway\r\n  namespace: linkerd-gateway\r\n  annotations:\r\n    mirror.linkerd.io/gateway-identity: default.default.serviceaccount.identity.linkerd.cluster.local\r\nspec:\r\n  ports:\r\n  - name: incoming-port\r\n    port: 80\r\n    protocol: TCP\r\n  selector:\r\n    app: linkerd-gateway\r\n  type: LoadBalancer\r\n```"", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'zaharidichev', 'comment_id': 614469492.0, 'datetime': '2020-04-16 07:35:16+00:00', 'masked_author': 'username_0', 'text': ""@username_1 That works out well. The only problem was that event with the proxy injected,  `127.1.1.1:80` was still creating a loop. So instead, I decided to just send it to the proxy's outbound server port (`proxy_pass 127.0.0.1:4140`). That works well."", 'title': None, 'type': 'comment'}]","<issue_start><issue_comment>Title: Add mutliclsuter support tutorial
+username_0: Feel free to give feedback wrt to CLI tools and overall workflow. A lot of the stuff described here is not yet merged (but all works...)
+<issue_comment>username_1: @cpretzer would you mind giving it a try end to end now. @username_0 might have some suggestions on how to get all the pieces in a single place to test out. I'm particularly interested in the bits that are confusing and/or don't flow immediately. If you're running a command that isn't in the doc, we need to update it =)
+<issue_comment>username_0: @cpretzer, @username_1  if you want to test this, you can use this branch: https://github.com/linkerd/linkerd2/tree/zd/multicluster-e2e-testing. It has everything that is described here. I have also published e version of the proxy that has the needed parts: `gcr.io/linkerd-io/proxy:multi`
+
+Let me know how it goes :)
+<issue_comment>username_2: This is really awesome progress.
+The power of Linkerd is in its simplicity. If we are able to provide a sustainable gateway solution (e.g. similarly to Istio / Envoy) yet keep it simple stupid it will be a great advantage.
+<issue_comment>username_1: @username_0 give this gateway config a try. I've:
+
+1. Removed all the `resolv.conf` stuff (super cool!) and just send it to loopback (note, not 127.0.0.1 as that'll skip the proxy).
+1. Use the tcp stream stuff instead of http and proxy_pass.
+1. Put everything in its own namespace for easy cleanup.
+1. Add injection because I'm lazy.
+1. Fix the nginx tag to the latest major version.
+
+```
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: linkerd-gateway
+---
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: nginx-configuration
+  namespace: linkerd-gateway
+data:
+  nginx.conf: |-
+    events {
+    }
+    stream {
+      server {
+          listen     80;
+          proxy_pass 127.1.1.1:80;
+      }
+    }
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: linkerd-gateway
+  namespace: linkerd-gateway
+  labels:
+    app: linkerd-gateway
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: linkerd-gateway
+  template:
+    metadata:
+      annotations:
+        linkerd.io/inject: enabled
+      labels:
+        app: linkerd-gateway
+    spec:
+      volumes:
+      - name: config
+        configMap:
+          name: nginx-configuration
+      containers:
+      - name: nginx
+        image: nginx:1.17
+        ports:
+        - name: http
+          containerPort: 80
+        volumeMounts:
+        - name: config
+          mountPath: /etc/nginx
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: linkerd-gateway
+  namespace: linkerd-gateway
+  annotations:
+    mirror.linkerd.io/gateway-identity: default.default.serviceaccount.identity.linkerd.cluster.local
+spec:
+  ports:
+  - name: incoming-port
+    port: 80
+    protocol: TCP
+  selector:
+    app: linkerd-gateway
+  type: LoadBalancer
+```
+<issue_comment>username_0: @username_1 That works out well. The only problem was that event with the proxy injected,  `127.1.1.1:80` was still creating a loop. So instead, I decided to just send it to the proxy's outbound server port (`proxy_pass 127.0.0.1:4140`). That works well."
+google/web-starter-kit,55294026,613,"{'number': 613.0, 'repo': 'web-starter-kit', 'user_login': 'google'}","[{'action': 'opened', 'author': 'jeffposnick', 'comment_id': None, 'datetime': '2015-01-23T15:27:27Z', 'masked_author': 'username_0', 'text': ""@PaulKinlan @username_1 & co.:\r\n\r\nAs discussed in #606, he's an approach to adding in offline support to WSK using the `sw-precache` module."", 'title': 'Service-worker based caching using sw-precache', 'type': 'issue'}
+ {'action': 'created', 'author': 'addyosmani', 'comment_id': 71445317.0, 'datetime': '2015-01-26 11:07:34+00:00', 'masked_author': 'username_1', 'text': 'Verified as working correctly both in Device Mode while offline and actually offline:\r\n\r\n![](http://i.imgur.com/nbjLZ7f.png)', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'addyosmani', 'comment_id': 71447663.0, 'datetime': '2015-01-26 11:29:12+00:00', 'masked_author': 'username_1', 'text': ""Tech review complete. Minor nits:\r\n\r\n* Can we limit the code-width for comments to 80 characters?\r\n* Remove the Style Guide from the glob patterns list in `staticFileGlobs`\r\n* `dynamicUrlToDependencies` should have a one-line comment summarising https://github.com/username_0/sw-precache#dynamicurltodependencies-objectstringarraystring. It's unclear to me atm whether I need to change this should I wish to support multiple markup files.\r\n* Please add a one-line comment for `stripPrefix` summarising https://github.com/username_0/sw-precache#stripprefix-string"", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'addyosmani', 'comment_id': 71448310.0, 'datetime': '2015-01-26 11:35:45+00:00', 'masked_author': 'username_1', 'text': ""Open question: Beginners and intermediate users are unlikely to have an SSL/HTTPs enabled web server. While Service Worker will work fine for them offline given localhost is whitelisted, they may be surprised to find this doesn't work in production.\r\n\r\nWhat can we do to alleviate this? Some options:\r\n\r\n* Include a comment reiterating the HTTPs requirement for this section\r\n* Comment out Service Worker configuration. User must uncomment to use/enable.\r\n* Don't include sw-precache in the default Gulpfile, but instead author a recipe for the `docs` directory which walks users through adding this in. Such a guide could also link up to additional SW resources.\r\n\r\nLooping in @gauntface @paullewis @username_2 @username_3 for their thoughts."", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'passy', 'comment_id': 71448869.0, 'datetime': '2015-01-26 11:41:27+00:00', 'masked_author': 'username_2', 'text': ""Advocating for HTTPS might be a good thing regardless of whether SW is enabled or not. As it gets easier and cheaper to deploy (gh-pages, Heroku, Cloudflare Universal SSL and EFF's Let's Encrypt) it should definitely not prevent anyone from using this.\r\n\r\nAnd on a more general note, I'm really excited about including this with WSK and getting some ServiceWorker code into hundreds (if not more) pages that would otherwise probably never see it."", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'sindresorhus', 'comment_id': 71449281.0, 'datetime': '2015-01-26 11:45:26+00:00', 'masked_author': 'username_3', 'text': ':+1: Is there like a ""the ultimate SSL guide"" we could link to?', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'addyosmani', 'comment_id': 71450335.0, 'datetime': '2015-01-26 11:55:44+00:00', 'masked_author': 'username_1', 'text': ""https://twitter.com/fugueish/status/548589307502395392 maybe? I've asked Chris to consider publishing this on Web Fundamentals or Chromium.org."", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'addyosmani', 'comment_id': 71622778.0, 'datetime': '2015-01-27 10:25:28+00:00', 'masked_author': 'username_1', 'text': ""FYI, Jeff has started work on addressing some of @PaulKinlan's feedback on the getting started experience for WSK + Service Workers over in #617."", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'jeffposnick', 'comment_id': 71890331.0, 'datetime': '2015-01-28 18:41:44+00:00', 'masked_author': 'username_0', 'text': ""I just pushed some updates to address https://github.com/google/web-starter-kit/pull/613#issuecomment-71447663. It was hard to stick to one line for some of the comments, though.\r\n\r\nI also put in a default value for the `cacheId` based on `package.json`'s `name`, assuming it's set.\r\n\r\n(I'm fairly sure that `sw-precache` will help with the pain point @PaulKinlan details in https://github.com/google/web-starter-kit/issues/617, but we can continue that conversation there.)"", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'addyosmani', 'comment_id': 72024509.0, 'datetime': '2015-01-29 13:38:33+00:00', 'masked_author': 'username_1', 'text': 'Thank you for updating, @username_0! Changes LGTM. It primarily looks like the the lines that are still > 80 are long URLs, so let\'s keep them as is for now. Can we get these commits squashed in preparation to land? :)\r\n\r\nTesting SW when served over a non-secure origin with SW caching in place, the user may see ""Mixed content"" warnings in DevTools, saying that the content must be loaded over HTTPs in order to correctly load from cache. \r\n\r\nGiven the average end-user is unlikely to have DevTools open, but a developer will, I\'m personally okay with this. Does anyone have any concerns here before we land this set of changes?', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'passy', 'comment_id': 72038774.0, 'datetime': '2015-01-29 15:02:03+00:00', 'masked_author': 'username_2', 'text': ""Tested in latest Canary and works wonderfully. I'm happy with it! :) :+1:"", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'jeffposnick', 'comment_id': 72050940.0, 'datetime': '2015-01-29 16:07:21+00:00', 'masked_author': 'username_0', 'text': ""My `rebase`-fu is weak, but I think the squash worked.\r\n\r\nBased on the comment around logging noise in https://github.com/google/web-starter-kit/pull/613#issuecomment-72024509, [I added in a check](https://github.com/username_0/web-starter-kit/blob/material-sprint/app/scripts/main.js#L27) to ensure we're on a [secure origin](http://www.chromium.org/Home/chromium-security/prefer-secure-origins-for-powerful-new-features) before attempting SW registration. It means that on non-secure origins, there won't be any console feedback about the lack of SW support, but it is friendlier for actual deployments."", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'addyosmani', 'comment_id': 72385937.0, 'datetime': '2015-02-01 21:43:36+00:00', 'masked_author': 'username_1', 'text': 'Changes LGTM. Thanks so much for working on this, @username_0! :star:', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'jeffposnick', 'comment_id': 72512433.0, 'datetime': '2015-02-02 18:42:13+00:00', 'masked_author': 'username_0', 'text': ':fireworks:', 'title': None, 'type': 'comment'}]","<issue_start><issue_comment>Title: Service-worker based caching using sw-precache
+username_0: @PaulKinlan @username_1 & co.:
+
+As discussed in #606, he's an approach to adding in offline support to WSK using the `sw-precache` module.
+<issue_comment>username_1: Verified as working correctly both in Device Mode while offline and actually offline:
+
+![](http://i.imgur.com/nbjLZ7f.png)
+<issue_comment>username_1: Tech review complete. Minor nits:
+
+* Can we limit the code-width for comments to 80 characters?
+* Remove the Style Guide from the glob patterns list in `staticFileGlobs`
+* `dynamicUrlToDependencies` should have a one-line comment summarising https://github.com/username_0/sw-precache#dynamicurltodependencies-objectstringarraystring. It's unclear to me atm whether I need to change this should I wish to support multiple markup files.
+* Please add a one-line comment for `stripPrefix` summarising https://github.com/username_0/sw-precache#stripprefix-string
+<issue_comment>username_1: Open question: Beginners and intermediate users are unlikely to have an SSL/HTTPs enabled web server. While Service Worker will work fine for them offline given localhost is whitelisted, they may be surprised to find this doesn't work in production.
+
+What can we do to alleviate this? Some options:
+
+* Include a comment reiterating the HTTPs requirement for this section
+* Comment out Service Worker configuration. User must uncomment to use/enable.
+* Don't include sw-precache in the default Gulpfile, but instead author a recipe for the `docs` directory which walks users through adding this in. Such a guide could also link up to additional SW resources.
+
+Looping in @gauntface @paullewis @username_2 @username_3 for their thoughts.
+<issue_comment>username_2: Advocating for HTTPS might be a good thing regardless of whether SW is enabled or not. As it gets easier and cheaper to deploy (gh-pages, Heroku, Cloudflare Universal SSL and EFF's Let's Encrypt) it should definitely not prevent anyone from using this.
+
+And on a more general note, I'm really excited about including this with WSK and getting some ServiceWorker code into hundreds (if not more) pages that would otherwise probably never see it.
+<issue_comment>username_3: :+1: Is there like a ""the ultimate SSL guide"" we could link to?
+<issue_comment>username_1: https://twitter.com/fugueish/status/548589307502395392 maybe? I've asked Chris to consider publishing this on Web Fundamentals or Chromium.org.
+<issue_comment>username_1: FYI, Jeff has started work on addressing some of @PaulKinlan's feedback on the getting started experience for WSK + Service Workers over in #617.
+<issue_comment>username_0: I just pushed some updates to address https://github.com/google/web-starter-kit/pull/613#issuecomment-71447663. It was hard to stick to one line for some of the comments, though.
+
+I also put in a default value for the `cacheId` based on `package.json`'s `name`, assuming it's set.
+
+(I'm fairly sure that `sw-precache` will help with the pain point @PaulKinlan details in https://github.com/google/web-starter-kit/issues/617, but we can continue that conversation there.)
+<issue_comment>username_1: Thank you for updating, @username_0! Changes LGTM. It primarily looks like the the lines that are still > 80 are long URLs, so let's keep them as is for now. Can we get these commits squashed in preparation to land? :)
+
+Testing SW when served over a non-secure origin with SW caching in place, the user may see ""Mixed content"" warnings in DevTools, saying that the content must be loaded over HTTPs in order to correctly load from cache. 
+
+Given the average end-user is unlikely to have DevTools open, but a developer will, I'm personally okay with this. Does anyone have any concerns here before we land this set of changes?
+<issue_comment>username_2: Tested in latest Canary and works wonderfully. I'm happy with it! :) :+1:
+<issue_comment>username_0: My `rebase`-fu is weak, but I think the squash worked.
+
+Based on the comment around logging noise in https://github.com/google/web-starter-kit/pull/613#issuecomment-72024509, [I added in a check](https://github.com/username_0/web-starter-kit/blob/material-sprint/app/scripts/main.js#L27) to ensure we're on a [secure origin](http://www.chromium.org/Home/chromium-security/prefer-secure-origins-for-powerful-new-features) before attempting SW registration. It means that on non-secure origins, there won't be any console feedback about the lack of SW support, but it is friendlier for actual deployments.
+<issue_comment>username_1: Changes LGTM. Thanks so much for working on this, @username_0! :star:
+<issue_comment>username_0: :fireworks:"
+kubernetes/website,432332850,13792,,"[{'action': 'opened', 'author': 'phs', 'comment_id': None, 'datetime': '2019-04-12 00:11:26+00:00', 'masked_author': 'username_0', 'text': ""Hello,\r\n\r\nI've been looking for information about the possibility of control creating and updating annotations through authorization such as RBAC.\r\n\r\nMy use case is a custom controller driven by a CRD. I would like to allow my end-users to create/update/delete CRD instances, but still provide a means for a separate set of empowered users to somehow modify the CRD instance to further unlock sensitive functionality in the controller.  Annotations on the CRD instances writable only by the empowered users might fill that need.\r\n\r\nThe `kubectl` CLI exposes a separate `annotate` verb, which gives me hope that a separate verb for annotation also exists in the API, where I might bind an RBAC rule.\r\n\r\nHowever it seems I can find nothing in either the RBAC or annotation documentation confirming or denying this.  Are annotations treated separately in the security model?  What are the relevant verbs?"", 'title': 'Improvement for k8s.io/docs/concepts/overview/working-with-objects/annotations/', 'type': 'issue'}
+ {'action': 'created', 'author': 'DanyC97', 'comment_id': 483535044.0, 'datetime': '2019-04-16 06:55:25+00:00', 'masked_author': 'username_1', 'text': ""hi @username_0 i'd suggest you try to find an answer by asking on https://discuss.kubernetes.io/ or on K8s slack channels \r\n\r\nwith that said i'm going to close this issue as is not related to the docs. \r\n/close"", 'title': None, 'type': 'comment'}]","<issue_start><issue_comment>Title: Improvement for k8s.io/docs/concepts/overview/working-with-objects/annotations/
+username_0: Hello,
+
+I've been looking for information about the possibility of control creating and updating annotations through authorization such as RBAC.
+
+My use case is a custom controller driven by a CRD. I would like to allow my end-users to create/update/delete CRD instances, but still provide a means for a separate set of empowered users to somehow modify the CRD instance to further unlock sensitive functionality in the controller.  Annotations on the CRD instances writable only by the empowered users might fill that need.
+
+The `kubectl` CLI exposes a separate `annotate` verb, which gives me hope that a separate verb for annotation also exists in the API, where I might bind an RBAC rule.
+
+However it seems I can find nothing in either the RBAC or annotation documentation confirming or denying this.  Are annotations treated separately in the security model?  What are the relevant verbs?
+<issue_comment>username_1: hi @username_0 i'd suggest you try to find an answer by asking on https://discuss.kubernetes.io/ or on K8s slack channels 
+
+with that said i'm going to close this issue as is not related to the docs. 
+/close"
+corona-warn-app/cwa-website,785025978,769,,"[{'action': 'opened', 'author': 'MikeMcC399', 'comment_id': None, 'datetime': '2021-01-13 11:31:44+00:00', 'masked_author': 'username_0', 'text': '## Where to find the issue\r\nFrom web browser: https://www.bundesregierung.de/corona-warn-app-faq-englisch \r\n\r\nThrough app:\r\n1. Device language is set to English\r\n2. Select FAQ in app\r\n3. scroll down \r\n\r\nSite status listed as Tuesday, 29. December 2020\r\n\r\n## Describe the issue\r\nThe headings of three sections are not readable since the text overlaps itself\r\n\r\n- How does using the Corona-Warn-App affect the battery life and storage space of smartphones?\r\n- Why do we need a central server for a distributed solution? Isn’t that a contradiction?\r\n- Is the ""increased risk"" warning by the Corona-Warn-App enough for sick leave or ordering quarantine?\r\n\r\n---\r\n![Unreadable subheadings](https://user-images.githubusercontent.com/66998419/104446685-1a08ac80-559b-11eb-8b15-3c29b9596128.jpg)\r\n\r\n---\r\n## Suggested change\r\n\r\nSomething has gone wrong with the formatting of the page https://www.bundesregierung.de/corona-warn-app-faq-englisch \r\nCompared to the German language page https://www.bundesregierung.de/corona-warn-app-faq the + / - to open and close FAQ sections is missing on the English language page.', 'title': 'BReg FAQ: Unreadable headings', 'type': 'issue'}
+ {'action': 'created', 'author': 'dsarkar', 'comment_id': 759395375.0, 'datetime': '2021-01-13 11:44:02+00:00', 'masked_author': 'username_1', 'text': '@username_0 Thanks. Internal Tracking ID: EXPOSUREAPP-4481.', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'GisoSchroederSAP', 'comment_id': 765406104.0, 'datetime': '2021-01-22 13:44:43+00:00', 'masked_author': 'username_2', 'text': ""Besides the fact, the above-mentioned URL [https://www.bundesregierung.de/corona-warn-app-faq-englisch] is not reachable (HTTP 404) but the URL [https://www.bundesregierung.de/corona-warn-app-faq-1758636] provide the English FAQ, \r\nunfortunately, I cannot reproduce the described behavior - maybe this is related to the used local browser. \r\n\r\nHowever, as I investigated there are two sections with a different font-setting on that FAQ page, I'm going to inform our contact at BPA (Bundespresseamt), which is responsible and capable in that matter."", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'MikeMcC399', 'comment_id': 765461677.0, 'datetime': '2021-01-22 14:58:17+00:00', 'masked_author': 'username_0', 'text': '@username_2\r\nThe URL https://www.bundesregierung.de/corona-warn-app-faq-englisch\r\ncomes from the string `main_about_link` embedded in the Android app at\r\n\r\nhttps://github.com/corona-warn-app/cwa-app-android/blob/4f7664467cb9be280f39e5e61f9e0eb5f6063613/Corona-Warn-App/src/main/res/values/strings.xml#L205-L206\r\n\r\nhttps://www.bundesregierung.de/corona-warn-app-faq-englisch responds with http 301 ""Moved Permanently"" and refers to the new location\r\nhttps://www.bundesregierung.de/breg-de/themen/corona-warn-app/corona-warn-app-englisch/corona-warn-app-faq-1758636 (similar to the URL you quoted).\r\n\r\nI can\'t say why you were getting a 404 error. I can\'t reproduce that problem.\r\n\r\nThe screen shot in the original issue report is **not** reproducible viewing the page in Android using Samsung Internet 172.16.31.10, however the problem **does** show using:\r\n\r\n- Google Chrome Version 87.0.4280.141 under Android and\r\n- Mozilla Firefox 84.1.4 under Android\r\n\r\nThe issues are also visible using Chrome, Firefox and Edge browsers under Microsoft Windows.\r\n\r\nThank you for contacting BPA about the English page.\r\n\r\nBTW the German page https://www.bundesregierung.de/breg-de/themen/corona-warn-app/corona-warn-app-faq-1758392 has a confusing double date at the bottom \r\nStand: 25. November 2020\r\nDienstag, 29. Dezember 2020', 'title': None, 'type': 'comment'}
+ {'action': 'closed', 'author': 'MikeMcC399', 'comment_id': None, 'datetime': '2021-01-27 18:56:30+00:00', 'masked_author': 'username_0', 'text': '', 'title': None, 'type': 'issue'}
+ {'action': 'created', 'author': 'MikeMcC399', 'comment_id': 768500160.0, 'datetime': '2021-01-27 18:56:30+00:00', 'masked_author': 'username_0', 'text': '@username_2 \r\nThe bad headings on\r\nhttps://www.bundesregierung.de/breg-de/themen/corona-warn-app/corona-warn-app-englisch/corona-warn-app-faq-1758636\r\nare fixed and the page is showing a status date\r\nMonday, 25. January 2021 (so the double status date is also fixed).', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'Ein-Tim', 'comment_id': 770229706.0, 'datetime': '2021-01-30 15:32:39+00:00', 'masked_author': 'username_3', 'text': ""I'm still able to reproduce this on an iPhone 6s:\r\n\r\n![IMG_5672DC2287E5-1](https://user-images.githubusercontent.com/67682506/106360449-c0351000-6318-11eb-956a-5c19621d7ddc.jpeg)"", 'title': None, 'type': 'comment'}
+ {'action': 'reopened', 'author': 'MikeMcC399', 'comment_id': None, 'datetime': '2021-01-30 15:44:36+00:00', 'masked_author': 'username_0', 'text': '## Where to find the issue\r\nFrom web browser: https://www.bundesregierung.de/corona-warn-app-faq-englisch \r\n\r\nThrough app:\r\n1. Device language is set to English\r\n2. Select FAQ in app\r\n3. scroll down \r\n\r\nSite status listed as Tuesday, 29. December 2020\r\n\r\n## Describe the issue\r\nThe headings of three sections are not readable since the text overlaps itself\r\n\r\n- How does using the Corona-Warn-App affect the battery life and storage space of smartphones?\r\n- Why do we need a central server for a distributed solution? Isn’t that a contradiction?\r\n- Is the ""increased risk"" warning by the Corona-Warn-App enough for sick leave or ordering quarantine?\r\n\r\n---\r\n![Unreadable subheadings](https://user-images.githubusercontent.com/66998419/104446685-1a08ac80-559b-11eb-8b15-3c29b9596128.jpg)\r\n\r\n---\r\n## Suggested change\r\n\r\nSomething has gone wrong with the formatting of the page https://www.bundesregierung.de/corona-warn-app-faq-englisch \r\nCompared to the German language page https://www.bundesregierung.de/corona-warn-app-faq the + / - to open and close FAQ sections is missing on the English language page.\r\n\r\n\r\n---\r\nInternal Tracking ID: [EXPOSUREAPP-4481](https://jira-ibs.wbs.net.sap/browse/EXPOSUREAPP-4481)', 'title': 'BReg FAQ: Unreadable headings', 'type': 'issue'}
+ {'action': 'created', 'author': 'MikeMcC399', 'comment_id': 770233577.0, 'datetime': '2021-01-30 16:01:05+00:00', 'masked_author': 'username_0', 'text': '@username_3 \r\nThanks for reporting the issue with https://www.bundesregierung.de/breg-de/themen/corona-warn-app/corona-warn-app-englisch/corona-warn-app-faq-1758636\r\n\r\nThe page now has an update status date of Friday, 29. January 2021.\r\n\r\nI can reproduce the heading issue on a Samsung device using Samsung Internet browser Version 172.16.31.10 and Google Chrome Version 88.0.4324.93 running on Android.\r\n\r\nOn a large screen running on a Microsoft Windows machine with Google Chrome 88.0.4324.104 the issue is noticeable if the window width is reduced to a minimum (like a mobile phone in portrait orientation).\r\n\r\nThe German FAQ page https://www.bundesregierung.de/breg-de/themen/corona-warn-app/corona-warn-app-faq-1758392 does not show the problem with the headings. On the German page each of the headings is linked to a ➕ sign which can be clicked to expand the FAQ article.  On the English page there are no longer ➕ signs. They have disappeared. The article appear in full and there is no function to expand or collapse an article.\r\n\r\nI have re-opened the issue and I need to retract the statement to @username_2 that the issue is fixed. 😞', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'GisoSchroederSAP', 'comment_id': 770253203.0, 'datetime': '2021-01-30 18:04:58+00:00', 'masked_author': 'username_2', 'text': ""All,\r\nI sent another collection of hints regarding English FAQ  to the respective BPA department:\r\n* Wrong or missing heading fonts\r\n* Missing FAQ and Blog links to coronawarn.app on the English FAQ version\r\n* Inconsistent layout in German (with line item expansion feature) and English website (without line item expansion)\r\n\r\nInternal tracking IDs 4479 and 4481 are updated accordingly.\r\n\r\nThanks @username_3, @username_0, and @username_1 for your ongoing engagement. I'll try to follow-up on those issues as soon as I can. However, with respect to #303 there is one decision that should no longer questioned, please:\r\nThere will not be *one* combined FAQ somewhere, the hierarchy is clear and fix: The [federal FAQ](https://www.bundesregierung.de/breg-de/themen/corona-warn-app/corona-warn-app-faq-1758392) comes first. From there, they will link to other sites like the [technical FAQ] (https://www.coronawarn.app/de/faq/) or to the [RKI](https://www.rki.de/DE/Content/InfAZ/N/Neuartiges_Coronavirus/nCoV.html). \r\nI hope you all can accept this hierarchy, even if this may lead to misplaced FAQ items or overlaps.\r\n\r\nThank you all."", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'Ein-Tim', 'comment_id': 770254227.0, 'datetime': '2021-01-30 18:11:15+00:00', 'masked_author': 'username_3', 'text': ""@username_2 \r\n\r\nThank you for all your work and also clarifying that the FAQ hierarchy is fix. \r\nI accept this, although I think that another hierarchy would make more sense, but I won't complain since this is a bit nitpicky IMHO 😅\r\n\r\nThanks for answering on a Saturday evening, have a nice week-end ❤"", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'MikeMcC399', 'comment_id': 770356625.0, 'datetime': '2021-01-31 09:59:17+00:00', 'masked_author': 'username_0', 'text': '@username_2\r\n\r\nThank you again for following up with BPA!\r\n\r\nPlease let us know the preferred way to report issues with the [Federal FAQs](https://www.bundesregierung.de/breg-de/themen/corona-warn-app/corona-warn-app-faq-1758392) managed by BPA. Should we continue to use https://github.com/corona-warn-app/cwa-website/issues even though the source of the [Federal FAQs](https://www.bundesregierung.de/breg-de/themen/corona-warn-app/corona-warn-app-faq-1758392) is not mirrored in this repository?', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'GisoSchroederSAP', 'comment_id': 770398336.0, 'datetime': '2021-01-31 15:18:31+00:00', 'masked_author': 'username_2', 'text': ""Yes, please stay with the current procedure. From GitHub input we create internal issues to follow up with the proper parties (DEV, communications, BPA, RKI...) . This gives us the chance to track the issues with standard tools and to collect similar items (I'm quite convinced BPA rather prefers the bundled website issues than separate tickets).\r\nThank you for your support here - many eyes uncover way more than two eys of an old man ;-)"", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'MikeMcC399', 'comment_id': 770921947.0, 'datetime': '2021-02-01 15:03:37+00:00', 'masked_author': 'username_0', 'text': 'I am seeing the English FAQ page https://www.bundesregierung.de/breg-de/themen/corona-warn-app/corona-warn-app-englisch/corona-warn-app-faq-1758636 displaying correctly now on Android and Windows .\r\n\r\nThe page still shows Friday, 29. January 2021 at the bottom though.\r\n\r\n@username_3 would you like to check on iOS?', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'Ein-Tim', 'comment_id': 770939558.0, 'datetime': '2021-02-01 15:27:18+00:00', 'masked_author': 'username_3', 'text': '@username_0 \n\nSeems fixed, now correctly displayed via Safari in-App browser on iOS.', 'title': None, 'type': 'comment'}
+ {'action': 'closed', 'author': 'MikeMcC399', 'comment_id': None, 'datetime': '2021-02-01 16:04:56+00:00', 'masked_author': 'username_0', 'text': '', 'title': None, 'type': 'issue'}
+ {'action': 'created', 'author': 'MikeMcC399', 'comment_id': 770965631.0, 'datetime': '2021-02-01 16:04:56+00:00', 'masked_author': 'username_0', 'text': '@username_2 - Thank you for working with BPA to get this fixed!\r\n@username_3 Thanks to you also for your support!\r\n\r\nNow closing as fixed.', 'title': None, 'type': 'comment'}]","<issue_start><issue_comment>Title: BReg FAQ: Unreadable headings
+username_0: ## Where to find the issue
+From web browser: https://www.bundesregierung.de/corona-warn-app-faq-englisch 
+
+Through app:
+1. Device language is set to English
+2. Select FAQ in app
+3. scroll down 
+
+Site status listed as Tuesday, 29. December 2020
+
+## Describe the issue
+The headings of three sections are not readable since the text overlaps itself
+
+- How does using the Corona-Warn-App affect the battery life and storage space of smartphones?
+- Why do we need a central server for a distributed solution? Isn’t that a contradiction?
+- Is the ""increased risk"" warning by the Corona-Warn-App enough for sick leave or ordering quarantine?
+
+---
+![Unreadable subheadings](https://user-images.githubusercontent.com/66998419/104446685-1a08ac80-559b-11eb-8b15-3c29b9596128.jpg)
+
+---
+## Suggested change
+
+Something has gone wrong with the formatting of the page https://www.bundesregierung.de/corona-warn-app-faq-englisch 
+Compared to the German language page https://www.bundesregierung.de/corona-warn-app-faq the + / - to open and close FAQ sections is missing on the English language page.
+<issue_comment>username_1: @username_0 Thanks. Internal Tracking ID: EXPOSUREAPP-4481.
+<issue_comment>username_2: Besides the fact, the above-mentioned URL [https://www.bundesregierung.de/corona-warn-app-faq-englisch] is not reachable (HTTP 404) but the URL [https://www.bundesregierung.de/corona-warn-app-faq-1758636] provide the English FAQ, 
+unfortunately, I cannot reproduce the described behavior - maybe this is related to the used local browser. 
+
+However, as I investigated there are two sections with a different font-setting on that FAQ page, I'm going to inform our contact at BPA (Bundespresseamt), which is responsible and capable in that matter.
+<issue_comment>username_0: @username_2
+The URL https://www.bundesregierung.de/corona-warn-app-faq-englisch
+comes from the string `main_about_link` embedded in the Android app at
+
+https://github.com/corona-warn-app/cwa-app-android/blob/4f7664467cb9be280f39e5e61f9e0eb5f6063613/Corona-Warn-App/src/main/res/values/strings.xml#L205-L206
+
+https://www.bundesregierung.de/corona-warn-app-faq-englisch responds with http 301 ""Moved Permanently"" and refers to the new location
+https://www.bundesregierung.de/breg-de/themen/corona-warn-app/corona-warn-app-englisch/corona-warn-app-faq-1758636 (similar to the URL you quoted).
+
+I can't say why you were getting a 404 error. I can't reproduce that problem.
+
+The screen shot in the original issue report is **not** reproducible viewing the page in Android using Samsung Internet 13.2.1.70, however the problem **does** show using:
+
+- Google Chrome Version 87.0.4280.141 under Android and
+- Mozilla Firefox 84.1.4 under Android
+
+The issues are also visible using Chrome, Firefox and Edge browsers under Microsoft Windows.
+
+Thank you for contacting BPA about the English page.
+
+BTW the German page https://www.bundesregierung.de/breg-de/themen/corona-warn-app/corona-warn-app-faq-1758392 has a confusing double date at the bottom 
+Stand: 25. November 2020
+Dienstag, 29. Dezember 2020<issue_closed>
+<issue_comment>username_0: @username_2 
+The bad headings on
+https://www.bundesregierung.de/breg-de/themen/corona-warn-app/corona-warn-app-englisch/corona-warn-app-faq-1758636
+are fixed and the page is showing a status date
+Monday, 25. January 2021 (so the double status date is also fixed).
+<issue_comment>username_3: I'm still able to reproduce this on an iPhone 6s:
+
+![IMG_5672DC2287E5-1](https://user-images.githubusercontent.com/67682506/106360449-c0351000-6318-11eb-956a-5c19621d7ddc.jpeg)
+<issue_comment>username_0: ## Where to find the issue
+From web browser: https://www.bundesregierung.de/corona-warn-app-faq-englisch 
+
+Through app:
+1. Device language is set to English
+2. Select FAQ in app
+3. scroll down 
+
+Site status listed as Tuesday, 29. December 2020
+
+## Describe the issue
+The headings of three sections are not readable since the text overlaps itself
+
+- How does using the Corona-Warn-App affect the battery life and storage space of smartphones?
+- Why do we need a central server for a distributed solution? Isn’t that a contradiction?
+- Is the ""increased risk"" warning by the Corona-Warn-App enough for sick leave or ordering quarantine?
+
+---
+![Unreadable subheadings](https://user-images.githubusercontent.com/66998419/104446685-1a08ac80-559b-11eb-8b15-3c29b9596128.jpg)
+
+---
+## Suggested change
+
+Something has gone wrong with the formatting of the page https://www.bundesregierung.de/corona-warn-app-faq-englisch 
+Compared to the German language page https://www.bundesregierung.de/corona-warn-app-faq the + / - to open and close FAQ sections is missing on the English language page.
+
+
+---
+Internal Tracking ID: [EXPOSUREAPP-4481](https://jira-ibs.wbs.net.sap/browse/EXPOSUREAPP-4481)
+<issue_comment>username_0: @username_3 
+Thanks for reporting the issue with https://www.bundesregierung.de/breg-de/themen/corona-warn-app/corona-warn-app-englisch/corona-warn-app-faq-1758636
+
+The page now has an update status date of Friday, 29. January 2021.
+
+I can reproduce the heading issue on a Samsung device using Samsung Internet browser Version 13.2.1.70 and Google Chrome Version 88.0.4324.93 running on Android.
+
+On a large screen running on a Microsoft Windows machine with Google Chrome 88.0.4324.104 the issue is noticeable if the window width is reduced to a minimum (like a mobile phone in portrait orientation).
+
+The German FAQ page https://www.bundesregierung.de/breg-de/themen/corona-warn-app/corona-warn-app-faq-1758392 does not show the problem with the headings. On the German page each of the headings is linked to a ➕ sign which can be clicked to expand the FAQ article.  On the English page there are no longer ➕ signs. They have disappeared. The article appear in full and there is no function to expand or collapse an article.
+
+I have re-opened the issue and I need to retract the statement to @username_2 that the issue is fixed. 😞
+<issue_comment>username_2: All,
+I sent another collection of hints regarding English FAQ  to the respective BPA department:
+* Wrong or missing heading fonts
+* Missing FAQ and Blog links to coronawarn.app on the English FAQ version
+* Inconsistent layout in German (with line item expansion feature) and English website (without line item expansion)
+
+Internal tracking IDs 4479 and 4481 are updated accordingly.
+
+Thanks @username_3, @username_0, and @username_1 for your ongoing engagement. I'll try to follow-up on those issues as soon as I can. However, with respect to #303 there is one decision that should no longer questioned, please:
+There will not be *one* combined FAQ somewhere, the hierarchy is clear and fix: The [federal FAQ](https://www.bundesregierung.de/breg-de/themen/corona-warn-app/corona-warn-app-faq-1758392) comes first. From there, they will link to other sites like the [technical FAQ] (https://www.coronawarn.app/de/faq/) or to the [RKI](https://www.rki.de/DE/Content/InfAZ/N/Neuartiges_Coronavirus/nCoV.html). 
+I hope you all can accept this hierarchy, even if this may lead to misplaced FAQ items or overlaps.
+
+Thank you all.
+<issue_comment>username_3: @username_2 
+
+Thank you for all your work and also clarifying that the FAQ hierarchy is fix. 
+I accept this, although I think that another hierarchy would make more sense, but I won't complain since this is a bit nitpicky IMHO 😅
+
+Thanks for answering on a Saturday evening, have a nice week-end ❤
+<issue_comment>username_0: @username_2
+
+Thank you again for following up with BPA!
+
+Please let us know the preferred way to report issues with the [Federal FAQs](https://www.bundesregierung.de/breg-de/themen/corona-warn-app/corona-warn-app-faq-1758392) managed by BPA. Should we continue to use https://github.com/corona-warn-app/cwa-website/issues even though the source of the [Federal FAQs](https://www.bundesregierung.de/breg-de/themen/corona-warn-app/corona-warn-app-faq-1758392) is not mirrored in this repository?
+<issue_comment>username_2: Yes, please stay with the current procedure. From GitHub input we create internal issues to follow up with the proper parties (DEV, communications, BPA, RKI...) . This gives us the chance to track the issues with standard tools and to collect similar items (I'm quite convinced BPA rather prefers the bundled website issues than separate tickets).
+Thank you for your support here - many eyes uncover way more than two eys of an old man ;-)
+<issue_comment>username_0: I am seeing the English FAQ page https://www.bundesregierung.de/breg-de/themen/corona-warn-app/corona-warn-app-englisch/corona-warn-app-faq-1758636 displaying correctly now on Android and Windows .
+
+The page still shows Friday, 29. January 2021 at the bottom though.
+
+@username_3 would you like to check on iOS?
+<issue_comment>username_3: @username_0 
+
+Seems fixed, now correctly displayed via Safari in-App browser on iOS.<issue_closed>
+<issue_comment>username_0: @username_2 - Thank you for working with BPA to get this fixed!
+@username_3 Thanks to you also for your support!
+
+Now closing as fixed."
+JuliaLang/www.julialang.org,640847319,877,"{'number': 877.0, 'repo': 'www.julialang.org', 'user_login': 'JuliaLang'}","[{'action': 'opened', 'author': 'logankilpatrick', 'comment_id': None, 'datetime': '2020-06-18T01:53:15Z', 'masked_author': 'username_0', 'text': 'This is an overhaul of the Julia Learning page. The wording on some of the sections is sparse so feel free to suggest things.', 'title': '[WIP] Re-designed Julia Learning Page', 'type': 'issue'}
+ {'action': 'created', 'author': 'logankilpatrick', 'comment_id': 645721508.0, 'datetime': '2020-06-18 01:54:30+00:00', 'masked_author': 'username_0', 'text': 'https://julialang.netlify.app/learning/', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'zdroid', 'comment_id': 645841013.0, 'datetime': '2020-06-18 07:41:12+00:00', 'masked_author': 'username_1', 'text': 'Those red sections look a bit messy with different top and bottom whitespace:\r\n\r\n![Screenshot from 2020-06-18 09-40-34](https://user-images.githubusercontent.com/2725611/84992127-cab6e680-b147-11ea-956e-cde3468a1f44.png)', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'ViralBShah', 'comment_id': 646027518.0, 'datetime': '2020-06-18 13:46:51+00:00', 'masked_author': 'username_2', 'text': 'Apart from the whitespace issues, I have some content thoughts.\r\n\r\n- [ ] I think we should show all the JuliaAcademy classes, and some of the books on this page with icons/pictures.\r\n- [ ] For Youtube, we should mention all the other non-teaching materials - perhaps that is for the community page.\r\n- [ ] For the universities teaching Julia, maybe we should add this image', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'ViralBShah', 'comment_id': 646028432.0, 'datetime': '2020-06-18 13:48:31+00:00', 'masked_author': 'username_2', 'text': '![Screen Shot 2020-06-18 at 9 48 07 AM](https://user-images.githubusercontent.com/744411/85028278-dce55480-b148-11ea-941e-6f508ed826a7.png)', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'ViralBShah', 'comment_id': 646028575.0, 'datetime': '2020-06-18 13:48:46+00:00', 'masked_author': 'username_2', 'text': '![Screen Shot 2020-06-18 at 9 48 19 AM](https://user-images.githubusercontent.com/744411/85028292-e2429f00-b148-11ea-8870-7ed96da8a7f4.png)', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'ViralBShah', 'comment_id': 646029929.0, 'datetime': '2020-06-18 13:51:12+00:00', 'masked_author': 'username_2', 'text': 'I can probably update the books to add a couple of new ones. I am guessing if we are going to do this, I can share the powerpoint slides, so that we can use the individual images in that to put a set of tiles together.', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'logankilpatrick', 'comment_id': 646835650.0, 'datetime': '2020-06-19 19:48:46+00:00', 'masked_author': 'username_0', 'text': ""@username_2 I agree with all those suggestions. Adding some images will liven things up. Feel free to post the images here or send them to me on Slack and I'll get them in there unless the ones above are sufficient ^"", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'zdroid', 'comment_id': 646844683.0, 'datetime': '2020-06-19 20:15:00+00:00', 'masked_author': 'username_1', 'text': ""@username_2 It does look very good, but it can't be expanded further, which is a bit of a liability. It also won't display nicely on mobiles, since the image has fixed size and cannot be broken into layout components."", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'ViralBShah', 'comment_id': 646868901.0, 'datetime': '2020-06-19 21:35:33+00:00', 'masked_author': 'username_2', 'text': 'I think with books, the images are easy to expand. With universities, not so much. I guess we could just show this list as a collection of some universities, followed by a larger list.', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'zdroid', 'comment_id': 646888916.0, 'datetime': '2020-06-19 22:57:13+00:00', 'masked_author': 'username_1', 'text': ""@username_2 That's right, I agree with you that not all universities should be presented on the prominent pages. Maybe a separate page for that would work well enough.\r\n\r\nBut I still don't see much merit of using an image. It is not a suitable form of communication, to merge multiple images into a larger one, when they can be broken down and made into a layout. Such image will be displayed very bad on smaller screens for example."", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'ViralBShah', 'comment_id': 646899462.0, 'datetime': '2020-06-19 23:44:44+00:00', 'masked_author': 'username_2', 'text': 'I did not suggest using the image... Just shared it as an example of what I have. I have shared the presentation with the images with Logan.', 'title': None, 'type': 'comment'}]","<issue_start><issue_comment>Title: [WIP] Re-designed Julia Learning Page
+username_0: This is an overhaul of the Julia Learning page. The wording on some of the sections is sparse so feel free to suggest things.
+<issue_comment>username_0: https://julialang.netlify.app/learning/
+<issue_comment>username_1: Those red sections look a bit messy with different top and bottom whitespace:
+
+![Screenshot from 2020-06-18 09-40-34](https://user-images.githubusercontent.com/2725611/84992127-cab6e680-b147-11ea-956e-cde3468a1f44.png)
+<issue_comment>username_2: Apart from the whitespace issues, I have some content thoughts.
+
+- [ ] I think we should show all the JuliaAcademy classes, and some of the books on this page with icons/pictures.
+- [ ] For Youtube, we should mention all the other non-teaching materials - perhaps that is for the community page.
+- [ ] For the universities teaching Julia, maybe we should add this image
+<issue_comment>username_2: ![Screen Shot 2020-06-18 at 9 48 07 AM](https://user-images.githubusercontent.com/744411/85028278-dce55480-b148-11ea-941e-6f508ed826a7.png)
+<issue_comment>username_2: ![Screen Shot 2020-06-18 at 9 48 19 AM](https://user-images.githubusercontent.com/744411/85028292-e2429f00-b148-11ea-8870-7ed96da8a7f4.png)
+<issue_comment>username_2: I can probably update the books to add a couple of new ones. I am guessing if we are going to do this, I can share the powerpoint slides, so that we can use the individual images in that to put a set of tiles together.
+<issue_comment>username_0: @username_2 I agree with all those suggestions. Adding some images will liven things up. Feel free to post the images here or send them to me on Slack and I'll get them in there unless the ones above are sufficient ^
+<issue_comment>username_1: @username_2 It does look very good, but it can't be expanded further, which is a bit of a liability. It also won't display nicely on mobiles, since the image has fixed size and cannot be broken into layout components.
+<issue_comment>username_2: I think with books, the images are easy to expand. With universities, not so much. I guess we could just show this list as a collection of some universities, followed by a larger list.
+<issue_comment>username_1: @username_2 That's right, I agree with you that not all universities should be presented on the prominent pages. Maybe a separate page for that would work well enough.
+
+But I still don't see much merit of using an image. It is not a suitable form of communication, to merge multiple images into a larger one, when they can be broken down and made into a layout. Such image will be displayed very bad on smaller screens for example.
+<issue_comment>username_2: I did not suggest using the image... Just shared it as an example of what I have. I have shared the presentation with the images with Logan."
+microsoft/TypeScript-Website,596110123,481,,"[{'action': 'opened', 'author': 'orta', 'comment_id': None, 'datetime': '2020-04-07 19:47:53+00:00', 'masked_author': 'username_0', 'text': '**Improvement Idea:** I want to be able to do ""cmd + /"" and quickly jump around the site\r\n**Why:** To improve the experience for power users', 'title': 'Idea: Key Command for Search', 'type': 'issue'}
+ {'action': 'created', 'author': 'orta', 'comment_id': 668069241.0, 'datetime': '2020-08-03 14:57:13+00:00', 'masked_author': 'username_0', 'text': ""#690 does have this, and it's pretty cool. Waiting for it to get a bit more stable before continuing."", 'title': None, 'type': 'comment'}]","<issue_start><issue_comment>Title: Idea: Key Command for Search
+username_0: **Improvement Idea:** I want to be able to do ""cmd + /"" and quickly jump around the site
+**Why:** To improve the experience for power users
+<issue_comment>username_0: #690 does have this, and it's pretty cool. Waiting for it to get a bit more stable before continuing."
+tektoncd/website,815726960,252,,"[{'action': 'opened', 'author': 'sergetron', 'comment_id': None, 'datetime': '2021-02-24 18:16:18+00:00', 'masked_author': 'username_0', 'text': '### Feature request\r\n\r\nTo maintain a high quality level for Tekton documentation, documentation changes should go through editorial review in addition to technical review. @Sergetron and other members of the Tekton Docs Working Group are willing to volunteer as editorial reviewers. The best way to make this happen is to automatically add the editorial reviewers to every PR that modifies documentation.\r\n\r\n### Use case\r\n\r\nPrerequisites: We must create a GitHub team that includes Tekton docs reviewers.\r\n\r\n1. Someone creates a PR against any of the Tekton project repos and that PR contains documentation changes.\r\n2. When we detect that the PR contains changes to files in the /docs directory, we automatically add the docs reviewers team as reviewers for the PR.\r\n3. PR goes through normal review process with docs changes reviewed for technical accuracy by the usual reviewers and for language, structure, and other editorial items by the docs reviewers team.', 'title': 'Automatically add an editorial reviewer team to every PR that modifies docs', 'type': 'issue'}
+ {'action': 'created', 'author': 'afrittoli', 'comment_id': 796152506.0, 'datetime': '2021-03-10 21:32:56+00:00', 'masked_author': 'username_1', 'text': 'This will be implemented as follows:\r\n- create a tekton task or pipeline that will run on PR open/reopen/sync/label, with the following logic\r\n- check if the label `kind/documentation` is set or if any file in the docs folder is modified or any `*.md` file is modified\r\n- in case of match cc the @tektoncd/docs-reviewers team on the PR', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'afrittoli', 'comment_id': 804838199.0, 'datetime': '2021-03-23 11:49:03+00:00', 'masked_author': 'username_1', 'text': ""I've been trying to implement this by requesting the doc team as a reviewer on PRs, however it turns out that only repo collaborators can be reviewers (from GitHub point of view). Making the doc reviewers team a collaborator of all repos would automatically git `/lgtm` powers to all members of the team on all repos, which is not what we want.\r\nThe only alternative I can think of is to add a comment to the PR with @tektoncd/docs-reviewers - that should trigger a notification email, so it should be enough."", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'sergetron', 'comment_id': 804932041.0, 'datetime': '2021-03-23 14:07:39+00:00', 'masked_author': 'username_0', 'text': ""Thank you for investigating this Andrea. I think the email notification works, this way at least we're aware that there are docs changes being made."", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'afrittoli', 'comment_id': 806240705.0, 'datetime': '2021-03-24 23:06:59+00:00', 'masked_author': 'username_1', 'text': ""Once the catalog update is done, it'll be quick to add to the CI job."", 'title': None, 'type': 'comment'}]","<issue_start><issue_comment>Title: Automatically add an editorial reviewer team to every PR that modifies docs
+username_0: ### Feature request
+
+To maintain a high quality level for Tekton documentation, documentation changes should go through editorial review in addition to technical review. @Sergetron and other members of the Tekton Docs Working Group are willing to volunteer as editorial reviewers. The best way to make this happen is to automatically add the editorial reviewers to every PR that modifies documentation.
+
+### Use case
+
+Prerequisites: We must create a GitHub team that includes Tekton docs reviewers.
+
+1. Someone creates a PR against any of the Tekton project repos and that PR contains documentation changes.
+2. When we detect that the PR contains changes to files in the /docs directory, we automatically add the docs reviewers team as reviewers for the PR.
+3. PR goes through normal review process with docs changes reviewed for technical accuracy by the usual reviewers and for language, structure, and other editorial items by the docs reviewers team.
+<issue_comment>username_1: This will be implemented as follows:
+- create a tekton task or pipeline that will run on PR open/reopen/sync/label, with the following logic
+- check if the label `kind/documentation` is set or if any file in the docs folder is modified or any `*.md` file is modified
+- in case of match cc the @tektoncd/docs-reviewers team on the PR
+<issue_comment>username_1: I've been trying to implement this by requesting the doc team as a reviewer on PRs, however it turns out that only repo collaborators can be reviewers (from GitHub point of view). Making the doc reviewers team a collaborator of all repos would automatically git `/lgtm` powers to all members of the team on all repos, which is not what we want.
+The only alternative I can think of is to add a comment to the PR with @tektoncd/docs-reviewers - that should trigger a notification email, so it should be enough.
+<issue_comment>username_0: Thank you for investigating this Andrea. I think the email notification works, this way at least we're aware that there are docs changes being made.
+<issue_comment>username_1: Once the catalog update is done, it'll be quick to add to the CI job."

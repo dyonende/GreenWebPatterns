@@ -1,0 +1,1123 @@
+hartator/wayback-machine-downloader,162391558,46,,"[{'action': 'opened', 'author': 'jcc10', 'comment_id': None, 'datetime': '2016-06-27 07:43:56+00:00', 'masked_author': 'username_0', 'text': ""The simple solution would be while going through the file names, to rename every '?' to %3F (URL encoding for '?')\r\n\r\nI would also recommend changing the '=' to %3D as that may become a issue as well."", 'title': ""Fails on URL's with '?' in the name"", 'type': 'issue'}
+ {'action': 'created', 'author': 'hartator', 'comment_id': 236058848.0, 'datetime': '2016-07-28 23:53:44+00:00', 'masked_author': 'username_1', 'text': ""Can you elaborate? Have you tried on Linux or OSX? Is it because Windows filesystem doesn't like `?` ?"", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'hartator', 'comment_id': 236385721.0, 'datetime': '2016-07-30 19:37:14+00:00', 'masked_author': 'username_1', 'text': '@username_0 try with the lastest gem version `0.4.1`, it might solve your issue.', 'title': None, 'type': 'comment'}
+ {'action': 'closed', 'author': 'hartator', 'comment_id': None, 'datetime': '2016-08-06 19:58:52+00:00', 'masked_author': 'username_1', 'text': '', 'title': None, 'type': 'issue'}
+ {'action': 'created', 'author': 'leilei-', 'comment_id': 238723847.0, 'datetime': '2016-08-09 23:30:45+00:00', 'masked_author': 'username_2', 'text': ""I'm getting this in the latest revision  of 0.4.6 too."", 'title': None, 'type': 'comment'}
+ {'action': 'reopened', 'author': 'hartator', 'comment_id': None, 'datetime': '2016-08-10 01:46:20+00:00', 'masked_author': 'username_1', 'text': ""The simple solution would be while going through the file names, to rename every '?' to %3F (URL encoding for '?')\r\n\r\nI would also recommend changing the '=' to %3D as that may become a issue as well.\r\n\r\n(This is on windows, not Linux)"", 'title': ""Fails on URL's with '?' in the name"", 'type': 'issue'}
+ {'action': 'created', 'author': 'hartator', 'comment_id': 238745559.0, 'datetime': '2016-08-10 01:58:55+00:00', 'masked_author': 'username_1', 'text': ""I've pushed a new version to filter out `&` and `=`, try to update to `0.4.7`. I don't have a windows machine under the hand to try it out myself."", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'condonia', 'comment_id': 239649144.0, 'datetime': '2016-08-14 00:31:54+00:00', 'masked_author': 'username_3', 'text': 'Hi,\r\nI also have the same problem with ""?"" and ""="". Now the files are renamed correctly to ""%3f"" and ""3%d"", but continues having two problems:\r\n\r\n1 - An url like ""http://www.domain.com/index.php%3fparam"" is interpreted by the browser as ""http://www.domain.com/index.php?param"" (as parameter, not as part of the file name), so the solution is to remove the special characters (""%3f"", ""%3d"", etc.) from files or replace with another non-special characters.\r\n2 - And second, the ""href""s containing these urls, also must be replaced, if not the links fail.', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'jcc10', 'comment_id': 239658777.0, 'datetime': '2016-08-14 06:41:34+00:00', 'masked_author': 'username_0', 'text': ""You could potentially use something like https://findandreplace.codeplex.com\nto find and replace the links (use a regular expression, I can make one\ntomorrow if you want.)\n\nBut hey! On the bright side we now have the files downloaded so we can make\nthe mass edit, previously we didn't even have that!\n\nJc / Wwjdtd / Jcc10\n\n“When I became a man I put away childish things, including the fear of\nchildishness and the desire to be very grown up.”\n― C.S. Lewis"", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'condonia', 'comment_id': 239660965.0, 'datetime': '2016-08-14 07:54:38+00:00', 'masked_author': 'username_3', 'text': 'Thanks JCC 10, it would be great!\r\nBut also have to rename the files to remove special characters of filenames, do not you think?', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'condonia', 'comment_id': 239698939.0, 'datetime': '2016-08-14 21:28:42+00:00', 'masked_author': 'username_3', 'text': 'Also the extension should be at the end of the filenames, something like this example:\r\n\r\n- Original url:        ""index.php?param1=value1&param2=value2""\r\n- Current file like:  ""index.php%3fparam1%3dvalue1%26param2%3dvalue2""\r\n- Should be like:    ""index-param1-value1-param2-value2.php""\r\n\r\nAnd the ""href""s containing these urls, also must be replaced, if not the links will fail!', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'Chriff', 'comment_id': 242983172.0, 'datetime': '2016-08-28 16:13:40+00:00', 'masked_author': 'username_4', 'text': 'Hello, i\'m having similar problems with "":"" \r\ne.g. a url with ""page:1"" in it\'s name will not be downloaded but skipped...\r\n\r\nI\'m on Windows 7, if that matters...\r\n\r\nIf you need a wayback link with "":"" for testing purposes i can send it to you or write it here (if that\'s allowed - i\'m new here... )', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'hartator', 'comment_id': 242983330.0, 'datetime': '2016-08-28 16:16:29+00:00', 'masked_author': 'username_1', 'text': 'Sure go ahead. If you can also copy/paste in a gist, your output that will be great.', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'Chriff', 'comment_id': 242984386.0, 'datetime': '2016-08-28 16:35:54+00:00', 'masked_author': 'username_4', 'text': 'ok, here we go:\r\n\r\nhttp://web.archive.org/web/20160309024213/http://www.moviesection.de/filme/genreIndex\r\n\r\nhere you find links like ""Abenteuer"" ""Abenteuer Epos"" etc.... \r\nthey all look like ""..../page:1/genre:Science-Fiction"" etc.\r\n\r\ni used this command:\r\n`wayback_machine_downloader http://moviesection.de/filme/genreIndex --from 20160309024213`\r\n\r\ni attached a log of the console window, and the downloaded index.html. \r\n[wayback_log_01.txt](https://github.com/username_1/wayback-machine-downloader/files/441229/wayback_log_01.txt)\r\n\r\n[index.zip](https://github.com/username_1/wayback-machine-downloader/files/441231/index.zip)', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'condonia', 'comment_id': 243018359.0, 'datetime': '2016-08-29 02:21:43+00:00', 'masked_author': 'username_3', 'text': 'Hi!\r\nAny news about the renames of querystrings?\r\n\r\nindex.php?param1=value1&param2=value2  =>  \r\nindex-param1-value1-param2-value2.php\r\n\r\nThank you!!!', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'hartator', 'comment_id': 247810210.0, 'datetime': '2016-09-17 21:49:32+00:00', 'masked_author': 'username_1', 'text': ""@username_3 I don't think I will make the modification because it will probably break the links. You are welcome to do a PR and I will merge it.\r\n\r\n@username_4 Have you tried `wayback_machine_downloader http://moviesection.de/filme/genreIndex/* --to 20160309024213` or ``wayback_machine_downloader http://moviesection.de` --to 20160309024213`?"", 'title': None, 'type': 'comment'}
+ {'action': 'closed', 'author': 'hartator', 'comment_id': None, 'datetime': '2016-11-15 00:31:07+00:00', 'masked_author': 'username_1', 'text': '', 'title': None, 'type': 'issue'}
+ {'action': 'created', 'author': 'asararai', 'comment_id': 622393273.0, 'datetime': '2020-05-01 13:41:36+00:00', 'masked_author': 'username_5', 'text': 'This worked for me, open Windows Powershell \r\n\r\n```\r\nCD (your folder location)\r\n\r\nget-childitem -recurse | rename-item -newname { $_.name -replace ""%3F"",""?"" }\r\n```', 'title': None, 'type': 'comment'}]","<issue_start><issue_comment>Title: Fails on URL's with '?' in the name
+username_0: The simple solution would be while going through the file names, to rename every '?' to %3F (URL encoding for '?')
+
+I would also recommend changing the '=' to %3D as that may become a issue as well.
+<issue_comment>username_1: Can you elaborate? Have you tried on Linux or OSX? Is it because Windows filesystem doesn't like `?` ?
+<issue_comment>username_1: @username_0 try with the lastest gem version `0.4.1`, it might solve your issue.<issue_closed>
+<issue_comment>username_2: I'm getting this in the latest revision  of 0.4.6 too.
+<issue_comment>username_1: The simple solution would be while going through the file names, to rename every '?' to %3F (URL encoding for '?')
+
+I would also recommend changing the '=' to %3D as that may become a issue as well.
+
+(This is on windows, not Linux)
+<issue_comment>username_1: I've pushed a new version to filter out `&` and `=`, try to update to `0.4.7`. I don't have a windows machine under the hand to try it out myself.
+<issue_comment>username_3: Hi,
+I also have the same problem with ""?"" and ""="". Now the files are renamed correctly to ""%3f"" and ""3%d"", but continues having two problems:
+
+1 - An url like ""http://www.domain.com/index.php%3fparam"" is interpreted by the browser as ""http://www.domain.com/index.php?param"" (as parameter, not as part of the file name), so the solution is to remove the special characters (""%3f"", ""%3d"", etc.) from files or replace with another non-special characters.
+2 - And second, the ""href""s containing these urls, also must be replaced, if not the links fail.
+<issue_comment>username_0: You could potentially use something like https://findandreplace.codeplex.com
+to find and replace the links (use a regular expression, I can make one
+tomorrow if you want.)
+
+But hey! On the bright side we now have the files downloaded so we can make
+the mass edit, previously we didn't even have that!
+
+Jc / Wwjdtd / Jcc10
+
+“When I became a man I put away childish things, including the fear of
+childishness and the desire to be very grown up.”
+― C.S. Lewis
+<issue_comment>username_3: Thanks JCC 10, it would be great!
+But also have to rename the files to remove special characters of filenames, do not you think?
+<issue_comment>username_3: Also the extension should be at the end of the filenames, something like this example:
+
+- Original url:        ""index.php?param1=value1&param2=value2""
+- Current file like:  ""index.php%3fparam1%3dvalue1%26param2%3dvalue2""
+- Should be like:    ""index-param1-value1-param2-value2.php""
+
+And the ""href""s containing these urls, also must be replaced, if not the links will fail!
+<issue_comment>username_4: Hello, i'm having similar problems with "":"" 
+e.g. a url with ""page:1"" in it's name will not be downloaded but skipped...
+
+I'm on Windows 7, if that matters...
+
+If you need a wayback link with "":"" for testing purposes i can send it to you or write it here (if that's allowed - i'm new here... )
+<issue_comment>username_1: Sure go ahead. If you can also copy/paste in a gist, your output that will be great.
+<issue_comment>username_4: ok, here we go:
+
+http://web.archive.org/web/20160309024213/http://www.moviesection.de/filme/genreIndex
+
+here you find links like ""Abenteuer"" ""Abenteuer Epos"" etc.... 
+they all look like ""..../page:1/genre:Science-Fiction"" etc.
+
+i used this command:
+`wayback_machine_downloader http://moviesection.de/filme/genreIndex --from 20160309024213`
+
+i attached a log of the console window, and the downloaded index.html. 
+[wayback_log_01.txt](https://github.com/username_1/wayback-machine-downloader/files/441229/wayback_log_01.txt)
+
+[index.zip](https://github.com/username_1/wayback-machine-downloader/files/441231/index.zip)
+<issue_comment>username_3: Hi!
+Any news about the renames of querystrings?
+
+index.php?param1=value1&param2=value2  =>  
+index-param1-value1-param2-value2.php
+
+Thank you!!!
+<issue_comment>username_1: @username_3 I don't think I will make the modification because it will probably break the links. You are welcome to do a PR and I will merge it.
+
+@username_4 Have you tried `wayback_machine_downloader http://moviesection.de/filme/genreIndex/* --to 20160309024213` or ``wayback_machine_downloader http://moviesection.de` --to 20160309024213`?<issue_closed>
+<issue_comment>username_5: This worked for me, open Windows Powershell 
+
+```
+CD (your folder location)
+
+get-childitem -recurse | rename-item -newname { $_.name -replace ""%3F"",""?"" }
+```"
+facebook/docusaurus,751774189,3827,"{'number': 3827.0, 'repo': 'docusaurus', 'user_login': 'facebook'}","[{'action': 'opened', 'author': 'slorber', 'comment_id': None, 'datetime': '2020-11-26T18:32:20Z', 'masked_author': 'username_0', 'text': '## Motivation\r\n\r\nMake new fixes accessible to power users as soon as they get merged, by publishing a npm version under the ""canary"" dist tag.', 'title': 'feat(v2): to add automated canary releases', 'type': 'issue'}
+ {'action': 'created', 'author': 'slorber', 'comment_id': 736412307.0, 'datetime': '2020-12-01 10:56:51+00:00', 'masked_author': 'username_0', 'text': ""The NPM_AUTH_TOKEN has been added as env variable for publish permission to NPM.\r\n\r\nLet's merge and hope it works!"", 'title': None, 'type': 'comment'}]","<issue_start><issue_comment>Title: feat(v2): to add automated canary releases
+username_0: ## Motivation
+
+Make new fixes accessible to power users as soon as they get merged, by publishing a npm version under the ""canary"" dist tag.
+<issue_comment>username_0: The NPM_AUTH_TOKEN has been added as env variable for publish permission to NPM.
+
+Let's merge and hope it works!"
+kubernetes/website,290224818,7037,"{'number': 7037.0, 'repo': 'website', 'user_login': 'kubernetes'}","[{'action': 'opened', 'author': 'EricFortin', 'comment_id': None, 'datetime': '2018-01-20T21:29:22Z', 'masked_author': 'username_0', 'text': 'Current doc list wrong config option.\n\n<!-- Reviewable:start -->\n---\nThis change is\u2002[<img src=""https://reviewable.kubernetes.io/review_button.svg"" height=""34"" align=""absmiddle"" alt=""Reviewable""/>](https://reviewable.kubernetes.io/reviews/kubernetes/website/7037)\n<!-- Reviewable:end -->', 'title': 'Fix doc for enabling RBAC on minikube', 'type': 'issue'}
+ {'action': 'created', 'author': 'EricFortin', 'comment_id': 359204040.0, 'datetime': '2018-01-20 21:36:23+00:00', 'masked_author': 'username_0', 'text': 'Hi, first PR here. Since it also applies to other versions, should I also modify those branches?', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'heckj', 'comment_id': 359274279.0, 'datetime': '2018-01-21 19:39:49+00:00', 'masked_author': 'username_1', 'text': ""Thanks @username_0  - \r\n\r\nwhen the past docs are released, we generally don't update those branches - they're more archival, including mistakes I'm afraid, but we generally don't have the manpower to manage fixes to docs back the number of versions we maintain.\r\n\r\nSo your PR is perfect against master\r\n\r\n/lgtm"", 'title': None, 'type': 'comment'}]","<issue_start><issue_comment>Title: Fix doc for enabling RBAC on minikube
+username_0: Current doc list wrong config option.
+
+<!-- Reviewable:start -->
+---
+This change is [<img src=""https://reviewable.kubernetes.io/review_button.svg"" height=""34"" align=""absmiddle"" alt=""Reviewable""/>](https://reviewable.kubernetes.io/reviews/kubernetes/website/7037)
+<!-- Reviewable:end -->
+<issue_comment>username_0: Hi, first PR here. Since it also applies to other versions, should I also modify those branches?
+<issue_comment>username_1: Thanks @username_0  - 
+
+when the past docs are released, we generally don't update those branches - they're more archival, including mistakes I'm afraid, but we generally don't have the manpower to manage fixes to docs back the number of versions we maintain.
+
+So your PR is perfect against master
+
+/lgtm"
+kubernetes/website,824741117,26956,,"[{'action': 'opened', 'author': 'svallier', 'comment_id': None, 'datetime': '2021-03-08 16:44:27+00:00', 'masked_author': 'username_0', 'text': '**This is a Bug Report**\r\nSince 3/4 days, we are no longer able to deploy kubectl using the install-kubectl script from PSGallery as described in documentation --> https://kubernetes.io/docs/tasks/tools/install-kubectl-windows/#install-with-powershell-from-psgallery\r\n\r\n<!--Required Information-->\r\n**Problem:**\r\n\r\n**script installation --> **### OK****\r\n##[debug]Using the provider \'PowerShellGet\' for searching packages.\r\n##[debug]The -Repository parameter was not specified.  PowerShellGet will use all of the registered repositories.\r\n##[debug]Getting the provider object for the PackageManagement Provider \'NuGet\'.\r\n##[debug]The specified Location is \'https://www.powershellgallery.com/api/v2/items/psscript\' and PackageManagementProvider is \'NuGet\'.\r\n##[debug]Searching repository \'https://www.powershellgallery.com/api/v2/items/psscript/FindPackagesById()?id=\'install-kubectl\'\' for \'\'.\r\n##[debug]Total package yield:\'1\' for the specified package \'install-kubectl\'.\r\n##[debug]The installation scope is specified to be \'CurrentUser\'.\r\n##[debug]The specified script will be installed in \'C:\\Windows\\ServiceProfiles\\NetworkService\\Documents\\WindowsPowerShell\\Scripts\' and its dependent modules will be installed in \'C:\\Windows\\ServiceProfiles\\NetworkService\\Documents\\WindowsPowerShell\\Modules\'.\r\n##[debug]The specified Location is \'NuGet\' and PackageManagementProvider is \'NuGet\'.\r\n##[debug]Downloading script \'install-kubectl\' with version \'1.7\' from the repository \'https://www.powershellgallery.com/api/v2/items/psscript\'.\r\n##[debug]Searching repository \'https://www.powershellgallery.com/api/v2/items/psscript/FindPackagesById()?id=\'install-kubectl\'\' for \'\'.\r\n##[debug]InstallPackage\' - name=\'install-kubectl\', version=\'1.7\',destination=\'C:\\Windows\\ServiceProfiles\\NetworkService\\AppData\\Local\\Temp\\1499304682\'\r\n##[debug]DownloadPackage\' - name=\'install-kubectl\', version=\'1.7\',destination=\'C:\\Windows\\ServiceProfiles\\NetworkService\\AppData\\Local\\Temp\\1499304682\\install-kubectl\\install-kubectl.nupkg\', uri=\'https://www.powershellgallery.com/api/v2/package/install-kubectl/1.7.0\'\r\n##[debug]Downloading \'https://www.powershellgallery.com/api/v2/package/install-kubectl/1.7.0\'.\r\n##[debug]Completed downloading \'https://www.powershellgallery.com/api/v2/package/install-kubectl/1.7.0\'.\r\n##[debug]Completed downloading \'install-kubectl\'.\r\n ##[debug]Hash for package \'install-kubectl\' does not match hash provided from the server.\r\n##[debug]Script \'install-kubectl\' was installed successfully to path ****\r\ninstall-Script -Name \'install-kubectl\' -Scope CurrentUser -Force\r\n\r\n\r\n**script execution** --> **### KO**\r\n==>Getting download link from  https://kubernetes.io/docs/tasks/tools/install-kubectl/\r\n==>analyzing Downloadlink\r\n==>starting Download from  using Bitstransfer\r\nCannot validate argument on parameter \'Source\'. The argument is null or empty. Provide an argument that is not null or empty, and then try the command again.\r\n\r\n\r\n**detected issue** \r\nThe content of the Uri _https://kubernetes.io/docs/tasks/tools/install-kubectl/_ seems modified few days ago. the script install-kubectl.ps1 is no longer to get the download link because there is no href matching the executable\r\n\r\ntry\r\n    {\r\n        Write-Host -ForegroundColor White ""==>analyzing Downloadlink""   \r\n        $downloadlink = ($req.Links | **where href -Match ""kubectl.exe""**).href\r\n    }\r\ncatch\r\n    {\r\n    Write-Warning ""Error Parsing Link""\r\n    Break\r\n    }\r\n\r\n**Proposed Solution:**\r\nAdd the necessary href or change the match value \r\n\r\n\r\n<!--Kubernetes Version:-->\r\nALL', 'title': 'No longer to install kubectl using powershell from PSGallery', 'type': 'issue'}
+ {'action': 'created', 'author': 'sftim', 'comment_id': 793066260.0, 'datetime': '2021-03-08 20:48:54+00:00', 'masked_author': 'username_1', 'text': ""Honestly, I think that's a bug in the PSGallery script.\r\n\r\nWe can fix this by removing the section https://kubernetes.io/docs/tasks/tools/install-kubectl-windows/#install-with-powershell-from-psgallery\r\nThe Kubernetes project does not maintain that script. We should remove the link to it.\r\n/sig windows"", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'sftim', 'comment_id': 793066818.0, 'datetime': '2021-03-08 20:49:49+00:00', 'masked_author': 'username_1', 'text': ""Related, I think https://kubernetes.io/docs/tasks/tools/install-kubectl-windows/#install-on-windows-as-part-of-the-google-cloud-sdk is also not something we'd link to based on the [content guide](https://kubernetes.io/docs/contribute/style/content-guide/)."", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'sftim', 'comment_id': 793066986.0, 'datetime': '2021-03-08 20:50:06+00:00', 'masked_author': 'username_1', 'text': '@username_0, thanks for mentioning this!', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'svallier', 'comment_id': 793480001.0, 'datetime': '2021-03-09 07:24:27+00:00', 'masked_author': 'username_0', 'text': 'I don\'t think removing the section https://kubernetes.io/docs/tasks/tools/install-kubectl-windows/#install-with-powershell-from-psgallery is the solution.\r\n\r\nmany customers already have automated kubectl installation using this method (including me ^^)\r\n\r\nCan you put back the downloadLink ?\r\n$downloadlink = ($req.Links | where href -Match ""kubectl.exe"").href', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'sftim', 'comment_id': 805300184.0, 'datetime': '2021-03-23 22:11:09+00:00', 'masked_author': 'username_1', 'text': ""The documentation for Kubernetes is *not* a stable API and Kubernetes makes **no** guarantee about the format of documentation. \r\nIt's OK if that tool wants to work out a better way to find a download link. In fact, I recommend it.\r\nAs the Kubernetes project does not maintain that script, we should remove the link to it - it's unhelpful to users to give the impression that that tool is considered secure."", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'sftim', 'comment_id': 805300205.0, 'datetime': '2021-03-23 22:11:12+00:00', 'masked_author': 'username_1', 'text': 'Duplicated by https://github.com/kubernetes/website/issues/27179', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'sftim', 'comment_id': 805300320.0, 'datetime': '2021-03-23 22:11:30+00:00', 'masked_author': 'username_1', 'text': '/triage accepted\r\n/priority important-longterm', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'DanielW10001', 'comment_id': 815174021.0, 'datetime': '2021-04-07 19:37:51+00:00', 'masked_author': 'username_2', 'text': 'Change Installation Script `install-kubectl.ps1` Line 29:\r\n```ps1\r\n$uri = ""https://kubernetes.io/docs/tasks/tools/install-kubectl/""\r\n```\r\nTo:\r\n```ps1\r\n$uri = ""https://kubernetes.io/docs/tasks/tools/install-kubectl-windows/""\r\n```\r\nWould resolve this issue.\r\nBecause download link to kubectl.exe is no longer at the previous page.', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'eddiezane', 'comment_id': 815989739.0, 'datetime': '2021-04-08 17:04:54+00:00', 'masked_author': 'username_3', 'text': 'Package managers are considered out of scope as the Kubernetes org just provides binaries and relies on the community to handle distribution past that.\r\n\r\nIf the documentation here is out of date I think we should remove it to avoid confusion.\r\n\r\nIf someone fixes or creates a new installation script for PSGallery we could easily add it back.\r\n\r\n@username_1 I can open a PR - thoughts?', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'eddiezane', 'comment_id': 815996890.0, 'datetime': '2021-04-08 17:15:28+00:00', 'masked_author': 'username_3', 'text': 'It looks like the [current PSGallery script](https://www.powershellgallery.com/packages/install-kubectl/1.7/Content/install-kubectl.ps1) was just grabbing a link with `kubectl.exe` from the docs. Definitely not a reliable way to handle installation.\r\n\r\nIf anyone wants to make a new script it should rely on something like https://downloadkubernetes.com/ or rely on https://storage.googleapis.com/kubernetes-release/release/stable.txt to grab https://storage.googleapis.com/kubernetes-release/release/v1.20.5/kubernetes-client-windows-amd64.tar.gz.', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'sftim', 'comment_id': 816103519.0, 'datetime': '2021-04-08 19:35:46+00:00', 'masked_author': 'username_1', 'text': "":+1:\r\nIf, later, there's a replacement script, it'd be even better for that tool to live in-project. Inside https://github.com/kubernetes-sigs/ perhaps?"", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'jsturtevant', 'comment_id': 823383652.0, 'datetime': '2021-04-20 15:47:31+00:00', 'masked_author': 'username_4', 'text': 'https://github.com/kubernetes-sigs/sig-windows-tools would be a good place so it can be updated by sig-windows members', 'title': None, 'type': 'comment'}]","<issue_start><issue_comment>Title: No longer to install kubectl using powershell from PSGallery
+username_0: **This is a Bug Report**
+Since 3/4 days, we are no longer able to deploy kubectl using the install-kubectl script from PSGallery as described in documentation --> https://kubernetes.io/docs/tasks/tools/install-kubectl-windows/#install-with-powershell-from-psgallery
+
+<!--Required Information-->
+**Problem:**
+
+**script installation --> **### OK****
+##[debug]Using the provider 'PowerShellGet' for searching packages.
+##[debug]The -Repository parameter was not specified.  PowerShellGet will use all of the registered repositories.
+##[debug]Getting the provider object for the PackageManagement Provider 'NuGet'.
+##[debug]The specified Location is 'https://www.powershellgallery.com/api/v2/items/psscript' and PackageManagementProvider is 'NuGet'.
+##[debug]Searching repository 'https://www.powershellgallery.com/api/v2/items/psscript/FindPackagesById()?id='install-kubectl'' for ''.
+##[debug]Total package yield:'1' for the specified package 'install-kubectl'.
+##[debug]The installation scope is specified to be 'CurrentUser'.
+##[debug]The specified script will be installed in 'C:\Windows\ServiceProfiles\NetworkService\Documents\WindowsPowerShell\Scripts' and its dependent modules will be installed in 'C:\Windows\ServiceProfiles\NetworkService\Documents\WindowsPowerShell\Modules'.
+##[debug]The specified Location is 'NuGet' and PackageManagementProvider is 'NuGet'.
+##[debug]Downloading script 'install-kubectl' with version '1.7' from the repository 'https://www.powershellgallery.com/api/v2/items/psscript'.
+##[debug]Searching repository 'https://www.powershellgallery.com/api/v2/items/psscript/FindPackagesById()?id='install-kubectl'' for ''.
+##[debug]InstallPackage' - name='install-kubectl', version='1.7',destination='C:\Windows\ServiceProfiles\NetworkService\AppData\Local\Temp\1499304682'
+##[debug]DownloadPackage' - name='install-kubectl', version='1.7',destination='C:\Windows\ServiceProfiles\NetworkService\AppData\Local\Temp\1499304682\install-kubectl\install-kubectl.nupkg', uri='https://www.powershellgallery.com/api/v2/package/install-kubectl/1.7.0'
+##[debug]Downloading 'https://www.powershellgallery.com/api/v2/package/install-kubectl/1.7.0'.
+##[debug]Completed downloading 'https://www.powershellgallery.com/api/v2/package/install-kubectl/1.7.0'.
+##[debug]Completed downloading 'install-kubectl'.
+ ##[debug]Hash for package 'install-kubectl' does not match hash provided from the server.
+##[debug]Script 'install-kubectl' was installed successfully to path ****
+install-Script -Name 'install-kubectl' -Scope CurrentUser -Force
+
+
+**script execution** --> **### KO**
+==>Getting download link from  https://kubernetes.io/docs/tasks/tools/install-kubectl/
+==>analyzing Downloadlink
+==>starting Download from  using Bitstransfer
+Cannot validate argument on parameter 'Source'. The argument is null or empty. Provide an argument that is not null or empty, and then try the command again.
+
+
+**detected issue** 
+The content of the Uri _https://kubernetes.io/docs/tasks/tools/install-kubectl/_ seems modified few days ago. the script install-kubectl.ps1 is no longer to get the download link because there is no href matching the executable
+
+try
+    {
+        Write-Host -ForegroundColor White ""==>analyzing Downloadlink""   
+        $downloadlink = ($req.Links | **where href -Match ""kubectl.exe""**).href
+    }
+catch
+    {
+    Write-Warning ""Error Parsing Link""
+    Break
+    }
+
+**Proposed Solution:**
+Add the necessary href or change the match value 
+
+
+<!--Kubernetes Version:-->
+ALL
+<issue_comment>username_1: Honestly, I think that's a bug in the PSGallery script.
+
+We can fix this by removing the section https://kubernetes.io/docs/tasks/tools/install-kubectl-windows/#install-with-powershell-from-psgallery
+The Kubernetes project does not maintain that script. We should remove the link to it.
+/sig windows
+<issue_comment>username_1: Related, I think https://kubernetes.io/docs/tasks/tools/install-kubectl-windows/#install-on-windows-as-part-of-the-google-cloud-sdk is also not something we'd link to based on the [content guide](https://kubernetes.io/docs/contribute/style/content-guide/).
+<issue_comment>username_1: @username_0, thanks for mentioning this!
+<issue_comment>username_0: I don't think removing the section https://kubernetes.io/docs/tasks/tools/install-kubectl-windows/#install-with-powershell-from-psgallery is the solution.
+
+many customers already have automated kubectl installation using this method (including me ^^)
+
+Can you put back the downloadLink ?
+$downloadlink = ($req.Links | where href -Match ""kubectl.exe"").href
+<issue_comment>username_1: The documentation for Kubernetes is *not* a stable API and Kubernetes makes **no** guarantee about the format of documentation. 
+It's OK if that tool wants to work out a better way to find a download link. In fact, I recommend it.
+As the Kubernetes project does not maintain that script, we should remove the link to it - it's unhelpful to users to give the impression that that tool is considered secure.
+<issue_comment>username_1: Duplicated by https://github.com/kubernetes/website/issues/27179
+<issue_comment>username_1: /triage accepted
+/priority important-longterm
+<issue_comment>username_2: Change Installation Script `install-kubectl.ps1` Line 29:
+```ps1
+$uri = ""https://kubernetes.io/docs/tasks/tools/install-kubectl/""
+```
+To:
+```ps1
+$uri = ""https://kubernetes.io/docs/tasks/tools/install-kubectl-windows/""
+```
+Would resolve this issue.
+Because download link to kubectl.exe is no longer at the previous page.
+<issue_comment>username_3: Package managers are considered out of scope as the Kubernetes org just provides binaries and relies on the community to handle distribution past that.
+
+If the documentation here is out of date I think we should remove it to avoid confusion.
+
+If someone fixes or creates a new installation script for PSGallery we could easily add it back.
+
+@username_1 I can open a PR - thoughts?
+<issue_comment>username_3: It looks like the [current PSGallery script](https://www.powershellgallery.com/packages/install-kubectl/1.7/Content/install-kubectl.ps1) was just grabbing a link with `kubectl.exe` from the docs. Definitely not a reliable way to handle installation.
+
+If anyone wants to make a new script it should rely on something like https://downloadkubernetes.com/ or rely on https://storage.googleapis.com/kubernetes-release/release/stable.txt to grab https://storage.googleapis.com/kubernetes-release/release/v1.20.5/kubernetes-client-windows-amd64.tar.gz.
+<issue_comment>username_1: :+1:
+If, later, there's a replacement script, it'd be even better for that tool to live in-project. Inside https://github.com/kubernetes-sigs/ perhaps?
+<issue_comment>username_4: https://github.com/kubernetes-sigs/sig-windows-tools would be a good place so it can be updated by sig-windows members"
+bitcoin-core/bitcoincore.org,893531840,773,,"[{'action': 'opened', 'author': 'dasa376', 'comment_id': None, 'datetime': '2021-05-17 17:06:26+00:00', 'masked_author': 'username_0', 'text': '<!doctype html>\n<html>\n\t<head>\n\t\t<title>Radius Raid</title>\n\t\t<link rel=""shortcut icon"" id=""favicon"" />\n\n\t\t<style>\n\t\t\tbody {\n\t\t\t\tbackground: #080808;\n\t\t\t}\n\n\t\t\t#wrap {\n\t\t\t\tbackground: #222;\n\t\t\t\tbox-shadow: inset 0 0 0 1px #404040, 0 0 0 1px #000;\n\t\t\t\tleft: 50%;\n\t\t\t\topacity: 0;\n\t\t\t\tpadding: 10px;\n\t\t\t\tposition: absolute;\n\t\t\t\ttop: 50%;\n\t\t\t\ttransition: opacity 1.5s;\n\t\t\t}\n\n\t\t\t.loaded #wrap {\n\t\t\t\topacity: 1;\n\t\t\t}\n\n\t\t\t#wrap-inner {\n\t\t\t\tbackground: #000;\n\t\t\t\toverflow: hidden;\n\t\t\t\tposition: relative;\n\t\t\t}\n\n\t\t\tcanvas {\n\t\t\t\tcursor: crosshair;\n\t\t\t\tdisplay: block;\n\t\t\t\tleft: 0;\n\t\t\t\tposition: absolute;\n\t\t\t\ttop: 0;\n\t\t\t}\n\n\t\t\t.joystick {\n\t\t\t\twidth: 120px;\n\t\t\t\theight: 120px;\n\t\t\t\tposition: absolute;\n\t\t\t\ttop: calc(60% - 60px);\n\t\t\t}\n\n\t\t\t#left-joystick.joystick {\n\t\t\t\tleft: 90px;\n\t\t\t}\n\n\t\t\t#right-joystick.joystick {\n\t\t\t\tright: 90px;\n\t\t\t}\n\t\t</style>\n\t</head>\n\t<body>\n\t\t<div id=""left-joystick"" class=""joystick""></div>\n\t\t<div id=""right-joystick"" class=""joystick""></div>\n\t\t<div id=""wrap"">\n\t\t\t<div id=""wrap-inner"">\n\t\t\t\t<canvas id=""cbg1""></canvas>\n\t\t\t\t<canvas id=""cbg2""></canvas>\n\t\t\t\t<canvas id=""cbg3""></canvas>\n\t\t\t\t<canvas id=""cbg4""></canvas>\n\t\t\t\t<canvas id=""cmg""></canvas>\n\t\t\t\t<canvas id=""cfg""></canvas>\n\t\t\t</div>\n\t\t</div>\n\t\t<script>var $ = {};</script>\n\t\t<script src=""js/touch-compat.js""></script>\n\t\t<script src=""js/jsfxr.js""></script>\n\t\t<script src=""js/util.js""></script>\n\t\t<script src=""js/storage.js""></script>\n\t\t<script src=""js/definitions.js""></script>\n\t\t<script src=""js/audio.js""></script>\n\t\t<script src=""js/text.js""></script>\n\t\t<script src=""js/hero.js""></script>\n\t\t<script src=""js/enemy.js""></script>\n\t\t<script src=""js/bullet.js""></script>\n\t\t<script src=""js/explosion.js""></script>\n\t\t<script src=""js/powerup.js""></script>\n\t\t<script src=""js/particle.js""></script>\n\t\t<script src=""js/particleemitter.js""></script>\n\t\t<script src=""js/textpop.js""></script>\n\t\t<script src=""js/levelpop.js""></script>\n\t\t<script src=""js/button.js""></script>\n\t\t<script src=""js/game.js""></script>\n\t</body>\n</html>', 'title': '8399537', 'type': 'issue'}]","<issue_start><issue_comment>Title: 8399537
+username_0: <!doctype html>
+<html>
+	<head>
+		<title>Radius Raid</title>
+		<link rel=""shortcut icon"" id=""favicon"" />
+
+		<style>
+			body {
+				background: #080808;
+			}
+
+			#wrap {
+				background: #222;
+				box-shadow: inset 0 0 0 1px #404040, 0 0 0 1px #000;
+				left: 50%;
+				opacity: 0;
+				padding: 10px;
+				position: absolute;
+				top: 50%;
+				transition: opacity 1.5s;
+			}
+
+			.loaded #wrap {
+				opacity: 1;
+			}
+
+			#wrap-inner {
+				background: #000;
+				overflow: hidden;
+				position: relative;
+			}
+
+			canvas {
+				cursor: crosshair;
+				display: block;
+				left: 0;
+				position: absolute;
+				top: 0;
+			}
+
+			.joystick {
+				width: 120px;
+				height: 120px;
+				position: absolute;
+				top: calc(60% - 60px);
+			}
+
+			#left-joystick.joystick {
+				left: 90px;
+			}
+
+			#right-joystick.joystick {
+				right: 90px;
+			}
+		</style>
+	</head>
+	<body>
+		<div id=""left-joystick"" class=""joystick""></div>
+		<div id=""right-joystick"" class=""joystick""></div>
+		<div id=""wrap"">
+			<div id=""wrap-inner"">
+				<canvas id=""cbg1""></canvas>
+				<canvas id=""cbg2""></canvas>
+				<canvas id=""cbg3""></canvas>
+				<canvas id=""cbg4""></canvas>
+				<canvas id=""cmg""></canvas>
+				<canvas id=""cfg""></canvas>
+			</div>
+		</div>
+		<script>var $ = {};</script>
+		<script src=""js/touch-compat.js""></script>
+		<script src=""js/jsfxr.js""></script>
+		<script src=""js/util.js""></script>
+		<script src=""js/storage.js""></script>
+		<script src=""js/definitions.js""></script>
+		<script src=""js/audio.js""></script>
+		<script src=""js/text.js""></script>
+		<script src=""js/hero.js""></script>
+		<script src=""js/enemy.js""></script>
+		<script src=""js/bullet.js""></script>
+		<script src=""js/explosion.js""></script>
+		<script src=""js/powerup.js""></script>
+		<script src=""js/particle.js""></script>
+		<script src=""js/particleemitter.js""></script>
+		<script src=""js/textpop.js""></script>
+		<script src=""js/levelpop.js""></script>
+		<script src=""js/button.js""></script>
+		<script src=""js/game.js""></script>
+	</body>
+</html>"
+emberjs/website,104176204,2356,"{'number': 2356.0, 'repo': 'website', 'user_login': 'emberjs'}","[{'action': 'opened', 'author': 'mrjavascript', 'comment_id': None, 'datetime': '2015-09-01T03:20:05Z', 'masked_author': 'username_0', 'text': 'Added Audacious Inquiry to users', 'title': 'Added Audacious Inquiry to users', 'type': 'issue'}
+ {'action': 'created', 'author': 'wifelette', 'comment_id': 136583845.0, 'datetime': '2015-09-01 04:39:04+00:00', 'masked_author': 'username_1', 'text': '@username_0 Please clarify how Ember is actually used at this company or in this product :)', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'mrjavascript', 'comment_id': 136584789.0, 'datetime': '2015-09-01 04:43:13+00:00', 'masked_author': 'username_0', 'text': 'We do health care software and the application my team works on has a\nreally slick dashboard powered by Ember.  The code is ever so easy to\nmaintain because of it.  I can take a photo of my Tomster next to the AI\ncoffee cup I have tomorrow in the office if that works.', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'wifelette', 'comment_id': 136585128.0, 'datetime': '2015-09-01 04:46:34+00:00', 'masked_author': 'username_1', 'text': 'Apologies, I meant in the PR, in the `use` field. It\'s supposed to be specific explanation, rather than marketing or just \'We <3 Ember\' type stuff (even though happiness is awesome :p). We\'ll likely be adding categories at some point soon as will need this info to easily sort everyone. \r\n\r\nIf you could replace the content there with ""Using Ember in the dashboard of our health care software"" or something, that\'d be perfect. Needs a general rebase by now too—everything moves fast in EmberLand ;) Thanks!', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'mrjavascript', 'comment_id': 136587604.0, 'datetime': '2015-09-01 05:04:37+00:00', 'masked_author': 'username_0', 'text': 'Rebased and made the suggested changes.  Thank you so much for your help.\r\n\r\n--Mike', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'wifelette', 'comment_id': 136824798.0, 'datetime': '2015-09-01 18:45:35+00:00', 'masked_author': 'username_1', 'text': 'Merged, thank *you* :)', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'mrjavascript', 'comment_id': 136911941.0, 'datetime': '2015-09-02 01:41:34+00:00', 'masked_author': 'username_0', 'text': 'Thanks!', 'title': None, 'type': 'comment'}]","<issue_start><issue_comment>Title: Added Audacious Inquiry to users
+username_0: Added Audacious Inquiry to users
+<issue_comment>username_1: @username_0 Please clarify how Ember is actually used at this company or in this product :)
+<issue_comment>username_0: We do health care software and the application my team works on has a
+really slick dashboard powered by Ember.  The code is ever so easy to
+maintain because of it.  I can take a photo of my Tomster next to the AI
+coffee cup I have tomorrow in the office if that works.
+<issue_comment>username_1: Apologies, I meant in the PR, in the `use` field. It's supposed to be specific explanation, rather than marketing or just 'We <3 Ember' type stuff (even though happiness is awesome :p). We'll likely be adding categories at some point soon as will need this info to easily sort everyone. 
+
+If you could replace the content there with ""Using Ember in the dashboard of our health care software"" or something, that'd be perfect. Needs a general rebase by now too—everything moves fast in EmberLand ;) Thanks!
+<issue_comment>username_0: Rebased and made the suggested changes.  Thank you so much for your help.
+
+--Mike
+<issue_comment>username_1: Merged, thank *you* :)
+<issue_comment>username_0: Thanks!"
+govdirectory/website,944098197,53,,"[{'action': 'opened', 'author': 'Abbe98', 'comment_id': None, 'datetime': '2021-07-14 06:40:19+00:00', 'masked_author': 'username_0', 'text': 'Deadline July 31st.\r\n\r\nhttps://form.typeform.com/to/NwzIwcie', 'title': 'Consider submitting a lightning talk to Code for All Summit', 'type': 'issue'}
+ {'action': 'created', 'author': 'Ainali', 'comment_id': 883638751.0, 'datetime': '2021-07-20 19:27:19+00:00', 'masked_author': 'username_1', 'text': ""The tracks are: \r\n\r\n- Open vs. Closed Tech in Government\r\n- Democracy & Elections\r\n- Disinformation & Fake News\r\n- Power Dynamics in Tech\r\n\r\nThe formats are:\r\n\r\n- Panel\r\n- Lightning talk\r\n- Workshop\r\n\r\nI think that a **lightning talk** in the **democracy** track would fit best for creating general awareness about Govdirectory.\r\n\r\nConsidering this is a Code for all summit, it might also be worth doing a workshop on some specific part, but I don't really know right now what that would be."", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'Ainali', 'comment_id': 887026500.0, 'datetime': '2021-07-26 21:06:29+00:00', 'masked_author': 'username_1', 'text': ""Questions in the form:\r\n- What is the title of your session? (in English)\r\n- What is the goal of your session? This question is required.* (max. 100 words)\r\n- Please describe your session (in English)This question is required. * (max. 250 words)\r\n- How will you make sure your session is engaging? (e.g. whether you have 3 people or 30 people attend) This question is required.*\r\n- What will participants get out of your session? This question is required.* (max. 100 words)\r\n- How will you make sure your session is a safe space for all participants? This question is required.*\r\n- What's your name and preferred pronouns? This question is required.*\r\n- What's your email address?\r\n- Institution/organization(s) you're part of\r\n- In 2-5 lines, tell us a bit about you This question is required. *"", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'Abbe98', 'comment_id': 887348501.0, 'datetime': '2021-07-27 09:13:32+00:00', 'masked_author': 'username_0', 'text': 'Considering this is a Code for All call, maybe a lightning talk about using Wikidata as a data store and foundation for civic tech projects? With Govdirectory being an example?', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'Ainali', 'comment_id': 887355333.0, 'datetime': '2021-07-27 09:22:51+00:00', 'masked_author': 'username_1', 'text': 'That is a great idea!', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'Ainali', 'comment_id': 888638221.0, 'datetime': '2021-07-28 21:36:53+00:00', 'masked_author': 'username_1', 'text': ""First draft:\r\n- What is the title of your session? (in English)\r\n  - Wikidata in your CivicTech project\r\n- What is the goal of your session? This question is required.* (max. 100 words)\r\n  - The goal of this session is to explain how Wikidata can, and when it cannot, be used as a datastore and a foundation in a CivicTech project.\r\n- Please describe your session (in English)This question is required. * (max. 250 words)\r\n  - Using the tool Govdirectory as an example, we'll explain various ways of:\r\n    - retrieving data from Wikidata\r\n    - enrich Wikidata with facts you and others can reuse\r\n    - explain trust systems and how you can use them \r\n  - We will also explain the basics of Wikidata, what it is for, how the community works and how you can be a part of the ecosystem.\r\n- How will you make sure your session is engaging? (e.g. whether you have 3 people or 30 people attend) This question is required.*\r\n  - We aim to give the participants concrete ideas of what they can build themselves, and perhaps how they can share data they already have. This should make this more than just a theoretical exercise and get their inspiriation going.\r\n- What will participants get out of your session? This question is required.* (max. 100 words)\r\n  - The participants will gain knowledge and inspiration. There is an entire community and ecosystem that wants to collaborate, so that the data that is being collected will get used by more people. This session is an invitation to that community.\r\n- How will you make sure your session is a safe space for all participants? This question is required.*\r\n- What's your name and preferred pronouns? This question is required.*\r\n  - Albin Larsson, he/him\r\n  - Jan username_1, he/him\r\n- What's your email address?\r\n  - I'll enter this in the form\r\n- Institution/organization(s) you're part of\r\n  - None \r\n- In 2-5 lines, tell us a bit about you This question is required. *\r\n  - Jan username_1 works at the Foundation for Public Code, helping public organizations collaborate on software development. Jan was the CEO of Wikimedia Sverige and has been a requirements analyst in software development.\r\n  - Albin Larsson has a background working at publicly funded institutions, most recently at Europeana Foundation with R&D related to linked data and AI, Albin is now a freelancer who tries to work on open source and open data projects for a living. Albin has received several adwards and scholarships for his work relating to open data and startups."", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'Abbe98', 'comment_id': 889355030.0, 'datetime': '2021-07-29 18:11:20+00:00', 'masked_author': 'username_0', 'text': ""Suggestions:\r\n\r\n\r\n - What is the goal of your session? This question is required.* (max. 100 words) \r\nThe goal of this session is to explain how Wikipedia's sister-project Wikidata can, and when it cannot, be used as a datastore and backend in a CivicTech project. While also giving participants actionable skills and tools to experiment with Wikidata on their own.\r\n\r\n\r\n- Please describe your session (in English)This question is required. * (max. 250 words) \r\nThe session will start off by showcasing examples of existing CivicTech projects which use or have integrations with Wikidata.\r\nLater the session will give participants usable examples of retrieving CivicTech-related data from Wikidata and visualizing it with Wikidata's Query Service. Going beyond that we will showcase how to edit Wikidata and expand the data relevant for one's project while also giving an introduction to the community and how it can help. Finally, we will explain and show Wikidata's trust system and take a critical look at the open-ended ecosystem and practices.\r\n\r\n - What will participants get out of your session? This question is required.* (max. 100 words)\r\nThe participants will gain knowledge and inspiration. There is an entire community and ecosystem that wants to collaborate so that the data that is being collected will get used by more people. This session is an invitation to that community. At the end of the session, participants will also have a set of practical data queries and tools at hand so that they can go straight into experimenting on their own."", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'Ainali', 'comment_id': 889361166.0, 'datetime': '2021-07-29 18:21:03+00:00', 'masked_author': 'username_1', 'text': 'I like it! The only question left is ""How will you make sure your session is a safe space for all participants?"". I think that is hard to answer when we don\'t know which platform it is on and what tools it has to help with that.', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'Abbe98', 'comment_id': 889386350.0, 'datetime': '2021-07-29 19:02:56+00:00', 'masked_author': 'username_0', 'text': '""We will review and follow the conference\'s code of conduct(or similar documentation) and inform all participants about it and if possible we will moderate potential participant-generated such as chat messages if need be.""', 'title': None, 'type': 'comment'}
+ {'action': 'closed', 'author': 'Ainali', 'comment_id': None, 'datetime': '2021-07-29 19:14:38+00:00', 'masked_author': 'username_1', 'text': '', 'title': None, 'type': 'issue'}
+ {'action': 'created', 'author': 'Ainali', 'comment_id': 889393419.0, 'datetime': '2021-07-29 19:14:38+00:00', 'masked_author': 'username_1', 'text': 'This has been submitted. 🤞', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'Ainali', 'comment_id': 898846737.0, 'datetime': '2021-08-14 06:39:18+00:00', 'masked_author': 'username_1', 'text': 'Just a note that the submission was accepted!', 'title': None, 'type': 'comment'}]","<issue_start><issue_comment>Title: Consider submitting a lightning talk to Code for All Summit
+username_0: Deadline July 31st.
+
+https://form.typeform.com/to/NwzIwcie
+<issue_comment>username_1: The tracks are: 
+
+- Open vs. Closed Tech in Government
+- Democracy & Elections
+- Disinformation & Fake News
+- Power Dynamics in Tech
+
+The formats are:
+
+- Panel
+- Lightning talk
+- Workshop
+
+I think that a **lightning talk** in the **democracy** track would fit best for creating general awareness about Govdirectory.
+
+Considering this is a Code for all summit, it might also be worth doing a workshop on some specific part, but I don't really know right now what that would be.
+<issue_comment>username_1: Questions in the form:
+- What is the title of your session? (in English)
+- What is the goal of your session? This question is required.* (max. 100 words)
+- Please describe your session (in English)This question is required. * (max. 250 words)
+- How will you make sure your session is engaging? (e.g. whether you have 3 people or 30 people attend) This question is required.*
+- What will participants get out of your session? This question is required.* (max. 100 words)
+- How will you make sure your session is a safe space for all participants? This question is required.*
+- What's your name and preferred pronouns? This question is required.*
+- What's your email address?
+- Institution/organization(s) you're part of
+- In 2-5 lines, tell us a bit about you This question is required. *
+<issue_comment>username_0: Considering this is a Code for All call, maybe a lightning talk about using Wikidata as a data store and foundation for civic tech projects? With Govdirectory being an example?
+<issue_comment>username_1: That is a great idea!
+<issue_comment>username_1: First draft:
+- What is the title of your session? (in English)
+  - Wikidata in your CivicTech project
+- What is the goal of your session? This question is required.* (max. 100 words)
+  - The goal of this session is to explain how Wikidata can, and when it cannot, be used as a datastore and a foundation in a CivicTech project.
+- Please describe your session (in English)This question is required. * (max. 250 words)
+  - Using the tool Govdirectory as an example, we'll explain various ways of:
+    - retrieving data from Wikidata
+    - enrich Wikidata with facts you and others can reuse
+    - explain trust systems and how you can use them 
+  - We will also explain the basics of Wikidata, what it is for, how the community works and how you can be a part of the ecosystem.
+- How will you make sure your session is engaging? (e.g. whether you have 3 people or 30 people attend) This question is required.*
+  - We aim to give the participants concrete ideas of what they can build themselves, and perhaps how they can share data they already have. This should make this more than just a theoretical exercise and get their inspiriation going.
+- What will participants get out of your session? This question is required.* (max. 100 words)
+  - The participants will gain knowledge and inspiration. There is an entire community and ecosystem that wants to collaborate, so that the data that is being collected will get used by more people. This session is an invitation to that community.
+- How will you make sure your session is a safe space for all participants? This question is required.*
+- What's your name and preferred pronouns? This question is required.*
+  - Albin Larsson, he/him
+  - Jan username_1, he/him
+- What's your email address?
+  - I'll enter this in the form
+- Institution/organization(s) you're part of
+  - None 
+- In 2-5 lines, tell us a bit about you This question is required. *
+  - Jan username_1 works at the Foundation for Public Code, helping public organizations collaborate on software development. Jan was the CEO of Wikimedia Sverige and has been a requirements analyst in software development.
+  - Albin Larsson has a background working at publicly funded institutions, most recently at Europeana Foundation with R&D related to linked data and AI, Albin is now a freelancer who tries to work on open source and open data projects for a living. Albin has received several adwards and scholarships for his work relating to open data and startups.
+<issue_comment>username_0: Suggestions:
+
+
+ - What is the goal of your session? This question is required.* (max. 100 words) 
+The goal of this session is to explain how Wikipedia's sister-project Wikidata can, and when it cannot, be used as a datastore and backend in a CivicTech project. While also giving participants actionable skills and tools to experiment with Wikidata on their own.
+
+
+- Please describe your session (in English)This question is required. * (max. 250 words) 
+The session will start off by showcasing examples of existing CivicTech projects which use or have integrations with Wikidata.
+Later the session will give participants usable examples of retrieving CivicTech-related data from Wikidata and visualizing it with Wikidata's Query Service. Going beyond that we will showcase how to edit Wikidata and expand the data relevant for one's project while also giving an introduction to the community and how it can help. Finally, we will explain and show Wikidata's trust system and take a critical look at the open-ended ecosystem and practices.
+
+ - What will participants get out of your session? This question is required.* (max. 100 words)
+The participants will gain knowledge and inspiration. There is an entire community and ecosystem that wants to collaborate so that the data that is being collected will get used by more people. This session is an invitation to that community. At the end of the session, participants will also have a set of practical data queries and tools at hand so that they can go straight into experimenting on their own.
+<issue_comment>username_1: I like it! The only question left is ""How will you make sure your session is a safe space for all participants?"". I think that is hard to answer when we don't know which platform it is on and what tools it has to help with that.
+<issue_comment>username_0: ""We will review and follow the conference's code of conduct(or similar documentation) and inform all participants about it and if possible we will moderate potential participant-generated such as chat messages if need be.""<issue_closed>
+<issue_comment>username_1: This has been submitted. 🤞
+<issue_comment>username_1: Just a note that the submission was accepted!"
+quarkusio/quarkusio.github.io,806851933,875,,"[{'action': 'opened', 'author': 'maxandersen', 'comment_id': None, 'datetime': '2021-02-12 00:23:55+00:00', 'masked_author': 'username_0', 'text': '```\r\n- id: PlatformshplatformshDeployFridayE41EmpoweringbusinessautomationwithQuarkusIOwithotaviojavaCrellkvarel4donatomKieCommunity-2021-02-12\r\n  type: article \r\n  title: ""Platform.sh: ""@platformsh #DeployFriday: E41 Empowering business automation with @QuarkusIO with @otaviojava @Crell @kvarel4 @donato_m @KieCommunity""""\r\n  date: ""2021-02-06""\r\n  author: ""Twitter Inc""\r\n  affiliation: ""platform.sh""\r\n  note: ""platform.sh video podcast discussing using Quarkus and Kogito on platform.sh""\r\n  url: ""https://www.pscp.tv/w/1PlJQPkmBQdGE""\r\n  urldate: ""2021-02-12""\r\n\r\n```', 'title': 'Add Platform.sh: ""@platformsh #DeployFriday: E41 Empowering business automation with @QuarkusIO with @otaviojava @Crell @kvarel4 @donato_m @KieCommunity"" to Publications', 'type': 'issue'}
+ {'action': 'created', 'author': 'maxandersen', 'comment_id': 880018557.0, 'datetime': '2021-07-14 16:04:01+00:00', 'masked_author': 'username_0', 'text': 'Closed by fetchpub as detected to already be included.', 'title': None, 'type': 'comment'}
+ {'action': 'closed', 'author': 'maxandersen', 'comment_id': None, 'datetime': '2021-07-14 16:04:02+00:00', 'masked_author': 'username_0', 'text': '', 'title': None, 'type': 'issue'}]","<issue_start><issue_comment>Title: Add Platform.sh: ""@platformsh #DeployFriday: E41 Empowering business automation with @QuarkusIO with @otaviojava @Crell @kvarel4 @donato_m @KieCommunity"" to Publications
+username_0: ```
+- id: PlatformshplatformshDeployFridayE41EmpoweringbusinessautomationwithQuarkusIOwithotaviojavaCrellkvarel4donatomKieCommunity-2021-02-12
+  type: article 
+  title: ""Platform.sh: ""@platformsh #DeployFriday: E41 Empowering business automation with @QuarkusIO with @otaviojava @Crell @kvarel4 @donato_m @KieCommunity""""
+  date: ""2021-02-06""
+  author: ""Twitter Inc""
+  affiliation: ""platform.sh""
+  note: ""platform.sh video podcast discussing using Quarkus and Kogito on platform.sh""
+  url: ""https://www.pscp.tv/w/1PlJQPkmBQdGE""
+  urldate: ""2021-02-12""
+
+```
+<issue_comment>username_0: Closed by fetchpub as detected to already be included.<issue_closed>"
+department-of-veterans-affairs/vets-website,388399919,9219,"{'number': 9219.0, 'repo': 'vets-website', 'user_login': 'department-of-veterans-affairs'}","[{'action': 'opened', 'author': 'ncksllvn', 'comment_id': None, 'datetime': '2018-12-06T21:12:48Z', 'masked_author': 'username_0', 'text': '## Description\r\n\r\nThese changes runs a hacked version of [this utility](https://github.com/department-of-veterans-affairs/vets.gov-utility/tree/master/url-fixer) powered by the [vets.gov-to-va.gov redirects](https://github.com/department-of-veterans-affairs/vagov-content/blob/master/redirects/vets-gov-to-va-gov.yml) to find all Vets.gov paths and replace them with their new VA.gov paths. \r\n\r\n- [ ] Manually go through the results and make any necessary modifications\r\n\r\nFor more context, please see the ticket - https://github.com/department-of-veterans-affairs/vets.gov-team/issues/15455\r\n\r\n## Testing done\r\n- Automated tests offer some help, but otherwise, the only real testing here is to look at each link and make sure the new VA.gov link exists and makes sense in context\r\n\r\n## Acceptance criteria\r\n- [x] No more Vets.gov page paths in the `src` directory.\r\n\r\n## Definition of done\r\n- [x] Events are logged appropriately\r\n- [x] Documentation has been updated, if applicable\r\n- [x] A link has been provided to the originating GitHub issue (or connected to it via ZenHub)\r\n- [x] No sensitive information (i.e. PII/credentials/internal URLs/etc.) is captured in logging, hardcoded, or specs', 'title': 'Replace outdated Vets.gov content paths in app-code with new VA.gov content paths', 'type': 'issue'}
+ {'action': 'created', 'author': 'ncksllvn', 'comment_id': 445271503.0, 'datetime': '2018-12-07 15:41:38+00:00', 'masked_author': 'username_0', 'text': 'I think this is good now. Can someone PTAL? Thanks all!', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'ncksllvn', 'comment_id': 445290409.0, 'datetime': '2018-12-07 16:39:59+00:00', 'masked_author': 'username_0', 'text': ""Apologies for the spam, but evidently this is still a WIP. I'll reopen this PR later. Thanks all."", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'ncksllvn', 'comment_id': 446388214.0, 'datetime': '2018-12-11 22:32:41+00:00', 'masked_author': 'username_0', 'text': ""The Terms and Conditions URL is sticking around until some MHV work is completed, so the URL changes from `/health-care/medical-information-terms-conditions` to `/health-care` have been reverted as a result. At some point, references to that URL should be updated, but that's on the Griffin/Identity Team's radar already."", 'title': None, 'type': 'comment'}]","<issue_start><issue_comment>Title: Replace outdated Vets.gov content paths in app-code with new VA.gov content paths
+username_0: ## Description
+
+These changes runs a hacked version of [this utility](https://github.com/department-of-veterans-affairs/vets.gov-utility/tree/master/url-fixer) powered by the [vets.gov-to-va.gov redirects](https://github.com/department-of-veterans-affairs/vagov-content/blob/master/redirects/vets-gov-to-va-gov.yml) to find all Vets.gov paths and replace them with their new VA.gov paths. 
+
+- [ ] Manually go through the results and make any necessary modifications
+
+For more context, please see the ticket - https://github.com/department-of-veterans-affairs/vets.gov-team/issues/15455
+
+## Testing done
+- Automated tests offer some help, but otherwise, the only real testing here is to look at each link and make sure the new VA.gov link exists and makes sense in context
+
+## Acceptance criteria
+- [x] No more Vets.gov page paths in the `src` directory.
+
+## Definition of done
+- [x] Events are logged appropriately
+- [x] Documentation has been updated, if applicable
+- [x] A link has been provided to the originating GitHub issue (or connected to it via ZenHub)
+- [x] No sensitive information (i.e. PII/credentials/internal URLs/etc.) is captured in logging, hardcoded, or specs
+<issue_comment>username_0: I think this is good now. Can someone PTAL? Thanks all!
+<issue_comment>username_0: Apologies for the spam, but evidently this is still a WIP. I'll reopen this PR later. Thanks all.
+<issue_comment>username_0: The Terms and Conditions URL is sticking around until some MHV work is completed, so the URL changes from `/health-care/medical-information-terms-conditions` to `/health-care` have been reverted as a result. At some point, references to that URL should be updated, but that's on the Griffin/Identity Team's radar already."
+facebook/docusaurus,1118888819,6519,"{'number': 6519.0, 'repo': 'docusaurus', 'user_login': 'facebook'}","[{'action': 'opened', 'author': 'jodyheavener', 'comment_id': None, 'datetime': '2022-01-31T02:42:28Z', 'masked_author': 'username_0', 'text': '## Motivation\r\n\r\nWe would like to be able to render custom HTML sidebar items. These items should render only the supplied HTML defined in the sidebar config, they don\'t need to be links or be associated with any pages, etc.\r\n\r\nTo achieve this I added a new sidebar item type, `""html""`. It accepts three configuration properties:\r\n\r\n- `value` (string, required) is the HTML to be rendered.\r\n- `defaultStyle` (boolean) will, when `true`, apply the styles that a standard menu item receives (i.e. spacing)\r\n- `className` (string) is a class name to be applied to the outer menu item `<li>`\r\n\r\nNote: this item\'s HTML is still rendered inside an `<li>` tag. This is required because sidebars are rendered inside inside `<ul>` tags, and no other element is a valid child element of it, therefor rendering ""unwrapped"" custom HTML is disallowed. Additionally, because menu items can be nested, custom HTML menu items will inherit horizontal spacing when nested.\r\n\r\n<!-- Write your motivation here. -->\r\n\r\n### Have you read the [Contributing Guidelines on pull requests](https://github.com/facebook/docusaurus/blob/main/CONTRIBUTING.md#pull-requests)?\r\n\r\nYes\r\n\r\n## Test Plan\r\n\r\nTo test this feature, you can use the following sample code.\r\n\r\n<details>\r\n  <summary>📃 Example HTML sidebar items</summary>\r\n  <div>\r\n\r\n```javascript\r\n// Divider\r\n{\r\n  type: \'html\',\r\n  value: \'<span class=""sidebar-divider"" />\',\r\n},\r\n// Section title\r\n{\r\n  type: \'html\',\r\n  className: \'sidebar-title\',\r\n  value: \'Core concepts\',\r\n  defaultStyle: true,\r\n},\r\n// Image\r\n{\r\n  type: \'html\',\r\n  defaultStyle: true,\r\n  className: \'powered-by-banner\',\r\n  value: `\r\n    <span>Powered by</span>\r\n    <img src=""/img/docusaurus.png"" alt=""Docusaurus Logo"" />\r\n  `,\r\n},\r\n```\r\n\r\n  </div>\r\n</details>\r\n\r\n<details>\r\n  <summary>🎨 CSS for HTML sidebar items</summary>\r\n  <div>\r\n\r\n```css\r\n.sidebar-divider {\r\n  border-top: 1px solid var(--ifm-color-gray-200);\r\n  display: block;\r\n  margin: 0.5rem 0 0.25rem 1rem;\r\n}\r\n\r\nhtml[data-theme=\'dark\'] .sidebar-divider {\r\n  border-top: 1px solid var(--ifm-color-gray-800);\r\n}\r\n\r\n.sidebar-title {\r\n  font-size: 0.8rem;\r\n  letter-spacing: 0.05rem;\r\n  text-transform: uppercase;\r\n  font-weight: 600;\r\n  color: var(--ifm-color-gray-600);\r\n}\r\n\r\nhtml[data-theme=\'dark\'] .sidebar-divider {\r\n  color: var(--ifm-color-gray-200);\r\n}\r\n[Truncated]\n  </div>\r\n</details>\r\n\r\nAdd this code to your Docusaurus sidebar config and CSS file, and it should render nicely as pictured below:\r\n\r\n<img width=""298"" alt=""Screen Shot 2022-01-30 at 18 36 21"" src=""https://user-images.githubusercontent.com/6392049/151731710-a3048865-c412-4122-a2e4-2dc92e79f431.png"">\r\n\r\nAdditional screenshots:\r\n\r\n- [Dark theme, mobile](https://user-images.githubusercontent.com/6392049/151731712-7c260399-35d9-4102-83c7-d3d2cb2abeac.png)\r\n- [Light theme, nested](https://user-images.githubusercontent.com/6392049/151731781-46408631-cd2f-46d8-aadf-b83ec0e6a644.png)\r\n- [Light theme, mobile, scrolled](https://user-images.githubusercontent.com/6392049/151731825-c6151190-8f71-4d1c-923b-54b27436d297.png)\r\n\r\n## Related PRs\r\n\r\nCloses #6389\r\n\r\n---\r\n\r\n⚙️ I took a quick stab at trying to get JSX rendering inside in these menu items, but I ran into CJS issues. Could be a nice followup issue.', 'title': 'feat: add ""html"" type sidebar item for rendering pure HTML in sidebar', 'type': 'issue'}
+ {'action': 'created', 'author': 'slorber', 'comment_id': 1028168218.0, 'datetime': '2022-02-02 17:18:24+00:00', 'masked_author': 'username_1', 'text': ""@Andarist I guess it's not exactly the same use-case as your sidebar carbon ads right? (https://github.com/facebook/docusaurus/discussions/5468#discussioncomment-1714434)"", 'title': None, 'type': 'comment'}]","<issue_start><issue_comment>Title: feat: add ""html"" type sidebar item for rendering pure HTML in sidebar
+username_0: ## Motivation
+
+We would like to be able to render custom HTML sidebar items. These items should render only the supplied HTML defined in the sidebar config, they don't need to be links or be associated with any pages, etc.
+
+To achieve this I added a new sidebar item type, `""html""`. It accepts three configuration properties:
+
+- `value` (string, required) is the HTML to be rendered.
+- `defaultStyle` (boolean) will, when `true`, apply the styles that a standard menu item receives (i.e. spacing)
+- `className` (string) is a class name to be applied to the outer menu item `<li>`
+
+Note: this item's HTML is still rendered inside an `<li>` tag. This is required because sidebars are rendered inside inside `<ul>` tags, and no other element is a valid child element of it, therefor rendering ""unwrapped"" custom HTML is disallowed. Additionally, because menu items can be nested, custom HTML menu items will inherit horizontal spacing when nested.
+
+<!-- Write your motivation here. -->
+
+### Have you read the [Contributing Guidelines on pull requests](https://github.com/facebook/docusaurus/blob/main/CONTRIBUTING.md#pull-requests)?
+
+Yes
+
+## Test Plan
+
+To test this feature, you can use the following sample code.
+
+<details>
+  <summary>📃 Example HTML sidebar items</summary>
+  <div>
+
+```javascript
+// Divider
+{
+  type: 'html',
+  value: '<span class=""sidebar-divider"" />',
+},
+// Section title
+{
+  type: 'html',
+  className: 'sidebar-title',
+  value: 'Core concepts',
+  defaultStyle: true,
+},
+// Image
+{
+  type: 'html',
+  defaultStyle: true,
+  className: 'powered-by-banner',
+  value: `
+    <span>Powered by</span>
+    <img src=""/img/docusaurus.png"" alt=""Docusaurus Logo"" />
+  `,
+},
+```
+
+  </div>
+</details>
+
+<details>
+  <summary>🎨 CSS for HTML sidebar items</summary>
+  <div>
+
+```css
+.sidebar-divider {
+  border-top: 1px solid var(--ifm-color-gray-200);
+  display: block;
+  margin: 0.5rem 0 0.25rem 1rem;
+}
+
+html[data-theme='dark'] .sidebar-divider {
+  border-top: 1px solid var(--ifm-color-gray-800);
+}
+
+.sidebar-title {
+  font-size: 0.8rem;
+  letter-spacing: 0.05rem;
+  text-transform: uppercase;
+  font-weight: 600;
+  color: var(--ifm-color-gray-600);
+}
+
+html[data-theme='dark'] .sidebar-divider {
+  color: var(--ifm-color-gray-200);
+}
+[Truncated]
+  </div>
+</details>
+
+Add this code to your Docusaurus sidebar config and CSS file, and it should render nicely as pictured below:
+
+<img width=""298"" alt=""Screen Shot 2022-01-30 at 18 36 21"" src=""https://user-images.githubusercontent.com/6392049/151731710-a3048865-c412-4122-a2e4-2dc92e79f431.png"">
+
+Additional screenshots:
+
+- [Dark theme, mobile](https://user-images.githubusercontent.com/6392049/151731712-7c260399-35d9-4102-83c7-d3d2cb2abeac.png)
+- [Light theme, nested](https://user-images.githubusercontent.com/6392049/151731781-46408631-cd2f-46d8-aadf-b83ec0e6a644.png)
+- [Light theme, mobile, scrolled](https://user-images.githubusercontent.com/6392049/151731825-c6151190-8f71-4d1c-923b-54b27436d297.png)
+
+## Related PRs
+
+Closes #6389
+
+---
+
+⚙️ I took a quick stab at trying to get JSX rendering inside in these menu items, but I ran into CJS issues. Could be a nice followup issue.
+<issue_comment>username_1: @Andarist I guess it's not exactly the same use-case as your sidebar carbon ads right? (https://github.com/facebook/docusaurus/discussions/5468#discussioncomment-1714434)"
+cake-build/website,161640039,106,,"[{'action': 'opened', 'author': 'gep13', 'comment_id': None, 'datetime': '2016-06-22 09:57:48+00:00', 'masked_author': 'username_0', 'text': 'https://gitter.im/cake-build/cake?at=57608a03da1c26b045361237', 'title': 'Add information about Visual Studio Task Runner', 'type': 'issue'}
+ {'action': 'created', 'author': 'agc93', 'comment_id': 228374472.0, 'datetime': '2016-06-24 15:18:58+00:00', 'masked_author': 'username_1', 'text': 'Oh hey, that\'s me! :+1: \r\n\r\nI\'m happy to have a look at this, but it\'s obviously not going to fit in with the format of the other ""Editors"" pages, since it\'s not to do with Intellisense or highlighting. Are there any other templates or anything I should use? \r\n\r\nOr if you guys are looking after this, I\'ll let more experienced hands work..', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'gep13', 'comment_id': 228551183.0, 'datetime': '2016-06-25 15:40:02+00:00', 'masked_author': 'username_0', 'text': ""@username_1 I was going to take this when I got a second, but happy for you to take it if you want.  We don't have any templates as such, so don't have anything that I can point you at, sorry.  I was thinking just a simple page with the steps on how to set up the task, and also some screenshots to help along the way, and a final screenshot showing the expected operation of the task."", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'enkafan', 'comment_id': 244792615.0, 'datetime': '2016-09-05 17:52:37+00:00', 'masked_author': 'username_2', 'text': 'Slightly related, I was working on calling my build script from VS Code. Maybe this new section could also house this information too. For what it\'s worth, here\'s the config I settled on.\r\n\r\n```json\r\n{\r\n    ""version"": ""0.1.0"",\r\n    ""isShellCommand"": true,\r\n    ""showOutput"": ""always"",\r\n    ""windows"" :{\r\n\t    ""command"": ""${env.windir}\\\\sysnative\\\\windowspowershell\\\\v1.0\\\\PowerShell.exe"",\r\n            ""args"": [   \r\n                ""-ExecutionPolicy"",\r\n                ""Unrestricted"",\r\n                ""-NoProfile"",\r\n                ""-file"",\r\n                ""build.ps1"",\r\n                ""-target""\r\n            ]\r\n    },    \r\n    ""tasks"": [\r\n        {\r\n            ""taskName"": ""build"",\r\n            ""suppressTaskName"": true,\r\n            ""isBuildCommand"": true,\r\n            ""args"": [\r\n                ""build""\r\n            ]\r\n        },\r\n        {\r\n            ""taskName"": ""Test"",\r\n            ""suppressTaskName"": true,\r\n            ""isTestCommand"": true,\r\n            ""args"": [\r\n                ""run-unit-tests""\r\n            ]\r\n        }\r\n    ]\r\n}```\r\n\r\nAssumes you have two tasks named `build` and `run-unit-tests` in your cake file. This is just for a Windows setup, but I\'ve tried to keep the tasks themselves workable for someone running *nix too.', 'title': None, 'type': 'comment'}
+ {'action': 'closed', 'author': 'gep13', 'comment_id': None, 'datetime': '2016-10-11 11:54:13+00:00', 'masked_author': 'username_0', 'text': '', 'title': None, 'type': 'issue'}
+ {'action': 'created', 'author': 'gep13', 'comment_id': 252896561.0, 'datetime': '2016-10-11 11:54:13+00:00', 'masked_author': 'username_0', 'text': '@username_1 fairly sure this is done, so closing it off.', 'title': None, 'type': 'comment'}]","<issue_start><issue_comment>Title: Add information about Visual Studio Task Runner
+username_0: https://gitter.im/cake-build/cake?at=57608a03da1c26b045361237
+<issue_comment>username_1: Oh hey, that's me! :+1: 
+
+I'm happy to have a look at this, but it's obviously not going to fit in with the format of the other ""Editors"" pages, since it's not to do with Intellisense or highlighting. Are there any other templates or anything I should use? 
+
+Or if you guys are looking after this, I'll let more experienced hands work..
+<issue_comment>username_0: @username_1 I was going to take this when I got a second, but happy for you to take it if you want.  We don't have any templates as such, so don't have anything that I can point you at, sorry.  I was thinking just a simple page with the steps on how to set up the task, and also some screenshots to help along the way, and a final screenshot showing the expected operation of the task.
+<issue_comment>username_2: Slightly related, I was working on calling my build script from VS Code. Maybe this new section could also house this information too. For what it's worth, here's the config I settled on.
+
+```json
+{
+    ""version"": ""0.1.0"",
+    ""isShellCommand"": true,
+    ""showOutput"": ""always"",
+    ""windows"" :{
+	    ""command"": ""${env.windir}\\sysnative\\windowspowershell\\v1.0\\PowerShell.exe"",
+            ""args"": [   
+                ""-ExecutionPolicy"",
+                ""Unrestricted"",
+                ""-NoProfile"",
+                ""-file"",
+                ""build.ps1"",
+                ""-target""
+            ]
+    },    
+    ""tasks"": [
+        {
+            ""taskName"": ""build"",
+            ""suppressTaskName"": true,
+            ""isBuildCommand"": true,
+            ""args"": [
+                ""build""
+            ]
+        },
+        {
+            ""taskName"": ""Test"",
+            ""suppressTaskName"": true,
+            ""isTestCommand"": true,
+            ""args"": [
+                ""run-unit-tests""
+            ]
+        }
+    ]
+}```
+
+Assumes you have two tasks named `build` and `run-unit-tests` in your cake file. This is just for a Windows setup, but I've tried to keep the tasks themselves workable for someone running *nix too.<issue_closed>
+<issue_comment>username_0: @username_1 fairly sure this is done, so closing it off."
+eduardoboucas/staticman,174160435,22,,"[{'action': 'opened', 'author': 'eduardoboucas', 'comment_id': None, 'datetime': '2016-08-31 00:55:57+00:00', 'masked_author': 'username_0', 'text': 'Anyone using [GitLab Pages](https://pages.gitlab.io/) that would be interested in using Staticman?', 'title': 'Support for GitLab Pages', 'type': 'issue'}
+ {'action': 'created', 'author': 'DirtyF', 'comment_id': 243632779.0, 'datetime': '2016-08-31 01:31:26+00:00', 'masked_author': 'username_1', 'text': 'cc/ @username_2 ?', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'andrewbanchich', 'comment_id': 243637261.0, 'datetime': '2016-08-31 02:02:46+00:00', 'masked_author': 'username_2', 'text': 'Thanks for the mention! This looks amazing! I will definitely try it out soon, probably this weekend.', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'eduardoboucas', 'comment_id': 243736012.0, 'datetime': '2016-08-31 11:27:58+00:00', 'masked_author': 'username_0', 'text': '(To be clear, only GitHub is supported at the moment. The issue is to gauge the interest in adding support for GitLab and ideally find someone to help make it happen.)', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'andrewbanchich', 'comment_id': 243751779.0, 'datetime': '2016-08-31 12:43:22+00:00', 'masked_author': 'username_2', 'text': '@username_0 Ah, okay. I would definitely be interested. GitLab is amazing and have been blowing past GitHub in most ways in my opinion. I know several others who feel the same way. I actually just use GitLab and mirror my repos to GitHub.', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'thercast', 'comment_id': 244525688.0, 'datetime': '2016-09-03 04:21:00+00:00', 'masked_author': 'username_3', 'text': ""I have my site's code hosted on GitLab and it'd be great to use staticman with it!"", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'sukiletxe', 'comment_id': 245409504.0, 'datetime': '2016-09-07 20:35:25+00:00', 'masked_author': 'username_4', 'text': ""I don't have a static site yet, but I'd love to use Staticman and Gitlab with it, especially since Gitlab supports any static site generator for doing continuous deployment."", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'sukiletxe', 'comment_id': 245409697.0, 'datetime': '2016-09-07 20:36:05+00:00', 'masked_author': 'username_4', 'text': ""I don't have a static site yet, but I'd love to use Staticman and Gitlab with it, especially since Gitlab supports any static site generator for doing continuous deployment."", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'mdxprograms', 'comment_id': 245412694.0, 'datetime': '2016-09-07 20:44:45+00:00', 'masked_author': 'username_5', 'text': 'Agreed. I switched to gitlab and would love to continue this.', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'eduardoboucas', 'comment_id': 246175750.0, 'datetime': '2016-09-11 11:36:03+00:00', 'masked_author': 'username_0', 'text': ""Thanks for the feedback, y'all.\r\n\r\nThis won't be a quick job, as a lot of the codebase was made to use the GitHub API, which will need to be reworked to support GitLab as well. I'll be on the lookout for someone that wishes to chip in, otherwise I'll (slowly) work on it whenever I get a chance."", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'zongren', 'comment_id': 248814586.0, 'datetime': '2016-09-22 05:13:43+00:00', 'masked_author': 'username_6', 'text': '+1\r\ncurrently using gitlab pages(due to github pages block baidu spider)', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'zongren', 'comment_id': 248859886.0, 'datetime': '2016-09-22 10:01:43+00:00', 'masked_author': 'username_6', 'text': 'using github webhooks and gitlab triggers make it work for gitlab pages\r\nsee [username_6/comment](https://github.com/username_6/comment/) and [my blog](https://username_6.me)', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'nakoo', 'comment_id': 280885124.0, 'datetime': '2017-02-19 00:15:48+00:00', 'masked_author': 'username_7', 'text': '@username_6 How do you set up the github webhook?', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'zburgermeiszter', 'comment_id': 283171829.0, 'datetime': '2017-02-28 21:51:39+00:00', 'masked_author': 'username_8', 'text': 'For this we should add the git provider domain to the request as a path element.\r\nso it would look like `/v3/entry/<github|gitlab>/<vendor>/<repo>/master/comments`', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'zburgermeiszter', 'comment_id': 283180538.0, 'datetime': '2017-02-28 22:23:20+00:00', 'masked_author': 'username_8', 'text': 'Node libs for future reference:\r\n[gitlab](https://www.npmjs.com/package/gitlab)\r\n[gitlab-webhook](https://www.npmjs.com/package/gitlab-webhook)', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'zburgermeiszter', 'comment_id': 283785937.0, 'datetime': '2017-03-02 21:22:06+00:00', 'masked_author': 'username_8', 'text': 'What do you think @username_0?', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'eduardoboucas', 'comment_id': 283787703.0, 'datetime': '2017-03-02 21:29:00+00:00', 'masked_author': 'username_0', 'text': ""The first step in making this work will be to decouple all the logic that interacts with GitHub, creating a generic storage class that can then be plugged in to GitHub or GitLab. This will be quite a substantial amount of work.\r\n\r\nRegarding the endpoint, I think we're adding too many levels to the URL. We either rename `entry` to `github` and `gitlab` in `v3`, or we add a `options[repo]` field that contains the full URL to the repository, which would also address the point you made about GitLab instances running on custom domains (which also stands for GitHub Enterprise).\r\n\r\nI definitely want to get this done, but I'd rather get some of the low-hanging fruit out of the way first (like #42) before attempting to build this."", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'zburgermeiszter', 'comment_id': 283901360.0, 'datetime': '2017-03-03 08:59:56+00:00', 'masked_author': 'username_8', 'text': 'I would implement a common git interface and then instantiate a github/gitlab connector based on the initialisation object.\r\n\r\nBut yes, there might be other features that would have bigger benefit than this.\r\nWe should have a simple poll to see where people want to use their pages.', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'lsrdg', 'comment_id': 283905274.0, 'datetime': '2017-03-03 09:19:26+00:00', 'masked_author': 'username_9', 'text': 'Hi, \r\n\r\nunfortunatelly I am not able to provide any help on this, but this is the only reason why I am not using Staticman **_yet_**; all my pages are hosted on Gitlab. Despite the lack of technical knowledge to help on any PR, I would still help on testing, documenting and giving any feedback needed in order to make this happen. (:', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'sukiletxe', 'comment_id': 283931097.0, 'datetime': '2017-03-03 11:27:21+00:00', 'masked_author': 'username_4', 'text': ""@username_9 as @username_6 commented, it's possible to use Gitlab using Gitlab triggers and Github webhooks. See his links above for reference. In a nutshell, you would need to instruct your `.gitlab-ci.yml` file to clone your GitHub repo with the comments (and just the comments) inside your GitLab repository, and make the necessary changes in the templates to render them. Also, you'd need to add a GitHub webhook which triggers a GitLab build when the GitHub repository receives a push event."", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'lsrdg', 'comment_id': 283934067.0, 'datetime': '2017-03-03 11:45:07+00:00', 'masked_author': 'username_9', 'text': ""Thanks for taking the time, @username_4!\r\nWhen I first saw his comment a couple of weeks ago, I take a look at his links and enjoyed what I saw over there, but I got hooked on the webhook stuff (bad punch..), which I have no idea how to approach. Maybe I should give it another try. Thanks to your comment, it does seem to be achievable. But I don't think it is worth to bother you guys here with my lack of knowledge on the issue. (:\r\nI'll give it a try and take notes, hopefully I can come up with some sort of guidelines to help another lost soul around there. Or, if anyone stumbles on any kind of tutorial around there, please share.\r\n\r\nThanks again, @username_4"", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'zburgermeiszter', 'comment_id': 283938040.0, 'datetime': '2017-03-03 12:08:50+00:00', 'masked_author': 'username_8', 'text': ""@username_4 yes, but that's a workaround."", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'sukiletxe', 'comment_id': 283961566.0, 'datetime': '2017-03-03 14:07:05+00:00', 'masked_author': 'username_4', 'text': '@username_8: I know, but until Staticman supports it, it can be used successfully.', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'lsrdg', 'comment_id': 284147007.0, 'datetime': '2017-03-04 11:56:36+00:00', 'masked_author': 'username_9', 'text': ""Github is great, but it is nice to have an alternative such as Gitlab, which provide different features.\r\n\r\nThere are many engines providing comments to static websites, yet I really like the idea of Staticman, and the fact that Staticman is not only an alternative, but it also provides different possibilities and a different approach to a common problem. \r\n\r\nUnder this perspective of: alternatives + different paths to be followed, I would like to see native support for Gitlab pages, and not only an workaround.\r\n\r\nYet, my comments here are not meant to press the development, and I do believe that those working on the development should decide how and when things should be done. Anyway, I'll keep watching this great project, and I would love contribute as possible.  (:"", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'hosnas', 'comment_id': 331615116.0, 'datetime': '2017-09-23 06:44:33+00:00', 'masked_author': 'username_10', 'text': 'Any update for this issue? Can we assume it is coming soon? I am desperately waiting for it.', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'asarkar', 'comment_id': 331682622.0, 'datetime': '2017-09-24 02:33:48+00:00', 'masked_author': 'username_11', 'text': ""I think it's clear that there's a fair amount of interest in this. I recently moved my blog to GitLab Pages because GitHub doesn't support HTTPS for custom domains."", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'lsrdg', 'comment_id': 331698119.0, 'datetime': '2017-09-24 09:26:04+00:00', 'masked_author': 'username_9', 'text': ""I couldn't make it work, but if someone cares to interprete and translate what @username_6 did to get Staticman to work with Gitlab, I would be glad to test it and help to document a how to (so that @username_0 doesn't need  to tweak the code, but users could still make it work...)."", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'eduardoboucas', 'comment_id': 331698450.0, 'datetime': '2017-09-24 09:33:04+00:00', 'masked_author': 'username_0', 'text': 'The issue isn’t about gauging interest anymore, people clearly want it. But the same people also need to understand that is is a non-profit open-source project, that depends on people (mainly myself) donating their time for free to keep it going. \r\n\r\nI have made it clear that I don’t have the capacity to look into this at the moment, but left the issue open hoping to get someone else to contribute with their time to make it happen.', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'asarkar', 'comment_id': 331734283.0, 'datetime': '2017-09-24 19:43:18+00:00', 'masked_author': 'username_11', 'text': ""I looked at @username_6 and @username_4 comments, as well as the links @username_6 provided, but none of that made sense to me. First of all, I don't want to maintain my blog on gitHub Pages anymore (due to lack of HTTPS as previously mentioned), so I don't understand how it's supposed to receive notifications from Staticman which apparently is one part of making it work with gitLab. Secondly, his blog appears to be in Chinese which I don't read."", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'DirtyF', 'comment_id': 331738004.0, 'datetime': '2017-09-24 20:27:54+00:00', 'masked_author': 'username_1', 'text': ""FWIW [Netlify](https://netlify.com) supports custom HTTPS and has no restrictions on Jekyll'splugins. You just have to link your GitHub repo to Netlify to be able to use Staticman without GitHub Pages restrictions. 🎉"", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'zongren', 'comment_id': 331754468.0, 'datetime': '2017-09-25 01:19:36+00:00', 'masked_author': 'username_6', 'text': '@username_11 \r\n1. The target of comment form is ""https://v3.staticman..."",so there will be not https issues.\r\n2. I only maintain my comments on github,and whenever there is a comment pushed to github repository by staticmanapp,it triggers ```gitlab``` to run page runner', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'HorribleGeek', 'comment_id': 364628205.0, 'datetime': '2018-02-10 05:42:33+00:00', 'masked_author': 'username_12', 'text': 'Any update on this?', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'ysolis', 'comment_id': 377634919.0, 'datetime': '2018-03-30 22:11:14+00:00', 'masked_author': 'username_13', 'text': 'https://donboulton.com/staticman/2018/03/05/post-Staticman-with-Gitlab.html', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'VincentTam', 'comment_id': 399974230.0, 'datetime': '2018-06-25 14:35:56+00:00', 'masked_author': 'username_14', 'text': '@username_13 404 Page not found\r\n\r\nhttp://username_6.me/2016/09/23/use-staticman-in-gitlab-pages/ (in Simplified Chinese)', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'ysolis', 'comment_id': 400040464.0, 'datetime': '2018-06-25 17:57:28+00:00', 'masked_author': 'username_13', 'text': 'thanks @username_14 ... corrected URL now:\r\n\r\nhttps://donboulton.com/2018-02-26-post-Staticman-with-Gitlab.html', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'ntsim', 'comment_id': 404801408.0, 'datetime': '2018-07-13 11:03:25+00:00', 'masked_author': 'username_15', 'text': ""Hi @username_0, thanks for your work on this project. GitLab is definitely something I want to see support for so I'd like to step up and volunteer to take point on this one :smile: \r\n\r\nI've already given it a nosy and looks like it shouldn't be too hard once the main pieces are in place. Here's my proposal:\r\n\r\n### API changes\r\n\r\nTo allow users to choose between GitHub or GitLab, I think we need to introduce a breaking change to the `/entry` endpoint. Specifically, we need to allow users the ability to choose between GitHub and GitLab like so:\r\n\r\n`https://api.staticman.net/v3/entry/{SERVICE}/{USERNAME}/{REPOSITORY}/{BRANCH}/{PROPERTY (optional)}`\r\n\r\nWhere `SERVICE` would be a new parameter that could take the following as options:\r\n\r\n- `github`\r\n- `gitlab`\r\n\r\nThis is also relevant for the `/auth` endpoint as well:\r\n\r\n`https://api.staticman.net/v3/auth/{SERVICE}/{USERNAME}/{REPOSITORY}/{BRANCH}/{PROPERTY (optional)}`\r\n\r\nThis is not quite a breaking change as the endpoint is already in the correct structure. I think bumping up the entire API to v3 seems like the way to go anyway?\r\n\r\n### Allowing configuration of GitLab site URLs\r\n\r\nCurrently, the Staticman API uses a hard-coded GitHub URL (http://api.github.com) to make its API calls. Unfortunately this is too inflexible if users want to use Staticman in conjunction with a self-hosted version of GitHub or GitLab (most likely GitLab).\r\n\r\nAs such, the following configuration options could be introduced to the config to allow for this kind of flexibility:\r\n\r\n```\r\n  githubUrl: {\r\n    doc: 'URL of the hosted GitHub service.',\r\n    format: String,\r\n    default: 'https://api.github.com',\r\n    env: 'GITHUB_URL'\r\n  },\r\n  gitlabUrl: {\r\n    doc: 'URL of the hosted GitLab service.',\r\n    format: String,\r\n    default: 'https://gitlab.com',\r\n    env: 'GITLAB_URL'\r\n  },\r\n```\r\n\r\nObviously with the hosted Staticman instance, this would just use the default URLs.\r\n\r\n### Updating the minimum NodeJS version\r\n\r\nI found it somewhat confusing what was the 'true' minimum version of Node that we intend to support. Currently the README suggests that 4.8.3 is the minimum version, however, it appeared like the provided Docker environment and tests actually only really support version 6+.\r\n\r\nAs 4.8.3 seems pretty barebones in terms of providing the complete ES2015+ feature set, I would suggest that whilst we are also upgrading the API version, we also take the opportunity to bump up to at least 6. This would provide features such as `classes` (which could be used for implementing the GitLab functionality) and would allow further quality-of-life refactoring across the rest of the codebase. \r\n\r\nI would personally suggest we just bump it up to the latest and greatest stable release - 8.11.3. Obviously this is at your discretion :wink:\r\n\r\n---\r\n\r\nIf all of the above seem amenable, then I think I could have it hacked together pretty soon (next week or so)."", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'eduardoboucas', 'comment_id': 404831620.0, 'datetime': '2018-07-13 13:21:09+00:00', 'masked_author': 'username_0', 'text': ""Hi @username_15, thanks for that. I'm happy that someone has the change to work on adding support for GitLab, given that it's unquestionably the most popular feature request.\r\n\r\nYour plan is sound. I'm not against introducing a breaking change to the API (that's why it is versioned, after all), but I wonder if we could avoid it by allowing the service to be part of the repository parameter, defaulting to `github`.\r\n\r\n```\r\nhttps://api.staticman.net/v3/entry/{USERNAME}/{REPOSITORY}@{SERVICE (optional)}/{BRANCH}/{PROPERTY (optional)}\r\n```\r\n\r\nSo, these URLs would use GitHub:\r\n\r\n- https://api.staticman.net/v3/entry/username_0/staticman/master/comments\r\n- https://api.staticman.net/v3/entry/username_0/staticman@github/master/comments\r\n\r\nAnd this one would use GitLab:\r\n\r\n- - https://api.staticman.net/v3/entry/username_0/staticman@gitlab/master/comments\r\n\r\nI'm in two minds about it. In the one hand, avoiding a breaking change is always tempting, but on the other hand it seems a bit hacky to cram the service in the repository parameter.\r\n\r\nWhat do you think? What does everyone else think?\r\n\r\nThanks again."", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'ntsim', 'comment_id': 404835207.0, 'datetime': '2018-07-13 13:35:13+00:00', 'masked_author': 'username_15', 'text': ""@username_0 if I had to choose, I would go with the breaking change so that the URLs can be better aligned. I'm mostly thinking about the `/auth` endpoint which actually looks like `/auth/github/{USERNAME}/{REPOSITORY}/{BRANCH}` currently (and would be consistent with the breaking change)."", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'eduardoboucas', 'comment_id': 404869241.0, 'datetime': '2018-07-13 15:34:27+00:00', 'masked_author': 'username_0', 'text': ""Okay, let's go with that!"", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'VincentTam', 'comment_id': 421877804.0, 'datetime': '2018-09-17 02:36:01+00:00', 'masked_author': 'username_14', 'text': ""@username_3 @username_4 @username_5 @username_9 Thanks to #219, I've managed to set up [a demo Hugo site](https://vincenttam.gitlab.io/test-hugo-staticman) ([Source](https://gitlab.com/vincenttam/test-hugo-staticman)) powered by Staticman&nbsp;v3's native GitLab support.\r\n\r\n![screenshot from 2018-09-17 04-06-36](https://user-images.githubusercontent.com/5748535/45604201-6aef5100-ba32-11e8-8185-80802ec10eeb.png)\r\n\r\nThere's a setup guide in #219, but GitLab repo config and API server config are mixed up, contrary to Staticman's README.  A mistake is hidden somewhere between me conversation with the developer.   As a result, I've decided to write [my own GitLab repo setup guide](https://vincenttam.gitlab.io/post/2018-09-16-staticman-powered-gitlab-pages/1/). A custom Staticman server setup guide is upcoming."", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'OlafHaag', 'comment_id': 473752430.0, 'datetime': '2019-03-18 03:00:21+00:00', 'masked_author': 'username_16', 'text': ""Hi! Thanks to @username_14's blog post I was able to setup my gitlab page with staticman and creating moderated comments works. Creating a mailing list also works, but sending notification e-mails does not. I suspect this is because the webhook part isn't yet converted to use the GitServiceFactory.\r\n\r\nCan someone please help me out a bit understanding some specifics? Because I'm really new to Node.js.\r\n\r\n_server.js_ initializes the webhook handler, but still uses `express-github-webhook` as GithubWebHook. So the first order of business would be to replace that with something git service agnostic or switch by service used. What's the best practice here?\r\n\r\nThis then leads to _controllers/handlePR.js_ that needs to use the GitServiceFactory instead of GitHub. So on top set `const gitFactory = require('./GitServiceFactory')`, then use `const git = gitFactory.create(<service>, {<options>})`. How do I populate the arguments _service_ and _options_ in this case? The currently used GitHub constructor gets this from _repository: data.repository.name_ and the likes, but what exactly is needed for the GitServiceFactory? I don't know where the _data_ reference is coming from and what's inside.\r\n\r\nIf we did replace all the github stuff with our gitFactory instance, _git.getReview_ kicks off _staticman.processMerge_ in _lib/Staticman.js_ , which in turn handles the subscriptions.\r\n\r\nThis seems fairly simply, but unfortunately I don't know the language yet."", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'mnlbox', 'comment_id': 485323407.0, 'datetime': '2019-04-22 04:44:48+00:00', 'masked_author': 'username_17', 'text': 'Any news?', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'VincentTam', 'comment_id': 485442009.0, 'datetime': '2019-04-22 14:59:58+00:00', 'masked_author': 'username_14', 'text': '@username_16 Maybe @username_15 can help, since he has authored #219 and #231.', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'ousia', 'comment_id': 571204768.0, 'datetime': '2020-01-06 16:23:15+00:00', 'masked_author': 'username_18', 'text': '@username_0,\r\n\r\nwould it be possible to have simple documentation (similar to the [docs for GitHub](https://staticman.net/docs/)) for GitLab?\r\n\r\n Many thanks for your help.', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'hispanic', 'comment_id': 713117693.0, 'datetime': '2020-10-20 20:24:09+00:00', 'masked_author': 'username_19', 'text': ""@username_16 I've submitted a PR that addresses this - https://github.com/username_0/staticman/pull/388"", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'OlafHaag', 'comment_id': 713122445.0, 'datetime': '2020-10-20 20:32:18+00:00', 'masked_author': 'username_16', 'text': ""@username_19 Thanks for contributing! In the meantime the e-mail list provider (mailgun) that I was using changed their pricing/free plan, and it wasn't clear how staticman would handle the GDPR requirements for e-mail notifications (need consent/confirmation to be added to the list), so I disabled e-mails completely for now. But it's nice to see there's some progress."", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'hispanic', 'comment_id': 713139329.0, 'datetime': '2020-10-20 21:05:42+00:00', 'masked_author': 'username_19', 'text': ""I'm not sure I understand your GDPR-related concerns. On my blog, I intend to provide a checkbox that the potential subscriber needs to affirmatively check in order to signal their permission for me to send them email. The only thing I can imagine Staticman needs to provide is support for capturing some audit info (possibly in Mailgun):\r\n- What they were told at the time of consent\r\n- How they consented (e.g., during checkout, via Facebook form, etc.)\r\n- Whether they have withdrawn consent\r\n~ https://www.litmus.com/blog/5-things-you-must-know-about-email-consent-under-gdpr/"", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'OlafHaag', 'comment_id': 713147847.0, 'datetime': '2020-10-20 21:23:02+00:00', 'masked_author': 'username_16', 'text': ""I could easily add anyone's e-mail address and check the box.\r\nI outlined my GDPR related thoughts in #277. Maybe we should take the discussion there."", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'hispanic', 'comment_id': 713158817.0, 'datetime': '2020-10-20 21:47:01+00:00', 'masked_author': 'username_19', 'text': '@username_16 Will do. Thanks for the pointer.', 'title': None, 'type': 'comment'}]","<issue_start><issue_comment>Title: Support for GitLab Pages
+username_0: Anyone using [GitLab Pages](https://pages.gitlab.io/) that would be interested in using Staticman?
+<issue_comment>username_1: cc/ @username_2 ?
+<issue_comment>username_2: Thanks for the mention! This looks amazing! I will definitely try it out soon, probably this weekend.
+<issue_comment>username_0: (To be clear, only GitHub is supported at the moment. The issue is to gauge the interest in adding support for GitLab and ideally find someone to help make it happen.)
+<issue_comment>username_2: @username_0 Ah, okay. I would definitely be interested. GitLab is amazing and have been blowing past GitHub in most ways in my opinion. I know several others who feel the same way. I actually just use GitLab and mirror my repos to GitHub.
+<issue_comment>username_3: I have my site's code hosted on GitLab and it'd be great to use staticman with it!
+<issue_comment>username_4: I don't have a static site yet, but I'd love to use Staticman and Gitlab with it, especially since Gitlab supports any static site generator for doing continuous deployment.
+<issue_comment>username_4: I don't have a static site yet, but I'd love to use Staticman and Gitlab with it, especially since Gitlab supports any static site generator for doing continuous deployment.
+<issue_comment>username_5: Agreed. I switched to gitlab and would love to continue this.
+<issue_comment>username_0: Thanks for the feedback, y'all.
+
+This won't be a quick job, as a lot of the codebase was made to use the GitHub API, which will need to be reworked to support GitLab as well. I'll be on the lookout for someone that wishes to chip in, otherwise I'll (slowly) work on it whenever I get a chance.
+<issue_comment>username_6: +1
+currently using gitlab pages(due to github pages block baidu spider)
+<issue_comment>username_6: using github webhooks and gitlab triggers make it work for gitlab pages
+see [username_6/comment](https://github.com/username_6/comment/) and [my blog](https://username_6.me)
+<issue_comment>username_7: @username_6 How do you set up the github webhook?
+<issue_comment>username_8: For this we should add the git provider domain to the request as a path element.
+so it would look like `/v3/entry/<github|gitlab>/<vendor>/<repo>/master/comments`
+<issue_comment>username_8: Node libs for future reference:
+[gitlab](https://www.npmjs.com/package/gitlab)
+[gitlab-webhook](https://www.npmjs.com/package/gitlab-webhook)
+<issue_comment>username_8: What do you think @username_0?
+<issue_comment>username_0: The first step in making this work will be to decouple all the logic that interacts with GitHub, creating a generic storage class that can then be plugged in to GitHub or GitLab. This will be quite a substantial amount of work.
+
+Regarding the endpoint, I think we're adding too many levels to the URL. We either rename `entry` to `github` and `gitlab` in `v3`, or we add a `options[repo]` field that contains the full URL to the repository, which would also address the point you made about GitLab instances running on custom domains (which also stands for GitHub Enterprise).
+
+I definitely want to get this done, but I'd rather get some of the low-hanging fruit out of the way first (like #42) before attempting to build this.
+<issue_comment>username_8: I would implement a common git interface and then instantiate a github/gitlab connector based on the initialisation object.
+
+But yes, there might be other features that would have bigger benefit than this.
+We should have a simple poll to see where people want to use their pages.
+<issue_comment>username_9: Hi, 
+
+unfortunatelly I am not able to provide any help on this, but this is the only reason why I am not using Staticman **_yet_**; all my pages are hosted on Gitlab. Despite the lack of technical knowledge to help on any PR, I would still help on testing, documenting and giving any feedback needed in order to make this happen. (:
+<issue_comment>username_4: @username_9 as @username_6 commented, it's possible to use Gitlab using Gitlab triggers and Github webhooks. See his links above for reference. In a nutshell, you would need to instruct your `.gitlab-ci.yml` file to clone your GitHub repo with the comments (and just the comments) inside your GitLab repository, and make the necessary changes in the templates to render them. Also, you'd need to add a GitHub webhook which triggers a GitLab build when the GitHub repository receives a push event.
+<issue_comment>username_9: Thanks for taking the time, @username_4!
+When I first saw his comment a couple of weeks ago, I take a look at his links and enjoyed what I saw over there, but I got hooked on the webhook stuff (bad punch..), which I have no idea how to approach. Maybe I should give it another try. Thanks to your comment, it does seem to be achievable. But I don't think it is worth to bother you guys here with my lack of knowledge on the issue. (:
+I'll give it a try and take notes, hopefully I can come up with some sort of guidelines to help another lost soul around there. Or, if anyone stumbles on any kind of tutorial around there, please share.
+
+Thanks again, @username_4
+<issue_comment>username_8: @username_4 yes, but that's a workaround.
+<issue_comment>username_4: @username_8: I know, but until Staticman supports it, it can be used successfully.
+<issue_comment>username_9: Github is great, but it is nice to have an alternative such as Gitlab, which provide different features.
+
+There are many engines providing comments to static websites, yet I really like the idea of Staticman, and the fact that Staticman is not only an alternative, but it also provides different possibilities and a different approach to a common problem. 
+
+Under this perspective of: alternatives + different paths to be followed, I would like to see native support for Gitlab pages, and not only an workaround.
+
+Yet, my comments here are not meant to press the development, and I do believe that those working on the development should decide how and when things should be done. Anyway, I'll keep watching this great project, and I would love contribute as possible.  (:
+<issue_comment>username_10: Any update for this issue? Can we assume it is coming soon? I am desperately waiting for it.
+<issue_comment>username_11: I think it's clear that there's a fair amount of interest in this. I recently moved my blog to GitLab Pages because GitHub doesn't support HTTPS for custom domains.
+<issue_comment>username_9: I couldn't make it work, but if someone cares to interprete and translate what @username_6 did to get Staticman to work with Gitlab, I would be glad to test it and help to document a how to (so that @username_0 doesn't need  to tweak the code, but users could still make it work...).
+<issue_comment>username_0: The issue isn’t about gauging interest anymore, people clearly want it. But the same people also need to understand that is is a non-profit open-source project, that depends on people (mainly myself) donating their time for free to keep it going. 
+
+I have made it clear that I don’t have the capacity to look into this at the moment, but left the issue open hoping to get someone else to contribute with their time to make it happen.
+<issue_comment>username_11: I looked at @username_6 and @username_4 comments, as well as the links @username_6 provided, but none of that made sense to me. First of all, I don't want to maintain my blog on gitHub Pages anymore (due to lack of HTTPS as previously mentioned), so I don't understand how it's supposed to receive notifications from Staticman which apparently is one part of making it work with gitLab. Secondly, his blog appears to be in Chinese which I don't read.
+<issue_comment>username_1: FWIW [Netlify](https://netlify.com) supports custom HTTPS and has no restrictions on Jekyll'splugins. You just have to link your GitHub repo to Netlify to be able to use Staticman without GitHub Pages restrictions. 🎉
+<issue_comment>username_6: @username_11 
+1. The target of comment form is ""https://v3.staticman..."",so there will be not https issues.
+2. I only maintain my comments on github,and whenever there is a comment pushed to github repository by staticmanapp,it triggers ```gitlab``` to run page runner
+<issue_comment>username_12: Any update on this?
+<issue_comment>username_13: https://donboulton.com/staticman/2018/03/05/post-Staticman-with-Gitlab.html
+<issue_comment>username_14: @username_13 404 Page not found
+
+http://username_6.me/2016/09/23/use-staticman-in-gitlab-pages/ (in Simplified Chinese)
+<issue_comment>username_13: thanks @username_14 ... corrected URL now:
+
+https://donboulton.com/2018-02-26-post-Staticman-with-Gitlab.html
+<issue_comment>username_15: Hi @username_0, thanks for your work on this project. GitLab is definitely something I want to see support for so I'd like to step up and volunteer to take point on this one :smile: 
+
+I've already given it a nosy and looks like it shouldn't be too hard once the main pieces are in place. Here's my proposal:
+
+### API changes
+
+To allow users to choose between GitHub or GitLab, I think we need to introduce a breaking change to the `/entry` endpoint. Specifically, we need to allow users the ability to choose between GitHub and GitLab like so:
+
+`https://api.staticman.net/v3/entry/{SERVICE}/{USERNAME}/{REPOSITORY}/{BRANCH}/{PROPERTY (optional)}`
+
+Where `SERVICE` would be a new parameter that could take the following as options:
+
+- `github`
+- `gitlab`
+
+This is also relevant for the `/auth` endpoint as well:
+
+`https://api.staticman.net/v3/auth/{SERVICE}/{USERNAME}/{REPOSITORY}/{BRANCH}/{PROPERTY (optional)}`
+
+This is not quite a breaking change as the endpoint is already in the correct structure. I think bumping up the entire API to v3 seems like the way to go anyway?
+
+### Allowing configuration of GitLab site URLs
+
+Currently, the Staticman API uses a hard-coded GitHub URL (http://api.github.com) to make its API calls. Unfortunately this is too inflexible if users want to use Staticman in conjunction with a self-hosted version of GitHub or GitLab (most likely GitLab).
+
+As such, the following configuration options could be introduced to the config to allow for this kind of flexibility:
+
+```
+  githubUrl: {
+    doc: 'URL of the hosted GitHub service.',
+    format: String,
+    default: 'https://api.github.com',
+    env: 'GITHUB_URL'
+  },
+  gitlabUrl: {
+    doc: 'URL of the hosted GitLab service.',
+    format: String,
+    default: 'https://gitlab.com',
+    env: 'GITLAB_URL'
+  },
+```
+
+Obviously with the hosted Staticman instance, this would just use the default URLs.
+
+### Updating the minimum NodeJS version
+
+I found it somewhat confusing what was the 'true' minimum version of Node that we intend to support. Currently the README suggests that 4.8.3 is the minimum version, however, it appeared like the provided Docker environment and tests actually only really support version 6+.
+
+As 4.8.3 seems pretty barebones in terms of providing the complete ES2015+ feature set, I would suggest that whilst we are also upgrading the API version, we also take the opportunity to bump up to at least 6. This would provide features such as `classes` (which could be used for implementing the GitLab functionality) and would allow further quality-of-life refactoring across the rest of the codebase. 
+
+I would personally suggest we just bump it up to the latest and greatest stable release - 8.11.3. Obviously this is at your discretion :wink:
+
+---
+
+If all of the above seem amenable, then I think I could have it hacked together pretty soon (next week or so).
+<issue_comment>username_0: Hi @username_15, thanks for that. I'm happy that someone has the change to work on adding support for GitLab, given that it's unquestionably the most popular feature request.
+
+Your plan is sound. I'm not against introducing a breaking change to the API (that's why it is versioned, after all), but I wonder if we could avoid it by allowing the service to be part of the repository parameter, defaulting to `github`.
+
+```
+https://api.staticman.net/v3/entry/{USERNAME}/{REPOSITORY}@{SERVICE (optional)}/{BRANCH}/{PROPERTY (optional)}
+```
+
+So, these URLs would use GitHub:
+
+- https://api.staticman.net/v3/entry/username_0/staticman/master/comments
+- https://api.staticman.net/v3/entry/username_0/staticman@github/master/comments
+
+And this one would use GitLab:
+
+- - https://api.staticman.net/v3/entry/username_0/staticman@gitlab/master/comments
+
+I'm in two minds about it. In the one hand, avoiding a breaking change is always tempting, but on the other hand it seems a bit hacky to cram the service in the repository parameter.
+
+What do you think? What does everyone else think?
+
+Thanks again.
+<issue_comment>username_15: @username_0 if I had to choose, I would go with the breaking change so that the URLs can be better aligned. I'm mostly thinking about the `/auth` endpoint which actually looks like `/auth/github/{USERNAME}/{REPOSITORY}/{BRANCH}` currently (and would be consistent with the breaking change).
+<issue_comment>username_0: Okay, let's go with that!
+<issue_comment>username_14: @username_3 @username_4 @username_5 @username_9 Thanks to #219, I've managed to set up [a demo Hugo site](https://vincenttam.gitlab.io/test-hugo-staticman) ([Source](https://gitlab.com/vincenttam/test-hugo-staticman)) powered by Staticman&nbsp;v3's native GitLab support.
+
+![screenshot from 2018-09-17 04-06-36](https://user-images.githubusercontent.com/5748535/45604201-6aef5100-ba32-11e8-8185-80802ec10eeb.png)
+
+There's a setup guide in #219, but GitLab repo config and API server config are mixed up, contrary to Staticman's README.  A mistake is hidden somewhere between me conversation with the developer.   As a result, I've decided to write [my own GitLab repo setup guide](https://vincenttam.gitlab.io/post/2018-09-16-staticman-powered-gitlab-pages/1/). A custom Staticman server setup guide is upcoming.
+<issue_comment>username_16: Hi! Thanks to @username_14's blog post I was able to setup my gitlab page with staticman and creating moderated comments works. Creating a mailing list also works, but sending notification e-mails does not. I suspect this is because the webhook part isn't yet converted to use the GitServiceFactory.
+
+Can someone please help me out a bit understanding some specifics? Because I'm really new to Node.js.
+
+_server.js_ initializes the webhook handler, but still uses `express-github-webhook` as GithubWebHook. So the first order of business would be to replace that with something git service agnostic or switch by service used. What's the best practice here?
+
+This then leads to _controllers/handlePR.js_ that needs to use the GitServiceFactory instead of GitHub. So on top set `const gitFactory = require('./GitServiceFactory')`, then use `const git = gitFactory.create(<service>, {<options>})`. How do I populate the arguments _service_ and _options_ in this case? The currently used GitHub constructor gets this from _repository: data.repository.name_ and the likes, but what exactly is needed for the GitServiceFactory? I don't know where the _data_ reference is coming from and what's inside.
+
+If we did replace all the github stuff with our gitFactory instance, _git.getReview_ kicks off _staticman.processMerge_ in _lib/Staticman.js_ , which in turn handles the subscriptions.
+
+This seems fairly simply, but unfortunately I don't know the language yet.
+<issue_comment>username_17: Any news?
+<issue_comment>username_14: @username_16 Maybe @username_15 can help, since he has authored #219 and #231.
+<issue_comment>username_18: @username_0,
+
+would it be possible to have simple documentation (similar to the [docs for GitHub](https://staticman.net/docs/)) for GitLab?
+
+ Many thanks for your help.
+<issue_comment>username_19: @username_16 I've submitted a PR that addresses this - https://github.com/username_0/staticman/pull/388
+<issue_comment>username_16: @username_19 Thanks for contributing! In the meantime the e-mail list provider (mailgun) that I was using changed their pricing/free plan, and it wasn't clear how staticman would handle the GDPR requirements for e-mail notifications (need consent/confirmation to be added to the list), so I disabled e-mails completely for now. But it's nice to see there's some progress.
+<issue_comment>username_19: I'm not sure I understand your GDPR-related concerns. On my blog, I intend to provide a checkbox that the potential subscriber needs to affirmatively check in order to signal their permission for me to send them email. The only thing I can imagine Staticman needs to provide is support for capturing some audit info (possibly in Mailgun):
+- What they were told at the time of consent
+- How they consented (e.g., during checkout, via Facebook form, etc.)
+- Whether they have withdrawn consent
+~ https://www.litmus.com/blog/5-things-you-must-know-about-email-consent-under-gdpr/
+<issue_comment>username_16: I could easily add anyone's e-mail address and check the box.
+I outlined my GDPR related thoughts in #277. Maybe we should take the discussion there.
+<issue_comment>username_19: @username_16 Will do. Thanks for the pointer."
+ethereum/ethereum-org-website,499813562,260,,"[{'action': 'opened', 'author': 'pr0toshi', 'comment_id': None, 'datetime': '2019-09-28 19:43:12+00:00', 'masked_author': 'username_0', 'text': ""There is no ethereum discord for the ecosystem as a whole and many are only made for 1 purpose like dapps or trading. By making a general one the community would be able to grow together and all people would be able to influence others and stop tunnel vision from segregating the community.\r\n\r\n## Expected Behavior\r\nWe will be focusing on building the space and towards a unified and decentralised future. The intent is to help unify the space and allow for collaborative efforts in growing the cryptocurrency ecosystem in a collaborative environment.\r\nIf a project would like a channel they would just ask a mod to put one up. \r\n\r\nChannels are optional to join and you'll be able to to customize what you want to see while part of 1 community.\r\n\r\nModeration is done the same way, mods on higher branches have authority on lower branches to always be accountable and limit power abuse.\r\n\r\n## Behaviour\r\nPeople only join project or purpose base communities like those for making dapps or for dapps themselves. By combining them all we would be able to make the space more collaborative.\r\n\r\n## Possible Solution\r\nMultiple optional channels.\r\nHierarchical Moderation.\r\nMultipurpose communities under 1 large community with all the purpose of growing the ethereum ecosystem.\r\n\r\n## Context\r\nHelped make a community for technical people known as cryptodevs. Great community but not large reach because of specialization. Also mod the one for r cryptocurrency but the community has become unhealthy with most only there to make money."", 'title': 'The community really could benefit from a eth base discord', 'type': 'issue'}
+ {'action': 'created', 'author': 'pr0toshi', 'comment_id': 536220316.0, 'datetime': '2019-09-28 19:47:57+00:00', 'masked_author': 'username_0', 'text': 'Made a proof of concept with the above done. Roles for projects and purpose. Mod roles for only that channel by project leaders. All the other usual bots.', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'samajammin', 'comment_id': 536240794.0, 'datetime': '2019-09-29 02:11:49+00:00', 'masked_author': 'username_1', 'text': 'Hey! Thanks for suggesting this. It\'s certainly a topic I\'ve been having discussions about the past couple weeks. I think it has solid potential. I\'m curious to hear any other folks weigh in.\r\n\r\nIn my mind, ""what is the best structure for community-wide online communications?"" is an outstanding question. Is there an ideal size of a chat server? Is it necessarily a negative that separate communities have domain-specific or project-specific chats? If the online community increases by 10x, is a single chat server still the best format?\r\n\r\nMy hunch is that the easiest way to answer these questions & build a successful online community might be to evolve an existing one. For instance, have you considered talking to the other mods at [cryptodevs](https://discord.gg/EDA6M3R)? Maybe they would be open to a ""re-brand"" to include a more general audience. There\'s already channels in there for design & marketing... I don\'t think it\'s a stretch to add additional focus areas like legal, financial, language translation, or other domains topics organically rather than creating a new server from scratch.\r\n\r\nI\'m also not convinced that an ""Ethereum Discord"" is within scope of this website. At least for now, given current resources, I\'d lean more towards creating a ""Community"" resource page similar to [React\'s community page](https://reactjs.org/community/support.html) and link out to the online communities that exist. That said, I welcome this discussion & would love to see it produce some action items, whether it\'s folks volunteering to help you create & moderate this new Discord or existing communities incorporating your ideas.', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'pr0toshi', 'comment_id': 536247693.0, 'datetime': '2019-09-29 04:23:01+00:00', 'masked_author': 'username_0', 'text': 'I had brought it up in the past but they had only wanted to keep it for devs. I understand the reasoning behind expansion of a community but honestly there are none that are both ethereum base and not only for 1 purpose.', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'samajammin', 'comment_id': 536350497.0, 'datetime': '2019-09-29 23:06:22+00:00', 'masked_author': 'username_1', 'text': ""Got it. I totally support the initiative but in my mind, it's out of the scope of this website. I'll keep this issue open for now in case other folks want to weigh in or get involved."", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'pr0toshi', 'comment_id': 536630337.0, 'datetime': '2019-09-30 16:00:46+00:00', 'masked_author': 'username_0', 'text': 'It would also help with open and real time discussion about prs and proposals on for this project.', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'jjmstark', 'comment_id': 537461134.0, 'datetime': '2019-10-02 12:04:02+00:00', 'masked_author': 'username_2', 'text': 'Hey @username_0 - this is an interesting idea, but Sam\'s right that it\'s out of scope for ethereum.org. That doesn\'t mean it\'s a bad idea, it just means that ""should there be a discord that gains wide adoption within the Ethereum community?"" isn\'t something that the website team should decide, or has control over.\r\n\r\nInstead, this is something that anyone in the community is welcome to start on their own - you don\'t ned anyone\'s permission to start a discord and get people to use it! There are already some online chat groups that might be interesting to you, either to serve this purpose or as a place to try and recruit people to a discord, like the [gitter chats for various ethereum repos](https://gitter.im/ethereum/home).', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'samajammin', 'comment_id': 558471855.0, 'datetime': '2019-11-26 05:51:14+00:00', 'masked_author': 'username_1', 'text': 'Closing this out for maintenance purposes. We still support the initiative if anyone is able to take it on! In the meantime, hopefully the upcoming Community page #269 will help solve some of the issues you raised.', 'title': None, 'type': 'comment'}
+ {'action': 'closed', 'author': 'samajammin', 'comment_id': None, 'datetime': '2019-11-26 05:51:14+00:00', 'masked_author': 'username_1', 'text': '', 'title': None, 'type': 'issue'}]","<issue_start><issue_comment>Title: The community really could benefit from a eth base discord
+username_0: There is no ethereum discord for the ecosystem as a whole and many are only made for 1 purpose like dapps or trading. By making a general one the community would be able to grow together and all people would be able to influence others and stop tunnel vision from segregating the community.
+
+## Expected Behavior
+We will be focusing on building the space and towards a unified and decentralised future. The intent is to help unify the space and allow for collaborative efforts in growing the cryptocurrency ecosystem in a collaborative environment.
+If a project would like a channel they would just ask a mod to put one up. 
+
+Channels are optional to join and you'll be able to to customize what you want to see while part of 1 community.
+
+Moderation is done the same way, mods on higher branches have authority on lower branches to always be accountable and limit power abuse.
+
+## Behaviour
+People only join project or purpose base communities like those for making dapps or for dapps themselves. By combining them all we would be able to make the space more collaborative.
+
+## Possible Solution
+Multiple optional channels.
+Hierarchical Moderation.
+Multipurpose communities under 1 large community with all the purpose of growing the ethereum ecosystem.
+
+## Context
+Helped make a community for technical people known as cryptodevs. Great community but not large reach because of specialization. Also mod the one for r cryptocurrency but the community has become unhealthy with most only there to make money.
+<issue_comment>username_0: Made a proof of concept with the above done. Roles for projects and purpose. Mod roles for only that channel by project leaders. All the other usual bots.
+<issue_comment>username_1: Hey! Thanks for suggesting this. It's certainly a topic I've been having discussions about the past couple weeks. I think it has solid potential. I'm curious to hear any other folks weigh in.
+
+In my mind, ""what is the best structure for community-wide online communications?"" is an outstanding question. Is there an ideal size of a chat server? Is it necessarily a negative that separate communities have domain-specific or project-specific chats? If the online community increases by 10x, is a single chat server still the best format?
+
+My hunch is that the easiest way to answer these questions & build a successful online community might be to evolve an existing one. For instance, have you considered talking to the other mods at [cryptodevs](https://discord.gg/EDA6M3R)? Maybe they would be open to a ""re-brand"" to include a more general audience. There's already channels in there for design & marketing... I don't think it's a stretch to add additional focus areas like legal, financial, language translation, or other domains topics organically rather than creating a new server from scratch.
+
+I'm also not convinced that an ""Ethereum Discord"" is within scope of this website. At least for now, given current resources, I'd lean more towards creating a ""Community"" resource page similar to [React's community page](https://reactjs.org/community/support.html) and link out to the online communities that exist. That said, I welcome this discussion & would love to see it produce some action items, whether it's folks volunteering to help you create & moderate this new Discord or existing communities incorporating your ideas.
+<issue_comment>username_0: I had brought it up in the past but they had only wanted to keep it for devs. I understand the reasoning behind expansion of a community but honestly there are none that are both ethereum base and not only for 1 purpose.
+<issue_comment>username_1: Got it. I totally support the initiative but in my mind, it's out of the scope of this website. I'll keep this issue open for now in case other folks want to weigh in or get involved.
+<issue_comment>username_0: It would also help with open and real time discussion about prs and proposals on for this project.
+<issue_comment>username_2: Hey @username_0 - this is an interesting idea, but Sam's right that it's out of scope for ethereum.org. That doesn't mean it's a bad idea, it just means that ""should there be a discord that gains wide adoption within the Ethereum community?"" isn't something that the website team should decide, or has control over.
+
+Instead, this is something that anyone in the community is welcome to start on their own - you don't ned anyone's permission to start a discord and get people to use it! There are already some online chat groups that might be interesting to you, either to serve this purpose or as a place to try and recruit people to a discord, like the [gitter chats for various ethereum repos](https://gitter.im/ethereum/home).
+<issue_comment>username_1: Closing this out for maintenance purposes. We still support the initiative if anyone is able to take it on! In the meantime, hopefully the upcoming Community page #269 will help solve some of the issues you raised.<issue_closed>"
+cake-build/website,336001554,541,,"[{'action': 'opened', 'author': 'Jericho', 'comment_id': None, 'datetime': '2018-06-26 21:42:16+00:00', 'masked_author': 'username_0', 'text': ""The Cake.AddinDiscoverer tool has discovered discrepencies between the YAML files currently on Cake's web site and the packages discovered on Nuget.org:\r\n\r\nYAML files to be deleted:\r\n\r\n\r\nYAML files to be created:\r\n- Cake.Android.AvdManager\r\n- Cake.APT.Module\r\n- Cake.Aws.ElasticBeanstalk.Dev\r\n- Cake.AWS.Lambda\r\n- Cake.AzCopy\r\n- Cake.Bower\r\n- Cake.Bridge\r\n- Cake.BuildSystems.Module\r\n- Cake.CakeBoss\r\n- Cake.Chocolatey.Module\r\n- Cake.CK.Pack\r\n- Cake.ClickTwice\r\n- Cake.ConventionalChangelog\r\n- Cake.Deploy.Azure.Authentication\r\n- Cake.Deploy.Bot.LUIS\r\n- Cake.Deploy.Variables\r\n- Cake.DNF.Module\r\n- Cake.DocCreator\r\n- Cake.DocumentDb\r\n- Cake.Eazfuscator.Net\r\n- Cake.Flyway\r\n- Cake.Frosting.Template\r\n- Cake.FtpDeploy\r\n- Cake.Git.NonPortable\r\n- Cake.Gradle\r\n- Cake.Graph\r\n- Cake.Handlebars\r\n- Cake.HandlebarsDotNet\r\n- Cake.Helm\r\n- Cake.HgVersion\r\n- Cake.Jira\r\n- Cake.Karma\r\n- Cake.LongPath.Module\r\n- Cake.Mage\r\n- Cake.Markdown-Pdf\r\n- Cake.MonoApiTools\r\n- Cake.Netlify\r\n- Cake.NewRelic\r\n- Cake.Npx\r\n- Cake.NSpec\r\n- Cake.NSwag.Console\r\n- Cake.NuGet\r\n- Cake.OssIndex\r\n- Cake.Paket.Module\r\n- Cake.Parallel.Module\r\n- Cake.PinNuGetDependency\r\n- Cake.Recipe\r\n- Cake.ScheduledTasks\r\n- Cake.Scripting.Abstractions\r\n- Cake.Scripting.Transport\r\n- Cake.ServiceOrchestration\r\n- Cake.SimpleHTTPServer\r\n- Cake.Storm.Android\r\n- Cake.Storm.Environment\r\n- Cake.Storm.Fluent\r\n- Cake.Storm.Fluent.Android\r\n- Cake.Storm.Fluent.DotNetCore\r\n- Cake.Storm.Fluent.iOS\r\n- Cake.Storm.Fluent.NuGet\r\n- Cake.Storm.Fluent.Transformations\r\n- Cake.Storm.iOS\r\n- Cake.Storm.JsonBuildConfiguration\r\n- Cake.Storm.Nuget\r\n- Cake.Testing\r\n- Cake.Tin\r\n- Cake.TravisCI\r\n- Cake.UncUtils\r\n- Cake.UrlLoadDirective.Module\r\n- Cake.UServer\r\n- Cake.ViewCompiler\r\n- Cake.VSforMac\r\n- Cake.WindowsAppStore\r\n- Cake.Wyam.Recipe\r\n- Cake.Xamarin.Build\r\n[Truncated]\n- Cake.Plist\r\n- Cake.Powershell\r\n- Cake.ProjHelpers\r\n- Cake.Putty\r\n- Cake.Raygun\r\n- Cake.ReSharperReports\r\n- Cake.Services\r\n- Cake.Slack\r\n- Cake.SqlServer\r\n- Cake.SqlTools\r\n- Cake.Terraform\r\n- Cake.Tfx\r\n- Cake.Topshelf\r\n- Cake.Twitter\r\n- Cake.VersionReader\r\n- Cake.VsCode\r\n- Cake.VsixSignTool\r\n- Cake.VsMetrics\r\n- Cake.WebDeploy\r\n- Cake.Webpack"", 'title': 'Synchronizing YAML files', 'type': 'issue'}
+ {'action': 'created', 'author': 'Jericho', 'comment_id': 400478449.0, 'datetime': '2018-06-26 22:06:53+00:00', 'masked_author': 'username_0', 'text': 'I forgot to filter out the modules.', 'title': None, 'type': 'comment'}
+ {'action': 'closed', 'author': 'Jericho', 'comment_id': None, 'datetime': '2018-06-26 22:39:51+00:00', 'masked_author': 'username_0', 'text': '', 'title': None, 'type': 'issue'}]","<issue_start><issue_comment>Title: Synchronizing YAML files
+username_0: The Cake.AddinDiscoverer tool has discovered discrepencies between the YAML files currently on Cake's web site and the packages discovered on Nuget.org:
+
+YAML files to be deleted:
+
+
+YAML files to be created:
+- Cake.Android.AvdManager
+- Cake.APT.Module
+- Cake.Aws.ElasticBeanstalk.Dev
+- Cake.AWS.Lambda
+- Cake.AzCopy
+- Cake.Bower
+- Cake.Bridge
+- Cake.BuildSystems.Module
+- Cake.CakeBoss
+- Cake.Chocolatey.Module
+- Cake.CK.Pack
+- Cake.ClickTwice
+- Cake.ConventionalChangelog
+- Cake.Deploy.Azure.Authentication
+- Cake.Deploy.Bot.LUIS
+- Cake.Deploy.Variables
+- Cake.DNF.Module
+- Cake.DocCreator
+- Cake.DocumentDb
+- Cake.Eazfuscator.Net
+- Cake.Flyway
+- Cake.Frosting.Template
+- Cake.FtpDeploy
+- Cake.Git.NonPortable
+- Cake.Gradle
+- Cake.Graph
+- Cake.Handlebars
+- Cake.HandlebarsDotNet
+- Cake.Helm
+- Cake.HgVersion
+- Cake.Jira
+- Cake.Karma
+- Cake.LongPath.Module
+- Cake.Mage
+- Cake.Markdown-Pdf
+- Cake.MonoApiTools
+- Cake.Netlify
+- Cake.NewRelic
+- Cake.Npx
+- Cake.NSpec
+- Cake.NSwag.Console
+- Cake.NuGet
+- Cake.OssIndex
+- Cake.Paket.Module
+- Cake.Parallel.Module
+- Cake.PinNuGetDependency
+- Cake.Recipe
+- Cake.ScheduledTasks
+- Cake.Scripting.Abstractions
+- Cake.Scripting.Transport
+- Cake.ServiceOrchestration
+- Cake.SimpleHTTPServer
+- Cake.Storm.Android
+- Cake.Storm.Environment
+- Cake.Storm.Fluent
+- Cake.Storm.Fluent.Android
+- Cake.Storm.Fluent.DotNetCore
+- Cake.Storm.Fluent.iOS
+- Cake.Storm.Fluent.NuGet
+- Cake.Storm.Fluent.Transformations
+- Cake.Storm.iOS
+- Cake.Storm.JsonBuildConfiguration
+- Cake.Storm.Nuget
+- Cake.Testing
+- Cake.Tin
+- Cake.TravisCI
+- Cake.UncUtils
+- Cake.UrlLoadDirective.Module
+- Cake.UServer
+- Cake.ViewCompiler
+- Cake.VSforMac
+- Cake.WindowsAppStore
+- Cake.Wyam.Recipe
+- Cake.Xamarin.Build
+[Truncated]
+- Cake.Plist
+- Cake.Powershell
+- Cake.ProjHelpers
+- Cake.Putty
+- Cake.Raygun
+- Cake.ReSharperReports
+- Cake.Services
+- Cake.Slack
+- Cake.SqlServer
+- Cake.SqlTools
+- Cake.Terraform
+- Cake.Tfx
+- Cake.Topshelf
+- Cake.Twitter
+- Cake.VersionReader
+- Cake.VsCode
+- Cake.VsixSignTool
+- Cake.VsMetrics
+- Cake.WebDeploy
+- Cake.Webpack
+<issue_comment>username_0: I forgot to filter out the modules.<issue_closed>"
+gohugoio/hugo,529286130,6544,,"[{'action': 'opened', 'author': 'onedrawingperday', 'comment_id': None, 'datetime': '2019-11-27 11:25:33+00:00', 'masked_author': 'username_0', 'text': 'Sincethe release of Hugo 0.60.0 the new default markdown library is Goldmark and mmark deprecatedis going to be removed at some point.\r\n\r\nI am opening this issue to track the matter of math typesetting in Hugo with the new default markdown library.\r\n\r\nThe present situation is like so: \r\n\r\nhttps://github.com/litao91/goldmark-mathjax is an extension that offers support for goldmark.\r\n\r\nCurrently there is no KaTex extension that offers support for goldmark. (ref: https://github.com/yuin/goldmark/issues/32 )', 'title': 'Consider markdown extensions for math typesetting in Hugo', 'type': 'issue'}
+ {'action': 'created', 'author': 'severen', 'comment_id': 559408331.0, 'datetime': '2019-11-28 09:18:00+00:00', 'masked_author': 'username_1', 'text': 'The lack of support for maths typesetting with Goldmark (and specifically with using KaTeX to render it) is currently a blocker for me.', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'mobop', 'comment_id': 569039825.0, 'datetime': '2019-12-26 11:12:00+00:00', 'masked_author': 'username_2', 'text': 'Some one should write a KaTex extension for goldmark', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'onedrawingperday', 'comment_id': 578924415.0, 'datetime': '2020-01-27 19:57:38+00:00', 'masked_author': 'username_0', 'text': 'I have just come across a KaTex extension for Goldmark.\r\n\r\nhttps://github.com/graemephi/goldmark-qjs-katex\r\n\r\nAs mentioned in the first post there is another for MathJax over here:\r\nhttps://github.com/litao91/goldmark-mathjax\r\n\r\ncc: @bep', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'oblitum', 'comment_id': 595058535.0, 'datetime': '2020-03-05 06:52:34+00:00', 'masked_author': 'username_3', 'text': 'Would be nice to have a rationale for this here. I came here from build warning and have no idea why of the deprecation, as Mmark coupled with KaTeX has been working great for me and I use it in all of my posts....', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'onedrawingperday', 'comment_id': 595096835.0, 'datetime': '2020-03-05 08:33:56+00:00', 'masked_author': 'username_0', 'text': '@username_3 The release notes for 0.60.0 provide all the rationale you request.\r\n\r\nAlso the former default Blackfriday is largely unmaintained. mmark decided to switch to another Markdown engine that unfortunately came with its own performance penalties. So in the end it was decided that Goldmark which is Commonmark compliant should be adopted.', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'jemus42', 'comment_id': 595265026.0, 'datetime': '2020-03-05 14:44:44+00:00', 'masked_author': 'username_4', 'text': 'Proper KaTeX and/or mathjax support by hugo would be huge. So far I always had to resort to various hacky solutions that never lasted without breaking in one way or another.', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'oblitum', 'comment_id': 595308817.0, 'datetime': '2020-03-05 16:06:14+00:00', 'masked_author': 'username_3', 'text': ""Well this sucks and I used to recommend Mmark for math savvy hugo bloggers (it's a great and simple solution that works), I hope they don't come hunting me now, I made a dozen of people adopt it."", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'oblitum', 'comment_id': 595323813.0, 'datetime': '2020-03-05 16:35:26+00:00', 'masked_author': 'username_3', 'text': ""@username_0 I checked the [release notes](https://github.com/gohugoio/hugo/releases/tag/v0.60.0) and it doesn't state anything regarding why remove Mmark, the point there is more about the default parser Blackfriday being substituted, which by the way is less critical in thesis, as people that were relying on Blackfriday weren't relying on math extensions, etc, just standard Markdown which is covered by CommonMark. I never relied on Blackfriday as it never supported the features I needed, specially for math, so it was great when I found out about Mmark support.\r\n\r\n Is it really necessary, as you're going to break everyone that are relying on Mmark extensions for a solution that solves CommonMark? Couldn't it keep supporting Mmark just like before, in dual mode?"", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'oblitum', 'comment_id': 595328260.0, 'datetime': '2020-03-05 16:43:31+00:00', 'masked_author': 'username_3', 'text': '@username_4 it has always worked in Hugo if you used [`.mmark` files](https://mmark.miek.nl/post/syntax/#mmark-v2-syntax).', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'onedrawingperday', 'comment_id': 595337768.0, 'datetime': '2020-03-05 17:02:20+00:00', 'masked_author': 'username_0', 'text': 'You need to ask your questions at  [Hugo Discussion Forum](https://discourse.gohugo.io/). \r\n\r\nThis issue is about tracking the addition of Math extensions in Hugo.\r\n\r\nWe are not going to have a discussion here. Also note that currently as shown in my status I am BUSY. Please respect that fact and not mention me any further.', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'oblitum', 'comment_id': 595362851.0, 'datetime': '2020-03-05 17:55:37+00:00', 'masked_author': 'username_3', 'text': 'Which have been available and working since circa 2015.', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'onedrawingperday', 'comment_id': 595364054.0, 'datetime': '2020-03-05 17:58:12+00:00', 'masked_author': 'username_0', 'text': 'I am closing this issue due to trolling.\r\n\r\nIf someone else wishes to track the development of Math Typesetting extensions feel free to open another issue.\r\n\r\nEnough already.\r\n\r\ncc: @bep', 'title': None, 'type': 'comment'}
+ {'action': 'closed', 'author': 'onedrawingperday', 'comment_id': None, 'datetime': '2020-03-05 17:58:12+00:00', 'masked_author': 'username_0', 'text': '', 'title': None, 'type': 'issue'}
+ {'action': 'created', 'author': 'AnomalRoil', 'comment_id': 595771119.0, 'datetime': '2020-03-06 13:38:49+00:00', 'masked_author': 'username_5', 'text': ""I'm not sure I've understood what's the current state of math typesetting using Hugo.\r\nI get that mmark with KaTeX still works, but will be deprecated at some point.\r\n\r\nDo we have a working alternative right now that does not imply changing Hugo's source code ourselves or not? (The above Goldmark extensions appears to require such changes for now)\r\n\r\nI see that pandoc has the `--mathjax` helper,  so I guess this is currently the only way around the deprecation of mmark? (At the cost of some client side performances, since MathJax is slower than KaTeX)"", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'jemus42', 'comment_id': 595775833.0, 'datetime': '2020-03-06 13:50:04+00:00', 'masked_author': 'username_4', 'text': '#6842 (adding the graemephi/goldmark-qjs-katex extension) couldn\'t be merged because (from my layman\'s understanding) the katex extension in question includes a dependency on C (cgo), which is... a problem? At least there\'s a ""no cgo rule"", as the PR discussion shows. Therefore: No goldmark-katex extension for the foreseeable future (at least not *this* one).\r\n\r\nAs far as pandoc is concerned: From what I understand the pandoc support / configuration options form the hugo side are fairly limited, meaning you can use `pandoc --mathjax`, but you may not be (easily, through `config.toml`) able to adjust other pandoc options relevant to your needs. Since pandoc is a very, very powerful tool, this is both understandable due to its complexity and also unfortunate.', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'davidvandebunte', 'comment_id': 605457360.0, 'datetime': '2020-03-28 14:50:11+00:00', 'masked_author': 'username_6', 'text': ""At the moment, it doesn't seem inline math works with the combination of Katex and goldmark. The only way to get it to work in my case was with this workaround of using mmark:\r\nhttps://eankeen.github.io/blog/posts/render-latex-with-katex-in-hugo-blog/"", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'KevCaz', 'comment_id': 616234480.0, 'datetime': '2020-04-19 22:19:21+00:00', 'masked_author': 'username_7', 'text': '@username_6 I got it work after tweaking the delimiters https://stackoverflow.com/questions/27375252/how-can-i-render-all-inline-formulas-in-with-katex see https://github.com/username_7/funkyflex/blob/master/layouts/partials/math.html', 'title': None, 'type': 'comment'}]","<issue_start><issue_comment>Title: Consider markdown extensions for math typesetting in Hugo
+username_0: Sincethe release of Hugo 0.60.0 the new default markdown library is Goldmark and mmark deprecatedis going to be removed at some point.
+
+I am opening this issue to track the matter of math typesetting in Hugo with the new default markdown library.
+
+The present situation is like so: 
+
+https://github.com/litao91/goldmark-mathjax is an extension that offers support for goldmark.
+
+Currently there is no KaTex extension that offers support for goldmark. (ref: https://github.com/yuin/goldmark/issues/32 )
+<issue_comment>username_1: The lack of support for maths typesetting with Goldmark (and specifically with using KaTeX to render it) is currently a blocker for me.
+<issue_comment>username_2: Some one should write a KaTex extension for goldmark
+<issue_comment>username_0: I have just come across a KaTex extension for Goldmark.
+
+https://github.com/graemephi/goldmark-qjs-katex
+
+As mentioned in the first post there is another for MathJax over here:
+https://github.com/litao91/goldmark-mathjax
+
+cc: @bep
+<issue_comment>username_3: Would be nice to have a rationale for this here. I came here from build warning and have no idea why of the deprecation, as Mmark coupled with KaTeX has been working great for me and I use it in all of my posts....
+<issue_comment>username_0: @username_3 The release notes for 0.60.0 provide all the rationale you request.
+
+Also the former default Blackfriday is largely unmaintained. mmark decided to switch to another Markdown engine that unfortunately came with its own performance penalties. So in the end it was decided that Goldmark which is Commonmark compliant should be adopted.
+<issue_comment>username_4: Proper KaTeX and/or mathjax support by hugo would be huge. So far I always had to resort to various hacky solutions that never lasted without breaking in one way or another.
+<issue_comment>username_3: Well this sucks and I used to recommend Mmark for math savvy hugo bloggers (it's a great and simple solution that works), I hope they don't come hunting me now, I made a dozen of people adopt it.
+<issue_comment>username_3: @username_0 I checked the [release notes](https://github.com/gohugoio/hugo/releases/tag/v0.60.0) and it doesn't state anything regarding why remove Mmark, the point there is more about the default parser Blackfriday being substituted, which by the way is less critical in thesis, as people that were relying on Blackfriday weren't relying on math extensions, etc, just standard Markdown which is covered by CommonMark. I never relied on Blackfriday as it never supported the features I needed, specially for math, so it was great when I found out about Mmark support.
+
+ Is it really necessary, as you're going to break everyone that are relying on Mmark extensions for a solution that solves CommonMark? Couldn't it keep supporting Mmark just like before, in dual mode?
+<issue_comment>username_3: @username_4 it has always worked in Hugo if you used [`.mmark` files](https://mmark.miek.nl/post/syntax/#mmark-v2-syntax).
+<issue_comment>username_0: You need to ask your questions at  [Hugo Discussion Forum](https://discourse.gohugo.io/). 
+
+This issue is about tracking the addition of Math extensions in Hugo.
+
+We are not going to have a discussion here. Also note that currently as shown in my status I am BUSY. Please respect that fact and not mention me any further.
+<issue_comment>username_3: Which have been available and working since circa 2015.
+<issue_comment>username_0: I am closing this issue due to trolling.
+
+If someone else wishes to track the development of Math Typesetting extensions feel free to open another issue.
+
+Enough already.
+
+cc: @bep<issue_closed>
+<issue_comment>username_5: I'm not sure I've understood what's the current state of math typesetting using Hugo.
+I get that mmark with KaTeX still works, but will be deprecated at some point.
+
+Do we have a working alternative right now that does not imply changing Hugo's source code ourselves or not? (The above Goldmark extensions appears to require such changes for now)
+
+I see that pandoc has the `--mathjax` helper,  so I guess this is currently the only way around the deprecation of mmark? (At the cost of some client side performances, since MathJax is slower than KaTeX)
+<issue_comment>username_4: #6842 (adding the graemephi/goldmark-qjs-katex extension) couldn't be merged because (from my layman's understanding) the katex extension in question includes a dependency on C (cgo), which is... a problem? At least there's a ""no cgo rule"", as the PR discussion shows. Therefore: No goldmark-katex extension for the foreseeable future (at least not *this* one).
+
+As far as pandoc is concerned: From what I understand the pandoc support / configuration options form the hugo side are fairly limited, meaning you can use `pandoc --mathjax`, but you may not be (easily, through `config.toml`) able to adjust other pandoc options relevant to your needs. Since pandoc is a very, very powerful tool, this is both understandable due to its complexity and also unfortunate.
+<issue_comment>username_6: At the moment, it doesn't seem inline math works with the combination of Katex and goldmark. The only way to get it to work in my case was with this workaround of using mmark:
+https://eankeen.github.io/blog/posts/render-latex-with-katex-in-hugo-blog/
+<issue_comment>username_7: @username_6 I got it work after tweaking the delimiters https://stackoverflow.com/questions/27375252/how-can-i-render-all-inline-formulas-in-with-katex see https://github.com/username_7/funkyflex/blob/master/layouts/partials/math.html"
+newrelic/docs-website,746882512,290,,"[{'action': 'opened', 'author': 'zstix', 'comment_id': None, 'datetime': '2020-11-19 20:02:20+00:00', 'masked_author': 'username_0', 'text': '## Description\r\nIn order to display a list of What\'s New posts in the in-product help experience, we need to query NerdGraph to fetch the latest posts:\r\n\r\n```graphql\r\n{\r\n  docs {\r\n    whatsNew {\r\n      newsSearch(query: {contentType: ANNOUNCEMENT}) {\r\n        results {\r\n          title\r\n          ... on WhatsNewAnnouncementContent {\r\n            id\r\n            docUrl\r\n          }\r\n        }\r\n      }\r\n    }\r\n  }\r\n}\r\n```\r\n```json\r\n{\r\n  ""data"": {\r\n    ""docs"": {\r\n      ""whatsNew"": {\r\n        ""newsSearch"": {\r\n          ""results"": [\r\n            {\r\n              ""docUrl"": ""https://docs.newrelic.com/whats-new/share-dashboards-curated-views-permalinks"",\r\n              ""id"": ""08bc3324b1d819f908a63dfadcc28a5973b7fc05"",\r\n              ""title"": ""Share dashboards and curated views with permalinks""\r\n            },\r\n```\r\n\r\nTo do this, we will need to update [nr1-dev-experience/nr1-help-xp](https://source.datanerd.us/nr1-dev-experience/nr1-help-xp). See [this PR](https://source.datanerd.us/nr1-dev-experience/nr1-help-xp/pull/44) for additional context.\r\n\r\nWe _may_ want to only show the **unread** content, which is another query parameter in NerdGraph (powered by the Java service that supplies this content to the product).\r\n\r\n## Acceptance Criteria\r\n* [ ] Query for new posts', 'title': '[In-Product Help XP] Query Nerdgraph for What’s New posts', 'type': 'issue'}
+ {'action': 'created', 'author': 'zstix', 'comment_id': 736021737.0, 'datetime': '2020-11-30 20:24:00+00:00', 'masked_author': 'username_0', 'text': ""We have decided to link the user to the post _within_ the product. I'll keep the `research` label on this ticket until we can uncover the right query for this."", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'zstix', 'comment_id': 740176924.0, 'datetime': '2020-12-07 21:00:07+00:00', 'masked_author': 'username_0', 'text': '', 'title': None, 'type': 'comment'}
+ {'action': 'closed', 'author': 'zstix', 'comment_id': None, 'datetime': '2020-12-10 19:11:04+00:00', 'masked_author': 'username_0', 'text': '', 'title': None, 'type': 'issue'}]","<issue_start><issue_comment>Title: [In-Product Help XP] Query Nerdgraph for What’s New posts
+username_0: ## Description
+In order to display a list of What's New posts in the in-product help experience, we need to query NerdGraph to fetch the latest posts:
+
+```graphql
+{
+  docs {
+    whatsNew {
+      newsSearch(query: {contentType: ANNOUNCEMENT}) {
+        results {
+          title
+          ... on WhatsNewAnnouncementContent {
+            id
+            docUrl
+          }
+        }
+      }
+    }
+  }
+}
+```
+```json
+{
+  ""data"": {
+    ""docs"": {
+      ""whatsNew"": {
+        ""newsSearch"": {
+          ""results"": [
+            {
+              ""docUrl"": ""https://docs.newrelic.com/whats-new/share-dashboards-curated-views-permalinks"",
+              ""id"": ""08bc3324b1d819f908a63dfadcc28a5973b7fc05"",
+              ""title"": ""Share dashboards and curated views with permalinks""
+            },
+```
+
+To do this, we will need to update [nr1-dev-experience/nr1-help-xp](https://source.datanerd.us/nr1-dev-experience/nr1-help-xp). See [this PR](https://source.datanerd.us/nr1-dev-experience/nr1-help-xp/pull/44) for additional context.
+
+We _may_ want to only show the **unread** content, which is another query parameter in NerdGraph (powered by the Java service that supplies this content to the product).
+
+## Acceptance Criteria
+* [ ] Query for new posts
+<issue_comment>username_0: We have decided to link the user to the post _within_ the product. I'll keep the `research` label on this ticket until we can uncover the right query for this.<issue_closed>"

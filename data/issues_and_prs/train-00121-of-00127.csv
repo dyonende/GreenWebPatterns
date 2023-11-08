@@ -1,0 +1,266 @@
+godotengine/godot-website,739141303,201,"{'number': 201.0, 'repo': 'godot-website', 'user_login': 'godotengine'}","[{'action': 'opened', 'author': 'Calinou', 'comment_id': None, 'datetime': '2020-11-09T15:47:40Z', 'masked_author': 'username_0', 'text': ""The map is powered by [Leaflet.js](https://leafletjs.com/) and [Mapbox](https://www.mapbox.com/)'s tiles API. Mapbox's free tier is limited to 50,000 page loads per month, which should be fine given the community map is placed on a 3rd-level page (*Home > Community > User Groups*).\r\n\r\nUser groups are now stored in a PHP array located in the front matter. This makes the [godotengine/community-map](https://github.com/godotengine/community-map) repository obsolete. While not as ubiquitous as JSON, the PHP array format is more commonly known compared to the custom format we were using before. (We could still move the list of communities to a JSON file if needed.)\r\n\r\nWhen adding a new country, make sure to add its GPS coordinates to the `countryCoordinates` JavaScript object in `user-groups.htm`. This is required to place the online community marker correctly.\r\n\r\n## TODO\r\n\r\n- Set up a Mapbox account shared among core Godot developers and replace the personal API key. Make sure to restrict the URL to allow only godotengine.org URLs.\r\n\r\n## Preview\r\n\r\n<details>\r\n\r\n![Screenshot_2020-11-09 User Groups](https://user-images.githubusercontent.com/180032/98563314-4fe39900-22ab-11eb-99cc-356d106fcbb6.png)\r\n</details>"", 'title': 'Add a community map on the User groups page', 'type': 'issue'}
+ {'action': 'created', 'author': 'akien-mga', 'comment_id': 732965859.0, 'datetime': '2020-11-24 13:14:38+00:00', 'masked_author': 'username_1', 'text': ""I liked the idea to have data sourced from a dedicated repository where people can directly PR their details, but I guess we can start with the embedded PHP for now and see if there's a need to move it out eventually."", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'roquef', 'comment_id': 764937826.0, 'datetime': '2021-01-21 20:58:29+00:00', 'masked_author': 'username_2', 'text': 'Just out of curiosity, why use the mapbox tile server instead of OSM?', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'Calinou', 'comment_id': 764939855.0, 'datetime': '2021-01-21 21:02:29+00:00', 'masked_author': 'username_0', 'text': 'Does OSM still offer a freely usable tile server? Last time I checked, you had to use a third party.', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'roquef', 'comment_id': 764942976.0, 'datetime': '2021-01-21 21:08:51+00:00', 'masked_author': 'username_2', 'text': 'Yes, it does! https://wiki.openstreetmap.org/wiki/Tile_servers\r\nAnd leaflet support the OSM multiple subdomains for speeding up concurrent requests by default:\r\nhttps://switch2osm.org/using-tiles/getting-started-with-leaflet/\r\nhttps://leafletjs.com/reference-1.7.1.html#tilelayer', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'Calinou', 'comment_id': 764969058.0, 'datetime': '2021-01-21 22:00:59+00:00', 'masked_author': 'username_0', 'text': '@username_2 Feel free to open a pull request to switch to it :slightly_smiling_face:', 'title': None, 'type': 'comment'}]","<issue_start><issue_comment>Title: Add a community map on the User groups page
+username_0: The map is powered by [Leaflet.js](https://leafletjs.com/) and [Mapbox](https://www.mapbox.com/)'s tiles API. Mapbox's free tier is limited to 50,000 page loads per month, which should be fine given the community map is placed on a 3rd-level page (*Home > Community > User Groups*).
+
+User groups are now stored in a PHP array located in the front matter. This makes the [godotengine/community-map](https://github.com/godotengine/community-map) repository obsolete. While not as ubiquitous as JSON, the PHP array format is more commonly known compared to the custom format we were using before. (We could still move the list of communities to a JSON file if needed.)
+
+When adding a new country, make sure to add its GPS coordinates to the `countryCoordinates` JavaScript object in `user-groups.htm`. This is required to place the online community marker correctly.
+
+## TODO
+
+- Set up a Mapbox account shared among core Godot developers and replace the personal API key. Make sure to restrict the URL to allow only godotengine.org URLs.
+
+## Preview
+
+<details>
+
+![Screenshot_2020-11-09 User Groups](https://user-images.githubusercontent.com/180032/98563314-4fe39900-22ab-11eb-99cc-356d106fcbb6.png)
+</details>
+<issue_comment>username_1: I liked the idea to have data sourced from a dedicated repository where people can directly PR their details, but I guess we can start with the embedded PHP for now and see if there's a need to move it out eventually.
+<issue_comment>username_2: Just out of curiosity, why use the mapbox tile server instead of OSM?
+<issue_comment>username_0: Does OSM still offer a freely usable tile server? Last time I checked, you had to use a third party.
+<issue_comment>username_2: Yes, it does! https://wiki.openstreetmap.org/wiki/Tile_servers
+And leaflet support the OSM multiple subdomains for speeding up concurrent requests by default:
+https://switch2osm.org/using-tiles/getting-started-with-leaflet/
+https://leafletjs.com/reference-1.7.1.html#tilelayer
+<issue_comment>username_0: @username_2 Feel free to open a pull request to switch to it :slightly_smiling_face:"
+pidcodes/pidcodes.github.com,219370721,244,"{'number': 244.0, 'repo': 'pidcodes.github.com', 'user_login': 'pidcodes'}","[{'action': 'opened', 'author': 'Ratfink', 'comment_id': None, 'datetime': '2017-04-04T20:20:05Z', 'masked_author': 'username_0', 'text': ""1209:9DB5 - PD Buddy Sink\r\n\r\nPD Buddy Sink is a device I'm making that makes USB Power Delivery easy to use for any electronics hobbyist.  The user configures the Sink with a particular voltage and current, then the Sink requests the user setting from the power supply whenever it's plugged in.  The configuration is done over a USB CDC-ACM interface, so having a non-testing PID for it would be wonderful.\r\n\r\nThanks,\r\n—Clay Hobbs"", 'title': 'Added PD Buddy organization and PID 9DB5', 'type': 'issue'}
+ {'action': 'created', 'author': 'Ratfink', 'comment_id': 306259987.0, 'datetime': '2017-06-05 18:04:31+00:00', 'masked_author': 'username_0', 'text': 'Thanks!', 'title': None, 'type': 'comment'}]","<issue_start><issue_comment>Title: Added PD Buddy organization and PID 9DB5
+username_0: 1209:9DB5 - PD Buddy Sink
+
+PD Buddy Sink is a device I'm making that makes USB Power Delivery easy to use for any electronics hobbyist.  The user configures the Sink with a particular voltage and current, then the Sink requests the user setting from the power supply whenever it's plugged in.  The configuration is done over a USB CDC-ACM interface, so having a non-testing PID for it would be wonderful.
+
+Thanks,
+—Clay Hobbs
+<issue_comment>username_0: Thanks!"
+styled-components/styled-components-website,254827537,104,,"[{'action': 'opened', 'author': 'morajabi', 'comment_id': None, 'datetime': '2017-09-02 18:12:43+00:00', 'masked_author': 'username_0', 'text': ""Just a suggestion to add a link to [`styled-media-query`](https://github.com/username_0/styled-media-query) in [the media templates section](https://www.styled-components.com/docs/advanced#media-templates) in docs.\r\nI think it'll make using media queries in styled-component easier. We can reference it in tooling, but I think most people don't think there's an alternative approach for using media queries more beautiful with the power of Javascript."", 'title': 'Suggest using styled-media-query in media templates', 'type': 'issue'}
+ {'action': 'closed', 'author': 'probablyup', 'comment_id': None, 'datetime': '2021-03-19 19:44:58+00:00', 'masked_author': 'username_1', 'text': '', 'title': None, 'type': 'issue'}]","<issue_start><issue_comment>Title: Suggest using styled-media-query in media templates
+username_0: Just a suggestion to add a link to [`styled-media-query`](https://github.com/username_0/styled-media-query) in [the media templates section](https://www.styled-components.com/docs/advanced#media-templates) in docs.
+I think it'll make using media queries in styled-component easier. We can reference it in tooling, but I think most people don't think there's an alternative approach for using media queries more beautiful with the power of Javascript.<issue_closed>"
+facebook/docusaurus,514892445,1921,,"[{'action': 'opened', 'author': 'binarylogic', 'comment_id': None, 'datetime': '2019-10-30T18:32:32Z', 'masked_author': 'username_0', 'text': '## 🐛 Bug Report\r\n\r\nThis is for `v2`.  The right TOC for documentation pages does not include headings that were generated outside of the markdown syntax.\r\n\r\n### Have you read the [Contributing Guidelines on issues](https://github.com/facebook/docusaurus/blob/master/CONTRIBUTING.md#reporting-new-issues)?\r\n\r\nYes\r\n\r\n## To Reproduce\r\n\r\n1. Add a `<h2 id=""my-anchor"">Title</h2>` HTML tag anywhere in a documentation markdown file.\r\n2. Notice it does not show up in the right TOC.\r\n\r\n## Expected behavior\r\n\r\nI expect for the title to show in in the right TOC just as it would if I provided a `## Title` line.\r\n\r\n## Actual Behavior\r\n\r\nThe heading does not show up in the right TOC.\r\n\r\n## Reproducible Demo\r\n\r\nn/a\r\n\r\n---\r\n\r\nMy primary issue with this is adding heading in custom components. Even when I import `Heading`:\r\n\r\n```\r\nimport Heading from \'@theme/Heading\';\r\n\r\nlet Title = Heading(\'h2\');\r\n\r\nreturn (<Title>My title</Title>);\r\n```\r\n\r\nWhile this includes the appropriate anchor links, it still does not show up in the right TOC.', 'title': 'Right TOC does not include headings generated outside of markdown', 'type': 'issue'}
+ {'action': 'closed', 'author': 'endiliey', 'comment_id': None, 'datetime': '2019-10-31 06:27:10+00:00', 'masked_author': 'username_1', 'text': '', 'title': None, 'type': 'issue'}
+ {'action': 'created', 'author': 'endiliey', 'comment_id': 548233619.0, 'datetime': '2019-10-31 06:27:10+00:00', 'masked_author': 'username_1', 'text': ""This is intended. JSX and/or HTML tag is left as it is. If you try https://github.com/remarkjs/remark-toc, I believe it will produce the same behavior as well\r\n\r\nYou can check this behavior in v1 as well.\r\nChanging this behavior will break everyone's URL.\r\n\r\n![image](https://user-images.githubusercontent.com/17883920/67923882-b2f31800-fbe1-11e9-967c-a5cdd93d4947.png)"", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'binarylogic', 'comment_id': 548418008.0, 'datetime': '2019-10-31 15:01:16+00:00', 'masked_author': 'username_0', 'text': 'Hm, I disagree with this behavior, the purpose of the TOC is to summarize the content hierarchy which the `h*` tags represent. Is there no way to ensure a custom `h*` will be included there? This is particularly problematic for custom compnents that define their own headers.\r\n\r\nThanks for the help.', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'binarylogic', 'comment_id': 550396440.0, 'datetime': '2019-11-06 16:44:39+00:00', 'masked_author': 'username_0', 'text': 'Can you explain this? Why would someone be using `h*` tags if they were not headings?', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'endiliey', 'comment_id': 550402762.0, 'datetime': '2019-11-06 16:58:20+00:00', 'masked_author': 'username_1', 'text': 'Well, if you can find a popular markdown parser that includes html `h*` tag as part of TOC, maybe we can talk further on a PR.\r\n\r\nBut as far as I know. All popular markdown TOC generator exclude JSX and/or HTML tag\r\n- https://github.com/jonschlinkert/markdown-toc (Docusaurus v1 use Remarkable as markdown parser and this plugin)\r\n- https://github.com/remarkjs/remark-toc (Docusaurus v2 use MDX as markdown parser which is powered by remark and this)\r\n\r\nOne example use case is this below. Using HTML `h*` tag intentionally means that it wont be included in the right sidebar. It seems more like a **feature** to me. Otherwise, how do we exclude certain `h*` tags ?\r\n![image](https://user-images.githubusercontent.com/17883920/68318809-e8bb6380-00ef-11ea-84b8-639a24330f82.png)', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'jacksongoode', 'comment_id': 727930393.0, 'datetime': '2020-11-16 11:50:45+00:00', 'masked_author': 'username_2', 'text': ""Hi.\r\n\r\nI wanted to bring this topic back up since there doesn't currently appear to be a way to generate a TOC from an .mdx/.js - only through markdown. Is there a hacky way to achieve this through html alone?\r\n\r\nI am rendering new pages with content in an mdx and it would be nice to have a TOC for them."", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'jacksongoode', 'comment_id': 728239251.0, 'datetime': '2020-11-16 18:20:36+00:00', 'masked_author': 'username_2', 'text': 'Great! In the mean time, is there any way to fake a markdown header (through js) for the TOC rules to interpret?', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'slorber', 'comment_id': 728261895.0, 'datetime': '2020-11-16 19:03:08+00:00', 'masked_author': 'username_3', 'text': ""I don't know of a good way to do this unfortunately. \r\n\r\nThis is not very convenient, but you can keep all the headings in original doc, and only put content in mdx fragments"", 'title': None, 'type': 'comment'}]","<issue_start><issue_comment>Title: Right TOC does not include headings generated outside of markdown
+username_0: ## 🐛 Bug Report
+
+This is for `v2`.  The right TOC for documentation pages does not include headings that were generated outside of the markdown syntax.
+
+### Have you read the [Contributing Guidelines on issues](https://github.com/facebook/docusaurus/blob/master/CONTRIBUTING.md#reporting-new-issues)?
+
+Yes
+
+## To Reproduce
+
+1. Add a `<h2 id=""my-anchor"">Title</h2>` HTML tag anywhere in a documentation markdown file.
+2. Notice it does not show up in the right TOC.
+
+## Expected behavior
+
+I expect for the title to show in in the right TOC just as it would if I provided a `## Title` line.
+
+## Actual Behavior
+
+The heading does not show up in the right TOC.
+
+## Reproducible Demo
+
+n/a
+
+---
+
+My primary issue with this is adding heading in custom components. Even when I import `Heading`:
+
+```
+import Heading from '@theme/Heading';
+
+let Title = Heading('h2');
+
+return (<Title>My title</Title>);
+```
+
+While this includes the appropriate anchor links, it still does not show up in the right TOC.<issue_closed>
+<issue_comment>username_1: This is intended. JSX and/or HTML tag is left as it is. If you try https://github.com/remarkjs/remark-toc, I believe it will produce the same behavior as well
+
+You can check this behavior in v1 as well.
+Changing this behavior will break everyone's URL.
+
+![image](https://user-images.githubusercontent.com/17883920/67923882-b2f31800-fbe1-11e9-967c-a5cdd93d4947.png)
+<issue_comment>username_0: Hm, I disagree with this behavior, the purpose of the TOC is to summarize the content hierarchy which the `h*` tags represent. Is there no way to ensure a custom `h*` will be included there? This is particularly problematic for custom compnents that define their own headers.
+
+Thanks for the help.
+<issue_comment>username_0: Can you explain this? Why would someone be using `h*` tags if they were not headings?
+<issue_comment>username_1: Well, if you can find a popular markdown parser that includes html `h*` tag as part of TOC, maybe we can talk further on a PR.
+
+But as far as I know. All popular markdown TOC generator exclude JSX and/or HTML tag
+- https://github.com/jonschlinkert/markdown-toc (Docusaurus v1 use Remarkable as markdown parser and this plugin)
+- https://github.com/remarkjs/remark-toc (Docusaurus v2 use MDX as markdown parser which is powered by remark and this)
+
+One example use case is this below. Using HTML `h*` tag intentionally means that it wont be included in the right sidebar. It seems more like a **feature** to me. Otherwise, how do we exclude certain `h*` tags ?
+![image](https://user-images.githubusercontent.com/17883920/68318809-e8bb6380-00ef-11ea-84b8-639a24330f82.png)
+<issue_comment>username_2: Hi.
+
+I wanted to bring this topic back up since there doesn't currently appear to be a way to generate a TOC from an .mdx/.js - only through markdown. Is there a hacky way to achieve this through html alone?
+
+I am rendering new pages with content in an mdx and it would be nice to have a TOC for them.
+<issue_comment>username_2: Great! In the mean time, is there any way to fake a markdown header (through js) for the TOC rules to interpret?
+<issue_comment>username_3: I don't know of a good way to do this unfortunately. 
+
+This is not very convenient, but you can keep all the headings in original doc, and only put content in mdx fragments"
+ethereum/ethereum-org-website,1008211873,4049,"{'number': 4049.0, 'repo': 'ethereum-org-website', 'user_login': 'ethereum'}","[{'action': 'opened', 'author': 'minimalsm', 'comment_id': None, 'datetime': '2021-09-27T14:18:33Z', 'masked_author': 'username_0', 'text': ""***\r\n### :zap: Changes\r\n- Update Intro to Ethereum developer doc (#3907) @username_0\r\n- Add missing breadcrumbs for Translation program pages (#4039) @username_0\r\n- Add missing breadcrumbs for Governance page (#4038) @username_0\r\n- Update Python developer docs - add notable Ethereum projects using Brownie and Vyper (#4016) @miohtama\r\n- Adding 2x rewards for vulnerabilities related to Altair (#4017) @fredriksvantes\r\n- Update Python programming language developer doc (#4000) @fselmo\r\n- Add InfStones to nodes-as-a-service (#3990) @bingwei-infstones\r\n- Add Chainlink Hackathon community event (#4008) @corwintines\r\n- Fix proof-of-stake link in glossary (#4019) @himanshu3w\r\n- Fix basefee rounding in gas developer doc (#3965) @metalocal\r\n- Fix broken wallet link in Glossary (#4018) @himanshu3w\r\n- Fix repo URL for Nimbus on ETH2 page (#4034) @the-emerald\r\n- 99.98% -> 99.95% Energy Reduction in ETH2 in NFT Page (#4032) @MrBrain295\r\n- Update EthPortland dates (#4020) @wackerow\r\n- Update Translation Program stats #2 (#4030) @lukassim\r\n- Add ETH Portland to community events [Fixes #4002] (#4005) @MrBrain295\r\n- Add Bankless jobs board (#4006) @samajammin\r\n- Add explicit https to twitter link (#4009) @himanshu3w\r\n- Update Alchemy Link on Enterprise page (#3989) @himanshu3w\r\n- Fix Alchemy link on web3 and alchemy tutorial (#3987) @himanshu3w\r\n- Fix Alchemy link on nodes and services doc (#3988) @himanshu3w\r\n- Add more explicit font families for monospace fonts (#3918) @username_0\r\n- Fix Discord Link For Alchemy Platform on backend API page (#3985) @himanshu3w\r\n- Fix Alchemy website link (#3982) @himanshu3w\r\n- Fix Discord Link For Alchemy Platform (#3981) @himanshu3w\r\n- Fix typo in Gas developer doc  (#3977) @phatngluu\r\n- fix broken links #3949 (#3974) @andyGallagher\r\n- Add video tutorials and tag for video tutorials (#3871) @username_1\r\n- Add info smart contact size limitations and diamond pattern (#3957) @MrBrain295\r\n- Add Questbook to developer learning tools (#3966) @username_0\r\n- ChainShot 'Learn by coding' description change + remove translations (#3933) @AlvaroLuken\r\n- Fix grammar/typo on ERC-777 page (#3962) @wackerow\r\n\r\n## :globe_with_meridians: Translations\r\n\r\n- Remove smartcontracts.code (broken app) from security page (#4014) @username_0\r\n- Remove all occurrences of Etherlime (deprecated) from docs (#3983) @himanshu3w\r\n- Update the name of OMGX to Boba (#3969) @the-emerald\r\n\r\n## :house: Internal\r\n\r\n- Translation banner patch [Fixes #3213] (#3973) @wackerow\r\n\r\n## :package: Dependencies\r\n\r\n- v2.42.0 (#4048) @username_0\r\n- Homepage Charts [Fixes #2319] (#4003) @wackerow\r\n- Updates caniuse db to latest [Fixes #4004] (#4021) @wackerow\r\n- Bump prismjs from 1.24.0 to 1.25.0 (#3963) @dependabot\r\n***\r\n### :unicorn: Contributors\r\nThank you @AlvaroLuken, @MrBrain295, @username_1, @andyGallagher, @bingwei-infstones, @corwintines, @fredriksvantes, @fselmo, @himanshu3w, @lukassim, @metalocal, @username_0, @miohtama, @phatngluu, @samajammin, @the-emerald and @wackerow for the contributions! :trophy:\r\n***"", 'title': 'Deploy v2.42.0', 'type': 'issue'}
+ {'action': 'created', 'author': 'PatrickAlphaC', 'comment_id': 928287814.0, 'datetime': '2021-09-27 21:15:34+00:00', 'masked_author': 'username_1', 'text': '<3 Ethereum', 'title': None, 'type': 'comment'}]","<issue_start><issue_comment>Title: Deploy v2.42.0
+username_0: ***
+### :zap: Changes
+- Update Intro to Ethereum developer doc (#3907) @username_0
+- Add missing breadcrumbs for Translation program pages (#4039) @username_0
+- Add missing breadcrumbs for Governance page (#4038) @username_0
+- Update Python developer docs - add notable Ethereum projects using Brownie and Vyper (#4016) @miohtama
+- Adding 2x rewards for vulnerabilities related to Altair (#4017) @fredriksvantes
+- Update Python programming language developer doc (#4000) @fselmo
+- Add InfStones to nodes-as-a-service (#3990) @bingwei-infstones
+- Add Chainlink Hackathon community event (#4008) @corwintines
+- Fix proof-of-stake link in glossary (#4019) @himanshu3w
+- Fix basefee rounding in gas developer doc (#3965) @metalocal
+- Fix broken wallet link in Glossary (#4018) @himanshu3w
+- Fix repo URL for Nimbus on ETH2 page (#4034) @the-emerald
+- 99.98% -> 99.95% Energy Reduction in ETH2 in NFT Page (#4032) @MrBrain295
+- Update EthPortland dates (#4020) @wackerow
+- Update Translation Program stats #2 (#4030) @lukassim
+- Add ETH Portland to community events [Fixes #4002] (#4005) @MrBrain295
+- Add Bankless jobs board (#4006) @samajammin
+- Add explicit https to twitter link (#4009) @himanshu3w
+- Update Alchemy Link on Enterprise page (#3989) @himanshu3w
+- Fix Alchemy link on web3 and alchemy tutorial (#3987) @himanshu3w
+- Fix Alchemy link on nodes and services doc (#3988) @himanshu3w
+- Add more explicit font families for monospace fonts (#3918) @username_0
+- Fix Discord Link For Alchemy Platform on backend API page (#3985) @himanshu3w
+- Fix Alchemy website link (#3982) @himanshu3w
+- Fix Discord Link For Alchemy Platform (#3981) @himanshu3w
+- Fix typo in Gas developer doc  (#3977) @phatngluu
+- fix broken links #3949 (#3974) @andyGallagher
+- Add video tutorials and tag for video tutorials (#3871) @username_1
+- Add info smart contact size limitations and diamond pattern (#3957) @MrBrain295
+- Add Questbook to developer learning tools (#3966) @username_0
+- ChainShot 'Learn by coding' description change + remove translations (#3933) @AlvaroLuken
+- Fix grammar/typo on ERC-777 page (#3962) @wackerow
+
+## :globe_with_meridians: Translations
+
+- Remove smartcontracts.code (broken app) from security page (#4014) @username_0
+- Remove all occurrences of Etherlime (deprecated) from docs (#3983) @himanshu3w
+- Update the name of OMGX to Boba (#3969) @the-emerald
+
+## :house: Internal
+
+- Translation banner patch [Fixes #3213] (#3973) @wackerow
+
+## :package: Dependencies
+
+- v2.42.0 (#4048) @username_0
+- Homepage Charts [Fixes #2319] (#4003) @wackerow
+- Updates caniuse db to latest [Fixes #4004] (#4021) @wackerow
+- Bump prismjs from 1.24.0 to 1.25.0 (#3963) @dependabot
+***
+### :unicorn: Contributors
+Thank you @AlvaroLuken, @MrBrain295, @username_1, @andyGallagher, @bingwei-infstones, @corwintines, @fredriksvantes, @fselmo, @himanshu3w, @lukassim, @metalocal, @username_0, @miohtama, @phatngluu, @samajammin, @the-emerald and @wackerow for the contributions! :trophy:
+***
+<issue_comment>username_1: <3 Ethereum"
+ethereum/ethereum-org-website,864111768,2903,"{'number': 2903.0, 'repo': 'ethereum-org-website', 'user_login': 'ethereum'}","[{'action': 'opened', 'author': 'DevAranCarter', 'comment_id': None, 'datetime': '2021-04-21T17:27:06Z', 'masked_author': 'username_0', 'text': 'I have answered all of the following:\r\nExplain why gas fees get high (i.e. high demand for the network)\r\nExplain initiatives in progress (e.g. Eth2, L2) that are working to reduce gas costs\r\nExplain strategies users can use to reduce gas costs (e.g. tools to monitor gas prices)\r\nExplain approaches as a dapp developer you can do to reduce gas usage of smart contracts (e.g. assembly code optimization)\r\n\r\n<!--- Provide a general summary of your changes in the Title above -->\r\n\r\nI have added information about the above and also added a YouTube video link and 3 website links.\r\n\r\n<!--- Describe your changes in detail -->\r\n\r\nI have added a ""Why are gas fees so high?"" part then written this ""High Gas fees are due to the popularity of Ethereum. As every operation on the Etheruem blockcahin uses gas, including computation, checking the balance of an account and transaction fees, these all contribute to the high gas levels we experience. Gas cost alone does not actually determine how much we have to pay for a particular transaction. To calculate the transaction fee we have to multiply the gas cost by gas price. (Which is measured in GWEI)\r\n\r\nThis video about gas fees explains fully why fees are so expensive:\r\n\r\n<iframe width=""100%"" height=""315"" src=""https://www.youtube.com/watch?v=Yh8cHUB-KoU"" frameborder=""0"" allow=""accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"" allowfullscreen></iframe>""\r\n\r\nNext I added information about Initiatives to reduce gas costs and have written ""With the new network upgrades of Ethereum 2.0 (also known as Eth2 or Serenity). This should ultimately address some of the gas fee issues, which will in turn enable the platform to process thousands of transactions per second and scale globally.\r\n\r\nThe new proof of stake model should reduce high power consumption and reliance on specialist hardware. The new PoS (Proof of stake) system will be introduced on what’s called the Beacon Chain, this chain will allow the decentralized Ethereum network to come to agreement and keep the network secure, but avoid high energy use by requiring a financial commitment. \r\n\r\nAnyone with atleast 32 ETH will be able to stake them and become a validator responsible for processing transactions, adding new block to the block chain and storing data. Users who have less than 32 ETH will be able to join staking pools.""\r\n\r\nThen I have written about Strategies to reduce gas costs and said ""If you are looking to reduce gas costs for your ETH you are able to set the price of your own gas fees. The gas price you set is how much you are willing to pay per unit of gas. However if you set the amount of gas too low you will not be able to send your ETH as you will run out of gas, you would then have to resubmit your transaction costing you more in gas fees. You can do this from some wallet providers when sending ETH.\r\n\r\nIf you want to monitor gas prices so you are able to send your ETH for less you can use many different tools such as:\r\n- [Etherscan](https://etherscan.io/gastracker)\r\n- [GasNow](https://www.gasnow.org)""\r\n\r\nFinally I added this to the further reading ""[Reducing the gas consumption of your Smart Contracts](https://medium.com/coinmonks/8-ways-of-reducing-the-gas-consumption-of-your-smart-contracts-9a506b339c0a)""\r\n\r\n<!--- This project accepts pull requests related to open issues -->\r\n<!--- If suggesting a new feature or change, please discuss it in an issue first -->\r\n<!--- If fixing a bug, there should be an issue describing it with steps to reproduce -->\r\n<!--- Please link to the issue here: https://github.com/ethereum/ethereum-org-website/issues/2699 -->', 'title': 'Update index.md', 'type': 'issue'}
+ {'action': 'created', 'author': 'wackerow', 'comment_id': 824532714.0, 'datetime': '2021-04-22 04:40:01+00:00', 'masked_author': 'username_1', 'text': '@username_0 Hey, thanks for posting this... will try to get a review up for this by the end of the week 👍', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'DevAranCarter', 'comment_id': 826799322.0, 'datetime': '2021-04-26 12:35:02+00:00', 'masked_author': 'username_0', 'text': '@username_1 Great, thank you!', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'wackerow', 'comment_id': 841482742.0, 'datetime': '2021-05-14 20:25:18+00:00', 'masked_author': 'username_1', 'text': '@all-contributors please add @username_0 for content', 'title': None, 'type': 'comment'}]","<issue_start><issue_comment>Title: Update index.md
+username_0: I have answered all of the following:
+Explain why gas fees get high (i.e. high demand for the network)
+Explain initiatives in progress (e.g. Eth2, L2) that are working to reduce gas costs
+Explain strategies users can use to reduce gas costs (e.g. tools to monitor gas prices)
+Explain approaches as a dapp developer you can do to reduce gas usage of smart contracts (e.g. assembly code optimization)
+
+<!--- Provide a general summary of your changes in the Title above -->
+
+I have added information about the above and also added a YouTube video link and 3 website links.
+
+<!--- Describe your changes in detail -->
+
+I have added a ""Why are gas fees so high?"" part then written this ""High Gas fees are due to the popularity of Ethereum. As every operation on the Etheruem blockcahin uses gas, including computation, checking the balance of an account and transaction fees, these all contribute to the high gas levels we experience. Gas cost alone does not actually determine how much we have to pay for a particular transaction. To calculate the transaction fee we have to multiply the gas cost by gas price. (Which is measured in GWEI)
+
+This video about gas fees explains fully why fees are so expensive:
+
+<iframe width=""100%"" height=""315"" src=""https://www.youtube.com/watch?v=Yh8cHUB-KoU"" frameborder=""0"" allow=""accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"" allowfullscreen></iframe>""
+
+Next I added information about Initiatives to reduce gas costs and have written ""With the new network upgrades of Ethereum 2.0 (also known as Eth2 or Serenity). This should ultimately address some of the gas fee issues, which will in turn enable the platform to process thousands of transactions per second and scale globally.
+
+The new proof of stake model should reduce high power consumption and reliance on specialist hardware. The new PoS (Proof of stake) system will be introduced on what’s called the Beacon Chain, this chain will allow the decentralized Ethereum network to come to agreement and keep the network secure, but avoid high energy use by requiring a financial commitment. 
+
+Anyone with atleast 32 ETH will be able to stake them and become a validator responsible for processing transactions, adding new block to the block chain and storing data. Users who have less than 32 ETH will be able to join staking pools.""
+
+Then I have written about Strategies to reduce gas costs and said ""If you are looking to reduce gas costs for your ETH you are able to set the price of your own gas fees. The gas price you set is how much you are willing to pay per unit of gas. However if you set the amount of gas too low you will not be able to send your ETH as you will run out of gas, you would then have to resubmit your transaction costing you more in gas fees. You can do this from some wallet providers when sending ETH.
+
+If you want to monitor gas prices so you are able to send your ETH for less you can use many different tools such as:
+- [Etherscan](https://etherscan.io/gastracker)
+- [GasNow](https://www.gasnow.org)""
+
+Finally I added this to the further reading ""[Reducing the gas consumption of your Smart Contracts](https://medium.com/coinmonks/8-ways-of-reducing-the-gas-consumption-of-your-smart-contracts-9a506b339c0a)""
+
+<!--- This project accepts pull requests related to open issues -->
+<!--- If suggesting a new feature or change, please discuss it in an issue first -->
+<!--- If fixing a bug, there should be an issue describing it with steps to reproduce -->
+<!--- Please link to the issue here: https://github.com/ethereum/ethereum-org-website/issues/2699 -->
+<issue_comment>username_1: @username_0 Hey, thanks for posting this... will try to get a review up for this by the end of the week 👍
+<issue_comment>username_0: @username_1 Great, thank you!
+<issue_comment>username_1: @all-contributors please add @username_0 for content"
+sindresorhus/pageres,547570917,383,,"[{'action': 'opened', 'author': 'chrismccoy', 'comment_id': None, 'datetime': '2020-01-09 16:04:30+00:00', 'masked_author': 'username_0', 'text': 'any current way to do something like\r\n\r\n     pageres < urls.txt\r\n\r\nfor a list of urls', 'title': 'ability to pipe in url list', 'type': 'issue'}
+ {'action': 'created', 'author': 'sindresorhus', 'comment_id': 585360935.0, 'datetime': '2020-02-12 18:52:20+00:00', 'masked_author': 'username_1', 'text': 'Not at the moment, but PR welcome. However, you could easily do it with just a Bash loop.\r\n\r\nSomething like this:\r\n\r\n```bash\r\nwhile read -r url; do\r\n    pageres ""$url""\r\ndone < urls.txt\r\n```', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'chrismccoy', 'comment_id': 585365191.0, 'datetime': '2020-02-12 19:02:17+00:00', 'masked_author': 'username_0', 'text': 'ya that is what im currently doing, had a client who wants to do it, but is on windows, so extra steps would be needed for bash, Powershell would be the next step.', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'chrismccoy', 'comment_id': 585365507.0, 'datetime': '2020-02-12 19:03:06+00:00', 'masked_author': 'username_0', 'text': 'side note, i bought dato on the appstore, great work!', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'sindresorhus', 'comment_id': 585392466.0, 'datetime': '2020-02-12 20:03:26+00:00', 'masked_author': 'username_1', 'text': 'https://itsfoss.com/install-bash-on-windows/', 'title': None, 'type': 'comment'}]","<issue_start><issue_comment>Title: ability to pipe in url list
+username_0: any current way to do something like
+
+     pageres < urls.txt
+
+for a list of urls
+<issue_comment>username_1: Not at the moment, but PR welcome. However, you could easily do it with just a Bash loop.
+
+Something like this:
+
+```bash
+while read -r url; do
+    pageres ""$url""
+done < urls.txt
+```
+<issue_comment>username_0: ya that is what im currently doing, had a client who wants to do it, but is on windows, so extra steps would be needed for bash, Powershell would be the next step.
+<issue_comment>username_0: side note, i bought dato on the appstore, great work!
+<issue_comment>username_1: https://itsfoss.com/install-bash-on-windows/"
+getnikola/nikola,229696473,2774,"{'number': 2774.0, 'repo': 'nikola', 'user_login': 'getnikola'}","[{'action': 'opened', 'author': 'ralsina', 'comment_id': None, 'datetime': '2017-05-18T14:39:22Z', 'masked_author': 'username_0', 'text': 'Fix #2771 \r\n\r\n* Log before raising exceptions\r\n* Eat the exception at the top level unless NIKOLA_DEBUG is set.', 'title': 'Nicer error handling (Fix #2771)', 'type': 'issue'}
+ {'action': 'created', 'author': 'ralsina', 'comment_id': 302434084.0, 'datetime': '2017-05-18 15:12:04+00:00', 'masked_author': 'username_0', 'text': ""Well, it still does. I'll remove this."", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'ralsina', 'comment_id': 302443367.0, 'datetime': '2017-05-18 15:38:27+00:00', 'masked_author': 'username_0', 'text': 'That is an alternative, yes. If you prefer that I can change.', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'ralsina', 'comment_id': 302503461.0, 'datetime': '2017-05-18 18:32:22+00:00', 'masked_author': 'username_0', 'text': 'Turns out no, it\'s an ""except Exception:"" so it would work. Will do it\ntomorrow, probably.', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'Kwpolska', 'comment_id': 302890904.0, 'datetime': '2017-05-20 18:37:02+00:00', 'masked_author': 'username_1', 'text': 'Hm, could we re-discuss this? Because in some cases, we will end up printing “Error loading tasks” without any explanation. How would people know what to fix? How would bug reports look?', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'ralsina', 'comment_id': 302893413.0, 'datetime': '2017-05-20 19:24:00+00:00', 'masked_author': 'username_0', 'text': 'In that case, clearly we are raising exceptions that we are not logging, right?\r\n\r\nSo, for that, we use NIKOLA_DEBUG=1 \r\n\r\nAlso, I will check a little to see if we still have unlogging raises.', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'Kwpolska', 'comment_id': 302893521.0, 'datetime': '2017-05-20 19:25:44+00:00', 'masked_author': 'username_1', 'text': 'It doesn’t have to be Nikola who’s raising those exceptions. My unhelpful errors were caused by Mako syntax errors. We should at least print the exception text, and tell the user how to get full debug info.', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'felixfontein', 'comment_id': 302895888.0, 'datetime': '2017-05-20 20:10:54+00:00', 'masked_author': 'username_2', 'text': ""Yes, a bit more information would be really helpful! It can always happen that we forget to write a message at some point in the future, and then some user gets a really unhelpful error message.\r\n\r\nAnother thing which might be worth discussing: how about printing a short information text that you can get debug info with `NIKOLA_DEBUG=1` in case an exception is caught? Then some more interested persons (power-users, hackers, ...) don't have to search the documentation (or the source code) first before being able to get more information."", 'title': None, 'type': 'comment'}]","<issue_start><issue_comment>Title: Nicer error handling (Fix #2771)
+username_0: Fix #2771 
+
+* Log before raising exceptions
+* Eat the exception at the top level unless NIKOLA_DEBUG is set.
+<issue_comment>username_0: Well, it still does. I'll remove this.
+<issue_comment>username_0: That is an alternative, yes. If you prefer that I can change.
+<issue_comment>username_0: Turns out no, it's an ""except Exception:"" so it would work. Will do it
+tomorrow, probably.
+<issue_comment>username_1: Hm, could we re-discuss this? Because in some cases, we will end up printing “Error loading tasks” without any explanation. How would people know what to fix? How would bug reports look?
+<issue_comment>username_0: In that case, clearly we are raising exceptions that we are not logging, right?
+
+So, for that, we use NIKOLA_DEBUG=1 
+
+Also, I will check a little to see if we still have unlogging raises.
+<issue_comment>username_1: It doesn’t have to be Nikola who’s raising those exceptions. My unhelpful errors were caused by Mako syntax errors. We should at least print the exception text, and tell the user how to get full debug info.
+<issue_comment>username_2: Yes, a bit more information would be really helpful! It can always happen that we forget to write a message at some point in the future, and then some user gets a really unhelpful error message.
+
+Another thing which might be worth discussing: how about printing a short information text that you can get debug info with `NIKOLA_DEBUG=1` in case an exception is caught? Then some more interested persons (power-users, hackers, ...) don't have to search the documentation (or the source code) first before being able to get more information."

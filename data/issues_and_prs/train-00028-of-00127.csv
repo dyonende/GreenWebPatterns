@@ -1,0 +1,761 @@
+facebook/docusaurus,567984372,2302,,"[{'action': 'opened', 'author': 'nebrelbug', 'comment_id': None, 'datetime': '2020-02-20 01:01:43+00:00', 'masked_author': 'username_0', 'text': ""<!--\r\n  Consider requesting the feature on https://docusaurus-2.netlify.com/feedback/ instead.\r\n  Feature requests on v1 are more likely to be missed as we're focusing on building v2.\r\n-->\r\n\r\n## 💥 Proposal\r\n\r\nHi! As I work on developing my Docusaurus site (https://squirrelly.js.org), I've noticed a few problems with the current versioning system.\r\n\r\n1) Pages aren't versioned. This is a problem for me because on one page I host a live playground, and the syntax changes completely between the new and old libraries.\r\n2) `docusaurus.config.js` isn't versioned. In my top bar, I link to different docs files. However, no matter what version I'm viewing, they always link to the latest docs (ex. `/docs/` instead of `docs/some-version/`).\r\n3) There's no way to get the current version in your React Components, so, for example, on the Docusaurus site, the link next to Docusaurus always reads `alpha.43`, no matter what version you're currently viewing.\r\n\r\nWith these problems in mind, I'd suggest having a public version variable. This could be provided to MDX files, similarly to `withBaseUrl`. It would also be nice if you could, in `docusaurus.config.js`, export a function that accepted a version string as the parameter.\r\n\r\n### Have you read the [Contributing Guidelines on issues](https://github.com/facebook/docusaurus/blob/master/CONTRIBUTING.md#reporting-new-issues)?\r\n\r\nYes"", 'title': '[V2] Versioning Suggestions', 'type': 'issue'}
+ {'action': 'created', 'author': 'daldridge-cs', 'comment_id': 589471680.0, 'datetime': '2020-02-21 02:43:43+00:00', 'masked_author': 'username_1', 'text': 'For item 3 above, I would like to see a hook that provides current version and a list of all versions:\r\n```\r\nimport useVersion from `@docusaurs/core`; // ? or whatever module...\r\n\r\nfunction myComponent() {\r\n  const ( version, versions } = useVersion();\r\n  return (... whatever ...);\r\n}\r\n```\r\nI wrote [something workable](https://github.com/daldridge/docusaurus-plugin-lunr/blob/master/src/theme/hooks/version.js) in my Lunr search plugin by using the `useLocation` hook from react-router and inspecting the path.  Would be much nicer to have Docusaurus provide a mechanism.', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'BoMiddleton', 'comment_id': 589754103.0, 'datetime': '2020-02-21 17:30:59+00:00', 'masked_author': 'username_2', 'text': 'Do you have different `sidebars.js` files for each version? I assume you do. Do you have a separate directory for each version? You can still point to reusable files. \r\n\r\nCheck the Discord post at the bottom: https://discordapp.com/channels/398180168688074762/632470883058843648', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'nebrelbug', 'comment_id': 589860617.0, 'datetime': '2020-02-21 22:17:27+00:00', 'masked_author': 'username_0', 'text': ""@username_2 yes, I have all of that set up and working.\r\n\r\nThe problem is that the links in the top navbar only point to the most recent version, rather than whatever version the user is currently looking at.\r\n\r\nAdditionally, I can't display different pages depending on the version (unless I parse the URL, which is rather complicated)"", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'amimas', 'comment_id': 591486443.0, 'datetime': '2020-02-26 15:31:47+00:00', 'masked_author': 'username_3', 'text': 'I don\'t think ""pages"" should be versioned. I think the idea of ""pages"" is different from ""docs"", which has a completely different requirement.\r\n\r\nIf ""pages"" are versioned, then the following pages become very confusing:\r\n\r\n```\r\n- index.html\r\n- help.html\r\n- contact.html\r\n```\r\n\r\nYou\'ll have to maintain a separate list of pages that should be versioned and should not be versioned. Pretty soon this is going to get out of control...\r\n\r\nSince this thread is about versioning in V2, then I think in your case you can write a custom react component and add that into a doc as part of normal mdx syntax.', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'amimas', 'comment_id': 591487225.0, 'datetime': '2020-02-26 15:33:19+00:00', 'masked_author': 'username_3', 'text': ""That sounds like a bug. That doesn't happen in V1"", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'nebrelbug', 'comment_id': 591576063.0, 'datetime': '2020-02-26 18:35:35+00:00', 'masked_author': 'username_0', 'text': ""@animas I agree we shouldn't have versioned pages, but I would love for there to be a way to fetch the current version inside a page, using something like `useVersion()`"", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'amimas', 'comment_id': 591620948.0, 'datetime': '2020-02-26 20:13:52+00:00', 'masked_author': 'username_3', 'text': 'I agree with this too. Just to be clear, I think you meant fetching the current version inside a ""doc"", not a page since... we\'re saying pages shouldn\'t be versioned and in that case, a page doesn\'t really have a context of what version you\'re looking at right now.', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'lex111', 'comment_id': 591654036.0, 'datetime': '2020-02-26 21:30:28+00:00', 'masked_author': 'username_4', 'text': 'We will add the `useVersion` hook, the more we need it to show the version of docs in navbar.', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'nebrelbug', 'comment_id': 591705686.0, 'datetime': '2020-02-26 23:58:47+00:00', 'masked_author': 'username_0', 'text': ""@username_4 let me know if there's anything I can do to help"", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'lex111', 'comment_id': 591707341.0, 'datetime': '2020-02-27 00:04:07+00:00', 'masked_author': 'username_4', 'text': '@username_0 well, if you want to implement a similar hook and create the corresponding PR - it would be very very cool :smiley:', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'nebrelbug', 'comment_id': 591708264.0, 'datetime': '2020-02-27 00:07:22+00:00', 'masked_author': 'username_0', 'text': ""I'll take a look, but I wouldn't be able to do any work until Friday :smile:. I would enjoy contributing though -- though I've found several bugs and given feedback, I have yet to earn the `Contributor` badge by my name :)"", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'yangshun', 'comment_id': 591753072.0, 'datetime': '2020-02-27 02:55:19+00:00', 'masked_author': 'username_5', 'text': ""We don't intend to add support for this. Versioning shall be a docs-only feature. Notice that the current versioned docs path is `docs/<version>/some-markdown`. This is intentional and by design. We want to support the use case of having multiple sets of docs, each with its own version. For example, you're building a mobile SDK for both iOS and Android and want them to have different versions.\r\n\r\nThe current docs design is a little flawed. We allow for multiple doc plugins but the versioning approach and commands assume only one docs plugin. In future we should have a namespace for each set of docs. So `useVersion()` would have to take in a parameter for the namespace."", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'slorber', 'comment_id': 631582389.0, 'datetime': '2020-05-20 16:25:32+00:00', 'masked_author': 'username_6', 'text': 'Some things worth mentioning:\r\n\r\n### one deployment per version\r\n\r\nIf your docusaurus site changes too much across versions and having only docs versioned is a problme, you could also handle the versioning outside of docusaurus, with separate immutable deployments.\r\n\r\nThis is the strategy of the ReactJS website.\r\nThis url redirects to a separate Netlify deployment: https://fr.reactjs.org/version/16.3\r\nThe main site only handle the current version: https://fr.reactjs.org/versions/\r\n\r\nThis strategy gives the opportunity to affect current version without the risk of breaking something that worked on an older version.\r\n\r\n### useVersion() can only work in docs/sidebar comps\r\n\r\nThere\'s currently no concept of ""global current version"", only docs/sidebar version.\r\nSuch a hook would only work when the user is browsing a docs page. \r\n\r\nOn global pages like /live-editor or /contact, there\'s no version in the url, so we don\'t know what is the version. At most, we could store the last version browsed by the user in some kind of storage, but that seems hacky (probably possible in userland).\r\n\r\n\r\n### global site dependencies \r\n\r\nIf you have a live editor like react-live somewhere in the app, in 5 different versions, it\'s unlikely you\'ll be able to provide your lib\'s code in the editor scope for the 5 different lib versions (it might be possible with yarn resolution to load a lib in 2 different versions). \r\n\r\nIt might be better to publish the live playground as a separate app, and integrate it in your doc. \r\n\r\nFor example you could use a unique page, with tabs to select the playground version, and load an iframe or something.\r\n\r\nIf this tab system is annoying, you can also create a versioned doc on which you embed the playground iframe thanks to MDX.', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'nebrelbug', 'comment_id': 632264349.0, 'datetime': '2020-05-21 18:18:35+00:00', 'masked_author': 'username_0', 'text': ""@username_6 I use NPM/Yarn package aliases (https://stackoverflow.com/questions/26414587/how-to-install-multiple-versions-of-package-using-npm) on https://squirrelly.js.org/playground along with tabs to allow users to choose the version of the playground, which means I don't have to use an iframe."", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'bravo-kernel', 'comment_id': 642588935.0, 'datetime': '2020-06-11 11:42:25+00:00', 'masked_author': 'username_7', 'text': ""Awesome @username_6. I have tried to explain this on multiple occasions and always failed to get it across. Perhaps this real world example will work:\r\n\r\n**First the situation:**\r\n\r\n- we have a separate repository that holds the code ([Powershell Pester](https://github.com/pester/Pester))\r\n- we have a separate repository for our D2 documentation ([Powershell Pester Docs](https://github.com/pester/docs)) \r\n- we once created the D2 website with some pages auto-generated by parsing the source code repo, at that time v4\r\n- time has passed \r\n- now the source repository is v5 (and will stay v5 for a long time)\r\n\r\n**What we would like:**\r\n\r\n- create a copy/cut of our current D2 website\r\n- name that copy v4\r\n- update master to represent v5\r\n- use master as `current`\r\n\r\n**What we do not want**\r\n\r\n- follow the workflow derived from existing `next` (because for us, v5 is not next version, it's the actual and current one)\r\n\r\nHope that makes sense. If you have any additional questions please let me know"", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'slorber', 'comment_id': 642642112.0, 'datetime': '2020-06-11 13:18:46+00:00', 'masked_author': 'username_6', 'text': '@username_7 \r\n\r\nDo you still update v4 docs? If not, you could simply create a docs-v4 branch, deploy it to netlify as a non-versioned D2 deployment, like `v4.pester.dev`, and have v5 be the master branch (still without D2 versioning).\r\n\r\nIf you want v4 and v5 as the same unified SPA under same domain: as far as I understand, what you would like is to have `/docs` instead of `/docs/next` ? ie v5 is the current ""work in progress version"", and you want to edit files in ./docs directly?\r\n\r\nIE somehow it\'s a workflow where you have already released v5 + v5 initial doc, but you still do a lot of documentation work, so that you don\'t yet want to copy these files to the versioned folder?\r\n\r\nThis feature makes sense to me, we could allow to configure `currentVersion: \'next\'`', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'bravo-kernel', 'comment_id': 642643409.0, 'datetime': '2020-06-11 13:20:49+00:00', 'masked_author': 'username_7', 'text': '', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'bravo-kernel', 'comment_id': 642644233.0, 'datetime': '2020-06-11 13:22:14+00:00', 'masked_author': 'username_7', 'text': 'And updates to the v4 would then have to be done in `/docs/v4` but that makes sense from an end-user perspective. Seems to be the location where one expects them to be.', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'amimas', 'comment_id': 642816717.0, 'datetime': '2020-06-11 17:10:01+00:00', 'masked_author': 'username_3', 'text': '☝️ This doesn\'t quite make sense to me, to be honest. I find it a bit confusing when I read that config.\r\n\r\nFrom the example that @username_7 mentioned, my understanding is ""v5"" is their ""next version"" if it\'s not fully completed yet or there isn\'t a ""next version"" after v5 (as of right now). So, the existing setup/process/workflow of Docusaurus still make sense to me.\r\n\r\nMaybe it\'s just a matter of being able to ""label"" the next release. That way, in the versioning page/list, ""next release"" is named ""v5"" instead of hard coded to ""master/unreleased"". So, technically you\'re not creating the ""v5"" version in Docusaurus, because it\'s still ""in-progress"".\r\n\r\nNot sure if that helps but thought I\'d put it out there. I like simplicity and hopefully Docusaurus V2 features does not become over-complicated due to multitude of options that becomes hard to maintain down the road.', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'krillboi', 'comment_id': 643168119.0, 'datetime': '2020-06-12 09:14:48+00:00', 'masked_author': 'username_8', 'text': ""I have a little caveat to add. Let's say I have 3 versions: 1.0, 2.0 and 3.0. This would produce links following this structure: \r\n\r\n`/docs/1.0/introduction.mdx`\r\n`/docs/2.0/introduction.mdx`\r\n\r\nThe problem now arises with 3.0. Since this is current stable version, you will access the introduction doc with simply `/docs/introduction.mdx` but as far as I can tell the link `/docs/3.0/introduction.mdx` is not created. This is a problem if you release your application/product with direct links to the introduction article with the correct version, i.e. I release 1.0 of my product which contains a link to `/docs/1.0/introduction.mdx`, then I release 2.0 with `/docs/2.0/introduction.mdx`.\r\n\r\nNow I release 3.0 where `/docs/3.0/introduction.mdx` won't work. If I link with `/docs/introduction.mdx` it always links to current version which means when 4.0 is released, links inside the 3.0 product will link to a wrong version.\r\n\r\nNot sure if that was clear enough but TLDR: all versions should have a corresponding link to it's version, also if it happens to be current version."", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'bravo-kernel', 'comment_id': 646966143.0, 'datetime': '2020-06-20 09:05:12+00:00', 'masked_author': 'username_7', 'text': 'As much as I understand that most examples and caveats can be valid, they also show the complexity that we (as requesters of simple versioning) are trying to avoid.', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'slorber', 'comment_id': 674165304.0, 'datetime': '2020-08-14 16:50:07+00:00', 'masked_author': 'username_6', 'text': 'Hey everyone.\r\n\r\nI believe we already addressed some things of this issue. \r\n\r\n- The pages and site config are not going to be versioned.\r\n\r\n- The docs plugin can be ""multi instance"": https://github.com/facebook/docusaurus/issues/2528#issuecomment-674112728\r\n\r\n- The [new navbar items ""versionDropdown"" and ""docsVersion""](https://v2.docusaurus.io/docs/theme-classic/#navbar-docs-version-dropdown) should cover your need. A `useVersion` hook is likely to not be straightforward to use because it would require passing the docs plugin instance id, + it would always return undefined on pages for examples. If you think it\'s not enough, please discuss with me your specific usecases in depth.\r\n\r\n\r\nThere is an RFC here that should cover the issues related to /docs/next, /docs etc... let\'s move the conversation here but please let me know if you think something is not resolved.\r\n\r\nhttps://github.com/facebook/docusaurus/issues/3285', 'title': None, 'type': 'comment'}
+ {'action': 'closed', 'author': 'slorber', 'comment_id': None, 'datetime': '2020-08-14 16:51:50+00:00', 'masked_author': 'username_6', 'text': '', 'title': None, 'type': 'issue'}
+ {'action': 'created', 'author': 'slorber', 'comment_id': 674175068.0, 'datetime': '2020-08-14 17:12:55+00:00', 'masked_author': 'username_6', 'text': 'In case you are interested to check these ""internal"" hooks, see the DocsVersionNavbarItem.tsx component, which permit to display in the navbar the current version, with a fallback to the ""latest version"".\r\n\r\nAs you see, it\'s not so straightforward to use as `useActiveVersion` will not necessarily return a result if you are on a page (like the homepage), on the 404/search page etc... We need a fallback to always display something useful.\r\n\r\n```\r\nimport React from \'react\';\r\nimport DefaultNavbarItem from \'./DefaultNavbarItem\';\r\nimport {useActiveVersion, useLatestVersion} from \'@theme/hooks/useDocs\';\r\n\r\nconst getVersionMainDoc = (version) =>\r\n  version.docs.find((doc) => doc.id === version.mainDocId);\r\n\r\nexport default function DocsVersionNavbarItem({\r\n  label: staticLabel,\r\n  to: staticTo,\r\n  docsPluginId,\r\n  ...props\r\n}) {\r\n  const activeVersion = useActiveVersion(docsPluginId);\r\n  const latestVersion = useLatestVersion(docsPluginId);\r\n  const version = activeVersion ?? latestVersion;\r\n  const label = staticLabel ?? version.label;\r\n  const path = staticTo ?? getVersionMainDoc(version).path;\r\n  return <DefaultNavbarItem {...props} label={label} to={path} />;\r\n}\r\n```', 'title': None, 'type': 'comment'}]","<issue_start><issue_comment>Title: [V2] Versioning Suggestions
+username_0: <!--
+  Consider requesting the feature on https://docusaurus-2.netlify.com/feedback/ instead.
+  Feature requests on v1 are more likely to be missed as we're focusing on building v2.
+-->
+
+## 💥 Proposal
+
+Hi! As I work on developing my Docusaurus site (https://squirrelly.js.org), I've noticed a few problems with the current versioning system.
+
+1) Pages aren't versioned. This is a problem for me because on one page I host a live playground, and the syntax changes completely between the new and old libraries.
+2) `docusaurus.config.js` isn't versioned. In my top bar, I link to different docs files. However, no matter what version I'm viewing, they always link to the latest docs (ex. `/docs/` instead of `docs/some-version/`).
+3) There's no way to get the current version in your React Components, so, for example, on the Docusaurus site, the link next to Docusaurus always reads `alpha.43`, no matter what version you're currently viewing.
+
+With these problems in mind, I'd suggest having a public version variable. This could be provided to MDX files, similarly to `withBaseUrl`. It would also be nice if you could, in `docusaurus.config.js`, export a function that accepted a version string as the parameter.
+
+### Have you read the [Contributing Guidelines on issues](https://github.com/facebook/docusaurus/blob/master/CONTRIBUTING.md#reporting-new-issues)?
+
+Yes
+<issue_comment>username_1: For item 3 above, I would like to see a hook that provides current version and a list of all versions:
+```
+import useVersion from `@docusaurs/core`; // ? or whatever module...
+
+function myComponent() {
+  const ( version, versions } = useVersion();
+  return (... whatever ...);
+}
+```
+I wrote [something workable](https://github.com/daldridge/docusaurus-plugin-lunr/blob/master/src/theme/hooks/version.js) in my Lunr search plugin by using the `useLocation` hook from react-router and inspecting the path.  Would be much nicer to have Docusaurus provide a mechanism.
+<issue_comment>username_2: Do you have different `sidebars.js` files for each version? I assume you do. Do you have a separate directory for each version? You can still point to reusable files. 
+
+Check the Discord post at the bottom: https://discordapp.com/channels/398180168688074762/632470883058843648
+<issue_comment>username_0: @username_2 yes, I have all of that set up and working.
+
+The problem is that the links in the top navbar only point to the most recent version, rather than whatever version the user is currently looking at.
+
+Additionally, I can't display different pages depending on the version (unless I parse the URL, which is rather complicated)
+<issue_comment>username_3: I don't think ""pages"" should be versioned. I think the idea of ""pages"" is different from ""docs"", which has a completely different requirement.
+
+If ""pages"" are versioned, then the following pages become very confusing:
+
+```
+- index.html
+- help.html
+- contact.html
+```
+
+You'll have to maintain a separate list of pages that should be versioned and should not be versioned. Pretty soon this is going to get out of control...
+
+Since this thread is about versioning in V2, then I think in your case you can write a custom react component and add that into a doc as part of normal mdx syntax.
+<issue_comment>username_3: That sounds like a bug. That doesn't happen in V1
+<issue_comment>username_0: @animas I agree we shouldn't have versioned pages, but I would love for there to be a way to fetch the current version inside a page, using something like `useVersion()`
+<issue_comment>username_3: I agree with this too. Just to be clear, I think you meant fetching the current version inside a ""doc"", not a page since... we're saying pages shouldn't be versioned and in that case, a page doesn't really have a context of what version you're looking at right now.
+<issue_comment>username_4: We will add the `useVersion` hook, the more we need it to show the version of docs in navbar.
+<issue_comment>username_0: @username_4 let me know if there's anything I can do to help
+<issue_comment>username_4: @username_0 well, if you want to implement a similar hook and create the corresponding PR - it would be very very cool :smiley:
+<issue_comment>username_0: I'll take a look, but I wouldn't be able to do any work until Friday :smile:. I would enjoy contributing though -- though I've found several bugs and given feedback, I have yet to earn the `Contributor` badge by my name :)
+<issue_comment>username_5: We don't intend to add support for this. Versioning shall be a docs-only feature. Notice that the current versioned docs path is `docs/<version>/some-markdown`. This is intentional and by design. We want to support the use case of having multiple sets of docs, each with its own version. For example, you're building a mobile SDK for both iOS and Android and want them to have different versions.
+
+The current docs design is a little flawed. We allow for multiple doc plugins but the versioning approach and commands assume only one docs plugin. In future we should have a namespace for each set of docs. So `useVersion()` would have to take in a parameter for the namespace.
+<issue_comment>username_6: Some things worth mentioning:
+
+### one deployment per version
+
+If your docusaurus site changes too much across versions and having only docs versioned is a problme, you could also handle the versioning outside of docusaurus, with separate immutable deployments.
+
+This is the strategy of the ReactJS website.
+This url redirects to a separate Netlify deployment: https://fr.reactjs.org/version/16.3
+The main site only handle the current version: https://fr.reactjs.org/versions/
+
+This strategy gives the opportunity to affect current version without the risk of breaking something that worked on an older version.
+
+### useVersion() can only work in docs/sidebar comps
+
+There's currently no concept of ""global current version"", only docs/sidebar version.
+Such a hook would only work when the user is browsing a docs page. 
+
+On global pages like /live-editor or /contact, there's no version in the url, so we don't know what is the version. At most, we could store the last version browsed by the user in some kind of storage, but that seems hacky (probably possible in userland).
+
+
+### global site dependencies 
+
+If you have a live editor like react-live somewhere in the app, in 5 different versions, it's unlikely you'll be able to provide your lib's code in the editor scope for the 5 different lib versions (it might be possible with yarn resolution to load a lib in 2 different versions). 
+
+It might be better to publish the live playground as a separate app, and integrate it in your doc. 
+
+For example you could use a unique page, with tabs to select the playground version, and load an iframe or something.
+
+If this tab system is annoying, you can also create a versioned doc on which you embed the playground iframe thanks to MDX.
+<issue_comment>username_0: @username_6 I use NPM/Yarn package aliases (https://stackoverflow.com/questions/26414587/how-to-install-multiple-versions-of-package-using-npm) on https://squirrelly.js.org/playground along with tabs to allow users to choose the version of the playground, which means I don't have to use an iframe.
+<issue_comment>username_7: Awesome @username_6. I have tried to explain this on multiple occasions and always failed to get it across. Perhaps this real world example will work:
+
+**First the situation:**
+
+- we have a separate repository that holds the code ([Powershell Pester](https://github.com/pester/Pester))
+- we have a separate repository for our D2 documentation ([Powershell Pester Docs](https://github.com/pester/docs)) 
+- we once created the D2 website with some pages auto-generated by parsing the source code repo, at that time v4
+- time has passed 
+- now the source repository is v5 (and will stay v5 for a long time)
+
+**What we would like:**
+
+- create a copy/cut of our current D2 website
+- name that copy v4
+- update master to represent v5
+- use master as `current`
+
+**What we do not want**
+
+- follow the workflow derived from existing `next` (because for us, v5 is not next version, it's the actual and current one)
+
+Hope that makes sense. If you have any additional questions please let me know
+<issue_comment>username_6: @username_7 
+
+Do you still update v4 docs? If not, you could simply create a docs-v4 branch, deploy it to netlify as a non-versioned D2 deployment, like `v4.pester.dev`, and have v5 be the master branch (still without D2 versioning).
+
+If you want v4 and v5 as the same unified SPA under same domain: as far as I understand, what you would like is to have `/docs` instead of `/docs/next` ? ie v5 is the current ""work in progress version"", and you want to edit files in ./docs directly?
+
+IE somehow it's a workflow where you have already released v5 + v5 initial doc, but you still do a lot of documentation work, so that you don't yet want to copy these files to the versioned folder?
+
+This feature makes sense to me, we could allow to configure `currentVersion: 'next'`
+<issue_comment>username_7: And updates to the v4 would then have to be done in `/docs/v4` but that makes sense from an end-user perspective. Seems to be the location where one expects them to be.
+<issue_comment>username_3: ☝️ This doesn't quite make sense to me, to be honest. I find it a bit confusing when I read that config.
+
+From the example that @username_7 mentioned, my understanding is ""v5"" is their ""next version"" if it's not fully completed yet or there isn't a ""next version"" after v5 (as of right now). So, the existing setup/process/workflow of Docusaurus still make sense to me.
+
+Maybe it's just a matter of being able to ""label"" the next release. That way, in the versioning page/list, ""next release"" is named ""v5"" instead of hard coded to ""master/unreleased"". So, technically you're not creating the ""v5"" version in Docusaurus, because it's still ""in-progress"".
+
+Not sure if that helps but thought I'd put it out there. I like simplicity and hopefully Docusaurus V2 features does not become over-complicated due to multitude of options that becomes hard to maintain down the road.
+<issue_comment>username_8: I have a little caveat to add. Let's say I have 3 versions: 1.0, 2.0 and 3.0. This would produce links following this structure: 
+
+`/docs/1.0/introduction.mdx`
+`/docs/2.0/introduction.mdx`
+
+The problem now arises with 3.0. Since this is current stable version, you will access the introduction doc with simply `/docs/introduction.mdx` but as far as I can tell the link `/docs/3.0/introduction.mdx` is not created. This is a problem if you release your application/product with direct links to the introduction article with the correct version, i.e. I release 1.0 of my product which contains a link to `/docs/1.0/introduction.mdx`, then I release 2.0 with `/docs/2.0/introduction.mdx`.
+
+Now I release 3.0 where `/docs/3.0/introduction.mdx` won't work. If I link with `/docs/introduction.mdx` it always links to current version which means when 4.0 is released, links inside the 3.0 product will link to a wrong version.
+
+Not sure if that was clear enough but TLDR: all versions should have a corresponding link to it's version, also if it happens to be current version.
+<issue_comment>username_7: As much as I understand that most examples and caveats can be valid, they also show the complexity that we (as requesters of simple versioning) are trying to avoid.
+<issue_comment>username_6: Hey everyone.
+
+I believe we already addressed some things of this issue. 
+
+- The pages and site config are not going to be versioned.
+
+- The docs plugin can be ""multi instance"": https://github.com/facebook/docusaurus/issues/2528#issuecomment-674112728
+
+- The [new navbar items ""versionDropdown"" and ""docsVersion""](https://v2.docusaurus.io/docs/theme-classic/#navbar-docs-version-dropdown) should cover your need. A `useVersion` hook is likely to not be straightforward to use because it would require passing the docs plugin instance id, + it would always return undefined on pages for examples. If you think it's not enough, please discuss with me your specific usecases in depth.
+
+
+There is an RFC here that should cover the issues related to /docs/next, /docs etc... let's move the conversation here but please let me know if you think something is not resolved.
+
+https://github.com/facebook/docusaurus/issues/3285<issue_closed>
+<issue_comment>username_6: In case you are interested to check these ""internal"" hooks, see the DocsVersionNavbarItem.tsx component, which permit to display in the navbar the current version, with a fallback to the ""latest version"".
+
+As you see, it's not so straightforward to use as `useActiveVersion` will not necessarily return a result if you are on a page (like the homepage), on the 404/search page etc... We need a fallback to always display something useful.
+
+```
+import React from 'react';
+import DefaultNavbarItem from './DefaultNavbarItem';
+import {useActiveVersion, useLatestVersion} from '@theme/hooks/useDocs';
+
+const getVersionMainDoc = (version) =>
+  version.docs.find((doc) => doc.id === version.mainDocId);
+
+export default function DocsVersionNavbarItem({
+  label: staticLabel,
+  to: staticTo,
+  docsPluginId,
+  ...props
+}) {
+  const activeVersion = useActiveVersion(docsPluginId);
+  const latestVersion = useLatestVersion(docsPluginId);
+  const version = activeVersion ?? latestVersion;
+  const label = staticLabel ?? version.label;
+  const path = staticTo ?? getVersionMainDoc(version).path;
+  return <DefaultNavbarItem {...props} label={label} to={path} />;
+}
+```"
+sustainers/website,588986496,253,"{'number': 253.0, 'repo': 'website', 'user_login': 'sustainers'}","[{'action': 'opened', 'author': 'ChrisChinchilla', 'comment_id': None, 'datetime': '2020-03-27T09:02:00Z', 'masked_author': 'username_0', 'text': 'This is just a start right now, also going to add images of our notes from the Sustain session, which I will break out to issues and further notes.', 'title': 'Add Ethics group', 'type': 'issue'}
+ {'action': 'created', 'author': 'ChrisChinchilla', 'comment_id': 604891601.0, 'datetime': '2020-03-27 09:03:39+00:00', 'masked_author': 'username_0', 'text': '![2D73668D-FDB5-478B-BCE8-DAA3DC3832E9](https://user-images.githubusercontent.com/42080/77739583-0727ea00-7012-11ea-8f27-73bbc61c27cb.jpeg)\r\n![F5E674FC-3792-4C0E-9771-C538AEE8677E](https://user-images.githubusercontent.com/42080/77739605-13ac4280-7012-11ea-92f2-1957aa7355bc.jpeg)\r\n![5ABBB16C-32F2-4107-A028-9C6049888B4B](https://user-images.githubusercontent.com/42080/77739614-16a73300-7012-11ea-956d-786d8a4d3d80.jpeg)\r\n\r\nNotes from the session', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'jdorfman', 'comment_id': 605315559.0, 'datetime': '2020-03-27 21:07:35+00:00', 'masked_author': 'username_1', 'text': 'Thanks @username_0! @username_2 will review this asap =)', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'RichardLitt', 'comment_id': 606014509.0, 'datetime': '2020-03-30 13:55:39+00:00', 'masked_author': 'username_2', 'text': 'Thanks, @username_0. ""ASAP"" for me means when I am back at my computer after a weekend away. :) \r\n\r\nSo, I think that this needs more work. Take a look at [this example of a filled out doc](https://sustainoss.org/working-groups/authentic-participation/). Can we get this towards that? \r\n\r\nI can transcribe the notes above and add them to the Sustain 2020 google drive notes, as I hadn\'t seen these photos before. Would that be useful, to you?', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'RichardLitt', 'comment_id': 606689462.0, 'datetime': '2020-03-31 15:12:48+00:00', 'masked_author': 'username_2', 'text': 'Just a note: These photos above are in [this Google Drive](https://drive.google.com/drive/u/0/folders/1__VyI8AtJj1caNWKsiRWxT_fyOy6Ybpk), and have been transcribed as follows:\r\n\r\n## Ethics\r\n- What\'s in scope?\r\n- How can we work together and support each other on shared goals?\r\n- Some topics:\r\n  - What is software? AI?\r\n  - Labor organizing, ethical workplace\r\n  - Social good orgs using FOSS\r\n  - License and social good\r\n  - The effects of software on society\r\n  - ""Have you though about this?"" for devs\r\n  - What is FOSS? From/for contributors\r\n  - Hippocratic oath?\r\n  - Responsibilities?\r\n\r\n### Challenges\r\n- Ethics make it not ""FOSS""\r\n- Economics - unethical software gets more money\r\n- Enforcement\r\n- Trans-jurisdictional\r\n- Regulating ourselves\r\n- Exploitation is lucrative\r\n- Easier to not care\r\n- Expensive to be intentional\r\n- Convincing that it\'s worth thinking about\r\n- Disillusionment, feel powerless\r\n- What does it mean?\r\n- Feel like ""not allowed"" to care\r\n- Individual vs. Collective\r\n- Academic and abstract into action\r\n- Money as moral good\r\n\r\n### Strategies for making change\r\n- Labor organizing\r\n  - Bad publicity, companies in the news\r\n  - not just 1st order, but also 2nd and 3rd, domino\r\n- Need an ethics board\r\n  - Amicus, law suits?\r\n- Talking to people, socializing\r\n- Modeling, positive reinforcement\r\n- Sharing successful metrics\r\n  - International law and rights\r\n  - Digital Infrastructure\r\n    - Sustainable Dev Goal #9\r\n  - GDPR, can we emulate?\r\n  - New Zealand, no on TPP\r\n  - ""Right to be forgotten""\r\n- Lowering the barrier to contributions\r\n- Tooling, education\r\n- International events\r\n- No harass, CoC, etc.\r\n\r\n- Share pain on international, contract and outsource\r\n- Labor org - 1st step is to express interest\r\n  - A Slack Group, US unions that have Tech, UA AFSCME-gove\r\n  - ""How to organize"" whistleblow\r\n  - England & Australia have broadcast works and communications workers\r\n  - Freelance union, SAF, tech workers coalition from HR, entrepreneur Visa\r\n- Ethics Board\r\n  - Framework, standards, _experts_ from other fields, civics, doctors, institutional review boards in education\r\n  - Args for getting companies to hire, discuss, implement Code of Ethics? Like IEEE (safe space to lobby)\r\n    - What is the process? How to enforce?\r\n- Lowering Barrier, legal & tech\r\n- Tooling and Education\r\n  - Add to training / onboarding material\r\n  - Bring in HR to help devs understand ethics\r\n  - Entry point or ally where devs are learning\r\n  - Curricula, online cc licensed module for teaching ethics w/ code, U of Santa Clara, RIIT\r\n\r\n### Next Steps\r\n- Ethics Board\r\n  - Literature review\r\n  - Share existing - Chris\r\n  - Gather/ID experts\r\n    - Find funding?\r\n    - How to guide/framework\r\n- Facilitating Labor organizing\r\n  - literature review - Remy\r\n  - Find someone in CA\r\n  - Gather/ID experts - Deb\r\n  - Find and gather more allies\r\n  - Look at coworker.org regarding labor organizing in tech\r\n  - Center for Humane Technology\r\n- Normalizing ethics as part of development training\r\n  - Share existing - Chris, including IEEE, Luis\r\n  - Speak with folks in C.S. - How hard to get an ethics module in use?\r\n  - Find a curricula savvy-person(s)\r\n  - Funding here, too\r\n  - Pilot, work on adoption\r\n  - Look into prototype tooling to ask ethics questions\r\n- Create a group (private) for sharing progress and resources for this work', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'ChrisChinchilla', 'comment_id': 607302981.0, 'datetime': '2020-04-01 15:03:39+00:00', 'masked_author': 'username_0', 'text': 'Asap to me can be anything from in an hour to 3 years @username_2 ;p\r\n\r\nCan you also assign a task for me to add more to this? I find it easier to find things I need to do with assigned tasks.', 'title': None, 'type': 'comment'}]","<issue_start><issue_comment>Title: Add Ethics group
+username_0: This is just a start right now, also going to add images of our notes from the Sustain session, which I will break out to issues and further notes.
+<issue_comment>username_0: ![2D73668D-FDB5-478B-BCE8-DAA3DC3832E9](https://user-images.githubusercontent.com/42080/77739583-0727ea00-7012-11ea-8f27-73bbc61c27cb.jpeg)
+![F5E674FC-3792-4C0E-9771-C538AEE8677E](https://user-images.githubusercontent.com/42080/77739605-13ac4280-7012-11ea-92f2-1957aa7355bc.jpeg)
+![5ABBB16C-32F2-4107-A028-9C6049888B4B](https://user-images.githubusercontent.com/42080/77739614-16a73300-7012-11ea-956d-786d8a4d3d80.jpeg)
+
+Notes from the session
+<issue_comment>username_1: Thanks @username_0! @username_2 will review this asap =)
+<issue_comment>username_2: Thanks, @username_0. ""ASAP"" for me means when I am back at my computer after a weekend away. :) 
+
+So, I think that this needs more work. Take a look at [this example of a filled out doc](https://sustainoss.org/working-groups/authentic-participation/). Can we get this towards that? 
+
+I can transcribe the notes above and add them to the Sustain 2020 google drive notes, as I hadn't seen these photos before. Would that be useful, to you?
+<issue_comment>username_2: Just a note: These photos above are in [this Google Drive](https://drive.google.com/drive/u/0/folders/1__VyI8AtJj1caNWKsiRWxT_fyOy6Ybpk), and have been transcribed as follows:
+
+## Ethics
+- What's in scope?
+- How can we work together and support each other on shared goals?
+- Some topics:
+  - What is software? AI?
+  - Labor organizing, ethical workplace
+  - Social good orgs using FOSS
+  - License and social good
+  - The effects of software on society
+  - ""Have you though about this?"" for devs
+  - What is FOSS? From/for contributors
+  - Hippocratic oath?
+  - Responsibilities?
+
+### Challenges
+- Ethics make it not ""FOSS""
+- Economics - unethical software gets more money
+- Enforcement
+- Trans-jurisdictional
+- Regulating ourselves
+- Exploitation is lucrative
+- Easier to not care
+- Expensive to be intentional
+- Convincing that it's worth thinking about
+- Disillusionment, feel powerless
+- What does it mean?
+- Feel like ""not allowed"" to care
+- Individual vs. Collective
+- Academic and abstract into action
+- Money as moral good
+
+### Strategies for making change
+- Labor organizing
+  - Bad publicity, companies in the news
+  - not just 1st order, but also 2nd and 3rd, domino
+- Need an ethics board
+  - Amicus, law suits?
+- Talking to people, socializing
+- Modeling, positive reinforcement
+- Sharing successful metrics
+  - International law and rights
+  - Digital Infrastructure
+    - Sustainable Dev Goal #9
+  - GDPR, can we emulate?
+  - New Zealand, no on TPP
+  - ""Right to be forgotten""
+- Lowering the barrier to contributions
+- Tooling, education
+- International events
+- No harass, CoC, etc.
+
+- Share pain on international, contract and outsource
+- Labor org - 1st step is to express interest
+  - A Slack Group, US unions that have Tech, UA AFSCME-gove
+  - ""How to organize"" whistleblow
+  - England & Australia have broadcast works and communications workers
+  - Freelance union, SAF, tech workers coalition from HR, entrepreneur Visa
+- Ethics Board
+  - Framework, standards, _experts_ from other fields, civics, doctors, institutional review boards in education
+  - Args for getting companies to hire, discuss, implement Code of Ethics? Like IEEE (safe space to lobby)
+    - What is the process? How to enforce?
+- Lowering Barrier, legal & tech
+- Tooling and Education
+  - Add to training / onboarding material
+  - Bring in HR to help devs understand ethics
+  - Entry point or ally where devs are learning
+  - Curricula, online cc licensed module for teaching ethics w/ code, U of Santa Clara, RIIT
+
+### Next Steps
+- Ethics Board
+  - Literature review
+  - Share existing - Chris
+  - Gather/ID experts
+    - Find funding?
+    - How to guide/framework
+- Facilitating Labor organizing
+  - literature review - Remy
+  - Find someone in CA
+  - Gather/ID experts - Deb
+  - Find and gather more allies
+  - Look at coworker.org regarding labor organizing in tech
+  - Center for Humane Technology
+- Normalizing ethics as part of development training
+  - Share existing - Chris, including IEEE, Luis
+  - Speak with folks in C.S. - How hard to get an ethics module in use?
+  - Find a curricula savvy-person(s)
+  - Funding here, too
+  - Pilot, work on adoption
+  - Look into prototype tooling to ask ethics questions
+- Create a group (private) for sharing progress and resources for this work
+<issue_comment>username_0: Asap to me can be anything from in an hour to 3 years @username_2 ;p
+
+Can you also assign a task for me to add more to this? I find it easier to find things I need to do with assigned tasks."
+stevenschobert/instafeed.js,714400024,701,,"[{'action': 'opened', 'author': 'zackwellin', 'comment_id': None, 'datetime': '2020-10-04 20:52:06+00:00', 'masked_author': 'username_0', 'text': ""I've recently updated a website that uses the Instafeed.js plugin from the old version to the new one. In the new version, the 'sortBy' option has been replaced by a 'sort' option, and as I've read on GitHub, it now 'uses a function' instead of the simple strings as in the previous version.\r\n\r\nMy Javascript knowledge is basic, and I've not come across something like this in a js plugin before. I don't really understand how I can write a function to sort the posts from the feed by the number of likes from most liked to least liked, since I can't see where the number of likes is made available from the Instagram API.\r\n\r\nIf anyone could point me in the right direction it would be really appreciated."", 'title': 'How to sort instafeed with a function', 'type': 'issue'}
+ {'action': 'created', 'author': 'vulkanus', 'comment_id': 723326613.0, 'datetime': '2020-11-06 22:23:05+00:00', 'masked_author': 'username_1', 'text': 'Hi\r\n FB does not allow to get a number of likes, only in business account, in API\r\n\r\nTo achieve this, the launching of Instagram Basic Display API comes with 3 major changes:\r\n+quote +\r\n**20th June 2020: New Basic Display API**\r\nTo protect users’ privacy, location information will no longer be included along with the media;\r\n\r\nOnly Instagram business accounts will continue to support likes and comments on the hover overlay;\r\n\r\nThe number of data fields like location data and follower counts are going to be censored.\r\n-quote-\r\n\r\nfont: [https://embedsocial.com/blog/instagram-api-changes-2020/](url)', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'zackwwww', 'comment_id': 723956150.0, 'datetime': '2020-11-09 11:32:18+00:00', 'masked_author': 'username_2', 'text': 'thanks v much. should have checked that...', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'stevenschobert', 'comment_id': 725821864.0, 'datetime': '2020-11-12 04:14:21+00:00', 'masked_author': 'username_3', 'text': 'Hey @username_2! Like @username_1 said, the new Instagram Basic Display API that powers v2 of Instafeed.js does not include like counts, unfortunately, which is partly why the `sortBy` option was dropped in favor of `sort`.\r\n\r\nTo answer the other half of your question though, the `sort` option works exactly like the `Array.prototype.sort()` standard library function. You can find examples of how to write a sort function on the [MDN docs site](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/sort). \r\n\r\nThe basic structure is:\r\n```js\r\nfunction compare(a, b) {\r\n  if (a is less than b by some ordering criterion) {\r\n    return -1;\r\n  }\r\n  if (a is greater than b by the ordering criterion) {\r\n    return 1;\r\n  }\r\n  // a must be equal to b\r\n  return 0;\r\n}\r\n```', 'title': None, 'type': 'comment'}
+ {'action': 'closed', 'author': 'stevenschobert', 'comment_id': None, 'datetime': '2020-11-12 04:14:21+00:00', 'masked_author': 'username_3', 'text': '', 'title': None, 'type': 'issue'}]","<issue_start><issue_comment>Title: How to sort instafeed with a function
+username_0: I've recently updated a website that uses the Instafeed.js plugin from the old version to the new one. In the new version, the 'sortBy' option has been replaced by a 'sort' option, and as I've read on GitHub, it now 'uses a function' instead of the simple strings as in the previous version.
+
+My Javascript knowledge is basic, and I've not come across something like this in a js plugin before. I don't really understand how I can write a function to sort the posts from the feed by the number of likes from most liked to least liked, since I can't see where the number of likes is made available from the Instagram API.
+
+If anyone could point me in the right direction it would be really appreciated.
+<issue_comment>username_1: Hi
+ FB does not allow to get a number of likes, only in business account, in API
+
+To achieve this, the launching of Instagram Basic Display API comes with 3 major changes:
++quote +
+**20th June 2020: New Basic Display API**
+To protect users’ privacy, location information will no longer be included along with the media;
+
+Only Instagram business accounts will continue to support likes and comments on the hover overlay;
+
+The number of data fields like location data and follower counts are going to be censored.
+-quote-
+
+font: [https://embedsocial.com/blog/instagram-api-changes-2020/](url)
+<issue_comment>username_2: thanks v much. should have checked that...
+<issue_comment>username_3: Hey @username_2! Like @username_1 said, the new Instagram Basic Display API that powers v2 of Instafeed.js does not include like counts, unfortunately, which is partly why the `sortBy` option was dropped in favor of `sort`.
+
+To answer the other half of your question though, the `sort` option works exactly like the `Array.prototype.sort()` standard library function. You can find examples of how to write a sort function on the [MDN docs site](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/sort). 
+
+The basic structure is:
+```js
+function compare(a, b) {
+  if (a is less than b by some ordering criterion) {
+    return -1;
+  }
+  if (a is greater than b by the ordering criterion) {
+    return 1;
+  }
+  // a must be equal to b
+  return 0;
+}
+```<issue_closed>"
+usegalaxy-eu/website,362372699,106,,"[{'action': 'opened', 'author': 'bgruening', 'comment_id': None, 'datetime': '2018-09-20T21:21:55Z', 'masked_author': 'username_0', 'text': 'If anyone wants to generate some posts please help ...\r\n\r\n- [x] GCB presentations about Bioconda, Clip-Explorer, RNA-workbench with @Florian-H-Lab, @eggzilla\r\n- [x] GalaxyProteomics Workshop in Prag\r\n- [x] new cloud with more power, de.NBI sponsored\r\n- [x] HiC workshop in Luzern 9-10.10\r\n- [x] Biohackathon in paris\r\n- [x] european Galaxy days in November in Freiburg (https://galaxyproject.org/events/2018-europe-dev/)\r\n- [x] @erasche post over RZ paper chimera/cyborg', 'title': 'some missing posts', 'type': 'issue'}
+ {'action': 'closed', 'author': 'erxleben', 'comment_id': None, 'datetime': '2019-08-15 11:16:58+00:00', 'masked_author': 'username_1', 'text': '', 'title': None, 'type': 'issue'}
+ {'action': 'created', 'author': 'erxleben', 'comment_id': 521607265.0, 'datetime': '2019-08-15 11:16:58+00:00', 'masked_author': 'username_1', 'text': 'all done', 'title': None, 'type': 'comment'}]","<issue_start><issue_comment>Title: some missing posts
+username_0: If anyone wants to generate some posts please help ...
+
+- [x] GCB presentations about Bioconda, Clip-Explorer, RNA-workbench with @Florian-H-Lab, @eggzilla
+- [x] GalaxyProteomics Workshop in Prag
+- [x] new cloud with more power, de.NBI sponsored
+- [x] HiC workshop in Luzern 9-10.10
+- [x] Biohackathon in paris
+- [x] european Galaxy days in November in Freiburg (https://galaxyproject.org/events/2018-europe-dev/)
+- [x] @erasche post over RZ paper chimera/cyborg<issue_closed>
+<issue_comment>username_1: all done"
+facebook/docusaurus,1091995096,6249,"{'number': 6249.0, 'repo': 'docusaurus', 'user_login': 'facebook'}","[{'action': 'opened', 'author': 'Josh-Cena', 'comment_id': None, 'datetime': '2022-01-02T10:51:30Z', 'masked_author': 'username_0', 'text': '<!--\r\nThank you for sending the PR! We appreciate you spending the time to work on these changes.\r\n\r\nHelp us understand your motivation by explaining why you decided to make this change.\r\n\r\nYou can learn more about contributing to Docusaurus here: https://github.com/facebook/docusaurus/blob/main/CONTRIBUTING.md\r\n\r\nHappy contributing!\r\n\r\n-->\r\n\r\n## Motivation\r\n\r\nClose #6232.\r\n\r\n### Have you read the [Contributing Guidelines on pull requests](https://github.com/facebook/docusaurus/blob/main/CONTRIBUTING.md#pull-requests)?\r\n\r\nYes\r\n\r\n## Test Plan\r\n\r\nAdded a dogfood example', 'title': 'feat(content-docs): allow setting class name for category link', 'type': 'issue'}
+ {'action': 'created', 'author': 'Josh-Cena', 'comment_id': 1006279253.0, 'datetime': '2022-01-06 04:38:39+00:00', 'masked_author': 'username_0', 'text': ""So we have a category class name already, but this one targets the entire category dropdown rather than the link itself. (I designed it like that initially because at that time there wasn't the extra `div` around the link, and targeting the entire dropdown allows people to customize margins, etc.) The changes in the DOM structure after the category index pages have caused troubles on the TS-eslint website. Adding another class name helps ensure a stable semantic selector, since otherwise if you want to style the category link, you have do `.theme-doc-sidebar-item-category > div > a` which looks like subjecting to another breaking change in the future. A new link class name makes it more consistent."", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'slorber', 'comment_id': 1006503170.0, 'datetime': '2022-01-06 11:31:53+00:00', 'masked_author': 'username_1', 'text': 'Agree that we could add another semantic selector here, but that seems like a different subject.\r\n\r\nDoes a new `.theme-doc-sidebar-item-category-group` for the parent li makes sense to you? (breaking change)\r\n\r\n---\r\n\r\nWhen using `sidebar_class_name: green` the user expect this class to be applied to the ""li"" item, not the child div.\r\n\r\nThis frontmatter should allow customizing a whole category li item, including subitems:\r\n\r\n![image](https://user-images.githubusercontent.com/749374/148375740-5e3692c5-d7e5-480e-94d6-6d163e57cf62.png)\r\n\r\nIf it\'s only applied to the child div, it\'s less powerful and it\'s definitively not what the original issue asked for.\r\n\r\nWe should be able to write something like:\r\n\r\n```css\r\n.theme-doc-sidebar-item-category-group.green > .theme-doc-sidebar-item-category > a {\r\n  color: green;\r\n}\r\n```\r\n\r\nBut also \r\n\r\n```css\r\n.theme-doc-sidebar-item-category-group.green {\r\n  border-left: solid green;\r\n}\r\n```\r\n\r\n![image](https://user-images.githubusercontent.com/749374/148376409-39d98167-0271-476d-8879-08b82658cf56.png)\r\n\r\n---\r\n\r\nAlso I think the current desing/API is mixing 2 things: the category linking feature, and the sidebar category label link. Those share some ""link"" terminology but are not strictly related. And it\'s even weird that you have a `link.className` and don\'t even apply this className to the `<a>` element in the end 🤪', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'Josh-Cena', 'comment_id': 1006505310.0, 'datetime': '2022-01-06 11:35:02+00:00', 'masked_author': 'username_0', 'text': ""Wait, eh? I didn't realize they wanted it on the `<li>` element...\r\n\r\nIn that case, maybe that issue is actually related to #6254?"", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'slorber', 'comment_id': 1006525892.0, 'datetime': '2022-01-06 12:02:40+00:00', 'masked_author': 'username_1', 'text': 'I don\'t really like to guarantee DOM structure stability, so there\'s probably still value in creating a sub-selector for the category ""row"" (excluding child), but not sure how to find good names 🤷\u200d♂️ However I don\'t think this selector is likely to be refactored so it should be pretty stable anyway.\r\n\r\nIn general, I think our public API surface is the theme components interface and stable CSS classNames. All other CSS and HTML structures should be considered as implementation details, subject to change.', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'slorber', 'comment_id': 1006527267.0, 'datetime': '2022-01-06 12:04:23+00:00', 'masked_author': 'username_1', 'text': 'Same reason for applying the className on `<li>` instead: you can still select the first div quite easily, but the opposite is not true', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'Josh-Cena', 'comment_id': 1006533849.0, 'datetime': '2022-01-06 12:12:56+00:00', 'masked_author': 'username_0', 'text': 'Yes, absolutely no objection to applying class name to `<li>` (which we do already). Just that ""you can still select the first div"" is defeated if we change DOM structure in the future.\r\n\r\nSo the resolution is:\r\n\r\n- Let the `sidebar_class_name` of index pages target the entire category (which will be consistent with other metadata once we allow using category index page metadata to set category metadata)\r\n- Give a new stable class name to category links, without letting users define a custom one because the equivalent can be achieved by using `.category > div > a`?', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'slorber', 'comment_id': 1006698165.0, 'datetime': '2022-01-06 15:51:36+00:00', 'masked_author': 'username_1', 'text': 'yes 👍 \r\n\r\nBut should the new stable selector apply to the div or the a? What could be a good name for it?', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'Josh-Cena', 'comment_id': 1059939908.0, 'datetime': '2022-03-06 10:58:03+00:00', 'masked_author': 'username_0', 'text': ""Going to close this as it's not in the right direction"", 'title': None, 'type': 'comment'}]","<issue_start><issue_comment>Title: feat(content-docs): allow setting class name for category link
+username_0: <!--
+Thank you for sending the PR! We appreciate you spending the time to work on these changes.
+
+Help us understand your motivation by explaining why you decided to make this change.
+
+You can learn more about contributing to Docusaurus here: https://github.com/facebook/docusaurus/blob/main/CONTRIBUTING.md
+
+Happy contributing!
+
+-->
+
+## Motivation
+
+Close #6232.
+
+### Have you read the [Contributing Guidelines on pull requests](https://github.com/facebook/docusaurus/blob/main/CONTRIBUTING.md#pull-requests)?
+
+Yes
+
+## Test Plan
+
+Added a dogfood example
+<issue_comment>username_0: So we have a category class name already, but this one targets the entire category dropdown rather than the link itself. (I designed it like that initially because at that time there wasn't the extra `div` around the link, and targeting the entire dropdown allows people to customize margins, etc.) The changes in the DOM structure after the category index pages have caused troubles on the TS-eslint website. Adding another class name helps ensure a stable semantic selector, since otherwise if you want to style the category link, you have do `.theme-doc-sidebar-item-category > div > a` which looks like subjecting to another breaking change in the future. A new link class name makes it more consistent.
+<issue_comment>username_1: Agree that we could add another semantic selector here, but that seems like a different subject.
+
+Does a new `.theme-doc-sidebar-item-category-group` for the parent li makes sense to you? (breaking change)
+
+---
+
+When using `sidebar_class_name: green` the user expect this class to be applied to the ""li"" item, not the child div.
+
+This frontmatter should allow customizing a whole category li item, including subitems:
+
+![image](https://user-images.githubusercontent.com/749374/148375740-5e3692c5-d7e5-480e-94d6-6d163e57cf62.png)
+
+If it's only applied to the child div, it's less powerful and it's definitively not what the original issue asked for.
+
+We should be able to write something like:
+
+```css
+.theme-doc-sidebar-item-category-group.green > .theme-doc-sidebar-item-category > a {
+  color: green;
+}
+```
+
+But also 
+
+```css
+.theme-doc-sidebar-item-category-group.green {
+  border-left: solid green;
+}
+```
+
+![image](https://user-images.githubusercontent.com/749374/148376409-39d98167-0271-476d-8879-08b82658cf56.png)
+
+---
+
+Also I think the current desing/API is mixing 2 things: the category linking feature, and the sidebar category label link. Those share some ""link"" terminology but are not strictly related. And it's even weird that you have a `link.className` and don't even apply this className to the `<a>` element in the end 🤪
+<issue_comment>username_0: Wait, eh? I didn't realize they wanted it on the `<li>` element...
+
+In that case, maybe that issue is actually related to #6254?
+<issue_comment>username_1: I don't really like to guarantee DOM structure stability, so there's probably still value in creating a sub-selector for the category ""row"" (excluding child), but not sure how to find good names 🤷‍♂️ However I don't think this selector is likely to be refactored so it should be pretty stable anyway.
+
+In general, I think our public API surface is the theme components interface and stable CSS classNames. All other CSS and HTML structures should be considered as implementation details, subject to change.
+<issue_comment>username_1: Same reason for applying the className on `<li>` instead: you can still select the first div quite easily, but the opposite is not true
+<issue_comment>username_0: Yes, absolutely no objection to applying class name to `<li>` (which we do already). Just that ""you can still select the first div"" is defeated if we change DOM structure in the future.
+
+So the resolution is:
+
+- Let the `sidebar_class_name` of index pages target the entire category (which will be consistent with other metadata once we allow using category index page metadata to set category metadata)
+- Give a new stable class name to category links, without letting users define a custom one because the equivalent can be achieved by using `.category > div > a`?
+<issue_comment>username_1: yes 👍 
+
+But should the new stable selector apply to the div or the a? What could be a good name for it?
+<issue_comment>username_0: Going to close this as it's not in the right direction"
+tdwg/website,708062910,182,"{'number': 182.0, 'repo': 'website', 'user_login': 'tdwg'}","[{'action': 'opened', 'author': 'peterdesmet', 'comment_id': None, 'datetime': '2020-09-24T10:46:13Z', 'masked_author': 'username_0', 'text': '- List examples as code (no need for espacing | then)\r\n- Make Qualname a functional link\r\n- Drop leading/ending | for table rows\r\n- Correct footnote syntax\r\n- List DOIs as <> so the URL is not repeated\r\n\r\nFixes #151 (reported by @username_1)\r\n\r\nShows now as:\r\n\r\n<img width=""709"" alt=""Screenshot 2020-09-24 at 12 45 30"" src=""https://user-images.githubusercontent.com/600993/94135527-dc550c00-fe63-11ea-8025-98aefc4aedcc.png"">', 'title': 'Fix attribution/people syntax issues', 'type': 'issue'}
+ {'action': 'created', 'author': 'dshorthouse', 'comment_id': 698295612.0, 'datetime': '2020-09-24 11:53:07+00:00', 'masked_author': 'username_1', 'text': 'Thanks, @username_0. Noticed that and have been meaning to tidy it up. Please do merge @stanblum.', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'dshorthouse', 'comment_id': 698296012.0, 'datetime': '2020-09-24 11:53:58+00:00', 'masked_author': 'username_1', 'text': ""Aha! Didn't realize I had the power to do this."", 'title': None, 'type': 'comment'}]","<issue_start><issue_comment>Title: Fix attribution/people syntax issues
+username_0: - List examples as code (no need for espacing | then)
+- Make Qualname a functional link
+- Drop leading/ending | for table rows
+- Correct footnote syntax
+- List DOIs as <> so the URL is not repeated
+
+Fixes #151 (reported by @username_1)
+
+Shows now as:
+
+<img width=""709"" alt=""Screenshot 2020-09-24 at 12 45 30"" src=""https://user-images.githubusercontent.com/600993/94135527-dc550c00-fe63-11ea-8025-98aefc4aedcc.png"">
+<issue_comment>username_1: Thanks, @username_0. Noticed that and have been meaning to tidy it up. Please do merge @stanblum.
+<issue_comment>username_1: Aha! Didn't realize I had the power to do this."
+ethereum/ethereum-org-website,439191148,40,,"[{'action': 'opened', 'author': 'vbuterin', 'comment_id': None, 'datetime': '2019-05-01 14:50:22+00:00', 'masked_author': 'username_0', 'text': '**Current:** ""Ethereum is a global, decentralized platform for money and new kinds of applications. On Ethereum, you can write code that controls money, and build applications accessible anywhere in the world.""\r\n\r\n**Problems with current**:\r\n\r\n* Fails to mention what\'s different about these applications compared to web apps\r\n* Over-emphasizes money\r\n\r\n**Alternative proposals**\r\n\r\n* Ethereum is a global, decentralized platform for building applications that are secure, can operate without a central administrator and are highly robust against third-party interference.\r\n* Ethereum is an open-source, decentralized platform for building applications that run exactly as programmed and are highly resilient against faults and third-party interference. \r\n* Ethereum is a global open-source platform for building decentralized applications and economic mechanisms. Applications on Ethereum are executed in a massively replicated public ledger that allows anyone to verify that computations are being executed correctly, and ensures a high level of fault tolerance and robustness.\r\n* Ethereum is a permissionless open-source platform for building decentralized applications and economic mechanisms. Applications on Ethereum are executed in a massively replicated public ledger that guarantees that code is being executed exactly as written, without relying on a central administrator to remain online or honest, and can be accessed from anywhere in the world.\r\n* Ethereum is a global, decentralized platform specially designed for building applications that need strong guarantees of liveness and protection against tampering or interference. Once an application on Ethereum is launched, it will continue running without requiring any central administrator, and the application can be accessed or verified from anywhere in the world.\r\n* Ethereum is an open-source, public blockchain-based platform for running distributed applications that demand high guarantees of security and robustness against tampering or faults. On Ethereum you can build applications that handle digital assets, implement economic mechanisms and markets, and timestamp and create tamper-proof logs of critical data, along with many other use cases being developed each month.\r\n\r\nNot meant to be the end-all, just some starting points. IMO if we want to mention money, we need to mention at least one thing that is not money too; and for a two-sentence intro that may not be appropriate.\r\n\r\nSome ideas above have been partially plagiarized from:\r\n\r\n* The previous Ethereum website\r\n* EthHub: https://docs.ethhub.io/ethereum-basics/what-is-ethereum/\r\n* Wikipedia', 'title': 'Alternatives to current headline', 'type': 'issue'}
+ {'action': 'created', 'author': 'jjmstark', 'comment_id': 488360171.0, 'datetime': '2019-05-01 17:59:53+00:00', 'masked_author': 'username_1', 'text': 'One important goal of the ""headline"" text is that it is comprehensible and useful to a wide variety of users. The landing page is the ""top of the funnel"" where a user arrives before opening a sub-page on a specific topic area. We might even assume that the landing page will **mostly** be used by ""beginners"", because a knowledgeable user is more likely to go directly to a sub-page than to the landing page itself. \r\n\r\nFor that reason, I think many of the examples above are not appropriate for the landing page (though they are good explanations that could go somewhere else). Phrases like ""resilient against faults"", ""massively replicated ledger"", ""guarantees of strong liveness"", ""tamper proof logs"" etc. might be accurate descriptions of Ethereum\'s technical characteristics, but they are not helpful for the majority of people who encounter this page for the first time. \r\n\r\nAnother consideration is that the headline text must be concise, two short sentences at most.\r\n\r\n**Alternative proposals**:\r\n\r\nFirst sentence:\r\n- Ethereum is a global, open-source platform for decentralized applications. \r\n- Ethereum is a global, open-source platform for money and decentralized applications.\r\n- Ethereum is a global, open-source platform for digital value and decentralized applications. \r\n\r\nSecond sentence:\r\n- On Ethereum you can write code that controls money and ship unstoppable software. \r\n- On Ethereum, your code always runs as programmed, and can control new kinds of money and digital value.\r\n- On Ethereum, your code can do more. Build unstoppable applications, control money, and change the world.\r\n- On Ethereum, your code has superpowers: it can control and create money, always runs as programmed, and can\'t be interfered with.', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'vbuterin', 'comment_id': 488526705.0, 'datetime': '2019-05-02 01:03:12+00:00', 'masked_author': 'username_0', 'text': ""That's a good point! This is definitely a hard balancing game. So far my favorite would be:\r\n\r\nEthereum is a global, open-source platform for decentralized applications. Ethereum, you can build applications that control digital value, run exactly as programmed, and are accessible anywhere in the world."", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'HansF', 'comment_id': 488578195.0, 'datetime': '2019-05-02 07:36:33+00:00', 'masked_author': 'username_2', 'text': ""Here's my remix : \r\n\r\nEthereum is a global, open-source platform for decentralized applications. Build unstoppable apps that run exactly as programmed. Exchange value and track transactions around the world without the need for a trusted third party."", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'jarradh', 'comment_id': 489393825.0, 'datetime': '2019-05-05 06:08:13+00:00', 'masked_author': 'username_3', 'text': ""Whether or not this impacts the headline, perhaps this is an opportunity to get clarity on the (EF's) mission/ideal, separate from what Ethereum implementation actually is?\r\n\r\nBeing a 'close outsider' to the EF I get the sense the current approach towards the mission of a decentralized application platform is to be more horizontally integrated, while EF focuses on the blockchain, rather than a focus on being vertically integrated/all-in one platform (providing decentralized storage and messaging), which seemed to be the case in the past.\r\n\r\nIn this case the EF's mission is provide a platform for decentralised application, and Ethereum is analogous to the Linux _kernel_,  the separation might be a moot point as far as communication to a general audience goes (GNU/Linux is referred to as just Linux).\r\n\r\nWhat I like about clarifying this distinction is that it would allow the EF to reduce their scope while at the same time supporting a more heterogeneous ecosystem, Ethereum is the 'cpu' in different architectures, whether compositions use IPFS/Swarm/SSB/Matrix/Whisper/Yin/etc."", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'jjmstark', 'comment_id': 489436405.0, 'datetime': '2019-05-05 15:25:15+00:00', 'masked_author': 'username_1', 'text': 'Hey Jarrad - there are plans to update https://ethereum.foundation/ in the near future with this information. The idea is that there will be a clean distinction between ethereum.org (about Ethereum) and ethereum.foundation (about the EF).', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'goldfarbas', 'comment_id': 490212645.0, 'datetime': '2019-05-07 18:56:13+00:00', 'masked_author': 'username_4', 'text': 'Piggybacking off @username_1\'s points, it\'s important that a headline explain why your subject matters because it\'s easier for people to relate to your reason for doing something than whatever thing you may be doing or showing off. Take ""I\'m biking"" versus ""I\'m biking for charity"" as an example - even if you don\'t bike, you probably like the idea of wanting to help others and will be inclined to feel something for the person biking for charity.\r\n\r\nRegarding the ""money"" problem, I lean against mentioning it but I see just as much potential around #DeIP as #DeFi so if we talk about money then it\'s also necessary to talk about intellectual capital.\r\n\r\n**Alternative Proposals**\r\n- Ethereum is a global, open-source platform for launching unstoppable software.\r\n- Ethereum is a global, open-source platform for launching decentralized applications that run exactly as programmed and remain accessible from anywhere in the world.\r\n- Ethereum is a global, open-source platform for launching decentralized applications that create and control financial and intellectual capital.\r\n- Ethereum is a global, open-source platform for launching decentralized applications that manage financial and intellectual capital.', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'EvanVanNessEth', 'comment_id': 490657318.0, 'datetime': '2019-05-08 21:27:46+00:00', 'masked_author': 'username_5', 'text': 'I\'ve been thinking about this and I think the strength (and occasionally the weakness) of Ethereum is that decentralization means that Ethereum is many things to different people.   Trying to put a blanket definition on that is relatively futile.  \r\n\r\nI\'d propose instead copy that is something like:\r\n\r\nAs a decentralized open-source project, Ethereum is whatever its community makes it.  Here are a few different definitions from people in the Ethereum community:\r\n\r\n1.  the blockchain securing the ""Ether"" cryptocurrency and the Ethereum Virtual Machine (EVM)\r\n2.  the backbone of web3\r\n3.  the native value transfer layer of the Internet\r\n4.  programmable money\r\n5.  a platform for decentralized software applications', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'EvanVanNessEth', 'comment_id': 490674301.0, 'datetime': '2019-05-08 22:32:08+00:00', 'masked_author': 'username_5', 'text': 'If we value pithy, I suggest an alternate version of one of @username_0\'s proffered taglines. \r\n\r\n""Ethereum is an open-source platform for decentralized applications. \r\n\r\nUsing Ethereum, you can build [censorship-resistant] applications with a native value transfer that run exactly as programmed and can be accessed from anywhere in the world""', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'HansF', 'comment_id': 490833047.0, 'datetime': '2019-05-09 09:37:39+00:00', 'masked_author': 'username_2', 'text': 'So... how do we proceed? I see several good headlines here... how do we make the change? \r\nDo we create pull requests for different proposals? Will we encourage the use of reactions to implement rudimentary voting? \r\n\r\n cc: @username_1 ?', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'jjmstark', 'comment_id': 491115459.0, 'datetime': '2019-05-10 00:48:27+00:00', 'masked_author': 'username_1', 'text': ""I'll add a PR to make the change, and close this issue for now. Obviously can still be tweaked in the future, but we're going to push some changes tomorrow so let's take this iteration for now."", 'title': None, 'type': 'comment'}
+ {'action': 'closed', 'author': 'jjmstark', 'comment_id': None, 'datetime': '2019-05-10 00:48:28+00:00', 'masked_author': 'username_1', 'text': '', 'title': None, 'type': 'issue'}]","<issue_start><issue_comment>Title: Alternatives to current headline
+username_0: **Current:** ""Ethereum is a global, decentralized platform for money and new kinds of applications. On Ethereum, you can write code that controls money, and build applications accessible anywhere in the world.""
+
+**Problems with current**:
+
+* Fails to mention what's different about these applications compared to web apps
+* Over-emphasizes money
+
+**Alternative proposals**
+
+* Ethereum is a global, decentralized platform for building applications that are secure, can operate without a central administrator and are highly robust against third-party interference.
+* Ethereum is an open-source, decentralized platform for building applications that run exactly as programmed and are highly resilient against faults and third-party interference. 
+* Ethereum is a global open-source platform for building decentralized applications and economic mechanisms. Applications on Ethereum are executed in a massively replicated public ledger that allows anyone to verify that computations are being executed correctly, and ensures a high level of fault tolerance and robustness.
+* Ethereum is a permissionless open-source platform for building decentralized applications and economic mechanisms. Applications on Ethereum are executed in a massively replicated public ledger that guarantees that code is being executed exactly as written, without relying on a central administrator to remain online or honest, and can be accessed from anywhere in the world.
+* Ethereum is a global, decentralized platform specially designed for building applications that need strong guarantees of liveness and protection against tampering or interference. Once an application on Ethereum is launched, it will continue running without requiring any central administrator, and the application can be accessed or verified from anywhere in the world.
+* Ethereum is an open-source, public blockchain-based platform for running distributed applications that demand high guarantees of security and robustness against tampering or faults. On Ethereum you can build applications that handle digital assets, implement economic mechanisms and markets, and timestamp and create tamper-proof logs of critical data, along with many other use cases being developed each month.
+
+Not meant to be the end-all, just some starting points. IMO if we want to mention money, we need to mention at least one thing that is not money too; and for a two-sentence intro that may not be appropriate.
+
+Some ideas above have been partially plagiarized from:
+
+* The previous Ethereum website
+* EthHub: https://docs.ethhub.io/ethereum-basics/what-is-ethereum/
+* Wikipedia
+<issue_comment>username_1: One important goal of the ""headline"" text is that it is comprehensible and useful to a wide variety of users. The landing page is the ""top of the funnel"" where a user arrives before opening a sub-page on a specific topic area. We might even assume that the landing page will **mostly** be used by ""beginners"", because a knowledgeable user is more likely to go directly to a sub-page than to the landing page itself. 
+
+For that reason, I think many of the examples above are not appropriate for the landing page (though they are good explanations that could go somewhere else). Phrases like ""resilient against faults"", ""massively replicated ledger"", ""guarantees of strong liveness"", ""tamper proof logs"" etc. might be accurate descriptions of Ethereum's technical characteristics, but they are not helpful for the majority of people who encounter this page for the first time. 
+
+Another consideration is that the headline text must be concise, two short sentences at most.
+
+**Alternative proposals**:
+
+First sentence:
+- Ethereum is a global, open-source platform for decentralized applications. 
+- Ethereum is a global, open-source platform for money and decentralized applications.
+- Ethereum is a global, open-source platform for digital value and decentralized applications. 
+
+Second sentence:
+- On Ethereum you can write code that controls money and ship unstoppable software. 
+- On Ethereum, your code always runs as programmed, and can control new kinds of money and digital value.
+- On Ethereum, your code can do more. Build unstoppable applications, control money, and change the world.
+- On Ethereum, your code has superpowers: it can control and create money, always runs as programmed, and can't be interfered with.
+<issue_comment>username_0: That's a good point! This is definitely a hard balancing game. So far my favorite would be:
+
+Ethereum is a global, open-source platform for decentralized applications. Ethereum, you can build applications that control digital value, run exactly as programmed, and are accessible anywhere in the world.
+<issue_comment>username_2: Here's my remix : 
+
+Ethereum is a global, open-source platform for decentralized applications. Build unstoppable apps that run exactly as programmed. Exchange value and track transactions around the world without the need for a trusted third party.
+<issue_comment>username_3: Whether or not this impacts the headline, perhaps this is an opportunity to get clarity on the (EF's) mission/ideal, separate from what Ethereum implementation actually is?
+
+Being a 'close outsider' to the EF I get the sense the current approach towards the mission of a decentralized application platform is to be more horizontally integrated, while EF focuses on the blockchain, rather than a focus on being vertically integrated/all-in one platform (providing decentralized storage and messaging), which seemed to be the case in the past.
+
+In this case the EF's mission is provide a platform for decentralised application, and Ethereum is analogous to the Linux _kernel_,  the separation might be a moot point as far as communication to a general audience goes (GNU/Linux is referred to as just Linux).
+
+What I like about clarifying this distinction is that it would allow the EF to reduce their scope while at the same time supporting a more heterogeneous ecosystem, Ethereum is the 'cpu' in different architectures, whether compositions use IPFS/Swarm/SSB/Matrix/Whisper/Yin/etc.
+<issue_comment>username_1: Hey Jarrad - there are plans to update https://ethereum.foundation/ in the near future with this information. The idea is that there will be a clean distinction between ethereum.org (about Ethereum) and ethereum.foundation (about the EF).
+<issue_comment>username_4: Piggybacking off @username_1's points, it's important that a headline explain why your subject matters because it's easier for people to relate to your reason for doing something than whatever thing you may be doing or showing off. Take ""I'm biking"" versus ""I'm biking for charity"" as an example - even if you don't bike, you probably like the idea of wanting to help others and will be inclined to feel something for the person biking for charity.
+
+Regarding the ""money"" problem, I lean against mentioning it but I see just as much potential around #DeIP as #DeFi so if we talk about money then it's also necessary to talk about intellectual capital.
+
+**Alternative Proposals**
+- Ethereum is a global, open-source platform for launching unstoppable software.
+- Ethereum is a global, open-source platform for launching decentralized applications that run exactly as programmed and remain accessible from anywhere in the world.
+- Ethereum is a global, open-source platform for launching decentralized applications that create and control financial and intellectual capital.
+- Ethereum is a global, open-source platform for launching decentralized applications that manage financial and intellectual capital.
+<issue_comment>username_5: I've been thinking about this and I think the strength (and occasionally the weakness) of Ethereum is that decentralization means that Ethereum is many things to different people.   Trying to put a blanket definition on that is relatively futile.  
+
+I'd propose instead copy that is something like:
+
+As a decentralized open-source project, Ethereum is whatever its community makes it.  Here are a few different definitions from people in the Ethereum community:
+
+1.  the blockchain securing the ""Ether"" cryptocurrency and the Ethereum Virtual Machine (EVM)
+2.  the backbone of web3
+3.  the native value transfer layer of the Internet
+4.  programmable money
+5.  a platform for decentralized software applications
+<issue_comment>username_5: If we value pithy, I suggest an alternate version of one of @username_0's proffered taglines. 
+
+""Ethereum is an open-source platform for decentralized applications. 
+
+Using Ethereum, you can build [censorship-resistant] applications with a native value transfer that run exactly as programmed and can be accessed from anywhere in the world""
+<issue_comment>username_2: So... how do we proceed? I see several good headlines here... how do we make the change? 
+Do we create pull requests for different proposals? Will we encourage the use of reactions to implement rudimentary voting? 
+
+ cc: @username_1 ?
+<issue_comment>username_1: I'll add a PR to make the change, and close this issue for now. Obviously can still be tweaked in the future, but we're going to push some changes tomorrow so let's take this iteration for now.<issue_closed>"
+department-of-veterans-affairs/vets-website,491422346,10707,"{'number': 10707.0, 'repo': 'vets-website', 'user_login': 'department-of-veterans-affairs'}","[{'action': 'opened', 'author': 'kevwalsh', 'comment_id': None, 'datetime': '2019-09-10T02:55:16Z', 'masked_author': 'username_0', 'text': '## Description\r\nhttps://github.com/department-of-veterans-affairs/vets-website/pull/10695/commits/8b8363950570acf9c4b165b779c8838a4747aa79 caused breadcrumbs to downcase sitewide for all drupal-powered pages. \r\n\r\nThis reverts one of those changes. \r\n\r\n## Testing done\r\n\r\n\r\n## Screenshots\r\n\r\n\r\n## Acceptance criteria\r\n- [ ]\r\n\r\n## Definition of done\r\n- [ ] Events are logged appropriately\r\n- [ ] Documentation has been updated, if applicable\r\n- [ ] A link has been provided to the originating GitHub issue (or connected to it via ZenHub)\r\n- [ ] No sensitive information (i.e. PII/credentials/internal URLs/etc.) is captured in logging, hardcoded, or specs', 'title': 'VAGOV-5766: Revert breadcrumb casing rule.', 'type': 'issue'}
+ {'action': 'created', 'author': 'kevwalsh', 'comment_id': 530004179.0, 'datetime': '2019-09-10 15:58:01+00:00', 'masked_author': 'username_0', 'text': ""Closing because i'm creating a new PR that's not from my fork."", 'title': None, 'type': 'comment'}]","<issue_start><issue_comment>Title: VAGOV-5766: Revert breadcrumb casing rule.
+username_0: ## Description
+https://github.com/department-of-veterans-affairs/vets-website/pull/10695/commits/8b8363950570acf9c4b165b779c8838a4747aa79 caused breadcrumbs to downcase sitewide for all drupal-powered pages. 
+
+This reverts one of those changes. 
+
+## Testing done
+
+
+## Screenshots
+
+
+## Acceptance criteria
+- [ ]
+
+## Definition of done
+- [ ] Events are logged appropriately
+- [ ] Documentation has been updated, if applicable
+- [ ] A link has been provided to the originating GitHub issue (or connected to it via ZenHub)
+- [ ] No sensitive information (i.e. PII/credentials/internal URLs/etc.) is captured in logging, hardcoded, or specs
+<issue_comment>username_0: Closing because i'm creating a new PR that's not from my fork."
+devopsdays/devopsdays-web,175752166,1072,"{'number': 1072.0, 'repo': 'devopsdays-web', 'user_login': 'devopsdays'}","[{'action': 'opened', 'author': 'mattstratton', 'comment_id': None, 'datetime': '2016-09-08T13:22:17Z', 'masked_author': 'username_0', 'text': 'Fixes #1063', 'title': 'Add powershell script for dockering all the things', 'type': 'issue'}
+ {'action': 'created', 'author': 'glennsarti', 'comment_id': 245641944.0, 'datetime': '2016-09-08 15:46:15+00:00', 'masked_author': 'username_1', 'text': '@username_0 Unfortunately I am unable to test this PR on DfW due to https://forums.docker.com/t/failed-to-start-vm-mobylinuxvm-the-vm-couldnt-get-an-ip-address-after-60-tries/19551/6\r\n\r\nIn my opinion this does not fix #1063 .  Installing Docker is an extremely heavy handed workaround for a simple backslash/forward slash issue.', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'mattstratton', 'comment_id': 245648895.0, 'datetime': '2016-09-08 16:06:28+00:00', 'masked_author': 'username_0', 'text': ""For now, this is the workaround. We cannot assume that everyone is going to defensively code against the slashes any time they are looking to use them. The workaround is using Docker.\r\n\r\nThe write-host piece is actually a troubleshooting/debugging thing I put in, and there's no need to keep it in there :) I'll remove that part."", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'bridgetkromhout', 'comment_id': 247885238.0, 'datetime': '2016-09-18 22:30:40+00:00', 'masked_author': 'username_2', 'text': ""Right now @username_0 is otherwise occupied and will get back to this when he's able."", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'glennsarti', 'comment_id': 247896424.0, 'datetime': '2016-09-19 01:13:24+00:00', 'masked_author': 'username_1', 'text': '@username_2 Do you have an ETA or is this more of an open-ended thing?', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'mattstratton', 'comment_id': 247897456.0, 'datetime': '2016-09-19 01:28:32+00:00', 'masked_author': 'username_0', 'text': 'I\'m getting married on 10/1. I will be back at ""work"" by 10/6.', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'mattstratton', 'comment_id': 255864434.0, 'datetime': '2016-10-24 20:59:18+00:00', 'masked_author': 'username_0', 'text': ""I'm going to go ahead and merge this since it's just the one script, and it seems to work..."", 'title': None, 'type': 'comment'}]","<issue_start><issue_comment>Title: Add powershell script for dockering all the things
+username_0: Fixes #1063
+<issue_comment>username_1: @username_0 Unfortunately I am unable to test this PR on DfW due to https://forums.docker.com/t/failed-to-start-vm-mobylinuxvm-the-vm-couldnt-get-an-ip-address-after-60-tries/19551/6
+
+In my opinion this does not fix #1063 .  Installing Docker is an extremely heavy handed workaround for a simple backslash/forward slash issue.
+<issue_comment>username_0: For now, this is the workaround. We cannot assume that everyone is going to defensively code against the slashes any time they are looking to use them. The workaround is using Docker.
+
+The write-host piece is actually a troubleshooting/debugging thing I put in, and there's no need to keep it in there :) I'll remove that part.
+<issue_comment>username_2: Right now @username_0 is otherwise occupied and will get back to this when he's able.
+<issue_comment>username_1: @username_2 Do you have an ETA or is this more of an open-ended thing?
+<issue_comment>username_0: I'm getting married on 10/1. I will be back at ""work"" by 10/6.
+<issue_comment>username_0: I'm going to go ahead and merge this since it's just the one script, and it seems to work..."
+kubernetes/website,660004668,22568,,"[{'action': 'opened', 'author': 'sandhya816', 'comment_id': None, 'datetime': '2020-07-18 08:27:31+00:00', 'masked_author': 'username_0', 'text': '**This is a Bug Report**\r\n\r\n<!-- Thanks for filing an issue! Before submitting, please fill in the following information. -->\r\n<!-- See https://kubernetes.io/docs/contribute/start/ for guidance on writing an actionable issue description. -->\r\n\r\n<!--Required Information-->\r\n**Problem:**\r\n\r\n**Proposed Solution:**\r\n\r\n**Page to Update:**\r\nhttps://kubernetes.io/...\r\n\r\n<!--Optional Information (remove the comment tags around information you would like to include)-->\r\n<!--Kubernetes Version:-->\r\n\r\n<!--Additional Information:-->', 'title': 'unable to configure ', 'type': 'issue'}
+ {'action': 'closed', 'author': 'sandhya816', 'comment_id': None, 'datetime': '2020-07-18 08:27:45+00:00', 'masked_author': 'username_0', 'text': '', 'title': None, 'type': 'issue'}
+ {'action': 'created', 'author': 'sandhya816', 'comment_id': 660450303.0, 'datetime': '2020-07-18 08:38:03+00:00', 'masked_author': 'username_0', 'text': 'When initiallize the kubeadm init \r\ngetting below error.\r\nW0718 12:32:18.678447   19191 configset.go:202] WARNING: kubeadm cannot validate component configs for API groups [kubelet.config.k8s.io kubeproxy.config.k8s.io]\r\n[init] Using Kubernetes version: v1.18.6\r\n[preflight] Running pre-flight checks\r\n[preflight] Pulling images required for setting up a Kubernetes cluster\r\n[preflight] This might take a minute or two, depending on the speed of your internet connection\r\n[preflight] You can also perform this action in beforehand using \'kubeadm config images pull\'\r\n[kubelet-start] Writing kubelet environment file with flags to file ""/var/lib/kubelet/kubeadm-flags.env""\r\n[kubelet-start] Writing kubelet configuration to file ""/var/lib/kubelet/config.yaml""\r\n[kubelet-start] Starting the kubelet\r\n[certs] Using certificateDir folder ""/etc/kubernetes/pki""\r\n[certs] Using existing ca certificate authority\r\n[certs] Using existing apiserver certificate and key on disk\r\n[certs] Using existing apiserver-kubelet-client certificate and key on disk\r\n[certs] Using existing front-proxy-ca certificate authority\r\n[certs] Using existing front-proxy-client certificate and key on disk\r\n[certs] Using existing etcd/ca certificate authority\r\n[certs] Using existing etcd/server certificate and key on disk\r\n[certs] Using existing etcd/peer certificate and key on disk\r\n[certs] Using existing etcd/healthcheck-client certificate and key on disk\r\n[certs] Using existing apiserver-etcd-client certificate and key on disk\r\n[certs] Using the existing ""sa"" key\r\n[kubeconfig] Using kubeconfig folder ""/etc/kubernetes""\r\n[kubeconfig] Writing ""admin.conf"" kubeconfig file\r\n[kubeconfig] Writing ""kubelet.conf"" kubeconfig file\r\n[kubeconfig] Writing ""controller-manager.conf"" kubeconfig file\r\n[kubeconfig] Writing ""scheduler.conf"" kubeconfig file\r\n[control-plane] Using manifest folder ""/etc/kubernetes/manifests""\r\n[control-plane] Creating static Pod manifest for ""kube-apiserver""\r\n[control-plane] Creating static Pod manifest for ""kube-controller-manager""\r\nW0718 12:32:19.988670   19191 manifests.go:225] the default kube-apiserver authorization-mode is ""Node,RBAC""; using ""Node,RBAC""\r\n[control-plane] Creating static Pod manifest for ""kube-scheduler""\r\nW0718 12:32:19.990954   19191 manifests.go:225] the default kube-apiserver authorization-mode is ""Node,RBAC""; using ""Node,RBAC""\r\n[etcd] Creating static Pod manifest for local etcd in ""/etc/kubernetes/manifests""\r\n[wait-control-plane] Waiting for the kubelet to boot up the control plane as static Pods from directory ""/etc/kubernetes/manifests"". This can take up to 4m0s\r\n[kubelet-check] Initial timeout of 40s passed.\r\n\r\n        Unfortunately, an error has occurred:\r\n                timed out waiting for the condition\r\n\r\n        This error is likely caused by:\r\n                - The kubelet is not running\r\n                - The kubelet is unhealthy due to a misconfiguration of the node in some way (required cgroups disabled)\r\n\r\n        If you are on a systemd-powered system, you can try to troubleshoot the error with the following commands:\r\n                - \'systemctl status kubelet\'\r\n                - \'journalctl -xeu kubelet\'\r\n\r\n        Additionally, a control plane component may have crashed or exited when started by the container runtime.\r\n        To troubleshoot, list all containers using your preferred container runtimes CLI.\r\n\r\n        Here is one example how you may list all Kubernetes containers running in docker:\r\n                - \'docker ps -a | grep kube | grep -v pause\'\r\n                Once you have found the failing container, you can inspect its logs with:\r\n                - \'docker logs CONTAINERID\'\r\n\r\nerror execution phase wait-control-plane: couldn\'t initialize a Kubernetes cluster\r\nTo see the stack trace of this error execute with --v=5 or higher', 'title': None, 'type': 'comment'}]","<issue_start><issue_comment>Title: unable to configure 
+username_0: **This is a Bug Report**
+
+<!-- Thanks for filing an issue! Before submitting, please fill in the following information. -->
+<!-- See https://kubernetes.io/docs/contribute/start/ for guidance on writing an actionable issue description. -->
+
+<!--Required Information-->
+**Problem:**
+
+**Proposed Solution:**
+
+**Page to Update:**
+https://kubernetes.io/...
+
+<!--Optional Information (remove the comment tags around information you would like to include)-->
+<!--Kubernetes Version:-->
+
+<!--Additional Information:--><issue_closed>
+<issue_comment>username_0: When initiallize the kubeadm init 
+getting below error.
+W0718 12:32:18.678447   19191 configset.go:202] WARNING: kubeadm cannot validate component configs for API groups [kubelet.config.k8s.io kubeproxy.config.k8s.io]
+[init] Using Kubernetes version: v1.18.6
+[preflight] Running pre-flight checks
+[preflight] Pulling images required for setting up a Kubernetes cluster
+[preflight] This might take a minute or two, depending on the speed of your internet connection
+[preflight] You can also perform this action in beforehand using 'kubeadm config images pull'
+[kubelet-start] Writing kubelet environment file with flags to file ""/var/lib/kubelet/kubeadm-flags.env""
+[kubelet-start] Writing kubelet configuration to file ""/var/lib/kubelet/config.yaml""
+[kubelet-start] Starting the kubelet
+[certs] Using certificateDir folder ""/etc/kubernetes/pki""
+[certs] Using existing ca certificate authority
+[certs] Using existing apiserver certificate and key on disk
+[certs] Using existing apiserver-kubelet-client certificate and key on disk
+[certs] Using existing front-proxy-ca certificate authority
+[certs] Using existing front-proxy-client certificate and key on disk
+[certs] Using existing etcd/ca certificate authority
+[certs] Using existing etcd/server certificate and key on disk
+[certs] Using existing etcd/peer certificate and key on disk
+[certs] Using existing etcd/healthcheck-client certificate and key on disk
+[certs] Using existing apiserver-etcd-client certificate and key on disk
+[certs] Using the existing ""sa"" key
+[kubeconfig] Using kubeconfig folder ""/etc/kubernetes""
+[kubeconfig] Writing ""admin.conf"" kubeconfig file
+[kubeconfig] Writing ""kubelet.conf"" kubeconfig file
+[kubeconfig] Writing ""controller-manager.conf"" kubeconfig file
+[kubeconfig] Writing ""scheduler.conf"" kubeconfig file
+[control-plane] Using manifest folder ""/etc/kubernetes/manifests""
+[control-plane] Creating static Pod manifest for ""kube-apiserver""
+[control-plane] Creating static Pod manifest for ""kube-controller-manager""
+W0718 12:32:19.988670   19191 manifests.go:225] the default kube-apiserver authorization-mode is ""Node,RBAC""; using ""Node,RBAC""
+[control-plane] Creating static Pod manifest for ""kube-scheduler""
+W0718 12:32:19.990954   19191 manifests.go:225] the default kube-apiserver authorization-mode is ""Node,RBAC""; using ""Node,RBAC""
+[etcd] Creating static Pod manifest for local etcd in ""/etc/kubernetes/manifests""
+[wait-control-plane] Waiting for the kubelet to boot up the control plane as static Pods from directory ""/etc/kubernetes/manifests"". This can take up to 4m0s
+[kubelet-check] Initial timeout of 40s passed.
+
+        Unfortunately, an error has occurred:
+                timed out waiting for the condition
+
+        This error is likely caused by:
+                - The kubelet is not running
+                - The kubelet is unhealthy due to a misconfiguration of the node in some way (required cgroups disabled)
+
+        If you are on a systemd-powered system, you can try to troubleshoot the error with the following commands:
+                - 'systemctl status kubelet'
+                - 'journalctl -xeu kubelet'
+
+        Additionally, a control plane component may have crashed or exited when started by the container runtime.
+        To troubleshoot, list all containers using your preferred container runtimes CLI.
+
+        Here is one example how you may list all Kubernetes containers running in docker:
+                - 'docker ps -a | grep kube | grep -v pause'
+                Once you have found the failing container, you can inspect its logs with:
+                - 'docker logs CONTAINERID'
+
+error execution phase wait-control-plane: couldn't initialize a Kubernetes cluster
+To see the stack trace of this error execute with --v=5 or higher"
+gohugoio/hugo,313426671,4606,,"[{'action': 'opened', 'author': 'CelticParser', 'comment_id': None, 'datetime': '2018-04-11 17:54:58+00:00', 'masked_author': 'username_0', 'text': 'I just started diving back into GoHugo and I started noticing after creating a half-dozen blog pages that the engine starts randomly creating wrong image URL\'s - Causing 404\'s on random featured images. If I rebuild, some are corrected and others are re-written incorrectly. If I rebuild again (**with no edits**), sometimes it will fix it\'s self but I can\'t truly verify without going thru every page.\r\n\r\nI have tested this on booth on Ubuntu and Windows machines with the same results (using Hugo v0.38.2). I don\'t think this is a theme issue because I switched themes with the same results as well (Below is the `featured image` snippet - just in case I have something wrong). However, this was tested on C9, another Ubuntu workstation, and a Windows 10 (VS code) workstation with two independent themes resulting with same undesired results.\r\n\r\nAttached are 3 screen-shoots of the same page after it was rebuilt using `hugo` - Re-generated seconds apart **without editing**. What I am seeing is that the engine is (randomly) generating bogus URL links by adding a non-existing folder in the string.\r\n\r\n**e.g. (see attachments)**\r\n**_hugo\'s wrong generated link:_**  `http://localhost:1313/img/2017/122017/12/Blue_Front_Inn.jpg`\r\n**_The expected URL should be:_** `http://localhost:1313/img/2017/12/Blue_Front_Inn.jpg`\r\nAs seen in this example, hugo added a `.../12201/...`\r\n\r\n![capture](https://user-images.githubusercontent.com/6665669/38630610-48f2f4aa-3d6c-11e8-977b-46c11f700e3b.PNG)\r\n![capture2](https://user-images.githubusercontent.com/6665669/38630611-4935378e-3d6c-11e8-9336-01414eaaa1e7.PNG)\r\n![capture3](https://user-images.githubusercontent.com/6665669/38630612-49527402-3d6c-11e8-93d1-a736bdf4334e.PNG)\r\n\r\n```\r\n{{ if and (isset .Params ""featuredpath"") (ne .Params.featuredpath """") }}\r\n    {{ $.Scratch.Set ""path"" .Params.featuredpath }}\r\n\r\n    {{ if and (isset .Params ""featured"") (ne .Params.featuredpath """") }}\r\n        {{ $.Scratch.Set ""structType"" ""page"" }}\r\n        {{ partial ""img-path"" . }}\r\n        {{ $path := $.Scratch.Get ""path"" }}\r\n        {{ $alt := $.Scratch.Get ""alt"" }}\r\n        {{ $img := $.Scratch.Get ""img"" }}\r\n\r\n        <a href=""{{ .RelPermalink }}"" class=""image featured"">\r\n            <img src=""{{ $path | relURL }}/{{ .Params.featured }}"" alt=""{{ $alt }}"">\r\n        </a>\r\n    {{ end }}\r\n{{ end }}\r\n```\r\n\r\nI have also discovered this is true when the build has been written to memory and to a `/public/` directory. Also, Its very random - Happens in blog posts, sidebars, fixed pages, etc. One side bar on a particular page will have no 404\'s and another single page, the side bar will have one or more image 404\'s. \r\n\r\nAny help with this (soon for this clients\' site to be release) will be greatly appreciated.', 'title': ""Different/Random Image URL's at Each Build (Intermittent)"", 'type': 'issue'}
+ {'action': 'created', 'author': 'CelticParser', 'comment_id': 380541426.0, 'datetime': '2018-04-11 17:57:16+00:00', 'masked_author': 'username_0', 'text': '@bep closed the previous issue stating this is not a bug so I am resubmitting it here with the following added:\r\n\r\nInteresting,\r\n\r\nThank you for getting back, however, I don\'t see how this is not a bug being that it is happening on different machines, different IDE\'s, different themes and different colleagues working on different sites within the office. It was not caught until today when an individual started actually navigating thru various pages after a site was generated - Its random and intermittent. I cut a site down to 12 pages and it goes away bring a dozen more, and surf around you\'ll find some image 404\'s. Add even more pages it gets worse. Add another 50, and it really gets bad. I also have been googling `powered by hugo` and reviewing if I see 404\'s, Unfortunately, nobody that is using hugo (that I can find) generates/utilizes images. Can you point me to current and active sites that are not in the hugo ""showcase"" utilizing images in their posts for closer inspection? This seems to happening on heavy image driven hugo sites.', 'title': None, 'type': 'comment'}]","<issue_start><issue_comment>Title: Different/Random Image URL's at Each Build (Intermittent)
+username_0: I just started diving back into GoHugo and I started noticing after creating a half-dozen blog pages that the engine starts randomly creating wrong image URL's - Causing 404's on random featured images. If I rebuild, some are corrected and others are re-written incorrectly. If I rebuild again (**with no edits**), sometimes it will fix it's self but I can't truly verify without going thru every page.
+
+I have tested this on booth on Ubuntu and Windows machines with the same results (using Hugo v0.38.2). I don't think this is a theme issue because I switched themes with the same results as well (Below is the `featured image` snippet - just in case I have something wrong). However, this was tested on C9, another Ubuntu workstation, and a Windows 10 (VS code) workstation with two independent themes resulting with same undesired results.
+
+Attached are 3 screen-shoots of the same page after it was rebuilt using `hugo` - Re-generated seconds apart **without editing**. What I am seeing is that the engine is (randomly) generating bogus URL links by adding a non-existing folder in the string.
+
+**e.g. (see attachments)**
+**_hugo's wrong generated link:_**  `http://localhost:1313/img/2017/122017/12/Blue_Front_Inn.jpg`
+**_The expected URL should be:_** `http://localhost:1313/img/2017/12/Blue_Front_Inn.jpg`
+As seen in this example, hugo added a `.../12201/...`
+
+![capture](https://user-images.githubusercontent.com/6665669/38630610-48f2f4aa-3d6c-11e8-977b-46c11f700e3b.PNG)
+![capture2](https://user-images.githubusercontent.com/6665669/38630611-4935378e-3d6c-11e8-9336-01414eaaa1e7.PNG)
+![capture3](https://user-images.githubusercontent.com/6665669/38630612-49527402-3d6c-11e8-93d1-a736bdf4334e.PNG)
+
+```
+{{ if and (isset .Params ""featuredpath"") (ne .Params.featuredpath """") }}
+    {{ $.Scratch.Set ""path"" .Params.featuredpath }}
+
+    {{ if and (isset .Params ""featured"") (ne .Params.featuredpath """") }}
+        {{ $.Scratch.Set ""structType"" ""page"" }}
+        {{ partial ""img-path"" . }}
+        {{ $path := $.Scratch.Get ""path"" }}
+        {{ $alt := $.Scratch.Get ""alt"" }}
+        {{ $img := $.Scratch.Get ""img"" }}
+
+        <a href=""{{ .RelPermalink }}"" class=""image featured"">
+            <img src=""{{ $path | relURL }}/{{ .Params.featured }}"" alt=""{{ $alt }}"">
+        </a>
+    {{ end }}
+{{ end }}
+```
+
+I have also discovered this is true when the build has been written to memory and to a `/public/` directory. Also, Its very random - Happens in blog posts, sidebars, fixed pages, etc. One side bar on a particular page will have no 404's and another single page, the side bar will have one or more image 404's. 
+
+Any help with this (soon for this clients' site to be release) will be greatly appreciated.
+<issue_comment>username_0: @bep closed the previous issue stating this is not a bug so I am resubmitting it here with the following added:
+
+Interesting,
+
+Thank you for getting back, however, I don't see how this is not a bug being that it is happening on different machines, different IDE's, different themes and different colleagues working on different sites within the office. It was not caught until today when an individual started actually navigating thru various pages after a site was generated - Its random and intermittent. I cut a site down to 12 pages and it goes away bring a dozen more, and surf around you'll find some image 404's. Add even more pages it gets worse. Add another 50, and it really gets bad. I also have been googling `powered by hugo` and reviewing if I see 404's, Unfortunately, nobody that is using hugo (that I can find) generates/utilizes images. Can you point me to current and active sites that are not in the hugo ""showcase"" utilizing images in their posts for closer inspection? This seems to happening on heavy image driven hugo sites."
+KiCad/kicad-website,134918523,134,"{'number': 134.0, 'repo': 'kicad-website', 'user_login': 'KiCad'}","[{'action': 'opened', 'author': 'tijuca', 'comment_id': None, 'datetime': '2016-02-19T17:06:53Z', 'masked_author': 'username_0', 'text': 'Finally version 4.0.2 was entering testing/sid and 4.0.1 is accepted in backports.', 'title': 'Debian: update package status and download information', 'type': 'issue'}
+ {'action': 'created', 'author': 'marekr', 'comment_id': 186307882.0, 'datetime': '2016-02-19 17:08:22+00:00', 'masked_author': 'username_1', 'text': 'Your PR conflcits with PR #133', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'tijuca', 'comment_id': 186312397.0, 'datetime': '2016-02-19 17:20:48+00:00', 'masked_author': 'username_0', 'text': ""Let's wait what username_2 is saying, Maybe he is agreed to revert his PR as I tried to be more precise and not only describing the situation for release testing and above."", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'GyrosGeier', 'comment_id': 186379001.0, 'datetime': '2016-02-19 19:56:26+00:00', 'masked_author': 'username_2', 'text': ""Yours is a bit more extensive, but needs proofreading by a native English speaker even more than mine does. I've dropped oldstable in my description, precisely because the newest version available there is really old, and backporting 4.0 is difficult (no wx 3.0, really old boost, ...), but I agree it should be mentioned."", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'tijuca', 'comment_id': 186400262.0, 'datetime': '2016-02-19 20:50:39+00:00', 'masked_author': 'username_0', 'text': ""Feel free to take parts and create a new and improved version. But I'd like to guide potential user by informations related to the used release."", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'GyrosGeier', 'comment_id': 186413226.0, 'datetime': '2016-02-19 21:26:15+00:00', 'masked_author': 'username_2', 'text': ""Well, I'd rather not have the page go out of date automatically. Georges isn't really synchronized with us, so new versions turn up in Debian independent from our releases, and backports happen basically when I notice that a new version has entered testing -- that's why I removed the KiCad version number."", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'tijuca', 'comment_id': 186431860.0, 'datetime': '2016-02-19 22:16:16+00:00', 'masked_author': 'username_0', 'text': ""The page will always go out of sync for a short while if there is a new KiCad release, and I have only seen three versions after the v4.0.0 was released. And I believe it's not fully true that Georges isn't in sync with official releases. I haven't yet recognized there is a new release of 4.0.2 (it isn't announced yet on the website!), Georges has already taken this release and has done a new upload. And even more, I suggested Georges to include the i18n files for kicad in the next upload, he has also included this piece and the current Debian version comes now with the localizations.\r\n\r\nThe versioning for a rolling release isn't working different, most Debian maintainers append simply the date (like 4.0.2+20160219) or a git/bzr hash/version (like 4.0.2+git12df34abc). So the current version **is** 4.0.2, nothing have to be changed.\r\nBackports is the same as there can't be no new version within the stable releases except security fixes. So I don't see a real reason to not guide a user what version he can expect in Debian. There is no real difference to Fedora or Mint. Btw, this pages are also outdated. :)\r\nFor me dropping the version information is definitely the wrong thing.\r\n\r\nAnd you use Hugo for the website, it's up to the users to collaborate to KiCad. I will take care.\r\n\r\nIn the end I can just make an offer, if the responsible people for the website don't want that than I will use my energy for something different."", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'GyrosGeier', 'comment_id': 186443006.0, 'datetime': '2016-02-19 23:03:58+00:00', 'masked_author': 'username_2', 'text': ""Okay, if you are willing to maintain the page, I'm not standing in your way -- my motivation was not to maintain it. :)\r\n\r\nThe goal appears to be to have the most recent stable in unstable and testing, and my goal is to have jessie-backports follow testing.\r\n\r\nSo I'm removing my pull request."", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'tijuca', 'comment_id': 186579571.0, 'datetime': '2016-02-20 12:09:39+00:00', 'masked_author': 'username_0', 'text': 'Thanks!', 'title': None, 'type': 'comment'}]","<issue_start><issue_comment>Title: Debian: update package status and download information
+username_0: Finally version 4.0.2 was entering testing/sid and 4.0.1 is accepted in backports.
+<issue_comment>username_1: Your PR conflcits with PR #133
+<issue_comment>username_0: Let's wait what username_2 is saying, Maybe he is agreed to revert his PR as I tried to be more precise and not only describing the situation for release testing and above.
+<issue_comment>username_2: Yours is a bit more extensive, but needs proofreading by a native English speaker even more than mine does. I've dropped oldstable in my description, precisely because the newest version available there is really old, and backporting 4.0 is difficult (no wx 3.0, really old boost, ...), but I agree it should be mentioned.
+<issue_comment>username_0: Feel free to take parts and create a new and improved version. But I'd like to guide potential user by informations related to the used release.
+<issue_comment>username_2: Well, I'd rather not have the page go out of date automatically. Georges isn't really synchronized with us, so new versions turn up in Debian independent from our releases, and backports happen basically when I notice that a new version has entered testing -- that's why I removed the KiCad version number.
+<issue_comment>username_0: The page will always go out of sync for a short while if there is a new KiCad release, and I have only seen three versions after the v4.0.0 was released. And I believe it's not fully true that Georges isn't in sync with official releases. I haven't yet recognized there is a new release of 4.0.2 (it isn't announced yet on the website!), Georges has already taken this release and has done a new upload. And even more, I suggested Georges to include the i18n files for kicad in the next upload, he has also included this piece and the current Debian version comes now with the localizations.
+
+The versioning for a rolling release isn't working different, most Debian maintainers append simply the date (like 4.0.2+20160219) or a git/bzr hash/version (like 4.0.2+git12df34abc). So the current version **is** 4.0.2, nothing have to be changed.
+Backports is the same as there can't be no new version within the stable releases except security fixes. So I don't see a real reason to not guide a user what version he can expect in Debian. There is no real difference to Fedora or Mint. Btw, this pages are also outdated. :)
+For me dropping the version information is definitely the wrong thing.
+
+And you use Hugo for the website, it's up to the users to collaborate to KiCad. I will take care.
+
+In the end I can just make an offer, if the responsible people for the website don't want that than I will use my energy for something different.
+<issue_comment>username_2: Okay, if you are willing to maintain the page, I'm not standing in your way -- my motivation was not to maintain it. :)
+
+The goal appears to be to have the most recent stable in unstable and testing, and my goal is to have jessie-backports follow testing.
+
+So I'm removing my pull request.
+<issue_comment>username_0: Thanks!"

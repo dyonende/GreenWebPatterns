@@ -1,0 +1,217 @@
+zeromq/zeromq.org,627363239,79,,"[{'action': 'opened', 'author': 'willmendil', 'comment_id': None, 'datetime': '2020-05-29 15:47:25+00:00', 'masked_author': 'username_0', 'text': 'Would it be possible to get clear instructions on how to install libz;q on windows. the link to the download does not provide any usefull information\r\n\r\nhttps://zeromq.org/download/', 'title': 'Libzmq for windows, clear instructions', 'type': 'issue'}
+ {'action': 'created', 'author': 'sappo', 'comment_id': 636055233.0, 'datetime': '2020-05-29 16:06:50+00:00', 'masked_author': 'username_1', 'text': 'Yes, for now follow the instructions in the czmq Readme:\nhttps://github.com/zeromq/czmq/blob/master/README.md', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'somdoron', 'comment_id': 636060923.0, 'datetime': '2020-05-29 16:18:35+00:00', 'masked_author': 'username_2', 'text': '@username_1 what happened to the download page? It used to include instructions to all OSes', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'sappo', 'comment_id': 636182102.0, 'datetime': '2020-05-29 20:39:26+00:00', 'masked_author': 'username_1', 'text': ""The current Version contains instructions for each library. But is not SEO\nfriendly at all ☹. I'll try to revert it on the weekend."", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'willmendil', 'comment_id': 636283735.0, 'datetime': '2020-05-30 06:10:32+00:00', 'masked_author': 'username_0', 'text': ""So I followed the instructions, succesfully installed vcpkg, and czmq, but when i go to install zmq4 from pebbe, I get this error\r\n\r\n```powershell\r\nPS C:\\Users\\bob\\vcpkg> go get github.com/pebbe/zmq4\r\n# github.com/pebbe/zmq4\r\nC:/TDM-GCC-64/bin/../lib/gcc/x86_64-w64-mingw32/9.2.0/../../../../x86_64-w64-mingw32/bin/ld.exe: cannot find -lzmq\r\ncollect2.exe: error: ld returned 1 exit status\r\n```\r\n\r\nI don't know if i should post the issue here or on pebbe's repo"", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'sappo', 'comment_id': 636535353.0, 'datetime': '2020-05-31 21:50:33+00:00', 'masked_author': 'username_1', 'text': ""I'm not sure but I think you can't use mingw if you installed czmq via\nvcpkg."", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'dinhero', 'comment_id': 903134788.0, 'datetime': '2021-08-21 15:40:42+00:00', 'masked_author': 'username_3', 'text': 'Hi all, \r\nI have got the same problem.\r\nThis is due of the way zmq is named after compilation in the lib folder of vcpkg. \r\nNormall ""vcpkg.exe install czmq""  will create 2 files czmq and libzmq-mt-4_3_4. copy/past the last one and rename it to zmq, and it solving the issue.', 'title': None, 'type': 'comment'}]","<issue_start><issue_comment>Title: Libzmq for windows, clear instructions
+username_0: Would it be possible to get clear instructions on how to install libz;q on windows. the link to the download does not provide any usefull information
+
+https://zeromq.org/download/
+<issue_comment>username_1: Yes, for now follow the instructions in the czmq Readme:
+https://github.com/zeromq/czmq/blob/master/README.md
+<issue_comment>username_2: @username_1 what happened to the download page? It used to include instructions to all OSes
+<issue_comment>username_1: The current Version contains instructions for each library. But is not SEO
+friendly at all ☹. I'll try to revert it on the weekend.
+<issue_comment>username_0: So I followed the instructions, succesfully installed vcpkg, and czmq, but when i go to install zmq4 from pebbe, I get this error
+
+```powershell
+PS C:\Users\bob\vcpkg> go get github.com/pebbe/zmq4
+# github.com/pebbe/zmq4
+C:/TDM-GCC-64/bin/../lib/gcc/x86_64-w64-mingw32/9.2.0/../../../../x86_64-w64-mingw32/bin/ld.exe: cannot find -lzmq
+collect2.exe: error: ld returned 1 exit status
+```
+
+I don't know if i should post the issue here or on pebbe's repo
+<issue_comment>username_1: I'm not sure but I think you can't use mingw if you installed czmq via
+vcpkg.
+<issue_comment>username_3: Hi all, 
+I have got the same problem.
+This is due of the way zmq is named after compilation in the lib folder of vcpkg. 
+Normall ""vcpkg.exe install czmq""  will create 2 files czmq and libzmq-mt-4_3_4. copy/past the last one and rename it to zmq, and it solving the issue."
+kyma-project/website,457992802,363,,"[{'action': 'opened', 'author': 'derberg', 'comment_id': None, 'datetime': '2019-06-19 12:46:27+00:00', 'masked_author': 'username_0', 'text': ""**Description**\r\n\r\n- We need section with list of logos and links to details about how given user uses Kyma on production\r\n- We need to think about adding more credibility to early adopters section, who are they and what are they actually doing with Kyma\r\n- We still need to work on the content and come up with as buzz-word free page as possible\r\n  - some feedback is visible here https://www.reddit.com/r/kubernetes/comments/c21xle/new_kyma_12_release_is_out/. The fact that we are getting all those questions means we really need to address some of them directly on landing page in a clear way\r\n  - I have to admit https://github.com/rancher/rio projects has clear abstract that I like, but I'm not 100% it is because it is really good or I simply know the subject well already.\r\n- have most of the stuff also in main kyma repo readme, especially icons of productive users\r\n- landing page should have a kind of widget that enables you to star a kyma repo on github, like Rio has https://rio.io/\r\n\r\n**Reasons**\r\n\r\nThe landing page still sounds like a commercial product landing page instead of developer friendly landing page. We also need to add more credibility to the project by mentioning the productive users we already have and a transparent (through PR) way of adding them, so they add themselves to the list and not we do it, so it doesn't look like we fake it (or if we add it, there should be a reference to some testimonial/use case described by particular user)"", 'title': 'Improve content and sections of kyma landing page', 'type': 'issue'}
+ {'action': 'created', 'author': 'tomekpapiernik', 'comment_id': 508013201.0, 'datetime': '2019-07-03 09:18:04+00:00', 'masked_author': 'username_1', 'text': 'If you can allow bits that are little less formal and less tech-heavy, I can offer my way of explaining what Kyma which bases on the analogy that Kyma is a travel power adapter that allows you to plug appliances into the wall around the world, no matter the plug type. Basically comparing the software to a sophisticated adapter with lots of goodies built in.', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'kazydek', 'comment_id': 508482726.0, 'datetime': '2019-07-04 13:28:13+00:00', 'masked_author': 'username_2', 'text': 'I\'m all for it. If the current intro seems too buzzwordy for the ""impartial"" readers, let\'s make it more digestible and descriptive.', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'aerfio', 'comment_id': 537362972.0, 'datetime': '2019-10-02 06:57:08+00:00', 'masked_author': 'username_3', 'text': 'Additional AC: please use some kind of tool, like [svgo](https://github.com/svg/svgo), to minify critical SVGs\n\nPreviously we had tool that helped us to do this in a form of a [gatsby plugin](https://www.npmjs.com/package/gatsby-plugin-optimize-svgs) , but unfortunately it malformed some svgs, so use it only on critical assets, like that SAAS svg, which takes whole 298kb, in comparison to typical size of ~3kb:\n ![image.png](https://images.zenhubusercontent.com/5ba8c32a4e030d642cf5cc74/f0fa5c09-1274-4fab-b302-4e296de273a8)', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'derberg', 'comment_id': 540598777.0, 'datetime': '2019-10-10 13:58:51+00:00', 'masked_author': 'username_0', 'text': 'also, for the landing page and main readme, make sure when we first write Kyma, we provide the way how to pronounce it `Kyma /kee-ma/`. Thanks', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'aerfio', 'comment_id': 542146637.0, 'datetime': '2019-10-15 10:27:26+00:00', 'masked_author': 'username_3', 'text': 'We had a meeting, during which we decided that:\n- community section is deleted, we have whole /community for that\n- buttons from community sections should be tranported to https://kyma-project.io/community/#get-started-get-started-social-media\n- we transform ""Early Adopters section""\n- we need to make ""Key features"" section less childlish\n- ""What makes Kyma so special?"" is also getting redone with list of cloud-native projects that we use in kyma\n- that big header needs to be less buzzwordy\n- everything else needs to be less buzzwordy too', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'aerfio', 'comment_id': 548332497.0, 'datetime': '2019-10-31 11:45:40+00:00', 'masked_author': 'username_3', 'text': ""Done. `buttons from community sections should be tranported to https://kyma-project.io/community/#get-started-get-started-social-media` - this was ignored as we discussed with TWs that it's not needed"", 'title': None, 'type': 'comment'}
+ {'action': 'closed', 'author': 'kazydek', 'comment_id': None, 'datetime': '2019-11-04 08:01:52+00:00', 'masked_author': 'username_2', 'text': '', 'title': None, 'type': 'issue'}]","<issue_start><issue_comment>Title: Improve content and sections of kyma landing page
+username_0: **Description**
+
+- We need section with list of logos and links to details about how given user uses Kyma on production
+- We need to think about adding more credibility to early adopters section, who are they and what are they actually doing with Kyma
+- We still need to work on the content and come up with as buzz-word free page as possible
+  - some feedback is visible here https://www.reddit.com/r/kubernetes/comments/c21xle/new_kyma_12_release_is_out/. The fact that we are getting all those questions means we really need to address some of them directly on landing page in a clear way
+  - I have to admit https://github.com/rancher/rio projects has clear abstract that I like, but I'm not 100% it is because it is really good or I simply know the subject well already.
+- have most of the stuff also in main kyma repo readme, especially icons of productive users
+- landing page should have a kind of widget that enables you to star a kyma repo on github, like Rio has https://rio.io/
+
+**Reasons**
+
+The landing page still sounds like a commercial product landing page instead of developer friendly landing page. We also need to add more credibility to the project by mentioning the productive users we already have and a transparent (through PR) way of adding them, so they add themselves to the list and not we do it, so it doesn't look like we fake it (or if we add it, there should be a reference to some testimonial/use case described by particular user)
+<issue_comment>username_1: If you can allow bits that are little less formal and less tech-heavy, I can offer my way of explaining what Kyma which bases on the analogy that Kyma is a travel power adapter that allows you to plug appliances into the wall around the world, no matter the plug type. Basically comparing the software to a sophisticated adapter with lots of goodies built in.
+<issue_comment>username_2: I'm all for it. If the current intro seems too buzzwordy for the ""impartial"" readers, let's make it more digestible and descriptive.
+<issue_comment>username_3: Additional AC: please use some kind of tool, like [svgo](https://github.com/svg/svgo), to minify critical SVGs
+
+Previously we had tool that helped us to do this in a form of a [gatsby plugin](https://www.npmjs.com/package/gatsby-plugin-optimize-svgs) , but unfortunately it malformed some svgs, so use it only on critical assets, like that SAAS svg, which takes whole 298kb, in comparison to typical size of ~3kb:
+ ![image.png](https://images.zenhubusercontent.com/5ba8c32a4e030d642cf5cc74/f0fa5c09-1274-4fab-b302-4e296de273a8)
+<issue_comment>username_0: also, for the landing page and main readme, make sure when we first write Kyma, we provide the way how to pronounce it `Kyma /kee-ma/`. Thanks
+<issue_comment>username_3: We had a meeting, during which we decided that:
+- community section is deleted, we have whole /community for that
+- buttons from community sections should be tranported to https://kyma-project.io/community/#get-started-get-started-social-media
+- we transform ""Early Adopters section""
+- we need to make ""Key features"" section less childlish
+- ""What makes Kyma so special?"" is also getting redone with list of cloud-native projects that we use in kyma
+- that big header needs to be less buzzwordy
+- everything else needs to be less buzzwordy too
+<issue_comment>username_3: Done. `buttons from community sections should be tranported to https://kyma-project.io/community/#get-started-get-started-social-media` - this was ignored as we discussed with TWs that it's not needed<issue_closed>"
+facebook/react-native-website,449442615,966,"{'number': 966.0, 'repo': 'react-native-website', 'user_login': 'facebook'}","[{'action': 'opened', 'author': 'TonyChampion', 'comment_id': None, 'datetime': '2019-05-28T19:40:05Z', 'masked_author': 'username_0', 'text': 'Should read ""React Native are mobile web apps"" instead of ""aren\'t""\r\n\r\n<!--\r\nThank you for the PR! Contributors like you keep React Native awesome!\r\n\r\nPlease see the Contribution Guide for guidelines:\r\n\r\nhttps://github.com/facebook/react-native-website/blob/master/CONTRIBUTING.md\r\n\r\nIf your PR references an existing issue, please add the issue number below:\r\n\r\n#<Issue>\r\n-->', 'title': 'Typo in index.js.', 'type': 'issue'}
+ {'action': 'created', 'author': 'charpeni', 'comment_id': 496660438.0, 'datetime': '2019-05-28 19:43:05+00:00', 'masked_author': 'username_1', 'text': ""Doesn't look like a typo to me, because React Native apps aren't powered by HTML/CSS like a mobile web app with Cordova would have."", 'title': None, 'type': 'comment'}]","<issue_start><issue_comment>Title: Typo in index.js.
+username_0: Should read ""React Native are mobile web apps"" instead of ""aren't""
+
+<!--
+Thank you for the PR! Contributors like you keep React Native awesome!
+
+Please see the Contribution Guide for guidelines:
+
+https://github.com/facebook/react-native-website/blob/master/CONTRIBUTING.md
+
+If your PR references an existing issue, please add the issue number below:
+
+#<Issue>
+-->
+<issue_comment>username_1: Doesn't look like a typo to me, because React Native apps aren't powered by HTML/CSS like a mobile web app with Cordova would have."
+cedricpinson/osgjs,99149135,401,,"[{'action': 'opened', 'author': 'Kuranes', 'comment_id': None, 'datetime': '2015-08-05 08:17:50+00:00', 'masked_author': 'username_0', 'text': '', 'title': 'ShadowCast Compiler Generated Shader are not Cached/Shared between lights.', 'type': 'issue'}
+ {'action': 'created', 'author': 'Kuranes', 'comment_id': 127991496.0, 'datetime': '2015-08-05 13:04:24+00:00', 'masked_author': 'username_0', 'text': 'Another solution not touching all those would be using a shaderprocessor cache.\r\nWould ""intercept"" any case falling out of the ""hash"" cache, but still the same exact shader program.', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'cedricpinson', 'comment_id': 128111692.0, 'datetime': '2015-08-05 19:03:31+00:00', 'masked_author': 'username_1', 'text': 'What are the performance impact ? I am not sure it is significant for our usecase, do you have number else we can spend energy on something else.', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'Kuranes', 'comment_id': 128278885.0, 'datetime': '2015-08-06 07:39:09+00:00', 'masked_author': 'username_0', 'text': 'It\'s just a note upon gl trace reading "" animation + shadow computed each frame that can easily gives huge number of GL call state. \r\n\r\nHere\'s the math for numbers:\r\n\r\nnb shader state change = nb submesh * nb lights \r\ninstead of = nbsubmesh\r\n\r\nIn case of animated mesh it\'s shader state change cost + whole bone uniform upload cost.\r\n\r\nDifficult to get number, unless digging/benchmarking by doing with/without the change...\r\n\r\nWhat we know that it impact:\r\n\r\n- impact shader compilation time (stuttering at loading: if animated &3 lights that gives \r\nNb of shaders =  nb submesh * nb lights. That can be a lot of useless compilation\r\n- fps impact. ( to determine need benchmark)\r\n- ""gl call trace"" clearing \r\n\r\n\r\nOther shadow related performance fix:\r\n\r\n-> Useless texture binding is also a big ""gl call trace"" problem in shadow casting.\r\nMaybe have to benchmark null texture binding, or even try a new kind of attribute state ""Disabled Override"" that would prevent any binding at all of texture.\r\n\r\n-> compute scenebounds once per shadowed scene instead of thrice when using same flags for node mask', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'Kuranes', 'comment_id': 128279517.0, 'datetime': '2015-08-06 07:41:47+00:00', 'masked_author': 'username_0', 'text': 'As @stephomi pointed, A specific shadow caster Compiler would ease adding those features, and would give even simpler code, thus more evolutive', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'Kuranes', 'comment_id': 142924272.0, 'datetime': '2015-09-24 13:17:49+00:00', 'masked_author': 'username_0', 'text': 'Fixed by ttps://github.com/username_1/osgjs/pull/434', 'title': None, 'type': 'comment'}
+ {'action': 'closed', 'author': 'Kuranes', 'comment_id': None, 'datetime': '2015-09-24 15:01:28+00:00', 'masked_author': 'username_0', 'text': '', 'title': None, 'type': 'issue'}]","<issue_start><issue_comment>Title: ShadowCast Compiler Generated Shader are not Cached/Shared between lights.
+username_0: 
+<issue_comment>username_0: Another solution not touching all those would be using a shaderprocessor cache.
+Would ""intercept"" any case falling out of the ""hash"" cache, but still the same exact shader program.
+<issue_comment>username_1: What are the performance impact ? I am not sure it is significant for our usecase, do you have number else we can spend energy on something else.
+<issue_comment>username_0: It's just a note upon gl trace reading "" animation + shadow computed each frame that can easily gives huge number of GL call state. 
+
+Here's the math for numbers:
+
+nb shader state change = nb submesh * nb lights 
+instead of = nbsubmesh
+
+In case of animated mesh it's shader state change cost + whole bone uniform upload cost.
+
+Difficult to get number, unless digging/benchmarking by doing with/without the change...
+
+What we know that it impact:
+
+- impact shader compilation time (stuttering at loading: if animated &3 lights that gives 
+Nb of shaders =  nb submesh * nb lights. That can be a lot of useless compilation
+- fps impact. ( to determine need benchmark)
+- ""gl call trace"" clearing 
+
+
+Other shadow related performance fix:
+
+-> Useless texture binding is also a big ""gl call trace"" problem in shadow casting.
+Maybe have to benchmark null texture binding, or even try a new kind of attribute state ""Disabled Override"" that would prevent any binding at all of texture.
+
+-> compute scenebounds once per shadowed scene instead of thrice when using same flags for node mask
+<issue_comment>username_0: As @stephomi pointed, A specific shadow caster Compiler would ease adding those features, and would give even simpler code, thus more evolutive
+<issue_comment>username_0: Fixed by ttps://github.com/username_1/osgjs/pull/434<issue_closed>"
+datacommonsorg/website,943841377,1034,,"[{'action': 'opened', 'author': 'beets', 'comment_id': None, 'datetime': '2021-07-13 21:27:07+00:00', 'masked_author': 'username_0', 'text': 'chart labels can link to the browser page for sv + place\r\n\r\ne.g. in the screenshot below, California --> https://datacommons.org/browser/geoId/06?statVar=Annual_Consumption_Coal_ElectricPower\r\n\r\n![image](https://user-images.githubusercontent.com/6052978/125527424-751d8095-6157-43b8-8368-01ed78d64a05.png)', 'title': '[timeline] click target for chart labels', 'type': 'issue'}
+ {'action': 'created', 'author': 'chejennifer', 'comment_id': 880873987.0, 'datetime': '2021-07-15 17:15:31+00:00', 'masked_author': 'username_1', 'text': ""when it's a single place, those labels show the stat vars. In those cases, do we still want the labels to link to browser page for sv + place? I feel like it might be a little confusing if both the chips and those labels have the same text but link to different places?"", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'beets', 'comment_id': 880877347.0, 'datetime': '2021-07-15 17:20:42+00:00', 'masked_author': 'username_0', 'text': 'good point - for a single place, the legend should also be the place label for consistency. wdyt?', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'chejennifer', 'comment_id': 880879141.0, 'datetime': '2021-07-15 17:23:38+00:00', 'masked_author': 'username_1', 'text': 'I think that could be confusing for single place + multiple stat vars because the legend would just have that same place repeated multiple times? Maybe the legend could be ""{statvar} - {place}""', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'beets', 'comment_id': 880904768.0, 'datetime': '2021-07-15 18:04:31+00:00', 'masked_author': 'username_0', 'text': 'i like that - maybe {statVar} ({place})\r\n\r\nsingle place, n statvar --> link to stat var x place page, and label is {statVar} ({place})\r\nmulti place, multi statvar --> link to place page, label stays as {place}', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'chejennifer', 'comment_id': 881716377.0, 'datetime': '2021-07-16 21:02:30+00:00', 'masked_author': 'username_1', 'text': 'thinking about it, I think it makes more sense to do:\r\n\r\nsingle statvar -> link to stat var x place page & label is {stat var} ({place})\r\nmulti statvar -> link to place page, label stays as {place}', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'shifucun', 'comment_id': 881768696.0, 'datetime': '2021-07-16 23:22:58+00:00', 'masked_author': 'username_2', 'text': 'I feel click target to the graph browser is more helpful than the place page. If I want to know more about those stat vars of a place, the place page does not tell much (and have no way to find where they are..)\r\n\r\nI wonder if we should have a simple page that shows a list of ""place stat var"" page links and the click target goes there. This would be much more helpful for debugging etc.\r\n\r\nAnother option is to allow the graph browser expand for multiple stat vars, which is doable given the recent changes. That will also help for debugging and seeing all the different charts for a given stat var (which is the most popular use of it).\r\n\r\nWhen there is a single place, showing {stat var} {place} is a bit surprising as the place just feel redundant there. I still vote for just showing the stat var label. \r\n\r\nIf there is concern on chip and label leading to different places. Maybe we should have a way to click from the stat var hierarchy to the stat var explorer when it is available. Since there is no chip in other tools anyway, and the function to explore the stat var information should belong to the hierarchy rather than the chart region?', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'chejennifer', 'comment_id': 882659123.0, 'datetime': '2021-07-19 15:51:19+00:00', 'masked_author': 'username_1', 'text': 'I agree that graph browser will be more helpful than the place page. \r\n\r\nI think the browser can already be expanded for multiple stat vars. Do you mean allowing the graph browser page to render with those stat vars already expanded when the user goes to a specific url?\r\n\r\nI think chip and label having the same text but leading to different places would be confusing for the user. But we could think about how to click from the stat var hierarchy instead of the chip. Or maybe have a separate click target for going to the stat var explorer.', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'beets', 'comment_id': 884506105.0, 'datetime': '2021-07-21 21:17:25+00:00', 'masked_author': 'username_0', 'text': ""Consider the case of a single place, but many stat vars ([example](https://autopush.datacommons.org/tools/timeline#place=geoId%2F06&statsVar=GenderIncomeInequality_Person_15OrMoreYears_WithIncome__LifeExpectancy_Person__Count_Person_PerArea__Median_Income_Person__Count_Person__dc%2Fc17kzp0zrfkq9)). As you scroll, the context of the place is easily lost, and each chart is no longer standalone. The stat var legend labels also become redundant with the chips.\r\n\r\nI think linking to the graph browser page with the stat vars expanded sounds good. That sounds sufficient though, and hoping we don't need to make it more complicated if we can avoid it."", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'shifucun', 'comment_id': 884584496.0, 'datetime': '2021-07-22 00:35:06+00:00', 'masked_author': 'username_2', 'text': 'Okay, using graph browser for all click targets sounds good. I am okay with the label name change, we can see how it looks like for more cases.', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'chejennifer', 'comment_id': 885028893.0, 'datetime': '2021-07-22 16:00:55+00:00', 'masked_author': 'username_1', 'text': 'ok, so:\r\n\r\nsingle statvar -> link to stat var x place page & label is {stat var} ({place})\r\nmulti statvar -> link to place page with all stat vars expanded, label stays as {place}', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'beets', 'comment_id': 885091920.0, 'datetime': '2021-07-22 17:37:48+00:00', 'masked_author': 'username_0', 'text': 'yea that sounds good!', 'title': None, 'type': 'comment'}
+ {'action': 'closed', 'author': 'chejennifer', 'comment_id': None, 'datetime': '2021-07-22 21:32:48+00:00', 'masked_author': 'username_1', 'text': '', 'title': None, 'type': 'issue'}]","<issue_start><issue_comment>Title: [timeline] click target for chart labels
+username_0: chart labels can link to the browser page for sv + place
+
+e.g. in the screenshot below, California --> https://datacommons.org/browser/geoId/06?statVar=Annual_Consumption_Coal_ElectricPower
+
+![image](https://user-images.githubusercontent.com/6052978/125527424-751d8095-6157-43b8-8368-01ed78d64a05.png)
+<issue_comment>username_1: when it's a single place, those labels show the stat vars. In those cases, do we still want the labels to link to browser page for sv + place? I feel like it might be a little confusing if both the chips and those labels have the same text but link to different places?
+<issue_comment>username_0: good point - for a single place, the legend should also be the place label for consistency. wdyt?
+<issue_comment>username_1: I think that could be confusing for single place + multiple stat vars because the legend would just have that same place repeated multiple times? Maybe the legend could be ""{statvar} - {place}""
+<issue_comment>username_0: i like that - maybe {statVar} ({place})
+
+single place, n statvar --> link to stat var x place page, and label is {statVar} ({place})
+multi place, multi statvar --> link to place page, label stays as {place}
+<issue_comment>username_1: thinking about it, I think it makes more sense to do:
+
+single statvar -> link to stat var x place page & label is {stat var} ({place})
+multi statvar -> link to place page, label stays as {place}
+<issue_comment>username_2: I feel click target to the graph browser is more helpful than the place page. If I want to know more about those stat vars of a place, the place page does not tell much (and have no way to find where they are..)
+
+I wonder if we should have a simple page that shows a list of ""place stat var"" page links and the click target goes there. This would be much more helpful for debugging etc.
+
+Another option is to allow the graph browser expand for multiple stat vars, which is doable given the recent changes. That will also help for debugging and seeing all the different charts for a given stat var (which is the most popular use of it).
+
+When there is a single place, showing {stat var} {place} is a bit surprising as the place just feel redundant there. I still vote for just showing the stat var label. 
+
+If there is concern on chip and label leading to different places. Maybe we should have a way to click from the stat var hierarchy to the stat var explorer when it is available. Since there is no chip in other tools anyway, and the function to explore the stat var information should belong to the hierarchy rather than the chart region?
+<issue_comment>username_1: I agree that graph browser will be more helpful than the place page. 
+
+I think the browser can already be expanded for multiple stat vars. Do you mean allowing the graph browser page to render with those stat vars already expanded when the user goes to a specific url?
+
+I think chip and label having the same text but leading to different places would be confusing for the user. But we could think about how to click from the stat var hierarchy instead of the chip. Or maybe have a separate click target for going to the stat var explorer.
+<issue_comment>username_0: Consider the case of a single place, but many stat vars ([example](https://autopush.datacommons.org/tools/timeline#place=geoId%2F06&statsVar=GenderIncomeInequality_Person_15OrMoreYears_WithIncome__LifeExpectancy_Person__Count_Person_PerArea__Median_Income_Person__Count_Person__dc%2Fc17kzp0zrfkq9)). As you scroll, the context of the place is easily lost, and each chart is no longer standalone. The stat var legend labels also become redundant with the chips.
+
+I think linking to the graph browser page with the stat vars expanded sounds good. That sounds sufficient though, and hoping we don't need to make it more complicated if we can avoid it.
+<issue_comment>username_2: Okay, using graph browser for all click targets sounds good. I am okay with the label name change, we can see how it looks like for more cases.
+<issue_comment>username_1: ok, so:
+
+single statvar -> link to stat var x place page & label is {stat var} ({place})
+multi statvar -> link to place page with all stat vars expanded, label stays as {place}
+<issue_comment>username_0: yea that sounds good!<issue_closed>"
+erlef/website,486004405,43,,"[{'action': 'opened', 'author': 'starbelly', 'comment_id': None, 'datetime': '2019-08-27T19:57:07Z', 'masked_author': 'username_0', 'text': ""Currently adding an event is mostly a manual job, lots of copy/pasta from existing sources which makes for an unpleasant operator experience and error prone. I think we can make use of fullcalendar's gcal support to simplify adding events as well as not having to create blog posts for said events. \r\n\r\n  The idea would be to add events to a specific google calendar which fullcalendar would pull in. Instead of relying on blog posts for the show route on /events this would have to be completely dynamic and the page would be build using nothing but supplied params and/or hitting google api to get all the information needed to build the page. \r\n\r\n It may also be possible to subscribe said google calendar to other calendars to further limit how much work has to be done for events to end up on the site. \r\n\r\nThe alternative would be to simplify creation of events posts from the command line. This would entail the mix task reaching out to sources such as google calendar to get as much info as possible to limit the amount of manual work done (optimally none) when adding events."", 'title': 'Simplify calendar event creation using google calendar', 'type': 'issue'}
+ {'action': 'created', 'author': 'joaquinalcerro', 'comment_id': 526299358.0, 'datetime': '2019-08-29 18:08:56+00:00', 'masked_author': 'username_1', 'text': '@username_0 \r\n\r\nWhat comes to my mind is: who is going to be responsible to add a event to the calendar. The final user?\r\n\r\nLove the idea of using what\'s on the market like Google Calendar and integrate it to the website. This is something that a lot of people use and are familiar with so from that users perspective, it will be simple to use.\r\n\r\nIf the events are going to be posted by a power user, command line might work.\r\n\r\nFrom our perspective, parsing the information of the event might be challenging if the user doesn\'t use a standard form (assuming we are not only going to capture the title, date and time of the event). So I am thinking that the user will add the event and much more details of it in the ""body"" of the calendar meeting.\r\n\r\nWhat do you think about integrating with Meetup or a similar type of event handling application? That might give the event organizer or groups more tools to followup and to make the most out of the event and from the website perspective, we just register and link it to the other site.\r\n\r\nLet me know your comments.', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'starbelly', 'comment_id': 526395049.0, 'datetime': '2019-08-29 23:12:34+00:00', 'masked_author': 'username_0', 'text': ""Someone designated for managing the would-be google calendar would be responsible for adding events to it.  With fullcalendar you don't need to parse anything. fullcalendar will your an api key to fetch events and display them in the calendar. We would instruct fullcalendar (via js callbacks) to make a link for /events/<slug>?gcal_event_id=some_gcal_event_id.... from there we could get utilize the calendar api at google to get all the information needed for displaying the event the way it currently is. So, there would be no scraping etc.\r\n\r\nhttps://developers.google.com/calendar/v3/reference/calendars#resource \r\n\r\nWe also want to integrate with meetup, but that can also be done via gcal. Specifically you can sync meetup.com events to a google calendar. The same people responsible for adding events to google calendar could also tag events that the calendar is subscribed to. That way we get everything in one go and don't default to displaying every single event our google calendar might be subscribed to. \r\n\r\n Further integration with meetup.com is possible though, but outside the scope of this issue."", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'joaquinalcerro', 'comment_id': 526432522.0, 'datetime': '2019-08-30 02:36:38+00:00', 'masked_author': 'username_1', 'text': 'Cool... lets get started... I will explore how fullcalendar works this weekend and try to get something to work on. Best regards.', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'starbelly', 'comment_id': 526447731.0, 'datetime': '2019-08-30 04:06:30+00:00', 'masked_author': 'username_0', 'text': ""👍 There is a google calendar plugin for fullcalendar : https://fullcalendar.io/docs/google-calendar\r\n\r\n What I was doing was simply get an env from the system which had the google calendar api key, then passing that on to fullcalendar. By default it links to a new event template, and that's as far as I took it."", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'benoitc', 'comment_id': 535855484.0, 'datetime': '2019-09-27 08:57:05+00:00', 'masked_author': 'username_2', 'text': ""I wouldn't worry much maybe a simple mail would be enough though. This is what doesthe Cloud Native Foundation : https://www.cncf.io/community/calendar/\r\n\r\nAlso what is the impact of the plugin for the GDPR?"", 'title': None, 'type': 'comment'}
+ {'action': 'closed', 'author': 'starbelly', 'comment_id': None, 'datetime': '2020-03-04 06:27:09+00:00', 'masked_author': 'username_0', 'text': '', 'title': None, 'type': 'issue'}
+ {'action': 'created', 'author': 'starbelly', 'comment_id': 594350014.0, 'datetime': '2020-03-04 06:27:09+00:00', 'masked_author': 'username_0', 'text': 'This issue is now obsolete. We have moved to displaying events in a vertical list vs using an actual calendar so closing this issue in light of that.', 'title': None, 'type': 'comment'}]","<issue_start><issue_comment>Title: Simplify calendar event creation using google calendar
+username_0: Currently adding an event is mostly a manual job, lots of copy/pasta from existing sources which makes for an unpleasant operator experience and error prone. I think we can make use of fullcalendar's gcal support to simplify adding events as well as not having to create blog posts for said events. 
+
+  The idea would be to add events to a specific google calendar which fullcalendar would pull in. Instead of relying on blog posts for the show route on /events this would have to be completely dynamic and the page would be build using nothing but supplied params and/or hitting google api to get all the information needed to build the page. 
+
+ It may also be possible to subscribe said google calendar to other calendars to further limit how much work has to be done for events to end up on the site. 
+
+The alternative would be to simplify creation of events posts from the command line. This would entail the mix task reaching out to sources such as google calendar to get as much info as possible to limit the amount of manual work done (optimally none) when adding events.
+<issue_comment>username_1: @username_0 
+
+What comes to my mind is: who is going to be responsible to add a event to the calendar. The final user?
+
+Love the idea of using what's on the market like Google Calendar and integrate it to the website. This is something that a lot of people use and are familiar with so from that users perspective, it will be simple to use.
+
+If the events are going to be posted by a power user, command line might work.
+
+From our perspective, parsing the information of the event might be challenging if the user doesn't use a standard form (assuming we are not only going to capture the title, date and time of the event). So I am thinking that the user will add the event and much more details of it in the ""body"" of the calendar meeting.
+
+What do you think about integrating with Meetup or a similar type of event handling application? That might give the event organizer or groups more tools to followup and to make the most out of the event and from the website perspective, we just register and link it to the other site.
+
+Let me know your comments.
+<issue_comment>username_0: Someone designated for managing the would-be google calendar would be responsible for adding events to it.  With fullcalendar you don't need to parse anything. fullcalendar will your an api key to fetch events and display them in the calendar. We would instruct fullcalendar (via js callbacks) to make a link for /events/<slug>?gcal_event_id=some_gcal_event_id.... from there we could get utilize the calendar api at google to get all the information needed for displaying the event the way it currently is. So, there would be no scraping etc.
+
+https://developers.google.com/calendar/v3/reference/calendars#resource 
+
+We also want to integrate with meetup, but that can also be done via gcal. Specifically you can sync meetup.com events to a google calendar. The same people responsible for adding events to google calendar could also tag events that the calendar is subscribed to. That way we get everything in one go and don't default to displaying every single event our google calendar might be subscribed to. 
+
+ Further integration with meetup.com is possible though, but outside the scope of this issue.
+<issue_comment>username_1: Cool... lets get started... I will explore how fullcalendar works this weekend and try to get something to work on. Best regards.
+<issue_comment>username_0: 👍 There is a google calendar plugin for fullcalendar : https://fullcalendar.io/docs/google-calendar
+
+ What I was doing was simply get an env from the system which had the google calendar api key, then passing that on to fullcalendar. By default it links to a new event template, and that's as far as I took it.
+<issue_comment>username_2: I wouldn't worry much maybe a simple mail would be enough though. This is what doesthe Cloud Native Foundation : https://www.cncf.io/community/calendar/
+
+Also what is the impact of the plugin for the GDPR?<issue_closed>
+<issue_comment>username_0: This issue is now obsolete. We have moved to displaying events in a vertical list vs using an actual calendar so closing this issue in light of that."

@@ -1,8 +1,13 @@
 import re
+import glob
+import warnings
+from pathlib import Path
 
 import pandas as pd
 from datasets import load_dataset
 from huggingface_hub import login
+
+warnings.filterwarnings("ignore", category=UserWarning)
 
 # regex to match commit messages
 PATTERN_ENERGY = "(.*(energy).*)|(.*(battery).*)|(.*(power).*)"
@@ -1018,15 +1023,44 @@ codegridweb/Minimal-Portfolio-Website"""
 
 repositories = repositories.split('\n')
 
-df = pd.read_parquet("../data/test.parquet")
+files = glob.glob("../the-stack/data/train-*.parquet")
+counter = 0
 
-df = df.drop(['text_size', 'usernames'], axis=1)
+for file in files:
+    filename = Path(file).stem
+
+    print(f" progress: {counter}/{len(files)}\t file: {file}", end='\r')
+
+    df = pd.read_parquet(file)
+
+    df = df.drop(['text_size', 'usernames'], axis=1)
 
 
-df = df.query("repo in @repositories")
+    df = df.query("repo in @repositories")
 
-df = df[df.content.str.contains(regexEnergy, regex= True)]
-
-print(df)
-
-df.to_csv("../data/smalltest.csv")
+    df = df[df.content.str.contains(regexEnergy, regex= True)]
+           
+    counter += 1
+    
+    df.to_csv(f"../data/issues_and_prs/{filename}.csv", header=False, index=False)
+    
+    del df
+    
+print("\nCreating final file")
+    
+with open("../data/issues_and_prs.csv", 'w') as outfile:
+    header = "repo,issue_id,issue_number,pull_request,events,content\n"
+    outfile.write(header)
+    
+with open("../data/issues_and_prs.csv", 'a') as outfile:
+    for file in glob.glob("../data/issues_and_prs/*.csv"):
+        with open(file) as infile:
+            data = infile.readlines()
+        
+        outfile.writelines(data)
+        
+print("Finished!")
+        
+    
+    
+        

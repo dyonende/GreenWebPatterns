@@ -1,0 +1,476 @@
+daattali/beautiful-jekyll,492051476,541,,"[{'action': 'opened', 'author': 'wini3d', 'comment_id': None, 'datetime': '2019-09-11 06:52:53+00:00', 'masked_author': 'username_0', 'text': 'More on a feature request. I was wondering if you are planning to have this supported or if it is already, is there a doc?\r\n\r\nhttps://github.com/apps/staticman-net\r\n\r\nAlso, any guide on how to setup your own heroku staticmanlab instance?', 'title': 'Staticman App support', 'type': 'issue'}
+ {'action': 'created', 'author': 'daattali', 'comment_id': 530367794.0, 'datetime': '2019-09-11 12:57:13+00:00', 'masked_author': 'username_1', 'text': 'Static man is already supported for comments. What feature exactly are you requesting? I try not to bloat this theme with too much info specific to one small feature in it (that is - I prefer not to have huge docs sections dedicated to staticman)', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'wini3d', 'comment_id': 530370270.0, 'datetime': '2019-09-11 13:03:45+00:00', 'masked_author': 'username_0', 'text': 'Yes, using the[ staticman github app](https://github.com/apps/staticman-net) instead of the `staticmanlab` collaborator which I read has lesser limits.', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'daattali', 'comment_id': 530376769.0, 'datetime': '2019-09-11 13:20:05+00:00', 'masked_author': 'username_1', 'text': ""I'll defer to @username_2 - he brought in staticman and would understand the question better"", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'VincentTam', 'comment_id': 530450058.0, 'datetime': '2019-09-11 16:06:13+00:00', 'masked_author': 'username_2', 'text': ""That's off-topic here, for the reason I've explained above.  You may go to the official Staticman repo to start an issue there—you've done that in eduardoboucas/staticman#310, or leave a comment under my blog article [*Staticman API Hosting 2018*](https://vincenttam.gitlab.io/post/2018-09-16-staticman-powered-gitlab-pages/2/).\r\n\r\n* * *\r\n:warning:  Remarks:\r\n\r\n:no_entry_sign: **Staticman v2 no longer works** on official production instance, as reported in https://github.com/eduardoboucas/staticman/issues/306."", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'wini3d', 'comment_id': 530474516.0, 'datetime': '2019-09-11 17:09:02+00:00', 'masked_author': 'username_0', 'text': 'Thank you. So are you suggesting to fork the merge from eduardoboucas/staticman#219 to have the same exact copy that your staticmanlab herokuapp is using?', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'VincentTam', 'comment_id': 530650285.0, 'datetime': '2019-09-12 03:34:16+00:00', 'masked_author': 'username_2', 'text': 'In [my linked guide for setting up Staticman API](https://vincenttam.gitlab.io/post/2018-09-16-staticman-powered-gitlab-pages/2/), there\'s a comparison between my `deploy` branch and the `dev` branch: https://github.com/eduardoboucas/staticman/compare/dev...username_2:deploy.  I\'ll update that because I meant the `dev` branch by the moment of writing the post: https://github.com/eduardoboucas/staticman/compare/55d14306d851059a2a27d24b5eb4cb17c5009477...username_2:deploy.  This comparison summarises my customization of Staticman\'s code last year.\r\n\r\nThe great thing about a Git branch is that it gives a short reference name to a feature/modification, so that you can easily make comparisons.  You don\'t need to follow every step in my post, like\r\n\r\n    echo ""web: npm start"" > Procfile\r\n\r\nBraching against the `deploy` branch will do.  You might try eduardoboucas/staticman#301 if you want.', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'wini3d', 'comment_id': 530651240.0, 'datetime': '2019-09-12 03:40:34+00:00', 'masked_author': 'username_0', 'text': 'Thanks @username_2 . I just tried your deploy branch, the invite went successfully but getting 500 Internal Server Error when posting comments. I just changed the form action url from your staticman3 to my heroku url.\r\n\r\nhttps://github.com/eduardoboucas/staticman/issues/311', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'daattali', 'comment_id': 530653291.0, 'datetime': '2019-09-12 03:52:20+00:00', 'masked_author': 'username_1', 'text': ""I'm going to close this issue because it's not relevant to beautifuljekyll - feel free to continue this discussion privately or in another repository where it makes sense :)"", 'title': None, 'type': 'comment'}
+ {'action': 'closed', 'author': 'daattali', 'comment_id': None, 'datetime': '2019-09-12 03:52:20+00:00', 'masked_author': 'username_1', 'text': '', 'title': None, 'type': 'issue'}
+ {'action': 'created', 'author': 'VincentTam', 'comment_id': 530654343.0, 'datetime': '2019-09-12 03:58:36+00:00', 'masked_author': 'username_2', 'text': '@username_0 I had lost my concentration for a few seconds browsing various issues.  I should have answered your question in a GitHub issue under Statimcan\'s repo since that\'s a question about Staticman\'s API rather than this theme\'s Staticman integration.\r\n\r\nTo understand what type of questions about Staticman is on-topic here, you may think about an ATM.  Staticman\'s API is like the ATM\'s interface.  A static blog theme deals with stuff ""in front of"" the interface (e.g. conversion of HTML form data into an appropriate POST request), and it doesn\'t care about what\'s ""behind the ATM\'s interface"" (e.g. how the POST request is converted to a Git commit object).', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'wini3d', 'comment_id': 530657071.0, 'datetime': '2019-09-12 04:14:34+00:00', 'masked_author': 'username_0', 'text': 'Thanks, I understand that and I have updated some findings [here](https://github.com/eduardoboucas/staticman/issues/311). We can move this discussion now to that issue.', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'VincentTam', 'comment_id': 530657083.0, 'datetime': '2019-09-12 04:14:38+00:00', 'masked_author': 'username_2', 'text': '', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'daattali', 'comment_id': 607621583.0, 'datetime': '2020-04-02 04:59:40+00:00', 'masked_author': 'username_1', 'text': ""@username_2 do you know if there are any updates on staticman? I just checked https://staticman.net/ and there is no mention at all of a v3 API, only v2. If v3 isn't official or recommended yet, I'd like to close this issue"", 'title': None, 'type': 'comment'}
+ {'action': 'closed', 'author': 'daattali', 'comment_id': None, 'datetime': '2020-04-12 22:24:33+00:00', 'masked_author': 'username_1', 'text': '', 'title': None, 'type': 'issue'}
+ {'action': 'created', 'author': 'daattali', 'comment_id': 612685350.0, 'datetime': '2020-04-12 22:24:33+00:00', 'masked_author': 'username_1', 'text': ""As far as I understand, v3 that was discussed here is not an official recommendation. Due to lack of response here, I'm closing this issue. If someone wants to raise this issue again with more information, please do"", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'VincentTam', 'comment_id': 690355621.0, 'datetime': '2020-09-10 15:10:48+00:00', 'masked_author': 'username_2', 'text': '`https://github.com/eduardoboucas/staticman/issues/317#issuecomment-565250060`\r\nI believe that he, as the maintainer, would recommend a version of the app with recent bug fixes.  Documenting recent changes takes time.  If the maintainer/owner doesn\'t have the time and effort to do it, and a 3rd-party person doesn\'t have the energy to test all the features, it\'s hard for him/her to come up with an encyclopedia-like ""documentation"".', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'daattali', 'comment_id': 690364968.0, 'datetime': '2020-09-10 15:25:58+00:00', 'masked_author': 'username_1', 'text': ""I understand those concerns, but I still would be a little hesitant to use a new version that isn't **at all** mentioned on the official site whatsoever."", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'VincentTam', 'comment_id': 770899574.0, 'datetime': '2021-02-01 14:31:33+00:00', 'masked_author': 'username_2', 'text': '@username_0 @username_1 Sorry I\'m eating my words again.  Due to the quoted comment from the app\'s maintainer, I\'m going to submit a PR for a README update about the GitHub App setup on a custom Heroku app instance.\r\n\r\nI\'ve found the motivation to try out the GitHub App, thanks to a clearly-written blog article https://hajekj.net/2020/04/15/staticman-setup-in-app-service/.  Here\'s some screenshots showing my successful setup.\r\n\r\n* * *\r\n\r\nStaticman\'s README : https://github.com/eduardoboucas/staticman\r\n\r\nClick the deploy button inside ![Deploy](https://www.herokucdn.com/deploy/button.svg), and configure the necessary variables in the popped up Heroku page in order to start Staticman with no installation.\r\n\r\n![Opera Snapshot_2021-02-01_140133_dashboard heroku com](https://user-images.githubusercontent.com/5748535/106462435-5e021980-6496-11eb-9c60-05471c067bff.png)\r\n\r\n![staticman-rsa](https://user-images.githubusercontent.com/5748535/106461761-82a9c180-6495-11eb-95ce-72fd8f11f768.png)  \r\nScreenshot of the `RSA_RPIVATE_KEY` variable.\r\n\r\nSuccessful example: https://github.com/username_2/TestStaticmanLab/pull/95\r\n\r\n![Screenshot from 2021-02-01 11-36-53](https://user-images.githubusercontent.com/5748535/106447729-21c4be00-6482-11eb-83d9-c200f4a34a83.png)\r\n![Screenshot from 2021-02-01 11-32-49](https://user-images.githubusercontent.com/5748535/106447733-22f5eb00-6482-11eb-99bc-8232cb96f664.png)\r\n\r\n* * *\r\n\r\nRemarks: If you\'re using Heroku\'s online dashboard, simple copy-and-paste the RSA private keys for the config variables `RSA_PRIVATE_KEY` and `GITHUB_PRIVATE_KEY` would do.  There\'s no need to do the manual replacement of the newline character `\\n` with the two-character string `""\\n""`.  I tried that in following the linked article and I ran into an `InvalidAsn1Error`.\r\n\r\n![screenshot of error](https://user-images.githubusercontent.com/5748535/106450580-a49b4800-6485-11eb-8e85-e3eb75d4b663.png)\r\n\r\nAfter removing all `""\\n""` as shown in the screenshot of the text area for `RSA_PRIVATE_KEY` in Heroku\'s online dashboard, I got pass this error.  The `Set RSA_PRIVATE_KEY` config vars ...` following the green time `09:21:01.49` and the line containing `path=""/v3/encrypt/nimportquoi""` at the bottom show that I\'ve successfully fixed the error.', 'title': None, 'type': 'comment'}]","<issue_start><issue_comment>Title: Staticman App support
+username_0: More on a feature request. I was wondering if you are planning to have this supported or if it is already, is there a doc?
+
+https://github.com/apps/staticman-net
+
+Also, any guide on how to setup your own heroku staticmanlab instance?
+<issue_comment>username_1: Static man is already supported for comments. What feature exactly are you requesting? I try not to bloat this theme with too much info specific to one small feature in it (that is - I prefer not to have huge docs sections dedicated to staticman)
+<issue_comment>username_0: Yes, using the[ staticman github app](https://github.com/apps/staticman-net) instead of the `staticmanlab` collaborator which I read has lesser limits.
+<issue_comment>username_1: I'll defer to @username_2 - he brought in staticman and would understand the question better
+<issue_comment>username_2: That's off-topic here, for the reason I've explained above.  You may go to the official Staticman repo to start an issue there—you've done that in eduardoboucas/staticman#310, or leave a comment under my blog article [*Staticman API Hosting 2018*](https://vincenttam.gitlab.io/post/2018-09-16-staticman-powered-gitlab-pages/2/).
+
+* * *
+:warning:  Remarks:
+
+:no_entry_sign: **Staticman v2 no longer works** on official production instance, as reported in https://github.com/eduardoboucas/staticman/issues/306.
+<issue_comment>username_0: Thank you. So are you suggesting to fork the merge from eduardoboucas/staticman#219 to have the same exact copy that your staticmanlab herokuapp is using?
+<issue_comment>username_2: In [my linked guide for setting up Staticman API](https://vincenttam.gitlab.io/post/2018-09-16-staticman-powered-gitlab-pages/2/), there's a comparison between my `deploy` branch and the `dev` branch: https://github.com/eduardoboucas/staticman/compare/dev...username_2:deploy.  I'll update that because I meant the `dev` branch by the moment of writing the post: https://github.com/eduardoboucas/staticman/compare/55d14306d851059a2a27d24b5eb4cb17c5009477...username_2:deploy.  This comparison summarises my customization of Staticman's code last year.
+
+The great thing about a Git branch is that it gives a short reference name to a feature/modification, so that you can easily make comparisons.  You don't need to follow every step in my post, like
+
+    echo ""web: npm start"" > Procfile
+
+Braching against the `deploy` branch will do.  You might try eduardoboucas/staticman#301 if you want.
+<issue_comment>username_0: Thanks @username_2 . I just tried your deploy branch, the invite went successfully but getting 500 Internal Server Error when posting comments. I just changed the form action url from your staticman3 to my heroku url.
+
+https://github.com/eduardoboucas/staticman/issues/311
+<issue_comment>username_1: I'm going to close this issue because it's not relevant to beautifuljekyll - feel free to continue this discussion privately or in another repository where it makes sense :)<issue_closed>
+<issue_comment>username_2: @username_0 I had lost my concentration for a few seconds browsing various issues.  I should have answered your question in a GitHub issue under Statimcan's repo since that's a question about Staticman's API rather than this theme's Staticman integration.
+
+To understand what type of questions about Staticman is on-topic here, you may think about an ATM.  Staticman's API is like the ATM's interface.  A static blog theme deals with stuff ""in front of"" the interface (e.g. conversion of HTML form data into an appropriate POST request), and it doesn't care about what's ""behind the ATM's interface"" (e.g. how the POST request is converted to a Git commit object).
+<issue_comment>username_0: Thanks, I understand that and I have updated some findings [here](https://github.com/eduardoboucas/staticman/issues/311). We can move this discussion now to that issue.
+<issue_comment>username_1: @username_2 do you know if there are any updates on staticman? I just checked https://staticman.net/ and there is no mention at all of a v3 API, only v2. If v3 isn't official or recommended yet, I'd like to close this issue<issue_closed>
+<issue_comment>username_1: As far as I understand, v3 that was discussed here is not an official recommendation. Due to lack of response here, I'm closing this issue. If someone wants to raise this issue again with more information, please do
+<issue_comment>username_2: `https://github.com/eduardoboucas/staticman/issues/317#issuecomment-565250060`
+I believe that he, as the maintainer, would recommend a version of the app with recent bug fixes.  Documenting recent changes takes time.  If the maintainer/owner doesn't have the time and effort to do it, and a 3rd-party person doesn't have the energy to test all the features, it's hard for him/her to come up with an encyclopedia-like ""documentation"".
+<issue_comment>username_1: I understand those concerns, but I still would be a little hesitant to use a new version that isn't **at all** mentioned on the official site whatsoever.
+<issue_comment>username_2: @username_0 @username_1 Sorry I'm eating my words again.  Due to the quoted comment from the app's maintainer, I'm going to submit a PR for a README update about the GitHub App setup on a custom Heroku app instance.
+
+I've found the motivation to try out the GitHub App, thanks to a clearly-written blog article https://hajekj.net/2020/04/15/staticman-setup-in-app-service/.  Here's some screenshots showing my successful setup.
+
+* * *
+
+Staticman's README : https://github.com/eduardoboucas/staticman
+
+Click the deploy button inside ![Deploy](https://www.herokucdn.com/deploy/button.svg), and configure the necessary variables in the popped up Heroku page in order to start Staticman with no installation.
+
+![Opera Snapshot_2021-02-01_140133_dashboard heroku com](https://user-images.githubusercontent.com/5748535/106462435-5e021980-6496-11eb-9c60-05471c067bff.png)
+
+![staticman-rsa](https://user-images.githubusercontent.com/5748535/106461761-82a9c180-6495-11eb-95ce-72fd8f11f768.png)  
+Screenshot of the `RSA_RPIVATE_KEY` variable.
+
+Successful example: https://github.com/username_2/TestStaticmanLab/pull/95
+
+![Screenshot from 2021-02-01 11-36-53](https://user-images.githubusercontent.com/5748535/106447729-21c4be00-6482-11eb-83d9-c200f4a34a83.png)
+![Screenshot from 2021-02-01 11-32-49](https://user-images.githubusercontent.com/5748535/106447733-22f5eb00-6482-11eb-99bc-8232cb96f664.png)
+
+* * *
+
+Remarks: If you're using Heroku's online dashboard, simple copy-and-paste the RSA private keys for the config variables `RSA_PRIVATE_KEY` and `GITHUB_PRIVATE_KEY` would do.  There's no need to do the manual replacement of the newline character `\n` with the two-character string `""\n""`.  I tried that in following the linked article and I ran into an `InvalidAsn1Error`.
+
+![screenshot of error](https://user-images.githubusercontent.com/5748535/106450580-a49b4800-6485-11eb-8e85-e3eb75d4b663.png)
+
+After removing all `""\n""` as shown in the screenshot of the text area for `RSA_PRIVATE_KEY` in Heroku's online dashboard, I got pass this error.  The `Set RSA_PRIVATE_KEY` config vars ...` following the green time `09:21:01.49` and the line containing `path=""/v3/encrypt/nimportquoi""` at the bottom show that I've successfully fixed the error."
+nodejs/nodejs.org,712663032,3425,"{'number': 3425.0, 'repo': 'nodejs.org', 'user_login': 'nodejs'}","[{'action': 'opened', 'author': '5HAD0W-P1R4T3', 'comment_id': None, 'datetime': '2020-10-01T09:23:15Z', 'masked_author': 'username_0', 'text': '', 'title': 'minor typo', 'type': 'issue'}
+ {'action': 'created', 'author': 'DanielRuf', 'comment_id': 702922334.0, 'datetime': '2020-10-02 19:39:55+00:00', 'masked_author': 'username_1', 'text': 'Not a typo.\r\n\r\nHas helped to facilitate ... and empower ... is correct.', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'Trott', 'comment_id': 703041743.0, 'datetime': '2020-10-03 03:58:26+00:00', 'masked_author': 'username_2', 'text': 'The first option is what this PR does but the second option is probably closer to the intention?', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': '5HAD0W-P1R4T3', 'comment_id': 704014396.0, 'datetime': '2020-10-06 04:04:41+00:00', 'masked_author': 'username_0', 'text': '@username_2 I think removing the whole paragraph is not a good idea.', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'Trott', 'comment_id': 704024861.0, 'datetime': '2020-10-06 04:48:50+00:00', 'masked_author': 'username_2', 'text': 'Why do you think that?', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'Trott', 'comment_id': 710748249.0, 'datetime': '2020-10-17 04:44:39+00:00', 'masked_author': 'username_2', 'text': '@username_0 Is it OK with you if we reopen this and land it as it is?', 'title': None, 'type': 'comment'}]","<issue_start><issue_comment>Title: minor typo
+username_0: 
+<issue_comment>username_1: Not a typo.
+
+Has helped to facilitate ... and empower ... is correct.
+<issue_comment>username_2: The first option is what this PR does but the second option is probably closer to the intention?
+<issue_comment>username_0: @username_2 I think removing the whole paragraph is not a good idea.
+<issue_comment>username_2: Why do you think that?
+<issue_comment>username_2: @username_0 Is it OK with you if we reopen this and land it as it is?"
+GDQuest/website,531853844,103,,"[{'action': 'opened', 'author': 'NathanLovato', 'comment_id': None, 'datetime': '2019-12-03T09:44:49Z', 'masked_author': 'username_0', 'text': ""# The problems\r\n\r\n1. **Our content is hard to find**. The work we do is scattered around YouTube, GitHub, our online shop...\r\n2. **A lot of our content is not referenced on the website**: some content is just hard to find, like the power sequencer docs, and the website's content is not up to date.\r\n3. The [first-time] **navigation is off**: the landing page does not lead people to our tools and tutorials first.\r\n4. **Our docs lack structure**:  power sequencer docs use a custom made page layout that's far from the quality of other themes\r\n5. **Conversions are poor**. We focused on producing content, and although our community has been growing steadily, we have a hard time getting people to find and share some of our demos and code repositories, and our revenue is going down.\r\n6. **We're not using the website that much**. Yet with thousands of visitors every month, people are! We should centralize our communication there, on top of using YouTube.\r\n\r\n# General goal\r\n\r\nMake the website a hub to find our content across platforms.\r\n\r\nTo achieve that, I think we need to focus on:\r\n\r\n1. Organizing the content\r\n2. Adding missing content\r\n3. Making maintenance and updates easier\r\n\r\n# Issues\r\n\r\nSee the [project board](https://github.com/GDquest/GDquest-website/projects/1)"", 'title': 'Improving the website and its content', 'type': 'issue'}
+ {'action': 'closed', 'author': 'NathanLovato', 'comment_id': None, 'datetime': '2020-06-24 18:41:37+00:00', 'masked_author': 'username_0', 'text': '', 'title': None, 'type': 'issue'}
+ {'action': 'created', 'author': 'NathanLovato', 'comment_id': 648997626.0, 'datetime': '2020-06-24 18:41:37+00:00', 'masked_author': 'username_0', 'text': 'Recent changes on the website addressed most issues listed here. The main one left is #104, adding search, but besides that it should already be much better. Closing for now.', 'title': None, 'type': 'comment'}]","<issue_start><issue_comment>Title: Improving the website and its content
+username_0: # The problems
+
+1. **Our content is hard to find**. The work we do is scattered around YouTube, GitHub, our online shop...
+2. **A lot of our content is not referenced on the website**: some content is just hard to find, like the power sequencer docs, and the website's content is not up to date.
+3. The [first-time] **navigation is off**: the landing page does not lead people to our tools and tutorials first.
+4. **Our docs lack structure**:  power sequencer docs use a custom made page layout that's far from the quality of other themes
+5. **Conversions are poor**. We focused on producing content, and although our community has been growing steadily, we have a hard time getting people to find and share some of our demos and code repositories, and our revenue is going down.
+6. **We're not using the website that much**. Yet with thousands of visitors every month, people are! We should centralize our communication there, on top of using YouTube.
+
+# General goal
+
+Make the website a hub to find our content across platforms.
+
+To achieve that, I think we need to focus on:
+
+1. Organizing the content
+2. Adding missing content
+3. Making maintenance and updates easier
+
+# Issues
+
+See the [project board](https://github.com/GDquest/GDquest-website/projects/1)<issue_closed>
+<issue_comment>username_0: Recent changes on the website addressed most issues listed here. The main one left is #104, adding search, but besides that it should already be much better. Closing for now."
+microsoft/TypeScript-Website,1057275840,2156,,"[{'action': 'opened', 'author': 'orta', 'comment_id': None, 'datetime': '2021-11-18 12:02:28+00:00', 'masked_author': 'username_0', 'text': 'Take the concept of the playground, and remove our custom UI - have that run inside vscode.dev.\r\n\r\nProof of concept: https://github.com/username_0/vscode-typescript-playground', 'title': 'Explore running the TypeScript Playground as a vscode extension inside vscode.dev', 'type': 'issue'}
+ {'action': 'created', 'author': 'orta', 'comment_id': 983693000.0, 'datetime': '2021-12-01 14:25:26+00:00', 'masked_author': 'username_0', 'text': ""## VSCode Powered Playgrounds Roadmap\r\n\r\nThe above proof of concept has been hooked up fully to vscode.dev now, and we've taken a step back to figure out how this can work structurally.\r\n\r\n_Today_, the playground has its own copy of the TypeScript compiler API which is used to generate things like the .js, .d.ts, grab errors etc, it is used for introspection in the docs and it is passed along to plugins.\r\n\r\nWe wonder if instead of the playground having a full copy of the typescript compiler, it instead sets up and makes requests to the tsserver provided by the default vscode typescript extension. Leaving the playground to effectively be a smart wrapper around the existing tsserver, with useful introspection tooling in the extension. To make that work, we'd need a few things:\r\n\r\n - The extension running on vscode.dev - https://github.com/microsoft/vscode-dev/pull/468\r\n - The full language sever on vscode.dev serverless - https://github.com/microsoft/TypeScript/issues/46421\r\n - A way to set the TS version to a https url - https://github.com/microsoft/TypeScript/issues/46421\r\n - A way to make requests to the tsserver from typescript - TBD \r\n\r\nThis leaves a few holes where the ts API was used (e.g. the compiler UI dropdown) but that's solvable by knowing the TS version and knowing when [a flag was added](https://github.com/microsoft/TypeScript-Website/blob/v2/packages/tsconfig-reference/scripts/tsconfigRules.ts#L294-L348) and pre-baking this info into the extension probably, and/or we add a tsservice command for info about the compiler's settings. \r\n\r\n### Examples\r\n\r\nAll of the code samples are available in JSON dumps by the TS website: https://www.typescriptlang.org/js/examples/en.json / https://www.typescriptlang.org/js/examples/ja.json - the playground just needs to ask for the hosted file: https://www.typescriptlang.org/js/examples/en/3-7/Syntax%20and%20Messaging/Flattened%20Error%20Reporting.ts\r\n\r\n### Running Code\r\n\r\nvscode has a lot of security tooling set up in the JS environment which makes it hard to arbitrarily execute the user's JS, perhaps the [debugging extension](https://code.visualstudio.com/api/extension-guides/debugger-extension) gives us a route for that. If not we can run it in a webworker, but capturing logs might get complicated then.\r\n\r\n### TS Version Support\r\n\r\nBecause we're looking at relying on the vscode side to handle the IDE integration, in theory we can only use versions which include this PR: https://github.com/microsoft/TypeScript/pull/39656 ( 4.3+ ) out of the box. To handle backwards compat we can make builds of older versions of TypeScript which have this PR in user-land code to replicate the same behavior."", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'orta', 'comment_id': 988297010.0, 'datetime': '2021-12-07 22:08:50+00:00', 'masked_author': 'username_0', 'text': 'https://github.com/microsoft/vscode/pull/138621 would hook up the full tsserver (supporting multifile/ ATA at a bare minimum) to vscode ts playgrounds', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'orta', 'comment_id': 989964931.0, 'datetime': '2021-12-09 15:36:21+00:00', 'masked_author': 'username_0', 'text': 'Confirming that the tsserver requests work well. The files in our vfs have paths like `^/playfs/index.tsx`, so I can call:\r\n\r\n```ts\r\nvscode.commands.executeCommand(\'typescript.tsserverRequest\', \'emit-output\', { file: ""^/playfs/index.tsx"" }).then(r => {\r\n    console.log(""Got"", r)\r\n})\r\n```\r\n\r\nWhich would return the .ts and .js files if the TSServer was not in partial mode. https://github.com/microsoft/vscode/pull/138621', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'orta', 'comment_id': 989967900.0, 'datetime': '2021-12-09 15:39:41+00:00', 'masked_author': 'username_0', 'text': ""I've been exploring using the setting UI to showcase the tsconfig vars, this kinda works OK for prototyping:\r\n\r\n![Screen Shot 2021-12-09 at 3 38 03 PM](https://user-images.githubusercontent.com/49038/145427114-6f978935-58b9-47cd-97c2-a7583cd48911.png)\r\n\r\nBut once I put in the full tsconfig the lack of subheadings and the single column really started to make it a bit unweidly, I might need to implement a custom settings page\r\n\r\n![Screen Shot 2021-12-09 at 3 38 52 PM](https://user-images.githubusercontent.com/49038/145427251-5afe11d6-91db-46e0-ad04-d1302ad327d2.png)"", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'orta', 'comment_id': 1006084166.0, 'datetime': '2022-01-05 21:17:45+00:00', 'masked_author': 'username_0', 'text': ""The codebase which it runs on is https://github.com/username_0/vscode-typescript-playground - but I built out a monorepo for many vscode extensions in https://github.com/microsoft/TypeScript-VSCode-Extensions (for example me/Ron/Andrew branch have TS related extensions). The version on my account is further along than the version in the MS org.\r\n\r\nWe already have a typescript marketplace account, probably for the VS side, but I've not figured out how I can get access to a write token to be able to deploy with it though, so it's a bit stunted in usage.\r\n\r\nI think the next major thing which needs building is for the vscode tsserver extension to use the vscode file system. I have a hunch that the web tsservice doesn't touch any user-land files and probably only gets given a file contents via the openFiles part of the protocol. This would mean that providing a vfs to vscode _is not_ reflected in the tsserver APIs."", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'orta', 'comment_id': 1010346808.0, 'datetime': '2022-01-11 20:47:00+00:00', 'masked_author': 'username_0', 'text': ""Been exploring how to get the full server running in vsocde.dev - https://github.com/microsoft/vscode/pull/138621 - right now there's a small change needed in vscode:\r\n\r\n```\r\nexport const semanticSupportedSchemes = [\r\n\tfile,\r\n\tuntitled,\r\n\twalkThroughSnippet,\r\n\tvscodeNotebookCell,\r\n];\r\n```\r\n\r\nand then in TS we need to  change https://github.com/microsoft/TypeScript/blob/ed014db864165cab3f568eb8e2a0b6ea1ba5f624/src/tsserver/webServer.ts#L47 to be a semantic versions"", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'orta', 'comment_id': 1010899027.0, 'datetime': '2022-01-12 10:37:18+00:00', 'masked_author': 'username_0', 'text': 'Made a request about setting the URL from an extension to vscode: https://github.com/microsoft/vscode/issues/140559', 'title': None, 'type': 'comment'}]","<issue_start><issue_comment>Title: Explore running the TypeScript Playground as a vscode extension inside vscode.dev
+username_0: Take the concept of the playground, and remove our custom UI - have that run inside vscode.dev.
+
+Proof of concept: https://github.com/username_0/vscode-typescript-playground
+<issue_comment>username_0: ## VSCode Powered Playgrounds Roadmap
+
+The above proof of concept has been hooked up fully to vscode.dev now, and we've taken a step back to figure out how this can work structurally.
+
+_Today_, the playground has its own copy of the TypeScript compiler API which is used to generate things like the .js, .d.ts, grab errors etc, it is used for introspection in the docs and it is passed along to plugins.
+
+We wonder if instead of the playground having a full copy of the typescript compiler, it instead sets up and makes requests to the tsserver provided by the default vscode typescript extension. Leaving the playground to effectively be a smart wrapper around the existing tsserver, with useful introspection tooling in the extension. To make that work, we'd need a few things:
+
+ - The extension running on vscode.dev - https://github.com/microsoft/vscode-dev/pull/468
+ - The full language sever on vscode.dev serverless - https://github.com/microsoft/TypeScript/issues/46421
+ - A way to set the TS version to a https url - https://github.com/microsoft/TypeScript/issues/46421
+ - A way to make requests to the tsserver from typescript - TBD 
+
+This leaves a few holes where the ts API was used (e.g. the compiler UI dropdown) but that's solvable by knowing the TS version and knowing when [a flag was added](https://github.com/microsoft/TypeScript-Website/blob/v2/packages/tsconfig-reference/scripts/tsconfigRules.ts#L294-L348) and pre-baking this info into the extension probably, and/or we add a tsservice command for info about the compiler's settings. 
+
+### Examples
+
+All of the code samples are available in JSON dumps by the TS website: https://www.typescriptlang.org/js/examples/en.json / https://www.typescriptlang.org/js/examples/ja.json - the playground just needs to ask for the hosted file: https://www.typescriptlang.org/js/examples/en/3-7/Syntax%20and%20Messaging/Flattened%20Error%20Reporting.ts
+
+### Running Code
+
+vscode has a lot of security tooling set up in the JS environment which makes it hard to arbitrarily execute the user's JS, perhaps the [debugging extension](https://code.visualstudio.com/api/extension-guides/debugger-extension) gives us a route for that. If not we can run it in a webworker, but capturing logs might get complicated then.
+
+### TS Version Support
+
+Because we're looking at relying on the vscode side to handle the IDE integration, in theory we can only use versions which include this PR: https://github.com/microsoft/TypeScript/pull/39656 ( 4.3+ ) out of the box. To handle backwards compat we can make builds of older versions of TypeScript which have this PR in user-land code to replicate the same behavior.
+<issue_comment>username_0: https://github.com/microsoft/vscode/pull/138621 would hook up the full tsserver (supporting multifile/ ATA at a bare minimum) to vscode ts playgrounds
+<issue_comment>username_0: Confirming that the tsserver requests work well. The files in our vfs have paths like `^/playfs/index.tsx`, so I can call:
+
+```ts
+vscode.commands.executeCommand('typescript.tsserverRequest', 'emit-output', { file: ""^/playfs/index.tsx"" }).then(r => {
+    console.log(""Got"", r)
+})
+```
+
+Which would return the .ts and .js files if the TSServer was not in partial mode. https://github.com/microsoft/vscode/pull/138621
+<issue_comment>username_0: I've been exploring using the setting UI to showcase the tsconfig vars, this kinda works OK for prototyping:
+
+![Screen Shot 2021-12-09 at 3 38 03 PM](https://user-images.githubusercontent.com/49038/145427114-6f978935-58b9-47cd-97c2-a7583cd48911.png)
+
+But once I put in the full tsconfig the lack of subheadings and the single column really started to make it a bit unweidly, I might need to implement a custom settings page
+
+![Screen Shot 2021-12-09 at 3 38 52 PM](https://user-images.githubusercontent.com/49038/145427251-5afe11d6-91db-46e0-ad04-d1302ad327d2.png)
+<issue_comment>username_0: The codebase which it runs on is https://github.com/username_0/vscode-typescript-playground - but I built out a monorepo for many vscode extensions in https://github.com/microsoft/TypeScript-VSCode-Extensions (for example me/Ron/Andrew branch have TS related extensions). The version on my account is further along than the version in the MS org.
+
+We already have a typescript marketplace account, probably for the VS side, but I've not figured out how I can get access to a write token to be able to deploy with it though, so it's a bit stunted in usage.
+
+I think the next major thing which needs building is for the vscode tsserver extension to use the vscode file system. I have a hunch that the web tsservice doesn't touch any user-land files and probably only gets given a file contents via the openFiles part of the protocol. This would mean that providing a vfs to vscode _is not_ reflected in the tsserver APIs.
+<issue_comment>username_0: Been exploring how to get the full server running in vsocde.dev - https://github.com/microsoft/vscode/pull/138621 - right now there's a small change needed in vscode:
+
+```
+export const semanticSupportedSchemes = [
+	file,
+	untitled,
+	walkThroughSnippet,
+	vscodeNotebookCell,
+];
+```
+
+and then in TS we need to  change https://github.com/microsoft/TypeScript/blob/ed014db864165cab3f568eb8e2a0b6ea1ba5f624/src/tsserver/webServer.ts#L47 to be a semantic versions
+<issue_comment>username_0: Made a request about setting the URL from an extension to vscode: https://github.com/microsoft/vscode/issues/140559"
+dlang/dlang.org,158484997,1326,"{'number': 1326.0, 'repo': 'dlang.org', 'user_login': 'dlang'}","[{'action': 'opened', 'author': 'wilzbach', 'comment_id': None, 'datetime': '2016-06-04T03:28:55Z', 'masked_author': 'username_0', 'text': ""Is there any special sorting mechanism of the menu? Should I sort the links alphabetically?\r\n\r\nPing @username_2 @username_1\r\n\r\nBtw\r\n1) the font-size for the menu on http://dlang.org/blog/ should be `15px` and your menu seems to be outdated (e.g. #1303 is missing)\r\n2) have you tried the blog on your phone yet? The D menu doesn't seem to be responsive anymore :/"", 'title': 'Add Official D Blog to menu', 'type': 'issue'}
+ {'action': 'created', 'author': 'mdparker', 'comment_id': 223747466.0, 'datetime': '2016-06-04 10:00:11+00:00', 'masked_author': 'username_1', 'text': 'The menu on the blog is up to date and is now 15px. Not sure yet where the problem is with the menu responsiveness, but working on it. Thanks, Seb!', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'mdparker', 'comment_id': 223790179.0, 'datetime': '2016-06-05 02:55:03+00:00', 'masked_author': 'username_1', 'text': ""Thanks, David. I'll dig into it. Or maybe @username_2  can figure it out first."", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'wilzbach', 'comment_id': 223826483.0, 'datetime': '2016-06-05 17:41:42+00:00', 'masked_author': 'username_0', 'text': '@username_1 @username_2 again a bit off-topic, but I also have a few more nitpicks and ideas:\r\n\r\n- the fonts used seem a bit different - at least on dlang.org nearly everything is thin\r\n- how about adding to the li item ""Community"" the css class `active`?\r\n- instead of word press search box you could use the Dlang search bar (you might fix the menu shift with this)\r\n- there are currently two links to WordPress. Afaik [it\'s not required to mention that](https://wordpress.org/support/topic/is-it-allowed-and-possible-to-remove-proudly-powered-by-wordpress), so in terms of hiding a bit that we use PHP, you might consider to remove that ;-)', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'JackStouffer', 'comment_id': 223827625.0, 'datetime': '2016-06-05 18:05:05+00:00', 'masked_author': 'username_2', 'text': 'These are up to @username_1', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'mdparker', 'comment_id': 223901400.0, 'datetime': '2016-06-06 08:47:18+00:00', 'masked_author': 'username_1', 'text': ""I honestly don't think it makes a difference. It's easy enough to see what we're running just by typeing in a WP specific URL. I always have the meta widget turned off on my personal blogs, simply because I don't allow multiple accounts. My initial thoughts here was that other people will eventually have accounts and so it will be convenient to have a log in link on the front page.\r\n\r\nThat said, there's no way to edit the Meta widget to remove the WP link without modifying the core Wordpress files. I looked into that when I first set the blog up. And now that you've mentioned it here, I realize I really don't like having the WP link there either. So, I've removed the meta box (log- in link and all, which I may add back in later) and replaced it with links to the RSS feeds.\r\n\r\n@WalterBright  @andralex Is there anyway we can get the repo @username_2 created for the blog theme transferred to the dlang organization? I keep getting issues reported all over the place."", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'JackStouffer', 'comment_id': 223963787.0, 'datetime': '2016-06-06 13:47:40+00:00', 'masked_author': 'username_2', 'text': 'I created a news group thread for this.', 'title': None, 'type': 'comment'}]","<issue_start><issue_comment>Title: Add Official D Blog to menu
+username_0: Is there any special sorting mechanism of the menu? Should I sort the links alphabetically?
+
+Ping @username_2 @username_1
+
+Btw
+1) the font-size for the menu on http://dlang.org/blog/ should be `15px` and your menu seems to be outdated (e.g. #1303 is missing)
+2) have you tried the blog on your phone yet? The D menu doesn't seem to be responsive anymore :/
+<issue_comment>username_1: The menu on the blog is up to date and is now 15px. Not sure yet where the problem is with the menu responsiveness, but working on it. Thanks, Seb!
+<issue_comment>username_1: Thanks, David. I'll dig into it. Or maybe @username_2  can figure it out first.
+<issue_comment>username_0: @username_1 @username_2 again a bit off-topic, but I also have a few more nitpicks and ideas:
+
+- the fonts used seem a bit different - at least on dlang.org nearly everything is thin
+- how about adding to the li item ""Community"" the css class `active`?
+- instead of word press search box you could use the Dlang search bar (you might fix the menu shift with this)
+- there are currently two links to WordPress. Afaik [it's not required to mention that](https://wordpress.org/support/topic/is-it-allowed-and-possible-to-remove-proudly-powered-by-wordpress), so in terms of hiding a bit that we use PHP, you might consider to remove that ;-)
+<issue_comment>username_2: These are up to @username_1
+<issue_comment>username_1: I honestly don't think it makes a difference. It's easy enough to see what we're running just by typeing in a WP specific URL. I always have the meta widget turned off on my personal blogs, simply because I don't allow multiple accounts. My initial thoughts here was that other people will eventually have accounts and so it will be convenient to have a log in link on the front page.
+
+That said, there's no way to edit the Meta widget to remove the WP link without modifying the core Wordpress files. I looked into that when I first set the blog up. And now that you've mentioned it here, I realize I really don't like having the WP link there either. So, I've removed the meta box (log- in link and all, which I may add back in later) and replaced it with links to the RSS feeds.
+
+@WalterBright  @andralex Is there anyway we can get the repo @username_2 created for the blog theme transferred to the dlang organization? I keep getting issues reported all over the place.
+<issue_comment>username_2: I created a news group thread for this."
+elementary/website,174912626,1330,,"[{'action': 'opened', 'author': 'emersion', 'comment_id': None, 'datetime': '2016-09-03T19:12:39Z', 'masked_author': 'username_0', 'text': 'Send JS errors to analytics.', 'title': 'Collect uncaught JS errors', 'type': 'issue'}
+ {'action': 'created', 'author': 'lewisgoddard', 'comment_id': 249312528.0, 'datetime': '2016-09-23 21:59:11+00:00', 'masked_author': 'username_1', 'text': 'So it turns out browser monitoring with stack traces is quite expensive on New Relic.\r\n\r\nhttps://sentry.io/pricing/ \r\n$29/mo for 28,800 events/day\r\n\r\nhttps://sentry.io/platforms/\r\nJavaScript, PHP, Node.', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'eprozium', 'comment_id': 249319593.0, 'datetime': '2016-09-23 22:44:59+00:00', 'masked_author': 'username_2', 'text': 'Why  buy a service for such a basic functionality that can be done with a few lines of code and config?\r\n\r\nJust collect the window onError event on every page (with the extra info you need) and POST it to a simple stateless Servlet(or other serverside solution) that will push it into a queue with persistence like Kafka or a NoSQL solution like RethinkDB or ElasticSearch directly. \r\n\r\nIt might not look as shiny like the payed services, but it does the job and the otherwise unobserved bugs can be caught easily this way.', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'btkostner', 'comment_id': 249324183.0, 'datetime': '2016-09-23 23:20:18+00:00', 'masked_author': 'username_3', 'text': ""@username_2 We would like not having to worry about another moving part / extra work on our side.\r\n\r\nWhile we _could_ setup our own database and server to catch the errors, we would like to be able to extend this to all of our services (PHP, nodejs, and client side Javascript), and the man power it would take to write the code, and test it seems too much. With that said, we don't need to use a paid service. If you know of any good projects that are free, open source, or self hosted, let us know and we will take a look. We would just like to avoid reinventing the wheel."", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'eprozium', 'comment_id': 249351006.0, 'datetime': '2016-09-24 07:37:12+00:00', 'masked_author': 'username_2', 'text': 'My experience with those is that for such a simple functionality, a DIY solution is quicker and faster: just to learn and integrate the stuff from others takes longer than to implement and deploy with Docker a minimal  JS Error Logging.', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'lewisgoddard', 'comment_id': 249383590.0, 'datetime': '2016-09-24 19:42:26+00:00', 'masked_author': 'username_1', 'text': 'I\'m sorry, but that\'s not going to allow for graphical stack traces that link into the code, nor will it be a ""few code lines"" to cover JS, PHP, and Node.', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'btkostner', 'comment_id': 250812491.0, 'datetime': '2016-09-30 18:05:34+00:00', 'masked_author': 'username_3', 'text': 'This is now implemented and working. Closing issue.', 'title': None, 'type': 'comment'}
+ {'action': 'closed', 'author': 'btkostner', 'comment_id': None, 'datetime': '2016-09-30 18:05:34+00:00', 'masked_author': 'username_3', 'text': '', 'title': None, 'type': 'issue'}]","<issue_start><issue_comment>Title: Collect uncaught JS errors
+username_0: Send JS errors to analytics.
+<issue_comment>username_1: So it turns out browser monitoring with stack traces is quite expensive on New Relic.
+
+https://sentry.io/pricing/ 
+$29/mo for 28,800 events/day
+
+https://sentry.io/platforms/
+JavaScript, PHP, Node.
+<issue_comment>username_2: Why  buy a service for such a basic functionality that can be done with a few lines of code and config?
+
+Just collect the window onError event on every page (with the extra info you need) and POST it to a simple stateless Servlet(or other serverside solution) that will push it into a queue with persistence like Kafka or a NoSQL solution like RethinkDB or ElasticSearch directly. 
+
+It might not look as shiny like the payed services, but it does the job and the otherwise unobserved bugs can be caught easily this way.
+<issue_comment>username_3: @username_2 We would like not having to worry about another moving part / extra work on our side.
+
+While we _could_ setup our own database and server to catch the errors, we would like to be able to extend this to all of our services (PHP, nodejs, and client side Javascript), and the man power it would take to write the code, and test it seems too much. With that said, we don't need to use a paid service. If you know of any good projects that are free, open source, or self hosted, let us know and we will take a look. We would just like to avoid reinventing the wheel.
+<issue_comment>username_2: My experience with those is that for such a simple functionality, a DIY solution is quicker and faster: just to learn and integrate the stuff from others takes longer than to implement and deploy with Docker a minimal  JS Error Logging.
+<issue_comment>username_1: I'm sorry, but that's not going to allow for graphical stack traces that link into the code, nor will it be a ""few code lines"" to cover JS, PHP, and Node.
+<issue_comment>username_3: This is now implemented and working. Closing issue.<issue_closed>"
+dotnet-foundation/website,719396459,388,"{'number': 388.0, 'repo': 'website', 'user_login': 'dotnet-foundation'}","[{'action': 'opened', 'author': 'clairernovotny', 'comment_id': None, 'datetime': '2020-10-12T13:49:31Z', 'masked_author': 'username_0', 'text': 'The board has proposed the following updates mission statement, in two forms: full and abridged:\r\n\r\n**Full**\r\nOur mission is to build and educate producers and consumers, both new and old of the .NET platform. We will grow a trusted OSS ecosystem adopted by education, commercial entities, and all users. We will lead by example creating a world-wide, healthy, vibrant, and diverse OSS community.\r\n\r\n**Abridged**\r\nOur mission is to build and educate producers and consumers, both new and old of the .NET platform, to grow a trusted OSS ecosystem adopted all users.\r\n\r\nThe comment period is open on this is two weeks (October 26).', 'title': 'Update the mission statement', 'type': 'issue'}
+ {'action': 'created', 'author': 'SeanKilleen', 'comment_id': 707139213.0, 'datetime': '2020-10-12 14:01:08+00:00', 'masked_author': 'username_1', 'text': '', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'clairernovotny', 'comment_id': 707140362.0, 'datetime': '2020-10-12 14:03:15+00:00', 'masked_author': 'username_0', 'text': '@username_1 Fixed!', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'ericsampson', 'comment_id': 707151857.0, 'datetime': '2020-10-12 14:22:53+00:00', 'masked_author': 'username_2', 'text': 'What does it mean to ""build and educate producers and consumers""? How can you ""build (snip) producers and consumers"", I\'m not sure what that means. Is it missing some nouns - ""build (something here) and educate"", or am I just missing the intent that\'s trying to be conveyed?\r\n\r\nOnce that\'s sorted, I\'d propose rearranging the last part:\r\n""Our mission is to (REVISED TEXT HERE) producers and consumers of the .NET platform, both current and future.\r\n\r\nCheers!!', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'ericsampson', 'comment_id': 707153652.0, 'datetime': '2020-10-12 14:25:49+00:00', 'masked_author': 'username_2', 'text': 'The other thing I\'d suggest is something like:\r\n""grow a trusted OSS ecosystem "" > ""grow a trusted community-inclusive OSS ecosystem""', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'haneytron', 'comment_id': 707153873.0, 'datetime': '2020-10-12 14:26:13+00:00', 'masked_author': 'username_3', 'text': 'I do agree with Eric that ""build"" seems like the wrong verb. I think maybe ""empower"" or something works? And I like the idea of calling out community inclusion as well.', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'ericsampson', 'comment_id': 707154887.0, 'datetime': '2020-10-12 14:27:56+00:00', 'masked_author': 'username_2', 'text': 'Nice call @username_3 👍 \r\n\r\n""Our mission is to empower and educate producers and consumers of the .NET platform, both current and future. We will grow a trusted community-inclusive OSS ecosystem adopted by education, commercial entities, and all users. We will lead by example creating a world-wide, healthy, vibrant, and diverse OSS community.""', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'eglasius', 'comment_id': 707267234.0, 'datetime': '2020-10-12 18:02:31+00:00', 'masked_author': 'username_4', 'text': 'How about: Our mission is to empower producers and consumers of the .NET platform, both current and future.', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'daveaglick', 'comment_id': 707423727.0, 'datetime': '2020-10-13 01:09:15+00:00', 'masked_author': 'username_5', 'text': '', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'secretGeek', 'comment_id': 707428894.0, 'datetime': '2020-10-13 01:28:38+00:00', 'masked_author': 'username_6', 'text': 'I’d consider the word “encourage” instead of “build” (and instead of “empower” suggested upthread).', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'Ochuwa-sophie', 'comment_id': 707737782.0, 'datetime': '2020-10-13 13:27:55+00:00', 'masked_author': 'username_7', 'text': '""We will grow a trusted OSS ecosystem adopted by education, commercial entities, and all users. ""\r\n""...by education..."" seems vague to me, how about ""...by educators and content creators"" ?\r\n\r\n""We will lead by example creating a world-wide, healthy, vibrant, and diverse OSS community.""\r\n\r\nI\'m thinking healthy may not be necessary or what picture is in mind when we say healthy?', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'HowardvanRooijen', 'comment_id': 717148254.0, 'datetime': '2020-10-27 10:36:03+00:00', 'masked_author': 'username_8', 'text': '', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'Layla-P', 'comment_id': 717430913.0, 'datetime': '2020-10-27 18:16:20+00:00', 'masked_author': 'username_9', 'text': 'Thank you all for this awesome feedback.  We shall review all and make appropriate amendments.', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'Layla-P', 'comment_id': 717431626.0, 'datetime': '2020-10-27 18:17:36+00:00', 'masked_author': 'username_9', 'text': 'Agreed. We shall work on this.', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'isaacabraham', 'comment_id': 778703034.0, 'datetime': '2021-02-14 01:06:51+00:00', 'masked_author': 'username_10', 'text': 'Going ahead with ""build"" then?', 'title': None, 'type': 'comment'}]","<issue_start><issue_comment>Title: Update the mission statement
+username_0: The board has proposed the following updates mission statement, in two forms: full and abridged:
+
+**Full**
+Our mission is to build and educate producers and consumers, both new and old of the .NET platform. We will grow a trusted OSS ecosystem adopted by education, commercial entities, and all users. We will lead by example creating a world-wide, healthy, vibrant, and diverse OSS community.
+
+**Abridged**
+Our mission is to build and educate producers and consumers, both new and old of the .NET platform, to grow a trusted OSS ecosystem adopted all users.
+
+The comment period is open on this is two weeks (October 26).
+<issue_comment>username_0: @username_1 Fixed!
+<issue_comment>username_2: What does it mean to ""build and educate producers and consumers""? How can you ""build (snip) producers and consumers"", I'm not sure what that means. Is it missing some nouns - ""build (something here) and educate"", or am I just missing the intent that's trying to be conveyed?
+
+Once that's sorted, I'd propose rearranging the last part:
+""Our mission is to (REVISED TEXT HERE) producers and consumers of the .NET platform, both current and future.
+
+Cheers!!
+<issue_comment>username_2: The other thing I'd suggest is something like:
+""grow a trusted OSS ecosystem "" > ""grow a trusted community-inclusive OSS ecosystem""
+<issue_comment>username_3: I do agree with Eric that ""build"" seems like the wrong verb. I think maybe ""empower"" or something works? And I like the idea of calling out community inclusion as well.
+<issue_comment>username_2: Nice call @username_3 👍 
+
+""Our mission is to empower and educate producers and consumers of the .NET platform, both current and future. We will grow a trusted community-inclusive OSS ecosystem adopted by education, commercial entities, and all users. We will lead by example creating a world-wide, healthy, vibrant, and diverse OSS community.""
+<issue_comment>username_4: How about: Our mission is to empower producers and consumers of the .NET platform, both current and future.
+<issue_comment>username_6: I’d consider the word “encourage” instead of “build” (and instead of “empower” suggested upthread).
+<issue_comment>username_7: ""We will grow a trusted OSS ecosystem adopted by education, commercial entities, and all users. ""
+""...by education..."" seems vague to me, how about ""...by educators and content creators"" ?
+
+""We will lead by example creating a world-wide, healthy, vibrant, and diverse OSS community.""
+
+I'm thinking healthy may not be necessary or what picture is in mind when we say healthy?
+<issue_comment>username_9: Thank you all for this awesome feedback.  We shall review all and make appropriate amendments.
+<issue_comment>username_9: Agreed. We shall work on this.
+<issue_comment>username_10: Going ahead with ""build"" then?"
+jscraftcamp/website,309114283,361,,"[{'action': 'opened', 'author': 'marcoemrich', 'comment_id': None, 'datetime': '2018-03-27 20:06:26+00:00', 'masked_author': 'username_0', 'text': ""## Why food?\r\n\r\nNo Food, no craftsmanship! Even the best people/coder need a full stomach - help us get some delicious energy-restorings for our guests. Of course as a sponsor you can either have a say in what to serve or you can leave it completely up to us to choose the right developers nutriment. And last year we got them all fed, so it's not as hard as it sounds :).\r\n\r\n## How does it work?\r\n\r\nLast year we asked some food companies for offers and had the sponsor confirm that amount up front. Once the food was delivered on the day the sponsor pulled out the credit card and made all attendees happy by enabling them to fill up their stomaches. And believe it or not, they had been happier and their energy levels had been restored and they went on for another half a day, learning and teaching."", 'title': 'Sponsor needed for lunch on Saturday', 'type': 'issue'}
+ {'action': 'created', 'author': 'wolframkriesing', 'comment_id': 404776713.0, 'datetime': '2018-07-13 09:16:20+00:00', 'masked_author': 'username_1', 'text': 'netcentric.biz is sponsoring this.', 'title': None, 'type': 'comment'}
+ {'action': 'closed', 'author': 'wolframkriesing', 'comment_id': None, 'datetime': '2018-07-13 09:16:27+00:00', 'masked_author': 'username_1', 'text': '', 'title': None, 'type': 'issue'}
+ {'action': 'created', 'author': 'marcoemrich', 'comment_id': 405124704.0, 'datetime': '2018-07-15 22:58:23+00:00', 'masked_author': 'username_0', 'text': 'Can we use this logo: https://www.netcentric.biz/content/dam/nc/logo/logo__regular.svg ?', 'title': None, 'type': 'comment'}]","<issue_start><issue_comment>Title: Sponsor needed for lunch on Saturday
+username_0: ## Why food?
+
+No Food, no craftsmanship! Even the best people/coder need a full stomach - help us get some delicious energy-restorings for our guests. Of course as a sponsor you can either have a say in what to serve or you can leave it completely up to us to choose the right developers nutriment. And last year we got them all fed, so it's not as hard as it sounds :).
+
+## How does it work?
+
+Last year we asked some food companies for offers and had the sponsor confirm that amount up front. Once the food was delivered on the day the sponsor pulled out the credit card and made all attendees happy by enabling them to fill up their stomaches. And believe it or not, they had been happier and their energy levels had been restored and they went on for another half a day, learning and teaching.
+<issue_comment>username_1: netcentric.biz is sponsoring this.<issue_closed>
+<issue_comment>username_0: Can we use this logo: https://www.netcentric.biz/content/dam/nc/logo/logo__regular.svg ?"
+conda-forge/conda-forge.github.io,690269048,1150,,"[{'action': 'opened', 'author': 'wolfv', 'comment_id': None, 'datetime': '2020-09-01 16:05:53+00:00', 'masked_author': 'username_0', 'text': 'This is a spending proposal to allocate $1500 for a Windows build machine to donate to Isuru to help conda-forge for long running builds on Windows. My proposal is for conda-forge to buy the hardware from our available funds, and donate it to Isuru, in full trust that the hardware will be put to good use.\r\nThere are no requirements for this machine to be available for other conda-forge members, but it would be appreciated if the hardware is returned to conda-forge if Isuru decides to cease contributing to conda-forge. After the three year cut off date, the machine is written off.', 'title': 'Spending proposal: donate windows build machine to Isuru', 'type': 'issue'}
+ {'action': 'created', 'author': 'ericdill', 'comment_id': 685022553.0, 'datetime': '2020-09-01 17:38:22+00:00', 'masked_author': 'username_1', 'text': 'Not really related to this proposal, but does it make sense to keep a record of these things somewhere? Maybe in our conda-forge google drive somewhere?\r\n\r\nThis falls under the ""Spending of funds"", requiring a 50% majority to pass. Given we have 22 members of core (according to core.csv) this means we need 12 votes to pass.', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'scopatz', 'comment_id': 685043262.0, 'datetime': '2020-09-01 18:10:48+00:00', 'masked_author': 'username_2', 'text': 'When does the vote end? In a week?', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'wolfv', 'comment_id': 685054747.0, 'datetime': '2020-09-01 18:28:31+00:00', 'masked_author': 'username_0', 'text': 'sorry for missing the formalities, thanks both!\r\n\r\nYes 1 week from now sounds good, voting  will end on 8th of September 6 PM GMT+2\r\n\r\nAs @username_1 said, 50% majority required.', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'CJ-Wright', 'comment_id': 685193999.0, 'datetime': '2020-09-01 23:56:19+00:00', 'masked_author': 'username_3', 'text': '@conda-forge/core', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'msarahan', 'comment_id': 685258722.0, 'datetime': '2020-09-02 03:02:20+00:00', 'masked_author': 'username_4', 'text': 'I have a machine that I can donate. Conda forge would need to pay for\nshipping and a windows license. Maybe a bigger, newer SSD to speed things\nup.\n\nThe box I have:\nHP z820\n2x xeon e5-2687w v2 (16 total cores, 32 threads)\n256 GB ddr3\nGTX 1070\n2 TB spinning disk\n2x 250 GB 2015-era SSDs\n\nThis said, $1500 would buy a much faster machine these days, though with\nless RAM. It does require windows 10 pro because of the dual cpu sockets.', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'msarahan', 'comment_id': 685725225.0, 'datetime': '2020-09-02 13:09:59+00:00', 'masked_author': 'username_4', 'text': 'I\'m not sure why we have the notion of ""writing off"" here - that\'s a concept that applies for tax purposes. We don\'t deal with taxes. Is it to say that after 3 years, conda-forge will no longer ""own"" the machine, and whoever has it at that time is free to repurpose it?\r\n\r\nWhile I trust that Isuru would absolutely use this computer in meaningful ways, I think that language around this being a dedicated community resource would be helpful. Perhaps we should name a primary custodian (Isuru) and ask that the primary custodian coordinate remote access for anyone else who might need the machine.\r\n\r\nThese are things that I think we implicitly agree on, but explicit is better than implicit, right?', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'beckermr', 'comment_id': 685726503.0, 'datetime': '2020-09-02 13:11:57+00:00', 'masked_author': 'username_5', 'text': 'I agree @username_4.', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'wolfv', 'comment_id': 685736000.0, 'datetime': '2020-09-02 13:26:58+00:00', 'masked_author': 'username_0', 'text': '@msaharan yes, your interpretation is what I wanted to say.\r\nI think as a community we have no means to enforce what happens to that hardware anyways, and I think 3 years is a good timeframe for a computer. If it\'s ""returned"" (where to, actually?) after that it\'s just going to rot away in someone else\'s basement.\r\n\r\nAlso regarding remote access I think it wouldn\'t be a great idea to have any expectations. It is a hassle to set up and maintain. Additionally if this computer lives inside someone\'s home it has access to the network, private files etc. which isn\'t great.\r\nAt QuantStack we have a fast computer that we intended as a build machine and it\'s constantly down. If we want something that\'s constantly running we should buy that as a service from elsewhere (i.e. a datacenter).\r\nI think people should be able to nicely ask for remote access but not really expect it to be granted or for it to be available 24/7. That would be up to Isuru to decide.\r\n\r\nIMO the easiest setup is to just ""give"" the hardware without any constraints (just as companies ""give"" conda-forge money without any constraints :) Companies trust us to do the right thing with their donation and I think we can trust @isuruf to do the right thing with conda-forge\'s donation. \r\n\r\nBut this is my opinion. If this proposal doesn\'t get enough votes I am happy to support another proposal that includes your language.\r\n\r\nAlso I think your hardware looks very powerful! IMO it\'s up to Isuru to decide if he wants to go with your offer or buy something from scratch.', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'mariusvniekerk', 'comment_id': 685875345.0, 'datetime': '2020-09-02 17:12:06+00:00', 'masked_author': 'username_6', 'text': 'Windows 10 pro licenses are pretty cheap', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'wolfv', 'comment_id': 688091106.0, 'datetime': '2020-09-07 07:14:36+00:00', 'masked_author': 'username_0', 'text': ""today is the last day to vote! Would be great if whoever hasn't voted could give their thumbs-up or thumbs-down 👍 👎 \r\n\r\n@username_5 @username_4 if you are not happy with the language, do you want to copy-paste this proposal and make a new vote with your points added? I am happy to vote in favour of yours if that has more potential to reach a majority. \r\n\r\nI just wanted to propose something with minimal overhead for everyone involved as we're all short on time, and this idea with a three-year no strings attached donation seems like it will be the simplest solution (as opposed to also have to maintain some computer that can be accessed at any time by core-members)."", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'beckermr', 'comment_id': 688307133.0, 'datetime': '2020-09-07 12:55:12+00:00', 'masked_author': 'username_5', 'text': 'Thank you for the note @username_0. This vote has reached quorum (11/22, kkrause14 is not eligible to vote iiuic) and has thus passed. Therefore I do not want to make a new vote. Nor would I change the language on this one since voting is timeconsuming anyways. While I do think the language should be improved, I also think we are all in general agreement on the intent of the proposal. I hope we can take more care with the language/wording in the future.', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'wolfv', 'comment_id': 688310955.0, 'datetime': '2020-09-07 13:01:56+00:00', 'masked_author': 'username_0', 'text': 'If @username_1 is correct, then it should only pass with 12 votes. Just in case.', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'beckermr', 'comment_id': 688312227.0, 'datetime': '2020-09-07 13:04:09+00:00', 'masked_author': 'username_5', 'text': 'Ack right. Good catch. I expect it will pass anyway, so I will hold off. If it does not pass, I am happy to make a new one with improved language.', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'beckermr', 'comment_id': 688323429.0, 'datetime': '2020-09-07 13:23:10+00:00', 'masked_author': 'username_5', 'text': 'Just for the record, I have voted no for the reasons stated above.', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'ericdill', 'comment_id': 688337807.0, 'datetime': '2020-09-07 13:47:38+00:00', 'masked_author': 'username_1', 'text': ""In my opinion, the expectations should be the following:\r\n\r\n1. We are buying a machine for Isuru to use for painful builds of windows things. There are no expectations around usage beyond that. Isuru can do whatever he wants with this machine, as far as I'm concerned.\r\n2. There is no expectation that Isuru will make this machine available for other members of conda-forge. If he chooses to do so, that is his choice. If other members of conda forge need a machine for windows builds, we can do a similar vote as this one to procure a machine for them.\r\n3. There are no expectations that Isuru will return this machine at any point. As far as I'm concerned this is his machine to do whatever he wishes. If Isuru wishes to pass this machine along to another member of conda-forge, then that is his choice to do so.\r\n\r\nIn short, we are buying a machine and giving it to Isuru. It is his and he can do whatever he wishes with it.\r\n\r\nWould love to hear others opinions on this perspective."", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'wolfv', 'comment_id': 688782947.0, 'datetime': '2020-09-08 10:40:24+00:00', 'masked_author': 'username_0', 'text': 'great, it looks like this proposal was accepted 14 YES and 1 NO.', 'title': None, 'type': 'comment'}
+ {'action': 'closed', 'author': 'wolfv', 'comment_id': None, 'datetime': '2020-09-08 10:40:24+00:00', 'masked_author': 'username_0', 'text': '', 'title': None, 'type': 'issue'}
+ {'action': 'created', 'author': 'mbargull', 'comment_id': 688957378.0, 'datetime': '2020-09-08 15:32:07+00:00', 'masked_author': 'username_7', 'text': ""Yes, please. To me it is not clear what terms, expectations, prerequisites are intended.\r\n(But I'd also like Isuru to have a Windows machine as soon as possible and largely agree with what Eric wrote.)"", 'title': None, 'type': 'comment'}]","<issue_start><issue_comment>Title: Spending proposal: donate windows build machine to Isuru
+username_0: This is a spending proposal to allocate $1500 for a Windows build machine to donate to Isuru to help conda-forge for long running builds on Windows. My proposal is for conda-forge to buy the hardware from our available funds, and donate it to Isuru, in full trust that the hardware will be put to good use.
+There are no requirements for this machine to be available for other conda-forge members, but it would be appreciated if the hardware is returned to conda-forge if Isuru decides to cease contributing to conda-forge. After the three year cut off date, the machine is written off.
+<issue_comment>username_1: Not really related to this proposal, but does it make sense to keep a record of these things somewhere? Maybe in our conda-forge google drive somewhere?
+
+This falls under the ""Spending of funds"", requiring a 50% majority to pass. Given we have 22 members of core (according to core.csv) this means we need 12 votes to pass.
+<issue_comment>username_2: When does the vote end? In a week?
+<issue_comment>username_0: sorry for missing the formalities, thanks both!
+
+Yes 1 week from now sounds good, voting  will end on 8th of September 6 PM GMT+2
+
+As @username_1 said, 50% majority required.
+<issue_comment>username_3: @conda-forge/core
+<issue_comment>username_4: I have a machine that I can donate. Conda forge would need to pay for
+shipping and a windows license. Maybe a bigger, newer SSD to speed things
+up.
+
+The box I have:
+HP z820
+2x xeon e5-2687w v2 (16 total cores, 32 threads)
+256 GB ddr3
+GTX 1070
+2 TB spinning disk
+2x 250 GB 2015-era SSDs
+
+This said, $1500 would buy a much faster machine these days, though with
+less RAM. It does require windows 10 pro because of the dual cpu sockets.
+<issue_comment>username_4: I'm not sure why we have the notion of ""writing off"" here - that's a concept that applies for tax purposes. We don't deal with taxes. Is it to say that after 3 years, conda-forge will no longer ""own"" the machine, and whoever has it at that time is free to repurpose it?
+
+While I trust that Isuru would absolutely use this computer in meaningful ways, I think that language around this being a dedicated community resource would be helpful. Perhaps we should name a primary custodian (Isuru) and ask that the primary custodian coordinate remote access for anyone else who might need the machine.
+
+These are things that I think we implicitly agree on, but explicit is better than implicit, right?
+<issue_comment>username_5: I agree @username_4.
+<issue_comment>username_0: @msaharan yes, your interpretation is what I wanted to say.
+I think as a community we have no means to enforce what happens to that hardware anyways, and I think 3 years is a good timeframe for a computer. If it's ""returned"" (where to, actually?) after that it's just going to rot away in someone else's basement.
+
+Also regarding remote access I think it wouldn't be a great idea to have any expectations. It is a hassle to set up and maintain. Additionally if this computer lives inside someone's home it has access to the network, private files etc. which isn't great.
+At QuantStack we have a fast computer that we intended as a build machine and it's constantly down. If we want something that's constantly running we should buy that as a service from elsewhere (i.e. a datacenter).
+I think people should be able to nicely ask for remote access but not really expect it to be granted or for it to be available 24/7. That would be up to Isuru to decide.
+
+IMO the easiest setup is to just ""give"" the hardware without any constraints (just as companies ""give"" conda-forge money without any constraints :) Companies trust us to do the right thing with their donation and I think we can trust @isuruf to do the right thing with conda-forge's donation. 
+
+But this is my opinion. If this proposal doesn't get enough votes I am happy to support another proposal that includes your language.
+
+Also I think your hardware looks very powerful! IMO it's up to Isuru to decide if he wants to go with your offer or buy something from scratch.
+<issue_comment>username_6: Windows 10 pro licenses are pretty cheap
+<issue_comment>username_0: today is the last day to vote! Would be great if whoever hasn't voted could give their thumbs-up or thumbs-down 👍 👎 
+
+@username_5 @username_4 if you are not happy with the language, do you want to copy-paste this proposal and make a new vote with your points added? I am happy to vote in favour of yours if that has more potential to reach a majority. 
+
+I just wanted to propose something with minimal overhead for everyone involved as we're all short on time, and this idea with a three-year no strings attached donation seems like it will be the simplest solution (as opposed to also have to maintain some computer that can be accessed at any time by core-members).
+<issue_comment>username_5: Thank you for the note @username_0. This vote has reached quorum (11/22, kkrause14 is not eligible to vote iiuic) and has thus passed. Therefore I do not want to make a new vote. Nor would I change the language on this one since voting is timeconsuming anyways. While I do think the language should be improved, I also think we are all in general agreement on the intent of the proposal. I hope we can take more care with the language/wording in the future.
+<issue_comment>username_0: If @username_1 is correct, then it should only pass with 12 votes. Just in case.
+<issue_comment>username_5: Ack right. Good catch. I expect it will pass anyway, so I will hold off. If it does not pass, I am happy to make a new one with improved language.
+<issue_comment>username_5: Just for the record, I have voted no for the reasons stated above.
+<issue_comment>username_1: In my opinion, the expectations should be the following:
+
+1. We are buying a machine for Isuru to use for painful builds of windows things. There are no expectations around usage beyond that. Isuru can do whatever he wants with this machine, as far as I'm concerned.
+2. There is no expectation that Isuru will make this machine available for other members of conda-forge. If he chooses to do so, that is his choice. If other members of conda forge need a machine for windows builds, we can do a similar vote as this one to procure a machine for them.
+3. There are no expectations that Isuru will return this machine at any point. As far as I'm concerned this is his machine to do whatever he wishes. If Isuru wishes to pass this machine along to another member of conda-forge, then that is his choice to do so.
+
+In short, we are buying a machine and giving it to Isuru. It is his and he can do whatever he wishes with it.
+
+Would love to hear others opinions on this perspective.
+<issue_comment>username_0: great, it looks like this proposal was accepted 14 YES and 1 NO.<issue_closed>
+<issue_comment>username_7: Yes, please. To me it is not clear what terms, expectations, prerequisites are intended.
+(But I'd also like Isuru to have a Windows machine as soon as possible and largely agree with what Eric wrote.)"
+kubernetes/website,919020108,28376,"{'number': 28376.0, 'repo': 'website', 'user_login': 'kubernetes'}","[{'action': 'opened', 'author': 'ystkfujii', 'comment_id': None, 'datetime': '2021-06-11T17:33:56Z', 'masked_author': 'username_0', 'text': '', 'title': 'Update for issue #28270', 'type': 'issue'}
+ {'action': 'created', 'author': 'kbhawkey', 'comment_id': 860073015.0, 'datetime': '2021-06-12 16:01:56+00:00', 'masked_author': 'username_1', 'text': '/retitle [ja] Update OpenID Connect Flow diagram', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'atoato88', 'comment_id': 860324813.0, 'datetime': '2021-06-14 02:25:58+00:00', 'masked_author': 'username_2', 'text': 'Is this PR for resolving [#28270](https://github.com/kubernetes/website/issues/28270)?\r\nIf so, please update description for this PR like [this](https://github.com/kubernetes/website/pull/28181#issue-657763019) or [this](https://github.com/kubernetes/website/pull/28371#issue-667861413)?\r\n\r\nWe should link this PR to the related issue at least for smooth reviewing.', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'ystkfujii', 'comment_id': 860331364.0, 'datetime': '2021-06-14 02:56:26+00:00', 'masked_author': 'username_0', 'text': 'Thanks for your comment.\r\nThe description has been updated.', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'atoato88', 'comment_id': 861840355.0, 'datetime': '2021-06-15 21:19:48+00:00', 'masked_author': 'username_2', 'text': '[As bot said](https://github.com/kubernetes/website/pull/28376#issuecomment-859735645), you can assign reviewers for approving this PR.\r\nMy power is LGTM only. :sweat_smile:', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'inductor', 'comment_id': 861860123.0, 'datetime': '2021-06-15 21:54:02+00:00', 'masked_author': 'username_3', 'text': 'もとの英語的にこのほうがよさそう', 'title': None, 'type': 'comment'}]","<issue_start><issue_comment>Title: Update for issue #28270
+username_0: 
+<issue_comment>username_1: /retitle [ja] Update OpenID Connect Flow diagram
+<issue_comment>username_2: Is this PR for resolving [#28270](https://github.com/kubernetes/website/issues/28270)?
+If so, please update description for this PR like [this](https://github.com/kubernetes/website/pull/28181#issue-657763019) or [this](https://github.com/kubernetes/website/pull/28371#issue-667861413)?
+
+We should link this PR to the related issue at least for smooth reviewing.
+<issue_comment>username_0: Thanks for your comment.
+The description has been updated.
+<issue_comment>username_2: [As bot said](https://github.com/kubernetes/website/pull/28376#issuecomment-859735645), you can assign reviewers for approving this PR.
+My power is LGTM only. :sweat_smile:
+<issue_comment>username_3: もとの英語的にこのほうがよさそう"
+facebook/docusaurus,533719276,2092,"{'number': 2092.0, 'repo': 'docusaurus', 'user_login': 'facebook'}","[{'action': 'opened', 'author': 'qshiwu', 'comment_id': None, 'datetime': '2019-12-06T03:11:22Z', 'masked_author': 'username_0', 'text': '<!--\r\nThank you for sending the PR! We appreciate you spending the time to work on these changes.\r\n\r\nHelp us understand your motivation by explaining why you decided to make this change.\r\n\r\nYou can learn more about contributing to Docusaurus here: https://github.com/facebook/docusaurus/blob/master/CONTRIBUTING.md\r\n\r\nHappy contributing!\r\n\r\n-->\r\n\r\n## Motivation\r\n\r\nWe just released Bottender 1.0: An Elegant, Robust, and Powerful Chatbot Framework. Thanks to **docusaurus** offers us a fantastic way to create the document site!\r\n\r\n\r\n### Have you read the [Contributing Guidelines on pull requests](https://github.com/facebook/docusaurus/blob/master/CONTRIBUTING.md#pull-requests)?\r\n\r\n(Write your answer here.)\r\n\r\n## Test Plan\r\n\r\n(Write your test plan here. If you changed any code, please provide us with clear instructions on how you verified your changes work. Bonus points for screenshots and videos!)\r\n\r\n## Related PRs\r\n\r\n(If this PR adds or changes functionality, please take some time to update the docs at https://github.com/facebook/docusaurus, and link to your PR here.)', 'title': 'add Bottender', 'type': 'issue'}
+ {'action': 'created', 'author': 'qshiwu', 'comment_id': 562428561.0, 'datetime': '2019-12-06 04:35:03+00:00', 'masked_author': 'username_0', 'text': 'Hello @username_1 \r\n\r\nThanks for the instant review :)  `docusaurus` is a fantastic tool!! \r\n\r\nTwo weeks ago, we had a talk about Bottender in a developer meetup. After our talk, audiences are more curious about `docusaurus` than Bottender.\r\n\r\nAnother doc site of UI package of YOCTOL is migrating to `docusaurus v2`. We will let you know when the doc site is online!\r\n\r\np.s. We are curious how do you know YOCTOL is a Taiwan based company :)', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'yangshun', 'comment_id': 562429100.0, 'datetime': '2019-12-06 04:38:40+00:00', 'masked_author': 'username_1', 'text': 'Because I follow @username_2 😄', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'chentsulin', 'comment_id': 562431410.0, 'datetime': '2019-12-06 04:51:41+00:00', 'masked_author': 'username_2', 'text': ""It's my pleasure. 😄We all love Docusaurus. \r\nBTW, I am following you too 😂"", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'yangshun', 'comment_id': 562436399.0, 'datetime': '2019-12-06 05:19:25+00:00', 'masked_author': 'username_1', 'text': 'The pleasure is mine! How about I send you guys some Facebook and Docusaurus stickers? If you are keen please send me the mailing address at kenaa@example.com 😄', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'endiliey', 'comment_id': 562436738.0, 'datetime': '2019-12-06 05:21:13+00:00', 'masked_author': 'username_3', 'text': 'Nice website 😉', 'title': None, 'type': 'comment'}]","<issue_start><issue_comment>Title: add Bottender
+username_0: <!--
+Thank you for sending the PR! We appreciate you spending the time to work on these changes.
+
+Help us understand your motivation by explaining why you decided to make this change.
+
+You can learn more about contributing to Docusaurus here: https://github.com/facebook/docusaurus/blob/master/CONTRIBUTING.md
+
+Happy contributing!
+
+-->
+
+## Motivation
+
+We just released Bottender 1.0: An Elegant, Robust, and Powerful Chatbot Framework. Thanks to **docusaurus** offers us a fantastic way to create the document site!
+
+
+### Have you read the [Contributing Guidelines on pull requests](https://github.com/facebook/docusaurus/blob/master/CONTRIBUTING.md#pull-requests)?
+
+(Write your answer here.)
+
+## Test Plan
+
+(Write your test plan here. If you changed any code, please provide us with clear instructions on how you verified your changes work. Bonus points for screenshots and videos!)
+
+## Related PRs
+
+(If this PR adds or changes functionality, please take some time to update the docs at https://github.com/facebook/docusaurus, and link to your PR here.)
+<issue_comment>username_0: Hello @username_1 
+
+Thanks for the instant review :)  `docusaurus` is a fantastic tool!! 
+
+Two weeks ago, we had a talk about Bottender in a developer meetup. After our talk, audiences are more curious about `docusaurus` than Bottender.
+
+Another doc site of UI package of YOCTOL is migrating to `docusaurus v2`. We will let you know when the doc site is online!
+
+p.s. We are curious how do you know YOCTOL is a Taiwan based company :)
+<issue_comment>username_1: Because I follow @username_2 😄
+<issue_comment>username_2: It's my pleasure. 😄We all love Docusaurus. 
+BTW, I am following you too 😂
+<issue_comment>username_1: The pleasure is mine! How about I send you guys some Facebook and Docusaurus stickers? If you are keen please send me the mailing address at username_1@fb.com 😄
+<issue_comment>username_3: Nice website 😉"
+appveyor/website,287957298,407,,"[{'action': 'opened', 'author': 'roozbehid-ic', 'comment_id': None, 'datetime': '2018-01-11 23:15:09+00:00', 'masked_author': 'username_0', 'text': 'In deployment page, hostnames are all upper case.\r\nIt would help if you can show them how they are and preserve the cases.\r\nthese hostnames are reported from our Appveyor Agent application.', 'title': 'Deployment page should list hosts names as they are', 'type': 'issue'}
+ {'action': 'created', 'author': 'IlyaFinkelshteyn', 'comment_id': 357096896.0, 'datetime': '2018-01-11 23:36:49+00:00', 'masked_author': 'username_1', 'text': 'Could you provide more details? Is it about hostnames reported in the deployment log?', 'title': None, 'type': 'comment'}
+ {'action': 'closed', 'author': 'IlyaFinkelshteyn', 'comment_id': None, 'datetime': '2018-01-13 01:18:21+00:00', 'masked_author': 'username_1', 'text': '', 'title': None, 'type': 'issue'}
+ {'action': 'created', 'author': 'IlyaFinkelshteyn', 'comment_id': 357397888.0, 'datetime': '2018-01-13 01:18:21+00:00', 'masked_author': 'username_1', 'text': 'AppVeyor displays what [Environment.MachineName](https://msdn.microsoft.com/en-us/library/system.environment.machinename(v=vs.110).aspx) returns on the Agent machine. Please check what `[System.Environment]::MachineName` in PowerShell to verify.\r\n\r\nI am closing this ticket. Feel free to reopen if I am not correct.', 'title': None, 'type': 'comment'}]","<issue_start><issue_comment>Title: Deployment page should list hosts names as they are
+username_0: In deployment page, hostnames are all upper case.
+It would help if you can show them how they are and preserve the cases.
+these hostnames are reported from our Appveyor Agent application.
+<issue_comment>username_1: Could you provide more details? Is it about hostnames reported in the deployment log?<issue_closed>
+<issue_comment>username_1: AppVeyor displays what [Environment.MachineName](https://msdn.microsoft.com/en-us/library/system.environment.machinename(v=vs.110).aspx) returns on the Agent machine. Please check what `[System.Environment]::MachineName` in PowerShell to verify.
+
+I am closing this ticket. Feel free to reopen if I am not correct."
+facebook/react-native-website,557218868,1569,,"[{'action': 'opened', 'author': 'baughmann', 'comment_id': None, 'datetime': '2020-01-30 01:44:34+00:00', 'masked_author': 'username_0', 'text': ""I'm really not sure even what to say. If asked, I could dig through my code and try to find some of the things that I've noticed. The latest is [this issue regarding `subview` frames in iOS](https://github.com/facebook/react-native/issues/15097). This is not the first time I've found myself saved by a several-year-old GitHub issue thread.\r\n\r\nMy limited knowledge on building and incorporating naive components and modules is based about 2% on the documentation, 80% on random Stack Overflow questions and Medium articles, and 18% on trial-and-error.\r\n\r\nI would really, really like to help. Please tell me how I can? Empowering the community to write more native integrations would be a really good thing!"", 'title': 'Docs: Native Component Documentation. What documentation?', 'type': 'issue'}]","<issue_start><issue_comment>Title: Docs: Native Component Documentation. What documentation?
+username_0: I'm really not sure even what to say. If asked, I could dig through my code and try to find some of the things that I've noticed. The latest is [this issue regarding `subview` frames in iOS](https://github.com/facebook/react-native/issues/15097). This is not the first time I've found myself saved by a several-year-old GitHub issue thread.
+
+My limited knowledge on building and incorporating naive components and modules is based about 2% on the documentation, 80% on random Stack Overflow questions and Medium articles, and 18% on trial-and-error.
+
+I would really, really like to help. Please tell me how I can? Empowering the community to write more native integrations would be a really good thing!"

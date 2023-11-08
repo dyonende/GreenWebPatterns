@@ -1,0 +1,943 @@
+gohugoio/hugo,375250851,5377,,"[{'action': 'opened', 'author': 'athanp', 'comment_id': None, 'datetime': '2018-10-29 22:57:23+00:00', 'masked_author': 'username_0', 'text': 'When Hugo runs under Windows 10 powershell (or legacy command shell) it prints non sense ANSI escape sequences before and after ""Building sites"" message\r\n\r\n`e[K25lBuilding sites … e[?25h`', 'title': 'Hugo prints escape chars when running in Windows shell', 'type': 'issue'}
+ {'action': 'created', 'author': 'GregorioMartinez', 'comment_id': 434548768.0, 'datetime': '2018-10-31 03:28:56+00:00', 'masked_author': 'username_1', 'text': 'Since Windows 10.1607 it looks like we need to set `ENABLE_VIRTUAL_TERMINAL_PROCESSING`  using `SetConsoleMode` if we want ANSI support.\r\n\r\nPrevious builds had it enabled by default (Windows 10.1511) and older versions did not support it.\r\n\r\nHere is some of the docs I found on this:\r\n\r\n- https://docs.microsoft.com/en-us/windows/console/console-virtual-terminal-sequences\r\n- https://docs.microsoft.com/en-us/windows/console/getconsolemode#ENABLE_VIRTUAL_TERMINAL_PROCESSING', 'title': None, 'type': 'comment'}
+ {'action': 'closed', 'author': 'bep', 'comment_id': None, 'datetime': '2018-11-02 08:09:11+00:00', 'masked_author': 'username_2', 'text': '', 'title': None, 'type': 'issue'}]","<issue_start><issue_comment>Title: Hugo prints escape chars when running in Windows shell
+username_0: When Hugo runs under Windows 10 powershell (or legacy command shell) it prints non sense ANSI escape sequences before and after ""Building sites"" message
+
+`e[K25lBuilding sites … e[?25h`
+<issue_comment>username_1: Since Windows 10.1607 it looks like we need to set `ENABLE_VIRTUAL_TERMINAL_PROCESSING`  using `SetConsoleMode` if we want ANSI support.
+
+Previous builds had it enabled by default (Windows 10.1511) and older versions did not support it.
+
+Here is some of the docs I found on this:
+
+- https://docs.microsoft.com/en-us/windows/console/console-virtual-terminal-sequences
+- https://docs.microsoft.com/en-us/windows/console/getconsolemode#ENABLE_VIRTUAL_TERMINAL_PROCESSING<issue_closed>"
+kubernetes/website,477915980,15720,,"[{'action': 'opened', 'author': 'ZamanOof', 'comment_id': None, 'datetime': '2019-08-07 13:03:10+00:00', 'masked_author': 'username_0', 'text': ""Hello,\r\nI'm not sure if it's can Called Bug,\r\nwhen running the command on GIT\r\n`kubectl exec -ti $POD_NAME bash\r\n`Result:\r\n`Unable to use a TTY - input is not a terminal or the right kind of file\r\n`The solution : \r\nrun it on **PowerShell**\r\nOn:\r\nWindows env (10,7)\r\nReferences:\r\nhttps://github.com/microsoft/WSL/issues/2271\r\nhttps://github.com/kubernetes/kubernetes/issues/37471\r\nBest Regards"", 'title': 'Issue with k8s.io/docs/tutorials/kubernetes-basics/explore/explore-interactive/', 'type': 'issue'}
+ {'action': 'created', 'author': 'thecrudge', 'comment_id': 520172958.0, 'datetime': '2019-08-10 19:13:38+00:00', 'masked_author': 'username_1', 'text': '/sig windows\r\n\r\n@kubernetes/sig-windows-misc can someone look at this?\r\n\r\n@username_0 This brings up a good question as to whether or not we should have both powershell and gitbash represented. If so, then where does it end?', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'sftim', 'comment_id': 541447470.0, 'datetime': '2019-10-13 19:02:07+00:00', 'masked_author': 'username_2', 'text': ""@username_0 do you have an idea about what should change about this webpage to make it work better for readers with Windows systems?\r\n\r\n(I wonder if the simplest explanation is that these commands assume you're using Linux)"", 'title': None, 'type': 'comment'}]","<issue_start><issue_comment>Title: Issue with k8s.io/docs/tutorials/kubernetes-basics/explore/explore-interactive/
+username_0: Hello,
+I'm not sure if it's can Called Bug,
+when running the command on GIT
+`kubectl exec -ti $POD_NAME bash
+`Result:
+`Unable to use a TTY - input is not a terminal or the right kind of file
+`The solution : 
+run it on **PowerShell**
+On:
+Windows env (10,7)
+References:
+https://github.com/microsoft/WSL/issues/2271
+https://github.com/kubernetes/kubernetes/issues/37471
+Best Regards
+<issue_comment>username_1: /sig windows
+
+@kubernetes/sig-windows-misc can someone look at this?
+
+@username_0 This brings up a good question as to whether or not we should have both powershell and gitbash represented. If so, then where does it end?
+<issue_comment>username_2: @username_0 do you have an idea about what should change about this webpage to make it work better for readers with Windows systems?
+
+(I wonder if the simplest explanation is that these commands assume you're using Linux)"
+gohugoio/hugo,262438060,3934,"{'number': 3934.0, 'repo': 'hugo', 'user_login': 'gohugoio'}","[{'action': 'opened', 'author': 'jamieconnolly', 'comment_id': None, 'datetime': '2017-10-03T13:55:16Z', 'masked_author': 'username_0', 'text': ""It lives behind a `trimTrailingSlash` option in `config.toml`. There is no CLI flag for this option.\r\n\r\nIt works by hooking into the `uglyURLs` functionality and then stripping out the `.html` suffix when generating URLs. This means it generates `/filename.html` files rather than `/filename/index.html`. It also handles when there's no trailing slash in the page's URL when set through the front matter.\r\n\r\nIt's all been tested, but if there are any I've missed please let me know.\r\n\r\nI've documented the option in my fork of hugoDocs. I'll create a PR if/when this progresses.\r\n\r\nSee #3556 and https://discuss.gohugo.io/t/links-without-a-trailing-slash/831."", 'title': 'Add an option to trim trailing slashes from URLs', 'type': 'issue'}
+ {'action': 'created', 'author': 'jamieconnolly', 'comment_id': 335008011.0, 'datetime': '2017-10-08 13:52:01+00:00', 'masked_author': 'username_0', 'text': 'I forgot to mention that this is now ready to review.', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'betaveros', 'comment_id': 342394011.0, 'datetime': '2017-11-07 07:05:37+00:00', 'masked_author': 'username_1', 'text': ""Any updates on this? I'd love to see this feature in Hugo."", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'DandyDev', 'comment_id': 346905690.0, 'datetime': '2017-11-24 23:22:10+00:00', 'masked_author': 'username_2', 'text': ""I'd love to see this merged. I want to migrate my website from Pelican to Hugo, but I want to keep the URLs in tact. And those URLs currently don't have trailing slashes."", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'bep', 'comment_id': 346907913.0, 'datetime': '2017-11-25 00:05:22+00:00', 'masked_author': 'username_3', 'text': ""I will have to think about this one. The change set was a little bit bigger than I imagined. It looks correct, but I'm not sure I'm willing to maintain such a feature."", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'DandyDev', 'comment_id': 346908350.0, 'datetime': '2017-11-25 00:13:56+00:00', 'masked_author': 'username_2', 'text': ""With the risk of reopening the whole discussion I saw on Discourse: I understand why the way Hugo currently works is really convenient, because it requires no changes to your webserver. But the reasoning behind the trailing slash just isn't valid 100% of the time.\r\nIf you don't need to have a separate directory per blog post, because you have no need for extra files (images, different formats, etc.), you should be able to generate a `.html` file per blog post, all in 1 directory. And in that case, trailing slashes would be breaking the rules.\r\n\r\nThis is my current setup in Pelican:\r\n\r\n```\r\nblog/post-1.html -> https://example.com/blog/post-1\r\nblog/post-2.html -> https://example.com/blog/post-2\r\n...\r\n```\r\nNGINX is configured in such a way that it will serve `blog/post-1.html` when `blog/post-1` is requested.\r\n\r\nThis is a valid usecase I'd think, right?"", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'mapx', 'comment_id': 367888976.0, 'datetime': '2018-02-23 02:17:44+00:00', 'masked_author': 'username_4', 'text': ""It's a great feature request that worth waiting to be accepted or refused by human."", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'storix', 'comment_id': 370416196.0, 'datetime': '2018-03-05 13:19:26+00:00', 'masked_author': 'username_5', 'text': ""It seems urls w/o trailing slashes are a standard in the modern web development. For God's sake, even this very PR url is **without** a trailing slash."", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'kaushalmodi', 'comment_id': 370425162.0, 'datetime': '2018-03-05 13:51:56+00:00', 'masked_author': 'username_6', 'text': 'The ""prettiness"" definition is slightly different, but not the opposite.\r\n\r\nBoth Hugo and Netlify consider URLs ending in `.html` as Ugly. That part is consistent.\r\n\r\nThe only thing is that Hugo doesn\'t care about removing the trailing slash for non-Ugly URLs, while Netlify removes the trailing slashes too.\r\n\r\nFWIW I don\'t care much about the trailing slashes being present or not.. Why is that a big deal.. just URL aesthetics or a technical reason?', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'storix', 'comment_id': 370445861.0, 'datetime': '2018-03-05 14:59:05+00:00', 'masked_author': 'username_5', 'text': 'It\'s a big deal when you are migrating a site which was already configured with ""slashless"" urls. Search engines treat `https://example.com/blog/post/` and `https://example.com/blog/post` as different urls. Currenlty I need to search through the web for some hacks that will force Hugo to remove the trailing slashes.', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'DandyDev', 'comment_id': 410047666.0, 'datetime': '2018-08-02 19:52:44+00:00', 'masked_author': 'username_2', 'text': 'Interesting that this issue is considered ""stale"", because the maintainers just chose to ignore it. Many compelling arguments have been put forth, but apparently that is not good enough...', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'anthonyfok', 'comment_id': 415939929.0, 'datetime': '2018-08-25 05:37:54+00:00', 'masked_author': 'username_7', 'text': 'Well, things are not what they appear on the surface.  A few observations from an occasional helper:\r\n\r\n* An issue or a PR becomes stale when there is no activity on it for several months, and as you can see, the ""stale"" tag was added automatically by a bot without no human intervention.\r\n* While it is a bit sad when an issue or a PR goes stale, it serves as a wake-up call because interested parties including the original submitter will notice the ""stale"" state, and that is usually enough to spurge everyone into action, if people care about the issue/PR enough.\r\n* Hugo has gone through tremendous evolution over the past year with lots of exciting new features as well as bug fixes, and I am really amazed by what our Lead Maintainer has accomplished.  That said, all maintainers and contributors, including our Lead, are volunteers, and are human.  There is a limitation of how much one can accomplish in a day, and there are lots of issues and PRs that still need to be looked after but would have to wait due to lack of manpower.  It is like that in almost all open-source projects, so I hope you can understand.\r\n* It seems the CLA (Contributor License Agreement) isn\'t signed?  Was that the case even before this PR went stale?  If that is the case, that would be a major obstacle which prevents the PR from being accepted.\r\n* For better or for worse, 10 months have passed since the initial PR, and due to Hugo\'s major new features and refactoring, there are now merge conflicts that need to be resolved.', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'betaveros', 'comment_id': 428451733.0, 'datetime': '2018-10-10 06:20:16+00:00', 'masked_author': 'username_1', 'text': ""As you can see from the GitHub notification, I tried rebasing this PR onto master. I didn't get to rebasing all the tests yet, but the feature seems to work overall if I manually test against my own static site and, if it would be enough to get this merged, I can try to rebase the tests or write equivalent ones in a few days. (Are there licensing issues? The original author has made a PR before https://github.com/gohugoio/hugo/pull/3933 and the CLA bot reports that they signed the CLA there; I also think I signed the CLA when submitting previous PRs, but the bot no longer seems to think that I have.) I still care a good deal about this feature and consider it essential for me to use Hugo, FWIW.\r\n\r\n(Incidentally, Hugo is orders of magnitude faster for me since the rebase — kudos to the maintainers' effort!)\r\n\r\nThe diff so far is here: https://github.com/gohugoio/hugo/compare/master...username_1:trim-trailing-slash"", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'ngocketit', 'comment_id': 488832151.0, 'datetime': '2019-05-02 21:05:58+00:00', 'masked_author': 'username_8', 'text': 'Any update on this please? Having URLs with a slash is a stopper for me to migrate a site to Hugo now :(', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'hanzei', 'comment_id': 488958397.0, 'datetime': '2019-05-03 06:17:32+00:00', 'masked_author': 'username_9', 'text': '@username_8 Could you please elaborate why this is a blocker for you?', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'ngocketit', 'comment_id': 488965987.0, 'datetime': '2019-05-03 06:40:25+00:00', 'masked_author': 'username_8', 'text': ""@username_9 I intend to host the site on S3 with CloudFront and HTTPS. With the trailing slash, CloudFront fails to serve the site as it couldn't route, for example, `https://www.blabla.com/about/` to `https://www.blabla.com/about/index.html` and I don't want to use ugly URLs."", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'jloh', 'comment_id': 489035671.0, 'datetime': '2019-05-03 09:45:47+00:00', 'masked_author': 'username_10', 'text': 'It’s already possible to keep pretty URLs with CloudFront https://docs.aws.amazon.com/AmazonS3/latest/dev/IndexDocumentSupport.html', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'ngocketit', 'comment_id': 489040433.0, 'datetime': '2019-05-03 09:57:10+00:00', 'masked_author': 'username_8', 'text': ""@username_10 That wouldn't work with HTTPS I think. One workaround is maybe to use Lambda@Edge."", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'jloh', 'comment_id': 489063323.0, 'datetime': '2019-05-03 11:20:30+00:00', 'masked_author': 'username_10', 'text': '@username_8 you put CloudFront in front of S3 for HTTPS https://aws.amazon.com/premiumsupport/knowledge-center/cloudfront-https-requests-s3/', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'ngocketit', 'comment_id': 489076311.0, 'datetime': '2019-05-03 12:18:44+00:00', 'masked_author': 'username_8', 'text': ""@username_10 Of course. But the problem is CloudFront doesn't allow you to use default directory indexing so that `/about/` will be mapped to `/about/index.html`. Using Lambda@Edge could solve the issue but still it'd be nice to have this feature in Hugo."", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'jloh', 'comment_id': 493746769.0, 'datetime': '2019-05-19 10:54:12+00:00', 'masked_author': 'username_10', 'text': ""It does, I've done it before as have many other people https://www.davidbaumgold.com/tutorials/host-static-site-aws-s3-cloudfront/"", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'Mickael-van-der-Beek', 'comment_id': 494043127.0, 'datetime': '2019-05-20 15:45:37+00:00', 'masked_author': 'username_11', 'text': '@username_10 To my knowledge, the routing rules necessary to host Hugo on S3 like adding trailing slashes and using index.html as root documents means that the requests for HTML pages will always be Cloudfront misses and thus fallback to S3 that will find the find using the routing rules.', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'betaveros', 'comment_id': 501941433.0, 'datetime': '2019-06-14 02:10:26+00:00', 'masked_author': 'username_1', 'text': ""Yup, I'm still here and still consider this feature essential for me to use Hugo, now for the additional lame reason that I've been hosting my site with a custom build including this feature for long enough that I would like to preserve my URLs. Even more of the tests have failed to rebase (and I really didn't even check that the ones that I did rebase are working, so I have no idea if this code works generally at all) and maybe it should be a brand new PR at this point, but I would like a signal from the core devs as to whether this feature still has a chance at being merged before proceeding."", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'mutru', 'comment_id': 508923398.0, 'datetime': '2019-07-06 12:36:36+00:00', 'masked_author': 'username_12', 'text': ""URLs refer to resources, and a blog post or an about page is a great example of a resource. The trailing slash seems like a reasonable choice for improving compatibility with serving files from the file system, but for environments that support it, I'd love to have better semantics and cleaner URLs.\r\n\r\n@username_3 Do you think it would be realistic to get this merged, once it's rebased and the CLA is signed?"", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'DandyDev', 'comment_id': 528394152.0, 'datetime': '2019-09-05 14:36:18+00:00', 'masked_author': 'username_2', 'text': ""@username_3 can you please merge this? I'll make another case for it that should appeal to the software engineer inside you: by forcing the use of trailing slashes because the blogpost might live inside its own directory, Hugo is leaking implementation details of the website to the end-user. **A single** blogpost, is akin to a single resource, and as such should not have a trailing slash, even if in the actual implementation the blogpost is represented by a directory with some files in it.\r\n\r\nCompare it to an API: let's say we have an API that serves products. If I want to get a product with ID 3, I'd do: `/products/3`, even though all the information for that particular product might live in a directory with image files, CSVs and what not."", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'piotrradzewicz', 'comment_id': 549391085.0, 'datetime': '2019-11-04 14:55:03+00:00', 'masked_author': 'username_13', 'text': ""Hey guys! Could you resolve conflicts and merge this PR? =) I'd really appreciate it"", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'DandyDev', 'comment_id': 550499518.0, 'datetime': '2019-11-06 21:04:04+00:00', 'masked_author': 'username_2', 'text': 'Calling @username_3 to merge this', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'johnsoncodehk', 'comment_id': 554661467.0, 'datetime': '2019-11-16 18:19:07+00:00', 'masked_author': 'username_14', 'text': 'Since it has not been merged, this is a quick fix. (only change the look, not really change the url)\r\n\r\n```html\r\n<!-- Put in <header> or anywhere -->\r\n<script>window.history.replaceState("""", """", window.location.href.replace(new RegExp(""/(?!.*/)""), """"));</script>\r\n```\r\n\r\n<details>\r\n<summary>Complain</summary>\r\nIMHO, should not let users spend so much time waiting for this basic feature. The decision to force the trailing slash is obviously causing trouble for somebody. The attitude of maintainers make me feel disheartened, so I will migrate to other builder.\r\n</details>', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'maximelouet', 'comment_id': 554664252.0, 'datetime': '2019-11-16 18:55:19+00:00', 'masked_author': 'username_15', 'text': ""I personally use a custom regex-based script in order to remove the trailing slashes. Actually, I enable the [ugly URLs](https://gohugo.io/content-management/urls/#ugly-urls) option which appends `.html` to all pages instead of slashes. Then I replace all occurences of `.html` while carefully making sure I only target my own website's links and not the external ones. I execute this script against the generated `public` directory after running `hugo`.\r\n\r\nIt works quite well but it took me a while to make it work properly. It's kinda sad such a basic feature is not implemented in Hugo; a blog post should not end with a slash as it is not a directory..."", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'christian-geier', 'comment_id': 570460527.0, 'datetime': '2020-01-03 04:41:27+00:00', 'masked_author': 'username_16', 'text': 'Hi! Just curious what the status is on this ? Simply cannot believe that this is not an option. Hope this will be implemented soon...', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'RonPeters', 'comment_id': 578671183.0, 'datetime': '2020-01-27 09:53:02+00:00', 'masked_author': 'username_17', 'text': ""It is absolutely ridiculous that this is not yet an option. As rosell pointed out 2+ years ago, plenty of CMS'es offer this. https://discourse.gohugo.io/t/hugo-support-for-urls-without-a-trailing-slash/6763/3\r\nAll code is opinionated, but this is too much."", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'virgofx', 'comment_id': 583259368.0, 'datetime': '2020-02-07 06:53:46+00:00', 'masked_author': 'username_18', 'text': '@username_3 Anyway we can get a status update on this? This is very much needed!', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'bep', 'comment_id': 583271805.0, 'datetime': '2020-02-07 07:41:08+00:00', 'masked_author': 'username_3', 'text': ""I'm closing this for now. This is too big of a change for me to review/merge/maintain (I don't need this myself). We may revisit this later if/when we get more long term maintainers. This is open source: Time is limited."", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'RonPeters', 'comment_id': 583295755.0, 'datetime': '2020-02-07 08:59:26+00:00', 'masked_author': 'username_17', 'text': 'In that case, I guess I will be moving on from Hugo.', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'dcu', 'comment_id': 583855743.0, 'datetime': '2020-02-09 15:09:37+00:00', 'masked_author': 'username_19', 'text': ""when hosting on Cloudfront + S3, it doesn't use `index.html` for subdirectories so a common hack is copying `foo/index.html` to `foo` to simulate it... but it doesn't work with trailing slashes\r\nis there an alternative? (different than using lambda edge which is hack as well)"", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'jloh', 'comment_id': 583902313.0, 'datetime': '2020-02-09 22:36:30+00:00', 'masked_author': 'username_10', 'text': '@username_19 yes, point CF at your S3 static website URL and not directly at the bucket. https://www.reddit.com/r/aws/comments/68on7h/indexhtml_in_subfolders_via_cloudfront/', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'betaveros', 'comment_id': 583963879.0, 'datetime': '2020-02-10 05:38:08+00:00', 'masked_author': 'username_1', 'text': 'Sad to hear but understandable. FWIW I will probably be ""maintaining"" this feature by rebasing it onto my fork for as long as it\'s not too hard (no conflicts since when I last did this 8 months ago), with the caveat that there are basically no code tests left (doesn\'t seem worth it if it won\'t be merged; my standard for it working is ""nothing breaks when I click around my blog"").', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'virgofx', 'comment_id': 584232237.0, 'datetime': '2020-02-10 17:16:07+00:00', 'masked_author': 'username_18', 'text': 'Just to clarify -- it does seem like 95% of the work is already done. @username_3 if the PR is updated with new tests would you consider merging this? (would you prefer a new PR?) It just basically allows an option as a flag.', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'sdwolfz', 'comment_id': 603535459.0, 'datetime': '2020-03-24 22:21:48+00:00', 'masked_author': 'username_20', 'text': ""Just wanted to let you know that I'm also interested in this functionality, but I don't have the knowledge to take over and improve this PR :disappointed: ."", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'CrazyOptimist', 'comment_id': 698614101.0, 'datetime': '2020-09-24 22:08:04+00:00', 'masked_author': 'username_21', 'text': '+1 here\r\nI also want this func!', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'sdwolfz', 'comment_id': 699035107.0, 'datetime': '2020-09-25 16:46:42+00:00', 'masked_author': 'username_20', 'text': 'So I tried adding support for this in GitLab pages a long time ago but I did not have time to work in it further, see: https://gitlab.com/gitlab-org/gitlab-pages/-/merge_requests/259 my plan was to start working on this after the former MR was merged. I might look into this in the future but my hands are tied these days. Still want this functionality though.', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'Hans5958', 'comment_id': 733700301.0, 'datetime': '2020-11-25 13:16:44+00:00', 'masked_author': 'username_22', 'text': '+1, if Jekyll does it and Netlify does it, why not Hugo?', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'joaopgrassi', 'comment_id': 738343472.0, 'datetime': '2020-12-03 21:56:42+00:00', 'masked_author': 'username_23', 'text': ""@username_22 curious on how you said GitHub pages won't do the trailing slash? Just hosted there now and I have them.. curious on what you did?"", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'Hans5958', 'comment_id': 739215191.0, 'datetime': '2020-12-05 10:58:03+00:00', 'masked_author': 'username_22', 'text': ""@username_23 That is just a theory. I didn't test it so don't take my word from it."", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'joaopgrassi', 'comment_id': 739287787.0, 'datetime': '2020-12-05 15:19:32+00:00', 'masked_author': 'username_23', 'text': ""@username_22 ah ok.. well I can tell you that it does have the trailing slash on my blog hosted on gh-pages. So there's that :)"", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'BDHU', 'comment_id': 821004686.0, 'datetime': '2021-04-16 08:15:40+00:00', 'masked_author': 'username_24', 'text': ""Great. I was trying to move everything from Jekyll to Hugo and noticed there's this trailing slash I can't get rid of. Now the hell is let loose and it just added extra work for me to update all url. The reason I picked Hugo in the first place was so that my life would get easier, not harder..."", 'title': None, 'type': 'comment'}]","<issue_start><issue_comment>Title: Add an option to trim trailing slashes from URLs
+username_0: It lives behind a `trimTrailingSlash` option in `config.toml`. There is no CLI flag for this option.
+
+It works by hooking into the `uglyURLs` functionality and then stripping out the `.html` suffix when generating URLs. This means it generates `/filename.html` files rather than `/filename/index.html`. It also handles when there's no trailing slash in the page's URL when set through the front matter.
+
+It's all been tested, but if there are any I've missed please let me know.
+
+I've documented the option in my fork of hugoDocs. I'll create a PR if/when this progresses.
+
+See #3556 and https://discuss.gohugo.io/t/links-without-a-trailing-slash/831.
+<issue_comment>username_0: I forgot to mention that this is now ready to review.
+<issue_comment>username_1: Any updates on this? I'd love to see this feature in Hugo.
+<issue_comment>username_2: I'd love to see this merged. I want to migrate my website from Pelican to Hugo, but I want to keep the URLs in tact. And those URLs currently don't have trailing slashes.
+<issue_comment>username_3: I will have to think about this one. The change set was a little bit bigger than I imagined. It looks correct, but I'm not sure I'm willing to maintain such a feature.
+<issue_comment>username_2: With the risk of reopening the whole discussion I saw on Discourse: I understand why the way Hugo currently works is really convenient, because it requires no changes to your webserver. But the reasoning behind the trailing slash just isn't valid 100% of the time.
+If you don't need to have a separate directory per blog post, because you have no need for extra files (images, different formats, etc.), you should be able to generate a `.html` file per blog post, all in 1 directory. And in that case, trailing slashes would be breaking the rules.
+
+This is my current setup in Pelican:
+
+```
+blog/post-1.html -> https://example.com/blog/post-1
+blog/post-2.html -> https://example.com/blog/post-2
+...
+```
+NGINX is configured in such a way that it will serve `blog/post-1.html` when `blog/post-1` is requested.
+
+This is a valid usecase I'd think, right?
+<issue_comment>username_4: It's a great feature request that worth waiting to be accepted or refused by human.
+<issue_comment>username_5: It seems urls w/o trailing slashes are a standard in the modern web development. For God's sake, even this very PR url is **without** a trailing slash.
+<issue_comment>username_6: The ""prettiness"" definition is slightly different, but not the opposite.
+
+Both Hugo and Netlify consider URLs ending in `.html` as Ugly. That part is consistent.
+
+The only thing is that Hugo doesn't care about removing the trailing slash for non-Ugly URLs, while Netlify removes the trailing slashes too.
+
+FWIW I don't care much about the trailing slashes being present or not.. Why is that a big deal.. just URL aesthetics or a technical reason?
+<issue_comment>username_5: It's a big deal when you are migrating a site which was already configured with ""slashless"" urls. Search engines treat `https://example.com/blog/post/` and `https://example.com/blog/post` as different urls. Currenlty I need to search through the web for some hacks that will force Hugo to remove the trailing slashes.
+<issue_comment>username_2: Interesting that this issue is considered ""stale"", because the maintainers just chose to ignore it. Many compelling arguments have been put forth, but apparently that is not good enough...
+<issue_comment>username_7: Well, things are not what they appear on the surface.  A few observations from an occasional helper:
+
+* An issue or a PR becomes stale when there is no activity on it for several months, and as you can see, the ""stale"" tag was added automatically by a bot without no human intervention.
+* While it is a bit sad when an issue or a PR goes stale, it serves as a wake-up call because interested parties including the original submitter will notice the ""stale"" state, and that is usually enough to spurge everyone into action, if people care about the issue/PR enough.
+* Hugo has gone through tremendous evolution over the past year with lots of exciting new features as well as bug fixes, and I am really amazed by what our Lead Maintainer has accomplished.  That said, all maintainers and contributors, including our Lead, are volunteers, and are human.  There is a limitation of how much one can accomplish in a day, and there are lots of issues and PRs that still need to be looked after but would have to wait due to lack of manpower.  It is like that in almost all open-source projects, so I hope you can understand.
+* It seems the CLA (Contributor License Agreement) isn't signed?  Was that the case even before this PR went stale?  If that is the case, that would be a major obstacle which prevents the PR from being accepted.
+* For better or for worse, 10 months have passed since the initial PR, and due to Hugo's major new features and refactoring, there are now merge conflicts that need to be resolved.
+<issue_comment>username_1: As you can see from the GitHub notification, I tried rebasing this PR onto master. I didn't get to rebasing all the tests yet, but the feature seems to work overall if I manually test against my own static site and, if it would be enough to get this merged, I can try to rebase the tests or write equivalent ones in a few days. (Are there licensing issues? The original author has made a PR before https://github.com/gohugoio/hugo/pull/3933 and the CLA bot reports that they signed the CLA there; I also think I signed the CLA when submitting previous PRs, but the bot no longer seems to think that I have.) I still care a good deal about this feature and consider it essential for me to use Hugo, FWIW.
+
+(Incidentally, Hugo is orders of magnitude faster for me since the rebase — kudos to the maintainers' effort!)
+
+The diff so far is here: https://github.com/gohugoio/hugo/compare/master...username_1:trim-trailing-slash
+<issue_comment>username_8: Any update on this please? Having URLs with a slash is a stopper for me to migrate a site to Hugo now :(
+<issue_comment>username_9: @username_8 Could you please elaborate why this is a blocker for you?
+<issue_comment>username_8: @username_9 I intend to host the site on S3 with CloudFront and HTTPS. With the trailing slash, CloudFront fails to serve the site as it couldn't route, for example, `https://www.blabla.com/about/` to `https://www.blabla.com/about/index.html` and I don't want to use ugly URLs.
+<issue_comment>username_10: It’s already possible to keep pretty URLs with CloudFront https://docs.aws.amazon.com/AmazonS3/latest/dev/IndexDocumentSupport.html
+<issue_comment>username_8: @username_10 That wouldn't work with HTTPS I think. One workaround is maybe to use Lambda@Edge.
+<issue_comment>username_10: @username_8 you put CloudFront in front of S3 for HTTPS https://aws.amazon.com/premiumsupport/knowledge-center/cloudfront-https-requests-s3/
+<issue_comment>username_8: @username_10 Of course. But the problem is CloudFront doesn't allow you to use default directory indexing so that `/about/` will be mapped to `/about/index.html`. Using Lambda@Edge could solve the issue but still it'd be nice to have this feature in Hugo.
+<issue_comment>username_10: It does, I've done it before as have many other people https://www.davidbaumgold.com/tutorials/host-static-site-aws-s3-cloudfront/
+<issue_comment>username_11: @username_10 To my knowledge, the routing rules necessary to host Hugo on S3 like adding trailing slashes and using index.html as root documents means that the requests for HTML pages will always be Cloudfront misses and thus fallback to S3 that will find the find using the routing rules.
+<issue_comment>username_1: Yup, I'm still here and still consider this feature essential for me to use Hugo, now for the additional lame reason that I've been hosting my site with a custom build including this feature for long enough that I would like to preserve my URLs. Even more of the tests have failed to rebase (and I really didn't even check that the ones that I did rebase are working, so I have no idea if this code works generally at all) and maybe it should be a brand new PR at this point, but I would like a signal from the core devs as to whether this feature still has a chance at being merged before proceeding.
+<issue_comment>username_12: URLs refer to resources, and a blog post or an about page is a great example of a resource. The trailing slash seems like a reasonable choice for improving compatibility with serving files from the file system, but for environments that support it, I'd love to have better semantics and cleaner URLs.
+
+@username_3 Do you think it would be realistic to get this merged, once it's rebased and the CLA is signed?
+<issue_comment>username_2: @username_3 can you please merge this? I'll make another case for it that should appeal to the software engineer inside you: by forcing the use of trailing slashes because the blogpost might live inside its own directory, Hugo is leaking implementation details of the website to the end-user. **A single** blogpost, is akin to a single resource, and as such should not have a trailing slash, even if in the actual implementation the blogpost is represented by a directory with some files in it.
+
+Compare it to an API: let's say we have an API that serves products. If I want to get a product with ID 3, I'd do: `/products/3`, even though all the information for that particular product might live in a directory with image files, CSVs and what not.
+<issue_comment>username_13: Hey guys! Could you resolve conflicts and merge this PR? =) I'd really appreciate it
+<issue_comment>username_2: Calling @username_3 to merge this
+<issue_comment>username_14: Since it has not been merged, this is a quick fix. (only change the look, not really change the url)
+
+```html
+<!-- Put in <header> or anywhere -->
+<script>window.history.replaceState("""", """", window.location.href.replace(new RegExp(""/(?!.*/)""), """"));</script>
+```
+
+<details>
+<summary>Complain</summary>
+IMHO, should not let users spend so much time waiting for this basic feature. The decision to force the trailing slash is obviously causing trouble for somebody. The attitude of maintainers make me feel disheartened, so I will migrate to other builder.
+</details>
+<issue_comment>username_15: I personally use a custom regex-based script in order to remove the trailing slashes. Actually, I enable the [ugly URLs](https://gohugo.io/content-management/urls/#ugly-urls) option which appends `.html` to all pages instead of slashes. Then I replace all occurences of `.html` while carefully making sure I only target my own website's links and not the external ones. I execute this script against the generated `public` directory after running `hugo`.
+
+It works quite well but it took me a while to make it work properly. It's kinda sad such a basic feature is not implemented in Hugo; a blog post should not end with a slash as it is not a directory...
+<issue_comment>username_16: Hi! Just curious what the status is on this ? Simply cannot believe that this is not an option. Hope this will be implemented soon...
+<issue_comment>username_17: It is absolutely ridiculous that this is not yet an option. As rosell pointed out 2+ years ago, plenty of CMS'es offer this. https://discourse.gohugo.io/t/hugo-support-for-urls-without-a-trailing-slash/6763/3
+All code is opinionated, but this is too much.
+<issue_comment>username_18: @username_3 Anyway we can get a status update on this? This is very much needed!
+<issue_comment>username_3: I'm closing this for now. This is too big of a change for me to review/merge/maintain (I don't need this myself). We may revisit this later if/when we get more long term maintainers. This is open source: Time is limited.
+<issue_comment>username_17: In that case, I guess I will be moving on from Hugo.
+<issue_comment>username_19: when hosting on Cloudfront + S3, it doesn't use `index.html` for subdirectories so a common hack is copying `foo/index.html` to `foo` to simulate it... but it doesn't work with trailing slashes
+is there an alternative? (different than using lambda edge which is hack as well)
+<issue_comment>username_10: @username_19 yes, point CF at your S3 static website URL and not directly at the bucket. https://www.reddit.com/r/aws/comments/68on7h/indexhtml_in_subfolders_via_cloudfront/
+<issue_comment>username_1: Sad to hear but understandable. FWIW I will probably be ""maintaining"" this feature by rebasing it onto my fork for as long as it's not too hard (no conflicts since when I last did this 8 months ago), with the caveat that there are basically no code tests left (doesn't seem worth it if it won't be merged; my standard for it working is ""nothing breaks when I click around my blog"").
+<issue_comment>username_18: Just to clarify -- it does seem like 95% of the work is already done. @username_3 if the PR is updated with new tests would you consider merging this? (would you prefer a new PR?) It just basically allows an option as a flag.
+<issue_comment>username_20: Just wanted to let you know that I'm also interested in this functionality, but I don't have the knowledge to take over and improve this PR :disappointed: .
+<issue_comment>username_21: +1 here
+I also want this func!
+<issue_comment>username_20: So I tried adding support for this in GitLab pages a long time ago but I did not have time to work in it further, see: https://gitlab.com/gitlab-org/gitlab-pages/-/merge_requests/259 my plan was to start working on this after the former MR was merged. I might look into this in the future but my hands are tied these days. Still want this functionality though.
+<issue_comment>username_22: +1, if Jekyll does it and Netlify does it, why not Hugo?
+<issue_comment>username_23: @username_22 curious on how you said GitHub pages won't do the trailing slash? Just hosted there now and I have them.. curious on what you did?
+<issue_comment>username_22: @username_23 That is just a theory. I didn't test it so don't take my word from it.
+<issue_comment>username_23: @username_22 ah ok.. well I can tell you that it does have the trailing slash on my blog hosted on gh-pages. So there's that :)
+<issue_comment>username_24: Great. I was trying to move everything from Jekyll to Hugo and noticed there's this trailing slash I can't get rid of. Now the hell is let loose and it just added extra work for me to update all url. The reason I picked Hugo in the first place was so that my life would get easier, not harder..."
+hartator/wayback-machine-downloader,101877771,3,,"[{'action': 'opened', 'author': 'DevJayM', 'comment_id': None, 'datetime': '2015-08-19 12:10:56+00:00', 'masked_author': 'username_0', 'text': ""Fairly new to Ruby so excuse me if I'm being an idiot, I keep getting this error;\r\n\r\n/usr/local/lib/ruby/gems/2.2.0/gems/wayback_machine_downloader-0.1.10/lib/wayback_machine_downloader.rb:3:in `require_relative': cannot load such file -- /usr/local/lib/ruby/gems/2.2.0/gems/wayback_machine_downloader-0.1.10/lib/tidy_bytes (LoadError)\r\n        from /usr/local/lib/ruby/gems/2.2.0/gems/wayback_machine_downloader-0.1.10/lib/wayback_machine_downloader.rb:3:in `<top (required)>'\r\n        from /usr/local/lib/ruby/gems/2.2.0/gems/wayback_machine_downloader-0.1.10/bin/wayback_machine_downloader:3:in `require_relative'\r\n        from /usr/local/lib/ruby/gems/2.2.0/gems/wayback_machine_downloader-0.1.10/bin/wayback_machine_downloader:3:in `<top (required)>'\r\n        from /usr/local/bin/wayback_machine_downloader:23:in `load'\r\n        from /usr/local/bin/wayback_machine_downloader:23:in `<main>'\r\n\r\nAm I missing something - any help appreciated, great project btw."", 'title': 'tidy_bytes (LoadError)', 'type': 'issue'}
+ {'action': 'created', 'author': 'benjaoming', 'comment_id': 132580434.0, 'datetime': '2015-08-19 12:52:56+00:00', 'masked_author': 'username_1', 'text': ""I think it's because it's trying to fetch an archive from rails, try:\r\n\r\n    sudo gem install rails"", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'DevJayM', 'comment_id': 132588852.0, 'datetime': '2015-08-19 13:15:56+00:00', 'masked_author': 'username_0', 'text': 'Thanks for the reply, rails is definitely installed, this is ruby 2.2.3p173 on Centos\r\n\r\n# gem list --local\r\n\r\n*** LOCAL GEMS ***\r\n\r\nactionmailer (4.2.3)\r\nactionpack (4.2.3)\r\nactionview (4.2.3)\r\nactivejob (4.2.3)\r\nactivemodel (4.2.3)\r\nactiverecord (4.2.3)\r\nactivesupport (4.2.3)\r\narel (6.0.3)\r\nbigdecimal (1.2.6)\r\nbuilder (3.2.2)\r\nbundler (1.10.6)\r\nchars (0.2.2)\r\nerubis (2.7.0)\r\nglobalid (0.3.6)\r\ni18n (0.7.0)\r\nio-console (0.4.3)\r\njson (1.8.1)\r\nloofah (2.0.3)\r\nmail (2.6.3)\r\nmime-types (2.6.1)\r\nmini_portile (0.6.2)\r\nminitest (5.4.3)\r\nnokogiri (1.6.6.2)\r\npower_assert (0.2.2)\r\npsych (2.0.8)\r\nrack (1.6.4)\r\nrack-test (0.6.3)\r\nrails (4.2.3)\r\nrails-deprecated_sanitizer (1.0.3)\r\nrails-dom-testing (1.0.7)\r\nrails-html-sanitizer (1.0.2)\r\nrailties (4.2.3)\r\nrake (10.4.2)\r\nrdoc (4.2.0)\r\nsprockets (3.3.1)\r\nsprockets-rails (2.3.2)\r\ntest-unit (3.0.8)\r\nthor (0.19.1)\r\nthread_safe (0.3.5)\r\ntidy (1.1.2)\r\ntzinfo (1.2.2)\r\nutf8_utils (2.0.1)\r\nwayback_machine_downloader (0.1.10)', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'hartator', 'comment_id': 132703491.0, 'datetime': '2015-08-19 17:25:20+00:00', 'masked_author': 'username_2', 'text': ""Should fix the issue. The TidyBytes file wasn't correctly distributed with gem."", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'DevJayM', 'comment_id': 132785734.0, 'datetime': '2015-08-19 21:11:09+00:00', 'masked_author': 'username_0', 'text': 'That fixed it - thanks', 'title': None, 'type': 'comment'}
+ {'action': 'closed', 'author': 'DevJayM', 'comment_id': None, 'datetime': '2015-08-19 21:11:11+00:00', 'masked_author': 'username_0', 'text': '', 'title': None, 'type': 'issue'}
+ {'action': 'created', 'author': 'hartator', 'comment_id': 132815922.0, 'datetime': '2015-08-19 22:50:35+00:00', 'masked_author': 'username_2', 'text': 'np, thanks for reporting the issue!', 'title': None, 'type': 'comment'}]","<issue_start><issue_comment>Title: tidy_bytes (LoadError)
+username_0: Fairly new to Ruby so excuse me if I'm being an idiot, I keep getting this error;
+
+/usr/local/lib/ruby/gems/2.2.0/gems/wayback_machine_downloader-0.1.10/lib/wayback_machine_downloader.rb:3:in `require_relative': cannot load such file -- /usr/local/lib/ruby/gems/2.2.0/gems/wayback_machine_downloader-0.1.10/lib/tidy_bytes (LoadError)
+        from /usr/local/lib/ruby/gems/2.2.0/gems/wayback_machine_downloader-0.1.10/lib/wayback_machine_downloader.rb:3:in `<top (required)>'
+        from /usr/local/lib/ruby/gems/2.2.0/gems/wayback_machine_downloader-0.1.10/bin/wayback_machine_downloader:3:in `require_relative'
+        from /usr/local/lib/ruby/gems/2.2.0/gems/wayback_machine_downloader-0.1.10/bin/wayback_machine_downloader:3:in `<top (required)>'
+        from /usr/local/bin/wayback_machine_downloader:23:in `load'
+        from /usr/local/bin/wayback_machine_downloader:23:in `<main>'
+
+Am I missing something - any help appreciated, great project btw.
+<issue_comment>username_1: I think it's because it's trying to fetch an archive from rails, try:
+
+    sudo gem install rails
+<issue_comment>username_0: Thanks for the reply, rails is definitely installed, this is ruby 2.2.3p173 on Centos
+
+# gem list --local
+
+*** LOCAL GEMS ***
+
+actionmailer (4.2.3)
+actionpack (4.2.3)
+actionview (4.2.3)
+activejob (4.2.3)
+activemodel (4.2.3)
+activerecord (4.2.3)
+activesupport (4.2.3)
+arel (6.0.3)
+bigdecimal (1.2.6)
+builder (3.2.2)
+bundler (1.10.6)
+chars (0.2.2)
+erubis (2.7.0)
+globalid (0.3.6)
+i18n (0.7.0)
+io-console (0.4.3)
+json (1.8.1)
+loofah (2.0.3)
+mail (2.6.3)
+mime-types (2.6.1)
+mini_portile (0.6.2)
+minitest (5.4.3)
+nokogiri (1.6.6.2)
+power_assert (0.2.2)
+psych (2.0.8)
+rack (1.6.4)
+rack-test (0.6.3)
+rails (4.2.3)
+rails-deprecated_sanitizer (1.0.3)
+rails-dom-testing (1.0.7)
+rails-html-sanitizer (1.0.2)
+railties (4.2.3)
+rake (10.4.2)
+rdoc (4.2.0)
+sprockets (3.3.1)
+sprockets-rails (2.3.2)
+test-unit (3.0.8)
+thor (0.19.1)
+thread_safe (0.3.5)
+tidy (1.1.2)
+tzinfo (1.2.2)
+utf8_utils (2.0.1)
+wayback_machine_downloader (0.1.10)
+<issue_comment>username_2: Should fix the issue. The TidyBytes file wasn't correctly distributed with gem.
+<issue_comment>username_0: That fixed it - thanks<issue_closed>
+<issue_comment>username_2: np, thanks for reporting the issue!"
+eduardoboucas/staticman,343450342,219,"{'number': 219.0, 'repo': 'staticman', 'user_login': 'eduardoboucas'}","[{'action': 'opened', 'author': 'ntsim', 'comment_id': None, 'datetime': '2018-07-22T23:50:08Z', 'masked_author': 'username_0', 'text': ""Fixes #22 \r\n\r\nThis PR primarily adds support for GitLab across Staticman's API :rocket: :tada:. There is a quite a big surface area to this one @username_1, so there might be things that you might not be certain about. Let me know if there's anything that needs more work or I haven't quite covered!\r\n\r\nThis includes the following notable changes:\r\n\r\n### Staticman API config\r\n\r\n- `githubBaseUrl` added to allow URL of self-hosted GitHub API to be configured.\r\n- `githubAccessTokenUri` added to allow the OAuth access token endpoint of self-hosted GitHub instances to be configured.\r\n- `gitlabToken` added to allow configuration of Staticman's personal access token in the GitLab instance.\r\n- `gitlabBaseUrl  added to allow URL of self-hosted GitLab API to be configured. \r\n- `gitlabAccessTokenUri` added to allow the OAuth access token endpoint of self-hosted GitLab instances to be configured.\r\n- The new options all default to the publicly available instances of GitHub/GitLab.\r\n\r\n### Staticman site config (`staticman.yml`)\r\n\r\n- `gitlabAuth.clientId`, `gitlabAuth.clientSecret` and `gitlabAuth.redirectUri` added to provide OAuth configuration when a user wishes to authenticate via GitLab.\r\n- `githubAuth.redirectUri` added for parity with the new `gitlabAuth` options.\r\n- `auth.required` option added to determine if **any** authentication is required before the user can submit a comment through Staticman.\r\n\r\n### `/entry` endpoint \r\n\r\n- New URL pattern added: \r\n\t```\r\n\t/v3/entry/:service/:username/:repository/:branch/:property\r\n\t```\r\n- Accepts `gitlab` or `github` as a service parameter. This will be then used as the target for the consequent API calls.\r\n- Functionality mostly remains the same, but with Staticman now able to submit Merge Requests (PRs) to GitLab. MRs are set to automatically close the source branch, meaning that it is **not necessary** to have a webhook to close the branch with GitLab.\r\n- If `auth.required` site config option is true, then `options[auth-token]` and `options[auth-type]` must be passed through as well. \r\n- `options[auth-token]` replaces `option[github-token]` (as this was too specific to GitHub). \r\n- `options[auth-type]` has been added to allow the user to choose which authentication provider should be used i.e. `gitlab` or `github`. Any future integrations with other authentication providers would be expected to hook into this.\r\n- A new `User` model has been implemented which abstracts the user identity models from GitHub and GitLab. This only exposes common properties such as username, email, etc, hopefully simplifying future code.\r\n- The v2 API functionality is still implemented for backwards compatiblity. This includes the previous authentication behaviour where `options[github-token]` is used.\r\n\r\n### `/auth` endpoint\r\n\r\n- New URL pattern added: \r\n\t```\r\n\t/v3/auth/:service/:username/:repository/:branch/:property\r\n\t```\r\n- Accepts `gitlab` or `github` as a service parameter. This will be then used as the target for the consequent API calls.\r\n- The site owner will have to have set the correct options in their site config e.g. `gitlabAuth.clientId`, etc, to enable the user to authenticate with all authentication providers.\r\n- As part of GitLab's OAuth flow, a `redirectUri` **must** be provided (see [here](https://docs.gitlab.com/ee/api/oauth2.html#2-requesting-access-token)). Consequently, this has also been added for GitHub to be consistent.\r\n- The new `User` model is exposed here in the response's `user` property to confine the scope of this model for any future consumers.\r\n- The v2 API functionality is still implemented for backwards compatiblity (will return the GitHub API's user model in the response).\r\n\r\n### `/connect` endpoint\r\n\r\n- URL pattern changed to: \r\n\t```\r\n\t/v3/connect/:service/:username/:repository\r\n\t```\r\n- Remains largely unchanged, however with the addition of a service parameter. This has been added to be consistent and future proof against more Git service providers to connect through.\r\n- GitLab does not have collaborator invites, so this is currently not required for Staticman to collaborate on a project. The user can just add Staticman immediately.\r\n\r\n### Other changes\r\n\r\n- Minimum supported NodeJS version have been bumped up to `8.11.3` (the current LTS version).\r\n- New `class` syntax has been introduced in places such as the Git service classes.\r\n- Tests run 4x faster by improving how the test site config is setup before tests. Bugs have also been fixed due to config being modified between tests. Config is now mostly just copied to new objects between tests.\r\n- Various NPM dependencies have been changed/upgraded, such as:\r\n\t- `github` -> `@octokit/rest` as the previous package was deprecated.\r\n\t- `request-promise-native` -> `request-promise` as this interops with the GitLab package's `request-promise`.\r\n\t- `node-uuid` -> `uuid` as the previous package was deprecated."", 'title': 'Add GitLab support', 'type': 'issue'}
+ {'action': 'created', 'author': 'eduardoboucas', 'comment_id': 406994937.0, 'datetime': '2018-07-23 09:22:15+00:00', 'masked_author': 'username_1', 'text': ""Wow, this is a big one. Thank you!\r\n\r\nGive me a couple of days to review this properly and I'll come back with any questions I might have. :)"", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'eduardoboucas', 'comment_id': 417052299.0, 'datetime': '2018-08-29 18:15:08+00:00', 'masked_author': 'username_1', 'text': 'Sorry for the ridiculously long time it took me to merge this. I had a review with a couple of minor comments (mostly around styling) but I forgot to press ""Submit review"" so it was pending. 🤦\u200d♂️ \r\n\r\nAfter realising this and given how long it has been, I was too ashamed to submit the review and just merged the PR. They were super small issues anyway.\r\n\r\nThanks again for this, it looks great. It should now be live on https://dev.staticman.net. How do we go about testing this? Any chance you could put together a short list of steps that people need to follow to get this working with GitLab?', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'VincentTam', 'comment_id': 417653228.0, 'datetime': '2018-08-31 12:47:58+00:00', 'masked_author': 'username_2', 'text': 'I\'m considering building a test GitLab page with Beautifulhugo to test this.  To allow Staticman to push comments into a GitLab repo, is there a bot on GitLab homologous to the ""staticmanapp"" on GitHub?', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'eduardoboucas', 'comment_id': 417657297.0, 'datetime': '2018-08-31 13:03:36+00:00', 'masked_author': 'username_1', 'text': ""Not that I'm aware. Could you create one?"", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'VincentTam', 'comment_id': 417660586.0, 'datetime': '2018-08-31 13:16:21+00:00', 'masked_author': 'username_2', 'text': ""As an amateur Linux user, I regret lacking knowledge to do so.  I don't know nodejs and how GitLab bot works.  The tutorial for setting up a GitLab bot is much harder to find than its GitHub counterpart."", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'VincentTam', 'comment_id': 417842105.0, 'datetime': '2018-09-01 08:16:14+00:00', 'masked_author': 'username_2', 'text': '@username_0 In the section for `/connect` endpoint, how can a GitLab user ""add Staticman immediately"" to his/her repo?  Simply configuring `config.*ml` and `staticman.yml` is enough?', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'ntsim', 'comment_id': 417857360.0, 'datetime': '2018-09-01 12:46:37+00:00', 'masked_author': 'username_0', 'text': ""Haha @username_1, I was wondering what happened :smile: No problem at all! I've been a little busy myself over the last few days so sorry for the delay getting back to you on this.\r\n\r\nIn terms of testing, I would suggest the following:\r\n\r\n## Setup\r\n\r\n1. Create a new GitLab.com user as the Staticman bot. In production this would want to be a user called `staticmanapp` (like the GitHub one). You could also use a different user for testing the dev environment.\r\n\r\n\t@username_2 you can just create any user to test it personally, for example, a work account.\r\n\r\n2. Create a Personal Access Token for the Staticman user. This should then be set for `gitlabToken` in `config.json`. This will need to be configured with the `api` and `read_repository` scopes.\r\n\r\n3. As your personal user, create a project for yourself.\r\n\r\n4. Add the Staticman user to your project. You should be able to it as the 'Guest' role (refer to GitLab's [permission matrix](https://docs.gitlab.com/ee/user/permissions.html)). No need to respond to any repository invites like in GitHub (hence not needing a specific `/connect` endpoint for GitLab).\r\n\r\n5. Create the project's `staticman.yml`. This works the same as before. To test it properly `moderation` should be enabled of course.\r\n\r\nFor reference, here is the project that I tested it on originally: [https://gitlab.com/username_0/test-staticman](https://gitlab.com/username_0/test-staticman).\r\n\r\nYou should now be able to use the Staticman API like you would with GitHub, but with the new functionality.\r\n\r\nI would recommend performing any testing with a HTTP client like Postman.\r\n\r\n## Creating comments\r\n\r\nYou can create new comments by using the new `/entry` endpoint. An example request might look like this:\r\n\r\n```\r\nPOST /v3/entry/gitlab/username_0/test-staticman/master/comments\r\n\r\noptions[slug]=test-slug\r\nfields[name]=Test user\r\nlyhxr@example.com\r\nfields[message]=Test message\r\n```\r\n\r\nThis should be tested with the `moderation` option enabled and disabled.\r\n\r\n## Authentication\r\n\r\nSetup:\r\n\r\n1. As your personal user on GitLab (not Staticman), setup a new OAuth application for your site.\r\n\tThis will require a callback/redirect URI that should be the URI on your site where you would redirect the user to e.g: \r\n\r\n\t```\r\n\thttp://my-website.com/login\r\n\t```\r\n\r\n\tFor testing, this could just be a localhost URL to avoid being redirected to a non-safe URL. \r\n\r\n\tThe `api` and `read_user` scopes are also required.\r\n\r\n2. Add the application ID (normally known as client ID in OAuth) to the `gitlabAuth.clientId`, secret to `gitlabAuth.secret` and callback/redirect URL to `gitlabAuth.redirectUri` in `staticman.yml`.\r\n\r\n\tBoth `gitlabAuth.clientId` and `gitlabAuth.secret` should be RSA encrypted in the same way that the GitHub equivalents would be. This will involve passing both values to the Staticman API's `/encrypt` endpoint. `gitlabAuth.redirectUri` does need this encryption.\r\n\r\n\tThinking about it a little more @username_1, I don't actually think that `gitlabAuth.clientId` or `githubAuth.clientId` really need to be encrypted as you would typically need to expose this value to the client to start the OAuth flow anyway.\r\n\r\n3. Set the `auth.required` option to true in the project's `staticman.yml`.\r\n\r\n### To test that authentication is required\r\n\r\n1. Send normal comment requests to the `/entry` endpoint. You should receive authentication errors when you do so.\r\n\r\n### To test that authenticated comments can be created\r\n\r\n1. Start the OAuth flow with GitLab. This will require going to their endpoint:\r\n\t\r\n\t```\r\n\thttps://gitlab.com/oauth/authorize?client_id=APP_ID&redirect_uri=REDIRECT_URI&response_type=code\r\n\t```\r\n\r\n\tWhere `APP_ID` is the OAuth application/client ID and `REDIRECT_URI` is the application's redirect URI specified in Setup step 1.\r\n\r\n\tSee the documentation on [Web application flow](https://docs.gitlab.com/ee/api/oauth2.html#web-application-flow) for more information.\r\n\r\n2. After initializing the OAuth flow, you authenticate with GitLab and then get redirected to the redirect URI with the `code` query parameter in the URI e.g.\r\n\r\n[Truncated]\n\tfields[message]=Test message\r\n\t```\r\n\r\nThe comments should be created with the generated fields in the comment data.\r\n\r\n## Interactions with third party services\r\n\r\nI haven't really tested any of this stuff with any other services such as Mailgun or Akismet, however I don't think their behaviours should be affected by any of these changes. Perhaps it would be a good idea to check they still work correctly?\r\n\r\n## Authentication should be independent of Git service provider\r\n\r\nOriginally I intended that a commenter should be able to authenticate with any OAuth provider, independent of where the Git site repository/project is hosted. For example, they could authenticate with GitLab and comment on a GitHub hosted repository.\r\n\r\nUnfortunately, I've spotted a flaw in the current logic which means that they are still restricted to the OAuth provider being on the same platform as the repository. I think this would just need a minor modification in the form of a new `provider` query parameter added to the `/auth` endpoint. This would look like:\r\n\r\n```\r\nGET /v3/auth/gitlab/username_0/test-staticman/master/comments?code=the-auth-code&provider=OAUTH_PROVIDER\r\n```\r\n\r\nWhere `OAUTH_PROVIDER` would currently be either `gitlab` or `github`. This would be extensible in that we could ultimately add additional OAuth providers such as Google, etc in the future. What do you think @username_1?"", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'ntsim', 'comment_id': 418533161.0, 'datetime': '2018-09-04 22:04:56+00:00', 'masked_author': 'username_0', 'text': ""@username_2 which step are you saying actually fails? When you try to send requests to the `/entry` endpoint? If so, does your instance of Staticman emit any errors in its output logs?\r\n\r\n`rsaPrivateKey` can be generated using `openssl`. A post on how to do it can be found [here](https://rietta.com/blog/2012/01/27/openssl-generating-rsa-key-from-command/). You will need to add any newline `\\n` characters in manually (as it has to be JSON compatible). It does not need to match `staticman_key.pub`. I think the intention of that public key is for verifying that any output from the `/encrypt` endpoint is indeed from Staticman (but maybe @username_1 could clarify that).\r\n\r\nYour other config options should be sufficient, I don't think you should have any issue with the missing `githubToken` as long as you're not trying to make requests to the `github` endpoint variants e.g. `/entry/github/...`."", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'VincentTam', 'comment_id': 418665761.0, 'datetime': '2018-09-05 09:33:07+00:00', 'masked_author': 'username_2', 'text': '@username_0 Thank you for looking into this.  I followed steps 1-5 in the setup.  [My project on GitLab](https://gitlab.com/vincenttam/test-hugo-staticman) is to integrate this into the theme halogenica/beautifulhugo#99.\r\n\r\nIn my `config.development.json` in step 2, I generated my private key using `ssh-keygen`. (the way in the doc of GitHub/GitLab, but without passphrase.)  I can try generating this with `openssl`.\r\n\r\n```json\r\n{\r\n  ""gitlabToken"": ""yX9bxxxxxxxxxxxxxxxxxxBiTl"",\r\n  ""githubToken"": ""YOUR_GITHUB_TOKEN"",\r\n  ""rsaPrivateKey"": ""-----BEGIN RSA PRIVATE KEY-----\\n...\\n-----END RSA PRIVATE KEY-----"",\r\n  ""port"": 8000\r\n}\r\n```\r\n\r\nIn my project, I adapted your `staticman.yml` to halogenica\'s one to match the keys in his form.\r\n\r\nAt my public site (https://vincenttam.gitlab.io/test-hugo-staticman), mixed active content is blocked.  Then I tried localhost:1313 served by `hugo server`, but failed again.\r\n\r\nI tried copying the request body from Firefox into Postman to send a POST request, but I got ""missing parameters"" error from `server.js`.\r\n\r\n![screenshot from 2018-09-05 11-29-58](https://user-images.githubusercontent.com/5748535/45084776-6c9a4a00-b0ff-11e8-9628-71092be1783a.png)', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'VincentTam', 'comment_id': 418760338.0, 'datetime': '2018-09-05 14:52:05+00:00', 'masked_author': 'username_2', 'text': 'After some ""testing"", I found that the error is due to `rsaPrivateKey`.  I followed the linked guide to generate a private key (*without* `-des3`) and `:%s/\\n/\\\\n/` in Vim, and got the *same* error.\r\n\r\nPost request parameters captured by `this.requireApiVersion([3])`:\r\n\r\n```json\r\nreq.params = { version: \'3\',\r\n  service: \'gitlab\',\r\n  username: \'vincenttam\',\r\n  repository: \'test-hugo-staticman\',\r\n  branch: \'master\',\r\n  property: \'comments\' }\r\nreq.body = { options:\r\n   { slug: \'test-hugo-staticmanpoststest-staticman\', parent: \'\' },\r\n  fields:\r\n   { comment: \'sadlfg sakg \',\r\n     name: \'sdlkfj\',\r\n     email: \'ychag@example.com\',\r\n     website: \'example.com\' } }\r\n```\r\n\r\nResponse output error:\r\n\r\n```\r\nError: Error during decryption (probably incorrect key). Original error: Error: Incorrect data or key\r\n    at NodeRSA.module.exports.NodeRSA.$$decryptKey (/home/vin100/staticman/node_modules/node-rsa/src/NodeRSA.js:301:19)\r\n    at NodeRSA.module.exports.NodeRSA.decrypt (/home/vin100/staticman/node_modules/node-rsa/src/NodeRSA.js:249:21)\r\n    at Object.coerce [as EncryptedString] (/home/vin100/staticman/siteConfig.js:194:18)\r\n    at coerce (/home/vin100/staticman/node_modules/convict/lib/convict.js:407:32)\r\n    at /home/vin100/staticman/node_modules/convict/lib/convict.js:369:15\r\n    at Array.forEach (<anonymous>)\r\n    at overlay (/home/vin100/staticman/node_modules/convict/lib/convict.js:366:21)\r\n    at /home/vin100/staticman/node_modules/convict/lib/convict.js:372:7\r\n    at Array.forEach (<anonymous>)\r\n    at overlay (/home/vin100/staticman/node_modules/convict/lib/convict.js:366:21)\r\n    at Object.load (/home/vin100/staticman/node_modules/convict/lib/convict.js:592:7)\r\n    at module.exports (/home/vin100/staticman/siteConfig.js:201:12)\r\n    at Staticman._validateConfig (/home/vin100/staticman/lib/Staticman.js:418:21)\r\n    at git.readFile.then.data (/home/vin100/staticman/lib/Staticman.js:476:35)\r\n```\r\n\r\nwith `const statusCode = 500`.', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'ntsim', 'comment_id': 419266449.0, 'datetime': '2018-09-06 22:49:50+00:00', 'masked_author': 'username_0', 'text': ""@username_2, interesting that there is a red herring 'missing parameters' error. The error could be more detailed here.\r\n\r\nI'm guessing there's some confusion so just to clarify what I've done to make it work:\r\n\r\n1. Create an RSA key using:\r\n\r\n```\r\nopenssl genrsa -out key.pem\r\n```\r\n\r\n2. Grab the RSA key from the created `key.pem` file of this and make it JSON friendly by replacing all line breaks with `\\n`.\r\n\r\n3. The JSON-friendly RSA key should now be copied over to the `rsaPrivateKey` of Staticman's `config.json`.\r\n\r\n4. Encrypt your GitLab OAuth application ID (client ID) and secret using the `/encrypt/{textToEncrypt}` endpoint.\r\n\r\n5. Place these in the site's `staticman.yml` under `gitlabAuth.clientId` and `gitlabAuth.clientSecret`.\r\n\r\n6. Restart the server and attempt to post comments to the `/entry` endpoint whilst the `auth.required` property of the site's `staticman.yml` is true.\r\n\r\nThe rest of the authentication test steps still apply, so you should be able to extrapolate from here.\r\n\r\nHope this helps!"", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'VincentTam', 'comment_id': 419427274.0, 'datetime': '2018-09-07 12:42:32+00:00', 'masked_author': 'username_2', 'text': '@username_0 Dispite my big thanks to your clear instrustions, my API server is still giving a 401 error.  (All `npm test` pass though.)  I don\'t know why I\'m still stuck at the RSA private key.  Here\'s what I\'ve done.\r\n\r\n# Missing RSA key\r\n\r\n1. I generated a RSA key using the above `openssl genrsa` cmd and pasted it into `config.development.json`.\r\n    ![screenshot from 2018-09-07 13-55-49](https://user-images.githubusercontent.com/5748535/45218068-8cb83d80-b2a6-11e8-9e21-158143880d6c.png)\r\n2. I obtained GitLab OAuth application ID and secret throught my personal ac  (also called vincenttam).\r\n    ![oauth](https://user-images.githubusercontent.com/5748535/45218614-862ac580-b2a8-11e8-9fd9-45c7f0945260.png)\r\n3. I encrypted them through `/encrypt` endpoint in Firefox.\r\n4. I forked your GitLab test repo and replaced the two lines `client*` with those from `/encrypt` in `staticman.yml`, then I pushed it back to GitLab.\r\n5. Restart the server and input https://gitlab.com/oauth/authorize?client_id=1f5c806921988e45cd0a9ed364e4396a747809ed35038304ad3f6fd07f7c1004&redirect_uri=http://localhost:8000&response_type=code in the address bar of Firefox.\r\n6. Sign in GitLab with my personal ac (vincenttam), authorise the app, and obtain the `code=...`.\r\n7. Sent a GET request to `/auth`.\r\n\r\n        GET /v3/auth/gitlab/vincenttam/test-staticman/master/comments?code=the-auth-code\r\n\r\n    ![screenshot from 2018-09-07 13-48-07](https://user-images.githubusercontent.com/5748535/45218908-6f38a300-b2a9-11e8-9ba0-6945056abfb2.png)\r\n\r\n* * *\r\n\r\n# Missing parameter `[\'fields\']`\r\n\r\nBesides, `POST`ing a comment to `/entry` results in error `500`.\r\n\r\n![screenshot from 2018-09-07 14-31-01](https://user-images.githubusercontent.com/5748535/45219282-ae1b2880-b2aa-11e8-9e40-6ebe8c9f4210.png)\r\n\r\nProvided that I _don\'t_ know Node.js, to gain a deep insight into the `req`uest received, I used the most primitive ""printf debug method"" under functions `requireApiVerison` and `sendResponse`.\r\n\r\nThis enables me to see that _nothing_ is passed from Postman to my Staticman API instance.\r\n\r\n![emptybody](https://user-images.githubusercontent.com/5748535/45219685-fb4bca00-b2ab-11e8-97d0-4486e27b9a5f.png)', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'VincentTam', 'comment_id': 419675705.0, 'datetime': '2018-09-08 22:02:31+00:00', 'masked_author': 'username_2', 'text': '@username_0 Thank you again for your advices.  I\'ve switched to Sublime and Postman so as to copy accurately.  After recreating *another* `rsaPrivateKey`, I can move _one_ step forward.\r\n\r\nWhat would be the source of `GITLAB_CREATING_PR`?\r\n\r\n![screenshot from 2018-09-08 22-24-17](https://user-images.githubusercontent.com/5748535/45258984-12c9a680-b3c3-11e8-938a-8aa43e84fc20.png)\r\n\r\n1. I tested my `gitlabToken` for my bot (""staticmanlab"") on GitLab.\r\n![screenshot from 2018-09-08 23-44-38](https://user-images.githubusercontent.com/5748535/45258993-40aeeb00-b3c3-11e8-9317-d01839b413bf.png)\r\n 2. I double-checked that this token\'s scope, which contains `api`.\r\n![screenshot from 2018-09-08 23-45-42](https://user-images.githubusercontent.com/5748535/45259001-7358e380-b3c3-11e8-9324-c5d09d8cad71.png)\r\n3. I checked the [member list](https://gitlab.com/vincenttam/test-staticman/project/) to ensure that ""staticmanlab"" is invited as a Guest.', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'VincentTam', 'comment_id': 419678597.0, 'datetime': '2018-09-08 23:03:40+00:00', 'masked_author': 'username_2', 'text': '@username_0 Thank you so much for your patience and help! 😀  It finally worked on [my forked project](https://gitlab.com/username_2/test-staticman/blob/c29f8048e228d11c69709a1244f028063de5d667/comments/test-slug/entry1536447225284.yml).\r\n\r\n![screenshot from 2018-09-09 01-03-29](https://user-images.githubusercontent.com/5748535/45259397-2e857a80-b3cc-11e8-9e7e-a15022c05f7a.png)', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'ntsim', 'comment_id': 419757921.0, 'datetime': '2018-09-10 00:45:30+00:00', 'masked_author': 'username_0', 'text': ""@username_2 nope you shouldn't need to create the comments directory. It will get created automatically by the comment (you also can't commit bare directories into Git)."", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'VincentTam', 'comment_id': 420423496.0, 'datetime': '2018-09-11 20:59:15+00:00', 'masked_author': 'username_2', 'text': '@username_0 Thanks again for this great PR !  I\'m sharing my views on some problems you\'ve raised in previous posts: the storage of OAuth tokens in local browsers and cross-platform authentication.\r\n\r\nAfter this success, I tested the [setup steps 1--5](https://github.com/username_1/staticman/pull/219#issuecomment-417857360) again with `authentication: false`.  I immediately got the `rsaPrivateKey` error.  It seems to me that only authenticated users can post a comment.\r\n\r\nSince comments from users of whatever Git service provider are welcomed, this brings up the problem of authentication with different Git service providers that you outlined.\r\n\r\nRemembering OpenID, I\'ve found [this answer][so] about OpenID vs OAuth on Stack Overflow.  During the testing, I confused the terms ""authentication"" and ""authorization"".\r\n\r\n| &nbsp; | authorization | authentication |\r\n| --- | --- | --- |\r\n| purpose | grant access _without_ further login | identity check, _requires_ login |\r\n| duration | long-term | short-term |\r\n| [Stack Overflow\'s answer][so] | OAuth | OpenID |\r\n| supposed target | Git* Bot | commenters |\r\n| real-world e.g. | border control personnel staff card | visitors\' passport |\r\n\r\nHowever, in the current OAuth + Web App flows, the `oauth-token` that an ""authenticated"" commenter POSTs along with his/her message _never expires_.\r\n\r\nIMHO, to achieve _authentic_ authentication, the OpenID flow does a better job.\r\n\r\n[so]: https://stackoverflow.com/a/1087071', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'ntsim', 'comment_id': 420492582.0, 'datetime': '2018-09-12 02:38:55+00:00', 'masked_author': 'username_0', 'text': ""@username_2 have you set up your `staticman.yml` correctly? It should be `auth.required: false`:\r\n\r\n```yml\r\n  auth:\r\n    required: false\r\n```\r\n\r\nI've had no issue just swapping it to false in my test repo then just POSTing to the `/entry` endpoint without any auth `options` in the request.\r\n\r\nIn terms of the actual authentication mechanism:\r\n\r\nI'm a little confused about how OpenID would solve anything here. Implementing the original OpenID 2.0 spec would essentially require setting up another server. There's also the issue that it is marked as [obsolete](https://openid.net/developers/specs/) in favour of OpenID Connect.\r\n\r\nOpenID Connect itself is just a layer on top of OAuth, which provides authentication as well authorization. In fact, GitLab is actually an OpenID Connect [identity provider](https://docs.gitlab.com/ee/integration/openid_connect_provider.html). In the context of Staticman, I believe this would only have the slight benefit of giving us the option to retrieve the user's profile information in the OpenID Connect way.\r\n\r\nWe would still need OAuth to allow us to do just about anything on GitLab/GitHub. That said, you are correct that currently the authenticated commenter's OAuth access token does not actually expire. This could potentially pose a security issue if we're not careful with how we handle it. \r\n\r\nFortunately, I think we are 'relatively' covered on this as we are using RSA encryption on the access token. The intention of this is to prevent its misuse outside of the Staticman API. Consequently, some malicious user shouldn't be able to just get their hands on the token and start using it to impersonate the user.\r\n\r\nThat said, as I've mentioned before, we should probably try to offer recommendations to help users store any authentication information correctly on the client side.\r\n\r\nAdditionally, whilst RSA is currently secure (AFAIK), it does have some concerns over its long-term viability. I believe Libsodium's encryption primitives are usually preferred by security/crypto experts. Perhaps, something worth thinking about @username_1?"", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'VincentTam', 'comment_id': 420512993.0, 'datetime': '2018-09-12 05:02:53+00:00', 'masked_author': 'username_2', 'text': ""@username_0 First and foremost, I apologize for my _incorrect_ claim. Swapping `auth.required` [did work](https://gitlab.com/username_2/test-staticman/merge_requests/5).\r\n\r\nThinking back, I should have confused my fork of your test project with [my own one](https://gitlab.com/username_2/test-hugo-staticman).\r\n\r\nBig thanks for testing this and explaining the role OpenID.\r\n\r\nCurrently, only GitLab users can post authenticated comments to GitLab project.  The proposed solution is great, but some work is needed to add support for _each_ OAuth provider.\r\n\r\nIf OpenID is implemented here, provided that a GitHub/Google user has authenticated him/herself through OpenID, it's possible that he/she can post authenticated comments _without_ a GitLab account?\r\n\r\nI thought about this while being unaware of the need of setting up another server---that would be too heavy to deal with."", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'ntsim', 'comment_id': 420797990.0, 'datetime': '2018-09-12 21:07:17+00:00', 'masked_author': 'username_0', 'text': ""No problem :smile:\r\n\r\nAs this PR is a bit incomplete without the ability to select the authentication identity provider independently of the site repository provider, I've gone and added the finishing touches (with respect to this discussion) in a new PR #231. Another one for you @username_1 :wink: \r\n\r\nOnce that PR is in, it will be possible for a commenter to authenticate with _either_ GitLab or GitHub (provided that the associated OAuth applications are setup correctly). It should be possible to expand this functionality in the future to encapsulate other providers such as Google, Auth0, etc.\r\n\r\nI don't think OpenID and its abstractions are really required at any point. Currently Staticman will try to generalise any profile data from GitHub/GitLab into it's own 'User' model. To me, this seems sufficient, but this could be something we could think about further if required."", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'VincentTam', 'comment_id': 420859526.0, 'datetime': '2018-09-13 02:12:20+00:00', 'masked_author': 'username_2', 'text': ""Thanks to your sample project and support, I'm happy to publish the [first Hugo blog powered by Staticman v3](https://vincenttam.gitlab.io/test-hugo-staticman/posts/test-staticman/).  😃\r\n\r\n![screenshot_2018-09-13-03-37-31](https://user-images.githubusercontent.com/5748535/45462704-35ccc100-b709-11e8-9014-be0a37a09f04.png)\r\n\r\nOnce cloned, it remains to configure the two config files. With KaTeX and Markdown support, that's much better than existing solutions (e.g. Disqus) for communicating math.\r\n\r\nIn fact, I find reCaptcha enough to distinguish my prof's and classmates 💼 (who don't have a Git* account) from Bots 💻."", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'VincentTam', 'comment_id': 421372026.0, 'datetime': '2018-09-14 14:15:06+00:00', 'masked_author': 'username_2', 'text': ""Thanks to @username_0 's continual help, I've created one running on a free dyno on Heroku at\r\nhttps://staticman3.herokuapp.com/ for testing, with the associated GitHub/GitLab bot both named @staticmanlab."", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'Kaligule', 'comment_id': 451654127.0, 'datetime': '2019-01-05 13:10:00+00:00', 'masked_author': 'username_3', 'text': '@username_1 Cool. It seems that dev.staticman.net is only a very small static html site saying ""Hello from Staticman version 3.0.0!"" - nothing more or less. I tested with Chromium, Firefox and Qutebrowser. Is that what you expected?', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'VincentTam', 'comment_id': 451691067.0, 'datetime': '2019-01-05 21:18:01+00:00', 'masked_author': 'username_2', 'text': ""@username_3 It can _never_ be static since its endpoints respond dynamically to users' requests."", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'Kaligule', 'comment_id': 451732317.0, 'datetime': '2019-01-06 10:54:37+00:00', 'masked_author': 'username_3', 'text': '@username_2 Ok, I didn\'t know that. I am not a web developer, could you explain what I am supposed to do for the ""final round of testing using the dev instance""? Perhapse you could point me to some documentation where I can read what one can do with that url. Or was that call for help just not for me?', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'VincentTam', 'comment_id': 451732543.0, 'datetime': '2019-01-06 10:58:45+00:00', 'masked_author': 'username_2', 'text': ""@username_3 Since the project owner doesn't disclose the associated GitLab account for his dev instance, there's _no_ proper way to publicly test this PR on this instance.\r\n\r\nTo see how this PR works, I recommend either hosting your own API instance or use @staticmanlab, my public GitLab instance."", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'nakoo', 'comment_id': 451752373.0, 'datetime': '2019-01-06 15:56:20+00:00', 'masked_author': 'username_4', 'text': 'I am testing now using dev.staticman.net, but always showing Internal Server Error. 😰', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'nakoo', 'comment_id': 459932048.0, 'datetime': '2019-02-02 03:45:13+00:00', 'masked_author': 'username_4', 'text': 'I tested it today on my website and it works flawlessly 😊', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'nakoo', 'comment_id': 469679915.0, 'datetime': '2019-03-05 13:30:27+00:00', 'masked_author': 'username_4', 'text': 'It would be needed webhook tweaks for gitlab to send a notification mail. I tried with `https://dev.staticman.net/v1/webhook` but always getting ""400: No id found in the request"".', 'title': None, 'type': 'comment'}]","<issue_start><issue_comment>Title: Add GitLab support
+username_0: Fixes #22 
+
+This PR primarily adds support for GitLab across Staticman's API :rocket: :tada:. There is a quite a big surface area to this one @username_1, so there might be things that you might not be certain about. Let me know if there's anything that needs more work or I haven't quite covered!
+
+This includes the following notable changes:
+
+### Staticman API config
+
+- `githubBaseUrl` added to allow URL of self-hosted GitHub API to be configured.
+- `githubAccessTokenUri` added to allow the OAuth access token endpoint of self-hosted GitHub instances to be configured.
+- `gitlabToken` added to allow configuration of Staticman's personal access token in the GitLab instance.
+- `gitlabBaseUrl  added to allow URL of self-hosted GitLab API to be configured. 
+- `gitlabAccessTokenUri` added to allow the OAuth access token endpoint of self-hosted GitLab instances to be configured.
+- The new options all default to the publicly available instances of GitHub/GitLab.
+
+### Staticman site config (`staticman.yml`)
+
+- `gitlabAuth.clientId`, `gitlabAuth.clientSecret` and `gitlabAuth.redirectUri` added to provide OAuth configuration when a user wishes to authenticate via GitLab.
+- `githubAuth.redirectUri` added for parity with the new `gitlabAuth` options.
+- `auth.required` option added to determine if **any** authentication is required before the user can submit a comment through Staticman.
+
+### `/entry` endpoint 
+
+- New URL pattern added: 
+	```
+	/v3/entry/:service/:username/:repository/:branch/:property
+	```
+- Accepts `gitlab` or `github` as a service parameter. This will be then used as the target for the consequent API calls.
+- Functionality mostly remains the same, but with Staticman now able to submit Merge Requests (PRs) to GitLab. MRs are set to automatically close the source branch, meaning that it is **not necessary** to have a webhook to close the branch with GitLab.
+- If `auth.required` site config option is true, then `options[auth-token]` and `options[auth-type]` must be passed through as well. 
+- `options[auth-token]` replaces `option[github-token]` (as this was too specific to GitHub). 
+- `options[auth-type]` has been added to allow the user to choose which authentication provider should be used i.e. `gitlab` or `github`. Any future integrations with other authentication providers would be expected to hook into this.
+- A new `User` model has been implemented which abstracts the user identity models from GitHub and GitLab. This only exposes common properties such as username, email, etc, hopefully simplifying future code.
+- The v2 API functionality is still implemented for backwards compatiblity. This includes the previous authentication behaviour where `options[github-token]` is used.
+
+### `/auth` endpoint
+
+- New URL pattern added: 
+	```
+	/v3/auth/:service/:username/:repository/:branch/:property
+	```
+- Accepts `gitlab` or `github` as a service parameter. This will be then used as the target for the consequent API calls.
+- The site owner will have to have set the correct options in their site config e.g. `gitlabAuth.clientId`, etc, to enable the user to authenticate with all authentication providers.
+- As part of GitLab's OAuth flow, a `redirectUri` **must** be provided (see [here](https://docs.gitlab.com/ee/api/oauth2.html#2-requesting-access-token)). Consequently, this has also been added for GitHub to be consistent.
+- The new `User` model is exposed here in the response's `user` property to confine the scope of this model for any future consumers.
+- The v2 API functionality is still implemented for backwards compatiblity (will return the GitHub API's user model in the response).
+
+### `/connect` endpoint
+
+- URL pattern changed to: 
+	```
+	/v3/connect/:service/:username/:repository
+	```
+- Remains largely unchanged, however with the addition of a service parameter. This has been added to be consistent and future proof against more Git service providers to connect through.
+- GitLab does not have collaborator invites, so this is currently not required for Staticman to collaborate on a project. The user can just add Staticman immediately.
+
+### Other changes
+
+- Minimum supported NodeJS version have been bumped up to `8.11.3` (the current LTS version).
+- New `class` syntax has been introduced in places such as the Git service classes.
+- Tests run 4x faster by improving how the test site config is setup before tests. Bugs have also been fixed due to config being modified between tests. Config is now mostly just copied to new objects between tests.
+- Various NPM dependencies have been changed/upgraded, such as:
+	- `github` -> `@octokit/rest` as the previous package was deprecated.
+	- `request-promise-native` -> `request-promise` as this interops with the GitLab package's `request-promise`.
+	- `node-uuid` -> `uuid` as the previous package was deprecated.
+<issue_comment>username_1: Wow, this is a big one. Thank you!
+
+Give me a couple of days to review this properly and I'll come back with any questions I might have. :)
+<issue_comment>username_1: Sorry for the ridiculously long time it took me to merge this. I had a review with a couple of minor comments (mostly around styling) but I forgot to press ""Submit review"" so it was pending. 🤦‍♂️ 
+
+After realising this and given how long it has been, I was too ashamed to submit the review and just merged the PR. They were super small issues anyway.
+
+Thanks again for this, it looks great. It should now be live on https://dev.staticman.net. How do we go about testing this? Any chance you could put together a short list of steps that people need to follow to get this working with GitLab?
+<issue_comment>username_2: I'm considering building a test GitLab page with Beautifulhugo to test this.  To allow Staticman to push comments into a GitLab repo, is there a bot on GitLab homologous to the ""staticmanapp"" on GitHub?
+<issue_comment>username_1: Not that I'm aware. Could you create one?
+<issue_comment>username_2: As an amateur Linux user, I regret lacking knowledge to do so.  I don't know nodejs and how GitLab bot works.  The tutorial for setting up a GitLab bot is much harder to find than its GitHub counterpart.
+<issue_comment>username_2: @username_0 In the section for `/connect` endpoint, how can a GitLab user ""add Staticman immediately"" to his/her repo?  Simply configuring `config.*ml` and `staticman.yml` is enough?
+<issue_comment>username_0: Haha @username_1, I was wondering what happened :smile: No problem at all! I've been a little busy myself over the last few days so sorry for the delay getting back to you on this.
+
+In terms of testing, I would suggest the following:
+
+## Setup
+
+1. Create a new GitLab.com user as the Staticman bot. In production this would want to be a user called `staticmanapp` (like the GitHub one). You could also use a different user for testing the dev environment.
+
+	@username_2 you can just create any user to test it personally, for example, a work account.
+
+2. Create a Personal Access Token for the Staticman user. This should then be set for `gitlabToken` in `config.json`. This will need to be configured with the `api` and `read_repository` scopes.
+
+3. As your personal user, create a project for yourself.
+
+4. Add the Staticman user to your project. You should be able to it as the 'Guest' role (refer to GitLab's [permission matrix](https://docs.gitlab.com/ee/user/permissions.html)). No need to respond to any repository invites like in GitHub (hence not needing a specific `/connect` endpoint for GitLab).
+
+5. Create the project's `staticman.yml`. This works the same as before. To test it properly `moderation` should be enabled of course.
+
+For reference, here is the project that I tested it on originally: [https://gitlab.com/username_0/test-staticman](https://gitlab.com/username_0/test-staticman).
+
+You should now be able to use the Staticman API like you would with GitHub, but with the new functionality.
+
+I would recommend performing any testing with a HTTP client like Postman.
+
+## Creating comments
+
+You can create new comments by using the new `/entry` endpoint. An example request might look like this:
+
+```
+POST /v3/entry/gitlab/username_0/test-staticman/master/comments
+
+options[slug]=test-slug
+fields[name]=Test user
+fields[email]=test@test.com
+fields[message]=Test message
+```
+
+This should be tested with the `moderation` option enabled and disabled.
+
+## Authentication
+
+Setup:
+
+1. As your personal user on GitLab (not Staticman), setup a new OAuth application for your site.
+	This will require a callback/redirect URI that should be the URI on your site where you would redirect the user to e.g: 
+
+	```
+	http://my-website.com/login
+	```
+
+	For testing, this could just be a localhost URL to avoid being redirected to a non-safe URL. 
+
+	The `api` and `read_user` scopes are also required.
+
+2. Add the application ID (normally known as client ID in OAuth) to the `gitlabAuth.clientId`, secret to `gitlabAuth.secret` and callback/redirect URL to `gitlabAuth.redirectUri` in `staticman.yml`.
+
+	Both `gitlabAuth.clientId` and `gitlabAuth.secret` should be RSA encrypted in the same way that the GitHub equivalents would be. This will involve passing both values to the Staticman API's `/encrypt` endpoint. `gitlabAuth.redirectUri` does need this encryption.
+
+	Thinking about it a little more @username_1, I don't actually think that `gitlabAuth.clientId` or `githubAuth.clientId` really need to be encrypted as you would typically need to expose this value to the client to start the OAuth flow anyway.
+
+3. Set the `auth.required` option to true in the project's `staticman.yml`.
+
+### To test that authentication is required
+
+1. Send normal comment requests to the `/entry` endpoint. You should receive authentication errors when you do so.
+
+### To test that authenticated comments can be created
+
+1. Start the OAuth flow with GitLab. This will require going to their endpoint:
+	
+	```
+	https://gitlab.com/oauth/authorize?client_id=APP_ID&redirect_uri=REDIRECT_URI&response_type=code
+	```
+
+	Where `APP_ID` is the OAuth application/client ID and `REDIRECT_URI` is the application's redirect URI specified in Setup step 1.
+
+	See the documentation on [Web application flow](https://docs.gitlab.com/ee/api/oauth2.html#web-application-flow) for more information.
+
+2. After initializing the OAuth flow, you authenticate with GitLab and then get redirected to the redirect URI with the `code` query parameter in the URI e.g.
+
+[Truncated]
+	fields[message]=Test message
+	```
+
+The comments should be created with the generated fields in the comment data.
+
+## Interactions with third party services
+
+I haven't really tested any of this stuff with any other services such as Mailgun or Akismet, however I don't think their behaviours should be affected by any of these changes. Perhaps it would be a good idea to check they still work correctly?
+
+## Authentication should be independent of Git service provider
+
+Originally I intended that a commenter should be able to authenticate with any OAuth provider, independent of where the Git site repository/project is hosted. For example, they could authenticate with GitLab and comment on a GitHub hosted repository.
+
+Unfortunately, I've spotted a flaw in the current logic which means that they are still restricted to the OAuth provider being on the same platform as the repository. I think this would just need a minor modification in the form of a new `provider` query parameter added to the `/auth` endpoint. This would look like:
+
+```
+GET /v3/auth/gitlab/username_0/test-staticman/master/comments?code=the-auth-code&provider=OAUTH_PROVIDER
+```
+
+Where `OAUTH_PROVIDER` would currently be either `gitlab` or `github`. This would be extensible in that we could ultimately add additional OAuth providers such as Google, etc in the future. What do you think @username_1?
+<issue_comment>username_0: @username_2 which step are you saying actually fails? When you try to send requests to the `/entry` endpoint? If so, does your instance of Staticman emit any errors in its output logs?
+
+`rsaPrivateKey` can be generated using `openssl`. A post on how to do it can be found [here](https://rietta.com/blog/2012/01/27/openssl-generating-rsa-key-from-command/). You will need to add any newline `\n` characters in manually (as it has to be JSON compatible). It does not need to match `staticman_key.pub`. I think the intention of that public key is for verifying that any output from the `/encrypt` endpoint is indeed from Staticman (but maybe @username_1 could clarify that).
+
+Your other config options should be sufficient, I don't think you should have any issue with the missing `githubToken` as long as you're not trying to make requests to the `github` endpoint variants e.g. `/entry/github/...`.
+<issue_comment>username_2: @username_0 Thank you for looking into this.  I followed steps 1-5 in the setup.  [My project on GitLab](https://gitlab.com/vincenttam/test-hugo-staticman) is to integrate this into the theme halogenica/beautifulhugo#99.
+
+In my `config.development.json` in step 2, I generated my private key using `ssh-keygen`. (the way in the doc of GitHub/GitLab, but without passphrase.)  I can try generating this with `openssl`.
+
+```json
+{
+  ""gitlabToken"": ""yX9bxxxxxxxxxxxxxxxxxxBiTl"",
+  ""githubToken"": ""YOUR_GITHUB_TOKEN"",
+  ""rsaPrivateKey"": ""-----BEGIN RSA PRIVATE KEY-----\n...\n-----END RSA PRIVATE KEY-----"",
+  ""port"": 8000
+}
+```
+
+In my project, I adapted your `staticman.yml` to halogenica's one to match the keys in his form.
+
+At my public site (https://vincenttam.gitlab.io/test-hugo-staticman), mixed active content is blocked.  Then I tried localhost:1313 served by `hugo server`, but failed again.
+
+I tried copying the request body from Firefox into Postman to send a POST request, but I got ""missing parameters"" error from `server.js`.
+
+![screenshot from 2018-09-05 11-29-58](https://user-images.githubusercontent.com/5748535/45084776-6c9a4a00-b0ff-11e8-9628-71092be1783a.png)
+<issue_comment>username_2: After some ""testing"", I found that the error is due to `rsaPrivateKey`.  I followed the linked guide to generate a private key (*without* `-des3`) and `:%s/\n/\\n/` in Vim, and got the *same* error.
+
+Post request parameters captured by `this.requireApiVersion([3])`:
+
+```json
+req.params = { version: '3',
+  service: 'gitlab',
+  username: 'vincenttam',
+  repository: 'test-hugo-staticman',
+  branch: 'master',
+  property: 'comments' }
+req.body = { options:
+   { slug: 'test-hugo-staticmanpoststest-staticman', parent: '' },
+  fields:
+   { comment: 'sadlfg sakg ',
+     name: 'sdlkfj',
+     email: 'dome@slkf.net',
+     website: 'example.com' } }
+```
+
+Response output error:
+
+```
+Error: Error during decryption (probably incorrect key). Original error: Error: Incorrect data or key
+    at NodeRSA.module.exports.NodeRSA.$$decryptKey (/home/vin100/staticman/node_modules/node-rsa/src/NodeRSA.js:301:19)
+    at NodeRSA.module.exports.NodeRSA.decrypt (/home/vin100/staticman/node_modules/node-rsa/src/NodeRSA.js:249:21)
+    at Object.coerce [as EncryptedString] (/home/vin100/staticman/siteConfig.js:194:18)
+    at coerce (/home/vin100/staticman/node_modules/convict/lib/convict.js:407:32)
+    at /home/vin100/staticman/node_modules/convict/lib/convict.js:369:15
+    at Array.forEach (<anonymous>)
+    at overlay (/home/vin100/staticman/node_modules/convict/lib/convict.js:366:21)
+    at /home/vin100/staticman/node_modules/convict/lib/convict.js:372:7
+    at Array.forEach (<anonymous>)
+    at overlay (/home/vin100/staticman/node_modules/convict/lib/convict.js:366:21)
+    at Object.load (/home/vin100/staticman/node_modules/convict/lib/convict.js:592:7)
+    at module.exports (/home/vin100/staticman/siteConfig.js:201:12)
+    at Staticman._validateConfig (/home/vin100/staticman/lib/Staticman.js:418:21)
+    at git.readFile.then.data (/home/vin100/staticman/lib/Staticman.js:476:35)
+```
+
+with `const statusCode = 500`.
+<issue_comment>username_0: @username_2, interesting that there is a red herring 'missing parameters' error. The error could be more detailed here.
+
+I'm guessing there's some confusion so just to clarify what I've done to make it work:
+
+1. Create an RSA key using:
+
+```
+openssl genrsa -out key.pem
+```
+
+2. Grab the RSA key from the created `key.pem` file of this and make it JSON friendly by replacing all line breaks with `\n`.
+
+3. The JSON-friendly RSA key should now be copied over to the `rsaPrivateKey` of Staticman's `config.json`.
+
+4. Encrypt your GitLab OAuth application ID (client ID) and secret using the `/encrypt/{textToEncrypt}` endpoint.
+
+5. Place these in the site's `staticman.yml` under `gitlabAuth.clientId` and `gitlabAuth.clientSecret`.
+
+6. Restart the server and attempt to post comments to the `/entry` endpoint whilst the `auth.required` property of the site's `staticman.yml` is true.
+
+The rest of the authentication test steps still apply, so you should be able to extrapolate from here.
+
+Hope this helps!
+<issue_comment>username_2: @username_0 Dispite my big thanks to your clear instrustions, my API server is still giving a 401 error.  (All `npm test` pass though.)  I don't know why I'm still stuck at the RSA private key.  Here's what I've done.
+
+# Missing RSA key
+
+1. I generated a RSA key using the above `openssl genrsa` cmd and pasted it into `config.development.json`.
+    ![screenshot from 2018-09-07 13-55-49](https://user-images.githubusercontent.com/5748535/45218068-8cb83d80-b2a6-11e8-9e21-158143880d6c.png)
+2. I obtained GitLab OAuth application ID and secret throught my personal ac  (also called vincenttam).
+    ![oauth](https://user-images.githubusercontent.com/5748535/45218614-862ac580-b2a8-11e8-9fd9-45c7f0945260.png)
+3. I encrypted them through `/encrypt` endpoint in Firefox.
+4. I forked your GitLab test repo and replaced the two lines `client*` with those from `/encrypt` in `staticman.yml`, then I pushed it back to GitLab.
+5. Restart the server and input https://gitlab.com/oauth/authorize?client_id=1f5c806921988e45cd0a9ed364e4396a747809ed35038304ad3f6fd07f7c1004&redirect_uri=http://localhost:8000&response_type=code in the address bar of Firefox.
+6. Sign in GitLab with my personal ac (vincenttam), authorise the app, and obtain the `code=...`.
+7. Sent a GET request to `/auth`.
+
+        GET /v3/auth/gitlab/vincenttam/test-staticman/master/comments?code=the-auth-code
+
+    ![screenshot from 2018-09-07 13-48-07](https://user-images.githubusercontent.com/5748535/45218908-6f38a300-b2a9-11e8-9ba0-6945056abfb2.png)
+
+* * *
+
+# Missing parameter `['fields']`
+
+Besides, `POST`ing a comment to `/entry` results in error `500`.
+
+![screenshot from 2018-09-07 14-31-01](https://user-images.githubusercontent.com/5748535/45219282-ae1b2880-b2aa-11e8-9e40-6ebe8c9f4210.png)
+
+Provided that I _don't_ know Node.js, to gain a deep insight into the `req`uest received, I used the most primitive ""printf debug method"" under functions `requireApiVerison` and `sendResponse`.
+
+This enables me to see that _nothing_ is passed from Postman to my Staticman API instance.
+
+![emptybody](https://user-images.githubusercontent.com/5748535/45219685-fb4bca00-b2ab-11e8-97d0-4486e27b9a5f.png)
+<issue_comment>username_2: @username_0 Thank you again for your advices.  I've switched to Sublime and Postman so as to copy accurately.  After recreating *another* `rsaPrivateKey`, I can move _one_ step forward.
+
+What would be the source of `GITLAB_CREATING_PR`?
+
+![screenshot from 2018-09-08 22-24-17](https://user-images.githubusercontent.com/5748535/45258984-12c9a680-b3c3-11e8-938a-8aa43e84fc20.png)
+
+1. I tested my `gitlabToken` for my bot (""staticmanlab"") on GitLab.
+![screenshot from 2018-09-08 23-44-38](https://user-images.githubusercontent.com/5748535/45258993-40aeeb00-b3c3-11e8-9317-d01839b413bf.png)
+ 2. I double-checked that this token's scope, which contains `api`.
+![screenshot from 2018-09-08 23-45-42](https://user-images.githubusercontent.com/5748535/45259001-7358e380-b3c3-11e8-9324-c5d09d8cad71.png)
+3. I checked the [member list](https://gitlab.com/vincenttam/test-staticman/project/) to ensure that ""staticmanlab"" is invited as a Guest.
+<issue_comment>username_2: @username_0 Thank you so much for your patience and help! 😀  It finally worked on [my forked project](https://gitlab.com/username_2/test-staticman/blob/c29f8048e228d11c69709a1244f028063de5d667/comments/test-slug/entry1536447225284.yml).
+
+![screenshot from 2018-09-09 01-03-29](https://user-images.githubusercontent.com/5748535/45259397-2e857a80-b3cc-11e8-9e7e-a15022c05f7a.png)
+<issue_comment>username_0: @username_2 nope you shouldn't need to create the comments directory. It will get created automatically by the comment (you also can't commit bare directories into Git).
+<issue_comment>username_2: @username_0 Thanks again for this great PR !  I'm sharing my views on some problems you've raised in previous posts: the storage of OAuth tokens in local browsers and cross-platform authentication.
+
+After this success, I tested the [setup steps 1--5](https://github.com/username_1/staticman/pull/219#issuecomment-417857360) again with `authentication: false`.  I immediately got the `rsaPrivateKey` error.  It seems to me that only authenticated users can post a comment.
+
+Since comments from users of whatever Git service provider are welcomed, this brings up the problem of authentication with different Git service providers that you outlined.
+
+Remembering OpenID, I've found [this answer][so] about OpenID vs OAuth on Stack Overflow.  During the testing, I confused the terms ""authentication"" and ""authorization"".
+
+| &nbsp; | authorization | authentication |
+| --- | --- | --- |
+| purpose | grant access _without_ further login | identity check, _requires_ login |
+| duration | long-term | short-term |
+| [Stack Overflow's answer][so] | OAuth | OpenID |
+| supposed target | Git* Bot | commenters |
+| real-world e.g. | border control personnel staff card | visitors' passport |
+
+However, in the current OAuth + Web App flows, the `oauth-token` that an ""authenticated"" commenter POSTs along with his/her message _never expires_.
+
+IMHO, to achieve _authentic_ authentication, the OpenID flow does a better job.
+
+[so]: https://stackoverflow.com/a/1087071
+<issue_comment>username_0: @username_2 have you set up your `staticman.yml` correctly? It should be `auth.required: false`:
+
+```yml
+  auth:
+    required: false
+```
+
+I've had no issue just swapping it to false in my test repo then just POSTing to the `/entry` endpoint without any auth `options` in the request.
+
+In terms of the actual authentication mechanism:
+
+I'm a little confused about how OpenID would solve anything here. Implementing the original OpenID 2.0 spec would essentially require setting up another server. There's also the issue that it is marked as [obsolete](https://openid.net/developers/specs/) in favour of OpenID Connect.
+
+OpenID Connect itself is just a layer on top of OAuth, which provides authentication as well authorization. In fact, GitLab is actually an OpenID Connect [identity provider](https://docs.gitlab.com/ee/integration/openid_connect_provider.html). In the context of Staticman, I believe this would only have the slight benefit of giving us the option to retrieve the user's profile information in the OpenID Connect way.
+
+We would still need OAuth to allow us to do just about anything on GitLab/GitHub. That said, you are correct that currently the authenticated commenter's OAuth access token does not actually expire. This could potentially pose a security issue if we're not careful with how we handle it. 
+
+Fortunately, I think we are 'relatively' covered on this as we are using RSA encryption on the access token. The intention of this is to prevent its misuse outside of the Staticman API. Consequently, some malicious user shouldn't be able to just get their hands on the token and start using it to impersonate the user.
+
+That said, as I've mentioned before, we should probably try to offer recommendations to help users store any authentication information correctly on the client side.
+
+Additionally, whilst RSA is currently secure (AFAIK), it does have some concerns over its long-term viability. I believe Libsodium's encryption primitives are usually preferred by security/crypto experts. Perhaps, something worth thinking about @username_1?
+<issue_comment>username_2: @username_0 First and foremost, I apologize for my _incorrect_ claim. Swapping `auth.required` [did work](https://gitlab.com/username_2/test-staticman/merge_requests/5).
+
+Thinking back, I should have confused my fork of your test project with [my own one](https://gitlab.com/username_2/test-hugo-staticman).
+
+Big thanks for testing this and explaining the role OpenID.
+
+Currently, only GitLab users can post authenticated comments to GitLab project.  The proposed solution is great, but some work is needed to add support for _each_ OAuth provider.
+
+If OpenID is implemented here, provided that a GitHub/Google user has authenticated him/herself through OpenID, it's possible that he/she can post authenticated comments _without_ a GitLab account?
+
+I thought about this while being unaware of the need of setting up another server---that would be too heavy to deal with.
+<issue_comment>username_0: No problem :smile:
+
+As this PR is a bit incomplete without the ability to select the authentication identity provider independently of the site repository provider, I've gone and added the finishing touches (with respect to this discussion) in a new PR #231. Another one for you @username_1 :wink: 
+
+Once that PR is in, it will be possible for a commenter to authenticate with _either_ GitLab or GitHub (provided that the associated OAuth applications are setup correctly). It should be possible to expand this functionality in the future to encapsulate other providers such as Google, Auth0, etc.
+
+I don't think OpenID and its abstractions are really required at any point. Currently Staticman will try to generalise any profile data from GitHub/GitLab into it's own 'User' model. To me, this seems sufficient, but this could be something we could think about further if required.
+<issue_comment>username_2: Thanks to your sample project and support, I'm happy to publish the [first Hugo blog powered by Staticman v3](https://vincenttam.gitlab.io/test-hugo-staticman/posts/test-staticman/).  😃
+
+![screenshot_2018-09-13-03-37-31](https://user-images.githubusercontent.com/5748535/45462704-35ccc100-b709-11e8-9014-be0a37a09f04.png)
+
+Once cloned, it remains to configure the two config files. With KaTeX and Markdown support, that's much better than existing solutions (e.g. Disqus) for communicating math.
+
+In fact, I find reCaptcha enough to distinguish my prof's and classmates 💼 (who don't have a Git* account) from Bots 💻.
+<issue_comment>username_2: Thanks to @username_0 's continual help, I've created one running on a free dyno on Heroku at
+https://staticman3.herokuapp.com/ for testing, with the associated GitHub/GitLab bot both named @staticmanlab.
+<issue_comment>username_3: @username_1 Cool. It seems that dev.staticman.net is only a very small static html site saying ""Hello from Staticman version 3.0.0!"" - nothing more or less. I tested with Chromium, Firefox and Qutebrowser. Is that what you expected?
+<issue_comment>username_2: @username_3 It can _never_ be static since its endpoints respond dynamically to users' requests.
+<issue_comment>username_3: @username_2 Ok, I didn't know that. I am not a web developer, could you explain what I am supposed to do for the ""final round of testing using the dev instance""? Perhapse you could point me to some documentation where I can read what one can do with that url. Or was that call for help just not for me?
+<issue_comment>username_2: @username_3 Since the project owner doesn't disclose the associated GitLab account for his dev instance, there's _no_ proper way to publicly test this PR on this instance.
+
+To see how this PR works, I recommend either hosting your own API instance or use @staticmanlab, my public GitLab instance.
+<issue_comment>username_4: I am testing now using dev.staticman.net, but always showing Internal Server Error. 😰
+<issue_comment>username_4: I tested it today on my website and it works flawlessly 😊
+<issue_comment>username_4: It would be needed webhook tweaks for gitlab to send a notification mail. I tried with `https://dev.staticman.net/v1/webhook` but always getting ""400: No id found in the request""."
+asyncapi/website,775467408,167,,"[{'action': 'opened', 'author': 'lbroudoux', 'comment_id': None, 'datetime': '2020-12-28 15:56:25+00:00', 'masked_author': 'username_0', 'text': '2nd and last part of `How Microcks Can Speed-Up Your AsyncAPI Adoption` series 😉 \r\n\r\n## Post title\r\n\r\nHow Microcks can speed-up your AsyncAPI adoption - Part 2\r\n\r\n## Post description\r\n\r\nIn this post we will show you how Microcks is leveraging the AsyncAPI specification on Kafka in a very pragmatic and powerful approach: way beyond documentation or code generation! We will also go through the different business use-cases implemented by users integrating Microcks in their asynchronous API toolchain.', 'title': 'Discover how Microcks can speed-up your AsyncAPI adoption - Part 2', 'type': 'issue'}
+ {'action': 'created', 'author': 'lbroudoux', 'comment_id': 756592926.0, 'datetime': '2021-01-08 07:13:28+00:00', 'masked_author': 'username_0', 'text': 'Now published. Thanks!', 'title': None, 'type': 'comment'}
+ {'action': 'closed', 'author': 'lbroudoux', 'comment_id': None, 'datetime': '2021-01-08 07:13:32+00:00', 'masked_author': 'username_0', 'text': '', 'title': None, 'type': 'issue'}]","<issue_start><issue_comment>Title: Discover how Microcks can speed-up your AsyncAPI adoption - Part 2
+username_0: 2nd and last part of `How Microcks Can Speed-Up Your AsyncAPI Adoption` series 😉 
+
+## Post title
+
+How Microcks can speed-up your AsyncAPI adoption - Part 2
+
+## Post description
+
+In this post we will show you how Microcks is leveraging the AsyncAPI specification on Kafka in a very pragmatic and powerful approach: way beyond documentation or code generation! We will also go through the different business use-cases implemented by users integrating Microcks in their asynchronous API toolchain.
+<issue_comment>username_0: Now published. Thanks!<issue_closed>"
+department-of-veterans-affairs/vets-website,174382041,2917,,"[{'action': 'created', 'author': 'koconnor719', 'comment_id': 243910227.0, 'datetime': '2016-08-31 21:36:30+00:00', 'masked_author': 'username_0', 'text': '@username_3 potential HCA issue; pls advise of response:)', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'markolson', 'comment_id': 243913176.0, 'datetime': '2016-08-31 21:48:15+00:00', 'masked_author': 'username_1', 'text': 'That error surfaces if the applicant\'s entry date is less than 15 years after their birth date. The wording could be made more clear. Perhaps ""You must have been older than 15 years old upon entry. Did you enter your birthdate correctly?"" or something like that?', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'koconnor719', 'comment_id': 243914195.0, 'datetime': '2016-08-31 21:52:14+00:00', 'masked_author': 'username_0', 'text': ""ty @username_1 ; assigning to content team @username_2  for review of this content per your suggestion.  @username_3 fyi.\r\n\r\nposted:\r\nThank you for your feedback. To submit the application, you must have been older than 15 years old upon entry. We are going to have our team review those instructions to see if we can improve them so it's clear!  \r\n\r\nvets.gov"", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'rcarthur', 'comment_id': 243962951.0, 'datetime': '2016-09-01 03:01:23+00:00', 'masked_author': 'username_2', 'text': '@username_0 @username_1 @username_3 \r\nMy 2 cents: I just ran through the application and the error message popped up as I started to fill out those fields on the form (military service page).  However, when I finished filling out the field, the red error message disappeared.  I powered through the error message...but I could see how this might have confused the user.   Recommend we look at adjusting the error cueing until the user hits ""enter.""', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'koconnor719', 'comment_id': 244044260.0, 'datetime': '2016-09-01 10:51:50+00:00', 'masked_author': 'username_0', 'text': 'Thx ric!!!\r\n\r\n\r\n\r\nSent with Good (www.good.com)\r\n\r\n\r\n-----Original Message-----', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'akainic', 'comment_id': 244463752.0, 'datetime': '2016-09-02 19:14:10+00:00', 'masked_author': 'username_3', 'text': 'Yes, this is something we talked about looking into but put it in the backlog. Sounds like a real issue now. This is the ticket for it: https://github.com/department-of-veterans-affairs/healthcare-application-team/issues/105.', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'koconnor719', 'comment_id': 247452318.0, 'datetime': '2016-09-15 20:53:25+00:00', 'masked_author': 'username_0', 'text': '@username_1 do you know status of this?', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'markolson', 'comment_id': 247454555.0, 'datetime': '2016-09-15 21:02:12+00:00', 'masked_author': 'username_1', 'text': ""Someone from the frontend team will need to be assigned to it. I'll see who has some free time in the morning."", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'koconnor719', 'comment_id': 247455964.0, 'datetime': '2016-09-15 21:07:59+00:00', 'masked_author': 'username_0', 'text': 'ty:)', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'akainic', 'comment_id': 248905282.0, 'datetime': '2016-09-22 13:36:49+00:00', 'masked_author': 'username_3', 'text': ""@jbalboni fixed this for education in a recent PR, but since HCA is still served from a separate repo I think it's not solved for HCA yet. I am working on trying to get everything moved over to vets-website so we can serve from there instead, but if that takes more than a day or two I will just recreate what Jeff did in the healthcare-application repo. Expect a fix early next week."", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'koconnor719', 'comment_id': 251269954.0, 'datetime': '2016-10-04 01:05:09+00:00', 'masked_author': 'username_0', 'text': '@username_3 what is status on this pls.', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'koconnor719', 'comment_id': 257069732.0, 'datetime': '2016-10-29 04:12:48+00:00', 'masked_author': 'username_0', 'text': ""sorry anne--what is status of this?  i need to respond and would like to say it's fixed:)  not urgent that it's fixed by veterans day but would like to close soon if possible:)"", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'koconnor719', 'comment_id': 265744491.0, 'datetime': '2016-12-08 13:53:09+00:00', 'masked_author': 'username_0', 'text': '@username_3 can you pls provide status?', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'leannammiller', 'comment_id': 265748664.0, 'datetime': '2016-12-08 14:12:05+00:00', 'masked_author': 'username_4', 'text': ""@username_0 we are moving to vets-api and it will be fixed as soon as that's complete"", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'koconnor719', 'comment_id': 267717188.0, 'datetime': '2016-12-16 23:02:51+00:00', 'masked_author': 'username_0', 'text': '@username_4 is this closed?', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'leannammiller', 'comment_id': 267972115.0, 'datetime': '2016-12-19 14:07:34+00:00', 'masked_author': 'username_4', 'text': 'I believe so but @username_3 can confirm.', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'akainic', 'comment_id': 268003953.0, 'datetime': '2016-12-19 16:09:28+00:00', 'masked_author': 'username_3', 'text': 'Yes it should be closed @username_0!', 'title': None, 'type': 'comment'}
+ {'action': 'closed', 'author': 'koconnor719', 'comment_id': None, 'datetime': '2016-12-20 15:30:13+00:00', 'masked_author': 'username_0', 'text': '', 'title': None, 'type': 'issue'}]","<issue_start><issue_comment>username_0: @username_3 potential HCA issue; pls advise of response:)
+<issue_comment>username_1: That error surfaces if the applicant's entry date is less than 15 years after their birth date. The wording could be made more clear. Perhaps ""You must have been older than 15 years old upon entry. Did you enter your birthdate correctly?"" or something like that?
+<issue_comment>username_0: ty @username_1 ; assigning to content team @username_2  for review of this content per your suggestion.  @username_3 fyi.
+
+posted:
+Thank you for your feedback. To submit the application, you must have been older than 15 years old upon entry. We are going to have our team review those instructions to see if we can improve them so it's clear!  
+
+vets.gov
+<issue_comment>username_2: @username_0 @username_1 @username_3 
+My 2 cents: I just ran through the application and the error message popped up as I started to fill out those fields on the form (military service page).  However, when I finished filling out the field, the red error message disappeared.  I powered through the error message...but I could see how this might have confused the user.   Recommend we look at adjusting the error cueing until the user hits ""enter.""
+<issue_comment>username_0: Thx ric!!!
+
+
+
+Sent with Good (www.good.com)
+
+
+-----Original Message-----
+<issue_comment>username_3: Yes, this is something we talked about looking into but put it in the backlog. Sounds like a real issue now. This is the ticket for it: https://github.com/department-of-veterans-affairs/healthcare-application-team/issues/105.
+<issue_comment>username_0: @username_1 do you know status of this?
+<issue_comment>username_1: Someone from the frontend team will need to be assigned to it. I'll see who has some free time in the morning.
+<issue_comment>username_0: ty:)
+<issue_comment>username_3: @jbalboni fixed this for education in a recent PR, but since HCA is still served from a separate repo I think it's not solved for HCA yet. I am working on trying to get everything moved over to vets-website so we can serve from there instead, but if that takes more than a day or two I will just recreate what Jeff did in the healthcare-application repo. Expect a fix early next week.
+<issue_comment>username_0: @username_3 what is status on this pls.
+<issue_comment>username_0: sorry anne--what is status of this?  i need to respond and would like to say it's fixed:)  not urgent that it's fixed by veterans day but would like to close soon if possible:)
+<issue_comment>username_0: @username_3 can you pls provide status?
+<issue_comment>username_4: @username_0 we are moving to vets-api and it will be fixed as soon as that's complete
+<issue_comment>username_0: @username_4 is this closed?
+<issue_comment>username_4: I believe so but @username_3 can confirm.
+<issue_comment>username_3: Yes it should be closed @username_0!<issue_closed>"
+kubernetes/website,610670193,20709,,"[{'action': 'opened', 'author': 'prakashid2', 'comment_id': None, 'datetime': '2020-05-01 09:49:14+00:00', 'masked_author': 'username_0', 'text': ""**This is a Bug Report**\r\n\r\n**Problem:**\r\nI'm trying to install Kubenetes as per [install-kubectl](https://kubernetes.io/docs/tasks/tools/install-kubectl/) link.\r\n\r\nPowershell is throwing error in output. First command 'Install-Script' succeeded but did not show any lines in console output.\r\n\r\n-- Error in output of install-kubectl.ps1 --\r\nPS D:\\kubernetesInstalled> install-kubectl.ps1 -DownloadLocation D:\\kubernetesInstalled\r\ninstall-kubectl.ps1: The term 'install-kubectl.ps1' is not recognized as the name of a cmdlet, function, script file, or operable program.\r\nCheck the spelling of the name, or if a path was included, verify that the path is correct and try again.\r\nPS D:\\kubernetesInstalled>\r\n-- --\r\n\r\n**Proposed Solution:**\r\nI want someone to look into this issue rather than installing using Chocolatey package manager which is more difficult. Not sure why 'install-kubectl.ps1' command is throwing error.\r\n\r\n**Page to Update:**\r\nhttps://kubernetes.io/...\r\n\r\n![ErrorIn install-kubectl](https://user-images.githubusercontent.com/35317036/80796980-3a840880-8bbe-11ea-9223-a3e17f413a17.jpg)\r\n![Installing install-kubectl ps1](https://user-images.githubusercontent.com/35317036/80796981-3c4dcc00-8bbe-11ea-8635-fa4b29c4ba94.jpg)\r\n\r\nKubernetes version 1.18.0"", 'title': 'Issue with install-kubectl.ps1 power shell command', 'type': 'issue'}
+ {'action': 'created', 'author': 'tengqm', 'comment_id': 643715560.0, 'datetime': '2020-06-14 04:07:09+00:00', 'masked_author': 'username_1', 'text': ""have you tried `Install-Script -Name install-kubectl -Scope CurrentUser -Force -Debug` and see if the `Install-Script` was a success? Sometimes PowerShell just fail silently.\r\n\r\nI'm gonna close this issue because it doesn't look like a documentation error. Please feel free to reopen if you believe there are something the doc site needs to fix.\r\n\r\nThis list of issues tracks bug reports and feature requests for the Kubernetes documentation.\r\n\r\nIf you're looking for help, check [Stack Overflow](https://stackoverflow.com/questions/tagged/kubernetes) and the [troubleshooting guide](https://kubernetes.io/docs/tasks/debug-application-cluster/troubleshooting/).\r\n\r\nYou can also post your question on the [Kubernetes Slack](http://slack.k8s.io/) or the [Discuss Kubernetes](https://discuss.kubernetes.io/) forum.\r\n\r\n/close"", 'title': None, 'type': 'comment'}]","<issue_start><issue_comment>Title: Issue with install-kubectl.ps1 power shell command
+username_0: **This is a Bug Report**
+
+**Problem:**
+I'm trying to install Kubenetes as per [install-kubectl](https://kubernetes.io/docs/tasks/tools/install-kubectl/) link.
+
+Powershell is throwing error in output. First command 'Install-Script' succeeded but did not show any lines in console output.
+
+-- Error in output of install-kubectl.ps1 --
+PS D:\kubernetesInstalled> install-kubectl.ps1 -DownloadLocation D:\kubernetesInstalled
+install-kubectl.ps1: The term 'install-kubectl.ps1' is not recognized as the name of a cmdlet, function, script file, or operable program.
+Check the spelling of the name, or if a path was included, verify that the path is correct and try again.
+PS D:\kubernetesInstalled>
+-- --
+
+**Proposed Solution:**
+I want someone to look into this issue rather than installing using Chocolatey package manager which is more difficult. Not sure why 'install-kubectl.ps1' command is throwing error.
+
+**Page to Update:**
+https://kubernetes.io/...
+
+![ErrorIn install-kubectl](https://user-images.githubusercontent.com/35317036/80796980-3a840880-8bbe-11ea-9223-a3e17f413a17.jpg)
+![Installing install-kubectl ps1](https://user-images.githubusercontent.com/35317036/80796981-3c4dcc00-8bbe-11ea-8635-fa4b29c4ba94.jpg)
+
+Kubernetes version 1.18.0
+<issue_comment>username_1: have you tried `Install-Script -Name install-kubectl -Scope CurrentUser -Force -Debug` and see if the `Install-Script` was a success? Sometimes PowerShell just fail silently.
+
+I'm gonna close this issue because it doesn't look like a documentation error. Please feel free to reopen if you believe there are something the doc site needs to fix.
+
+This list of issues tracks bug reports and feature requests for the Kubernetes documentation.
+
+If you're looking for help, check [Stack Overflow](https://stackoverflow.com/questions/tagged/kubernetes) and the [troubleshooting guide](https://kubernetes.io/docs/tasks/debug-application-cluster/troubleshooting/).
+
+You can also post your question on the [Kubernetes Slack](http://slack.k8s.io/) or the [Discuss Kubernetes](https://discuss.kubernetes.io/) forum.
+
+/close"
+github/personal-website,412122201,9,,"[{'action': 'opened', 'author': 'smakosh', 'comment_id': None, 'datetime': '2019-02-19 21:01:06+00:00', 'masked_author': 'username_0', 'text': 'Why not let the user pick the SSG they want like Hugo, Gatsby, Pelican....?', 'title': 'Let the user pick their favorite SSG', 'type': 'issue'}
+ {'action': 'created', 'author': 'brandonrosage', 'comment_id': 469401275.0, 'datetime': '2019-03-04 20:03:08+00:00', 'masked_author': 'username_1', 'text': ""I'd love to hear any proposals you have for integrating those choices into this project. One of the design principles with this project was to provide a codebase that, upon forking, could be deployed without any changes and be ready for the public to see out of the box. We got pretty darn close with the initial release.\r\n\r\nI'm not certain how one could start with this codebase, be asked to make a one-click or one-line-of-code decision, and simply deploy. It seems to me that that choice would require some pretty sweeping changes to the code that powers the layouts, etc.\r\n\r\nI'm hoping you can show me how it'd work 👍"", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'smakosh', 'comment_id': 469402674.0, 'datetime': '2019-03-04 20:07:32+00:00', 'masked_author': 'username_0', 'text': 'I was thinking about having separate branches for each SSG, all will be easy to customize and deploy, this can be mentioned on the docs to let anyone know that they can have the same design & functionality but with different SSGs.', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'brandonrosage', 'comment_id': 476304669.0, 'datetime': '2019-03-25 17:39:46+00:00', 'masked_author': 'username_1', 'text': '@username_0 I think the codebases for each SSG would vary so widely that they\'d be far better off managed in separate repos. The ""Issues"" alone would be impossible to decipher -- which codebase is the users referring to?\r\n\r\nThey would be distinctly different projects and should therefore be distinct repos, no?\r\n\r\n_Example_: [Octicons](https://github.com/primer/octicons/#libraries), with separate repos for each library it supports.', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'smakosh', 'comment_id': 476530267.0, 'datetime': '2019-03-26 08:54:44+00:00', 'masked_author': 'username_0', 'text': 'Yes makes sense', 'title': None, 'type': 'comment'}
+ {'action': 'closed', 'author': 'smakosh', 'comment_id': None, 'datetime': '2019-03-26 08:54:50+00:00', 'masked_author': 'username_0', 'text': '', 'title': None, 'type': 'issue'}]","<issue_start><issue_comment>Title: Let the user pick their favorite SSG
+username_0: Why not let the user pick the SSG they want like Hugo, Gatsby, Pelican....?
+<issue_comment>username_1: I'd love to hear any proposals you have for integrating those choices into this project. One of the design principles with this project was to provide a codebase that, upon forking, could be deployed without any changes and be ready for the public to see out of the box. We got pretty darn close with the initial release.
+
+I'm not certain how one could start with this codebase, be asked to make a one-click or one-line-of-code decision, and simply deploy. It seems to me that that choice would require some pretty sweeping changes to the code that powers the layouts, etc.
+
+I'm hoping you can show me how it'd work 👍
+<issue_comment>username_0: I was thinking about having separate branches for each SSG, all will be easy to customize and deploy, this can be mentioned on the docs to let anyone know that they can have the same design & functionality but with different SSGs.
+<issue_comment>username_1: @username_0 I think the codebases for each SSG would vary so widely that they'd be far better off managed in separate repos. The ""Issues"" alone would be impossible to decipher -- which codebase is the users referring to?
+
+They would be distinctly different projects and should therefore be distinct repos, no?
+
+_Example_: [Octicons](https://github.com/primer/octicons/#libraries), with separate repos for each library it supports.
+<issue_comment>username_0: Yes makes sense<issue_closed>"
+conda-forge/conda-forge.github.io,860179822,1390,,"[{'action': 'opened', 'author': 'samcmill', 'comment_id': None, 'datetime': '2021-04-16 21:21:33+00:00', 'masked_author': 'username_0', 'text': 'The [NVIDIA HPC SDK](https://developer.nvidia.com/hpc-sdk) is a comprehensive suite of compilers, libraries and tools for HPC developers.  The HPC SDK includes C, C++, and Fortran compilers (formerly known as the PGI compilers), as well as CUDA, GPU math libraries, communication libraries such as MPI and NCCL, and Nsight performance profilers.  \r\n\r\nThis issue is to discuss adding a package for the HPC SDK, including support for using the compilers to build other packages.\r\n\r\nThe HPC SDK is free for [download](https://developer.nvidia.com/nvidia-hpc-sdk-downloads), and is also available as [containers from NGC](https://ngc.nvidia.com/catalog/containers/nvidia:nvhpc) and is supported in [Spack](https://github.com/spack/spack/pull/19294).\r\n\r\nThe HPC SDK is available for x86_64, Power, and Arm.\r\n\r\nThe HPC SDK has two variants: one includes the latest CUDA only, and the other includes 3 versions of CUDA.  Ideally, based on the detected NVIDIA driver, the most appropriate variant can be selected for install.  \r\n\r\nThe ""REDIST"" directory contains the set of runtime libraries (there are also separate `devel` and `runtime` Docker containers on NGC).  \r\n\r\nTagging @username_2 @kkraus14 @raydouglass @costat @username_3', 'title': 'Add package for the NVIDIA HPC SDK', 'type': 'issue'}
+ {'action': 'created', 'author': 'beckermr', 'comment_id': 821576648.0, 'datetime': '2021-04-16 21:36:49+00:00', 'masked_author': 'username_1', 'text': 'When I read the license, I understood the text to mean that while the compilers are available for download, conda-forge cannot redistribute them. Even if the runtimes are redistributable, this would mean our CI services would have to download the compilers themselves, which might be a big lift. Supporting CUDA in this way has been pretty non-trivial.\r\n\r\nDoes anyone know the situation regarding ABI compatibility on the fortran side?', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'beckermr', 'comment_id': 821576969.0, 'datetime': '2021-04-16 21:37:42+00:00', 'masked_author': 'username_1', 'text': 'also cc @conda-forge/core @isuruf', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'jakirkham', 'comment_id': 821581452.0, 'datetime': '2021-04-16 21:49:57+00:00', 'masked_author': 'username_2', 'text': '@username_0 do you know?', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'samcmill', 'comment_id': 821602595.0, 'datetime': '2021-04-16 22:12:53+00:00', 'masked_author': 'username_0', 'text': 'In general there is no Fortran ABI compatibility between different compilers.', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'beckermr', 'comment_id': 821605888.0, 'datetime': '2021-04-16 22:14:30+00:00', 'masked_author': 'username_1', 'text': 'This is what I figured and is the same with ifort. This means we will have to rebuild the full fortran stack if we want fully ship things. We faced a similar question for intel fortran and ended up punting on the fortran compilers from them.', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'sfiligoi', 'comment_id': 821755291.0, 'datetime': '2021-04-17 02:59:25+00:00', 'masked_author': 'username_3', 'text': 'I have not tried the fortran builds, but I have heard them claim they maintain GCC ABI compatibility.\r\n\r\nI know that it holds for C/C++ builds for sure.\r\nBTW: If anyone is interested, I had posted a recipe for building a mixed gcc/NVIDIA HPC SDK setup some time ago:\r\nhttps://www.linkedin.com/pulse/conda-h5c-openacc-gpu-compute-nvidia-hpc-sdk-igor-username_3/', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'beckermr', 'comment_id': 821876480.0, 'datetime': '2021-04-17 19:38:29+00:00', 'masked_author': 'username_1', 'text': 'That would be very good if it is true.\r\n\r\nDoes anyone have timing comparisons for various libraries that we might build with the compilers or is this more about getting access to some other feature I am not aware of?', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'sfiligoi', 'comment_id': 821877155.0, 'datetime': '2021-04-17 19:44:11+00:00', 'masked_author': 'username_3', 'text': ""@username_1 \r\nThe NVIDIA HPC SDK is the only compiler with great support for OpenACC (for GPU offload).\r\nThat's my main reason for wanting it."", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'jakirkham', 'comment_id': 833021635.0, 'datetime': '2021-05-05 21:33:22+00:00', 'masked_author': 'username_2', 'text': '@username_3, are you simply wanting to install the compiler or are there particular packages that you are wanting to rebuild with it?', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'sfiligoi', 'comment_id': 833078609.0, 'datetime': '2021-05-05 22:06:13+00:00', 'masked_author': 'username_3', 'text': 'Our problem is dependencies;\r\nin particular hdf5.\r\nOur main GPU-using package, unifrac, is currently being hosted on bioconda, but it depends on conda-forge packages.', 'title': None, 'type': 'comment'}]","<issue_start><issue_comment>Title: Add package for the NVIDIA HPC SDK
+username_0: The [NVIDIA HPC SDK](https://developer.nvidia.com/hpc-sdk) is a comprehensive suite of compilers, libraries and tools for HPC developers.  The HPC SDK includes C, C++, and Fortran compilers (formerly known as the PGI compilers), as well as CUDA, GPU math libraries, communication libraries such as MPI and NCCL, and Nsight performance profilers.  
+
+This issue is to discuss adding a package for the HPC SDK, including support for using the compilers to build other packages.
+
+The HPC SDK is free for [download](https://developer.nvidia.com/nvidia-hpc-sdk-downloads), and is also available as [containers from NGC](https://ngc.nvidia.com/catalog/containers/nvidia:nvhpc) and is supported in [Spack](https://github.com/spack/spack/pull/19294).
+
+The HPC SDK is available for x86_64, Power, and Arm.
+
+The HPC SDK has two variants: one includes the latest CUDA only, and the other includes 3 versions of CUDA.  Ideally, based on the detected NVIDIA driver, the most appropriate variant can be selected for install.  
+
+The ""REDIST"" directory contains the set of runtime libraries (there are also separate `devel` and `runtime` Docker containers on NGC).  
+
+Tagging @username_2 @kkraus14 @raydouglass @costat @username_3
+<issue_comment>username_1: When I read the license, I understood the text to mean that while the compilers are available for download, conda-forge cannot redistribute them. Even if the runtimes are redistributable, this would mean our CI services would have to download the compilers themselves, which might be a big lift. Supporting CUDA in this way has been pretty non-trivial.
+
+Does anyone know the situation regarding ABI compatibility on the fortran side?
+<issue_comment>username_1: also cc @conda-forge/core @isuruf
+<issue_comment>username_2: @username_0 do you know?
+<issue_comment>username_0: In general there is no Fortran ABI compatibility between different compilers.
+<issue_comment>username_1: This is what I figured and is the same with ifort. This means we will have to rebuild the full fortran stack if we want fully ship things. We faced a similar question for intel fortran and ended up punting on the fortran compilers from them.
+<issue_comment>username_3: I have not tried the fortran builds, but I have heard them claim they maintain GCC ABI compatibility.
+
+I know that it holds for C/C++ builds for sure.
+BTW: If anyone is interested, I had posted a recipe for building a mixed gcc/NVIDIA HPC SDK setup some time ago:
+https://www.linkedin.com/pulse/conda-h5c-openacc-gpu-compute-nvidia-hpc-sdk-igor-username_3/
+<issue_comment>username_1: That would be very good if it is true.
+
+Does anyone have timing comparisons for various libraries that we might build with the compilers or is this more about getting access to some other feature I am not aware of?
+<issue_comment>username_3: @username_1 
+The NVIDIA HPC SDK is the only compiler with great support for OpenACC (for GPU offload).
+That's my main reason for wanting it.
+<issue_comment>username_2: @username_3, are you simply wanting to install the compiler or are there particular packages that you are wanting to rebuild with it?
+<issue_comment>username_3: Our problem is dependencies;
+in particular hdf5.
+Our main GPU-using package, unifrac, is currently being hosted on bioconda, but it depends on conda-forge packages."
+gohugoio/hugo,555593489,6812,,"[{'action': 'opened', 'author': 'eMUQI', 'comment_id': None, 'datetime': '2020-01-27 14:01:23+00:00', 'masked_author': 'username_0', 'text': '<!-- Please answer these questions before submitting your issue. Thanks! -->\r\n\r\n### What version of Hugo are you using (`hugo version`)?\r\n\r\n<pre>\r\n$ hugo version\r\nHugo Static Site Generator v0.63.1-CE9ACEB7 windows/amd64 BuildDate: 2020-01-23T20:09:17Z\r\n</pre>\r\n\r\n### Does this issue reproduce with the latest release?\r\nYES\r\n\r\nHi , when i follow [this page](https://gohugo.io/getting-started/quick-start/) to use hugo\r\ni saw this error.\r\n![image](https://user-images.githubusercontent.com/32332228/73180450-50fa6e00-4150-11ea-8bbb-b56d7fb2e894.png)\r\nmy config.toml\r\n![image](https://user-images.githubusercontent.com/32332228/73180510-666f9800-4150-11ea-9556-d24c86e237fc.png)\r\n\r\nhow to slove this ?', 'title': 'Error: ""C:\\Users\\wulu\\hugo\\config.toml:1:1"": unmarshal failed: Near line 0 (last key parsed \'\'): bare keys cannot contain \'�\'', 'type': 'issue'}
+ {'action': 'created', 'author': 'bep', 'comment_id': 580372183.0, 'datetime': '2020-01-30 17:45:19+00:00', 'masked_author': 'username_1', 'text': 'Please use https://discourse.gohugo.io/ for questions/troubleshooting. Also see  [Hugo Documentation](http://gohugo.io/overview/introduction/).', 'title': None, 'type': 'comment'}
+ {'action': 'closed', 'author': 'bep', 'comment_id': None, 'datetime': '2020-01-30 17:45:20+00:00', 'masked_author': 'username_1', 'text': '', 'title': None, 'type': 'issue'}
+ {'action': 'created', 'author': 'aasim-akhtar', 'comment_id': 839974602.0, 'datetime': '2021-05-12 17:47:36+00:00', 'masked_author': 'username_2', 'text': ""Faced the same issue when using powershell. Open config.toml file using sublime or any other editor\r\n, Goto File-> Reopen with Encoding -> UTF-8. You'll then be able to see those NULL references <0x00>. Just delete them and you'll be good to go.\r\n\r\n![sublimescreenshort](https://user-images.githubusercontent.com/43917573/118020652-f2bec200-b377-11eb-9b9b-67da56487151.jpg)\r\n\r\n![vsscreenshot](https://user-images.githubusercontent.com/43917573/118020772-1eda4300-b378-11eb-81a7-56bdaac12b83.jpg)"", 'title': None, 'type': 'comment'}]","<issue_start><issue_comment>Title: Error: ""C:\Users\wulu\hugo\config.toml:1:1"": unmarshal failed: Near line 0 (last key parsed ''): bare keys cannot contain '�'
+username_0: <!-- Please answer these questions before submitting your issue. Thanks! -->
+
+### What version of Hugo are you using (`hugo version`)?
+
+<pre>
+$ hugo version
+Hugo Static Site Generator v0.63.1-CE9ACEB7 windows/amd64 BuildDate: 2020-01-23T20:09:17Z
+</pre>
+
+### Does this issue reproduce with the latest release?
+YES
+
+Hi , when i follow [this page](https://gohugo.io/getting-started/quick-start/) to use hugo
+i saw this error.
+![image](https://user-images.githubusercontent.com/32332228/73180450-50fa6e00-4150-11ea-8bbb-b56d7fb2e894.png)
+my config.toml
+![image](https://user-images.githubusercontent.com/32332228/73180510-666f9800-4150-11ea-9556-d24c86e237fc.png)
+
+how to slove this ?
+<issue_comment>username_1: Please use https://discourse.gohugo.io/ for questions/troubleshooting. Also see  [Hugo Documentation](http://gohugo.io/overview/introduction/).<issue_closed>
+<issue_comment>username_2: Faced the same issue when using powershell. Open config.toml file using sublime or any other editor
+, Goto File-> Reopen with Encoding -> UTF-8. You'll then be able to see those NULL references <0x00>. Just delete them and you'll be good to go.
+
+![sublimescreenshort](https://user-images.githubusercontent.com/43917573/118020652-f2bec200-b377-11eb-9b9b-67da56487151.jpg)
+
+![vsscreenshot](https://user-images.githubusercontent.com/43917573/118020772-1eda4300-b378-11eb-81a7-56bdaac12b83.jpg)"
+etcd-io/website,416288745,9,,"[{'action': 'opened', 'author': 'philips', 'comment_id': None, 'datetime': '2019-03-01 21:36:22+00:00', 'masked_author': 'username_0', 'text': ""Like the existing etcd docs website we should have versioned documentation. Copying and/or using the existing docs setup exactly isn't necessary. The only thing is the outcome of the setup: etcd docs that are partitioned by version.\r\n\r\ne.g. https://coreos.com/etcd/docs/3.2.13/index.html\r\nv.s. https://coreos.com/etcd/docs/latest/\r\n\r\nWe can use whatever tooling to accomplish this.  So, if there is another CNCF project doing this you can copy and use that infrastructure."", 'title': 'versioned documentation', 'type': 'issue'}
+ {'action': 'created', 'author': 'lucperkins', 'comment_id': 470314452.0, 'datetime': '2019-03-06 23:09:59+00:00', 'masked_author': 'username_1', 'text': 'A bit of clarification regarding existing blockers (for the sake of all parties involved, especially those who may be able to help):\r\n\r\nCurrently, the etcd docs are maintained in the [main etcd repo](https://github.com/etcd-io/etcd/tree/master/Documentation) as bare Markdown. Internally at CoreOS (and later Red Hat), a bespoke script written in [Rust](https://rust-lang.org) converts those bare Markdown files into static-site-generator-friendly Markdown, i.e. prefaced with the necessary page metadata to be processed by [Jekyll](https://jekyllrb.com), which is the static site generator used to power the [etcd docs hosted by CoreOS/RedHat](https://coreos.com/etcd/docs/latest/). Without that script, the ""raw"" Markdown docs can\'t be ""seen"" by Jekyll and thus can\'t be converted into styled HTML.\r\n\r\nIn order to use the existing etcd documentation in the new site, we need to first get the script working properly (I have not yet succeeded but am working in conjunction with @crawford to get over the hump) and then make the changes necessary to get the Markdown working with [Hugo](https://gohugo.io). This *could* be a relatively simple process (I\'ll need to get the script working first to determine that) or it could require getting creative. If it were just a matter of a few etcd versions worth of docs, a manual solution might suffice, but unfortunately it\'s a matter of processing thousands of docs across dozens of versions, so *some* kind of automated solution is going to be necessary.', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'philips', 'comment_id': 470369047.0, 'datetime': '2019-03-07 03:21:00+00:00', 'masked_author': 'username_0', 'text': ""I wouldn't get too hung up importing all of the old versions of docs into etcd.io. But, we do need a simple way to handle new versions as releases are cut every few weeks."", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'lucperkins', 'comment_id': 471034355.0, 'datetime': '2019-03-08 18:48:03+00:00', 'masked_author': 'username_1', 'text': '@username_0 That part is fortunately much easier and essentially already in place (as I can add the appropriate document metadata, which will be carried over into all future releases). The question at this point: do you want to keep the documentation content in this repo or in the main project repo?', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'philips', 'comment_id': 471114381.0, 'datetime': '2019-03-08 23:36:42+00:00', 'masked_author': 'username_0', 'text': 'I think keeping the docs in the main repo is fine.\r\n\r\nHow does the metadata system work? Is that documented somewhere?', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'lucperkins', 'comment_id': 471120864.0, 'datetime': '2019-03-09 00:08:20+00:00', 'masked_author': 'username_1', 'text': '@username_0 Page metadata looks like this:\r\n\r\n```markdown\r\n---\r\ntitle: Getting Started\r\ndescription: Run Fluffybird locally on your laptop\r\nfoo: bar\r\n---\r\n\r\nHere is the actual Markdown content of the page.\r\n```\r\n\r\nWithout that metadata, static site generators don\'t even *recognize* Markdown files as ""pages"" to be rendered. I\'m assuming that CoreOS\'s internal script auto-generates that page metadata for all of the Markdown files in the `Documentation` folder of the main repo, though I haven\'t yet gotten it to work, so I\'m still not certain what the mechanics are.\r\n\r\nI can add the necessary metadata to the existing documentation now, which will ensure that we don\'t need to apply it via any external script going forward.', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'philips', 'comment_id': 471124410.0, 'datetime': '2019-03-09 00:29:15+00:00', 'masked_author': 'username_0', 'text': 'How do you plan on having versioned docs? In the CoreOS docs setup\neverytime we made a release of etcd a script would copy the docs into the\ncoreos.com website repo.', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'lucperkins', 'comment_id': 471125434.0, 'datetime': '2019-03-09 00:35:50+00:00', 'masked_author': 'username_1', 'text': '@username_0 There are two possible scenarios:\r\n\r\n1. **Docs are kept in etcd-io/etcd** --- The etcd repo gets pulled into this one as a Git submodule. A script can iterate through a list of versions and copy the `Documentation` folder into `content/docs/<version>` based on the tag.\r\n2. **Docs are kept in this repo** --- Each version is simply a subfolder in `content/docs` (not the most elegant solution but in my experience by far the least troublesome one). Adding a new version just  means copying and pasting the previous ""latest"" folder.\r\n\r\nIn both cases, any ""latest"" logic in the URL, i.e. `/docs/1.1` vs. `/docs/1.2`, can be handled via auto-generated [Netlify redirects](https://www.netlify.com/docs/redirects/). I\'ve done this for several sites and it works great.', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'philips', 'comment_id': 471125915.0, 'datetime': '2019-03-09 00:39:13+00:00', 'masked_author': 'username_0', 'text': 'The submodule thing makes sense to me.\n\nThanks for the clarification.', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'philips', 'comment_id': 479657159.0, 'datetime': '2019-04-03 21:00:52+00:00', 'masked_author': 'username_0', 'text': '@username_1 I was thinking about it further and I think we should patch the docs for all of the currently maintained branches: https://github.com/etcd-io/etcd/blob/master/Documentation/dev-internal/release.md#release-management\r\n\r\nWDYT @etcd-io/maintainers-etcd ?', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'jpbetz', 'comment_id': 479664811.0, 'datetime': '2019-04-03 21:25:22+00:00', 'masked_author': 'username_2', 'text': 'That sounds right to me.', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'lucperkins', 'comment_id': 488085399.0, 'datetime': '2019-04-30 19:33:56+00:00', 'masked_author': 'username_1', 'text': '@username_0 FYI I now have [pull requests](https://github.com/etcd-io/etcd/pulls/username_1) open to the etcd-io/etcd project with upstream changes to the `Documentation` folder and the [in-progress site](https://etcd.netlify.com/docs/v3.3.12/) now includes the latest versions of the 3.1, 3.2, and 3.3 series.', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'philips', 'comment_id': 488088974.0, 'datetime': '2019-04-30 19:44:18+00:00', 'masked_author': 'username_0', 'text': 'Great! Sorry, I just noticed this PR:\nhttps://github.com/etcd-io/etcd/pull/10615\n\nDo you still need help with that?', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'lucperkins', 'comment_id': 488116190.0, 'datetime': '2019-04-30 21:07:52+00:00', 'masked_author': 'username_1', 'text': ""@username_0 Yeah, I could use a little help there, particularly from someone who's knowledgeable about the intention behind the CI checks"", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'philips', 'comment_id': 488388253.0, 'datetime': '2019-05-01 19:28:17+00:00', 'masked_author': 'username_0', 'text': 'Oh, I guess the last thing we really need is a warning if you are browsing an out of date doc.', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'philips', 'comment_id': 493629115.0, 'datetime': '2019-05-17 23:49:55+00:00', 'masked_author': 'username_0', 'text': '@hexfusion do you have time to look into this? I keep meaning to but it keeps slipping off of my todo list.', 'title': None, 'type': 'comment'}
+ {'action': 'closed', 'author': 'lucperkins', 'comment_id': None, 'datetime': '2019-05-31 15:30:27+00:00', 'masked_author': 'username_1', 'text': '', 'title': None, 'type': 'issue'}]","<issue_start><issue_comment>Title: versioned documentation
+username_0: Like the existing etcd docs website we should have versioned documentation. Copying and/or using the existing docs setup exactly isn't necessary. The only thing is the outcome of the setup: etcd docs that are partitioned by version.
+
+e.g. https://coreos.com/etcd/docs/3.2.13/index.html
+v.s. https://coreos.com/etcd/docs/latest/
+
+We can use whatever tooling to accomplish this.  So, if there is another CNCF project doing this you can copy and use that infrastructure.
+<issue_comment>username_1: A bit of clarification regarding existing blockers (for the sake of all parties involved, especially those who may be able to help):
+
+Currently, the etcd docs are maintained in the [main etcd repo](https://github.com/etcd-io/etcd/tree/master/Documentation) as bare Markdown. Internally at CoreOS (and later Red Hat), a bespoke script written in [Rust](https://rust-lang.org) converts those bare Markdown files into static-site-generator-friendly Markdown, i.e. prefaced with the necessary page metadata to be processed by [Jekyll](https://jekyllrb.com), which is the static site generator used to power the [etcd docs hosted by CoreOS/RedHat](https://coreos.com/etcd/docs/latest/). Without that script, the ""raw"" Markdown docs can't be ""seen"" by Jekyll and thus can't be converted into styled HTML.
+
+In order to use the existing etcd documentation in the new site, we need to first get the script working properly (I have not yet succeeded but am working in conjunction with @crawford to get over the hump) and then make the changes necessary to get the Markdown working with [Hugo](https://gohugo.io). This *could* be a relatively simple process (I'll need to get the script working first to determine that) or it could require getting creative. If it were just a matter of a few etcd versions worth of docs, a manual solution might suffice, but unfortunately it's a matter of processing thousands of docs across dozens of versions, so *some* kind of automated solution is going to be necessary.
+<issue_comment>username_0: I wouldn't get too hung up importing all of the old versions of docs into etcd.io. But, we do need a simple way to handle new versions as releases are cut every few weeks.
+<issue_comment>username_1: @username_0 That part is fortunately much easier and essentially already in place (as I can add the appropriate document metadata, which will be carried over into all future releases). The question at this point: do you want to keep the documentation content in this repo or in the main project repo?
+<issue_comment>username_0: I think keeping the docs in the main repo is fine.
+
+How does the metadata system work? Is that documented somewhere?
+<issue_comment>username_1: @username_0 Page metadata looks like this:
+
+```markdown
+---
+title: Getting Started
+description: Run Fluffybird locally on your laptop
+foo: bar
+---
+
+Here is the actual Markdown content of the page.
+```
+
+Without that metadata, static site generators don't even *recognize* Markdown files as ""pages"" to be rendered. I'm assuming that CoreOS's internal script auto-generates that page metadata for all of the Markdown files in the `Documentation` folder of the main repo, though I haven't yet gotten it to work, so I'm still not certain what the mechanics are.
+
+I can add the necessary metadata to the existing documentation now, which will ensure that we don't need to apply it via any external script going forward.
+<issue_comment>username_0: How do you plan on having versioned docs? In the CoreOS docs setup
+everytime we made a release of etcd a script would copy the docs into the
+coreos.com website repo.
+<issue_comment>username_1: @username_0 There are two possible scenarios:
+
+1. **Docs are kept in etcd-io/etcd** --- The etcd repo gets pulled into this one as a Git submodule. A script can iterate through a list of versions and copy the `Documentation` folder into `content/docs/<version>` based on the tag.
+2. **Docs are kept in this repo** --- Each version is simply a subfolder in `content/docs` (not the most elegant solution but in my experience by far the least troublesome one). Adding a new version just  means copying and pasting the previous ""latest"" folder.
+
+In both cases, any ""latest"" logic in the URL, i.e. `/docs/1.1` vs. `/docs/1.2`, can be handled via auto-generated [Netlify redirects](https://www.netlify.com/docs/redirects/). I've done this for several sites and it works great.
+<issue_comment>username_0: The submodule thing makes sense to me.
+
+Thanks for the clarification.
+<issue_comment>username_0: @username_1 I was thinking about it further and I think we should patch the docs for all of the currently maintained branches: https://github.com/etcd-io/etcd/blob/master/Documentation/dev-internal/release.md#release-management
+
+WDYT @etcd-io/maintainers-etcd ?
+<issue_comment>username_2: That sounds right to me.
+<issue_comment>username_1: @username_0 FYI I now have [pull requests](https://github.com/etcd-io/etcd/pulls/username_1) open to the etcd-io/etcd project with upstream changes to the `Documentation` folder and the [in-progress site](https://etcd.netlify.com/docs/v3.3.12/) now includes the latest versions of the 3.1, 3.2, and 3.3 series.
+<issue_comment>username_0: Great! Sorry, I just noticed this PR:
+https://github.com/etcd-io/etcd/pull/10615
+
+Do you still need help with that?
+<issue_comment>username_1: @username_0 Yeah, I could use a little help there, particularly from someone who's knowledgeable about the intention behind the CI checks
+<issue_comment>username_0: Oh, I guess the last thing we really need is a warning if you are browsing an out of date doc.
+<issue_comment>username_0: @hexfusion do you have time to look into this? I keep meaning to but it keeps slipping off of my todo list.<issue_closed>"

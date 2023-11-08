@@ -1,0 +1,645 @@
+gohugoio/hugo,314415371,4623,,"[{'action': 'opened', 'author': 'fedir', 'comment_id': None, 'datetime': '2018-04-15 13:24:33+00:00', 'masked_author': 'username_0', 'text': ""Please add license in GitHub settings of the repository.\r\n\r\nCurrently, GitHub could not identify Your project licence, and it's not shown in interface, and not available via API also.\r\n\r\nRef : https://help.github.com/articles/adding-a-license-to-a-repository/"", 'title': 'Please add license in GitHub settings', 'type': 'issue'}
+ {'action': 'created', 'author': 'bep', 'comment_id': 381410527.0, 'datetime': '2018-04-15 14:24:56+00:00', 'masked_author': 'username_1', 'text': ""There is no such setting.\r\n\r\nWe have a `LICENSE.md` file. Not sure why it's not recognized by GH."", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'fedir', 'comment_id': 381440541.0, 'datetime': '2018-04-15 21:45:41+00:00', 'masked_author': 'username_0', 'text': 'Hi !\r\n\r\nI just get the answer from GitHub support team. Basically, GitHub uses automatic license detector : https://github.com/benbalter/licensee\r\n\r\nI just installed it locally and get following results for gohugoio/hugo\r\n\r\n```\r\nscript/git-repo https://github.com/gohugoio/hugo\r\nLicense:        \r\nMatched files:  LICENSE.md\r\nLICENSE.md:\r\n  Content hash:  757dedd5fd66729149269bcc83cbbd7e2ce18af6\r\n  License:       \r\n  Closest licenses:\r\n    Apache-2.0 similarity:  95.04%\r\n    ECL-2.0 similarity:     92.81%\r\n    EPL-2.0 similarity:     56.97%\r\n```\r\nAlso it\'s possible to compare Hugo\'s version with GitHub\'s one, to understand the differences :\r\n\r\n```\r\nbundle exec bin/licensee detect https://github.com/gohugoio/hugo --remote --license Apache-2.0\r\nLicense:        \r\nMatched files:  LICENSE.md\r\nLICENSE.md:\r\n  Content hash:  757dedd5fd66729149269bcc83cbbd7e2ce18af6\r\n  License:       \r\n  Closest licenses:\r\n    Apache-2.0 similarity:  95.04%\r\n    ECL-2.0 similarity:     92.81%\r\n    EPL-2.0 similarity:     56.97%\r\nComparing to Apache License 2.0:\r\nInput Length:     10158\r\nLicense length:    9024\r\nSimilarity:      95.04%\r\ndiff --git a/LICENSE b/LICENSE\r\nindex c28b8e6..7616026 100644\r\n--- a/LICENSE\r\n+++ b/LICENSE\r\n@@ -1,117 +1,131 @@\r\n[-http://www.apache.org/licenses/-]{+version 2.0, january 2004 &lt;<http://www.apache.org/licenses/ &gt;+} terms and\r\nconditions for use, reproduction, and distribution 1. [-definitions. ""license""-]{+definitions “license”+}\r\nshall mean the terms and conditions for use, reproduction, and distribution as\r\ndefined by sections 1 through 9 of this document. [-""licensor""-]{+“licensor”+} shall mean the\r\ncopyright owner or entity authorized by the copyright owner that is granting the\r\nlicense. [-""legal entity""-]{+“legal entity”+} shall mean the union of the acting entity and all other\r\nentities that control, are controlled by, or are under common control with that\r\nentity. for the purposes of this definition, [-""control""-]{+“control”+} means i the power, direct\r\nor indirect, to cause the direction or management of such entity, whether by\r\ncontract or otherwise, or ii ownership of fifty percent 50% or more of the\r\noutstanding shares, or iii beneficial ownership of such entity. [-""you""-]{+“you”+} or [-""your""-]{+“your”+}\r\nshall mean an individual or legal entity exercising permissions granted by this\r\nlicense. [-""source""-]{+“source”+} form shall mean the preferred form for making modifications,\r\nincluding but not limited to software source code, documentation source, and\r\nconfiguration files. [-""object""-]{+“object”+} form shall mean any form resulting from mechanical\r\ntransformation or translation of a source form, including but not limited to\r\ncompiled object code, generated documentation, and conversions to other media\r\ntypes. [-""work""-]{+“work”+} shall mean the work of authorship, whether in source or object\r\nform, made available under the license, as indicated by a copyright notice that\r\nis included in or attached to the work an example is provided in the appendix\r\nbelow . [-""derivative works""-]{+“derivative works”+} shall mean any work, whether in source or object\r\nform, that is based on or derived from the work and for which the editorial\r\nrevisions, annotations, elaborations, or other modifications represent, as a\r\nwhole, an original work of authorship. for the purposes of this license,\r\nderivative works shall not include works that remain separable from, or merely\r\nlink or bind by name to the interfaces of, the work and derivative works\r\nthereof. [-""contribution""-]{+“contribution”+} shall mean any work of authorship, including the\r\noriginal version of the work and any modifications or additions to that work or\r\nderivative works thereof, that is intentionally submitted to licensor for\r\ninclusion in the work by the copyright owner or by an individual or legal entity\r\nauthorized to submit on behalf of the copyright owner. for the purposes of this\r\ndefinition, [-""submitted""-]{+“submitted”+} means any form of electronic, verbal, or written\r\ncommunication sent to the licensor or its representatives, including but not\r\nlimited to communication on electronic mailing lists, source code control\r\nsystems, and issue tracking systems that are managed by, or on behalf of, the\r\nlicensor for the purpose of discussing and improving the work, but excluding\r\ncommunication that is conspicuously marked or otherwise designated in writing by\r\nthe copyright owner as [-""not-]{+“not+} a [-contribution.""-]\r\n[-""contributor""-]{+contribution.” “contributor”+} shall mean licensor\r\nand any individual or legal entity on behalf of whom a contribution has been\r\n[Truncated]\n{+work, attach the following boilerplate notice, with the fields enclosed by+}\r\n{+brackets replaced with your own identifying information. don\'t include the+}\r\n{+brackets! the text should be enclosed in the appropriate comment syntax for the+}\r\n{+file format. we also recommend that a file or class name and description of+}\r\n{+purpose be included on the same “printed page” as the copyright notice for+}\r\n{+easier identification within third-party archives. copyright yyyy name of+}\r\n{+copyright owner licensed under the apache license, version 2.0 the ""license"" ;+}\r\n{+you may not use this file except in compliance with the license. you may obtain+}\r\n{+a copy of the license at http://www.apache.org/licenses/license-2.0 unless+}\r\n{+required by applicable law or agreed to in writing, software distributed under+}\r\n{+the license is distributed on an ""as is"" basis, without warranties or conditions+}\r\n{+of any kind, either express or implied. see the license for the specific+}\r\n{+language governing permissions and limitations under the license.+}\r\n```\r\n\r\nAll of the sections surrounded by {+ and +} are additions that that tool detected. GitHub has 98% confidence requirement, so with those changes GitHub not meeting that threshold to detect this license.\r\n\r\nIf the project removes those additions, then the license will be detected properly.\r\n\r\nOf course, it\'s Your choice, which version of license You would like to use.', 'title': None, 'type': 'comment'}
+ {'action': 'closed', 'author': 'bep', 'comment_id': None, 'datetime': '2018-04-15 22:04:22+00:00', 'masked_author': 'username_1', 'text': '', 'title': None, 'type': 'issue'}
+ {'action': 'created', 'author': 'fedir', 'comment_id': 381442009.0, 'datetime': '2018-04-15 22:09:07+00:00', 'masked_author': 'username_0', 'text': '👍', 'title': None, 'type': 'comment'}]","<issue_start><issue_comment>Title: Please add license in GitHub settings
+username_0: Please add license in GitHub settings of the repository.
+
+Currently, GitHub could not identify Your project licence, and it's not shown in interface, and not available via API also.
+
+Ref : https://help.github.com/articles/adding-a-license-to-a-repository/
+<issue_comment>username_1: There is no such setting.
+
+We have a `LICENSE.md` file. Not sure why it's not recognized by GH.
+<issue_comment>username_0: Hi !
+
+I just get the answer from GitHub support team. Basically, GitHub uses automatic license detector : https://github.com/benbalter/licensee
+
+I just installed it locally and get following results for gohugoio/hugo
+
+```
+script/git-repo https://github.com/gohugoio/hugo
+License:        
+Matched files:  LICENSE.md
+LICENSE.md:
+  Content hash:  757dedd5fd66729149269bcc83cbbd7e2ce18af6
+  License:       
+  Closest licenses:
+    Apache-2.0 similarity:  95.04%
+    ECL-2.0 similarity:     92.81%
+    EPL-2.0 similarity:     56.97%
+```
+Also it's possible to compare Hugo's version with GitHub's one, to understand the differences :
+
+```
+bundle exec bin/licensee detect https://github.com/gohugoio/hugo --remote --license Apache-2.0
+License:        
+Matched files:  LICENSE.md
+LICENSE.md:
+  Content hash:  757dedd5fd66729149269bcc83cbbd7e2ce18af6
+  License:       
+  Closest licenses:
+    Apache-2.0 similarity:  95.04%
+    ECL-2.0 similarity:     92.81%
+    EPL-2.0 similarity:     56.97%
+Comparing to Apache License 2.0:
+Input Length:     10158
+License length:    9024
+Similarity:      95.04%
+diff --git a/LICENSE b/LICENSE
+index c28b8e6..7616026 100644
+--- a/LICENSE
++++ b/LICENSE
+@@ -1,117 +1,131 @@
+[-http://www.apache.org/licenses/-]{+version 2.0, january 2004 &lt;<http://www.apache.org/licenses/ &gt;+} terms and
+conditions for use, reproduction, and distribution 1. [-definitions. ""license""-]{+definitions “license”+}
+shall mean the terms and conditions for use, reproduction, and distribution as
+defined by sections 1 through 9 of this document. [-""licensor""-]{+“licensor”+} shall mean the
+copyright owner or entity authorized by the copyright owner that is granting the
+license. [-""legal entity""-]{+“legal entity”+} shall mean the union of the acting entity and all other
+entities that control, are controlled by, or are under common control with that
+entity. for the purposes of this definition, [-""control""-]{+“control”+} means i the power, direct
+or indirect, to cause the direction or management of such entity, whether by
+contract or otherwise, or ii ownership of fifty percent 50% or more of the
+outstanding shares, or iii beneficial ownership of such entity. [-""you""-]{+“you”+} or [-""your""-]{+“your”+}
+shall mean an individual or legal entity exercising permissions granted by this
+license. [-""source""-]{+“source”+} form shall mean the preferred form for making modifications,
+including but not limited to software source code, documentation source, and
+configuration files. [-""object""-]{+“object”+} form shall mean any form resulting from mechanical
+transformation or translation of a source form, including but not limited to
+compiled object code, generated documentation, and conversions to other media
+types. [-""work""-]{+“work”+} shall mean the work of authorship, whether in source or object
+form, made available under the license, as indicated by a copyright notice that
+is included in or attached to the work an example is provided in the appendix
+below . [-""derivative works""-]{+“derivative works”+} shall mean any work, whether in source or object
+form, that is based on or derived from the work and for which the editorial
+revisions, annotations, elaborations, or other modifications represent, as a
+whole, an original work of authorship. for the purposes of this license,
+derivative works shall not include works that remain separable from, or merely
+link or bind by name to the interfaces of, the work and derivative works
+thereof. [-""contribution""-]{+“contribution”+} shall mean any work of authorship, including the
+original version of the work and any modifications or additions to that work or
+derivative works thereof, that is intentionally submitted to licensor for
+inclusion in the work by the copyright owner or by an individual or legal entity
+authorized to submit on behalf of the copyright owner. for the purposes of this
+definition, [-""submitted""-]{+“submitted”+} means any form of electronic, verbal, or written
+communication sent to the licensor or its representatives, including but not
+limited to communication on electronic mailing lists, source code control
+systems, and issue tracking systems that are managed by, or on behalf of, the
+licensor for the purpose of discussing and improving the work, but excluding
+communication that is conspicuously marked or otherwise designated in writing by
+the copyright owner as [-""not-]{+“not+} a [-contribution.""-]
+[-""contributor""-]{+contribution.” “contributor”+} shall mean licensor
+and any individual or legal entity on behalf of whom a contribution has been
+[Truncated]
+{+work, attach the following boilerplate notice, with the fields enclosed by+}
+{+brackets replaced with your own identifying information. don't include the+}
+{+brackets! the text should be enclosed in the appropriate comment syntax for the+}
+{+file format. we also recommend that a file or class name and description of+}
+{+purpose be included on the same “printed page” as the copyright notice for+}
+{+easier identification within third-party archives. copyright yyyy name of+}
+{+copyright owner licensed under the apache license, version 2.0 the ""license"" ;+}
+{+you may not use this file except in compliance with the license. you may obtain+}
+{+a copy of the license at http://www.apache.org/licenses/license-2.0 unless+}
+{+required by applicable law or agreed to in writing, software distributed under+}
+{+the license is distributed on an ""as is"" basis, without warranties or conditions+}
+{+of any kind, either express or implied. see the license for the specific+}
+{+language governing permissions and limitations under the license.+}
+```
+
+All of the sections surrounded by {+ and +} are additions that that tool detected. GitHub has 98% confidence requirement, so with those changes GitHub not meeting that threshold to detect this license.
+
+If the project removes those additions, then the license will be detected properly.
+
+Of course, it's Your choice, which version of license You would like to use.<issue_closed>
+<issue_comment>username_0: 👍"
+flutter/website,318418404,987,"{'number': 987.0, 'repo': 'website', 'user_login': 'flutter'}","[{'action': 'opened', 'author': 'rock3r', 'comment_id': None, 'datetime': '2018-04-27T13:53:42Z', 'masked_author': 'username_0', 'text': ""This PR is for the eleventh section of the work to create the `flutter-for-ios.md` document. Writing by @niamh-power on Novoda's behalf, I am just a proxy.\r\n\r\nFollowing the same rough format as the `flutter-for-android.md` document, with iOS details instead.\r\n\r\nThe following sections have been created:\r\n\r\n* How do I setup Push Notifications?\r\n\r\n⚠️ **This requires #986 to be merged first!** ⚠️"", 'title': 'Flutter for iOS — Notifications section', 'type': 'issue'}
+ {'action': 'created', 'author': 'rock3r', 'comment_id': 385894428.0, 'datetime': '2018-05-02 07:54:20+00:00', 'masked_author': 'username_0', 'text': 'Contents covered in #993, closing this.', 'title': None, 'type': 'comment'}]","<issue_start><issue_comment>Title: Flutter for iOS — Notifications section
+username_0: This PR is for the eleventh section of the work to create the `flutter-for-ios.md` document. Writing by @niamh-power on Novoda's behalf, I am just a proxy.
+
+Following the same rough format as the `flutter-for-android.md` document, with iOS details instead.
+
+The following sections have been created:
+
+* How do I setup Push Notifications?
+
+⚠️ **This requires #986 to be merged first!** ⚠️
+<issue_comment>username_0: Contents covered in #993, closing this."
+files-community/Website,1057739298,72,,"[{'action': 'opened', 'author': 'Tropix126', 'comment_id': None, 'datetime': '2021-11-18 19:51:29+00:00', 'masked_author': 'username_0', 'text': 'At the moment, there are two powershell files stored in the repo that are pretty massive due to their signatures. This destabilizes the linguist statistics saying that the repo is around half written with powershell. Linguist can exclude files in the language statistics by adding them to a `vendor.yml` file.', 'title': 'Add ps1 files to vendor.yml.', 'type': 'issue'}
+ {'action': 'created', 'author': 'TheOnlyTails', 'comment_id': 973236904.0, 'datetime': '2021-11-18 20:30:14+00:00', 'masked_author': 'username_1', 'text': 'Actually, these two can be removed entirely, since this is now handled outside of the repo.', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'TheOnlyTails', 'comment_id': 1019896488.0, 'datetime': '2022-01-24 09:34:03+00:00', 'masked_author': 'username_1', 'text': 'Closed by #108.', 'title': None, 'type': 'comment'}
+ {'action': 'closed', 'author': 'TheOnlyTails', 'comment_id': None, 'datetime': '2022-01-24 09:34:09+00:00', 'masked_author': 'username_1', 'text': '', 'title': None, 'type': 'issue'}]","<issue_start><issue_comment>Title: Add ps1 files to vendor.yml.
+username_0: At the moment, there are two powershell files stored in the repo that are pretty massive due to their signatures. This destabilizes the linguist statistics saying that the repo is around half written with powershell. Linguist can exclude files in the language statistics by adding them to a `vendor.yml` file.
+<issue_comment>username_1: Actually, these two can be removed entirely, since this is now handled outside of the repo.
+<issue_comment>username_1: Closed by #108.<issue_closed>"
+corona-warn-app/cwa-website,736895930,539,,"[{'action': 'opened', 'author': 'MikeMcC399', 'comment_id': None, 'datetime': '2020-11-05 12:34:21+00:00', 'masked_author': 'username_0', 'text': '## Where to find the issue \r\nhttps://www.coronawarn.app/en/faq/#android_location\r\n""[Google/Android]: When activating exposure logging or Bluetooth I\'m asked to activate my location. Do I have to do this?""\r\n\r\n## Describe the issue\r\nThe requirement to enable Use location in order to access Bluetooth Low Energy, required for CWA, has been removed for COVID-19 apps starting with Android 11. (See https://support.google.com/android/answer/9930236 and https://developers.google.com/android/exposure-notifications/implementation-guide#locationless_scanning_in_android_11.)\r\n\r\n## Suggested change\r\nAdd text to the article https://www.coronawarn.app/en/faq/#android_location to explain that it does not apply to Android 11.', 'title': 'FAQ: Location does not apply to Android 11', 'type': 'issue'}
+ {'action': 'created', 'author': 'Ein-Tim', 'comment_id': 722392347.0, 'datetime': '2020-11-05 13:54:21+00:00', 'masked_author': 'username_1', 'text': ""@username_0 I could at this to #535 if you want? \r\n\r\nI would write:\r\n\r\n`AKTUELL: Wenn Sie Android 11 benutzen, müssen Sie die Standortverwendung nicht mehr aktvieren um die App zu benutzen.`\r\n\r\n`UPDATE: If you are using Android 11, you don't have to activate the location to use the App.`\r\n\r\nIf this is correct and you are happy with this I would add it to the PR and mark the PR that it also closes this Issue 👍"", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'MikeMcC399', 'comment_id': 722410561.0, 'datetime': '2020-11-05 14:24:46+00:00', 'masked_author': 'username_0', 'text': ""Hi @username_1 \r\n\r\nI appreciate your offer, however I think we should keep the subjects in different PRs to keep it clean. #535 is about the hotlines. I'd also like to wait for first feedback here from the Open Source Team and in the related topic I raised today in https://github.com/corona-warn-app/cwa-app-android/issues/1541. I would be happy to draft a separate PR myself in fact, now that I've done it once, I know how the process works.\r\n\r\nLuckily there aren't too many users on Android 11 yet, so I don't think that many are getting confused by the FAQ at this time."", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'Ein-Tim', 'comment_id': 722434740.0, 'datetime': '2020-11-05 15:04:08+00:00', 'masked_author': 'username_1', 'text': ""@username_0 \n\nTotally understandable! Yes let's wait for feedback first and for sure you can draft a PR yourself! Thanks for your always kind replies! 🙂"", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'dsarkar', 'comment_id': 723924727.0, 'datetime': '2020-11-09 10:33:02+00:00', 'masked_author': 'username_2', 'text': 'Dear @username_0,\r\n\r\nWould you agree with something like that?\r\n\r\nAKTUELL: Wenn Sie Android 11 und die Corona-Warn-App ab Version 1.4 benutzen, müssen Sie die Standortverwendung nicht mehr aktivieren, um die Corona-Warn-App zu nutzen. Diese für Android Version 11 nicht zutreffende Benachrichtigung wird in einem der nächsten Updates der Corona-Warn-App entfernt.\r\n\r\nUPDATE: If you are using Android 11 and the Corona-Warn-App version 1.4 or above, you don\'t have to ""allow location access"" in order to use the Corona-Warn-App. This notification is not applicable for Android 11 phones and will be removed in one of the following updates of the Corona-Warn-App for Android Version 11 phones.\r\n\r\nBest wishes,\r\nDS\r\n\r\nCorona-Warn-App Open Source Team', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'MikeMcC399', 'comment_id': 723973999.0, 'datetime': '2020-11-09 12:09:32+00:00', 'masked_author': 'username_0', 'text': 'For the English version, I suggest removing the final ""for Android Version 11 phones."" which is not necessary and does not match the German text. So the English text would read:\r\n\r\nUPDATE: If you are using Android 11 and the Corona-Warn-App version 1.5 or above, you don\'t have to ""allow location access"" in order to use the Corona-Warn-App. This notification is not applicable for Android 11 phones and will be removed in one of the following updates of the Corona-Warn-App.', 'title': None, 'type': 'comment'}
+ {'action': 'closed', 'author': 'mtb77', 'comment_id': None, 'datetime': '2020-11-11 14:49:31+00:00', 'masked_author': 'username_3', 'text': '', 'title': None, 'type': 'issue'}]","<issue_start><issue_comment>Title: FAQ: Location does not apply to Android 11
+username_0: ## Where to find the issue 
+https://www.coronawarn.app/en/faq/#android_location
+""[Google/Android]: When activating exposure logging or Bluetooth I'm asked to activate my location. Do I have to do this?""
+
+## Describe the issue
+The requirement to enable Use location in order to access Bluetooth Low Energy, required for CWA, has been removed for COVID-19 apps starting with Android 11. (See https://support.google.com/android/answer/9930236 and https://developers.google.com/android/exposure-notifications/implementation-guide#locationless_scanning_in_android_11.)
+
+## Suggested change
+Add text to the article https://www.coronawarn.app/en/faq/#android_location to explain that it does not apply to Android 11.
+<issue_comment>username_1: @username_0 I could at this to #535 if you want? 
+
+I would write:
+
+`AKTUELL: Wenn Sie Android 11 benutzen, müssen Sie die Standortverwendung nicht mehr aktvieren um die App zu benutzen.`
+
+`UPDATE: If you are using Android 11, you don't have to activate the location to use the App.`
+
+If this is correct and you are happy with this I would add it to the PR and mark the PR that it also closes this Issue 👍
+<issue_comment>username_0: Hi @username_1 
+
+I appreciate your offer, however I think we should keep the subjects in different PRs to keep it clean. #535 is about the hotlines. I'd also like to wait for first feedback here from the Open Source Team and in the related topic I raised today in https://github.com/corona-warn-app/cwa-app-android/issues/1541. I would be happy to draft a separate PR myself in fact, now that I've done it once, I know how the process works.
+
+Luckily there aren't too many users on Android 11 yet, so I don't think that many are getting confused by the FAQ at this time.
+<issue_comment>username_1: @username_0 
+
+Totally understandable! Yes let's wait for feedback first and for sure you can draft a PR yourself! Thanks for your always kind replies! 🙂
+<issue_comment>username_2: Dear @username_0,
+
+Would you agree with something like that?
+
+AKTUELL: Wenn Sie Android 11 und die Corona-Warn-App ab Version 1.4 benutzen, müssen Sie die Standortverwendung nicht mehr aktivieren, um die Corona-Warn-App zu nutzen. Diese für Android Version 11 nicht zutreffende Benachrichtigung wird in einem der nächsten Updates der Corona-Warn-App entfernt.
+
+UPDATE: If you are using Android 11 and the Corona-Warn-App version 1.4 or above, you don't have to ""allow location access"" in order to use the Corona-Warn-App. This notification is not applicable for Android 11 phones and will be removed in one of the following updates of the Corona-Warn-App for Android Version 11 phones.
+
+Best wishes,
+DS
+
+Corona-Warn-App Open Source Team
+<issue_comment>username_0: For the English version, I suggest removing the final ""for Android Version 11 phones."" which is not necessary and does not match the German text. So the English text would read:
+
+UPDATE: If you are using Android 11 and the Corona-Warn-App version 1.5 or above, you don't have to ""allow location access"" in order to use the Corona-Warn-App. This notification is not applicable for Android 11 phones and will be removed in one of the following updates of the Corona-Warn-App.<issue_closed>"
+JuliaLang/www.julialang.org,657206293,911,"{'number': 911.0, 'repo': 'www.julialang.org', 'user_login': 'JuliaLang'}","[{'action': 'opened', 'author': 'tlienart', 'comment_id': None, 'datetime': '2020-07-15T09:30:53Z', 'masked_author': 'username_0', 'text': 'ref: #903 \r\n\r\nNote: I don\'t know what should go in ""OS version"" \r\n\r\nTable currently looks like this:\r\n\r\n![Screenshot 2020-07-15 at 11 30 22](https://user-images.githubusercontent.com/10897531/87528998-a12da400-c68e-11ea-9c34-9f8571995c65.png)', 'title': 'Downloads: PowerPC entry (erroneous HTML)', 'type': 'issue'}
+ {'action': 'created', 'author': 'ViralBShah', 'comment_id': 658766659.0, 'datetime': '2020-07-15 13:26:31+00:00', 'masked_author': 'username_1', 'text': 'Thank you! I did not realize the number of rows had to be captured right.', 'title': None, 'type': 'comment'}]","<issue_start><issue_comment>Title: Downloads: PowerPC entry (erroneous HTML)
+username_0: ref: #903 
+
+Note: I don't know what should go in ""OS version"" 
+
+Table currently looks like this:
+
+![Screenshot 2020-07-15 at 11 30 22](https://user-images.githubusercontent.com/10897531/87528998-a12da400-c68e-11ea-9c34-9f8571995c65.png)
+<issue_comment>username_1: Thank you! I did not realize the number of rows had to be captured right."
+cake-build/website,735671686,1209,"{'number': 1209.0, 'repo': 'website', 'user_login': 'cake-build'}","[{'action': 'opened', 'author': 'pascalberger', 'comment_id': None, 'datetime': '2020-11-03T22:18:28Z', 'masked_author': 'username_0', 'text': 'Add additional redirects for every OS & runner', 'title': 'Add redirects for every OS', 'type': 'issue'}
+ {'action': 'created', 'author': 'gep13', 'comment_id': 721566717.0, 'datetime': '2020-11-04 07:42:27+00:00', 'masked_author': 'username_1', 'text': '@username_0 why are these necessary?\r\n\r\nIf I recall correctly, the original osx/windows/linux URL\'s were used for a while, but they were then replaced with the powershell/bash ones.  Those original redirects were left in place in case anyone was using them, but everywhere that we ""owned"" starting using the powershell/bash links.', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'pascalberger', 'comment_id': 721567802.0, 'datetime': '2020-11-04 07:45:08+00:00', 'masked_author': 'username_0', 'text': ""Currently in docs the OS ones are used for .NET Framework (https://cakebuild.net/docs/running-builds/runners/cake-runner-for-dotnet-framework#bootstrapping-for-cake-runner-for.net-framework). We should either provide OS redirects for every bootstrapper, or adopt docs to use PowerShell / Bash redirects. I'm also OK to update docs to move away from the OS redirects."", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'gep13', 'comment_id': 721569084.0, 'datetime': '2020-11-04 07:48:15+00:00', 'masked_author': 'username_1', 'text': 'Hmm, ok, fair enough.  In which case, this makes sense.', 'title': None, 'type': 'comment'}]","<issue_start><issue_comment>Title: Add redirects for every OS
+username_0: Add additional redirects for every OS & runner
+<issue_comment>username_1: @username_0 why are these necessary?
+
+If I recall correctly, the original osx/windows/linux URL's were used for a while, but they were then replaced with the powershell/bash ones.  Those original redirects were left in place in case anyone was using them, but everywhere that we ""owned"" starting using the powershell/bash links.
+<issue_comment>username_0: Currently in docs the OS ones are used for .NET Framework (https://cakebuild.net/docs/running-builds/runners/cake-runner-for-dotnet-framework#bootstrapping-for-cake-runner-for.net-framework). We should either provide OS redirects for every bootstrapper, or adopt docs to use PowerShell / Bash redirects. I'm also OK to update docs to move away from the OS redirects.
+<issue_comment>username_1: Hmm, ok, fair enough.  In which case, this makes sense."
+COVID19Tracking/website,600431993,576,,"[{'action': 'opened', 'author': 'julialedur', 'comment_id': None, 'datetime': '2020-04-15 16:31:55+00:00', 'masked_author': 'username_0', 'text': 'here are the text edits we need to make: \r\n\r\n- Close the space here in “it ’s” (“Because COVID-19 testing and reporting are inconsistent among states, it ’s easy to misinterpret the data.“)\r\n\r\n- Delete mid-page header (“On this page, you will find …“) and change previous sentence to ""If you plan to display data from the COVID Tracking Project yourself, please closely follow these design and visualization guidelines""\r\n\r\n- Cut “sort of” here: “This functions as a sort of targeted social distancing technique and can help slow the outbreak.” I also suggest swapping this paragraph with the previous one. (to follow structure of other tips)\r\n\r\n- Cut this paragraph: ""By comparing the positive tests to the total tests in each state, we can get a sense of how widespread a state’s testing regime might be (though always remember to consider population densities vary wildly across the country) and if the number of positive tests is tracking roughly against the total number of tests. If it is, then we might consider that the state isn’t necessarily just getting new infections every day but that they’re also giving more tests."" (second graf under ""Be mindful when comparing states""\r\n\r\n- Adjust name in small multiples: “US Virgin Islands” (instead of Virgin Islands)\r\n\r\n- fix apostrophe code here: ""This reduces the **data&apso;s** power and the reader\'s comprehension."" \r\n\r\n- Update link in John Burn-Murdoch’s name to: https://twitter.com/janinegibson/status/1244519429825802240\r\n\r\n- Link out to FactCheck.org: factcheck.org/2020/04/social-media-posts-make-baseless-claim-on-covid-19-death-toll/', 'title': 'text edits ', 'type': 'issue'}
+ {'action': 'created', 'author': 'kissane', 'comment_id': 614198413.0, 'datetime': '2020-04-15 18:16:33+00:00', 'masked_author': 'username_1', 'text': '', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'kissane', 'comment_id': 614204126.0, 'datetime': '2020-04-15 18:28:09+00:00', 'masked_author': 'username_1', 'text': '', 'title': None, 'type': 'comment'}
+ {'action': 'closed', 'author': 'goleary', 'comment_id': None, 'datetime': '2020-04-22 01:15:40+00:00', 'masked_author': 'username_2', 'text': '', 'title': None, 'type': 'issue'}]","<issue_start><issue_comment>Title: text edits 
+username_0: here are the text edits we need to make: 
+
+- Close the space here in “it ’s” (“Because COVID-19 testing and reporting are inconsistent among states, it ’s easy to misinterpret the data.“)
+
+- Delete mid-page header (“On this page, you will find …“) and change previous sentence to ""If you plan to display data from the COVID Tracking Project yourself, please closely follow these design and visualization guidelines""
+
+- Cut “sort of” here: “This functions as a sort of targeted social distancing technique and can help slow the outbreak.” I also suggest swapping this paragraph with the previous one. (to follow structure of other tips)
+
+- Cut this paragraph: ""By comparing the positive tests to the total tests in each state, we can get a sense of how widespread a state’s testing regime might be (though always remember to consider population densities vary wildly across the country) and if the number of positive tests is tracking roughly against the total number of tests. If it is, then we might consider that the state isn’t necessarily just getting new infections every day but that they’re also giving more tests."" (second graf under ""Be mindful when comparing states""
+
+- Adjust name in small multiples: “US Virgin Islands” (instead of Virgin Islands)
+
+- fix apostrophe code here: ""This reduces the **data&apso;s** power and the reader's comprehension."" 
+
+- Update link in John Burn-Murdoch’s name to: https://twitter.com/janinegibson/status/1244519429825802240
+
+- Link out to FactCheck.org: factcheck.org/2020/04/social-media-posts-make-baseless-claim-on-covid-19-death-toll/<issue_closed>"
+tdwg/website,258529050,14,,"[{'action': 'opened', 'author': 'peterdesmet', 'comment_id': None, 'datetime': '2017-09-18 15:50:15+00:00', 'masked_author': 'username_0', 'text': ""Let's choose one for consistency!\r\n\r\nMy 2 cents: option 3, but with regular `@` symbol: envkt@example.com.ca`. It's intuitive to add, maintain and use. I never click email links, because it more often than not opens an email program I'm not using; so I copy the address. I'm also assuming crawlers are pretty powerful and that my address is out there somewhere... relying on a good spam filter to keep unwanted email at bay.\r\n\r\nFeedback welcome."", 'title': 'How to display email addresses?', 'type': 'issue'}
+ {'action': 'created', 'author': 'gkampmeier', 'comment_id': 330306282.0, 'datetime': '2017-09-18 17:59:49+00:00', 'masked_author': 'username_1', 'text': ""I agree, we should choose one.  I wondered, however, if web crawlers weren't sophisticated enough to see through these obfuscations that mainly only annoy legitimate users. This rather agreed with what I was thinking [https://qz.com/181635/surprise-theres-really-no-need-to-conceal-your-email-address-from-spammers/](https://qz.com/181635/surprise-theres-really-no-need-to-conceal-your-email-address-from-spammers/).  There is apparently another way suggested, although less handy, unless what you are doing can be programmed to be used automatically by anyone creating a webpage for our site [https://stackoverflow.com/questions/4098408/is-it-worth-obfuscating-email-addresses-on-the-web-these-days?noredirect=1&lq=1](https://stackoverflow.com/questions/4098408/is-it-worth-obfuscating-email-addresses-on-the-web-these-days?noredirect=1&lq=1)."", 'title': None, 'type': 'comment'}]","<issue_start><issue_comment>Title: How to display email addresses?
+username_0: Let's choose one for consistency!
+
+My 2 cents: option 3, but with regular `@` symbol: `james.macklin@agr.gc.ca`. It's intuitive to add, maintain and use. I never click email links, because it more often than not opens an email program I'm not using; so I copy the address. I'm also assuming crawlers are pretty powerful and that my address is out there somewhere... relying on a good spam filter to keep unwanted email at bay.
+
+Feedback welcome.
+<issue_comment>username_1: I agree, we should choose one.  I wondered, however, if web crawlers weren't sophisticated enough to see through these obfuscations that mainly only annoy legitimate users. This rather agreed with what I was thinking [https://qz.com/181635/surprise-theres-really-no-need-to-conceal-your-email-address-from-spammers/](https://qz.com/181635/surprise-theres-really-no-need-to-conceal-your-email-address-from-spammers/).  There is apparently another way suggested, although less handy, unless what you are doing can be programmed to be used automatically by anyone creating a webpage for our site [https://stackoverflow.com/questions/4098408/is-it-worth-obfuscating-email-addresses-on-the-web-these-days?noredirect=1&lq=1](https://stackoverflow.com/questions/4098408/is-it-worth-obfuscating-email-addresses-on-the-web-these-days?noredirect=1&lq=1)."
+newrelic/docs-website,1073339807,5190,,"[{'action': 'opened', 'author': 'alejandroalv87', 'comment_id': None, 'datetime': '2021-12-07T13:14:43Z', 'masked_author': 'username_0', 'text': ""I cannot forward logs from my servers to NR. When it comes to infrastructure logs do I need to install any log procesor? \r\nFrom https://docs.newrelic.com/docs/logs/forward-logs/forward-your-logs-using-infrastructure-agent/ I see that we need to \r\nCreate a logging.yml configuration file, and add the parameters you need. The logging.d directory has various .yml.example files you can use as a reference or starting point. which they are as an example and I am using this:\r\n\r\nlogs:\r\n\r\n \r\n # entries for the application, system, powershell, and SCOM channels\r\n  - name: windows-application\r\n    winlog: \r\n       channel: Application\r\n  - name: windows-system\r\n    winlog: \r\n       channel: System\r\n\r\n # Entry for IIS logs with logtype attribute for automatic parsing\r\n  - name: iis-log\r\n    file: C:\\inetpub\\logs\\LogFiles\\W3SVC2\\u_ex*\r\n    attributes:\r\n      logtype: iis_w3c\r\n\r\nsystem: windows server 2016\r\nagent version: 10.20.7\r\n\r\n### Doc information (don't delete this section)\r\n\r\n* https://docs.newrelic.com/docs/logs/forward-logs/forward-your-logs-using-infrastructure-agent/\r\n* **OS**: Windows 10\r\n* **Browser**: Chrome 96.0.4664.45\r\n* **Device**: Unknown"", 'title': 'Issue: Forward your logs using the infrastructure agent', 'type': 'issue'}
+ {'action': 'created', 'author': 'barbnewrelic', 'comment_id': 988050291.0, 'datetime': '2021-12-07 15:47:58+00:00', 'masked_author': 'username_1', 'text': '@username_0  Our infrastructure agent works as the log forwarder. It acts as a lightweight data collector, without having to use additional software. The ""System requirements"" section https://docs.newrelic.com/docs/logs/forward-logs/forward-your-logs-using-infrastructure-agent/#requirements  describes the various operating system requirements, and the rest of this doc walks you through the various setup options. If you need additional help with setting up log forwarding with our infrastructure agent,  we recommend that you file a support ticket. Then, if our support or engineering teams notice any discrepancies in the documented setup requirements, they will update this doc. Hope this helps!', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'barbnewrelic', 'comment_id': 1001799472.0, 'datetime': '2021-12-27 23:33:46+00:00', 'masked_author': 'username_1', 'text': '@username_0  I will assume the info we provided several weeks ago answered your question, so I am taking the liberty of closing this issue. Feel free to file docs issues here, or contact support through your standard support channels anytime!', 'title': None, 'type': 'comment'}
+ {'action': 'closed', 'author': 'barbnewrelic', 'comment_id': None, 'datetime': '2021-12-27 23:33:47+00:00', 'masked_author': 'username_1', 'text': '', 'title': None, 'type': 'issue'}]","<issue_start><issue_comment>Title: Issue: Forward your logs using the infrastructure agent
+username_0: I cannot forward logs from my servers to NR. When it comes to infrastructure logs do I need to install any log procesor? 
+From https://docs.newrelic.com/docs/logs/forward-logs/forward-your-logs-using-infrastructure-agent/ I see that we need to 
+Create a logging.yml configuration file, and add the parameters you need. The logging.d directory has various .yml.example files you can use as a reference or starting point. which they are as an example and I am using this:
+
+logs:
+
+ 
+ # entries for the application, system, powershell, and SCOM channels
+  - name: windows-application
+    winlog: 
+       channel: Application
+  - name: windows-system
+    winlog: 
+       channel: System
+
+ # Entry for IIS logs with logtype attribute for automatic parsing
+  - name: iis-log
+    file: C:\inetpub\logs\LogFiles\W3SVC2\u_ex*
+    attributes:
+      logtype: iis_w3c
+
+system: windows server 2016
+agent version: 10.20.7
+
+### Doc information (don't delete this section)
+
+* https://docs.newrelic.com/docs/logs/forward-logs/forward-your-logs-using-infrastructure-agent/
+* **OS**: Windows 10
+* **Browser**: Chrome 96.0.4664.45
+* **Device**: Unknown
+<issue_comment>username_1: @username_0  Our infrastructure agent works as the log forwarder. It acts as a lightweight data collector, without having to use additional software. The ""System requirements"" section https://docs.newrelic.com/docs/logs/forward-logs/forward-your-logs-using-infrastructure-agent/#requirements  describes the various operating system requirements, and the rest of this doc walks you through the various setup options. If you need additional help with setting up log forwarding with our infrastructure agent,  we recommend that you file a support ticket. Then, if our support or engineering teams notice any discrepancies in the documented setup requirements, they will update this doc. Hope this helps!
+<issue_comment>username_1: @username_0  I will assume the info we provided several weeks ago answered your question, so I am taking the liberty of closing this issue. Feel free to file docs issues here, or contact support through your standard support channels anytime!<issue_closed>"
+GDQuest/website,898858285,270,"{'number': 270.0, 'repo': 'website', 'user_login': 'GDQuest'}","[{'action': 'opened', 'author': 'VictorAdC', 'comment_id': None, 'datetime': '2021-05-22T18:30:18Z', 'masked_author': 'username_0', 'text': '**Please check if the PR fulfills these requirements:**\r\n\r\n- [ ] The commit message follows our guidelines.\r\n- For bug fixes and features:\r\n    - [X] You tested the changes.\r\n    - [ ] You updated the docs or changelog.\r\n\r\n\r\nRelated issue (if applicable): #\r\n\r\n<!-- You don\'t have to fill all the information below if it is all explained in the linked issue above. -->\r\n\r\n**What kind of change does this PR introduce?**\r\nThis PR fix an URL. ""Getting Started with Godot in 2021"" hyperlink is pointing to a power sequencer tutorial, this PR corrects it to redirect the user to the playlist in the GDQuest channel.\r\n\r\n\r\n**Does this PR introduce a breaking change?**\r\nNo.\r\n\r\n\r\n## New feature or change ##\r\n\r\n\r\n**What is the current behavior?** \r\n""Getting Started with Godot in 2021"" hyperlink is pointing to a power sequencer tutorial.\r\n\r\n\r\n**What is the new behavior?**\r\n""Getting Started with Godot in 2021"" hyperlink will point to ""Getting Started with Godot in 2021"" playlist in the GDQuest channel.\r\n\r\n\r\n**Other information**', 'title': 'Fix Getting Started with the Godot Game Engine in 2021 youtube url', 'type': 'issue'}
+ {'action': 'created', 'author': 'NathanLovato', 'comment_id': 846452212.0, 'datetime': '2021-05-22 19:18:55+00:00', 'masked_author': 'username_1', 'text': ""Thanks much for the PR. However, this should link to the series on the website. I unfortunately couldn't push to your PR, so I made the fix manually in a26e0348b52824ca1010e20a8d23dc871f94e8f4"", 'title': None, 'type': 'comment'}]","<issue_start><issue_comment>Title: Fix Getting Started with the Godot Game Engine in 2021 youtube url
+username_0: **Please check if the PR fulfills these requirements:**
+
+- [ ] The commit message follows our guidelines.
+- For bug fixes and features:
+    - [X] You tested the changes.
+    - [ ] You updated the docs or changelog.
+
+
+Related issue (if applicable): #
+
+<!-- You don't have to fill all the information below if it is all explained in the linked issue above. -->
+
+**What kind of change does this PR introduce?**
+This PR fix an URL. ""Getting Started with Godot in 2021"" hyperlink is pointing to a power sequencer tutorial, this PR corrects it to redirect the user to the playlist in the GDQuest channel.
+
+
+**Does this PR introduce a breaking change?**
+No.
+
+
+## New feature or change ##
+
+
+**What is the current behavior?** 
+""Getting Started with Godot in 2021"" hyperlink is pointing to a power sequencer tutorial.
+
+
+**What is the new behavior?**
+""Getting Started with Godot in 2021"" hyperlink will point to ""Getting Started with Godot in 2021"" playlist in the GDQuest channel.
+
+
+**Other information**
+<issue_comment>username_1: Thanks much for the PR. However, this should link to the series on the website. I unfortunately couldn't push to your PR, so I made the fix manually in a26e0348b52824ca1010e20a8d23dc871f94e8f4"
+cake-build/website,241951934,383,,"[{'action': 'opened', 'author': 'Roemer', 'comment_id': None, 'datetime': '2017-07-11 07:24:21+00:00', 'masked_author': 'username_0', 'text': 'The first parameter seems to work.\r\n\r\nChanging the quotes to:\r\n`-ScriptArgs`: `powershell -File build.ps1 -ScriptArgs ""-someflag -my_setting=\\""from a batch file\\""""` fixes that issue.\r\n\r\nAn alternative that seems to work would be:\r\n`-ScriptArgs`: `powershell -File build.ps1 -ScriptArgs \'-someflag\',\'-my_setting=""from a batch file""\'` (no space between the arguments!)\r\n\r\nTook me some time to figure this out so I think it would be worth mentioning that somewhere.', 'title': 'Example with -ScripArgs is not working with multiple', 'type': 'issue'}
+ {'action': 'created', 'author': 'Roemer', 'comment_id': 314454497.0, 'datetime': '2017-07-11 14:05:26+00:00', 'masked_author': 'username_0', 'text': 'I actually spent some more time with it and I have very very strange results.\r\nRunning:\r\n```\r\npowershell.exe -NonInteractive -ExecutionPolicy ByPass -File build.ps1 -Target ""Run-UI-Tests"" -Configuration ""Release"" -ScriptArgs ""--coverage=true"",""--uiTestWhere=\\""class == UITests.Aut01\\""""\r\n```\r\nwill use the following expression with `Invoke-Expression`:\r\n```\r\n& ""C:\\Development\\ELCA\\ksta-verana\\tools\\Cake\\Cake.exe"" ""build.cake"" -target=""Run-UI-Tests"" -configuration=""Release"" -verbosity=""Verbose""    --coverage=true,--uiTestWhere=""class == UITests.Aut01""\r\n```\r\nand that works correctly.\r\n\r\nNow when I use:\r\n```\r\n""C:\\Development\\ELCA\\ksta-verana\\tools\\Cake\\Cake.exe"" ""build.cake"" -target=""Run-UI-Tests"" -configuration=""Release"" -verbosity=""Verbose""    --coverage=true,--uiTestWhere=""class == UITests.Aut01""\r\n```\r\nfrom a command prompt I get the exception:\r\n```\r\nError: true,--uiTestWhere=""class == UITests.Aut01"" is not a valid value for Boolean.\r\n```\r\n(coverage is a boolean parameter in the cake file).\r\nThat is already strange enough.\r\nAdditionally when I run the PowerShell script mentioned on top from a Jenkins slave, it also does not work.\r\n\r\nIt does work in all cases if I use:\r\n```\r\npowershell.exe -NonInteractive -ExecutionPolicy ByPass -File build.ps1 -Target ""Run-UI-Tests"" -Configuration ""Release"" -ScriptArgs ""--coverage=true --uiTestWhere=\\""class == UITests.Aut01\\""""\r\n```\r\n\r\nAll in all this seems a bit unreliable in general and a clean guideline would be good.', 'title': None, 'type': 'comment'}]","<issue_start><issue_comment>Title: Example with -ScripArgs is not working with multiple
+username_0: The first parameter seems to work.
+
+Changing the quotes to:
+`-ScriptArgs`: `powershell -File build.ps1 -ScriptArgs ""-someflag -my_setting=\""from a batch file\""""` fixes that issue.
+
+An alternative that seems to work would be:
+`-ScriptArgs`: `powershell -File build.ps1 -ScriptArgs '-someflag','-my_setting=""from a batch file""'` (no space between the arguments!)
+
+Took me some time to figure this out so I think it would be worth mentioning that somewhere.
+<issue_comment>username_0: I actually spent some more time with it and I have very very strange results.
+Running:
+```
+powershell.exe -NonInteractive -ExecutionPolicy ByPass -File build.ps1 -Target ""Run-UI-Tests"" -Configuration ""Release"" -ScriptArgs ""--coverage=true"",""--uiTestWhere=\""class == UITests.Aut01\""""
+```
+will use the following expression with `Invoke-Expression`:
+```
+& ""C:\Development\ELCA\ksta-verana\tools\Cake\Cake.exe"" ""build.cake"" -target=""Run-UI-Tests"" -configuration=""Release"" -verbosity=""Verbose""    --coverage=true,--uiTestWhere=""class == UITests.Aut01""
+```
+and that works correctly.
+
+Now when I use:
+```
+""C:\Development\ELCA\ksta-verana\tools\Cake\Cake.exe"" ""build.cake"" -target=""Run-UI-Tests"" -configuration=""Release"" -verbosity=""Verbose""    --coverage=true,--uiTestWhere=""class == UITests.Aut01""
+```
+from a command prompt I get the exception:
+```
+Error: true,--uiTestWhere=""class == UITests.Aut01"" is not a valid value for Boolean.
+```
+(coverage is a boolean parameter in the cake file).
+That is already strange enough.
+Additionally when I run the PowerShell script mentioned on top from a Jenkins slave, it also does not work.
+
+It does work in all cases if I use:
+```
+powershell.exe -NonInteractive -ExecutionPolicy ByPass -File build.ps1 -Target ""Run-UI-Tests"" -Configuration ""Release"" -ScriptArgs ""--coverage=true --uiTestWhere=\""class == UITests.Aut01\""""
+```
+
+All in all this seems a bit unreliable in general and a clean guideline would be good."
+kubeflow/website,854053339,2590,,"[{'action': 'opened', 'author': 'thesuperzapper', 'comment_id': None, 'datetime': '2021-04-09 00:51:07+00:00', 'masked_author': 'username_0', 'text': 'As we have been moving all distribution-specific docs out of ""Getting Started"" with PRs like #2576, #2577, #2569, #2492, we should now clean up the first place people look when trying to install Kubeflow.\r\n\r\nAs proposed by @username_2 we should clearly indicate the two ""paths"" for installing Kubeflow:\r\n1. __Roll your own__ -- using the `kubeflow/manifests` yourself, with no support\r\n2. __Supported Distribution__ -- using a vendor or community supported install process\r\n\r\nI think this leaves us with the following sections in ""Getting Started"" / ""Installing Kubeflow"":\r\n\r\n```md\r\n## Overview\r\n* discussion about Kubeflow being a ""Kubernetes"" app, with multiple components which can be mix-and-matched\r\n* discussion about the two ""paths"" as described above, ""Roll your own"" and ""Distribution""\r\n* discussion about how Kubeflow is versioned, e.g. what 1.3, 1.4, even mean.\r\n\r\n## Path 1: Roll Your Own\r\n* Either take the content in the README of `kubeflow/manifests`, or just link to it\r\n* https://github.com/kubeflow/manifests#kubeflow-manifests\r\n\r\n## Path 2: Supported Distribution \r\n\r\n### Vendor Supported\r\na TABLE which lists the currently maintained VENDOR-SUPPORTED distributions, and links to their docs\r\n\r\nCONTENT (Alphabetical):\r\n* `Kubeflow on AWS`\r\n* `Kubeflow on Azure`\r\n* `Kubeflow on GCP`\r\n* `Kubeflow on IBM Cloud`\r\n* `Kubeflow on Openshift` (Combine: ""Kubeflow Operator"" and ""Kubeflow on Openshift"" page)\r\n* `Kubeflow on MicroK8s` (Rename from ""MicroK8s Kubeflow add-on"" page)\r\n* `Kubeflow with Charmed Operators` (Rename from ""Kubeflow Charmed Operators"" page)\r\n* `Kubeflow with MiniKF`\r\n\r\n### Community Supported\r\na TABLE which lists the currently maintained COMMUNITY-SUPPORTED distributions, and links to their docs\r\n\r\nCONTENT (Alphabetical):\r\n* `Kubeflow with ArgoCD` (New page)\r\n* `Kubeflow with kfctl` (Rename from ""kfctl"" page)\r\n\r\n## Next Steps\r\n* links to important component docs ""Pipelines"", ""Notebooks"", etc.\r\n```', 'title': 'Refactor the ""Getting Started"" ""Installing Kubeflow"" page', 'type': 'issue'}
+ {'action': 'created', 'author': 'thesuperzapper', 'comment_id': 816376487.0, 'datetime': '2021-04-09 03:32:42+00:00', 'masked_author': 'username_0', 'text': '@username_1 there are quite a lot of renames here, but I think it will make the user experience easier.\r\n\r\nI have used `Kubeflow on XXX` for cases were the ""distribution"" is a guide for using Kubeflow on a platform, and `Kubeflow with XXX` when the ""distribution"" is a tool for deploying/using kubeflow arbitrarily.', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'RFMVasconcelos', 'comment_id': 817626573.0, 'datetime': '2021-04-12 08:59:31+00:00', 'masked_author': 'username_1', 'text': 'I would draw the distinction between `platform-specific distributions` and `multi-platform distributions`. I think this is what you have tried to achieve with the `on XXX` VS `with XXX` but IMO it is too subtle, might be confusing. \r\n\r\nWe could split into two tables: \r\n```\r\nPlatform-specific distributions (Alphabetical):\r\n* `Kubeflow on AWS`\r\n* `Kubeflow on Azure`\r\n* `Kubeflow on GCP`\r\n* `Kubeflow on IBM Cloud`\r\n* `Kubeflow on Openshift` \r\n* `Kubeflow on MicroK8s` \r\n\r\nMulti-platform distributions (Alphabetical):\r\n* `Kubeflow with Charmed Operators` \r\n* `Kubeflow with MiniKF`\r\n```\r\n\r\nThe rest LGTM!', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'cvenets', 'comment_id': 818206032.0, 'datetime': '2021-04-12 20:41:44+00:00', 'masked_author': 'username_2', 'text': ""@username_1 I agree with all your comments above.\r\n\r\nI would rename `Kubeflow with MiniKF` to `Kubeflow with Arrikto MiniKF` to denote explicitly who is the vendor supporting the distro, so it is easy for new users. You may want to do the same for Charmed Operators (e.g., Canonical Charmed Operators). For the Platform-specific distros it is evident, so no need to do anything there.\r\n\r\nAlso, it may make sense for all the tables to go to the distributions page and leave here only a link to the distributions page, same as we do for Path 1, so the user doesn't have to scroll a lot, but I'll let you decide on this.\r\n\r\nThanks!"", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'RFMVasconcelos', 'comment_id': 818783953.0, 'datetime': '2021-04-13 14:31:48+00:00', 'masked_author': 'username_1', 'text': ""Looking at my previous proposal + @username_2 comments one option would be:\r\n```\r\nPlatform-specific distributions (Alphabetical):\r\n* `Kubeflow on AWS`\r\n* `Kubeflow on Azure`\r\n* `Kubeflow on GCP`\r\n* `Kubeflow on IBM Cloud`\r\n* `Kubeflow on Openshift` \r\n\r\nMulti-platform distributions (Alphabetical):\r\n* `Arrikto MiniKF`\r\n* `MicroK8s Kubeflow add-on`\r\n* `Kubeflow Charmed Operators`\r\n```\r\n@username_2 maybe `Arrikto MiniKF` is shorter and better than `Kubeflow with Arrikto MiniKF`, WDYT? \r\n\r\n**// note 1:** I moved MicroK8s from platform-specific to multi-platform, because being a small K8s, it can be run on multiple platforms.\r\n**// note 2:** I think that with the separation of `platform-specific` and `multi-platform` distributions we don't need `Kubeflow with` to create this separation.\r\n\r\n**// Issue 1:** I would like to have a way to show users on e.g. `AWS` that they can also use one of the `multi-platform distributions` on AWS, not necessarily the AWS-specific distribution. Any ideas?\r\n\r\n@username_0 WDYT?"", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'cvenets', 'comment_id': 818974632.0, 'datetime': '2021-04-13 18:49:40+00:00', 'masked_author': 'username_2', 'text': '@username_1 I agree with all your comments and notes.\r\n\r\nWrt to the issue, I agree as well. The only two ways I can think of are:\r\n\r\n1. Add a parenthesis next to the multi-platform items, which will include all the currently supported platforms, e.g.,:\r\n  * `Arrikto MiniKF` (AWS, GCP, laptop/desktop)\r\n  * `MicroK8s Kubeflow add-on (..., ..., ...)\r\n  ...\r\n2. Change ""Multi-platform distributions"" to ""Platform-agnostic distributions across clouds""\r\n\r\nI\'m not sure I can think of something to add on the first section, but maybe someone has an idea for this as well.', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'cvenets', 'comment_id': 818974744.0, 'datetime': '2021-04-13 18:49:48+00:00', 'masked_author': 'username_2', 'text': '@username_1 I agree with all your comments and notes.\r\n\r\nWrt to the issue, I agree as well. The only two ways I can think of are:\r\n\r\n1. Add a parenthesis next to the multi-platform items, which will include all the currently supported platforms, e.g.,:\r\n  * `Arrikto MiniKF` (AWS, GCP, laptop/desktop)\r\n  * `MicroK8s Kubeflow add-on (..., ..., ...)\r\n  ...\r\n2. Change ""Multi-platform distributions"" to ""Platform-agnostic distributions across clouds""\r\n\r\nI\'m not sure I can think of something to add on the first section, but maybe someone has an idea for this as well.', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'cvenets', 'comment_id': 818977709.0, 'datetime': '2021-04-13 18:54:57+00:00', 'masked_author': 'username_2', 'text': '@username_1 note that we need to remove the kfctl entry from this page:\r\n\r\n* `Kubeflow with kfctl` (Rename from ""kfctl"" page)\r\n\r\nTake a look at https://github.com/kubeflow/website/pull/2604, which @castrojo just provided after today\'s update on https://github.com/kubeflow/manifests/issues/1798 from vendors, where both Cisco and Arrikto dropped support for kfctl, and thus all corresponding docs become obsolete and out-of-date for 1.3.', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'thesuperzapper', 'comment_id': 819131997.0, 'datetime': '2021-04-14 00:18:53+00:00', 'masked_author': 'username_0', 'text': '@username_1 \r\n* I agree with splitting on single/multi platform\r\n* I think MiniKF is a Platform-specific one, as its a single VM image on vagrant\r\n* Re letting AWS/GCP users know there are other options, we will just say under ""Multi-platform distributions"" that these distributions support any existing + compliant K8S cluster\r\n\r\n__I think we should call the two paths:__\r\n* Path 1: Roll Your Own\r\n   * ""A warning that this is an advanced option, which is not officially supported by the project""\r\n   * ""A quick description of what this means, with a link to the `kubeflow/manifests` readme""\r\n* Path 2: Use a Distribution\r\n   * Platform-specific distributions\r\n      * ""A description that these could be anything from a managed service to a fully contained VM image""\r\n   * Multi-platform distributions\r\n      * ""A description that these should support any existing & complaint K8S cluster""\r\n\r\n---\r\n\r\nI was thinking something like this for the distribution tables.\r\n\r\n__Platform-specific distributions:__\r\n\r\nName | Maintained By\r\n-- | --\r\n[Kubeflow on AWS](...) | [AWS](...)\r\nKubeflow on Azure | Azure\r\nKubeflow on GCP | GCP\r\nKubeflow on IBM Cloud | IBM Cloud\r\nKubeflow on Openshift | Red Hat\r\nKubeflow on MicroK8S | Canonical\r\nKubeflow on MiniKF | Arrikto\r\n\r\n__Multi-platform distributions:__\r\n\r\nName | Maintained By\r\n-- | --\r\nArgoFlow | ArgoFlow Team\r\nCharmed Operators | Canonical\r\nKfctl Command Line | N/A\r\n\r\n__NOTE:__\r\n* ""Name"" would be link to the distribution\'s docs\r\n* ""Maintained By"" would link to the company/community support page\r\n\r\n---\r\n\r\nI am happy to have a crack at a PR it unless you really want to.', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'cvenets', 'comment_id': 819230506.0, 'datetime': '2021-04-14 05:06:28+00:00', 'masked_author': 'username_2', 'text': ""This doesn't hold. The Manifests WG maintain and guarantee that these instructions should work, so it is definitely supported."", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'thesuperzapper', 'comment_id': 819246265.0, 'datetime': '2021-04-14 05:47:52+00:00', 'masked_author': 'username_0', 'text': '@username_2\r\n\r\nRe MiniKF: I think its probably better to remove the distinction, and add a column to clarify, for example:\r\n\r\nName | Maintained By | Deployment Target\r\n-- | -- | --\r\nKubeflow on AWS | AWS | EKS Clusters\r\nKubeflow on Azure | Azure | AKS Clusters\r\nKubeflow on GCP | GCP | GKE Clusters\r\nKubeflow on IBM Cloud | IBM Cloud | IKS Clusters\r\nKubeflow on Openshift | Red Hat | Openshift Clusters\r\nKubeflow on MicroK8S | Canonical | MicroK8S Clusters\r\nMiniKF | Arrikto | AWS Marketplace, GCP Marketplace, Local VirtualBox\r\nArgoFlow | ArgoFlow Community | K8S Clusters with Argo-CD Installed\r\nCharmed Operators | Canonical | K8S Clusters with Juju Installed\r\n\r\n---\r\n\r\nRe the warning: What I am trying to say is that users should not expect any environment-specific support from the Kubeflow Community for the ""roll your own"" path', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'thesuperzapper', 'comment_id': 819556753.0, 'datetime': '2021-04-14 14:21:20+00:00', 'masked_author': 'username_0', 'text': '@username_1 and @username_2 I have raised a WIP PR for this refactor https://github.com/kubeflow/website/pull/2611\r\n\r\nI will finish up the text-copy some time other than midnight my time!', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'RFMVasconcelos', 'comment_id': 819660635.0, 'datetime': '2021-04-14 16:41:37+00:00', 'masked_author': 'username_1', 'text': 'Thank you @username_2 and @username_0 for the comments on this front and for creating the WIP PR! \r\n\r\nA few comments on your proposing table @username_0: \r\n\r\n1. **No separation, only 1 table:** I think that `deployment target` or `target platforms` make things clear for users.\r\n2. **A proper map:** I think we should not forget that this page is a gateway and that it should be clear to users where to click on that table. I think we should strict links to the `Name` column and rename that to `Documentation` - links in every column as in your [PR](https://github.com/kubeflow/website/pull/2611) will be hard to follow and drive users off the website.\r\n\r\nI have `MicroK8s` and `Charmed Operators` specific suggestions, but I will add these to your PR. :) \r\n\r\n(PS: @username_2 I deleted one comment from you because it was repeated)', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'cvenets', 'comment_id': 819666734.0, 'datetime': '2021-04-14 16:51:09+00:00', 'masked_author': 'username_2', 'text': '@username_0 OK, this makes sense then, but I think this is pretty clear by the ""on your own"" part of the title of the section.', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'DavidSpek', 'comment_id': 819739325.0, 'datetime': '2021-04-14 18:28:45+00:00', 'masked_author': 'username_3', 'text': '@username_0 For ArgoFlow I think the target should be `Any K8S Clusters` (or something similar), as the Argo CD installation is part of the deployment, and Argo CD does not technically need to run on the same cluster as Kubeflow. Otherwise user might think they need to figure out how to deploy Argo CD on their own before going through the documentation.', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'RFMVasconcelos', 'comment_id': 820439715.0, 'datetime': '2021-04-15 13:52:59+00:00', 'masked_author': 'username_1', 'text': '@username_0 (and @username_3) I love the energy behind ArgoFlow, but I feel a bit wary of adding it directly here as per your [proposal](https://github.com/kubeflow/website/issues/2590#issuecomment-819246265). \r\n\r\nAccording to #2611, the way you propose this table is to link the ArgoFlow documentation to its own [repo](https://github.com/argoflow/argoflow). I am not sure what is the right way to proceed here. If creating appropriate docs in Kubeflow for this distribution and point from here.\r\n\r\nI would overall want to make sure that the goal of this page as a gateway and map to Kubeflow docs is met.\r\n\r\nI would suggest tackling this specific issue on a separate thread, making structure independent from content. WDYT?', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'cvenets', 'comment_id': 820608054.0, 'datetime': '2021-04-15 17:34:16+00:00', 'masked_author': 'username_2', 'text': 'I agree with @username_1. All links in this page should redirect to Kubeflow docs, not external sites.', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'thesuperzapper', 'comment_id': 820888767.0, 'datetime': '2021-04-16 03:59:04+00:00', 'masked_author': 'username_0', 'text': ""@username_1 @username_2  specifically regarding comment that we should only link to kubeflow.org...\n\nI actually think we should do the opposite (over time) just as kubernetes.io doesn't host EKS docs, we shouldn't host vendor specific docs, but rather link to parter websites.\n\nThis will do a few things:\n1. Make it easier for distributions to update thier docs\n2. Prevents it looking like the community endorses any specific distribution\n2. Encourage vendors to keep thier docs updated (as it's gonna look bad for vendors if they neglect docs on their own website)\n\nNOTE: This is not about the structure of the table, I agree with comments about improving how the links are displayed, and will update the PR"", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'Bobgy', 'comment_id': 824675260.0, 'datetime': '2021-04-22 09:09:40+00:00', 'masked_author': 'username_4', 'text': 'and some ideas for further improvement:\r\n* the link to manifest README should better pin to 1.3.0 release once we pin the final release\r\n* I think we should add a column ""Issue Tracker"" where people can report distribution specific issues.', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'Bobgy', 'comment_id': 824693084.0, 'datetime': '2021-04-22 09:37:56+00:00', 'masked_author': 'username_4', 'text': 'the immediate problems are fixed by https://github.com/kubeflow/website/pull/2635\r\n\r\nWhere do you plan to create a new issue tracking future improvements? Or shall we keep the discussion here?', 'title': None, 'type': 'comment'}
+ {'action': 'closed', 'author': 'thesuperzapper', 'comment_id': None, 'datetime': '2021-04-22 12:26:53+00:00', 'masked_author': 'username_0', 'text': '', 'title': None, 'type': 'issue'}]","<issue_start><issue_comment>Title: Refactor the ""Getting Started"" ""Installing Kubeflow"" page
+username_0: As we have been moving all distribution-specific docs out of ""Getting Started"" with PRs like #2576, #2577, #2569, #2492, we should now clean up the first place people look when trying to install Kubeflow.
+
+As proposed by @username_2 we should clearly indicate the two ""paths"" for installing Kubeflow:
+1. __Roll your own__ -- using the `kubeflow/manifests` yourself, with no support
+2. __Supported Distribution__ -- using a vendor or community supported install process
+
+I think this leaves us with the following sections in ""Getting Started"" / ""Installing Kubeflow"":
+
+```md
+## Overview
+* discussion about Kubeflow being a ""Kubernetes"" app, with multiple components which can be mix-and-matched
+* discussion about the two ""paths"" as described above, ""Roll your own"" and ""Distribution""
+* discussion about how Kubeflow is versioned, e.g. what 1.3, 1.4, even mean.
+
+## Path 1: Roll Your Own
+* Either take the content in the README of `kubeflow/manifests`, or just link to it
+* https://github.com/kubeflow/manifests#kubeflow-manifests
+
+## Path 2: Supported Distribution 
+
+### Vendor Supported
+a TABLE which lists the currently maintained VENDOR-SUPPORTED distributions, and links to their docs
+
+CONTENT (Alphabetical):
+* `Kubeflow on AWS`
+* `Kubeflow on Azure`
+* `Kubeflow on GCP`
+* `Kubeflow on IBM Cloud`
+* `Kubeflow on Openshift` (Combine: ""Kubeflow Operator"" and ""Kubeflow on Openshift"" page)
+* `Kubeflow on MicroK8s` (Rename from ""MicroK8s Kubeflow add-on"" page)
+* `Kubeflow with Charmed Operators` (Rename from ""Kubeflow Charmed Operators"" page)
+* `Kubeflow with MiniKF`
+
+### Community Supported
+a TABLE which lists the currently maintained COMMUNITY-SUPPORTED distributions, and links to their docs
+
+CONTENT (Alphabetical):
+* `Kubeflow with ArgoCD` (New page)
+* `Kubeflow with kfctl` (Rename from ""kfctl"" page)
+
+## Next Steps
+* links to important component docs ""Pipelines"", ""Notebooks"", etc.
+```
+<issue_comment>username_0: @username_1 there are quite a lot of renames here, but I think it will make the user experience easier.
+
+I have used `Kubeflow on XXX` for cases were the ""distribution"" is a guide for using Kubeflow on a platform, and `Kubeflow with XXX` when the ""distribution"" is a tool for deploying/using kubeflow arbitrarily.
+<issue_comment>username_1: I would draw the distinction between `platform-specific distributions` and `multi-platform distributions`. I think this is what you have tried to achieve with the `on XXX` VS `with XXX` but IMO it is too subtle, might be confusing. 
+
+We could split into two tables: 
+```
+Platform-specific distributions (Alphabetical):
+* `Kubeflow on AWS`
+* `Kubeflow on Azure`
+* `Kubeflow on GCP`
+* `Kubeflow on IBM Cloud`
+* `Kubeflow on Openshift` 
+* `Kubeflow on MicroK8s` 
+
+Multi-platform distributions (Alphabetical):
+* `Kubeflow with Charmed Operators` 
+* `Kubeflow with MiniKF`
+```
+
+The rest LGTM!
+<issue_comment>username_2: @username_1 I agree with all your comments above.
+
+I would rename `Kubeflow with MiniKF` to `Kubeflow with Arrikto MiniKF` to denote explicitly who is the vendor supporting the distro, so it is easy for new users. You may want to do the same for Charmed Operators (e.g., Canonical Charmed Operators). For the Platform-specific distros it is evident, so no need to do anything there.
+
+Also, it may make sense for all the tables to go to the distributions page and leave here only a link to the distributions page, same as we do for Path 1, so the user doesn't have to scroll a lot, but I'll let you decide on this.
+
+Thanks!
+<issue_comment>username_1: Looking at my previous proposal + @username_2 comments one option would be:
+```
+Platform-specific distributions (Alphabetical):
+* `Kubeflow on AWS`
+* `Kubeflow on Azure`
+* `Kubeflow on GCP`
+* `Kubeflow on IBM Cloud`
+* `Kubeflow on Openshift` 
+
+Multi-platform distributions (Alphabetical):
+* `Arrikto MiniKF`
+* `MicroK8s Kubeflow add-on`
+* `Kubeflow Charmed Operators`
+```
+@username_2 maybe `Arrikto MiniKF` is shorter and better than `Kubeflow with Arrikto MiniKF`, WDYT? 
+
+**// note 1:** I moved MicroK8s from platform-specific to multi-platform, because being a small K8s, it can be run on multiple platforms.
+**// note 2:** I think that with the separation of `platform-specific` and `multi-platform` distributions we don't need `Kubeflow with` to create this separation.
+
+**// Issue 1:** I would like to have a way to show users on e.g. `AWS` that they can also use one of the `multi-platform distributions` on AWS, not necessarily the AWS-specific distribution. Any ideas?
+
+@username_0 WDYT?
+<issue_comment>username_2: @username_1 I agree with all your comments and notes.
+
+Wrt to the issue, I agree as well. The only two ways I can think of are:
+
+1. Add a parenthesis next to the multi-platform items, which will include all the currently supported platforms, e.g.,:
+  * `Arrikto MiniKF` (AWS, GCP, laptop/desktop)
+  * `MicroK8s Kubeflow add-on (..., ..., ...)
+  ...
+2. Change ""Multi-platform distributions"" to ""Platform-agnostic distributions across clouds""
+
+I'm not sure I can think of something to add on the first section, but maybe someone has an idea for this as well.
+<issue_comment>username_2: @username_1 I agree with all your comments and notes.
+
+Wrt to the issue, I agree as well. The only two ways I can think of are:
+
+1. Add a parenthesis next to the multi-platform items, which will include all the currently supported platforms, e.g.,:
+  * `Arrikto MiniKF` (AWS, GCP, laptop/desktop)
+  * `MicroK8s Kubeflow add-on (..., ..., ...)
+  ...
+2. Change ""Multi-platform distributions"" to ""Platform-agnostic distributions across clouds""
+
+I'm not sure I can think of something to add on the first section, but maybe someone has an idea for this as well.
+<issue_comment>username_2: @username_1 note that we need to remove the kfctl entry from this page:
+
+* `Kubeflow with kfctl` (Rename from ""kfctl"" page)
+
+Take a look at https://github.com/kubeflow/website/pull/2604, which @castrojo just provided after today's update on https://github.com/kubeflow/manifests/issues/1798 from vendors, where both Cisco and Arrikto dropped support for kfctl, and thus all corresponding docs become obsolete and out-of-date for 1.3.
+<issue_comment>username_0: @username_1 
+* I agree with splitting on single/multi platform
+* I think MiniKF is a Platform-specific one, as its a single VM image on vagrant
+* Re letting AWS/GCP users know there are other options, we will just say under ""Multi-platform distributions"" that these distributions support any existing + compliant K8S cluster
+
+__I think we should call the two paths:__
+* Path 1: Roll Your Own
+   * ""A warning that this is an advanced option, which is not officially supported by the project""
+   * ""A quick description of what this means, with a link to the `kubeflow/manifests` readme""
+* Path 2: Use a Distribution
+   * Platform-specific distributions
+      * ""A description that these could be anything from a managed service to a fully contained VM image""
+   * Multi-platform distributions
+      * ""A description that these should support any existing & complaint K8S cluster""
+
+---
+
+I was thinking something like this for the distribution tables.
+
+__Platform-specific distributions:__
+
+Name | Maintained By
+-- | --
+[Kubeflow on AWS](...) | [AWS](...)
+Kubeflow on Azure | Azure
+Kubeflow on GCP | GCP
+Kubeflow on IBM Cloud | IBM Cloud
+Kubeflow on Openshift | Red Hat
+Kubeflow on MicroK8S | Canonical
+Kubeflow on MiniKF | Arrikto
+
+__Multi-platform distributions:__
+
+Name | Maintained By
+-- | --
+ArgoFlow | ArgoFlow Team
+Charmed Operators | Canonical
+Kfctl Command Line | N/A
+
+__NOTE:__
+* ""Name"" would be link to the distribution's docs
+* ""Maintained By"" would link to the company/community support page
+
+---
+
+I am happy to have a crack at a PR it unless you really want to.
+<issue_comment>username_2: This doesn't hold. The Manifests WG maintain and guarantee that these instructions should work, so it is definitely supported.
+<issue_comment>username_0: @username_2
+
+Re MiniKF: I think its probably better to remove the distinction, and add a column to clarify, for example:
+
+Name | Maintained By | Deployment Target
+-- | -- | --
+Kubeflow on AWS | AWS | EKS Clusters
+Kubeflow on Azure | Azure | AKS Clusters
+Kubeflow on GCP | GCP | GKE Clusters
+Kubeflow on IBM Cloud | IBM Cloud | IKS Clusters
+Kubeflow on Openshift | Red Hat | Openshift Clusters
+Kubeflow on MicroK8S | Canonical | MicroK8S Clusters
+MiniKF | Arrikto | AWS Marketplace, GCP Marketplace, Local VirtualBox
+ArgoFlow | ArgoFlow Community | K8S Clusters with Argo-CD Installed
+Charmed Operators | Canonical | K8S Clusters with Juju Installed
+
+---
+
+Re the warning: What I am trying to say is that users should not expect any environment-specific support from the Kubeflow Community for the ""roll your own"" path
+<issue_comment>username_0: @username_1 and @username_2 I have raised a WIP PR for this refactor https://github.com/kubeflow/website/pull/2611
+
+I will finish up the text-copy some time other than midnight my time!
+<issue_comment>username_1: Thank you @username_2 and @username_0 for the comments on this front and for creating the WIP PR! 
+
+A few comments on your proposing table @username_0: 
+
+1. **No separation, only 1 table:** I think that `deployment target` or `target platforms` make things clear for users.
+2. **A proper map:** I think we should not forget that this page is a gateway and that it should be clear to users where to click on that table. I think we should strict links to the `Name` column and rename that to `Documentation` - links in every column as in your [PR](https://github.com/kubeflow/website/pull/2611) will be hard to follow and drive users off the website.
+
+I have `MicroK8s` and `Charmed Operators` specific suggestions, but I will add these to your PR. :) 
+
+(PS: @username_2 I deleted one comment from you because it was repeated)
+<issue_comment>username_2: @username_0 OK, this makes sense then, but I think this is pretty clear by the ""on your own"" part of the title of the section.
+<issue_comment>username_3: @username_0 For ArgoFlow I think the target should be `Any K8S Clusters` (or something similar), as the Argo CD installation is part of the deployment, and Argo CD does not technically need to run on the same cluster as Kubeflow. Otherwise user might think they need to figure out how to deploy Argo CD on their own before going through the documentation.
+<issue_comment>username_1: @username_0 (and @username_3) I love the energy behind ArgoFlow, but I feel a bit wary of adding it directly here as per your [proposal](https://github.com/kubeflow/website/issues/2590#issuecomment-819246265). 
+
+According to #2611, the way you propose this table is to link the ArgoFlow documentation to its own [repo](https://github.com/argoflow/argoflow). I am not sure what is the right way to proceed here. If creating appropriate docs in Kubeflow for this distribution and point from here.
+
+I would overall want to make sure that the goal of this page as a gateway and map to Kubeflow docs is met.
+
+I would suggest tackling this specific issue on a separate thread, making structure independent from content. WDYT?
+<issue_comment>username_2: I agree with @username_1. All links in this page should redirect to Kubeflow docs, not external sites.
+<issue_comment>username_0: @username_1 @username_2  specifically regarding comment that we should only link to kubeflow.org...
+
+I actually think we should do the opposite (over time) just as kubernetes.io doesn't host EKS docs, we shouldn't host vendor specific docs, but rather link to parter websites.
+
+This will do a few things:
+1. Make it easier for distributions to update thier docs
+2. Prevents it looking like the community endorses any specific distribution
+2. Encourage vendors to keep thier docs updated (as it's gonna look bad for vendors if they neglect docs on their own website)
+
+NOTE: This is not about the structure of the table, I agree with comments about improving how the links are displayed, and will update the PR
+<issue_comment>username_4: and some ideas for further improvement:
+* the link to manifest README should better pin to 1.3.0 release once we pin the final release
+* I think we should add a column ""Issue Tracker"" where people can report distribution specific issues.
+<issue_comment>username_4: the immediate problems are fixed by https://github.com/kubeflow/website/pull/2635
+
+Where do you plan to create a new issue tracking future improvements? Or shall we keep the discussion here?<issue_closed>"
+usds/website,443949742,460,"{'number': 460.0, 'repo': 'website', 'user_login': 'usds'}","[{'action': 'opened', 'author': 'ButtersUSDS', 'comment_id': None, 'datetime': '2019-05-14T14:31:05Z', 'masked_author': 'username_0', 'text': 'This is the same 1-sheet that USDS gave to Congress.', 'title': 'Updating USDS Press Sheet with cost savings info', 'type': 'issue'}
+ {'action': 'created', 'author': 'dmethvin-gov', 'comment_id': 492279726.0, 'datetime': '2019-05-14 15:10:10+00:00', 'masked_author': 'username_1', 'text': ""I can't see the file (I guess because its a PDF) so please double check that it's got the info you want once it's deployed. I'm not authorized to merge unfortunately, not sure why."", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'ButtersUSDS', 'comment_id': 492302620.0, 'datetime': '2019-05-14 16:05:22+00:00', 'masked_author': 'username_0', 'text': '@DavidEHolmes any chance you can give Dave merging power?', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'jaredcunha-usds', 'comment_id': 492310741.0, 'datetime': '2019-05-14 16:27:43+00:00', 'masked_author': 'username_2', 'text': '@username_1 Thanks for getting this. I was at a dr. appointment. I have added you to the Website-Admin team, so I think you should be able to merge now.', 'title': None, 'type': 'comment'}]","<issue_start><issue_comment>Title: Updating USDS Press Sheet with cost savings info
+username_0: This is the same 1-sheet that USDS gave to Congress.
+<issue_comment>username_1: I can't see the file (I guess because its a PDF) so please double check that it's got the info you want once it's deployed. I'm not authorized to merge unfortunately, not sure why.
+<issue_comment>username_0: @DavidEHolmes any chance you can give Dave merging power?
+<issue_comment>username_2: @username_1 Thanks for getting this. I was at a dr. appointment. I have added you to the Website-Admin team, so I think you should be able to merge now."
+gdg-x/hoverboard,177046268,133,,"[{'action': 'opened', 'author': 'cliveb', 'comment_id': None, 'datetime': '2016-09-14 23:10:12+00:00', 'masked_author': 'username_0', 'text': 'Using Polymer 0.12.0 \r\n\r\nMake changes to data/hoverboard.config.json + index.html for Seattle GDG\r\n\r\nRun $ polymer build\r\n\r\nGet polymer warning messages screen shot\r\n\r\n![polymer build](https://cloud.githubusercontent.com/assets/733870/18533094/673a7e2e-7a95-11e6-9d88-9d1b84603936.png)\r\n \r\nfirebase deploy \r\n\r\nResult same as original Ukraine form git fork repo\r\n\r\nAny ideas?', 'title': 'Only initial Ukraine builds works [super urgent]', 'type': 'issue'}
+ {'action': 'created', 'author': 'cliveb', 'comment_id': 247225160.0, 'datetime': '2016-09-15 03:34:39+00:00', 'masked_author': 'username_0', 'text': 'Polymer build wiped out contents of the contents of firebase.json\r\n\r\nHow do I fix this please?', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'cliveb', 'comment_id': 247237474.0, 'datetime': '2016-09-15 05:21:33+00:00', 'masked_author': 'username_0', 'text': 'Using [sudo] install. No errors \r\nnpm 3.10.7\r\nnode 6.5.0\r\nbower 1.7.9\r\npolymer 0.12.0 \r\n\r\nReexecuted npm, node, bower, power installs after executing npm clean detailed here https://github.com/Polymer/polymer-cli/issues/220#issuecomment-222292622', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'cliveb', 'comment_id': 247238622.0, 'datetime': '2016-09-15 05:31:11+00:00', 'masked_author': 'username_0', 'text': ""Clivebs-bigMac:hoverboard seebe$ bower install\r\n/usr/local/lib/node_modules/bower/lib/node_modules/configstore/index.js:54\r\n\t\t\t\tthrow err;\r\n\t\t\t\t^\r\n\r\nError: EACCES: permission denied, open '/Users/seebe/.config/configstore/bower-github.json'\r\nYou don't have access to this file.\r\n\r\nFixed it with\r\n[https://github.com/bower/bower/issues/2262#issuecomment-212601652](url)"", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'cliveb', 'comment_id': 247241545.0, 'datetime': '2016-09-15 05:52:52+00:00', 'masked_author': 'username_0', 'text': '4 files changed between Hoverboard v. 1.0.2 and my local machine\r\n\r\n![4 changes](https://cloud.githubusercontent.com/assets/733870/18539672/f3d1a2da-7acd-11e6-8f1c-949b81644916.png)', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'ozasadnyy', 'comment_id': 247259902.0, 'datetime': '2016-09-15 07:46:11+00:00', 'masked_author': 'username_1', 'text': '@username_0 you have not valid hoverboard.config.json. Please remove a comma [here](https://github.com/GDGSeattle/hoverboard/blob/8ea9707c0aa74c9216a7fb3bd476ef5713c80f44/data/hoverboard.config.json#L209)\r\nWarning is ok during a build :)', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'cliveb', 'comment_id': 247273299.0, 'datetime': '2016-09-15 08:54:32+00:00', 'masked_author': 'username_0', 'text': '@username_1 Resolved build. Thank you.', 'title': None, 'type': 'comment'}
+ {'action': 'closed', 'author': 'cliveb', 'comment_id': None, 'datetime': '2016-09-15 08:54:37+00:00', 'masked_author': 'username_0', 'text': '', 'title': None, 'type': 'issue'}]","<issue_start><issue_comment>Title: Only initial Ukraine builds works [super urgent]
+username_0: Using Polymer 0.12.0 
+
+Make changes to data/hoverboard.config.json + index.html for Seattle GDG
+
+Run $ polymer build
+
+Get polymer warning messages screen shot
+
+![polymer build](https://cloud.githubusercontent.com/assets/733870/18533094/673a7e2e-7a95-11e6-9d88-9d1b84603936.png)
+ 
+firebase deploy 
+
+Result same as original Ukraine form git fork repo
+
+Any ideas?
+<issue_comment>username_0: Polymer build wiped out contents of the contents of firebase.json
+
+How do I fix this please?
+<issue_comment>username_0: Using [sudo] install. No errors 
+npm 3.10.7
+node 6.5.0
+bower 1.7.9
+polymer 0.12.0 
+
+Reexecuted npm, node, bower, power installs after executing npm clean detailed here https://github.com/Polymer/polymer-cli/issues/220#issuecomment-222292622
+<issue_comment>username_0: Clivebs-bigMac:hoverboard seebe$ bower install
+/usr/local/lib/node_modules/bower/lib/node_modules/configstore/index.js:54
+				throw err;
+				^
+
+Error: EACCES: permission denied, open '/Users/seebe/.config/configstore/bower-github.json'
+You don't have access to this file.
+
+Fixed it with
+[https://github.com/bower/bower/issues/2262#issuecomment-212601652](url)
+<issue_comment>username_0: 4 files changed between Hoverboard v. 1.0.2 and my local machine
+
+![4 changes](https://cloud.githubusercontent.com/assets/733870/18539672/f3d1a2da-7acd-11e6-8f1c-949b81644916.png)
+<issue_comment>username_1: @username_0 you have not valid hoverboard.config.json. Please remove a comma [here](https://github.com/GDGSeattle/hoverboard/blob/8ea9707c0aa74c9216a7fb3bd476ef5713c80f44/data/hoverboard.config.json#L209)
+Warning is ok during a build :)
+<issue_comment>username_0: @username_1 Resolved build. Thank you.<issue_closed>"

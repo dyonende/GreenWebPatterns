@@ -1,0 +1,206 @@
+gohugoio/hugo,288563807,4279,,"[{'action': 'opened', 'author': 'Siassei', 'comment_id': None, 'datetime': '2018-01-15 11:31:34+00:00', 'masked_author': 'username_0', 'text': 'Very powerfull feature is missing in hugo. I open the issue based on forum topic\r\nhttps://discourse.gohugo.io/t/add-language-selection-to-index-html-of-a-multilingual-site/9070\r\n\r\nCurrently I replace the hugo `index.html` with a own written file. The solution of the forum topic is\r\n```html\r\n<!DOCTYPE html>\r\n<html lang=""{{$.Site.Language}}"">\r\n  <head>\r\n    <title>xxxx</title>\r\n\r\n    <!-- languages - Google way: <link rel=""alternate"" hreflang=""es"" href=""http://es.example.com/"" /> -->\r\n    {{ if .Site.IsMultiLingual }}\r\n    {{ range .Site.Languages }}\r\n    {{ if ne . $.Site.Language }}\r\n    <link rel=""alternate"" hreflang=""{{.}}"" href=""{{ $.Site.BaseURL }}{{.}}/"" />\r\n    {{ end }}\r\n    {{ end }}\r\n    {{ end }}\r\n    <link rel=""alternate"" hreflang=""x-default"" href=""{{ $.Site.BaseURL }}"" />\r\n\r\n    <meta name=""robots"" content=""noindex"">\r\n    <meta http-equiv=""content-type"" content=""text/html; charset=utf-8"" />\r\n    <meta http-equiv=""refresh"" content=""0; url=https://xxx/en"" />\r\n  </head>\r\n</html>\r\n```\r\n, need additional resarch, but should work in most browsers.\r\n\r\nI had set the `defaultContentLanguageInSubdir = true` option in the config of the hugo project. So, I replace the `/index.html` with\r\n```html\r\n<!DOCTYPE html>\r\n<html>\r\n  <head>\r\n    <title>... what ever ...</title>\r\n\r\n    <meta name=""robots"" content=""noindex"">\r\n    <meta charset=""utf-8"" />\r\n    <noscript>\r\n      <meta http-equiv=""refresh"" content=""0;url=en/index.html"">\r\n      <!-- languages - Google way: <link rel=""alternate"" hreflang=""es"" href=""http://es.example.com/"" /> -->\r\n      {{ if .Site.IsMultiLingual }}\r\n      {{ range .Site.Languages }}\r\n      {{ if ne . $.Site.Language }}\r\n      <link rel=""alternate"" hreflang=""{{.}}"" href=""{{ $.Site.BaseURL }}{{.}}/"" />\r\n      {{ end }}\r\n      {{ end }}\r\n      {{ end }}\r\n      <link rel=""alternate"" hreflang=""x-default"" href=""{{ $.Site.BaseURL }}"" />\r\n    </noscript>\r\n\r\n    <script>\r\n      var getFirstBrowserLanguage = function () {\r\n      \tvar nav = window.navigator,\r\n      \tbrowserLanguagePropertyKeys = [\'language\', \'browserLanguage\', \'systemLanguage\', \'userLanguage\'],\r\n      \ti,\r\n      \tlanguage;\r\n\r\n      \t// support for HTML 5.1 ""navigator.languages""\r\n      \tif (Array.isArray(nav.languages)) {\r\n      \t\tfor (i = 0; i < nav.languages.length; i++) {\r\n      \t\t\tlanguage = nav.languages[i];\r\n      \t\t\tif (language && language.length) {\r\n      \t\t\t\treturn language;\r\n      \t\t\t}\r\n      \t\t}\r\n      \t}\r\n\r\n      \t// support for other well known properties in browsers\r\n      \tfor (i = 0; i < browserLanguagePropertyKeys.length; i++) {\r\n      \t\tlanguage = nav[browserLanguagePropertyKeys[i]];\r\n      \t\tif (language && language.length) {\r\n      \t\t\treturn language;\r\n      \t\t}\r\n      \t}\r\n      \treturn \'en\';\r\n      };\r\n\r\n      var $pref_lang = getFirstBrowserLanguage ();\r\n      window.location.replace($pref_lang.substring(0, 2) + ""/"")\r\n    </script>\r\n  </head>\r\n<body>\r\n\r\n</body>\r\n</html>\r\n```\r\n**Note:** Two possible solutions are shown. A third way should be to tell the webserver, over the .htaccess, where the languages are placed and the webserver ask the browser client, which language the client are prefer. (I\'m not 100% sure, if that is possible)\r\n\r\n**Question:** Is there a way to manipulate the `/index.html` directly in an theme? My workaround is a manuall replacement in an upload script.', 'title': 'Add language selection to index.html of a multilingual site', 'type': 'issue'}
+ {'action': 'created', 'author': 'bep', 'comment_id': 357661705.0, 'datetime': '2018-01-15 11:52:10+00:00', 'masked_author': 'username_1', 'text': 'Please use https://discourse.gohugo.io/ for questions/troubleshooting. Also see  [Hugo Documentation](http://gohugo.io/overview/introduction/).', 'title': None, 'type': 'comment'}
+ {'action': 'closed', 'author': 'bep', 'comment_id': None, 'datetime': '2018-01-15 11:52:10+00:00', 'masked_author': 'username_1', 'text': '', 'title': None, 'type': 'issue'}
+ {'action': 'created', 'author': 'nanmu42', 'comment_id': 599351421.0, 'datetime': '2020-03-16 05:25:22+00:00', 'masked_author': 'username_2', 'text': ""Met this too.\r\n\r\nYou may create an `alias.html` in your template's `layout` directory.\r\n\r\nRef: https://github.com/gohugoio/hugo/blob/70a1aa345b95bcf325f19c6e7184bcd6f885e454/docs/content/en/content-management/urls.md#customize\r\n\r\nThe rendering context for `alias.html` seems to be quite lacking, only `Permalink` is working in my case, but still it is better than nothing."", 'title': None, 'type': 'comment'}]","<issue_start><issue_comment>Title: Add language selection to index.html of a multilingual site
+username_0: Very powerfull feature is missing in hugo. I open the issue based on forum topic
+https://discourse.gohugo.io/t/add-language-selection-to-index-html-of-a-multilingual-site/9070
+
+Currently I replace the hugo `index.html` with a own written file. The solution of the forum topic is
+```html
+<!DOCTYPE html>
+<html lang=""{{$.Site.Language}}"">
+  <head>
+    <title>xxxx</title>
+
+    <!-- languages - Google way: <link rel=""alternate"" hreflang=""es"" href=""http://es.example.com/"" /> -->
+    {{ if .Site.IsMultiLingual }}
+    {{ range .Site.Languages }}
+    {{ if ne . $.Site.Language }}
+    <link rel=""alternate"" hreflang=""{{.}}"" href=""{{ $.Site.BaseURL }}{{.}}/"" />
+    {{ end }}
+    {{ end }}
+    {{ end }}
+    <link rel=""alternate"" hreflang=""x-default"" href=""{{ $.Site.BaseURL }}"" />
+
+    <meta name=""robots"" content=""noindex"">
+    <meta http-equiv=""content-type"" content=""text/html; charset=utf-8"" />
+    <meta http-equiv=""refresh"" content=""0; url=https://xxx/en"" />
+  </head>
+</html>
+```
+, need additional resarch, but should work in most browsers.
+
+I had set the `defaultContentLanguageInSubdir = true` option in the config of the hugo project. So, I replace the `/index.html` with
+```html
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>... what ever ...</title>
+
+    <meta name=""robots"" content=""noindex"">
+    <meta charset=""utf-8"" />
+    <noscript>
+      <meta http-equiv=""refresh"" content=""0;url=en/index.html"">
+      <!-- languages - Google way: <link rel=""alternate"" hreflang=""es"" href=""http://es.example.com/"" /> -->
+      {{ if .Site.IsMultiLingual }}
+      {{ range .Site.Languages }}
+      {{ if ne . $.Site.Language }}
+      <link rel=""alternate"" hreflang=""{{.}}"" href=""{{ $.Site.BaseURL }}{{.}}/"" />
+      {{ end }}
+      {{ end }}
+      {{ end }}
+      <link rel=""alternate"" hreflang=""x-default"" href=""{{ $.Site.BaseURL }}"" />
+    </noscript>
+
+    <script>
+      var getFirstBrowserLanguage = function () {
+      	var nav = window.navigator,
+      	browserLanguagePropertyKeys = ['language', 'browserLanguage', 'systemLanguage', 'userLanguage'],
+      	i,
+      	language;
+
+      	// support for HTML 5.1 ""navigator.languages""
+      	if (Array.isArray(nav.languages)) {
+      		for (i = 0; i < nav.languages.length; i++) {
+      			language = nav.languages[i];
+      			if (language && language.length) {
+      				return language;
+      			}
+      		}
+      	}
+
+      	// support for other well known properties in browsers
+      	for (i = 0; i < browserLanguagePropertyKeys.length; i++) {
+      		language = nav[browserLanguagePropertyKeys[i]];
+      		if (language && language.length) {
+      			return language;
+      		}
+      	}
+      	return 'en';
+      };
+
+      var $pref_lang = getFirstBrowserLanguage ();
+      window.location.replace($pref_lang.substring(0, 2) + ""/"")
+    </script>
+  </head>
+<body>
+
+</body>
+</html>
+```
+**Note:** Two possible solutions are shown. A third way should be to tell the webserver, over the .htaccess, where the languages are placed and the webserver ask the browser client, which language the client are prefer. (I'm not 100% sure, if that is possible)
+
+**Question:** Is there a way to manipulate the `/index.html` directly in an theme? My workaround is a manuall replacement in an upload script.
+<issue_comment>username_1: Please use https://discourse.gohugo.io/ for questions/troubleshooting. Also see  [Hugo Documentation](http://gohugo.io/overview/introduction/).<issue_closed>
+<issue_comment>username_2: Met this too.
+
+You may create an `alias.html` in your template's `layout` directory.
+
+Ref: https://github.com/gohugoio/hugo/blob/70a1aa345b95bcf325f19c6e7184bcd6f885e454/docs/content/en/content-management/urls.md#customize
+
+The rendering context for `alias.html` seems to be quite lacking, only `Permalink` is working in my case, but still it is better than nothing."
+pallets/flask-website,374674251,73,,"[{'action': 'opened', 'author': 'Jonesn11', 'comment_id': None, 'datetime': '2018-10-27T18:25:54Z', 'masked_author': 'username_0', 'text': 'On the examples page:\r\n""http://flask.pocoo.org/community/poweredby/"" \r\nmany links are dead.\r\nI think this prevents newcomers from being awe-inspired by what one can do with flask.', 'title': 'Examples page', 'type': 'issue'}
+ {'action': 'created', 'author': 'dhyanpatel', 'comment_id': 442536306.0, 'datetime': '2018-11-28 17:36:24+00:00', 'masked_author': 'username_1', 'text': 'Can I do this?', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'dhyanpatel', 'comment_id': 442567636.0, 'datetime': '2018-11-28 19:09:47+00:00', 'masked_author': 'username_1', 'text': 'Removed some more of the Dead Links\r\n#75', 'title': None, 'type': 'comment'}
+ {'action': 'closed', 'author': 'davidism', 'comment_id': None, 'datetime': '2019-07-11 15:35:25+00:00', 'masked_author': 'username_2', 'text': '', 'title': None, 'type': 'issue'}
+ {'action': 'created', 'author': 'davidism', 'comment_id': 510537347.0, 'datetime': '2019-07-11 15:35:25+00:00', 'masked_author': 'username_2', 'text': ""Merged, but also this site is no longer in use, so it's sort of moot."", 'title': None, 'type': 'comment'}]","<issue_start><issue_comment>Title: Examples page
+username_0: On the examples page:
+""http://flask.pocoo.org/community/poweredby/"" 
+many links are dead.
+I think this prevents newcomers from being awe-inspired by what one can do with flask.
+<issue_comment>username_1: Can I do this?
+<issue_comment>username_1: Removed some more of the Dead Links
+#75<issue_closed>
+<issue_comment>username_2: Merged, but also this site is no longer in use, so it's sort of moot."
+flutter/website,318396275,982,"{'number': 982.0, 'repo': 'website', 'user_login': 'flutter'}","[{'action': 'opened', 'author': 'rock3r', 'comment_id': None, 'datetime': '2018-04-27T12:45:54Z', 'masked_author': 'username_0', 'text': ""This PR is for the seventh section of the work to create the `flutter-for-ios.md` document. Writing by @niamh-power on Novoda's behalf, I am just a proxy.\r\n\r\nFollowing the same rough format as the `flutter-for-android.md` document, with iOS details instead.\r\n\r\nThe following sections have been created:\r\n\r\n* How do I add a click listener to a widget in Flutter?\r\n* How do I handle other gestures on widgets?\r\n\r\n⚠️ **This requires #981 to be merged first!** ⚠️"", 'title': 'Flutter for iOS — Gestures section', 'type': 'issue'}
+ {'action': 'created', 'author': 'rock3r', 'comment_id': 385896287.0, 'datetime': '2018-05-02 08:02:02+00:00', 'masked_author': 'username_0', 'text': 'Contents covered in #993, closing this.', 'title': None, 'type': 'comment'}]","<issue_start><issue_comment>Title: Flutter for iOS — Gestures section
+username_0: This PR is for the seventh section of the work to create the `flutter-for-ios.md` document. Writing by @niamh-power on Novoda's behalf, I am just a proxy.
+
+Following the same rough format as the `flutter-for-android.md` document, with iOS details instead.
+
+The following sections have been created:
+
+* How do I add a click listener to a widget in Flutter?
+* How do I handle other gestures on widgets?
+
+⚠️ **This requires #981 to be merged first!** ⚠️
+<issue_comment>username_0: Contents covered in #993, closing this."
+kubernetes/website,435873647,13961,,"[{'action': 'opened', 'author': 'kbhawkey', 'comment_id': None, 'datetime': '2019-04-22 20:15:27+00:00', 'masked_author': 'username_0', 'text': '**This is a Bug Report**\r\n\r\n<!-- Thanks for filing an issue! Before submitting, please fill in the following information. -->\r\n<!-- See https://kubernetes.io/docs/contribute/start/ for guidance on writing an actionable issue description. -->\r\n\r\n<!--Required Information-->\r\n**Problem:**\r\n- kubectl reference does not describe new -k flag for `apply` command.\r\n- Was the kubectl reference updated for the 1.14 release?\r\n\r\n**Proposed Solution:**\r\nUpdate reference docs in k8s/k8s or just re-generate the kubectl reference docs?\r\n\r\nSee: \r\nhttps://kubectl.docs.kubernetes.io/pages/app_management/apply.html\r\nhttps://kubernetes.io/docs/tutorials/stateful-application/mysql-wordpress-persistent-volume/#apply-and-verify\r\n\r\n**Page to Update:**\r\nhttps://kubernetes.io/docs/reference/generated/kubectl/kubectl-commands#apply\r\n<!--Optional Information (remove the comment tags around information you would like to include)-->\r\n\r\n**Kubernetes Version:**\r\n1.14\r\n<!--Additional Information:-->', 'title': 'kubectl reference does not contain -k flag', 'type': 'issue'}
+ {'action': 'created', 'author': 'kbhawkey', 'comment_id': 485785480.0, 'datetime': '2019-04-23 12:39:55+00:00', 'masked_author': 'username_0', 'text': '@username_2, can you confirm that the kubectl reference was updated for the 1.14 docs release?  Trying to track down reference changes.', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'daminisatya', 'comment_id': 486051694.0, 'datetime': '2019-04-24 03:18:42+00:00', 'masked_author': 'username_1', 'text': '/kind bug', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'kbhawkey', 'comment_id': 486203152.0, 'datetime': '2019-04-24 12:15:38+00:00', 'masked_author': 'username_0', 'text': '/assign', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'kbhawkey', 'comment_id': 486203568.0, 'datetime': '2019-04-24 12:17:06+00:00', 'masked_author': 'username_0', 'text': 'Note: I am investigating the generation and instructions to generate.', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'jimangel', 'comment_id': 486370919.0, 'datetime': '2019-04-24 18:26:19+00:00', 'masked_author': 'username_2', 'text': ""Hey @username_0, sorry I'm late to the party; a great spot to track the summary of 1.14 reference docs is in this open issue: https://github.com/kubernetes/website/issues/13396 which links to the PRs I tested and the PRs merged that @tengqm did: https://github.com/kubernetes/website/pull/13444 - I see the kubectl bits in there, I wonder if it was a timing issue too...\r\n\r\nOne thing to consider for `kubectl` in particular is where https://kubectl.docs.kubernetes.io/ and https://kubernetes.io/ intersect. Should we focus more on empowering that sub doc project, or as @tengqm said during our meeting, focus on coordinating with the upstream providers to ensure we're offering a solid service by generating these documents.\r\n\r\nIt definitely is a pain point in the current release process.\r\n\r\n/cc @MAKOSCAFEE for awareness"", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'kbhawkey', 'comment_id': 486421159.0, 'datetime': '2019-04-24 20:52:14+00:00', 'masked_author': 'username_0', 'text': ""Hi, @username_2. I'll look at the open issues for 1.14. I have not been following along.\r\nThis issue was reported as the ref did not seem to contain the latest 1.14 changes for apply. I decided to try and re-generate the doc; the gen instructions have gone astray. I documented the changes I made. Totally agree that there are known gen issues/pain points. I would support having the reference generated as part of the tool. The publishing process and the ref UI could use some change. Though, the reference still seems valuable as part of the docs set."", 'title': None, 'type': 'comment'}
+ {'action': 'closed', 'author': 'kbhawkey', 'comment_id': None, 'datetime': '2019-05-08 21:42:45+00:00', 'masked_author': 'username_0', 'text': '', 'title': None, 'type': 'issue'}]","<issue_start><issue_comment>Title: kubectl reference does not contain -k flag
+username_0: **This is a Bug Report**
+
+<!-- Thanks for filing an issue! Before submitting, please fill in the following information. -->
+<!-- See https://kubernetes.io/docs/contribute/start/ for guidance on writing an actionable issue description. -->
+
+<!--Required Information-->
+**Problem:**
+- kubectl reference does not describe new -k flag for `apply` command.
+- Was the kubectl reference updated for the 1.14 release?
+
+**Proposed Solution:**
+Update reference docs in k8s/k8s or just re-generate the kubectl reference docs?
+
+See: 
+https://kubectl.docs.kubernetes.io/pages/app_management/apply.html
+https://kubernetes.io/docs/tutorials/stateful-application/mysql-wordpress-persistent-volume/#apply-and-verify
+
+**Page to Update:**
+https://kubernetes.io/docs/reference/generated/kubectl/kubectl-commands#apply
+<!--Optional Information (remove the comment tags around information you would like to include)-->
+
+**Kubernetes Version:**
+1.14
+<!--Additional Information:-->
+<issue_comment>username_0: @username_2, can you confirm that the kubectl reference was updated for the 1.14 docs release?  Trying to track down reference changes.
+<issue_comment>username_1: /kind bug
+<issue_comment>username_0: /assign
+<issue_comment>username_0: Note: I am investigating the generation and instructions to generate.
+<issue_comment>username_2: Hey @username_0, sorry I'm late to the party; a great spot to track the summary of 1.14 reference docs is in this open issue: https://github.com/kubernetes/website/issues/13396 which links to the PRs I tested and the PRs merged that @tengqm did: https://github.com/kubernetes/website/pull/13444 - I see the kubectl bits in there, I wonder if it was a timing issue too...
+
+One thing to consider for `kubectl` in particular is where https://kubectl.docs.kubernetes.io/ and https://kubernetes.io/ intersect. Should we focus more on empowering that sub doc project, or as @tengqm said during our meeting, focus on coordinating with the upstream providers to ensure we're offering a solid service by generating these documents.
+
+It definitely is a pain point in the current release process.
+
+/cc @MAKOSCAFEE for awareness
+<issue_comment>username_0: Hi, @username_2. I'll look at the open issues for 1.14. I have not been following along.
+This issue was reported as the ref did not seem to contain the latest 1.14 changes for apply. I decided to try and re-generate the doc; the gen instructions have gone astray. I documented the changes I made. Totally agree that there are known gen issues/pain points. I would support having the reference generated as part of the tool. The publishing process and the ref UI could use some change. Though, the reference still seems valuable as part of the docs set.<issue_closed>"
+kubernetes/website,889572745,27953,,"[{'action': 'opened', 'author': 'FalkWinkler', 'comment_id': None, 'datetime': '2021-05-12 03:23:10+00:00', 'masked_author': 'username_0', 'text': 'Install containerd with powershell do not work with .\\Install-Containerd.ps1 -ContainerDVersion v1.4.1.\r\n\r\nThe download url is \'https://github.com/containerd/containerd/releases/download/vv1.4.1/containerd-v1.4.1-windows-amd64.tar.gz\'. \r\n\r\n So "".\\Install-Containerd.ps1 -ContainerDVersion 1.4.1."" will work the command.', 'title': 'Adding Windows nodes', 'type': 'issue'}
+ {'action': 'created', 'author': 'sftim', 'comment_id': 841196030.0, 'datetime': '2021-05-14 11:52:25+00:00', 'masked_author': 'username_1', 'text': 'I think this might be a bug in https://github.com/kubernetes-sigs/sig-windows-tools/releases/latest/download/Install-Containerd.ps1 rather than in the Kubernetes documentation.\r\n\r\nIf so, you could report this via https://github.com/kubernetes-sigs/sig-windows-tools/issues/ @username_0', 'title': None, 'type': 'comment'}]","<issue_start><issue_comment>Title: Adding Windows nodes
+username_0: Install containerd with powershell do not work with .\Install-Containerd.ps1 -ContainerDVersion v1.4.1.
+
+The download url is 'https://github.com/containerd/containerd/releases/download/vv1.4.1/containerd-v1.4.1-windows-amd64.tar.gz'. 
+
+ So "".\Install-Containerd.ps1 -ContainerDVersion 1.4.1."" will work the command.
+<issue_comment>username_1: I think this might be a bug in https://github.com/kubernetes-sigs/sig-windows-tools/releases/latest/download/Install-Containerd.ps1 rather than in the Kubernetes documentation.
+
+If so, you could report this via https://github.com/kubernetes-sigs/sig-windows-tools/issues/ @username_0"
+momentum-mod/website,849693664,484,"{'number': 484.0, 'repo': 'website', 'user_login': 'momentum-mod'}","[{'action': 'opened', 'author': 'strafe', 'comment_id': None, 'datetime': '2021-04-03T16:39:06Z', 'masked_author': 'username_0', 'text': ""Closes #465.\r\n\r\nI chose to emit the `Production Build` job as it is already covered by the new [`AngularBuild`](https://github.com/momentum-mod/website/blob/staging/.github/workflows/angularbuild.yml) action. A sample run of these workflows [can be seen on my fork](https://github.com/username_0/website/actions/runs/714690169).\r\n\r\n[GitHub's Ubuntu runner environments have the default MySQL root user password set to `root`](https://github.com/actions/virtual-environments/blob/main/images/linux/Ubuntu2004-README.md#mysql). If this ends up being a problem for running tests locally, a condition in the shell script is probably the best course."", 'title': 'Migrate tests to GitHub Actions', 'type': 'issue'}
+ {'action': 'created', 'author': 'strafe', 'comment_id': 812895857.0, 'datetime': '2021-04-03 17:13:51+00:00', 'masked_author': 'username_0', 'text': ""Also worth noting that I didn't include caching in this workflow, GitHub actions has [a pretty powerful caching action](https://github.com/actions/cache). But it's likely out of the scope of this particular PR and relates more to #424."", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'Gocnak', 'comment_id': 812950231.0, 'datetime': '2021-04-04 00:58:04+00:00', 'masked_author': 'username_1', 'text': ""Honestly you could add the caching to this PR if you'd like! Anything to optimize the build times haha."", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'strafe', 'comment_id': 812953657.0, 'datetime': '2021-04-04 01:27:57+00:00', 'masked_author': 'username_0', 'text': ""Assuming this set of tests pass, this should be good to go. I also ended up setting the workflows to not trigger when editing just Markdown files because that's a waste of build minutes. This can be expanded upon in the future in theory if someone wanted to gather a list of files that don't affect the build. Docs: https://docs.github.com/en/actions/reference/workflow-syntax-for-github-actions#onpushpull_requestpaths"", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'Hona', 'comment_id': 812954115.0, 'datetime': '2021-04-04 01:32:39+00:00', 'masked_author': 'username_2', 'text': ""Very awesome work! Are you in our discord? \n\nWe'd love to have you keep making PRs if that's something you'd be interested in"", 'title': None, 'type': 'comment'}]","<issue_start><issue_comment>Title: Migrate tests to GitHub Actions
+username_0: Closes #465.
+
+I chose to emit the `Production Build` job as it is already covered by the new [`AngularBuild`](https://github.com/momentum-mod/website/blob/staging/.github/workflows/angularbuild.yml) action. A sample run of these workflows [can be seen on my fork](https://github.com/username_0/website/actions/runs/714690169).
+
+[GitHub's Ubuntu runner environments have the default MySQL root user password set to `root`](https://github.com/actions/virtual-environments/blob/main/images/linux/Ubuntu2004-README.md#mysql). If this ends up being a problem for running tests locally, a condition in the shell script is probably the best course.
+<issue_comment>username_0: Also worth noting that I didn't include caching in this workflow, GitHub actions has [a pretty powerful caching action](https://github.com/actions/cache). But it's likely out of the scope of this particular PR and relates more to #424.
+<issue_comment>username_1: Honestly you could add the caching to this PR if you'd like! Anything to optimize the build times haha.
+<issue_comment>username_0: Assuming this set of tests pass, this should be good to go. I also ended up setting the workflows to not trigger when editing just Markdown files because that's a waste of build minutes. This can be expanded upon in the future in theory if someone wanted to gather a list of files that don't affect the build. Docs: https://docs.github.com/en/actions/reference/workflow-syntax-for-github-actions#onpushpull_requestpaths
+<issue_comment>username_2: Very awesome work! Are you in our discord? 
+
+We'd love to have you keep making PRs if that's something you'd be interested in"
+elementary/website,252960951,1797,"{'number': 1797.0, 'repo': 'website', 'user_login': 'elementary'}","[{'action': 'opened', 'author': 'danrabbit', 'comment_id': None, 'datetime': '2017-08-25T16:55:31Z', 'masked_author': 'username_0', 'text': ""Seems like it would be more straightforward to use Gtk.App from the very beginning instead of changing things halfway through\r\n\r\nThis also moves the first compile to right after creating the application. The point of this is moving that “yatta” moment sooner and reducing the chances of messing up early on. This way the reader can test their changes in smaller increments \r\n\r\nI wrote this in the airport lobby, so please test it. I'm sure it has issues."", 'title': 'Developer docs: Use Gtk.Application throughout', 'type': 'issue'}
+ {'action': 'created', 'author': 'btkostner', 'comment_id': 324996547.0, 'datetime': '2017-08-25 18:06:54+00:00', 'masked_author': 'username_1', 'text': 'I summon the power of @elementary/desktop-developers', 'title': None, 'type': 'comment'}]","<issue_start><issue_comment>Title: Developer docs: Use Gtk.Application throughout
+username_0: Seems like it would be more straightforward to use Gtk.App from the very beginning instead of changing things halfway through
+
+This also moves the first compile to right after creating the application. The point of this is moving that “yatta” moment sooner and reducing the chances of messing up early on. This way the reader can test their changes in smaller increments 
+
+I wrote this in the airport lobby, so please test it. I'm sure it has issues.
+<issue_comment>username_1: I summon the power of @elementary/desktop-developers"

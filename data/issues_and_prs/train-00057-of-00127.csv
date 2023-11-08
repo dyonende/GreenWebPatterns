@@ -1,0 +1,239 @@
+newrelic/docs-website,820377169,1096,,"[{'action': 'opened', 'author': 'austin-schaefer', 'comment_id': None, 'datetime': '2021-03-02 20:45:13+00:00', 'masked_author': 'username_0', 'text': ""### Description\r\n\r\nTwo (possibly three?) issues with the *Create issue* button on each page:\r\n\r\n* It doesn't apply the `feedback` and `content` labels, which we need to ensure writers are tracking against the right issues.\r\n* It seems to bring in environment info somewhat inconsistently (might be due to user ad-blockers or similar though)\r\n* It's got a duplicate header\r\n![image](https://user-images.githubusercontent.com/55203603/109712519-facadc00-7b54-11eb-9fee-97254da46e5a.png)\r\n\r\n### Steps to reproduce\r\n\r\n1. Go to any doc\r\n2. Click on *Create issue*\r\n\r\n### Expected behavior\r\n\r\n* Apply a `feedback` and `content` label to issues created from docs site.\r\n* Don't duplicate header\r\n* Include environment info where possible"", 'title': 'Wrong labels, duplicate header on ""Create issue"" button', 'type': 'issue'}
+ {'action': 'created', 'author': 'austin-schaefer', 'comment_id': 789203463.0, 'datetime': '2021-03-02 20:45:22+00:00', 'masked_author': 'username_0', 'text': 'FYI @username_1', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'jpvajda', 'comment_id': 789205126.0, 'datetime': '2021-03-02 20:48:17+00:00', 'masked_author': 'username_1', 'text': ""I'll look into this one, as I think we need to change the theme component here: \r\n\r\nhttps://github.com/newrelic/gatsby-theme-newrelic/blob/e818cc0f9a767d79e0054e81c1b[…]kages/gatsby-theme-newrelic/src/components/CreateIssueButton.js"", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'jpvajda', 'comment_id': 789319295.0, 'datetime': '2021-03-03 00:17:36+00:00', 'masked_author': 'username_1', 'text': ""@username_0 so at this stage of filing an issue we don't know if the user is actually reporting a content bug or a code bug, so can we just be more generic and add a feedback label to these issues triggered from click of this button?"", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'jpvajda', 'comment_id': 789341354.0, 'datetime': '2021-03-03 00:59:40+00:00', 'masked_author': 'username_1', 'text': '@username_2 it seems the developer site isn\'t using the global theme component for the createIssuebutton? Is there a reason for that?\r\n\r\ndev site is on ""@newrelic/gatsby-theme-newrelic"": ""^1.25.0"", and docs site is on ""@newrelic/gatsby-theme-newrelic"": ""^1.32.3"" can i bump the theme on the dev site? or do we do this for a reason? \r\n\r\nI\'d like to fix this problem reported by Austin and have both sites use the newest `createIssuebutton` component version', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'austin-schaefer', 'comment_id': 789872731.0, 'datetime': '2021-03-03 16:52:02+00:00', 'masked_author': 'username_0', 'text': ""@username_1 : I'm fine just starting with a `feedback` label. If we find that 90% of the feedback or something is for content, we can always add that as a second pre-filled label in future."", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'jerelmiller', 'comment_id': 789875852.0, 'datetime': '2021-03-03 16:56:23+00:00', 'masked_author': 'username_2', 'text': ""Mostly just that we were focused on the docs launch, so we didn't focus energy on the developer site. We should get this upgraded as well."", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'jerelmiller', 'comment_id': 789929571.0, 'datetime': '2021-03-03 17:46:51+00:00', 'masked_author': 'username_2', 'text': '@username_0 just to confirm, we want both the feedback buttons AND the create issue button to add a `feedback` label when opening issues correct?\r\n\r\nOnce updated, the labels would look like this. Can you confirm this is correct?\r\n\r\n**Feedback ""yes""**\r\n- `content`\r\n- `feedback`\r\n- `feedback-positive`\r\n\r\n**Feedback ""no""**\r\n- `content`\r\n- `feedback`\r\n- `feedback-negative`\r\n\r\n**Create issue**\r\n- `content`\r\n- `feedback`\r\n\r\nMy personal take on this is that with the updated labels, it really muddies the difference between the create issue and feedback buttons since this is now all feedback (in terms of labels). We had initially designed the create issue button to be more of a bug report button so that people can tell us something that looked wrong or off, where the feedback buttons were really meant for that: feedback on what was good/bad for the page they were viewing.\r\n\r\nI\'m totally happy to make this change, but just wanted to call out that now we\'ve got 3 buttons that serve more or less the same purpose after this. Is this correct?', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'austin-schaefer', 'comment_id': 789946349.0, 'datetime': '2021-03-03 18:10:55+00:00', 'masked_author': 'username_0', 'text': ""@username_1 Yep, I think that's all correct. I agree it muddies the waters, but I'm already seeing users not really process those distinctions. Might mean we want to reconsider this down the line, but I think for now I'm fine just updating labels and seeing how things sort out over the next month or so."", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'jpvajda', 'comment_id': 789966326.0, 'datetime': '2021-03-03 18:40:35+00:00', 'masked_author': 'username_1', 'text': ""Create Issue should not be labeled content and feedback it's not just about content issues or gathering feedback\r\n\r\nThe Create issue should be:\r\n\r\n- `bug` \r\n- `content`\r\n- `eng`\r\n\r\nAs it's purpose is to report an issue with the site, after triage the label can be corrected if it's just a content problem, but this isn't site feedback, it's bug triaging."", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'austin-schaefer', 'comment_id': 789989217.0, 'datetime': '2021-03-03 19:16:37+00:00', 'masked_author': 'username_0', 'text': ""@username_1 : I think content issues are going to dramatically outnumber site issues, particularly for issues that start from the docs sidebar. I'm fine, though, if we just want to go with a `feedback` label. I do need that label, though, because this is how I'm going to monitor and report on issues."", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'austin-schaefer', 'comment_id': 789989805.0, 'datetime': '2021-03-03 19:17:25+00:00', 'masked_author': 'username_0', 'text': 'We have `feedback-positive` and `feedback-negative` to help differentiate issues started from the yes/no buttons.', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'jpvajda', 'comment_id': 790133547.0, 'datetime': '2021-03-03 23:00:01+00:00', 'masked_author': 'username_1', 'text': 'how about: \r\n\r\nThe Create issue has one label then, based on `type`\r\n\r\n`feedback-issue`', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'austin-schaefer', 'comment_id': 790140363.0, 'datetime': '2021-03-03 23:12:33+00:00', 'masked_author': 'username_0', 'text': 'That works. Can we do both `feedback` and `feedback-issue`, just so I can see allll the feedback in one place?', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'jpvajda', 'comment_id': 790245633.0, 'datetime': '2021-03-04 02:48:32+00:00', 'masked_author': 'username_1', 'text': '@username_0 oh yeah, that works!', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'jerelmiller', 'comment_id': 791009085.0, 'datetime': '2021-03-04 22:57:29+00:00', 'masked_author': 'username_2', 'text': 'FYI, the duplicate headers have been fixed (https://github.com/newrelic/gatsby-theme-newrelic/pull/301). Once we have the updated labels, we can close this issue.', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'jpvajda', 'comment_id': 791039921.0, 'datetime': '2021-03-04 23:58:41+00:00', 'masked_author': 'username_1', 'text': '@username_2 `and my ax` currently working on that now. 😄', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'jpvajda', 'comment_id': 791040610.0, 'datetime': '2021-03-05 00:00:35+00:00', 'masked_author': 'username_1', 'text': 'As a note:  I was able to get system data testing:\r\n\r\n```\r\n* https://developer.newrelic.com/build-apps/set-up-dev-env\r\n* **OS**: Mac OS 10.15\r\n* **Browser**: Firefox 86.0\r\n* **Device**: Unknown\r\n```', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'jpvajda', 'comment_id': 791042144.0, 'datetime': '2021-03-05 00:04:20+00:00', 'masked_author': 'username_1', 'text': 'https://github.com/newrelic/gatsby-theme-newrelic/pull/311/', 'title': None, 'type': 'comment'}
+ {'action': 'closed', 'author': 'jpvajda', 'comment_id': None, 'datetime': '2021-03-06 00:44:37+00:00', 'masked_author': 'username_1', 'text': '', 'title': None, 'type': 'issue'}]","<issue_start><issue_comment>Title: Wrong labels, duplicate header on ""Create issue"" button
+username_0: ### Description
+
+Two (possibly three?) issues with the *Create issue* button on each page:
+
+* It doesn't apply the `feedback` and `content` labels, which we need to ensure writers are tracking against the right issues.
+* It seems to bring in environment info somewhat inconsistently (might be due to user ad-blockers or similar though)
+* It's got a duplicate header
+![image](https://user-images.githubusercontent.com/55203603/109712519-facadc00-7b54-11eb-9fee-97254da46e5a.png)
+
+### Steps to reproduce
+
+1. Go to any doc
+2. Click on *Create issue*
+
+### Expected behavior
+
+* Apply a `feedback` and `content` label to issues created from docs site.
+* Don't duplicate header
+* Include environment info where possible
+<issue_comment>username_0: FYI @username_1
+<issue_comment>username_1: I'll look into this one, as I think we need to change the theme component here: 
+
+https://github.com/newrelic/gatsby-theme-newrelic/blob/e818cc0f9a767d79e0054e81c1b[…]kages/gatsby-theme-newrelic/src/components/CreateIssueButton.js
+<issue_comment>username_1: @username_0 so at this stage of filing an issue we don't know if the user is actually reporting a content bug or a code bug, so can we just be more generic and add a feedback label to these issues triggered from click of this button?
+<issue_comment>username_1: @username_2 it seems the developer site isn't using the global theme component for the createIssuebutton? Is there a reason for that?
+
+dev site is on ""@newrelic/gatsby-theme-newrelic"": ""^1.25.0"", and docs site is on ""@newrelic/gatsby-theme-newrelic"": ""^1.32.3"" can i bump the theme on the dev site? or do we do this for a reason? 
+
+I'd like to fix this problem reported by Austin and have both sites use the newest `createIssuebutton` component version
+<issue_comment>username_0: @username_1 : I'm fine just starting with a `feedback` label. If we find that 90% of the feedback or something is for content, we can always add that as a second pre-filled label in future.
+<issue_comment>username_2: Mostly just that we were focused on the docs launch, so we didn't focus energy on the developer site. We should get this upgraded as well.
+<issue_comment>username_2: @username_0 just to confirm, we want both the feedback buttons AND the create issue button to add a `feedback` label when opening issues correct?
+
+Once updated, the labels would look like this. Can you confirm this is correct?
+
+**Feedback ""yes""**
+- `content`
+- `feedback`
+- `feedback-positive`
+
+**Feedback ""no""**
+- `content`
+- `feedback`
+- `feedback-negative`
+
+**Create issue**
+- `content`
+- `feedback`
+
+My personal take on this is that with the updated labels, it really muddies the difference between the create issue and feedback buttons since this is now all feedback (in terms of labels). We had initially designed the create issue button to be more of a bug report button so that people can tell us something that looked wrong or off, where the feedback buttons were really meant for that: feedback on what was good/bad for the page they were viewing.
+
+I'm totally happy to make this change, but just wanted to call out that now we've got 3 buttons that serve more or less the same purpose after this. Is this correct?
+<issue_comment>username_0: @username_1 Yep, I think that's all correct. I agree it muddies the waters, but I'm already seeing users not really process those distinctions. Might mean we want to reconsider this down the line, but I think for now I'm fine just updating labels and seeing how things sort out over the next month or so.
+<issue_comment>username_1: Create Issue should not be labeled content and feedback it's not just about content issues or gathering feedback
+
+The Create issue should be:
+
+- `bug` 
+- `content`
+- `eng`
+
+As it's purpose is to report an issue with the site, after triage the label can be corrected if it's just a content problem, but this isn't site feedback, it's bug triaging.
+<issue_comment>username_0: @username_1 : I think content issues are going to dramatically outnumber site issues, particularly for issues that start from the docs sidebar. I'm fine, though, if we just want to go with a `feedback` label. I do need that label, though, because this is how I'm going to monitor and report on issues.
+<issue_comment>username_0: We have `feedback-positive` and `feedback-negative` to help differentiate issues started from the yes/no buttons.
+<issue_comment>username_1: how about: 
+
+The Create issue has one label then, based on `type`
+
+`feedback-issue`
+<issue_comment>username_0: That works. Can we do both `feedback` and `feedback-issue`, just so I can see allll the feedback in one place?
+<issue_comment>username_1: @username_0 oh yeah, that works!
+<issue_comment>username_2: FYI, the duplicate headers have been fixed (https://github.com/newrelic/gatsby-theme-newrelic/pull/301). Once we have the updated labels, we can close this issue.
+<issue_comment>username_1: @username_2 `and my ax` currently working on that now. 😄
+<issue_comment>username_1: As a note:  I was able to get system data testing:
+
+```
+* https://developer.newrelic.com/build-apps/set-up-dev-env
+* **OS**: Mac OS 10.15
+* **Browser**: Firefox 86.0
+* **Device**: Unknown
+```
+<issue_comment>username_1: https://github.com/newrelic/gatsby-theme-newrelic/pull/311/<issue_closed>"
+tdwg/website,385757291,115,,"[{'action': 'opened', 'author': 'baskaufs', 'comment_id': None, 'datetime': '2018-11-29 14:17:52+00:00', 'masked_author': 'username_0', 'text': 'Expected to be able to download the charter templates.', 'title': 'charter template links are broken', 'type': 'issue'}
+ {'action': 'created', 'author': 'baskaufs', 'comment_id': 442850283.0, 'datetime': '2018-11-29 14:21:20+00:00', 'masked_author': 'username_0', 'text': 'The templates seem to be here:\r\nhttps://rs.tdwg.org/documents/templates/\r\nalthough my browser was complaining about security issues', 'title': None, 'type': 'comment'}
+ {'action': 'closed', 'author': 'stanblum', 'comment_id': None, 'datetime': '2018-12-01 23:08:15+00:00', 'masked_author': 'username_1', 'text': '', 'title': None, 'type': 'issue'}
+ {'action': 'created', 'author': 'stanblum', 'comment_id': 443466205.0, 'datetime': '2018-12-01 23:08:15+00:00', 'masked_author': 'username_1', 'text': ""I don't know what lead you search for them on the rs.tdwg.org (which seems to be http instead of https), but thanks for the reminder.  The better URLs for those are https://static.tdwg.org/documents/...  Those corrections are now updated on page in the first comment.  Actually, these docs need to be reviewed, updated as necessary, converted to markdown and re-posted.  I'm going to remove the links to the powerpoint templates for 5 min presentations at business meeting."", 'title': None, 'type': 'comment'}]","<issue_start><issue_comment>Title: charter template links are broken
+username_0: Expected to be able to download the charter templates.
+<issue_comment>username_0: The templates seem to be here:
+https://rs.tdwg.org/documents/templates/
+although my browser was complaining about security issues<issue_closed>
+<issue_comment>username_1: I don't know what lead you search for them on the rs.tdwg.org (which seems to be http instead of https), but thanks for the reminder.  The better URLs for those are https://static.tdwg.org/documents/...  Those corrections are now updated on page in the first comment.  Actually, these docs need to be reviewed, updated as necessary, converted to markdown and re-posted.  I'm going to remove the links to the powerpoint templates for 5 min presentations at business meeting."
+AdoptOpenJDK/openjdk-website,439791580,481,,"[{'action': 'opened', 'author': 'userquin', 'comment_id': None, 'datetime': '2019-05-02 21:14:25+00:00', 'masked_author': 'username_0', 'text': ""This is not a issue, only spanish translation for instalation page:\r\n\r\nWindows:\r\n**ENGLISH**\r\n`Alternative, you can download SHA-256 checksum file and verify downloaded binary using this command (the command must be run using Command Prompt in the same directory you download the binary file and requires PowerShell 3.0+):`\r\n**SPANISH**\r\n`Alternativamente, puede descargar el archivo de suma de comprobación SHA-256 y verificar el binario descargado con este comando (el comando debe ejecutarse utilizando el símbolo del sistema en el mismo directorio en el que ha descargado el archivo binario y requiere PowerShell 3.0+):`\r\n\r\nLinux/Mac:\r\n**ENGLISH**\r\n`Alternative, you can download SHA-256 checksum file and verify downloaded binary using this command (the command must be run on a terminal in the same directory you download the binary file):`\r\n**SPANISH**\r\n`Alternativamente, puede descargar el archivo de suma de comprobación SHA-256 y verificar el binario descargado usando este comando (el comando debe ejecutarse en una terminal en el mismo directorio en el que ha descargado el archivo binario):`\r\n\r\nCommand ouput:\r\n**ENGLISH**\r\n`and confirm the command output succeeds.`\r\n**SPANISH**\r\n`y confirme que la salida del comando tiene éxito.`\r\n\r\nMigration guide:\r\n**ENGLISH**\r\n`If you're migrating to AdoptOpenJDK, you can learn about the differences between Oracle JDK and OpenJDK in our Migration Guide and any steps that you might need to take. For example, how to use IcedTea-Web as an alternative to Webstart. `\r\n**SPANISH**\r\n`Si usted está migrando a AdoptOpenJDK, puede conocer las diferencias entre Oracle JDK y OpenJDK en nuestra Guía de Migración y los pasos que debe seguir. Por ejemplo, cómo utilizar IcedTea-Web como alternativa a Webstart.`\r\n\r\nThe link for `Migration Guide` can be set on `Guía de Migración` text."", 'title': 'Spanish translation for instalation page (PR 422)', 'type': 'issue'}
+ {'action': 'created', 'author': 'userquin', 'comment_id': 488838883.0, 'datetime': '2019-05-02 21:28:48+00:00', 'masked_author': 'username_0', 'text': '@username_1 translations for spanish, also for migration guide', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'userquin', 'comment_id': 489416703.0, 'datetime': '2019-05-05 11:17:48+00:00', 'masked_author': 'username_0', 'text': '@username_1 we also need to translate windows command outputs (linux and mac checksum commands outputs are included on the commands itself), I dont know if those can be translated (we should only change texts at the end of the command):\r\n\r\n**ENGLISH**\r\n` ( echo ""FILENAME: The SHA-256 fingerprint matches"" ) || ( echo ""FILENAME: The SHA-256 fingerprint does NOT match"" )`\r\n**SPANISH**\r\n` ( echo ""FILENAME: La huella SHA-256 coincide"" ) || ( echo ""FILENAME: La huella SHA-256 NO coincide"" )`\r\n\r\nAlso for spanish translation, uppercase first letter for first instalation text heading on instalation page:\r\n\r\n![instalation_head](https://user-images.githubusercontent.com/6311119/57193052-95e1d300-6f37-11e9-82fb-a15e1c7806c3.png)\r\n\r\nThe text for all plaforms and jre/jdk should start with `Instalación en`.', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'karianna', 'comment_id': 1039030448.0, 'datetime': '2022-02-14 12:28:50+00:00', 'masked_author': 'username_1', 'text': 'We are no longer enhancing this legacy website.  Please see the adoptium.net website.', 'title': None, 'type': 'comment'}
+ {'action': 'closed', 'author': 'karianna', 'comment_id': None, 'datetime': '2022-02-14 12:28:51+00:00', 'masked_author': 'username_1', 'text': '', 'title': None, 'type': 'issue'}]","<issue_start><issue_comment>Title: Spanish translation for instalation page (PR 422)
+username_0: This is not a issue, only spanish translation for instalation page:
+
+Windows:
+**ENGLISH**
+`Alternative, you can download SHA-256 checksum file and verify downloaded binary using this command (the command must be run using Command Prompt in the same directory you download the binary file and requires PowerShell 3.0+):`
+**SPANISH**
+`Alternativamente, puede descargar el archivo de suma de comprobación SHA-256 y verificar el binario descargado con este comando (el comando debe ejecutarse utilizando el símbolo del sistema en el mismo directorio en el que ha descargado el archivo binario y requiere PowerShell 3.0+):`
+
+Linux/Mac:
+**ENGLISH**
+`Alternative, you can download SHA-256 checksum file and verify downloaded binary using this command (the command must be run on a terminal in the same directory you download the binary file):`
+**SPANISH**
+`Alternativamente, puede descargar el archivo de suma de comprobación SHA-256 y verificar el binario descargado usando este comando (el comando debe ejecutarse en una terminal en el mismo directorio en el que ha descargado el archivo binario):`
+
+Command ouput:
+**ENGLISH**
+`and confirm the command output succeeds.`
+**SPANISH**
+`y confirme que la salida del comando tiene éxito.`
+
+Migration guide:
+**ENGLISH**
+`If you're migrating to AdoptOpenJDK, you can learn about the differences between Oracle JDK and OpenJDK in our Migration Guide and any steps that you might need to take. For example, how to use IcedTea-Web as an alternative to Webstart. `
+**SPANISH**
+`Si usted está migrando a AdoptOpenJDK, puede conocer las diferencias entre Oracle JDK y OpenJDK en nuestra Guía de Migración y los pasos que debe seguir. Por ejemplo, cómo utilizar IcedTea-Web como alternativa a Webstart.`
+
+The link for `Migration Guide` can be set on `Guía de Migración` text.
+<issue_comment>username_0: @username_1 translations for spanish, also for migration guide
+<issue_comment>username_0: @username_1 we also need to translate windows command outputs (linux and mac checksum commands outputs are included on the commands itself), I dont know if those can be translated (we should only change texts at the end of the command):
+
+**ENGLISH**
+` ( echo ""FILENAME: The SHA-256 fingerprint matches"" ) || ( echo ""FILENAME: The SHA-256 fingerprint does NOT match"" )`
+**SPANISH**
+` ( echo ""FILENAME: La huella SHA-256 coincide"" ) || ( echo ""FILENAME: La huella SHA-256 NO coincide"" )`
+
+Also for spanish translation, uppercase first letter for first instalation text heading on instalation page:
+
+![instalation_head](https://user-images.githubusercontent.com/6311119/57193052-95e1d300-6f37-11e9-82fb-a15e1c7806c3.png)
+
+The text for all plaforms and jre/jdk should start with `Instalación en`.
+<issue_comment>username_1: We are no longer enhancing this legacy website.  Please see the adoptium.net website.<issue_closed>"
+preactjs/preact-www,527676183,485,,"[{'action': 'opened', 'author': 'leafi', 'comment_id': None, 'datetime': '2019-11-24 10:12:09+00:00', 'masked_author': 'username_0', 'text': ""Hey,\r\n\r\nI think I probably last visited preactjs.com several months ago. Certainly before Preact X documentation was present.\r\n\r\nIt seems I had a service worker installed that happily presented me the old site repeatedly, until I manually cleared site data stored in my browser and the new website finally appeared. Very nice it is, too!\r\n\r\nA screenshot of the old site, presented despite its age:\r\n![Screenshot from 2019-11-24 09-57-35](https://user-images.githubusercontent.com/2166555/69493080-2ebf4800-0ea2-11ea-920b-f2012fc1485c.png)\r\n\r\nPost-cookie clear, cache clear, and SW unregister (Chrome 'Clear site data' button) - and after I loaded the new site in a new tab - here's the old tab, on the Service Worker page in Chrome DevTools:\r\n\r\n![Screenshot from 2019-11-24 10-01-52](https://user-images.githubusercontent.com/2166555/69493106-7cd44b80-0ea2-11ea-816b-9acab756a87d.png)\r\n\r\nNote the 'clients' list including both the old (versionless) getting started guide and the new v10 what's new page.\r\n\r\nWhen is the old service worker invalidated? I spent a good 25 mins futzing around in the browser, trying to understand why the live site had nothing about v10 compared to this repository. I was persistently presented the old site."", 'title': 'Only old site shows until browser data cleared', 'type': 'issue'}
+ {'action': 'created', 'author': 'developit', 'comment_id': 558281197.0, 'datetime': '2019-11-25 18:27:55+00:00', 'masked_author': 'username_1', 'text': 'This is super painful, and I\'m sorry. Prateek and I had been throwing ideas back and forth for a while on how to upgrade, but never came up with anything that could work. The problem stems from us having no way to update the cached ServiceWorker code running in your browser - it\'s stuck at its current version until the end of time.\r\n\r\nHowever! I looked into things again today and miraculously stumbled onto a solution. It\'s implemented in #489 - the new ServiceWorker has the same URL as the old one, and I\'ve added a sort of ""power-on self test"" bit that detects the broken situation you ran into and forces the new version to install.\r\n\r\nWithout doing anything, it should show the old website for a split second, then switch to the new one (without breaking the URL!).', 'title': None, 'type': 'comment'}
+ {'action': 'closed', 'author': 'developit', 'comment_id': None, 'datetime': '2019-11-26 14:59:33+00:00', 'masked_author': 'username_1', 'text': '', 'title': None, 'type': 'issue'}]","<issue_start><issue_comment>Title: Only old site shows until browser data cleared
+username_0: Hey,
+
+I think I probably last visited preactjs.com several months ago. Certainly before Preact X documentation was present.
+
+It seems I had a service worker installed that happily presented me the old site repeatedly, until I manually cleared site data stored in my browser and the new website finally appeared. Very nice it is, too!
+
+A screenshot of the old site, presented despite its age:
+![Screenshot from 2019-11-24 09-57-35](https://user-images.githubusercontent.com/2166555/69493080-2ebf4800-0ea2-11ea-920b-f2012fc1485c.png)
+
+Post-cookie clear, cache clear, and SW unregister (Chrome 'Clear site data' button) - and after I loaded the new site in a new tab - here's the old tab, on the Service Worker page in Chrome DevTools:
+
+![Screenshot from 2019-11-24 10-01-52](https://user-images.githubusercontent.com/2166555/69493106-7cd44b80-0ea2-11ea-816b-9acab756a87d.png)
+
+Note the 'clients' list including both the old (versionless) getting started guide and the new v10 what's new page.
+
+When is the old service worker invalidated? I spent a good 25 mins futzing around in the browser, trying to understand why the live site had nothing about v10 compared to this repository. I was persistently presented the old site.
+<issue_comment>username_1: This is super painful, and I'm sorry. Prateek and I had been throwing ideas back and forth for a while on how to upgrade, but never came up with anything that could work. The problem stems from us having no way to update the cached ServiceWorker code running in your browser - it's stuck at its current version until the end of time.
+
+However! I looked into things again today and miraculously stumbled onto a solution. It's implemented in #489 - the new ServiceWorker has the same URL as the old one, and I've added a sort of ""power-on self test"" bit that detects the broken situation you ran into and forces the new version to install.
+
+Without doing anything, it should show the old website for a split second, then switch to the new one (without breaking the URL!).<issue_closed>"
+facebook/react-native-website,618365156,1933,"{'number': 1933.0, 'repo': 'react-native-website', 'user_login': 'facebook'}","[{'action': 'opened', 'author': 'kikisaints', 'comment_id': None, 'datetime': '2020-05-14T16:23:53Z', 'masked_author': 'username_0', 'text': 'Reopening this due to accidental closure on the previous pr of #1862', 'title': ""addition of the pressable API (con't)"", 'type': 'issue'}
+ {'action': 'created', 'author': 'rachelnabors', 'comment_id': 628831296.0, 'datetime': '2020-05-14 19:06:02+00:00', 'masked_author': 'username_1', 'text': ""TODO: We're going to need to document the Event and React.node types with these docs."", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'TheSavior', 'comment_id': 628835333.0, 'datetime': '2020-05-14 19:14:02+00:00', 'masked_author': 'username_2', 'text': ""| Type       | Required |\r\n| ---------- | -------- |\r\n| React.Node | No       |\r\n\r\nThe type of React.Node in the table isn't quite right since it can also take a function. Perhaps it should be something like this for both `children` and `style`?\r\n\r\n`React.Node | (PressState) => React.Node`\r\n\r\n\r\n----------\r\nAlso, since we can't embed a Snack for the example since Snack won't have this version, could it have an animated gif instead?"", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'TheSavior', 'comment_id': 628872909.0, 'datetime': '2020-05-14 20:35:18+00:00', 'masked_author': 'username_2', 'text': ""Also, I think the image across the top that shows the order of events might not be quite right. press and longPress will never both fire for the same event. onPress fires after longPress, but before onPress. I feel like articulating these complexities and ordering might be out of scope for the documentation and make it more complicated than not including it. What do you think?\r\n\r\nAlso I highly recommend checking out the examples in RNTester to validate the content here. See this recording of the press events example that showed me that the image isn't quite right.\r\n\r\n![android_Phone_Screen_Recording_2020-05-14_at_12 18 40](https://user-images.githubusercontent.com/249164/81982904-5d171800-95e7-11ea-9b92-d2138db85306.gif)"", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'rachelnabors', 'comment_id': 629225450.0, 'datetime': '2020-05-15 13:07:07+00:00', 'masked_author': 'username_1', 'text': ""Thanks for all your feedback, @Eli, and for clarifying how the interactions work. I actually had trouble running RNTester until last night, thus had to work with source and tests to make this illustration. I do feel the illustration helps explain the sequence of events. Changing the diagram to reflect that is not impossible :)\r\n\r\nI agree, the 130ms can go as people might set timers by it. But the 500ms should probably stay as it's the default.\r\n\r\nAs for `RectOrSize`, perhaps it should live on its own Object Type page as well, given that many learners are unfamiliar with both flow notation and TS notation."", 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'rachelnabors', 'comment_id': 629261733.0, 'datetime': '2020-05-15 14:19:05+00:00', 'masked_author': 'username_1', 'text': '@username_2 Almost forgot! Re Android-at-the top: all props are alphabetized now. It would be weird to put iOS and Android out of order. Perhaps we could shift them to a ""Platform Props"" section further down the page. Thoughts, @username_3?', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'Simek', 'comment_id': 629454665.0, 'datetime': '2020-05-15 20:00:52+00:00', 'masked_author': 'username_3', 'text': 'I just have pushed the initial version of the `PressEvent`. All the descriptions are based on the things I was able to deduce from the code and playing with live events. Probably not all of the them will be 100% accurate. Keys with missing description: `changedTouches`, `target` and `touches`. Hope someone with better knowledge about events and event system can correct me and fill the gaps in.\r\n\r\nAlso from the test I have made it looks for me that `force` should be marked as an option field/key in the `CoreEventTypes` definition: https://github.com/facebook/react-native/blob/master/Libraries/Types/CoreEventTypes.js#L91', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'rachelnabors', 'comment_id': 630312866.0, 'datetime': '2020-05-18 16:59:22+00:00', 'masked_author': 'username_1', 'text': ""![shera_feels-powerful](https://user-images.githubusercontent.com/236306/82239631-fbc9ae80-9930-11ea-9422-8162a24eae75.gif)\r\n\r\nAnd that's a wrap, folks! Thanks @username_3 for working on the label, attribute and design updates! Thanks to @username_0 for writing the doc! And thanks to @username_2 for providing technical direction and feedback! (And a special thanks to @yungsters for helping me figure out the sequence of events to make that illustration 100% accurate!)\r\n\r\nGreat work, everyone! This sets a new standard for how we document components and APIs :)"", 'title': None, 'type': 'comment'}]","<issue_start><issue_comment>Title: addition of the pressable API (con't)
+username_0: Reopening this due to accidental closure on the previous pr of #1862
+<issue_comment>username_1: TODO: We're going to need to document the Event and React.node types with these docs.
+<issue_comment>username_2: | Type       | Required |
+| ---------- | -------- |
+| React.Node | No       |
+
+The type of React.Node in the table isn't quite right since it can also take a function. Perhaps it should be something like this for both `children` and `style`?
+
+`React.Node | (PressState) => React.Node`
+
+
+----------
+Also, since we can't embed a Snack for the example since Snack won't have this version, could it have an animated gif instead?
+<issue_comment>username_2: Also, I think the image across the top that shows the order of events might not be quite right. press and longPress will never both fire for the same event. onPress fires after longPress, but before onPress. I feel like articulating these complexities and ordering might be out of scope for the documentation and make it more complicated than not including it. What do you think?
+
+Also I highly recommend checking out the examples in RNTester to validate the content here. See this recording of the press events example that showed me that the image isn't quite right.
+
+![android_Phone_Screen_Recording_2020-05-14_at_12 18 40](https://user-images.githubusercontent.com/249164/81982904-5d171800-95e7-11ea-9b92-d2138db85306.gif)
+<issue_comment>username_1: Thanks for all your feedback, @Eli, and for clarifying how the interactions work. I actually had trouble running RNTester until last night, thus had to work with source and tests to make this illustration. I do feel the illustration helps explain the sequence of events. Changing the diagram to reflect that is not impossible :)
+
+I agree, the 130ms can go as people might set timers by it. But the 500ms should probably stay as it's the default.
+
+As for `RectOrSize`, perhaps it should live on its own Object Type page as well, given that many learners are unfamiliar with both flow notation and TS notation.
+<issue_comment>username_1: @username_2 Almost forgot! Re Android-at-the top: all props are alphabetized now. It would be weird to put iOS and Android out of order. Perhaps we could shift them to a ""Platform Props"" section further down the page. Thoughts, @username_3?
+<issue_comment>username_3: I just have pushed the initial version of the `PressEvent`. All the descriptions are based on the things I was able to deduce from the code and playing with live events. Probably not all of the them will be 100% accurate. Keys with missing description: `changedTouches`, `target` and `touches`. Hope someone with better knowledge about events and event system can correct me and fill the gaps in.
+
+Also from the test I have made it looks for me that `force` should be marked as an option field/key in the `CoreEventTypes` definition: https://github.com/facebook/react-native/blob/master/Libraries/Types/CoreEventTypes.js#L91
+<issue_comment>username_1: ![shera_feels-powerful](https://user-images.githubusercontent.com/236306/82239631-fbc9ae80-9930-11ea-9422-8162a24eae75.gif)
+
+And that's a wrap, folks! Thanks @username_3 for working on the label, attribute and design updates! Thanks to @username_0 for writing the doc! And thanks to @username_2 for providing technical direction and feedback! (And a special thanks to @yungsters for helping me figure out the sequence of events to make that illustration 100% accurate!)
+
+Great work, everyone! This sets a new standard for how we document components and APIs :)"
+appveyor/website,324959669,468,,"[{'action': 'opened', 'author': 'jacobq', 'comment_id': None, 'datetime': '2018-05-21 15:31:29+00:00', 'masked_author': 'username_0', 'text': ""[Quick start](https://github.com/appveyor/website/blob/master/src/docs/lang/nodejs-iojs.md#quick-start) suggests using the following line to install the latest Node.js version:\r\n`ps: Install-Product node $env:nodejs_version`\r\nHowever, this appears to fail on Linux (tried with `Ubuntu` image) with the error message:\r\n`Install-Product : The term 'Install-Product' is not recognized as the name of a cmdlet, function, script file, or operable program.`\r\n\r\nIs this a problem with the documentation or the image? (Or am I just doing something wrong?)"", 'title': 'Quick start `Install-Product...` fails on Linux images', 'type': 'issue'}
+ {'action': 'created', 'author': 'jacobq', 'comment_id': 390703982.0, 'datetime': '2018-05-21 16:17:34+00:00', 'masked_author': 'username_0', 'text': 'Seems like one needs to use something else like `nvm use 8` or `stack: node 8` on Linux VMs.', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'IlyaFinkelshteyn', 'comment_id': 390821251.0, 'datetime': '2018-05-22 00:02:57+00:00', 'masked_author': 'username_1', 'text': 'Correct, [here](https://www.appveyor.com/docs/getting-started-with-appveyor-for-linux/#configuring-language-stack) we described approach for Linux build. We are working on making documentation and experience more straightforward and unified.', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'jacobq', 'comment_id': 390852597.0, 'datetime': '2018-05-22 03:36:41+00:00', 'masked_author': 'username_0', 'text': 'OK. I guess what surprised/confused me most was that (1) this simple, recommended, and unqualified (nothing on the page suggests that it is just for Windows images) configuration does not work (making me think I must be doing something wrong), and (2) some other powershell stuff seems to work on Linux images but not this one.', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'FeodorFitsner', 'comment_id': 393319187.0, 'datetime': '2018-05-30 21:05:43+00:00', 'masked_author': 'username_2', 'text': 'Closing the issue in favor of https://github.com/appveyor/website/issues/474', 'title': None, 'type': 'comment'}
+ {'action': 'created', 'author': 'jacobq', 'comment_id': 393351636.0, 'datetime': '2018-05-30 23:28:10+00:00', 'masked_author': 'username_0', 'text': ""Oops, looks like it didn't close, so I'll do it. Just wanted to make sure that the doc issues are being tracked / worked on somewhere."", 'title': None, 'type': 'comment'}
+ {'action': 'closed', 'author': 'jacobq', 'comment_id': None, 'datetime': '2018-05-30 23:28:10+00:00', 'masked_author': 'username_0', 'text': '', 'title': None, 'type': 'issue'}]","<issue_start><issue_comment>Title: Quick start `Install-Product...` fails on Linux images
+username_0: [Quick start](https://github.com/appveyor/website/blob/master/src/docs/lang/nodejs-iojs.md#quick-start) suggests using the following line to install the latest Node.js version:
+`ps: Install-Product node $env:nodejs_version`
+However, this appears to fail on Linux (tried with `Ubuntu` image) with the error message:
+`Install-Product : The term 'Install-Product' is not recognized as the name of a cmdlet, function, script file, or operable program.`
+
+Is this a problem with the documentation or the image? (Or am I just doing something wrong?)
+<issue_comment>username_0: Seems like one needs to use something else like `nvm use 8` or `stack: node 8` on Linux VMs.
+<issue_comment>username_1: Correct, [here](https://www.appveyor.com/docs/getting-started-with-appveyor-for-linux/#configuring-language-stack) we described approach for Linux build. We are working on making documentation and experience more straightforward and unified.
+<issue_comment>username_0: OK. I guess what surprised/confused me most was that (1) this simple, recommended, and unqualified (nothing on the page suggests that it is just for Windows images) configuration does not work (making me think I must be doing something wrong), and (2) some other powershell stuff seems to work on Linux images but not this one.
+<issue_comment>username_2: Closing the issue in favor of https://github.com/appveyor/website/issues/474
+<issue_comment>username_0: Oops, looks like it didn't close, so I'll do it. Just wanted to make sure that the doc issues are being tracked / worked on somewhere.<issue_closed>"
